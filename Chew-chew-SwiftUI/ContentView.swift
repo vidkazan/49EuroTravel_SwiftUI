@@ -14,24 +14,18 @@ final class ViewModel : ObservableObject {
 struct ContentView: View {
 	@EnvironmentObject var viewModel : ViewModel
 	var body: some View {
-		VStack {
-			ZStack {
+		ZStack {
+			VStack {
 				SearchFieldView(placeholder: "from")
-					.frame(alignment: .top)
-					.offset(y:40)
 				SearchFieldView(placeholder: "to")
-					.frame(alignment: .top)
-					.offset(y:80)
 				TimeChoosingView()
-					.frame(alignment: .top)
-					.offset(y:120)
-				if viewModel.isShowingDatePicker {
-					DatePickerView()
-				}
+				Spacer()
 			}
-			Spacer()
+			.padding()
+			if viewModel.isShowingDatePicker {
+				DatePickerView()
+			}
 		}
-		.padding()
 	}
 }
 
@@ -42,3 +36,6 @@ struct ContentView_Previews: PreviewProvider {
 			
     }
 }
+
+
+

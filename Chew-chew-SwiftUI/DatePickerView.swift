@@ -10,26 +10,30 @@ import SwiftUI
 struct DatePickerView: View {
 	@EnvironmentObject var viewModel : ViewModel
 	@State private var date = Date.now
+	@State private var time = Date.now
     var body: some View {
-		ZStack {
-			VStack {
-				DatePicker(
-					"",
-					selection: $date
-				)
-					.datePickerStyle(.graphical)
-					.padding()
-				Button("Done") {
-					viewModel.isShowingDatePicker = false
-				}
-				Spacer()
+		VStack {
+			DatePicker(
+				"",
+				selection: $date,
+				displayedComponents: [.date]
+			)
+				.datePickerStyle(.graphical)
+				.padding()
+			DatePicker(
+				"",
+				selection: $time,
+				displayedComponents: [.hourAndMinute]
+			)
+				.datePickerStyle(.wheel)
+				.padding()
+			Button("Done") {
+				viewModel.isShowingDatePicker = false
 			}
+			Spacer()
 		}
 		.background(Color.white)
-		.frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity)
 	}
-		
-		
 }
 
 struct DatePickerView_Previews: PreviewProvider {
