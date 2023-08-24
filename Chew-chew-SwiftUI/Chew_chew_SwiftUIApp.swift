@@ -14,7 +14,6 @@ struct Chew_chew_SwiftUIApp: App {
         WindowGroup {
             ContentView()
 				.environmentObject(viewModelChew)
-				.navigationTitle("Chew-chew")
         }
     }
 }

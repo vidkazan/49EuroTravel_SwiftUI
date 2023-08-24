@@ -20,18 +20,30 @@ struct DatePickerView: View {
 			)
 				.datePickerStyle(.graphical)
 				.padding()
+				.background(Color.init(uiColor: .systemGray6))
+				.cornerRadius(10)
+//			datePicker.setDate(Date.now, animated: true)
 			DatePicker(
 				"",
 				selection: $time,
 				displayedComponents: [.hourAndMinute]
 			)
+			.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
 				.datePickerStyle(.wheel)
 				.padding()
+				.background(Color.init(uiColor: .systemGray6))
+				.cornerRadius(10)
 			Button("Done") {
 				viewModel.isShowingDatePicker = false
 			}
+			.padding()
+			.frame(maxWidth: .infinity)
+			.background(Color.init(uiColor: .systemGray4))
+			.foregroundColor(Color.black)
+			.cornerRadius(10)
 			Spacer()
 		}
+		.padding()
 		.background(Color.white)
 	}
 }

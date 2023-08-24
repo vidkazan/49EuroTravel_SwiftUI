@@ -15,10 +15,12 @@ struct SearchFieldView: View {
 	}
 	
     var body: some View {
-		TextField(self.placeholder, text: $departureText)
-			.padding(7)
-			.background(Color(UIColor.systemGray6))
-			.cornerRadius(12)
+		VStack {
+			TextField(self.placeholder, text: $departureText)
+				.padding(7)
+				.background(Color(UIColor.systemGray6))
+				.cornerRadius(12)
+		}
     }
 }
 
