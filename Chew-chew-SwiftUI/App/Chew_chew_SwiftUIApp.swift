@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct Chew_chew_SwiftUIApp: App {
-	@StateObject private var viewModelChew = ViewModel()
+	@StateObject private var viewModelChew = SearchLocationViewModel()
     var body: some Scene {
         WindowGroup {
             ContentView()
@@ -17,3 +17,4 @@ struct Chew_chew_SwiftUIApp: App {
         }
     }
 }
+	

@@ -7,6 +7,24 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7D02CE072A97D5CF0048ADE6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE062A97D5CF0048ADE6 /* ViewModel.swift */; };
+		7D02CE092A97E32D0048ADE6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE082A97E32D0048ADE6 /* Model.swift */; };
+		7D02CE0B2A97E37D0048ADE6 /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE0A2A97E37D0048ADE6 /* DataSource.swift */; };
+		7D02CE102A97E4100048ADE6 /* ViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE0F2A97E4100048ADE6 /* ViewDataSource.swift */; };
+		7D02CE132A97E4700048ADE6 /* DateParcer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE122A97E4700048ADE6 /* DateParcer.swift */; };
+		7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE142A97E4940048ADE6 /* Constants.swift */; };
+		7D02CE192A97E5190048ADE6 /* ViewModel+ConstructJourneyData+Timeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE182A97E5190048ADE6 /* ViewModel+ConstructJourneyData+Timeline.swift */; };
+		7D02CE1B2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE1A2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift */; };
+		7D02CE1D2A97E55D0048ADE6 /* ViewModel+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE1C2A97E55D0048ADE6 /* ViewModel+Fetch.swift */; };
+		7D02CE1F2A97E5630048ADE6 /* oldViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE1E2A97E5630048ADE6 /* oldViewModel.swift */; };
+		7D02CE212A97E5700048ADE6 /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE202A97E5700048ADE6 /* States.swift */; };
+		7D02CE232A97E64E0048ADE6 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE222A97E64E0048ADE6 /* Query.swift */; };
+		7D02CE252A97E6620048ADE6 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE242A97E6620048ADE6 /* Errors.swift */; };
+		7D02CE272A97E6790048ADE6 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE262A97E6790048ADE6 /* ApiService.swift */; };
+		7D02CE2A2A97E80D0048ADE6 /* Collections in Frameworks */ = {isa = PBXBuildFile; productRef = 7D02CE292A97E80D0048ADE6 /* Collections */; };
+		7D02CE2C2A97E80D0048ADE6 /* DequeModule in Frameworks */ = {isa = PBXBuildFile; productRef = 7D02CE2B2A97E80D0048ADE6 /* DequeModule */; };
+		7D02CE2E2A97E80D0048ADE6 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 7D02CE2D2A97E80D0048ADE6 /* OrderedCollections */; };
+		7D02CE302A97E96E0048ADE6 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */; };
 		7D6734B32A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */; };
 		7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B42A96334B00CBE9C1 /* ContentView.swift */; };
 		7D6734B72A96334C00CBE9C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D6734B62A96334C00CBE9C1 /* Assets.xcassets */; };
@@ -37,6 +55,21 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7D02CE062A97D5CF0048ADE6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		7D02CE082A97E32D0048ADE6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		7D02CE0A2A97E37D0048ADE6 /* DataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSource.swift; sourceTree = "<group>"; };
+		7D02CE0F2A97E4100048ADE6 /* ViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataSource.swift; sourceTree = "<group>"; };
+		7D02CE122A97E4700048ADE6 /* DateParcer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParcer.swift; sourceTree = "<group>"; };
+		7D02CE142A97E4940048ADE6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7D02CE182A97E5190048ADE6 /* ViewModel+ConstructJourneyData+Timeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+ConstructJourneyData+Timeline.swift"; sourceTree = "<group>"; };
+		7D02CE1A2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+ConstructJourneyData.swift"; sourceTree = "<group>"; };
+		7D02CE1C2A97E55D0048ADE6 /* ViewModel+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Fetch.swift"; sourceTree = "<group>"; };
+		7D02CE1E2A97E5630048ADE6 /* oldViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = oldViewModel.swift; sourceTree = "<group>"; };
+		7D02CE202A97E5700048ADE6 /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
+		7D02CE222A97E64E0048ADE6 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		7D02CE242A97E6620048ADE6 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
+		7D02CE262A97E6790048ADE6 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
+		7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chew-chew-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUIApp.swift; sourceTree = "<group>"; };
 		7D6734B42A96334B00CBE9C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -57,6 +90,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D02CE2A2A97E80D0048ADE6 /* Collections in Frameworks */,
+				7D02CE2C2A97E80D0048ADE6 /* DequeModule in Frameworks */,
+				7D02CE2E2A97E80D0048ADE6 /* OrderedCollections in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -77,6 +113,58 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7D02CE0C2A97E38B0048ADE6 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				7D02CE082A97E32D0048ADE6 /* Model.swift */,
+				7D02CE0A2A97E37D0048ADE6 /* DataSource.swift */,
+				7D02CE0F2A97E4100048ADE6 /* ViewDataSource.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7D02CE0D2A97E3B30048ADE6 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7D6734DC2A96370200CBE9C1 /* SearchFieldView.swift */,
+				7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */,
+				7D81AB252A978CDC0055AEAF /* DatePickerView.swift */,
+				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
+				7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7D02CE0E2A97E3C00048ADE6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		7D02CE112A97E4650048ADE6 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7D02CE122A97E4700048ADE6 /* DateParcer.swift */,
+				7D02CE142A97E4940048ADE6 /* Constants.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7D02CE172A97E50F0048ADE6 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				7D02CE182A97E5190048ADE6 /* ViewModel+ConstructJourneyData+Timeline.swift */,
+				7D02CE1A2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift */,
+				7D02CE1C2A97E55D0048ADE6 /* ViewModel+Fetch.swift */,
+				7D02CE1E2A97E5630048ADE6 /* oldViewModel.swift */,
+				7D02CE062A97D5CF0048ADE6 /* ViewModel.swift */,
+				7D02CE202A97E5700048ADE6 /* States.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		7D6734A62A96334B00CBE9C1 = {
 			isa = PBXGroup;
 			children = (
@@ -100,13 +188,16 @@
 		7D6734B12A96334B00CBE9C1 /* Chew-chew-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */,
-				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
+				7D02CE172A97E50F0048ADE6 /* ViewModel */,
+				7D02CE112A97E4650048ADE6 /* Helpers */,
+				7D02CE0E2A97E3C00048ADE6 /* App */,
+				7D02CE0D2A97E3B30048ADE6 /* View */,
+				7D02CE0C2A97E38B0048ADE6 /* Model */,
 				7D6734B62A96334C00CBE9C1 /* Assets.xcassets */,
 				7D6734B82A96334C00CBE9C1 /* Preview Content */,
-				7D6734DC2A96370200CBE9C1 /* SearchFieldView.swift */,
-				7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */,
-				7D81AB252A978CDC0055AEAF /* DatePickerView.swift */,
+				7D02CE222A97E64E0048ADE6 /* Query.swift */,
+				7D02CE242A97E6620048ADE6 /* Errors.swift */,
+				7D02CE262A97E6790048ADE6 /* ApiService.swift */,
 			);
 			path = "Chew-chew-SwiftUI";
 			sourceTree = "<group>";
@@ -152,6 +243,11 @@
 			dependencies = (
 			);
 			name = "Chew-chew-SwiftUI";
+			packageProductDependencies = (
+				7D02CE292A97E80D0048ADE6 /* Collections */,
+				7D02CE2B2A97E80D0048ADE6 /* DequeModule */,
+				7D02CE2D2A97E80D0048ADE6 /* OrderedCollections */,
+			);
 			productName = "Chew-chew-SwiftUI";
 			productReference = 7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */;
 			productType = "com.apple.product-type.application";
@@ -224,6 +320,9 @@
 				Base,
 			);
 			mainGroup = 7D6734A62A96334B00CBE9C1;
+			packageReferences = (
+				7D02CE282A97E80D0048ADE6 /* XCRemoteSwiftPackageReference "swift-collections" */,
+			);
 			productRefGroup = 7D6734B02A96334B00CBE9C1 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -266,11 +365,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D02CE092A97E32D0048ADE6 /* Model.swift in Sources */,
+				7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */,
 				7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */,
+				7D02CE132A97E4700048ADE6 /* DateParcer.swift in Sources */,
 				7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */,
 				7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */,
 				7D6734B32A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift in Sources */,
+				7D02CE1B2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift in Sources */,
+				7D02CE102A97E4100048ADE6 /* ViewDataSource.swift in Sources */,
+				7D02CE192A97E5190048ADE6 /* ViewModel+ConstructJourneyData+Timeline.swift in Sources */,
+				7D02CE1F2A97E5630048ADE6 /* oldViewModel.swift in Sources */,
+				7D02CE212A97E5700048ADE6 /* States.swift in Sources */,
+				7D02CE072A97D5CF0048ADE6 /* ViewModel.swift in Sources */,
+				7D02CE0B2A97E37D0048ADE6 /* DataSource.swift in Sources */,
+				7D02CE272A97E6790048ADE6 /* ApiService.swift in Sources */,
 				7D6734DD2A96370200CBE9C1 /* SearchFieldView.swift in Sources */,
+				7D02CE302A97E96E0048ADE6 /* BadgeView.swift in Sources */,
+				7D02CE232A97E64E0048ADE6 /* Query.swift in Sources */,
+				7D02CE252A97E6620048ADE6 /* Errors.swift in Sources */,
+				7D02CE1D2A97E55D0048ADE6 /* ViewModel+Fetch.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -595,6 +709,35 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		7D02CE282A97E80D0048ADE6 /* XCRemoteSwiftPackageReference "swift-collections" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apple/swift-collections.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		7D02CE292A97E80D0048ADE6 /* Collections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D02CE282A97E80D0048ADE6 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = Collections;
+		};
+		7D02CE2B2A97E80D0048ADE6 /* DequeModule */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D02CE282A97E80D0048ADE6 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = DequeModule;
+		};
+		7D02CE2D2A97E80D0048ADE6 /* OrderedCollections */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D02CE282A97E80D0048ADE6 /* XCRemoteSwiftPackageReference "swift-collections" */;
+			productName = OrderedCollections;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 7D6734A72A96334B00CBE9C1 /* Project object */;
 }

@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct SearchFieldView: View {
+	@EnvironmentObject var viewModel : SearchLocationViewModel
 	@State var departureText = ""
 	let placeholder : String
 	init(placeholder: String) {
@@ -20,6 +21,12 @@ struct SearchFieldView: View {
 				.padding(7)
 				.background(Color(UIColor.systemGray6))
 				.cornerRadius(12)
+				.onTapGesture {
+					departureText = ""
+				}
+				.onChange(of: departureText, perform: { text in
+					viewModel.updateSearchText(text: departureText, isDeparture: true)
+				})
 		}
     }
 }

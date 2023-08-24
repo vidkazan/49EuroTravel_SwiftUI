@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeChoosingView: View {
-	@EnvironmentObject var viewModel : ViewModel
+	@EnvironmentObject var viewModel : SearchLocationViewModel
 	@State private var selectedOption = 0
 	@State private var datePickerIsShowing = false
 	private let options = ["now", "23 aug 2023, 15:03"]
