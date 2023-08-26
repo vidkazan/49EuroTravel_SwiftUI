@@ -32,23 +32,25 @@ struct SearchFieldView: View {
 						viewModel.updateSearchText(text: fieldText, type: type)
 					}
 				})
+				.font(.system(size: 17))
+				.padding(5)
 			if textFieldIsFocused {
 			ForEach(type == .departure ? viewModel.searchLocationDataDeparture : viewModel.searchLocationDataArrival) { stop in
-				if let text = stop.name {
-					Button(text){
-						textFieldIsFocused = false
-						fieldText = text
-						viewModel.updateSearchData(stop: stop, type: type)
+					if let text = stop.name {
+						Button(text){
+							textFieldIsFocused = false
+							fieldText = text
+							viewModel.updateSearchData(stop: stop, type: type)
+						}
+						.foregroundColor(.black)
+						.padding(5)
 					}
-					.foregroundColor(.black)
-					.padding(2)
 				}
-			}
-			.frame(maxWidth: .infinity,alignment: .leading)
+				.frame(maxWidth: .infinity,alignment: .leading)
 			}
 		}
-		.padding(7)
-		.background(Color(UIColor.systemGray6))
+		.padding(5)
+		.background(.ultraThinMaterial)
 		.cornerRadius(10)
     }
 		

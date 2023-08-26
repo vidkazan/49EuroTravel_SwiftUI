@@ -14,38 +14,67 @@ struct DatePickerView: View {
 	@State private var time = Date.now
     var body: some View {
 		VStack {
+			HStack {
+				Button("now") {
+					viewModel.updateJourneyTimeValue(date: Date.now)
+				}
+				.padding(7)
+				.foregroundColor(.primary)
+					.cornerRadius(10)
+					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
+				Button("in 15 min") {
+					viewModel.updateJourneyTimeValue(date: Date.now + (15 * 60))
+				}
+				.padding(7)
+				.foregroundColor(.primary)
+					.cornerRadius(10)
+					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
+				Button("in 1 hour") {
+					viewModel.updateJourneyTimeValue(date: Date.now + (60 * 60))
+				}
+				.padding(7)
+				.foregroundColor(.primary)
+					.cornerRadius(10)
+					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
+				Divider()
+					.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 0))
+					.frame(height: 30)
+				DatePicker(
+					"",
+					selection: $time,
+					displayedComponents: [.hourAndMinute]
+				)
+					.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
+					.datePickerStyle(.compact)
+					.cornerRadius(10)
+					.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
+					
+			}
+				.frame(maxWidth: .infinity,maxHeight: 43)
+				.background(.ultraThinMaterial)
+				.cornerRadius(10)
 			DatePicker(
 				"",
 				selection: $date,
 				displayedComponents: [.date]
 			)
 				.datePickerStyle(.graphical)
-				.padding()
-				.background(Color.init(uiColor: .systemGray6))
+				.padding(7)
+				.background(.ultraThinMaterial)
 				.cornerRadius(10)
-			DatePicker(
-				"",
-				selection: $time,
-				displayedComponents: [.hourAndMinute]
-			)
-				.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
-					.datePickerStyle(.wheel)
-					.padding()
-					.background(Color.init(uiColor: .systemGray6))
-					.cornerRadius(10)
+			
 			Button("Done") {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
 					print(dateCombined)
 					viewModel.updateJourneyTimeValue(date: dateCombined)
 				}
 			}
-				.padding()
-				.background(Color.init(uiColor: .systemGray4))
+				.frame(maxWidth: .infinity,minHeight: 43)
+				.background(.thickMaterial)
 				.foregroundColor(Color.black)
 				.cornerRadius(10)
 			Spacer()
 		}
-		.padding()
 		.background(Color.white)
 	}
 }
@@ -55,3 +84,5 @@ struct DatePickerView_Previews: PreviewProvider {
         DatePickerView()
     }
 }
+
+

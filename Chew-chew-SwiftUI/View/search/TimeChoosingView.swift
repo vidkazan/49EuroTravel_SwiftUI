@@ -16,13 +16,9 @@ struct TimeChoosingView: View {
 	var body: some View {
 		ZStack {
 			Rectangle()
-				.frame(height: 36)
-				.cornerRadius(10)
-				.foregroundColor(Color(UIColor.systemGray6))
-			Rectangle()
 				.frame(
 					width: UIScreen.main.bounds.width / 2.2,
-					height: 29)
+					height: 36)
 				.cornerRadius(8)
 				.foregroundColor(Color(UIColor.white))
 				.shadow(radius: 0.5,y: 1)
@@ -51,15 +47,19 @@ struct TimeChoosingView: View {
 						Text(text)
 							.frame(width: UIScreen.main.bounds.width / 2.3)
 							.font(.system(size: 17))
-							.foregroundColor(Color(UIColor.black))
+							.foregroundColor(selectedOption == index ? .primary : .black)
 							.fontWeight(selectedOption == index ? .medium : .regular)
 							.cornerRadius(10)
 						
 					}
-					.frame(maxWidth: .infinity)
+//					.frame(maxWidth: .infinity,minHeight: 43)
 				}
 			}
 		}
+		.frame(maxWidth: .infinity,maxHeight: 43)
+		.background(.ultraThinMaterial)
+		.cornerRadius(10)
+		
 	}
 
 	func optionPressed(_ index: Int) {
