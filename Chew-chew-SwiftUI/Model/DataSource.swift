@@ -10,6 +10,15 @@ import Foundation
 enum LocationDirectionType{
 	case departure
 	case arrival
+	
+	var placeholder : String {
+		switch self {
+		case .departure:
+			return "from"
+		case .arrival:
+			return "to"
+		}
+	}
 }
 
 struct SearchLocationData {

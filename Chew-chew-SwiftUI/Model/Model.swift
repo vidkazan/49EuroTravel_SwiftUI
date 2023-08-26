@@ -47,7 +47,7 @@ struct Stops : Decodable {
 	let stops : [Stop]
 }
 
-struct Stop : Decodable {
+struct Stop : Decodable, Identifiable {
 	let type	: String?
 	let id		: String?
 	let name	: String?

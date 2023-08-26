@@ -22,7 +22,6 @@ struct DatePickerView: View {
 				.padding()
 				.background(Color.init(uiColor: .systemGray6))
 				.cornerRadius(10)
-//			datePicker.setDate(Date.now, animated: true)
 			DatePicker(
 				"",
 				selection: $time,

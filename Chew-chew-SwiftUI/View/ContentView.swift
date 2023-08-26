@@ -10,22 +10,17 @@ import SwiftUI
 struct ContentView: View {
 	@EnvironmentObject var viewModel : SearchLocationViewModel
 	var body: some View {
-		VStack {
-			ZStack {
-				if viewModel.isShowingDatePicker {
-					DatePickerView()
-				}
+		ZStack {
+			VStack {
+				SearchFieldView(type: .departure)
+				SearchFieldView(type: .arrival)
 				TimeChoosingView()
-					.frame(alignment: .top)
-					.offset(y:120)
-				SearchFieldView(placeholder: "to")
-					.frame(alignment: .top)
-					.offset(y:80)
-				SearchFieldView(placeholder: "from")
-					.frame(alignment: .top)
-					.offset(y:40)
+				JourneyView()
 			}
-			Spacer()
+			if viewModel.isShowingDatePicker {
+				DatePickerView()
+				Spacer()
+			}
 		}
 		.padding()
 	}

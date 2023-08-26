@@ -19,9 +19,9 @@ struct BadgeView : View {
 		Text(text)
 			.font(.system(size: 12))
 			.foregroundColor(.white)
-			.padding(5)
+			.padding(4)
 			.background(color)
-			.cornerRadius(15)
+			.cornerRadius(8)
 	}
 }
 

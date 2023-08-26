@@ -7,7 +7,11 @@
 
 import Foundation
 
-enum SearchControllerStates {
+enum SearchControllerStates : Equatable {
+	static func == (lhs: SearchControllerStates, rhs: SearchControllerStates) -> Bool {
+		return lhs.description == rhs.description
+	}
+	
 	case onStart
 //	case onLoading
 	case onNewDataDepartureStop

@@ -55,14 +55,16 @@ struct TimelineViewDataSourse : Equatable {
 	let timeLabels : [TimelineTimeLabelDataSourse]
 }
 
-struct LegViewDataSourse : Equatable {
+struct LegViewDataSourse : Equatable,Identifiable {
+	let id : Int
 	let name : String
 	let legTopPosition : Double
 	let legBottomPosition : Double
 	var color : UIColor
 }
 
-struct JourneyCollectionViewDataSourse : Equatable {
+struct JourneyCollectionViewDataSourse : Equatable, Identifiable {
+	let id : Int
 	let startTimeLabelText : String
 	let endTimeLabelText : String
 	let durationLabelText : String

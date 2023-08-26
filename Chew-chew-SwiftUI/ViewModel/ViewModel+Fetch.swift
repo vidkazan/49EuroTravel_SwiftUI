@@ -34,7 +34,7 @@ extension SearchLocationViewModel {
 			}
 		}
 	
-	func fetchLocations(text : String?, isDeparture : Bool){
+	func fetchLocations(text : String?, type : LocationDirectionType){
 		guard let text = text else { return }
 		if text.count < 2 { return }
 		var query : [URLQueryItem] = []
@@ -45,11 +45,10 @@ extension SearchLocationViewModel {
 		ApiService.fetch([Stop].self,query: query, type: ApiService.Requests.locations(name: text ),requestGroupId: "") { [self] result in
 			switch result {
 			case .success(let res) :
-				print(">>>", "wohoo")
-				switch isDeparture {
-				case true:
+				switch type {
+				case .departure:
 					self.searchLocationDataDeparture = res
-				case false:
+				case .arrival:
 					self.searchLocationDataArrival = res
 				}
 			case .failure(let error) :

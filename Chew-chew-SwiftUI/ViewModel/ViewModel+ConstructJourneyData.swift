@@ -10,7 +10,7 @@ import SwiftUI
 
 extension SearchLocationViewModel {
 	
-	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?) -> LegViewDataSourse? {
+	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int) -> LegViewDataSourse? {
 		guard
 			let plannedDepartureTSString = leg.plannedDeparture,
 			let plannedArrivalTSString = leg.plannedArrival,
@@ -29,10 +29,11 @@ extension SearchLocationViewModel {
 			  let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: actualArrivalTS) else { return nil }
 		
 		let res = LegViewDataSourse(
+			id: id,
 			name: lineName,
 			legTopPosition: actualDeparturePosition,
 			legBottomPosition: actualArrivalPosition > plannedArrivalPosition ? actualArrivalPosition : plannedArrivalPosition ,
-			color: .darkGray
+			color: UIColor(hue: 0, saturation: 0, brightness: 0.2, alpha: 1)
 		)
 		return res
 	}
@@ -42,11 +43,11 @@ extension SearchLocationViewModel {
 		return previousLeg.legBottomPosition > currentLeg.legTopPosition
 	}
 	
-	func constructJourneyCollectionViewData(journey : Journey, firstTS: Date, lastTS: Date) -> JourneyCollectionViewDataSourse? {
+	func constructJourneyCollectionViewData(journey : Journey, firstTS: Date, lastTS: Date,id : Int) -> JourneyCollectionViewDataSourse? {
 		var legsDataSourse : [LegViewDataSourse] = []
 		guard let legs = journey.legs else { return nil }
-		for leg in legs {
-			if var res = self.constructLegData(leg: leg, firstTS: firstTS, lastTS: lastTS) {
+		for (index,leg) in legs.enumerated() {
+			if var res = self.constructLegData(leg: leg, firstTS: firstTS, lastTS: lastTS,id: index) {
 				if legsDataSourse.last != nil && modifyLegColorDependingOnDelays(currentLeg: res, previousLeg: legsDataSourse.last) {
 					legsDataSourse[legsDataSourse.count-1].color = UIColor.red
 				}
@@ -54,6 +55,7 @@ extension SearchLocationViewModel {
 			}
 		}
 		return JourneyCollectionViewDataSourse(
+			id : id,
 			startTimeLabelText: DateParcer.getTimeStringFromDate(date: firstTS),
 			endTimeLabelText: DateParcer.getTimeStringFromDate(date: lastTS),
 			durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(
@@ -69,7 +71,7 @@ extension SearchLocationViewModel {
 		guard let src = self.journeysData else { return }
 		guard let journeys = src.journeys else { return }
 		var journeysViewData : [JourneyCollectionViewDataSourse] = []
-		for journey in journeys {
+		for (index,journey) in journeys.enumerated() {
 			guard let journeyLegs = journey.legs else { return }
 			guard let journeyFirstLeg = journeyLegs.first else { return }
 			guard let journeyLastLeg = journeyLegs.last else { return }
@@ -77,7 +79,7 @@ extension SearchLocationViewModel {
 			guard let lastTimestamp = journeyLastLeg.arrival else { return }
 			guard let firstTS = DateParcer.getDateFromDateString(dateString: firstTimestamp) else { return }
 			guard let lastTS = DateParcer.getDateFromDateString(dateString: lastTimestamp) else { return }
-			if let res = self.constructJourneyCollectionViewData(journey: journey, firstTS: firstTS, lastTS: lastTS) {
+			if let res = self.constructJourneyCollectionViewData(journey: journey, firstTS: firstTS, lastTS: lastTS,id:index) {
 				journeysViewData.append(res)
 			}
 		}
