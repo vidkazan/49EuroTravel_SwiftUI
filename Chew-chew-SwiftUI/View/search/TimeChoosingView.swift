@@ -10,9 +10,9 @@ import SwiftUI
 struct TimeChoosingView: View {
 	@EnvironmentObject var viewModel : SearchLocationViewModel
 	@State private var selectedOption = 0
-	@State private var datePickerIsShowing = false
-	private let options = ["now", "23 aug 2023, 15:03"]
-	   
+	private var datePickerIsShowing = false
+	private var options = ["now","date"]
+   
 	var body: some View {
 		ZStack {
 			Rectangle()
@@ -33,17 +33,28 @@ struct TimeChoosingView: View {
 						-UIScreen.main.bounds.width / 4.5)
 				.animation(.spring(response: 0.5), value: selectedOption)
 			HStack(alignment: .top) {
-				ForEach(0..<options.count, id: \.self) { index in
+				ForEach(0..<2) { index in
 					Button(action: {
 						selectedOption = index
 						optionPressed(index)
 					}) {
-						Text(options[index])
+						var text : String {
+						switch index {
+							case 0:
+								return "now"
+							case 1:
+								return DateParcer.getTimeAndDateStringFromDate(date: viewModel.timeChooserDate)
+							default:
+								return ""
+							}
+						}
+						Text(text)
 							.frame(width: UIScreen.main.bounds.width / 2.3)
 							.font(.system(size: 17))
 							.foregroundColor(Color(UIColor.black))
 							.fontWeight(selectedOption == index ? .medium : .regular)
 							.cornerRadius(10)
+						
 					}
 					.frame(maxWidth: .infinity)
 				}
@@ -52,10 +63,15 @@ struct TimeChoosingView: View {
 	}
 
 	func optionPressed(_ index: Int) {
-		if selectedOption == 1 {
+		switch selectedOption {
+		case 0:
+			viewModel.updateJourneyTimeValue(date: Date.now)
+			
+		case 1:
 			viewModel.isShowingDatePicker = true
+		default:
+			break
 		}
-		print("Option Pressed: \(options[index])")
 	}
 }
 

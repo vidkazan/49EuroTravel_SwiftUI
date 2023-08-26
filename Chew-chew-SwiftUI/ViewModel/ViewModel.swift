@@ -10,6 +10,7 @@ import Foundation
 class SearchLocationViewModel : ObservableObject {
 	
 	@Published var isShowingDatePicker = false
+	@Published var timeChooserDate = Date.now
 	var journeySearchData = JourneySearchData()
 	var onStateChange : ((SearchControllerStates) -> Void)?
 	@Published var state : SearchControllerStates {
@@ -84,7 +85,10 @@ extension SearchLocationViewModel {
 			self.fetchJourneys()
 		}
 	}
-	func updateJourneyTimeValue(date : Date?){
+	func updateJourneyTimeValue(date : Date){
+		print(date)
+		timeChooserDate = date
+		isShowingDatePicker = false
 		if journeySearchData.updateSearchTimeData(departureTime: date) == true {
 //			self.resultJourneysViewDataSourse = ResultJourneyViewDataSourse(
 //				awaitingData: true,

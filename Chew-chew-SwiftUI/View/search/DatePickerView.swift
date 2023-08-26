@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DatePickerView: View {
 	@EnvironmentObject var viewModel : SearchLocationViewModel
+	
 	@State private var date = Date.now
 	@State private var time = Date.now
     var body: some View {
@@ -27,19 +28,21 @@ struct DatePickerView: View {
 				selection: $time,
 				displayedComponents: [.hourAndMinute]
 			)
-			.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
-				.datePickerStyle(.wheel)
-				.padding()
-				.background(Color.init(uiColor: .systemGray6))
-				.cornerRadius(10)
+				.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
+					.datePickerStyle(.wheel)
+					.padding()
+					.background(Color.init(uiColor: .systemGray6))
+					.cornerRadius(10)
 			Button("Done") {
-				viewModel.isShowingDatePicker = false
+				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
+					print(dateCombined)
+					viewModel.updateJourneyTimeValue(date: dateCombined)
+				}
 			}
-			.padding()
-			.frame(maxWidth: .infinity)
-			.background(Color.init(uiColor: .systemGray4))
-			.foregroundColor(Color.black)
-			.cornerRadius(10)
+				.padding()
+				.background(Color.init(uiColor: .systemGray4))
+				.foregroundColor(Color.black)
+				.cornerRadius(10)
 			Spacer()
 		}
 		.padding()
