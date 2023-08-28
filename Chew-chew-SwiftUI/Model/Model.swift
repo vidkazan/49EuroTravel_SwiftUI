@@ -47,7 +47,7 @@ struct Stops : Decodable {
 	let stops : [Stop]
 }
 
-struct Stop : Decodable, Identifiable {
+struct Stop : Decodable, Identifiable, Equatable {
 	let type	: String?
 	let id		: String?
 	let name	: String?
@@ -91,7 +91,7 @@ class Destination : Decodable {
 }
 
 // MARK: - Location
-struct Location : Decodable {
+struct Location : Decodable,Equatable {
 	let type		: String?
 	let id			: String?
 	let latitude	: Double?
@@ -99,7 +99,7 @@ struct Location : Decodable {
 }
 
 // MARK: - Products
-struct Products : Decodable {
+struct Products : Decodable, Equatable {
 	let nationalExpress		: Bool?
 	let national			: Bool?
 	let regionalExpress		: Bool?

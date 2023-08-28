@@ -14,8 +14,6 @@ struct Chew_chew_SwiftUIApp: App {
         WindowGroup {
             ContentView()
 				.environmentObject(viewModelChew)
-				.animation(.easeInOut, value: viewModelChew.state)
-				.transition(.offset(y: .infinity))
         }
     }
 }

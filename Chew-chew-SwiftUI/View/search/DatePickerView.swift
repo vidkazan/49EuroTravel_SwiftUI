@@ -22,23 +22,25 @@ struct DatePickerView: View {
 				.foregroundColor(.primary)
 					.cornerRadius(10)
 					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
-				Button("in 15 min") {
+				Button("15 min") {
 					viewModel.updateJourneyTimeValue(date: Date.now + (15 * 60))
 				}
 				.padding(7)
 				.foregroundColor(.primary)
 					.cornerRadius(10)
 					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
-				Button("in 1 hour") {
+				Button("1 hour") {
 					viewModel.updateJourneyTimeValue(date: Date.now + (60 * 60))
 				}
 				.padding(7)
 				.foregroundColor(.primary)
 					.cornerRadius(10)
 					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
+				Spacer()
 				Divider()
 					.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 0))
 					.frame(height: 30)
+				Spacer()
 				DatePicker(
 					"",
 					selection: $time,
@@ -48,8 +50,9 @@ struct DatePickerView: View {
 					.datePickerStyle(.compact)
 					.cornerRadius(10)
 					.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
+				Spacer()
 			}
-				.frame(maxWidth: .infinity,maxHeight: 60)
+				.frame(maxWidth: .infinity,maxHeight: 50)
 				.background(.thinMaterial)
 				.cornerRadius(10)
 			DatePicker(
@@ -57,6 +60,7 @@ struct DatePickerView: View {
 				selection: $date,
 				displayedComponents: [.date]
 			)
+			.frame(minHeight: 400)
 				.datePickerStyle(.graphical)
 				.padding(7)
 				.background(.thinMaterial)
@@ -70,7 +74,7 @@ struct DatePickerView: View {
 			}
 				.frame(maxWidth: .infinity,minHeight: 43)
 				.background(.regularMaterial)
-				.foregroundColor(Color.blue)
+				.foregroundColor(Color.black)
 				.cornerRadius(10)
 			Spacer()
 		}

@@ -56,14 +56,11 @@ struct SearchFieldView: View {
 						}
 					}
 					.onChange(of: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText, perform: { text in
-						withAnimation{
 							if textFieldIsFocused {
 								viewModel.updateSearchText(
 									text: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText ,
 									type: type)
 							}
-						}
-						
 					})
 					.font(.system(size: 17,weight: .semibold))
 					.frame(maxWidth: .infinity,alignment: .leading)
@@ -71,27 +68,32 @@ struct SearchFieldView: View {
 					.foregroundColor(.black)
 			}
 			.padding(5)
-			
-			if textFieldIsFocused {
-				ForEach(stops) { stop in
-					if let text = stop.name {
-						Button(text){
-								viewModel.updateSearchData(stop: stop, type: type)
-								textFieldIsFocused = false
+		
+			VStack {
+				if textFieldIsFocused {
+					ForEach(stops) { stop in
+						if let text = stop.name {
+							Button(text){
+								withAnimation(.spring()){
+									viewModel.updateSearchText(
+										text: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText ,
+										type: type
+									)
+									viewModel.updateSearchData(stop: stop, type: type)
+									textFieldIsFocused = false}
+							}
+							.foregroundColor(.black)
+							.padding(5)
 						}
-						.foregroundColor(.black)
-						.padding(5)
 					}
+					.frame(maxWidth: .infinity,alignment: .leading)
 				}
-//				.animation(.easeInOut, value: textFieldIsFocused)
-				.frame(maxWidth: .infinity,alignment: .leading)
 			}
 		}
+		
 		.padding(5)
 		.background(.regularMaterial)
 		.cornerRadius(10)
-		.transition(.move(edge: .bottom))
-		.animation(.easeInOut, value: stops.count)
     }
 		
 }
