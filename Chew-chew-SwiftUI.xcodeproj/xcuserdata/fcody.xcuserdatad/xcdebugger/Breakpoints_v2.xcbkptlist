@@ -46,8 +46,8 @@
             filePath = "Chew-chew-SwiftUI/ViewModel/ViewModel+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "11"
-            endingLineNumber = "11"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
             landmarkName = "fetchJourneys()"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,10 @@
             filePath = "Chew-chew-SwiftUI/ViewModel/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "109"
-            endingLineNumber = "109">
+            startingLineNumber = "114"
+            endingLineNumber = "114"
+            landmarkName = "updateJourneyTimeValue(date:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

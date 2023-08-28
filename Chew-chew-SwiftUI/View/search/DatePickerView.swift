@@ -48,10 +48,9 @@ struct DatePickerView: View {
 					.datePickerStyle(.compact)
 					.cornerRadius(10)
 					.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
-					
 			}
-				.frame(maxWidth: .infinity,maxHeight: 43)
-				.background(.ultraThinMaterial)
+				.frame(maxWidth: .infinity,maxHeight: 60)
+				.background(.thinMaterial)
 				.cornerRadius(10)
 			DatePicker(
 				"",
@@ -60,7 +59,7 @@ struct DatePickerView: View {
 			)
 				.datePickerStyle(.graphical)
 				.padding(7)
-				.background(.ultraThinMaterial)
+				.background(.thinMaterial)
 				.cornerRadius(10)
 			
 			Button("Done") {
@@ -70,12 +69,16 @@ struct DatePickerView: View {
 				}
 			}
 				.frame(maxWidth: .infinity,minHeight: 43)
-				.background(.thickMaterial)
-				.foregroundColor(Color.black)
+				.background(.regularMaterial)
+				.foregroundColor(Color.blue)
 				.cornerRadius(10)
 			Spacer()
 		}
-		.background(Color.white)
+		.font(.system(size: 17,weight: .semibold))
+		.padding(5)
+		.background(.ultraThinMaterial)
+		.cornerRadius(10)
+		.padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5))
 	}
 }
 

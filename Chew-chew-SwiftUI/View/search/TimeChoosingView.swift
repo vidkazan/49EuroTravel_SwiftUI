@@ -16,25 +16,23 @@ struct TimeChoosingView: View {
 	var body: some View {
 		ZStack {
 			Rectangle()
+				.fill(.regularMaterial)
 				.frame(
-					width: UIScreen.main.bounds.width / 2.2,
+					width: UIScreen.main.bounds.width / 2.15,
 					height: 36)
 				.cornerRadius(8)
-				.foregroundColor(Color(UIColor.white))
 				.shadow(radius: 0.5,y: 1)
 				.padding(4)
 				.offset(
 					x: (selectedOption != 0) ?
-					UIScreen.main.bounds.width / 4.5 :
-						-UIScreen.main.bounds.width / 4.5)
+					UIScreen.main.bounds.width / 4.4 :
+						-UIScreen.main.bounds.width / 4.4)
 				.animation(.spring(response: 0.5), value: selectedOption)
 			HStack(alignment: .top) {
 				ForEach(0..<2) { index in
 					Button(action: {
-						withAnimation{
 							selectedOption = index
 							optionPressed(index)
-						}
 					}) {
 						var text : String {
 						switch index {
@@ -47,19 +45,17 @@ struct TimeChoosingView: View {
 							}
 						}
 						Text(text)
-							.frame(width: UIScreen.main.bounds.width / 2.3)
-							.font(.system(size: 17))
+							.frame(width: UIScreen.main.bounds.width / 2.25)
+							.font(.system(size: 17,weight: selectedOption == index ? .semibold : .regular))
 							.foregroundColor(selectedOption == index ? .primary : .black)
-							.fontWeight(selectedOption == index ? .medium : .regular)
 							.cornerRadius(10)
-						
 					}
 //					.frame(maxWidth: .infinity,minHeight: 43)
 				}
 			}
 		}
 		.frame(maxWidth: .infinity,maxHeight: 43)
-		.background(.ultraThinMaterial)
+		.background(.thinMaterial)
 		.cornerRadius(10)
 		
 	}
@@ -68,7 +64,6 @@ struct TimeChoosingView: View {
 		switch selectedOption {
 		case 0:
 			viewModel.updateJourneyTimeValue(date: Date.now)
-			
 		case 1:
 			viewModel.isShowingDatePicker = true
 		default:

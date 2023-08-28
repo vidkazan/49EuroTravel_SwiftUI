@@ -10,7 +10,6 @@ import SwiftUI
 struct SearchFieldView: View {
 	@EnvironmentObject private var viewModel : SearchLocationViewModel
 	@FocusState	private var textFieldIsFocused	: Bool
-	@State	var fieldText : String = ""
 	let placeholder : String
 	let type : LocationDirectionType
 	init(type : LocationDirectionType) {
@@ -27,7 +26,7 @@ struct SearchFieldView: View {
 		
 		:
 		Button(action: {
-			
+			viewModel.switchStops()
 		}, label: {
 			Image(systemName: "arrow.up.arrow.down")
 		})
@@ -40,45 +39,59 @@ struct SearchFieldView: View {
     var body: some View {
 		VStack {
 			HStack {
-				TextField(self.placeholder, text: $fieldText)
+				TextField(self.placeholder, text: type == .departure ? $viewModel.topSearchFieldText : $viewModel.bottomSearchFieldText)
 					.focused($textFieldIsFocused)
 					.onTapGesture {
-						viewModel.updateSearchText(text: fieldText, type: type)
-						fieldText = ""
+						if !textFieldIsFocused {
+							switch type {
+							case .departure:
+								viewModel.topSearchFieldText = ""
+							case .arrival:
+								viewModel.bottomSearchFieldText = ""
+							}
+							viewModel.updateSearchText(
+								text: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText ,
+								type: type
+							)
+						}
 					}
-					.onChange(of: fieldText, perform: { text in
+					.onChange(of: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText, perform: { text in
 						withAnimation{
 							if textFieldIsFocused {
-								viewModel.updateSearchText(text: fieldText, type: type)
+								viewModel.updateSearchText(
+									text: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText ,
+									type: type)
 							}
 						}
 						
 					})
-					.font(.system(size: 17))
+					.font(.system(size: 17,weight: .semibold))
 					.frame(maxWidth: .infinity,alignment: .leading)
 				rightButton
 					.foregroundColor(.black)
 			}
 			.padding(5)
+			
 			if textFieldIsFocused {
 				ForEach(stops) { stop in
 					if let text = stop.name {
 						Button(text){
-							viewModel.updateSearchData(stop: stop, type: type)
-							textFieldIsFocused = false
-							fieldText = text
+								viewModel.updateSearchData(stop: stop, type: type)
+								textFieldIsFocused = false
 						}
 						.foregroundColor(.black)
 						.padding(5)
 					}
 				}
+//				.animation(.easeInOut, value: textFieldIsFocused)
 				.frame(maxWidth: .infinity,alignment: .leading)
 			}
 		}
 		.padding(5)
-		.background(.ultraThinMaterial)
+		.background(.regularMaterial)
 		.cornerRadius(10)
-		.animation(.linear, value: stops.count)
+		.transition(.move(edge: .bottom))
+		.animation(.easeInOut, value: stops.count)
     }
 		
 }

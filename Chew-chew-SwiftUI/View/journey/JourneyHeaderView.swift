@@ -19,8 +19,7 @@ struct JourneyHeaderView: View {
 			HStack{
 				Text(journey.startTimeLabelText)
 					.padding(7)
-					.font(.system(size: 17))
-					.fontWeight(.semibold)
+					.font(.system(size: 17,weight: .semibold))
 					.frame(alignment: .leading)
 				Spacer()
 				Text(journey.durationLabelText)
@@ -30,9 +29,8 @@ struct JourneyHeaderView: View {
 				Spacer()
 				Text(journey.endTimeLabelText)
 					.padding(7)
-					.font(.system(size: 17))
+					.font(.system(size: 17,weight: .semibold))
 					.foregroundColor(.white)
-					.fontWeight(.semibold)
 					.frame(alignment: .leading)
 			}
 		}

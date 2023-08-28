@@ -8,7 +8,12 @@
 import Foundation
 
 extension SearchLocationViewModel {
-	func fetchJourneys(){
+	func getJourneys(){
+		self.resultJourneysCollectionViewDataSourse = AllJourneysCollectionViewDataSourse(awaitingData: true, journeys: [])
+		self.fetchJourneys()
+	}
+	
+	private func fetchJourneys(){
 			var query : [URLQueryItem] = []
 			query = Query.getQueryItems(methods: [
 				Query.departureTime(departureTime: self.journeySearchData.departureTime),

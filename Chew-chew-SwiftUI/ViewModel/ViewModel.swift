@@ -8,7 +8,8 @@
 import Foundation
 
 class SearchLocationViewModel : ObservableObject {
-	
+	@Published var topSearchFieldText = ""
+	@Published var bottomSearchFieldText = ""
 	@Published var isShowingDatePicker = false
 	@Published var timeChooserDate = Date.now
 	var journeySearchData = JourneySearchData()
@@ -52,7 +53,7 @@ class SearchLocationViewModel : ObservableObject {
 }
 
 extension SearchLocationViewModel {
-	func updateSearchText(text : String?,type : LocationDirectionType){
+	func updateSearchText(text : String?,type : LocationDirectionType) {
 		guard let text = text else {
 			switch type {
 			case .departure:
@@ -61,6 +62,7 @@ extension SearchLocationViewModel {
 				self.searchLocationDataArrival = []
 			}
 			self.previousSearchLineString = ""
+			self.journeySearchData.clearStop(type: type)
 			return
 		}
 		if text.count > 2 && text.count > self.previousSearchLineString.count {
@@ -72,17 +74,31 @@ extension SearchLocationViewModel {
 			case .arrival:
 				self.searchLocationDataArrival = []
 			}
+			self.journeySearchData.clearStop(type: type)
 		}
 		self.previousSearchLineString = text
 	}
 	
+	func switchStops(){
+		swap(&self.topSearchFieldText, &self.bottomSearchFieldText)
+		if journeySearchData.switchStops() == true {
+			self.getJourneys()
+		}
+	}
+	
 	func updateSearchData(stop : Stop, type : LocationDirectionType){
+		switch type {
+		case .departure:
+			self.topSearchFieldText = stop.name ?? ""
+		case .arrival:
+			self.bottomSearchFieldText = stop.name ?? ""
+		}
 		if journeySearchData.updateSearchStopData(type: type, stop: stop) == true {
 //			self.resultJourneysViewDataSourse = ResultJourneyViewDataSourse(
 //				awaitingData: true,
 //				journeys: nil,
 //				timeline: nil)
-			self.fetchJourneys()
+			self.getJourneys()
 		}
 	}
 	func updateJourneyTimeValue(date : Date){
@@ -94,7 +110,8 @@ extension SearchLocationViewModel {
 //				awaitingData: true,
 //				journeys: nil,
 //				timeline: nil)
-			self.fetchJourneys()
+			self.getJourneys()
 		}
 	}
+	
 }
