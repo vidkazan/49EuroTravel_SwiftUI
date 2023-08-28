@@ -18,6 +18,9 @@ struct SearchFieldView: View {
 		self.placeholder = type.placeholder
 		self.type = type
 	}
+	var stops : [Stop] {
+		type == .departure ? viewModel.searchLocationDataDeparture : viewModel.searchLocationDataArrival
+	}
 	
     var body: some View {
 		VStack {
@@ -28,14 +31,17 @@ struct SearchFieldView: View {
 					viewModel.updateSearchText(text: fieldText, type: type)
 				}
 				.onChange(of: fieldText, perform: { text in
-					if textFieldIsFocused {
-						viewModel.updateSearchText(text: fieldText, type: type)
+					withAnimation{
+						if textFieldIsFocused {
+							viewModel.updateSearchText(text: fieldText, type: type)
+						}
 					}
+					
 				})
 				.font(.system(size: 17))
 				.padding(5)
 			if textFieldIsFocused {
-			ForEach(type == .departure ? viewModel.searchLocationDataDeparture : viewModel.searchLocationDataArrival) { stop in
+				ForEach(stops) { stop in
 					if let text = stop.name {
 						Button(text){
 							textFieldIsFocused = false
@@ -52,6 +58,7 @@ struct SearchFieldView: View {
 		.padding(5)
 		.background(.ultraThinMaterial)
 		.cornerRadius(10)
+		.animation(.easeInOut, value: stops.count)
     }
 		
 }

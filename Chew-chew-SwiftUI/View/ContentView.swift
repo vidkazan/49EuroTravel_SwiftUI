@@ -19,6 +19,7 @@ struct ContentView: View {
 			}
 			if viewModel.isShowingDatePicker {
 				DatePickerView()
+					.transition(.push(from: .bottom))
 				Spacer()
 			}
 		}

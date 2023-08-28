@@ -31,8 +31,10 @@ struct TimeChoosingView: View {
 			HStack(alignment: .top) {
 				ForEach(0..<2) { index in
 					Button(action: {
-						selectedOption = index
-						optionPressed(index)
+						withAnimation{
+							selectedOption = index
+							optionPressed(index)
+						}
 					}) {
 						var text : String {
 						switch index {
