@@ -23,15 +23,11 @@ struct ContentView: View {
 					.frame(maxWidth: .infinity)
 					.padding(5)
 					.cornerRadius(10)
-					.transition(.move(edge: .bottom))
-					.animation(.spring(), value: viewModel.resultJourneysCollectionViewDataSourse.journeys.count)
 			}
-				.transition(.move(edge: .bottom))
-				.animation(.spring(), value: viewModel.resultJourneysCollectionViewDataSourse.journeys.count)
 				.padding(5)
 			if viewModel.isShowingDatePicker {
 				VStack{
-					DatePickerView()
+					DatePickerView(startDat: viewModel.timeChooserDate)
 					Spacer()
 				}
 				.transition(.move(edge: .bottom))
@@ -49,7 +45,7 @@ struct ContentView: View {
 				)
 			)
 			.transition(.move(edge: .bottom))
-//			.animation(.spring(), value: viewModel.isShowingDatePicker)
+			.animation(.spring(), value: viewModel.isShowingDatePicker)
 			.animation(.spring(), value: viewModel.searchLocationDataDeparture)
 			.animation(.spring(), value: viewModel.searchLocationDataArrival)
 			

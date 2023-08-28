@@ -10,10 +10,27 @@ import SwiftUI
 struct DatePickerView: View {
 	@EnvironmentObject var viewModel : SearchLocationViewModel
 	
-	@State private var date = Date.now
-	@State private var time = Date.now
+	@State private var date = Date()
+	@State private var time = Date()
+	var startDate : Date
+	init(startDat: Date = Date()) {
+		startDate = startDat
+	}
     var body: some View {
 		VStack {
+			DatePicker(
+				"",
+				selection: $date,
+				displayedComponents: [.date]
+			)
+			.onAppear {
+				  date = startDate
+			}
+			.frame(minHeight: 400)
+				.datePickerStyle(.graphical)
+				.padding(7)
+				.background(.thinMaterial)
+				.cornerRadius(10)
 			HStack {
 				Button("now") {
 					viewModel.updateJourneyTimeValue(date: Date.now)
@@ -50,22 +67,15 @@ struct DatePickerView: View {
 					.datePickerStyle(.compact)
 					.cornerRadius(10)
 					.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
+					.onAppear {
+						  time = startDate
+					}
 				Spacer()
 			}
 				.frame(maxWidth: .infinity,maxHeight: 50)
 				.background(.thinMaterial)
 				.cornerRadius(10)
-			DatePicker(
-				"",
-				selection: $date,
-				displayedComponents: [.date]
-			)
-			.frame(minHeight: 400)
-				.datePickerStyle(.graphical)
-				.padding(7)
-				.background(.thinMaterial)
-				.cornerRadius(10)
-			
+			Spacer()
 			Button("Done") {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
 					print(dateCombined)
@@ -76,20 +86,23 @@ struct DatePickerView: View {
 				.background(.regularMaterial)
 				.foregroundColor(Color.black)
 				.cornerRadius(10)
-			Spacer()
+			
 		}
 		.font(.system(size: 17,weight: .semibold))
 		.padding(5)
 		.background(.ultraThinMaterial)
 		.cornerRadius(10)
 		.padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5))
+		.opacity(viewModel.isShowingDatePicker ? 1 : 0)
+		.transition(.move(edge: .bottom))
+		.animation(.easeInOut, value: viewModel.isShowingDatePicker)
 	}
 }
 
-struct DatePickerView_Previews: PreviewProvider {
-    static var previews: some View {
-        DatePickerView()
-    }
-}
+//struct DatePickerView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        DatePickerView(viewModel: viewModel)
+//    }
+//}
 
 

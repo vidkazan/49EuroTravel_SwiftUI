@@ -94,22 +94,13 @@ extension SearchLocationViewModel {
 			self.bottomSearchFieldText = stop.name ?? ""
 		}
 		if journeySearchData.updateSearchStopData(type: type, stop: stop) == true {
-//			self.resultJourneysViewDataSourse = ResultJourneyViewDataSourse(
-//				awaitingData: true,
-//				journeys: nil,
-//				timeline: nil)
 			self.getJourneys()
 		}
 	}
 	func updateJourneyTimeValue(date : Date){
-		print(date)
 		timeChooserDate = date
 		isShowingDatePicker = false
 		if journeySearchData.updateSearchTimeData(departureTime: date) == true {
-//			self.resultJourneysViewDataSourse = ResultJourneyViewDataSourse(
-//				awaitingData: true,
-//				journeys: nil,
-//				timeline: nil)
 			self.getJourneys()
 		}
 	}
