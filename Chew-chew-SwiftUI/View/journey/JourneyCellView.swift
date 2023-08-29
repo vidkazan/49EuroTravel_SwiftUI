@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+
 struct ScrollViewGestureButton<Label: View>: View {
 
 	init(
@@ -125,42 +127,88 @@ struct JourneyCellView: View {
 					ObservableScrollView(scrollOffset: $viewModel.scrollOffset) { proxy in
 						if viewModel.state == .onNewDataJourney && viewModel.resultJourneysCollectionViewDataSourse.journeys.count > 0 {
 							VStack {
-								Text("Reload")
-									.font(.system(size: 17, weight: .medium))
-									.foregroundColor(-viewModel.scrollOffset > 150 ? .green : .white)
-								ProgressView(value: -viewModel.scrollOffset > 149 ? 149 : -viewModel.scrollOffset,total:CGFloat(150))
-									.tint(-viewModel.scrollOffset > 150 ? .green : .white)
-									.progressViewStyle(.linear)
-							}
-							.id(0)
-							let count : Int = viewModel.resultJourneysCollectionViewDataSourse.journeys.count
-	//						ForEach(viewModel.resultJourneysCollectionViewDataSourse.journeys) { journey in
-							ForEach(0..<count) { index in
-									let journey = viewModel.resultJourneysCollectionViewDataSourse.journeys[index]
-									VStack {
-										JourneyHeaderView(journey: journey)
-										LegsView(journey : journey)
-										BadgesView(badges: [.init(color: UIColor(hue: 0.3, saturation: 1, brightness: 0.4, alpha: 1), name: "DeutschlandTicket")])
+								HStack{
+									ZStack(alignment: .leading){
+										Rectangle()
+											.fill(.ultraThinMaterial.opacity(0.4))
+											.cornerRadius(10)
+											.frame(width: 80,alignment: .leading)
+										Rectangle()
+											.fill(Color(hue: 0.3, saturation: 1, brightness: 0.4))
+											.cornerRadius(10)
+											.frame(width: -viewModel.scrollOffset < 0 ? 0 : -viewModel.scrollOffset*8/15,alignment: .leading)
+											.animation(.easeInOut, value: -viewModel.scrollOffset)
+										Text("Reload")
+											.frame(maxWidth: 80)
+											.font(.system(size: 17, weight: .medium))
+											.foregroundColor(.white)
+											.padding(5)
 									}
-									.background(.ultraThinMaterial)
+									.frame(maxWidth: 80)
 									.cornerRadius(10)
-									.frame(maxWidth: .infinity)
-									.shadow(radius: 1,y:2)
-									.id(index+1)
-									.onAppear{
-										proxy.scrollTo(1,anchor: .top)
+									Spacer()
+									ZStack(alignment: .leading){
+										Rectangle()
+											.fill(.ultraThinMaterial.opacity(0.4))
+											.cornerRadius(10)
+											.frame(width: 80,alignment: .leading)
+										Text("Earlier")
+											.frame(maxWidth: 80)
+											.font(.system(size: 17, weight: .medium))
+											.foregroundColor(.white)
+											.padding(5)
 									}
+									.frame(maxWidth: 80)
+									.cornerRadius(10)
+								}
 							}
+							.id(-1)
+							ForEach(viewModel.resultJourneysCollectionViewDataSourse.journeys) { (journey) in
+								VStack {
+									JourneyHeaderView(journey: journey)
+									LegsView(journey : journey)
+									BadgesView(badges: [.init(color: UIColor(hue: 0.3, saturation: 1, brightness: 0.4, alpha: 1), name: "DeutschlandTicket")])
+								}
+								.background(.ultraThinMaterial)
+								.cornerRadius(10)
+								.frame(maxWidth: .infinity)
+								.shadow(radius: 1,y:2)
+								.id(journey.id)
+								.onAppear{
+									proxy.scrollTo(0,anchor: .top)
+								}
+							}
+							Button(action:{
+								
+							}, label:{
+								HStack{
+									Spacer()
+									ZStack(alignment: .leading){
+										Rectangle()
+											.fill(.ultraThinMaterial.opacity(0.4))
+											.cornerRadius(10)
+											.frame(width: 80,alignment: .leading)
+										Text("Later")
+											.frame(maxWidth: 80)
+											.font(.system(size: 17, weight: .medium))
+											.foregroundColor(.white)
+											.padding(5)
+									}
+									.frame(maxWidth: 80)
+									.cornerRadius(10)
+								}
+							})
 							
 						}
-					}.onChange(of: viewModel.scrollOffset, perform: { offset in
+					}
+					.onChange(of: viewModel.scrollOffset, perform: { offset in
 						if -offset > 150 {
 							viewModel.updateJourneyTimeValue(date: viewModel.timeChooserDate)
 						}
 					})
 					.transition(.move(edge: .bottom))
 					.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
-				
+					
 			}
 		}
 		.transition(.move(edge: .bottom))
@@ -176,8 +224,8 @@ struct JourneyView_Previews: PreviewProvider {
 
 struct ScrollViewOffsetPreferenceKey: PreferenceKey {
   static var defaultValue = CGFloat.zero
-  static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
-	value += nextValue()
+	static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
+	  value += nextValue()
   }
 }
 
@@ -199,16 +247,16 @@ struct ObservableScrollView<Content>: View where Content : View {
 	  ScrollViewReader { proxy in
 		  content(proxy)
 		  .background(GeometryReader { geo in
-			  let offset = -geo.frame(in: .named(scrollSpace)).minY
+			  let offsetY = -geo.frame(in: .named(scrollSpace)).minY
 			  Color.clear
 				.preference(key: ScrollViewOffsetPreferenceKey.self,
-							value: offset)
+							value: offsetY)
 		  })
 	  }
 	}
 	.coordinateSpace(name: scrollSpace)
-	.onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { value in
-	  scrollOffset = value
+	.onPreferenceChange(ScrollViewOffsetPreferenceKey.self) { offsetY in
+	  scrollOffset = offsetY
 	}
   }
 }

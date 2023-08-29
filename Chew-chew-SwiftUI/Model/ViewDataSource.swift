@@ -76,7 +76,7 @@ struct JourneyViewDataSourse : Equatable {
 	let legs : [LegViewDataSourse]
 }
 
-struct AllJourneysCollectionViewDataSourse : Equatable {
+struct AllJourneysCollectionViewDataSourse : Equatable{
 	let awaitingData : Bool
 	let journeys : [JourneyCollectionViewDataSourse]
 }
