@@ -14,7 +14,10 @@ struct BadgesView: View {
 	}
     var body: some View {
 		HStack{
-			BadgeView(badge: .init(color: UIColor(red: 0.8, green: 0, blue: 0, alpha: 1), name: "cancelled"))
+			ForEach(badges) { badge in
+				BadgeView(badge: badge)
+			}
+			
 		}
 		.frame(maxWidth: .infinity, alignment: .trailing)
 		.padding(EdgeInsets(top: 0, leading: 7, bottom: 7, trailing: 7))

@@ -8,7 +8,8 @@
 import Foundation
 import UIKit
 
-struct BadgeDataSource : Equatable {
+struct BadgeDataSource : Equatable, Identifiable {
+	let id = UUID()
 	let color : UIColor
 	let name : String
 	

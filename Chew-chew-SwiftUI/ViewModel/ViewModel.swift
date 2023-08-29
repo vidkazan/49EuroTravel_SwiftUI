@@ -8,6 +8,7 @@
 import Foundation
 
 class SearchLocationViewModel : ObservableObject {
+	@Published var scrollOffset = CGFloat.zero
 	@Published var topSearchFieldText = ""
 	@Published var bottomSearchFieldText = ""
 	@Published var isShowingDatePicker = false
