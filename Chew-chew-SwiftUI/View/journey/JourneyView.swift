@@ -16,28 +16,53 @@ struct JourneyView: View {
 			case true:
 				JourneyScrollViewLoader()
 			case false:
-				ObservableScrollView(scrollOffset: $viewModel.scrollOffset) { proxy in
-					if viewModel.state == .onNewDataJourney{
-						JourneyScrollViewHeader()
-							.id(-1)
-						ForEach(viewModel.resultJourneysCollectionViewDataSourse.journeys) { (journey) in
-							VStack {
-								JourneyHeaderView(journey: journey)
-								LegsView(journey : journey)
-								BadgesView(badges: [.init(color: UIColor(hue: 0.3, saturation: 1, brightness: 0.4, alpha: 1), name: "DeutschlandTicket")])
+				ScrollViewReader { proxy in
+					ScrollView(showsIndicators: false)  {
+						if viewModel.state == .onNewDataJourney{
+							JourneyScrollViewHeader()
+								.id(-1)
+							ForEach(viewModel.resultJourneysCollectionViewDataSourse.journeys) { (journey) in
+								VStack {
+									JourneyHeaderView(journey: journey)
+									LegsView(journey : journey)
+									BadgesView(badges: [.init(color: UIColor(hue: 0.3, saturation: 1, brightness: 0.4, alpha: 1), name: "DeutschlandTicket")])
+								}
+								.id(journey.id)
+								.background(.ultraThinMaterial)
+								.cornerRadius(10)
+								.frame(maxWidth: .infinity)
+								.shadow(radius: 1,y:2)
+								.onAppear{
+									proxy.scrollTo(0,anchor: .top)
+								}
 							}
-							.id(journey.id)
-							.background(.ultraThinMaterial)
-							.cornerRadius(10)
-							.frame(maxWidth: .infinity)
-							.shadow(radius: 1,y:2)
-							.onAppear{
-								proxy.scrollTo(0,anchor: .top)
-							}
+							JourneyScrollViewFooter()
 						}
-						JourneyScrollViewFooter()
 					}
 				}
+				
+//				ObservableScrollView(scrollOffset: $viewModel.scrollOffset) { proxy in
+//					if viewModel.state == .onNewDataJourney{
+//						JourneyScrollViewHeader()
+//							.id(-1)
+//						ForEach(viewModel.resultJourneysCollectionViewDataSourse.journeys) { (journey) in
+//							VStack {
+//								JourneyHeaderView(journey: journey)
+//								LegsView(journey : journey)
+//								BadgesView(badges: [.init(color: UIColor(hue: 0.3, saturation: 1, brightness: 0.4, alpha: 1), name: "DeutschlandTicket")])
+//							}
+//							.id(journey.id)
+//							.background(.ultraThinMaterial)
+//							.cornerRadius(10)
+//							.frame(maxWidth: .infinity)
+//							.shadow(radius: 1,y:2)
+//							.onAppear{
+//								proxy.scrollTo(0,anchor: .top)
+//							}
+//						}
+//						JourneyScrollViewFooter()
+//					}
+//				}
 //				.onChange(of: viewModel.scrollOffset, perform: { offset in
 //					if -offset > 100 {
 //						viewModel.updateJourneyTimeValue(date: viewModel.timeChooserDate)

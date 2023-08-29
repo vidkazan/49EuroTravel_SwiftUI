@@ -50,7 +50,6 @@ struct TimeChoosingView: View {
 							.foregroundColor(selectedOption == index ? .primary : .black)
 							.cornerRadius(10)
 					}
-//					.frame(maxWidth: .infinity,minHeight: 43)
 				}
 			}
 		}
@@ -71,9 +70,3 @@ struct TimeChoosingView: View {
 		}
 	}
 }
-
-//struct TimeChoosingView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        TimeChoosingView()
-//    }
-//}
