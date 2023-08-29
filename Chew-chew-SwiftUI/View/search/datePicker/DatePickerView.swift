@@ -23,41 +23,18 @@ struct DatePickerView: View {
 				selection: $date,
 				displayedComponents: [.date]
 			)
-			.onAppear {
-				  date = startDate
-			}
-			.frame(minHeight: 400)
-				.datePickerStyle(.graphical)
-				.padding(7)
-				.background(.thinMaterial)
-				.cornerRadius(10)
+				.onAppear {
+					  date = startDate
+				}
+				.frame(minHeight: 400)
+					.datePickerStyle(.graphical)
+					.padding(7)
+					.background(.ultraThinMaterial)
+					.cornerRadius(10)
 			HStack {
-				Button("now") {
-					viewModel.updateJourneyTimeValue(date: Date.now)
-				}
-				.padding(7)
-				.foregroundColor(.primary)
-					.cornerRadius(10)
-					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
-				Button("15 min") {
-					viewModel.updateJourneyTimeValue(date: Date.now + (15 * 60))
-				}
-				.padding(7)
-				.foregroundColor(.primary)
-					.cornerRadius(10)
-					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
-				Button("1 hour") {
-					viewModel.updateJourneyTimeValue(date: Date.now + (60 * 60))
-				}
-				.padding(7)
-				.foregroundColor(.primary)
-					.cornerRadius(10)
-					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
-				Spacer()
+				DatePickerTimePresetButtons()
 				Divider()
-					.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 0))
 					.frame(height: 30)
-				Spacer()
 				DatePicker(
 					"",
 					selection: $time,
@@ -73,12 +50,11 @@ struct DatePickerView: View {
 				Spacer()
 			}
 				.frame(maxWidth: .infinity,maxHeight: 50)
-				.background(.thinMaterial)
+				.background(.ultraThinMaterial)
 				.cornerRadius(10)
 			Spacer()
 			Button("Done") {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
-					print(dateCombined)
 					viewModel.updateJourneyTimeValue(date: dateCombined)
 				}
 			}
@@ -98,11 +74,3 @@ struct DatePickerView: View {
 		.animation(.easeInOut, value: viewModel.isShowingDatePicker)
 	}
 }
-
-//struct DatePickerView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        DatePickerView(viewModel: viewModel)
-//    }
-//}
-
-

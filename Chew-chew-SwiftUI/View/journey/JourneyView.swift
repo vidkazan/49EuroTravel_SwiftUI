@@ -15,38 +15,36 @@ struct JourneyView: View {
 			switch viewModel.resultJourneysCollectionViewDataSourse.awaitingData {
 			case true:
 				JourneyScrollViewLoader()
-					.transition(.identity)
-					.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
 			case false:
-					ObservableScrollView(scrollOffset: $viewModel.scrollOffset) { proxy in
-						if viewModel.state == .onNewDataJourney{
-							JourneyScrollViewHeader()
-								.id(-1)
-							ForEach(viewModel.resultJourneysCollectionViewDataSourse.journeys) { (journey) in
-								VStack {
-									JourneyHeaderView(journey: journey)
-									LegsView(journey : journey)
-									BadgesView(badges: [.init(color: UIColor(hue: 0.3, saturation: 1, brightness: 0.4, alpha: 1), name: "DeutschlandTicket")])
-								}
-								.id(journey.id)
-								.background(.ultraThinMaterial)
-								.cornerRadius(10)
-								.frame(maxWidth: .infinity)
-								.shadow(radius: 1,y:2)
-								.onAppear{
-									proxy.scrollTo(0,anchor: .top)
-								}
+				ObservableScrollView(scrollOffset: $viewModel.scrollOffset) { proxy in
+					if viewModel.state == .onNewDataJourney{
+						JourneyScrollViewHeader()
+							.id(-1)
+						ForEach(viewModel.resultJourneysCollectionViewDataSourse.journeys) { (journey) in
+							VStack {
+								JourneyHeaderView(journey: journey)
+								LegsView(journey : journey)
+								BadgesView(badges: [.init(color: UIColor(hue: 0.3, saturation: 1, brightness: 0.4, alpha: 1), name: "DeutschlandTicket")])
 							}
-							JourneyScrollViewFooter()
+							.id(journey.id)
+							.background(.ultraThinMaterial)
+							.cornerRadius(10)
+							.frame(maxWidth: .infinity)
+							.shadow(radius: 1,y:2)
+							.onAppear{
+								proxy.scrollTo(0,anchor: .top)
+							}
 						}
+						JourneyScrollViewFooter()
 					}
-					.onChange(of: viewModel.scrollOffset, perform: { offset in
-						if -offset > 150 {
-							viewModel.updateJourneyTimeValue(date: viewModel.timeChooserDate)
-						}
-					})
-					.transition(.move(edge: .bottom))
-					.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
+				}
+				.onChange(of: viewModel.scrollOffset, perform: { offset in
+					if -offset > 150 {
+						viewModel.updateJourneyTimeValue(date: viewModel.timeChooserDate)
+					}
+				})
+				.transition(.move(edge: .bottom))
+				.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
 			}
 		}
 		.transition(.move(edge: .bottom))

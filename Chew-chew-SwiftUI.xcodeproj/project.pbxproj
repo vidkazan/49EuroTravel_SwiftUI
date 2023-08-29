@@ -44,6 +44,7 @@
 		7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */; };
 		7DAF62AF2A9E5494006F1A17 /* JourneyScrollViewLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */; };
 		7DAF62B12A9E54E3006F1A17 /* JourneyScrollViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */; };
+		7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -101,6 +102,7 @@
 		7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewHeader.swift; sourceTree = "<group>"; };
 		7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewLoader.swift; sourceTree = "<group>"; };
 		7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewFooter.swift; sourceTree = "<group>"; };
+		7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTimePresetButtons.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,11 +265,20 @@
 		7DA8D3462A9A0DDC005DF550 /* search */ = {
 			isa = PBXGroup;
 			children = (
+				7DAF62B42A9E5833006F1A17 /* datePicker */,
 				7D6734DC2A96370200CBE9C1 /* SearchFieldView.swift */,
 				7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */,
-				7D81AB252A978CDC0055AEAF /* DatePickerView.swift */,
 			);
 			path = search;
+			sourceTree = "<group>";
+		};
+		7DAF62B42A9E5833006F1A17 /* datePicker */ = {
+			isa = PBXGroup;
+			children = (
+				7D81AB252A978CDC0055AEAF /* DatePickerView.swift */,
+				7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */,
+			);
+			path = datePicker;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -437,6 +448,7 @@
 				7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */,
 				7DAF62A92A9E52FF006F1A17 /* ObservableScrollView.swift in Sources */,
 				7D02CE1D2A97E55D0048ADE6 /* ViewModel+Fetch.swift in Sources */,
+				7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
