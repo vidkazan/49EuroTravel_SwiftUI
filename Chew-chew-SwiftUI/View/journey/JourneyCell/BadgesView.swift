@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct BadgesView: View {
-	let badges : [BadgeDataSource]
-	init(badges: [BadgeDataSource]) {
+	let badges : [BadgesList]
+	init(badges: [BadgesList]) {
 		self.badges = badges
 	}
     var body: some View {

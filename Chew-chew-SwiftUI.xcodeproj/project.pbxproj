@@ -45,6 +45,7 @@
 		7DAF62AF2A9E5494006F1A17 /* JourneyScrollViewLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */; };
 		7DAF62B12A9E54E3006F1A17 /* JourneyScrollViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */; };
 		7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */; };
+		7DAF62C02A9E6DED006F1A17 /* D-ticketLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,6 +104,7 @@
 		7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewLoader.swift; sourceTree = "<group>"; };
 		7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewFooter.swift; sourceTree = "<group>"; };
 		7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTimePresetButtons.swift; sourceTree = "<group>"; };
+		7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "D-ticketLogo.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -167,6 +169,7 @@
 				7D02CE122A97E4700048ADE6 /* DateParcer.swift */,
 				7D02CE142A97E4940048ADE6 /* Constants.swift */,
 				7DAF62A82A9E52FF006F1A17 /* ObservableScrollView.swift */,
+				7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -462,6 +465,7 @@
 				7D02CE232A97E64E0048ADE6 /* Query.swift in Sources */,
 				7D02CE252A97E6620048ADE6 /* Errors.swift in Sources */,
 				7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */,
+				7DAF62C02A9E6DED006F1A17 /* D-ticketLogo.swift in Sources */,
 				7DAF62A92A9E52FF006F1A17 /* ObservableScrollView.swift in Sources */,
 				7D02CE1D2A97E55D0048ADE6 /* ViewModel+Fetch.swift in Sources */,
 				7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */,

@@ -25,7 +25,7 @@ struct JourneyView: View {
 								VStack {
 									JourneyHeaderView(journey: journey)
 									LegsView(journey : journey)
-									BadgesView(badges: [.init(color: UIColor(hue: 0.3, saturation: 1, brightness: 0.4, alpha: 1), name: "DeutschlandTicket")])
+									BadgesView(badges: [.cancelled,.dticket])
 								}
 								.id(journey.id)
 								.background(.ultraThinMaterial)

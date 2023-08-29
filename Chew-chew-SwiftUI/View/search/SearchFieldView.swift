@@ -23,14 +23,12 @@ struct SearchFieldView: View {
 		}, label: {
 			Image(systemName: "location")
 		})
-		
 		:
 		Button(action: {
 			viewModel.switchStops()
 		}, label: {
 			Image(systemName: "arrow.up.arrow.down")
 		})
-		
 	}
 	var stops : [Stop] {
 		type == .departure ? viewModel.searchLocationDataDeparture : viewModel.searchLocationDataArrival

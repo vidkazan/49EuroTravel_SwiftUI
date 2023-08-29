@@ -9,24 +9,27 @@ import Foundation
 import SwiftUI
 
 struct BadgeView : View {
-	var text : String
-	var color : Color
-		init(badge : BadgeDataSource) {
-			self.text = badge.name
-			self.color = Color(badge.color)
-		}
-	var body : some View {
-		Text(text)
-			.font(.system(size: 12))
-			.foregroundColor(.white)
-			.padding(4)
-			.background(color)
-			.cornerRadius(8)
+//	var text : String
+//	var color : Color
+	var badge : BadgesList
+	init(badge : BadgesList) {
+		self.badge = badge
 	}
-}
-
-struct BadgeView_Previews: PreviewProvider {
-	static var previews: some View {
-		BadgeView(badge: BadgeDataSource(color: .red, name: "cancelled"))
+	var body : some View {
+		switch badge {
+		case .price,.cancelled,.connectionNotReachable:
+			Text(badge.badgeDataSourse.name)
+				.font(.system(size: 12))
+				.foregroundColor(.white)
+				.padding(4)
+				.background(Color(badge.badgeDataSourse.color))
+				.cornerRadius(8)
+		case .dticket:
+			DTicketLogo()
+				.font(.system(size: 12))
+				.padding(4)
+				.background(Color(badge.badgeDataSourse.color))
+				.cornerRadius(8)
+		}
 	}
 }

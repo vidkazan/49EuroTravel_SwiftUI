@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import UIKit
+import SwiftUI
 
 struct BadgeDataSource : Equatable, Identifiable {
 	let id = UUID()
@@ -19,30 +19,43 @@ struct BadgeDataSource : Equatable, Identifiable {
 	}
 }
 
-enum BadgesList {
+enum BadgesList : Identifiable {
 	case price(price: String)
 	case dticket
 	case cancelled
 	case connectionNotReachable
+	 
+	var id : Int {
+		switch self {
+		case .price:
+			return 0
+		case .dticket:
+			return 1
+		case .cancelled:
+			return 2
+		case .connectionNotReachable:
+			return 3
+		}
+	}
 	
-	var badgeView : BadgeView {
+	var badgeDataSourse : BadgeDataSource {
 		switch self {
 		case .price(let price):
-			return BadgeView(badge: BadgeDataSource(
-				color: .red,
-				name: price))
+			return BadgeDataSource(
+				color: UIColor(hue: 0.5, saturation: 1, brightness: 0.4, alpha: 1),
+				name: price)
 		case .dticket:
-			return BadgeView(badge: BadgeDataSource(
-				color: .green,
-				name: "DeutschlandTicket"))
+			return BadgeDataSource(
+				color: UIColor(hue: 0.35, saturation: 0, brightness: 0.4, alpha: 1),
+				name: "DeutschlandTicket")
 		case .cancelled:
-			return BadgeView(badge: BadgeDataSource(
-				color: .red,
-				name: "cancelled"))
+			return BadgeDataSource(
+				color: UIColor(hue: 0, saturation: 0.8, brightness: 0.6, alpha: 1),
+				name: "cancelled")
 		case .connectionNotReachable:
-			return BadgeView(badge: BadgeDataSource(
-				color: .red,
-				name: "connection is not reachable"))
+			return BadgeDataSource(
+				color: UIColor(hue: 0, saturation: 0.8, brightness: 0.6, alpha: 1),
+				name: "connection is not reachable")
 		}
 	}
 }
