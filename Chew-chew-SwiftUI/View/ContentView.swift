@@ -19,7 +19,7 @@ struct ContentView: View {
 				}
 					.padding(5)
 					.cornerRadius(10)
-				JourneyCellView()
+				JourneyView()
 					.frame(maxWidth: .infinity)
 					.padding(5)
 					.cornerRadius(10)
