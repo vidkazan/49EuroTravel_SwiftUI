@@ -38,11 +38,11 @@ struct JourneyView: View {
 						JourneyScrollViewFooter()
 					}
 				}
-				.onChange(of: viewModel.scrollOffset, perform: { offset in
-					if -offset > 150 {
-						viewModel.updateJourneyTimeValue(date: viewModel.timeChooserDate)
-					}
-				})
+//				.onChange(of: viewModel.scrollOffset, perform: { offset in
+//					if -offset > 100 {
+//						viewModel.updateJourneyTimeValue(date: viewModel.timeChooserDate)
+//					}
+//				})
 				.transition(.move(edge: .bottom))
 				.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
 			}

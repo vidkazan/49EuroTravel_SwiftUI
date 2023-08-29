@@ -11,7 +11,7 @@ struct JourneyScrollViewHeader: View {
     var body: some View {
 		VStack {
 			HStack{
-				FillableButton(text: "Reload",isNotFillable: false)
+				FillableButton(text: "Reload")
 					.frame(maxWidth: 80)
 					.cornerRadius(10)
 				Spacer()

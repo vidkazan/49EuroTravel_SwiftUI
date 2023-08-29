@@ -45,7 +45,7 @@ extension SearchLocationViewModel {
 		var query : [URLQueryItem] = []
 		query = Query.getQueryItems(methods: [
 			Query.location(location: text),
-			Query.results(max: 10)
+			Query.results(max: 5)
 		])
 		ApiService.fetch([Stop].self,query: query, type: ApiService.Requests.locations(name: text ),requestGroupId: "") { [self] result in
 			switch result {

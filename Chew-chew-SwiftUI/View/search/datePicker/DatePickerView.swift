@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DatePickerView: View {
 	@EnvironmentObject var viewModel : SearchLocationViewModel
-	
 	@State private var date = Date()
 	@State private var time = Date()
 	var startDate : Date
@@ -18,19 +17,6 @@ struct DatePickerView: View {
 	}
     var body: some View {
 		VStack {
-			DatePicker(
-				"",
-				selection: $date,
-				displayedComponents: [.date]
-			)
-				.onAppear {
-					  date = startDate
-				}
-				.frame(minHeight: 400)
-					.datePickerStyle(.graphical)
-					.padding(7)
-					.background(.ultraThinMaterial)
-					.cornerRadius(10)
 			HStack {
 				DatePickerTimePresetButtons()
 				Divider()
@@ -45,13 +31,26 @@ struct DatePickerView: View {
 					.cornerRadius(10)
 					.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
 					.onAppear {
-						  time = startDate
+						time = startDate
 					}
 				Spacer()
 			}
 				.frame(maxWidth: .infinity,maxHeight: 50)
 				.background(.ultraThinMaterial)
 				.cornerRadius(10)
+			DatePicker(
+				"",
+				selection: $date,
+				displayedComponents: [.date]
+			)
+					.onAppear {
+						  date = startDate
+					}
+					.frame(minHeight: 350,alignment: .top)
+					.datePickerStyle(.graphical)
+					.padding(7)
+					.cornerRadius(10)
+			
 			Spacer()
 			Button("Done") {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
@@ -68,7 +67,7 @@ struct DatePickerView: View {
 		.padding(5)
 		.background(.ultraThinMaterial)
 		.cornerRadius(10)
-		.padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5))
+		.padding(5)
 		.opacity(viewModel.isShowingDatePicker ? 1 : 0)
 		.transition(.move(edge: .bottom))
 		.animation(.easeInOut, value: viewModel.isShowingDatePicker)

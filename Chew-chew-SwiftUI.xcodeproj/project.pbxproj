@@ -146,9 +146,9 @@
 		7D02CE0D2A97E3B30048ADE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
 				7DA8D3462A9A0DDC005DF550 /* search */,
 				7DA8D3452A9A0DB8005DF550 /* journey */,
-				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -248,16 +248,9 @@
 		7DA8D3452A9A0DB8005DF550 /* journey */ = {
 			isa = PBXGroup;
 			children = (
-				7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */,
 				7D02CE332A98E8130048ADE6 /* JourneyView.swift */,
-				7D23E4492A98F9800037C3E1 /* LegsView.swift */,
-				7D23E44B2A98FD700037C3E1 /* LegView.swift */,
-				7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */,
-				7DA8D3492A9A118E005DF550 /* BadgesView.swift */,
-				7DAF62AA2A9E5327006F1A17 /* FillableButton.swift */,
-				7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */,
-				7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */,
-				7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */,
+				7DAF62BA2A9E5DEF006F1A17 /* JourneyScrollView */,
+				7DAF62B92A9E5DA6006F1A17 /* JourneyCell */,
 			);
 			path = journey;
 			sourceTree = "<group>";
@@ -279,6 +272,29 @@
 				7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */,
 			);
 			path = datePicker;
+			sourceTree = "<group>";
+		};
+		7DAF62B92A9E5DA6006F1A17 /* JourneyCell */ = {
+			isa = PBXGroup;
+			children = (
+				7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */,
+				7DA8D3492A9A118E005DF550 /* BadgesView.swift */,
+				7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */,
+				7D23E4492A98F9800037C3E1 /* LegsView.swift */,
+				7D23E44B2A98FD700037C3E1 /* LegView.swift */,
+			);
+			path = JourneyCell;
+			sourceTree = "<group>";
+		};
+		7DAF62BA2A9E5DEF006F1A17 /* JourneyScrollView */ = {
+			isa = PBXGroup;
+			children = (
+				7DAF62AA2A9E5327006F1A17 /* FillableButton.swift */,
+				7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */,
+				7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */,
+				7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */,
+			);
+			path = JourneyScrollView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
