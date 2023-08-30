@@ -50,11 +50,11 @@ enum BadgesList : Identifiable {
 				name: "DeutschlandTicket")
 		case .cancelled:
 			return BadgeDataSource(
-				color: UIColor(hue: 0, saturation: 0.8, brightness: 0.6, alpha: 1),
+				color: UIColor(hue: 0, saturation: 1, brightness: 0.7, alpha: 1),
 				name: "cancelled")
 		case .connectionNotReachable:
 			return BadgeDataSource(
-				color: UIColor(hue: 0, saturation: 0.8, brightness: 0.6, alpha: 1),
+				color: UIColor(hue: 0, saturation: 1, brightness: 0.7, alpha: 1),
 				name: "connection is not reachable")
 		}
 	}
@@ -81,8 +81,11 @@ struct JourneyCollectionViewDataSourse : Equatable, Identifiable {
 	let id : Int
 	let startTimeLabelText : String
 	let endTimeLabelText : String
+	let startDate : Date
+	let endDate : Date
 	let durationLabelText : String
 	let legs : [LegViewDataSourse]
+	let sunEvents : [SunEvent]
 }
 
 struct JourneyViewDataSourse : Equatable {

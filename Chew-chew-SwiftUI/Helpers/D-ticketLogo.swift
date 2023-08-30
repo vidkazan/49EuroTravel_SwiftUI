@@ -21,7 +21,6 @@ struct DTicketLogo: View {
 	}
 }
 
-
 struct dTicketLogoTop: Shape {
 	func path(in rect: CGRect) -> Path {
 		var path = Path()

@@ -17,9 +17,9 @@ struct LegsView: View {
 		GeometryReader { geo in
 			ZStack {
 				Rectangle()
+					.fill(.ultraThinMaterial)
 					.frame(height:15)
 					.cornerRadius(5)
-					.foregroundColor(Color.init(uiColor: UIColor.lightGray))
 				ForEach(journey.legs) { leg in
 					LegView(leg: leg)
 						.frame(

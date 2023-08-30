@@ -108,4 +108,19 @@ class DateParcer {
 	 return Calendar.current.date(from: combined)
  }
 
+	static func getDaysIncludedInRange(startDateUnnormalised: Date, endDateUnnormalised: Date) -> [Date] {
+		let startDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: startDateUnnormalised)!
+		let endDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: endDateUnnormalised)!
+		
+		var currentDate = startDate
+		var allDays: [Date] = []
+	   
+		let calendar = Calendar.current
+	   
+		while currentDate <= endDate {
+			allDays.append(currentDate)
+			currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+		}
+		return allDays
+	}
 }

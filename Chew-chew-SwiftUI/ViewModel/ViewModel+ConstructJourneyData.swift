@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 extension SearchLocationViewModel {
 	
@@ -54,16 +55,34 @@ extension SearchLocationViewModel {
 				legsDataSourse.append(res)
 			}
 		}
+		
+		let sunEventGenerator = SunEventGenerator(
+			locationStart: CLLocationCoordinate2D(
+				latitude: self.journeySearchData.departureStop?.stop.location?.latitude ?? 0,
+				longitude: self.journeySearchData.departureStop?.stop.location?.longitude ?? 0
+			),
+			locationFinal : CLLocationCoordinate2D(
+				latitude: self.journeySearchData.arrivalStop?.stop.location?.latitude ?? 0,
+				longitude: self.journeySearchData.arrivalStop?.stop.location?.longitude ?? 0
+			),
+			dateStart: firstTS,
+			dateFinal: lastTS)
+		
+		
+		
 		return JourneyCollectionViewDataSourse(
 			id : id,
 			startTimeLabelText: DateParcer.getTimeStringFromDate(date: firstTS),
 			endTimeLabelText: DateParcer.getTimeStringFromDate(date: lastTS),
+			startDate: firstTS,
+			endDate: lastTS,
 			durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 				minutes: DateParcer.getTwoDateIntervalInMinutes(
 					date1: firstTS,
 					date2: lastTS)
-			)!,
-			legs: legsDataSourse
+			) ?? "ololo",
+			legs: legsDataSourse,
+			sunEvents: sunEventGenerator.getSunEvents()
 		)
 	}
 	
@@ -89,58 +108,3 @@ extension SearchLocationViewModel {
 		)
 	}
 }
-
-
-//	func constructJourneyData(journey : Journey, firstTS: Date?, lastTS: Date?) -> JourneyViewDataSourse? {
-//		var legsDataSourse : [LegViewDataSourse] = []
-//		guard let legs = journey.legs else { return nil }
-//		for leg in legs {
-//			if var res = self.constructLegData(leg: leg, firstTS: firstTS, lastTS: lastTS) {
-//				if legsDataSourse.last != nil && modifyLegColorDependingOnDelays(currentLeg: res, previousLeg: legsDataSourse.last) {
-//					legsDataSourse[legsDataSourse.count-1].color = UIColor.CompanionColors.red
-//				}
-//				legsDataSourse.append(res)
-//			}
-//		}
-//		return JourneyViewDataSourse(legs: legsDataSourse)
-//	}
-	
-//	func constructJourneysData(){
-//		guard let src = self.journeysData else { return }
-//		guard let journeys = src.journeys else { return }
-//		guard let firstJourney = journeys.first else { return }
-//		guard let lastJourney = journeys.last else { return }
-//		guard let firstJourneyLegs = firstJourney.legs else { return }
-//		guard let lastJourneyLegs = lastJourney.legs else { return }
-//
-//		guard let firstJourneyFirstLeg = firstJourneyLegs.first else { return }
-//		guard let firstJourneyLastLeg = firstJourneyLegs.last else { return }
-//		guard let lastJourneyLastLeg = lastJourneyLegs.last else { return }
-//
-//
-//		guard let firstTimestamp = firstJourneyFirstLeg.plannedDeparture else { return }
-//		guard let lastTimestampFirstTrip = firstJourneyLastLeg.plannedArrival else { return }
-//		guard let lastTimestamp = lastJourneyLastLeg.plannedArrival else { return }
-//
-//		let firstTS = DateParcer.getDateFromDateString(dateString: firstTimestamp)
-//		let lastFromFirstJourneyTS = DateParcer.getDateFromDateString(dateString: lastTimestampFirstTrip)
-//		let lastTS = DateParcer.getDateFromDateString(dateString: lastTimestamp)
-//
-//		var journeysViewData : [JourneyViewDataSourse] = []
-//		for journey in journeys {
-//		if let res = self.constructJourneyData(journey: journey, firstTS: firstTS, lastTS: lastTS) {
-//				journeysViewData.append(res)
-//			}
-//		}
-//
-//		guard let tl = self.constructTimelineData(firstTS: firstTS, lastTS: lastTS) else { return }
-//		prints("pixels per journey / pixels per all journeys")
-//		prints(Double(UIScreen.main.bounds.height) / Double(DateParcer.getTwoDateIntervalInMinutes(date1: lastTS, date2: firstTS)!),
-//			   Double(UIScreen.main.bounds.height) / Double(DateParcer.getTwoDateIntervalInMinutes(date1: lastFromFirstJourneyTS, date2: firstTS)!))
-//
-//		self.resultJourneysViewDataSourse = ResultJourneyViewDataSourse(
-//			awaitingData: false,
-//			journeys: journeysViewData,
-//			timeline: tl
-//		)
-//	}

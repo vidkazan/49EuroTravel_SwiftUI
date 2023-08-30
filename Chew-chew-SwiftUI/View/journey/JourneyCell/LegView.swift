@@ -21,16 +21,14 @@ struct LegView: View {
 				.foregroundColor(Color(uiColor: leg.color))
 				.cornerRadius(8)
 				.overlay() {
-					Text(leg.name)
-						.foregroundColor(.white)
-						.font(.system(size: 12))
-				}
+					if (Int(geo.size.width / 3) > leg.name.count) {
+						Text(leg.name)
+							.foregroundColor(.white)
+							.font(.system(size: 12))
+					} else {
+						Text("")
+					}
+			}
 		}
 	}
 }
-
-//struct LegView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LegView()
-//    }
-//}
