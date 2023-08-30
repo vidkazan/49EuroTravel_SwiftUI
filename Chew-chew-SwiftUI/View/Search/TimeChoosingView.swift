@@ -16,7 +16,7 @@ struct TimeChoosingView: View {
 	var body: some View {
 		ZStack {
 			Rectangle()
-				.fill(.thinMaterial)
+				.fill(.ultraThinMaterial)
 				.frame(
 					width: UIScreen.main.bounds.width / 2.15,
 					height: 36)
@@ -56,7 +56,6 @@ struct TimeChoosingView: View {
 		.frame(maxWidth: .infinity,maxHeight: 43)
 		.background(.thinMaterial)
 		.cornerRadius(10)
-		
 	}
 
 	func optionPressed(_ index: Int) {

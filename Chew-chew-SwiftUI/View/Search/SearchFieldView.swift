@@ -65,32 +65,35 @@ struct SearchFieldView: View {
 				rightButton
 					.foregroundColor(.black)
 			}
-			.padding(5)
-		
+			.padding(10)
+			.background(.ultraThinMaterial)
+			.cornerRadius(10)
+			.shadow(radius: 1,y:1)
+			
 			VStack {
 				if textFieldIsFocused {
 					ForEach(stops) { stop in
 						if let text = stop.name {
 							Button(text){
-								withAnimation(.spring()){
 									viewModel.updateSearchText(
 										text: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText ,
 										type: type
 									)
 									viewModel.updateSearchData(stop: stop, type: type)
-									textFieldIsFocused = false}
+									textFieldIsFocused = false
 							}
 							.foregroundColor(.black)
 							.padding(5)
 						}
 					}
+					
 					.frame(maxWidth: .infinity,alignment: .leading)
 				}
 			}
+			.padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))
+			.frame(maxWidth: .infinity,alignment: .leading)
 		}
-		
-		.padding(5)
-		.background(.regularMaterial)
+		.background(.thinMaterial)
 		.cornerRadius(10)
     }
 		

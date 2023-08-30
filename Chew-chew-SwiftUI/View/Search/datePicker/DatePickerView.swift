@@ -46,7 +46,7 @@ struct DatePickerView: View {
 					.onAppear {
 						  date = startDate
 					}
-					.frame(minHeight: 350,alignment: .top)
+					.frame(minHeight: 400,alignment: .top)
 					.datePickerStyle(.graphical)
 					.padding(7)
 					.cornerRadius(10)

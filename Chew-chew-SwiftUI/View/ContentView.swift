@@ -25,18 +25,20 @@ struct ContentView: View {
 			VStack {
 				VStack{
 					SearchFieldView(type: .departure)
+						.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
 					SearchFieldView(type: .arrival)
+						.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
 					TimeChoosingView()
 				}
-					.padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5))
 					.cornerRadius(10)
 					.shadow(radius: 1,y:1)
+					.padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5))
 				JourneyView()
 					.frame(maxWidth: .infinity)
-					.padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
 					.cornerRadius(10)
+					.padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
 			}
-				.padding(5)
+				.padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))
 			if viewModel.isShowingDatePicker {
 				VStack{
 					DatePickerView(startDat: viewModel.timeChooserDate)
