@@ -65,3 +65,10 @@ struct ContentView: View {
 			.animation(.spring(), value: viewModel.searchLocationDataArrival)
 	}
 }
+
+struct ContentView_Previews: PreviewProvider {
+	static var previews: some View {
+		ContentView()
+			.environmentObject(SearchLocationViewModel())
+	}
+}

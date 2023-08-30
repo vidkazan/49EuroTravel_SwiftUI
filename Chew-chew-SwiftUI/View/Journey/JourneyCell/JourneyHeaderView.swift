@@ -13,7 +13,7 @@ struct JourneyHeaderView: View {
 	var gradientStops : [Gradient.Stop]
 	
 	init(journey: JourneyCollectionViewDataSourse) {
-		let nightColor = Color(hue: 0.57, saturation: 0.7, brightness: 0.9).opacity(0.8)
+		let nightColor = Color(hue: 0.57, saturation: 0.7, brightness: 0.8).opacity(0.8)
 		let dayColor = Color(hue: 0.13, saturation: 0.6, brightness: 1).opacity(0.8)
 		self.journey = journey
 		self.gradientStops = {

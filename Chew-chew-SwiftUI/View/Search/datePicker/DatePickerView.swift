@@ -38,6 +38,7 @@ struct DatePickerView: View {
 				.frame(maxWidth: .infinity,maxHeight: 50)
 				.background(.ultraThinMaterial)
 				.cornerRadius(10)
+				.shadow(radius: 1,y:1)
 			DatePicker(
 				"",
 				selection: $date,
@@ -61,6 +62,7 @@ struct DatePickerView: View {
 				.background(.regularMaterial)
 				.foregroundColor(Color.black)
 				.cornerRadius(10)
+				.shadow(radius: 1,y:1)
 		}
 		.font(.system(size: 17,weight: .semibold))
 		.padding(5)
@@ -68,6 +70,7 @@ struct DatePickerView: View {
 		.cornerRadius(10)
 		.padding(5)
 		.opacity(viewModel.isShowingDatePicker ? 1 : 0)
+		.shadow(radius: 1,y:1)
 		.transition(.move(edge: .bottom))
 		.animation(.easeInOut, value: viewModel.isShowingDatePicker)
 	}

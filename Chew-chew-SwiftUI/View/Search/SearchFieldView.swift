@@ -86,7 +86,6 @@ struct SearchFieldView: View {
 							.padding(5)
 						}
 					}
-					
 					.frame(maxWidth: .infinity,alignment: .leading)
 				}
 			}
@@ -99,8 +98,9 @@ struct SearchFieldView: View {
 		
 }
 
-//struct SearchFieldView_Previews: PreviewProvider {
-//    static var previews: some View {
-//		SearchFieldView(type: .departure,viewModel: view)
-//    }
-//}
+struct SearchFieldView_Previews: PreviewProvider {
+    static var previews: some View {
+		SearchFieldView(type: .arrival)
+			.environmentObject(SearchLocationViewModel())
+    }
+}

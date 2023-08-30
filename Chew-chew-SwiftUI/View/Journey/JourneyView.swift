@@ -31,7 +31,7 @@ struct JourneyView: View {
 								.background(.ultraThinMaterial)
 								.cornerRadius(10)
 								.frame(maxWidth: .infinity)
-								.shadow(radius: 1,y:2)
+								.shadow(radius: 1,y:1)
 								.onAppear{
 									proxy.scrollTo(0,anchor: .top)
 								}
