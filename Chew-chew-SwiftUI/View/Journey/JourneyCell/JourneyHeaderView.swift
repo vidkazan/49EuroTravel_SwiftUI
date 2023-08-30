@@ -13,8 +13,8 @@ struct JourneyHeaderView: View {
 	var gradientStops : [Gradient.Stop]
 	
 	init(journey: JourneyCollectionViewDataSourse) {
-		let nightColor = Color(hue: 0.6, saturation: 1, brightness: 0.4)
-		let dayColor = Color.yellow
+		let nightColor = Color(hue: 0.57, saturation: 0.7, brightness: 0.9).opacity(0.8)
+		let dayColor = Color(hue: 0.13, saturation: 0.6, brightness: 1).opacity(0.8)
 		self.journey = journey
 		self.gradientStops = {
 			var stops : [Gradient.Stop] = []
@@ -27,7 +27,7 @@ struct JourneyHeaderView: View {
 					))
 					if let final = event.timeFinal {
 						stops.append(.init(
-							color: .yellow,
+							color: dayColor,
 							location: (final.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970) / (journey.endDate.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970)
 						))
 					}
@@ -64,6 +64,7 @@ struct JourneyHeaderView: View {
 				stops: gradientStops,
 				startPoint: UnitPoint(x: 0, y: 0),
 				endPoint: UnitPoint(x: 1, y: 0))
+			.background(.ultraThinMaterial)
 			HStack{
 				Text(journey.startTimeLabelText)
 					.padding(7)
@@ -78,23 +79,9 @@ struct JourneyHeaderView: View {
 				Text(journey.endTimeLabelText)
 					.padding(7)
 					.font(.system(size: 17,weight: .semibold))
-					.foregroundColor(.white)
 					.frame(alignment: .leading)
 			}
 		}
 		.cornerRadius(10)
     }
 }
-
-//struct JourneyHeaderView_Previews: PreviewProvider {
-//    static var previews: some View {
-//		JourneyHeaderView(journey: .init(
-//			id: 0,
-//			startTimeLabelText: "22:22",
-//			endTimeLabelText: "11:11",
-//			durationLabelText: "00:00",
-//			legs: [], sunEvents: [])
-//		)
-//		.frame(height: 30)
-//    }
-//}

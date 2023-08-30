@@ -16,7 +16,7 @@ struct TimeChoosingView: View {
 	var body: some View {
 		ZStack {
 			Rectangle()
-				.fill(.regularMaterial)
+				.fill(.thinMaterial)
 				.frame(
 					width: UIScreen.main.bounds.width / 2.15,
 					height: 36)

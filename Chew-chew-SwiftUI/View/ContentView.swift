@@ -7,8 +7,19 @@
 
 import SwiftUI
 
+extension Color {
+	static let night = Color(hue: 0.57, saturation: 0.7, brightness: 0.6)
+	static let nightSecondary = Color(hue: 0.57, saturation: 0.5, brightness: 0.7)
+	
+	static let day = Color(hue: 0.13, saturation: 0.55, brightness: 1)
+	static let daySecondary = Color(hue: 0.13, saturation: 0.45, brightness: 0.9)
+}
+
 struct ContentView: View {
 	@EnvironmentObject var viewModel : SearchLocationViewModel
+	let solar = Solar(coordinate: .init(
+		latitude: 51.3,
+		longitude: 9.4))
 	var body: some View {
 		ZStack {
 			VStack {
@@ -17,11 +28,12 @@ struct ContentView: View {
 					SearchFieldView(type: .arrival)
 					TimeChoosingView()
 				}
-					.padding(5)
+					.padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5))
 					.cornerRadius(10)
+					.shadow(radius: 1,y:1)
 				JourneyView()
 					.frame(maxWidth: .infinity)
-					.padding(5)
+					.padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
 					.cornerRadius(10)
 			}
 				.padding(5)
@@ -36,29 +48,18 @@ struct ContentView: View {
 		}
 			.background(
 				.linearGradient(
-					colors: [
-						Color(hue: 0.55, saturation: 0.9, brightness: 0.6),
-						Color(hue: 0.55, saturation: 1, brightness: 0.4),
-					],
-					startPoint: UnitPoint(x: 0.5, y: 0.33),
-					endPoint: UnitPoint(x: 0.5, y: 0.9)
+					colors: (solar != nil && solar!.isDaytime) ?
+						[Color.day,
+						Color.daySecondary] :
+						[Color.night,
+						Color.nightSecondary],
+					startPoint: UnitPoint(x: 0.5, y: 0.1),
+					endPoint: UnitPoint(x: 0.5, y: 0.4)
 				)
 			)
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: viewModel.isShowingDatePicker)
 			.animation(.spring(), value: viewModel.searchLocationDataDeparture)
 			.animation(.spring(), value: viewModel.searchLocationDataArrival)
-			
 	}
 }
-
-
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView()
-			.environmentObject(SearchLocationViewModel())
-    }
-}
-
-
-

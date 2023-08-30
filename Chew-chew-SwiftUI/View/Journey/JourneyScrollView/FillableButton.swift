@@ -18,7 +18,7 @@ struct FillableButton: View{
 	var body: some View {
 		ZStack(alignment: .leading){
 			Rectangle()
-				.fill(.ultraThinMaterial.opacity(0.4))
+				.fill(.ultraThinMaterial.opacity(0.8))
 				.cornerRadius(10)
 				.frame(width: 80,alignment: .leading)
 			if isFillable{
@@ -31,7 +31,7 @@ struct FillableButton: View{
 			Text(text)
 				.frame(maxWidth: 80)
 				.font(.system(size: 17, weight: .medium))
-				.foregroundColor(.white)
+				.foregroundColor(Color(uiColor: .darkGray))
 				.padding(5)
 		}
 	}

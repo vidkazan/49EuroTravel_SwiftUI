@@ -153,8 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
-				7DA8D3462A9A0DDC005DF550 /* search */,
-				7DA8D3452A9A0DB8005DF550 /* journey */,
+				7DA8D3462A9A0DDC005DF550 /* Search */,
+				7DA8D3452A9A0DB8005DF550 /* Journey */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -254,24 +254,24 @@
 			path = "Chew-chew-SwiftUIUITests";
 			sourceTree = "<group>";
 		};
-		7DA8D3452A9A0DB8005DF550 /* journey */ = {
+		7DA8D3452A9A0DB8005DF550 /* Journey */ = {
 			isa = PBXGroup;
 			children = (
 				7D02CE332A98E8130048ADE6 /* JourneyView.swift */,
 				7DAF62BA2A9E5DEF006F1A17 /* JourneyScrollView */,
 				7DAF62B92A9E5DA6006F1A17 /* JourneyCell */,
 			);
-			path = journey;
+			path = Journey;
 			sourceTree = "<group>";
 		};
-		7DA8D3462A9A0DDC005DF550 /* search */ = {
+		7DA8D3462A9A0DDC005DF550 /* Search */ = {
 			isa = PBXGroup;
 			children = (
 				7DAF62B42A9E5833006F1A17 /* datePicker */,
 				7D6734DC2A96370200CBE9C1 /* SearchFieldView.swift */,
 				7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */,
 			);
-			path = search;
+			path = Search;
 			sourceTree = "<group>";
 		};
 		7DAF62B42A9E5833006F1A17 /* datePicker */ = {
