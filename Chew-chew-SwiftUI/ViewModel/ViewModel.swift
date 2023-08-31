@@ -7,12 +7,24 @@
 
 import Foundation
 
+struct SearchLocationDataSourse {
+	var scrollOffset = CGFloat.zero
+	var topSearchFieldText = ""
+	var bottomSearchFieldText = ""
+	var isShowingDatePicker = false
+	var timeChooserDate = Date.now
+	var searchLocationDataDeparture : [Stop] = []
+	var searchLocationDataArrival : [Stop] = []
+	var previousSearchLineString = ""
+	
+	mutating func switchStops(){
+		swap(&topSearchFieldText, &bottomSearchFieldText)
+	}
+}
+
 class SearchLocationViewModel : ObservableObject {
-	@Published var scrollOffset = CGFloat.zero
-	@Published var topSearchFieldText = ""
-	@Published var bottomSearchFieldText = ""
-	@Published var isShowingDatePicker = false
-	@Published var timeChooserDate = Date.now
+	@Published var searchLocationDataSource : SearchLocationDataSourse
+	
 	var journeySearchData = JourneySearchData()
 	var onStateChange : ((SearchControllerStates) -> Void)?
 	@Published var state : SearchControllerStates {
@@ -20,36 +32,23 @@ class SearchLocationViewModel : ObservableObject {
 			self.onStateChange?(self.state)
 		}
 	}
-	@Published var searchLocationDataDeparture : [Stop] = []  {
-		didSet {
-			self.state = .onNewDataDepartureStop
-		}
-	}
-	@Published var searchLocationDataArrival : [Stop] = []  {
-		didSet {
-			self.state = .onNewDataArrivalStop
-		}
-	}
+	
 	var journeysData : JourneysContainer? {
 		didSet {
 			self.constructJourneysCollectionViewData()
 		}
 	}
-//	var resultJourneysViewDataSourse : AllJourneysCollectionViewDataSourse? {
-//		didSet {
-//			self.state = .onNewDataJourney
-//		}
-//	}
 	@Published var resultJourneysCollectionViewDataSourse : AllJourneysCollectionViewDataSourse {
 		didSet {
 			self.state = .onNewDataJourney
 		}
 	}
-	var previousSearchLineString = ""
+	
 	
 	init(){
 		self.state = .onStart
-		self.resultJourneysCollectionViewDataSourse = AllJourneysCollectionViewDataSourse(awaitingData: false, journeys: [])
+		self.resultJourneysCollectionViewDataSourse = .init(awaitingData: false, journeys: [])
+		self.searchLocationDataSource = .init()
 	}
 }
 
@@ -58,30 +57,30 @@ extension SearchLocationViewModel {
 		guard let text = text else {
 			switch type {
 			case .departure:
-				self.searchLocationDataDeparture = []
+				self.searchLocationDataSource.searchLocationDataDeparture = []
 			case .arrival:
-				self.searchLocationDataArrival = []
+				self.searchLocationDataSource.searchLocationDataArrival = []
 			}
-			self.previousSearchLineString = ""
+			self.searchLocationDataSource.previousSearchLineString = ""
 			self.journeySearchData.clearStop(type: type)
 			return
 		}
-		if text.count > 2 && text.count > self.previousSearchLineString.count {
+		if text.count > 2 && text.count > self.searchLocationDataSource.previousSearchLineString.count {
 			self.fetchLocations(text: text,type: type)
 		} else {
 			switch type {
 			case .departure:
-				self.searchLocationDataDeparture = []
+				self.searchLocationDataSource.searchLocationDataDeparture = []
 			case .arrival:
-				self.searchLocationDataArrival = []
+				self.searchLocationDataSource.searchLocationDataArrival = []
 			}
 			self.journeySearchData.clearStop(type: type)
 		}
-		self.previousSearchLineString = text
+		self.searchLocationDataSource.previousSearchLineString = text
 	}
 	
 	func switchStops(){
-		swap(&self.topSearchFieldText, &self.bottomSearchFieldText)
+		self.searchLocationDataSource.switchStops()
 		if journeySearchData.switchStops() == true {
 			self.getJourneys()
 		}
@@ -90,17 +89,17 @@ extension SearchLocationViewModel {
 	func updateSearchData(stop : Stop, type : LocationDirectionType){
 		switch type {
 		case .departure:
-			self.topSearchFieldText = stop.name ?? ""
+			self.searchLocationDataSource.topSearchFieldText = stop.name ?? ""
 		case .arrival:
-			self.bottomSearchFieldText = stop.name ?? ""
+			self.searchLocationDataSource.bottomSearchFieldText = stop.name ?? ""
 		}
 		if journeySearchData.updateSearchStopData(type: type, stop: stop) == true {
 			self.getJourneys()
 		}
 	}
 	func updateJourneyTimeValue(date : Date){
-		timeChooserDate = date
-		isShowingDatePicker = false
+		searchLocationDataSource.timeChooserDate = date
+		searchLocationDataSource.isShowingDatePicker = false
 		if journeySearchData.updateSearchTimeData(departureTime: date) == true {
 			self.getJourneys()
 		}

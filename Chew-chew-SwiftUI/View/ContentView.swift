@@ -39,13 +39,13 @@ struct ContentView: View {
 					.padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
 			}
 				.padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))
-			if viewModel.isShowingDatePicker {
+			if viewModel.searchLocationDataSource.isShowingDatePicker {
 				VStack{
-					DatePickerView(startDat: viewModel.timeChooserDate)
+					DatePickerView(startDat: viewModel.searchLocationDataSource.timeChooserDate)
 					Spacer()
 				}
 				.transition(.move(edge: .bottom))
-				.animation(.spring(), value: viewModel.isShowingDatePicker)
+				.animation(.spring(), value: viewModel.searchLocationDataSource.isShowingDatePicker)
 			}
 		}
 			.background(
@@ -60,9 +60,9 @@ struct ContentView: View {
 				)
 			)
 			.transition(.move(edge: .bottom))
-			.animation(.spring(), value: viewModel.isShowingDatePicker)
-			.animation(.spring(), value: viewModel.searchLocationDataDeparture)
-			.animation(.spring(), value: viewModel.searchLocationDataArrival)
+			.animation(.spring(), value: viewModel.searchLocationDataSource.isShowingDatePicker)
+			.animation(.spring(), value: viewModel.searchLocationDataSource.searchLocationDataDeparture)
+			.animation(.spring(), value: viewModel.searchLocationDataSource.searchLocationDataArrival)
 	}
 }
 

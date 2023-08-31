@@ -62,9 +62,9 @@
             filePath = "Chew-chew-SwiftUI/ViewModel/ViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "106"
-            endingLineNumber = "106"
-            landmarkName = "updateJourneyTimeValue(date:)"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "updateSearchData(stop:type:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -72,7 +72,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "897F72EF-251B-4662-8364-D18349AD2A24"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Chew-chew-SwiftUI/ViewModel/ViewModel+ConstructJourneyData.swift"
@@ -113,6 +113,36 @@
                   endingLineNumber = "14"
                   offsetFromSymbolStart = "1980">
                </Location>
+               <Location
+                  uuid = "897F72EF-251B-4662-8364-D18349AD2A24 - 6a7d514d47a2b703"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.SearchLocationViewModel.constructLegData(leg: Chew_chew_SwiftUI.Leg, firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, id: Swift.Int) -&gt; Swift.Optional&lt;Chew_chew_SwiftUI.LegViewDataSourse&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/ViewModel/ViewModel+ConstructJourneyData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "428">
+               </Location>
+               <Location
+                  uuid = "897F72EF-251B-4662-8364-D18349AD2A24 - 6a7d514d47a2b6c1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.SearchLocationViewModel.constructLegData(leg: Chew_chew_SwiftUI.Leg, firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, id: Swift.Int) -&gt; Swift.Optional&lt;Chew_chew_SwiftUI.LegViewDataSourse&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/ViewModel/ViewModel+ConstructJourneyData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "14"
+                  endingLineNumber = "14"
+                  offsetFromSymbolStart = "2060">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
@@ -126,8 +156,8 @@
             filePath = "Chew-chew-SwiftUI/View/ContentView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -135,17 +165,79 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D8079385-1755-4EB6-A158-0E50815D99A4"
+            uuid = "18D73ED4-AA99-4CEF-AA12-D206E9647AE1"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/View/Search/SearchFieldView.swift"
+            filePath = "Chew-chew-SwiftUI/ViewModel/ViewModel+ConstructJourneyData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "15"
+            endingLineNumber = "15"
+            landmarkName = "constructLegData(leg:firstTS:lastTS:id:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "18D73ED4-AA99-4CEF-AA12-D206E9647AE1 - 6a7d514d47a2b703"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.SearchLocationViewModel.constructLegData(leg: Chew_chew_SwiftUI.Leg, firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, id: Swift.Int) -&gt; Swift.Optional&lt;Chew_chew_SwiftUI.LegViewDataSourse&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/ViewModel/ViewModel+ConstructJourneyData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "428">
+               </Location>
+               <Location
+                  uuid = "18D73ED4-AA99-4CEF-AA12-D206E9647AE1 - 6a7d514d47a2b703"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.SearchLocationViewModel.constructLegData(leg: Chew_chew_SwiftUI.Leg, firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, id: Swift.Int) -&gt; Swift.Optional&lt;Chew_chew_SwiftUI.LegViewDataSourse&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/ViewModel/ViewModel+ConstructJourneyData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "492">
+               </Location>
+               <Location
+                  uuid = "18D73ED4-AA99-4CEF-AA12-D206E9647AE1 - 6a7d514d47a2b703"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.SearchLocationViewModel.constructLegData(leg: Chew_chew_SwiftUI.Leg, firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, id: Swift.Int) -&gt; Swift.Optional&lt;Chew_chew_SwiftUI.LegViewDataSourse&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/ViewModel/ViewModel+ConstructJourneyData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "348">
+               </Location>
+               <Location
+                  uuid = "18D73ED4-AA99-4CEF-AA12-D206E9647AE1 - 6a7d514d47a2b703"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.SearchLocationViewModel.constructLegData(leg: Chew_chew_SwiftUI.Leg, firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, id: Swift.Int) -&gt; Swift.Optional&lt;Chew_chew_SwiftUI.LegViewDataSourse&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/ViewModel/ViewModel+ConstructJourneyData.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "412">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

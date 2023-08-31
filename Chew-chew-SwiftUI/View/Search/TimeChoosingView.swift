@@ -16,12 +16,12 @@ struct TimeChoosingView: View {
 	var body: some View {
 		ZStack {
 			Rectangle()
-				.fill(.ultraThinMaterial)
+				.fill(.regularMaterial)
 				.frame(
 					width: UIScreen.main.bounds.width / 2.15,
 					height: 36)
 				.cornerRadius(8)
-				.shadow(radius: 0.5,y: 1)
+				.shadow(radius: 1,y: 1)
 				.padding(4)
 				.offset(
 					x: (selectedOption != 0) ?
@@ -39,7 +39,7 @@ struct TimeChoosingView: View {
 							case 0:
 								return "now"
 							case 1:
-								return DateParcer.getTimeAndDateStringFromDate(date: viewModel.timeChooserDate)
+								return DateParcer.getTimeAndDateStringFromDate(date: viewModel.searchLocationDataSource.timeChooserDate)
 							default:
 								return ""
 							}
@@ -63,7 +63,7 @@ struct TimeChoosingView: View {
 		case 0:
 			viewModel.updateJourneyTimeValue(date: Date.now)
 		case 1:
-			viewModel.isShowingDatePicker = true
+			viewModel.searchLocationDataSource.isShowingDatePicker = true
 		default:
 			break
 		}

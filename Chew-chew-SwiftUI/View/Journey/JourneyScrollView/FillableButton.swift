@@ -21,13 +21,13 @@ struct FillableButton: View{
 				.fill(.ultraThinMaterial)
 				.cornerRadius(10)
 				.frame(width: 80,alignment: .leading)
-			if isFillable{
-				Rectangle()
-					.fill(Color(hue: 0.3, saturation: 1, brightness: 0.4))
-					.cornerRadius(10)
-					.frame(width: -viewModel.scrollOffset < 0 ? 0 : -viewModel.scrollOffset*8/15,alignment: .leading)
-					.animation(.easeInOut, value: -viewModel.scrollOffset)
-			}
+//			if isFillable{
+//				Rectangle()
+//					.fill(Color(hue: 0.3, saturation: 1, brightness: 0.4))
+//					.cornerRadius(10)
+//					.frame(width: -viewModel.scrollOffset < 0 ? 0 : -viewModel.scrollOffset*8/15,alignment: .leading)
+//					.animation(.easeInOut, value: -viewModel.scrollOffset)
+//			}
 			Text(text)
 				.frame(maxWidth: 80)
 				.font(.system(size: 17, weight: .medium))

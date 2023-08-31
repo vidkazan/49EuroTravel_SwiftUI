@@ -69,9 +69,9 @@ struct DatePickerView: View {
 		.background(.ultraThinMaterial)
 		.cornerRadius(10)
 		.padding(5)
-		.opacity(viewModel.isShowingDatePicker ? 1 : 0)
+		.opacity(viewModel.searchLocationDataSource.isShowingDatePicker ? 1 : 0)
 		.shadow(radius: 1,y:1)
 		.transition(.move(edge: .bottom))
-		.animation(.easeInOut, value: viewModel.isShowingDatePicker)
+		.animation(.easeInOut, value: viewModel.searchLocationDataSource.isShowingDatePicker)
 	}
 }

@@ -30,20 +30,21 @@ struct JourneyView: View {
 								.id(journey.id)
 								.background(.ultraThinMaterial)
 								.cornerRadius(10)
-								.frame(maxWidth: .infinity)
+								.padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
 								.shadow(radius: 1,y:1)
+								.frame(maxWidth: .infinity)
 								.onAppear{
 									proxy.scrollTo(0,anchor: .top)
 								}
-							}
+							} // forEach
 							JourneyScrollViewFooter()
 						}
-					}
-				}
+					} // scroll view
+				} // scrollViewReader
 				.transition(.move(edge: .bottom))
 				.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
 			}
-		}
+		} // VStack
 		.transition(.move(edge: .bottom))
 		.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
     }

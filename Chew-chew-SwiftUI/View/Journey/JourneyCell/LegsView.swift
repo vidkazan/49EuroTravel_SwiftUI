@@ -13,11 +13,11 @@ struct LegsView: View {
 	init(journey: JourneyCollectionViewDataSourse) {
 		self.journey = journey
 	}
-    var body: some View {
+	var body: some View {
 		GeometryReader { geo in
 			ZStack {
 				Rectangle()
-					.fill(.ultraThinMaterial)
+					.fill(.regularMaterial)
 					.frame(height:15)
 					.cornerRadius(5)
 				ForEach(journey.legs) { leg in
@@ -31,12 +31,5 @@ struct LegsView: View {
 		}
 		.frame(height:30)
 		.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
-    }
-	
+	}
 }
-
-//struct LegsView_Previews: PreviewProvider {
-//    static var previews: some View {
-//        LegsView()
-//    }
-//}

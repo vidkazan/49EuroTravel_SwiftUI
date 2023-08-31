@@ -170,6 +170,7 @@
 		7D02CE112A97E4650048ADE6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7DAF62C52AA08BED006F1A17 /* ViewModifiers */,
 				7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */,
 				7D02CE122A97E4700048ADE6 /* DateParcer.swift */,
 				7D02CE142A97E4940048ADE6 /* Constants.swift */,
@@ -304,6 +305,13 @@
 				7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */,
 			);
 			path = JourneyScrollView;
+			sourceTree = "<group>";
+		};
+		7DAF62C52AA08BED006F1A17 /* ViewModifiers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ViewModifiers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

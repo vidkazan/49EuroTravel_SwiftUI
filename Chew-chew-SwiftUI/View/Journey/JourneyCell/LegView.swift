@@ -24,7 +24,7 @@ struct LegView: View {
 					if (Int(geo.size.width / 3) > leg.name.count) {
 						Text(leg.name)
 							.foregroundColor(.white)
-							.font(.system(size: 12))
+							.font(.system(size: 12,weight: .semibold))
 					} else {
 						Text("")
 					}

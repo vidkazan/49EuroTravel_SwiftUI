@@ -31,32 +31,32 @@ struct SearchFieldView: View {
 		})
 	}
 	var stops : [Stop] {
-		type == .departure ? viewModel.searchLocationDataDeparture : viewModel.searchLocationDataArrival
+		type == .departure ? viewModel.searchLocationDataSource.searchLocationDataDeparture : viewModel.searchLocationDataSource.searchLocationDataArrival
 	}
 	
     var body: some View {
 		VStack {
 			HStack {
-				TextField(self.placeholder, text: type == .departure ? $viewModel.topSearchFieldText : $viewModel.bottomSearchFieldText)
+				TextField(self.placeholder, text: type == .departure ? $viewModel.searchLocationDataSource.topSearchFieldText : $viewModel.searchLocationDataSource.bottomSearchFieldText)
 					.focused($textFieldIsFocused)
 					.onTapGesture {
 						if !textFieldIsFocused {
 							switch type {
 							case .departure:
-								viewModel.topSearchFieldText = ""
+								viewModel.searchLocationDataSource.topSearchFieldText = ""
 							case .arrival:
-								viewModel.bottomSearchFieldText = ""
+								viewModel.searchLocationDataSource.bottomSearchFieldText = ""
 							}
 							viewModel.updateSearchText(
-								text: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText ,
+								text: (type == .departure) ? viewModel.searchLocationDataSource.topSearchFieldText : viewModel.searchLocationDataSource.bottomSearchFieldText ,
 								type: type
 							)
 						}
 					}
-					.onChange(of: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText, perform: { text in
+					.onChange(of: (type == .departure) ? viewModel.searchLocationDataSource.topSearchFieldText : viewModel.searchLocationDataSource.bottomSearchFieldText, perform: { text in
 							if textFieldIsFocused {
 								viewModel.updateSearchText(
-									text: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText ,
+									text: (type == .departure) ? viewModel.searchLocationDataSource.topSearchFieldText : viewModel.searchLocationDataSource.bottomSearchFieldText ,
 									type: type)
 							}
 					})
@@ -76,7 +76,7 @@ struct SearchFieldView: View {
 						if let text = stop.name {
 							Button(text){
 									viewModel.updateSearchText(
-										text: (type == .departure) ? viewModel.topSearchFieldText : viewModel.bottomSearchFieldText ,
+										text: (type == .departure) ? viewModel.searchLocationDataSource.topSearchFieldText : viewModel.searchLocationDataSource.bottomSearchFieldText ,
 										type: type
 									)
 									viewModel.updateSearchData(stop: stop, type: type)
