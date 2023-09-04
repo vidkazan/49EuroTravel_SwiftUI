@@ -7,8 +7,14 @@
 
 import Foundation
 import DequeModule
+import Combine
 
 class ApiService  {
+	struct Response<T> {
+		 let value: T
+		 let response: URLResponse
+	 }
+	
 	private static var set : [(Int, URLSessionDataTask?)] = (0 ..< 6).map { ($0,nil) }
 	private static var currentRequestGroupId : String = ""
 	private static var token : String =  ""
@@ -59,8 +65,6 @@ class ApiService  {
 		
 		var urlString : String {
 			switch self {
-//			case .stopDepartures(let stopId):
-//				return Constants.apiData.urlPathStops + String(stopId) + Constants.apiData.urlPathDepartures
 			case .journeys:
 				return Constants.apiData.urlPathJourneys
 			case .locations:
@@ -85,6 +89,14 @@ class ApiService  {
 	
 	static func cancelAllOngoingRequests(){
 		self.fetchLobbyDeque.removeAll()
+	}
+	
+	static func fetchCombine<T : Decodable>(
+		_ t : T.Type,
+		query : [URLQueryItem],
+		type : Requests,
+		requestGroupId : String) -> AnyPublisher<T,Error> {
+			return Self.executeCombine(T.self, query: query, type: type)
 	}
 	
 	static func fetch<T : Decodable>(
@@ -143,26 +155,10 @@ class ApiService  {
 //									prints(task?.0.type.description ?? "", task?.0.query ?? "", "waiting")
 //									usleep(100000)
 								}
-//								prints(task?.0.type.description ?? "", task?.0.query ?? "", "starting")
 								task?.function()
-//								prints(task?.0.type.description ?? "", task?.0.query ?? "")
 							}
 							return
-//						case .getScaleTeamsAsCorrector, .getLocations:
-//							if task?.0.query != currentRequestGroupId {
-//								prints(task?.0.type.description ?? "", task?.0.query ?? "", "DROPPED by groupId")
-//							} else {
-//								prints(task?.0.type.description ?? "", task?.0.query ?? "", "waiting")
-//								usleep(500000)
-//								prints(task?.0.type.description ?? "", task?.0.query ?? "", "starting")
-//								task?.function()
-//								prints(task?.0.type.description ?? "", task?.0.query ?? "")
-//							}
-//							return
 						case .customGet:
-//							prints(task?.0.type.description ?? "", task?.0.query ?? "", "waiting")
-//							usleep(100000)
-//							prints(task?.0.type.description ?? "", task?.0.query ?? "", "starting")
 							task?.function()
 							print(task?.0.type.description ?? "", task?.0.query ?? "")
 						}
@@ -172,26 +168,37 @@ class ApiService  {
 		}
 	}
 	
-	static private func execute<T : Decodable>(_ t : T.Type,query : [URLQueryItem], type : Requests,completed: @escaping (Result<T, CustomErrors>) -> Void) {
-		let sessionConfig = URLSessionConfiguration.default
-		sessionConfig.timeoutIntervalForRequest = 10.0
-		let session = URLSession(configuration: sessionConfig)
-		
-		let url : URL? = {
-			switch type {
-			case .locations,.journeys:
-				var components = URLComponents()
-				components.path = type.urlString
-				components.host = Constants.apiData.urlBase
-				components.scheme = "https"
-				components.queryItems = query
-//				prints(components)
-				return components.url
-			case .customGet(let path):
-				return URL(string: path)
+	static private func executeCombine<T: Decodable>(
+		_ t : T.Type,
+		query : [URLQueryItem],
+		type : Requests
+	) -> AnyPublisher<T, Error> {
+		guard let url = generateUrl(query: query, type: type) else {
+			let subject = Future<T,Error> { promise in
+				return promise(.failure(CustomErrors(apiServiceErrors: .requestRateExceeded, source: type)as Error as! CustomErrors))
 			}
-		}()
-		guard let url = url else {
+			return subject.eraseToAnyPublisher()
+		}
+		let request = type.getRequest(urlEndPoint: url)
+		return URLSession.shared
+				.dataTaskPublisher(for: request)
+				.tryMap { result -> T in
+					let value = try JSONDecoder().decode(T.self, from: result.data)
+					return value
+				}
+				.receive(on: DispatchQueue.main)
+				.eraseToAnyPublisher()
+	}
+	
+
+	static private func execute<T : Decodable>(
+		_ t : T.Type,
+		query : [URLQueryItem],
+		type : Requests,
+		completed: @escaping (Result<T, CustomErrors>) -> Void
+	) {
+		let session = generateSession()
+		guard let url = generateUrl(query: query, type: type) else {
 			let error = CustomErrors(apiServiceErrors: .badUrl, source: type)
 			completed(.failure(error))
 			print(">",Date.now.timeIntervalSince1970,type.description ,query)
@@ -221,25 +228,19 @@ class ApiService  {
 				}
 				
 				switch response.statusCode {
-//					case 401:
-//						completed(.failure(.unauthorised))
-//						print(">",Date.now.timeIntervalSince1970,type.description,query,"error Bad Response")
-//						set[type.index].1 = nil
-//						return
 					case 400:
 					completed(.failure(CustomErrors(apiServiceErrors: .badRequest, source: type)))
-						print(">",Date.now.timeIntervalSince1970,type.description,query,"error Bad Response")
+						print(">",Date.now.timeIntervalSince1970,type.description,query,"error Bad Request")
 						set[type.index].1 = nil
 						return
 					case 429:
 					completed(.failure(CustomErrors(apiServiceErrors: .requestRateExceeded, source: type)))
-						print(">",Date.now.timeIntervalSince1970,type.description,query,"error Bad Response")
+						print(">",Date.now.timeIntervalSince1970,type.description,query,"error Request Rate")
 						set[type.index].1 = nil
 						return
 					case 200:
 						break
 					default:
-					
 						completed(.failure(CustomErrors(apiServiceErrors: .badServerResponse(code: response.statusCode), source: type)))
 						print(">",Date.now.timeIntervalSince1970,type.description,query,"error Bad Response")
 						set[type.index].1 = nil
@@ -257,12 +258,11 @@ class ApiService  {
 					do {
 						let decodedData = try decoder.decode(T.self, from: data)
 						completed(.success(decodedData))
-//						prints(type.description,query,"finished")
 						set[type.index].1 = nil
 						break
 					} catch {
 						completed(.failure(CustomErrors(apiServiceErrors: .cannotDecodeContentData, source: type)))
-//						print(type.description,query,"error Decode JSON")
+						print(type.description,query,"error Decode JSON")
 						set[type.index].1 = nil
 						return
 					}
@@ -281,5 +281,29 @@ class ApiService  {
 		}
 		task.resume()
 		return
+	}
+	
+	static private func generateUrl(query : [URLQueryItem],
+										type : Requests) -> URL? {
+		let url : URL? = {
+			switch type {
+			case .locations,.journeys:
+				var components = URLComponents()
+				components.path = type.urlString
+				components.host = Constants.apiData.urlBase
+				components.scheme = "https"
+				components.queryItems = query
+				return components.url
+			case .customGet(let path):
+				return URL(string: path)
+			}
+		}()
+		return url
+	}
+	
+	static private func generateSession() -> URLSession {
+		let sessionConfig = URLSessionConfiguration.default
+		sessionConfig.timeoutIntervalForRequest = 5.0
+		return URLSession(configuration: sessionConfig)
 	}
 }

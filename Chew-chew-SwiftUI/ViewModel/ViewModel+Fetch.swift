@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 extension SearchLocationViewModel {
 	func getJourneys(){
@@ -59,5 +60,14 @@ extension SearchLocationViewModel {
 				self.state = .onError(error: error, indexPath: nil)
 			}
 		}
+	}
+	
+	static func fetchLocationsCombine(text : String, type : LocationDirectionType) -> AnyPublisher<[Stop],Error> {
+		var query : [URLQueryItem] = []
+		query = Query.getQueryItems(methods: [
+			Query.location(location: text),
+			Query.results(max: 5)
+		])
+		return ApiService.fetchCombine([Stop].self,query: query, type: ApiService.Requests.locations(name: text ), requestGroupId: "")
 	}
 }

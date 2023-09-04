@@ -13,7 +13,6 @@ enum SearchControllerStates : Equatable {
 	}
 	
 	case onStart
-//	case onLoading
 	case onNewDataDepartureStop
 	case onNewDataArrivalStop
 	case onNewDataJourney
@@ -23,8 +22,6 @@ enum SearchControllerStates : Equatable {
 		switch self {
 		case .onStart:
 			return "onStart"
-//		case .onLoading:
-//			return "onLoading"
 		case .onNewDataDepartureStop:
 			return "onNewDataDepartureStop"
 		case .onNewDataArrivalStop:

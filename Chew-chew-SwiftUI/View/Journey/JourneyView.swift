@@ -47,5 +47,8 @@ struct JourneyView: View {
 		} // VStack
 		.transition(.move(edge: .bottom))
 		.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
+		.frame(maxWidth: .infinity)
+		.cornerRadius(10)
     }
+		
 }

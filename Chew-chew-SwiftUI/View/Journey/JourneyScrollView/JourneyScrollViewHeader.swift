@@ -9,17 +9,16 @@ import SwiftUI
 
 struct JourneyScrollViewHeader: View {
     var body: some View {
-		VStack {
-			HStack{
-				FillableButton(text: "Reload")
-					.frame(maxWidth: 80)
-					.cornerRadius(10)
-				Spacer()
-				FillableButton(text: "Earlier")
-					.frame(maxWidth: 80)
-					.cornerRadius(10)
-			}
+		HStack{
+			FillableButton(text: "Reload")
+				.frame(maxWidth: 80)
+				.cornerRadius(10)
+			Spacer()
+			FillableButton(text: "Earlier")
+				.frame(maxWidth: 80)
+				.cornerRadius(10)
 		}
+		.padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))
     }
 }
 

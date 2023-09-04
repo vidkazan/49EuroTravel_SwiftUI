@@ -46,8 +46,8 @@
             filePath = "Chew-chew-SwiftUI/ViewModel/ViewModel+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "fetchJourneys()"
             landmarkType = "7">
          </BreakpointContent>
@@ -144,22 +144,6 @@
                   offsetFromSymbolStart = "2060">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "327F22EB-6F46-46B3-B643-E51F8BB30B34"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/View/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "39"
-            endingLineNumber = "39"
-            landmarkName = "body"
-            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
