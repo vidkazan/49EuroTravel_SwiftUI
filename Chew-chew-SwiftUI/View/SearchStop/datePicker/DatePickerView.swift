@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DatePickerView: View {
 	@EnvironmentObject var viewModel : SearchLocationViewModel
+	@EnvironmentObject private var viewModel2 : SearchJourneyViewModel
 	@State private var date = Date()
 	@State private var time = Date()
 	var startDate : Date
@@ -57,6 +58,7 @@ struct DatePickerView: View {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
 					viewModel.updateJourneyTimeValue(date: dateCombined)
 				}
+				viewModel2.send(event: .onNewDate)
 			}
 				.frame(maxWidth: .infinity,minHeight: 43)
 				.background(.regularMaterial)
@@ -69,9 +71,9 @@ struct DatePickerView: View {
 		.background(.ultraThinMaterial)
 		.cornerRadius(10)
 		.padding(5)
-		.opacity(viewModel.searchLocationDataSource.isShowingDatePicker ? 1 : 0)
+//		.opacity(viewModel.searchLocationDataSource.isShowingDatePicker ? 1 : 0)
 		.shadow(radius: 1,y:1)
-		.transition(.move(edge: .bottom))
-		.animation(.easeInOut, value: viewModel.searchLocationDataSource.isShowingDatePicker)
+//		.transition(.move(edge: .bottom))
+//		.animation(.easeInOut, value: viewModel.searchLocationDataSource.isShowingDatePicker)
 	}
 }

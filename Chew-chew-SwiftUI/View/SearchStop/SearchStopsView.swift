@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SearchStopsView: View {
 	@EnvironmentObject private var viewModel : SearchLocationViewModel
-	@EnvironmentObject private var viewModel2 : SearchStopViewModel
+	@EnvironmentObject private var viewModel2 : SearchJourneyViewModel
 	@FocusState	private var textTopFieldIsFocused	: Bool
 	@FocusState	private var textBottomFieldIsFocused	: Bool
 	var body: some View {
@@ -22,7 +22,6 @@ struct SearchStopsView: View {
 							if !textTopFieldIsFocused {
 								viewModel.searchLocationDataSource.topSearchFieldText = ""
 								viewModel.updateSearchText(
-									text: viewModel.searchLocationDataSource.topSearchFieldText,
 									type: .departure
 								)
 							}
@@ -30,22 +29,16 @@ struct SearchStopsView: View {
 						.onChange(of: viewModel.searchLocationDataSource.topSearchFieldText, perform: { text in
 								if textTopFieldIsFocused {
 									viewModel.updateSearchText(
-										text: viewModel.searchLocationDataSource.topSearchFieldText,
 										type: .departure)
-			//								viewModel2.send(event: .onSearchFieldDidEdited((type == .departure) ? viewModel.searchLocationDataSource.topSearchFieldText : viewModel.searchLocationDataSource.bottomSearchFieldText))
 								}
 						})
 						.font(.system(size: 17,weight: .semibold))
 						.frame(maxWidth: .infinity,alignment: .leading)
 					Button(action: {
 					}, label: {
-						switch viewModel2.state {
-						case .loading:
-							ProgressView()
-						default:
 							Image(systemName: "location")
 						}
-					})
+					)
 					.foregroundColor(.black)
 				}
 				.padding(10)
@@ -58,7 +51,6 @@ struct SearchStopsView: View {
 							if let text = stop.name {
 								Button(text){
 										viewModel.updateSearchText(
-											text: viewModel.searchLocationDataSource.topSearchFieldText,
 											type: .departure
 										)
 									viewModel.updateSearchData(stop: stop, type: .departure)
@@ -85,7 +77,6 @@ struct SearchStopsView: View {
 							if !textBottomFieldIsFocused {
 								viewModel.searchLocationDataSource.bottomSearchFieldText = ""
 								viewModel.updateSearchText(
-									text: viewModel.searchLocationDataSource.bottomSearchFieldText ,
 									type: .arrival
 								)
 							}
@@ -93,9 +84,7 @@ struct SearchStopsView: View {
 						.onChange(of: viewModel.searchLocationDataSource.bottomSearchFieldText, perform: { text in
 								if textBottomFieldIsFocused {
 									viewModel.updateSearchText(
-										text: viewModel.searchLocationDataSource.bottomSearchFieldText ,
 										type: .arrival)
-			//								viewModel2.send(event: .onSearchFieldDidEdited((type == .departure) ? viewModel.searchLocationDataSource.topSearchFieldText : viewModel.searchLocationDataSource.bottomSearchFieldText))
 								}
 						})
 						.font(.system(size: 17,weight: .semibold))
@@ -103,13 +92,9 @@ struct SearchStopsView: View {
 					Button(action: {
 						viewModel.switchStops()
 					}, label: {
-						switch viewModel2.state {
-						case .loading:
-							ProgressView()
-						default:
 							Image(systemName: "arrow.up.arrow.down")
 						}
-					})
+					)
 					.foregroundColor(.black)
 				}
 				.padding(10)
@@ -121,10 +106,9 @@ struct SearchStopsView: View {
 						ForEach(viewModel.searchLocationDataSource.searchLocationDataArrival) { stop in
 							if let text = stop.name {
 								Button(text){
-										viewModel.updateSearchText(
-											text: viewModel.searchLocationDataSource.bottomSearchFieldText,
-											type: .arrival
-										)
+									viewModel.updateSearchText(
+										type: .arrival
+									)
 									viewModel.updateSearchData(stop: stop, type:.arrival)
 									textBottomFieldIsFocused = false
 								}

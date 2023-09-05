@@ -9,6 +9,7 @@ import SwiftUI
 
 struct TimeChoosingView: View {
 	@EnvironmentObject var viewModel : SearchLocationViewModel
+	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
 	@State private var selectedOption = 0
 	private var datePickerIsShowing = false
 	private var options = ["now","date"]
@@ -40,6 +41,7 @@ struct TimeChoosingView: View {
 								return "now"
 							case 1:
 								return DateParcer.getTimeAndDateStringFromDate(date: viewModel.searchLocationDataSource.timeChooserDate)
+//								return "time"
 							default:
 								return ""
 							}
@@ -62,8 +64,10 @@ struct TimeChoosingView: View {
 		switch selectedOption {
 		case 0:
 			viewModel.updateJourneyTimeValue(date: Date.now)
+			viewModel2.send(event: .onNewDate)
 		case 1:
-			viewModel.searchLocationDataSource.isShowingDatePicker = true
+//			viewModel.searchLocationDataSource.isShowingDatePicker = true
+			viewModel2.send(event: .onDatePickerDidPressed)
 		default:
 			break
 		}

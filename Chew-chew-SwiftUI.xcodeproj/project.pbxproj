@@ -16,7 +16,6 @@
 		7D02CE1B2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE1A2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift */; };
 		7D02CE1D2A97E55D0048ADE6 /* ViewModel+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE1C2A97E55D0048ADE6 /* ViewModel+Fetch.swift */; };
 		7D02CE1F2A97E5630048ADE6 /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE1E2A97E5630048ADE6 /* ViewModel.swift */; };
-		7D02CE212A97E5700048ADE6 /* States.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE202A97E5700048ADE6 /* States.swift */; };
 		7D02CE232A97E64E0048ADE6 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE222A97E64E0048ADE6 /* Query.swift */; };
 		7D02CE252A97E6620048ADE6 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE242A97E6620048ADE6 /* Errors.swift */; };
 		7D02CE272A97E6790048ADE6 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE262A97E6790048ADE6 /* ApiService.swift */; };
@@ -35,7 +34,7 @@
 		7D6734CE2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */; };
 		7D6734D02A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734CF2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift */; };
 		7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */; };
-		7D7A55322AA4A27C000256EF /* SearchStopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A55312AA4A27C000256EF /* SearchStopViewModel.swift */; };
+		7D7A55322AA4A27C000256EF /* SearchJourneyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A55312AA4A27C000256EF /* SearchJourneyViewModel.swift */; };
 		7D7A553A2AA4B3E5000256EF /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A55392AA4B3E5000256EF /* Feedback.swift */; };
 		7D7A553D2AA4B407000256EF /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A553C2AA4B407000256EF /* System.swift */; };
 		7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81AB252A978CDC0055AEAF /* DatePickerView.swift */; };
@@ -80,7 +79,6 @@
 		7D02CE1A2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+ConstructJourneyData.swift"; sourceTree = "<group>"; };
 		7D02CE1C2A97E55D0048ADE6 /* ViewModel+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewModel+Fetch.swift"; sourceTree = "<group>"; };
 		7D02CE1E2A97E5630048ADE6 /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
-		7D02CE202A97E5700048ADE6 /* States.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = States.swift; sourceTree = "<group>"; };
 		7D02CE222A97E64E0048ADE6 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		7D02CE242A97E6620048ADE6 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		7D02CE262A97E6790048ADE6 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -99,7 +97,7 @@
 		7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUIUITests.swift; sourceTree = "<group>"; };
 		7D6734CF2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChoosingView.swift; sourceTree = "<group>"; };
-		7D7A55312AA4A27C000256EF /* SearchStopViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStopViewModel.swift; sourceTree = "<group>"; };
+		7D7A55312AA4A27C000256EF /* SearchJourneyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchJourneyViewModel.swift; sourceTree = "<group>"; };
 		7D7A55392AA4B3E5000256EF /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		7D7A553C2AA4B407000256EF /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		7D81AB252A978CDC0055AEAF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
@@ -194,8 +192,7 @@
 				7D02CE1A2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift */,
 				7D02CE1C2A97E55D0048ADE6 /* ViewModel+Fetch.swift */,
 				7D02CE1E2A97E5630048ADE6 /* ViewModel.swift */,
-				7D02CE202A97E5700048ADE6 /* States.swift */,
-				7D7A55312AA4A27C000256EF /* SearchStopViewModel.swift */,
+				7D7A55312AA4A27C000256EF /* SearchJourneyViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -478,11 +475,10 @@
 				7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */,
 				7D02CE1B2A97E5470048ADE6 /* ViewModel+ConstructJourneyData.swift in Sources */,
 				7D02CE102A97E4100048ADE6 /* ViewDataSource.swift in Sources */,
-				7D7A55322AA4A27C000256EF /* SearchStopViewModel.swift in Sources */,
+				7D7A55322AA4A27C000256EF /* SearchJourneyViewModel.swift in Sources */,
 				7D02CE192A97E5190048ADE6 /* ViewModel+ConstructJourneyData+Timeline.swift in Sources */,
 				7D9E10872AA6752B00820B92 /* SearchStopsView.swift in Sources */,
 				7D02CE1F2A97E5630048ADE6 /* ViewModel.swift in Sources */,
-				7D02CE212A97E5700048ADE6 /* States.swift in Sources */,
 				7DAF62B12A9E54E3006F1A17 /* JourneyScrollViewFooter.swift in Sources */,
 				7D02CE342A98E8130048ADE6 /* JourneyView.swift in Sources */,
 				7DAF62AF2A9E5494006F1A17 /* JourneyScrollViewLoader.swift in Sources */,

@@ -20,7 +20,6 @@ extension SearchLocationViewModel {
 				Query.departureTime(departureTime: self.journeySearchData.departureTime),
 				Query.departureStop(departureStopId: self.journeySearchData.departureStop?.stop.id),
 				Query.arrivalStop(arrivalStopId: self.journeySearchData.arrivalStop?.stop.id),
-//				Query.duration(minutes: 20),
 				Query.national(icTrains: false),
 				Query.nationalExpress(iceTrains: false),
 				Query.regionalExpress(reTrains: false),
@@ -33,8 +32,8 @@ extension SearchLocationViewModel {
 				switch result {
 				case .success(let res) :
 					self.journeysData = res
-				case .failure(let error) :
-					self.state = .onError(error: error, indexPath: nil)
+				case .failure(_) :
+					break
 				}
 			}
 		}
@@ -56,8 +55,8 @@ extension SearchLocationViewModel {
 				case .arrival:
 					self.searchLocationDataSource.searchLocationDataArrival = res
 				}
-			case .failure(let error) :
-				self.state = .onError(error: error, indexPath: nil)
+			case .failure(_) :
+				break
 			}
 		}
 	}

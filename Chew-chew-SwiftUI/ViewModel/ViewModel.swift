@@ -11,7 +11,7 @@ struct SearchLocationDataSourse {
 	var scrollOffset = CGFloat.zero
 	var topSearchFieldText = ""
 	var bottomSearchFieldText = ""
-	var isShowingDatePicker = false
+//	var isShowingDatePicker = false
 	var timeChooserDate = Date.now
 	var searchLocationDataDeparture : [Stop] = []
 	var searchLocationDataArrival : [Stop] = []
@@ -26,34 +26,31 @@ class SearchLocationViewModel : ObservableObject {
 	@Published var searchLocationDataSource : SearchLocationDataSourse
 	
 	var journeySearchData = JourneySearchData()
-	var onStateChange : ((SearchControllerStates) -> Void)?
-	@Published var state : SearchControllerStates {
-		didSet {
-			self.onStateChange?(self.state)
-		}
-	}
 	
 	var journeysData : JourneysContainer? {
 		didSet {
 			self.constructJourneysCollectionViewData()
 		}
 	}
-	@Published var resultJourneysCollectionViewDataSourse : AllJourneysCollectionViewDataSourse {
-		didSet {
-			self.state = .onNewDataJourney
-		}
-	}
+	@Published var resultJourneysCollectionViewDataSourse : AllJourneysCollectionViewDataSourse
 	
 	
 	init(){
-		self.state = .onStart
 		self.resultJourneysCollectionViewDataSourse = .init(awaitingData: false, journeys: [])
 		self.searchLocationDataSource = .init()
 	}
 }
 
 extension SearchLocationViewModel {
-	func updateSearchText(text : String?,type : LocationDirectionType) {
+	func updateSearchText(type : LocationDirectionType) {
+		let text : String? = {
+			switch type {
+			case .departure:
+				return searchLocationDataSource.topSearchFieldText
+			case .arrival:
+				return searchLocationDataSource.bottomSearchFieldText
+			}
+		}()
 		guard let text = text else {
 			switch type {
 			case .departure:
@@ -99,7 +96,7 @@ extension SearchLocationViewModel {
 	}
 	func updateJourneyTimeValue(date : Date){
 		searchLocationDataSource.timeChooserDate = date
-		searchLocationDataSource.isShowingDatePicker = false
+//		searchLocationDataSource.isShowingDatePicker = false
 		if journeySearchData.updateSearchTimeData(departureTime: date) == true {
 			self.getJourneys()
 		}

@@ -14,7 +14,7 @@ extension Color {
 
 struct ContentView: View {
 	@EnvironmentObject var viewModel : SearchLocationViewModel
-	@EnvironmentObject private var viewModel2 : SearchStopViewModel
+	@EnvironmentObject private var viewModel2 : SearchJourneyViewModel
 	let solar = Solar(coordinate: .init(
 		latitude: 51.3,
 		longitude: 9.4)
@@ -30,15 +30,17 @@ struct ContentView: View {
 					.shadow(radius: 1,y:1)
 					.padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5))
 				JourneyView()
+				Spacer()
 			}
 				.padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))
-			if viewModel.searchLocationDataSource.isShowingDatePicker {
+			if viewModel2.state == .datePicker {
+//			if viewModel.searchLocationDataSource.isShowingDatePicker {
 				VStack{
 					DatePickerView(startDat: viewModel.searchLocationDataSource.timeChooserDate)
 					Spacer()
 				}
-				.transition(.move(edge: .bottom))
-				.animation(.spring(), value: viewModel.searchLocationDataSource.isShowingDatePicker)
+//				.transition(.move(edge: .bottom))
+//				.animation(.spring(), value: viewModel.searchLocationDataSource.isShowingDatePicker)
 			}
 		}
 			.background(
@@ -49,16 +51,16 @@ struct ContentView: View {
 					endPoint: UnitPoint(x: 0.5, y: 0.4)
 				)
 			)
-			.transition(.move(edge: .bottom))
-			.animation(.spring(), value: viewModel.searchLocationDataSource.isShowingDatePicker)
-			.animation(.spring(), value: viewModel.searchLocationDataSource.searchLocationDataDeparture)
-			.animation(.spring(), value: viewModel.searchLocationDataSource.searchLocationDataArrival)
+//			.transition(.move(edge: .bottom))
+//			.animation(.spring(), value: viewModel.searchLocationDataSource.isShowingDatePicker)
+//			.animation(.spring(), value: viewModel.searchLocationDataSource.searchLocationDataDeparture)
+//			.animation(.spring(), value: viewModel.searchLocationDataSource.searchLocationDataArrival)
 	}
 }
 
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		ContentView()
-			.environmentObject(SearchLocationViewModel())
-	}
-}
+//struct ContentView_Previews: PreviewProvider {
+//	static var previews: some View {
+//		ContentView()
+//			.environmentObject(SearchLocationViewModel())
+//	}
+//}
