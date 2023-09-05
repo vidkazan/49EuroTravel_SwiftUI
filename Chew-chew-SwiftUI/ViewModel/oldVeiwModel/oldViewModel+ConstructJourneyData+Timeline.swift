@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension SearchLocationViewModel {
+extension OldSearchLocationViewModel {
 	
 	func getTimeLabelPosition(firstTS : Date?, lastTS: Date?, currentTS: Date?) -> Double?{
 		guard let firstTS = firstTS, let lastTS = lastTS, let currentTS = currentTS else { return nil }

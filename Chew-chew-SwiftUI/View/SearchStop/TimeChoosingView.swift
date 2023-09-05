@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeChoosingView: View {
-	@EnvironmentObject var viewModel : SearchLocationViewModel
+	@EnvironmentObject var viewModel : OldSearchLocationViewModel
 	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
 	@State private var selectedOption = 0
 	private var datePickerIsShowing = false
@@ -63,7 +63,7 @@ struct TimeChoosingView: View {
 	func optionPressed(_ index: Int) {
 		switch selectedOption {
 		case 0:
-			viewModel.updateJourneyTimeValue(date: Date.now)
+//			viewModel.updateJourneyTimeValue(date: Date.now)
 			viewModel2.send(event: .onNewDate)
 		case 1:
 //			viewModel.searchLocationDataSource.isShowingDatePicker = true

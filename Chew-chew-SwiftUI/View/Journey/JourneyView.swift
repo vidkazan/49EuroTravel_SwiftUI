@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct JourneyView: View {
-	@EnvironmentObject var viewModel : SearchLocationViewModel
+	@EnvironmentObject var viewModel : OldSearchLocationViewModel
 	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
     var body: some View {
 		VStack{
@@ -19,7 +19,7 @@ struct JourneyView: View {
 			case false:
 				ScrollViewReader { proxy in
 					ScrollView(showsIndicators: false)  {
-//						if viewModel.state == .onNewDataJourney{
+						if viewModel2.state == .journeysLoaded {
 							JourneyScrollViewHeader()
 								.id(-1)
 							ForEach(viewModel.resultJourneysCollectionViewDataSourse.journeys) { (journey) in
@@ -39,7 +39,7 @@ struct JourneyView: View {
 								}
 							} // forEach
 							JourneyScrollViewFooter()
-//						}
+						}
 					} // scroll view
 				} // scrollViewReader
 				.transition(.move(edge: .bottom))

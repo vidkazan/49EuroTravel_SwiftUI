@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-extension SearchLocationViewModel {
+extension OldSearchLocationViewModel {
 	
 	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int) -> LegViewDataSourse? {
 		guard

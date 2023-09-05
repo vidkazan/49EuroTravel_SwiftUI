@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LegsView: View {
-	@EnvironmentObject var viewModel : SearchLocationViewModel
+	@EnvironmentObject var viewModel : OldSearchLocationViewModel
 	var journey : JourneyCollectionViewDataSourse
 	init(journey: JourneyCollectionViewDataSourse) {
 		self.journey = journey

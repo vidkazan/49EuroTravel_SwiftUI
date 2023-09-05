@@ -1,17 +1,17 @@
 //
-//  ViewModel.swift
-//  49EuroTravel
+//  SearchLocationViewModel.swift
+//  Chew-chew-SwiftUI
 //
-//  Created by Dmitrii Grigorev on 05.05.23.
+//  Created by Dmitrii Grigorev on 05.09.23.
 //
 
 import Foundation
+import Combine
 
 struct SearchLocationDataSourse {
 	var scrollOffset = CGFloat.zero
 	var topSearchFieldText = ""
 	var bottomSearchFieldText = ""
-//	var isShowingDatePicker = false
 	var timeChooserDate = Date.now
 	var searchLocationDataDeparture : [Stop] = []
 	var searchLocationDataArrival : [Stop] = []
@@ -27,11 +27,6 @@ class SearchLocationViewModel : ObservableObject {
 	
 	var journeySearchData = JourneySearchData()
 	
-	var journeysData : JourneysContainer? {
-		didSet {
-			self.constructJourneysCollectionViewData()
-		}
-	}
 	@Published var resultJourneysCollectionViewDataSourse : AllJourneysCollectionViewDataSourse
 	
 	
@@ -78,28 +73,46 @@ extension SearchLocationViewModel {
 	
 	func switchStops(){
 		self.searchLocationDataSource.switchStops()
-		if journeySearchData.switchStops() == true {
-			self.getJourneys()
-		}
 	}
 	
-	func updateSearchData(stop : Stop, type : LocationDirectionType){
-		switch type {
-		case .departure:
-			self.searchLocationDataSource.topSearchFieldText = stop.name ?? ""
-		case .arrival:
-			self.searchLocationDataSource.bottomSearchFieldText = stop.name ?? ""
-		}
-		if journeySearchData.updateSearchStopData(type: type, stop: stop) == true {
-			self.getJourneys()
-		}
-	}
 	func updateJourneyTimeValue(date : Date){
 		searchLocationDataSource.timeChooserDate = date
 //		searchLocationDataSource.isShowingDatePicker = false
-		if journeySearchData.updateSearchTimeData(departureTime: date) == true {
-			self.getJourneys()
+	}
+}
+
+
+extension SearchLocationViewModel {
+	func fetchLocations(text : String?, type : LocationDirectionType){
+		guard let text = text else { return }
+		if text.count < 2 { return }
+		var query : [URLQueryItem] = []
+		query = Query.getQueryItems(methods: [
+			Query.location(location: text),
+			Query.results(max: 5)
+		])
+		ApiService.fetch([Stop].self,query: query, type: ApiService.Requests.locations(name: text ),requestGroupId: "") { [self] result in
+			switch result {
+			case .success(let res) :
+				switch type {
+				case .departure:
+					self.searchLocationDataSource.searchLocationDataDeparture = res
+				case .arrival:
+					self.searchLocationDataSource.searchLocationDataArrival = res
+				}
+			case .failure(_) :
+				break
+			}
 		}
 	}
 	
+	static func fetchLocationsCombine(text : String, type : LocationDirectionType) -> AnyPublisher<[Stop],Error> {
+		var query : [URLQueryItem] = []
+		query = Query.getQueryItems(methods: [
+			Query.location(location: text),
+			Query.results(max: 5)
+		])
+		return ApiService.fetchCombine([Stop].self,query: query, type: ApiService.Requests.locations(name: text ), requestGroupId: "")
+	}
 }
+

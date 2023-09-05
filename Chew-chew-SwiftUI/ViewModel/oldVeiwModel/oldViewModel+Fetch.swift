@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-extension SearchLocationViewModel {
+extension OldSearchLocationViewModel {
 	func getJourneys(){
 		self.resultJourneysCollectionViewDataSourse = AllJourneysCollectionViewDataSourse(awaitingData: true, journeys: [])
 		self.fetchJourneys()
@@ -20,6 +20,7 @@ extension SearchLocationViewModel {
 				Query.departureTime(departureTime: self.journeySearchData.departureTime),
 				Query.departureStop(departureStopId: self.journeySearchData.departureStop?.stop.id),
 				Query.arrivalStop(arrivalStopId: self.journeySearchData.arrivalStop?.stop.id),
+
 				Query.national(icTrains: false),
 				Query.nationalExpress(iceTrains: false),
 				Query.regionalExpress(reTrains: false),

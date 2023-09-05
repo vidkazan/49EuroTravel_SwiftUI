@@ -64,6 +64,8 @@ extension SearchJourneyViewModel {
 				return .editingArrivalStop
 			case .onDatePickerDidPressed:
 				return .datePicker
+			case .onNewDate, .onStopsSwitch:
+				return .idle
 			default:
 				return state
 			}
@@ -73,6 +75,8 @@ extension SearchJourneyViewModel {
 				return .editingDepartureStop
 			case .onDatePickerDidPressed:
 				return .datePicker
+			case .onNewDate, .onStopsSwitch:
+				return .idle
 			default:
 				return state
 			}

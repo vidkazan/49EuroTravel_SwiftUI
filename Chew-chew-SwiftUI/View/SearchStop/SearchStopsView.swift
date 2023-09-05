@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct SearchStopsView: View {
-	@EnvironmentObject private var viewModel : SearchLocationViewModel
+	@EnvironmentObject private var viewModel : OldSearchLocationViewModel
 	@EnvironmentObject private var viewModel2 : SearchJourneyViewModel
-	@FocusState	private var textTopFieldIsFocused	: Bool
-	@FocusState	private var textBottomFieldIsFocused	: Bool
+	@FocusState	private var textTopFieldIsFocused : Bool
+	@FocusState	private var textBottomFieldIsFocused: Bool
 	var body: some View {
 		VStack{
 			VStack {
@@ -19,6 +19,7 @@ struct SearchStopsView: View {
 					TextField(LocationDirectionType.departure.placeholder, text: $viewModel.searchLocationDataSource.topSearchFieldText)
 						.focused($textTopFieldIsFocused)
 						.onTapGesture {
+							viewModel2.send(event: .onDepartureEdit)
 							if !textTopFieldIsFocused {
 								viewModel.searchLocationDataSource.topSearchFieldText = ""
 								viewModel.updateSearchText(
@@ -31,6 +32,12 @@ struct SearchStopsView: View {
 									viewModel.updateSearchText(
 										type: .departure)
 								}
+						})
+						.onChange(of: textTopFieldIsFocused, perform: { val in
+							if val == true {
+								viewModel2.send(event: .onDepartureEdit)
+								textBottomFieldIsFocused = false
+							}
 						})
 						.font(.system(size: 17,weight: .semibold))
 						.frame(maxWidth: .infinity,alignment: .leading)
@@ -74,6 +81,7 @@ struct SearchStopsView: View {
 					TextField(LocationDirectionType.arrival.placeholder, text: $viewModel.searchLocationDataSource.bottomSearchFieldText)
 						.focused($textBottomFieldIsFocused)
 						.onTapGesture {
+							viewModel2.send(event: .onArrivalEdit)
 							if !textBottomFieldIsFocused {
 								viewModel.searchLocationDataSource.bottomSearchFieldText = ""
 								viewModel.updateSearchText(
@@ -87,10 +95,17 @@ struct SearchStopsView: View {
 										type: .arrival)
 								}
 						})
+						.onChange(of: textBottomFieldIsFocused, perform: { val in
+							if val == true {
+								viewModel2.send(event: .onArrivalEdit)
+								textTopFieldIsFocused = false
+							}
+						})
 						.font(.system(size: 17,weight: .semibold))
 						.frame(maxWidth: .infinity,alignment: .leading)
 					Button(action: {
 						viewModel.switchStops()
+						viewModel2.send(event: .onStopsSwitch)
 					}, label: {
 							Image(systemName: "arrow.up.arrow.down")
 						}

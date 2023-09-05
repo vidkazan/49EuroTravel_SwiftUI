@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DatePickerView: View {
-	@EnvironmentObject var viewModel : SearchLocationViewModel
+	@EnvironmentObject var viewModel : OldSearchLocationViewModel
 	@EnvironmentObject private var viewModel2 : SearchJourneyViewModel
 	@State private var date = Date()
 	@State private var time = Date()
@@ -73,7 +73,8 @@ struct DatePickerView: View {
 		.padding(5)
 //		.opacity(viewModel.searchLocationDataSource.isShowingDatePicker ? 1 : 0)
 		.shadow(radius: 1,y:1)
-//		.transition(.move(edge: .bottom))
+		.transition(.move(edge: .bottom))
 //		.animation(.easeInOut, value: viewModel.searchLocationDataSource.isShowingDatePicker)
+		.animation(.easeInOut, value: viewModel2.state)
 	}
 }
