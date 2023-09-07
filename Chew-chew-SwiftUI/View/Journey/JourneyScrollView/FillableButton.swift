@@ -14,7 +14,6 @@ struct FillableButton: View{
 		self.text = text
 		self.isFillable = !isNotFillable
 	}
-	@EnvironmentObject var viewModel : OldSearchLocationViewModel
 	var body: some View {
 		ZStack(alignment: .leading){
 			Rectangle()

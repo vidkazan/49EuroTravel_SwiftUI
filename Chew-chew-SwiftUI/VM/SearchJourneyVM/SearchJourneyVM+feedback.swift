@@ -29,14 +29,10 @@ extension SearchJourneyViewModel {
 	
 	func whenIdleCheckForSufficientDataForJourneyRequest() -> Feedback<State, Event> {
 	  Feedback { (state: State) -> AnyPublisher<Event, Never> in
-		  print(">> feedback : check for data")
 		  guard case .idle = state else { return Empty().eraseToAnyPublisher() }
+		  print(">> feedback : check for data")
 		  guard self.depStop != nil && self.arrStop != nil else { return Empty().eraseToAnyPublisher() }
-		  return self.fetchJourneys()
-			  .map { _ in
-				  return Event.onJourneyDataUpdated
-			  }
-			  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+				return Just(Event.onJourneyDataUpdated)
 			  .eraseToAnyPublisher()
 	  }
 	}

@@ -9,7 +9,7 @@ import Foundation
 
 extension SearchJourneyViewModel {
 	func transform(_ state: State, _ event: Event){
-		print(">>> transform",state.description)
+		print(">> transfofm: event:",event.description,"for",state.description)
 		switch event {
 		case .onNewJourneysData(let data):
 			self.journeysData = data
@@ -24,7 +24,7 @@ extension SearchJourneyViewModel {
 	}
 	func reduce(_ state: State, _ event: Event) -> State {
 		transform(state, event)
-		print(">> reduce: event:",event,"for",state.description)
+		print(">> reduce: event:",event.description,"for",state.description)
 		switch state {
 		case .idle:
 			switch event {

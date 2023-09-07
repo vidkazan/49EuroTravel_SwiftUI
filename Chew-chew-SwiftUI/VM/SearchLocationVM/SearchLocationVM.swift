@@ -25,7 +25,7 @@ class SearchLocationViewModel : ObservableObject {
 	private let input = PassthroughSubject<Event,Never>()
 	@Published private(set) var state : State {
 		didSet {
-			print(">> searchStops state: ",state.description)
+			print(":: searchLocations state: ",state.description)
 		}
 	}
 	

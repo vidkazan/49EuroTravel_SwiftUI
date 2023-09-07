@@ -9,7 +9,6 @@ import SwiftUI
 
 
 struct JourneyView: View {
-	@EnvironmentObject var viewModel : SearchLocationViewModel
 	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
     var body: some View {
 		VStack{

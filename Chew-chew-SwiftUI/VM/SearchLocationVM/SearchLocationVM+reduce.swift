@@ -41,7 +41,7 @@ extension SearchLocationViewModel {
 extension SearchLocationViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
 		transform(state, event)
-		print(">>> reduce event:",event.description)
+		print(":: reduce event:",event.description)
 		switch state {
 		case .idle:
 			switch event {

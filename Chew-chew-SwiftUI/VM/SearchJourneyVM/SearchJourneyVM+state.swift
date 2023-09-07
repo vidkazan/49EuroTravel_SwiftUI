@@ -70,5 +70,42 @@ extension SearchJourneyViewModel {
 		case onReloadJourneys
 		case onLaterRef
 		case onEarlierRef
+		
+		var description : String {
+			switch self {
+			case .onArrivalEdit:
+				return "onArrivalEdit"
+			case .onDepartureEdit:
+				return "onDepartureEdit"
+			case .onDatePickerDidPressed:
+				return "onDatePickerDidPressed"
+			case .onNewDeparture(_):
+				return "onNewDeparture"
+			case .onNewArrival(_):
+				return "onNewArrival"
+			case .onResetJourneyView:
+				return "onResetJourneyView"
+			case .onStopsSwitch:
+				return "onStopsSwitch"
+			case .onNewDate:
+				return "onNewDate"
+			case .onJourneyDataUpdated:
+				return "onJourneyDataUpdated"
+			case .onNewJourneysData(_):
+				return "onNewJourneysData"
+			case .onFailedToLoadJourneysData(_):
+				return "onFailedToLoadJourneysData"
+			case .onJourneyDidPressed:
+				return "onJourneyDidPressed"
+			case .onBackFromJourneyDetails:
+				return "onBackFromJourneyDetails"
+			case .onReloadJourneys:
+				return "onReloadJourneys"
+			case .onLaterRef:
+				return "onLaterRef"
+			case .onEarlierRef:
+				return "onEarlierRef"
+			}
+		}
 	}
 }

@@ -173,6 +173,7 @@ class ApiService  {
 		query : [URLQueryItem],
 		type : Requests
 	) -> AnyPublisher<T, ApiServiceError> {
+		let now = Date.now
 		guard let url = generateUrl(query: query, type: type) else {
 			let subject = Future<T,ApiServiceError> { promise in
 				return promise(.failure(.badUrl))
@@ -180,23 +181,24 @@ class ApiService  {
 			return subject.eraseToAnyPublisher()
 		}
 		let request = type.getRequest(urlEndPoint: url)
+		print(Date.now.timeIntervalSince(now),"> api: start:",type)
 		return URLSession.shared
 				.dataTaskPublisher(for: request)
 				.tryMap { result -> T in
 					let value = try JSONDecoder().decode(T.self, from: result.data)
-					print("> api:",type)
+					print(Date.now.timeIntervalSince(now),"> api: done:",type)
 					return value
 				}
 				.receive(on: DispatchQueue.main)
 				.mapError{ error -> ApiServiceError in
 					switch error {
 						case let error as ApiServiceError:
-							print("> api",type)
-							print("> api",error.description)
+						print(Date.now.timeIntervalSince(now),"> api: error:",type)
+							print(Date.now.timeIntervalSince(now),"> api: error:",error.description)
 							return error
 						default:
-							print("> api",type)
-							print("> api",error.localizedDescription)
+							print(Date.now.timeIntervalSince(now),"> api: error:",type)
+							print(Date.now.timeIntervalSince(now),"> api: error:",error.localizedDescription)
 							return .generic(error)
 						}
 				}
