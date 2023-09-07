@@ -12,7 +12,7 @@ struct CustomErrors : Error {
 	let source : ApiService.Requests
 }
 
-enum ApiServiceError {
+enum ApiServiceError : Error {
 	case badUrl
 	case cannotConnectToHost(string : String)
 	case badServerResponse(code : Int)
@@ -21,6 +21,7 @@ enum ApiServiceError {
 //	case unauthorised
 	case badRequest
 	case requestRateExceeded
+	case generic(Error)
 	
 	
 	
@@ -42,6 +43,8 @@ enum ApiServiceError {
 			return "Bad search request"
 		case .requestRateExceeded:
 			return "Request rate exceeded"
+		case .generic(let error):
+			return error.localizedDescription
 		}
 	}
 }

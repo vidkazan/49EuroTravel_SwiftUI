@@ -95,7 +95,7 @@ class ApiService  {
 		_ t : T.Type,
 		query : [URLQueryItem],
 		type : Requests,
-		requestGroupId : String) -> AnyPublisher<T,Error> {
+		requestGroupId : String) -> AnyPublisher<T,ApiServiceError> {
 			return Self.executeCombine(T.self, query: query, type: type)
 	}
 	
@@ -104,7 +104,7 @@ class ApiService  {
 		query : [URLQueryItem],
 		type : Requests,
 		requestGroupId : String,
-		completed: @escaping (Result<T, CustomErrors>) -> Void) {
+		completed: @escaping (Result<T, ApiServiceError>) -> Void) {
 		switch type {
 		case .customGet:
 			queue.async {
@@ -172,10 +172,10 @@ class ApiService  {
 		_ t : T.Type,
 		query : [URLQueryItem],
 		type : Requests
-	) -> AnyPublisher<T, Error> {
+	) -> AnyPublisher<T, ApiServiceError> {
 		guard let url = generateUrl(query: query, type: type) else {
-			let subject = Future<T,Error> { promise in
-				return promise(.failure(CustomErrors(apiServiceErrors: .requestRateExceeded, source: type)as Error as! CustomErrors))
+			let subject = Future<T,ApiServiceError> { promise in
+				return promise(.failure(.badUrl))
 			}
 			return subject.eraseToAnyPublisher()
 		}
@@ -184,9 +184,22 @@ class ApiService  {
 				.dataTaskPublisher(for: request)
 				.tryMap { result -> T in
 					let value = try JSONDecoder().decode(T.self, from: result.data)
+					print("> api:",type)
 					return value
 				}
 				.receive(on: DispatchQueue.main)
+				.mapError{ error -> ApiServiceError in
+					switch error {
+						case let error as ApiServiceError:
+							print("> api",type)
+							print("> api",error.description)
+							return error
+						default:
+							print("> api",type)
+							print("> api",error.localizedDescription)
+							return .generic(error)
+						}
+				}
 				.eraseToAnyPublisher()
 	}
 	
@@ -195,12 +208,11 @@ class ApiService  {
 		_ t : T.Type,
 		query : [URLQueryItem],
 		type : Requests,
-		completed: @escaping (Result<T, CustomErrors>) -> Void
+		completed: @escaping (Result<T, ApiServiceError>) -> Void
 	) {
 		let session = generateSession()
 		guard let url = generateUrl(query: query, type: type) else {
-			let error = CustomErrors(apiServiceErrors: .badUrl, source: type)
-			completed(.failure(error))
+			completed(.failure(.badUrl))
 			print(">",Date.now.timeIntervalSince1970,type.description ,query)
 			set[type.index].1 = nil
 			return
@@ -213,7 +225,7 @@ class ApiService  {
 					case -999:
 						break
 					default:
-						completed(.failure(CustomErrors(apiServiceErrors: .cannotConnectToHost(string: error.localizedDescription), source: type)))
+						completed(.failure(.cannotConnectToHost(string: error.localizedDescription)))
 					}
 					print(">",Date.now.timeIntervalSince1970,type.description,query,"error Connect to HOST")
 					set[type.index].1 = nil
@@ -221,7 +233,7 @@ class ApiService  {
 				}
 				
 				guard let response = response as? HTTPURLResponse  else {
-					completed(.failure(CustomErrors(apiServiceErrors: .cannotDecodeRawData, source: type)))
+					completed(.failure(.cannotDecodeRawData))
 					print(">",Date.now.timeIntervalSince1970,type.description,query,"error Bad Response")
 					set[type.index].1 = nil
 					return
@@ -229,25 +241,25 @@ class ApiService  {
 				
 				switch response.statusCode {
 					case 400:
-					completed(.failure(CustomErrors(apiServiceErrors: .badRequest, source: type)))
+					completed(.failure(.badRequest))
 						print(">",Date.now.timeIntervalSince1970,type.description,query,"error Bad Request")
 						set[type.index].1 = nil
 						return
 					case 429:
-					completed(.failure(CustomErrors(apiServiceErrors: .requestRateExceeded, source: type)))
+					completed(.failure(.requestRateExceeded))
 						print(">",Date.now.timeIntervalSince1970,type.description,query,"error Request Rate")
 						set[type.index].1 = nil
 						return
 					case 200:
 						break
 					default:
-						completed(.failure(CustomErrors(apiServiceErrors: .badServerResponse(code: response.statusCode), source: type)))
+						completed(.failure(.badServerResponse(code: response.statusCode)))
 						print(">",Date.now.timeIntervalSince1970,type.description,query,"error Bad Response")
 						set[type.index].1 = nil
 						return
 				}
 				guard let data = data else {
-					completed(.failure(CustomErrors(apiServiceErrors: .cannotDecodeRawData, source: type)))
+					completed(.failure(.cannotDecodeRawData))
 					print(">",Date.now.timeIntervalSince1970,type.description,query,"error Get Data")
 					set[type.index].1 = nil
 					return
@@ -261,7 +273,7 @@ class ApiService  {
 						set[type.index].1 = nil
 						break
 					} catch {
-						completed(.failure(CustomErrors(apiServiceErrors: .cannotDecodeContentData, source: type)))
+						completed(.failure(.cannotDecodeContentData))
 						print(type.description,query,"error Decode JSON")
 						set[type.index].1 = nil
 						return

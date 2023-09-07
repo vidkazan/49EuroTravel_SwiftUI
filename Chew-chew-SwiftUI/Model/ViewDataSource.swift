@@ -19,7 +19,7 @@ struct BadgeDataSource : Equatable, Identifiable {
 	}
 }
 
-enum BadgesList : Identifiable {
+enum Badges : Identifiable {
 	case price(price: String)
 	case dticket
 	case cancelled
@@ -93,12 +93,10 @@ struct JourneyViewDataSourse : Equatable {
 }
 
 struct AllJourneysCollectionViewDataSourse : Equatable{
-	let awaitingData : Bool
 	let journeys : [JourneyCollectionViewDataSourse]
 }
 
 struct ResultJourneyViewDataSourse : Equatable {
-	let awaitingData : Bool
 	let journeys : [JourneyViewDataSourse]?
 	let timeline : TimelineViewDataSourse?
 }

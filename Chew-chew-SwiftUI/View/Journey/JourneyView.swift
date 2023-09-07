@@ -9,20 +9,22 @@ import SwiftUI
 
 
 struct JourneyView: View {
-	@EnvironmentObject var viewModel : OldSearchLocationViewModel
+	@EnvironmentObject var viewModel : SearchLocationViewModel
 	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
     var body: some View {
 		VStack{
-			switch viewModel.resultJourneysCollectionViewDataSourse.awaitingData {
-			case true:
+			switch viewModel2.state {
+			case .loadingJourneys:
+				Spacer()
 				JourneyScrollViewLoader()
-			case false:
+				Spacer()
+			case .journeysLoaded:
 				ScrollViewReader { proxy in
 					ScrollView(showsIndicators: false)  {
 						if viewModel2.state == .journeysLoaded {
 							JourneyScrollViewHeader()
 								.id(-1)
-							ForEach(viewModel.resultJourneysCollectionViewDataSourse.journeys) { (journey) in
+							ForEach(viewModel2.resultJourneysCollectionViewDataSourse.journeys) { (journey) in
 								VStack {
 									JourneyHeaderView(journey: journey)
 									LegsView(journey : journey)
@@ -42,12 +44,14 @@ struct JourneyView: View {
 						}
 					} // scroll view
 				} // scrollViewReader
-				.transition(.move(edge: .bottom))
-				.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
+//				.transition(.move(edge: .bottom))
+//				.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
+			case .idle,.editingDepartureStop,.editingArrivalStop,.datePicker,.journeyDetails,.failedToLoadJourneys:
+				Spacer()
 			}
 		} // VStack
-		.transition(.move(edge: .bottom))
-		.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
+//		.transition(.move(edge: .bottom))
+//		.animation(.interactiveSpring(), value: viewModel.resultJourneysCollectionViewDataSourse)
 		.frame(maxWidth: .infinity)
 		.cornerRadius(10)
     }

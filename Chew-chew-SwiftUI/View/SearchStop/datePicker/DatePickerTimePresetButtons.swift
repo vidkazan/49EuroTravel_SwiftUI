@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DatePickerTimePresetButtons: View {
-	@EnvironmentObject var viewModel : OldSearchLocationViewModel
+	@EnvironmentObject var viewModel : SearchLocationViewModel
 	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
     var body: some View {
 		Button("now") {

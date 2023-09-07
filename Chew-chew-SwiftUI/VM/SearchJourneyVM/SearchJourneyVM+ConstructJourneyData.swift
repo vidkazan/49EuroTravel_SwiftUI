@@ -1,15 +1,15 @@
 //
-//  ViewModel+ConstructJourneyData.swift
-//  49EuroTravel
+//  SearchJourneyVM+ConstructJourneyData.swift
+//  Chew-chew-SwiftUI
 //
-//  Created by Dmitrii Grigorev on 09.08.23.
+//  Created by Dmitrii Grigorev on 07.09.23.
 //
 
 import Foundation
-import SwiftUI
+import UIKit
 import CoreLocation
 
-extension OldSearchLocationViewModel {
+extension SearchJourneyViewModel {
 	
 	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int) -> LegViewDataSourse? {
 		guard
@@ -58,12 +58,12 @@ extension OldSearchLocationViewModel {
 		
 		let sunEventGenerator = SunEventGenerator(
 			locationStart: CLLocationCoordinate2D(
-				latitude: self.journeySearchData.departureStop?.stop.location?.latitude ?? 0,
-				longitude: self.journeySearchData.departureStop?.stop.location?.longitude ?? 0
+				latitude: self.depStop?.location?.latitude ?? 0,
+				longitude: self.depStop?.location?.longitude ?? 0
 			),
 			locationFinal : CLLocationCoordinate2D(
-				latitude: self.journeySearchData.arrivalStop?.stop.location?.latitude ?? 0,
-				longitude: self.journeySearchData.arrivalStop?.stop.location?.longitude ?? 0
+				latitude: self.arrStop?.location?.latitude ?? 0,
+				longitude: self.arrStop?.location?.longitude ?? 0
 			),
 			dateStart: firstTS,
 			dateFinal: lastTS)
@@ -103,8 +103,45 @@ extension OldSearchLocationViewModel {
 			}
 		}
 		self.resultJourneysCollectionViewDataSourse = AllJourneysCollectionViewDataSourse(
-			awaitingData: false,
 			journeys: journeysViewData
 		)
+	}
+}
+
+extension SearchJourneyViewModel {
+	
+	func getTimeLabelPosition(firstTS : Date?, lastTS: Date?, currentTS: Date?) -> Double?{
+		guard let firstTS = firstTS, let lastTS = lastTS, let currentTS = currentTS else { return nil }
+		let fTs = firstTS.timeIntervalSinceReferenceDate
+		let lTs = lastTS.timeIntervalSinceReferenceDate
+		let cTs = currentTS.timeIntervalSinceReferenceDate
+		let ext = 0.0
+		let fTsExtended = fTs - ext
+		let lTsExtended = lTs + ext
+		
+		let diffExtended = lTsExtended - fTsExtended
+		
+		let cDiff = cTs - fTsExtended
+		
+		return cDiff / diffExtended
+	}
+	
+	private func constructTimelineTimelabelData(firstTS: Date?,lastTS: Date?,currentTS: Date?) -> TimelineTimeLabelDataSourse? {
+		guard let firstTS = firstTS, let lastTS = lastTS, let currentTS = currentTS else { return nil }
+		let tl = TimelineTimeLabelDataSourse(
+			text: DateParcer.getTimeStringFromDate(date: currentTS),
+			   textCenterYposition: self.getTimeLabelPosition(
+				   firstTS: firstTS,
+				   lastTS: lastTS,
+				   currentTS: currentTS)!)
+		return tl
+	}
+	
+	 func constructTimelineData(firstTS: Date?,lastTS: Date?) -> TimelineViewDataSourse? {
+		let tl = TimelineViewDataSourse(timeLabels: [
+			self.constructTimelineTimelabelData(firstTS: firstTS, lastTS: lastTS, currentTS: firstTS)!,
+			self.constructTimelineTimelabelData(firstTS: firstTS, lastTS: lastTS, currentTS: lastTS)!
+		])
+		return tl
 	}
 }

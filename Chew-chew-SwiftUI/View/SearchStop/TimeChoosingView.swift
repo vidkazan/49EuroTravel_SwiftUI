@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct TimeChoosingView: View {
-	@EnvironmentObject var viewModel : OldSearchLocationViewModel
+	@EnvironmentObject var viewModel : SearchLocationViewModel
 	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
 	@State private var selectedOption = 0
 	private var datePickerIsShowing = false

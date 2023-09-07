@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DatePickerView: View {
-	@EnvironmentObject var viewModel : OldSearchLocationViewModel
+	@EnvironmentObject var viewModel : SearchLocationViewModel
 	@EnvironmentObject private var viewModel2 : SearchJourneyViewModel
 	@State private var date = Date()
 	@State private var time = Date()

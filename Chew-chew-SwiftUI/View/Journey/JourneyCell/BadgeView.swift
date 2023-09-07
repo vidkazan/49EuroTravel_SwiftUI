@@ -11,8 +11,8 @@ import SwiftUI
 struct BadgeView : View {
 //	var text : String
 //	var color : Color
-	var badge : BadgesList
-	init(badge : BadgesList) {
+	var badge : Badges
+	init(badge : Badges) {
 		self.badge = badge
 	}
 	var body : some View {

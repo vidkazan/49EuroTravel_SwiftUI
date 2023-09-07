@@ -10,7 +10,7 @@ import Combine
 
 extension OldSearchLocationViewModel {
 	func getJourneys(){
-		self.resultJourneysCollectionViewDataSourse = AllJourneysCollectionViewDataSourse(awaitingData: true, journeys: [])
+		self.resultJourneysCollectionViewDataSourse = AllJourneysCollectionViewDataSourse(journeys: [])
 		self.fetchJourneys()
 	}
 	
@@ -62,12 +62,12 @@ extension OldSearchLocationViewModel {
 		}
 	}
 	
-	static func fetchLocationsCombine(text : String, type : LocationDirectionType) -> AnyPublisher<[Stop],Error> {
-		var query : [URLQueryItem] = []
-		query = Query.getQueryItems(methods: [
-			Query.location(location: text),
-			Query.results(max: 5)
-		])
-		return ApiService.fetchCombine([Stop].self,query: query, type: ApiService.Requests.locations(name: text ), requestGroupId: "")
-	}
+//	static func fetchLocationsCombine(text : String, type : LocationDirectionType) -> AnyPublisher<[Stop],Error> {
+//		var query : [URLQueryItem] = []
+//		query = Query.getQueryItems(methods: [
+//			Query.location(location: text),
+//			Query.results(max: 5)
+//		])
+//		return ApiService.fetchCombine([Stop].self,query: query, type: ApiService.Requests.locations(name: text ), requestGroupId: "")
+//	}
 }
