@@ -9,32 +9,29 @@ import Foundation
 import Combine
 import SwiftUI
 
-struct SearchLocationDataSourse {
-	var timeChooserDate = Date.now
-	var searchLocationDataDeparture : [Stop] = []
-	var searchLocationDataArrival : [Stop] = []
-	var previousTopSearchLineString = ""
-	var previousBottomSearchLineString = ""
-}
-
 class SearchLocationViewModel : ObservableObject {
-	@Published var topSearchFieldText : String = ""
-	@Published var bottomSearchFieldText : String = ""
-	var searchLocationDataSource : SearchLocationDataSourse
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	@Published private(set) var state : State {
 		didSet {
-			print(":: searchLocations state: ",state.description)
+			print(":: searchLocations state: ",state.status.description, state.type)
 		}
 	}
 	
-	
-	init() {
-		self.searchLocationDataSource = .init()
-		self.state = .idle
+	init(type : LocationDirectionType) {
+		self.state = State(
+			stops: [],
+			previousSearchLineString: "",
+			status: .idle,
+			type: type
+		)
 		Publishers.system(
-			initial: .idle,
+			initial: State(
+				stops: [],
+				previousSearchLineString: "",
+				status: .idle,
+				type: type
+		 ),
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
@@ -53,12 +50,6 @@ class SearchLocationViewModel : ObservableObject {
 		input.send(event)
 	}
 	
-}
-
-extension SearchLocationViewModel {
-	func updateJourneyTimeValue(date : Date){
-		searchLocationDataSource.timeChooserDate = date
-	}
 }
 
 

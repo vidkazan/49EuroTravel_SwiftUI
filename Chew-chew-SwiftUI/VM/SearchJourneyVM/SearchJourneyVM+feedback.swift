@@ -17,21 +17,23 @@ extension SearchJourneyViewModel {
 	
 	func whenLoading() -> Feedback<State, Event> {
 	  Feedback { (state: State) -> AnyPublisher<Event, Never> in
-		  guard case .loadingJourneys = state else { return Empty().eraseToAnyPublisher() }
-		  return self.fetchJourneys()
-			  .map { data in
-				  return Event.onNewJourneysData(data)
-			  }
-			  .catch { error in Just(.onFailedToLoadJourneysData(error))}
-			  .eraseToAnyPublisher()
+		  guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
+		  guard let dep = state.depStop, let arr = state.arrStop else { return Empty().eraseToAnyPublisher() }
+		  return self.fetchJourneys(dep: dep, arr: arr, time: state.timeChooserDate)
+				  .map { data in
+					  return Event.onNewJourneysData(data)
+				  }
+				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+				  .eraseToAnyPublisher()
 	  }
 	}
 	
+	
 	func whenIdleCheckForSufficientDataForJourneyRequest() -> Feedback<State, Event> {
 	  Feedback { (state: State) -> AnyPublisher<Event, Never> in
-		  guard case .idle = state else { return Empty().eraseToAnyPublisher() }
-		  print(">> feedback : check for data")
-		  guard self.depStop != nil && self.arrStop != nil else { return Empty().eraseToAnyPublisher() }
+		  guard case .idle = state.status else { return Empty().eraseToAnyPublisher() }
+		  print(">> feedback : check for data",state.arrStop,state.depStop)
+		  guard state.depStop != nil && state.arrStop != nil else { return Empty().eraseToAnyPublisher() }
 				return Just(Event.onJourneyDataUpdated)
 			  .eraseToAnyPublisher()
 	  }

@@ -58,12 +58,12 @@ extension SearchJourneyViewModel {
 		
 		let sunEventGenerator = SunEventGenerator(
 			locationStart: CLLocationCoordinate2D(
-				latitude: self.depStop?.location?.latitude ?? 0,
-				longitude: self.depStop?.location?.longitude ?? 0
+				latitude: self.state.depStop?.location?.latitude ?? 0,
+				longitude: self.state.depStop?.location?.longitude ?? 0
 			),
 			locationFinal : CLLocationCoordinate2D(
-				latitude: self.arrStop?.location?.latitude ?? 0,
-				longitude: self.arrStop?.location?.longitude ?? 0
+				latitude: self.state.arrStop?.location?.latitude ?? 0,
+				longitude: self.state.arrStop?.location?.longitude ?? 0
 			),
 			dateStart: firstTS,
 			dateFinal: lastTS)
@@ -86,25 +86,22 @@ extension SearchJourneyViewModel {
 		)
 	}
 	
-	func constructJourneysCollectionViewData(){
-		guard let src = self.journeysData else { return }
-		guard let journeys = src.journeys else { return }
+	func constructJourneysCollectionViewData(journeysData : JourneysContainer) -> [JourneyCollectionViewDataSourse] {
+		guard let journeys = journeysData.journeys else { return []}
 		var journeysViewData : [JourneyCollectionViewDataSourse] = []
 		for (index,journey) in journeys.enumerated() {
-			guard let journeyLegs = journey.legs else { return }
-			guard let journeyFirstLeg = journeyLegs.first else { return }
-			guard let journeyLastLeg = journeyLegs.last else { return }
-			guard let firstTimestamp = journeyFirstLeg.departure else { return }
-			guard let lastTimestamp = journeyLastLeg.arrival else { return }
-			guard let firstTS = DateParcer.getDateFromDateString(dateString: firstTimestamp) else { return }
-			guard let lastTS = DateParcer.getDateFromDateString(dateString: lastTimestamp) else { return }
+			guard let journeyLegs = journey.legs else { return []}
+			guard let journeyFirstLeg = journeyLegs.first else { return []}
+			guard let journeyLastLeg = journeyLegs.last else { return []}
+			guard let firstTimestamp = journeyFirstLeg.departure else { return []}
+			guard let lastTimestamp = journeyLastLeg.arrival else { return []}
+			guard let firstTS = DateParcer.getDateFromDateString(dateString: firstTimestamp) else { return []}
+			guard let lastTS = DateParcer.getDateFromDateString(dateString: lastTimestamp) else { return []}
 			if let res = self.constructJourneyCollectionViewData(journey: journey, firstTS: firstTS, lastTS: lastTS,id:index) {
 				journeysViewData.append(res)
 			}
 		}
-		self.resultJourneysCollectionViewDataSourse = AllJourneysCollectionViewDataSourse(
-			journeys: journeysViewData
-		)
+		return journeysViewData
 	}
 }
 

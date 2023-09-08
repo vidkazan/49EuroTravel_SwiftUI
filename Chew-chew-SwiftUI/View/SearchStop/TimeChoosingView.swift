@@ -40,8 +40,7 @@ struct TimeChoosingView: View {
 							case 0:
 								return "now"
 							case 1:
-								return DateParcer.getTimeAndDateStringFromDate(date: viewModel.searchLocationDataSource.timeChooserDate)
-//								return "time"
+							return DateParcer.getTimeAndDateStringFromDate(date: viewModel2.state.timeChooserDate)
 							default:
 								return ""
 							}
@@ -63,10 +62,8 @@ struct TimeChoosingView: View {
 	func optionPressed(_ index: Int) {
 		switch selectedOption {
 		case 0:
-//			viewModel.updateJourneyTimeValue(date: Date.now)
-			viewModel2.send(event: .onNewDate)
+			viewModel2.send(event: .onNewDate(.now))
 		case 1:
-//			viewModel.searchLocationDataSource.isShowingDatePicker = true
 			viewModel2.send(event: .onDatePickerDidPressed)
 		default:
 			break

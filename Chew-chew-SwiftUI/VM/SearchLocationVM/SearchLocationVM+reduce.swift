@@ -8,82 +8,111 @@
 import Foundation
 
 extension SearchLocationViewModel {
-	func transform(_ state: State, _ event: Event){
-//		print(">>> transform")
-		switch event {
-		case .onSearchFieldDidChanged(let string, let type):
-			break
-		case .onDataLoaded(let stops, let type):
-			switch type {
-			case .departure:
-				self.searchLocationDataSource.searchLocationDataDeparture = stops
-			case .arrival:
-				self.searchLocationDataSource.searchLocationDataArrival = stops
-			}
-		case .onDataLoadError(_):
-			break
-		case .onReset(_):
-			self.searchLocationDataSource.searchLocationDataArrival = []
-			self.searchLocationDataSource.searchLocationDataDeparture = []
-		case .onStopDidTap(let stop, let type):
-			switch type {
-			case .departure:
-				topSearchFieldText = stop.name ?? "<^.^>"
-			case .arrival:
-				bottomSearchFieldText = stop.name ?? "<^.^>"
-			}
-			self.searchLocationDataSource.searchLocationDataArrival = []
-			self.searchLocationDataSource.searchLocationDataDeparture = []
-		}
-	}
-}
-
-extension SearchLocationViewModel {
-	func reduce(_ state: State, _ event: Event) -> State {
-		transform(state, event)
+	func reduce(_ state:  State, _ event: Event) -> State {
 		print(":: reduce event:",event.description)
-		switch state {
+		
+		switch state.status {
 		case .idle:
 			switch event {
 			case .onSearchFieldDidChanged(let string, let type):
-				return .loading(string,type)
+				return State(
+					stops: state.stops,
+					previousSearchLineString: state.previousSearchLineString,
+					status: .loading(string, type),
+					type: state.type
+				)
 			default:
 				return state
 			}
 		case .loading:
 			switch event {
-			case .onDataLoaded:
-				return .loaded
+			case .onDataLoaded(let stops, let type):
+				return State(
+					stops: stops,
+					previousSearchLineString: state.previousSearchLineString,
+					status: .loaded,
+					type: type
+				)
 			case .onDataLoadError:
-				return .error
+				return State(
+					stops: [],
+					previousSearchLineString: state.previousSearchLineString,
+					status: .error,
+					type: state.type
+				)
 			case .onSearchFieldDidChanged(let string, let type):
-				return .loading(string,type)
+				return State(
+					stops: state.stops,
+					previousSearchLineString: state.previousSearchLineString,
+					status: .loading(string, type),
+					type: type
+				)
 			case .onReset(_):
-				return .idle
-			case .onStopDidTap(_):
-				return .idle
+				return State(
+					stops: [],
+					previousSearchLineString: "",
+					status: .idle,
+					type: state.type
+				)
+			case .onStopDidTap((_), let type):
+				return State(
+					stops: [],
+					previousSearchLineString: "",
+					status: .idle,
+					type: type
+				)
 			}
 		case .loaded:
 			switch event {
 			case .onSearchFieldDidChanged(let string, let type):
-				return .loading(string,type)
+				return State(
+					stops: state.stops,
+					previousSearchLineString: state.previousSearchLineString,
+					status: .loading(string, type),
+					type: state.type
+				)
 			case .onDataLoaded, .onDataLoadError:
 				return state
-			case .onStopDidTap(_):
-				return .idle
+			case .onStopDidTap((_), let type):
+				return State(
+					stops: [],
+					previousSearchLineString: "",
+					status: .idle,
+					type: state.type
+				)
 			case .onReset(_):
-				return .idle
+				return State(
+					stops: [],
+					previousSearchLineString: "",
+					status: .idle,
+					type: state.type
+				)
 			}
 		case .error:
 			switch event {
 			case .onSearchFieldDidChanged(let string, let type):
-				return .loading(string,type)
-			case .onStopDidTap(_):
-				return .idle
+				return State(
+					stops: state.stops,
+					previousSearchLineString: state.previousSearchLineString,
+					status: .loading(string, type),
+					type: state.type
+				)
+			case .onStopDidTap(let stop, let type):
+				return State(
+					stops: [],
+					previousSearchLineString: "",
+					status: .idle,
+					type: state.type
+				)
 			case .onDataLoaded, .onDataLoadError:
 				return state
 			case .onReset(_):
-				return .idle
+				return State(
+					stops: [],
+					previousSearchLineString: "",
+					status: .idle,
+					type: state.type
+				)
 			}
 		}
 	}

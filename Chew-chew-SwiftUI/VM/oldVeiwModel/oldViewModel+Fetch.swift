@@ -50,12 +50,13 @@ extension OldSearchLocationViewModel {
 		ApiService.fetch([Stop].self,query: query, type: ApiService.Requests.locations(name: text ),requestGroupId: "") { [self] result in
 			switch result {
 			case .success(let res) :
-				switch type {
-				case .departure:
-					self.searchLocationDataSource.searchLocationDataDeparture = res
-				case .arrival:
-					self.searchLocationDataSource.searchLocationDataArrival = res
-				}
+				break
+//				switch type {
+//				case .departure:
+//					self.searchLocationDataSource.searchLocationDataDeparture = res
+//				case .arrival:
+//					self.searchLocationDataSource.searchLocationDataArrival = res
+//				}
 			case .failure(_) :
 				break
 			}

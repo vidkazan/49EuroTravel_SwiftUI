@@ -14,7 +14,7 @@ extension Color {
 
 struct ContentView: View {
 	@EnvironmentObject private var searchJourneyViewModel : SearchJourneyViewModel
-	@EnvironmentObject private var searchStopViewModel : SearchLocationViewModel
+	
 	let solar = Solar(coordinate: .init(
 		latitude: 51.3,
 		longitude: 9.4)
@@ -23,7 +23,7 @@ struct ContentView: View {
 		ZStack {
 			VStack {
 				VStack{
-					SearchStopsView()
+					SearchStopsView(searchStopViewModel: searchJourneyViewModel.state.searchStopViewModel)
 					TimeChoosingView()
 				}
 					.cornerRadius(10)
@@ -32,14 +32,13 @@ struct ContentView: View {
 				JourneyView()
 			}
 				.padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))
-			if searchJourneyViewModel.state == .datePicker {
+			if searchJourneyViewModel.state.status == .datePicker {
 				VStack{
-					DatePickerView(startDat: searchStopViewModel.searchLocationDataSource.timeChooserDate)
+					DatePickerView(startDat: searchJourneyViewModel.state.timeChooserDate)
 					Spacer()
 				}
-//				.transition(.move(edge: .bottom))
-//				.animation(.spring(), value: viewModel.searchLocationDataSource.isShowingDatePicker)
-//				.animation(.spring(), value: viewModel2.state)
+				.transition(.move(edge: .bottom))
+				.animation(.easeInOut, value: searchJourneyViewModel.state.status)
 			}
 		}
 			.background(
@@ -50,9 +49,7 @@ struct ContentView: View {
 					endPoint: UnitPoint(x: 0.5, y: 0.4)
 				)
 			)
-//			.transition(.move(edge: .bottom))
-//			.animation(.spring(), value: viewModel2.state)
-//			.animation(.spring(), value: viewModel.searchLocationDataSource.searchLocationDataDeparture)
-//			.animation(.spring(), value: viewModel.searchLocationDataSource.searchLocationDataArrival)
+			.transition(.move(edge: .bottom))
+			.animation(.spring(), value: searchJourneyViewModel.state.status)
 	}
 }

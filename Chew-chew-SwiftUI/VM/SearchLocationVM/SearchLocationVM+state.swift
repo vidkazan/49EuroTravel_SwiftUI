@@ -8,15 +8,22 @@
 import Foundation
 
 extension SearchLocationViewModel {
-	enum State : Equatable {
-		static func == (lhs: SearchLocationViewModel.State, rhs: SearchLocationViewModel.State) -> Bool {
+	struct State {
+		var stops : [Stop]
+		var previousSearchLineString : String
+		var status : Status
+		var type : LocationDirectionType
+	}
+	
+	enum Status : Equatable {
+		static func == (lhs: SearchLocationViewModel.Status, rhs: SearchLocationViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
 		case idle
 		case loading(String,LocationDirectionType)
 		case loaded
 		case error
-		
+
 		var description : String {
 			switch self {
 			case .idle:

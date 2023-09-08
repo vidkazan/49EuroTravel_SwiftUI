@@ -9,27 +9,21 @@ import Foundation
 import Combine
 
 final class SearchJourneyViewModel : ObservableObject, Identifiable {
+	@Published var topSearchFieldText : String = ""
+	@Published var bottomSearchFieldText : String = ""
 	@Published private(set) var state : State {
 		didSet {
-			print(">> state: ",state.description)
+			print(">> state: ",state.status.description)
 		}
 	}
-	var depStop : Stop?
-	var arrStop : Stop?
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
-	var journeysData : JourneysContainer? {
-		didSet {
-			self.constructJourneysCollectionViewData()
-		}
-	}
-	var resultJourneysCollectionViewDataSourse : AllJourneysCollectionViewDataSourse
+	
 	
 	init() {
-		self.resultJourneysCollectionViewDataSourse = .init(journeys: [])
-		self.state = .idle
+		self.state = State(depStop: nil, arrStop: nil, timeChooserDate: .now, journeys: [], status: .idle)
 		Publishers.system(
-			initial: .idle,
+			initial: State(depStop: nil, arrStop: nil, timeChooserDate: .now, journeys: [], status: .idle),
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
@@ -51,12 +45,12 @@ final class SearchJourneyViewModel : ObservableObject, Identifiable {
 }
 
 extension SearchJourneyViewModel {
-	func fetchJourneys() -> AnyPublisher<JourneysContainer,ApiServiceError> {
+	func fetchJourneys(dep : Stop,arr : Stop,time: Date) -> AnyPublisher<JourneysContainer,ApiServiceError> {
 			var query : [URLQueryItem] = []
 			query = Query.getQueryItems(methods: [
-				Query.departureTime(departureTime: .now),
-				Query.departureStop(departureStopId: self.depStop?.id),
-				Query.arrivalStop(arrivalStopId: self.arrStop?.id),
+				Query.departureTime(departureTime: time),
+				Query.departureStop(departureStopId: dep.id),
+				Query.arrivalStop(arrivalStopId: arr.id),
 
 				Query.national(icTrains: false),
 				Query.nationalExpress(iceTrains: false),

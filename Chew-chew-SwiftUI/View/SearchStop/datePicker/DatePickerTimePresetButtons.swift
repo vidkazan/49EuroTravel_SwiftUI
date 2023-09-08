@@ -12,24 +12,21 @@ struct DatePickerTimePresetButtons: View {
 	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
     var body: some View {
 		Button("now") {
-			viewModel.updateJourneyTimeValue(date: Date.now)
-			viewModel2.send(event: .onNewDate)
+			viewModel2.send(event: .onNewDate(.now))
 		}
 			.padding(7)
 			.foregroundColor(.primary)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
 		Button("15 min") {
-			viewModel.updateJourneyTimeValue(date: Date.now + (15 * 60))
-			viewModel2.send(event: .onNewDate)
+			viewModel2.send(event: .onNewDate(Date.now + (15 * 60)))
 		}
 			.padding(7)
 			.foregroundColor(.primary)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
 		Button("1 hour") {
-			viewModel.updateJourneyTimeValue(date: Date.now + (60 * 60))
-			viewModel2.send(event: .onNewDate)
+			viewModel2.send(event: .onNewDate(Date.now + (60 * 60)))
 		}
 			.padding(7)
 			.foregroundColor(.primary)

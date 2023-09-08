@@ -8,7 +8,7 @@
 import Foundation
 
 class OldSearchLocationViewModel : ObservableObject {
-	@Published var searchLocationDataSource : SearchLocationDataSourse
+//	@Published var searchLocationDataSource : SearchLocationDataSourse
 	
 	var journeySearchData = JourneySearchData()
 	
@@ -22,7 +22,7 @@ class OldSearchLocationViewModel : ObservableObject {
 	
 	init(){
 		self.resultJourneysCollectionViewDataSourse = .init(journeys: [])
-		self.searchLocationDataSource = .init()
+//		self.searchLocationDataSource = .init()
 	}
 }
 
@@ -80,7 +80,7 @@ extension OldSearchLocationViewModel {
 		}
 	}
 	func updateJourneyTimeValue(date : Date){
-		searchLocationDataSource.timeChooserDate = date
+//		searchLocationDataSource.timeChooserDate = date
 //		searchLocationDataSource.isShowingDatePicker = false
 		if journeySearchData.updateSearchTimeData(departureTime: date) == true {
 			self.getJourneys()
