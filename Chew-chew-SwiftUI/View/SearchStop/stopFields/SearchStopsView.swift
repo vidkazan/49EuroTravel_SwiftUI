@@ -36,10 +36,14 @@ struct SearchStopsView: View {
 					.cornerRadius(10)
 					.shadow(radius: 1,y:1)
 				stopList(type: .departure)
+					.transition(.move(edge: .bottom))
+					.animation(.spring(), value: searchStopViewModel.state)
 			}
 			.background(.thinMaterial)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
+			.transition(.move(edge: .bottom))
+			.animation(.spring(), value: searchStopViewModel.state)
 			VStack {
 				HStack {
 					textField(
@@ -56,10 +60,14 @@ struct SearchStopsView: View {
 					.cornerRadius(10)
 					.shadow(radius: 1,y:1)
 				stopList(type: .arrival)
+					.transition(.move(edge: .bottom))
+					.animation(.spring(), value: searchStopViewModel.state)
 			}
 			.background(.thinMaterial)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
+			.transition(.move(edge: .bottom))
+			.animation(.spring(), value: searchStopViewModel.state)
 		}
 	}
 }

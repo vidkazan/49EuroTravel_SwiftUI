@@ -74,6 +74,6 @@ struct DatePickerView: View {
 		.shadow(radius: 1,y:1)
 		.transition(.move(edge: .bottom))
 		.opacity(viewModel2.state.status == .datePicker ? 1 : 0)
-		.animation(.easeInOut, value: viewModel2.state.status)
+		.animation(.spring(), value: viewModel2.state.status)
 	}
 }

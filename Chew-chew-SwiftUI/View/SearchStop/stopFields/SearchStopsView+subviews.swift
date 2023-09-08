@@ -86,11 +86,12 @@ extension SearchStopsView {
 				 }
 			 }
 			 .onChange(of: text, perform: { text in
-					 if focus == true && text.count > 2 {
-						 searchStopViewModel.send(event: .onSearchFieldDidChanged(text,type))
-					 } else {
-						 searchStopViewModel.send(event: .onReset(type))
-					 }
+				 if focus == true && text.count > 2 {
+					 searchStopViewModel.send(event: .onSearchFieldDidChanged(text,type))
+				 }
+				 if focus == false || text.isEmpty {
+					 searchStopViewModel.send(event: .onReset(type))
+				 }
 			 })
 			 .onChange(of: focus, perform: { focused in
 				 if focused == true {
@@ -102,15 +103,15 @@ extension SearchStopsView {
 					 }
 				 }
 			 })
-			 .onChange(of: searchStopViewModel.state.status) { status in
-				if status == .idle {
-					switch searchStopViewModel.state.type {
-					case .departure:
-						self.textTopFieldIsFocused = false
-					case .arrival:
-						self.textBottomFieldIsFocused = false
-					}
-				}
-			}
+//			 .onChange(of: searchStopViewModel.state.status) { status in
+//				if status == .idle {
+//					switch searchStopViewModel.state.type {
+//					case .departure:
+//						self.textTopFieldIsFocused = false
+//					case .arrival:
+//						self.textBottomFieldIsFocused = false
+//					}
+//				}
+//			}
 	}
 }

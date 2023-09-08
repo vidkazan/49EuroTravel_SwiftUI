@@ -10,11 +10,9 @@ import SwiftUI
 @main
 struct Chew_chew_SwiftUIApp: App {
 	@StateObject private var searchJourneyViewModel = SearchJourneyViewModel()
-	@StateObject private var searchStopViewModel = SearchLocationViewModel(type: .departure)
     var body: some Scene {
         WindowGroup {
-            ContentView()
-				.environmentObject(searchStopViewModel)
+			ContentView(searchStopViewModel: searchJourneyViewModel.state.searchStopViewModel)
 				.environmentObject(searchJourneyViewModel)
         }
     }
