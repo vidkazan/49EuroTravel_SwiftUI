@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum LocationDirectionType{
+enum LocationDirectionType :Equatable {
 	case departure
 	case arrival
 	

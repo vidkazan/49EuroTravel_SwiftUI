@@ -8,14 +8,27 @@
 import SwiftUI
 
 struct JourneyScrollViewHeader: View {
+	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
     var body: some View {
 		HStack{
-			FillableButton(text: "Reload")
+			Button("Reload", action: {
+				viewModel2.send(event: .onReloadJourneys)
+			})
+				.foregroundColor(Color.night)
 				.frame(maxWidth: 80)
+				.padding(5)
+				.font(.system(size: 17, weight: .medium))
+				.background(.ultraThinMaterial)
 				.cornerRadius(10)
 			Spacer()
-			FillableButton(text: "Earlier")
+			Button("Earlier", action: {
+				
+			})
+				.foregroundColor(Color.night)
 				.frame(maxWidth: 80)
+				.padding(5)
+				.font(.system(size: 17, weight: .medium))
+				.background(.ultraThinMaterial)
 				.cornerRadius(10)
 		}
 		.padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))

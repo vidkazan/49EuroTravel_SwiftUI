@@ -10,6 +10,8 @@ import Combine
 import SwiftUI
 
 class SearchLocationViewModel : ObservableObject {
+	@FocusState	 var textTopFieldIsFocused : Bool
+	@FocusState	 var textBottomFieldIsFocused: Bool
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	@Published private(set) var state : State {

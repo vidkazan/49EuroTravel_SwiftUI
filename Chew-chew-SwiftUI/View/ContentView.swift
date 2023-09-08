@@ -51,5 +51,6 @@ struct ContentView: View {
 			)
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: searchJourneyViewModel.state.status)
+			.animation(.easeInOut, value: searchJourneyViewModel.state.searchStopViewModel.state)
 	}
 }

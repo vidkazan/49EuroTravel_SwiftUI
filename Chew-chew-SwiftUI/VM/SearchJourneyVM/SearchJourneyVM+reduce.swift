@@ -47,6 +47,14 @@ extension SearchJourneyViewModel {
 							journeys: [],
 							status: .datePicker
 						)
+					case .onStopsSwitch:
+						return State(
+							depStop: state.arrStop,
+							arrStop: state.depStop,
+							timeChooserDate: state.timeChooserDate,
+							journeys: state.journeys,
+							status: .idle
+						)
 					default:
 						return state
 					}
@@ -83,7 +91,7 @@ extension SearchJourneyViewModel {
 							arrStop: state.depStop,
 							timeChooserDate: state.timeChooserDate,
 							journeys: state.journeys,
-							status: .idle
+							status: state.status
 						)
 					case .onNewDeparture(let stop):
 						self.topSearchFieldText = stop?.name ?? "no name"
@@ -130,7 +138,7 @@ extension SearchJourneyViewModel {
 							arrStop: state.depStop,
 							timeChooserDate: state.timeChooserDate,
 							journeys: state.journeys,
-							status: .idle
+							status: state.status
 						)
 					case .onNewArrival(let stop):
 						self.bottomSearchFieldText = stop?.name ?? "no name"
@@ -355,13 +363,7 @@ extension SearchJourneyViewModel {
 					searchStopViewModel: SearchLocationViewModel(type: .departure)
 				)
 			case .onDatePickerDidPressed:
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					timeChooserDate: state.timeChooserDate,
-					journeys: [],
-					status: .datePicker
-				)
+				return State(depStop: state.depStop,arrStop: state.arrStop,timeChooserDate: state.timeChooserDate,journeys: [],status: .datePicker)
 			default:
 				return state
 			}

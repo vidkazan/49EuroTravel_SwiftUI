@@ -11,8 +11,14 @@ struct JourneyScrollViewFooter: View {
     var body: some View {
 		HStack{
 			Spacer()
-			FillableButton(text: "Later")
+			Button("Later", action: {
+				
+			})
+				.foregroundColor(Color.night)
 				.frame(maxWidth: 80)
+				.padding(5)
+				.font(.system(size: 17, weight: .medium))
+				.background(.ultraThinMaterial)
 				.cornerRadius(10)
 		}
 		.padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))

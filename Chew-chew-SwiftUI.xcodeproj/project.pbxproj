@@ -168,6 +168,7 @@
 		7D02CE0D2A97E3B30048ADE6 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
 				7DA8D3462A9A0DDC005DF550 /* SearchStop */,
 				7DA8D3452A9A0DB8005DF550 /* Journey */,
 			);
@@ -177,7 +178,6 @@
 		7D02CE0E2A97E3C00048ADE6 /* App */ = {
 			isa = PBXGroup;
 			children = (
-				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
 				7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */,
 			);
 			path = App;

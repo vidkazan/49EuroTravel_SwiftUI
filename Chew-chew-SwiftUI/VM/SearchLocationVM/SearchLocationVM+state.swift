@@ -8,7 +8,7 @@
 import Foundation
 
 extension SearchLocationViewModel {
-	struct State {
+	struct State : Equatable {
 		var stops : [Stop]
 		var previousSearchLineString : String
 		var status : Status

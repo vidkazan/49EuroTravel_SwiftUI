@@ -74,6 +74,8 @@ extension SearchStopsView {
 	
 	func textField(type : LocationDirectionType,text: String, textBinding: Binding<String>, focusBinding: FocusState<Bool>.Binding,focus: Bool) -> some View {
 		return TextField(type.placeholder, text: textBinding)
+			.font(.system(size: 17,weight: .semibold))
+			.frame(maxWidth: .infinity,alignment: .leading)
 			.focused(focusBinding)
 			 .onTapGesture {
 				 switch type {
@@ -98,10 +100,17 @@ extension SearchStopsView {
 					 case .arrival:
 						 searchJourneyViewModel.send(event: .onArrivalEdit)
 					 }
-					 
 				 }
 			 })
-			 .font(.system(size: 17,weight: .semibold))
-			 .frame(maxWidth: .infinity,alignment: .leading)
+			 .onChange(of: searchStopViewModel.state.status) { status in
+				if status == .idle {
+					switch searchStopViewModel.state.type {
+					case .departure:
+						self.textTopFieldIsFocused = false
+					case .arrival:
+						self.textBottomFieldIsFocused = false
+					}
+				}
+			}
 	}
 }
