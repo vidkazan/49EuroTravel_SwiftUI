@@ -18,7 +18,7 @@ struct LegView: View {
 	var body: some View {
 		GeometryReader { geo in
 			Rectangle()
-				.foregroundColor(Color(uiColor: leg.color))
+				.foregroundColor(leg.delayedAndNextIsNotReachable == true ? Color(hue: 0, saturation: 1, brightness: 0.6) : Color(hue: 0, saturation: 0, brightness: 0.3))
 				.cornerRadius(8)
 				.overlay() {
 					if (Int(geo.size.width / 3) > leg.name.count) {

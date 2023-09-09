@@ -67,7 +67,7 @@ extension SearchJourneyViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
-				journeys: self.constructJourneysCollectionViewData(journeysData: data),
+				journeys: self.constructJourneysViewData(journeysData: data),
 				status: .journeysLoaded
 			)
 		case .onFailedToLoadJourneysData:
@@ -75,7 +75,7 @@ extension SearchJourneyViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
-				journeys: [.init(id: 0, startTimeLabelText: "-", endTimeLabelText: "-", startDate: .now, endDate: .now, durationLabelText: "error", legs: [], sunEvents: [])],
+				journeys: [],
 				status: .failedToLoadJourneys
 			)
 		default:

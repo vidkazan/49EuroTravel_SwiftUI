@@ -66,22 +66,52 @@ struct JourneyHeaderView: View {
 				endPoint: UnitPoint(x: 1, y: 0))
 			.background(.ultraThinMaterial)
 			HStack{
-				Text(journey.startTimeLabelText)
-					.padding(7)
+				Text(journey.startPlannedTimeLabelText)
+					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
 					.font(.system(size: 17,weight: .semibold))
 					.frame(alignment: .leading)
+				Text(journey.startActualTimeLabelText)
+					.font(.system(size: 12,weight: .regular))
+					.frame(alignment: .topLeading)
+					.offset(x:-3,y:-2)
+					.foregroundColor(Color(hue: 0, saturation: 1, brightness: 0.7))
 				Spacer()
 				Text(journey.durationLabelText)
 					.font(.system(size: 12))
-					.padding(7)
 					.frame(alignment: .center)
 				Spacer()
-				Text(journey.endTimeLabelText)
-					.padding(7)
+				Text(journey.endActualTimeLabelText)
+					.font(.system(size: 12,weight: .regular))
+					.frame(alignment: .topTrailing)
+					.offset(x:3,y:-2)
+					.foregroundColor(Color(hue: 0, saturation: 1, brightness: 0.7))
+				Text(journey.endPlannedTimeLabelText)
+					.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
 					.font(.system(size: 17,weight: .semibold))
-					.frame(alignment: .leading)
+					.frame(alignment: .trailing)
 			}
 		}
+		.frame(maxHeight: 40)
 		.cornerRadius(10)
     }
+}
+
+
+struct Previews: PreviewProvider {
+	static var previews: some View {
+		JourneyHeaderView(
+			journey: .init(
+				id: 0,
+				startPlannedTimeLabelText: "11:11",
+				startActualTimeLabelText: "11:12",
+				endPlannedTimeLabelText: "22:23",
+				endActualTimeLabelText: "22:22",
+				startDate: .now,
+				endDate: .now,
+				durationLabelText: "11 h 11 min",
+				legs: [],
+				sunEvents: []
+			)
+		)
+	}
 }

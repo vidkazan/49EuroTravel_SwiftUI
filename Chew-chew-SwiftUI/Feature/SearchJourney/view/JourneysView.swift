@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct JourneyView: View {
+struct JourneysView: View {
 	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
     var body: some View {
 		VStack{
@@ -33,22 +33,12 @@ struct JourneyView: View {
 							if viewModel2.state.status == .journeysLoaded {
 								JourneyScrollViewHeader()
 									.id(-1)
-								ForEach(viewModel2.state.journeys) { (journey) in
-									VStack {
-										JourneyHeaderView(journey: journey)
-										LegsView(journey : journey)
-										BadgesView(badges: [.dticket])
-									}
-									.id(journey.id)
-									.background(.ultraThinMaterial)
-									.cornerRadius(10)
-									.padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
-									.shadow(radius: 1,y:1)
-									.frame(maxWidth: .infinity)
-									.onAppear{
-										proxy.scrollTo(0,anchor: .top)
-									}
+								ForEach(viewModel2.state.journeys) { journey in
+									JourneyCell(journey: journey)
 								} // forEach
+								.onAppear{
+									proxy.scrollTo(0,anchor: .top)
+								}
 								JourneyScrollViewFooter()
 							}
 						} // scroll view

@@ -72,7 +72,7 @@ extension SearchJourneyViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
-				journeys: [.init(id: 0, startTimeLabelText: "-", endTimeLabelText: "-", startDate: .now, endDate: .now, durationLabelText: "journey details", legs: [], sunEvents: [])],
+				journeys: [],
 				status: .journeyDetails
 			)
 		default:

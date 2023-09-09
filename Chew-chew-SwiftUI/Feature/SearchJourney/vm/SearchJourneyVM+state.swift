@@ -15,7 +15,15 @@ extension SearchJourneyViewModel {
 		var journeys : [JourneyCollectionViewDataSourse]
 		var status : Status
 		let searchStopViewModel : SearchLocationViewModel
-		init(depStop: Stop? = nil, arrStop: Stop? = nil, timeChooserDate: Date, journeys: [JourneyCollectionViewDataSourse], status: Status, searchStopViewModel: SearchLocationViewModel = .init(type: .departure)) {
+		
+		init(
+			depStop: Stop? = nil,
+			arrStop: Stop? = nil,
+			timeChooserDate: Date,
+			journeys: [JourneyCollectionViewDataSourse],
+			status: Status,
+			searchStopViewModel: SearchLocationViewModel = .init(type: .departure)
+		) {
 			self.depStop = depStop
 			self.arrStop = arrStop
 			self.timeChooserDate = timeChooserDate

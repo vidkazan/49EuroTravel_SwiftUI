@@ -74,13 +74,15 @@ struct LegViewDataSourse : Equatable,Identifiable {
 	let name : String
 	let legTopPosition : Double
 	let legBottomPosition : Double
-	var color : UIColor
+	var delayedAndNextIsNotReachable : Bool?
 }
 
 struct JourneyCollectionViewDataSourse : Equatable, Identifiable {
 	let id : Int
-	let startTimeLabelText : String
-	let endTimeLabelText : String
+	let startPlannedTimeLabelText : String
+	let startActualTimeLabelText : String
+	let endPlannedTimeLabelText : String
+	let endActualTimeLabelText : String
 	let startDate : Date
 	let endDate : Date
 	let durationLabelText : String

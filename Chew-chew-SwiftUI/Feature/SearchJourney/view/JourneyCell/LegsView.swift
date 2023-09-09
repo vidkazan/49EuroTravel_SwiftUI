@@ -23,7 +23,7 @@ struct LegsView: View {
 					LegView(leg: leg)
 						.frame(
 							width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
-							height:25)
+							height:leg.delayedAndNextIsNotReachable == true ? 29 : 25)
 						.position(x:geo.size.width * (leg.legTopPosition + (( leg.legBottomPosition - leg.legTopPosition ) / 2)),y: geo.size.height/2)
 				}
 			}

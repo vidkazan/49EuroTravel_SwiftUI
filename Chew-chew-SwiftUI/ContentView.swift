@@ -29,7 +29,7 @@ struct ContentView: View {
 					.cornerRadius(10)
 					.shadow(radius: 1,y:1)
 					.padding(EdgeInsets(top: 5, leading: 5, bottom: 0, trailing: 5))
-				JourneyView()
+				JourneysView()
 					.transition(.move(edge: .bottom))
 					.animation(.spring(), value: searchJourneyViewModel.state.status)
 					.animation(.spring(), value: searchJourneyViewModel.state.searchStopViewModel.state)
