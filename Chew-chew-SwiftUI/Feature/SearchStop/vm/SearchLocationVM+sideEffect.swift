@@ -27,3 +27,16 @@ extension SearchLocationViewModel {
 	  }
 	}
 }
+
+
+extension SearchLocationViewModel {
+	static func fetchLocations(text : String, type : LocationDirectionType) -> AnyPublisher<[Stop],ApiServiceError> {
+		var query : [URLQueryItem] = []
+		query = Query.getQueryItems(methods: [
+			Query.location(location: text),
+			Query.results(max: 5)
+		])
+		return ApiService.fetchCombine([Stop].self,query: query, type: ApiService.Requests.locations(name: text ), requestGroupId: "")
+	}
+}
+

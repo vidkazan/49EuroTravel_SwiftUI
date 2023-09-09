@@ -21,19 +21,15 @@ class SearchLocationViewModel : ObservableObject {
 	}
 	
 	init(type : LocationDirectionType) {
-		self.state = State(
+		let state = State(
 			stops: [],
 			previousSearchLineString: "",
 			status: .idle,
 			type: type
 		)
+		self.state = state
 		Publishers.system(
-			initial: State(
-				stops: [],
-				previousSearchLineString: "",
-				status: .idle,
-				type: type
-		 ),
+			initial: state,
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
@@ -52,16 +48,4 @@ class SearchLocationViewModel : ObservableObject {
 		input.send(event)
 	}
 	
-}
-
-
-extension SearchLocationViewModel {
-	static func fetchLocations(text : String, type : LocationDirectionType) -> AnyPublisher<[Stop],ApiServiceError> {
-		var query : [URLQueryItem] = []
-		query = Query.getQueryItems(methods: [
-			Query.location(location: text),
-			Query.results(max: 5)
-		])
-		return ApiService.fetchCombine([Stop].self,query: query, type: ApiService.Requests.locations(name: text ), requestGroupId: "")
-	}
 }

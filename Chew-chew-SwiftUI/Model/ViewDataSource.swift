@@ -100,3 +100,17 @@ struct ResultJourneyViewDataSourse : Equatable {
 	let journeys : [JourneyViewDataSourse]?
 	let timeline : TimelineViewDataSourse?
 }
+
+enum LocationDirectionType :Equatable {
+	case departure
+	case arrival
+	
+	var placeholder : String {
+		switch self {
+		case .departure:
+			return "from"
+		case .arrival:
+			return "to"
+		}
+	}
+}

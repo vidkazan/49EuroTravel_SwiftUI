@@ -8,6 +8,7 @@
 import Foundation
 
 extension SearchLocationViewModel {
+	
 	struct State : Equatable {
 		var stops : [Stop]
 		var previousSearchLineString : String
@@ -22,7 +23,7 @@ extension SearchLocationViewModel {
 		case idle
 		case loading(String,LocationDirectionType)
 		case loaded
-		case error
+		case error(ApiServiceError)
 
 		var description : String {
 			switch self {
@@ -41,7 +42,7 @@ extension SearchLocationViewModel {
 	enum Event {
 		case onSearchFieldDidChanged(String,LocationDirectionType)
 		case onDataLoaded([Stop],LocationDirectionType)
-		case onDataLoadError(Error)
+		case onDataLoadError(ApiServiceError)
 		case onReset(LocationDirectionType)
 		case onStopDidTap(Stop, LocationDirectionType)
 		
