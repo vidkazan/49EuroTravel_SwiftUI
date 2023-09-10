@@ -20,6 +20,9 @@ extension SearchLocationViewModel {
 		  guard case .loading(let string, let type) = state.status else { return Empty().eraseToAnyPublisher() }
 		  return SearchLocationViewModel.fetchLocations(text: string, type: type)
 			  .map { stops in
+				  if stops.isEmpty {
+					  return Event.onDataLoadError(ApiServiceError.stopNotFound)
+				  }
 				  return Event.onDataLoaded(stops,type)
 			  }
 			  .catch { error in Just(.onDataLoadError(error)) }
@@ -34,7 +37,9 @@ extension SearchLocationViewModel {
 		var query : [URLQueryItem] = []
 		query = Query.getQueryItems(methods: [
 			Query.location(location: text),
-			Query.results(max: 5)
+			Query.results(max: 5),
+			Query.showAddresses(showAddresses: false),
+			Query.showPointsOfInterests(showPointsOfInterests: false)
 		])
 		return ApiService.fetchCombine([Stop].self,query: query, type: ApiService.Requests.locations(name: text ), requestGroupId: "")
 	}

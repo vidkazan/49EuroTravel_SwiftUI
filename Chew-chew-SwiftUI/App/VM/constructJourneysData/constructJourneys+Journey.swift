@@ -21,8 +21,8 @@ extension SearchJourneyViewModel {
 		guard let legs = journey.legs else { return nil }
 		for (index,leg) in legs.enumerated() {
 			if var res = self.constructLegData(leg: leg, firstTS: firstTSPlanned, lastTS: lastTSPlanned,id: index) {
-				if legsDataSourse.last != nil && modifyLegColorDependingOnDelays(currentLeg: res, previousLeg: legsDataSourse.last) {
-					legsDataSourse[legsDataSourse.count-1].delayedAndNextIsNotReachable = true
+				if legsDataSourse.last != nil && currentLegIsReachable(currentLeg: res, previousLeg: legsDataSourse.last) {
+					res.delayedAndNextIsNotReachable = true
 				}
 				legsDataSourse.append(res)
 			}
@@ -53,7 +53,7 @@ extension SearchJourneyViewModel {
 					date1: firstTSActual,
 					date2: lastTSActual)
 			) ?? "error",
-			legs: legsDataSourse,
+			legs: legsDataSourse.reversed(),
 			sunEvents: sunEventGenerator.getSunEvents()
 		)
 	}

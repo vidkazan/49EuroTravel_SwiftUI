@@ -29,20 +29,19 @@ extension SearchStopsView {
 					searchJourneyViewModel.topSearchFieldText = searchJourneyViewModel.bottomSearchFieldText
 					searchJourneyViewModel.bottomSearchFieldText = tmp
 				}
-				
-			},
-			label: {
-					switch searchStopViewModel.state.status {
-					case .loading:
-						if type == searchStopViewModel.state.type {
-							ProgressView()
-						} else {
-							image
-						}
-					default:
+			}, label: {
+				switch searchStopViewModel.state.status {
+				case .loading:
+					if type == searchStopViewModel.state.type {
+						ProgressView()
+					} else {
 						image
 					}
+				default:
+					image
+				}
 			})
-				.foregroundColor(.black)
+			.padding(12)
+			.foregroundColor(.primary)
 	}
 }

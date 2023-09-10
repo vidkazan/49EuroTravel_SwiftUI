@@ -23,8 +23,6 @@ struct JourneyCell: View {
 			.id(journey.id)
 			.background(.ultraThinMaterial)
 			.cornerRadius(10)
-			.padding(EdgeInsets(top: 0, leading: 5, bottom: 5, trailing: 5))
-			.shadow(radius: 1,y:1)
 			.frame(maxWidth: .infinity,maxHeight: 200)
 	}
 }
@@ -46,6 +44,5 @@ struct JourneyCell_Previews: PreviewProvider {
 					sunEvents: []
 			))
 		}
-		.background(.blue)
 	}
 }

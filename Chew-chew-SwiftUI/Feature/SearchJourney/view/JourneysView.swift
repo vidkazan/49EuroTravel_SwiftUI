@@ -16,17 +16,15 @@ struct JourneysView: View {
 			case .loadingJourneys:
 				Spacer()
 				JourneyScrollViewLoader()
-				Spacer()
 			case .journeysLoaded:
 				switch viewModel2.state.journeys.isEmpty {
 				case true:
 					Spacer()
 					Text("connections not found")
 						.padding(5)
-						.foregroundColor(.black.opacity(0.7))
+						.foregroundColor(.secondary)
 						.font(.system(size: 17,weight: .semibold))
 						.frame(maxWidth: .infinity,alignment: .center)
-					Spacer()
 				case false:
 					ScrollViewReader { proxy in
 						ScrollView(showsIndicators: false)  {
@@ -35,27 +33,33 @@ struct JourneysView: View {
 									.id(-1)
 								ForEach(viewModel2.state.journeys) { journey in
 									JourneyCell(journey: journey)
-								} // forEach
+								}
 								.onAppear{
 									proxy.scrollTo(0,anchor: .top)
 								}
 								JourneyScrollViewFooter()
 							}
-						} // scroll view
-					} // scrollViewReader
+						}
+					}
 					.transition(.move(edge: .bottom))
 					.animation(.interactiveSpring(), value: viewModel2.state.status)
 				}
 				
 			case .idle,.editingDepartureStop,.editingArrivalStop,.datePicker,.journeyDetails:
-				Spacer()
+				EmptyView()
 			case .failedToLoadJourneys:
-				Text("failed to load journeys")
 				Spacer()
+				Text("failed to load journeys")
+					.padding(5)
+					.foregroundColor(.secondary)
+					.font(.system(size: 17,weight: .semibold))
+					.frame(maxWidth: .infinity,alignment: .center)
 			}
-		} // VStack
+			Spacer()
+		}
 		.transition(.move(edge: .bottom))
-		.animation(.interactiveSpring(), value: viewModel2.state.status)
+		.animation(.spring(), value: viewModel2.state.status)
+		.animation(.spring(), value: viewModel2.state.searchStopViewModel.state)
 		.frame(maxWidth: .infinity)
 		.cornerRadius(10)
     }

@@ -38,7 +38,7 @@ extension SearchJourneyViewModel {
 		return res
 	}
 	
-	func modifyLegColorDependingOnDelays(currentLeg: LegViewDataSourse?, previousLeg: LegViewDataSourse?) -> Bool{
+	func currentLegIsReachable(currentLeg: LegViewDataSourse?, previousLeg: LegViewDataSourse?) -> Bool {
 		guard let currentLeg = currentLeg, let previousLeg = previousLeg else { return false }
 		return previousLeg.legBottomPosition > currentLeg.legTopPosition
 	}

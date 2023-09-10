@@ -9,19 +9,22 @@ import SwiftUI
 
 struct TimeChoosingView: View {
 	@EnvironmentObject var viewModel2 : SearchJourneyViewModel
+	@ObservedObject var searchStopViewModel : SearchLocationViewModel
 	@State private var selectedOption = 0
 	private var datePickerIsShowing = false
 	private var options = ["now","date"]
    
+	init(searchStopViewModel: SearchLocationViewModel) {
+		self.searchStopViewModel = searchStopViewModel
+	}
 	var body: some View {
 		ZStack {
 			Rectangle()
-				.fill(.regularMaterial)
+				.fill(.thinMaterial)
 				.frame(
 					width: UIScreen.main.bounds.width / 2.15,
 					height: 36)
 				.cornerRadius(8)
-				.shadow(radius: 1,y: 1)
 				.padding(4)
 				.offset(
 					x: (selectedOption != 0) ?
@@ -47,7 +50,7 @@ struct TimeChoosingView: View {
 						Text(text)
 							.frame(width: UIScreen.main.bounds.width / 2.25)
 							.font(.system(size: 17,weight: selectedOption == index ? .semibold : .regular))
-							.foregroundColor(selectedOption == index ? .primary : .black)
+							.foregroundColor(selectedOption == index ? .primary : .primary)
 							.cornerRadius(10)
 					}
 				}
@@ -56,6 +59,9 @@ struct TimeChoosingView: View {
 		.frame(maxWidth: .infinity,maxHeight: 43)
 		.background(.thinMaterial)
 		.cornerRadius(10)
+		.transition(.move(edge: .bottom))
+		.animation(.spring(), value: viewModel2.state.status)
+		.animation(.spring(), value: searchStopViewModel.state.status)
 	}
 
 	func optionPressed(_ index: Int) {

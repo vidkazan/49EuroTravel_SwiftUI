@@ -46,7 +46,7 @@ enum Badges : Identifiable {
 				name: price)
 		case .dticket:
 			return BadgeDataSource(
-				color: UIColor(hue: 0.35, saturation: 0, brightness: 0.4, alpha: 1),
+				color: UIColor(hue: 0.35, saturation: 0, brightness: 0.6, alpha: 1),
 				name: "DeutschlandTicket")
 		case .cancelled:
 			return BadgeDataSource(

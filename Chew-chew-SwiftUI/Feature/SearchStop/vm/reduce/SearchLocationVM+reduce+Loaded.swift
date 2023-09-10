@@ -25,7 +25,7 @@ extension SearchLocationViewModel {
 				stops: [],
 				previousSearchLineString: "",
 				status: .idle,
-				type: state.type
+				type: type
 			)
 		case .onReset(_):
 			return State(

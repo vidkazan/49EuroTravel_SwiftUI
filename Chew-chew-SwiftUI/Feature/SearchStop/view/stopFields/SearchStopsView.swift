@@ -29,23 +29,20 @@ struct SearchStopsView: View {
 						focus: textTopFieldIsFocused
 					)
 					rightButton(type: .departure)
+						.animation(nil, value: searchStopViewModel.state.status)
 				}
-					.padding(10)
-					.background(.ultraThinMaterial)
-					.cornerRadius(10)
-					.shadow(radius: 1,y:1)
+				.background(.ultraThickMaterial)
+				.cornerRadius(10)
 				if searchStopViewModel.state.type == .departure {
 					stopList(type: .departure)
-						.transition(.move(edge: .bottom))
-						.animation(.spring(), value: searchStopViewModel.state)
 				}
 					
 			}
-			.background(.thinMaterial)
+			.background(.ultraThickMaterial)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
-//			.transition(.move(edge: .bottom))
-//			.animation(.spring(), value: searchStopViewModel.state)
+			.transition(.move(edge: .bottom))
+			.animation(.spring(), value: searchStopViewModel.state.status)
 			VStack {
 				HStack {
 					textField(
@@ -57,21 +54,19 @@ struct SearchStopsView: View {
 					)
 					rightButton(type: .arrival)
 				}
-					.padding(10)
-					.background(.ultraThinMaterial)
-					.cornerRadius(10)
-					.shadow(radius: 1,y:1)
+				.background(.ultraThickMaterial)
+				.cornerRadius(10)
 				if searchStopViewModel.state.type == .arrival {
 					stopList(type: .arrival)
-						.transition(.move(edge: .bottom))
-						.animation(.spring(), value: searchStopViewModel.state)
+					.transition(.move(edge: .bottom))
+					.animation(.spring(), value: searchStopViewModel.state.status)
 				}
 			}
-			.background(.thinMaterial)
+			.background(.ultraThickMaterial)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
-//			.transition(.move(edge: .bottom))
-//			.animation(.spring(), value: searchStopViewModel.state)
+			.transition(.move(edge: .bottom))
+			.animation(.spring(), value: searchStopViewModel.state.status)
 		}
 	}
 }

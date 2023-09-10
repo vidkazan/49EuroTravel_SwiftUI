@@ -9,8 +9,6 @@ import Foundation
 import SwiftUI
 
 struct BadgeView : View {
-//	var text : String
-//	var color : Color
 	var badge : Badges
 	init(badge : Badges) {
 		self.badge = badge

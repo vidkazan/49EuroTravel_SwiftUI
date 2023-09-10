@@ -37,6 +37,7 @@ extension SearchJourneyViewModel {
 				status: .idle
 			)
 		case .onDepartureEdit:
+			self.topSearchFieldText = ""
 			return State(
 				depStop: nil,
 				arrStop: state.arrStop,
@@ -46,6 +47,7 @@ extension SearchJourneyViewModel {
 				searchStopViewModel: SearchLocationViewModel(type: .departure)
 			)
 		case .onArrivalEdit:
+			self.bottomSearchFieldText = ""
 			return State(
 				depStop: state.depStop,
 				arrStop: nil,

@@ -43,23 +43,3 @@ final class SearchJourneyViewModel : ObservableObject, Identifiable {
 		input.send(event)
 	}
 }
-
-extension SearchJourneyViewModel {
-	func fetchJourneys(dep : Stop,arr : Stop,time: Date) -> AnyPublisher<JourneysContainer,ApiServiceError> {
-			var query : [URLQueryItem] = []
-			query = Query.getQueryItems(methods: [
-				Query.departureTime(departureTime: time),
-				Query.departureStop(departureStopId: dep.id),
-				Query.arrivalStop(arrivalStopId: arr.id),
-
-				Query.national(icTrains: false),
-				Query.nationalExpress(iceTrains: false),
-				Query.regionalExpress(reTrains: false),
-				Query.pretty(pretyIntend: false),
-				Query.taxi(taxi: false),
-				Query.remarks(showRemarks: true),
-				Query.results(max: 5)
-			])
-			return ApiService.fetchCombine(JourneysContainer.self,query: query, type: ApiService.Requests.journeys, requestGroupId: "")
-	}
-}

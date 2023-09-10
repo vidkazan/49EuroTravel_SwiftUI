@@ -13,8 +13,8 @@ struct JourneyHeaderView: View {
 	var gradientStops : [Gradient.Stop]
 	
 	init(journey: JourneyCollectionViewDataSourse) {
-		let nightColor = Color(hue: 0.57, saturation: 0.7, brightness: 0.8).opacity(0.8)
-		let dayColor = Color(hue: 0.13, saturation: 0.6, brightness: 1).opacity(0.8)
+		let nightColor = Color.blue.opacity(0.5)
+		let dayColor = Color.yellow.opacity(0.5)
 		self.journey = journey
 		self.gradientStops = {
 			var stops : [Gradient.Stop] = []
@@ -60,38 +60,42 @@ struct JourneyHeaderView: View {
 	}
     var body: some View {
 		ZStack {
-			LinearGradient(
-				stops: gradientStops,
-				startPoint: UnitPoint(x: 0, y: 0),
-				endPoint: UnitPoint(x: 1, y: 0))
-			.background(.ultraThinMaterial)
 			HStack{
-				Text(journey.startPlannedTimeLabelText)
-					.foregroundColor(journey.startActualTimeLabelText == "" ? .black : .secondary )
-					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
-					.font(.system(size: 17,weight: .semibold))
-					.frame(alignment: .leading)
-				Text(journey.startActualTimeLabelText)
-					.font(.system(size: 12,weight: .semibold))
-					.frame(alignment: .topLeading)
-					.offset(x:-3,y:-2)
-					.foregroundColor(Color(hue: 0, saturation: 1, brightness: 0.7))
+				HStack{
+					Text(journey.startActualTimeLabelText.isEmpty ? journey.startPlannedTimeLabelText : journey.startActualTimeLabelText)
+						.foregroundColor(
+							journey.startActualTimeLabelText.isEmpty ? .primary : Color(hue: 0, saturation: 1, brightness: 0.8))
+						.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
+						.font(.system(size: 17,weight: .semibold))
+					Text(journey.startActualTimeLabelText.isEmpty ? "" : journey.startPlannedTimeLabelText)
+						.strikethrough()
+						.foregroundColor(.secondary)
+						.font(.system(size: 12,weight: .semibold))
+						.offset(x:-4)
+					Spacer()
+				}
+				.frame(maxWidth: 200)
 				Spacer()
 				Text(journey.durationLabelText)
-					.font(.system(size: 12))
-					.frame(alignment: .center)
-				Spacer()
-				Text(journey.endActualTimeLabelText)
+					.foregroundColor(.primary)
 					.font(.system(size: 12,weight: .semibold))
-					.frame(alignment: .topTrailing)
-					.offset(x:3,y:-2)
-					.foregroundColor(Color(hue: 0, saturation: 1, brightness: 0.7))
-				Text(journey.endPlannedTimeLabelText)
-					.foregroundColor(journey.endActualTimeLabelText == "" ? .black : .secondary )
-					.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
-					.font(.system(size: 17,weight: .semibold))
-					.frame(alignment: .trailing)
+				Spacer()
+				HStack {
+					Spacer()
+					Text(journey.endActualTimeLabelText.isEmpty ? "" : journey.endPlannedTimeLabelText)
+						.strikethrough()
+						.foregroundColor(.secondary)
+						.font(.system(size: 12,weight: .semibold))
+						.offset(x:4)
+					Text(journey.endActualTimeLabelText.isEmpty ? journey.endPlannedTimeLabelText : journey.endActualTimeLabelText)
+						.foregroundColor(journey.endActualTimeLabelText.isEmpty ? .primary : Color(hue: 0, saturation: 1, brightness: 0.8))
+						.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
+						.font(.system(size: 17,weight: .semibold))
+				}
+				.frame(maxWidth: 200)
 			}
+			.background(.ultraThinMaterial)
+			.frame(maxWidth: .infinity)
 		}
 		.frame(maxHeight: 40)
 		.cornerRadius(10)

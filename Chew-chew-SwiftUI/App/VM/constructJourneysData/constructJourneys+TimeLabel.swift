@@ -9,7 +9,7 @@ import Foundation
 
 extension SearchJourneyViewModel {
 	
-	func getTimeLabelPosition(firstTS : Date?, lastTS: Date?, currentTS: Date?) -> Double?{
+	func getTimeLabelPosition(firstTS : Date?, lastTS: Date?, currentTS: Date?) -> Double? {
 		guard let firstTS = firstTS, let lastTS = lastTS, let currentTS = currentTS else { return nil }
 		let fTs = firstTS.timeIntervalSinceReferenceDate
 		let lTs = lastTS.timeIntervalSinceReferenceDate
@@ -22,7 +22,7 @@ extension SearchJourneyViewModel {
 		
 		let cDiff = cTs - fTsExtended
 		
-		return cDiff / diffExtended
+		return cDiff / diffExtended > 0 ? cDiff / diffExtended : 0
 	}
 	
 	private func constructTimelineTimelabelData(firstTS: Date?,lastTS: Date?,currentTS: Date?) -> TimelineTimeLabelDataSourse? {

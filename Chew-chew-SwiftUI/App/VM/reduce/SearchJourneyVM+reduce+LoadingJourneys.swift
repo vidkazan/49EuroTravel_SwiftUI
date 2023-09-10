@@ -1,5 +1,5 @@
 //
-//  SearchJourneyVM+reduce+Idle.swift
+//  SearchJourneyVM+reduce+3.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 09.09.23.
@@ -7,19 +7,37 @@
 
 import Foundation
 
+
 extension SearchJourneyViewModel {
-	func reduceIdle(_ state:  State, _ event: Event) -> State {
-		guard case .idle = state.status else { return state }
+	func reduceLoadingJourneys(_ state:  State, _ event: Event) -> State {
+		guard case .loadingJourneys = state.status else { return state }
 		switch event {
-		case .onJourneyDataUpdated:
+		case .onStopsSwitch:
+			return State(
+				depStop: state.arrStop,
+				arrStop: state.depStop,
+				timeChooserDate: state.timeChooserDate,
+				journeys: state.journeys,
+				status: .idle
+			)
+		case .onResetJourneyView:
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
+				journeys: [],
+				status: .idle
+			)
+		case .onNewDate(let date):
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				timeChooserDate: date,
 				journeys: state.journeys,
-				status: .loadingJourneys
+				status: .idle
 			)
 		case .onDepartureEdit:
+			self.topSearchFieldText = ""
 			return State(
 				depStop: nil,
 				arrStop: state.arrStop,
@@ -29,6 +47,7 @@ extension SearchJourneyViewModel {
 				searchStopViewModel: SearchLocationViewModel(type: .departure)
 			)
 		case .onArrivalEdit:
+			self.bottomSearchFieldText = ""
 			return State(
 				depStop: state.depStop,
 				arrStop: nil,
@@ -45,17 +64,24 @@ extension SearchJourneyViewModel {
 				journeys: [],
 				status: .datePicker
 			)
-		case .onStopsSwitch:
+		case .onNewJourneysData(let data):
 			return State(
-				depStop: state.arrStop,
-				arrStop: state.depStop,
+				depStop: state.depStop,
+				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
-				journeys: state.journeys,
-				status: .idle
+				journeys: self.constructJourneysViewData(journeysData: data),
+				status: .journeysLoaded
+			)
+		case .onFailedToLoadJourneysData:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				timeChooserDate: state.timeChooserDate,
+				journeys: [],
+				status: .failedToLoadJourneys
 			)
 		default:
 			return state
 		}
 	}
 }
-

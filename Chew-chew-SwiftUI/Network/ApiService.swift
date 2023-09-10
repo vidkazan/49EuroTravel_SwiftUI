@@ -24,7 +24,6 @@ class ApiService  {
 	enum Requests {
 		case journeys
 		case locations(name : String)
-//		case stopDepartures(stopId : Int)
 		case customGet(path : String)
 		
 		var description : String {
@@ -173,7 +172,6 @@ class ApiService  {
 		query : [URLQueryItem],
 		type : Requests
 	) -> AnyPublisher<T, ApiServiceError> {
-		let now = Date.now
 		guard let url = generateUrl(query: query, type: type) else {
 			let subject = Future<T,ApiServiceError> { promise in
 				return promise(.failure(.badUrl))
@@ -227,7 +225,7 @@ class ApiService  {
 					case -999:
 						break
 					default:
-						completed(.failure(.cannotConnectToHost(string: error.localizedDescription)))
+						completed(.failure(.cannotConnectToHost(error.localizedDescription)))
 					}
 					print(">",Date.now.timeIntervalSince1970,type.description,query,"error Connect to HOST")
 					set[type.index].1 = nil

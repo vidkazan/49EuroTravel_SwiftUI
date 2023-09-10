@@ -16,14 +16,14 @@ struct LegsView: View {
 		GeometryReader { geo in
 			ZStack {
 				Rectangle()
-					.fill(.regularMaterial)
+					.fill(.ultraThinMaterial)
 					.frame(height:15)
 					.cornerRadius(5)
 				ForEach(journey.legs) { leg in
 					LegView(leg: leg)
 						.frame(
 							width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
-							height:leg.delayedAndNextIsNotReachable == true ? 29 : 25)
+							height:leg.delayedAndNextIsNotReachable == true ? 23 : 25)
 						.position(x:geo.size.width * (leg.legTopPosition + (( leg.legBottomPosition - leg.legTopPosition ) / 2)),y: geo.size.height/2)
 				}
 			}

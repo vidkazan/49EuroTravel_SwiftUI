@@ -32,12 +32,12 @@ struct Journey : Decodable {
 	let legs : [Leg]?
 //	let refreshToken : String?
 //	let remarks : [Remark]?
-////	let price : String?
+//	let price : String?
 }
 
 struct JourneysContainer : Decodable {
-//	let earlierRef: String?
-//	let laterRef: String?
+	let earlierRef: String?
+	let laterRef: String?
 	let journeys : [Journey]?
 //	let realtimeDataUpdatedAt: Int64?
 }
