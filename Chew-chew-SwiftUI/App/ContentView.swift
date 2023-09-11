@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
-	@EnvironmentObject private var searchJourneyViewModel : SearchJourneyViewModel
+	@EnvironmentObject private var chewViewModel : ChewViewModel
 	let solar = Solar(coordinate: .init(
 		latitude: 51.3,
 		longitude: 9.4)
@@ -17,16 +17,20 @@ struct ContentView: View {
 	var body: some View {
 		ZStack {
 			VStack {
-				SearchStopsView(searchStopViewModel: searchJourneyViewModel.state.searchStopViewModel)
-				TimeChoosingView(searchStopViewModel: searchJourneyViewModel.state.searchStopViewModel)
-				JourneysView()
+				SearchStopsView(searchStopViewModel: chewViewModel.state.searchStopViewModel)
+				TimeChoosingView(searchStopViewModel: chewViewModel.state.searchStopViewModel)
+				if case .journeys(let vm) = chewViewModel.state.status {
+					JourneysView(journeyViewModel: vm)
+				} else {
+					Spacer()
+				}
 			}
 			.padding(10)
 			.transition(.move(edge: .bottom))
-			.animation(.spring(), value: searchJourneyViewModel.state.status)
-			.animation(.spring(), value: searchJourneyViewModel.state.searchStopViewModel.state.status)
-			if searchJourneyViewModel.state.status == .datePicker {
-				DatePickerView(startDat: searchJourneyViewModel.state.timeChooserDate)
+			.animation(.spring(), value: chewViewModel.state.status)
+			.animation(.spring(), value: chewViewModel.state.searchStopViewModel.state.status)
+			if chewViewModel.state.status == .datePicker {
+				DatePickerView(startDat: chewViewModel.state.timeChooserDate)
 			}
 		}
 		.background( .linearGradient(
@@ -35,6 +39,6 @@ struct ContentView: View {
 			endPoint: UnitPoint(x: 0.5, y: 0.4))
 		)
 		.transition(.move(edge: .bottom))
-		.animation(.spring(), value: searchJourneyViewModel.state.status)
+		.animation(.spring(), value: chewViewModel.state.status)
 	}
 }

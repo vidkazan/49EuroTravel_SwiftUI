@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct Chew_chew_SwiftUIApp: App {
-	@StateObject private var searchJourneyViewModel = SearchJourneyViewModel()
+	@StateObject private var chewJourneyViewModel = ChewViewModel()
     var body: some Scene {
         WindowGroup {
-			ContentView()
-				.environmentObject(searchJourneyViewModel)
+			NavigationView{
+				ContentView()
+					.environmentObject(chewJourneyViewModel)
+			}
         }
     }
 }
