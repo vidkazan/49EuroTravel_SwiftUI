@@ -10,7 +10,7 @@ import UIKit
 import CoreLocation
 
 extension JourneyListViewModel {
-	func constructJourneysViewData(journeysData : JourneysContainer) -> [JourneyCollectionViewDataSourse] {
+	func constructJourneysViewData(journeysData : JourneysContainer,startId : Int = 0) -> [JourneyCollectionViewDataSourse] {
 		guard let journeys = journeysData.journeys else { return []}
 		var journeysViewData : [JourneyCollectionViewDataSourse] = []
 		
@@ -35,7 +35,7 @@ extension JourneyListViewModel {
 				firstTSActual: firstTimestampActualDate,
 				lastTSPlanned:  lastTimestampPlannedDate,
 				lastTSActual: lastTimestampActualDate,
-				id:index
+				id:index + startId
 			) {
 				journeysViewData.append(res)
 			}

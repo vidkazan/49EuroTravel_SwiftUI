@@ -19,29 +19,29 @@ extension JourneyListViewModel {
 	  Feedback {[self] (state: State) -> AnyPublisher<Event, Never> in
 		  guard case .loadingJourneys(let type) = state.status else { return Empty().eraseToAnyPublisher() }
 		  switch type {
-		  case .main:
+		  case .initial:
 			  return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate)
 				  .map { data in
 					  return Event.onNewJourneysData(data,type)
 				  }
 				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
 				  .eraseToAnyPublisher()
-//		  case .earlierRef:
-//			  guard let ref = state.earlierRef else { return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher() }
-//			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
-//				  .map { data in
-//					  return Event.onNewJourneysData(data,type)
-//				  }
-//				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
-//				  .eraseToAnyPublisher()
-//		  case .laterRef:
-//			  guard let ref = state.laterRef else { return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher() }
-//			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
-//				  .map { data in
-//					  return Event.onNewJourneysData(data,type)
-//				  }
-//				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
-//				  .eraseToAnyPublisher()
+		  case .earlierRef:
+			  guard let ref = state.earlierRef else { return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher() }
+			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
+				  .map { data in
+					  return Event.onNewJourneysData(data,type)
+				  }
+				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+				  .eraseToAnyPublisher()
+		  case .laterRef:
+			  guard let ref = state.laterRef else { return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher() }
+			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
+				  .map { data in
+					  return Event.onNewJourneysData(data,type)
+				  }
+				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+				  .eraseToAnyPublisher()
 		  }
 	  }
 	}
@@ -68,7 +68,7 @@ extension JourneyListViewModel {
 			query = Query.getQueryItems(methods: [
 				Query.departureStop(departureStopId: dep.id),
 				Query.arrivalStop(arrivalStopId: arr.id),
-//				type == .earlierRef ? Query.earlierThan(earlierRef: ref) : Query.laterThan(laterRef: ref),
+				type == .earlierRef ? Query.earlierThan(earlierRef: ref) : Query.laterThan(laterRef: ref),
 				Query.national(icTrains: false),
 				Query.nationalExpress(iceTrains: false),
 				Query.regionalExpress(reTrains: false),

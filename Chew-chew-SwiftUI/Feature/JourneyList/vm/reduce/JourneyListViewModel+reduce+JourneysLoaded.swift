@@ -16,22 +16,22 @@ extension JourneyListViewModel {
 				journeys: state.journeys,
 				earlierRef: state.earlierRef,
 				laterRef: state.laterRef,
-				status: .loadingJourneys(.main)
+				status: .loadingJourneys(.initial)
 			)
-//		case .onLaterRef:
-//			return State(
-//				journeys: state.journeys,
-//				earlierRef: state.earlierRef,
-//				laterRef: state.laterRef,
-//				status: .loadingJourneys(.laterRef)
-//			)
-//		case .onEarlierRef:
-//			return State(
-//				journeys: state.journeys,
-//				earlierRef: state.earlierRef,
-//				laterRef: state.laterRef,
-//				status: .loadingJourneys(.earlierRef)
-//			)
+		case .onLaterRef:
+			return State(
+				journeys: state.journeys,
+				earlierRef: state.earlierRef,
+				laterRef: state.laterRef,
+				status: .loadingJourneys(.laterRef)
+			)
+		case .onEarlierRef:
+			return State(
+				journeys: state.journeys,
+				earlierRef: state.earlierRef,
+				laterRef: state.laterRef,
+				status: .loadingJourneys(.earlierRef)
+			)
 		default:
 			return state
 		}

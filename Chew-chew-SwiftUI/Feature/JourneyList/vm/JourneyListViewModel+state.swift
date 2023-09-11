@@ -10,7 +10,7 @@ import Foundation
 extension JourneyListViewModel {
 	
 	struct State {
-		var journeys : [JourneyCollectionViewDataSourse]
+		var journeys :  [JourneyCollectionViewDataSourse]
 		var earlierRef : String?
 		var laterRef : String?
 		var status : Status
@@ -24,9 +24,9 @@ extension JourneyListViewModel {
 	}
 	
 	enum JourneyUpdateType {
-		case main
-//		case earlierRef
-//		case laterRef
+		case initial
+		case earlierRef
+		case laterRef
 	}
 	
 	enum Status : Equatable {

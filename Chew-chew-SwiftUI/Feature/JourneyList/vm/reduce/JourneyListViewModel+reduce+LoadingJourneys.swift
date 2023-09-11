@@ -14,28 +14,27 @@ extension JourneyListViewModel {
 		switch event {
 		case .onNewJourneysData(let data, let type):
 			switch type {
-			case .main:
+			case .initial:
 				return State(
-//					journeys: self.constructJourneysViewData(journeysData: data),
-					journeys: [],
+					journeys: constructJourneysViewData(journeysData: data),
 					earlierRef: data.earlierRef,
 					laterRef: data.laterRef,
 					status: .journeysLoaded
 				)
-//			case .earlierRef:
-//				return State(
-//					journeys: state.journeys + self.constructJourneysViewData(journeysData: data),
-//					earlierRef: data.earlierRef,
-//					laterRef: data.laterRef,
-//					status: .journeysLoaded
-//				)
-//			case .laterRef:
-//				return State(
-//					journeys: self.constructJourneysViewData(journeysData: data) + state.journeys,
-//					earlierRef: data.earlierRef,
-//					laterRef: data.laterRef,
-//					status: .journeysLoaded
-//				)
+			case .earlierRef:
+				return State(
+					journeys: constructJourneysViewData(journeysData: data,startId: state.journeys.count) + state.journeys,
+					earlierRef: data.earlierRef,
+					laterRef: data.laterRef,
+					status: .journeysLoaded
+				)
+			case .laterRef:
+				return State(
+					journeys: state.journeys + constructJourneysViewData(journeysData: data,startId: state.journeys.count) ,
+					earlierRef: data.earlierRef,
+					laterRef: data.laterRef,
+					status: .journeysLoaded
+				)
 			}
 		case .onFailedToLoadJourneysData:
 			return State(

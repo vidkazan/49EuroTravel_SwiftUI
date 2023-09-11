@@ -25,9 +25,9 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 		self.depStop = depStop
 		self.arrStop = arrStop
 		self.timeChooserDate = timeChooserDate
-		self.state = .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys(.main))
+		self.state = .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys(.initial))
 		Publishers.system(
-			initial: .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys(.main)),
+			initial: .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys(.initial)),
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [

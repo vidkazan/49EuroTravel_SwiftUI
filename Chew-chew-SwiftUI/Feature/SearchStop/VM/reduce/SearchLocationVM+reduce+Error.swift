@@ -18,7 +18,7 @@ extension SearchLocationViewModel {
 				status: .loading(string, type),
 				type: state.type
 			)
-		case .onStopDidTap(let stop, let type):
+		case .onStopDidTap:
 			return State(
 				stops: [],
 				previousSearchLineString: "",
