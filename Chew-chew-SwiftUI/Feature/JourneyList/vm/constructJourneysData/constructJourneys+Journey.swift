@@ -14,15 +14,19 @@ extension JourneyListViewModel {
 		firstTSPlanned: Date,
 		firstTSActual: Date,
 		lastTSPlanned: Date,
-		lastTSActual: Date,
-		id : Int
+		lastTSActual: Date
 	) -> JourneyCollectionViewDataSourse? {
+		var isReachable = true
 		var legsDataSourse : [LegViewDataSourse] = []
 		guard let legs = journey.legs else { return nil }
 		for (index,leg) in legs.enumerated() {
+			if leg.reachable == false {
+				isReachable = false
+			}
 			if var res = self.constructLegData(leg: leg, firstTS: firstTSPlanned, lastTS: lastTSPlanned,id: index) {
 				if legsDataSourse.last != nil && currentLegIsReachable(currentLeg: res, previousLeg: legsDataSourse.last) {
 					res.delayedAndNextIsNotReachable = true
+					isReachable = false
 				}
 				legsDataSourse.append(res)
 			}
@@ -54,7 +58,8 @@ extension JourneyListViewModel {
 					date2: lastTSActual)
 			) ?? "error",
 			legs: legsDataSourse.reversed(),
-			sunEvents: sunEventGenerator.getSunEvents()
+			sunEvents: sunEventGenerator.getSunEvents(),
+			isReachable: isReachable
 		)
 	}
 	

@@ -88,6 +88,7 @@ struct JourneyCollectionViewDataSourse : Equatable,Hashable {
 	let durationLabelText : String
 	let legs : [LegViewDataSourse]
 	let sunEvents : [SunEvent]
+	let isReachable : Bool
 }
 
 struct JourneyViewDataSourse : Equatable,Hashable {

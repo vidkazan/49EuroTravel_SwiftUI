@@ -64,7 +64,7 @@ struct JourneyHeaderView: View {
 				HStack{
 					Text(journey.startActualTimeLabelText.isEmpty ? journey.startPlannedTimeLabelText : journey.startActualTimeLabelText)
 						.foregroundColor(
-							journey.startActualTimeLabelText.isEmpty ? .primary : Color(hue: 0, saturation: 1, brightness: 0.8))
+							journey.startActualTimeLabelText.isEmpty ? .primary.opacity(0.85) : Color(hue: 0, saturation: 1, brightness: 0.8))
 						.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
 						.font(.system(size: 17,weight: .semibold))
 					Text(journey.startActualTimeLabelText.isEmpty ? "" : journey.startPlannedTimeLabelText)
@@ -88,16 +88,16 @@ struct JourneyHeaderView: View {
 						.font(.system(size: 12,weight: .semibold))
 						.offset(x:4)
 					Text(journey.endActualTimeLabelText.isEmpty ? journey.endPlannedTimeLabelText : journey.endActualTimeLabelText)
-						.foregroundColor(journey.endActualTimeLabelText.isEmpty ? .primary : Color(hue: 0, saturation: 1, brightness: 0.8))
+						.foregroundColor(journey.endActualTimeLabelText.isEmpty ? .primary.opacity(0.85) : Color(hue: 0, saturation: 1, brightness: 0.8))
 						.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
 						.font(.system(size: 17,weight: .semibold))
 				}
 				.frame(maxWidth: 200)
 			}
-			.background(LinearGradient(
-					stops: gradientStops,
-					startPoint: UnitPoint(x: 0, y: 0),
-					endPoint: UnitPoint(x: 1, y: 0)).opacity(0.25))
+//			.background(LinearGradient(
+//					stops: gradientStops,
+//					startPoint: UnitPoint(x: 0, y: 0),
+//					endPoint: UnitPoint(x: 1, y: 0)).opacity(0.25))
 			.frame(maxWidth: .infinity)
 		}
 		.frame(maxHeight: 40)
@@ -119,7 +119,8 @@ struct Previews: PreviewProvider {
 				endDate: .now,
 				durationLabelText: "11 h 11 min",
 				legs: [],
-				sunEvents: []
+				sunEvents: [],
+				isReachable: true
 			)
 		)
 	}

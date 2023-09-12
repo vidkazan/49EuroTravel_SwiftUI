@@ -32,12 +32,12 @@ extension JourneyListViewModel {
 					status: .journeysLoaded
 				)
 			}
-		case .onFailedToLoadJourneysData:
+		case .onFailedToLoadJourneysData(let err):
 			return State(
 				journeys: state.journeys,
 				earlierRef: state.earlierRef,
 				laterRef: state.laterRef,
-				status: .failedToLoadJourneys
+				status: .failedToLoadJourneys(err)
 			)
 		default:
 			return state

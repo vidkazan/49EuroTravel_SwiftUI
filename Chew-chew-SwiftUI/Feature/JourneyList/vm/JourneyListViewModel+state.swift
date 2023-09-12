@@ -37,7 +37,7 @@ extension JourneyListViewModel {
 		case loadingRef(JourneyUpdateType)
 		case loadingJourneys
 		case journeysLoaded
-		case failedToLoadJourneys
+		case failedToLoadJourneys(ApiServiceError)
 		
 		var description : String {
 			switch self {

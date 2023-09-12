@@ -22,14 +22,14 @@ extension JourneyListViewModel {
 					status: .journeysLoaded
 				)
 			default:
-				return .init(journeys: [], earlierRef: nil, laterRef: nil, status: .failedToLoadJourneys)
+				return state
 			}
-		case .onFailedToLoadJourneysData:
+		case .onFailedToLoadJourneysData(let err):
 			return State(
 				journeys: [],
 				earlierRef: nil,
 				laterRef: nil,
-				status: .failedToLoadJourneys
+				status: .failedToLoadJourneys(err)
 			)
 		default:
 			return state

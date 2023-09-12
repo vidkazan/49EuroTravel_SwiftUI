@@ -19,36 +19,32 @@ struct Leg : Codable {
 	let arrival: String?
 	let plannedArrival: String?
 	let departureDelay,arrivalDelay: Int?
-	//	let reachable: Bool?
+		let reachable: Bool?
 	//	let tripId, direction: String?
 	////	let currentLocation: CurrentLocation
 	//	let arrivalPlatform, plannedArrivalPlatform: String?
 	//	let arrivalPrognosisType: String?
 	//	let departurePlatform, plannedDeparturePlatform, departurePrognosisType: String?
-//	enum CodingKeys: String, CodingKey {
-//		case line = "line"
-//		case departure = "departure"
-//		case plannedDeparture = "plannedDeparture"
-//		case arrival = "arrival"
-// 		case plannedArrival = "plannedArrival"
-//		case departureDelay = "departureDelay"
-//		case arrivalDelay = "arrivalDelay"
-//	 }
 }
 
+struct Price : Codable,Equatable {
+	let amount: Double?
+	let currency : String?
+	let hint : String?
+}
 struct Journey : Codable,Identifiable {
 	let id = UUID()
 	let type : String?
 	let legs : [Leg]?
 //	let refreshToken : String?
 //	let remarks : [Remark]?
-//	let price : String?
+	let price : Price?
 	private enum CodingKeys : String, CodingKey {
 		case type
 		case legs
 //		case refreshToken
 //		case remarks
-//		case price
+		case price
 	}
 }
 

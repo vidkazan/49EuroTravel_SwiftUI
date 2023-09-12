@@ -18,19 +18,12 @@ extension JourneyListViewModel {
 	func whenLoadingJourneys() -> Feedback<State, Event> {
 	  Feedback {(state: State) -> AnyPublisher<Event, Never> in
 		  guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
-//		  switch type {
-//		  case .initial:
-			  return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate)
-				  .map { data in
-					  return Event.onNewJourneysData(data,.initial)
-				  }
-				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
-				  .eraseToAnyPublisher()
-//		  case .earlierRef:
-//			  return  Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
-//		  case .laterRef:
-//			  return  Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
-//		  }
+		  return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate)
+			  .map { data in
+				  return Event.onNewJourneysData(data,.initial)
+			  }
+			  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+			  .eraseToAnyPublisher()
 	  }
 	}
 

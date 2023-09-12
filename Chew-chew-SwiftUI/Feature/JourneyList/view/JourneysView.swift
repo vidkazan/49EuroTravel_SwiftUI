@@ -43,9 +43,9 @@ struct JourneysView: View {
 					.transition(.move(edge: .bottom))
 					.animation(.interactiveSpring(), value: journeyViewModel.state.status)
 				}
-			case .failedToLoadJourneys:
+			case .failedToLoadJourneys(let error):
 				Spacer()
-				Text("failed to load journeys")
+				Text(error.description)
 					.padding(5)
 					.foregroundColor(.secondary)
 					.font(.system(size: 17,weight: .semibold))

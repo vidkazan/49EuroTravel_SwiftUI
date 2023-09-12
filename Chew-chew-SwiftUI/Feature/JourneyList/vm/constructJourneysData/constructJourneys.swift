@@ -34,8 +34,7 @@ extension JourneyListViewModel {
 				firstTSPlanned: firstTimestampPlannedDate,
 				firstTSActual: firstTimestampActualDate,
 				lastTSPlanned:  lastTimestampPlannedDate,
-				lastTSActual: lastTimestampActualDate,
-				id:index + startId
+				lastTSActual: lastTimestampActualDate
 			) {
 				journeysViewData.append(res)
 			}

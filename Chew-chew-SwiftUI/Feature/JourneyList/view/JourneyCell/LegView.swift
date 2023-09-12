@@ -19,12 +19,12 @@ struct LegView: View {
 		GeometryReader { geo in
 			Rectangle()
 				.foregroundColor(
-					leg.delayedAndNextIsNotReachable == true ? Color(hue: 0, saturation: 1, brightness: 0.6) : Color.init(uiColor: .systemGray4))
+					leg.delayedAndNextIsNotReachable == true ? Color(hue: 0, saturation: 1, brightness: 0.4) : Color.init(uiColor: .systemGray5))
 				.cornerRadius(8)
 				.overlay() {
 					if (Int(geo.size.width / 3) > leg.name.count) {
 						Text(leg.name)
-							.foregroundColor(.primary)
+							.foregroundColor(.primary.opacity(0.8))
 							.font(.system(size: 12,weight: .semibold))
 					} else {
 						Text("")
