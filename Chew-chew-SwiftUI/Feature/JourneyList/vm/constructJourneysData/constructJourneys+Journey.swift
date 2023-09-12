@@ -23,7 +23,7 @@ extension JourneyListViewModel {
 			if leg.reachable == false {
 				isReachable = false
 			}
-			if var res = self.constructLegData(leg: leg, firstTS: firstTSPlanned, lastTS: lastTSPlanned,id: index) {
+			if let res = self.constructLegData(leg: leg, firstTS: firstTSPlanned, lastTS: lastTSPlanned,id: index) {
 				if legsDataSourse.last != nil && currentLegIsReachable(currentLeg: res, previousLeg: legsDataSourse.last) {
 					legsDataSourse[legsDataSourse.count-1].delayedAndNextIsNotReachable = true
 					isReachable = false

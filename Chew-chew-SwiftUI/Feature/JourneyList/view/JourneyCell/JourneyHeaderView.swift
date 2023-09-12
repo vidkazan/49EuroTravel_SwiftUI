@@ -13,9 +13,10 @@ struct JourneyHeaderView: View {
 	var gradientStops : [Gradient.Stop]
 	
 	init(journey: JourneyCollectionViewDataSourse) {
-		let nightColor = Color.blue.opacity(0.5)
-		let dayColor = Color.yellow.opacity(0.8)
 		self.journey = journey
+		let nightColor = Color.blue.opacity(0.5)
+		let dayColor = Color.yellow.opacity(0.6)
+
 		self.gradientStops = {
 			var stops : [Gradient.Stop] = []
 			for event in journey.sunEvents {

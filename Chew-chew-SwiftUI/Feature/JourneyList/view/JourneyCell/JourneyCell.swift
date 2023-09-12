@@ -49,7 +49,13 @@ struct JourneyCell_Previews: PreviewProvider {
 					endDate: .now,
 					durationLabelText: "11 h 11 min",
 					legs: [],
-					sunEvents: [],
+					sunEvents: [
+						.init(
+							type: .day,
+							location: .init(latitude: 53, longitude: 6),
+							timeStart: .now,
+							timeFinal: .now
+						)],
 					isReachable: false
 			))
 			.frame(maxHeight: 130)

@@ -14,7 +14,7 @@ extension JourneyListViewModel {
 		guard let journeys = journeysData.journeys else { return []}
 		var journeysViewData : [JourneyCollectionViewDataSourse] = []
 		
-		for (index,journey) in journeys.enumerated() {
+		for journey in journeys {
 			guard let journeyLegs = journey.legs else { return []}
 			guard let journeyFirstLeg = journeyLegs.first else { return []}
 			guard let journeyLastLeg = journeyLegs.last else { return []}
