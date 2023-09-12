@@ -25,7 +25,7 @@ extension JourneyListViewModel {
 			}
 			if var res = self.constructLegData(leg: leg, firstTS: firstTSPlanned, lastTS: lastTSPlanned,id: index) {
 				if legsDataSourse.last != nil && currentLegIsReachable(currentLeg: res, previousLeg: legsDataSourse.last) {
-					res.delayedAndNextIsNotReachable = true
+					legsDataSourse[legsDataSourse.count-1].delayedAndNextIsNotReachable = true
 					isReachable = false
 				}
 				legsDataSourse.append(res)

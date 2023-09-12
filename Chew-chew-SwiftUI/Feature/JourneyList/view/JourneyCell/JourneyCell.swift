@@ -26,7 +26,7 @@ struct JourneyCell: View {
 			.background(.ultraThinMaterial.opacity(0.5))
 			.overlay {
 				if !journey.isReachable {
-					Color(hue: 0, saturation: 0.4, brightness: 0.1,opacity: 0.6).blendMode(.lighten)
+					Color.gray.blendMode(.multiply)
 				}
 			}
 			.cornerRadius(10)
