@@ -14,7 +14,7 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	var timeChooserDate : Date
 	@Published private(set) var state : State {
 		didSet {
-			print(">> journeys state: ",state.status)
+			print(">> journeys state: ",state.status.description)
 		}
 	}
 	private var bag = Set<AnyCancellable>()
@@ -25,14 +25,15 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 		self.depStop = depStop
 		self.arrStop = arrStop
 		self.timeChooserDate = timeChooserDate
-		self.state = .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys(.initial))
+		self.state = .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys)
 		Publishers.system(
-			initial: .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys(.initial)),
+			initial: .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys),
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenLoading(),
+				self.whenLoadingUpdate(),
+				self.whenLoadingJourneys()
 			]
 		)
 			.assign(to: \.state, on: self)

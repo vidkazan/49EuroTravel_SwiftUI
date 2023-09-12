@@ -17,7 +17,7 @@ struct JourneysView: View {
 			case .loadingJourneys:
 				Spacer()
 				JourneyScrollViewLoader()
-			case .journeysLoaded:
+			case .journeysLoaded,.loadingRef:
 				switch journeyViewModel.state.journeys.isEmpty {
 				case true:
 					Spacer()
@@ -27,25 +27,17 @@ struct JourneysView: View {
 						.font(.system(size: 17,weight: .semibold))
 						.frame(maxWidth: .infinity,alignment: .center)
 				case false:
-					ScrollViewReader { proxy in
-						ScrollView(showsIndicators: false)  {
-							if journeyViewModel.state.status == .journeysLoaded {
-								JourneyScrollViewHeader(journeyViewModel: journeyViewModel)
-									.id(-1)
-								ForEach(journeyViewModel.state.journeys) { journey in
-									NavigationLink(destination: {
-										JourneyDetailsView()
-											.environmentObject(chewVM)
-									}, label: {
-										JourneyCell(journey: journey)
-									})
-										
-								}
-								.onAppear{
-									proxy.scrollTo(0,anchor: .top)
-								}
-								JourneyScrollViewFooter(journeyViewModel: journeyViewModel)
+					ScrollView()  {
+						LazyVStack{
+							ForEach(journeyViewModel.state.journeys,id: \.id) { journey in
+								let _ = print(journey.id,"of",journeyViewModel.state.journeys.count)
+								JourneyCell(journey: journey)
 							}
+							ProgressView()
+								.onAppear{
+									journeyViewModel.send(event: .onLaterRef)
+								}
+								.frame(maxHeight: 100)
 						}
 					}
 					.transition(.move(edge: .bottom))

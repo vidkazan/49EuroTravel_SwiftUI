@@ -41,7 +41,7 @@ extension JourneyListViewModel {
 			dateFinal: lastTSPlanned > lastTSActual ? lastTSPlanned : lastTSActual )
 		
 		return JourneyCollectionViewDataSourse(
-			id : id,
+			id : journey.id,
 			startPlannedTimeLabelText: DateParcer.getTimeStringFromDate(date: firstTSPlanned),
 			startActualTimeLabelText: firstTSActual == firstTSPlanned ? "" : DateParcer.getTimeStringFromDate(date: firstTSActual),
 			endPlannedTimeLabelText: DateParcer.getTimeStringFromDate(date: lastTSPlanned),

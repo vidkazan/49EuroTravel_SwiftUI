@@ -82,6 +82,10 @@
 		7DD4A8D62AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD4A8D52AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift */; };
 		7DD4A8D82AAC90C3001AA30C /* SearchLocationVM+reduce+Loaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD4A8D72AAC90C3001AA30C /* SearchLocationVM+reduce+Loaded.swift */; };
 		7DD4A8DA2AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD4A8D92AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift */; };
+		7DE640F02AB079710087FC64 /* JourneyListViewModel+reduce+LoadingUpdate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE640EF2AB079710087FC64 /* JourneyListViewModel+reduce+LoadingUpdate.swift */; };
+		7DE640F32AB0875C0087FC64 /* CombineFeedback in Frameworks */ = {isa = PBXBuildFile; productRef = 7DE640F22AB0875C0087FC64 /* CombineFeedback */; };
+		7DE640F52AB0875C0087FC64 /* CombineFeedbackUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7DE640F42AB0875C0087FC64 /* CombineFeedbackUI */; };
+		7DE640FB2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE640FA2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -177,6 +181,8 @@
 		7DD4A8D52AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Loading.swift"; sourceTree = "<group>"; };
 		7DD4A8D72AAC90C3001AA30C /* SearchLocationVM+reduce+Loaded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Loaded.swift"; sourceTree = "<group>"; };
 		7DD4A8D92AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Error.swift"; sourceTree = "<group>"; };
+		7DE640EF2AB079710087FC64 /* JourneyListViewModel+reduce+LoadingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+reduce+LoadingUpdate.swift"; sourceTree = "<group>"; };
+		7DE640FA2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLOcationCoordinate2D+hash.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,8 +191,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D02CE2A2A97E80D0048ADE6 /* Collections in Frameworks */,
+				7DE640F32AB0875C0087FC64 /* CombineFeedback in Frameworks */,
 				7D02CE2C2A97E80D0048ADE6 /* DequeModule in Frameworks */,
 				7D02CE2E2A97E80D0048ADE6 /* OrderedCollections in Frameworks */,
+				7DE640F52AB0875C0087FC64 /* CombineFeedbackUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,6 +245,7 @@
 				7DAF62A82A9E52FF006F1A17 /* ObservableScrollView.swift */,
 				7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */,
 				7DAF62C12A9E8C2B006F1A17 /* Solar.swift */,
+				7DE640FA2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -247,6 +256,7 @@
 				7D4B1B892AA8CB460096F372 /* JourneyListViewModel+reduce.swift */,
 				7D462D4E2AAC956B00BC0D65 /* JourneyListViewModel+reduce+FailedToLoadJourneys.swift */,
 				7D462D482AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift */,
+				7DE640EF2AB079710087FC64 /* JourneyListViewModel+reduce+LoadingUpdate.swift */,
 				7D462D4A2AAC948700BC0D65 /* JourneyListViewModel+reduce+JourneysLoaded.swift */,
 			);
 			path = reduce;
@@ -540,6 +550,8 @@
 				7D02CE292A97E80D0048ADE6 /* Collections */,
 				7D02CE2B2A97E80D0048ADE6 /* DequeModule */,
 				7D02CE2D2A97E80D0048ADE6 /* OrderedCollections */,
+				7DE640F22AB0875C0087FC64 /* CombineFeedback */,
+				7DE640F42AB0875C0087FC64 /* CombineFeedbackUI */,
 			);
 			productName = "Chew-chew-SwiftUI";
 			productReference = 7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */;
@@ -615,6 +627,7 @@
 			mainGroup = 7D6734A62A96334B00CBE9C1;
 			packageReferences = (
 				7D02CE282A97E80D0048ADE6 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				7DE640F12AB0875C0087FC64 /* XCRemoteSwiftPackageReference "CombineFeedback" */,
 			);
 			productRefGroup = 7D6734B02A96334B00CBE9C1 /* Products */;
 			projectDirPath = "";
@@ -662,6 +675,7 @@
 				7DD4A8DA2AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift in Sources */,
 				7D02CE092A97E32D0048ADE6 /* Model.swift in Sources */,
 				7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */,
+				7DE640FB2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift in Sources */,
 				7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */,
 				7D462D622AACEE2500BC0D65 /* constructJourneys+Leg.swift in Sources */,
 				7D02CE132A97E4700048ADE6 /* DateParcer.swift in Sources */,
@@ -682,6 +696,7 @@
 				7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */,
 				7D462D602AACED6D00BC0D65 /* constructJourneys+Journey.swift in Sources */,
 				7DD4A8D62AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift in Sources */,
+				7DE640F02AB079710087FC64 /* JourneyListViewModel+reduce+LoadingUpdate.swift in Sources */,
 				7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */,
 				7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift in Sources */,
 				7D6734B32A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift in Sources */,
@@ -1067,6 +1082,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		7DE640F12AB0875C0087FC64 /* XCRemoteSwiftPackageReference "CombineFeedback" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/sergdort/CombineFeedback";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.7.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1084,6 +1107,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7D02CE282A97E80D0048ADE6 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		7DE640F22AB0875C0087FC64 /* CombineFeedback */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DE640F12AB0875C0087FC64 /* XCRemoteSwiftPackageReference "CombineFeedback" */;
+			productName = CombineFeedback;
+		};
+		7DE640F42AB0875C0087FC64 /* CombineFeedbackUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7DE640F12AB0875C0087FC64 /* XCRemoteSwiftPackageReference "CombineFeedback" */;
+			productName = CombineFeedbackUI;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

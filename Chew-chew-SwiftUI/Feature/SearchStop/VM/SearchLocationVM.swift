@@ -9,7 +9,10 @@ import Foundation
 import Combine
 import SwiftUI
 
-class SearchLocationViewModel : ObservableObject {
+class SearchLocationViewModel : ObservableObject, Equatable {
+	static func == (lhs: SearchLocationViewModel, rhs: SearchLocationViewModel) -> Bool {
+		return lhs.state == rhs.state
+	}
 	@FocusState	 var textTopFieldIsFocused : Bool
 	@FocusState	 var textBottomFieldIsFocused: Bool
 	private var bag = Set<AnyCancellable>()

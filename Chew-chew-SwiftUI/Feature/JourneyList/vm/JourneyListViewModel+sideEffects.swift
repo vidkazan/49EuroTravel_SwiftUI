@@ -15,17 +15,32 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func whenLoading() -> Feedback<State, Event> {
-	  Feedback {[self] (state: State) -> AnyPublisher<Event, Never> in
-		  guard case .loadingJourneys(let type) = state.status else { return Empty().eraseToAnyPublisher() }
-		  switch type {
-		  case .initial:
+	func whenLoadingJourneys() -> Feedback<State, Event> {
+	  Feedback {(state: State) -> AnyPublisher<Event, Never> in
+		  guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
+//		  switch type {
+//		  case .initial:
 			  return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate)
 				  .map { data in
-					  return Event.onNewJourneysData(data,type)
+					  return Event.onNewJourneysData(data,.initial)
 				  }
 				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
 				  .eraseToAnyPublisher()
+//		  case .earlierRef:
+//			  return  Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
+//		  case .laterRef:
+//			  return  Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
+//		  }
+	  }
+	}
+
+	
+	func whenLoadingUpdate() -> Feedback<State, Event> {
+	  Feedback {[self] (state: State) -> AnyPublisher<Event, Never> in
+		  guard case .loadingRef(let type) = state.status else { return Empty().eraseToAnyPublisher() }
+		  switch type {
+		  case .initial:
+			  return  Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
 		  case .earlierRef:
 			  guard let ref = state.earlierRef else { return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher() }
 			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
@@ -45,7 +60,7 @@ extension JourneyListViewModel {
 		  }
 	  }
 	}
-	
+
 	func fetchJourneys(dep : Stop,arr : Stop,time: Date) -> AnyPublisher<JourneysContainer,ApiServiceError> {
 			var query : [URLQueryItem] = []
 			query = Query.getQueryItems(methods: [

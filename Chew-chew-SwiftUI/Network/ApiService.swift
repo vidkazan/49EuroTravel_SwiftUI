@@ -179,7 +179,6 @@ class ApiService  {
 			return subject.eraseToAnyPublisher()
 		}
 		let request = type.getRequest(urlEndPoint: url)
-		print("> api: start:",type,url)
 		return URLSession.shared
 				.dataTaskPublisher(for: request)
 				.tryMap { result -> T in

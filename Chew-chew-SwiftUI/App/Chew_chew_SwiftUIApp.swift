@@ -12,10 +12,8 @@ struct Chew_chew_SwiftUIApp: App {
 	@StateObject private var chewJourneyViewModel = ChewViewModel()
     var body: some Scene {
         WindowGroup {
-			NavigationView{
-				ContentView()
-					.environmentObject(chewJourneyViewModel)
-			}
+			ContentView()
+				.environmentObject(chewJourneyViewModel)
         }
     }
 }

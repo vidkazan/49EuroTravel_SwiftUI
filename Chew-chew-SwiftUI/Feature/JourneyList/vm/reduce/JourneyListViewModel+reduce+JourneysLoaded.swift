@@ -16,21 +16,21 @@ extension JourneyListViewModel {
 				journeys: state.journeys,
 				earlierRef: state.earlierRef,
 				laterRef: state.laterRef,
-				status: .loadingJourneys(.initial)
+				status: .loadingJourneys
 			)
 		case .onLaterRef:
 			return State(
 				journeys: state.journeys,
 				earlierRef: state.earlierRef,
 				laterRef: state.laterRef,
-				status: .loadingJourneys(.laterRef)
+				status: .loadingRef(.laterRef)
 			)
 		case .onEarlierRef:
 			return State(
 				journeys: state.journeys,
 				earlierRef: state.earlierRef,
 				laterRef: state.laterRef,
-				status: .loadingJourneys(.earlierRef)
+				status: .loadingRef(.earlierRef)
 			)
 		default:
 			return state

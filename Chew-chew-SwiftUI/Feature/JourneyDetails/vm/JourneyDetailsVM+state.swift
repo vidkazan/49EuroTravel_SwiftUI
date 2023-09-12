@@ -8,12 +8,9 @@
 import Foundation
 
 extension JourneyDetailsViewModel {
-	struct State {
+	struct State : Equatable {
 		var status : Status
-		
-		init(
-			status: Status
-		) {
+		init(status: Status) {
 			self.status = status
 		}
 	}
@@ -24,7 +21,6 @@ extension JourneyDetailsViewModel {
 		}
 		
 		case idle
-		
 		var description : String {
 			switch self {
 			case .idle:

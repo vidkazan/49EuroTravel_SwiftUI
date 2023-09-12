@@ -21,20 +21,8 @@ extension JourneyListViewModel {
 					laterRef: data.laterRef,
 					status: .journeysLoaded
 				)
-			case .earlierRef:
-				return State(
-					journeys: constructJourneysViewData(journeysData: data,startId: state.journeys.count) + state.journeys,
-					earlierRef: data.earlierRef,
-					laterRef: data.laterRef,
-					status: .journeysLoaded
-				)
-			case .laterRef:
-				return State(
-					journeys: state.journeys + constructJourneysViewData(journeysData: data,startId: state.journeys.count) ,
-					earlierRef: data.earlierRef,
-					laterRef: data.laterRef,
-					status: .journeysLoaded
-				)
+			default:
+				return .init(journeys: [], earlierRef: nil, laterRef: nil, status: .failedToLoadJourneys)
 			}
 		case .onFailedToLoadJourneysData:
 			return State(

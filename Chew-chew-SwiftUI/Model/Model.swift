@@ -9,33 +9,50 @@ import Foundation
 
 // /journeys
 
-struct Leg : Decodable {
-//	let origin : Stop?
-//	let destination : Stop?
+struct Leg : Codable {
+	//	let origin : Stop?
+	//	let destination : Stop?
 	let line : Line?
-//	let remarks : [Remark]?
+	//	let remarks : [Remark]?
 	let departure: String?
 	let plannedDeparture: String?
 	let arrival: String?
 	let plannedArrival: String?
 	let departureDelay,arrivalDelay: Int?
-//	let reachable: Bool?
-//	let tripId, direction: String?
-////	let currentLocation: CurrentLocation
-//	let arrivalPlatform, plannedArrivalPlatform: String?
-//	let arrivalPrognosisType: String?
-//	let departurePlatform, plannedDeparturePlatform, departurePrognosisType: String?
+	//	let reachable: Bool?
+	//	let tripId, direction: String?
+	////	let currentLocation: CurrentLocation
+	//	let arrivalPlatform, plannedArrivalPlatform: String?
+	//	let arrivalPrognosisType: String?
+	//	let departurePlatform, plannedDeparturePlatform, departurePrognosisType: String?
+//	enum CodingKeys: String, CodingKey {
+//		case line = "line"
+//		case departure = "departure"
+//		case plannedDeparture = "plannedDeparture"
+//		case arrival = "arrival"
+// 		case plannedArrival = "plannedArrival"
+//		case departureDelay = "departureDelay"
+//		case arrivalDelay = "arrivalDelay"
+//	 }
 }
 
-struct Journey : Decodable {
+struct Journey : Codable,Identifiable {
+	let id = UUID()
 	let type : String?
 	let legs : [Leg]?
 //	let refreshToken : String?
 //	let remarks : [Remark]?
 //	let price : String?
+	private enum CodingKeys : String, CodingKey {
+		case type
+		case legs
+//		case refreshToken
+//		case remarks
+//		case price
+	}
 }
 
-struct JourneysContainer : Decodable {
+struct JourneysContainer : Codable {
 	let earlierRef: String?
 	let laterRef: String?
 	let journeys : [Journey]?
@@ -43,11 +60,11 @@ struct JourneysContainer : Decodable {
 }
 
 // /locations
-struct Stops : Decodable {
+struct Stops : Codable {
 	let stops : [Stop]
 }
 
-struct Stop : Decodable, Identifiable, Equatable {
+struct Stop : Codable, Identifiable, Equatable {
 	let type	: String?
 	let id		: String?
 	let name	: String?
@@ -57,11 +74,11 @@ struct Stop : Decodable, Identifiable, Equatable {
 
 
 // /departures
-struct Departures : Decodable {
+struct Departures : Codable {
 	let departures : [Departure]
 }
 
-struct Departure : Decodable {
+struct Departure : Codable {
 	let tripId				: String?
 	let stop				: Destination
 	let when				: String?
@@ -82,7 +99,7 @@ struct Departure : Decodable {
 }
 
 // MARK: - Destination
-class Destination : Decodable {
+class Destination : Codable {
 	let type		: String?
 	let id			: String?
 	let name		: String?
@@ -91,7 +108,7 @@ class Destination : Decodable {
 }
 
 // MARK: - Location
-struct Location : Decodable,Equatable {
+struct Location : Codable,Equatable {
 	let type		: String?
 	let id			: String?
 	let latitude	: Double?
@@ -99,7 +116,7 @@ struct Location : Decodable,Equatable {
 }
 
 // MARK: - Products
-struct Products : Decodable, Equatable {
+struct Products : Codable, Equatable {
 	let nationalExpress		: Bool?
 	let national			: Bool?
 	let regionalExpress		: Bool?
@@ -113,7 +130,7 @@ struct Products : Decodable, Equatable {
 }
 
 // MARK: - Line
-struct Line : Decodable {
+struct Line : Codable {
 	let type			: String?
 	let id				: String?
 	let fahrtNr			: String?
@@ -126,13 +143,13 @@ struct Line : Decodable {
 }
 
 // MARK: - Remark
-struct Remark : Decodable {
+struct Remark : Codable {
 	let type	: String?
 	let code	: String?
 	let text	: String?
 }
 
-struct Station : Decodable {
+struct Station : Codable {
 	let EVA_NR			: Int?
 	let DS100			: String?
 	let IFOPT			: String?

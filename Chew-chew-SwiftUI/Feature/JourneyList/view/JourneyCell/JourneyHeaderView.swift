@@ -14,7 +14,7 @@ struct JourneyHeaderView: View {
 	
 	init(journey: JourneyCollectionViewDataSourse) {
 		let nightColor = Color.blue.opacity(0.5)
-		let dayColor = Color.yellow.opacity(0.5)
+		let dayColor = Color.yellow.opacity(0.8)
 		self.journey = journey
 		self.gradientStops = {
 			var stops : [Gradient.Stop] = []
@@ -110,7 +110,7 @@ struct Previews: PreviewProvider {
 	static var previews: some View {
 		JourneyHeaderView(
 			journey: .init(
-				id: 0,
+				id: UUID(),
 				startPlannedTimeLabelText: "11:11",
 				startActualTimeLabelText: "11:12",
 				endPlannedTimeLabelText: "22:23",

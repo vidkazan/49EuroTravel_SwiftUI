@@ -9,7 +9,7 @@ import Foundation
 
 extension JourneyListViewModel {
 	
-	struct State {
+	struct State : Equatable {
 		var journeys :  [JourneyCollectionViewDataSourse]
 		var earlierRef : String?
 		var laterRef : String?
@@ -34,7 +34,8 @@ extension JourneyListViewModel {
 			return lhs.description == rhs.description
 		}
 		
-		case loadingJourneys(JourneyUpdateType)
+		case loadingRef(JourneyUpdateType)
+		case loadingJourneys
 		case journeysLoaded
 		case failedToLoadJourneys
 		
@@ -46,6 +47,8 @@ extension JourneyListViewModel {
 				return "failedToLoadJourneys"
 			case .journeysLoaded:
 				return "journeysLoaded"
+			case .loadingRef:
+				return "loadingRef"
 			}
 		}
 	}

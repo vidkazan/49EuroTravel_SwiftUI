@@ -8,7 +8,7 @@
 import Foundation
 
 extension ChewViewModel {
-	struct State {
+	struct State : Equatable {
 		var depStop : Stop?
 		var arrStop : Stop?
 		var timeChooserDate : Date

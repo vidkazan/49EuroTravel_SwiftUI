@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct BadgeDataSource : Equatable, Identifiable {
+struct BadgeDataSource : Equatable, Identifiable,Hashable {
 	let id = UUID()
 	let color : UIColor
 	let name : String
@@ -19,7 +19,7 @@ struct BadgeDataSource : Equatable, Identifiable {
 	}
 }
 
-enum Badges : Identifiable {
+enum Badges : Identifiable,Hashable {
 	case price(price: String)
 	case dticket
 	case cancelled
@@ -60,16 +60,16 @@ enum Badges : Identifiable {
 	}
 }
 
-struct TimelineTimeLabelDataSourse : Equatable {
+struct TimelineTimeLabelDataSourse : Equatable,Hashable {
 	let text : String
 	let textCenterYposition : Double
 }
 
-struct TimelineViewDataSourse : Equatable {
+struct TimelineViewDataSourse : Equatable,Hashable {
 	let timeLabels : [TimelineTimeLabelDataSourse]
 }
 
-struct LegViewDataSourse : Equatable,Identifiable {
+struct LegViewDataSourse : Equatable,Identifiable,Hashable {
 	let id : Int
 	let name : String
 	let legTopPosition : Double
@@ -77,8 +77,8 @@ struct LegViewDataSourse : Equatable,Identifiable {
 	var delayedAndNextIsNotReachable : Bool?
 }
 
-struct JourneyCollectionViewDataSourse : Equatable, Identifiable {
-	let id : Int
+struct JourneyCollectionViewDataSourse : Equatable,Hashable {
+	let id : UUID
 	let startPlannedTimeLabelText : String
 	let startActualTimeLabelText : String
 	let endPlannedTimeLabelText : String
@@ -90,20 +90,20 @@ struct JourneyCollectionViewDataSourse : Equatable, Identifiable {
 	let sunEvents : [SunEvent]
 }
 
-struct JourneyViewDataSourse : Equatable {
+struct JourneyViewDataSourse : Equatable,Hashable {
 	let legs : [LegViewDataSourse]
 }
 
-struct AllJourneysCollectionViewDataSourse : Equatable{
+struct AllJourneysCollectionViewDataSourse : Equatable,Hashable{
 	let journeys : [JourneyCollectionViewDataSourse]
 }
 
-struct ResultJourneyViewDataSourse : Equatable {
+struct ResultJourneyViewDataSourse : Equatable,Hashable {
 	let journeys : [JourneyViewDataSourse]?
 	let timeline : TimelineViewDataSourse?
 }
 
-enum LocationDirectionType :Equatable {
+enum LocationDirectionType :Equatable, Hashable {
 	case departure
 	case arrival
 	

@@ -20,10 +20,11 @@ struct JourneyCell: View {
 			LegsView(journey : journey)
 			BadgesView(badges: [.dticket])
 		}
-			.id(journey.id)
-			.background(.ultraThinMaterial)
-			.cornerRadius(10)
-			.frame(maxWidth: .infinity,maxHeight: 300)
+		.frame(maxWidth: .infinity,maxHeight: 400)
+		.id(journey.id)
+		.background(.ultraThinMaterial)
+		.cornerRadius(10)
+		
 	}
 }
 
@@ -32,7 +33,7 @@ struct JourneyCell_Previews: PreviewProvider {
 		VStack {
 			JourneyCell(
 				journey: .init(
-					id: 0,
+					id: UUID(),
 					startPlannedTimeLabelText: "11:11",
 					startActualTimeLabelText: "11:12",
 					endPlannedTimeLabelText: "22:22",
