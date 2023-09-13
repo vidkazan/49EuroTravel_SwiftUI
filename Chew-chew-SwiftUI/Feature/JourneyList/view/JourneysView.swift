@@ -30,7 +30,6 @@ struct JourneysView: View {
 					ScrollView()  {
 						LazyVStack{
 							ForEach(journeyViewModel.state.journeys,id: \.id) { journey in
-								let _ = print(journey.id,"of",journeyViewModel.state.journeys.count)
 								JourneyCell(journey: journey)
 							}
 							ProgressView()

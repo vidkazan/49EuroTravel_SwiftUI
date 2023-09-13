@@ -15,7 +15,7 @@ struct BadgeView : View {
 	}
 	var body : some View {
 		switch badge {
-		case .price,.cancelled,.connectionNotReachable:
+		case .price,.cancelled,.connectionNotReachable,.alertFromRemark:
 			Text(badge.badgeDataSourse.name)
 				.font(.system(size: 12))
 				.foregroundColor(.white)

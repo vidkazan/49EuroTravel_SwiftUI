@@ -24,6 +24,7 @@ enum Badges : Identifiable,Hashable {
 	case dticket
 	case cancelled
 	case connectionNotReachable
+	case alertFromRemark
 	 
 	var id : Int {
 		switch self {
@@ -35,6 +36,8 @@ enum Badges : Identifiable,Hashable {
 			return 2
 		case .connectionNotReachable:
 			return 3
+		case .alertFromRemark:
+			return 4
 		}
 	}
 	
@@ -55,7 +58,11 @@ enum Badges : Identifiable,Hashable {
 		case .connectionNotReachable:
 			return BadgeDataSource(
 				color: UIColor(hue: 0, saturation: 1, brightness: 0.7, alpha: 1),
-				name: "connection is not reachable")
+				name: "not reachable")
+		case .alertFromRemark:
+			return BadgeDataSource(
+				color: UIColor(hue: 0, saturation: 1, brightness: 0.7, alpha: 1),
+				name: " ! ")
 		}
 	}
 }
@@ -75,9 +82,10 @@ struct LegViewDataSourse : Equatable,Identifiable,Hashable {
 	let legTopPosition : Double
 	let legBottomPosition : Double
 	var delayedAndNextIsNotReachable : Bool?
+	let remarks : [Remark]?
 }
 
-struct JourneyCollectionViewDataSourse : Equatable,Hashable {
+struct JourneyCollectionViewDataSourse : Equatable {
 	let id : UUID
 	let startPlannedTimeLabelText : String
 	let startActualTimeLabelText : String
@@ -86,16 +94,18 @@ struct JourneyCollectionViewDataSourse : Equatable,Hashable {
 	let startDate : Date
 	let endDate : Date
 	let durationLabelText : String
+	let legDTO : [Leg]?
 	let legs : [LegViewDataSourse]
 	let sunEvents : [SunEvent]
 	let isReachable : Bool
+	let badges : [Badges]
 }
 
 struct JourneyViewDataSourse : Equatable,Hashable {
 	let legs : [LegViewDataSourse]
 }
 
-struct AllJourneysCollectionViewDataSourse : Equatable,Hashable{
+struct AllJourneysCollectionViewDataSourse : Equatable{
 	let journeys : [JourneyCollectionViewDataSourse]
 }
 

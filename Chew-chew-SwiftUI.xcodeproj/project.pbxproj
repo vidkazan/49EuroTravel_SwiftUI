@@ -86,6 +86,7 @@
 		7DE640F32AB0875C0087FC64 /* CombineFeedback in Frameworks */ = {isa = PBXBuildFile; productRef = 7DE640F22AB0875C0087FC64 /* CombineFeedback */; };
 		7DE640F52AB0875C0087FC64 /* CombineFeedbackUI in Frameworks */ = {isa = PBXBuildFile; productRef = 7DE640F42AB0875C0087FC64 /* CombineFeedbackUI */; };
 		7DE640FB2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE640FA2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift */; };
+		7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -183,6 +184,7 @@
 		7DD4A8D92AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Error.swift"; sourceTree = "<group>"; };
 		7DE640EF2AB079710087FC64 /* JourneyListViewModel+reduce+LoadingUpdate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+reduce+LoadingUpdate.swift"; sourceTree = "<group>"; };
 		7DE640FA2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CLLOcationCoordinate2D+hash.swift"; sourceTree = "<group>"; };
+		7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Badges.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +291,7 @@
 				7D462D5D2AACEC5600BC0D65 /* constructJourneys+TimeLabel.swift */,
 				7D462D5F2AACED6D00BC0D65 /* constructJourneys+Journey.swift */,
 				7D462D612AACEE2500BC0D65 /* constructJourneys+Leg.swift */,
+				7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */,
 			);
 			path = constructJourneysData;
 			sourceTree = "<group>";
@@ -711,6 +714,7 @@
 				7D6C5C332AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift in Sources */,
 				7D6C5C2F2AAF792200DEFC57 /* JourneyDetailsVM+state.swift in Sources */,
 				7D4B1B8A2AA8CB460096F372 /* JourneyListViewModel+reduce.swift in Sources */,
+				7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */,
 				7D9E10872AA6752B00820B92 /* SearchStopsView.swift in Sources */,
 				7DAF62B12A9E54E3006F1A17 /* JourneyScrollViewFooter.swift in Sources */,
 				7D6C5C2D2AAF791400DEFC57 /* JourneyDetailsVM+sideEffects.swift in Sources */,

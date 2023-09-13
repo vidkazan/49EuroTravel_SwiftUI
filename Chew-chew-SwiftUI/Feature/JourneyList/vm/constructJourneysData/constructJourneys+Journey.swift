@@ -17,9 +17,12 @@ extension JourneyListViewModel {
 		lastTSActual: Date
 	) -> JourneyCollectionViewDataSourse? {
 		var isReachable = true
+		var remarks : [Remark] = []
 		var legsDataSourse : [LegViewDataSourse] = []
 		guard let legs = journey.legs else { return nil }
+		remarks = journey.remarks ?? .init()
 		for (index,leg) in legs.enumerated() {
+			remarks += leg.remarks ?? .init()
 			if leg.reachable == false {
 				isReachable = false
 			}
@@ -56,10 +59,11 @@ extension JourneyListViewModel {
 				minutes: DateParcer.getTwoDateIntervalInMinutes(
 					date1: firstTSActual,
 					date2: lastTSActual)
-			) ?? "error",
+			) ?? "error", legDTO: journey.legs,
 			legs: legsDataSourse.reversed(),
 			sunEvents: sunEventGenerator.getSunEvents(),
-			isReachable: isReachable
+			isReachable: isReachable,
+			badges: constructBadges(remarks: remarks,isReachable: isReachable)
 		)
 	}
 	

@@ -19,11 +19,16 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
-	
 	init() {
-		self.state = State(depStop: nil, arrStop: nil, timeChooserDate: .now, status: .idle)
+		self.state = State(
+			depStop: .init(type: "", id: "\(8000274)", name: "Lol", location: nil),
+			arrStop: .init(type: "", id: "\(8006552)", name: "Lol", location: nil),
+			timeChooserDate: .now, status: .idle)
 		Publishers.system(
-			initial: State(depStop: nil, arrStop: nil, timeChooserDate: .now, status: .idle),
+			initial: State(
+				depStop: .init(type: "", id: "\(8000274)", name: "Lol", location: nil),
+				arrStop: .init(type: "", id: "\(8006552)", name: "Lol", location: nil),
+				  timeChooserDate: .now, status: .idle),
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [

@@ -15,22 +15,20 @@ struct JourneyCell: View {
 	}
 	
 	var body: some View {
-		ZStack {
-			VStack {
-				JourneyHeaderView(journey: journey)
-				LegsView(journey : journey)
-				BadgesView(badges: [.dticket])
-			}
-			.frame(maxWidth: .infinity,maxHeight: 400)
-			.id(journey.id)
-			.background(.ultraThinMaterial.opacity(0.5))
-			.overlay {
-				if !journey.isReachable {
-					Color.gray.blendMode(.multiply)
-				}
-			}
-			.cornerRadius(10)
+		VStack {
+			JourneyHeaderView(journey: journey)
+			LegsView(journey : journey)
+			BadgesView(badges: journey.badges)
 		}
+		.frame(maxWidth: .infinity,maxHeight: 400)
+		.id(journey.id)
+		.background(.ultraThinMaterial.opacity(0.5))
+		.overlay {
+			if !journey.isReachable {
+				Color.black.opacity(0.7)
+			}
+		}
+		.cornerRadius(10)
 	}
 }
 
@@ -47,7 +45,7 @@ struct JourneyCell_Previews: PreviewProvider {
 					endActualTimeLabelText: "22:23",
 					startDate: .now,
 					endDate: .now,
-					durationLabelText: "11 h 11 min",
+					durationLabelText: "11 h 11 min", legDTO: [],
 					legs: [],
 					sunEvents: [
 						.init(
@@ -56,7 +54,8 @@ struct JourneyCell_Previews: PreviewProvider {
 							timeStart: .now,
 							timeFinal: .now
 						)],
-					isReachable: false
+					isReachable: true,
+					badges: [.dticket]
 			))
 			.frame(maxHeight: 130)
 			Spacer()

@@ -33,7 +33,8 @@ extension JourneyListViewModel {
 			name: lineName,
 			legTopPosition: actualDeparturePosition < plannedDeparturePosition ? actualDeparturePosition : plannedDeparturePosition,
 			legBottomPosition: actualArrivalPosition < plannedArrivalPosition ? actualArrivalPosition : plannedArrivalPosition,
-			delayedAndNextIsNotReachable: nil
+			delayedAndNextIsNotReachable: nil,
+			remarks: leg.remarks
 		)
 		return res
 	}

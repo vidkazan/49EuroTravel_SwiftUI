@@ -8,14 +8,15 @@
 import SwiftUI
 
 struct LegsView: View {
+	@EnvironmentObject var chewVM : ChewViewModel
 	var journey : JourneyCollectionViewDataSourse
 	var gradientStops : [Gradient.Stop]
 	
 	init(journey: JourneyCollectionViewDataSourse) {
 		self.journey = journey
 		
-		let nightColor = Color(hue: 0.55, saturation: 1, brightness: 0.2)
-		let dayColor = Color(hue: 0.15, saturation: 0.7, brightness: 0.7)
+		let nightColor = Color(hue: 0.58, saturation: 1, brightness: 0.15)
+		let dayColor = Color(hue: 0.12, saturation: 1, brightness: 0.7)
 
 		self.gradientStops = {
 			var stops : [Gradient.Stop] = []
@@ -32,7 +33,7 @@ struct LegsView: View {
 							location: (final.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970) / (journey.endDate.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970)
 						))
 					}
-				case .day:
+					case .day:
 					stops.append(.init(
 						color: dayColor,
 						location: 0
@@ -55,33 +56,49 @@ struct LegsView: View {
 					))
 				}
 			}
-			
 			return stops
 		}()
 
 	}
 	var body: some View {
-		GeometryReader { geo in
-			ZStack {
-				Rectangle()
-//					.fill(.ultraThinMaterial.opacity(0.7))
-					.frame(height:15)
-					.background(LinearGradient(
-							stops: gradientStops,
-							startPoint: UnitPoint(x: 0, y: 0),
-							endPoint: UnitPoint(x: 1, y: 0)).opacity(0.7))
-					.cornerRadius(5)
-				ForEach(journey.legs) { leg in
-					LegView(leg: leg)
-						.frame(
-							width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
-							height:leg.delayedAndNextIsNotReachable == true ? 28 : 25)
-						.position(x:geo.size.width * (leg.legTopPosition + (( leg.legBottomPosition - leg.legTopPosition ) / 2)),y: geo.size.height/2)
-						.opacity(0.9)
+		VStack {
+			GeometryReader { geo in
+				ZStack {
+					Rectangle()
+						.overlay{
+							LinearGradient(
+								stops: gradientStops,
+								startPoint: UnitPoint(x: 0, y: 0),
+								endPoint: UnitPoint(x: 1, y: 0))
+						}
+						.frame(height:15)
+						.cornerRadius(5)
+					ForEach(journey.legs) { leg in
+						LegView(leg: leg)
+							.frame(
+								width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
+								height:leg.delayedAndNextIsNotReachable == true ? 30 : 27)
+							.position(x:geo.size.width * (leg.legTopPosition + (( leg.legBottomPosition - leg.legTopPosition ) / 2)),y: geo.size.height/2)
+							.opacity(0.85)
+					}
 				}
 			}
+			.frame(height:30)
+			if let pl = journey.legDTO?.first?.departurePlatform {
+				HStack {
+					Text(pl)
+						.foregroundColor(pl == journey.legDTO?.first?.plannedDeparturePlatform ? .primary : .red)
+						.font(.system(size: 12,weight: .semibold))
+						.padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
+						.background(Color(red: 0.1255, green: 0.156, blue: 0.4))
+					Text(journey.legDTO?.first?.origin?.name != chewVM.topSearchFieldText ? journey.legDTO?.first?.origin?.name ?? "" : "")
+						.font(.system(size: 12,weight: .semibold))
+						.foregroundColor(.secondary)
+					Spacer()
+				}
+				.padding(4)
+			}
 		}
-		.frame(height:30)
 		.padding(EdgeInsets(top: 5, leading: 7, bottom: 5, trailing: 7))
 	}
 }
