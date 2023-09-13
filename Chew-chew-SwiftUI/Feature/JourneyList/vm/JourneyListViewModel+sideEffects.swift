@@ -18,7 +18,7 @@ extension JourneyListViewModel {
 	func whenLoadingJourneys() -> Feedback<State, Event> {
 	  Feedback {(state: State) -> AnyPublisher<Event, Never> in
 		  guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
-		  return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate)
+		  return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date)
 			  .map { data in
 				  return Event.onNewJourneysData(data,.initial)
 			  }

@@ -18,7 +18,6 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 		
-	
 	init() {
 		self.state = .init(status: .idle)
 		Publishers.system(

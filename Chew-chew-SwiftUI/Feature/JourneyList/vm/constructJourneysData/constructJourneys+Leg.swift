@@ -11,6 +11,7 @@ import UIKit
 extension JourneyListViewModel {
 	
 	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int) -> LegViewDataSourse? {
+		print("leg", leg.line?.name!)
 		guard
 			let plannedDepartureTSString = leg.plannedDeparture,
 			let plannedArrivalTSString = leg.plannedArrival,
@@ -23,7 +24,7 @@ extension JourneyListViewModel {
 		let actualDepartureTS = DateParcer.getDateFromDateString(dateString: actualDepartureTSString)
 		let actualArrivalTS = DateParcer.getDateFromDateString(dateString: actualArrivalTSString)
 		
-		guard let plannedDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,currentTS: plannedDepartureTS),
+		guard let plannedDeparturePosition = getTimeLabelPosition(firstTS: firstTS, lastTS: lastTS,currentTS: plannedDepartureTS),
 			  let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: actualDepartureTS),
 			  let plannedArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: plannedArrivalTS),
 			  let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: actualArrivalTS) else { return nil }
@@ -31,15 +32,15 @@ extension JourneyListViewModel {
 		let res = LegViewDataSourse(
 			id: id,
 			name: lineName,
-			legTopPosition: actualDeparturePosition < plannedDeparturePosition ? actualDeparturePosition : plannedDeparturePosition,
-			legBottomPosition: actualArrivalPosition < plannedArrivalPosition ? actualArrivalPosition : plannedArrivalPosition,
+			legTopPosition: max(plannedDeparturePosition,actualDeparturePosition),
+			legBottomPosition: max(plannedArrivalPosition,actualArrivalPosition),
 			delayedAndNextIsNotReachable: nil,
 			remarks: leg.remarks
 		)
 		return res
 	}
 	
-	func currentLegIsReachable(currentLeg: LegViewDataSourse?, previousLeg: LegViewDataSourse?) -> Bool {
+	func currentLegIsNotReachable(currentLeg: LegViewDataSourse?, previousLeg: LegViewDataSourse?) -> Bool {
 		guard let currentLeg = currentLeg, let previousLeg = previousLeg else { return false }
 		return previousLeg.legBottomPosition > currentLeg.legTopPosition
 	}

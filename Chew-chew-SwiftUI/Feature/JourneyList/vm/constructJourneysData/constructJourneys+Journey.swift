@@ -19,22 +19,23 @@ extension JourneyListViewModel {
 		var isReachable = true
 		var remarks : [Remark] = []
 		var legsDataSourse : [LegViewDataSourse] = []
+		let startTS = max(firstTSActual, firstTSPlanned)
+		let endTS = max(lastTSActual,lastTSPlanned)
 		guard let legs = journey.legs else { return nil }
-		remarks = journey.remarks ?? .init()
+		remarks = journey.remarks ?? []
 		for (index,leg) in legs.enumerated() {
 			remarks += leg.remarks ?? .init()
 			if leg.reachable == false {
 				isReachable = false
 			}
-			if let res = self.constructLegData(leg: leg, firstTS: firstTSPlanned, lastTS: lastTSPlanned,id: index) {
-				if legsDataSourse.last != nil && currentLegIsReachable(currentLeg: res, previousLeg: legsDataSourse.last) {
+			if let res = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: index) {
+				if legsDataSourse.last != nil && currentLegIsNotReachable(currentLeg: res, previousLeg: legsDataSourse.last) {
 					legsDataSourse[legsDataSourse.count-1].delayedAndNextIsNotReachable = true
 					isReachable = false
 				}
 				legsDataSourse.append(res)
 			}
 		}
-		
 		let sunEventGenerator = SunEventGenerator(
 			locationStart: CLLocationCoordinate2D(
 				latitude: depStop.location?.latitude ?? 0,
@@ -44,8 +45,8 @@ extension JourneyListViewModel {
 				latitude: arrStop.location?.latitude ?? 0,
 				longitude: arrStop.location?.longitude ?? 0
 			),
-			dateStart: firstTSPlanned < firstTSActual ? firstTSPlanned : firstTSActual,
-			dateFinal: lastTSPlanned > lastTSActual ? lastTSPlanned : lastTSActual )
+			dateStart: startTS,
+			dateFinal: endTS)
 		
 		return JourneyCollectionViewDataSourse(
 			id : journey.id,

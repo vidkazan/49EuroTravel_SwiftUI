@@ -30,7 +30,7 @@ struct ContentView: View {
 			.animation(.spring(), value: chewViewModel.state.status)
 			.animation(.spring(), value: chewViewModel.state.searchStopViewModel.state.status)
 			if chewViewModel.state.status == .datePicker {
-				DatePickerView(startDat: chewViewModel.state.timeChooserDate)
+				DatePickerView(startDat: chewViewModel.state.timeChooserDate.date)
 			}
 		}
 		.background( .linearGradient(

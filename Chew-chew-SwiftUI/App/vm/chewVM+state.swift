@@ -8,17 +8,31 @@
 import Foundation
 
 extension ChewViewModel {
+	enum DateType :  Equatable {
+		case now
+		case specificDate(Date)
+		
+		var date : Date {
+			switch self{
+			case .now:
+				return .now
+			case .specificDate(let date):
+				return date
+			}
+		}
+	}
+	
 	struct State : Equatable {
 		var depStop : Stop?
 		var arrStop : Stop?
-		var timeChooserDate : Date
+		var timeChooserDate : DateType
 		var status : Status
 		let searchStopViewModel : SearchLocationViewModel
 		
 		init(
 			depStop: Stop?,
 			arrStop: Stop?,
-			timeChooserDate: Date,
+			timeChooserDate: DateType,
 			status: Status,
 			searchStopViewModel: SearchLocationViewModel = .init(type: .departure)
 		) {
@@ -69,7 +83,7 @@ extension ChewViewModel {
 		case onNewArrival(Stop?)
 		case onResetJourneyView
 		case onStopsSwitch
-		case onNewDate(Date)
+		case onNewDate(DateType)
 		case onJourneyDataUpdated
 		case onBackFromJourneyDetails
 		

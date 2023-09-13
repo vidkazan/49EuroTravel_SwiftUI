@@ -21,15 +21,12 @@ struct TimeChoosingView: View {
 		ZStack {
 			Rectangle()
 				.fill(.ultraThickMaterial)
-				.frame(
-					width: UIScreen.main.bounds.width / 2.15,
-					height: 36)
+				.frame(width: UIScreen.main.bounds.width / 2.15, height: 36)
 				.cornerRadius(8)
 				.padding(4)
-				.offset(
-					x: (selectedOption != 0) ?
-					UIScreen.main.bounds.width / 4.4 :
-						-UIScreen.main.bounds.width / 4.4)
+				.offset(x: (selectedOption != 0) ?
+						UIScreen.main.bounds.width / 4.4 :
+							-UIScreen.main.bounds.width / 4.4)
 				.animation(.spring(response: 0.5), value: selectedOption)
 			HStack(alignment: .top) {
 				ForEach(0..<2) { index in
@@ -42,7 +39,7 @@ struct TimeChoosingView: View {
 							case 0:
 								return "now"
 							case 1:
-							return DateParcer.getTimeAndDateStringFromDate(date: chewVM.state.timeChooserDate)
+							return DateParcer.getTimeAndDateStringFromDate(date: chewVM.state.timeChooserDate.date)
 							default:
 								return ""
 							}

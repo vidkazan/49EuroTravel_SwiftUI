@@ -20,7 +20,6 @@ struct JourneyCell: View {
 			LegsView(journey : journey)
 			BadgesView(badges: journey.badges)
 		}
-		.frame(maxWidth: .infinity,maxHeight: 400)
 		.id(journey.id)
 		.background(.ultraThinMaterial.opacity(0.5))
 		.overlay {

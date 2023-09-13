@@ -351,5 +351,146 @@
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D76B600F-359D-41F3-B804-A4D6F10F6E95"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyList/vm/constructJourneysData/constructJourneys+TimeLabel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "12"
+            endingLineNumber = "12"
+            landmarkName = "getTimeLabelPosition(firstTS:lastTS:currentTS:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "D76B600F-359D-41F3-B804-A4D6F10F6E95 - bfed478e674625db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.JourneyListViewModel.getTimeLabelPosition(firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, currentTS: Swift.Optional&lt;Foundation.Date&gt;) -&gt; Swift.Optional&lt;Swift.Double&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyList/vm/constructJourneysData/constructJourneys+TimeLabel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "376">
+               </Location>
+               <Location
+                  uuid = "D76B600F-359D-41F3-B804-A4D6F10F6E95 - bfed478e674625db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.JourneyListViewModel.getTimeLabelPosition(firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, currentTS: Swift.Optional&lt;Foundation.Date&gt;) -&gt; Swift.Optional&lt;Swift.Double&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyList/vm/constructJourneysData/constructJourneys+TimeLabel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "368">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B01C5306-C428-4FDF-90C8-1ADAB6388C30"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyList/vm/constructJourneysData/constructJourneys+TimeLabel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "getTimeLabelPosition(firstTS:lastTS:currentTS:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "B01C5306-C428-4FDF-90C8-1ADAB6388C30 - bfed478e674625db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.JourneyListViewModel.getTimeLabelPosition(firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, currentTS: Swift.Optional&lt;Foundation.Date&gt;) -&gt; Swift.Optional&lt;Swift.Double&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyList/vm/constructJourneysData/constructJourneys+TimeLabel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "368">
+               </Location>
+               <Location
+                  uuid = "B01C5306-C428-4FDF-90C8-1ADAB6388C30 - bfed478e674625db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.JourneyListViewModel.getTimeLabelPosition(firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, currentTS: Swift.Optional&lt;Foundation.Date&gt;) -&gt; Swift.Optional&lt;Swift.Double&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyList/vm/constructJourneysData/constructJourneys+TimeLabel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "464">
+               </Location>
+               <Location
+                  uuid = "B01C5306-C428-4FDF-90C8-1ADAB6388C30 - bfed478e674625db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.JourneyListViewModel.getTimeLabelPosition(firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, currentTS: Swift.Optional&lt;Foundation.Date&gt;) -&gt; Swift.Optional&lt;Swift.Double&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyList/vm/constructJourneysData/constructJourneys+TimeLabel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "564">
+               </Location>
+               <Location
+                  uuid = "B01C5306-C428-4FDF-90C8-1ADAB6388C30 - bfed478e674625db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.JourneyListViewModel.getTimeLabelPosition(firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, currentTS: Swift.Optional&lt;Foundation.Date&gt;) -&gt; Swift.Optional&lt;Swift.Double&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyList/vm/constructJourneysData/constructJourneys+TimeLabel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "608">
+               </Location>
+               <Location
+                  uuid = "B01C5306-C428-4FDF-90C8-1ADAB6388C30 - bfed478e674625db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.JourneyListViewModel.getTimeLabelPosition(firstTS: Swift.Optional&lt;Foundation.Date&gt;, lastTS: Swift.Optional&lt;Foundation.Date&gt;, currentTS: Swift.Optional&lt;Foundation.Date&gt;) -&gt; Swift.Optional&lt;Swift.Double&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyList/vm/constructJourneysData/constructJourneys+TimeLabel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "1124">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

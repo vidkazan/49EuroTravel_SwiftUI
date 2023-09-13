@@ -54,7 +54,7 @@ struct DatePickerView: View {
 			Spacer()
 			Button("Done") {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
-					chewVM.send(event: .onNewDate(dateCombined))
+					chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
 				} else {
 					chewVM.send(event: .onNewDate(.now))
 				}

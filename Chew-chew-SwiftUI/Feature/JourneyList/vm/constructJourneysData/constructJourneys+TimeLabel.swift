@@ -11,18 +11,10 @@ extension JourneyListViewModel {
 	
 	func getTimeLabelPosition(firstTS : Date?, lastTS: Date?, currentTS: Date?) -> Double? {
 		guard let firstTS = firstTS, let lastTS = lastTS, let currentTS = currentTS else { return nil }
-		let fTs = firstTS.timeIntervalSinceReferenceDate
-		let lTs = lastTS.timeIntervalSinceReferenceDate
-		let cTs = currentTS.timeIntervalSinceReferenceDate
-		let ext = 0.0
-		let fTsExtended = fTs - ext
-		let lTsExtended = lTs + ext
-		
-		let diffExtended = lTsExtended - fTsExtended
-		
-		let cDiff = cTs - fTsExtended
-		
-		return cDiff / diffExtended > 0 ? cDiff / diffExtended : 0
+		let fTs = firstTS.timeIntervalSince1970
+		let lTs = lastTS.timeIntervalSince1970
+		let cTs = currentTS.timeIntervalSince1970
+		return (cTs - fTs) / (lTs - fTs) > 0 ? (cTs - fTs) / (lTs - fTs) : 0
 	}
 	
 	private func constructTimelineTimelabelData(firstTS: Date?,lastTS: Date?,currentTS: Date?) -> TimelineTimeLabelDataSourse? {

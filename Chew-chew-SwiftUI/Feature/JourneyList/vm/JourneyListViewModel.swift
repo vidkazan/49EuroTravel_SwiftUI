@@ -11,7 +11,7 @@ import Combine
 final class JourneyListViewModel : ObservableObject, Identifiable {
 	var depStop : Stop
 	var arrStop : Stop
-	var timeChooserDate : Date
+	var timeChooserDate : ChewViewModel.DateType
 	@Published private(set) var state : State {
 		didSet {
 			print(">> journeys state: ",state.status.description)
@@ -21,7 +21,7 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 		
 	
-	init(depStop: Stop, arrStop: Stop, timeChooserDate: Date) {
+	init(depStop: Stop, arrStop: Stop, timeChooserDate: ChewViewModel.DateType) {
 		self.depStop = depStop
 		self.arrStop = arrStop
 		self.timeChooserDate = timeChooserDate

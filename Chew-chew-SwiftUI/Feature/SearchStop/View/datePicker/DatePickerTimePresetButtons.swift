@@ -19,14 +19,14 @@ struct DatePickerTimePresetButtons: View {
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
 		Button("15 min") {
-			chewVM.send(event: .onNewDate(Date.now + (15 * 60)))
+			chewVM.send(event: .onNewDate(.specificDate(Date.now + (15 * 60))))
 		}
 			.padding(7)
 			.foregroundColor(.primary)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
 		Button("1 hour") {
-			chewVM.send(event: .onNewDate(Date.now + (60 * 60)))
+			chewVM.send(event: .onNewDate(.specificDate(Date.now + (60 * 60))))
 		}
 			.padding(7)
 			.foregroundColor(.primary)
