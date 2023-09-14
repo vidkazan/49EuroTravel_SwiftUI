@@ -9,7 +9,7 @@ import Foundation
 
 extension JourneyListViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
-		print(">> journeys state: ",state.status.description,"event:",event.description)
+		print("🟢🔥 >> journeys event:",event.description)
 		switch state.status {
 		case .loadingJourneys:
 			return reduceLoadingJourneys(state, event)

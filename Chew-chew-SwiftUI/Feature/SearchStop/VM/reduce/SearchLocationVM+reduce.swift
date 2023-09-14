@@ -9,7 +9,7 @@ import Foundation
 
 extension SearchLocationViewModel {
 	func reduce(_ state:  State, _ event: Event) -> State {
-		print(":: reduce event:",event.description)
+		print("🔵🔥 >> stops event:",event.description,"state:",state.status.description)
 		
 		switch state.status {
 		case .idle:
@@ -20,6 +20,10 @@ extension SearchLocationViewModel {
 			return SearchLocationViewModel.reduceLoaded(state, event)
 		case .error:
 			return SearchLocationViewModel.reduceError(state, event)
+//		case .loadingLocation:
+//			return SearchLocationViewModel.reduceLoadingLocation(state, event)
+//		case .loadedUserLocation:
+//			return SearchLocationViewModel.reduceLoadedUserLocationData(state, event)
 		}
 	}
 }

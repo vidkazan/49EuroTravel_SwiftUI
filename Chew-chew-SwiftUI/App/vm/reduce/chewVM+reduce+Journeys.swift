@@ -19,13 +19,13 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
-		case .onResetJourneyView:
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				timeChooserDate: state.timeChooserDate,
-				status: .idle
-			)
+//		case .onResetJourneyView:
+//			return State(
+//				depStop: state.depStop,
+//				arrStop: state.arrStop,
+//				timeChooserDate: state.timeChooserDate,
+//				status: .idle
+//			)
 		case .onNewDate(let date):
 			return State(
 				depStop: state.depStop,
@@ -52,8 +52,28 @@ extension ChewViewModel {
 				searchStopViewModel: SearchLocationViewModel(type: .departure)
 			)
 		case .onDatePickerDidPressed:
-			return State(depStop: state.depStop,arrStop: state.arrStop,timeChooserDate: state.timeChooserDate,status: .datePicker)
-		default:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				timeChooserDate: state.timeChooserDate,
+				status: .datePicker)
+		case .onNewDeparture(_):
+			return state
+		case .onNewArrival(_):
+			return state
+		case .onJourneyDataUpdated:
+			return state
+		case .onBackFromJourneyDetails:
+			return state
+		case .didLocationButtonPressed:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				timeChooserDate: state.timeChooserDate,
+				status: .loadingLocation)
+		case .didReceiveLocaitonData(lat: let lat, long: let long):
+			return state
+		case .didFailToLoadLocationData:
 			return state
 		}
 	}

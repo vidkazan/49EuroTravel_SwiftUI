@@ -20,12 +20,14 @@ extension SearchStopsView {
 			.frame(maxWidth: .infinity,alignment: .leading)
 			.focused(focusBinding)
 			.onChange(of: text, perform: { text in
+				guard chewViewModel.state.status == .editingArrivalStop ||
+						chewViewModel.state.status == .editingDepartureStop else { return }
 				 if focus == true && text.count > 2 {
 					 searchStopViewModel.send(event: .onSearchFieldDidChanged(text,type))
 				 }
-				 if focus == false || text.isEmpty {
-					 searchStopViewModel.send(event: .onReset(type))
-				 }
+//				 if focus == false || text.isEmpty {
+//					 searchStopViewModel.send(event: .onReset(type))
+//				 }
 			})
 			.onChange(of: focus, perform: { focused in
 				 if focused == true {

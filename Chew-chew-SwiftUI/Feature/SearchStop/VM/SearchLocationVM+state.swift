@@ -22,6 +22,8 @@ extension SearchLocationViewModel {
 		}
 		case idle
 		case loading(String,LocationDirectionType)
+//		case loadingLocation
+//		case loadedUserLocation(lat: Double,long: Double)
 		case loaded
 		case error(ApiServiceError)
 
@@ -35,6 +37,10 @@ extension SearchLocationViewModel {
 				return "loaded"
 			case .error:
 				return "error"
+//			case .loadingLocation:
+//				return "loadingLocation"
+//			case .loadedUserLocation:
+//				return "loadedUserLocation"
 			}
 		}
 	}
@@ -45,6 +51,11 @@ extension SearchLocationViewModel {
 		case onDataLoadError(ApiServiceError)
 		case onReset(LocationDirectionType)
 		case onStopDidTap(Stop, LocationDirectionType)
+//		case didLocationButtonPressed
+//		case didReceiveLocaitonData(lat: Double,long: Double)
+//		case didFailToLoadLocationData
+//		case didSetUserLocationData
+		
 		
 		var description : String {
 			switch self {
@@ -58,8 +69,15 @@ extension SearchLocationViewModel {
 				return "onReset"
 			case .onStopDidTap:
 				return "onStopDidTap"
+//			case .didReceiveLocaitonData:
+//				return "didReceiveLocaitonData"
+//			case .didFailToLoadLocationData:
+//				return "didFailToLoadLocationData"
+//			case .didSetUserLocationData:
+//				return "didSetUserLocationData"
+//			case .didLocationButtonPressed:
+//				return "didLocationButtonPressed"
 			}
 		}
-			
 	}
 }

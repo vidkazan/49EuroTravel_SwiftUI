@@ -21,6 +21,9 @@
 		7D02CE342A98E8130048ADE6 /* JourneysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE332A98E8130048ADE6 /* JourneysView.swift */; };
 		7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E4492A98F9800037C3E1 /* LegsView.swift */; };
 		7D23E44C2A98FD700037C3E1 /* LegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E44B2A98FD700037C3E1 /* LegView.swift */; };
+		7D3E5F012AB321580064213A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3E5F002AB321580064213A /* LocationManager.swift */; };
+		7D3E5F032AB33D830064213A /* SearchLocationVM+reduce+LoadingLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3E5F022AB33D830064213A /* SearchLocationVM+reduce+LoadingLocation.swift */; };
+		7D3E5F072AB343EB0064213A /* SearchLocationVM+reduce+LoadedUserLocationData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3E5F062AB343EB0064213A /* SearchLocationVM+reduce+LoadedUserLocationData.swift */; };
 		7D462D492AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D462D482AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift */; };
 		7D462D4B2AAC948700BC0D65 /* JourneyListViewModel+reduce+JourneysLoaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D462D4A2AAC948700BC0D65 /* JourneyListViewModel+reduce+JourneysLoaded.swift */; };
 		7D462D4F2AAC956B00BC0D65 /* JourneyListViewModel+reduce+FailedToLoadJourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D462D4E2AAC956B00BC0D65 /* JourneyListViewModel+reduce+FailedToLoadJourneys.swift */; };
@@ -118,6 +121,9 @@
 		7D02CE332A98E8130048ADE6 /* JourneysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneysView.swift; sourceTree = "<group>"; };
 		7D23E4492A98F9800037C3E1 /* LegsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegsView.swift; sourceTree = "<group>"; };
 		7D23E44B2A98FD700037C3E1 /* LegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegView.swift; sourceTree = "<group>"; };
+		7D3E5F002AB321580064213A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		7D3E5F022AB33D830064213A /* SearchLocationVM+reduce+LoadingLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+LoadingLocation.swift"; sourceTree = "<group>"; };
+		7D3E5F062AB343EB0064213A /* SearchLocationVM+reduce+LoadedUserLocationData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+LoadedUserLocationData.swift"; sourceTree = "<group>"; };
 		7D462D482AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+reduce+LoadingJourneys.swift"; sourceTree = "<group>"; };
 		7D462D4A2AAC948700BC0D65 /* JourneyListViewModel+reduce+JourneysLoaded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+reduce+JourneysLoaded.swift"; sourceTree = "<group>"; };
 		7D462D4E2AAC956B00BC0D65 /* JourneyListViewModel+reduce+FailedToLoadJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+reduce+FailedToLoadJourneys.swift"; sourceTree = "<group>"; };
@@ -248,6 +254,7 @@
 				7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */,
 				7DAF62C12A9E8C2B006F1A17 /* Solar.swift */,
 				7DE640FA2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift */,
+				7D3E5F002AB321580064213A /* LocationManager.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -462,10 +469,10 @@
 		7D9E10902AA77CC200820B92 /* VM */ = {
 			isa = PBXGroup;
 			children = (
-				7DCB2BFD2AAC8728007C672A /* reduce */,
 				7D9E10922AA77E0B00820B92 /* SearchLocationVM.swift */,
 				7D4B1B962AA8FDDB0096F372 /* SearchLocationVM+sideEffect.swift */,
 				7D4B1B942AA8FDA20096F372 /* SearchLocationVM+state.swift */,
+				7DCB2BFD2AAC8728007C672A /* reduce */,
 			);
 			path = VM;
 			sourceTree = "<group>";
@@ -524,6 +531,8 @@
 		7DCB2BFD2AAC8728007C672A /* reduce */ = {
 			isa = PBXGroup;
 			children = (
+				7D3E5F022AB33D830064213A /* SearchLocationVM+reduce+LoadingLocation.swift */,
+				7D3E5F062AB343EB0064213A /* SearchLocationVM+reduce+LoadedUserLocationData.swift */,
 				7D4B1B922AA8FD9D0096F372 /* SearchLocationVM+reduce.swift */,
 				7DCB2BFE2AAC8831007C672A /* SearchLocationVM+reduce+Idle.swift */,
 				7DD4A8D52AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift */,
@@ -699,6 +708,7 @@
 				7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */,
 				7D462D602AACED6D00BC0D65 /* constructJourneys+Journey.swift in Sources */,
 				7DD4A8D62AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift in Sources */,
+				7D3E5F032AB33D830064213A /* SearchLocationVM+reduce+LoadingLocation.swift in Sources */,
 				7DE640F02AB079710087FC64 /* JourneyListViewModel+reduce+LoadingUpdate.swift in Sources */,
 				7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */,
 				7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift in Sources */,
@@ -713,6 +723,7 @@
 				7D7A55322AA4A27C000256EF /* JourneyListViewModel.swift in Sources */,
 				7D6C5C332AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift in Sources */,
 				7D6C5C2F2AAF792200DEFC57 /* JourneyDetailsVM+state.swift in Sources */,
+				7D3E5F072AB343EB0064213A /* SearchLocationVM+reduce+LoadedUserLocationData.swift in Sources */,
 				7D4B1B8A2AA8CB460096F372 /* JourneyListViewModel+reduce.swift in Sources */,
 				7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */,
 				7D9E10872AA6752B00820B92 /* SearchStopsView.swift in Sources */,
@@ -727,6 +738,7 @@
 				7D4B1B972AA8FDDB0096F372 /* SearchLocationVM+sideEffect.swift in Sources */,
 				7D6C5C162AAF485F00DEFC57 /* chewVM+sideEffect.swift in Sources */,
 				7D6C5C212AAF4AE100DEFC57 /* chewVM+reduce+EditingDepartureStop.swift in Sources */,
+				7D3E5F012AB321580064213A /* LocationManager.swift in Sources */,
 				7D02CE232A97E64E0048ADE6 /* Query.swift in Sources */,
 				7D6C5C312AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift in Sources */,
 				7D4B1B8E2AA8CBB00096F372 /* JourneyListViewModel+state.swift in Sources */,
@@ -905,6 +917,7 @@
 				DEVELOPMENT_TEAM = M82325R967;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -938,6 +951,7 @@
 				DEVELOPMENT_TEAM = M82325R967;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

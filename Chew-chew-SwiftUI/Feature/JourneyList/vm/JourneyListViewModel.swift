@@ -9,19 +9,19 @@ import Foundation
 import Combine
 
 final class JourneyListViewModel : ObservableObject, Identifiable {
-	var depStop : Stop
-	var arrStop : Stop
+	var depStop : StopType
+	var arrStop : StopType
 	var timeChooserDate : ChewViewModel.DateType
 	@Published private(set) var state : State {
 		didSet {
-			print(">> journeys state: ",state.status.description)
+			print("🟢 >> journeys state: ",state.status.description)
 		}
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 		
 	
-	init(depStop: Stop, arrStop: Stop, timeChooserDate: ChewViewModel.DateType) {
+	init(depStop: StopType, arrStop: StopType, timeChooserDate: ChewViewModel.DateType) {
 		self.depStop = depStop
 		self.arrStop = arrStop
 		self.timeChooserDate = timeChooserDate

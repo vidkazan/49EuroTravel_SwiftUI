@@ -18,8 +18,23 @@ extension SearchLocationViewModel {
 				status: .loading(string, type),
 				type: state.type
 			)
-		default:
+		case
+			.onDataLoaded,
+			.onDataLoadError,
+			.onReset,
+			.onStopDidTap:
+//			.didReceiveLocaitonData,
+//			.didFailToLoadLocationData,
+//			.didSetUserLocationData:
 			return state
+			
+//		case .didLocationButtonPressed:
+//			return State(
+//				stops: [],
+//				previousSearchLineString: "",
+//				status: .loadingLocation,
+//				type: .departure
+//			)
 		}
 	}
 }

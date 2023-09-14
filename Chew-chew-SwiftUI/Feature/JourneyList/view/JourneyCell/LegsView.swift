@@ -79,7 +79,7 @@ struct LegsView: View {
 								width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
 								height:leg.delayedAndNextIsNotReachable == true ? 30 : 27)
 							.position(x:geo.size.width * (leg.legTopPosition + (( leg.legBottomPosition - leg.legTopPosition ) / 2)),y: geo.size.height/2)
-							.opacity(0.85)
+							.opacity(0.9)
 					}
 				}
 			}

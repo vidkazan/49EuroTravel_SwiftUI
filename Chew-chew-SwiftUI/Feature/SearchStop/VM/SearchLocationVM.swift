@@ -13,13 +13,14 @@ class SearchLocationViewModel : ObservableObject, Equatable {
 	static func == (lhs: SearchLocationViewModel, rhs: SearchLocationViewModel) -> Bool {
 		return lhs.state == rhs.state
 	}
+//	@ObservedObject var  locationDataManager = LocationDataManager()
 	@FocusState	 var textTopFieldIsFocused : Bool
 	@FocusState	 var textBottomFieldIsFocused: Bool
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	@Published private(set) var state : State {
 		didSet {
-			print(">>     searchLocations state: ",state.status.description, state.type)
+			print("🔵 >> stops state:",state.status.description,state.type)
 		}
 	}
 	
@@ -37,7 +38,8 @@ class SearchLocationViewModel : ObservableObject, Equatable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenLoadingLocation()
+//				self.whenLoadingUserLocation(),
+				self.whenLoadingStops()
 			]
 		)
 			.assign(to: \.state, on: self)

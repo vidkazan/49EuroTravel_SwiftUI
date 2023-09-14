@@ -60,12 +60,39 @@ struct Stops : Codable {
 	let stops : [Stop]?
 }
 
+enum StopType : Equatable {
+	case pointOfInterest(Stop)
+	case location(Stop)
+	case stop(Stop)
+	
+	var stop : Stop {
+		switch self {
+		case .pointOfInterest(let stop):
+			return stop
+		case .location(let stop):
+			return stop
+		case .stop(let stop):
+			return stop
+		}
+	}
+}
+
 struct Stop : Codable, Identifiable, Equatable {
 	let type	: String?
 	let id		: String?
 	let name	: String?
+	let address : String?
 	let location : Location?
-//	let products : Products?
+	let products : Products?
+	
+	private enum CodingKeys : String, CodingKey {
+		case type
+		case id
+		case name
+		case address
+		case location
+		case products
+	}
 }
 
 

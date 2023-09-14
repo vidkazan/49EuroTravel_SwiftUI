@@ -42,14 +42,31 @@ extension ChewViewModel {
 				status: state.status
 			)
 		case .onNewArrival(let stop):
-			self.bottomSearchFieldText = stop?.name ?? "no name"
+			self.bottomSearchFieldText = stop?.stop.name ?? "no name"
 			return State(
 				depStop: state.depStop,
 				arrStop: stop,
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
-		default:
+		case .onArrivalEdit:
+			return state
+		case .onNewDeparture(_):
+			return state
+		case .onJourneyDataUpdated:
+			return state
+		case .onBackFromJourneyDetails:
+			return state
+		case .didLocationButtonPressed:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				timeChooserDate: state.timeChooserDate,
+				status: .loadingLocation
+			)
+		case .didReceiveLocaitonData(lat: let lat, long: let long):
+			return state
+		case .didFailToLoadLocationData:
 			return state
 		}
 		

@@ -18,7 +18,10 @@ extension SearchLocationViewModel {
 				status: .loading(string, type),
 				type: state.type
 			)
-		case .onDataLoaded, .onDataLoadError:
+		case .onDataLoaded,.onDataLoadError:
+//				.didFailToLoadLocationData,
+//				.didReceiveLocaitonData,
+//				.didSetUserLocationData:
 			return state
 		case .onStopDidTap((_), let type):
 			return State(
@@ -27,13 +30,20 @@ extension SearchLocationViewModel {
 				status: .idle,
 				type: type
 			)
-		case .onReset(_):
+		case .onReset:
 			return State(
 				stops: [],
 				previousSearchLineString: "",
 				status: .idle,
 				type: state.type
 			)
+//		case .didLocationButtonPressed:
+//			return State(
+//				stops: [],
+//				previousSearchLineString: "",
+//				status: .loadingLocation,
+//				type: .departure
+//			)
 		}
 	}
 }

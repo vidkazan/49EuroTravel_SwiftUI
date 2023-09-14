@@ -26,6 +26,7 @@ extension SearchLocationViewModel {
 				type: state.type
 			)
 		case .onDataLoaded, .onDataLoadError:
+//				.didSetUserLocationData,.didFailToLoadLocationData,.didReceiveLocaitonData:
 			return state
 		case .onReset(_):
 			return State(
@@ -34,6 +35,13 @@ extension SearchLocationViewModel {
 				status: .idle,
 				type: state.type
 			)
+//		case .didLocationButtonPressed:
+//			return State(
+//				stops: [],
+//				previousSearchLineString: "",
+//				status: .loadingLocation,
+//				type: .departure
+//			)
 		}
 	}
 }

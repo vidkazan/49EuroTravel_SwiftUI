@@ -8,6 +8,7 @@ import Foundation
 import CoreLocation
 import UIKit
 
+
 extension JourneyListViewModel {
 	func constructJourneyViewData(
 		journey : Journey,
@@ -38,12 +39,12 @@ extension JourneyListViewModel {
 		}
 		let sunEventGenerator = SunEventGenerator(
 			locationStart: CLLocationCoordinate2D(
-				latitude: depStop.location?.latitude ?? 0,
-				longitude: depStop.location?.longitude ?? 0
+				latitude: depStop.stop.location?.latitude ?? 0,
+				longitude: depStop.stop.location?.longitude ?? 0
 			),
 			locationFinal : CLLocationCoordinate2D(
-				latitude: arrStop.location?.latitude ?? 0,
-				longitude: arrStop.location?.longitude ?? 0
+				latitude: arrStop.stop.location?.latitude ?? 0,
+				longitude: arrStop.stop.location?.longitude ?? 0
 			),
 			dateStart: startTS,
 			dateFinal: endTS)

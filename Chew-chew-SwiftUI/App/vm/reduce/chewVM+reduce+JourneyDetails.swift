@@ -11,9 +11,32 @@ extension ChewViewModel {
 	func reduceJourneyDetails(_ state:  State, _ event: Event) -> State {
 		guard case .journeyDetails = state.status else { return state }
 		switch event {
-		default:
+		case .onDepartureEdit:
+			return state
+		case .onArrivalEdit:
+			return state
+		case .onDatePickerDidPressed:
+			return state
+		case .onNewDeparture(_):
+			return state
+		case .onNewArrival(_):
+			return state
+//		case .onResetJourneyView:
+//			return state
+		case .onStopsSwitch:
+			return state
+		case .onNewDate(_):
+			return state
+		case .onJourneyDataUpdated:
+			return state
+		case .onBackFromJourneyDetails:
+			return state
+		case .didLocationButtonPressed:
+			return state
+		case .didReceiveLocaitonData(lat: let lat, long: let long):
+			return state
+		case .didFailToLoadLocationData:
 			return state
 		}
 	}
 }
-

@@ -24,7 +24,7 @@ struct LegView: View {
 				.overlay() {
 					if (Int(geo.size.width / 3) > leg.name.count) {
 						Text(leg.name)
-							.foregroundColor(.primary.opacity(1))
+							.foregroundColor(.primary)
 							.font(.system(size: 12,weight: .semibold))
 					} else {
 						Text("")

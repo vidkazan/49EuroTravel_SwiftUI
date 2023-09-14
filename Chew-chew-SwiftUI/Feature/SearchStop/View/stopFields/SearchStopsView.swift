@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct SearchStopsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
@@ -18,6 +19,7 @@ struct SearchStopsView: View {
 	}
 	
 	var body: some View {
+//		let _ = print("::",searchStopViewModel.state)
 		VStack{
 			VStack {
 				HStack {
@@ -29,7 +31,6 @@ struct SearchStopsView: View {
 						focus: textTopFieldIsFocused
 					)
 					rightButton(type: .departure)
-						.animation(nil, value: searchStopViewModel.state.status)
 				}
 				.background(.ultraThickMaterial)
 				.cornerRadius(10)

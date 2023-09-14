@@ -23,15 +23,15 @@ extension ChewViewModel {
 	}
 	
 	struct State : Equatable {
-		var depStop : Stop?
-		var arrStop : Stop?
+		var depStop : StopType?
+		var arrStop : StopType?
 		var timeChooserDate : DateType
 		var status : Status
 		let searchStopViewModel : SearchLocationViewModel
 		
 		init(
-			depStop: Stop?,
-			arrStop: Stop?,
+			depStop: StopType?,
+			arrStop: StopType?,
 			timeChooserDate: DateType,
 			status: Status,
 			searchStopViewModel: SearchLocationViewModel = .init(type: .departure)
@@ -56,6 +56,7 @@ extension ChewViewModel {
 		case datePicker
 		case journeys(JourneyListViewModel)
 		case journeyDetails(JourneyDetailsViewModel)
+		case loadingLocation
 		
 		var description : String {
 			switch self {
@@ -71,6 +72,8 @@ extension ChewViewModel {
 				return "journeys"
 			case .journeyDetails:
 				return "journeyDetails"
+			case .loadingLocation:
+				return "loadingLocation"
 			}
 		}
 	}
@@ -79,13 +82,17 @@ extension ChewViewModel {
 		case onDepartureEdit
 		case onArrivalEdit
 		case onDatePickerDidPressed
-		case onNewDeparture(Stop?)
-		case onNewArrival(Stop?)
-		case onResetJourneyView
+		case onNewDeparture(StopType?)
+		case onNewArrival(StopType?)
+//		case onResetJourneyView
 		case onStopsSwitch
 		case onNewDate(DateType)
 		case onJourneyDataUpdated
 		case onBackFromJourneyDetails
+		
+		case didLocationButtonPressed
+		case didReceiveLocaitonData(lat: Double,long: Double)
+		case didFailToLoadLocationData
 		
 		
 		var description : String {
@@ -100,8 +107,8 @@ extension ChewViewModel {
 				return "onNewDeparture"
 			case .onNewArrival(_):
 				return "onNewArrival"
-			case .onResetJourneyView:
-				return "onResetJourneyView"
+//			case .onResetJourneyView:
+//				return "onResetJourneyView"
 			case .onStopsSwitch:
 				return "onStopsSwitch"
 			case .onNewDate:
@@ -110,6 +117,12 @@ extension ChewViewModel {
 				return "onJourneyDataUpdated"
 			case .onBackFromJourneyDetails:
 				return "onBackFromJourneyDetails"
+			case .didReceiveLocaitonData:
+				return "didReceiveLocaitonData"
+			case .didFailToLoadLocationData:
+				return "didFailToLoadLocationData"
+			case .didLocationButtonPressed:
+				return "didLocationButtonPressed"
 			}
 		}
 	}

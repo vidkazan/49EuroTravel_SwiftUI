@@ -24,6 +24,7 @@ enum ApiServiceError : Error {
 	case generic(Error)
 	case stopNotFound
 	case connectionNotFound
+	case failedToGetUserLocation
 	
 	
 	
@@ -51,6 +52,8 @@ enum ApiServiceError : Error {
 			return "stop not found"
 		case .connectionNotFound:
 			return "connection not found"
+		case .failedToGetUserLocation:
+			return "failedToGetUserLocation"
 		}
 	}
 }

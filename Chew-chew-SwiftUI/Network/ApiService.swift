@@ -150,10 +150,6 @@ class ApiService  {
 							if fetchLobbyDeque.contains(where: { $0.0.type == task?.0.type }) {
 								print(task?.0.type.description ?? "", task?.0.query ?? "", "DROPPED by type")
 							} else {
-								if !set.filter( { $0.1 != nil } ).isEmpty {
-//									prints(task?.0.type.description ?? "", task?.0.query ?? "", "waiting")
-//									usleep(100000)
-								}
 								task?.function()
 							}
 							return

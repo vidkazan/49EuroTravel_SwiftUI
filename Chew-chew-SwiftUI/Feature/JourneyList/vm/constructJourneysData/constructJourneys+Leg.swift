@@ -11,7 +11,6 @@ import UIKit
 extension JourneyListViewModel {
 	
 	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int) -> LegViewDataSourse? {
-		print("leg", leg.line?.name!)
 		guard
 			let plannedDepartureTSString = leg.plannedDeparture,
 			let plannedArrivalTSString = leg.plannedArrival,
