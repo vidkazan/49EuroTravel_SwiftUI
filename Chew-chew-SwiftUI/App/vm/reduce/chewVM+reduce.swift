@@ -90,17 +90,17 @@ extension ChewViewModel {
 				return State(
 					depStop: StopType.location(.init(
 						type: "location",
-									id: nil,
-									name: "My Location",
-									address: "My Location",
-									location: .init(
-										type: "location",
-										id: nil,
-										latitude: lat,
-										longitude: long
-									),
-									products: nil
-							)),
+						id: nil,
+						name: "My Location",
+						address: "My Location",
+						location: .init(
+							type: "location",
+							id: nil,
+							latitude: lat,
+							longitude: long
+						),
+						products: nil
+					)),
 					arrStop: state.arrStop,
 					timeChooserDate: state.timeChooserDate,
 					status: .idle
@@ -112,6 +112,8 @@ extension ChewViewModel {
 					timeChooserDate: state.timeChooserDate,
 					status: .idle
 				)
+			case .didTapJourney:
+				return state
 			}
 		}
 	}

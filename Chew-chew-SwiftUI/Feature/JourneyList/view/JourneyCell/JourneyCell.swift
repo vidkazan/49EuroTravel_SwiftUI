@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct JourneyCell: View {
+	@EnvironmentObject var chewVM : ChewViewModel
 	let journey : JourneyCollectionViewDataSourse
 	init(journey: JourneyCollectionViewDataSourse) {
 		self.journey = journey
@@ -18,6 +19,7 @@ struct JourneyCell: View {
 		VStack {
 			JourneyHeaderView(journey: journey)
 			LegsView(journey : journey)
+			platformView()
 			BadgesView(badges: journey.badges)
 		}
 		.id(journey.id)
@@ -28,6 +30,23 @@ struct JourneyCell: View {
 			}
 		}
 		.cornerRadius(10)
+	}
+	
+	func platformView() -> some View {
+		HStack {
+			if let pl = journey.legDTO?.first?.departurePlatform {
+				Text(pl)
+					.foregroundColor(pl == journey.legDTO?.first?.plannedDeparturePlatform ? .primary : .red)
+					.font(.system(size: 12,weight: .semibold))
+					.padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
+					.background(Color(red: 0.1255, green: 0.156, blue: 0.4))
+			}
+			Text(journey.legDTO?.first?.origin?.name != chewVM.topSearchFieldText ? journey.legDTO?.first?.origin?.name ?? "" : "")
+				.font(.system(size: 12,weight: .semibold))
+				.foregroundColor(.secondary)
+			Spacer()
+		}
+		.padding(7)
 	}
 }
 

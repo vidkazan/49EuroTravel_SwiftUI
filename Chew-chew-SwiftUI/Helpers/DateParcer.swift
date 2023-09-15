@@ -79,6 +79,13 @@ class DateParcer {
 		return timeString
 	}
 	
+	static func getDateOnlyStringFromDate(date : Date) -> String {
+		let dateFormatter = DateFormatter()
+		dateFormatter.dateFormat = "dd MMMM YYYY"
+		let timeString = dateFormatter.string(from: date)
+		return timeString
+	}
+	
 	static func getTimeStringWithHoursAndMinutesFormat(minutes: Int?) -> String? {
 		guard let minutes = minutes else { return nil }
 			let hours = minutes / 60

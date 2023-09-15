@@ -51,7 +51,7 @@ extension ChewViewModel {
 			)
 		case .onArrivalEdit:
 			return state
-		case .onNewDeparture(_):
+		case .onNewDeparture:
 			return state
 		case .onJourneyDataUpdated:
 			return state
@@ -68,7 +68,8 @@ extension ChewViewModel {
 			return state
 		case .didFailToLoadLocationData:
 			return state
+		case .didTapJourney:
+			return state
 		}
-		
 	}
 }

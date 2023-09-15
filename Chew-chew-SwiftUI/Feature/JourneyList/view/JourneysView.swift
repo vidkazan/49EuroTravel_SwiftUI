@@ -30,7 +30,11 @@ struct JourneysView: View {
 					ScrollView()  {
 						LazyVStack{
 							ForEach(journeyViewModel.state.journeys,id: \.id) { journey in
-								JourneyCell(journey: journey)
+								NavigationLink(destination: {
+									JourneyDetailsView(data: journey)
+								}, label: {
+									JourneyCell(journey: journey)
+								})	
 							}
 							ProgressView()
 								.onAppear{

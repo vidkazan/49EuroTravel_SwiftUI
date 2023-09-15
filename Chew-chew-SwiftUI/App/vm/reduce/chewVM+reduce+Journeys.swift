@@ -19,13 +19,6 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
-//		case .onResetJourneyView:
-//			return State(
-//				depStop: state.depStop,
-//				arrStop: state.arrStop,
-//				timeChooserDate: state.timeChooserDate,
-//				status: .idle
-//			)
 		case .onNewDate(let date):
 			return State(
 				depStop: state.depStop,
@@ -75,6 +68,12 @@ extension ChewViewModel {
 			return state
 		case .didFailToLoadLocationData:
 			return state
+		case .didTapJourney:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				timeChooserDate: state.timeChooserDate,
+				status: .journeyDetails(.init()))
 		}
 	}
 }
