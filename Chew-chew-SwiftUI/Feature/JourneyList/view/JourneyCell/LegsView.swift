@@ -71,7 +71,7 @@ struct LegsView: View {
 								startPoint: UnitPoint(x: 0, y: 0),
 								endPoint: UnitPoint(x: 1, y: 0))
 						}
-						.frame(height:15)
+						.frame(maxWidth: (geo.size.width - 6) > 0 ? geo.size.width - 6 : 0 ,maxHeight: 18)
 						.cornerRadius(5)
 					ForEach(journey.legs) { leg in
 						LegView(leg: leg)
@@ -79,7 +79,7 @@ struct LegsView: View {
 								width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
 								height:leg.delayedAndNextIsNotReachable == true ? 30 : 27)
 							.position(x:geo.size.width * (leg.legTopPosition + (( leg.legBottomPosition - leg.legTopPosition ) / 2)),y: geo.size.height/2)
-							.opacity(0.9)
+							.opacity(0.93)
 					}
 				}
 			}

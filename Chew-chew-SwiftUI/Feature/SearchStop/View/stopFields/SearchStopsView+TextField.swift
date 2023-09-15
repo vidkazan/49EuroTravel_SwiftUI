@@ -25,9 +25,9 @@ extension SearchStopsView {
 				 if focus == true && text.count > 2 {
 					 searchStopViewModel.send(event: .onSearchFieldDidChanged(text,type))
 				 }
-//				 if focus == false || text.isEmpty {
-//					 searchStopViewModel.send(event: .onReset(type))
-//				 }
+				 if focus == false || text.isEmpty {
+					 searchStopViewModel.send(event: .onReset(type))
+				 }
 			})
 			.onChange(of: focus, perform: { focused in
 				 if focused == true {

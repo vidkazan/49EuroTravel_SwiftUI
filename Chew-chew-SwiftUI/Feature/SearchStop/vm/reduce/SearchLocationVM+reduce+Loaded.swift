@@ -1,5 +1,5 @@
 //
-//  SearchLocationVM+reduce+Error.swift
+//  SearchLocationVM+reduce+Loaded.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 09.09.23.
@@ -8,8 +8,8 @@
 import Foundation
 
 extension SearchLocationViewModel {
-	static func reduceError(_ state:  State, _ event: Event) -> State {
-		guard case .error = state.status else { return state }
+	static func reduceLoaded(_ state:  State, _ event: Event) -> State {
+		guard case .loaded = state.status else { return state }
 		switch event {
 		case .onSearchFieldDidChanged(let string, let type):
 			return State(
@@ -18,30 +18,22 @@ extension SearchLocationViewModel {
 				status: .loading(string, type),
 				type: state.type
 			)
-		case .onStopDidTap:
-			return State(
-				stops: [],
-				previousSearchLineString: "",
-				status: .idle,
-				type: state.type
-			)
-		case .onDataLoaded, .onDataLoadError:
-//				.didSetUserLocationData,.didFailToLoadLocationData,.didReceiveLocaitonData:
+		case .onDataLoaded,.onDataLoadError:
 			return state
-		case .onReset(_):
+		case .onStopDidTap((_), let type):
+			return State(
+				stops: [],
+				previousSearchLineString: "",
+				status: .idle,
+				type: type
+			)
+		case .onReset:
 			return State(
 				stops: [],
 				previousSearchLineString: "",
 				status: .idle,
 				type: state.type
 			)
-//		case .didLocationButtonPressed:
-//			return State(
-//				stops: [],
-//				previousSearchLineString: "",
-//				status: .loadingLocation,
-//				type: .departure
-//			)
 		}
 	}
 }

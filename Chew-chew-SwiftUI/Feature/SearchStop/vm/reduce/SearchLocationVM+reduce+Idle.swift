@@ -23,18 +23,7 @@ extension SearchLocationViewModel {
 			.onDataLoadError,
 			.onReset,
 			.onStopDidTap:
-//			.didReceiveLocaitonData,
-//			.didFailToLoadLocationData,
-//			.didSetUserLocationData:
 			return state
-			
-//		case .didLocationButtonPressed:
-//			return State(
-//				stops: [],
-//				previousSearchLineString: "",
-//				status: .loadingLocation,
-//				type: .departure
-//			)
 		}
 	}
 }

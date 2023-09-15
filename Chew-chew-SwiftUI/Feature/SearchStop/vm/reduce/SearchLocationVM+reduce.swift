@@ -20,10 +20,6 @@ extension SearchLocationViewModel {
 			return SearchLocationViewModel.reduceLoaded(state, event)
 		case .error:
 			return SearchLocationViewModel.reduceError(state, event)
-//		case .loadingLocation:
-//			return SearchLocationViewModel.reduceLoadingLocation(state, event)
-//		case .loadedUserLocation:
-//			return SearchLocationViewModel.reduceLoadedUserLocationData(state, event)
 		}
 	}
 }

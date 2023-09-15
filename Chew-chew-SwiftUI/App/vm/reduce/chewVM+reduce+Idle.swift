@@ -74,11 +74,11 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				timeChooserDate: date,
-				status: .loadingLocation
+				status: .idle
 			)
 		case .onBackFromJourneyDetails:
 			return state
-		case .didReceiveLocaitonData(lat: let lat, long: let long):
+		case .didReceiveLocaitonData:
 			return state
 		case .didFailToLoadLocationData:
 			return state

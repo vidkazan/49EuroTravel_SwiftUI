@@ -10,20 +10,16 @@ import UIKit
 
 
 extension JourneyListViewModel {
-	func constructJourneyViewData(
-		journey : Journey,
-		firstTSPlanned: Date,
-		firstTSActual: Date,
-		lastTSPlanned: Date,
-		lastTSActual: Date
-	) -> JourneyCollectionViewDataSourse? {
+	func constructJourneyViewData(journey : Journey,firstTSPlanned: Date,firstTSActual: Date,lastTSPlanned: Date,lastTSActual: Date
+	) -> JourneyCollectionViewDataSourse {
 		var isReachable = true
 		var remarks : [Remark] = []
 		var legsDataSourse : [LegViewDataSourse] = []
 		let startTS = max(firstTSActual, firstTSPlanned)
 		let endTS = max(lastTSActual,lastTSPlanned)
-		guard let legs = journey.legs else { return nil }
+		let legs = journey.legs ?? []
 		remarks = journey.remarks ?? []
+		
 		for (index,leg) in legs.enumerated() {
 			remarks += leg.remarks ?? .init()
 			if leg.reachable == false {

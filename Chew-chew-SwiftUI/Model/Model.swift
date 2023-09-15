@@ -25,6 +25,7 @@ struct Leg : Codable,Equatable{
 	//	let arrivalPlatform, plannedArrivalPlatform: String?
 	//	let arrivalPrognosisType: String?
 	let departurePlatform, plannedDeparturePlatform, departurePrognosisType: String?
+	let walking : Bool?
 }
 
 struct Price : Codable,Equatable {

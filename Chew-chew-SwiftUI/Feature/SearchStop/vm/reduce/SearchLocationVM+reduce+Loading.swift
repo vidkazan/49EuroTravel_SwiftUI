@@ -47,8 +47,6 @@ extension SearchLocationViewModel {
 				status: .idle,
 				type: type
 			)
-//		case .didReceiveLocaitonData, .didFailToLoadLocationData, .didSetUserLocationData,.didLocationButtonPressed:
-//			return state
 		}
 	}
 }

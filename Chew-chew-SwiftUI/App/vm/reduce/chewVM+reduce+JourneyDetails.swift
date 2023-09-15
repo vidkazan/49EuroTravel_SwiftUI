@@ -33,7 +33,7 @@ extension ChewViewModel {
 			return state
 		case .didLocationButtonPressed:
 			return state
-		case .didReceiveLocaitonData(lat: let lat, long: let long):
+		case .didReceiveLocaitonData:
 			return state
 		case .didFailToLoadLocationData:
 			return state

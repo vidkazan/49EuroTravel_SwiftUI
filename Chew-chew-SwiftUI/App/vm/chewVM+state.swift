@@ -22,7 +22,7 @@ extension ChewViewModel {
 		}
 	}
 	
-	struct State : Equatable {
+	struct State {
 		var depStop : StopType?
 		var arrStop : StopType?
 		var timeChooserDate : DateType
@@ -84,7 +84,6 @@ extension ChewViewModel {
 		case onDatePickerDidPressed
 		case onNewDeparture(StopType?)
 		case onNewArrival(StopType?)
-//		case onResetJourneyView
 		case onStopsSwitch
 		case onNewDate(DateType)
 		case onJourneyDataUpdated
@@ -107,8 +106,6 @@ extension ChewViewModel {
 				return "onNewDeparture"
 			case .onNewArrival(_):
 				return "onNewArrival"
-//			case .onResetJourneyView:
-//				return "onResetJourneyView"
 			case .onStopsSwitch:
 				return "onStopsSwitch"
 			case .onNewDate:

@@ -15,7 +15,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	@Published var bottomSearchFieldText : String = ""
 	@Published private(set) var state : State {
 		didSet {
-			print("⚪ > main new state:",state.status.description, state.depStop?.stop.name,state.arrStop?.stop.name)
+			print("⚪ > main new state:",state.status.description)
 		}}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
