@@ -33,7 +33,7 @@ struct JourneyDetailsView: View {
 						Text(DateParcer.getDateOnlyStringFromDate(date: chewVM.state.timeChooserDate.date))
 					}
 						.padding(5)
-						.font(.system(size: 12,weight: .semibold))
+						.font(.system(size: 12,weight: .medium))
 						.background(.ultraThinMaterial.opacity(0.5))
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
@@ -43,13 +43,13 @@ struct JourneyDetailsView: View {
 						Text(data.endActualTimeLabelText.isEmpty ? data.endPlannedTimeLabelText : data.endActualTimeLabelText)
 					}
 						.padding(5)
-						.font(.system(size: 12,weight: .semibold))
+						.font(.system(size: 12,weight: .medium))
 						.background(.ultraThinMaterial.opacity(0.5))
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
 					Text(data.durationLabelText)
 						.padding(5)
-						.font(.system(size: 12,weight: .semibold))
+						.font(.system(size: 12,weight: .medium))
 						.background(.ultraThinMaterial.opacity(0.5))
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
@@ -59,7 +59,7 @@ struct JourneyDetailsView: View {
 							Text(String((data.legDTO?.count ?? 1) - 1))
 						}
 							.padding(5)
-							.font(.system(size: 12,weight: .semibold))
+							.font(.system(size: 12,weight: .medium))
 							.background(.ultraThinMaterial.opacity(0.5))
 							.foregroundColor(.primary.opacity(0.6))
 							.cornerRadius(8)
@@ -71,7 +71,10 @@ struct JourneyDetailsView: View {
 					.background(.ultraThinMaterial.opacity(0.5))
 					.cornerRadius(8)
 			}
-			
+			VStack {
+				
+			}
+				.background(.ultraThinMaterial.opacity(0.5))
 		}
 		.padding(10)
 		Spacer()

@@ -138,6 +138,7 @@
 		7D4B1B962AA8FDDB0096F372 /* SearchLocationVM+sideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+sideEffect.swift"; sourceTree = "<group>"; };
 		7D4B1B982AA950780096F372 /* constructJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constructJourneys.swift; sourceTree = "<group>"; };
 		7D62AF5C2AAA7BB800D3827D /* res.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = res.geojson; sourceTree = "<group>"; };
+		7D63285C2AB75B0900E1EF2B /* tmp.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = tmp.geojson; sourceTree = "<group>"; };
 		7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chew-chew-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUIApp.swift; sourceTree = "<group>"; };
 		7D6734B42A96334B00CBE9C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -243,6 +244,7 @@
 			isa = PBXGroup;
 			children = (
 				7D62AF5C2AAA7BB800D3827D /* res.geojson */,
+				7D63285C2AB75B0900E1EF2B /* tmp.geojson */,
 				7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */,
 				7D02CE122A97E4700048ADE6 /* DateParcer.swift */,
 				7D02CE142A97E4940048ADE6 /* Constants.swift */,
