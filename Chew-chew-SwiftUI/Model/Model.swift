@@ -37,13 +37,13 @@ struct Journey : Codable,Identifiable,Equatable {
 	let id = UUID()
 	let type : String?
 	let legs : [Leg]?
-//	let refreshToken : String?
+	let refreshToken : String?
 	let remarks : [Remark]?
 	let price : Price?
 	private enum CodingKeys : String, CodingKey {
 		case type
 		case legs
-//		case refreshToken
+		case refreshToken
 		case remarks
 		case price
 	}

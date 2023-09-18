@@ -23,6 +23,7 @@ class ApiService  {
 	
 	enum Requests {
 		case journeys
+		case journeyByRefreshToken(ref : String?)
 		case locations(name : String)
 		case customGet(path : String)
 		
@@ -34,6 +35,8 @@ class ApiService  {
 				return "customGet"
 			case .journeys:
 				return "journeys"
+			case .journeyByRefreshToken(ref: let ref):
+				return "journeyByRefreshToken"
 			}
 		}
 		
@@ -45,19 +48,21 @@ class ApiService  {
 				return 2
 			case .journeys:
 				return 3
+			case .journeyByRefreshToken:
+				return 4
 			}
 		}
 		
 		var method : String {
 			switch self {
-			case .locations, .customGet, .journeys:
+			case .locations, .customGet, .journeys,.journeyByRefreshToken:
 				return "GET"
 			}
 		}
 		
 		var headers : [(value : String, key : String)] {
 			switch self {
-			case .customGet, .locations, .journeys:
+			case .customGet, .locations, .journeys,.journeyByRefreshToken:
 				return []
 			}
 		}
@@ -70,12 +75,14 @@ class ApiService  {
 				return Constants.apiData.urlPathLocations
 			case .customGet(let path):
 				return path
+			case .journeyByRefreshToken(let ref):
+				return Constants.apiData.urlPathJourneys + "/\(ref)"
 			}
 		}
 		
 		func getRequest(urlEndPoint : URL) -> URLRequest {
 			switch self {
-			case .customGet, .locations,.journeys:
+			case .customGet, .locations,.journeys,.journeyByRefreshToken:
 				var req = URLRequest(url : urlEndPoint)
 				req.httpMethod = self.method
 				for header in self.headers {
@@ -137,7 +144,7 @@ class ApiService  {
 					while !fetchLobbyDeque.isEmpty {
 						let task = self.fetchLobbyDeque.popFirst()
 						switch type {
-						case .locations,.journeys:
+						case .locations,.journeys,.journeyByRefreshToken:
 							if let t = set[type.index].1 {
 //							//	prints("previous is cancelled")
 								t.cancel()
@@ -146,7 +153,7 @@ class ApiService  {
 							break
 						}
 						switch type {
-						case .locations, .journeys:
+						case .locations, .journeys,.journeyByRefreshToken:
 							if fetchLobbyDeque.contains(where: { $0.0.type == task?.0.type }) {
 								print(task?.0.type.description ?? "", task?.0.query ?? "", "DROPPED by type")
 							} else {
@@ -258,7 +265,7 @@ class ApiService  {
 					return
 				}
 				switch type {
-				case .locations,.journeys:
+				case .locations,.journeys,.journeyByRefreshToken:
 					let decoder = JSONDecoder()
 					do {
 						let decodedData = try decoder.decode(T.self, from: data)
@@ -279,7 +286,7 @@ class ApiService  {
 		}
 		
 		switch type {
-		case .locations,.journeys:
+		case .locations,.journeys,.journeyByRefreshToken:
 			set[type.index].1 = task
 		case .customGet:
 			break
@@ -292,7 +299,7 @@ class ApiService  {
 										type : Requests) -> URL? {
 		let url : URL? = {
 			switch type {
-			case .locations,.journeys:
+			case .locations,.journeys,.journeyByRefreshToken:
 				var components = URLComponents()
 				components.path = type.urlString
 				components.host = Constants.apiData.urlBase

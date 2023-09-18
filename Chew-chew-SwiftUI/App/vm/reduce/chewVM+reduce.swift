@@ -112,8 +112,8 @@ extension ChewViewModel {
 					timeChooserDate: state.timeChooserDate,
 					status: .idle
 				)
-			case .didTapJourney:
-				return state
+//			case .didTapJourney:
+//				return state
 			}
 		}
 	}

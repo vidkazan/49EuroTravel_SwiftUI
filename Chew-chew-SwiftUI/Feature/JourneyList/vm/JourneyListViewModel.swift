@@ -32,7 +32,7 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenLoadingUpdate(),
+				self.whenLoadingJourneyRef(),
 				self.whenLoadingJourneys()
 			]
 		)

@@ -74,7 +74,8 @@ struct Previews: PreviewProvider {
 				legs: [],
 				sunEvents: [],
 				isReachable: true,
-				badges: [.dticket]
+				badges: [.dticket],
+				refreshToken: ""
 			)
 		)
 	}

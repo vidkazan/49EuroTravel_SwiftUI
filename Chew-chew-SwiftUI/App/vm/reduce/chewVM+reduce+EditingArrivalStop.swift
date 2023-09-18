@@ -68,8 +68,8 @@ extension ChewViewModel {
 			return state
 		case .didFailToLoadLocationData:
 			return state
-		case .didTapJourney:
-			return state
+//		case .didTapJourney:
+//			return state
 		}
 	}
 }

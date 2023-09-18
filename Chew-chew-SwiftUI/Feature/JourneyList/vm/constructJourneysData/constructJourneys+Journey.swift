@@ -61,7 +61,8 @@ extension JourneyListViewModel {
 			legs: legsDataSourse.reversed(),
 			sunEvents: sunEventGenerator.getSunEvents(),
 			isReachable: isReachable,
-			badges: constructBadges(remarks: remarks,isReachable: isReachable)
+			badges: constructBadges(remarks: remarks,isReachable: isReachable),
+			refreshToken: journey.refreshToken
 		)
 	}
 	

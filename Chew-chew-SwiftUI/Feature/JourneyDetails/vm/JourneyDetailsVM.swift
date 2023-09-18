@@ -12,16 +12,18 @@ import Combine
 final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
 		didSet {
-			print(">> deatails state: ",state.status.description)
+			print("🔴 > details new state:",state.status.description)
 		}
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
+	var refreshToken : String?
 		
-	init() {
-		self.state = .init(status: .idle)
+	init(refreshToken : String?) {
+		self.refreshToken = refreshToken
+		self.state = .init(status: .loading(refreshToken: refreshToken))
 		Publishers.system(
-			initial: .init(status: .idle),
+			initial: .init(status: .loading(refreshToken: refreshToken)),
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [

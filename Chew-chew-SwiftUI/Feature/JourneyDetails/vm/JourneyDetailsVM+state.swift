@@ -19,15 +19,37 @@ extension JourneyDetailsViewModel {
 		static func == (lhs: JourneyDetailsViewModel.Status, rhs: JourneyDetailsViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
-		case idle
+		case loading(refreshToken : String?)
+		case loadedJourneyData(data : Journey)
+		case error(error : ApiServiceError)
+		
 		var description : String {
 			switch self {
-			case .idle:
-				return "idle"
+			case .loading:
+				return "loading"
+			case .loadedJourneyData:
+				return "loadedJourneyData"
+			case .error:
+				return "error"
 			}
 		}
 	}
 	
 	enum Event {
+		case didLoadJourneyData(data : Journey)
+		case didFailedToLoadJourneyData(error : ApiServiceError)
+		case didReloadJourneys
+		
+		var description : String {
+			switch self {
+			case .didLoadJourneyData:
+				return "didLoadJourneyData"
+			case .didFailedToLoadJourneyData:
+				return "didFailedToLoadJourneyData"
+			case .didReloadJourneys:
+				return "didReloadJourneys"
+			}
+		}
 	}
 }
+ 

@@ -99,6 +99,7 @@ struct JourneyCollectionViewDataSourse : Equatable {
 	let sunEvents : [SunEvent]
 	let isReachable : Bool
 	let badges : [Badges]
+	let refreshToken : String?
 }
 
 struct JourneyViewDataSourse : Equatable,Hashable {

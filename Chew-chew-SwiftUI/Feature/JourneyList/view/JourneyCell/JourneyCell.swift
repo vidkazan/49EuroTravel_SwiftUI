@@ -73,7 +73,8 @@ struct JourneyCell_Previews: PreviewProvider {
 							timeFinal: .now
 						)],
 					isReachable: true,
-					badges: [.dticket]
+					badges: [.dticket],
+					refreshToken: ""
 			))
 			.frame(maxHeight: 130)
 			Spacer()
