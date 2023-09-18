@@ -12,7 +12,7 @@
 		7D000CF72AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D000CF62AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift */; };
 		7D000CF92AB8768400566120 /* JourneyDetailsViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D000CF82AB8768400566120 /* JourneyDetailsViewHeader.swift */; };
 		7D000CFB2AB87ACD00566120 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D000CFA2AB87ACD00566120 /* NavigationLazyView.swift */; };
-		7D02CE092A97E32D0048ADE6 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE082A97E32D0048ADE6 /* Model.swift */; };
+		7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE082A97E32D0048ADE6 /* DTO.swift */; };
 		7D02CE102A97E4100048ADE6 /* ViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE0F2A97E4100048ADE6 /* ViewDataSource.swift */; };
 		7D02CE132A97E4700048ADE6 /* DateParcer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE122A97E4700048ADE6 /* DateParcer.swift */; };
 		7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE142A97E4940048ADE6 /* Constants.swift */; };
@@ -118,7 +118,7 @@
 		7D000CF62AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift"; sourceTree = "<group>"; };
 		7D000CF82AB8768400566120 /* JourneyDetailsViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDetailsViewHeader.swift; sourceTree = "<group>"; };
 		7D000CFA2AB87ACD00566120 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
-		7D02CE082A97E32D0048ADE6 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		7D02CE082A97E32D0048ADE6 /* DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTO.swift; sourceTree = "<group>"; };
 		7D02CE0F2A97E4100048ADE6 /* ViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDataSource.swift; sourceTree = "<group>"; };
 		7D02CE122A97E4700048ADE6 /* DateParcer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParcer.swift; sourceTree = "<group>"; };
 		7D02CE142A97E4940048ADE6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -252,7 +252,7 @@
 		7D02CE0C2A97E38B0048ADE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7D02CE082A97E32D0048ADE6 /* Model.swift */,
+				7D02CE082A97E32D0048ADE6 /* DTO.swift */,
 				7D02CE0F2A97E4100048ADE6 /* ViewDataSource.swift */,
 			);
 			path = Model;
@@ -713,7 +713,7 @@
 			files = (
 				7D000CF92AB8768400566120 /* JourneyDetailsViewHeader.swift in Sources */,
 				7DD4A8DA2AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift in Sources */,
-				7D02CE092A97E32D0048ADE6 /* Model.swift in Sources */,
+				7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */,
 				7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */,
 				7DE640FB2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift in Sources */,
 				7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */,

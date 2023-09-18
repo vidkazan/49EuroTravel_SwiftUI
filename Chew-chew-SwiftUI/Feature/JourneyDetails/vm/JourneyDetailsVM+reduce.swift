@@ -9,7 +9,7 @@ import Foundation
 
 extension JourneyDetailsViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
-		print("🔴🔥 > details event:",event.description,"state:",state.status.description)
+		print("🟣🔥 > details event:",event.description,"state:",state.status.description)
 		switch state.status {
 		case .loading(refreshToken: let refreshToken):
 			switch event {

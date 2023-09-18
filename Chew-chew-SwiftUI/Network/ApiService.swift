@@ -186,24 +186,23 @@ class ApiService  {
 				.dataTaskPublisher(for: request)
 				.tryMap { result -> T in
 					let value = try JSONDecoder().decode(T.self, from: result.data)
-					print("> api: done:",type,url)
+					print("🟢 > api: done:",type,url)
 					return value
 				}
 				.receive(on: DispatchQueue.main)
 				.mapError{ error -> ApiServiceError in
 					switch error {
 						case let error as ApiServiceError:
-						print("> api: error:",type,error)
+						print("🔴> api: error:",type,error)
 							return error
 						default:
-							print("> api: error:",type,error)
+							print("🔴> api: error:",type,error)
 							return .generic(error)
 						}
 				}
 				.eraseToAnyPublisher()
 	}
 	
-
 	static private func execute<T : Decodable>(
 		_ t : T.Type,
 		query : [URLQueryItem],

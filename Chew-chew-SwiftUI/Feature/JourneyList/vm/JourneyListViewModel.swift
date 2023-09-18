@@ -14,7 +14,7 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	var timeChooserDate : ChewViewModel.DateType
 	@Published private(set) var state : State {
 		didSet {
-			print("🟢 >> journeys state: ",state.status.description)
+			print("🟤 >> journeys state: ",state.status.description)
 		}
 	}
 	private var bag = Set<AnyCancellable>()

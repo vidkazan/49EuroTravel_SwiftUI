@@ -1,5 +1,5 @@
 //
-//  Model.swift
+//  DTO.swift
 //  49EuroTravel
 //
 //  Created by Dmitrii Grigorev on 05.05.23.
@@ -8,6 +8,22 @@
 import Foundation
 
 // /journeys
+
+struct StopOver : Codable,Equatable {
+	let stop				: Stop?
+	let departure,
+		plannedDeparture	: String?
+	let arrival,
+		plannedArrival		: String?
+	let departureDelay,
+		arrivalDelay		: Int?
+	let reachable			: Bool?
+	let arrivalPlatform,
+		plannedArrivalPlatform		: String?
+	let departurePlatform,
+		plannedDeparturePlatform	: String?
+	let remarks						: [Remark]?
+}
 
 struct Leg : Codable,Equatable{
 	let origin : Stop?
@@ -18,20 +34,26 @@ struct Leg : Codable,Equatable{
 	let plannedDeparture: String?
 	let arrival: String?
 	let plannedArrival: String?
-	let departureDelay,arrivalDelay: Int?
+	let departureDelay,
+		arrivalDelay: Int?
 	let reachable: Bool?
-	//	let tripId, direction: String?
+	let tripId : String?
+	let direction: String?
 	////	let currentLocation: CurrentLocation
-	//	let arrivalPlatform, plannedArrivalPlatform: String?
+	let arrivalPlatform,
+		plannedArrivalPlatform: String?
 	//	let arrivalPrognosisType: String?
-	let departurePlatform, plannedDeparturePlatform, departurePrognosisType: String?
+	let departurePlatform,
+		plannedDeparturePlatform,
+		departurePrognosisType: String?
 	let walking : Bool?
+	let stopovers : [StopOver]?
 }
 
 struct Price : Codable,Equatable {
-	let amount: Double?
-	let currency : String?
-	let hint : String?
+	let amount		: Double?
+	let currency	: String?
+	let hint		: String?
 }
 struct Journey : Codable,Identifiable,Equatable {
 	let id = UUID()
@@ -53,12 +75,7 @@ struct JourneysContainer : Codable,Equatable {
 	let earlierRef: String?
 	let laterRef: String?
 	let journeys : [Journey]?
-//	let realtimeDataUpdatedAt: Int64?
-}
-
-// /locations
-struct Stops : Codable {
-	let stops : [Stop]?
+	let realtimeDataUpdatedAt: Int64?
 }
 
 enum StopType : Equatable {
@@ -98,13 +115,10 @@ struct Stop : Codable, Identifiable, Equatable {
 
 
 // /departures
-struct Departures : Codable,Equatable {
-	let departures : [Departure]?
-}
 
 struct Departure : Codable,Equatable {
 	let tripId				: String?
-	let stop				: Destination?
+	let stop				: Stop?
 	let when				: String?
 	let plannedWhen			: String?
 	let prognosedWhen		: String?
@@ -118,18 +132,10 @@ struct Departure : Codable,Equatable {
 	let line				: Line?
 	let remarks				: [Remark]?
 	let origin				: String?
-	let destination			: Destination?
+	let destination			: Stop?
 	let cancelled			: Bool?
 }
 
-// MARK: - Destination
-struct Destination : Codable,Equatable {
-	let type		: String?
-	let id			: String?
-	let name		: String?
-	let location	: Location?
-	let products	: Products?
-}
 
 // MARK: - Location
 struct Location : Codable,Equatable {

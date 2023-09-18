@@ -12,7 +12,7 @@ import Combine
 final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
 		didSet {
-			print("🔴 > details new state:",state.status.description)
+			print("🟣 > details new state:",state.status.description)
 		}
 	}
 	private var bag = Set<AnyCancellable>()
@@ -27,7 +27,8 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
-				Self.userInput(input: input.eraseToAnyPublisher())
+				Self.userInput(input: input.eraseToAnyPublisher()),
+				self.whenLoadingJourneyByRefreshToken()
 			]
 		)
 			.assign(to: \.state, on: self)

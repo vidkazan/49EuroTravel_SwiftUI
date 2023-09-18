@@ -20,7 +20,6 @@ extension SearchLocationViewModel {
 			guard case .loading(let string, let type) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			print(">> fetch")
 			return SearchLocationViewModel.fetchLocations(text: string, type: type)
 				.map { stops in
 					if stops.isEmpty {
