@@ -126,7 +126,8 @@ class DateParcer {
 	   
 		while currentDate <= endDate {
 			allDays.append(currentDate)
-			guard let currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
+			guard let newCurrDate = calendar.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
+			currentDate = newCurrDate
 		}
 		return allDays
 	}

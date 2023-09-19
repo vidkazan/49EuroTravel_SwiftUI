@@ -36,9 +36,9 @@ extension JourneyDetailsView {
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
 					HStack {
-						Text(viewModel.state.data.startActualTimeLabelText.isEmpty ? viewModel.state.data.startPlannedTimeLabelText : viewModel.state.data.startActualTimeLabelText)
+						Text(DateParcer.getTimeStringFromDate(date: viewModel.state.data.startActualTimeDate))
 						Text("-")
-						Text(viewModel.state.data.endActualTimeLabelText.isEmpty ? viewModel.state.data.endPlannedTimeLabelText : viewModel.state.data.endActualTimeLabelText)
+						Text(DateParcer.getTimeStringFromDate(date: viewModel.state.data.endActualTimeDate))
 					}
 						.padding(5)
 						.font(.system(size: 12,weight: .medium))

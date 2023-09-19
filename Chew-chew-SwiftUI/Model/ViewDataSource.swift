@@ -108,10 +108,10 @@ struct LegViewDataSourse : Equatable,Identifiable,Hashable {
 
 struct JourneyCollectionViewDataSourse : Equatable {
 	let id : UUID
-	let startPlannedTimeLabelText : String
-	let startActualTimeLabelText : String
-	let endPlannedTimeLabelText : String
-	let endActualTimeLabelText : String
+	let startPlannedTimeDate : Date
+	let startActualTimeDate : Date
+	let endPlannedTimeDate : Date
+	let endActualTimeDate : Date
 	let startDate : Date
 	let endDate : Date
 	let durationLabelText : String

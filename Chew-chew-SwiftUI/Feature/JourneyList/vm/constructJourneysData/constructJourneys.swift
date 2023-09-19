@@ -11,7 +11,7 @@ import CoreLocation
 
 extension JourneyListViewModel {
 	func constructJourneysViewData(journeysData : JourneysContainer) -> [JourneyCollectionViewDataSourse] {
-		let res = journeysData.journeys?.compactMap { (journey) -> JourneyCollectionViewDataSourse in
+		let res = journeysData.journeys?.compactMap { (journey) -> JourneyCollectionViewDataSourse? in
 			constructJourneyViewData(
 				journey: journey,
 				firstTSPlanned: DateParcer.getDateFromDateString(

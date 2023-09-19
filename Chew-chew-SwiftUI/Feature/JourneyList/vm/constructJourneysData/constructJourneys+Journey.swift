@@ -47,10 +47,10 @@ extension JourneyListViewModel {
 		
 		return JourneyCollectionViewDataSourse(
 			id : journey.id,
-			startPlannedTimeLabelText: DateParcer.getTimeStringFromDate(date: firstTSPlanned),
-			startActualTimeLabelText: DateParcer.getTimeStringFromDate(date: firstTSActual),
-			endPlannedTimeLabelText: DateParcer.getTimeStringFromDate(date: lastTSPlanned),
-			endActualTimeLabelText: DateParcer.getTimeStringFromDate(date: lastTSActual),
+			startPlannedTimeDate: firstTSPlanned,
+			startActualTimeDate: firstTSActual,
+			endPlannedTimeDate: lastTSPlanned,
+			endActualTimeDate: lastTSActual,
 			startDate: firstTSPlanned,
 			endDate: lastTSPlanned,
 			durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(

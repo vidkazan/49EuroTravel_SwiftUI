@@ -45,8 +45,8 @@ struct LegStopView: View {
 			TimeLabelView(
 				isSmall: stopover != nil,
 				isLeft: false,
-				planned: plannedTS,
-				actual: actualTS
+				planned: DateParcer.getDateFromDateString(dateString: plannedTS) ?? .distantPast,
+				actual: DateParcer.getDateFromDateString(dateString: actualTS) ?? .distantPast
 			)
 				.padding(3)
 				.background(.thinMaterial)

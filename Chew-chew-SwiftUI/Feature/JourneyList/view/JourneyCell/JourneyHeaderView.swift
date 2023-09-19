@@ -11,22 +11,14 @@ import CoreLocation
 struct TimeLabelView: View {
 	let isSmall : Bool
 	let isLeft : Bool
-	let planned : String
-	let actual : String
+	var planned : String
+	var actual : String
 	
-	init(isSmall: Bool, isLeft: Bool, planned: String, actual: String) {
+	init(isSmall: Bool, isLeft: Bool, planned: Date, actual: Date) {
 		self.isSmall = isSmall
 		self.isLeft = isLeft
-		self.planned = DateParcer.getTimeStringFromDate(
-			date: DateParcer.getDateFromDateString(
-				dateString: planned
-			) ?? .now
-		)
-		self.actual = DateParcer.getTimeStringFromDate(
-			date: DateParcer.getDateFromDateString(
-				dateString: actual
-			) ?? .now
-		)
+		self.planned = DateParcer.getTimeStringFromDate(date:planned)
+		self.actual = DateParcer.getTimeStringFromDate(date:actual)
 	}
 	
 	var body: some View {
@@ -68,14 +60,14 @@ struct JourneyHeaderView: View {
     var body: some View {
 		ZStack {
 			HStack{
-				TimeLabelView(isSmall: false, isLeft: false, planned: journey.startPlannedTimeLabelText, actual: journey.startActualTimeLabelText)
+				TimeLabelView(isSmall: false, isLeft: false, planned: journey.startPlannedTimeDate, actual: journey.startActualTimeDate)
 				.padding(7)
 				Spacer()
 				Text(journey.durationLabelText)
 					.foregroundColor(.primary)
 					.font(.system(size: 12,weight: .semibold))
 				Spacer()
-				TimeLabelView(isSmall: false, isLeft: true, planned: journey.endPlannedTimeLabelText, actual: journey.endActualTimeLabelText)
+				TimeLabelView(isSmall: false, isLeft: true, planned: journey.endPlannedTimeDate, actual: journey.endActualTimeDate)
 				.padding(7)
 			}
 			.frame(maxWidth: .infinity)
@@ -91,10 +83,10 @@ struct Previews: PreviewProvider {
 		JourneyHeaderView(
 			journey: .init(
 				id: UUID(),
-				startPlannedTimeLabelText: "11:11",
-				startActualTimeLabelText: "11:12",
-				endPlannedTimeLabelText: "22:23",
-				endActualTimeLabelText: "22:22",
+				startPlannedTimeDate: .now,
+				startActualTimeDate: .now,
+				endPlannedTimeDate: .now,
+				endActualTimeDate: .now,
 				startDate: .now,
 				endDate: .now,
 				durationLabelText: "11 h 11 min",
