@@ -55,8 +55,6 @@ extension ChewViewModel {
 			return state
 		case .onJourneyDataUpdated:
 			return state
-		case .onBackFromJourneyDetails:
-			return state
 		case .didLocationButtonPressed:
 			return State(
 				depStop: state.depStop,
@@ -64,12 +62,10 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .loadingLocation
 			)
-		case .didReceiveLocaitonData:
+		case .didReceiveLocationData:
 			return state
 		case .didFailToLoadLocationData:
 			return state
-//		case .didTapJourney:
-//			return state
 		}
 	}
 }

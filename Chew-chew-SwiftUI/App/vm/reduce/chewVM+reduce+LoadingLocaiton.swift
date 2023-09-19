@@ -12,15 +12,7 @@ extension ChewViewModel {
 		guard case .loadingLocation = state.status else { return state }
 		switch event {
 		case .onJourneyDataUpdated:
-			guard let dep = state.depStop,let arr = state.arrStop else {
-				return State(depStop: state.depStop,arrStop: state.arrStop, timeChooserDate: state.timeChooserDate, status: .idle)
-			}
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				timeChooserDate: state.timeChooserDate,
-				status: .journeys(.init(depStop: dep, arrStop: arr, timeChooserDate: state.timeChooserDate))
-			)
+			return state
 		case .onDepartureEdit:
 			self.topSearchFieldText = ""
 			return State(
@@ -76,12 +68,33 @@ extension ChewViewModel {
 				timeChooserDate: date,
 				status: .idle
 			)
-		case .onBackFromJourneyDetails:
-			return state
-		case .didReceiveLocaitonData:
-			return state
+		case .didReceiveLocationData(let lat, let long):
+			return State(
+				depStop: StopType.location(.init(
+					type: "location",
+					id: nil,
+					name: "My Location",
+					address: "My Location",
+					location: .init(
+						type: "location",
+						id: nil,
+						latitude: lat,
+						longitude: long
+					),
+					products: nil
+				)),
+				arrStop: state.arrStop,
+				timeChooserDate: state.timeChooserDate,
+				status: .idle
+			)
 		case .didFailToLoadLocationData:
-			return state
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				timeChooserDate: state.timeChooserDate,
+				status: .idle
+			)
+
 		}
 	}
 }

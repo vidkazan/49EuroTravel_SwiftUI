@@ -87,9 +87,8 @@ extension ChewViewModel {
 		case onStopsSwitch
 		case onNewDate(DateType)
 		case onJourneyDataUpdated
-		case onBackFromJourneyDetails
 		case didLocationButtonPressed
-		case didReceiveLocaitonData(lat: Double,long: Double)
+		case didReceiveLocationData(lat: Double,long: Double)
 		case didFailToLoadLocationData
 		
 		
@@ -111,9 +110,7 @@ extension ChewViewModel {
 				return "onNewDate"
 			case .onJourneyDataUpdated:
 				return "onJourneyDataUpdated"
-			case .onBackFromJourneyDetails:
-				return "onBackFromJourneyDetails"
-			case .didReceiveLocaitonData:
+			case .didReceiveLocationData:
 				return "didReceiveLocaitonData"
 			case .didFailToLoadLocationData:
 				return "didFailToLoadLocationData"

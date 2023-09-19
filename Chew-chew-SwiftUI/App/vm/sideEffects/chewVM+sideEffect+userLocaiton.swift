@@ -17,7 +17,7 @@ extension ChewViewModel {
 			}
 			return self.requestUserLocation()
 				.map { res in
-					return Event.didReceiveLocaitonData(lat: res.lat, long: res.long)
+					return Event.didReceiveLocationData(lat: res.lat, long: res.long)
 				}
 				.catch { error in Just(.didFailToLoadLocationData) }
 				.eraseToAnyPublisher()

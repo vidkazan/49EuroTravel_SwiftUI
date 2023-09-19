@@ -76,14 +76,10 @@ extension ChewViewModel {
 				timeChooserDate: date,
 				status: .idle
 			)
-		case .onBackFromJourneyDetails:
-			return state
-		case .didReceiveLocaitonData:
+		case .didReceiveLocationData:
 			return state
 		case .didFailToLoadLocationData:
 			return state
-//		case .didTapJourney:
-//			return state
 		}
 	}
 }

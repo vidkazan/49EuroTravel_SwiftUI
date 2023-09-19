@@ -27,16 +27,12 @@ extension ChewViewModel {
 			return state
 		case .onJourneyDataUpdated:
 			return state
-		case .onBackFromJourneyDetails:
-			return state
 		case .didLocationButtonPressed:
 			return state
-		case .didReceiveLocaitonData:
+		case .didReceiveLocationData:
 			return state
 		case .didFailToLoadLocationData:
 			return state
-//		case .didTapJourney:
-//			return state
 		}
 	}
 }

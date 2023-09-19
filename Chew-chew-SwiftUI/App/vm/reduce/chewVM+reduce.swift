@@ -9,7 +9,7 @@ import Foundation
 
 extension ChewViewModel {
 	func transform(_ state: State, _ event: Event){
-		if case .didReceiveLocaitonData = event{
+		if case .didReceiveLocationData = event{
 			self.topSearchFieldText = "My Location"
 		}
 	}
