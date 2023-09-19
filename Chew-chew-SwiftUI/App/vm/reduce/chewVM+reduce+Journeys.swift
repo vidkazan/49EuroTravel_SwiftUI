@@ -68,12 +68,7 @@ extension ChewViewModel {
 			return state
 		case .didFailToLoadLocationData:
 			return state
-//		case .didTapJourney:
-//			return State(
-//				depStop: state.depStop,
-//				arrStop: state.arrStop,
-//				timeChooserDate: state.timeChooserDate,
-//				status: .journeyDetails(.init(refreshToken: )))
+			
 		}
 	}
 }

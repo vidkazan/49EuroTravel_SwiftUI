@@ -72,7 +72,7 @@
 		7D7A553A2AA4B3E5000256EF /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A55392AA4B3E5000256EF /* Feedback.swift */; };
 		7D7A553D2AA4B407000256EF /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A553C2AA4B407000256EF /* System.swift */; };
 		7D7B3D9F2AB8DBFD0070E44D /* LegDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3D9E2AB8DBFD0070E44D /* LegDetailsView.swift */; };
-		7D7B3DA22AB9CC7E0070E44D /* LegDetailsMainViewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DA12AB9CC7E0070E44D /* LegDetailsMainViewView.swift */; };
+		7D7B3DA22AB9CC7E0070E44D /* LegDetailsStopView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DA12AB9CC7E0070E44D /* LegDetailsStopView.swift */; };
 		7D7B3DAA2AB9D31D0070E44D /* LegDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DA92AB9D31D0070E44D /* LegDetailsVM.swift */; };
 		7D7B3DAC2AB9D34A0070E44D /* LegDetailsVM+state.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DAB2AB9D34A0070E44D /* LegDetailsVM+state.swift */; };
 		7D7B3DAE2AB9D3620070E44D /* LegDetailsVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DAD2AB9D3620070E44D /* LegDetailsVM+reduce.swift */; };
@@ -186,7 +186,7 @@
 		7D7A55392AA4B3E5000256EF /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		7D7A553C2AA4B407000256EF /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
 		7D7B3D9E2AB8DBFD0070E44D /* LegDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegDetailsView.swift; sourceTree = "<group>"; };
-		7D7B3DA12AB9CC7E0070E44D /* LegDetailsMainViewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegDetailsMainViewView.swift; sourceTree = "<group>"; };
+		7D7B3DA12AB9CC7E0070E44D /* LegDetailsStopView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegDetailsStopView.swift; sourceTree = "<group>"; };
 		7D7B3DA92AB9D31D0070E44D /* LegDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegDetailsVM.swift; sourceTree = "<group>"; };
 		7D7B3DAB2AB9D34A0070E44D /* LegDetailsVM+state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsVM+state.swift"; sourceTree = "<group>"; };
 		7D7B3DAD2AB9D3620070E44D /* LegDetailsVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsVM+reduce.swift"; sourceTree = "<group>"; };
@@ -514,7 +514,7 @@
 		7D7B3DA42AB9CEE80070E44D /* view */ = {
 			isa = PBXGroup;
 			children = (
-				7D7B3DA12AB9CC7E0070E44D /* LegDetailsMainViewView.swift */,
+				7D7B3DA12AB9CC7E0070E44D /* LegDetailsStopView.swift */,
 				7D7B3D9E2AB8DBFD0070E44D /* LegDetailsView.swift */,
 			);
 			path = view;
@@ -772,7 +772,7 @@
 				7D4B1B952AA8FDA20096F372 /* SearchLocationVM+state.swift in Sources */,
 				7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */,
 				7D462D522AAC96C000BC0D65 /* SearchStopsView+RightButton.swift in Sources */,
-				7D7B3DA22AB9CC7E0070E44D /* LegDetailsMainViewView.swift in Sources */,
+				7D7B3DA22AB9CC7E0070E44D /* LegDetailsStopView.swift in Sources */,
 				7D6C5C362AAF7C4500DEFC57 /* JourneyDetailsView.swift in Sources */,
 				7D000CF02AB86A4700566120 /* chewVM+sideEffect+userLocaiton.swift in Sources */,
 				7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */,

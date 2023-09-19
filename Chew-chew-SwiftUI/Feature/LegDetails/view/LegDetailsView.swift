@@ -10,9 +10,7 @@ import SwiftUI
 
 
 struct LegDetailsView: View {
-	@ObservedObject var viewModelJourney : JourneyDetailsViewModel
 	@ObservedObject var viewModel : LegDetailsViewModel
-	
 	var body : some View {
 		VStack {
 			ZStack {

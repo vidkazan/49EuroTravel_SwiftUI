@@ -9,7 +9,7 @@ import SwiftUI
 
 struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var viewModel : JourneyDetailsViewModel
+	var viewModel : JourneyDetailsViewModel
 	var body: some View {
 		VStack {
 			header()
@@ -18,14 +18,14 @@ struct JourneyDetailsView: View {
 				LazyVStack{
 					if let dto = viewModel.state.data.legDTO {
 						ForEach(dto) { leg in
-							LegDetailsView(viewModelJourney: viewModel, viewModel: .init(leg: leg))
+							LegDetailsView(viewModel: .init(leg: leg))
 						}
 					}
 				}
 				.padding(10)
 			}
 		}
-		.navigationBarTitle("")
+//		.navigationBarTitle("")
 //		.navigationBarHidden(true)
 		Spacer()
 	}

@@ -57,7 +57,8 @@ extension JourneyListViewModel {
 				minutes: DateParcer.getTwoDateIntervalInMinutes(
 					date1: firstTSActual,
 					date2: lastTSActual)
-			) ?? "error", legDTO: journey.legs,
+			) ?? "error",
+			legDTO: journey.legs,
 			legs: legsDataSourse.reversed(),
 			sunEvents: sunEventGenerator.getSunEvents(),
 			isReachable: isReachable,
