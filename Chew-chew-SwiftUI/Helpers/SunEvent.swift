@@ -104,9 +104,9 @@ class SunEventGenerator {
 	}
 	
 	private func getLocationByDate(date: Date) -> CLLocationCoordinate2D? {
-		if (self.duration != nil) && (self.duration != 0) {
-			let avgSpeedLat = abs(self.locationStart.latitude - self.locationFinal.latitude) / self.duration!
-			let avgSpeedLong = abs(self.locationStart.longitude - self.locationFinal.longitude) / self.duration!
+		if let duration = self.duration, duration != 0 {
+			let avgSpeedLat = abs(self.locationStart.latitude - self.locationFinal.latitude) / duration
+			let avgSpeedLong = abs(self.locationStart.longitude - self.locationFinal.longitude) / duration
 			
 			if let currentDuration = DateParcer.getTwoDateInterval(date1: dateStart, date2: date) {
 				return CLLocationCoordinate2D(

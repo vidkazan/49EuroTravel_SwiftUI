@@ -15,14 +15,17 @@ extension JourneyDetailsViewModel {
 			switch event {
 			case .didLoadJourneyData(let data):
 				return State(
+					data: state.data,
 					status: .loadedJourneyData(data: data)
 				)
 			case .didFailedToLoadJourneyData(let error):
 				return State(
+					data: state.data,
 					status: .error(error: error)
 				)
 			case .didReloadJourneys:
 				return State(
+					data: state.data,
 					status: .loading(refreshToken: refreshToken)
 				)
 			}
@@ -34,6 +37,7 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didReloadJourneys:
 				return State(
+					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
 				)
 			}
@@ -45,6 +49,7 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didReloadJourneys:
 				return State(
+					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
 				)
 			}

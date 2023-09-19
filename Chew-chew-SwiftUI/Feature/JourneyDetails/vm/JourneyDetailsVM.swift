@@ -18,17 +18,17 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	var refreshToken : String?
-		
-	init(refreshToken : String?) {
+	
+	init(refreshToken : String?,data: JourneyCollectionViewDataSourse) {
 		self.refreshToken = refreshToken
-		self.state = .init(status: .loading(refreshToken: refreshToken))
+		self.state = .init(data: data, status: .loading(refreshToken: refreshToken))
 		Publishers.system(
-			initial: .init(status: .loading(refreshToken: refreshToken)),
+			initial: .init(data: data, status: .loading(refreshToken: refreshToken)),
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenLoadingJourneyByRefreshToken()
+//				self.whenLoadingJourneyByRefreshToken()
 			]
 		)
 			.assign(to: \.state, on: self)

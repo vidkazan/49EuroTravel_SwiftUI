@@ -19,7 +19,17 @@ struct JourneyCell: View {
 		VStack {
 			JourneyHeaderView(journey: journey)
 			LegsView(journey : journey)
-			platformView()
+			HStack {
+				PlatformView(
+					isShowingPlatormWord: false,
+					platform: journey.legDTO?.first?.departurePlatform,
+					plannedPlatform: journey.legDTO?.first?.plannedDeparturePlatform)
+				Text(journey.legDTO?.first?.origin?.name != chewVM.topSearchFieldText ? journey.legDTO?.first?.origin?.name ?? "" : "")
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.secondary)
+				Spacer()
+			}
+			.padding(7)
 			BadgesView(badges: journey.badges)
 		}
 		.id(journey.id)
@@ -31,54 +41,28 @@ struct JourneyCell: View {
 		}
 		.cornerRadius(10)
 	}
-	
-	func platformView() -> some View {
-		HStack {
-			if let pl = journey.legDTO?.first?.departurePlatform {
-				Text(pl)
-					.foregroundColor(pl == journey.legDTO?.first?.plannedDeparturePlatform ? .primary : .red)
-					.font(.system(size: 12,weight: .semibold))
-					.padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-					.background(Color(red: 0.1255, green: 0.156, blue: 0.4))
-			}
-			Text(journey.legDTO?.first?.origin?.name != chewVM.topSearchFieldText ? journey.legDTO?.first?.origin?.name ?? "" : "")
-				.font(.system(size: 12,weight: .semibold))
-				.foregroundColor(.secondary)
-			Spacer()
-		}
-		.padding(7)
-	}
 }
 
-struct JourneyCell_Previews: PreviewProvider {
-	static var previews: some View {
-		VStack {
-			Spacer()
-			JourneyCell(
-				journey: .init(
-					id: UUID(),
-					startPlannedTimeLabelText: "11:11",
-					startActualTimeLabelText: "11:12",
-					endPlannedTimeLabelText: "22:22",
-					endActualTimeLabelText: "22:23",
-					startDate: .now,
-					endDate: .now,
-					durationLabelText: "11 h 11 min", legDTO: [],
-					legs: [],
-					sunEvents: [
-						.init(
-							type: .day,
-							location: .init(latitude: 53, longitude: 6),
-							timeStart: .now,
-							timeFinal: .now
-						)],
-					isReachable: true,
-					badges: [.dticket],
-					refreshToken: ""
-			))
-			.frame(maxHeight: 130)
-			Spacer()
+struct PlatformView: View {
+	let isShowingPlatormWord : Bool
+	let platform : String?
+	let plannedPlatform : String?
+	var body: some View {
+		if let pl = platform {
+			HStack(spacing: 2) {
+				if isShowingPlatormWord == true {
+					Text("platform")
+						.foregroundColor(.gray)
+					.font(.system(size: 12,weight: .regular))
+				}
+				Text(pl)
+					.padding(3)
+					.frame(minWidth: 20)
+					.background(Color(red: 0.1255, green: 0.156, blue: 0.4))
+					.foregroundColor(pl == plannedPlatform ? .primary : .red)
+					.font(.system(size: 12,weight: .semibold))
+					
+			}
 		}
-		.background(.black)
 	}
 }

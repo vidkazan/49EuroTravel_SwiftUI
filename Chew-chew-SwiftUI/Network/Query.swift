@@ -71,6 +71,7 @@ enum Query{
 	
 	case showAddresses(showAddresses : Bool)
 	case showPointsOfInterests(showPointsOfInterests : Bool)
+	case stopovers(isShowing: Bool)
 	
 	func getQueryMethod() -> URLQueryItem {
 		switch self {
@@ -220,6 +221,10 @@ enum Query{
 			return URLQueryItem(
 				name: "to.id",
 				value: String(poiId))
+		case .stopovers(isShowing: let isShowing):
+			return URLQueryItem(
+				name: "stopovers",
+				value: String(isShowing))
 		}
 	}
 	static func getQueryItems(methods : [Query]) -> [URLQueryItem] {

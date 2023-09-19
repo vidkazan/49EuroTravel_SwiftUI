@@ -8,14 +8,18 @@
 import Foundation
 import SwiftUI
 
-struct BadgeDataSource : Equatable, Identifiable,Hashable {
+struct BadgeDataSource : Equatable, Identifiable {
+	static func == (lhs: BadgeDataSource, rhs: BadgeDataSource) -> Bool {
+		lhs.name == rhs.name
+	}
+	
 	let id = UUID()
-	let color : UIColor
+	let style : Color?
 	let name : String
 	
-	init(color : UIColor, name : String){
+	init(style : Color? = nil, name : String){
 		self.name = name
-		self.color = color
+		self.style = style
 	}
 }
 
@@ -25,6 +29,10 @@ enum Badges : Identifiable,Hashable {
 	case cancelled
 	case connectionNotReachable
 	case alertFromRemark
+	
+	case lineNumber(num : String)
+	case legDuration(dur : Int)
+	case legDirection(dir : String)
 	 
 	var id : Int {
 		switch self {
@@ -38,6 +46,12 @@ enum Badges : Identifiable,Hashable {
 			return 3
 		case .alertFromRemark:
 			return 4
+		case .lineNumber:
+			return 5
+		case .legDuration:
+			return 6
+		case .legDirection:
+			return 7
 		}
 	}
 	
@@ -45,24 +59,31 @@ enum Badges : Identifiable,Hashable {
 		switch self {
 		case .price(let price):
 			return BadgeDataSource(
-				color: UIColor(hue: 0.5, saturation: 1, brightness: 0.4, alpha: 1),
+				style: Color(hue: 0.5, saturation: 1, brightness: 0.4),
 				name: price)
 		case .dticket:
 			return BadgeDataSource(
-				color: UIColor(hue: 0.35, saturation: 0, brightness: 0.6, alpha: 1),
+				style: Color(hue: 0.35, saturation: 0, brightness: 0.6),
 				name: "DeutschlandTicket")
 		case .cancelled:
 			return BadgeDataSource(
-				color: UIColor(hue: 0, saturation: 1, brightness: 0.7, alpha: 1),
+				style: Color(hue: 0, saturation: 1, brightness: 0.7),
 				name: "cancelled")
 		case .connectionNotReachable:
 			return BadgeDataSource(
-				color: UIColor(hue: 0, saturation: 1, brightness: 0.7, alpha: 1),
+				style: Color(hue: 0, saturation: 1, brightness: 0.7),
 				name: "not reachable")
 		case .alertFromRemark:
 			return BadgeDataSource(
-				color: UIColor(hue: 0, saturation: 1, brightness: 0.7, alpha: 1),
+				style: Color(hue: 0, saturation: 1, brightness: 0.7),
 				name: " ! ")
+		case .lineNumber(num: let num):
+			return BadgeDataSource(
+				name: num)
+		case .legDuration(dur: let dur):
+			return BadgeDataSource(name: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: dur) ?? "duration")
+		case .legDirection(dir: let dir):
+			return BadgeDataSource(name: dir)
 		}
 	}
 }

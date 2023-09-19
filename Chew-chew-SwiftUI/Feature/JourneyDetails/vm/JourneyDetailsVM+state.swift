@@ -9,8 +9,10 @@ import Foundation
 
 extension JourneyDetailsViewModel {
 	struct State : Equatable {
-		var status : Status
-		init(status: Status) {
+		let data : JourneyCollectionViewDataSourse
+		let status : Status
+		init(data: JourneyCollectionViewDataSourse, status: Status) {
+			self.data = data
 			self.status = status
 		}
 	}

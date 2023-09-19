@@ -10,22 +10,23 @@ import SwiftUI
 struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	let data : JourneyCollectionViewDataSourse
 	var body: some View {
-		header()
-			.padding(10)
-		switch viewModel.state.status {
-		case .loading:
-			Spacer()
-			ProgressView()
-		case .loadedJourneyData(data: let data):
-			Spacer()
-			Text("loadded")
-		case .error(error: let error):
-			Spacer()
-			Text(error.description)
+		VStack {
+			header()
+				.padding(10)
+			ScrollView() {
+				LazyVStack{
+					if let dto = viewModel.state.data.legDTO {
+						ForEach(dto) { leg in
+							LegDetailsView(viewModelJourney: viewModel, viewModel: .init(leg: leg))
+						}
+					}
+				}
+				.padding(10)
+			}
 		}
+		.navigationBarTitle("")
+//		.navigationBarHidden(true)
 		Spacer()
 	}
 }
-

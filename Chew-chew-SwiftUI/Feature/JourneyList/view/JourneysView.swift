@@ -31,7 +31,7 @@ struct JourneysView: View {
 						LazyVStack{
 							ForEach(journeyViewModel.state.journeys,id: \.id) { journey in
 								NavigationLink(destination: {
-									NavigationLazyView(JourneyDetailsView(viewModel: .init(refreshToken: journey.refreshToken), data: journey))
+									NavigationLazyView(JourneyDetailsView(viewModel: .init(refreshToken: journey.refreshToken, data: journey)))
 								}, label: {
 									JourneyCell(journey: journey)
 								})	

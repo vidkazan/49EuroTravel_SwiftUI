@@ -13,11 +13,11 @@ extension JourneyDetailsView {
 			VStack {
 				HStack {
 					HStack {
-						Text(data.legDTO?.first?.origin?.name ?? "Origin")
+						Text(viewModel.state.data.legDTO?.first?.origin?.name ?? "Origin")
 							.font(.system(size: 17,weight: .semibold))
 							.foregroundColor(.primary)
 						Image(systemName: "arrow.right")
-						Text(data.legDTO?.last?.destination?.name ?? "Departure")
+						Text(viewModel.state.data.legDTO?.last?.destination?.name ?? "Departure")
 							.font(.system(size: 17,weight: .semibold))
 							.foregroundColor(.primary)
 					}
@@ -36,25 +36,25 @@ extension JourneyDetailsView {
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
 					HStack {
-						Text(data.startActualTimeLabelText.isEmpty ? data.startPlannedTimeLabelText : data.startActualTimeLabelText)
+						Text(viewModel.state.data.startActualTimeLabelText.isEmpty ? viewModel.state.data.startPlannedTimeLabelText : viewModel.state.data.startActualTimeLabelText)
 						Text("-")
-						Text(data.endActualTimeLabelText.isEmpty ? data.endPlannedTimeLabelText : data.endActualTimeLabelText)
+						Text(viewModel.state.data.endActualTimeLabelText.isEmpty ? viewModel.state.data.endPlannedTimeLabelText : viewModel.state.data.endActualTimeLabelText)
 					}
 						.padding(5)
 						.font(.system(size: 12,weight: .medium))
 						.background(.ultraThinMaterial.opacity(0.5))
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
-					Text(data.durationLabelText)
+					Text(viewModel.state.data.durationLabelText)
 						.padding(5)
 						.font(.system(size: 12,weight: .medium))
 						.background(.ultraThinMaterial.opacity(0.5))
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
-					if data.legDTO?.count ?? 0 > 1 {
+					if viewModel.state.data.legDTO?.count ?? 0 > 1 {
 						HStack {
 							Image(systemName: "arrow.triangle.2.circlepath")
-							Text(String((data.legDTO?.count ?? 1) - 1))
+							Text(String((viewModel.state.data.legDTO?.count ?? 1) - 1))
 						}
 							.padding(5)
 							.font(.system(size: 12,weight: .medium))
@@ -64,7 +64,7 @@ extension JourneyDetailsView {
 					}
 					Spacer()
 				}
-				LegsView(journey : data)
+				LegsView(journey : viewModel.state.data)
 					.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
 					.background(.ultraThinMaterial.opacity(0.5))
 					.cornerRadius(8)

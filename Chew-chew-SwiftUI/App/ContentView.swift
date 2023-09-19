@@ -39,6 +39,8 @@ struct ContentView: View {
 				startPoint: UnitPoint(x: 0.5, y: 0.1),
 				endPoint: UnitPoint(x: 0.5, y: 0.4))
 			)
+			.navigationBarTitle("")
+			.navigationBarHidden(true)
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: chewViewModel.state.status)
 		}

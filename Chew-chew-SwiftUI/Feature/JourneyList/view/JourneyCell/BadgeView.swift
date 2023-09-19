@@ -18,16 +18,55 @@ struct BadgeView : View {
 		case .price,.cancelled,.connectionNotReachable,.alertFromRemark:
 			Text(badge.badgeDataSourse.name)
 				.font(.system(size: 12))
-				.foregroundColor(.white)
+				.foregroundColor(.primary)
 				.padding(4)
-				.background(Color(badge.badgeDataSourse.color))
+				.background(badge.badgeDataSourse.style)
+				.background(.ultraThinMaterial)
 				.cornerRadius(8)
 		case .dticket:
 			DTicketLogo()
 				.font(.system(size: 12))
 				.padding(4)
-				.background(Color(badge.badgeDataSourse.color).opacity(0.5))
+				.background(badge.badgeDataSourse.style)
+				.background(.ultraThinMaterial)
 				.cornerRadius(8)
+		case .lineNumber:
+			Text(badge.badgeDataSourse.name)
+				.font(.system(size: 12,weight: .semibold))
+				.foregroundColor(.primary)
+				.padding(4)
+				.background(badge.badgeDataSourse.style)
+				.background(.ultraThinMaterial)
+				.cornerRadius(8)
+		case .legDuration:
+			HStack(spacing: 2) {
+				Text(badge.badgeDataSourse.name)
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.secondary)
+					.background(badge.badgeDataSourse.style)
+					.lineSpacing(2)
+					.lineLimit(1)
+			}
+			.padding(4)
+			.background(.ultraThinMaterial)
+			.cornerRadius(8)
+		case .legDirection:
+			HStack(spacing: 2) {
+				Text("to")
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.secondary)
+					.background(badge.badgeDataSourse.style)
+					.lineSpacing(2)
+				Text(badge.badgeDataSourse.name)
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.primary)
+					.background(badge.badgeDataSourse.style)
+					.lineSpacing(2)
+					.lineLimit(1)
+			}
+			.padding(4)
+			.background(.ultraThinMaterial)
+			.cornerRadius(8)
 		}
 	}
 }

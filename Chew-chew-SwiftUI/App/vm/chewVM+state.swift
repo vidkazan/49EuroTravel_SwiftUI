@@ -87,10 +87,7 @@ extension ChewViewModel {
 		case onStopsSwitch
 		case onNewDate(DateType)
 		case onJourneyDataUpdated
-		
-//		case didTapJourney
 		case onBackFromJourneyDetails
-		
 		case didLocationButtonPressed
 		case didReceiveLocaitonData(lat: Double,long: Double)
 		case didFailToLoadLocationData
@@ -122,8 +119,6 @@ extension ChewViewModel {
 				return "didFailToLoadLocationData"
 			case .didLocationButtonPressed:
 				return "didLocationButtonPressed"
-//			case .didTapJourney:
-//				return "didTapJourney"
 			}
 		}
 	}

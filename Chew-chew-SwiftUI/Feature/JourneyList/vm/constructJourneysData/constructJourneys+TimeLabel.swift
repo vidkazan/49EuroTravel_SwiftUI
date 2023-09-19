@@ -21,10 +21,11 @@ extension JourneyListViewModel {
 		guard let firstTS = firstTS, let lastTS = lastTS, let currentTS = currentTS else { return nil }
 		let tl = TimelineTimeLabelDataSourse(
 			text: DateParcer.getTimeStringFromDate(date: currentTS),
-			   textCenterYposition: self.getTimeLabelPosition(
+			textCenterYposition: self.getTimeLabelPosition(
 				   firstTS: firstTS,
 				   lastTS: lastTS,
-				   currentTS: currentTS)!)
+				   currentTS: currentTS) ?? 0
+		)
 		return tl
 	}
 }

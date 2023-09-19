@@ -698,5 +698,68 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4BC1C922-6FBD-4826-AF39-A8124B2C4067"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/LegDetails/view/LegDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "4BC1C922-6FBD-4826-AF39-A8124B2C4067 - 960aeded7503cdc2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Chew_chew_SwiftUI.StopOver) -&gt; Chew_chew_SwiftUI.LegStopView in closure #1 () -&gt; SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.LegStopView, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.StopOver&gt;, Foundation.UUID, Chew_chew_SwiftUI.LegStopView&gt;&gt;, Chew_chew_SwiftUI.LegStopView)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ZStack&lt;&lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in Chew_chew_SwiftUI.LegDetailsView.body.getter : some"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/LegDetails/view/LegDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "572">
+               </Location>
+               <Location
+                  uuid = "4BC1C922-6FBD-4826-AF39-A8124B2C4067 - aaef8ed786cb90c2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.LegStopView, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.StopOver&gt;, Foundation.UUID, Swift.Optional&lt;Chew_chew_SwiftUI.LegStopView&gt;&gt;&gt;, Chew_chew_SwiftUI.LegStopView)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ZStack&lt;&lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in Chew_chew_SwiftUI.LegDetailsView.body.getter : some"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/LegDetails/view/LegDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "948">
+               </Location>
+               <Location
+                  uuid = "4BC1C922-6FBD-4826-AF39-A8124B2C4067 - aaef8ed786cb90c2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.LegStopView, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.StopOver&gt;, Foundation.UUID, Swift.Optional&lt;Chew_chew_SwiftUI.LegStopView&gt;&gt;&gt;, Chew_chew_SwiftUI.LegStopView)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ZStack&lt;&lt;&lt;opaque return type of SwiftUI.View.background&lt;&#x3c4;_0_0 where &#x3c4;_1_0: SwiftUI.View&gt;(alignment: SwiftUI.Alignment, content: () -&gt; &#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt; in Chew_chew_SwiftUI.LegDetailsView.body.getter : some"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/LegDetails/view/LegDetailsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "26"
+                  endingLineNumber = "26"
+                  offsetFromSymbolStart = "1156">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

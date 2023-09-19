@@ -94,14 +94,14 @@ class DateParcer {
 			var formattedTime = ""
 			
 			if hours > 0 {
-				formattedTime = "\(hours) h"
+				formattedTime = "\(hours)h"
 			}
 			
 			if remainingMinutes > 0 {
 				if !formattedTime.isEmpty {
 					formattedTime += " "
 				}
-				formattedTime += "\(remainingMinutes) min"
+				formattedTime += "\(remainingMinutes)min"
 			}
 			return formattedTime
 	}
@@ -116,8 +116,8 @@ class DateParcer {
  }
 
 	static func getDaysIncludedInRange(startDateUnnormalised: Date, endDateUnnormalised: Date) -> [Date] {
-		let startDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: startDateUnnormalised)!
-		let endDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: endDateUnnormalised)!
+		guard let startDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: startDateUnnormalised),
+			  let endDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: endDateUnnormalised) else { return [] }
 		
 		var currentDate = startDate
 		var allDays: [Date] = []
@@ -126,7 +126,7 @@ class DateParcer {
 	   
 		while currentDate <= endDate {
 			allDays.append(currentDate)
-			currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate)!
+			guard let currentDate = calendar.date(byAdding: .day, value: 1, to: currentDate) else { return [] }
 		}
 		return allDays
 	}

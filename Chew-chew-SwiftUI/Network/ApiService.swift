@@ -76,7 +76,7 @@ class ApiService  {
 			case .customGet(let path):
 				return path
 			case .journeyByRefreshToken(let ref):
-				return Constants.apiData.urlPathJourneys + "/\(ref)"
+				return Constants.apiData.urlPathJourneys + "/" + (ref ?? "")
 			}
 		}
 		

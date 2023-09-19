@@ -9,7 +9,8 @@ import Foundation
 
 // /journeys
 
-struct StopOver : Codable,Equatable {
+struct StopOver : Codable,Equatable,Identifiable {
+	let id = UUID()
 	let stop				: Stop?
 	let departure,
 		plannedDeparture	: String?
@@ -23,9 +24,27 @@ struct StopOver : Codable,Equatable {
 	let departurePlatform,
 		plannedDeparturePlatform	: String?
 	let remarks						: [Remark]?
+	
+	
+	private enum CodingKeys : String, CodingKey {
+		case  stop
+		case  departure
+		case plannedDeparture
+		case  arrival
+		case plannedArrival
+		case  departureDelay
+		case arrivalDelay
+		case  reachable
+		case  arrivalPlatform
+		case plannedArrivalPlatform
+		case  departurePlatform
+		case plannedDeparturePlatform
+		case  remarks
+	}
 }
 
-struct Leg : Codable,Equatable{
+struct Leg : Codable,Equatable,Identifiable{
+	let id = UUID()
 	let origin : Stop?
 	let destination : Stop?
 	let line : Line?
@@ -48,6 +67,31 @@ struct Leg : Codable,Equatable{
 		departurePrognosisType: String?
 	let walking : Bool?
 	let stopovers : [StopOver]?
+	
+	private enum CodingKeys : String, CodingKey {
+		case origin
+		case destination
+		case line
+		case remarks
+		case departure
+		case plannedDeparture
+		case arrival
+		case plannedArrival
+		case departureDelay
+		case arrivalDelay
+		case reachable
+		case tripId
+		case direction
+//		case currentLocation
+		case arrivalPlatform
+		case plannedArrivalPlatform
+//		case arrivalPrognosisType
+		case departurePlatform
+		case plannedDeparturePlatform
+		case departurePrognosisType
+		case walking
+		case stopovers
+	}
 }
 
 struct Price : Codable,Equatable {
