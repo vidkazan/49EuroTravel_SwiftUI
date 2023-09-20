@@ -21,7 +21,7 @@ struct LegView: View {
 				.fill(
 					leg.delayedAndNextIsNotReachable == true ? Color(hue: 0, saturation: 1, brightness: 0.4) : Color.init(uiColor: .systemGray5))
 				.cornerRadius(8)
-				.overlay() {
+				.overlay {
 					if (Int(geo.size.width / 3) > leg.name.count) {
 						Text(leg.name)
 							.foregroundColor(.primary)

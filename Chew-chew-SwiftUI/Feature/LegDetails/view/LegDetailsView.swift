@@ -13,54 +13,43 @@ struct LegDetailsView: View {
 	@ObservedObject var viewModel : LegDetailsViewModel
 	var body : some View {
 		VStack {
-			ZStack {
-				VStack {
+			VStack {
+				if let stop = viewModel.state.leg.stopovers?.first {
 					LegStopView(
-						viewModel: viewModel,
-						line: viewModel.state.leg.line,
-						type: .departure,
-						stopover: nil
+						type: .origin(stop, viewModel.state.leg.line, viewModel.state.leg),
+						vm: viewModel
 					)
-					if viewModel.state.status == .stopovers, let stopovers = viewModel.state.leg.stopovers {
-						ForEach(stopovers) { stopover in
-							if stopover != stopovers.first,stopover != stopovers.last {
-								LegStopView(
-									viewModel: viewModel,
-									line: nil,
-									type: .departure,
-									stopover: stopover
-								)
+				}
+				if viewModel.state.status == .stopovers {
+					ForEach(viewModel.state.leg.stopovers ?? []) { stopover in
+						if stopover != viewModel.state.leg.stopovers!.first,stopover != viewModel.state.leg.stopovers!.last {
+							LegStopView(type: .stopover(stopover), vm: viewModel)
 							}
 						}
 					}
+				if let stop = viewModel.state.leg.stopovers?.last {
 					LegStopView(
-						viewModel: viewModel,
-						line: nil,
-						type: .arrival,
-						stopover: nil
+						type: .destination(stop),
+						vm: viewModel
 					)
 				}
-				.background {
-					HStack {
-						Rectangle()
-							.fill(.ultraThinMaterial.opacity(0.5))
-							.frame(width: 20)
-							.cornerRadius(8)
-							.padding(5)
-							.padding(.leading,15)
-						Spacer()
-					}
+			}
+			.background {
+				HStack {
+					Rectangle()
+						.fill(.ultraThinMaterial.opacity(0.5))
+						.frame(width: 20)
+						.cornerRadius(8)
+						.padding(5)
+						.padding(.leading,15)
+					Spacer()
 				}
 			}
 		}
 		.padding(5)
 		.background(.ultraThinMaterial.opacity(0.5))
-		.overlay {
-			viewModel.state.leg.reachable == false ?
-			Color.black.opacity(0.7) :
-			Color.clear
-		}
 		.cornerRadius(10)
+		
 	}
 }
 

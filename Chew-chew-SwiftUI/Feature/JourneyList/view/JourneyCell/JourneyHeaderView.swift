@@ -9,30 +9,54 @@ import SwiftUI
 import CoreLocation
 
 struct TimeLabelView: View {
+	enum Arragement {
+		case left
+		case right
+		case top
+		case bottom
+	}
 	let isSmall : Bool
-	let isLeft : Bool
+	let arragement : Arragement
 	var planned : String
 	var actual : String
 	
-	init(isSmall: Bool, isLeft: Bool, planned: Date, actual: Date) {
+	init(isSmall: Bool, arragement : Arragement, planned: Date, actual: Date) {
 		self.isSmall = isSmall
-		self.isLeft = isLeft
+		self.arragement = arragement
 		self.planned = DateParcer.getTimeStringFromDate(date:planned)
 		self.actual = DateParcer.getTimeStringFromDate(date:actual)
 	}
 	
 	var body: some View {
-		HStack(spacing: 2){
-			switch isLeft {
-			case true:
-				if !isSmall {
-					actualTime()
+		switch arragement {
+		case .left,.right:
+			HStack(spacing: 2){
+				switch arragement == .left {
+				case true:
+					if !isSmall, actual != planned {
+						actualTime(actual: actual)
+					}
+					plannedTime()
+				case false:
+					plannedTime()
+					if !isSmall, actual != planned {
+						actualTime(actual: actual)
+					}
 				}
-				plannedTime()
-			case false:
-				plannedTime()
-				if !isSmall {
-					actualTime()
+			}
+		case .bottom,.top:
+			VStack(spacing: 2){
+				switch arragement == .top {
+				case true:
+					if !isSmall, actual != planned {
+						actualTime(actual: actual)
+					}
+					plannedTime()
+				case false:
+					plannedTime()
+					if !isSmall, actual != planned {
+						actualTime(actual: actual)
+					}
 				}
 			}
 		}
@@ -40,8 +64,8 @@ struct TimeLabelView: View {
 }
 
 extension TimeLabelView {
-	func actualTime() -> some View {
-		Text(actual == planned ? "" : planned)
+	func actualTime(actual : String) -> some View {
+		Text(actual)
 			.strikethrough()
 			.foregroundColor(.secondary)
 			.font(.system(size: 12,weight: .semibold))
@@ -60,14 +84,19 @@ struct JourneyHeaderView: View {
     var body: some View {
 		ZStack {
 			HStack{
-				TimeLabelView(isSmall: false, isLeft: false, planned: journey.startPlannedTimeDate, actual: journey.startActualTimeDate)
+				TimeLabelView(
+					isSmall: false,
+					arragement: .right,
+					planned: journey.startPlannedTimeDate,
+					actual: journey.startActualTimeDate
+				)
 				.padding(7)
 				Spacer()
 				Text(journey.durationLabelText)
 					.foregroundColor(.primary)
 					.font(.system(size: 12,weight: .semibold))
 				Spacer()
-				TimeLabelView(isSmall: false, isLeft: true, planned: journey.endPlannedTimeDate, actual: journey.endActualTimeDate)
+				TimeLabelView(isSmall: false, arragement: .left, planned: journey.endPlannedTimeDate, actual: journey.endActualTimeDate)
 				.padding(7)
 			}
 			.frame(maxWidth: .infinity)

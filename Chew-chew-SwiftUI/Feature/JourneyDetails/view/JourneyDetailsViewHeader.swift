@@ -69,10 +69,6 @@ extension JourneyDetailsView {
 					.background(.ultraThinMaterial.opacity(0.5))
 					.cornerRadius(8)
 			}
-			VStack {
-				
-			}
-				.background(.ultraThinMaterial.opacity(0.5))
 		}
 	}
 }
