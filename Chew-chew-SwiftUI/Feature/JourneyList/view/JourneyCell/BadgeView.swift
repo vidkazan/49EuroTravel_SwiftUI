@@ -87,6 +87,23 @@ struct BadgeView : View {
 //			.background(.ultraThinMaterial)
 			.background(.gray.opacity(0.15))
 			.cornerRadius(8)
+		case .walking:
+			HStack(spacing: 2) {
+				Image(systemName: "figure.walk.circle")
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.secondary)
+				Text("walk to")
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.secondary)
+					.background(badge.badgeData.style)
+					.lineSpacing(2)
+				Text(badge.badgeData.name)
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.primary)
+					.background(badge.badgeData.style)
+					.lineSpacing(2)
+					.lineLimit(1)
+			}
 		}
 	}
 }

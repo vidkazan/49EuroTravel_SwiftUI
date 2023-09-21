@@ -13,6 +13,7 @@ struct LegStopView : View {
 		case origin(LegViewData)
 		case stopover
 		case destination
+		case walk
 		
 		var description : String {
 			switch self {
@@ -22,6 +23,8 @@ struct LegStopView : View {
 				return "origin"
 			case .stopover:
 				return "stopover"
+			case .walk:
+				return "walk"
 			}
 		}
 	}
@@ -41,6 +44,8 @@ struct LegStopView : View {
 				return stopOver.departureActualTimeString
 			case .destination:
 				return stopOver.arrivalActualTimeString
+			case .walk:
+				return stopOver.departureActualTimeString
 			}
 		}()
 		self.plannedTS = {
@@ -51,6 +56,8 @@ struct LegStopView : View {
 				return stopOver.departurePlannedTimeString
 			case .destination:
 				return stopOver.arrivalPlannedTimeString
+			case .walk:
+				return stopOver.departureActualTimeString
 			}
 		}()
 	}
@@ -79,6 +86,10 @@ struct LegStopView : View {
 						.frame(height: 15,alignment: .center)
 				case .destination:
 					Text(stopOver.name)
+						.font(.system(size: 17,weight: .semibold))
+						.frame(height: 20,alignment: .center)
+				case .walk:
+					Text("My Location")
 						.font(.system(size: 17,weight: .semibold))
 						.frame(height: 20,alignment: .center)
 				}
@@ -114,6 +125,11 @@ struct LegStopView : View {
 					.frame(height: 20)
 				case .stopover:
 					EmptyView()
+				case .walk:
+					HStack(spacing: 3) {
+						BadgeView(badge: .walking(direction: "direction"))
+						BadgeView(badge: .walkingDistance(1100))
+					}
 				}
 			}
 			Spacer()

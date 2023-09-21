@@ -60,21 +60,15 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 		let arrivalPlatform,
 			plannedArrivalPlatform	: String?
 	}
-//	struct LineViewData : Equatable,Identifiable,Hashable {
-//		let id = UUID()
-//		let name : String
-//	}
 	let id : Int
 	let fillColor : Color
 	let legType : LegType
 	let direction : String
 	let duration : String
-//	let name : String
 	let legTopPosition : Double
 	let legBottomPosition : Double
 	var delayedAndNextIsNotReachable : Bool?
 	let remarks : [Remark]?
-//	let lineViewData : LineViewData?
 	let legStopsViewData : [StopViewData]
 }
 

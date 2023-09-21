@@ -14,6 +14,23 @@ struct LegDetailsView: View {
 	var body : some View {
 		VStack {
 			LazyVStack {
+				if case .foot(distance: let dist) = viewModel.state.leg.legType {
+					LegStopView(
+						type: .walk,
+						vm: viewModel,
+						stopOver: .init(
+							name: "walk name",
+							departurePlannedTimeString: "time",
+							departureActualTimeString: "time",
+							arrivalPlannedTimeString: "time",
+							arrivalActualTimeString: "time",
+							departurePlatform: nil,
+							plannedDeparturePlatform: nil,
+							arrivalPlatform: nil,
+							plannedArrivalPlatform: nil
+						)
+					)
+				}
 				if let stop = viewModel.state.leg.legStopsViewData.first {
 					LegStopView(
 						type: .origin(viewModel.state.leg),
@@ -42,7 +59,6 @@ struct LegDetailsView: View {
 			.background {
 				HStack {
 					Rectangle()
-//						.fill(.ultraThinMaterial.opacity(0.5))
 						.fill(.gray.opacity(0.1))
 						.frame(width: 20)
 						.cornerRadius(8)
@@ -56,7 +72,6 @@ struct LegDetailsView: View {
 			viewModel.send(event: .didtapExpandButton)
 		}
 		.padding(5)
-//		.background(.ultraThinMaterial.opacity(0.5))
 		.background(.gray.opacity(0.1))
 		.cornerRadius(10)
 		

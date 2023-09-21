@@ -23,8 +23,6 @@ struct JourneyDetailsView: View {
 				.padding(10)
 			}
 		}
-//		.navigationBarTitle("")
-//		.navigationBarHidden(true)
 		Spacer()
 	}
 }
