@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct LegStopView : View {
-//	var viewModel : LegDetailsViewModel
 	enum StopOverType : Equatable {
 		case origin(LegViewData)
 		case stopover
@@ -33,7 +32,6 @@ struct LegStopView : View {
 	
 	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : LegViewData.StopViewData) {
 		self.stopOver = stopOver
-//		self.viewModel = vm
 		self.stopType = type
 		self.actualTS = {
 			switch type {
@@ -65,7 +63,6 @@ struct LegStopView : View {
 				actual: actualTS
 			)
 			.padding(3)
-//			.background(.ultraThinMaterial)
 			.background(.gray.opacity(0.15))
 			.cornerRadius(stopType == .stopover ? 7 : 10 )
 			.frame(width: 60,alignment: .center)
@@ -106,24 +103,13 @@ struct LegStopView : View {
 						}
 						BadgeView(badge: .legDuration(dur: legViewData.duration)
 						)
-//						Button(action: {
-//							viewModel.send(event: .didtapExpandButton)
-//						}, label: {
-//							Image(systemName: viewModel.state.status == .idle ? "chevron.down" : "chevron.up")
-//								.font(.system(size: 12,weight: .semibold))
-//								.foregroundColor(.gray)
-//								.padding(7)
-//								.background(.ultraThinMaterial)
-//								.cornerRadius(10)
-//								.animation(.easeInOut, value: viewModel.state.status)
-//						})
 					}
 					.frame(height: 30)
 				case  .destination:
 					PlatformView(
 						isShowingPlatormWord: true,
-						platform: stopOver.departurePlatform,
-						plannedPlatform: stopOver.plannedDeparturePlatform
+						platform: stopOver.arrivalPlatform,
+						plannedPlatform: stopOver.plannedArrivalPlatform
 					)
 					.frame(height: 20)
 				case .stopover:

@@ -49,7 +49,9 @@ extension JourneyListViewModel {
 					arrivalPlannedTimeString: DateParcer.getTimeStringFromDate(date: DateParcer.getDateFromDateString(dateString: stop.plannedArrival)) ?? "time",
 					arrivalActualTimeString: DateParcer.getTimeStringFromDate(date: DateParcer.getDateFromDateString(dateString: stop.arrival)) ?? "time",
 					departurePlatform: stop.departurePlatform,
-					plannedDeparturePlatform: stop.plannedDeparturePlatform
+					plannedDeparturePlatform: stop.plannedDeparturePlatform,
+					arrivalPlatform: stop.arrivalPlatform,
+					plannedArrivalPlatform: stop.plannedArrivalPlatform
 				)
 		}
 		return res

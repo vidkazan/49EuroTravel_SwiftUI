@@ -34,7 +34,7 @@ struct JourneyCell: View {
 			
 		}
 //		.background(.ultraThinMaterial.opacity(0.5))
-		.background(.gray.opacity(0.07))
+		.background(.gray.opacity(0.1))
 		.overlay {
 			if !journey.isReachable {
 				Color.black.opacity(0.7)

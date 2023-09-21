@@ -57,6 +57,8 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 		let arrivalActualTimeString : String
 		let departurePlatform,
 			plannedDeparturePlatform	: String?
+		let arrivalPlatform,
+			plannedArrivalPlatform	: String?
 	}
 //	struct LineViewData : Equatable,Identifiable,Hashable {
 //		let id = UUID()

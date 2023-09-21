@@ -35,7 +35,7 @@ class ApiService  {
 				return "customGet"
 			case .journeys:
 				return "journeys"
-			case .journeyByRefreshToken(ref: let ref):
+			case .journeyByRefreshToken:
 				return "journeyByRefreshToken"
 			}
 		}
