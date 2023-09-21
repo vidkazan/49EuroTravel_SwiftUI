@@ -13,17 +13,17 @@ struct LegDetailsView: View {
 	@ObservedObject var viewModel : LegDetailsViewModel
 	var body : some View {
 		VStack {
-			VStack {
-				if let stop = viewModel.state.leg.stopovers?.first {
+			LazyVStack {
+				if let stop = viewModel.state.leg.legStopsViewData.first {
 					LegStopView(
-						type: .origin(viewModel.state.leg.line, viewModel.state.leg),
+						type: .origin(viewModel.state.leg),
 						vm: viewModel,
 						stopOver: stop
 					)
 				}
 				if viewModel.state.status == .stopovers {
-					ForEach(viewModel.state.leg.stopovers ?? []) { stopover in
-						if stopover != viewModel.state.leg.stopovers!.first,stopover != viewModel.state.leg.stopovers!.last {
+					ForEach(viewModel.state.leg.legStopsViewData) { stopover in
+						if stopover != viewModel.state.leg.legStopsViewData.first,stopover != viewModel.state.leg.legStopsViewData.last {
 								LegStopView(
 									type: .stopover,
 									vm: viewModel,
@@ -31,7 +31,7 @@ struct LegDetailsView: View {
 							}
 						}
 					}
-				if let stop = viewModel.state.leg.stopovers?.last {
+				if let stop = viewModel.state.leg.legStopsViewData.last {
 					LegStopView(
 						type: .destination,
 						vm: viewModel,
@@ -42,7 +42,8 @@ struct LegDetailsView: View {
 			.background {
 				HStack {
 					Rectangle()
-						.fill(.ultraThinMaterial.opacity(0.5))
+//						.fill(.ultraThinMaterial.opacity(0.5))
+						.fill(.gray.opacity(0.1))
 						.frame(width: 20)
 						.cornerRadius(8)
 						.padding(5)
@@ -52,64 +53,9 @@ struct LegDetailsView: View {
 			}
 		}
 		.padding(5)
-		.background(.ultraThinMaterial.opacity(0.5))
+//		.background(.ultraThinMaterial.opacity(0.5))
+		.background(.gray.opacity(0.1))
 		.cornerRadius(10)
 		
 	}
 }
-
-//struct JourneyDetails_Previews: PreviewProvider {
-//	static var previews: some View {
-//		LegDetailsView(
-//			viewModelJourney: .init(refreshToken: "", data: .init(id: .init(), startPlannedTimeLabelText: "", startActualTimeLabelText: "", endPlannedTimeLabelText: "", endActualTimeLabelText: "", startDate: .now, endDate: .now, durationLabelText: "", legDTO: [], legs: [], sunEvents: [], isReachable: true, badges: [], refreshToken: nil)),
-//			viewModel: .init(
-//				leg: .init(
-//					origin: .init(
-//					type: nil,
-//						 id: nil,
-//						 name: "Neuss Hbf",
-//						 address: nil,
-//						 location: nil,
-//						 products: nil
-//					 ),
-//					 destination: .init(
-//						 type: nil,
-//						 id: nil,
-//						 name: "Minden",
-//						 address: nil,
-//						 location: nil,
-//						 products: nil
-//					 ),
-//					 line: .init(
-//						 type: nil,
-//						 id: nil,
-//						 fahrtNr: nil,
-//						 name: "RE6",
-//						 linePublic: nil,
-//						 adminCode: nil,
-//						 productName: nil,
-//						 mode: nil,
-//						 product: nil
-//					 ),
-//					 remarks: nil,
-//					 departure: "2023-09-19T10:36:21Z",
-//					 plannedDeparture: "2023-09-19T10:36:21Z",
-//					 arrival: "2023-09-19T13:35:21Z",
-//					 plannedArrival: "2023-09-19T13:30:21Z",
-//					 departureDelay: 0,
-//					 arrivalDelay: 0,
-//					 reachable: true,
-//					 tripId: nil,
-//					 direction: "Buch",
-//					 arrivalPlatform: "13",
-//					 plannedArrivalPlatform: "13",
-//					 departurePlatform: "1",
-//					 plannedDeparturePlatform: "1",
-//					 departurePrognosisType: nil,
-//					 walking: false,
-//					 stopovers: []
-//			)
-//			))
-//	}
-//}
-//

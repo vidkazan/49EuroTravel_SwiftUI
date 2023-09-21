@@ -21,18 +21,18 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	
 	init() {
-//		self.state = State(depStop: nil, arrStop: nil, timeChooserDate: .now, status: .idle)
-		self.state = State(
-			depStop: .stop(.init(type: "station", id: "\(8000274)", name: "Neuss", address: nil, location: nil, products: nil)),
-			arrStop: .stop(.init(type: "station", id: "\(8006552)", name: "Wob", address: nil, location: nil, products: nil)),
-			timeChooserDate: .now, status: .idle)
+		self.state = State(depStop: nil, arrStop: nil, timeChooserDate: .now, status: .idle)
+//		self.state = State(
+//			depStop: .stop(.init(type: "station", id: "\(8000274)", name: "Neuss", address: nil, location: nil, products: nil)),
+//			arrStop: .stop(.init(type: "station", id: "\(8006552)", name: "Wob", address: nil, location: nil, products: nil)),
+//			timeChooserDate: .now, status: .idle)
 		Publishers.system(
 			initial:
-//				State(depStop: nil, arrStop: nil, timeChooserDate: .now, status: .idle),
-				State(
-				depStop: .stop(.init(type: "station", id: "\(8000274)", name: "Neuss", address: nil, location: nil, products: nil)),
-				arrStop: .stop(.init(type: "station", id: "\(8006552)", name: "Wob", address: nil, location: nil, products: nil)),
-				  timeChooserDate: .now, status: .idle),
+				State(depStop: nil, arrStop: nil, timeChooserDate: .now, status: .idle),
+//				State(
+//				depStop: .stop(.init(type: "station", id: "\(8000274)", name: "Neuss", address: nil, location: nil, products: nil)),
+//				arrStop: .stop(.init(type: "station", id: "\(8006552)", name: "Wob", address: nil, location: nil, products: nil)),
+//				  timeChooserDate: .now, status: .idle),
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [

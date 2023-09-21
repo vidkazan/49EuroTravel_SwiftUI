@@ -10,12 +10,12 @@ import Foundation
 extension JourneyListViewModel {
 	
 	struct State : Equatable {
-		var journeys :  [JourneyCollectionViewData]
+		var journeys :  [JourneyViewData]
 		var earlierRef : String?
 		var laterRef : String?
 		var status : Status
 		
-		init(journeys: [JourneyCollectionViewData], earlierRef: String?, laterRef: String?, status: Status) {
+		init(journeys: [JourneyViewData], earlierRef: String?, laterRef: String?, status: Status) {
 			self.journeys = journeys
 			self.earlierRef = earlierRef
 			self.laterRef = laterRef

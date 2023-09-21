@@ -20,11 +20,11 @@ struct TimeLabelView: View {
 	var planned : String
 	var actual : String
 	
-	init(isSmall: Bool, arragement : Arragement, planned: Date, actual: Date) {
+	init(isSmall: Bool, arragement : Arragement, planned: String, actual: String) {
 		self.isSmall = isSmall
 		self.arragement = arragement
-		self.planned = DateParcer.getTimeStringFromDate(date:planned)
-		self.actual = DateParcer.getTimeStringFromDate(date:actual)
+		self.planned = planned
+		self.actual = actual
 	}
 	
 	var body: some View {

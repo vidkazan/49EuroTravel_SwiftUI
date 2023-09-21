@@ -17,10 +17,7 @@ struct BadgesView: View {
 			ForEach(badges) { badge in
 				BadgeView(badge: badge)
 			}
-			
 		}
-		.frame(maxWidth: .infinity, alignment: .trailing)
-		.padding(EdgeInsets(top: 0, leading: 7, bottom: 7, trailing: 7))
     }
 }
 

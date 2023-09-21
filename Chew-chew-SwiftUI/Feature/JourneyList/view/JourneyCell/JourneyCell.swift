@@ -10,8 +10,8 @@ import SwiftUI
 
 struct JourneyCell: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	let journey : JourneyCollectionViewData
-	init(journey: JourneyCollectionViewData) {
+	let journey : JourneyViewData
+	init(journey: JourneyViewData) {
 		self.journey = journey
 	}
 	
@@ -19,7 +19,7 @@ struct JourneyCell: View {
 		VStack {
 			JourneyHeaderView(journey: journey)
 			LegsView(journey : journey)
-			HStack {
+			HStack(alignment: .center) {
 				PlatformView(
 					isShowingPlatormWord: false,
 					platform: journey.legDTO?.first?.departurePlatform,
@@ -28,12 +28,13 @@ struct JourneyCell: View {
 					.font(.system(size: 12,weight: .semibold))
 					.foregroundColor(.secondary)
 				Spacer()
+				BadgesView(badges: journey.badges)
 			}
 			.padding(7)
-			BadgesView(badges: journey.badges)
+			
 		}
-		.id(journey.id)
-		.background(.ultraThinMaterial.opacity(0.5))
+//		.background(.ultraThinMaterial.opacity(0.5))
+		.background(.gray.opacity(0.07))
 		.overlay {
 			if !journey.isReachable {
 				Color.black.opacity(0.7)

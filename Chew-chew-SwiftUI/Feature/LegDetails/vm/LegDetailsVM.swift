@@ -17,7 +17,7 @@ final class LegDetailsViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
-	init(leg : Leg) {
+	init(leg : LegViewData) {
 		self.state = .init(status: .idle, leg: leg)
 		Publishers.system(
 			initial: .init(status: .idle, leg: leg),

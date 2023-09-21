@@ -10,8 +10,8 @@ import Foundation
 extension LegDetailsViewModel {
 	struct State : Equatable {
 		let status : Status
-		let leg : Leg
-		init(status: Status, leg: Leg) {
+		let leg : LegViewData
+		init(status: Status, leg: LegViewData) {
 			self.status = status
 			self.leg = leg
 		}

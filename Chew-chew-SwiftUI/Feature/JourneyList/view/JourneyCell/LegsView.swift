@@ -9,10 +9,10 @@ import SwiftUI
 
 struct LegsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	var journey : JourneyCollectionViewData
+	var journey : JourneyViewData
 	var gradientStops : [Gradient.Stop]
 	
-	init(journey: JourneyCollectionViewData) {
+	init(journey: JourneyViewData) {
 		self.journey = journey
 		
 		let nightColor = Color(hue: 0.58, saturation: 1, brightness: 0.15)
@@ -84,26 +84,7 @@ struct LegsView: View {
 				}
 			}
 			.frame(height:25)
-//			platformView()
 		}
 		.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
 	}
-	
-//	func platformView() -> some View {
-//		HStack {
-//			if let pl = journey.legDTO?.first?.departurePlatform {
-//				Text(pl)
-//					.foregroundColor(pl == journey.legDTO?.first?.plannedDeparturePlatform ? .primary : .red)
-//					.font(.system(size: 12,weight: .semibold))
-//					.padding(EdgeInsets(top: 2, leading: 6, bottom: 2, trailing: 6))
-//					.background(Color(red: 0.1255, green: 0.156, blue: 0.4))
-//			}
-//			Text(journey.legDTO?.first?.origin?.name != chewVM.topSearchFieldText ? journey.legDTO?.first?.origin?.name ?? "" : "")
-//				.font(.system(size: 12,weight: .semibold))
-//				.foregroundColor(.secondary)
-//			Spacer()
-//		}
-//		.padding(4)
-//	}
-
 }

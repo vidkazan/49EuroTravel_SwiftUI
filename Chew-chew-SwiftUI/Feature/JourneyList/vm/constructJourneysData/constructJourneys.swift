@@ -10,8 +10,8 @@ import UIKit
 import CoreLocation
 
 extension JourneyListViewModel {
-	func constructJourneysViewData(journeysData : JourneysContainer) -> [JourneyCollectionViewData] {
-		let res = journeysData.journeys?.compactMap { (journey) -> JourneyCollectionViewData? in
+	func constructJourneysViewData(journeysData : JourneysContainer) -> [JourneyViewData] {
+		let res = journeysData.journeys?.compactMap { (journey) -> JourneyViewData? in
 			constructJourneyViewData(
 				journey: journey,
 				firstTSPlanned: DateParcer.getDateFromDateString(

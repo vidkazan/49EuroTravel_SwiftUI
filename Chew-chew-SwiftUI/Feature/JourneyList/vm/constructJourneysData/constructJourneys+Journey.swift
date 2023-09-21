@@ -11,7 +11,7 @@ import UIKit
 
 extension JourneyListViewModel {
 	func constructJourneyViewData(journey : Journey,firstTSPlanned: Date,firstTSActual: Date,lastTSPlanned: Date,lastTSActual: Date
-	) -> JourneyCollectionViewData {
+	) -> JourneyViewData {
 		var isReachable = true
 		var remarks : [Remark] = []
 		var legsData : [LegViewData] = []
@@ -45,21 +45,25 @@ extension JourneyListViewModel {
 			dateStart: startTS,
 			dateFinal: endTS)
 		
-		return JourneyCollectionViewData(
+		return JourneyViewData(
 			id : journey.id,
-			startPlannedTimeDate: firstTSPlanned,
-			startActualTimeDate: firstTSActual,
-			endPlannedTimeDate: lastTSPlanned,
-			endActualTimeDate: lastTSActual,
-			startDate: firstTSPlanned,
-			endDate: lastTSPlanned,
+			origin: journey.legs?.first?.origin?.name ?? "Origin",
+			destination: journey.legs?.first?.destination?.name ?? "Destination",
+			startPlannedTimeString: DateParcer.getTimeStringFromDate(date: firstTSPlanned) ?? "time",
+			startActualTimeString: DateParcer.getTimeStringFromDate(date: firstTSActual) ?? "time",
+			endPlannedTimeString: DateParcer.getTimeStringFromDate(date: lastTSPlanned) ?? "time",
+			endActualTimeString: DateParcer.getTimeStringFromDate(date: lastTSActual) ?? "time",
+			startDate: firstTSActual,
+			endDate: lastTSActual,
+			startDateString: DateParcer.getDateOnlyStringFromDate(date: firstTSActual),
+			endDateString: DateParcer.getDateOnlyStringFromDate(date: lastTSActual),
 			durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 				minutes: DateParcer.getTwoDateIntervalInMinutes(
 					date1: firstTSActual,
 					date2: lastTSActual)
 			) ?? "error",
 			legDTO: journey.legs,
-			legs: legsData.reversed(),
+			legs: legsData,
 			sunEvents: sunEventGenerator.getSunEvents(),
 			isReachable: isReachable,
 			badges: constructBadges(remarks: remarks,isReachable: isReachable),

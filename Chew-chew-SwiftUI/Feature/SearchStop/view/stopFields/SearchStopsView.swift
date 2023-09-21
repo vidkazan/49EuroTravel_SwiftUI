@@ -33,6 +33,7 @@ struct SearchStopsView: View {
 					rightButton(type: .departure)
 				}
 				.background(.ultraThickMaterial)
+				.background(.gray.opacity(0.3))
 				.cornerRadius(10)
 				if searchStopViewModel.state.type == .departure {
 					stopList(type: .departure)
@@ -55,7 +56,8 @@ struct SearchStopsView: View {
 					)
 					rightButton(type: .arrival)
 				}
-				.background(.ultraThickMaterial)
+//				.background(.ultraThickMaterial)
+				.background(.gray.opacity(0.3))
 				.cornerRadius(10)
 				if searchStopViewModel.state.type == .arrival {
 					stopList(type: .arrival)

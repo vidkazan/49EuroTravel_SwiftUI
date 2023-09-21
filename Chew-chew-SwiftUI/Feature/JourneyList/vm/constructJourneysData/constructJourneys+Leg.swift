@@ -9,14 +9,38 @@ import Foundation
 import UIKit
 
 extension JourneyListViewModel {
+
+	func constructLegName(leg : Leg) -> String {
+		return "line"
+	}
+	
+	func constructLineData(leg : Leg) -> LegViewData.LineViewData? {
+		guard let line = leg.line else { return nil }
+		return .init(name: line.name ?? " line" )
+	}
+	
+	func constructLineStopOverData(leg : Leg) -> [LegViewData.StopViewData] {
+		guard let stops = leg.stopovers else { return [] }
+		let res = stops.map { stop -> LegViewData.StopViewData in
+				.init(
+					name: stop.stop?.name ?? "stop",
+					departurePlannedTimeString: DateParcer.getTimeStringFromDate(date: DateParcer.getDateFromDateString(dateString: stop.plannedDeparture)) ?? "time",
+					departureActualTimeString: DateParcer.getTimeStringFromDate(date: DateParcer.getDateFromDateString(dateString: stop.departure)) ?? "time",
+					arrivalPlannedTimeString: DateParcer.getTimeStringFromDate(date: DateParcer.getDateFromDateString(dateString: stop.plannedArrival)) ?? "time",
+					arrivalActualTimeString: DateParcer.getTimeStringFromDate(date: DateParcer.getDateFromDateString(dateString: stop.arrival)) ?? "time",
+					departurePlatform: stop.departurePlatform,
+					plannedDeparturePlatform: stop.plannedDeparturePlatform
+				)
+		}
+		return res
+	}
 	
 	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int) -> LegViewData? {
 		guard
 			let plannedDepartureTSString = leg.plannedDeparture,
 			let plannedArrivalTSString = leg.plannedArrival,
 			let actualDepartureTSString = leg.departure,
-			let actualArrivalTSString = leg.arrival,
-			let lineName = leg.line?.name else { return nil }
+			let actualArrivalTSString = leg.arrival else { return nil }
 		
 		let plannedDepartureTS = DateParcer.getDateFromDateString(dateString: plannedDepartureTSString)
 		let plannedArrivalTS = DateParcer.getDateFromDateString(dateString: plannedArrivalTSString)
@@ -30,11 +54,19 @@ extension JourneyListViewModel {
 		
 		let res = LegViewData(
 			id: id,
-			name: lineName,
+			direction: leg.direction ?? "direction",
+			duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
+				minutes: DateParcer.getTwoDateIntervalInMinutes(
+					date1: actualDepartureTS,
+					date2: actualArrivalTS
+				)) ?? "duration",
+			name: constructLegName(leg: leg),
 			legTopPosition: max(plannedDeparturePosition,actualDeparturePosition),
 			legBottomPosition: max(plannedArrivalPosition,actualArrivalPosition),
 			delayedAndNextIsNotReachable: nil,
-			remarks: leg.remarks
+			remarks: leg.remarks,
+			lineViewData: constructLineData(leg: leg),
+			legStopsViewData: constructLineStopOverData(leg: leg)
 		)
 		return res
 	}

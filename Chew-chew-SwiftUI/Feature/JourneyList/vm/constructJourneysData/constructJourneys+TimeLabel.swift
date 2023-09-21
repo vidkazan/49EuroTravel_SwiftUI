@@ -20,7 +20,7 @@ extension JourneyListViewModel {
 	private func constructTimelineTimelabelData(firstTS: Date?,lastTS: Date?,currentTS: Date?) -> TimelineTimeLabelData? {
 		guard let firstTS = firstTS, let lastTS = lastTS, let currentTS = currentTS else { return nil }
 		let tl = TimelineTimeLabelData(
-			text: DateParcer.getTimeStringFromDate(date: currentTS),
+			text: DateParcer.getTimeStringFromDate(date: currentTS) ?? "time",
 			textCenterYposition: self.getTimeLabelPosition(
 				   firstTS: firstTS,
 				   lastTS: lastTS,

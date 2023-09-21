@@ -1,5 +1,5 @@
-{ "type": "FeatureCollection", "properties": { "zoom": 16, "x": 35201, "y": 21491, "compressed": false }, "features": [
-{ "type": "FeatureCollection", "properties": { "layer": "polygon", "version": 2, "extent": 4096 }, "features": [
+{ "type": "Feature", "properties": { "zoom": 16, "x": 35201, "y": 21491, "compressed": false }, "features": [
+{ "type": "Feature", "properties": { "layer": "polygon", "version": 2, "extent": 4096 }, "features": [
 { "type": "Feature", "id": 1, "properties": { "amenity": "fast_food", "indoor": "room", "level": "0", "room": "restaurant" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 13.369329, 52.524642 ], [ 13.369381, 52.524567 ], [ 13.369326, 52.524553 ], [ 13.369274, 52.524628 ], [ 13.369329, 52.524642 ] ] ] } }
 ,
 { "type": "Feature", "id": 2, "properties": { "highway": "footway", "level": "1" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 13.369986, 52.525708 ], [ 13.369989, 52.525667 ], [ 13.369989, 52.525649 ], [ 13.369990, 52.525610 ], [ 13.370073, 52.525609 ], [ 13.370416, 52.525609 ], [ 13.370419, 52.525507 ], [ 13.370418, 52.525397 ], [ 13.370467, 52.525399 ], [ 13.370498, 52.525399 ], [ 13.370533, 52.525400 ], [ 13.370533, 52.525380 ], [ 13.370050, 52.525369 ], [ 13.369913, 52.525366 ], [ 13.369822, 52.525361 ], [ 13.369833, 52.525410 ], [ 13.369807, 52.525447 ], [ 13.369748, 52.525535 ], [ 13.369798, 52.525612 ], [ 13.369837, 52.525611 ], [ 13.369833, 52.525707 ], [ 13.369920, 52.525707 ], [ 13.369986, 52.525708 ] ] ] } }
@@ -699,7 +699,7 @@
 { "type": "Feature", "id": 349, "properties": { "level": "-2", "public_transport": "platform", "railway": "platform" }, "geometry": { "type": "Polygon", "coordinates": [ [ [ 13.368438, 52.526353 ], [ 13.368486, 52.526284 ], [ 13.368891, 52.525704 ], [ 13.369227, 52.525229 ], [ 13.369350, 52.525052 ], [ 13.369474, 52.524872 ], [ 13.369730, 52.524509 ], [ 13.370263, 52.523746 ], [ 13.370428, 52.523510 ], [ 13.370285, 52.523472 ], [ 13.370121, 52.523709 ], [ 13.369592, 52.524473 ], [ 13.369331, 52.524837 ], [ 13.369208, 52.525013 ], [ 13.369085, 52.525191 ], [ 13.368748, 52.525669 ], [ 13.368344, 52.526247 ], [ 13.368271, 52.526353 ], [ 13.368438, 52.526353 ] ] ] } }
 ] }
 ,
-{ "type": "FeatureCollection", "properties": { "layer": "point", "version": 2, "extent": 4096 }, "features": [
+{ "type": "Feature", "properties": { "layer": "point", "version": 2, "extent": 4096 }, "features": [
 { "type": "Feature", "id": 1, "properties": { "amenity": "bench", "level": "0" }, "geometry": { "type": "Point", "coordinates": [ 13.369512, 52.525405 ] } }
 ,
 { "type": "Feature", "id": 2, "properties": { "amenity": "clock", "level": "2" }, "geometry": { "type": "Point", "coordinates": [ 13.369934, 52.525229 ] } }
@@ -1331,7 +1331,7 @@
 { "type": "Feature", "id": 315, "properties": { "amenity": "cafe", "level": "0", "name": "Costa" }, "geometry": { "type": "Point", "coordinates": [ 13.368934, 52.524469 ] } }
 ] }
 ,
-{ "type": "FeatureCollection", "properties": { "layer": "line", "version": 2, "extent": 4096 }, "features": [
+{ "type": "Feature", "properties": { "layer": "line", "version": 2, "extent": 4096 }, "features": [
 { "type": "Feature", "id": 1, "properties": { "level": "2", "railway": "rail" }, "geometry": { "type": "LineString", "coordinates": [ [ 13.365855, 52.524072 ], [ 13.365765, 52.524030 ], [ 13.365649, 52.523982 ], [ 13.365469, 52.523901 ], [ 13.365281, 52.523814 ], [ 13.365084, 52.523717 ], [ 13.364977, 52.523661 ], [ 13.364864, 52.523603 ], [ 13.364697, 52.523515 ] ] } }
 ,
 { "type": "Feature", "id": 2, "properties": { "level": "2", "railway": "rail" }, "geometry": { "type": "LineString", "coordinates": [ [ 13.365757, 52.524158 ], [ 13.365670, 52.524114 ], [ 13.365562, 52.524065 ], [ 13.365387, 52.523977 ], [ 13.365190, 52.523873 ], [ 13.365014, 52.523773 ], [ 13.364697, 52.523578 ] ] } }
@@ -2323,7 +2323,7 @@
 { "type": "Feature", "id": 497, "properties": { "highway": "steps", "incline": "up", "level": "1;2" }, "geometry": { "type": "LineString", "coordinates": [ [ 13.369832, 52.525054 ], [ 13.370017, 52.525067 ] ] } }
 ] }
 ,
-{ "type": "FeatureCollection", "properties": { "layer": "label", "version": 2, "extent": 4096 }, "features": [
+{ "type": "Feature", "properties": { "layer": "label", "version": 2, "extent": 4096 }, "features": [
 { "type": "Feature", "id": 1, "properties": { "level": "1" }, "geometry": { "type": "Point", "coordinates": [ 13.370389, 52.524520 ] } }
 ,
 { "type": "Feature", "id": 2, "properties": { "level": "1", "name": "DB Reisezentrum", "shop": "ticket" }, "geometry": { "type": "Point", "coordinates": [ 13.369027, 52.524871 ] } }

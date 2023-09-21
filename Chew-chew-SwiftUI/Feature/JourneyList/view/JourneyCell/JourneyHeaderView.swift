@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct JourneyHeaderView: View {
-	let journey : JourneyCollectionViewData
+	let journey : JourneyViewData
 	
     var body: some View {
 		ZStack {
@@ -17,8 +17,8 @@ struct JourneyHeaderView: View {
 				TimeLabelView(
 					isSmall: false,
 					arragement: .right,
-					planned: journey.startPlannedTimeDate,
-					actual: journey.startActualTimeDate
+					planned: journey.startPlannedTimeString,
+					actual: journey.startActualTimeString
 				)
 				.padding(7)
 				Spacer()
@@ -26,7 +26,7 @@ struct JourneyHeaderView: View {
 					.foregroundColor(.primary)
 					.font(.system(size: 12,weight: .semibold))
 				Spacer()
-				TimeLabelView(isSmall: false, arragement: .left, planned: journey.endPlannedTimeDate, actual: journey.endActualTimeDate)
+				TimeLabelView(isSmall: false, arragement: .left, planned: journey.endPlannedTimeString, actual: journey.endActualTimeString)
 				.padding(7)
 			}
 			.frame(maxWidth: .infinity)
@@ -42,12 +42,16 @@ struct Previews: PreviewProvider {
 		JourneyHeaderView(
 			journey: .init(
 				id: UUID(),
-				startPlannedTimeDate: .now,
-				startActualTimeDate: .now,
-				endPlannedTimeDate: .now,
-				endActualTimeDate: .now,
+				origin: "Origin",
+				destination: "Destination",
+				startPlannedTimeString: "11:11",
+				startActualTimeString: "11:11",
+				endPlannedTimeString: "22:22",
+				endActualTimeString: "22:22",
 				startDate: .now,
 				endDate: .now,
+				startDateString:  "21 sep 2023",
+				endDateString: "21 sep 2023",
 				durationLabelText: "11 h 11 min",
 				legDTO: [],
 				legs: [],

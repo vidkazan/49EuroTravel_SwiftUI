@@ -23,7 +23,7 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .error(error: error)
 				)
-			case .didReloadJourneys:
+			case .didTapReloadJourneys:
 				return State(
 					data: state.data,
 					status: .loading(refreshToken: refreshToken)
@@ -35,7 +35,7 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didFailedToLoadJourneyData:
 				return state
-			case .didReloadJourneys:
+			case .didTapReloadJourneys:
 				return State(
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
@@ -47,7 +47,7 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didFailedToLoadJourneyData:
 				return state
-			case .didReloadJourneys:
+			case .didTapReloadJourneys:
 				return State(
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)

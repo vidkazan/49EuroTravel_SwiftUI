@@ -21,14 +21,16 @@ struct BadgeView : View {
 				.foregroundColor(.primary)
 				.padding(4)
 				.background(badge.badgeData.style)
-				.background(.ultraThinMaterial)
+//				.background(.ultraThinMaterial)
+				.background(.gray.opacity(0.15))
 				.cornerRadius(8)
 		case .dticket:
 			DTicketLogo()
 				.font(.system(size: 12))
 				.padding(4)
 				.background(badge.badgeData.style)
-				.background(.ultraThinMaterial)
+//				.background(.ultraThinMaterial)
+				.background(.gray.opacity(0.15))
 				.cornerRadius(8)
 		case .lineNumber:
 			Text(badge.badgeData.name)
@@ -36,7 +38,8 @@ struct BadgeView : View {
 				.foregroundColor(.primary)
 				.padding(4)
 				.background(badge.badgeData.style)
-				.background(.ultraThinMaterial)
+//				.background(.ultraThinMaterial)
+				.background(.gray.opacity(0.15))
 				.cornerRadius(8)
 		case .legDuration:
 			HStack(spacing: 2) {
@@ -48,7 +51,8 @@ struct BadgeView : View {
 					.lineLimit(1)
 			}
 			.padding(4)
-			.background(.ultraThinMaterial)
+//			.background(.ultraThinMaterial)
+			.background(.gray.opacity(0.15))
 			.cornerRadius(8)
 		case .legDirection:
 			HStack(spacing: 2) {
@@ -65,7 +69,23 @@ struct BadgeView : View {
 					.lineLimit(1)
 			}
 			.padding(4)
-			.background(.ultraThinMaterial)
+//			.background(.ultraThinMaterial)
+			.background(.gray.opacity(0.15))
+			.cornerRadius(8)
+		case .walkingDistance:
+			HStack(spacing: 2) {
+				Image(systemName: "figure.walk.circle")
+					.font(.system(size: 12,weight: .semibold))
+				Text(badge.badgeData.name)
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.primary)
+					.background(badge.badgeData.style)
+					.lineSpacing(2)
+					.lineLimit(1)
+			}
+			.padding(4)
+//			.background(.ultraThinMaterial)
+			.background(.gray.opacity(0.15))
 			.cornerRadius(8)
 		}
 	}

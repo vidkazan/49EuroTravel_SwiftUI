@@ -18,7 +18,8 @@ struct JourneyScrollViewHeader: View {
 				.frame(maxWidth: 80)
 				.padding(5)
 				.font(.system(size: 17, weight: .medium))
-				.background(.ultraThinMaterial)
+//				.background(.ultraThinMaterial)
+				.background(.gray.opacity(0.15))
 				.cornerRadius(10)
 			Spacer()
 			Button("Earlier", action: {
@@ -28,7 +29,8 @@ struct JourneyScrollViewHeader: View {
 				.frame(maxWidth: 80)
 				.padding(5)
 				.font(.system(size: 17, weight: .medium))
-				.background(.ultraThinMaterial)
+//				.background(.ultraThinMaterial)
+				.background(.gray.opacity(0.15))
 				.cornerRadius(10)
 		}
     }

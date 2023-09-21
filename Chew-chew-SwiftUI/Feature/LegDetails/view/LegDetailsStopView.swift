@@ -9,9 +9,9 @@ import Foundation
 import SwiftUI
 
 struct LegStopView : View {
-	@ObservedObject var viewModel : LegDetailsViewModel
+	var viewModel : LegDetailsViewModel
 	enum StopOverType : Equatable {
-		case origin(Line?,Leg)
+		case origin(LegViewData)
 		case stopover
 		case destination
 		
@@ -26,33 +26,33 @@ struct LegStopView : View {
 			}
 		}
 	}
-	let stopOver : StopOver
+	let stopOver : LegViewData.StopViewData
 	let stopType : StopOverType
 	var plannedTS : String
 	var actualTS : String
 	
-	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : StopOver) {
+	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : LegViewData.StopViewData) {
 		self.stopOver = stopOver
 		self.viewModel = vm
 		self.stopType = type
 		self.actualTS = {
 			switch type {
 			case .origin:
-				return stopOver.departure ?? "error"
+				return stopOver.departureActualTimeString
 			case .stopover:
-				return stopOver.departure ?? "error"
+				return stopOver.departureActualTimeString
 			case .destination:
-				return stopOver.arrival ?? "error"
+				return stopOver.arrivalActualTimeString
 			}
 		}()
 		self.plannedTS = {
 			switch type {
 			case .origin:
-				return stopOver.plannedDeparture ?? "error"
+				return stopOver.departurePlannedTimeString
 			case .stopover:
-				return stopOver.plannedDeparture ?? "error"
+				return stopOver.departurePlannedTimeString
 			case .destination:
-				return stopOver.plannedArrival ?? "error"
+				return stopOver.arrivalPlannedTimeString
 			}
 		}()
 	}
@@ -61,32 +61,33 @@ struct LegStopView : View {
 			TimeLabelView(
 				isSmall: stopType == .stopover,
 				arragement: .bottom,
-				planned: DateParcer.getDateFromDateString(dateString: plannedTS) ?? .distantPast,
-				actual: DateParcer.getDateFromDateString(dateString: actualTS) ?? .distantPast
+				planned: plannedTS,
+				actual: actualTS
 			)
-			.padding(stopType == .stopover ? 1 : 3)
-			.background(.ultraThinMaterial)
-			.cornerRadius(stopType == .stopover ? 5 : 10 )
+			.padding(3)
+//			.background(.ultraThinMaterial)
+			.background(.gray.opacity(0.15))
+			.cornerRadius(stopType == .stopover ? 7 : 10 )
 			.frame(width: 60,alignment: .center)
 			
 			VStack(alignment: .leading, spacing: 2) {
 				switch stopType {
 				case .origin:
-					Text((stopOver.stop?.name) ?? "origin")
+					Text(stopOver.name)
 						.font(.system(size: 17,weight: .semibold))
 						.frame(height: 20,alignment: .center)
 				case .stopover:
-					Text((stopOver.stop?.name) ?? "origin")
+					Text(stopOver.name)
 						.font(.system(size: 12,weight: .semibold))
 						.frame(height: 15,alignment: .center)
 				case .destination:
-					Text((stopOver.stop?.name) ?? "origin")
+					Text(stopOver.name)
 						.font(.system(size: 17,weight: .semibold))
 						.frame(height: 20,alignment: .center)
 				}
 				
 				switch stopType {
-				case .origin(let line, let leg):
+				case .origin(let legViewData):
 					PlatformView(
 						isShowingPlatormWord: true,
 						platform: stopOver.departurePlatform,
@@ -94,13 +95,11 @@ struct LegStopView : View {
 					)
 					.frame(height: 20)
 					HStack(spacing: 3) {
-						BadgeView(badge: .lineNumber(num: line?.name ?? "line"))
-						BadgeView(badge: .legDirection(dir:leg.direction ?? "Direction"))
-						BadgeView(badge: .legDuration(
-							dur: DateParcer.getTwoDateIntervalInMinutes(
-								date1: DateParcer.getDateFromDateString(dateString:leg.departure),
-								date2: DateParcer.getDateFromDateString(dateString:leg.arrival)
-							) ?? 0)
+						if let line = legViewData.lineViewData {
+							BadgeView(badge: .lineNumber(num: line.name))
+							BadgeView(badge: .legDirection(dir:legViewData.direction))
+						}
+						BadgeView(badge: .legDuration(dur: legViewData.duration)
 						)
 						Button(action: {
 							viewModel.send(event: .didtapExpandButton)

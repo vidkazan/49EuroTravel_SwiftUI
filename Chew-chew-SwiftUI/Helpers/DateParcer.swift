@@ -65,7 +65,8 @@ class DateParcer {
 		return newDate
 	}
 	
-	static func getTimeStringFromDate(date : Date) -> String {
+	static func getTimeStringFromDate(date : Date?) -> String? {
+		guard let date = date else { return nil }
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "HH:mm"
 		let timeString = dateFormatter.string(from: date)

@@ -29,17 +29,17 @@ extension JourneyDetailsViewModel {
 //		  }
 //	}
 	
-	func whenLoadingData() -> Feedback<State, Event> {
-	  Feedback { (state: State) -> AnyPublisher<Event, Never> in
-		  guard case .loading = state.status else { return Empty().eraseToAnyPublisher() }
-//			  let subject = Future<(lat:Double,long:Double),ApiServiceError> { promise in
-//				  return promise(.failure(.failedToGetUserLocation))
-//			  }
-//			  return subject.eraseToAnyPublisher()
-		  return Just(.didLoadJourneyData(data: .init(legsViewData: []))).eraseToAnyPublisher()
-
-		  }
-	}
+//	func whenLoadingData() -> Feedback<State, Event> {
+//	  Feedback { (state: State) -> AnyPublisher<Event, Never> in
+//		  guard case .loading = state.status else { return Empty().eraseToAnyPublisher() }
+////			  let subject = Future<(lat:Double,long:Double),ApiServiceError> { promise in
+////				  return promise(.failure(.failedToGetUserLocation))
+////			  }
+////			  return subject.eraseToAnyPublisher()
+//		  return Just(.didLoadJourneyData(data: .init(legsViewData: []))).eraseToAnyPublisher()
+//
+//		  }
+//	}
 	
 	func fetchJourneyByRefreshToken(ref : String?) -> AnyPublisher<Journey,ApiServiceError> {
 		return ApiService.fetchCombine(Journey.self,query: [], type: ApiService.Requests.journeyByRefreshToken(ref: ref), requestGroupId: "")
