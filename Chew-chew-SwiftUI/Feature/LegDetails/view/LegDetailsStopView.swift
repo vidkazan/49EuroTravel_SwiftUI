@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct LegStopView : View {
-	var viewModel : LegDetailsViewModel
+//	var viewModel : LegDetailsViewModel
 	enum StopOverType : Equatable {
 		case origin(LegViewData)
 		case stopover
@@ -33,7 +33,7 @@ struct LegStopView : View {
 	
 	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : LegViewData.StopViewData) {
 		self.stopOver = stopOver
-		self.viewModel = vm
+//		self.viewModel = vm
 		self.stopType = type
 		self.actualTS = {
 			switch type {
@@ -95,23 +95,28 @@ struct LegStopView : View {
 					)
 					.frame(height: 20)
 					HStack(spacing: 3) {
-						if let line = legViewData.lineViewData {
-							BadgeView(badge: .lineNumber(num: line.name))
-							BadgeView(badge: .legDirection(dir:legViewData.direction))
+						switch legViewData.legType {
+						case .bus(name: let name), .train(name: let name):
+							BadgeView(badge: .lineNumber(num: name))
+							BadgeView(badge: .legDirection(dir: legViewData.direction))
+						case .foot(distance: let dist):
+							BadgeView(badge: .walkingDistance(dist))
+						case .custom(name: let name):
+							BadgeView(badge: .lineNumber(num: String(name)))
 						}
 						BadgeView(badge: .legDuration(dur: legViewData.duration)
 						)
-						Button(action: {
-							viewModel.send(event: .didtapExpandButton)
-						}, label: {
-							Image(systemName: viewModel.state.status == .idle ? "chevron.down" : "chevron.up")
-								.font(.system(size: 12,weight: .semibold))
-								.foregroundColor(.gray)
-								.padding(7)
-								.background(.ultraThinMaterial)
-								.cornerRadius(10)
-								.animation(.easeInOut, value: viewModel.state.status)
-						})
+//						Button(action: {
+//							viewModel.send(event: .didtapExpandButton)
+//						}, label: {
+//							Image(systemName: viewModel.state.status == .idle ? "chevron.down" : "chevron.up")
+//								.font(.system(size: 12,weight: .semibold))
+//								.foregroundColor(.gray)
+//								.padding(7)
+//								.background(.ultraThinMaterial)
+//								.cornerRadius(10)
+//								.animation(.easeInOut, value: viewModel.state.status)
+//						})
 					}
 					.frame(height: 30)
 				case  .destination:

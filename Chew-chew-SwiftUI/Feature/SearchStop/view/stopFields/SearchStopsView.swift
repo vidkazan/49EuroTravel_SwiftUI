@@ -19,7 +19,6 @@ struct SearchStopsView: View {
 	}
 	
 	var body: some View {
-//		let _ = print("::",searchStopViewModel.state)
 		VStack{
 			VStack {
 				HStack {
@@ -33,7 +32,7 @@ struct SearchStopsView: View {
 					rightButton(type: .departure)
 				}
 				.background(.ultraThickMaterial)
-				.background(.gray.opacity(0.3))
+//				.background(.gray.opacity(0.3))
 				.cornerRadius(10)
 				if searchStopViewModel.state.type == .departure {
 					stopList(type: .departure)
@@ -41,6 +40,7 @@ struct SearchStopsView: View {
 					
 			}
 			.background(.thinMaterial)
+//			.background(.gray.opacity(0.2))
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
 			.transition(.move(edge: .bottom))
@@ -56,8 +56,8 @@ struct SearchStopsView: View {
 					)
 					rightButton(type: .arrival)
 				}
-//				.background(.ultraThickMaterial)
-				.background(.gray.opacity(0.3))
+				.background(.ultraThickMaterial)
+//				.background(.gray.opacity(0.3))
 				.cornerRadius(10)
 				if searchStopViewModel.state.type == .arrival {
 					stopList(type: .arrival)
@@ -66,6 +66,7 @@ struct SearchStopsView: View {
 				}
 			}
 			.background(.thinMaterial)
+//			.background(.gray.opacity(0.2))
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
 			.transition(.move(edge: .bottom))

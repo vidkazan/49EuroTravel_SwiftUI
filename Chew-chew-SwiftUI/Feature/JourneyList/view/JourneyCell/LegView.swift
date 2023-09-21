@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LegView: View {
-    var leg : LegViewData
+	var leg : LegViewData
 	let screenWidth = UIScreen.main.bounds.width
 	
 	init(leg: LegViewData) {
@@ -18,18 +18,33 @@ struct LegView: View {
 	var body: some View {
 		GeometryReader { geo in
 			Rectangle()
-				.fill(
-					leg.delayedAndNextIsNotReachable == true ? Color(hue: 0, saturation: 1, brightness: 0.4) : Color.init(uiColor: .systemGray5))
+				.fill(leg.fillColor)
 				.cornerRadius(8)
 				.overlay {
-					if (Int(geo.size.width / 3) > leg.name.count) {
-						Text(leg.name)
-							.foregroundColor(.primary)
-							.font(.system(size: 12,weight: .semibold))
+					if case .foot = leg.legType {
+						HStack(spacing: 1) {
+							Image(systemName: "figure.walk.circle")
+								.font(.system(size: 12))
+								.foregroundColor(.primary)
+							if (Int(geo.size.width / 3) > leg.legType.value.count) {
+								Text(leg.legType.value)
+									.foregroundColor(.primary)
+									.font(.system(size: 12,weight: .semibold))
+							} else {
+								Text("")
+							}
+						}
 					} else {
-						Text("")
+						if (Int(geo.size.width / 3) > leg.legType.value.count) {
+							Text(leg.legType.value)
+								.foregroundColor(.primary)
+								.font(.system(size: 12,weight: .semibold))
+						} else {
+							Text("")
+						}
 					}
-			}
+				}
+				.padding(.trailing,0.5)
 		}
 	}
 }

@@ -52,6 +52,9 @@ struct LegDetailsView: View {
 				}
 			}
 		}
+		.onTapGesture {
+			viewModel.send(event: .didtapExpandButton)
+		}
 		.padding(5)
 //		.background(.ultraThinMaterial.opacity(0.5))
 		.background(.gray.opacity(0.1))

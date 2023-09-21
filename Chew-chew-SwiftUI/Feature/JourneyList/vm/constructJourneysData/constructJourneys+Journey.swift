@@ -48,7 +48,7 @@ extension JourneyListViewModel {
 		return JourneyViewData(
 			id : journey.id,
 			origin: journey.legs?.first?.origin?.name ?? "Origin",
-			destination: journey.legs?.first?.destination?.name ?? "Destination",
+			destination: journey.legs?.last?.destination?.name ?? "Destination",
 			startPlannedTimeString: DateParcer.getTimeStringFromDate(date: firstTSPlanned) ?? "time",
 			startActualTimeString: DateParcer.getTimeStringFromDate(date: firstTSActual) ?? "time",
 			endPlannedTimeString: DateParcer.getTimeStringFromDate(date: lastTSPlanned) ?? "time",

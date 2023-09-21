@@ -7,18 +7,38 @@
 
 import Foundation
 import UIKit
+import SwiftUI
 
 extension JourneyListViewModel {
-
-	func constructLegName(leg : Leg) -> String {
-		return "line"
+	func constructLegType(leg : Leg) -> LegViewData.LegType {
+		if let dist = leg.distance {
+			return .foot(distance: dist)
+		}
+		if let line = leg.line, let mode = line.mode {
+			switch mode {
+			case "train":
+				return .train(name: line.name ?? "train")
+			case "bus":
+				return .bus(name: line.name ?? "bus")
+			default:
+				return .custom(name: mode)
+			}
+		}
+		return .custom(name: "wtf??")
 	}
-	
-	func constructLineData(leg : Leg) -> LegViewData.LineViewData? {
-		guard let line = leg.line else { return nil }
-		return .init(name: line.name ?? " line" )
+	func constructLegFillColor(leg : Leg) -> Color {
+		switch leg.reachable ?? true {
+		case true:
+//			switch constructLegType(leg: leg) {
+//			case .foot:
+//				return Color.init(uiColor: .systemGray3)
+//			case .bus,.train,.custom:
+				return Color.init(uiColor: .systemGray5)
+//			}
+		case false:
+			return Color(hue: 0, saturation: 1, brightness: 0.4)
+		}
 	}
-	
 	func constructLineStopOverData(leg : Leg) -> [LegViewData.StopViewData] {
 		guard let stops = leg.stopovers else { return [] }
 		let res = stops.map { stop -> LegViewData.StopViewData in
@@ -54,18 +74,18 @@ extension JourneyListViewModel {
 		
 		let res = LegViewData(
 			id: id,
+			fillColor: constructLegFillColor(leg: leg),
+			legType: constructLegType(leg: leg),
 			direction: leg.direction ?? "direction",
 			duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 				minutes: DateParcer.getTwoDateIntervalInMinutes(
 					date1: actualDepartureTS,
 					date2: actualArrivalTS
 				)) ?? "duration",
-			name: constructLegName(leg: leg),
 			legTopPosition: max(plannedDeparturePosition,actualDeparturePosition),
 			legBottomPosition: max(plannedArrivalPosition,actualArrivalPosition),
 			delayedAndNextIsNotReachable: nil,
 			remarks: leg.remarks,
-			lineViewData: constructLineData(leg: leg),
 			legStopsViewData: constructLineStopOverData(leg: leg)
 		)
 		return res

@@ -20,8 +20,8 @@ struct TimeChoosingView: View {
 	var body: some View {
 		ZStack {
 			Rectangle()
-//				.fill(.ultraThickMaterial)
-				.fill(.gray.opacity(0.3))
+				.fill(.ultraThickMaterial)
+//				.fill(.gray.opacity(0.3))
 				.frame(width: UIScreen.main.bounds.width / 2.15, height: 36)
 				.cornerRadius(8)
 				.padding(4)
@@ -55,8 +55,8 @@ struct TimeChoosingView: View {
 			}
 		}
 		.frame(maxWidth: .infinity,maxHeight: 43)
-//		.background(.ultraThinMaterial.opacity(0.7))
-		.background(.gray.opacity(0.10))
+		.background(.ultraThinMaterial.opacity(0.7))
+//		.background(.gray.opacity(0.10))
 		.cornerRadius(10)
 		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: chewVM.state.status)

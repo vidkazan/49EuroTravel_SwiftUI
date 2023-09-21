@@ -16,9 +16,37 @@ struct TimelineTimeLabelData : Equatable,Hashable {
 }
 
 struct LegViewData : Equatable,Identifiable,Hashable {
-	enum legType {
-		case foot
-		case train
+	enum LegType : Equatable,Hashable {
+		case foot(distance: Int)
+		case bus(name: String)
+		case train(name : String)
+		case custom(name: String)
+		
+		var description : String {
+			switch self {
+			case .bus(name: let name):
+				return "bus" + name
+			case .foot(distance: let distance):
+				return "foot " + String(distance) + "m"
+			case .train(name: let name):
+				return "train" + name
+			case .custom(name: let name):
+				return "custom " + name
+			}
+		}
+		
+		var value : String {
+			switch self {
+			case .bus(name: let name):
+				return name
+			case .foot(distance: let distance):
+				return String(distance) + "m"
+			case .train(name: let name):
+				return name
+			case .custom(name: let name):
+				return name
+			}
+		}
 	}
 	struct StopViewData : Equatable,Identifiable,Hashable {
 		let id = UUID()
@@ -30,19 +58,21 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 		let departurePlatform,
 			plannedDeparturePlatform	: String?
 	}
-	struct LineViewData : Equatable,Identifiable,Hashable {
-		let id = UUID()
-		let name : String
-	}
+//	struct LineViewData : Equatable,Identifiable,Hashable {
+//		let id = UUID()
+//		let name : String
+//	}
 	let id : Int
+	let fillColor : Color
+	let legType : LegType
 	let direction : String
 	let duration : String
-	let name : String
+//	let name : String
 	let legTopPosition : Double
 	let legBottomPosition : Double
 	var delayedAndNextIsNotReachable : Bool?
 	let remarks : [Remark]?
-	let lineViewData : LineViewData?
+//	let lineViewData : LineViewData?
 	let legStopsViewData : [StopViewData]
 }
 
