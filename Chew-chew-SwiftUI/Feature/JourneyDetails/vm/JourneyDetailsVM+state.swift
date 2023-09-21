@@ -9,9 +9,9 @@ import Foundation
 
 extension JourneyDetailsViewModel {
 	struct State : Equatable {
-		let data : JourneyCollectionViewDataSourse
+		let data : JourneyCollectionViewData
 		let status : Status
-		init(data: JourneyCollectionViewDataSourse, status: Status) {
+		init(data: JourneyCollectionViewData, status: Status) {
 			self.data = data
 			self.status = status
 		}
@@ -22,7 +22,7 @@ extension JourneyDetailsViewModel {
 			return lhs.description == rhs.description
 		}
 		case loading(refreshToken : String?)
-		case loadedJourneyData(data : Journey)
+		case loadedJourneyData(data : JourneyDetailsViewData)
 		case error(error : ApiServiceError)
 		
 		var description : String {
@@ -38,7 +38,7 @@ extension JourneyDetailsViewModel {
 	}
 	
 	enum Event {
-		case didLoadJourneyData(data : Journey)
+		case didLoadJourneyData(data : JourneyDetailsViewData)
 		case didFailedToLoadJourneyData(error : ApiServiceError)
 		case didReloadJourneys
 		

@@ -19,7 +19,7 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	var refreshToken : String?
 	
-	init(refreshToken : String?,data: JourneyCollectionViewDataSourse) {
+	init(refreshToken : String?,data: JourneyCollectionViewData) {
 		self.refreshToken = refreshToken
 		self.state = .init(data: data, status: .loading(refreshToken: refreshToken))
 		Publishers.system(
@@ -28,7 +28,8 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-//				self.whenLoadingJourneyByRefreshToken()
+//				self.whenLoadingJourneyByRefreshToken(),
+				self.whenLoadingData()
 			]
 		)
 			.assign(to: \.state, on: self)

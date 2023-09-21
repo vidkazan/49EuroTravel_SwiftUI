@@ -17,9 +17,9 @@ extension JourneyListViewModel {
 		return (cTs - fTs) / (lTs - fTs) > 0 ? (cTs - fTs) / (lTs - fTs) : 0
 	}
 	
-	private func constructTimelineTimelabelData(firstTS: Date?,lastTS: Date?,currentTS: Date?) -> TimelineTimeLabelDataSourse? {
+	private func constructTimelineTimelabelData(firstTS: Date?,lastTS: Date?,currentTS: Date?) -> TimelineTimeLabelData? {
 		guard let firstTS = firstTS, let lastTS = lastTS, let currentTS = currentTS else { return nil }
-		let tl = TimelineTimeLabelDataSourse(
+		let tl = TimelineTimeLabelData(
 			text: DateParcer.getTimeStringFromDate(date: currentTS),
 			textCenterYposition: self.getTimeLabelPosition(
 				   firstTS: firstTS,

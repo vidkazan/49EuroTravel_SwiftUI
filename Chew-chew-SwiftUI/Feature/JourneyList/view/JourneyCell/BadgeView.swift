@@ -16,34 +16,34 @@ struct BadgeView : View {
 	var body : some View {
 		switch badge {
 		case .price,.cancelled,.connectionNotReachable,.alertFromRemark:
-			Text(badge.badgeDataSourse.name)
+			Text(badge.badgeData.name)
 				.font(.system(size: 12))
 				.foregroundColor(.primary)
 				.padding(4)
-				.background(badge.badgeDataSourse.style)
+				.background(badge.badgeData.style)
 				.background(.ultraThinMaterial)
 				.cornerRadius(8)
 		case .dticket:
 			DTicketLogo()
 				.font(.system(size: 12))
 				.padding(4)
-				.background(badge.badgeDataSourse.style)
+				.background(badge.badgeData.style)
 				.background(.ultraThinMaterial)
 				.cornerRadius(8)
 		case .lineNumber:
-			Text(badge.badgeDataSourse.name)
+			Text(badge.badgeData.name)
 				.font(.system(size: 12,weight: .semibold))
 				.foregroundColor(.primary)
 				.padding(4)
-				.background(badge.badgeDataSourse.style)
+				.background(badge.badgeData.style)
 				.background(.ultraThinMaterial)
 				.cornerRadius(8)
 		case .legDuration:
 			HStack(spacing: 2) {
-				Text(badge.badgeDataSourse.name)
+				Text(badge.badgeData.name)
 					.font(.system(size: 12,weight: .semibold))
 					.foregroundColor(.secondary)
-					.background(badge.badgeDataSourse.style)
+					.background(badge.badgeData.style)
 					.lineSpacing(2)
 					.lineLimit(1)
 			}
@@ -55,12 +55,12 @@ struct BadgeView : View {
 				Text("to")
 					.font(.system(size: 12,weight: .semibold))
 					.foregroundColor(.secondary)
-					.background(badge.badgeDataSourse.style)
+					.background(badge.badgeData.style)
 					.lineSpacing(2)
-				Text(badge.badgeDataSourse.name)
+				Text(badge.badgeData.name)
 					.font(.system(size: 12,weight: .semibold))
 					.foregroundColor(.primary)
-					.background(badge.badgeDataSourse.style)
+					.background(badge.badgeData.style)
 					.lineSpacing(2)
 					.lineLimit(1)
 			}

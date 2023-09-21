@@ -8,10 +8,10 @@
 import SwiftUI
 
 struct LegView: View {
-    var leg : LegViewDataSourse
+    var leg : LegViewData
 	let screenWidth = UIScreen.main.bounds.width
 	
-	init(leg: LegViewDataSourse) {
+	init(leg: LegViewData) {
 		self.leg = leg
 	}
 	

@@ -1,5 +1,5 @@
 //
-//  ViewDataSourse.swift
+//  ViewData.swift
 //  49EuroTravel
 //
 //  Created by Dmitrii Grigorev on 09.08.23.
@@ -8,22 +8,31 @@
 import Foundation
 import SwiftUI
 
-struct BadgeDataSource : Equatable, Identifiable {
-	static func == (lhs: BadgeDataSource, rhs: BadgeDataSource) -> Bool {
-		lhs.name == rhs.name
+struct JourneyDetailsViewData : Equatable,Identifiable,Hashable {
+	struct LegDetailsViewData : Equatable,Identifiable,Hashable {
+		let id = UUID()
 	}
-	
 	let id = UUID()
-	let style : Color?
-	let name : String
-	
-	init(style : Color? = nil, name : String){
-		self.name = name
-		self.style = style
-	}
+	let legsViewData : [LegViewData]
 }
 
 enum Badges : Identifiable,Hashable {
+	
+	struct BadgeData : Equatable, Identifiable {
+		static func == (lhs: BadgeData, rhs: BadgeData) -> Bool {
+			lhs.name == rhs.name
+		}
+		
+		let id = UUID()
+		let style : Color?
+		let name : String
+		
+		init(style : Color? = nil, name : String){
+			self.name = name
+			self.style = style
+		}
+	}
+
 	case price(price: String)
 	case dticket
 	case cancelled
@@ -55,49 +64,45 @@ enum Badges : Identifiable,Hashable {
 		}
 	}
 	
-	var badgeDataSourse : BadgeDataSource {
+	var badgeData : BadgeData {
 		switch self {
 		case .price(let price):
-			return BadgeDataSource(
+			return BadgeData(
 				style: Color(hue: 0.5, saturation: 1, brightness: 0.4),
 				name: price)
 		case .dticket:
-			return BadgeDataSource(
+			return BadgeData(
 				style: Color(hue: 0.35, saturation: 0, brightness: 0.6),
 				name: "DeutschlandTicket")
 		case .cancelled:
-			return BadgeDataSource(
+			return BadgeData(
 				style: Color(hue: 0, saturation: 1, brightness: 0.7),
 				name: "cancelled")
 		case .connectionNotReachable:
-			return BadgeDataSource(
+			return BadgeData(
 				style: Color(hue: 0, saturation: 1, brightness: 0.7),
 				name: "not reachable")
 		case .alertFromRemark:
-			return BadgeDataSource(
+			return BadgeData(
 				style: Color(hue: 0, saturation: 1, brightness: 0.7),
 				name: " ! ")
 		case .lineNumber(num: let num):
-			return BadgeDataSource(
+			return BadgeData(
 				name: num)
 		case .legDuration(dur: let dur):
-			return BadgeDataSource(name: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: dur) ?? "duration")
+			return BadgeData(name: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: dur) ?? "duration")
 		case .legDirection(dir: let dir):
-			return BadgeDataSource(name: dir)
+			return BadgeData(name: dir)
 		}
 	}
 }
 
-struct TimelineTimeLabelDataSourse : Equatable,Hashable {
+struct TimelineTimeLabelData : Equatable,Hashable {
 	let text : String
 	let textCenterYposition : Double
 }
 
-struct TimelineViewDataSourse : Equatable,Hashable {
-	let timeLabels : [TimelineTimeLabelDataSourse]
-}
-
-struct LegViewDataSourse : Equatable,Identifiable,Hashable {
+struct LegViewData : Equatable,Identifiable,Hashable {
 	let id : Int
 	let name : String
 	let legTopPosition : Double
@@ -106,7 +111,7 @@ struct LegViewDataSourse : Equatable,Identifiable,Hashable {
 	let remarks : [Remark]?
 }
 
-struct JourneyCollectionViewDataSourse : Equatable {
+struct JourneyCollectionViewData : Equatable {
 	let id : UUID
 	let startPlannedTimeDate : Date
 	let startActualTimeDate : Date
@@ -116,25 +121,18 @@ struct JourneyCollectionViewDataSourse : Equatable {
 	let endDate : Date
 	let durationLabelText : String
 	let legDTO : [Leg]?
-	let legs : [LegViewDataSourse]
+	let legs : [LegViewData]
 	let sunEvents : [SunEvent]
 	let isReachable : Bool
 	let badges : [Badges]
 	let refreshToken : String?
 }
 
-struct JourneyViewDataSourse : Equatable,Hashable {
-	let legs : [LegViewDataSourse]
+struct ResultJourneyViewData : Equatable,Hashable {
+	let journeys : [[LegViewData]]?
+	let timeline : [TimelineTimeLabelData]?
 }
 
-struct AllJourneysCollectionViewDataSourse : Equatable{
-	let journeys : [JourneyCollectionViewDataSourse]
-}
-
-struct ResultJourneyViewDataSourse : Equatable,Hashable {
-	let journeys : [JourneyViewDataSourse]?
-	let timeline : TimelineViewDataSourse?
-}
 
 enum LocationDirectionType :Equatable, Hashable {
 	case departure

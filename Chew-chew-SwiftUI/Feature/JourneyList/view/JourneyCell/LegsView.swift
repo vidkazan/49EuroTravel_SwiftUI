@@ -9,10 +9,10 @@ import SwiftUI
 
 struct LegsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	var journey : JourneyCollectionViewDataSourse
+	var journey : JourneyCollectionViewData
 	var gradientStops : [Gradient.Stop]
 	
-	init(journey: JourneyCollectionViewDataSourse) {
+	init(journey: JourneyCollectionViewData) {
 		self.journey = journey
 		
 		let nightColor = Color(hue: 0.58, saturation: 1, brightness: 0.15)

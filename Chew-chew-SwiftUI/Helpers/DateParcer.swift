@@ -74,14 +74,14 @@ class DateParcer {
 	
 	static func getTimeAndDateStringFromDate(date : Date) -> String {
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd MMM YYYY  HH:mm"
+		dateFormatter.dateFormat = "dd MMM YYYY HH:mm"
 		let timeString = dateFormatter.string(from: date)
 		return timeString
 	}
 	
 	static func getDateOnlyStringFromDate(date : Date) -> String {
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd MMMM YYYY"
+		dateFormatter.dateFormat = "dd MMM YYYY"
 		let timeString = dateFormatter.string(from: date)
 		return timeString
 	}

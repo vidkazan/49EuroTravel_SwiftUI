@@ -16,21 +16,26 @@ struct LegDetailsView: View {
 			VStack {
 				if let stop = viewModel.state.leg.stopovers?.first {
 					LegStopView(
-						type: .origin(stop, viewModel.state.leg.line, viewModel.state.leg),
-						vm: viewModel
+						type: .origin(viewModel.state.leg.line, viewModel.state.leg),
+						vm: viewModel,
+						stopOver: stop
 					)
 				}
 				if viewModel.state.status == .stopovers {
 					ForEach(viewModel.state.leg.stopovers ?? []) { stopover in
 						if stopover != viewModel.state.leg.stopovers!.first,stopover != viewModel.state.leg.stopovers!.last {
-							LegStopView(type: .stopover(stopover), vm: viewModel)
+								LegStopView(
+									type: .stopover,
+									vm: viewModel,
+									stopOver: stopover)
 							}
 						}
 					}
 				if let stop = viewModel.state.leg.stopovers?.last {
 					LegStopView(
-						type: .destination(stop),
-						vm: viewModel
+						type: .destination,
+						vm: viewModel,
+						stopOver: stop
 					)
 				}
 			}

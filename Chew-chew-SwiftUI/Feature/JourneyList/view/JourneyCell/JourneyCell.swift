@@ -10,8 +10,8 @@ import SwiftUI
 
 struct JourneyCell: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	let journey : JourneyCollectionViewDataSourse
-	init(journey: JourneyCollectionViewDataSourse) {
+	let journey : JourneyCollectionViewData
+	init(journey: JourneyCollectionViewData) {
 		self.journey = journey
 	}
 	

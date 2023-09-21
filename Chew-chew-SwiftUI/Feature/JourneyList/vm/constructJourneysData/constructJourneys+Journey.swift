@@ -11,10 +11,10 @@ import UIKit
 
 extension JourneyListViewModel {
 	func constructJourneyViewData(journey : Journey,firstTSPlanned: Date,firstTSActual: Date,lastTSPlanned: Date,lastTSActual: Date
-	) -> JourneyCollectionViewDataSourse {
+	) -> JourneyCollectionViewData {
 		var isReachable = true
 		var remarks : [Remark] = []
-		var legsDataSourse : [LegViewDataSourse] = []
+		var legsData : [LegViewData] = []
 		let startTS = max(firstTSActual, firstTSPlanned)
 		let endTS = max(lastTSActual,lastTSPlanned)
 		let legs = journey.legs ?? []
@@ -26,11 +26,11 @@ extension JourneyListViewModel {
 				isReachable = false
 			}
 			if let res = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: index) {
-				if legsDataSourse.last != nil && currentLegIsNotReachable(currentLeg: res, previousLeg: legsDataSourse.last) {
-					legsDataSourse[legsDataSourse.count-1].delayedAndNextIsNotReachable = true
+				if legsData.last != nil && currentLegIsNotReachable(currentLeg: res, previousLeg: legsData.last) {
+					legsData[legsData.count-1].delayedAndNextIsNotReachable = true
 					isReachable = false
 				}
-				legsDataSourse.append(res)
+				legsData.append(res)
 			}
 		}
 		let sunEventGenerator = SunEventGenerator(
@@ -45,7 +45,7 @@ extension JourneyListViewModel {
 			dateStart: startTS,
 			dateFinal: endTS)
 		
-		return JourneyCollectionViewDataSourse(
+		return JourneyCollectionViewData(
 			id : journey.id,
 			startPlannedTimeDate: firstTSPlanned,
 			startActualTimeDate: firstTSActual,
@@ -59,7 +59,7 @@ extension JourneyListViewModel {
 					date2: lastTSActual)
 			) ?? "error",
 			legDTO: journey.legs,
-			legs: legsDataSourse.reversed(),
+			legs: legsData.reversed(),
 			sunEvents: sunEventGenerator.getSunEvents(),
 			isReachable: isReachable,
 			badges: constructBadges(remarks: remarks,isReachable: isReachable),

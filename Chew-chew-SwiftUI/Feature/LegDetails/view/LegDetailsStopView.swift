@@ -11,9 +11,9 @@ import SwiftUI
 struct LegStopView : View {
 	@ObservedObject var viewModel : LegDetailsViewModel
 	enum StopOverType : Equatable {
-		case origin(StopOver,Line?,Leg)
-		case stopover(StopOver)
-		case destination(StopOver)
+		case origin(Line?,Leg)
+		case stopover
+		case destination
 		
 		var description : String {
 			switch self {
@@ -26,30 +26,32 @@ struct LegStopView : View {
 			}
 		}
 	}
+	let stopOver : StopOver
 	let stopType : StopOverType
 	var plannedTS : String
 	var actualTS : String
 	
-	init(type : StopOverType, vm : LegDetailsViewModel) {
+	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : StopOver) {
+		self.stopOver = stopOver
 		self.viewModel = vm
 		self.stopType = type
 		self.actualTS = {
 			switch type {
-			case .origin(let stopOver, (_), (_)):
+			case .origin:
 				return stopOver.departure ?? "error"
-			case .stopover(let stopOver):
+			case .stopover:
 				return stopOver.departure ?? "error"
-			case .destination(let stopOver):
+			case .destination:
 				return stopOver.arrival ?? "error"
 			}
 		}()
 		self.plannedTS = {
 			switch type {
-			case .origin(let stopOver, (_),(_)):
+			case .origin:
 				return stopOver.plannedDeparture ?? "error"
-			case .stopover(let stopOver):
+			case .stopover:
 				return stopOver.plannedDeparture ?? "error"
-			case .destination(let stopOver):
+			case .destination:
 				return stopOver.plannedArrival ?? "error"
 			}
 		}()
@@ -57,36 +59,40 @@ struct LegStopView : View {
 	var body : some View {
 		HStack(alignment: .top) {
 			TimeLabelView(
-				isSmall: stopType.description == "stopover",
+				isSmall: stopType == .stopover,
 				arragement: .bottom,
 				planned: DateParcer.getDateFromDateString(dateString: plannedTS) ?? .distantPast,
 				actual: DateParcer.getDateFromDateString(dateString: actualTS) ?? .distantPast
 			)
-			.padding(3)
-			.background(.thinMaterial)
-			.cornerRadius(8)
-			.frame(alignment: .leading)
-			.padding(5)
+			.padding(stopType == .stopover ? 1 : 3)
+			.background(.ultraThinMaterial)
+			.cornerRadius(stopType == .stopover ? 5 : 10 )
+			.frame(width: 60,alignment: .center)
+			
 			VStack(alignment: .leading, spacing: 2) {
 				switch stopType {
-				case .origin(let stopover, let line, let leg):
-					Text((stopover.stop?.name) ?? "origin")
+				case .origin:
+					Text((stopOver.stop?.name) ?? "origin")
 						.font(.system(size: 17,weight: .semibold))
-				case .stopover(let stopover):
-					Text((stopover.stop?.name) ?? "origin")
+						.frame(height: 20,alignment: .center)
+				case .stopover:
+					Text((stopOver.stop?.name) ?? "origin")
 						.font(.system(size: 12,weight: .semibold))
-				case .destination(let stopover):
-					Text((stopover.stop?.name) ?? "origin")
+						.frame(height: 15,alignment: .center)
+				case .destination:
+					Text((stopOver.stop?.name) ?? "origin")
 						.font(.system(size: 17,weight: .semibold))
+						.frame(height: 20,alignment: .center)
 				}
-
+				
 				switch stopType {
-				case .origin(let stopover, let line, let leg):
+				case .origin(let line, let leg):
 					PlatformView(
 						isShowingPlatormWord: true,
-						platform: stopover.departurePlatform,
-						plannedPlatform: stopover.plannedDeparturePlatform
+						platform: stopOver.departurePlatform,
+						plannedPlatform: stopOver.plannedDeparturePlatform
 					)
+					.frame(height: 20)
 					HStack(spacing: 3) {
 						BadgeView(badge: .lineNumber(num: line?.name ?? "line"))
 						BadgeView(badge: .legDirection(dir:leg.direction ?? "Direction"))
@@ -108,18 +114,18 @@ struct LegStopView : View {
 								.animation(.easeInOut, value: viewModel.state.status)
 						})
 					}
-					.padding(.top,7)
-				case  .destination(let stopover):
+					.frame(height: 30)
+				case  .destination:
 					PlatformView(
 						isShowingPlatormWord: true,
-						platform: stopover.departurePlatform,
-						plannedPlatform: stopover.plannedDeparturePlatform
+						platform: stopOver.departurePlatform,
+						plannedPlatform: stopOver.plannedDeparturePlatform
 					)
-				case .stopover(let stopOver):
+					.frame(height: 20)
+				case .stopover:
 					EmptyView()
 				}
 			}
-			.padding(3)
 			Spacer()
 		}
 	}

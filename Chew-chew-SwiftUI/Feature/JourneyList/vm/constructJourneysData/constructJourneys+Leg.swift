@@ -10,7 +10,7 @@ import UIKit
 
 extension JourneyListViewModel {
 	
-	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int) -> LegViewDataSourse? {
+	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int) -> LegViewData? {
 		guard
 			let plannedDepartureTSString = leg.plannedDeparture,
 			let plannedArrivalTSString = leg.plannedArrival,
@@ -28,7 +28,7 @@ extension JourneyListViewModel {
 			  let plannedArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: plannedArrivalTS),
 			  let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: actualArrivalTS) else { return nil }
 		
-		let res = LegViewDataSourse(
+		let res = LegViewData(
 			id: id,
 			name: lineName,
 			legTopPosition: max(plannedDeparturePosition,actualDeparturePosition),
@@ -39,7 +39,7 @@ extension JourneyListViewModel {
 		return res
 	}
 	
-	func currentLegIsNotReachable(currentLeg: LegViewDataSourse?, previousLeg: LegViewDataSourse?) -> Bool {
+	func currentLegIsNotReachable(currentLeg: LegViewData?, previousLeg: LegViewData?) -> Bool {
 		guard let currentLeg = currentLeg, let previousLeg = previousLeg else { return false }
 		return previousLeg.legBottomPosition > currentLeg.legTopPosition
 	}
