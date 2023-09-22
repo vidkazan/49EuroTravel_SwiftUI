@@ -42,6 +42,8 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 	var delayedAndNextIsNotReachable : Bool?
 	let remarks : [Remark]?
 	let legStopsViewData : [StopViewData]
+	let footDistance : Int
+	let lineName : String
 }
 
 enum FootLegPlace : Equatable, Hashable {
@@ -50,29 +52,18 @@ enum FootLegPlace : Equatable, Hashable {
 	case atFinish(finishPointName : String)
 }
 enum LegType : Equatable,Hashable {
-	case foot(distance: Int, place : FootLegPlace)
-	case transfer(duration : Int)
-	case line(mode: String,name: String)
+	case foot(place : FootLegPlace)
+	case transfer
+	case line
 	
 	var description : String {
 		switch self {
-		case .line(mode: let mode, name: let name):
-			return mode + name
-		case .foot(distance: let distance, _):
-			return "foot " + String(distance) + "m"
-		case .transfer(duration: let duration):
-			return "transfer " + String(duration) + "min"
-		}
-	}
-	
-	var value : String {
-		switch self {
-		case .line((_), name: let name):
-			return name
-		case .foot(distance: let distance, _):
-			return String(distance) + "m"
-		case .transfer(duration: let duration):
-			return String(duration) + "min"
+		case .line:
+			return "line"
+		case .foot:
+			return "foot"
+		case .transfer:
+			return "transfer"
 		}
 	}
 }

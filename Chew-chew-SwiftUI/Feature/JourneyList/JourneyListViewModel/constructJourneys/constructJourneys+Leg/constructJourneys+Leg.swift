@@ -50,7 +50,9 @@ extension JourneyListViewModel {
 			legBottomPosition: max(plannedArrivalPosition,actualArrivalPosition),
 			delayedAndNextIsNotReachable: nil,
 			remarks: leg.remarks,
-			legStopsViewData: constructLineStopOverData(leg: leg, type : constructLegType(leg: leg, legs: legs))
+			legStopsViewData: constructLineStopOverData(leg: leg, type : constructLegType(leg: leg, legs: legs)),
+			footDistance: leg.distance ?? 0,
+			lineName: leg.line?.name ?? leg.line?.mode ?? "line"
 		)
 		return res
 	}

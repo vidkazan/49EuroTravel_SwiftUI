@@ -13,7 +13,7 @@ extension JourneyListViewModel {
 	func constructLineStopOverData(leg : Leg, type : LegType) -> [LegViewData.StopViewData] {
 		var name : String? {
 			switch type {
-			case .foot((_), let place):
+			case .foot(let place):
 				switch place {
 				case .atStart(let startPointName):
 					return startPointName
@@ -30,7 +30,7 @@ extension JourneyListViewModel {
 		}
 		
 		switch type {
-		case .foot(_, place: let place):
+		case .foot(place: let place):
 			switch place {
 			case .atStart:
 				return [

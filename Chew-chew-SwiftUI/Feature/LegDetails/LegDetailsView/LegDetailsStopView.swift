@@ -10,11 +10,10 @@ import SwiftUI
 
 struct LegStopView : View {
 	enum StopOverType : Equatable {
-		case origin(LegViewData)
+		case origin
 		case stopover
 		case destination
-//		case walk
-//		case transfer
+		case foot(FootLegPlace)
 		
 		var description : String {
 			switch self {
@@ -24,76 +23,75 @@ struct LegStopView : View {
 				return "origin"
 			case .stopover:
 				return "stopover"
-//			case .walk:
-//				return "walk"
-//			case .transfer:
-//				return "walk"
+			case .foot:
+				return "foot"
 			}
 		}
 	}
+	let legViewData : LegViewData
 	let stopOver : LegViewData.StopViewData
 	let stopType : StopOverType
 	var plannedTS : String
 	var actualTS : String
 	var delay : Int
 	
-	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : LegViewData.StopViewData) {
+	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : LegViewData.StopViewData,leg : LegViewData) {
 		self.stopOver = stopOver
 		self.stopType = type
-		self.actualTS = {
-			switch type {
-			case .origin:
-				return stopOver.departureActualTimeString
-			case .stopover:
-				return stopOver.departureActualTimeString
-			case .destination:
-				return stopOver.arrivalActualTimeString
-//			case .walk:
-//				return stopOver.departureActualTimeString
-//			case .transfer:
-//				return stopOver.departureActualTimeString
+		self.legViewData = leg
+		switch type {
+		case .origin:
+			self.actualTS = stopOver.departureActualTimeString
+			self.plannedTS = stopOver.departurePlannedTimeString
+			self.delay = stopOver.departureDelay
+		case .stopover:
+			self.actualTS = stopOver.departureActualTimeString
+			self.plannedTS = stopOver.departurePlannedTimeString
+			self.delay = stopOver.departureDelay
+		case .destination:
+			self.actualTS = stopOver.arrivalActualTimeString
+			self.plannedTS = stopOver.arrivalPlannedTimeString
+			self.delay = stopOver.arrivalDelay
+		case .foot(let place):
+			switch place {
+			case .atStart:
+				self.actualTS = stopOver.departureActualTimeString
+				self.plannedTS = stopOver.departurePlannedTimeString
+				self.delay = stopOver.departureDelay
+			case .inBetween:
+				self.actualTS = stopOver.departureActualTimeString
+				self.plannedTS = stopOver.departurePlannedTimeString
+				self.delay = stopOver.departureDelay
+			case .atFinish:
+				self.actualTS = stopOver.arrivalActualTimeString
+				self.plannedTS = stopOver.arrivalPlannedTimeString
+				self.delay = stopOver.arrivalDelay
 			}
-		}()
-		self.plannedTS = {
-			switch type {
-			case .origin:
-				return stopOver.departurePlannedTimeString
-			case .stopover:
-				return stopOver.departurePlannedTimeString
-			case .destination:
-				return stopOver.arrivalPlannedTimeString
-//			case .walk:
-//				return stopOver.departureActualTimeString
-//			case .transfer:
-//				return stopOver.departureActualTimeString
-			}
-		}()
-		self.delay = {
-			switch type {
-			case .origin:
-				return stopOver.departureDelay
-			case .stopover:
-				return stopOver.departureDelay
-			case .destination:
-				return stopOver.arrivalDelay
-			}
-		}()
+		}
 	}
 	var body : some View {
 		HStack(alignment: .top) {
-			TimeLabelView(
-				isSmall: stopType == .stopover,
-				arragement: .bottom,
-				planned: plannedTS,
-				actual: actualTS,
-				delay: delay
-			)
-			.padding(3)
-			.background(.gray.opacity(0.15))
-			.cornerRadius(stopType == .stopover ? 7 : 10 )
-			.frame(width: 60,alignment: .center)
-			
+			// MARK: Time Label
+			if case .foot(let place)=stopType, case .inBetween=place{
+				Rectangle()
+					.fill(.clear)
+				.padding(3)
+				.frame(width: 60,alignment: .center)
+			} else {
+				TimeLabelView(
+					isSmall: stopType == .stopover,
+					arragement: .bottom,
+					planned: plannedTS,
+					actual: actualTS,
+					delay: delay
+				)
+				.padding(3)
+				.background(.gray.opacity(0.15))
+				.cornerRadius(stopType == .stopover ? 7 : 10 )
+				.frame(width: 60,alignment: .center)
+			}
 			VStack(alignment: .leading, spacing: 2) {
+				// MARK: Location Name above Badges
 				switch stopType {
 				case .origin, .destination:
 					Text(stopOver.name)
@@ -103,10 +101,27 @@ struct LegStopView : View {
 					Text(stopOver.name)
 						.font(.system(size: 12,weight: .semibold))
 						.frame(height: 15,alignment: .center)
+				case .foot(let place):
+					switch place {
+					case .inBetween:
+						EmptyView()
+					case .atFinish:
+						EmptyView()
+					case .atStart:
+						Text(stopOver.name)
+							.font(.system(size: 17,weight: .semibold))
+							.frame(height: 20,alignment: .center)
+					}
 				}
 				
+				// MARK: Badges
 				switch stopType {
-				case .origin(let legViewData):
+				case .foot(let place):
+					HStack(spacing: 3) {
+						BadgeView(badge: .legDuration(dur: legViewData.duration))
+					}
+					.frame(height: 30)
+				case .origin:
 					PlatformView(
 						isShowingPlatormWord: true,
 						platform: stopOver.departurePlatform,
@@ -114,17 +129,9 @@ struct LegStopView : View {
 					)
 					.frame(height: 20)
 					HStack(spacing: 3) {
-						switch legViewData.legType {
-						case .line(mode: let mode, name: let name):
-							BadgeView(badge: .lineNumber(lineType:.other(type: mode) ,num: name))
-							BadgeView(badge: .legDirection(dir: legViewData.direction))
-						case .foot(distance: let dist,_):
-							BadgeView(badge: .walkingDistance(dist))
-						case .transfer(duration: let duration):
-							BadgeView(badge: .legDuration(dur: "\(duration)min"))
-						}
-						BadgeView(badge: .legDuration(dur: legViewData.duration)
-						)
+						BadgeView(badge: .lineNumber(lineType:.other(type: "mode") ,num: legViewData.lineName))
+						BadgeView(badge: .legDirection(dir: legViewData.direction))
+						BadgeView(badge: .legDuration(dur: legViewData.duration))
 					}
 					.frame(height: 30)
 				case  .destination:
@@ -134,13 +141,25 @@ struct LegStopView : View {
 						plannedPlatform: stopOver.plannedArrivalPlatform
 					)
 					.frame(height: 20)
+					
 				case .stopover:
 					EmptyView()
-//				case .walk:
-//					HStack(spacing: 3) {
-//						BadgeView(badge: .walking(direction: "direction"))
-//						BadgeView(badge: .walkingDistance(1100))
-//					}
+				}
+				
+				// MARK: Location Name under Badges
+				
+				switch stopType {
+				case .foot(let place):
+					switch place {
+					case .inBetween,.atFinish:
+						Text(stopOver.name)
+							.font(.system(size: 17,weight: .semibold))
+							.frame(height: 20,alignment: .center)
+					default:
+						EmptyView()
+					}
+				default:
+					EmptyView()
 				}
 			}
 			Spacer()

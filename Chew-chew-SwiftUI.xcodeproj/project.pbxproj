@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7D000CF02AB86A4700566120 /* chewVM+sideEffect+userLocaiton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D000CEF2AB86A4700566120 /* chewVM+sideEffect+userLocaiton.swift */; };
 		7D000CF32AB86AD700566120 /* JourneyListViewModel+sideEffects+loadingJourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D000CF22AB86AD700566120 /* JourneyListViewModel+sideEffects+loadingJourneys.swift */; };
-		7D000CF72AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D000CF62AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift */; };
+		7D000CF72AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D000CF62AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef.swift */; };
 		7D000CF92AB8768400566120 /* JourneyDetailsViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D000CF82AB8768400566120 /* JourneyDetailsViewHeader.swift */; };
 		7D000CFB2AB87ACD00566120 /* NavigationLazyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D000CFA2AB87ACD00566120 /* NavigationLazyView.swift */; };
 		7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE082A97E32D0048ADE6 /* DTO.swift */; };
@@ -125,7 +125,7 @@
 /* Begin PBXFileReference section */
 		7D000CEF2AB86A4700566120 /* chewVM+sideEffect+userLocaiton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+sideEffect+userLocaiton.swift"; sourceTree = "<group>"; };
 		7D000CF22AB86AD700566120 /* JourneyListViewModel+sideEffects+loadingJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+sideEffects+loadingJourneys.swift"; sourceTree = "<group>"; };
-		7D000CF62AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift"; sourceTree = "<group>"; };
+		7D000CF62AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+sideEffects+loadingJourneysRef.swift"; sourceTree = "<group>"; };
 		7D000CF82AB8768400566120 /* JourneyDetailsViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDetailsViewHeader.swift; sourceTree = "<group>"; };
 		7D000CFA2AB87ACD00566120 /* NavigationLazyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationLazyView.swift; sourceTree = "<group>"; };
 		7D02CE082A97E32D0048ADE6 /* DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTO.swift; sourceTree = "<group>"; };
@@ -262,7 +262,7 @@
 		7D000CF12AB86AC900566120 /* JourneyListViewModel+sideEffects */ = {
 			isa = PBXGroup;
 			children = (
-				7D000CF62AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift */,
+				7D000CF62AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef.swift */,
 				7D000CF22AB86AD700566120 /* JourneyListViewModel+sideEffects+loadingJourneys.swift */,
 				7D4B1B8B2AA8CB970096F372 /* JourneyListViewModel+sideEffects.swift */,
 			);
@@ -854,7 +854,7 @@
 				7D4B1B8E2AA8CBB00096F372 /* JourneyListViewModel+state.swift in Sources */,
 				7D02CE252A97E6620048ADE6 /* Errors.swift in Sources */,
 				7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */,
-				7D000CF72AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift in Sources */,
+				7D000CF72AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef.swift in Sources */,
 				7D4B1B8C2AA8CB970096F372 /* JourneyListViewModel+sideEffects.swift in Sources */,
 				7D4B1B932AA8FD9D0096F372 /* SearchLocationVM+reduce.swift in Sources */,
 				7DD4A8D82AAC90C3001AA30C /* SearchLocationVM+reduce+Loaded.swift in Sources */,

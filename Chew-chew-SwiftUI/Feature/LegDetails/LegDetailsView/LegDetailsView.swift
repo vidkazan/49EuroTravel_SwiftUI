@@ -13,40 +13,43 @@ struct LegDetailsView: View {
 	@ObservedObject var viewModel : LegDetailsViewModel
 	var body : some View {
 		VStack {
-			LazyVStack {
+			VStack {
 				switch viewModel.state.leg.legType {
-				case .foot((_),place: let place):
+				case .foot(place: let place):
 					switch place {
 					case .atStart:
 						if let stop = viewModel.state.leg.legStopsViewData.first {
 							LegStopView(
-								type: .origin(viewModel.state.leg),
+								type: .origin,
 								vm: viewModel,
-								stopOver: stop
+								stopOver: stop,
+								leg: viewModel.state.leg
 							)
 						}
 					case .inBetween:
 						if viewModel.state.leg.legStopsViewData.count > 1 {
 							if let stop = viewModel.state.leg.legStopsViewData.first {
 								LegStopView(
-									type: .origin(viewModel.state.leg),
+									type: .origin,
 									vm: viewModel,
-									stopOver: stop
+									stopOver: stop,
+									leg: viewModel.state.leg
 								)
 							}
 						}
 					case .atFinish:
 						if let stop = viewModel.state.leg.legStopsViewData.first {
 							LegStopView(
-								type: .destination,
+								type: .origin,
 								vm: viewModel,
-								stopOver: stop
+								stopOver: stop,
+								leg: viewModel.state.leg
 							)
 						}
 					}
-				case .transfer(duration: let dur):
+				case .transfer:
 					HStack(spacing: 3) {
-						BadgeView(badge: .legDuration(dur: dur.description))
+						BadgeView(badge: .legDuration(dur: viewModel.state.leg.duration))
 						Spacer()
 					}
 					.frame(height: 30)
@@ -54,9 +57,10 @@ struct LegDetailsView: View {
 					if viewModel.state.leg.legStopsViewData.count > 1 {
 						if let stop = viewModel.state.leg.legStopsViewData.first {
 							LegStopView(
-								type: .origin(viewModel.state.leg),
+								type: .origin,
 								vm: viewModel,
-								stopOver: stop
+								stopOver: stop,
+								leg: viewModel.state.leg
 							)
 						}
 						if viewModel.state.status == .stopovers {
@@ -65,7 +69,9 @@ struct LegDetailsView: View {
 									LegStopView(
 										type: .stopover,
 										vm: viewModel,
-										stopOver: stopover)
+										stopOver: stopover,
+										leg: viewModel.state.leg
+									)
 								}
 							}
 						}
@@ -73,7 +79,8 @@ struct LegDetailsView: View {
 							LegStopView(
 								type: .destination,
 								vm: viewModel,
-								stopOver: stop
+								stopOver: stop,
+								leg: viewModel.state.leg
 							)
 						}
 					}
@@ -82,22 +89,31 @@ struct LegDetailsView: View {
 			}
 			.background {
 				HStack {
-					Rectangle()
-						.fill(.gray.opacity(0.1))
-						.frame(width: 20)
-						.cornerRadius(8)
-						.padding(5)
-						.padding(.leading,15)
-					Spacer()
+					if case .foot=viewModel.state.leg.legType {
+						EmptyView()
+					} else if case.transfer=viewModel.state.leg.legType  {
+						EmptyView()
+					} else {
+						Rectangle()
+							.fill(.gray.opacity(0.1))
+							.frame(width: 20)
+							.cornerRadius(8)
+							.padding(5)
+							.padding(.leading,15)
+						Spacer()
+					}
 				}
 			}
 		}
 		.onTapGesture {
 			viewModel.send(event: .didtapExpandButton)
 		}
-		.padding(5)
-		.background(.gray.opacity(0.1))
+		.padding(
+			viewModel.state.leg.legType.description == "line" ? EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5) : EdgeInsets(top: 20, leading: 5, bottom: 20, trailing: 5)
+		)
+		.background{
+			viewModel.state.leg.legType.description == "line" ? Color.gray.opacity(0.1) : Color.clear
+		}
 		.cornerRadius(10)
-		
 	}
 }

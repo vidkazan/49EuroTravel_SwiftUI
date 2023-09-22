@@ -26,8 +26,6 @@ enum ApiServiceError : Error {
 	case connectionNotFound
 	case failedToGetUserLocation
 	
-	
-	
 	var description : String  {
 		switch self {
 		case .badUrl:

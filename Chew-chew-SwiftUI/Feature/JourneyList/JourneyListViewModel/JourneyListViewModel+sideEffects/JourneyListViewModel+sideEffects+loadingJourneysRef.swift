@@ -24,7 +24,10 @@ extension JourneyListViewModel {
 				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
 				  .eraseToAnyPublisher()
 		  case .laterRef:
-			  guard let ref = state.laterRef else { return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher() }
+			  guard let ref = state.laterRef else {
+				  print("🟤❌ >> laterRef is nil")
+				  return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
+			  }
 			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
 				  .map { data in
 					  return Event.onNewJourneysData(data,type)
