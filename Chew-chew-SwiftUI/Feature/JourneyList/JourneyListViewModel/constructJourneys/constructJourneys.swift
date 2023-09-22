@@ -21,7 +21,9 @@ extension JourneyListViewModel {
 				lastTSPlanned: DateParcer.getDateFromDateString(
 					dateString: journey.legs?.last?.plannedArrival) ?? .now,
 				lastTSActual: DateParcer.getDateFromDateString(
-					dateString: journey.legs?.last?.arrival) ?? .now
+					dateString: journey.legs?.last?.arrival) ?? .now,
+				firstDelay: journey.legs?.first?.departureDelay ?? 0,
+				lastDelay: journey.legs?.last?.arrivalDelay ?? 0
 			)
 		}
 		return res ?? []

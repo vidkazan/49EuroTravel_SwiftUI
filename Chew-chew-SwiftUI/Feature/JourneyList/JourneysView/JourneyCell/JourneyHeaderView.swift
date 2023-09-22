@@ -18,7 +18,8 @@ struct JourneyHeaderView: View {
 					isSmall: false,
 					arragement: .right,
 					planned: journey.startPlannedTimeString,
-					actual: journey.startActualTimeString
+					actual: journey.startActualTimeString,
+					delay: journey.startDelay
 				)
 				.padding(7)
 				Spacer()
@@ -26,7 +27,13 @@ struct JourneyHeaderView: View {
 					.foregroundColor(.primary)
 					.font(.system(size: 12,weight: .semibold))
 				Spacer()
-				TimeLabelView(isSmall: false, arragement: .left, planned: journey.endPlannedTimeString, actual: journey.endActualTimeString)
+				TimeLabelView(
+					isSmall: false,
+					arragement: .left,
+					planned: journey.endPlannedTimeString,
+					actual: journey.endActualTimeString,
+					delay: journey.endDelay
+				)
 				.padding(7)
 			}
 			.frame(maxWidth: .infinity)
@@ -48,13 +55,15 @@ struct Previews: PreviewProvider {
 				startActualTimeString: "11:11",
 				endPlannedTimeString: "22:22",
 				endActualTimeString: "22:22",
+				startDelay: 0,
+				endDelay: 0,
 				startDate: .now,
 				endDate: .now,
 				startDateString:  "21 sep 2023",
 				endDateString: "21 sep 2023",
 				durationLabelText: "11 h 11 min",
 				legDTO: [],
-				legs: [],
+				legs: [], transferCount: 0,
 				sunEvents: [],
 				isReachable: true,
 				badges: [.dticket],

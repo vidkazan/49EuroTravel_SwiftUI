@@ -53,6 +53,9 @@
 		7D6734CE2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */; };
 		7D6734D02A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734CF2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift */; };
 		7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */; };
+		7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */; };
+		7D68D9F52ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift */; };
+		7D68D9F82ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F72ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift */; };
 		7D6C5C142AAF482D00DEFC57 /* chewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C132AAF482D00DEFC57 /* chewVM.swift */; };
 		7D6C5C162AAF485F00DEFC57 /* chewVM+sideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C152AAF485F00DEFC57 /* chewVM+sideEffect.swift */; };
 		7D6C5C182AAF486700DEFC57 /* chewVM+state.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C172AAF486700DEFC57 /* chewVM+state.swift */; };
@@ -167,6 +170,9 @@
 		7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUIUITests.swift; sourceTree = "<group>"; };
 		7D6734CF2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChoosingView.swift; sourceTree = "<group>"; };
+		7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Type.swift"; sourceTree = "<group>"; };
+		7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Stopover.swift"; sourceTree = "<group>"; };
+		7D68D9F72ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Journey+TransferCount.swift"; sourceTree = "<group>"; };
 		7D6C5C132AAF482D00DEFC57 /* chewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chewVM.swift; sourceTree = "<group>"; };
 		7D6C5C152AAF485F00DEFC57 /* chewVM+sideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+sideEffect.swift"; sourceTree = "<group>"; };
 		7D6C5C172AAF486700DEFC57 /* chewVM+state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+state.swift"; sourceTree = "<group>"; };
@@ -244,23 +250,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		7D000CEE2AB86A0800566120 /* sideEffects */ = {
+		7D000CEE2AB86A0800566120 /* chewVM+sideEffects */ = {
 			isa = PBXGroup;
 			children = (
 				7D000CEF2AB86A4700566120 /* chewVM+sideEffect+userLocaiton.swift */,
 				7D6C5C152AAF485F00DEFC57 /* chewVM+sideEffect.swift */,
 			);
-			path = sideEffects;
+			path = "chewVM+sideEffects";
 			sourceTree = "<group>";
 		};
-		7D000CF12AB86AC900566120 /* sideEffects */ = {
+		7D000CF12AB86AC900566120 /* JourneyListViewModel+sideEffects */ = {
 			isa = PBXGroup;
 			children = (
 				7D000CF62AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef copy.swift */,
 				7D000CF22AB86AD700566120 /* JourneyListViewModel+sideEffects+loadingJourneys.swift */,
 				7D4B1B8B2AA8CB970096F372 /* JourneyListViewModel+sideEffects.swift */,
 			);
-			path = sideEffects;
+			path = "JourneyListViewModel+sideEffects";
 			sourceTree = "<group>";
 		};
 		7D02CE0C2A97E38B0048ADE6 /* Model */ = {
@@ -278,7 +284,7 @@
 			isa = PBXGroup;
 			children = (
 				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
-				7D6C5C122AAF482400DEFC57 /* vm */,
+				7D6C5C122AAF482400DEFC57 /* chewVM */,
 				7D7A55382AA4B3DD000256EF /* feedback */,
 			);
 			path = App;
@@ -330,37 +336,37 @@
 		7D462D562AACD2F700BC0D65 /* view */ = {
 			isa = PBXGroup;
 			children = (
-				7D4B1B8F2AA8DB090096F372 /* stopFields */,
-				7DAF62B42A9E5833006F1A17 /* datePicker */,
+				7D4B1B8F2AA8DB090096F372 /* SearchStopsView */,
+				7DAF62B42A9E5833006F1A17 /* DatePickerView */,
 			);
 			path = view;
 			sourceTree = "<group>";
 		};
-		7D462D5A2AACE0E800BC0D65 /* constructJourneysData */ = {
+		7D462D5A2AACE0E800BC0D65 /* constructJourneys */ = {
 			isa = PBXGroup;
 			children = (
 				7D4B1B982AA950780096F372 /* constructJourneys.swift */,
 				7D462D5D2AACEC5600BC0D65 /* constructJourneys+TimeLabel.swift */,
-				7D462D5F2AACED6D00BC0D65 /* constructJourneys+Journey.swift */,
-				7D462D612AACEE2500BC0D65 /* constructJourneys+Leg.swift */,
+				7D68D9F62ABDB39A00579711 /* constructJourneys+Journey */,
+				7DBEFB7F2ABDB18100C8D5DE /* constructJourneys+Leg */,
 				7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */,
 			);
-			path = constructJourneysData;
+			path = constructJourneys;
 			sourceTree = "<group>";
 		};
-		7D462D632AADCBEA00BC0D65 /* vm */ = {
+		7D462D632AADCBEA00BC0D65 /* JourneyListViewModel */ = {
 			isa = PBXGroup;
 			children = (
 				7D7A55312AA4A27C000256EF /* JourneyListViewModel.swift */,
 				7D4B1B8D2AA8CBB00096F372 /* JourneyListViewModel+state.swift */,
-				7D000CF12AB86AC900566120 /* sideEffects */,
+				7D000CF12AB86AC900566120 /* JourneyListViewModel+sideEffects */,
 				7D462D3F2AAC93AA00BC0D65 /* reduce */,
-				7D462D5A2AACE0E800BC0D65 /* constructJourneysData */,
+				7D462D5A2AACE0E800BC0D65 /* constructJourneys */,
 			);
-			path = vm;
+			path = JourneyListViewModel;
 			sourceTree = "<group>";
 		};
-		7D4B1B8F2AA8DB090096F372 /* stopFields */ = {
+		7D4B1B8F2AA8DB090096F372 /* SearchStopsView */ = {
 			isa = PBXGroup;
 			children = (
 				7D9E10862AA6752B00820B92 /* SearchStopsView.swift */,
@@ -368,7 +374,7 @@
 				7D462D512AAC96C000BC0D65 /* SearchStopsView+RightButton.swift */,
 				7D462D532AAC972200BC0D65 /* SearchStopsView+StopList.swift */,
 			);
-			path = stopFields;
+			path = SearchStopsView;
 			sourceTree = "<group>";
 		};
 		7D6734A62A96334B00CBE9C1 = {
@@ -429,18 +435,27 @@
 			path = "Chew-chew-SwiftUIUITests";
 			sourceTree = "<group>";
 		};
-		7D6C5C122AAF482400DEFC57 /* vm */ = {
+		7D68D9F62ABDB39A00579711 /* constructJourneys+Journey */ = {
 			isa = PBXGroup;
 			children = (
-				7D000CEE2AB86A0800566120 /* sideEffects */,
-				7D6C5C132AAF482D00DEFC57 /* chewVM.swift */,
-				7D6C5C172AAF486700DEFC57 /* chewVM+state.swift */,
-				7D6C5C192AAF490300DEFC57 /* reduce */,
+				7D68D9F72ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift */,
+				7D462D5F2AACED6D00BC0D65 /* constructJourneys+Journey.swift */,
 			);
-			path = vm;
+			path = "constructJourneys+Journey";
 			sourceTree = "<group>";
 		};
-		7D6C5C192AAF490300DEFC57 /* reduce */ = {
+		7D6C5C122AAF482400DEFC57 /* chewVM */ = {
+			isa = PBXGroup;
+			children = (
+				7D6C5C132AAF482D00DEFC57 /* chewVM.swift */,
+				7D6C5C172AAF486700DEFC57 /* chewVM+state.swift */,
+				7D000CEE2AB86A0800566120 /* chewVM+sideEffects */,
+				7D6C5C192AAF490300DEFC57 /* chewVM+reduce */,
+			);
+			path = chewVM;
+			sourceTree = "<group>";
+		};
+		7D6C5C192AAF490300DEFC57 /* chewVM+reduce */ = {
 			isa = PBXGroup;
 			children = (
 				7D6C5C1A2AAF495B00DEFC57 /* chewVM+reduce.swift */,
@@ -452,19 +467,19 @@
 				7D6C5C222AAF4AE400DEFC57 /* chewVM+reduce+DatePicker.swift */,
 				7D6C5C262AAF4BD300DEFC57 /* chewVM+reduce+Journeys.swift */,
 			);
-			path = reduce;
+			path = "chewVM+reduce";
 			sourceTree = "<group>";
 		};
 		7D6C5C282AAF77A700DEFC57 /* JourneyDetails */ = {
 			isa = PBXGroup;
 			children = (
-				7D6C5C342AAF7C3B00DEFC57 /* view */,
-				7D6C5C2B2AAF78F400DEFC57 /* vm */,
+				7D6C5C342AAF7C3B00DEFC57 /* JourneyDetailsView */,
+				7D6C5C2B2AAF78F400DEFC57 /* JourneyDetailsVM */,
 			);
 			path = JourneyDetails;
 			sourceTree = "<group>";
 		};
-		7D6C5C2B2AAF78F400DEFC57 /* vm */ = {
+		7D6C5C2B2AAF78F400DEFC57 /* JourneyDetailsVM */ = {
 			isa = PBXGroup;
 			children = (
 				7D6C5C292AAF77CF00DEFC57 /* JourneyDetailsVM.swift */,
@@ -472,16 +487,16 @@
 				7D6C5C302AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift */,
 				7D6C5C2E2AAF792200DEFC57 /* JourneyDetailsVM+state.swift */,
 			);
-			path = vm;
+			path = JourneyDetailsVM;
 			sourceTree = "<group>";
 		};
-		7D6C5C342AAF7C3B00DEFC57 /* view */ = {
+		7D6C5C342AAF7C3B00DEFC57 /* JourneyDetailsView */ = {
 			isa = PBXGroup;
 			children = (
 				7D6C5C352AAF7C4500DEFC57 /* JourneyDetailsView.swift */,
 				7D000CF82AB8768400566120 /* JourneyDetailsViewHeader.swift */,
 			);
-			path = view;
+			path = JourneyDetailsView;
 			sourceTree = "<group>";
 		};
 		7D7A55382AA4B3DD000256EF /* feedback */ = {
@@ -496,13 +511,13 @@
 		7D7B3DA02AB9AD160070E44D /* LegDetails */ = {
 			isa = PBXGroup;
 			children = (
-				7D7B3DA32AB9CEE20070E44D /* vm */,
-				7D7B3DA42AB9CEE80070E44D /* view */,
+				7D7B3DA32AB9CEE20070E44D /* LegDetailsVM */,
+				7D7B3DA42AB9CEE80070E44D /* LegDetailsView */,
 			);
 			path = LegDetails;
 			sourceTree = "<group>";
 		};
-		7D7B3DA32AB9CEE20070E44D /* vm */ = {
+		7D7B3DA32AB9CEE20070E44D /* LegDetailsVM */ = {
 			isa = PBXGroup;
 			children = (
 				7D7B3DAF2AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift */,
@@ -510,16 +525,16 @@
 				7D7B3DAB2AB9D34A0070E44D /* LegDetailsVM+state.swift */,
 				7D7B3DA92AB9D31D0070E44D /* LegDetailsVM.swift */,
 			);
-			path = vm;
+			path = LegDetailsVM;
 			sourceTree = "<group>";
 		};
-		7D7B3DA42AB9CEE80070E44D /* view */ = {
+		7D7B3DA42AB9CEE80070E44D /* LegDetailsView */ = {
 			isa = PBXGroup;
 			children = (
 				7D7B3DA12AB9CC7E0070E44D /* LegDetailsStopView.swift */,
 				7D7B3D9E2AB8DBFD0070E44D /* LegDetailsView.swift */,
 			);
-			path = view;
+			path = LegDetailsView;
 			sourceTree = "<group>";
 		};
 		7D9E108E2AA7722700820B92 /* Network */ = {
@@ -535,13 +550,13 @@
 		7D9E108F2AA77CA200820B92 /* JourneyList */ = {
 			isa = PBXGroup;
 			children = (
-				7D462D632AADCBEA00BC0D65 /* vm */,
-				7DA8D3452A9A0DB8005DF550 /* view */,
+				7D462D632AADCBEA00BC0D65 /* JourneyListViewModel */,
+				7DA8D3452A9A0DB8005DF550 /* JourneysView */,
 			);
 			path = JourneyList;
 			sourceTree = "<group>";
 		};
-		7D9E10902AA77CC200820B92 /* vm */ = {
+		7D9E10902AA77CC200820B92 /* SearchLocationVM */ = {
 			isa = PBXGroup;
 			children = (
 				7D9E10922AA77E0B00820B92 /* SearchLocationVM.swift */,
@@ -549,36 +564,36 @@
 				7D4B1B942AA8FDA20096F372 /* SearchLocationVM+state.swift */,
 				7DCB2BFD2AAC8728007C672A /* reduce */,
 			);
-			path = vm;
+			path = SearchLocationVM;
 			sourceTree = "<group>";
 		};
-		7DA8D3452A9A0DB8005DF550 /* view */ = {
+		7DA8D3452A9A0DB8005DF550 /* JourneysView */ = {
 			isa = PBXGroup;
 			children = (
 				7D02CE332A98E8130048ADE6 /* JourneysView.swift */,
 				7DAF62BA2A9E5DEF006F1A17 /* JourneyScrollView */,
 				7DAF62B92A9E5DA6006F1A17 /* JourneyCell */,
 			);
-			path = view;
+			path = JourneysView;
 			sourceTree = "<group>";
 		};
 		7DA8D3462A9A0DDC005DF550 /* SearchStop */ = {
 			isa = PBXGroup;
 			children = (
 				7D462D562AACD2F700BC0D65 /* view */,
-				7D9E10902AA77CC200820B92 /* vm */,
+				7D9E10902AA77CC200820B92 /* SearchLocationVM */,
 			);
 			path = SearchStop;
 			sourceTree = "<group>";
 		};
-		7DAF62B42A9E5833006F1A17 /* datePicker */ = {
+		7DAF62B42A9E5833006F1A17 /* DatePickerView */ = {
 			isa = PBXGroup;
 			children = (
 				7D81AB252A978CDC0055AEAF /* DatePickerView.swift */,
 				7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */,
 				7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */,
 			);
-			path = datePicker;
+			path = DatePickerView;
 			sourceTree = "<group>";
 		};
 		7DAF62B92A9E5DA6006F1A17 /* JourneyCell */ = {
@@ -602,6 +617,16 @@
 				7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */,
 			);
 			path = JourneyScrollView;
+			sourceTree = "<group>";
+		};
+		7DBEFB7F2ABDB18100C8D5DE /* constructJourneys+Leg */ = {
+			isa = PBXGroup;
+			children = (
+				7D462D612AACEE2500BC0D65 /* constructJourneys+Leg.swift */,
+				7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */,
+				7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift */,
+			);
+			path = "constructJourneys+Leg";
 			sourceTree = "<group>";
 		};
 		7DCB2BFD2AAC8728007C672A /* reduce */ = {
@@ -756,6 +781,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D000CF92AB8768400566120 /* JourneyDetailsViewHeader.swift in Sources */,
+				7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */,
 				7DD4A8DA2AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift in Sources */,
 				7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */,
 				7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */,
@@ -784,6 +810,7 @@
 				7D6C5C1B2AAF495B00DEFC57 /* chewVM+reduce.swift in Sources */,
 				7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */,
 				7D462D602AACED6D00BC0D65 /* constructJourneys+Journey.swift in Sources */,
+				7D68D9F52ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift in Sources */,
 				7DD4A8D62AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift in Sources */,
 				7DE640F02AB079710087FC64 /* JourneyListViewModel+reduce+LoadingUpdate.swift in Sources */,
 				7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */,
@@ -811,6 +838,7 @@
 				7D02CE342A98E8130048ADE6 /* JourneysView.swift in Sources */,
 				7DAF62AF2A9E5494006F1A17 /* JourneyScrollViewLoader.swift in Sources */,
 				7D02CE272A97E6790048ADE6 /* ApiService.swift in Sources */,
+				7D68D9F82ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift in Sources */,
 				7D462D5C2AACE5D100BC0D65 /* JourneyCell.swift in Sources */,
 				7DE3599F2AB9E9430028CA59 /* chewVM+reduce+LoadingLocaiton.swift in Sources */,
 				7D23E44C2A98FD700037C3E1 /* LegView.swift in Sources */,

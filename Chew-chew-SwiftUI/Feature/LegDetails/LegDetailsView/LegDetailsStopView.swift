@@ -13,7 +13,8 @@ struct LegStopView : View {
 		case origin(LegViewData)
 		case stopover
 		case destination
-		case walk
+//		case walk
+//		case transfer
 		
 		var description : String {
 			switch self {
@@ -23,8 +24,10 @@ struct LegStopView : View {
 				return "origin"
 			case .stopover:
 				return "stopover"
-			case .walk:
-				return "walk"
+//			case .walk:
+//				return "walk"
+//			case .transfer:
+//				return "walk"
 			}
 		}
 	}
@@ -32,6 +35,7 @@ struct LegStopView : View {
 	let stopType : StopOverType
 	var plannedTS : String
 	var actualTS : String
+	var delay : Int
 	
 	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : LegViewData.StopViewData) {
 		self.stopOver = stopOver
@@ -44,8 +48,10 @@ struct LegStopView : View {
 				return stopOver.departureActualTimeString
 			case .destination:
 				return stopOver.arrivalActualTimeString
-			case .walk:
-				return stopOver.departureActualTimeString
+//			case .walk:
+//				return stopOver.departureActualTimeString
+//			case .transfer:
+//				return stopOver.departureActualTimeString
 			}
 		}()
 		self.plannedTS = {
@@ -56,8 +62,20 @@ struct LegStopView : View {
 				return stopOver.departurePlannedTimeString
 			case .destination:
 				return stopOver.arrivalPlannedTimeString
-			case .walk:
-				return stopOver.departureActualTimeString
+//			case .walk:
+//				return stopOver.departureActualTimeString
+//			case .transfer:
+//				return stopOver.departureActualTimeString
+			}
+		}()
+		self.delay = {
+			switch type {
+			case .origin:
+				return stopOver.departureDelay
+			case .stopover:
+				return stopOver.departureDelay
+			case .destination:
+				return stopOver.arrivalDelay
 			}
 		}()
 	}
@@ -67,7 +85,8 @@ struct LegStopView : View {
 				isSmall: stopType == .stopover,
 				arragement: .bottom,
 				planned: plannedTS,
-				actual: actualTS
+				actual: actualTS,
+				delay: delay
 			)
 			.padding(3)
 			.background(.gray.opacity(0.15))
@@ -76,7 +95,7 @@ struct LegStopView : View {
 			
 			VStack(alignment: .leading, spacing: 2) {
 				switch stopType {
-				case .origin:
+				case .origin, .destination:
 					Text(stopOver.name)
 						.font(.system(size: 17,weight: .semibold))
 						.frame(height: 20,alignment: .center)
@@ -84,14 +103,6 @@ struct LegStopView : View {
 					Text(stopOver.name)
 						.font(.system(size: 12,weight: .semibold))
 						.frame(height: 15,alignment: .center)
-				case .destination:
-					Text(stopOver.name)
-						.font(.system(size: 17,weight: .semibold))
-						.frame(height: 20,alignment: .center)
-				case .walk:
-					Text("My Location")
-						.font(.system(size: 17,weight: .semibold))
-						.frame(height: 20,alignment: .center)
 				}
 				
 				switch stopType {
@@ -104,13 +115,13 @@ struct LegStopView : View {
 					.frame(height: 20)
 					HStack(spacing: 3) {
 						switch legViewData.legType {
-						case .bus(name: let name), .train(name: let name):
-							BadgeView(badge: .lineNumber(num: name))
+						case .line(mode: let mode, name: let name):
+							BadgeView(badge: .lineNumber(lineType:.other(type: mode) ,num: name))
 							BadgeView(badge: .legDirection(dir: legViewData.direction))
-						case .foot(distance: let dist):
+						case .foot(distance: let dist,_):
 							BadgeView(badge: .walkingDistance(dist))
-						case .custom(name: let name):
-							BadgeView(badge: .lineNumber(num: String(name)))
+						case .transfer(duration: let duration):
+							BadgeView(badge: .legDuration(dur: "\(duration)min"))
 						}
 						BadgeView(badge: .legDuration(dur: legViewData.duration)
 						)
@@ -125,11 +136,11 @@ struct LegStopView : View {
 					.frame(height: 20)
 				case .stopover:
 					EmptyView()
-				case .walk:
-					HStack(spacing: 3) {
-						BadgeView(badge: .walking(direction: "direction"))
-						BadgeView(badge: .walkingDistance(1100))
-					}
+//				case .walk:
+//					HStack(spacing: 3) {
+//						BadgeView(badge: .walking(direction: "direction"))
+//						BadgeView(badge: .walkingDistance(1100))
+//					}
 				}
 			}
 			Spacer()

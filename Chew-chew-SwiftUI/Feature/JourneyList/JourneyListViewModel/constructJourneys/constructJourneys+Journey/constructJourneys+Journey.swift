@@ -10,7 +10,14 @@ import UIKit
 
 
 extension JourneyListViewModel {
-	func constructJourneyViewData(journey : Journey,firstTSPlanned: Date,firstTSActual: Date,lastTSPlanned: Date,lastTSActual: Date
+	func constructJourneyViewData(
+		journey : Journey,
+		firstTSPlanned: Date,
+		firstTSActual: Date,
+		lastTSPlanned: Date,
+		lastTSActual: Date,
+		firstDelay : Int,
+		lastDelay : Int
 	) -> JourneyViewData {
 		var isReachable = true
 		var remarks : [Remark] = []
@@ -25,7 +32,7 @@ extension JourneyListViewModel {
 			if leg.reachable == false {
 				isReachable = false
 			}
-			if let res = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: index) {
+			if let res = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: index, legs: legs) {
 				if legsData.last != nil && currentLegIsNotReachable(currentLeg: res, previousLeg: legsData.last) {
 					legsData[legsData.count-1].delayedAndNextIsNotReachable = true
 					isReachable = false
@@ -53,6 +60,8 @@ extension JourneyListViewModel {
 			startActualTimeString: DateParcer.getTimeStringFromDate(date: firstTSActual) ?? "time",
 			endPlannedTimeString: DateParcer.getTimeStringFromDate(date: lastTSPlanned) ?? "time",
 			endActualTimeString: DateParcer.getTimeStringFromDate(date: lastTSActual) ?? "time",
+			startDelay: firstDelay,
+			endDelay: lastDelay,
 			startDate: firstTSActual,
 			endDate: lastTSActual,
 			startDateString: DateParcer.getDateOnlyStringFromDate(date: firstTSActual),
@@ -64,6 +73,7 @@ extension JourneyListViewModel {
 			) ?? "error",
 			legDTO: journey.legs,
 			legs: legsData,
+			transferCount: constructTransferCount(legs: legsData),
 			sunEvents: sunEventGenerator.getSunEvents(),
 			isReachable: isReachable,
 			badges: constructBadges(remarks: remarks,isReachable: isReachable),

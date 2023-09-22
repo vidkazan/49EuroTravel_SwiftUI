@@ -26,12 +26,11 @@ struct LegView: View {
 							Image(systemName: "figure.walk.circle")
 								.font(.system(size: 12))
 								.foregroundColor(.primary)
-							if (Int(geo.size.width / 3) > leg.legType.value.count) {
-								Text(leg.legType.value)
+							let duration = "\(leg.duration)"
+							if (Int(geo.size.width / 3) - 15 > duration.count) {
+								Text(duration)
 									.foregroundColor(.primary)
 									.font(.system(size: 12,weight: .semibold))
-							} else {
-								Text("")
 							}
 						}
 					} else {
@@ -39,8 +38,6 @@ struct LegView: View {
 							Text(leg.legType.value)
 								.foregroundColor(.primary)
 								.font(.system(size: 12,weight: .semibold))
-						} else {
-							Text("")
 						}
 					}
 				}

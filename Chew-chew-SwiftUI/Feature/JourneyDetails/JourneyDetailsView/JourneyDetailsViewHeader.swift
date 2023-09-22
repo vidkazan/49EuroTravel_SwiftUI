@@ -55,10 +55,10 @@ extension JourneyDetailsView {
 						.background(.gray.opacity(0.1))
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
-					if viewModel.state.data.legDTO?.count ?? 0 > 1 {
+					if viewModel.state.data.transferCount > 0 {
 						HStack {
 							Image(systemName: "arrow.triangle.2.circlepath")
-							Text(String((viewModel.state.data.legDTO?.count ?? 1) - 1))
+							Text(String(viewModel.state.data.transferCount))
 						}
 							.padding(5)
 							.font(.system(size: 12,weight: .medium))

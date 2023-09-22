@@ -8,6 +8,13 @@
 import Foundation
 import SwiftUI
 
+enum LineType :Equatable,Hashable {
+	case train
+	case bus
+	case tram
+	case other(type: String)
+}
+
 enum Badges : Identifiable,Hashable {
 	struct BadgeData : Equatable, Identifiable {
 		static func == (lhs: BadgeData, rhs: BadgeData) -> Bool {
@@ -30,7 +37,7 @@ enum Badges : Identifiable,Hashable {
 	case alertFromRemark
 	case walkingDistance(Int)
 	
-	case lineNumber(num : String)
+	case lineNumber(lineType:LineType,num : String)
 	case legDuration(dur : String)
 	case legDirection(dir : String)
 	case walking(direction : String)
@@ -82,7 +89,7 @@ enum Badges : Identifiable,Hashable {
 			return BadgeData(
 				style: Color(hue: 0, saturation: 1, brightness: 0.7),
 				name: "!")
-		case .lineNumber(num: let num):
+		case .lineNumber((_), num: let num):
 			return BadgeData(name: num)
 		case .legDuration(let dur):
 			return BadgeData(name: dur)
@@ -90,7 +97,6 @@ enum Badges : Identifiable,Hashable {
 			return BadgeData(name: dir)
 		case .walkingDistance(let dist):
 			return BadgeData(
-				style: Color(hue: 0.12, saturation: 0.9, brightness: 0.7),
 				name: String(dist) + "m")
 		case .walking(direction: let direction):
 			return BadgeData(
