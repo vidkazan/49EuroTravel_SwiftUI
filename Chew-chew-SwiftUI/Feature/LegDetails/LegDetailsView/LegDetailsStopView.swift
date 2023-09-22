@@ -40,11 +40,7 @@ struct LegStopView : View {
 		self.stopType = type
 		self.legViewData = leg
 		switch type {
-		case .origin:
-			self.actualTS = stopOver.departureActualTimeString
-			self.plannedTS = stopOver.departurePlannedTimeString
-			self.delay = stopOver.departureDelay
-		case .stopover:
+		case .origin,.stopover:
 			self.actualTS = stopOver.departureActualTimeString
 			self.plannedTS = stopOver.departurePlannedTimeString
 			self.delay = stopOver.departureDelay
@@ -54,11 +50,7 @@ struct LegStopView : View {
 			self.delay = stopOver.arrivalDelay
 		case .foot(let place):
 			switch place {
-			case .atStart:
-				self.actualTS = stopOver.departureActualTimeString
-				self.plannedTS = stopOver.departurePlannedTimeString
-				self.delay = stopOver.departureDelay
-			case .inBetween:
+			case .atStart, .inBetween:
 				self.actualTS = stopOver.departureActualTimeString
 				self.plannedTS = stopOver.departurePlannedTimeString
 				self.delay = stopOver.departureDelay
@@ -70,7 +62,7 @@ struct LegStopView : View {
 		}
 	}
 	var body : some View {
-		HStack(alignment: .top) {
+		HStack(alignment:  .top) {
 			// MARK: Time Label
 			if case .foot(let place)=stopType, case .inBetween=place{
 				Rectangle()
@@ -113,12 +105,11 @@ struct LegStopView : View {
 							.frame(height: 20,alignment: .center)
 					}
 				}
-				
 				// MARK: Badges
 				switch stopType {
-				case .foot(let place):
+				case .foot:
 					HStack(spacing: 3) {
-						BadgeView(badge: .legDuration(dur: legViewData.duration))
+						BadgeView(badge: .walking(duration: legViewData.duration))
 					}
 					.frame(height: 30)
 				case .origin:
@@ -141,25 +132,14 @@ struct LegStopView : View {
 						plannedPlatform: stopOver.plannedArrivalPlatform
 					)
 					.frame(height: 20)
-					
 				case .stopover:
 					EmptyView()
 				}
-				
 				// MARK: Location Name under Badges
-				
-				switch stopType {
-				case .foot(let place):
-					switch place {
-					case .inBetween,.atFinish:
-						Text(stopOver.name)
-							.font(.system(size: 17,weight: .semibold))
-							.frame(height: 20,alignment: .center)
-					default:
-						EmptyView()
-					}
-				default:
-					EmptyView()
+				if case .foot(let place)=stopType, case .atFinish=place{
+					Text(stopOver.name)
+						.font(.system(size: 17,weight: .semibold))
+						.frame(height: 20,alignment: .center)
 				}
 			}
 			Spacer()

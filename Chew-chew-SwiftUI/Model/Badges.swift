@@ -35,12 +35,11 @@ enum Badges : Identifiable,Hashable {
 	case cancelled
 	case connectionNotReachable
 	case alertFromRemark
-	case walkingDistance(Int)
 	
 	case lineNumber(lineType:LineType,num : String)
 	case legDuration(dur : String)
 	case legDirection(dir : String)
-	case walking(direction : String)
+	case walking(duration : String)
 	 
 	var id : Int {
 		switch self {
@@ -60,10 +59,8 @@ enum Badges : Identifiable,Hashable {
 			return 6
 		case .legDirection:
 			return 7
-		case .walkingDistance:
-			return 8
 		case .walking:
-			return 9
+			return 8
 		}
 	}
 	
@@ -95,13 +92,9 @@ enum Badges : Identifiable,Hashable {
 			return BadgeData(name: dur)
 		case .legDirection(let dir):
 			return BadgeData(name: dir)
-		case .walkingDistance(let dist):
+		case .walking(let duration):
 			return BadgeData(
-				name: String(dist) + "m")
-		case .walking(direction: let direction):
-			return BadgeData(
-				name: String(direction)
-			)
+				name: String(duration))
 		}
 	}
 }

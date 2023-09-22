@@ -16,31 +16,10 @@ struct LegDetailsView: View {
 			VStack {
 				switch viewModel.state.leg.legType {
 				case .foot(place: let place):
-					switch place {
-					case .atStart:
+					if viewModel.state.leg.legStopsViewData.count > 1 {
 						if let stop = viewModel.state.leg.legStopsViewData.first {
 							LegStopView(
-								type: .origin,
-								vm: viewModel,
-								stopOver: stop,
-								leg: viewModel.state.leg
-							)
-						}
-					case .inBetween:
-						if viewModel.state.leg.legStopsViewData.count > 1 {
-							if let stop = viewModel.state.leg.legStopsViewData.first {
-								LegStopView(
-									type: .origin,
-									vm: viewModel,
-									stopOver: stop,
-									leg: viewModel.state.leg
-								)
-							}
-						}
-					case .atFinish:
-						if let stop = viewModel.state.leg.legStopsViewData.first {
-							LegStopView(
-								type: .origin,
+								type: .foot(place),
 								vm: viewModel,
 								stopOver: stop,
 								leg: viewModel.state.leg
