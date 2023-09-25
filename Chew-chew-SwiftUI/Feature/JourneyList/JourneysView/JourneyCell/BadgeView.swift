@@ -89,6 +89,24 @@ struct BadgeView : View {
 					.lineSpacing(2)
 					.lineLimit(1)
 			}
+		case .transfer(duration: let duration):
+			HStack(spacing: 2) {
+				Image(systemName: "arrow.2.squarepath")
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.secondary)
+				Text("transfer")
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.secondary)
+					.background(badge.badgeData.style)
+					.lineSpacing(2)
+				Text(badge.badgeData.name)
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.primary)
+					.background(badge.badgeData.style)
+					.lineSpacing(2)
+					.lineLimit(1)
+			}
+
 		}
 	}
 }

@@ -67,11 +67,16 @@ struct LegStopView : View {
 	var body : some View {
 		HStack(alignment:  .top) {
 			// MARK: Time Label
-			if case .foot(let place)=stopType, case .inBetween=place{
+			if case .foot(let place)=stopType, case .inBetween = place{
 				Rectangle()
 					.fill(.clear)
-				.padding(3)
-				.frame(width: 60,alignment: .center)
+					.padding(3)
+					.frame(width: 60,alignment: .center)
+			} else if case .transfer=stopType {
+				Rectangle()
+					.fill(.clear)
+					.padding(3)
+					.frame(width: 60,alignment: .center)
 			} else {
 				TimeLabelView(
 					isSmall: stopType == .stopover,
@@ -141,8 +146,7 @@ struct LegStopView : View {
 					EmptyView()
 				case .transfer:
 					HStack(spacing: 3) {
-						Text("transfer")
-						BadgeView(badge: .legDuration(dur: legViewData.duration))
+						BadgeView(badge: .transfer(duration: legViewData.duration))
 					}
 					.frame(height: 30)
 				}

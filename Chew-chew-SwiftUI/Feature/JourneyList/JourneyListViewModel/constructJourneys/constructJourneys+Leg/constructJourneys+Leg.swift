@@ -9,11 +9,52 @@ import Foundation
 import UIKit
 import SwiftUI
 
-//extension JourneyListViewModel {
-//	func constructTransferViewData() -> LegViewData{
-//		
-//	}
-//}
+extension JourneyListViewModel {
+	func constructTransferViewData(fromLeg : Leg, toLeg : Leg, id : Int) -> LegViewData? {
+		guard
+			let plannedDepartureTSString = fromLeg.plannedArrival,
+			let plannedArrivalTSString = toLeg.plannedDeparture,
+			let actualDepartureTSString = fromLeg.arrival,
+			let actualArrivalTSString =  toLeg.departure else { return nil }
+		let plannedDepartureTS = DateParcer.getDateFromDateString(dateString: plannedDepartureTSString)
+		let plannedArrivalTS = DateParcer.getDateFromDateString(dateString: plannedArrivalTSString)
+		let actualDepartureTS = DateParcer.getDateFromDateString(dateString: actualDepartureTSString)
+		let actualArrivalTS = DateParcer.getDateFromDateString(dateString: actualArrivalTSString)
+		
+		
+		let res = LegViewData(
+			id: id,
+			fillColor: .clear,
+			legType: .transfer,
+			direction: "transfer direction",
+			duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
+				minutes: DateParcer.getTwoDateIntervalInMinutes(
+					date1: actualDepartureTS,
+					date2: actualArrivalTS
+				)) ?? "duration",
+			legTopPosition: 0,
+			legBottomPosition: 0,
+			delayedAndNextIsNotReachable: nil,
+			remarks: [],
+			legStopsViewData: [.init(
+				name: "transfer",
+				departurePlannedTimeString: "",
+				departureActualTimeString: "",
+				arrivalPlannedTimeString: "",
+				arrivalActualTimeString: "",
+				departurePlatform: "platform",
+				plannedDeparturePlatform: "platform",
+				arrivalPlatform: "platform",
+				plannedArrivalPlatform: "platform",
+				departureDelay: 666,
+				arrivalDelay: 666
+			)],
+			footDistance: 0,
+			lineName: "transfer line name"
+		)
+		return res
+	}
+}
 
 extension JourneyListViewModel {
 	func constructLegFillColor(leg : Leg) -> Color {
@@ -25,7 +66,7 @@ extension JourneyListViewModel {
 		}
 	}
 
-	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int, legs : [Leg]) -> LegViewData? {
+	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?,id : Int, legs : [Leg]) -> LegViewData? {	
 		guard
 			let plannedDepartureTSString = leg.plannedDeparture,
 			let plannedArrivalTSString = leg.plannedArrival,

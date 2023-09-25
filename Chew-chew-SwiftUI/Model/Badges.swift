@@ -40,6 +40,7 @@ enum Badges : Identifiable,Hashable {
 	case legDuration(dur : String)
 	case legDirection(dir : String)
 	case walking(duration : String)
+	case transfer(duration : String)
 	 
 	var id : Int {
 		switch self {
@@ -61,6 +62,8 @@ enum Badges : Identifiable,Hashable {
 			return 7
 		case .walking:
 			return 8
+		case .transfer:
+			return 9
 		}
 	}
 	
@@ -95,6 +98,10 @@ enum Badges : Identifiable,Hashable {
 		case .walking(let duration):
 			return BadgeData(
 				name: String(duration))
+		case .transfer(duration: let dur):
+			return BadgeData(
+				name: String(dur))
+			
 		}
 	}
 }

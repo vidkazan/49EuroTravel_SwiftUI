@@ -27,11 +27,14 @@ struct LegDetailsView: View {
 						}
 					}
 				case .transfer:
-					HStack(spacing: 3) {
-						BadgeView(badge: .legDuration(dur: viewModel.state.leg.duration))
-						Spacer()
+					if let stop = viewModel.state.leg.legStopsViewData.first {
+						LegStopView(
+							type: .transfer,
+							vm: viewModel,
+							stopOver: stop,
+							leg: viewModel.state.leg
+						)
 					}
-					.frame(height: 30)
 				case .line:
 					if viewModel.state.leg.legStopsViewData.count > 1 {
 						if let stop = viewModel.state.leg.legStopsViewData.first {

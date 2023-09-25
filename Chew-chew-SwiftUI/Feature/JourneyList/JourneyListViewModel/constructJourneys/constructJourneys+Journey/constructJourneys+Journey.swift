@@ -32,17 +32,18 @@ extension JourneyListViewModel {
 			if leg.reachable == false {
 				isReachable = false
 			}
-			if let res = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: index, legs: legs) {
+			if let res = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: (legsData.last?.id ?? -1)  + 2, legs: legs) {
 				if let last = legsData.last {
-//					if case .line = res.legType, case .line=last.legType {
-//						if let transfer = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: index, legs: legs) {
-//							legsData.append(transfer)
-//						}
-//					}
 					if currentLegIsNotReachable(currentLeg: res, previousLeg: last) {
 						legsData[legsData.count-1].delayedAndNextIsNotReachable = true
 						isReachable = false
 					}
+					if case .line = res.legType, case .line=last.legType {
+						if let transfer = self.constructTransferViewData(fromLeg: legs[index-1], toLeg: leg,id : (legsData.last?.id ?? -1) + 1) {
+							legsData.append(transfer)
+						}
+					}
+					
 				}
 				legsData.append(res)
 			}
