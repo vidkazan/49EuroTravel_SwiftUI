@@ -82,7 +82,6 @@ struct JourneyViewData : Equatable {
 	let startDateString : String
 	let endDateString : String
 	let durationLabelText : String
-	let legDTO : [Leg]?
 	let legs : [LegViewData]
 	let transferCount : Int
 	let sunEvents : [SunEvent]

@@ -22,9 +22,9 @@ struct JourneyCell: View {
 			HStack(alignment: .center) {
 				PlatformView(
 					isShowingPlatormWord: false,
-					platform: journey.legDTO?.first?.departurePlatform,
-					plannedPlatform: journey.legDTO?.first?.plannedDeparturePlatform)
-				Text(journey.legDTO?.first?.origin?.name != chewVM.topSearchFieldText ? journey.legDTO?.first?.origin?.name ?? "" : "")
+					platform: journey.legs.first?.legStopsViewData.first?.departurePlatform,
+					plannedPlatform: journey.legs.first?.legStopsViewData.first?.plannedDeparturePlatform)
+				Text(journey.legs.first?.legStopsViewData.first?.name != chewVM.topSearchFieldText ? journey.legs.first?.legStopsViewData.first?.name ?? "" : "")
 					.font(.system(size: 12,weight: .semibold))
 					.foregroundColor(.secondary)
 				Spacer()

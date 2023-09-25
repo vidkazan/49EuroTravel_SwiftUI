@@ -33,9 +33,16 @@ extension JourneyListViewModel {
 				isReachable = false
 			}
 			if let res = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: index, legs: legs) {
-				if legsData.last != nil && currentLegIsNotReachable(currentLeg: res, previousLeg: legsData.last) {
-					legsData[legsData.count-1].delayedAndNextIsNotReachable = true
-					isReachable = false
+				if let last = legsData.last {
+//					if case .line = res.legType, case .line=last.legType {
+//						if let transfer = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: index, legs: legs) {
+//							legsData.append(transfer)
+//						}
+//					}
+					if currentLegIsNotReachable(currentLeg: res, previousLeg: last) {
+						legsData[legsData.count-1].delayedAndNextIsNotReachable = true
+						isReachable = false
+					}
 				}
 				legsData.append(res)
 			}
@@ -71,7 +78,6 @@ extension JourneyListViewModel {
 					date1: firstTSActual,
 					date2: lastTSActual)
 			) ?? "error",
-			legDTO: journey.legs,
 			legs: legsData,
 			transferCount: constructTransferCount(legs: legsData),
 			sunEvents: sunEventGenerator.getSunEvents(),

@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 import SwiftUI
 
+//extension JourneyListViewModel {
+//	func constructTransferViewData() -> LegViewData{
+//		
+//	}
+//}
+
 extension JourneyListViewModel {
 	func constructLegFillColor(leg : Leg) -> Color {
 		switch leg.reachable ?? true {

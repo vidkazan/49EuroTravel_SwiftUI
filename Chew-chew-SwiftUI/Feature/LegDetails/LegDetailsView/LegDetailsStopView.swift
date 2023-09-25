@@ -14,6 +14,7 @@ struct LegStopView : View {
 		case stopover
 		case destination
 		case foot(FootLegPlace)
+		case transfer
 		
 		var description : String {
 			switch self {
@@ -25,6 +26,8 @@ struct LegStopView : View {
 				return "stopover"
 			case .foot:
 				return "foot"
+			case .transfer:
+				return "transfer"
 			}
 		}
 	}
@@ -40,7 +43,7 @@ struct LegStopView : View {
 		self.stopType = type
 		self.legViewData = leg
 		switch type {
-		case .origin,.stopover:
+		case .origin,.stopover,.transfer:
 			self.actualTS = stopOver.departureActualTimeString
 			self.plannedTS = stopOver.departurePlannedTimeString
 			self.delay = stopOver.departureDelay
@@ -104,6 +107,8 @@ struct LegStopView : View {
 							.font(.system(size: 17,weight: .semibold))
 							.frame(height: 20,alignment: .center)
 					}
+				case .transfer:
+					EmptyView()
 				}
 				// MARK: Badges
 				switch stopType {
@@ -134,6 +139,12 @@ struct LegStopView : View {
 					.frame(height: 20)
 				case .stopover:
 					EmptyView()
+				case .transfer:
+					HStack(spacing: 3) {
+						Text("transfer")
+						BadgeView(badge: .legDuration(dur: legViewData.duration))
+					}
+					.frame(height: 30)
 				}
 				// MARK: Location Name under Badges
 				if case .foot(let place)=stopType, case .atFinish=place{

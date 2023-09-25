@@ -62,7 +62,6 @@ struct Previews: PreviewProvider {
 				startDateString:  "21 sep 2023",
 				endDateString: "21 sep 2023",
 				durationLabelText: "11 h 11 min",
-				legDTO: [],
 				legs: [], transferCount: 0,
 				sunEvents: [],
 				isReachable: true,

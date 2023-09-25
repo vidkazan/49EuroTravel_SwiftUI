@@ -346,9 +346,9 @@
 			isa = PBXGroup;
 			children = (
 				7D4B1B982AA950780096F372 /* constructJourneys.swift */,
-				7D462D5D2AACEC5600BC0D65 /* constructJourneys+TimeLabel.swift */,
 				7D68D9F62ABDB39A00579711 /* constructJourneys+Journey */,
 				7DBEFB7F2ABDB18100C8D5DE /* constructJourneys+Leg */,
+				7D462D5D2AACEC5600BC0D65 /* constructJourneys+TimeLabel.swift */,
 				7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */,
 			);
 			path = constructJourneys;
