@@ -31,18 +31,17 @@ struct SearchStopsView: View {
 					rightButton(type: .departure)
 				}
 				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray30 : Color.chewGray15)
-				.animation(.easeInOut, value: chewViewModel.state.status)
+				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
 				if searchStopViewModel.state.type == .departure {
 					stopList(type: .departure)
 				}
-					
 			}
 			.background(Color.chewGray15)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
 			.transition(.move(edge: .bottom))
-			.animation(.spring(), value: searchStopViewModel.state)
+			.animation(.spring(), value: searchStopViewModel.state.status)
 			VStack {
 				HStack {
 					textField(
@@ -55,12 +54,10 @@ struct SearchStopsView: View {
 					rightButton(type: .arrival)
 				}
 				.background(chewViewModel.state.status == .editingArrivalStop ?  Color.chewGray30 : Color.chewGray15)
-				.animation(.easeInOut, value: chewViewModel.state.status)
+				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
 				if searchStopViewModel.state.type == .arrival {
 					stopList(type: .arrival)
-					.transition(.move(edge: .bottom))
-					.animation(.spring(), value: searchStopViewModel.state)
 				}
 			}
 			.background(Color.chewGray15)

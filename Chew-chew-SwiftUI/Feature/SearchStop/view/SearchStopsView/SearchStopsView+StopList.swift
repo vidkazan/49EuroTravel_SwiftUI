@@ -18,11 +18,9 @@ extension SearchStopsView {
 						Button(text){
 							switch type {
 							case .departure:
-								focusedField = nil
 								chewViewModel.send(event: .onNewDeparture(.stop(stop)))
 								searchStopViewModel.send(event: .onStopDidTap(stop, type))
 							case .arrival:
-								focusedField = nil
 								chewViewModel.send(event: .onNewArrival(.stop(stop)))
 								searchStopViewModel.send(event: .onStopDidTap(stop, type))
 							}

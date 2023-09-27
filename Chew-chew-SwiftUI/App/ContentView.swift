@@ -27,9 +27,6 @@ struct ContentView: View {
 					}
 				}
 				.padding(10)
-				.transition(.move(edge: .bottom))
-//				.animation(.spring(), value: chewViewModel.state.status)
-				.animation(.spring(), value: chewViewModel.state.searchStopViewModel.state.status)
 				if chewViewModel.state.status == .datePicker {
 					DatePickerView(startDat: chewViewModel.state.timeChooserDate.date)
 				}
@@ -39,9 +36,6 @@ struct ContentView: View {
 				startPoint: UnitPoint(x: 0.5, y: 0.1),
 				endPoint: UnitPoint(x: 0.5, y: 0.4))
 			)
-			.transition(.move(edge: .bottom))
-			.animation(.spring(), value: chewViewModel.state.searchStopViewModel.state.status)
-//			.animation(.spring(), value: chewViewModel.state.status)
 			.navigationBarTitle("")
 			.navigationBarHidden(true)
 		}

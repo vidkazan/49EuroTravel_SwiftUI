@@ -21,7 +21,6 @@ struct TimeChoosingView: View {
 		ZStack {
 			Rectangle()
 				.fill(.ultraThickMaterial)
-//				.fill(.gray.opacity(0.3))
 				.frame(width: UIScreen.main.bounds.width / 2.15, height: 36)
 				.cornerRadius(8)
 				.padding(4)
@@ -59,6 +58,7 @@ struct TimeChoosingView: View {
 		.cornerRadius(10)
 		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: chewVM.state.status)
+		.animation(.spring(), value: chewVM.state.searchStopViewModel.state.status)
 	}
 
 	func optionPressed(_ index: Int) {
