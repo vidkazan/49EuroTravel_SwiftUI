@@ -36,8 +36,8 @@ struct DatePickerView: View {
 				Spacer()
 			}
 				.frame(maxWidth: .infinity,maxHeight: 50)
-//				.background(.ultraThinMaterial)
-				.background(.gray.opacity(0.15))
+				.background(.ultraThinMaterial)
+//				.background(Color.chewGray15)
 				.cornerRadius(10)
 			DatePicker(
 				"",

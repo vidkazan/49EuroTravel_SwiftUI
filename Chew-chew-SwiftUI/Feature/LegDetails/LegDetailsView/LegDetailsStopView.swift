@@ -86,7 +86,7 @@ struct LegStopView : View {
 					delay: delay
 				)
 				.padding(3)
-				.background(.gray.opacity(0.15))
+				.background(Color.chewGray15)
 				.cornerRadius(stopType == .stopover ? 7 : 10 )
 				.frame(width: 60,alignment: .center)
 			}

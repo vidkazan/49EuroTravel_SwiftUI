@@ -20,7 +20,7 @@ struct JourneyScrollViewFooter: View {
 				.padding(5)
 				.font(.system(size: 17, weight: .medium))
 //				.background(.ultraThinMaterial)
-				.background(.gray.opacity(0.15))
+				.background(Color.chewGray15)
 				.cornerRadius(10)
 		}
     }

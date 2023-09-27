@@ -22,8 +22,7 @@ extension JourneyDetailsView {
 							.foregroundColor(.primary)
 					}
 					.padding(7)
-//					.background(.ultraThinMaterial.opacity(0.5))
-					.background(.gray.opacity(0.1))
+					.background(Color.chewGray10)
 					.cornerRadius(10)
 					Spacer()
 				}
@@ -33,8 +32,7 @@ extension JourneyDetailsView {
 					}
 						.padding(5)
 						.font(.system(size: 12,weight: .medium))
-//						.background(.ultraThinMaterial.opacity(0.5))
-						.background(.gray.opacity(0.1))
+						.background(Color.chewGray10)
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
 					HStack {
@@ -44,15 +42,13 @@ extension JourneyDetailsView {
 					}
 						.padding(5)
 						.font(.system(size: 12,weight: .medium))
-//						.background(.ultraThinMaterial.opacity(0.5))
-						.background(.gray.opacity(0.1))
+						.background(Color.chewGray10)
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
 					Text(viewModel.state.data.durationLabelText)
 						.padding(5)
 						.font(.system(size: 12,weight: .medium))
-//						.background(.ultraThinMaterial.opacity(0.5))
-						.background(.gray.opacity(0.1))
+						.background(Color.chewGray10)
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
 					if viewModel.state.data.transferCount > 0 {
@@ -63,7 +59,7 @@ extension JourneyDetailsView {
 							.padding(5)
 							.font(.system(size: 12,weight: .medium))
 //							.background(.ultraThinMaterial.opacity(0.5))
-							.background(.gray.opacity(0.1))
+							.background(Color.chewGray10)
 							.foregroundColor(.primary.opacity(0.6))
 							.cornerRadius(8)
 					}
@@ -72,7 +68,7 @@ extension JourneyDetailsView {
 				LegsView(journey : viewModel.state.data)
 					.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
 //					.background(.ultraThinMaterial.opacity(0.5))
-					.background(.gray.opacity(0.1))
+					.background(Color.chewGray10)
 					.cornerRadius(8)
 			}
 			

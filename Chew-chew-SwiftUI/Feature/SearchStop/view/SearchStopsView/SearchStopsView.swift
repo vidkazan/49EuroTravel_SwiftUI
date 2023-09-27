@@ -31,14 +31,15 @@ struct SearchStopsView: View {
 					)
 					rightButton(type: .departure)
 				}
-				.background(.ultraThickMaterial)
+				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray30 : Color.chewGray15)
+				.animation(.easeInOut, value: chewViewModel.state.status)
 				.cornerRadius(10)
 				if searchStopViewModel.state.type == .departure {
 					stopList(type: .departure)
 				}
 					
 			}
-			.background(.thinMaterial)
+			.background(Color.chewGray15)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
 			.transition(.move(edge: .bottom))
@@ -54,7 +55,8 @@ struct SearchStopsView: View {
 					)
 					rightButton(type: .arrival)
 				}
-				.background(.ultraThickMaterial)
+				.background(chewViewModel.state.status == .editingArrivalStop ?  Color.chewGray30 : Color.chewGray15)
+				.animation(.easeInOut, value: chewViewModel.state.status)
 				.cornerRadius(10)
 				if searchStopViewModel.state.type == .arrival {
 					stopList(type: .arrival)
@@ -62,7 +64,7 @@ struct SearchStopsView: View {
 					.animation(.spring(), value: searchStopViewModel.state.status)
 				}
 			}
-			.background(.thinMaterial)
+			.background(Color.chewGray15)
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
 			.transition(.move(edge: .bottom))

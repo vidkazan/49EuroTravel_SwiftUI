@@ -11,7 +11,7 @@ import Combine
 final class LegDetailsViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
 		didSet {
-			print("🟣 > leg details new state:",state.status.description)
+//			print("🟣 > leg details new state:",state.status.description)
 		}
 	}
 	private var bag = Set<AnyCancellable>()

@@ -22,7 +22,7 @@ struct BadgeView : View {
 				.padding(4)
 				.background(badge.badgeData.style)
 //				.background(.ultraThinMaterial)
-				.background(.gray.opacity(0.15))
+				.background(Color.chewGray15)
 				.cornerRadius(8)
 		case .dticket:
 			DTicketLogo()
@@ -30,7 +30,7 @@ struct BadgeView : View {
 				.padding(4)
 				.background(badge.badgeData.style)
 //				.background(.ultraThinMaterial)
-				.background(.gray.opacity(0.15))
+				.background(Color.chewGray15)
 				.cornerRadius(8)
 		case .lineNumber:
 			Text(badge.badgeData.name)
@@ -39,7 +39,7 @@ struct BadgeView : View {
 				.padding(4)
 				.background(badge.badgeData.style)
 //				.background(.ultraThinMaterial)
-				.background(.gray.opacity(0.15))
+				.background(Color.chewGray15)
 				.cornerRadius(8)
 		case .legDuration:
 			HStack(spacing: 2) {
@@ -52,7 +52,7 @@ struct BadgeView : View {
 			}
 			.padding(4)
 //			.background(.ultraThinMaterial)
-			.background(.gray.opacity(0.15))
+			.background(Color.chewGray15)
 			.cornerRadius(8)
 		case .legDirection:
 			HStack(spacing: 2) {
@@ -70,7 +70,7 @@ struct BadgeView : View {
 			}
 			.padding(4)
 //			.background(.ultraThinMaterial)
-			.background(.gray.opacity(0.15))
+			.background(Color.chewGray15)
 			.cornerRadius(8)
 		case .walking:
 			HStack(spacing: 2) {

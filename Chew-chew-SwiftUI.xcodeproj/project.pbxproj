@@ -96,6 +96,7 @@
 		7DBF1E572ABB8084009B85EF /* TimeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */; };
 		7DBF1E592ABC522E009B85EF /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF1E582ABC522E009B85EF /* Badges.swift */; };
 		7DCB2BFF2AAC8831007C672A /* SearchLocationVM+reduce+Idle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB2BFE2AAC8831007C672A /* SearchLocationVM+reduce+Idle.swift */; };
+		7DCD20102AC470AD00788B38 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD200F2AC470AD00788B38 /* Colors.swift */; };
 		7DD4A8D62AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD4A8D52AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift */; };
 		7DD4A8D82AAC90C3001AA30C /* SearchLocationVM+reduce+Loaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD4A8D72AAC90C3001AA30C /* SearchLocationVM+reduce+Loaded.swift */; };
 		7DD4A8DA2AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD4A8D92AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift */; };
@@ -213,6 +214,7 @@
 		7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabelView.swift; sourceTree = "<group>"; };
 		7DBF1E582ABC522E009B85EF /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		7DCB2BFE2AAC8831007C672A /* SearchLocationVM+reduce+Idle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Idle.swift"; sourceTree = "<group>"; };
+		7DCD200F2AC470AD00788B38 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7DD4A8D52AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Loading.swift"; sourceTree = "<group>"; };
 		7DD4A8D72AAC90C3001AA30C /* SearchLocationVM+reduce+Loaded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Loaded.swift"; sourceTree = "<group>"; };
 		7DD4A8D92AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Error.swift"; sourceTree = "<group>"; };
@@ -306,6 +308,7 @@
 				7D3E5F002AB321580064213A /* LocationManager.swift */,
 				7D000CFA2AB87ACD00566120 /* NavigationLazyView.swift */,
 				7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */,
+				7DCD200F2AC470AD00788B38 /* Colors.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -781,6 +784,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7D000CF92AB8768400566120 /* JourneyDetailsViewHeader.swift in Sources */,
+				7DCD20102AC470AD00788B38 /* Colors.swift in Sources */,
 				7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */,
 				7DD4A8DA2AAC90C9001AA30C /* SearchLocationVM+reduce+Error.swift in Sources */,
 				7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */,

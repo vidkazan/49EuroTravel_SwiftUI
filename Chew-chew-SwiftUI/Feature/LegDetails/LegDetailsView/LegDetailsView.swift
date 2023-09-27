@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 
-
 struct LegDetailsView: View {
 	@ObservedObject var viewModel : LegDetailsViewModel
 	var body : some View {
@@ -45,7 +44,7 @@ struct LegDetailsView: View {
 								leg: viewModel.state.leg
 							)
 						}
-						if viewModel.state.status == .stopovers {
+						if case .stopovers = viewModel.state.status {
 							ForEach(viewModel.state.leg.legStopsViewData) { stopover in
 								if stopover != viewModel.state.leg.legStopsViewData.first,stopover != viewModel.state.leg.legStopsViewData.last {
 									LegStopView(
@@ -56,6 +55,10 @@ struct LegDetailsView: View {
 									)
 								}
 							}
+						} else {
+							Rectangle()
+								.fill(.clear)
+								.frame(height: 15)
 						}
 						if let stop = viewModel.state.leg.legStopsViewData.last {
 							LegStopView(
@@ -86,7 +89,10 @@ struct LegDetailsView: View {
 					}
 				}
 			}
+			.transition(.move(edge: .bottom))
+			.animation(.spring(), value: viewModel.state.status)
 		}
+		.padding(5)
 		.onTapGesture {
 			viewModel.send(event: .didtapExpandButton)
 		}
@@ -97,5 +103,7 @@ struct LegDetailsView: View {
 			viewModel.state.leg.legType.description == "line" ? Color.gray.opacity(0.1) : Color.clear
 		}
 		.cornerRadius(10)
+		.transition(.move(edge: .bottom))
+		.animation(.spring(), value: viewModel.state.status)
 	}
 }
