@@ -39,7 +39,7 @@ extension ChewViewModel {
 				depStop: state.arrStop,
 				arrStop: state.depStop,
 				timeChooserDate: state.timeChooserDate,
-				status: state.status
+				status: .editingDepartureStop
 			)
 		case .onNewArrival(let stop):
 			self.bottomSearchFieldText = stop?.stop.name ?? "no name"

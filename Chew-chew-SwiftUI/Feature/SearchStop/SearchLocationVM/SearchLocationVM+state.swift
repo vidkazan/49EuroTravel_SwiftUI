@@ -9,14 +9,14 @@ import Foundation
 
 extension SearchLocationViewModel {
 	
-	struct State : Equatable {
+	struct State : Equatable, Hashable {
 		var stops : [Stop]
 		var previousSearchLineString : String
 		var status : Status
 		var type : LocationDirectionType
 	}
 	
-	enum Status : Equatable {
+	enum Status : Equatable,Hashable {
 		static func == (lhs: SearchLocationViewModel.Status, rhs: SearchLocationViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}

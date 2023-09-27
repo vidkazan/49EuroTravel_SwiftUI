@@ -11,8 +11,7 @@ import CoreLocation
 struct SearchStopsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
 	@ObservedObject var searchStopViewModel : SearchLocationViewModel
-	@FocusState	 var textTopFieldIsFocused : Bool
-	@FocusState	 var textBottomFieldIsFocused: Bool
+	@FocusState	var focusedField : LocationDirectionType?
 	
 	init(searchStopViewModel: SearchLocationViewModel) {
 		self.searchStopViewModel = searchStopViewModel
@@ -26,8 +25,8 @@ struct SearchStopsView: View {
 						type: .departure,
 						text: chewViewModel.topSearchFieldText,
 						textBinding: $chewViewModel.topSearchFieldText,
-						focusBinding: $textTopFieldIsFocused,
-						focus: textTopFieldIsFocused
+						focusedField: focusedField,
+						focusedFieldBinding: $focusedField
 					)
 					rightButton(type: .departure)
 				}
@@ -43,15 +42,15 @@ struct SearchStopsView: View {
 			.cornerRadius(10)
 			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
 			.transition(.move(edge: .bottom))
-			.animation(.spring(), value: searchStopViewModel.state.status)
+			.animation(.spring(), value: searchStopViewModel.state)
 			VStack {
 				HStack {
 					textField(
 						type: .arrival,
 						text: chewViewModel.bottomSearchFieldText,
 						textBinding: $chewViewModel.bottomSearchFieldText,
-						focusBinding: $textBottomFieldIsFocused,
-						focus: textBottomFieldIsFocused
+						focusedField: focusedField,
+						focusedFieldBinding: $focusedField
 					)
 					rightButton(type: .arrival)
 				}
@@ -61,7 +60,7 @@ struct SearchStopsView: View {
 				if searchStopViewModel.state.type == .arrival {
 					stopList(type: .arrival)
 					.transition(.move(edge: .bottom))
-					.animation(.spring(), value: searchStopViewModel.state.status)
+					.animation(.spring(), value: searchStopViewModel.state)
 				}
 			}
 			.background(Color.chewGray15)
@@ -70,5 +69,18 @@ struct SearchStopsView: View {
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: searchStopViewModel.state.status)
 		}
+		.onChange(of: chewViewModel.state.status, perform: { s in
+			focusedField = {
+				switch s {
+				case .editingDepartureStop:
+					return .departure
+				case .editingArrivalStop:
+					return .arrival
+				default:
+					return nil
+				}
+			}()
+		})
 	}
 }
+

@@ -8,7 +8,7 @@
 import Foundation
 
 extension ChewViewModel {
-	enum DateType :  Equatable {
+	enum DateType : Hashable {
 		case now
 		case specificDate(Date)
 		
@@ -49,7 +49,6 @@ extension ChewViewModel {
 		static func == (lhs: ChewViewModel.Status, rhs: ChewViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
-		
 		case idle
 		case editingDepartureStop
 		case editingArrivalStop

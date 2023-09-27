@@ -90,7 +90,7 @@ struct JourneyViewData : Equatable {
 	let refreshToken : String?
 }
 
-enum LocationDirectionType :Equatable, Hashable {
+enum LocationDirectionType :Int, Hashable {
 	case departure
 	case arrival
 	

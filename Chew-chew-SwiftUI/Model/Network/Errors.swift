@@ -12,13 +12,42 @@ struct CustomErrors : Error {
 	let source : ApiService.Requests
 }
 
-enum ApiServiceError : Error {
+enum ApiServiceError : Error,Equatable,Hashable {
+	static func == (lhs: ApiServiceError, rhs: ApiServiceError) -> Bool {
+		return lhs.description == rhs.description
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		switch self {
+		case .badUrl:
+			break
+		case .cannotConnectToHost(let string):
+			hasher.combine(string)
+		case .badServerResponse(let code):
+			hasher.combine(code)
+		case .cannotDecodeRawData:
+			break
+		case .cannotDecodeContentData:
+			break
+		case .badRequest:
+			break
+		case .requestRateExceeded:
+			break
+		case .generic(let error):
+			hasher.combine(error.localizedDescription)
+		case .stopNotFound:
+			break
+		case .connectionNotFound:
+			break
+		case .failedToGetUserLocation:
+			break
+		}
+	}
 	case badUrl
 	case cannotConnectToHost(String)
 	case badServerResponse(code : Int)
 	case cannotDecodeRawData
 	case cannotDecodeContentData
-//	case unauthorised
 	case badRequest
 	case requestRateExceeded
 	case generic(Error)
@@ -38,8 +67,6 @@ enum ApiServiceError : Error {
 			return "Server response data nil"
 		case .cannotDecodeContentData:
 			return "Server response data decoding"
-//		case .unauthorised:
-//			return "Your token is expired"
 		case .badRequest:
 			return "Bad search request"
 		case .requestRateExceeded:

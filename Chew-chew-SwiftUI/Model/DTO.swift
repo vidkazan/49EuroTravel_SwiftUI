@@ -141,7 +141,7 @@ enum StopType : Equatable {
 	}
 }
 
-struct Stop : Codable, Identifiable, Equatable {
+struct Stop : Codable, Identifiable, Equatable,Hashable {
 	let type	: String?
 	let id		: String?
 	let name	: String?
@@ -184,7 +184,7 @@ struct Departure : Codable,Equatable {
 
 
 // MARK: - Location
-struct Location : Codable,Equatable {
+struct Location : Codable,Equatable,Hashable {
 	let type		: String?
 	let id			: String?
 	let latitude	: Double?
@@ -192,7 +192,7 @@ struct Location : Codable,Equatable {
 }
 
 // MARK: - Products
-struct Products : Codable, Equatable {
+struct Products : Codable, Equatable,Hashable {
 	let nationalExpress		: Bool?
 	let national			: Bool?
 	let regionalExpress		: Bool?
