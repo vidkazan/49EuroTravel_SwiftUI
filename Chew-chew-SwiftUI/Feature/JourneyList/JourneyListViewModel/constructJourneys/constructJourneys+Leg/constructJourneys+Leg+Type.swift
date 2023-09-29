@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-extension JourneyListViewModel {
+extension JourneyViewDataConstructor {
 	func constructLegType(leg : Leg, legs: [Leg]) -> LegType {
 		if let dist = leg.distance {
 			switch legs.firstIndex(of: leg) {

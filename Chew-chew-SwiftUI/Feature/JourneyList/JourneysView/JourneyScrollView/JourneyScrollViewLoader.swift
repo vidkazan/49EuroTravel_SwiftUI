@@ -19,8 +19,8 @@ struct JourneyScrollViewLoader: View {
     }
 }
 
-struct JourneyScrollViewLoader_Previews: PreviewProvider {
-    static var previews: some View {
-        JourneyScrollViewLoader()
-    }
-}
+//struct JourneyScrollViewLoader_Previews: PreviewProvider {
+//    static var previews: some View {
+//        JourneyScrollViewLoader()
+//    }
+//}

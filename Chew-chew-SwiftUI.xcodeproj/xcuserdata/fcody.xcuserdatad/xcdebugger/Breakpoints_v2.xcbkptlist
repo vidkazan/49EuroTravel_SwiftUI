@@ -208,7 +208,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "41"
             endingLineNumber = "41"
-            landmarkName = "constructJourneyViewData(journey:firstDatePlanned:firstDateActual:lastDatePlanned:lastDateActual:firstDelay:lastDelay:timeContainer:)"
+            landmarkName = "constructJourneyViewData(journey:firstTSPlanned:firstTSActual:lastTSPlanned:lastTSActual:firstDelay:lastDelay:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

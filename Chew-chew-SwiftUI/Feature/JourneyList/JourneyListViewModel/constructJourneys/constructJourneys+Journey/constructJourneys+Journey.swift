@@ -9,7 +9,7 @@ import CoreLocation
 import UIKit
 
 
-extension JourneyListViewModel {
+extension JourneyViewDataConstructor {
 	func constructJourneyViewData(
 		journey : Journey,
 		firstTSPlanned: Date,

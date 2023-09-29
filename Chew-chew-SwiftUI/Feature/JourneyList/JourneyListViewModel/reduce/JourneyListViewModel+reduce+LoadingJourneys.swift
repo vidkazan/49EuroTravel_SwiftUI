@@ -16,7 +16,7 @@ extension JourneyListViewModel {
 			switch type {
 			case .initial:
 				return State(
-					journeys: constructJourneysViewData(journeysData: data),
+					journeys:  JourneyViewDataConstructor(data: data, dep: self.depStop, arr: self.arrStop).constructJourneysViewData(journeysData: data),
 					earlierRef: data.earlierRef,
 					laterRef: data.laterRef,
 					status: .journeysLoaded

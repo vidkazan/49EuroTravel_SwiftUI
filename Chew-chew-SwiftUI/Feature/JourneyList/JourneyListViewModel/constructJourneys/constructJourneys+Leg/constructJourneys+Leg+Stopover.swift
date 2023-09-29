@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-extension JourneyListViewModel {
+extension JourneyViewDataConstructor {
 	func constructLineStopOverData(leg : Leg, type : LegType) -> [LegViewData.StopViewData] {
 		var name : String? {
 			switch type {

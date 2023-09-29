@@ -43,31 +43,31 @@ struct JourneyHeaderView: View {
     }
 }
 
-
-struct Previews: PreviewProvider {
-	static var previews: some View {
-		JourneyHeaderView(
-			journey: .init(
-				id: UUID(),
-				origin: "Origin",
-				destination: "Destination",
-				startPlannedTimeString: "11:11",
-				startActualTimeString: "11:11",
-				endPlannedTimeString: "22:22",
-				endActualTimeString: "22:22",
-				startDelay: 0,
-				endDelay: 0,
-				startDate: .now,
-				endDate: .now,
-				startDateString:  "21 sep 2023",
-				endDateString: "21 sep 2023",
-				durationLabelText: "11 h 11 min",
-				legs: [], transferCount: 0,
-				sunEvents: [],
-				isReachable: true,
-				badges: [.dticket],
-				refreshToken: ""
-			)
-		)
-	}
-}
+//
+//struct Previews: PreviewProvider {
+//	static var previews: some View {
+//		JourneyHeaderView(
+//			journey: .init(
+//				id: UUID(),
+//				origin: "Origin",
+//				destination: "Destination",
+//				startPlannedTimeString: "11:11",
+//				startActualTimeString: "11:11",
+//				endPlannedTimeString: "22:22",
+//				endActualTimeString: "22:22",
+//				startDelay: 0,
+//				endDelay: 0,
+//				startDate: .now,
+//				endDate: .now,
+//				startDateString:  "21 sep 2023",
+//				endDateString: "21 sep 2023",
+//				durationLabelText: "11 h 11 min",
+//				legs: [], transferCount: 0,
+//				sunEvents: [],
+//				isReachable: true,
+//				badges: [.dticket],
+//				refreshToken: ""
+//			)
+//		)
+//	}
+//}

@@ -39,31 +39,6 @@ extension SearchStopsView {
 					} else {
 						image
 					}
-//				case .loadingLocation:
-//					if type == .departure {
-//						ProgressView()
-//					} else {
-//						image
-//					}
-//				case .loadedUserLocation:
-//						image.foregroundColor(.green)
-//							.onAppear{
-//								guard case .loadedUserLocation(lat: let lat, long: let long) = searchStopViewModel.state.status else { return }
-//								chewViewModel.send(
-//									event: .onNewDeparture(.location(.init(
-//										type: "location",
-//										id: nil,
-//										name: "My Location",
-//										address: "My Location",
-//										location: .init(
-//											type: "location",
-//											id: nil,
-//											latitude: lat,
-//											longitude: long
-//										),
-//										products: nil
-//								))))
-//							}
 				case .idle,.loaded,.error:
 					image
 				}

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension JourneyListViewModel {
+extension JourneyViewDataConstructor {
 	func constructBadges(remarks : [Remark],isReachable : Bool ) -> [Badges] {
 		var res : [Badges] = []
 		let rems = remarks.filter({$0.type == "status"})

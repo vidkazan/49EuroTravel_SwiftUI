@@ -86,7 +86,6 @@
 		7D9E10932AA77E0B00820B92 /* SearchLocationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E10922AA77E0B00820B92 /* SearchLocationVM.swift */; };
 		7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */; };
 		7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3492A9A118E005DF550 /* BadgesView.swift */; };
-		7DAF62A92A9E52FF006F1A17 /* ObservableScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62A82A9E52FF006F1A17 /* ObservableScrollView.swift */; };
 		7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */; };
 		7DAF62AF2A9E5494006F1A17 /* JourneyScrollViewLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */; };
 		7DAF62B12A9E54E3006F1A17 /* JourneyScrollViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */; };
@@ -205,7 +204,6 @@
 		7D9E10922AA77E0B00820B92 /* SearchLocationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationVM.swift; sourceTree = "<group>"; };
 		7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		7DA8D3492A9A118E005DF550 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
-		7DAF62A82A9E52FF006F1A17 /* ObservableScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObservableScrollView.swift; sourceTree = "<group>"; };
 		7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewHeader.swift; sourceTree = "<group>"; };
 		7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewLoader.swift; sourceTree = "<group>"; };
 		7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewFooter.swift; sourceTree = "<group>"; };
@@ -303,7 +301,6 @@
 				7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */,
 				7D02CE122A97E4700048ADE6 /* DateParcer.swift */,
 				7D02CE142A97E4940048ADE6 /* Constants.swift */,
-				7DAF62A82A9E52FF006F1A17 /* ObservableScrollView.swift */,
 				7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */,
 				7DAF62C12A9E8C2B006F1A17 /* Solar.swift */,
 				7DE640FA2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift */,
@@ -872,7 +869,6 @@
 				7D7A553D2AA4B407000256EF /* System.swift in Sources */,
 				7DCB2BFF2AAC8831007C672A /* SearchLocationVM+reduce+Idle.swift in Sources */,
 				7D4B1B992AA950780096F372 /* constructJourneys.swift in Sources */,
-				7DAF62A92A9E52FF006F1A17 /* ObservableScrollView.swift in Sources */,
 				7D462D492AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift in Sources */,
 				7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */,
 			);

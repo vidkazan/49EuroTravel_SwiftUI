@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SwiftUI
 
-extension JourneyListViewModel {
+extension JourneyViewDataConstructor {
 	func constructTransferViewData(fromLeg : Leg, toLeg : Leg, id : Int) -> LegViewData? {
 		guard
 			let plannedDepartureTSString = fromLeg.plannedArrival,
@@ -56,7 +56,7 @@ extension JourneyListViewModel {
 	}
 }
 
-extension JourneyListViewModel {
+extension JourneyViewDataConstructor {
 	func constructLegFillColor(leg : Leg) -> Color {
 		switch leg.reachable ?? true {
 		case true:
