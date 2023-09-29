@@ -54,7 +54,7 @@ struct TimeChoosingView: View {
 			}
 		}
 		.frame(maxWidth: .infinity,maxHeight: 43)
-		.background(Color.chewGray15)
+		.background(Color.chewGray10)
 		.cornerRadius(10)
 		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: chewVM.state.status)

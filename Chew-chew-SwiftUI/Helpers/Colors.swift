@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 extension Color {
+	public static var chewGray07: Color {
+		return Color.gray.opacity(0.07)
+	}
 	public static var chewGray10: Color {
 		return Color.gray.opacity(0.1)
 	}

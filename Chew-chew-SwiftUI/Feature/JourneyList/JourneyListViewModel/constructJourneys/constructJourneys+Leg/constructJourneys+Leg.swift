@@ -60,7 +60,7 @@ extension JourneyListViewModel {
 	func constructLegFillColor(leg : Leg) -> Color {
 		switch leg.reachable ?? true {
 		case true:
-			return Color.init(uiColor: .systemGray5)
+			return Color(hue: 0, saturation: 0, brightness: 0.15).opacity(0.75)
 		case false:
 			return Color(hue: 0, saturation: 1, brightness: 0.4)
 		}

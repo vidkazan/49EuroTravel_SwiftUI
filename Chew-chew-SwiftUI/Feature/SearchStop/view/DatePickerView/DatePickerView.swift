@@ -60,7 +60,7 @@ struct DatePickerView: View {
 				}
 			}
 				.frame(maxWidth: .infinity,minHeight: 43)
-				.background(Color.chewGray15)
+				.background(Color.chewGray10)
 				.foregroundColor(.primary)
 				.cornerRadius(10)
 		}

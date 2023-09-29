@@ -328,7 +328,6 @@
 		7D462D552AACD1E000BC0D65 /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				7D7B3DA02AB9AD160070E44D /* LegDetails */,
 				7D6C5C282AAF77A700DEFC57 /* JourneyDetails */,
 				7DA8D3462A9A0DDC005DF550 /* SearchStop */,
 				7D9E108F2AA77CA200820B92 /* JourneyList */,
@@ -476,6 +475,7 @@
 		7D6C5C282AAF77A700DEFC57 /* JourneyDetails */ = {
 			isa = PBXGroup;
 			children = (
+				7D7B3DA02AB9AD160070E44D /* LegDetails */,
 				7D6C5C342AAF7C3B00DEFC57 /* JourneyDetailsView */,
 				7D6C5C2B2AAF78F400DEFC57 /* JourneyDetailsVM */,
 			);

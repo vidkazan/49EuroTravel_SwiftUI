@@ -67,9 +67,6 @@ extension JourneyDetailsView {
 				}
 				LegsView(journey : viewModel.state.data)
 					.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
-//					.background(.ultraThinMaterial.opacity(0.5))
-					.background(Color.chewGray10)
-					.cornerRadius(8)
 			}
 			
 		}

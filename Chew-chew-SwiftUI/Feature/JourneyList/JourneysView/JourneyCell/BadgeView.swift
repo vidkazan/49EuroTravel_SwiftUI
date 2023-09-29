@@ -21,27 +21,24 @@ struct BadgeView : View {
 				.foregroundColor(.primary)
 				.padding(4)
 				.background(badge.badgeData.style)
-//				.background(.ultraThinMaterial)
-				.background(Color.chewGray15)
+				.background(Color.chewGray10)
 				.cornerRadius(8)
 		case .dticket:
 			DTicketLogo()
 				.font(.system(size: 12))
 				.padding(4)
 				.background(badge.badgeData.style)
-//				.background(.ultraThinMaterial)
 				.background(Color.chewGray10)
 				.cornerRadius(8)
-		case .lineNumber:
+		case .lineNumber(lineType: let type, num: let num):
 			Text(badge.badgeData.name)
 				.font(.system(size: 12,weight: .semibold))
 				.foregroundColor(.primary)
 				.padding(4)
 				.background(badge.badgeData.style)
-//				.background(.ultraThinMaterial)
-				.background(Color.chewGray15)
+				.background(Color.chewGray10)
 				.cornerRadius(8)
-		case .legDuration:
+		case .legDuration(dur: let dur):
 			HStack(spacing: 2) {
 				Text(badge.badgeData.name)
 					.font(.system(size: 12,weight: .semibold))
@@ -51,10 +48,9 @@ struct BadgeView : View {
 					.lineLimit(1)
 			}
 			.padding(4)
-//			.background(.ultraThinMaterial)
-			.background(Color.chewGray15)
+			.background(Color.chewGray10)
 			.cornerRadius(8)
-		case .legDirection:
+		case .legDirection(dir: let dir):
 			HStack(spacing: 2) {
 				Text("to")
 					.font(.system(size: 12,weight: .semibold))
@@ -69,10 +65,9 @@ struct BadgeView : View {
 					.lineLimit(1)
 			}
 			.padding(4)
-//			.background(.ultraThinMaterial)
-			.background(Color.chewGray15)
+			.background(Color.chewGray10)
 			.cornerRadius(8)
-		case .walking:
+		case .walking(duration: let dur):
 			HStack(spacing: 2) {
 				Image(systemName: "figure.walk.circle")
 					.font(.system(size: 12,weight: .semibold))
@@ -106,7 +101,16 @@ struct BadgeView : View {
 					.lineSpacing(2)
 					.lineLimit(1)
 			}
-
+		case .stopsCount:
+			HStack(spacing: 2) {
+				Text(badge.badgeData.name)
+					.font(.system(size: 12,weight: .semibold))
+					.foregroundColor(.secondary)
+					.background(badge.badgeData.style)
+					.lineSpacing(2)
+			}
+			.padding(4)
+//			.cornerRadius(8)
 		}
 	}
 }

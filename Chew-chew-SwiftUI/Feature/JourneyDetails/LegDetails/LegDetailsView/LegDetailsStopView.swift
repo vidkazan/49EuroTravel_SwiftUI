@@ -37,6 +37,7 @@ struct LegStopView : View {
 			}
 		}
 	}
+	@ObservedObject var vm : LegDetailsViewModel
 	let legViewData : LegViewData
 	let stopOver : LegViewData.StopViewData
 	let stopType : StopOverType
@@ -45,6 +46,7 @@ struct LegStopView : View {
 	var delay : Int
 	
 	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : LegViewData.StopViewData,leg : LegViewData) {
+		self.vm = vm
 		self.stopOver = stopOver
 		self.stopType = type
 		self.legViewData = leg
@@ -75,7 +77,7 @@ struct LegStopView : View {
 						delay: delay
 					)
 					.padding(3)
-					.background(Color.chewGray15)
+					.background(Color.chewGray10)
 					.cornerRadius(7)
 					.frame(width: 60,alignment: .center)
 					Spacer()
@@ -88,7 +90,7 @@ struct LegStopView : View {
 						delay: delay
 					)
 					.padding(3)
-					.background(Color.chewGray15)
+					.background(Color.chewGray10)
 					.cornerRadius(10)
 					.frame(width: 60,alignment: .center)
 				case .footMiddle:
@@ -145,7 +147,18 @@ struct LegStopView : View {
 					HStack(spacing: 3) {
 						BadgeView(badge: .lineNumber(lineType:.other(type: "mode") ,num: legViewData.lineName))
 						BadgeView(badge: .legDirection(dir: legViewData.direction))
-						BadgeView(badge: .legDuration(dur: legViewData.duration))
+//						BadgeView(badge: .legDuration(dur: legViewData.duration))
+						HStack(spacing: 0) {
+							BadgeView(badge: .stopsCount(legViewData.legStopsViewData.count - 1))
+							if legViewData.legStopsViewData.count > 2 {
+								Image(systemName: "chevron.down.circle")
+									.font(.system(size: 15,weight: .semibold))
+									.rotationEffect(vm.state.status == .idle ? .degrees(0) : .degrees(180))
+									.animation(.spring(), value: vm.state.status)
+							}
+						}
+						.background(Color.chewGray10)
+						.cornerRadius(8)
 					}
 					.frame(height: 30)
 				case  .destination:
@@ -161,7 +174,7 @@ struct LegStopView : View {
 					HStack(spacing: 3) {
 						BadgeView(badge: .transfer(duration: legViewData.duration))
 					}
-					.frame(height: 30)
+					.frame(height: 20)
 				}
 				
 				// MARK: Location Name under Badges

@@ -37,6 +37,7 @@ enum Badges : Identifiable,Hashable {
 	case alertFromRemark
 	
 	case lineNumber(lineType:LineType,num : String)
+	case stopsCount(Int)
 	case legDuration(dur : String)
 	case legDirection(dir : String)
 	case walking(duration : String)
@@ -64,6 +65,8 @@ enum Badges : Identifiable,Hashable {
 			return 8
 		case .transfer:
 			return 9
+		case .stopsCount(_):
+			return 10
 		}
 	}
 	
@@ -75,7 +78,7 @@ enum Badges : Identifiable,Hashable {
 				name: price)
 		case .dticket:
 			return BadgeData(
-				style: Color.chewGray15,
+				style: Color.chewGray10,
 				name: "DeutschlandTicket")
 		case .cancelled:
 			return BadgeData(
@@ -102,6 +105,9 @@ enum Badges : Identifiable,Hashable {
 			return BadgeData(
 				name: String(dur))
 			
+		case .stopsCount(let num):
+			return BadgeData(
+				name: String(num) + " stops")
 		}
 	}
 }

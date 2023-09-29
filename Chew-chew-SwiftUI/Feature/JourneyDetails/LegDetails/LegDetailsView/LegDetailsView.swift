@@ -73,10 +73,6 @@ struct LegDetailsView: View {
 									)
 								}
 							}
-						} else {
-							Rectangle()
-								.fill(.clear)
-								.frame(height: 15)
 						}
 						if let stop = viewModel.state.leg.legStopsViewData.last {
 							LegStopView(
@@ -107,13 +103,10 @@ struct LegDetailsView: View {
 					}
 				}
 			}
-			.transition(.move(edge: .bottom))
-			.animation(.spring(), value: viewModel.state.status)
 		}
 		.padding(5)
 		.onTapGesture {
 			viewModel.send(event: .didtapExpandButton)
-			journeyDetailsViewModel.send(event: .didExpandLegDetails)
 		}
 		.padding(
 			viewModel.state.leg.legType.description == "line" ? EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5) : EdgeInsets(top: 20, leading: 5, bottom: 20, trailing: 5)
@@ -122,7 +115,5 @@ struct LegDetailsView: View {
 			viewModel.state.leg.legType.description == "line" ? Color.chewGray10 : Color.clear
 		}
 		.cornerRadius(10)
-		.transition(.move(edge: .bottom))
-		.animation(.spring(), value: viewModel.state.status)
 	}
 }
