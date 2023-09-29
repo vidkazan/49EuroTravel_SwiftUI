@@ -28,9 +28,13 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .loading(refreshToken: refreshToken)
 				)
+			case .didExpandLegDetails:
+				return state
 			}
 		case .loadedJourneyData:
 			switch event {
+			case .didExpandLegDetails:
+				return state
 			case .didLoadJourneyData:
 				return state
 			case .didFailedToLoadJourneyData:
@@ -43,6 +47,8 @@ extension JourneyDetailsViewModel {
 			}
 		case .error:
 			switch event {
+			case .didExpandLegDetails:
+				return state
 			case .didLoadJourneyData:
 				return state
 			case .didFailedToLoadJourneyData:

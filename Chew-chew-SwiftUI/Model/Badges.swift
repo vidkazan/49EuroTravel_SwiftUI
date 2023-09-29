@@ -75,7 +75,7 @@ enum Badges : Identifiable,Hashable {
 				name: price)
 		case .dticket:
 			return BadgeData(
-				style: Color(hue: 0.35, saturation: 0, brightness: 0.6),
+				style: Color.chewGray15,
 				name: "DeutschlandTicket")
 		case .cancelled:
 			return BadgeData(

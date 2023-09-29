@@ -10,6 +10,7 @@ import SwiftUI
 
 struct LegDetailsView: View {
 	@ObservedObject var viewModel : LegDetailsViewModel
+	let journeyDetailsViewModel : JourneyDetailsViewModel
 	var body : some View {
 		VStack {
 			VStack {
@@ -17,12 +18,29 @@ struct LegDetailsView: View {
 				case .foot(place: let place):
 					if viewModel.state.leg.legStopsViewData.count > 1 {
 						if let stop = viewModel.state.leg.legStopsViewData.first {
-							LegStopView(
-								type: .foot(place),
-								vm: viewModel,
-								stopOver: stop,
-								leg: viewModel.state.leg
-							)
+							switch place {
+							case .atStart:
+								LegStopView(
+									type: .footTop,
+									vm: viewModel,
+									stopOver: stop,
+									leg: viewModel.state.leg
+								)
+							case .inBetween:
+								LegStopView(
+									type: .footMiddle,
+									vm: viewModel,
+									stopOver: stop,
+									leg: viewModel.state.leg
+								)
+							case .atFinish:
+								LegStopView(
+									type: .footBottom,
+									vm: viewModel,
+									stopOver: stop,
+									leg: viewModel.state.leg
+								)
+							}
 						}
 					}
 				case .transfer:
@@ -80,7 +98,7 @@ struct LegDetailsView: View {
 						EmptyView()
 					} else {
 						Rectangle()
-							.fill(.gray.opacity(0.1))
+							.fill(Color.chewGray10)
 							.frame(width: 20)
 							.cornerRadius(8)
 							.padding(5)
@@ -95,12 +113,13 @@ struct LegDetailsView: View {
 		.padding(5)
 		.onTapGesture {
 			viewModel.send(event: .didtapExpandButton)
+			journeyDetailsViewModel.send(event: .didExpandLegDetails)
 		}
 		.padding(
 			viewModel.state.leg.legType.description == "line" ? EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5) : EdgeInsets(top: 20, leading: 5, bottom: 20, trailing: 5)
 		)
 		.background{
-			viewModel.state.leg.legType.description == "line" ? Color.gray.opacity(0.1) : Color.clear
+			viewModel.state.leg.legType.description == "line" ? Color.chewGray10 : Color.clear
 		}
 		.cornerRadius(10)
 		.transition(.move(edge: .bottom))

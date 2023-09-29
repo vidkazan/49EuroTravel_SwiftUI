@@ -41,7 +41,7 @@ extension JourneyDetailsViewModel {
 		case didLoadJourneyData(data : JourneyViewData)
 		case didFailedToLoadJourneyData(error : ApiServiceError)
 		case didTapReloadJourneys
-		
+		case didExpandLegDetails
 		var description : String {
 			switch self {
 			case .didLoadJourneyData:
@@ -50,6 +50,8 @@ extension JourneyDetailsViewModel {
 				return "didFailedToLoadJourneyData"
 			case .didTapReloadJourneys:
 				return "didReloadJourneys"
+			case .didExpandLegDetails:
+				return "didExpandLegDetails"
 			}
 		}
 	}

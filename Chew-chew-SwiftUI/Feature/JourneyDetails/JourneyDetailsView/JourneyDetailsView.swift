@@ -9,7 +9,7 @@ import SwiftUI
 
 struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	var viewModel : JourneyDetailsViewModel
+	let viewModel : JourneyDetailsViewModel
 	var body: some View {
 		VStack {
 			header()
@@ -17,7 +17,7 @@ struct JourneyDetailsView: View {
 			ScrollView() {
 				LazyVStack{
 					ForEach(viewModel.state.data.legs) { leg in
-						LegDetailsView(viewModel: .init(leg: leg))
+						LegDetailsView(viewModel: .init(leg: leg), journeyDetailsViewModel: viewModel)
 					}
 				}
 				.padding(10)

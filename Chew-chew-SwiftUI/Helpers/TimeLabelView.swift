@@ -69,13 +69,13 @@ extension TimeLabelView {
 	func actualTime(actual : String) -> some View {
 		Text(delay > 59 ? planned : actual)
 			.strikethrough()
-			.foregroundColor(.secondary)
+			.foregroundColor(isSmall ? .gray : .secondary)
 			.font(.system(size: 12,weight: .semibold))
 	}
 	func plannedTime() -> some View {
 		Text(delay < 60 ? planned : actual)
 			.foregroundColor(
-				delay < 300 ? .primary.opacity(0.85) : Color(hue: 0, saturation: 1, brightness: 0.8))
-			.font(.system(size: isSmall == false ? 17 : 12,weight: isSmall == false ? .semibold : .regular))
+				delay < 300 ? isSmall ? .gray : .primary.opacity(0.85) : Color(hue: 0, saturation: 1, brightness: 0.8))
+			.font(.system(size: isSmall == false ? 17 : 12,weight: isSmall == false ? .semibold : .medium))
 	}
 }

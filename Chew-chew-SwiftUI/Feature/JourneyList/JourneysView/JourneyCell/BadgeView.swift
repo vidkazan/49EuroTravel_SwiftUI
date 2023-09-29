@@ -30,7 +30,7 @@ struct BadgeView : View {
 				.padding(4)
 				.background(badge.badgeData.style)
 //				.background(.ultraThinMaterial)
-				.background(Color.chewGray15)
+				.background(Color.chewGray10)
 				.cornerRadius(8)
 		case .lineNumber:
 			Text(badge.badgeData.name)

@@ -17,11 +17,12 @@ struct ContentView: View {
 	var body: some View {
 		NavigationView {
 			ZStack {
-				VStack {
+				VStack(spacing: 5) {
 					SearchStopsView(searchStopViewModel: chewViewModel.state.searchStopViewModel)
 					TimeChoosingView(searchStopViewModel: chewViewModel.state.searchStopViewModel)
 					if case .journeys(let vm) = chewViewModel.state.status {
 						JourneysView(journeyViewModel: vm)
+							.padding(.top,10)
 					} else {
 						Spacer()
 					}
@@ -38,6 +39,8 @@ struct ContentView: View {
 			)
 			.navigationBarTitle("")
 			.navigationBarHidden(true)
+			.transition(.move(edge: .bottom))
+			.animation(.spring(), value: chewViewModel.state.status)
 		}
 	}
 }

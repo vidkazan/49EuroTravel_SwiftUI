@@ -20,7 +20,7 @@ struct TimeChoosingView: View {
 	var body: some View {
 		ZStack {
 			Rectangle()
-				.fill(.ultraThickMaterial)
+				.fill(Color.chewGray10)
 				.frame(width: UIScreen.main.bounds.width / 2.15, height: 36)
 				.cornerRadius(8)
 				.padding(4)
@@ -46,8 +46,8 @@ struct TimeChoosingView: View {
 						}
 						Text(text)
 							.frame(width: UIScreen.main.bounds.width / 2.25)
-							.font(.system(size: 17,weight: selectedOption == index ? .semibold : .regular))
-							.foregroundColor(selectedOption == index ? .primary : .primary)
+							.font(.system(size: 15,weight: selectedOption == index ? .semibold : .regular))
+							.foregroundColor(.primary)
 							.cornerRadius(10)
 					}
 				}
