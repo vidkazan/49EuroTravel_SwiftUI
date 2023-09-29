@@ -16,10 +16,20 @@ extension JourneyViewDataConstructor {
 			let plannedArrivalTSString = toLeg.plannedDeparture,
 			let actualDepartureTSString = fromLeg.arrival,
 			let actualArrivalTSString =  toLeg.departure else { return nil }
-		let plannedDepartureTS = DateParcer.getDateFromDateString(dateString: plannedDepartureTSString)
-		let plannedArrivalTS = DateParcer.getDateFromDateString(dateString: plannedArrivalTSString)
-		let actualDepartureTS = DateParcer.getDateFromDateString(dateString: actualDepartureTSString)
-		let actualArrivalTS = DateParcer.getDateFromDateString(dateString: actualArrivalTSString)
+		
+		let container = TimeContainer(
+			plannedDeparture: plannedDepartureTSString,
+			plannedArrival: plannedArrivalTSString,
+			actualDeparture: actualDepartureTSString,
+			actualArrival: actualArrivalTSString
+		)
+		
+		guard let dates = container.date else { return nil }
+		
+		let plannedDepartureTS = dates.plannedDeparture
+		let plannedArrivalTS = dates.plannedArrival
+		let actualDepartureTS = dates.actualDeparture
+		let actualArrivalTS = dates.actualArrival
 		
 		
 		let res = LegViewData(
@@ -47,7 +57,8 @@ extension JourneyViewDataConstructor {
 				arrivalPlatform: "platform",
 				plannedArrivalPlatform: "platform",
 				departureDelay: 666,
-				arrivalDelay: 666
+				arrivalDelay: 666,
+				timeContainer: container
 			)],
 			footDistance: 0,
 			lineName: "transfer line name"

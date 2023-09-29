@@ -30,6 +30,7 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 			plannedArrivalPlatform	: String?
 		let departureDelay,
 			arrivalDelay		: Int
+		let timeContainer : TimeContainer
 		
 	}
 	let id : Int

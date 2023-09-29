@@ -11,6 +11,13 @@ import SwiftUI
 
 extension JourneyViewDataConstructor {
 	func constructLineStopOverData(leg : Leg, type : LegType) -> [LegViewData.StopViewData] {
+		let container = TimeContainer(
+			plannedDeparture: "",
+			plannedArrival: "",
+			actualDeparture: "",
+			actualArrival: ""
+		)
+		
 		var name : String? {
 			switch type {
 			case .foot(let place):
@@ -45,7 +52,8 @@ extension JourneyViewDataConstructor {
 						arrivalPlatform: leg.arrivalPlatform,
 						plannedArrivalPlatform: leg.plannedArrivalPlatform,
 						departureDelay: leg.departureDelay ?? 0,
-						arrivalDelay: leg.arrivalDelay ?? 0
+						arrivalDelay: leg.arrivalDelay ?? 0,
+						timeContainer: container
 					),
 					.init(
 						name: name ?? leg.destination?.name ?? "dest name",
@@ -58,7 +66,8 @@ extension JourneyViewDataConstructor {
 						arrivalPlatform: leg.arrivalPlatform,
 						plannedArrivalPlatform: leg.plannedArrivalPlatform,
 						departureDelay: leg.departureDelay ?? 0,
-						arrivalDelay: leg.arrivalDelay ?? 0
+						arrivalDelay: leg.arrivalDelay ?? 0,
+						timeContainer: container
 					)
 				]
 			case .inBetween, .atFinish:
@@ -74,7 +83,8 @@ extension JourneyViewDataConstructor {
 						arrivalPlatform: leg.arrivalPlatform,
 						plannedArrivalPlatform: leg.plannedArrivalPlatform,
 						departureDelay: leg.departureDelay ?? 0,
-						arrivalDelay: leg.arrivalDelay ?? 0
+						arrivalDelay: leg.arrivalDelay ?? 0,
+						timeContainer: container
 					),
 					.init(
 						name: name ?? leg.destination?.name ?? "dest name",
@@ -87,7 +97,8 @@ extension JourneyViewDataConstructor {
 						arrivalPlatform: leg.arrivalPlatform,
 						plannedArrivalPlatform: leg.plannedArrivalPlatform,
 						departureDelay: leg.departureDelay ?? 0,
-						arrivalDelay: leg.arrivalDelay ?? 0
+						arrivalDelay: leg.arrivalDelay ?? 0,
+						timeContainer: container
 					)
 				]
 			}
@@ -104,7 +115,8 @@ extension JourneyViewDataConstructor {
 					arrivalPlatform: leg.arrivalPlatform,
 					plannedArrivalPlatform: leg.plannedArrivalPlatform,
 					departureDelay: leg.departureDelay ?? 0,
-					arrivalDelay: leg.arrivalDelay ?? 0
+					arrivalDelay: leg.arrivalDelay ?? 0,
+					timeContainer: container
 				),
 				.init(
 					name: name ?? leg.destination?.name ?? "dest name",
@@ -117,7 +129,8 @@ extension JourneyViewDataConstructor {
 					arrivalPlatform: leg.arrivalPlatform,
 					plannedArrivalPlatform: leg.plannedArrivalPlatform,
 					departureDelay: leg.departureDelay ?? 0,
-					arrivalDelay: leg.arrivalDelay ?? 0
+					arrivalDelay: leg.arrivalDelay ?? 0,
+					timeContainer: container
 				)
 			]
 		case .line:
@@ -134,7 +147,8 @@ extension JourneyViewDataConstructor {
 						arrivalPlatform: stop.arrivalPlatform,
 						plannedArrivalPlatform: stop.plannedArrivalPlatform,
 						departureDelay: stop.departureDelay ?? 0,
-						arrivalDelay: stop.arrivalDelay ?? 0
+						arrivalDelay: leg.arrivalDelay ?? 0,
+						timeContainer: container
 					)
 			}
 			return res
