@@ -13,7 +13,7 @@ struct LegDetailsView: View {
 	let journeyDetailsViewModel : JourneyDetailsViewModel
 	var body : some View {
 		VStack {
-			VStack {
+			VStack(spacing: 0) {
 				switch viewModel.state.leg.legType {
 				case .transfer:
 					if let stop = viewModel.state.leg.legStopsViewData.first {
@@ -92,18 +92,33 @@ struct LegDetailsView: View {
 				
 			}
 			.background {
-				HStack {
+				ZStack{
 					switch viewModel.state.leg.legType {
 					case .footEnd,.footMiddle,.footStart,.transfer:
 						EmptyView()
 					case .line:
-						Rectangle()
-							.fill(Color.chewGray10)
-							.frame(width: 20)
-							.cornerRadius(8)
-							.padding(5)
-							.padding(.leading,15)
-						Spacer()
+						VStack{
+							HStack(alignment: .top){
+								Rectangle()
+									.fill(Color.chewGrayScale07)
+									.cornerRadius(6)
+									.frame(width: 20,height: 50)
+									.padding(.leading,20)
+								Spacer()
+							}
+							Spacer()
+						}
+						VStack{
+							HStack(alignment: .top){
+								Rectangle()
+									.fill(Color.chewGrayScale15)
+									.cornerRadius(6)
+									.frame(width: 20,height: 50)
+									.padding(.leading,20)
+								Spacer()
+							}
+							Spacer()
+						}
 					}
 				}
 			}

@@ -74,6 +74,8 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 			arrivalDelay		: Int
 		let timeContainer : TimeContainer
 		
+		
+		
 	}
 	let id : Int
 	let fillColor : Color
@@ -89,11 +91,6 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 	let lineName : String
 }
 
-enum FootLegPlace : Equatable, Hashable {
-	case atStart(startPointName : String)
-	case inBetween
-	case atFinish(finishPointName : String)
-}
 enum LegType : Equatable,Hashable {
 	case footStart(startPointName : String)
 	case footMiddle
@@ -116,6 +113,7 @@ enum LegType : Equatable,Hashable {
 		}
 	}
 }
+
 struct JourneyViewData : Equatable {
 	let id : UUID
 	let origin : String
