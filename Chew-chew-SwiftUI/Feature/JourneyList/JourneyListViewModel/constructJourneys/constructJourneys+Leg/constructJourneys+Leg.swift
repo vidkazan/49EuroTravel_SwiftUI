@@ -24,10 +24,10 @@ extension JourneyViewDataConstructor {
 			actualArrival: actualArrivalTSString
 		)
 		
-		guard let dates = container.date else { return nil }
+		let dates = container.date
 		
-		let plannedDepartureTS = dates.plannedDeparture
-		let plannedArrivalTS = dates.plannedArrival
+//		let plannedDepartureTS = dates.plannedDeparture
+//		let plannedArrivalTS = dates.plannedArrival
 		let actualDepartureTS = dates.actualDeparture
 		let actualArrivalTS = dates.actualArrival
 		

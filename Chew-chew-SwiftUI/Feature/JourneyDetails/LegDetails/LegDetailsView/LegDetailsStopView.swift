@@ -44,7 +44,7 @@ struct LegStopView : View {
 	var plannedTS : String
 	var actualTS : String
 	var delay : Int
-	
+	let now = Date.now.timeIntervalSince1970
 	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : LegViewData.StopViewData,leg : LegViewData) {
 		self.vm = vm
 		self.stopOver = stopOver
@@ -77,7 +77,13 @@ struct LegStopView : View {
 						delay: delay
 					)
 					.padding(3)
-					.background(Color.chewGray10)
+					.background {
+						LinearGradient(stops: [
+							.init(color: .chewGray50, location: 0),
+							.init(color: .chewGray50, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+							.init(color: .chewGray10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+						], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
+					}
 					.cornerRadius(7)
 					.frame(width: 60,alignment: .center)
 					Spacer()
@@ -90,7 +96,13 @@ struct LegStopView : View {
 						delay: delay
 					)
 					.padding(3)
-					.background(Color.chewGray10)
+					.background {
+						LinearGradient(stops: [
+							.init(color: .chewGray50, location: 0),
+							.init(color: .chewGray50, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+							.init(color: .chewGray10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+						], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
+					}
 					.cornerRadius(10)
 					.frame(width: 60,alignment: .center)
 				case .footMiddle:
@@ -147,7 +159,7 @@ struct LegStopView : View {
 					HStack(spacing: 3) {
 						BadgeView(badge: .lineNumber(lineType:.other(type: "mode") ,num: legViewData.lineName))
 						BadgeView(badge: .legDirection(dir: legViewData.direction))
-//						BadgeView(badge: .legDuration(dur: legViewData.duration))
+						BadgeView(badge: .legDuration(dur: legViewData.duration))
 						HStack(spacing: 0) {
 							BadgeView(badge: .stopsCount(legViewData.legStopsViewData.count - 1))
 							if legViewData.legStopsViewData.count > 2 {

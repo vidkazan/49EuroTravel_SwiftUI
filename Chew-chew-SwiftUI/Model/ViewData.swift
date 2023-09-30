@@ -19,10 +19,10 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 	struct StopViewData : Equatable,Identifiable,Hashable {
 		init(name : String,timeContainer : TimeContainer) {
 			self.timeContainer = timeContainer
-			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedDeparture) ?? "time"
-			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualDeparture) ?? "time"
-			self.arrivalPlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedArrival) ?? "time"
-			self.arrivalActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualArrival) ?? "time"
+			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.plannedDeparture) ?? "time0"
+			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.actualDeparture) ?? "time0"
+			self.arrivalPlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.plannedArrival) ?? "time0"
+			self.arrivalActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.actualArrival) ?? "time0"
 			self.name = name
 			self.departurePlatform = ""
 			self.plannedDeparturePlatform = ""
@@ -33,10 +33,10 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 		}
 		init(name : String,timeContainer : TimeContainer, stop : StopOver) {
 			self.timeContainer = timeContainer
-			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedDeparture) ?? "time"
-			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualDeparture) ?? "time"
-			self.arrivalPlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedArrival) ?? "time"
-			self.arrivalActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualArrival) ?? "time"
+			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.plannedDeparture) ?? "time1"
+			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.actualDeparture) ?? "time1"
+			self.arrivalPlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.plannedArrival) ?? "time1"
+			self.arrivalActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.actualArrival) ?? "time1"
 			self.name = name
 			self.departurePlatform = stop.departurePlatform
 			self.plannedDeparturePlatform = stop.plannedDeparturePlatform
@@ -47,10 +47,10 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 		}
 		init(name : String,timeContainer : TimeContainer, leg : Leg) {
 			self.timeContainer = timeContainer
-			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedDeparture) ?? "time"
-			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualDeparture) ?? "time"
-			self.arrivalPlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedArrival) ?? "time"
-			self.arrivalActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualArrival) ?? "time"
+			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.plannedDeparture) ?? "time2"
+			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.actualDeparture) ?? "time2"
+			self.arrivalPlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.plannedArrival) ?? "time2"
+			self.arrivalActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.actualArrival) ?? "time2"
 			self.name = name
 			self.departurePlatform = leg.departurePlatform
 			self.plannedDeparturePlatform = leg.plannedDeparturePlatform

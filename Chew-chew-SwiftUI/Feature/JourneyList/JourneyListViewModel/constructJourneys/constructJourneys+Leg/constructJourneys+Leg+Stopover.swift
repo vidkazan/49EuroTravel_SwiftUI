@@ -26,12 +26,12 @@ extension JourneyViewDataConstructor {
 		case .line:
 			guard let stops = leg.stopovers else { return [] }
 			let res = stops.map { stop -> LegViewData.StopViewData in
-				let c = TimeContainer(plannedDeparture: leg.plannedDeparture, plannedArrival: leg.plannedArrival, actualDeparture: leg.departure, actualArrival: leg.arrival)
+				let c = TimeContainer(plannedDeparture: stop.plannedDeparture, plannedArrival: stop.plannedArrival, actualDeparture: stop.departure, actualArrival: stop.arrival)
 				return LegViewData.StopViewData(
-						name: stop.stop?.name ?? "stop",
-						timeContainer: c,
-						stop: stop
-					)
+					name: stop.stop?.name ?? "stop",
+					timeContainer: c,
+					stop: stop
+				)
 			}
 			return res
 		case .footStart:
