@@ -15,34 +15,6 @@ struct LegDetailsView: View {
 		VStack {
 			VStack {
 				switch viewModel.state.leg.legType {
-				case .foot(place: let place):
-					if viewModel.state.leg.legStopsViewData.count > 1 {
-						if let stop = viewModel.state.leg.legStopsViewData.first {
-							switch place {
-							case .atStart:
-								LegStopView(
-									type: .footTop,
-									vm: viewModel,
-									stopOver: stop,
-									leg: viewModel.state.leg
-								)
-							case .inBetween:
-								LegStopView(
-									type: .footMiddle,
-									vm: viewModel,
-									stopOver: stop,
-									leg: viewModel.state.leg
-								)
-							case .atFinish:
-								LegStopView(
-									type: .footBottom,
-									vm: viewModel,
-									stopOver: stop,
-									leg: viewModel.state.leg
-								)
-							}
-						}
-					}
 				case .transfer:
 					if let stop = viewModel.state.leg.legStopsViewData.first {
 						LegStopView(
@@ -83,16 +55,48 @@ struct LegDetailsView: View {
 							)
 						}
 					}
+				case .footStart:
+					if viewModel.state.leg.legStopsViewData.count > 1 {
+						if let stop = viewModel.state.leg.legStopsViewData.first {
+							LegStopView(
+								type: .footTop,
+								vm: viewModel,
+								stopOver: stop,
+								leg: viewModel.state.leg
+							)
+						}
+					}
+				case .footMiddle:
+					if viewModel.state.leg.legStopsViewData.count > 1 {
+						if let stop = viewModel.state.leg.legStopsViewData.first {
+								LegStopView(
+									type: .footMiddle,
+									vm: viewModel,
+									stopOver: stop,
+									leg: viewModel.state.leg
+								)
+						}
+					}
+				case .footEnd:
+					if viewModel.state.leg.legStopsViewData.count > 1 {
+						if let stop = viewModel.state.leg.legStopsViewData.first {
+							LegStopView(
+								type: .footBottom,
+								vm: viewModel,
+								stopOver: stop,
+								leg: viewModel.state.leg
+							)
+						}
+					}
 				}
 				
 			}
 			.background {
 				HStack {
-					if case .foot=viewModel.state.leg.legType {
+					switch viewModel.state.leg.legType {
+					case .footEnd,.footMiddle,.footStart,.transfer:
 						EmptyView()
-					} else if case.transfer=viewModel.state.leg.legType  {
-						EmptyView()
-					} else {
+					case .line:
 						Rectangle()
 							.fill(Color.chewGray10)
 							.frame(width: 20)

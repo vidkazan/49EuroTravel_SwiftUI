@@ -56,10 +56,20 @@ struct TimeContainer : Equatable, Hashable{
 	let date : DateTimeContainer?
 	let timestamp : TimestampTimeContainer?
 	
-	init(plannedDeparture: String, plannedArrival: String, actualDeparture: String, actualArrival: String) {
-		self.iso = ISOTimeContainer(plannedDeparture: plannedDeparture, plannedArrival: plannedArrival, actualDeparture: actualDeparture, actualArrival: actualArrival)
-		self.date = self.iso?.getDateContainer()
-		self.timestamp = self.date?.getTSContainer()
+	init(plannedDeparture: String?, plannedArrival: String?, actualDeparture: String?, actualArrival: String?) {
+		if
+			let pd = plannedDeparture,
+			let pa = plannedArrival,
+			let ad = actualDeparture,
+			let aa = actualArrival {
+			self.iso = ISOTimeContainer(plannedDeparture: pd, plannedArrival: pa, actualDeparture: ad, actualArrival: aa)
+			self.date = self.iso?.getDateContainer()
+			self.timestamp = self.date?.getTSContainer()
+		} else {
+			self.iso = nil
+			self.date = nil
+			self.timestamp = nil
+		}
 	}
 	
 	func isConsistent() -> Bool {

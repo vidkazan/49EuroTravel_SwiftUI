@@ -53,7 +53,9 @@ enum FootLegPlace : Equatable, Hashable {
 	case atFinish(finishPointName : String)
 }
 enum LegType : Equatable,Hashable {
-	case foot(place : FootLegPlace)
+	case footStart(startPointName : String)
+	case footMiddle
+	case footEnd(finishPointName : String)
 	case transfer
 	case line
 	
@@ -61,10 +63,14 @@ enum LegType : Equatable,Hashable {
 		switch self {
 		case .line:
 			return "line"
-		case .foot:
-			return "foot"
 		case .transfer:
 			return "transfer"
+		case .footStart:
+			return "footStart"
+		case .footMiddle:
+			return "footMiddle"
+		case .footEnd:
+			return "footEnd"
 		}
 	}
 }
