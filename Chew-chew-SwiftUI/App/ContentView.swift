@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import CoreLocation
 
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject private var chewViewModel : ChewViewModel
-	let solar = Solar(coordinate: .init(
+	let solar = Solar(coordinate: CLLocationCoordinate2D(
 		latitude: 51.3,
 		longitude: 9.4)
 	)

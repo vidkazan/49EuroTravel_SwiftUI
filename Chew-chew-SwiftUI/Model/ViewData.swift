@@ -16,8 +16,50 @@ struct TimelineTimeLabelData : Equatable,Hashable {
 }
 
 struct LegViewData : Equatable,Identifiable,Hashable {
-
 	struct StopViewData : Equatable,Identifiable,Hashable {
+		init(name : String,timeContainer : TimeContainer) {
+			self.timeContainer = timeContainer
+			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedDeparture) ?? "time"
+			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualDeparture) ?? "time"
+			self.arrivalPlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedArrival) ?? "time"
+			self.arrivalActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualArrival) ?? "time"
+			self.name = name
+			self.departurePlatform = ""
+			self.plannedDeparturePlatform = ""
+			self.arrivalPlatform = ""
+			self.plannedArrivalPlatform = ""
+			self.departureDelay = 0
+			self.arrivalDelay = 0
+		}
+		init(name : String,timeContainer : TimeContainer, stop : StopOver) {
+			self.timeContainer = timeContainer
+			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedDeparture) ?? "time"
+			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualDeparture) ?? "time"
+			self.arrivalPlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedArrival) ?? "time"
+			self.arrivalActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualArrival) ?? "time"
+			self.name = name
+			self.departurePlatform = stop.departurePlatform
+			self.plannedDeparturePlatform = stop.plannedDeparturePlatform
+			self.arrivalPlatform = stop.arrivalPlatform
+			self.plannedArrivalPlatform = stop.plannedArrivalPlatform
+			self.departureDelay = stop.departureDelay ?? 0
+			self.arrivalDelay = stop.arrivalDelay ?? 0
+		}
+		init(name : String,timeContainer : TimeContainer, leg : Leg) {
+			self.timeContainer = timeContainer
+			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedDeparture) ?? "time"
+			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualDeparture) ?? "time"
+			self.arrivalPlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.plannedArrival) ?? "time"
+			self.arrivalActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date?.actualArrival) ?? "time"
+			self.name = name
+			self.departurePlatform = leg.departurePlatform
+			self.plannedDeparturePlatform = leg.plannedDeparturePlatform
+			self.arrivalPlatform = leg.arrivalPlatform
+			self.plannedArrivalPlatform = leg.plannedArrivalPlatform
+			self.departureDelay = leg.departureDelay ?? 0
+			self.arrivalDelay = leg.arrivalDelay ?? 0
+			
+		}
 		let id = UUID()
 		let name : String
 		let departurePlannedTimeString : String

@@ -46,18 +46,8 @@ extension JourneyViewDataConstructor {
 			legBottomPosition: 0,
 			delayedAndNextIsNotReachable: nil,
 			remarks: [],
-			legStopsViewData: [.init(
+			legStopsViewData: [LegViewData.StopViewData(
 				name: "transfer",
-				departurePlannedTimeString: "",
-				departureActualTimeString: "",
-				arrivalPlannedTimeString: "",
-				arrivalActualTimeString: "",
-				departurePlatform: "platform",
-				plannedDeparturePlatform: "platform",
-				arrivalPlatform: "platform",
-				plannedArrivalPlatform: "platform",
-				departureDelay: 666,
-				arrivalDelay: 666,
 				timeContainer: container
 			)],
 			footDistance: 0,

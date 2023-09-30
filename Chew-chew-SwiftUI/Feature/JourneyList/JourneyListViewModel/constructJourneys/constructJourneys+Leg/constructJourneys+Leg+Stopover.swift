@@ -13,14 +13,10 @@ extension JourneyViewDataConstructor {
 	func constructLineStopOverData(leg : Leg, type : LegType) -> [LegViewData.StopViewData] {
 		var name : String? {
 			switch type {
-			case .transfer:
-				return nil
-			case .line:
+			case .transfer,.line,.footMiddle:
 				return nil
 			case .footStart(startPointName: let name):
 				return name
-			case .footMiddle:
-				return nil
 			case .footEnd(finishPointName: let name):
 				return name
 			}
@@ -33,17 +29,8 @@ extension JourneyViewDataConstructor {
 				let c = TimeContainer(plannedDeparture: leg.plannedDeparture, plannedArrival: leg.plannedArrival, actualDeparture: leg.departure, actualArrival: leg.arrival)
 				return LegViewData.StopViewData(
 						name: stop.stop?.name ?? "stop",
-						departurePlannedTimeString: DateParcer.getTimeStringFromDate(date: c.date?.plannedDeparture) ?? "time",
-						departureActualTimeString: DateParcer.getTimeStringFromDate(date: c.date?.actualDeparture) ?? "time",
-						arrivalPlannedTimeString: DateParcer.getTimeStringFromDate(date: c.date?.plannedArrival) ?? "time",
-						arrivalActualTimeString: DateParcer.getTimeStringFromDate(date: c.date?.actualArrival) ?? "time",
-						departurePlatform: stop.departurePlatform,
-						plannedDeparturePlatform: stop.plannedDeparturePlatform,
-						arrivalPlatform: stop.arrivalPlatform,
-						plannedArrivalPlatform: stop.plannedArrivalPlatform,
-						departureDelay: stop.departureDelay ?? 0,
-						arrivalDelay: leg.arrivalDelay ?? 0,
-						timeContainer: c
+						timeContainer: c,
+						stop: stop
 					)
 			}
 			return res
@@ -63,31 +50,13 @@ extension JourneyViewDataConstructor {
 			return [
 				LegViewData.StopViewData(
 					name: name ?? leg.origin?.name ?? "origin name",
-					departurePlannedTimeString: DateParcer.getTimeStringFromDate(date: first.date?.plannedDeparture) ?? "time",
-					departureActualTimeString: DateParcer.getTimeStringFromDate(date: first.date?.actualDeparture) ?? "time",
-					arrivalPlannedTimeString: DateParcer.getTimeStringFromDate(date: first.date?.plannedArrival) ?? "time",
-					arrivalActualTimeString: DateParcer.getTimeStringFromDate(date: first.date?.actualArrival) ?? "time",
-					departurePlatform: leg.departurePlatform,
-					plannedDeparturePlatform: leg.plannedDeparturePlatform,
-					arrivalPlatform: leg.arrivalPlatform,
-					plannedArrivalPlatform: leg.plannedArrivalPlatform,
-					departureDelay: leg.departureDelay ?? 0,
-					arrivalDelay: leg.arrivalDelay ?? 0,
-					timeContainer: first
+					timeContainer: first,
+					leg: leg
 				),
 				LegViewData.StopViewData(
 					name: name ?? leg.destination?.name ?? "dest name",
-					departurePlannedTimeString: DateParcer.getTimeStringFromDate(date: last.date?.plannedDeparture) ?? "time",
-					departureActualTimeString: DateParcer.getTimeStringFromDate(date: last.date?.actualDeparture) ?? "time",
-					arrivalPlannedTimeString: DateParcer.getTimeStringFromDate(date: last.date?.plannedArrival) ?? "time",
-					arrivalActualTimeString: DateParcer.getTimeStringFromDate(date: last.date?.actualArrival) ?? "time",
-					departurePlatform: leg.departurePlatform,
-					plannedDeparturePlatform: leg.plannedDeparturePlatform,
-					arrivalPlatform: leg.arrivalPlatform,
-					plannedArrivalPlatform: leg.plannedArrivalPlatform,
-					departureDelay: leg.departureDelay ?? 0,
-					arrivalDelay: leg.arrivalDelay ?? 0,
-					timeContainer: last
+					timeContainer: last,
+					leg: leg
 				)
 			]
 		case .footEnd, .footMiddle,.transfer:
@@ -100,31 +69,13 @@ extension JourneyViewDataConstructor {
 			return [
 				LegViewData.StopViewData(
 					name: name ?? leg.origin?.name ?? "origin name",
-					departurePlannedTimeString: DateParcer.getTimeStringFromDate(date: c.date?.plannedDeparture) ?? "time",
-					departureActualTimeString: DateParcer.getTimeStringFromDate(date: c.date?.actualDeparture) ?? "time",
-					arrivalPlannedTimeString: DateParcer.getTimeStringFromDate(date: c.date?.plannedArrival) ?? "time",
-					arrivalActualTimeString: DateParcer.getTimeStringFromDate(date: c.date?.actualArrival) ?? "time",
-					departurePlatform: leg.departurePlatform,
-					plannedDeparturePlatform: leg.plannedDeparturePlatform,
-					arrivalPlatform: leg.arrivalPlatform,
-					plannedArrivalPlatform: leg.plannedArrivalPlatform,
-					departureDelay: leg.departureDelay ?? 0,
-					arrivalDelay: leg.arrivalDelay ?? 0,
-					timeContainer: c
+					timeContainer: c,
+					leg: leg
 				),
 				LegViewData.StopViewData(
 					name: name ?? leg.destination?.name ?? "dest name",
-					departurePlannedTimeString: DateParcer.getTimeStringFromDate(date: c.date?.plannedDeparture) ?? "time",
-					departureActualTimeString: DateParcer.getTimeStringFromDate(date: c.date?.actualDeparture) ?? "time",
-					arrivalPlannedTimeString: DateParcer.getTimeStringFromDate(date: c.date?.plannedArrival) ?? "time",
-					arrivalActualTimeString: DateParcer.getTimeStringFromDate(date: c.date?.actualArrival) ?? "time",
-					departurePlatform: leg.departurePlatform,
-					plannedDeparturePlatform: leg.plannedDeparturePlatform,
-					arrivalPlatform: leg.arrivalPlatform,
-					plannedArrivalPlatform: leg.plannedArrivalPlatform,
-					departureDelay: leg.departureDelay ?? 0,
-					arrivalDelay: leg.arrivalDelay ?? 0,
-					timeContainer: c
+					timeContainer: c,
+					leg: leg
 				)
 			]
 		}
