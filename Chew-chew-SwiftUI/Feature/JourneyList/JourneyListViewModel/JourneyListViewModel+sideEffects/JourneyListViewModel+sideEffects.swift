@@ -9,10 +9,6 @@ import Foundation
 import Combine
 
 extension JourneyListViewModel {
-	
-}
-
-extension JourneyListViewModel {
 	static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
 		Feedback { _ in
 			return input

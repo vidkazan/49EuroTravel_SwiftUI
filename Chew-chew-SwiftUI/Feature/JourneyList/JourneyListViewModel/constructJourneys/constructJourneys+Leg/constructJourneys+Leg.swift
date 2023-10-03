@@ -9,7 +9,94 @@ import Foundation
 import UIKit
 import SwiftUI
 
+struct LegViewProgressHeights : Equatable, Hashable {
+	let totalHeight : CGFloat
+	let totalHeightWithStopovers : CGFloat
+}
+
+struct Segments : Equatable, Hashable {
+	struct SegmentPoint : Equatable, Hashable {
+		let time: Double
+		let height: CGFloat
+	}
+	
+	var segments: [SegmentPoint]
+	
+	init(segments: [SegmentPoint]) {
+		self.segments = segments
+	}
+	
+	func evaluateExpanded(time: Double) -> Double {
+		guard segments.count >= 2 else { return 0.0 }
+		
+		guard let first = segments.first, let last = segments.last else { return 0 }
+		
+		if time < first.time { return 0 }
+		
+		if time > last.time { return last.height }
+		
+		for i in 0..<segments.count - 1 {
+			let currentSegment = segments[i]
+			let nextSegment = segments[i + 1]
+			
+			if time >= currentSegment.time && time <= nextSegment.time {
+				let timeFraction = (time - currentSegment.time) / (nextSegment.time - currentSegment.time)
+				print(time,currentSegment.height + (nextSegment.height - currentSegment.height) * timeFraction)
+				return currentSegment.height + (nextSegment.height - currentSegment.height) * timeFraction
+			}
+		}
+		
+		// If time is outside all segments, return a default value or handle it accordingly.
+		return 0.0 // You can change this to your desired default value.
+	}
+	
+	func evaluateCollapsed(time: Double) -> Double {
+		guard let currentSegment = segments.first,
+			  var nextSegment = segments.last else { return 0 }
+		
+		nextSegment = SegmentPoint(time: nextSegment.time, height: StopOverType.origin.viewHeight)
+		
+		if time < currentSegment.time { return 0 }
+		if time > nextSegment.time { return nextSegment.height }
+			if time >= currentSegment.time && time <= nextSegment.time {
+				let timeFraction = (time - currentSegment.time) / (nextSegment.time - currentSegment.time)
+				print(currentSegment.time,currentSegment.height)
+				print(nextSegment.time,nextSegment.height)
+				print(time,currentSegment.height + (nextSegment.height - currentSegment.height) * timeFraction)
+				return currentSegment.height + (nextSegment.height - currentSegment.height) * timeFraction
+			}
+		return 0
+	}
+}
+
 extension JourneyViewDataConstructor {
+	func constructSegmentsFromStopOverData(stopovers : [LegViewData.StopViewData]) -> Segments {
+		var currentHeight : CGFloat = 0
+		var segs = Segments(segments: [])
+		
+		for stop in stopovers {
+			if let time = stop.timeContainer.timestamp.actualArrival {
+				segs.segments.append(
+					Segments.SegmentPoint(
+						time:time,
+						height: currentHeight
+					)
+				)
+			}
+			currentHeight += stop.type.timeLabelHeight
+			if let time = stop.timeContainer.timestamp.actualDeparture {
+				segs.segments.append(
+					Segments.SegmentPoint(
+						time:time,
+						height: currentHeight
+					)
+				)
+			}
+			currentHeight += (stop.type.viewHeight - stop.type.timeLabelHeight)
+		}
+		return segs
+	}
+	
 	func constructTransferViewData(fromLeg : Leg, toLeg : Leg, id : Int) -> LegViewData? {
 		guard
 			let plannedDepartureTSString = fromLeg.plannedArrival,
@@ -48,10 +135,16 @@ extension JourneyViewDataConstructor {
 			remarks: [],
 			legStopsViewData: [LegViewData.StopViewData(
 				name: "transfer",
-				timeContainer: container
+				timeContainer: container,
+				type: .transfer
 			)],
 			footDistance: 0,
-			lineName: "transfer line name"
+			lineName: "transfer line name",
+			heights: LegViewProgressHeights(
+				totalHeight: 100,
+				totalHeightWithStopovers: 150
+			),
+			progressSegments: constructSegmentsFromStopOverData(stopovers: [])
 		)
 		return res
 	}
@@ -79,10 +172,14 @@ extension JourneyViewDataConstructor {
 		let actualDepartureTS = DateParcer.getDateFromDateString(dateString: actualDepartureTSString)
 		let actualArrivalTS = DateParcer.getDateFromDateString(dateString: actualArrivalTSString)
 		
-		guard let plannedDeparturePosition = getTimeLabelPosition(firstTS: firstTS, lastTS: lastTS,currentTS: plannedDepartureTS),
-			  let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: actualDepartureTS),
-			  let plannedArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: plannedArrivalTS),
-			  let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: actualArrivalTS) else { return nil }
+		guard let plannedDeparturePosition = JourneyViewDataConstructor.getTimeLabelPosition(firstTS: firstTS, lastTS: lastTS,currentTS: plannedDepartureTS),
+			  let actualDeparturePosition = JourneyViewDataConstructor.getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: actualDepartureTS),
+			  let plannedArrivalPosition = JourneyViewDataConstructor.getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: plannedArrivalTS),
+			  let actualArrivalPosition = JourneyViewDataConstructor.getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: actualArrivalTS) else { return nil }
+		
+		let stops = constructLineStopOverData(leg: leg, type: constructLegType(leg: leg, legs: legs))
+		let segments = constructSegmentsFromStopOverData(stopovers: stops)
+		
 		
 		let res = LegViewData(
 			id: id,
@@ -98,9 +195,14 @@ extension JourneyViewDataConstructor {
 			legBottomPosition: max(plannedArrivalPosition,actualArrivalPosition),
 			delayedAndNextIsNotReachable: nil,
 			remarks: leg.remarks,
-			legStopsViewData: constructLineStopOverData(leg: leg, type : constructLegType(leg: leg, legs: legs)),
+			legStopsViewData: stops,
 			footDistance: leg.distance ?? 0,
-			lineName: leg.line?.name ?? leg.line?.mode ?? "line"
+			lineName: leg.line?.name ?? leg.line?.mode ?? "line",
+			heights: LegViewProgressHeights(
+				totalHeight: StopOverType.origin.viewHeight,
+				totalHeightWithStopovers: segments.segments.last?.height ?? 0
+			),
+			progressSegments: segments
 		)
 		return res
 	}

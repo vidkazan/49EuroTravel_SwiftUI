@@ -15,84 +15,48 @@ struct LegDetailsView: View {
 		VStack {
 			VStack(spacing: 0) {
 				switch viewModel.state.leg.legType {
-				case .transfer:
+				case .transfer,.footMiddle,.footEnd,.footStart:
 					if let stop = viewModel.state.leg.legStopsViewData.first {
 						LegStopView(
-							type: .transfer,
+							type: stop.type,
 							vm: viewModel,
 							stopOver: stop,
 							leg: viewModel.state.leg
 						)
 					}
 				case .line:
-					if viewModel.state.leg.legStopsViewData.count > 1 {
-						if let stop = viewModel.state.leg.legStopsViewData.first {
-							LegStopView(
-								type: .origin,
-								vm: viewModel,
-								stopOver: stop,
-								leg: viewModel.state.leg
-							)
-						}
-						if case .stopovers = viewModel.state.status {
-							ForEach(viewModel.state.leg.legStopsViewData) { stopover in
-								if stopover != viewModel.state.leg.legStopsViewData.first,stopover != viewModel.state.leg.legStopsViewData.last {
-									LegStopView(
-										type: .stopover,
-										vm: viewModel,
-										stopOver: stopover,
-										leg: viewModel.state.leg
-									)
-								}
-							}
-						}
-						if let stop = viewModel.state.leg.legStopsViewData.last {
-							LegStopView(
-								type: .destination,
-								vm: viewModel,
-								stopOver: stop,
-								leg: viewModel.state.leg
-							)
-						}
+					if let stop = viewModel.state.leg.legStopsViewData.first {
+						LegStopView(
+							type: stop.type,
+							vm: viewModel,
+							stopOver: stop,
+							leg: viewModel.state.leg
+						)
 					}
-				case .footStart:
-					if viewModel.state.leg.legStopsViewData.count > 1 {
-						if let stop = viewModel.state.leg.legStopsViewData.first {
-							LegStopView(
-								type: .footTop,
-								vm: viewModel,
-								stopOver: stop,
-								leg: viewModel.state.leg
-							)
-						}
-					}
-				case .footMiddle:
-					if viewModel.state.leg.legStopsViewData.count > 1 {
-						if let stop = viewModel.state.leg.legStopsViewData.first {
+					if case .stopovers = viewModel.state.status {
+						ForEach(viewModel.state.leg.legStopsViewData) { stop in
+							if stop != viewModel.state.leg.legStopsViewData.first,stop != viewModel.state.leg.legStopsViewData.last {
 								LegStopView(
-									type: .footMiddle,
+									type: stop.type,
 									vm: viewModel,
 									stopOver: stop,
 									leg: viewModel.state.leg
 								)
+							}
 						}
 					}
-				case .footEnd:
-					if viewModel.state.leg.legStopsViewData.count > 1 {
-						if let stop = viewModel.state.leg.legStopsViewData.first {
-							LegStopView(
-								type: .footBottom,
-								vm: viewModel,
-								stopOver: stop,
-								leg: viewModel.state.leg
-							)
-						}
+					if let stop = viewModel.state.leg.legStopsViewData.last {
+						LegStopView(
+							type: stop.type,
+							vm: viewModel,
+							stopOver: stop,
+							leg: viewModel.state.leg
+						)
 					}
 				}
-				
 			}
 			.background {
-				ZStack{
+				ZStack {
 					switch viewModel.state.leg.legType {
 					case .footEnd,.footMiddle,.footStart,.transfer:
 						EmptyView()
@@ -101,8 +65,7 @@ struct LegDetailsView: View {
 							HStack(alignment: .top){
 								Rectangle()
 									.fill(Color.chewGrayScale07)
-									.cornerRadius(6)
-									.frame(width: 20,height: 50)
+									.frame(width: 20,height:  viewModel.state.totalProgressHeight)
 									.padding(.leading,20)
 								Spacer()
 							}
@@ -111,9 +74,9 @@ struct LegDetailsView: View {
 						VStack{
 							HStack(alignment: .top){
 								Rectangle()
-									.fill(Color.chewGrayScale15)
-									.cornerRadius(6)
-									.frame(width: 20,height: 50)
+									.fill(Color.chewRedScale20)
+									.cornerRadius(viewModel.state.totalProgressHeight == viewModel.state.currentProgressHeight ? 0 : 6)
+									.frame(width: 20,height: viewModel.state.currentProgressHeight)
 									.padding(.leading,20)
 								Spacer()
 							}

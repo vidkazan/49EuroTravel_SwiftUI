@@ -44,4 +44,21 @@ extension Color {
 	public static var chewGrayScale15: Color {
 		return Color(hue: 0, saturation: 0, brightness: 0.15)
 	}
+	public static var chewRedScale20: Color {
+		return Color(hue: 0, saturation: 1, brightness: 0.2)
+	}
+	public static var chewRedScale30: Color {
+		return Color(hue: 0, saturation: 1, brightness: 0.3)
+	}
+	public static var chewRedScale80: Color {
+		return Color(hue: 0, saturation: 1, brightness: 0.8)
+	}
+	
+	public static var chewYellow: Color {
+		return Color(hue: 0.12, saturation: 1, brightness: 0.7)
+	}
+	
+	public static var chewBlue: Color {
+		return Color(hue: 0.58, saturation: 1, brightness: 0.15)
+	}
 }

@@ -17,7 +17,7 @@ struct TimelineTimeLabelData : Equatable,Hashable {
 
 struct LegViewData : Equatable,Identifiable,Hashable {
 	struct StopViewData : Equatable,Identifiable,Hashable {
-		init(name : String,timeContainer : TimeContainer) {
+		init(name : String,timeContainer : TimeContainer,type: StopOverType) {
 			self.timeContainer = timeContainer
 			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.plannedDeparture) ?? "time0"
 			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.actualDeparture) ?? "time0"
@@ -30,8 +30,9 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 			self.plannedArrivalPlatform = ""
 			self.departureDelay = 0
 			self.arrivalDelay = 0
+			self.type = type
 		}
-		init(name : String,timeContainer : TimeContainer, stop : StopOver) {
+		init(name : String,timeContainer : TimeContainer, stop : StopOver,type: StopOverType) {
 			self.timeContainer = timeContainer
 			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.plannedDeparture) ?? "time1"
 			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.actualDeparture) ?? "time1"
@@ -44,8 +45,9 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 			self.plannedArrivalPlatform = stop.plannedArrivalPlatform
 			self.departureDelay = stop.departureDelay ?? 0
 			self.arrivalDelay = stop.arrivalDelay ?? 0
+			self.type = type
 		}
-		init(name : String,timeContainer : TimeContainer, leg : Leg) {
+		init(name : String,timeContainer : TimeContainer, leg : Leg,type: StopOverType) {
 			self.timeContainer = timeContainer
 			self.departurePlannedTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.plannedDeparture) ?? "time2"
 			self.departureActualTimeString = DateParcer.getTimeStringFromDate(date: timeContainer.date.actualDeparture) ?? "time2"
@@ -58,6 +60,7 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 			self.plannedArrivalPlatform = leg.plannedArrivalPlatform
 			self.departureDelay = leg.departureDelay ?? 0
 			self.arrivalDelay = leg.arrivalDelay ?? 0
+			self.type = type
 			
 		}
 		let id = UUID()
@@ -73,9 +76,7 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 		let departureDelay,
 			arrivalDelay		: Int
 		let timeContainer : TimeContainer
-		
-		
-		
+		let type : StopOverType
 	}
 	let id : Int
 	let fillColor : Color
@@ -89,6 +90,8 @@ struct LegViewData : Equatable,Identifiable,Hashable {
 	let legStopsViewData : [StopViewData]
 	let footDistance : Int
 	let lineName : String
+	let heights : LegViewProgressHeights
+	let progressSegments : Segments
 }
 
 enum LegType : Equatable,Hashable {

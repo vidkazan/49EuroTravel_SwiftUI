@@ -23,6 +23,7 @@ struct BadgeView : View {
 				.background(badge.badgeData.style)
 				.background(Color.chewGray10)
 				.cornerRadius(8)
+				.lineLimit(1)
 		case .dticket:
 			DTicketLogo()
 				.font(.system(size: 12))
@@ -38,6 +39,7 @@ struct BadgeView : View {
 				.background(badge.badgeData.style)
 				.background(Color.chewGray10)
 				.cornerRadius(8)
+				.lineLimit(1)
 		case .legDuration(dur: let dur):
 			HStack(spacing: 2) {
 				Text(badge.badgeData.name)
@@ -57,6 +59,7 @@ struct BadgeView : View {
 					.foregroundColor(.secondary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
+					.lineLimit(1)
 				Text(badge.badgeData.name)
 					.font(.system(size: 12,weight: .semibold))
 					.foregroundColor(.primary)
@@ -94,6 +97,7 @@ struct BadgeView : View {
 					.foregroundColor(.secondary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
+					.lineLimit(1)
 				Text(badge.badgeData.name)
 					.font(.system(size: 12,weight: .semibold))
 					.foregroundColor(.primary)
@@ -108,6 +112,7 @@ struct BadgeView : View {
 					.foregroundColor(.secondary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
+					.lineLimit(1)
 			}
 			.padding(4)
 //			.cornerRadius(8)

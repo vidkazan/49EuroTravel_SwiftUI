@@ -18,13 +18,24 @@ final class LegDetailsViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	
 	init(leg : LegViewData) {
-		self.state = .init(status: .idle, leg: leg)
+		self.state = State(
+			status: .idle,
+				  leg: leg,
+			currentHeight: leg.progressSegments.evaluateCollapsed(time: Date.now.timeIntervalSince1970),
+				  totalHeight: leg.heights.totalHeight
+			  )
 		Publishers.system(
-			initial: .init(status: .idle, leg: leg),
+			initial: State(
+				status: .idle,
+				   leg: leg,
+				currentHeight: leg.progressSegments.evaluateCollapsed(time: Date.now.timeIntervalSince1970),
+				   totalHeight: leg.heights.totalHeight
+			   ),
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
+//				self.when()
 			]
 		)
 			.assign(to: \.state, on: self)

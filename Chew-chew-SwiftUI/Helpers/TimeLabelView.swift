@@ -35,44 +35,53 @@ struct TimeLabelView: View {
 			HStack(spacing: 2){
 				switch arragement == .left {
 				case true:
-					if !isSmall, delay > 59 {
-						actualTime(actual: actual)
+					if delay > 59 {
+						optionalTime(actual: actual)
 					}
-					plannedTime()
+					mainTime()
 				case false:
-					plannedTime()
-					if !isSmall, delay > 59 {
-						actualTime(actual: actual)
+					mainTime()
+					if delay > 59 {
+						optionalTime(actual: actual)
 					}
 				}
 			}
+			.padding(3)
 		case .bottom,.top:
 			VStack(spacing: 2){
 				switch arragement == .top {
 				case true:
-					if !isSmall, delay > 59 {
-						actualTime(actual: actual)
+					if delay > 59 {
+						optionalTime(actual: actual)
 					}
-					plannedTime()
+					mainTime()
 				case false:
-					plannedTime()
-					if !isSmall, delay > 59 {
-						actualTime(actual: actual)
+					mainTime()
+					if delay > 59 {
+						optionalTime(actual: actual)
 					}
 				}
 			}
+			.padding(3)
 		}
 	}
 }
 
 extension TimeLabelView {
-	func actualTime(actual : String) -> some View {
-		Text(delay > 59 ? planned : actual)
-			.strikethrough()
-			.foregroundColor(isSmall ? .gray : .secondary)
-			.font(.system(size: 12,weight: .semibold))
+	func optionalTime(actual : String) -> some View {
+		switch isSmall {
+		case true:
+			return Text(delay >= 60 ? "+" + String(delay/60) : "")
+				.foregroundColor(isSmall ? .gray : .secondary)
+				.font(.system(size: 12,weight: .semibold))
+		case false:
+			return Text(delay >= 60 ? planned : actual)
+				.strikethrough()
+				.foregroundColor(isSmall ? .gray : .secondary)
+				.font(.system(size: 12,weight: .semibold))
+		}
 	}
-	func plannedTime() -> some View {
+	func mainTime() -> some View {
 		Text(delay < 60 ? planned : actual)
 			.foregroundColor(
 				delay < 300 ? isSmall ? .gray : .primary.opacity(0.85) : Color(hue: 0, saturation: 1, brightness: 0.8))

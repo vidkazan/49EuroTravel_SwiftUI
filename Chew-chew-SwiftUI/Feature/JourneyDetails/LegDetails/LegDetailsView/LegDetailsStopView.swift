@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct LegStopView : View {
-	
 	@ObservedObject var vm : LegDetailsViewModel
 	let legViewData : LegViewData
 	let stopOver : LegViewData.StopViewData
@@ -41,23 +40,22 @@ struct LegStopView : View {
 				switch stopType {
 				case .stopover:
 					TimeLabelView(
-						isSmall: true,arragement: .bottom,planned: plannedTS,actual: actualTS,delay: delay)
-					.padding(3)
+						isSmall: true,arragement: .right,planned: plannedTS,actual: actualTS,delay: delay)
+					.frame(height: stopType.timeLabelHeight)
 					.background {
 						LinearGradient(stops: [
-							.init(color: .chewGrayScale10, location: 0),
-							.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+							.init(color: .chewRedScale30, location: 0),
+							.init(color: .chewRedScale30, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
 							.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 						], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 					}
 					.cornerRadius(7)
 				case .origin,.destination,.footTop,.footBottom:
 					TimeLabelView(isSmall: false,arragement: .bottom,planned: plannedTS,actual: actualTS,delay: delay)
-					.padding(3)
 					.background {
 						LinearGradient(stops: [
-							.init(color: .chewGrayScale10, location: 0),
-							.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+							.init(color: .chewRedScale30, location: 0),
+							.init(color: .chewRedScale30, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
 							.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 						], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 					}
@@ -65,11 +63,9 @@ struct LegStopView : View {
 				case .footMiddle:
 					Rectangle()
 						.fill(.clear)
-						.padding(3)
 				case .transfer:
 					Rectangle()
 						.fill(.clear)
-						.padding(3)
 				}
 				Spacer()
 			}
@@ -80,18 +76,15 @@ struct LegStopView : View {
 				case .origin, .destination:
 					Text(stopOver.name)
 						.font(.system(size: 17,weight: .semibold))
-						.padding(.top,3)
 				case .stopover:
 					Text(stopOver.name)
 						.font(.system(size: 12,weight: .semibold))
 						.foregroundColor(.gray)
-						.padding(.top,3)
 				case .transfer,.footBottom,.footMiddle:
 					EmptyView()
 				case .footTop:
 					Text(stopOver.name)
 						.font(.system(size: 17,weight: .semibold))
-						.padding(.top,3)
 				}
 				// MARK: Badges
 				
@@ -156,6 +149,15 @@ enum StopOverType : Equatable {
 	case footMiddle
 	case footBottom
 	case transfer
+	
+	var timeLabelHeight : CGFloat {
+		switch self {
+		case .destination,.origin:
+			return 30
+		case .transfer,.footMiddle,.footBottom,.footTop,.stopover:
+			return 15
+		}
+	}
 	
 	var viewHeight : CGFloat {
 		switch self {

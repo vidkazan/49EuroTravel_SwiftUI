@@ -27,11 +27,28 @@ extension JourneyViewDataConstructor {
 			guard let stops = leg.stopovers else { return [] }
 			let res = stops.map { stop -> LegViewData.StopViewData in
 				let c = TimeContainer(plannedDeparture: stop.plannedDeparture, plannedArrival: stop.plannedArrival, actualDeparture: stop.departure, actualArrival: stop.arrival)
-				return LegViewData.StopViewData(
-					name: stop.stop?.name ?? "stop",
-					timeContainer: c,
-					stop: stop
-				)
+				if stop == stops.first {
+					return LegViewData.StopViewData(
+						name: stop.stop?.name ?? "stop",
+						timeContainer: c,
+						stop: stop,
+						type: .origin
+					)
+				} else if stop == stops.last {
+					return LegViewData.StopViewData(
+						name: stop.stop?.name ?? "stop",
+						timeContainer: c,
+						stop: stop,
+						type: .destination
+					)
+				} else {
+					return LegViewData.StopViewData(
+						name: stop.stop?.name ?? "stop",
+						timeContainer: c,
+						stop: stop,
+						type: .stopover
+					)
+				}
 			}
 			return res
 		case .footStart:
@@ -51,15 +68,17 @@ extension JourneyViewDataConstructor {
 				LegViewData.StopViewData(
 					name: name ?? leg.origin?.name ?? "origin name",
 					timeContainer: first,
-					leg: leg
-				),
-				LegViewData.StopViewData(
-					name: name ?? leg.destination?.name ?? "dest name",
-					timeContainer: last,
-					leg: leg
+					leg: leg,
+					type: .footTop
 				)
+//				LegViewData.StopViewData(
+//					name: name ?? leg.destination?.name ?? "dest name",
+//					timeContainer: last,
+//					leg: leg,
+//					type: .footBottom
+//				)
 			]
-		case .footEnd, .footMiddle,.transfer:
+		case .footMiddle:
 			let c = TimeContainer(
 				plannedDeparture: leg.plannedDeparture,
 				plannedArrival: leg.plannedArrival,
@@ -70,13 +89,56 @@ extension JourneyViewDataConstructor {
 				LegViewData.StopViewData(
 					name: name ?? leg.origin?.name ?? "origin name",
 					timeContainer: c,
-					leg: leg
-				),
-				LegViewData.StopViewData(
-					name: name ?? leg.destination?.name ?? "dest name",
-					timeContainer: c,
-					leg: leg
+					leg: leg,
+					type: .footMiddle
 				)
+//				LegViewData.StopViewData(
+//					name: name ?? leg.destination?.name ?? "dest name",
+//					timeContainer: c,
+//					leg: leg,
+//					type: .destination
+//				)
+			]
+		case .footEnd:
+			let c = TimeContainer(
+				plannedDeparture: leg.plannedDeparture,
+				plannedArrival: leg.plannedArrival,
+				actualDeparture: leg.departure,
+				actualArrival: leg.arrival
+			)
+			return [
+				LegViewData.StopViewData(
+					name: name ?? leg.origin?.name ?? "origin name",
+					timeContainer: c,
+					leg: leg,
+					type: .footBottom
+				)
+//				LegViewData.StopViewData(
+//					name: name ?? leg.destination?.name ?? "dest name",
+//					timeContainer: c,
+//					leg: leg,
+//
+//				)
+			]
+		case .transfer:
+			let c = TimeContainer(
+				plannedDeparture: leg.plannedDeparture,
+				plannedArrival: leg.plannedArrival,
+				actualDeparture: leg.departure,
+				actualArrival: leg.arrival
+			)
+			return [
+				LegViewData.StopViewData(
+					name: name ?? leg.origin?.name ?? "origin name",
+					timeContainer: c,
+					leg: leg,
+					type: .transfer
+				)
+//				LegViewData.StopViewData(
+//					name: name ?? leg.destination?.name ?? "dest name",
+//					timeContainer: c,
+//					leg: leg
+//				)
 			]
 		}
 	}

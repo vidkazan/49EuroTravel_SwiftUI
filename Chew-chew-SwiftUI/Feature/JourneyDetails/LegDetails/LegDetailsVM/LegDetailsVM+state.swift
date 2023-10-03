@@ -11,9 +11,14 @@ extension LegDetailsViewModel {
 	struct State : Equatable {
 		let status : Status
 		let leg : LegViewData
-		init(status: Status, leg: LegViewData) {
+		let totalProgressHeight : CGFloat
+		let currentProgressHeight : CGFloat
+		init(status: Status, leg: LegViewData,currentHeight : CGFloat, totalHeight : CGFloat) {
+			print(currentHeight,totalHeight,leg.lineName)
 			self.status = status
 			self.leg = leg
+			self.currentProgressHeight = currentHeight
+			self.totalProgressHeight = totalHeight
 		}
 	}
 	
@@ -36,10 +41,13 @@ extension LegDetailsViewModel {
 	
 	enum Event {
 		case didtapExpandButton
+		case didUpdateTime
 		var description : String {
 			switch self {
 			case .didtapExpandButton:
 				return "didtapExpandButton"
+			case .didUpdateTime:
+				return "didUpdateTime"
 			}
 		}
 	}

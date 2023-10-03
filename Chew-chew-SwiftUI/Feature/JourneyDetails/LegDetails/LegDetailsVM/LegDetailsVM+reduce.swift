@@ -14,12 +14,36 @@ extension LegDetailsViewModel {
 		case .idle:
 			switch event {
 			case .didtapExpandButton:
-				return State(status: .stopovers, leg: state.leg)
+				return State(
+					status: .stopovers,
+					leg: state.leg,
+					currentHeight: state.leg.progressSegments.evaluateExpanded(time: Date.now.timeIntervalSince1970),
+					totalHeight: state.leg.heights.totalHeightWithStopovers
+				)
+			case .didUpdateTime:
+				return State(
+					status: .idle,
+					leg: state.leg,
+					currentHeight: state.leg.progressSegments.evaluateCollapsed(time: Date.now.timeIntervalSince1970),
+					totalHeight: state.leg.heights.totalHeight
+				)
 			}
 		case .stopovers:
 			switch event {
 			case .didtapExpandButton:
-				return State(status: .idle, leg: state.leg)
+				return State(
+					status: .idle,
+					leg: state.leg,
+					currentHeight: state.leg.progressSegments.evaluateCollapsed(time: Date.now.timeIntervalSince1970),
+					totalHeight: state.leg.heights.totalHeight
+				)
+			case .didUpdateTime:
+				return State(
+					status: .stopovers,
+					leg: state.leg,
+					currentHeight: state.leg.progressSegments.evaluateExpanded(time: Date.now.timeIntervalSince1970),
+					totalHeight: state.leg.heights.totalHeightWithStopovers
+				)
 			}
 		}
 	}

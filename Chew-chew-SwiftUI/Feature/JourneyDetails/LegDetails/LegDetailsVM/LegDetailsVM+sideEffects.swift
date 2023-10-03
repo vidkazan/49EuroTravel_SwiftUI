@@ -14,4 +14,9 @@ extension LegDetailsViewModel {
 			return input
 		}
 	}
+	func when() -> Feedback<State, Event> {
+	  Feedback { (state: State) -> AnyPublisher<Event, Never> in
+		  return Just(Event.didUpdateTime).eraseToAnyPublisher()
+	  }
+	}
 }
