@@ -60,9 +60,6 @@ struct Segments : Equatable, Hashable {
 		if time > nextSegment.time { return nextSegment.height }
 			if time >= currentSegment.time && time <= nextSegment.time {
 				let timeFraction = (time - currentSegment.time) / (nextSegment.time - currentSegment.time)
-				print(currentSegment.time,currentSegment.height)
-				print(nextSegment.time,nextSegment.height)
-				print(time,currentSegment.height + (nextSegment.height - currentSegment.height) * timeFraction)
 				return currentSegment.height + (nextSegment.height - currentSegment.height) * timeFraction
 			}
 		return 0
@@ -118,7 +115,6 @@ extension JourneyViewDataConstructor {
 		let actualDepartureTS = dates.actualDeparture
 		let actualArrivalTS = dates.actualArrival
 		
-		
 		let res = LegViewData(
 			id: id,
 			fillColor: .clear,
@@ -141,10 +137,19 @@ extension JourneyViewDataConstructor {
 			footDistance: 0,
 			lineName: "transfer line name",
 			heights: LegViewProgressHeights(
-				totalHeight: 100,
-				totalHeightWithStopovers: 150
+				totalHeight: StopOverType.origin.viewHeight,
+				totalHeightWithStopovers: StopOverType.origin.viewHeight
 			),
-			progressSegments: constructSegmentsFromStopOverData(stopovers: [])
+			progressSegments: Segments(segments: [
+				Segments.SegmentPoint(
+					time: container.timestamp.actualDeparture ?? 0,
+					height: 0
+				),
+				Segments.SegmentPoint(
+					time: container.timestamp.actualArrival ?? 0,
+					height: StopOverType.transfer.viewHeight
+				)
+			])
 		)
 		return res
 	}

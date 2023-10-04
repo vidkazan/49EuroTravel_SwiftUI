@@ -14,7 +14,6 @@ extension LegDetailsViewModel {
 		let totalProgressHeight : CGFloat
 		let currentProgressHeight : CGFloat
 		init(status: Status, leg: LegViewData,currentHeight : CGFloat, totalHeight : CGFloat) {
-			print(currentHeight,totalHeight,leg.lineName)
 			self.status = status
 			self.leg = leg
 			self.currentProgressHeight = currentHeight

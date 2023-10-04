@@ -58,43 +58,54 @@ struct LegDetailsView: View {
 			.background {
 				ZStack {
 					switch viewModel.state.leg.legType {
-					case .footEnd,.footMiddle,.footStart,.transfer:
+					case .footEnd,.footMiddle,.footStart:
 						EmptyView()
-					case .line:
+					case .line,.transfer:
 						VStack{
 							HStack(alignment: .top){
 								Rectangle()
-									.fill(Color.chewGrayScale07)
+									.fill(Color.chewGrayScale10)
 									.frame(width: 20,height:  viewModel.state.totalProgressHeight)
-									.padding(.leading,20)
+									.padding(.leading,25)
 								Spacer()
 							}
 							Spacer()
 						}
 						VStack{
 							HStack(alignment: .top){
+								let _ = print(viewModel.state.totalProgressHeight,viewModel.state.currentProgressHeight,viewModel.state.leg.legType.description)
 								Rectangle()
-									.fill(Color.chewRedScale20)
+									.fill(Color.chewGreenScale20)
 									.cornerRadius(viewModel.state.totalProgressHeight == viewModel.state.currentProgressHeight ? 0 : 6)
 									.frame(width: 20,height: viewModel.state.currentProgressHeight)
-									.padding(.leading,20)
+									.padding(.leading,25)
 								Spacer()
 							}
 							Spacer()
 						}
 					}
+					if case .transfer=viewModel.state.leg.legType {
+						Rectangle()
+							.fill(Color.chewGrayScale07.opacity(0.6))
+							.frame(height: StopOverType.transfer.viewHeight - 20)
+							.cornerRadius(10)
+					}
 				}
 			}
 		}
-		.padding(5)
 		.onTapGesture {
-			viewModel.send(event: .didtapExpandButton)
+			if case .line=viewModel.state.leg.legType {
+				viewModel.send(event: .didtapExpandButton)
+			}
 		}
-		.padding(
-			viewModel.state.leg.legType.description == "line" ? EdgeInsets(top: 5, leading: 5, bottom: 5, trailing: 5) : EdgeInsets(top: 20, leading: 5, bottom: 20, trailing: 5)
-		)
+		.padding(.vertical,5)
 		.background{
-			viewModel.state.leg.legType.description == "line" ? Color.chewGray10 : Color.clear
+			switch viewModel.state.leg.legType {
+			case .line:
+				Color.chewGray10
+			case .footStart,.footMiddle, .footEnd,.transfer:
+				Color.clear
+			}
 		}
 		.cornerRadius(10)
 	}

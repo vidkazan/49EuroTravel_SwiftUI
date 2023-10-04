@@ -46,7 +46,7 @@ struct TimeLabelView: View {
 					}
 				}
 			}
-			.padding(3)
+			.padding(4)
 		case .bottom,.top:
 			VStack(spacing: 2){
 				switch arragement == .top {
@@ -62,7 +62,8 @@ struct TimeLabelView: View {
 					}
 				}
 			}
-			.padding(3)
+			.padding(4)
+			.padding(.horizontal, 2)
 		}
 	}
 }

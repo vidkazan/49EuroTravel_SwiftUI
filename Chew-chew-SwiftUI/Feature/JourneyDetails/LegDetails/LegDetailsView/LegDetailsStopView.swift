@@ -34,110 +34,126 @@ struct LegStopView : View {
 		}
 	}
 	var body : some View {
-		HStack(alignment:  .top) {
-			// MARK: Time Label
-			VStack(alignment: .leading) {
-				switch stopType {
-				case .stopover:
-					TimeLabelView(
-						isSmall: true,arragement: .right,planned: plannedTS,actual: actualTS,delay: delay)
-					.frame(height: stopType.timeLabelHeight)
-					.background {
-						LinearGradient(stops: [
-							.init(color: .chewRedScale30, location: 0),
-							.init(color: .chewRedScale30, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-							.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
-						], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
-					}
-					.cornerRadius(7)
-				case .origin,.destination,.footTop,.footBottom:
-					TimeLabelView(isSmall: false,arragement: .bottom,planned: plannedTS,actual: actualTS,delay: delay)
-					.background {
-						LinearGradient(stops: [
-							.init(color: .chewRedScale30, location: 0),
-							.init(color: .chewRedScale30, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-							.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
-						], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
-					}
-					.cornerRadius(10)
-				case .footMiddle:
-					Rectangle()
-						.fill(.clear)
-				case .transfer:
+		switch stopType {
+		case .transfer:
+			HStack(alignment:  .center) {
+				VStack(alignment: .leading) {
 					Rectangle()
 						.fill(.clear)
 				}
-				Spacer()
-			}
-			.frame(width: 60)
-			VStack(alignment: .leading, spacing: 2) {
-				// MARK: Location Name above Badges
-				switch stopType {
-				case .origin, .destination:
-					Text(stopOver.name)
-						.font(.system(size: 17,weight: .semibold))
-				case .stopover:
-					Text(stopOver.name)
-						.font(.system(size: 12,weight: .semibold))
-						.foregroundColor(.gray)
-				case .transfer,.footBottom,.footMiddle:
-					EmptyView()
-				case .footTop:
-					Text(stopOver.name)
-						.font(.system(size: 17,weight: .semibold))
-				}
-				// MARK: Badges
-				
-				switch stopType {
-				case .footBottom,.footMiddle,.footTop:
-					HStack(spacing: 3) {
-						BadgeView(badge: .walking(duration: legViewData.duration))
-					}
-				case .origin:
-					PlatformView(
-						isShowingPlatormWord: true,
-						platform: stopOver.departurePlatform,
-						plannedPlatform: stopOver.plannedDeparturePlatform
-					)
-					HStack(spacing: 3) {
-						BadgeView(badge: .lineNumber(lineType:.other(type: "mode") ,num: legViewData.lineName))
-						BadgeView(badge: .legDirection(dir: legViewData.direction))
-						BadgeView(badge: .legDuration(dur: legViewData.duration))
-						HStack(spacing: 0) {
-							BadgeView(badge: .stopsCount(legViewData.legStopsViewData.count - 1))
-							if legViewData.legStopsViewData.count > 2 {
-								Image(systemName: "chevron.down.circle")
-									.font(.system(size: 15,weight: .semibold))
-									.rotationEffect(vm.state.status == .idle ? .degrees(0) : .degrees(180))
-									.animation(.spring(), value: vm.state.status)
-							}
-						}
-						.background(Color.chewGray10)
-						.cornerRadius(8)
-					}
-				case  .destination:
-					PlatformView(
-						isShowingPlatormWord: true,
-						platform: stopOver.arrivalPlatform,
-						plannedPlatform: stopOver.plannedArrivalPlatform
-					)
-				case .stopover:
-					EmptyView()
-				case .transfer:
+				.frame(width: 70)
+				VStack(alignment: .leading) {
 					HStack(spacing: 3) {
 						BadgeView(badge: .transfer(duration: legViewData.duration))
 					}
 				}
-				// MARK: Location Name under Badges
-				
-				if case .footBottom = stopType{
-					Text(stopOver.name)
-						.font(.system(size: 17,weight: .semibold))
-				}
+				Spacer()
 			}
-			Spacer()
+			.frame(height: stopType.viewHeight)
+		default:
+			HStack(alignment:  .top) {
+				// MARK: Time Label
+				VStack(alignment: .leading) {
+					switch stopType {
+					case .stopover:
+						TimeLabelView(
+							isSmall: true,arragement: .right,planned: plannedTS,actual: actualTS,delay: delay)
+						.frame(height: stopType.timeLabelHeight)
+						.background {
+							LinearGradient(stops: [
+								.init(color: .chewGrayScale10, location: 0),
+								.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+								.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
+						}
+						.cornerRadius(7)
+					case .origin,.destination:
+						TimeLabelView(isSmall: false,arragement: .bottom,planned: plannedTS,actual: actualTS,delay: delay)
+						.background {
+							LinearGradient(stops: [
+								.init(color: .chewGrayScale10, location: 0),
+								.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+								.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
+						}
+						.cornerRadius(10)
+					case .footTop,.footBottom:
+						TimeLabelView(isSmall: false,arragement: .bottom,planned: plannedTS,actual: actualTS,delay: delay)
+							.background(Color.chewGrayScale10)
+						.cornerRadius(10)
+					case .footMiddle,.transfer:
+						Rectangle()
+							.fill(.clear)
+					}
+					Spacer()
+				}
+				.frame(width: 70)
+				VStack(alignment: .leading, spacing: 2) {
+					// MARK: Location Name above Badges
+					switch stopType {
+					case .origin, .destination,.footTop:
+						Text(stopOver.name)
+							.font(.system(size: 17,weight: .semibold))
+					case .stopover:
+						Text(stopOver.name)
+							.font(.system(size: 12,weight: .semibold))
+							.foregroundColor(.gray)
+					case .transfer,.footBottom,.footMiddle:
+						EmptyView()
+					}
+					// MARK: Badges
+					
+					switch stopType {
+					case .footBottom,.footMiddle,.footTop:
+						HStack(spacing: 3) {
+							BadgeView(badge: .walking(duration: legViewData.duration))
+						}
+					case .origin:
+						PlatformView(
+							isShowingPlatormWord: true,
+							platform: stopOver.departurePlatform,
+							plannedPlatform: stopOver.plannedDeparturePlatform
+						)
+						HStack(spacing: 3) {
+							BadgeView(badge: .lineNumber(lineType:.other(type: "mode") ,num: legViewData.lineName))
+							BadgeView(badge: .legDirection(dir: legViewData.direction))
+							BadgeView(badge: .legDuration(dur: legViewData.duration))
+							HStack(spacing: 0) {
+								BadgeView(badge: .stopsCount(legViewData.legStopsViewData.count - 1))
+								if legViewData.legStopsViewData.count > 2 {
+									Image(systemName: "chevron.down.circle")
+										.font(.system(size: 15,weight: .semibold))
+										.rotationEffect(vm.state.status == .idle ? .degrees(0) : .degrees(180))
+										.animation(.spring(), value: vm.state.status)
+								}
+							}
+							.background(Color.chewGray10)
+							.cornerRadius(8)
+						}
+					case  .destination:
+						PlatformView(
+							isShowingPlatormWord: true,
+							platform: stopOver.arrivalPlatform,
+							plannedPlatform: stopOver.plannedArrivalPlatform
+						)
+					case .stopover:
+						EmptyView()
+					case .transfer:
+						HStack(spacing: 3) {
+							BadgeView(badge: .transfer(duration: legViewData.duration))
+						}
+					}
+					// MARK: Location Name under Badges
+					
+					if case .footBottom = stopType{
+						Text(stopOver.name)
+							.font(.system(size: 17,weight: .semibold))
+					}
+				}
+				Spacer()
+			}
+			.frame(height: stopType.viewHeight)
 		}
-		.frame(height: stopType.viewHeight)
 	}
 }
 
@@ -162,13 +178,13 @@ enum StopOverType : Equatable {
 	var viewHeight : CGFloat {
 		switch self {
 		case .destination:
-			return 60
+			return 50
 		case .origin:
 			return 90
 		case .stopover:
 			return 35
 		case .transfer,.footMiddle,.footBottom,.footTop:
-			return 15
+			return 70
 		}
 	}
 	

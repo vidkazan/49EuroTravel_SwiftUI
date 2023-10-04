@@ -61,4 +61,11 @@ extension Color {
 	public static var chewBlue: Color {
 		return Color(hue: 0.58, saturation: 1, brightness: 0.15)
 	}
+	
+	public static var chewGreenScale10: Color {
+		return Color(hue: 0.45, saturation: 1, brightness: 0.1)
+	}
+	public static var chewGreenScale20: Color {
+		return Color(hue: 0.45, saturation: 1, brightness: 0.2)
+	}
 }

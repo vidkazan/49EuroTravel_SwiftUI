@@ -15,7 +15,7 @@ struct JourneyDetailsView: View {
 			header()
 				.padding(10)
 			ScrollView() {
-				LazyVStack{
+				LazyVStack(spacing: 0){
 					ForEach(viewModel.state.data.legs) { leg in
 						LegDetailsView(viewModel: .init(leg: leg), journeyDetailsViewModel: viewModel)
 					}

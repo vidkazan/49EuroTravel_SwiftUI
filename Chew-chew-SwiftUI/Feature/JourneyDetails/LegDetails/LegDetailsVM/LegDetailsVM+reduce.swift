@@ -22,7 +22,7 @@ extension LegDetailsViewModel {
 				)
 			case .didUpdateTime:
 				return State(
-					status: .idle,
+					status: state.status,
 					leg: state.leg,
 					currentHeight: state.leg.progressSegments.evaluateCollapsed(time: Date.now.timeIntervalSince1970),
 					totalHeight: state.leg.heights.totalHeight
@@ -39,7 +39,7 @@ extension LegDetailsViewModel {
 				)
 			case .didUpdateTime:
 				return State(
-					status: .stopovers,
+					status: state.status,
 					leg: state.leg,
 					currentHeight: state.leg.progressSegments.evaluateExpanded(time: Date.now.timeIntervalSince1970),
 					totalHeight: state.leg.heights.totalHeightWithStopovers

@@ -9,33 +9,25 @@ import Foundation
 import Combine
 
 final class LegDetailsViewModel : ObservableObject, Identifiable {
-	@Published private(set) var state : State {
-		didSet {
-//			print("🟣 > leg details new state:",state.status.description)
-		}
-	}
+	@Published private(set) var state : State
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
 	init(leg : LegViewData) {
-		self.state = State(
+		let state = State(
 			status: .idle,
 				  leg: leg,
-			currentHeight: leg.progressSegments.evaluateCollapsed(time: Date.now.timeIntervalSince1970),
+				currentHeight: leg.progressSegments.evaluateCollapsed(time: Date.now.timeIntervalSince1970),
 				  totalHeight: leg.heights.totalHeight
 			  )
+		self.state = state
 		Publishers.system(
-			initial: State(
-				status: .idle,
-				   leg: leg,
-				currentHeight: leg.progressSegments.evaluateCollapsed(time: Date.now.timeIntervalSince1970),
-				   totalHeight: leg.heights.totalHeight
-			   ),
+			initial: state,
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-//				self.when()
+				Self.updateByTimer()
 			]
 		)
 			.assign(to: \.state, on: self)
