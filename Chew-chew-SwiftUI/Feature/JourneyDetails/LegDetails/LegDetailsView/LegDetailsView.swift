@@ -57,38 +57,35 @@ struct LegDetailsView: View {
 			}
 			.background {
 				ZStack {
-					switch viewModel.state.leg.legType {
-					case .footEnd,.footMiddle,.footStart:
-						EmptyView()
-					case .line,.transfer:
-						VStack{
-							HStack(alignment: .top){
-								Rectangle()
-									.fill(Color.chewGrayScale10)
-									.frame(width: 20,height:  viewModel.state.totalProgressHeight)
-									.padding(.leading,25)
-								Spacer()
-							}
+					VStack{
+						HStack(alignment: .top){
+							Rectangle()
+								.fill(Color.chewGrayScale10)
+								.frame(width: 18,height:  viewModel.state.totalProgressHeight)
+								.padding(.leading,26)
 							Spacer()
 						}
-						VStack{
-							HStack(alignment: .top){
-								let _ = print(viewModel.state.totalProgressHeight,viewModel.state.currentProgressHeight,viewModel.state.leg.legType.description)
-								Rectangle()
-									.fill(Color.chewGreenScale20)
-									.cornerRadius(viewModel.state.totalProgressHeight == viewModel.state.currentProgressHeight ? 0 : 6)
-									.frame(width: 20,height: viewModel.state.currentProgressHeight)
-									.padding(.leading,25)
-								Spacer()
-							}
-							Spacer()
-						}
+						Spacer()
 					}
-					if case .transfer=viewModel.state.leg.legType {
-						Rectangle()
-							.fill(Color.chewGrayScale07.opacity(0.6))
-							.frame(height: StopOverType.transfer.viewHeight - 20)
-							.cornerRadius(10)
+					VStack{
+						HStack(alignment: .top){
+							Rectangle()
+								.fill(Color.chewGreenScale20)
+								.cornerRadius(viewModel.state.totalProgressHeight == viewModel.state.currentProgressHeight ? 0 : 6)
+								.frame(width: 20,height: viewModel.state.currentProgressHeight)
+								.padding(.leading,25)
+							Spacer()
+						}
+						Spacer()
+					}
+					switch viewModel.state.leg.legType {
+					case .transfer,.footEnd,.footMiddle,.footStart:
+							Rectangle()
+								.fill(Color.chewGrayScale07.opacity(0.6))
+								.frame(height: StopOverType.transfer.viewHeight - 20)
+								.cornerRadius(10)
+					case .line:
+						EmptyView()
 					}
 				}
 			}

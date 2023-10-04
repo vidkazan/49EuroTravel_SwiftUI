@@ -21,7 +21,8 @@ struct LegView: View {
 				.fill(leg.fillColor)
 				.cornerRadius(8)
 				.overlay {
-					if leg.legType.description == "foot" {
+					switch leg.legType {
+					case .footStart,.footMiddle,.footEnd:
 						HStack(spacing: 1) {
 							Image(systemName: "figure.walk.circle")
 								.font(.system(size: 12))
@@ -33,12 +34,14 @@ struct LegView: View {
 									.font(.system(size: 12,weight: .semibold))
 							}
 						}
-					} else {
+					case .line:
 						if (Int(geo.size.width / 3) > leg.lineName.count) {
 							Text(leg.lineName)
 								.foregroundColor(.primary)
 								.font(.system(size: 12,weight: .semibold))
 						}
+					case .transfer:
+						EmptyView()
 					}
 				}
 				.padding(.trailing,0.5)

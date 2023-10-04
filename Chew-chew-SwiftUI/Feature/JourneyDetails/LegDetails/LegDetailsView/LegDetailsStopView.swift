@@ -35,7 +35,7 @@ struct LegStopView : View {
 	}
 	var body : some View {
 		switch stopType {
-		case .transfer:
+		case .transfer,.footMiddle:
 			HStack(alignment:  .center) {
 				VStack(alignment: .leading) {
 					Rectangle()
@@ -43,8 +43,15 @@ struct LegStopView : View {
 				}
 				.frame(width: 70)
 				VStack(alignment: .leading) {
-					HStack(spacing: 3) {
-						BadgeView(badge: .transfer(duration: legViewData.duration))
+					if case .transfer=stopType {
+						HStack(spacing: 3) {
+							BadgeView(badge: .transfer(duration: legViewData.duration))
+						}
+					}
+					if case .footMiddle=stopType {
+						HStack(spacing: 3) {
+							BadgeView(badge: .walking(duration: legViewData.duration))
+						}
 					}
 				}
 				Spacer()

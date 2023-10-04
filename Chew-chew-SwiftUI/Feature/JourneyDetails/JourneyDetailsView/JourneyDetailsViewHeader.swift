@@ -52,13 +52,12 @@ extension JourneyDetailsView {
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
 					if viewModel.state.data.transferCount > 0 {
-						HStack {
+						HStack(spacing: 2) {
 							Image(systemName: "arrow.triangle.2.circlepath")
 							Text(String(viewModel.state.data.transferCount))
 						}
 							.padding(5)
 							.font(.system(size: 12,weight: .medium))
-//							.background(.ultraThinMaterial.opacity(0.5))
 							.background(Color.chewGray10)
 							.foregroundColor(.primary.opacity(0.6))
 							.cornerRadius(8)

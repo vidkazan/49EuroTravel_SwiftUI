@@ -29,7 +29,8 @@ struct Segments : Equatable, Hashable {
 	func evaluateExpanded(time: Double) -> Double {
 		guard segments.count >= 2 else { return 0.0 }
 		
-		guard let first = segments.first, let last = segments.last else { return 0 }
+		guard let first = segments.first,
+			  let last = segments.last else { return 0 }
 		
 		if time < first.time { return 0 }
 		

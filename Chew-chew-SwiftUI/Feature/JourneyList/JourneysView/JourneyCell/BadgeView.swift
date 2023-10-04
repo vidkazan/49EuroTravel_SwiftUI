@@ -89,9 +89,9 @@ struct BadgeView : View {
 			}
 		case .transfer(duration: let duration):
 			HStack(spacing: 2) {
-				Image(systemName: "arrow.2.squarepath")
+				Image(systemName: "arrow.triangle.2.circlepath")
 					.font(.system(size: 12,weight: .semibold))
-					.foregroundColor(.secondary)
+					.foregroundColor(.primary)
 				Text("transfer")
 					.font(.system(size: 12,weight: .semibold))
 					.foregroundColor(.secondary)
