@@ -206,10 +206,10 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneyListViewModel/constructJourneys/constructJourneys+Journey/constructJourneys+Journey.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "constructJourneyViewData(journey:timeContainer:firstDelay:lastDelay:)"
-            landmarkType = "7">
+            startingLineNumber = "37"
+            endingLineNumber = "37"
+            landmarkName = "constructJourneyViewData(journey:timeContainer:firstDelay:lastDelay:depStop:arrStop:)"
+            landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -787,8 +787,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "12"
             endingLineNumber = "12"
-            landmarkName = "LegDetailsViewModel"
-            landmarkType = "3">
+            landmarkName = "state"
+            landmarkType = "24">
             <Locations>
                <Location
                   uuid = "753B3FF5-F34F-4247-A683-03479FD158D5 - 9739838750f75d95"

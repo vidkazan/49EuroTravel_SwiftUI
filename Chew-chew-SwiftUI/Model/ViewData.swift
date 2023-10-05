@@ -8,6 +8,17 @@
 import Foundation
 import SwiftUI
 
+struct JourneysViewData : Equatable {
+	let journeys : [JourneyViewData]
+	let laterRef : String?
+	let earlierRef : String?
+	init(data: JourneysContainer,depStop: StopType, arrStop : StopType) {
+		self.journeys = constructJourneysViewData(journeysData: data, depStop: depStop, arrStop: arrStop)
+		self.laterRef = data.laterRef
+		self.earlierRef = data.earlierRef
+	}
+}
+
 struct JourneyViewData : Equatable {
 	let id = UUID()
 	let origin : String

@@ -7,12 +7,9 @@
 import Foundation
 import CoreLocation
 
-
-extension JourneyViewDataConstructor {
-	func constructTransferCount(legs : [LegViewData]) -> Int {
-		return legs.filter { leg in
-			if case .line = leg.legType { return true }
-			return false
-		}.count - 1
-	}
+func constructTransferCount(legs : [LegViewData]) -> Int {
+	return legs.filter { leg in
+		if case .line = leg.legType { return true }
+		return false
+	}.count - 1
 }

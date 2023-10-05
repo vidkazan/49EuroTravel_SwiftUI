@@ -68,7 +68,6 @@ struct Segments : Equatable, Hashable {
 	}
 }
 
-extension JourneyViewDataConstructor {
 	func constructSegmentsFromStopOverData(stopovers : [StopViewData]) -> Segments {
 		var currentHeight : CGFloat = 0
 		var segs = [Segments.SegmentPoint]()
@@ -147,9 +146,7 @@ extension JourneyViewDataConstructor {
 		)
 		return res
 	}
-}
 
-extension JourneyViewDataConstructor {
 
 	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]) -> LegViewData? {
 		let container = TimeContainer(
@@ -159,10 +156,10 @@ extension JourneyViewDataConstructor {
 			actualArrival: leg.arrival
 		)
 		
-		guard let plannedDeparturePosition = JourneyViewDataConstructor.getTimeLabelPosition(firstTS: firstTS, lastTS: lastTS,currentTS: container.date.departure.planned),
-			  let actualDeparturePosition = JourneyViewDataConstructor.getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.departure.actual),
-			  let plannedArrivalPosition = JourneyViewDataConstructor.getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.planned),
-			  let actualArrivalPosition = JourneyViewDataConstructor.getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) else { return nil }
+		guard let plannedDeparturePosition = getTimeLabelPosition(firstTS: firstTS, lastTS: lastTS,currentTS: container.date.departure.planned),
+			  let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.departure.actual),
+			  let plannedArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.planned),
+			  let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) else { return nil }
 		
 		let stops = constructLineStopOverData(leg: leg, type: constructLegType(leg: leg, legs: legs))
 		let segments = constructSegmentsFromStopOverData(stopovers: stops)
@@ -193,4 +190,3 @@ extension JourneyViewDataConstructor {
 		guard let currentLeg = currentLeg, let previousLeg = previousLeg else { return false }
 		return previousLeg.legBottomPosition > currentLeg.legTopPosition
 	}
-}

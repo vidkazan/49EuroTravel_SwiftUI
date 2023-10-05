@@ -9,7 +9,6 @@ import Foundation
 import UIKit
 import SwiftUI
 
-extension JourneyViewDataConstructor {
 	func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopViewData] {
 		var name : String? {
 			switch type {
@@ -148,4 +147,3 @@ extension JourneyViewDataConstructor {
 			]
 		}
 	}
-}

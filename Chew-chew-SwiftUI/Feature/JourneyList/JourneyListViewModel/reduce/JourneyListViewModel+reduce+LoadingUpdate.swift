@@ -13,20 +13,19 @@ extension JourneyListViewModel {
 		guard case .loadingRef = state.status else { return state }
 		switch event {
 		case .onNewJourneysData(let data, let type):
-			let newData = JourneyViewDataConstructor(data: data, dep: self.depStop, arr: self.arrStop).constructJourneysViewData(journeysData: data)
 			switch type {
 			case .initial:
 				return state
 			case .earlierRef:
 				return State(
-					journeys: newData + state.journeys,
+					journeys: data.journeys + state.journeys,
 					earlierRef: data.earlierRef,
 					laterRef: data.laterRef,
 					status: .journeysLoaded
 				)
 			case .laterRef:
 				return State(
-					journeys: state.journeys + newData,
+					journeys: state.journeys + data.journeys,
 					earlierRef: data.earlierRef,
 					laterRef: data.laterRef,
 					status: .journeysLoaded

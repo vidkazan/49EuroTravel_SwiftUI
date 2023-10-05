@@ -54,7 +54,7 @@ extension JourneyListViewModel {
 	}
 	
 	enum Event {
-		case onNewJourneysData(JourneysContainer,JourneyUpdateType)
+		case onNewJourneysData(JourneysViewData,JourneyUpdateType)
 		case onFailedToLoadJourneysData(ApiServiceError)
 		case onReloadJourneys
 		case onLaterRef
