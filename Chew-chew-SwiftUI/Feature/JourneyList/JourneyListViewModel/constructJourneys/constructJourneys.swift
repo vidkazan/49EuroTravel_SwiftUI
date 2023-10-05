@@ -20,21 +20,20 @@ class JourneyViewDataConstructor {
 	}
 	
 	func constructJourneysViewData(journeysData : JourneysContainer) -> [JourneyViewData] {
-		let res = journeysData.journeys?.compactMap { (journey) -> JourneyViewData? in
-			constructJourneyViewData(
+		let res = journeysData.journeys.compactMap { (journey) -> JourneyViewData? in
+			let container = TimeContainer(
+				plannedDeparture: journey.legs.first?.plannedDeparture,
+				plannedArrival: journey.legs.last?.plannedArrival,
+				actualDeparture: journey.legs.first?.departure,
+				actualArrival: journey.legs.last?.arrival
+			)
+			return constructJourneyViewData(
 				journey: journey,
-				firstTSPlanned: DateParcer.getDateFromDateString(
-					dateString: journey.legs?.first?.plannedDeparture) ?? .now,
-				firstTSActual: DateParcer.getDateFromDateString(
-					dateString: journey.legs?.first?.departure) ?? .now,
-				lastTSPlanned: DateParcer.getDateFromDateString(
-					dateString: journey.legs?.last?.plannedArrival) ?? .now,
-				lastTSActual: DateParcer.getDateFromDateString(
-					dateString: journey.legs?.last?.arrival) ?? .now,
-				firstDelay: journey.legs?.first?.departureDelay ?? 0,
-				lastDelay: journey.legs?.last?.arrivalDelay ?? 0
+				timeContainer: container,
+				firstDelay: journey.legs.first?.departureDelay ?? 0,
+				lastDelay: journey.legs.last?.arrivalDelay ?? 0
 			)
 		}
-		return res ?? []
+		return res
 	}
 }

@@ -59,7 +59,7 @@ class SunEventGenerator {
 		
 		guard let solar = Solar(for: self.dateStart,coordinate: self.locationStart) else { return [] }
 		
-			sunEvents.append(.init(
+			sunEvents.append(SunEvent(
 				type: solar.isDaytime ? .day : .night,
 				location: self.locationStart,
 				timeStart: self.dateStart,
@@ -75,7 +75,7 @@ class SunEventGenerator {
 				guard let correctedSolar = Solar(for: date,coordinate: correctadLocation) else { return [] }
 				if let correctedSunriseStart = correctedSolar.civilSunrise, let correctedSunriseEnd = correctedSolar.sunrise {
 					if self.dateStart < correctedSunriseStart && correctedSunriseEnd < self.dateFinal {
-						sunEvents.append(.init(
+						sunEvents.append(SunEvent(
 							type: .sunrise,
 							location: self.locationStart,
 							timeStart: correctedSunriseStart,
@@ -89,7 +89,7 @@ class SunEventGenerator {
 				guard let correctedSolar = Solar(for: date,coordinate: correctadLocation) else { return [] }
 				if let correctedSunsetStart = correctedSolar.sunset, let correctedSunsetEnd = correctedSolar.civilSunset {
 					if self.dateStart < correctedSunsetStart && correctedSunsetEnd < self.dateFinal {
-						sunEvents.append(.init(
+						sunEvents.append(SunEvent(
 							type: .sunset,
 							location: self.locationStart,
 							timeStart: correctedSunsetStart,

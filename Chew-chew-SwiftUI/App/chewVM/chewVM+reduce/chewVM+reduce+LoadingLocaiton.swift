@@ -70,12 +70,12 @@ extension ChewViewModel {
 			)
 		case .didReceiveLocationData(let lat, let long):
 			return State(
-				depStop: StopType.location(.init(
+				depStop: StopType.location(Stop(
 					type: "location",
 					id: nil,
 					name: "My Location",
 					address: "My Location",
-					location: .init(
+					location: Location(
 						type: "location",
 						id: nil,
 						latitude: lat,

@@ -36,9 +36,9 @@ extension JourneyDetailsView {
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
 					HStack {
-						Text(viewModel.state.data.startActualTimeString)
+						Text(viewModel.state.data.timeContainer.stringValue.departure.actual ?? "time")
 						Text("-")
-						Text(viewModel.state.data.endActualTimeString)
+						Text(viewModel.state.data.timeContainer.stringValue.arrival.actual ?? "time")
 					}
 						.padding(5)
 						.font(.system(size: 12,weight: .medium))

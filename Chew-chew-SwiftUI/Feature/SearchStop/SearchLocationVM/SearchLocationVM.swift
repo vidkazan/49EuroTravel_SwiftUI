@@ -22,13 +22,12 @@ class SearchLocationViewModel : ObservableObject {
 	}
 	
 	init(type : LocationDirectionType) {
-		let state = State(
+		state = State(
 			stops: [],
 			previousSearchLineString: "",
 			status: .idle,
 			type: type
 		)
-		self.state = state
 		Publishers.system(
 			initial: state,
 			reduce: self.reduce,

@@ -19,7 +19,7 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
-				status: .journeys(.init(depStop: dep, arrStop: arr, timeChooserDate: state.timeChooserDate))
+				status: .journeys(JourneyListViewModel(depStop: dep, arrStop: arr, timeChooserDate: state.timeChooserDate))
 			)
 		case .onDepartureEdit:
 			self.topSearchFieldText = ""

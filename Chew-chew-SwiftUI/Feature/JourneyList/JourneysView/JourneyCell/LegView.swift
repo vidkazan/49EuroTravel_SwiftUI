@@ -18,7 +18,7 @@ struct LegView: View {
 	var body: some View {
 		GeometryReader { geo in
 			Rectangle()
-				.fill(leg.fillColor)
+				.fill(leg.isReachable ? Color.chewGrayScale10.opacity(80) : Color.chewRedScale20)
 				.cornerRadius(8)
 				.overlay {
 					switch leg.legType {

@@ -12,34 +12,31 @@ import UIKit
 extension JourneyViewDataConstructor {
 	func constructJourneyViewData(
 		journey : Journey,
-		firstTSPlanned: Date,
-		firstTSActual: Date,
-		lastTSPlanned: Date,
-		lastTSActual: Date,
+		timeContainer : TimeContainer,
 		firstDelay : Int,
 		lastDelay : Int
 	) -> JourneyViewData {
 		var isReachable = true
 		var remarks : [Remark] = []
 		var legsData : [LegViewData] = []
-		let startTS = max(firstTSActual, firstTSPlanned)
-		let endTS = max(lastTSActual,lastTSPlanned)
-		let legs = journey.legs ?? []
+		let startTS = max(timeContainer.date.departure.actual ?? .now, timeContainer.date.departure.planned ?? .now)
+		let endTS = max(timeContainer.date.arrival.planned ?? .now,timeContainer.date.arrival.actual ?? .now)
+		let legs = journey.legs
 		remarks = journey.remarks ?? []
 		
 		for (index,leg) in legs.enumerated() {
-			remarks += leg.remarks ?? .init()
+			remarks += leg.remarks ?? []
 			if leg.reachable == false {
 				isReachable = false
 			}
-			if let res = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS,id: (legsData.last?.id ?? -1)  + 2, legs: legs) {
+			if let res = self.constructLegData(leg: leg, firstTS: startTS, lastTS: endTS, legs: legs) {
 				if let last = legsData.last {
 					if currentLegIsNotReachable(currentLeg: res, previousLeg: last) {
 						legsData[legsData.count-1].delayedAndNextIsNotReachable = true
 						isReachable = false
 					}
 					if case .line = res.legType, case .line = last.legType {
-						if let transfer = self.constructTransferViewData(fromLeg: legs[index-1], toLeg: leg,id : (legsData.last?.id ?? -1) + 1) {
+						if let transfer = self.constructTransferViewData(fromLeg: legs[index-1], toLeg: leg) {
 							legsData.append(transfer)
 						}
 					}
@@ -58,32 +55,24 @@ extension JourneyViewDataConstructor {
 			),
 			dateStart: startTS,
 			dateFinal: endTS)
-		
+			
 		return JourneyViewData(
-			id : journey.id,
-			origin: journey.legs?.first?.origin?.name ?? "Origin",
-			destination: journey.legs?.last?.destination?.name ?? "Destination",
-			startPlannedTimeString: DateParcer.getTimeStringFromDate(date: firstTSPlanned) ?? "time",
-			startActualTimeString: DateParcer.getTimeStringFromDate(date: firstTSActual) ?? "time",
-			endPlannedTimeString: DateParcer.getTimeStringFromDate(date: lastTSPlanned) ?? "time",
-			endActualTimeString: DateParcer.getTimeStringFromDate(date: lastTSActual) ?? "time",
-			startDelay: firstDelay,
-			endDelay: lastDelay,
-			startDate: firstTSActual,
-			endDate: lastTSActual,
-			startDateString: DateParcer.getDateOnlyStringFromDate(date: firstTSActual),
-			endDateString: DateParcer.getDateOnlyStringFromDate(date: lastTSActual),
+			origin: journey.legs.first?.origin?.name ?? "Origin",
+			destination: journey.legs.last?.destination?.name ?? "Destination",
+			startDateString: DateParcer.getDateOnlyStringFromDate(date: timeContainer.date.departure.actual ?? .now),
+			endDateString: DateParcer.getDateOnlyStringFromDate(date: timeContainer.date.arrival.actual ?? .now),
 			durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 				minutes: DateParcer.getTwoDateIntervalInMinutes(
-					date1: firstTSActual,
-					date2: lastTSActual)
+					date1: timeContainer.date.departure.actual,
+					date2: timeContainer.date.arrival.actual)
 			) ?? "error",
 			legs: legsData,
 			transferCount: constructTransferCount(legs: legsData),
 			sunEvents: sunEventGenerator.getSunEvents(),
 			isReachable: isReachable,
 			badges: constructBadges(remarks: remarks,isReachable: isReachable),
-			refreshToken: journey.refreshToken
+			refreshToken: journey.refreshToken,
+			timeContainer: timeContainer
 		)
 	}
 	

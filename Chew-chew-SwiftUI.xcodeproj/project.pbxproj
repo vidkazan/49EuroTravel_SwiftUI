@@ -45,6 +45,7 @@
 		7D4B1B952AA8FDA20096F372 /* SearchLocationVM+state.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B1B942AA8FDA20096F372 /* SearchLocationVM+state.swift */; };
 		7D4B1B972AA8FDDB0096F372 /* SearchLocationVM+sideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B1B962AA8FDDB0096F372 /* SearchLocationVM+sideEffect.swift */; };
 		7D4B1B992AA950780096F372 /* constructJourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B1B982AA950780096F372 /* constructJourneys.swift */; };
+		7D53705C2ACED7300009BA20 /* PlannedActual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D53705B2ACED7300009BA20 /* PlannedActual.swift */; };
 		7D62AF5D2AAA7BB800D3827D /* res.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 7D62AF5C2AAA7BB800D3827D /* res.geojson */; };
 		7D6734B32A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */; };
 		7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B42A96334B00CBE9C1 /* ContentView.swift */; };
@@ -84,6 +85,7 @@
 		7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81AB252A978CDC0055AEAF /* DatePickerView.swift */; };
 		7D9E10872AA6752B00820B92 /* SearchStopsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E10862AA6752B00820B92 /* SearchStopsView.swift */; };
 		7D9E10932AA77E0B00820B92 /* SearchLocationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E10922AA77E0B00820B92 /* SearchLocationVM.swift */; };
+		7DA8852A2ACF23F400263DB6 /* PrintThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA885292ACF23F400263DB6 /* PrintThread.swift */; };
 		7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */; };
 		7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3492A9A118E005DF550 /* BadgesView.swift */; };
 		7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */; };
@@ -159,6 +161,7 @@
 		7D4B1B942AA8FDA20096F372 /* SearchLocationVM+state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+state.swift"; sourceTree = "<group>"; };
 		7D4B1B962AA8FDDB0096F372 /* SearchLocationVM+sideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+sideEffect.swift"; sourceTree = "<group>"; };
 		7D4B1B982AA950780096F372 /* constructJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constructJourneys.swift; sourceTree = "<group>"; };
+		7D53705B2ACED7300009BA20 /* PlannedActual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannedActual.swift; sourceTree = "<group>"; };
 		7D62AF5C2AAA7BB800D3827D /* res.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = res.geojson; sourceTree = "<group>"; };
 		7D63285C2AB75B0900E1EF2B /* tmp.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = tmp.geojson; sourceTree = "<group>"; };
 		7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chew-chew-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -202,6 +205,7 @@
 		7D81AB252A978CDC0055AEAF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		7D9E10862AA6752B00820B92 /* SearchStopsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStopsView.swift; sourceTree = "<group>"; };
 		7D9E10922AA77E0B00820B92 /* SearchLocationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationVM.swift; sourceTree = "<group>"; };
+		7DA885292ACF23F400263DB6 /* PrintThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintThread.swift; sourceTree = "<group>"; };
 		7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		7DA8D3492A9A118E005DF550 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
 		7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewHeader.swift; sourceTree = "<group>"; };
@@ -309,6 +313,8 @@
 				7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */,
 				7DCD200F2AC470AD00788B38 /* Colors.swift */,
 				7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */,
+				7D53705B2ACED7300009BA20 /* PlannedActual.swift */,
+				7DA885292ACF23F400263DB6 /* PrintThread.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -790,12 +796,14 @@
 				7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */,
 				7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */,
 				7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */,
+				7DA8852A2ACF23F400263DB6 /* PrintThread.swift in Sources */,
 				7DE640FB2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift in Sources */,
 				7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */,
 				7D7B3DAA2AB9D31D0070E44D /* LegDetailsVM.swift in Sources */,
 				7D462D622AACEE2500BC0D65 /* constructJourneys+Leg.swift in Sources */,
 				7D02CE132A97E4700048ADE6 /* DateParcer.swift in Sources */,
 				7DBF1E592ABC522E009B85EF /* Badges.swift in Sources */,
+				7D53705C2ACED7300009BA20 /* PlannedActual.swift in Sources */,
 				7D6C5C252AAF4B1300DEFC57 /* chewVM+reduce+Idle.swift in Sources */,
 				7D462D542AAC972200BC0D65 /* SearchStopsView+StopList.swift in Sources */,
 				7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */,

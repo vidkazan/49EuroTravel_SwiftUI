@@ -25,16 +25,4 @@ extension JourneyViewDataConstructor {
 		let res = (cTs - fTs) / (lTs - fTs)
 		return res > 0 ? ( res > 1 ? 1 : res ) : 0
 	}
-	
-	private func constructTimelineTimelabelData(firstTS: Date?,lastTS: Date?,currentTS: Date?) -> TimelineTimeLabelData? {
-		guard let firstTS = firstTS, let lastTS = lastTS, let currentTS = currentTS else { return nil }
-		let tl = TimelineTimeLabelData(
-			text: DateParcer.getTimeStringFromDate(date: currentTS) ?? "time",
-			textCenterYposition: JourneyViewDataConstructor.getTimeLabelPosition(
-				   firstTS: firstTS,
-				   lastTS: lastTS,
-				   currentTS: currentTS) ?? 0
-		)
-		return tl
-	}
 }

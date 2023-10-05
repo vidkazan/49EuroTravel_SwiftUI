@@ -25,9 +25,9 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 		self.depStop = depStop
 		self.arrStop = arrStop
 		self.timeChooserDate = timeChooserDate
-		self.state = .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys)
+		state = State(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys)
 		Publishers.system(
-			initial: .init(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys),
+			initial: state,
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
@@ -41,7 +41,7 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 		}
 	deinit {
 		   bag.removeAll()
-	   }
+	}
 	   
 	func send(event: Event) {
 		input.send(event)

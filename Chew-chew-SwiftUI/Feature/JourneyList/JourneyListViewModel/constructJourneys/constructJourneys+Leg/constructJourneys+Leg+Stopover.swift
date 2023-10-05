@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 
 extension JourneyViewDataConstructor {
-	func constructLineStopOverData(leg : Leg, type : LegType) -> [LegViewData.StopViewData] {
+	func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopViewData] {
 		var name : String? {
 			switch type {
 			case .transfer,.line,.footMiddle:
@@ -24,25 +24,25 @@ extension JourneyViewDataConstructor {
 		
 		switch type {
 		case .line:
-			guard let stops = leg.stopovers else { return [] }
-			let res = stops.map { stop -> LegViewData.StopViewData in
+			let stops = leg.stopovers
+			let res = stops.map { stop -> StopViewData in
 				let c = TimeContainer(plannedDeparture: stop.plannedDeparture, plannedArrival: stop.plannedArrival, actualDeparture: stop.departure, actualArrival: stop.arrival)
 				if stop == stops.first {
-					return LegViewData.StopViewData(
+					return StopViewData(
 						name: stop.stop?.name ?? "stop",
 						timeContainer: c,
 						stop: stop,
 						type: .origin
 					)
 				} else if stop == stops.last {
-					return LegViewData.StopViewData(
+					return StopViewData(
 						name: stop.stop?.name ?? "stop",
 						timeContainer: c,
 						stop: stop,
 						type: .destination
 					)
 				} else {
-					return LegViewData.StopViewData(
+					return StopViewData(
 						name: stop.stop?.name ?? "stop",
 						timeContainer: c,
 						stop: stop,
@@ -53,30 +53,30 @@ extension JourneyViewDataConstructor {
 			return res
 		case .footStart:
 			let first = TimeContainer(
-				plannedDeparture: leg.plannedDeparture,
-				plannedArrival: leg.plannedArrival,
-				actualDeparture: leg.plannedDeparture,
-				actualArrival: leg.plannedArrival
+				plannedDeparture: leg.departure,
+				plannedArrival: leg.departure,
+				actualDeparture: leg.departure,
+				actualArrival: leg.departure
 			)
 			let last = TimeContainer(
-				plannedDeparture: leg.plannedDeparture,
-				plannedArrival: leg.plannedArrival,
-				actualDeparture: leg.departure,
+				plannedDeparture: leg.arrival,
+				plannedArrival: leg.arrival,
+				actualDeparture: leg.arrival,
 				actualArrival: leg.arrival
 			)
 			return [
-				LegViewData.StopViewData(
+				StopViewData(
 					name: name ?? leg.origin?.name ?? "origin name",
 					timeContainer: first,
 					leg: leg,
 					type: .footTop
+				),
+				StopViewData(
+					name: name ?? leg.destination?.name ?? "dest name",
+					timeContainer: last,
+					leg: leg,
+					type: .footTop
 				)
-//				LegViewData.StopViewData(
-//					name: name ?? leg.destination?.name ?? "dest name",
-//					timeContainer: last,
-//					leg: leg,
-//					type: .footBottom
-//				)
 			]
 		case .footMiddle:
 			let c = TimeContainer(
@@ -86,13 +86,13 @@ extension JourneyViewDataConstructor {
 				actualArrival: leg.arrival
 			)
 			return [
-				LegViewData.StopViewData(
+				StopViewData(
 					name: name ?? leg.origin?.name ?? "origin name",
 					timeContainer: c,
 					leg: leg,
 					type: .footMiddle
 				)
-//				LegViewData.StopViewData(
+//				StopViewData(
 //					name: name ?? leg.destination?.name ?? "dest name",
 //					timeContainer: c,
 //					leg: leg,
@@ -100,25 +100,31 @@ extension JourneyViewDataConstructor {
 //				)
 			]
 		case .footEnd:
-			let c = TimeContainer(
-				plannedDeparture: leg.plannedDeparture,
-				plannedArrival: leg.plannedArrival,
+			let first = TimeContainer(
+				plannedDeparture: leg.departure,
+				plannedArrival: leg.departure,
 				actualDeparture: leg.departure,
+				actualArrival: leg.departure
+			)
+			let last = TimeContainer(
+				plannedDeparture: leg.arrival,
+				plannedArrival: leg.arrival,
+				actualDeparture: leg.arrival,
 				actualArrival: leg.arrival
 			)
 			return [
-				LegViewData.StopViewData(
+				StopViewData(
 					name: name ?? leg.origin?.name ?? "origin name",
-					timeContainer: c,
+					timeContainer: first,
+					leg: leg,
+					type: .footBottom
+				),
+				StopViewData(
+					name: name ?? leg.destination?.name ?? "dest name",
+					timeContainer: last,
 					leg: leg,
 					type: .footBottom
 				)
-//				LegViewData.StopViewData(
-//					name: name ?? leg.destination?.name ?? "dest name",
-//					timeContainer: c,
-//					leg: leg,
-//
-//				)
 			]
 		case .transfer:
 			let c = TimeContainer(
@@ -128,13 +134,13 @@ extension JourneyViewDataConstructor {
 				actualArrival: leg.arrival
 			)
 			return [
-				LegViewData.StopViewData(
+				StopViewData(
 					name: name ?? leg.origin?.name ?? "origin name",
 					timeContainer: c,
 					leg: leg,
 					type: .transfer
 				)
-//				LegViewData.StopViewData(
+//				StopViewData(
 //					name: name ?? leg.destination?.name ?? "dest name",
 //					timeContainer: c,
 //					leg: leg

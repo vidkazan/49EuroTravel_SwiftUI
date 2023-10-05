@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension JourneyViewDataConstructor {
-	func constructLegType(leg : Leg, legs: [Leg]) -> LegType {
+	func constructLegType(leg : Leg, legs: [Leg]) -> LegViewData.LegType {
 		if let dist = leg.distance {
 			switch legs.firstIndex(of: leg) {
 			case 0:

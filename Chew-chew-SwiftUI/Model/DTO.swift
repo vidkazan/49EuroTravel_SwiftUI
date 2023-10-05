@@ -67,7 +67,7 @@ struct Leg : Codable,Equatable,Identifiable{
 		departurePrognosisType: String?
 	let walking : Bool?
 	let distance : Int?
-	let stopovers : [StopOver]?
+	let stopovers : [StopOver]
 	
 	private enum CodingKeys : String, CodingKey {
 		case origin
@@ -104,7 +104,7 @@ struct Price : Codable,Equatable {
 struct Journey : Codable,Identifiable,Equatable {
 	let id = UUID()
 	let type : String?
-	let legs : [Leg]?
+	let legs : [Leg]
 	let refreshToken : String?
 	let remarks : [Remark]?
 	let price : Price?
@@ -120,7 +120,7 @@ struct Journey : Codable,Identifiable,Equatable {
 struct JourneysContainer : Codable,Equatable {
 	let earlierRef: String?
 	let laterRef: String?
-	let journeys : [Journey]?
+	let journeys : [Journey]
 	let realtimeDataUpdatedAt: Int64?
 }
 

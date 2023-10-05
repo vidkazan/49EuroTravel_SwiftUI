@@ -21,39 +21,43 @@ struct LegsView: View {
 		self.gradientStops = {
 			var stops : [Gradient.Stop] = []
 			for event in journey.sunEvents {
-				switch event.type {
-				case .sunrise:
-					stops.append(.init(
-						color: nightColor,
-						location: (event.timeStart.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970) / (journey.endDate.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970)
-					))
-					if let final = event.timeFinal {
-						stops.append(.init(
-							color: dayColor,
-							location: (final.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970) / (journey.endDate.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970)
-						))
-					}
-					case .day:
-					stops.append(.init(
-						color: dayColor,
-						location: 0
-					))
-				case .sunset:
-					stops.append(.init(
-						color: dayColor,
-						location: (event.timeStart.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970) / (journey.endDate.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970)
-					))
-					if let final = event.timeFinal {
-						stops.append(.init(
+				if
+					let startDateTS = journey.timeContainer.timestamp.departure.actual,
+					let endDateTS = journey.timeContainer.timestamp.arrival.actual {
+					switch event.type {
+					case .sunrise:
+						stops.append(Gradient.Stop(
 							color: nightColor,
-							location:  (final.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970) / (journey.endDate.timeIntervalSince1970 - journey.startDate.timeIntervalSince1970)
+							location: (event.timeStart.timeIntervalSince1970 - startDateTS) / (endDateTS - startDateTS)
+						))
+						if let final = event.timeFinal {
+							stops.append(Gradient.Stop(
+								color: dayColor,
+								location: (final.timeIntervalSince1970 - startDateTS) / (endDateTS - startDateTS)
+							))
+						}
+					case .day:
+						stops.append(Gradient.Stop(
+							color: dayColor,
+							location: 0
+						))
+					case .sunset:
+						stops.append(Gradient.Stop(
+							color: dayColor,
+							location: (event.timeStart.timeIntervalSince1970 - startDateTS) / (endDateTS - startDateTS)
+						))
+						if let final = event.timeFinal {
+							stops.append(Gradient.Stop(
+								color: nightColor,
+								location:  (final.timeIntervalSince1970 - startDateTS) / (endDateTS - startDateTS)
+							))
+						}
+					case .night:
+						stops.append(Gradient.Stop(
+							color: nightColor,
+							location: 0
 						))
 					}
-				case .night:
-					stops.append(.init(
-						color: nightColor,
-						location: 0
-					))
 				}
 			}
 			return stops

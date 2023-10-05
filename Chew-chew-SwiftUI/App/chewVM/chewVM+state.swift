@@ -34,7 +34,7 @@ extension ChewViewModel {
 			arrStop: StopType?,
 			timeChooserDate: DateType,
 			status: Status,
-			searchStopViewModel: SearchLocationViewModel = .init(type: .departure)
+			searchStopViewModel: SearchLocationViewModel = SearchLocationViewModel(type: .departure)
 		) {
 			self.depStop = depStop
 			self.arrStop = arrStop

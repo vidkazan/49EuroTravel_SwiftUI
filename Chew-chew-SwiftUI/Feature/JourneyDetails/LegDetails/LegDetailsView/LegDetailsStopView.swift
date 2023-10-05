@@ -11,26 +11,26 @@ import SwiftUI
 struct LegStopView : View {
 	@ObservedObject var vm : LegDetailsViewModel
 	let legViewData : LegViewData
-	let stopOver : LegViewData.StopViewData
+	let stopOver : StopViewData
 	let stopType : StopOverType
 	var plannedTS : String
 	var actualTS : String
 	var delay : Int
 	let now = Date.now.timeIntervalSince1970
-	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : LegViewData.StopViewData,leg : LegViewData) {
+	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : StopViewData,leg : LegViewData) {
 		self.vm = vm
 		self.stopOver = stopOver
 		self.stopType = type
 		self.legViewData = leg
 		switch type {
 		case .origin,.stopover,.transfer, .footTop,.footMiddle:
-			self.actualTS = stopOver.departureActualTimeString
-			self.plannedTS = stopOver.departurePlannedTimeString
-			self.delay = stopOver.departureDelay
+			self.actualTS = stopOver.timeContainer.stringValue.departure.actual ?? ""
+			self.plannedTS = stopOver.timeContainer.stringValue.departure.planned ?? ""
+			self.delay = stopOver.timeContainer.departureDelay
 		case .destination, .footBottom:
-			self.actualTS = stopOver.arrivalActualTimeString
-			self.plannedTS = stopOver.arrivalPlannedTimeString
-			self.delay = stopOver.arrivalDelay
+			self.actualTS = stopOver.timeContainer.stringValue.arrival.actual ?? ""
+			self.plannedTS = stopOver.timeContainer.stringValue.arrival.planned ?? ""
+			self.delay = stopOver.timeContainer.arrivalDelay
 		}
 	}
 	var body : some View {
@@ -68,9 +68,9 @@ struct LegStopView : View {
 						.frame(height: stopType.timeLabelHeight)
 						.background {
 							LinearGradient(stops: [
-								.init(color: .chewGrayScale10, location: 0),
-								.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-								.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+								Gradient.Stop(color: .chewGrayScale10, location: 0),
+								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
 						.cornerRadius(7)
@@ -78,9 +78,9 @@ struct LegStopView : View {
 						TimeLabelView(isSmall: false,arragement: .bottom,planned: plannedTS,actual: actualTS,delay: delay)
 						.background {
 							LinearGradient(stops: [
-								.init(color: .chewGrayScale10, location: 0),
-								.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-								.init(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+								Gradient.Stop(color: .chewGrayScale10, location: 0),
+								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
 						.cornerRadius(10)
@@ -173,7 +173,7 @@ enum StopOverType : Equatable {
 	case footBottom
 	case transfer
 	
-	var timeLabelHeight : CGFloat {
+	var timeLabelHeight : Double {
 		switch self {
 		case .destination,.origin:
 			return 30
@@ -182,7 +182,7 @@ enum StopOverType : Equatable {
 		}
 	}
 	
-	var viewHeight : CGFloat {
+	var viewHeight : Double {
 		switch self {
 		case .destination:
 			return 50
@@ -190,27 +190,29 @@ enum StopOverType : Equatable {
 			return 90
 		case .stopover:
 			return 35
-		case .transfer,.footMiddle,.footBottom,.footTop:
+		case .transfer,.footMiddle:
 			return 70
+		case .footBottom,.footTop:
+			return 90
 		}
 	}
 	
-	var description : String {
-		switch self {
-		case .destination:
-			return "destination"
-		case .origin:
-			return "origin"
-		case .stopover:
-			return "stopover"
-		case .transfer:
-			return "transfer"
-		case .footMiddle:
-			return "footMiddle"
-		case .footBottom:
-			return "footBottom"
-		case .footTop:
-			return "footTop"
-		}
-	}
+//	var description : String {
+//		switch self {
+//		case .destination:
+//			return "destination"
+//		case .origin:
+//			return "origin"
+//		case .stopover:
+//			return "stopover"
+//		case .transfer:
+//			return "transfer"
+//		case .footMiddle:
+//			return "footMiddle"
+//		case .footBottom:
+//			return "footBottom"
+//		case .footTop:
+//			return "footTop"
+//		}
+//	}
 }

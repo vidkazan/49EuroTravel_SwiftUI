@@ -11,6 +11,11 @@ import SwiftUI
 struct LegDetailsView: View {
 	@ObservedObject var viewModel : LegDetailsViewModel
 	let journeyDetailsViewModel : JourneyDetailsViewModel
+	init(leg : LegViewData, journeyDetailsViewModel: JourneyDetailsViewModel) {
+		self.viewModel = LegDetailsViewModel(leg: leg)
+		self.journeyDetailsViewModel = journeyDetailsViewModel
+	}
+	
 	var body : some View {
 		VStack {
 			VStack(spacing: 0) {
@@ -89,6 +94,9 @@ struct LegDetailsView: View {
 					}
 				}
 			}
+		}
+		.onDisappear {
+			viewModel.send(event: .didDisappear)
 		}
 		.onTapGesture {
 			if case .line=viewModel.state.leg.legType {

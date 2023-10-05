@@ -9,7 +9,14 @@ import SwiftUI
 
 struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	let viewModel : JourneyDetailsViewModel
+	var viewModel : JourneyDetailsViewModel
+	var ids = Set<UUID?>()
+	
+	init(token : String?,data : JourneyViewData) {
+		viewModel = JourneyDetailsViewModel(refreshToken: token, data: data)
+		
+	}
+	
 	var body: some View {
 		VStack {
 			header()
@@ -17,11 +24,14 @@ struct JourneyDetailsView: View {
 			ScrollView() {
 				LazyVStack(spacing: 0){
 					ForEach(viewModel.state.data.legs) { leg in
-						LegDetailsView(viewModel: .init(leg: leg), journeyDetailsViewModel: viewModel)
+						LegDetailsView(leg : leg, journeyDetailsViewModel: viewModel)
 					}
 				}
 				.padding(10)
 			}
+		}
+		.onDisappear{
+			viewModel.cleanup()
 		}
 		Spacer()
 	}

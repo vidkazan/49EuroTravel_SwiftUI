@@ -21,24 +21,27 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	
 	init(refreshToken : String?,data: JourneyViewData) {
 		self.refreshToken = refreshToken
-		self.state = .init(data: data, status: .loading(refreshToken: refreshToken))
+		state = State(data: data, status: .loading(refreshToken: refreshToken))
 		Publishers.system(
-			initial: .init(data: data, status: .loading(refreshToken: refreshToken)),
+			initial: state,
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-//				self.whenLoadingJourneyByRefreshToken(),
-//				self.whenLoadingData()
 			]
 		)
 			.assign(to: \.state, on: self)
 			.store(in: &bag)
 		}
 	deinit {
+		print("deinit journey details")
 		   bag.removeAll()
 	   }
 	   
+	func cleanup(){
+		print("cleanup journey details")
+		bag.removeAll()
+	}
 	func send(event: Event) {
 		input.send(event)
 	}
