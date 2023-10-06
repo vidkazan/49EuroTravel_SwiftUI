@@ -41,15 +41,19 @@ struct LegViewData : Equatable,Identifiable{
 	let id = UUID()
 	let isReachable : Bool
 	let legType : LegType
+	
 	let direction : String
 	let duration : String
+	
 	let legTopPosition : Double
 	let legBottomPosition : Double
+	
 	var delayedAndNextIsNotReachable : Bool?
+	
 	let remarks : [Remark]?
 	let legStopsViewData : [StopViewData]
 	let footDistance : Int
-	let lineName : String
+	let lineViewData : LineViewData
 	let progressSegments : Segments
 	let timeContainer : TimeContainer
 }
@@ -57,10 +61,8 @@ struct LegViewData : Equatable,Identifiable{
 struct StopViewData : Equatable,Identifiable {
 	let id = UUID()
 	let name : String
-	let departurePlatform,
-		plannedDeparturePlatform	: String?
-	let arrivalPlatform,
-		plannedArrivalPlatform	: String?
+	let departurePlatform : PrognoseType<String?>
+	let arrivalPlatform : PrognoseType<String?>
 	let timeContainer : TimeContainer
 	let type : StopOverType
 }
@@ -79,33 +81,32 @@ enum LocationDirectionType :Int, Hashable {
 	}
 }
 
+struct LineViewData : Equatable {
+	let type : LineType
+	let name : String
+	let shortName : String
+}
 
 extension StopViewData {
 	init(name : String,timeContainer : TimeContainer,type: StopOverType) {
 		self.timeContainer = timeContainer
 		self.name = name
-		self.departurePlatform = ""
-		self.plannedDeparturePlatform = ""
-		self.arrivalPlatform = ""
-		self.plannedArrivalPlatform = ""
+		self.departurePlatform  = PrognoseType(actual: "", planned: "")
+		self.arrivalPlatform  = PrognoseType(actual: "", planned: "")
 		self.type = type
 	}
 	init(name : String,timeContainer : TimeContainer, stop : StopOver,type: StopOverType) {
 		self.timeContainer = timeContainer
 		self.name = name
-		self.departurePlatform = stop.departurePlatform
-		self.plannedDeparturePlatform = stop.plannedDeparturePlatform
-		self.arrivalPlatform = stop.arrivalPlatform
-		self.plannedArrivalPlatform = stop.plannedArrivalPlatform
+		self.departurePlatform  = PrognoseType(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
+		self.arrivalPlatform  = PrognoseType(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
 		self.type = type
 	}
 	init(name : String,timeContainer : TimeContainer, leg : Leg,type: StopOverType) {
 		self.timeContainer = timeContainer
 		self.name = name
-		self.departurePlatform = leg.departurePlatform
-		self.plannedDeparturePlatform = leg.plannedDeparturePlatform
-		self.arrivalPlatform = leg.arrivalPlatform
-		self.plannedArrivalPlatform = leg.plannedArrivalPlatform
+		self.departurePlatform  = PrognoseType(actual: leg.departurePlatform, planned: leg.plannedDeparturePlatform)
+		self.arrivalPlatform  = PrognoseType(actual: leg.arrivalPlatform, planned: leg.plannedArrivalPlatform)
 		self.type = type
 		
 	}

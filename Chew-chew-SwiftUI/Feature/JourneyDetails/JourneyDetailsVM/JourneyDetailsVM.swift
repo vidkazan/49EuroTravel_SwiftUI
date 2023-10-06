@@ -27,19 +27,13 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
-				Self.userInput(input: input.eraseToAnyPublisher()),
+				Self.userInput(input: input.eraseToAnyPublisher())
 			]
 		)
 			.assign(to: \.state, on: self)
 			.store(in: &bag)
 		}
 	deinit {
-		print("deinit journey details")
-		   bag.removeAll()
-	   }
-	   
-	func cleanup(){
-		print("cleanup journey details")
 		bag.removeAll()
 	}
 	func send(event: Event) {

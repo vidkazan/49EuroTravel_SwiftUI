@@ -18,7 +18,7 @@ struct LegView: View {
 	var body: some View {
 		GeometryReader { geo in
 			Rectangle()
-				.fill(leg.isReachable ? Color.chewGrayScale10.opacity(80) : Color.chewRedScale20)
+				.fill(leg.isReachable ? Color.chewGrayScale15.opacity(80) : Color.chewRedScale20)
 				.cornerRadius(8)
 				.overlay {
 					switch leg.legType {
@@ -35,8 +35,12 @@ struct LegView: View {
 							}
 						}
 					case .line:
-						if (Int(geo.size.width / 3) > leg.lineName.count) {
-							Text(leg.lineName)
+						if (Int(geo.size.width / 7) > leg.lineViewData.name.count) {
+							Text(leg.lineViewData.name)
+								.foregroundColor(.primary)
+								.font(.system(size: 12,weight: .semibold))
+						} else if (Int(geo.size.width / 7) > leg.lineViewData.shortName.count) {
+							Text(leg.lineViewData.shortName)
 								.foregroundColor(.primary)
 								.font(.system(size: 12,weight: .semibold))
 						}

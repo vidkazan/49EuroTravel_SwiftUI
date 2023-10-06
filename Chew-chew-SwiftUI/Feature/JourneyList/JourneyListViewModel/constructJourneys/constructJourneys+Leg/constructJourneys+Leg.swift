@@ -127,7 +127,7 @@ struct Segments : Equatable, Hashable {
 				type: .transfer
 			)],
 			footDistance: 0,
-			lineName: "transfer line name",
+			lineViewData: LineViewData(type: .transfer, name: "transfer", shortName: "transfer"),
 			progressSegments: Segments(
 				segments: [
 					Segments.SegmentPoint(
@@ -147,6 +147,39 @@ struct Segments : Equatable, Hashable {
 		return res
 	}
 
+func constructLineViewData(mode : String,product : String, name : String, productName : String) -> LineViewData{
+		var mode : LineType = {
+			switch product {
+			case "nationalExpress":
+				return .nationalExpress
+			case "national":
+				return .national
+			case "regionalExpress":
+				return .regionalExpress
+			case "regional":
+				return .regional
+			case "suburban":
+				return .suburban
+			case "bus":
+				return .bus
+			case "ferry":
+				return .ferry
+			case "subway":
+				return .subway
+			case "tram":
+				return .tram
+			case "taxi":
+				return .taxi
+			default:
+				return .other(type: mode)
+			}
+		}()
+		return LineViewData(
+			type: mode,
+			name: name,
+			shortName: productName
+		)
+	}
 
 	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]) -> LegViewData? {
 		let container = TimeContainer(
@@ -179,7 +212,12 @@ struct Segments : Equatable, Hashable {
 			remarks: leg.remarks,
 			legStopsViewData: stops,
 			footDistance: leg.distance ?? 0,
-			lineName: leg.line?.name ?? leg.line?.mode ?? "line",
+			lineViewData: constructLineViewData(
+				mode: leg.line?.mode ?? "",
+				product: leg.line?.product ?? "",
+				name: leg.line?.name ?? "",
+				productName: leg.line?.productName ?? ""
+			),
 			progressSegments: segments,
 			timeContainer: container
 		)

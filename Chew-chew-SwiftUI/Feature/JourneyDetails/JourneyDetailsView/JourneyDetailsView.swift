@@ -14,7 +14,6 @@ struct JourneyDetailsView: View {
 	
 	init(token : String?,data : JourneyViewData) {
 		viewModel = JourneyDetailsViewModel(refreshToken: token, data: data)
-		
 	}
 	
 	var body: some View {
@@ -29,9 +28,6 @@ struct JourneyDetailsView: View {
 				}
 				.padding(10)
 			}
-		}
-		.onDisappear{
-			viewModel.cleanup()
 		}
 		Spacer()
 	}

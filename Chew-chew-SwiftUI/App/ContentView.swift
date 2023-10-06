@@ -42,6 +42,7 @@ struct ContentView: View {
 			.navigationBarHidden(true)
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: chewViewModel.state.status)
+			.navigationViewStyle(.stack)
 		}
 	}
 }

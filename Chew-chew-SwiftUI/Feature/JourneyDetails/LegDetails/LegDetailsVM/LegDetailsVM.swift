@@ -9,11 +9,7 @@ import Foundation
 import Combine
 
 final class LegDetailsViewModel : ObservableObject, Identifiable {
-	@Published private(set) var state : State {
-		didSet {
-			print("new state: ",state.status,state.leg.lineName)
-		}
-	}
+	@Published private(set) var state : State
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	

@@ -67,7 +67,7 @@ struct Leg : Codable,Equatable,Identifiable{
 		departurePrognosisType: String?
 	let walking : Bool?
 	let distance : Int?
-	let stopovers : [StopOver]
+	let stopovers : [StopOver]?
 	
 	private enum CodingKeys : String, CodingKey {
 		case origin

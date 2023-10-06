@@ -21,7 +21,6 @@ struct BadgeView : View {
 				.foregroundColor(.primary)
 				.padding(4)
 				.background(badge.badgeData.style)
-				.background(Color.chewGray10)
 				.cornerRadius(8)
 				.lineLimit(1)
 		case .dticket:
@@ -29,15 +28,20 @@ struct BadgeView : View {
 				.font(.system(size: 12))
 				.padding(4)
 				.background(badge.badgeData.style)
-				.background(Color.chewGray10)
 				.cornerRadius(8)
 		case .lineNumber(lineType: let type, num: let num):
 			Text(badge.badgeData.name)
 				.font(.system(size: 12,weight: .semibold))
 				.foregroundColor(.primary)
 				.padding(4)
-				.background(badge.badgeData.style)
-				.background(Color.chewGray10)
+				.background( .linearGradient(
+					colors: [
+						badge.badgeData.style,
+						type.color
+					],
+					startPoint: UnitPoint(x: 0, y: 0),
+					endPoint: UnitPoint(x: 1, y: 0))
+				)
 				.cornerRadius(8)
 				.lineLimit(1)
 		case .legDuration(dur: let dur):
@@ -115,7 +119,6 @@ struct BadgeView : View {
 					.lineLimit(1)
 			}
 			.padding(4)
-//			.cornerRadius(8)
 		}
 	}
 }

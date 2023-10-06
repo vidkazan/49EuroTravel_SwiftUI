@@ -23,7 +23,7 @@ import SwiftUI
 		
 		switch type {
 		case .line:
-			let stops = leg.stopovers
+			let stops = leg.stopovers ?? []
 			let res = stops.map { stop -> StopViewData in
 				let c = TimeContainer(plannedDeparture: stop.plannedDeparture, plannedArrival: stop.plannedArrival, actualDeparture: stop.departure, actualArrival: stop.arrival)
 				if stop == stops.first {

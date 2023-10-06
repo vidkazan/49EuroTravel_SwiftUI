@@ -23,8 +23,8 @@ struct JourneyCell: View {
 			HStack(alignment: .center) {
 				PlatformView(
 					isShowingPlatormWord: false,
-					platform: journey.legs.first?.legStopsViewData.first?.departurePlatform,
-					plannedPlatform: journey.legs.first?.legStopsViewData.first?.plannedDeparturePlatform)
+					platform: journey.legs.first?.legStopsViewData.first?.departurePlatform.actual,
+					plannedPlatform: journey.legs.first?.legStopsViewData.first?.departurePlatform.planned)
 				Text(journey.legs.first?.legStopsViewData.first?.name != chewVM.topSearchFieldText ? journey.legs.first?.legStopsViewData.first?.name ?? "" : "")
 					.font(.system(size: 12,weight: .semibold))
 					.foregroundColor(.secondary)

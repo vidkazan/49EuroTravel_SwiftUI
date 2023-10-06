@@ -56,7 +56,7 @@ struct LegStopView : View {
 				}
 				Spacer()
 			}
-			.frame(height: stopType.viewHeight)
+			.frame(height: stopType.viewHeight + 20)
 		default:
 			HStack(alignment:  .top) {
 				// MARK: Time Label
@@ -118,11 +118,11 @@ struct LegStopView : View {
 					case .origin:
 						PlatformView(
 							isShowingPlatormWord: true,
-							platform: stopOver.departurePlatform,
-							plannedPlatform: stopOver.plannedDeparturePlatform
+							platform: stopOver.departurePlatform.actual,
+							plannedPlatform: stopOver.departurePlatform.planned
 						)
 						HStack(spacing: 3) {
-							BadgeView(badge: .lineNumber(lineType:.other(type: "mode") ,num: legViewData.lineName))
+							BadgeView(badge: .lineNumber(lineType:legViewData.lineViewData.type ,num: legViewData.lineViewData.name))
 							BadgeView(badge: .legDirection(dir: legViewData.direction))
 							BadgeView(badge: .legDuration(dur: legViewData.duration))
 							HStack(spacing: 0) {
@@ -140,8 +140,8 @@ struct LegStopView : View {
 					case  .destination:
 						PlatformView(
 							isShowingPlatormWord: true,
-							platform: stopOver.arrivalPlatform,
-							plannedPlatform: stopOver.plannedArrivalPlatform
+							platform: stopOver.arrivalPlatform.actual,
+							plannedPlatform: stopOver.arrivalPlatform.planned
 						)
 					case .stopover:
 						EmptyView()

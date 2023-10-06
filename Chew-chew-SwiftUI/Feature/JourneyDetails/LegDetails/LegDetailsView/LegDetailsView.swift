@@ -95,9 +95,6 @@ struct LegDetailsView: View {
 				}
 			}
 		}
-		.onDisappear {
-			viewModel.send(event: .didDisappear)
-		}
 		.onTapGesture {
 			if case .line=viewModel.state.leg.legType {
 				viewModel.send(event: .didtapExpandButton)
