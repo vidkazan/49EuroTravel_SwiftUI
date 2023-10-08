@@ -37,6 +37,7 @@ struct LegDetailsView: View {
 							stopOver: stop,
 							leg: viewModel.state.leg
 						)
+						.padding(.top,10)
 					}
 					if case .stopovers = viewModel.state.status {
 						ForEach(viewModel.state.leg.legStopsViewData) { stop in
@@ -61,19 +62,15 @@ struct LegDetailsView: View {
 				}
 			}
 			.background {
-				ZStack {
-					VStack{
-						HStack(alignment: .top){
+				ZStack(alignment: .top) {
+						HStack {
 							Rectangle()
 								.fill(Color.chewGrayScale10)
 								.frame(width: 18,height:  viewModel.state.totalProgressHeight)
 								.padding(.leading,26)
 							Spacer()
 						}
-						Spacer()
-					}
-					VStack{
-						HStack(alignment: .top){
+						HStack {
 							Rectangle()
 								.fill(Color.chewGreenScale20)
 								.cornerRadius(viewModel.state.totalProgressHeight == viewModel.state.currentProgressHeight ? 0 : 6)
@@ -81,18 +78,21 @@ struct LegDetailsView: View {
 								.padding(.leading,25)
 							Spacer()
 						}
-						Spacer()
-					}
 					switch viewModel.state.leg.legType {
-					case .transfer,.footEnd,.footMiddle,.footStart:
+					case .transfer,.footMiddle:
+						VStack{
+							Spacer()
 							Rectangle()
 								.fill(Color.chewGrayScale07.opacity(0.6))
-								.frame(height: StopOverType.transfer.viewHeight - 20)
+								.frame(height: viewModel.state.totalProgressHeight - 20)
 								.cornerRadius(10)
-					case .line:
+							Spacer()
+						}
+					case .line,.footStart,.footEnd:
 						EmptyView()
 					}
 				}
+				.frame(height: viewModel.state.totalProgressHeight)
 			}
 		}
 		.onTapGesture {
@@ -100,12 +100,11 @@ struct LegDetailsView: View {
 				viewModel.send(event: .didtapExpandButton)
 			}
 		}
-		.padding(.vertical,5)
 		.background{
 			switch viewModel.state.leg.legType {
-			case .line:
+			case .line,.footStart,.footEnd:
 				Color.chewGray10
-			case .footStart,.footMiddle, .footEnd,.transfer:
+			case .footMiddle,.transfer:
 				Color.clear
 			}
 		}

@@ -16,26 +16,30 @@ struct DatePickerView: View {
 		startDate = startDat
 	}
     var body: some View {
-		VStack {
+		VStack(alignment: .center) {
 			HStack {
 				DatePickerTimePresetButtons()
-				Divider()
-					.frame(height: 30)
+			}
+				.frame(maxWidth: .infinity,maxHeight: 50)
+				.background(.ultraThinMaterial)
+				.cornerRadius(10)
+			HStack {
 				DatePicker(
 					"",
 					selection: $time,
 					displayedComponents: [.hourAndMinute]
 				)
 					.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
-					.datePickerStyle(.compact)
+					.datePickerStyle(.wheel)
 					.cornerRadius(10)
-					.padding(EdgeInsets(top: 7, leading: 0, bottom: 7, trailing: 7))
+					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 15))
 					.onAppear {
+						UIDatePicker.appearance().minuteInterval = 5
 						time = startDate
 					}
 				Spacer()
 			}
-				.frame(maxWidth: .infinity,maxHeight: 50)
+				.frame(maxWidth: .infinity,maxHeight: 150)
 				.background(.ultraThinMaterial)
 				.cornerRadius(10)
 			DatePicker(

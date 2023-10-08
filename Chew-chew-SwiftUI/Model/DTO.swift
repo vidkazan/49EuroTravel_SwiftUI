@@ -24,22 +24,24 @@ struct StopOver : Codable,Equatable,Identifiable {
 	let departurePlatform,
 		plannedDeparturePlatform	: String?
 	let remarks						: [Remark]?
+	let cancelled : 			Bool?
 	
 	
 	private enum CodingKeys : String, CodingKey {
-		case  stop
-		case  departure
+		case cancelled
+		case stop
+		case departure
 		case plannedDeparture
-		case  arrival
+		case arrival
 		case plannedArrival
-		case  departureDelay
+		case departureDelay
 		case arrivalDelay
-		case  reachable
-		case  arrivalPlatform
+		case reachable
+		case arrivalPlatform
 		case plannedArrivalPlatform
-		case  departurePlatform
+		case departurePlatform
 		case plannedDeparturePlatform
-		case  remarks
+		case remarks
 	}
 }
 
@@ -58,7 +60,7 @@ struct Leg : Codable,Equatable,Identifiable{
 	let reachable: Bool?
 	let tripId : String?
 	let direction: String?
-	////	let currentLocation: CurrentLocation
+	////	let currentLocation: CurrentLocation	
 	let arrivalPlatform,
 		plannedArrivalPlatform: String?
 	//	let arrivalPrognosisType: String?

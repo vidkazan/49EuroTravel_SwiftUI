@@ -29,7 +29,7 @@ extension LegDetailsViewModel {
 			  let delayFirst : Double = first - now
 			  return Just(Event.didUpdateTime)
 				  .delay(
-					for: delayFirst > 0 ? .seconds(delayFirst) :  .seconds(5),
+					for: delayFirst > 0 ? .seconds(delayFirst) :  .seconds(10),
 					scheduler: DispatchQueue.main
 				  )
 				  .eraseToAnyPublisher()

@@ -37,7 +37,7 @@ struct Segments : Equatable, Hashable {
 			  time >= first.time else { return 0 }
 		
 		if case .collapsed = type {
-			last = SegmentPoint(time: last.time, height: StopOverType.origin.viewHeight)
+			last = SegmentPoint(time: last.time, height: self.heightTotalCollapsed)
 		}
 		if time > last.time { return last.height }
 		
@@ -148,7 +148,7 @@ struct Segments : Equatable, Hashable {
 	}
 
 func constructLineViewData(mode : String,product : String, name : String, productName : String) -> LineViewData{
-		var mode : LineType = {
+		let mode : LineType = {
 			switch product {
 			case "nationalExpress":
 				return .nationalExpress

@@ -56,7 +56,7 @@ struct LegStopView : View {
 				}
 				Spacer()
 			}
-			.frame(height: stopType.viewHeight + 20)
+			.frame(height: stopType.viewHeight)
 		default:
 			HStack(alignment:  .top) {
 				// MARK: Time Label
