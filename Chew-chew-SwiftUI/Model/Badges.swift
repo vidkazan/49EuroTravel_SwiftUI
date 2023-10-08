@@ -144,7 +144,6 @@ enum Badges : Identifiable,Hashable {
 		case .transfer(duration: let dur):
 			return BadgeData(
 				name: String(dur))
-			
 		case .stopsCount(let num):
 			return BadgeData(
 				name: String(num) + " stops")
