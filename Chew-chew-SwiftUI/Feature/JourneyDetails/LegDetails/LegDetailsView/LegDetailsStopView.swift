@@ -13,8 +13,7 @@ struct LegStopView : View {
 	let legViewData : LegViewData
 	let stopOver : StopViewData
 	let stopType : StopOverType
-	var plannedTS : String
-	var actualTS : String
+	var time : PrognoseType<String>
 	var delay : TimeContainer.Status
 	let now = Date.now.timeIntervalSince1970
 	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : StopViewData,leg : LegViewData) {
@@ -24,12 +23,10 @@ struct LegStopView : View {
 		self.legViewData = leg
 		switch type {
 		case .origin,.stopover,.transfer, .footTop,.footMiddle:
-			self.actualTS = stopOver.timeContainer.stringValue.departure.actual ?? ""
-			self.plannedTS = stopOver.timeContainer.stringValue.departure.planned ?? ""
+			self.time = PrognoseType(actual: stopOver.timeContainer.stringValue.departure.actual ?? "", planned: stopOver.timeContainer.stringValue.departure.planned ?? "")
 			self.delay = stopOver.timeContainer.departureDelay
 		case .destination, .footBottom:
-			self.actualTS = stopOver.timeContainer.stringValue.arrival.actual ?? ""
-			self.plannedTS = stopOver.timeContainer.stringValue.arrival.planned ?? ""
+			self.time = PrognoseType(actual: stopOver.timeContainer.stringValue.arrival.actual ?? "", planned: stopOver.timeContainer.stringValue.arrival.planned ?? "")
 			self.delay = stopOver.timeContainer.arrivalDelay
 		}
 	}
@@ -60,32 +57,32 @@ struct LegStopView : View {
 		default:
 			HStack(alignment:  .top) {
 				// MARK: Time Label
-				VStack() {
+				VStack(alignment: .leading) {
 					switch stopType {
 					case .stopover:
 						TimeLabelView(
-							isSmall: true,arragement: .right,planned: plannedTS,actual: actualTS,delay: delay)
+							isSmall: true,arragement: .right,time: time,delay: delay)
 						.frame(height: stopType.timeLabelHeight)
 						.background {
 							LinearGradient(stops: [
 								Gradient.Stop(color: .chewGrayScale10, location: 0),
 								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-								Gradient.Stop(color: .chewGrayScale15, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
 						.cornerRadius(7)
 					case .origin,.destination:
-						TimeLabelView(isSmall: false,arragement: .bottom,planned: plannedTS,actual: actualTS,delay: delay)
+						TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
 						.background {
 							LinearGradient(stops: [
 								Gradient.Stop(color: .chewGrayScale10, location: 0),
 								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-								Gradient.Stop(color: .chewGrayScale15, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
 						.cornerRadius(10)
 					case .footTop,.footBottom:
-						TimeLabelView(isSmall: false,arragement: .bottom,planned: plannedTS,actual: actualTS,delay: delay)
+						TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
 							.background(Color.chewGrayScale10)
 						.cornerRadius(10)
 					case .footMiddle,.transfer:
@@ -109,7 +106,7 @@ struct LegStopView : View {
 						EmptyView()
 					}
 					// MARK: Badges
-					
+
 					switch stopType {
 					case .footBottom,.footMiddle,.footTop:
 						HStack(spacing: 3) {
@@ -158,7 +155,6 @@ struct LegStopView : View {
 				}
 				Spacer()
 			}
-			.cornerRadius(6)
 			.frame(height: stopType.viewHeight)
 		}
 	}

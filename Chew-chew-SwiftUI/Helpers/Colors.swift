@@ -15,6 +15,9 @@ extension Color {
 	public static var chewGray10: Color {
 		return Color.gray.opacity(0.1)
 	}
+	public static var chewGray11: Color {
+		return Color.gray.opacity(0.11)
+	}
 	public static var chewGray15: Color {
 		return Color.gray.opacity(0.15)
 	}

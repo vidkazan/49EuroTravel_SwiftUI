@@ -17,8 +17,10 @@ struct JourneyHeaderView: View {
 				TimeLabelView(
 					isSmall: false,
 					arragement: .right,
-					planned: journey.timeContainer.stringValue.departure.planned ?? "time",
-					actual: journey.timeContainer.stringValue.departure.actual ?? "time",
+					time : PrognoseType(
+						actual: journey.timeContainer.stringValue.departure.actual ?? "time",
+						planned:  journey.timeContainer.stringValue.departure.planned ?? "time"
+					),
 					delay: journey.timeContainer.departureDelay
 				)
 				.padding(7)
@@ -30,8 +32,10 @@ struct JourneyHeaderView: View {
 				TimeLabelView(
 					isSmall: false,
 					arragement: .left,
-					planned: journey.timeContainer.stringValue.arrival.planned ?? "time",
-					actual: journey.timeContainer.stringValue.arrival.actual ?? "time",
+					time : PrognoseType(
+						actual: journey.timeContainer.stringValue.departure.actual ?? "time",
+						planned:  journey.timeContainer.stringValue.departure.planned ?? "time"
+					),
 					delay: journey.timeContainer.arrivalDelay
 				)
 				.padding(7)

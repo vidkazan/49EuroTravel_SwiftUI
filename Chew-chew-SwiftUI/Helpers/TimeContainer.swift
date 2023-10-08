@@ -91,8 +91,8 @@ extension TimeContainer {
 			if cancelled == true {
 				return .cancelled
 			}
-			let delay = Int((time.actual ?? 0) - (time.planned ?? 0))
-			if delay >= 60 {
+			let delay = Int((time.actual ?? 0) - (time.planned ?? 0)) / 60
+			if delay >= 1 {
 				return .delay(delay)
 			} else {
 				return .onTime

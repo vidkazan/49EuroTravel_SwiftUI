@@ -103,7 +103,7 @@ struct LegDetailsView: View {
 		.background{
 			switch viewModel.state.leg.legType {
 			case .line,.footStart,.footEnd:
-				Color.chewGray10
+				Color.chewGray11
 			case .footMiddle,.transfer:
 				Color.clear
 			}

@@ -26,7 +26,7 @@ final class LegDetailsViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				Self.updateByTimer()
+//				Self.updateByTimer()
 			]
 		)
 			.assign(to: \.state, on: self)

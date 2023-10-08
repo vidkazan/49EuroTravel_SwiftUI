@@ -18,15 +18,12 @@ struct TimeLabelView: View {
 	let isSmall : Bool
 	let arragement : Arragement
 	var delay : TimeContainer.Status
-	var planned : String
-	var actual : String
-	
-	init(isSmall: Bool, arragement : Arragement, planned: String, actual: String, delay: TimeContainer.Status) {
+	var time : PrognoseType<String>
+	init(isSmall: Bool, arragement : Arragement, time : PrognoseType<String>, delay: TimeContainer.Status) {
 		self.delay = delay
 		self.isSmall = isSmall
 		self.arragement = arragement
-		self.planned = planned
-		self.actual = actual
+		self.time = time
 	}
 	
 	var body: some View {
@@ -40,11 +37,11 @@ struct TimeLabelView: View {
 				HStack(spacing: 2){
 					switch arragement == .left {
 					case true:
-						optionalTime(actual: actual, delay: delay)
+						optionalTime(delay: delay)
 						mainTime(delay: delay, cancelled: false)
 					case false:
 						mainTime(delay: delay, cancelled: false)
-						optionalTime(actual: actual, delay: delay)
+						optionalTime(delay: delay)
 					}
 				}
 				.padding(4)
@@ -52,11 +49,11 @@ struct TimeLabelView: View {
 				VStack(spacing: 2){
 					switch arragement == .top {
 					case true:
-						optionalTime(actual: actual, delay: delay)
+						optionalTime(delay: delay)
 						mainTime(delay: delay, cancelled: false)
 					case false:
 						mainTime(delay: delay, cancelled: false)
-						optionalTime(actual: actual, delay: delay)
+						optionalTime(delay: delay)
 					}
 				}
 				.padding(4)
@@ -70,14 +67,14 @@ struct TimeLabelView: View {
 }
 
 extension TimeLabelView {
-	func optionalTime(actual : String,delay : Int) -> some View {
+	func optionalTime(delay : Int) -> some View {
 		switch isSmall {
 		case true:
-			return Text(delay >= 60 ? "+" + String(delay/60) : "")
+			return Text(delay > 0 ? "+" + String(delay) : "")
 				.foregroundColor(isSmall ? .gray : .secondary)
 				.font(.system(size: 12,weight: .semibold))
 		case false:
-			return Text(delay >= 60 ? planned : actual)
+			return Text(delay > 0 ? time.planned : time.actual)
 				.strikethrough()
 				.foregroundColor(isSmall ? .gray : .secondary)
 				.font(.system(size: 12,weight: .semibold))
@@ -85,13 +82,13 @@ extension TimeLabelView {
 	}
 	func mainTime(delay : Int, cancelled : Bool) -> some View {
 		if cancelled == true {
-			return	Text(planned)
+			return	Text(time.planned)
 				.foregroundColor(Color.chewRedScale80)
 				.font(.system(size: isSmall == false ? 17 : 12,weight: isSmall == false ? .semibold : .medium))
 				.strikethrough()
 		} else {
-			return	Text(delay < 60 ? planned : actual)
-				.foregroundColor(delay < 300 ? isSmall ? .gray : .primary.opacity(0.85) : Color.chewRedScale80)
+			return	Text(delay < 1 ? time.planned : time.actual)
+				.foregroundColor(delay < 5 ? isSmall ? .gray : .primary.opacity(0.85) : Color.chewRedScale80)
 				.font(.system(size: isSmall == false ? 17 : 12,weight: isSmall == false ? .semibold : .medium))
 		}
 	}

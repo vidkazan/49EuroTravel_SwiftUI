@@ -65,7 +65,7 @@ enum Badges : Identifiable,Hashable {
 		let style : Color
 		let name : String
 		
-		init(style : Color = Color.chewGrayScale10, name : String){
+		init(style : Color = Color.clear, name : String){
 			self.name = name
 			self.style = style
 		}
