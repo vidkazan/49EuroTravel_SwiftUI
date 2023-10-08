@@ -23,9 +23,11 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	init() {
 //		state = State(depStop: nil, arrStop: nil, timeChooserDate: .now, status: .idle)
 		state = State(
-			depStop: .stop(Stop(type: "station", id: "\(8000274)", name: "Neuss", address: nil, location: nil, products: nil)),
+			depStop: .stop(Stop(type: "station", id: "\(586640)", name: "Neuss", address: nil, location: nil, products: nil)),
 			arrStop: .stop(Stop(type: "station", id: "\(8006552)", name: "Wob", address: nil, location: nil, products: nil)),
-			timeChooserDate: .now, status: .idle)
+			timeChooserDate: .now,
+			status: .idle
+		)
 		Publishers.system(
 			initial: state,
 			reduce: self.reduce,

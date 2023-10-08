@@ -133,18 +133,16 @@ enum Badges : Identifiable,Hashable {
 				style: Color(hue: 0, saturation: 1, brightness: 0.7),
 				name: "!")
 		case .lineNumber(let lineType, num: let num):
-			return BadgeData(name: num)
+			return BadgeData(style: .chewGrayScale10, name: num)
 		case .legDuration(let dur):
 			return BadgeData(name: dur)
 		case .legDirection(let dir):
 			return BadgeData(name: dir)
 		case .walking(let duration):
 			return BadgeData(
-				style: .clear,
 				name: String(duration))
 		case .transfer(duration: let dur):
 			return BadgeData(
-				style: .clear,
 				name: String(dur))
 			
 		case .stopsCount(let num):

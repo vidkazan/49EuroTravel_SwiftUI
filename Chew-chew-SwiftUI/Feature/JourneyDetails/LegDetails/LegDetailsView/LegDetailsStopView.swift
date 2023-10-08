@@ -54,6 +54,28 @@ struct LegStopView : View {
 				Spacer()
 			}
 			.frame(height: stopType.viewHeight)
+		case .footBottom:
+			HStack(alignment:  .bottom) {
+				// MARK: Time Label
+				VStack(alignment: .leading) {
+					Spacer()
+					TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
+						.background(Color.chewGrayScale10)
+					.cornerRadius(10)
+				}
+				.frame(width: 70)
+				VStack(alignment: .leading, spacing: 2) {
+					// MARK: Badges
+					HStack(spacing: 3) {
+						BadgeView(badge: .walking(duration: legViewData.duration))
+					}
+					// MARK: Location Name under Badges
+					Text(stopOver.name)
+						.font(.system(size: 17,weight: .semibold))
+				}
+				Spacer()
+			}
+			.frame(height: stopType.viewHeight)
 		default:
 			HStack(alignment:  .top) {
 				// MARK: Time Label
@@ -171,9 +193,9 @@ enum StopOverType : Equatable {
 	
 	var timeLabelHeight : Double {
 		switch self {
-		case .destination,.origin:
+		case .destination,.origin,.footBottom,.footTop:
 			return 30
-		case .transfer,.footMiddle,.footBottom,.footTop,.stopover:
+		case .transfer,.footMiddle,.stopover:
 			return 15
 		}
 	}
@@ -192,23 +214,4 @@ enum StopOverType : Equatable {
 			return 90
 		}
 	}
-	
-//	var description : String {
-//		switch self {
-//		case .destination:
-//			return "destination"
-//		case .origin:
-//			return "origin"
-//		case .stopover:
-//			return "stopover"
-//		case .transfer:
-//			return "transfer"
-//		case .footMiddle:
-//			return "footMiddle"
-//		case .footBottom:
-//			return "footBottom"
-//		case .footTop:
-//			return "footTop"
-//		}
-//	}
 }
