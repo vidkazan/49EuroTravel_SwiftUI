@@ -84,7 +84,7 @@ extension JourneyListViewModel {
 			Query.national(icTrains: false),
 			Query.nationalExpress(iceTrains: false),
 			Query.regionalExpress(reTrains: false),
-			Query.pretty(pretyIntend: false),
+//			Query.pretty(pretyIntend: false),
 			Query.taxi(taxi: false),
 			Query.remarks(showRemarks: true),
 			Query.results(max: 5),

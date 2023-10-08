@@ -7,73 +7,100 @@
 
 import Foundation
 
-struct ISOTimeContainer : Equatable {
-	let departure : PrognoseType<String?>
-	let arrival : PrognoseType<String?>
-	
-	func getDateContainer() -> DateTimeContainer {
-		return DateTimeContainer(
-			departure: PrognoseType(
-				actual: DateParcer.getDateFromDateString(dateString: departure.actual),
-				planned: DateParcer.getDateFromDateString(dateString: departure.planned)
-			),
-			arrival: PrognoseType(
-				actual: DateParcer.getDateFromDateString(dateString: arrival.actual),
-				planned: DateParcer.getDateFromDateString(dateString: arrival.planned)
-			)
-		)
-	}
-}
-
-struct DateTimeContainer : Equatable {
-	let departure : PrognoseType<Date?>
-	let arrival : PrognoseType<Date?>
-	
-	func getTSContainer() -> TimestampTimeContainer {
-		return TimestampTimeContainer(
-			departure: PrognoseType(
-				actual: departure.actual?.timeIntervalSince1970,
-				planned: departure.planned?.timeIntervalSince1970
-			),
-			arrival: PrognoseType(
-				actual: arrival.actual?.timeIntervalSince1970,
-				planned: arrival.planned?.timeIntervalSince1970
-			)
-		)
-	}
-	func getStringValueContainer() -> TimeStringContainer {
-		return TimeStringContainer(
-			departure: PrognoseType(
-				actual: DateParcer.getTimeStringFromDate(date: departure.actual),
-				planned: DateParcer.getTimeStringFromDate(date: departure.planned)
-			),
-			arrival: PrognoseType(
-				actual: DateParcer.getTimeStringFromDate(date: arrival.actual),
-				planned: DateParcer.getTimeStringFromDate(date: arrival.planned)
-			)
-		)
-	}
-}
-
-struct TimeStringContainer : Equatable {
-	let departure : PrognoseType<String?>
-	let arrival : PrognoseType<String?>
-}
-
-struct TimestampTimeContainer : Equatable {
-	let departure : PrognoseType<Double?>
-	let arrival : PrognoseType<Double?>
-}
-
 struct TimeContainer : Equatable{
+	enum Status : Equatable {
+		case onTime
+		case delay(Int)
+		case cancelled
+	}
 	let iso : ISOTimeContainer
 	let date : DateTimeContainer
 	let timestamp : TimestampTimeContainer
 	let stringValue : TimeStringContainer
-	let departureDelay : Int
-	let arrivalDelay : Int
+	let departureDelay : Status
+	let arrivalDelay : Status
+}
+extension TimeContainer {
+	struct ISOTimeContainer : Equatable {
+		let departure : PrognoseType<String?>
+		let arrival : PrognoseType<String?>
+		
+		func getDateContainer() -> DateTimeContainer {
+			return DateTimeContainer(
+				departure: PrognoseType(
+					actual: DateParcer.getDateFromDateString(dateString: departure.actual),
+					planned: DateParcer.getDateFromDateString(dateString: departure.planned)
+				),
+				arrival: PrognoseType(
+					actual: DateParcer.getDateFromDateString(dateString: arrival.actual),
+					planned: DateParcer.getDateFromDateString(dateString: arrival.planned)
+				)
+			)
+		}
+	}
+
+	struct DateTimeContainer : Equatable {
+		let departure : PrognoseType<Date?>
+		let arrival : PrognoseType<Date?>
+		
+		func getTSContainer() -> TimestampTimeContainer {
+			return TimestampTimeContainer(
+				departure: PrognoseType(
+					actual: departure.actual?.timeIntervalSince1970,
+					planned: departure.planned?.timeIntervalSince1970
+				),
+				arrival: PrognoseType(
+					actual: arrival.actual?.timeIntervalSince1970,
+					planned: arrival.planned?.timeIntervalSince1970
+				)
+			)
+		}
+		func getStringValueContainer() -> TimeStringContainer {
+			return TimeStringContainer(
+				departure: PrognoseType(
+					actual: DateParcer.getTimeStringFromDate(date: departure.actual),
+					planned: DateParcer.getTimeStringFromDate(date: departure.planned)
+				),
+				arrival: PrognoseType(
+					actual: DateParcer.getTimeStringFromDate(date: arrival.actual),
+					planned: DateParcer.getTimeStringFromDate(date: arrival.planned)
+				)
+			)
+		}
+	}
+
+	struct TimeStringContainer : Equatable {
+		let departure : PrognoseType<String?>
+		let arrival : PrognoseType<String?>
+	}
+
+	struct TimestampTimeContainer : Equatable {
+		let departure : PrognoseType<Double?>
+		let arrival : PrognoseType<Double?>
+		
+		func generateDelayStatus(type: LocationDirectionType, cancelled : Bool?) -> Status {
+			let time : PrognoseType<Double?> = {
+				switch type {
+				case .departure:
+					return self.departure
+				case .arrival:
+					return self.arrival
+				}
+			}()
+			
+			if cancelled == true {
+				return .cancelled
+			}
+			let delay = Int((time.actual ?? 0) - (time.planned ?? 0))
+			if delay >= 60 {
+				return .delay(delay)
+			} else {
+				return .onTime
+			}
+		}
+	}
 	
-	init(plannedDeparture: String?, plannedArrival: String?, actualDeparture: String?, actualArrival: String?) {
+	init(plannedDeparture: String?, plannedArrival: String?, actualDeparture: String?, actualArrival: String?, cancelled : Bool?) {
 		let departure = PrognoseType(
 			actual: actualDeparture,
 			planned: plannedDeparture
@@ -86,9 +113,11 @@ struct TimeContainer : Equatable{
 		self.date = self.iso.getDateContainer()
 		self.timestamp = self.date.getTSContainer()
 		self.stringValue = self.date.getStringValueContainer()
-		self.departureDelay = Int((self.timestamp.departure.actual ?? 0) - (self.timestamp.departure.planned ?? 0))
-		self.arrivalDelay = Int((self.timestamp.arrival.actual ?? 0) - (self.timestamp.arrival.planned ?? 0))
+		self.departureDelay = self.timestamp.generateDelayStatus(type: .departure, cancelled: cancelled)
+		self.arrivalDelay = self.timestamp.generateDelayStatus(type: .arrival, cancelled:  cancelled)
 	}
+	
+	
 	
 	func getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: Double?) -> Double? {
 		let fTs : Double = self.timestamp.arrival.actual ?? self.timestamp.departure.actual ?? 0

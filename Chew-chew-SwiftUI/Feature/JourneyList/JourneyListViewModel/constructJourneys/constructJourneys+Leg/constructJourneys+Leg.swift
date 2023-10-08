@@ -105,7 +105,8 @@ struct Segments : Equatable, Hashable {
 			plannedDeparture: fromLeg.plannedArrival,
 			plannedArrival: toLeg.plannedDeparture,
 			actualDeparture: fromLeg.arrival,
-			actualArrival: toLeg.departure
+			actualArrival: toLeg.departure,
+			cancelled: nil
 		)
 		
 		let res = LegViewData(
@@ -186,7 +187,8 @@ func constructLineViewData(mode : String,product : String, name : String, produc
 			plannedDeparture: leg.plannedDeparture,
 			plannedArrival: leg.plannedArrival,
 			actualDeparture: leg.departure,
-			actualArrival: leg.arrival
+			actualArrival: leg.arrival,
+			cancelled: nil
 		)
 		
 		guard let plannedDeparturePosition = getTimeLabelPosition(firstTS: firstTS, lastTS: lastTS,currentTS: container.date.departure.planned),

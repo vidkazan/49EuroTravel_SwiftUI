@@ -14,7 +14,8 @@ func constructJourneysViewData(journeysData : JourneysContainer, depStop : StopT
 			plannedDeparture: journey.legs.first?.plannedDeparture,
 			plannedArrival: journey.legs.last?.plannedArrival,
 			actualDeparture: journey.legs.first?.departure,
-			actualArrival: journey.legs.last?.arrival
+			actualArrival: journey.legs.last?.arrival,
+			cancelled: nil
 		)
 		return constructJourneyViewData(
 			journey: journey,

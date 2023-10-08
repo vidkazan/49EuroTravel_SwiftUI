@@ -25,7 +25,7 @@ import SwiftUI
 		case .line:
 			let stops = leg.stopovers ?? []
 			let res = stops.map { stop -> StopViewData in
-				let c = TimeContainer(plannedDeparture: stop.plannedDeparture, plannedArrival: stop.plannedArrival, actualDeparture: stop.departure, actualArrival: stop.arrival)
+				let c = TimeContainer(plannedDeparture: stop.plannedDeparture, plannedArrival: stop.plannedArrival, actualDeparture: stop.departure, actualArrival: stop.arrival,cancelled: stop.cancelled)
 				if stop == stops.first {
 					return StopViewData(
 						name: stop.stop?.name ?? "stop",
@@ -55,13 +55,15 @@ import SwiftUI
 				plannedDeparture: leg.departure,
 				plannedArrival: leg.departure,
 				actualDeparture: leg.departure,
-				actualArrival: leg.departure
+				actualArrival: leg.departure,
+				cancelled: nil
 			)
 			let last = TimeContainer(
 				plannedDeparture: leg.arrival,
 				plannedArrival: leg.arrival,
 				actualDeparture: leg.arrival,
-				actualArrival: leg.arrival
+				actualArrival: leg.arrival,
+				cancelled: nil
 			)
 			return [
 				StopViewData(
@@ -82,7 +84,8 @@ import SwiftUI
 				plannedDeparture: leg.plannedDeparture,
 				plannedArrival: leg.plannedArrival,
 				actualDeparture: leg.departure,
-				actualArrival: leg.arrival
+				actualArrival: leg.arrival,
+				cancelled: nil
 			)
 			return [
 				StopViewData(
@@ -103,13 +106,15 @@ import SwiftUI
 				plannedDeparture: leg.departure,
 				plannedArrival: leg.departure,
 				actualDeparture: leg.departure,
-				actualArrival: leg.departure
+				actualArrival: leg.departure,
+				cancelled: nil
 			)
 			let last = TimeContainer(
 				plannedDeparture: leg.arrival,
 				plannedArrival: leg.arrival,
 				actualDeparture: leg.arrival,
-				actualArrival: leg.arrival
+				actualArrival: leg.arrival,
+				cancelled: nil
 			)
 			return [
 				StopViewData(
@@ -130,7 +135,8 @@ import SwiftUI
 				plannedDeparture: leg.plannedDeparture,
 				plannedArrival: leg.plannedArrival,
 				actualDeparture: leg.departure,
-				actualArrival: leg.arrival
+				actualArrival: leg.arrival,
+				cancelled: nil
 			)
 			return [
 				StopViewData(

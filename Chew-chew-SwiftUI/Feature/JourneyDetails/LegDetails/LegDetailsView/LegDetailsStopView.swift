@@ -15,7 +15,7 @@ struct LegStopView : View {
 	let stopType : StopOverType
 	var plannedTS : String
 	var actualTS : String
-	var delay : Int
+	var delay : TimeContainer.Status
 	let now = Date.now.timeIntervalSince1970
 	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : StopViewData,leg : LegViewData) {
 		self.vm = vm
@@ -60,7 +60,7 @@ struct LegStopView : View {
 		default:
 			HStack(alignment:  .top) {
 				// MARK: Time Label
-				VStack(alignment: .leading) {
+				VStack() {
 					switch stopType {
 					case .stopover:
 						TimeLabelView(
@@ -70,7 +70,7 @@ struct LegStopView : View {
 							LinearGradient(stops: [
 								Gradient.Stop(color: .chewGrayScale10, location: 0),
 								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+								Gradient.Stop(color: .chewGrayScale15, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
 						.cornerRadius(7)
@@ -80,7 +80,7 @@ struct LegStopView : View {
 							LinearGradient(stops: [
 								Gradient.Stop(color: .chewGrayScale10, location: 0),
 								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+								Gradient.Stop(color: .chewGrayScale15, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
 						.cornerRadius(10)
@@ -151,7 +151,6 @@ struct LegStopView : View {
 						}
 					}
 					// MARK: Location Name under Badges
-					
 					if case .footBottom = stopType{
 						Text(stopOver.name)
 							.font(.system(size: 17,weight: .semibold))
@@ -159,6 +158,7 @@ struct LegStopView : View {
 				}
 				Spacer()
 			}
+			.cornerRadius(6)
 			.frame(height: stopType.viewHeight)
 		}
 	}
