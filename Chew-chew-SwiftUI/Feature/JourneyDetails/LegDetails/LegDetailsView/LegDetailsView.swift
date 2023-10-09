@@ -7,13 +7,16 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
+import MapKit
 
 struct LegDetailsView: View {
 	@ObservedObject var vm : LegDetailsViewModel
+	let journeyVM : JourneyDetailsViewModel
 	init(leg : LegViewData, journeyDetailsViewModel: JourneyDetailsViewModel) {
 		self.vm = LegDetailsViewModel(leg: leg)
+		self.journeyVM = journeyDetailsViewModel
 	}
-	
 	var body : some View {
 		VStack {
 			VStack(spacing: 0) {
@@ -105,31 +108,28 @@ struct LegDetailsView: View {
 					// MARK: Background for but Line
 					switch vm.state.leg.legType {
 					case .transfer,.footMiddle:
-						VStack{
+						VStack {
 							Spacer()
-							Rectangle()
-								.fill(Color.chewGrayScale07.opacity(0.6))
+							Color.chewGrayScale07.opacity(0.6)
 								.frame(height: vm.state.totalProgressHeight - 20)
 								.cornerRadius(10)
 							Spacer()
 						}
 					case .footStart:
-						Rectangle()
-							.fill(Color.chewGrayScale07.opacity(0.6))
+						Color.chewGrayScale07.opacity(0.6)
 							.frame(height: vm.state.totalProgressHeight)
 							.cornerRadius(10)
 							.offset(y: -10)
 					case .footEnd:
-						Rectangle()
-							.fill(Color.chewGrayScale07.opacity(0.6))
+						Color.chewGrayScale07.opacity(0.6)
 							.frame(height: vm.state.totalProgressHeight)
 							.cornerRadius(10)
 							.offset(y: 10)
 					case .line:
-						EmptyView()
+						Color.chewGray11
+							.cornerRadius(10)
 					}
 				}
-//				.frame(height: vm.state.totalProgressHeight)
 				.frame(maxHeight: .infinity)
 			}
 		}
@@ -138,15 +138,35 @@ struct LegDetailsView: View {
 				vm.send(event: .didtapExpandButton)
 			}
 		}
-		// MARK: Background for Line
-		.background{
-			switch vm.state.leg.legType {
-			case .line:
-				Color.chewGray11
-			case .footMiddle,.transfer,.footStart,.footEnd:
-				Color.clear
+		.onLongPressGesture {
+			if let locFirst = vm.state.leg.legStopsViewData.first?.locationCoordinates,
+			   let locLast = vm.state.leg.legStopsViewData.last?.locationCoordinates {
+				let centerCoordinate = CLLocationCoordinate2D(
+					latitude: (locFirst.latitude + locLast.latitude) / 2,
+					longitude: (locFirst.longitude + locLast.longitude) / 2
+				)
+
+				// Calculate the span (delta) between the two coordinates
+				let latitudinalDelta = abs(locFirst.latitude - locLast.latitude)
+				let longitudinalDelta = abs(locFirst.longitude - locLast.longitude)
+
+				// Add a little padding to the span
+				let span = MKCoordinateSpan(
+					latitudeDelta: latitudinalDelta * 1.4, // You can adjust this factor as needed
+					longitudeDelta: longitudinalDelta * 1.4 // You can adjust this factor as needed
+				)
+
+				// Create and return the region
+				let region = MKCoordinateRegion(center: centerCoordinate, span: span)
+				journeyVM.send(
+					event: .didTapLocationDetails(
+						coordRegion: region,
+						coordinates: [
+							locFirst,locLast
+						]
+					))
 			}
+			print("long")
 		}
-		.cornerRadius(10)
 	}
 }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 extension JourneyDetailsViewModel {
 	struct State : Equatable {
@@ -24,6 +25,7 @@ extension JourneyDetailsViewModel {
 		case loading(refreshToken : String?)
 		case loadedJourneyData(data : JourneyViewData)
 		case error(error : ApiServiceError)
+		case locationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
 		
 		var description : String {
 			switch self {
@@ -33,6 +35,8 @@ extension JourneyDetailsViewModel {
 				return "loadedJourneyData"
 			case .error:
 				return "error"
+			case .locationDetails:
+				return "locationDetails"
 			}
 		}
 	}
@@ -42,6 +46,9 @@ extension JourneyDetailsViewModel {
 		case didFailedToLoadJourneyData(error : ApiServiceError)
 		case didTapReloadJourneys
 		case didExpandLegDetails
+		case didTapLocationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
+		case didCloseLocationDetails
+		
 		var description : String {
 			switch self {
 			case .didLoadJourneyData:
@@ -52,6 +59,10 @@ extension JourneyDetailsViewModel {
 				return "didReloadJourneys"
 			case .didExpandLegDetails:
 				return "didExpandLegDetails"
+			case .didTapLocationDetails:
+				return "didTapLocationDetails"
+			case .didCloseLocationDetails:
+				return "didCloseLocationDetails"
 			}
 		}
 	}

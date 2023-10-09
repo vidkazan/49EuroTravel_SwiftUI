@@ -6,29 +6,33 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	var viewModel : JourneyDetailsViewModel
-	var ids = Set<UUID?>()
+	@ObservedObject var viewModel : JourneyDetailsViewModel
 	
 	init(token : String?,data : JourneyViewData) {
 		viewModel = JourneyDetailsViewModel(refreshToken: token, data: data)
 	}
-	
 	var body: some View {
-		VStack {
-			header()
-				.padding(10)
-			ScrollView() {
-				LazyVStack(spacing: 0){
-					ForEach(viewModel.state.data.legs) { leg in
-						LegDetailsView(leg : leg, journeyDetailsViewModel: viewModel)
+		ZStack {
+			VStack {
+				header()
+					.padding(10)
+				ScrollView() {
+					LazyVStack(spacing: 0){
+						ForEach(viewModel.state.data.legs) { leg in
+							LegDetailsView(leg : leg, journeyDetailsViewModel: viewModel)
+						}
 					}
+					.padding(10)
 				}
-				.padding(10)
+			}
+			if case .locationDetails(coordRegion: let reg, coordinates: let coords) = viewModel.state.status {
+				let _ = print("reg")
+				MapView(mapRect: reg, coords: coords,viewModel: viewModel)
 			}
 		}
-		Spacer()
 	}
 }

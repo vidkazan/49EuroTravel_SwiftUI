@@ -30,7 +30,7 @@ struct ContentView: View {
 				}
 				.padding(10)
 				if chewViewModel.state.status == .datePicker {
-					DatePickerView(startDat: chewViewModel.state.timeChooserDate.date)
+					DatePickerView(sStartDate: chewViewModel.state.timeChooserDate.date)
 				}
 			}
 			.background( .linearGradient(

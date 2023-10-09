@@ -30,6 +30,10 @@ extension JourneyDetailsViewModel {
 				)
 			case .didExpandLegDetails:
 				return state
+			case .didTapLocationDetails:
+				return state
+			case .didCloseLocationDetails:
+				return state
 			}
 		case .loadedJourneyData:
 			switch event {
@@ -44,6 +48,13 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
 				)
+			case .didTapLocationDetails(coordRegion: let reg, coordinates: let coords):
+				return State(
+					data: state.data,
+					status: .locationDetails(coordRegion: reg,coordinates: coords)
+				)
+			case .didCloseLocationDetails:
+				return state
 			}
 		case .error:
 			switch event {
@@ -57,6 +68,28 @@ extension JourneyDetailsViewModel {
 				return State(
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
+				)
+			case .didTapLocationDetails:
+				return state
+			case .didCloseLocationDetails:
+				return state
+			}
+		case .locationDetails(coordRegion: let region):
+			switch event {
+			case .didExpandLegDetails:
+				return state
+			case .didLoadJourneyData:
+				return state
+			case .didFailedToLoadJourneyData:
+				return state
+			case .didTapReloadJourneys:
+				return state
+			case .didTapLocationDetails:
+				return state
+			case .didCloseLocationDetails:
+				return State(
+					data: state.data,
+					status: .loadedJourneyData(data: state.data)
 				)
 			}
 		}

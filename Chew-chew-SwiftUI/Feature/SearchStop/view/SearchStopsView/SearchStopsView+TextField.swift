@@ -15,6 +15,7 @@ extension SearchStopsView {
 		focusedFieldBinding : FocusState<LocationDirectionType?>.Binding
 	) -> some View {
 		return TextField(type.placeholder, text: textBinding)
+			.autocorrectionDisabled(true)
 			.padding(10)
 			.font(.system(size: 17,weight: .semibold))
 			.frame(maxWidth: .infinity,alignment: .leading)

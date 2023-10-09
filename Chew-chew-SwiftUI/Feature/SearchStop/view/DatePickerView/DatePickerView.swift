@@ -12,8 +12,8 @@ struct DatePickerView: View {
 	@State private var date = Date()
 	@State private var time = Date()
 	var startDate : Date
-	init(startDat: Date = Date()) {
-		startDate = startDat
+	init(sStartDate: Date = Date()) {
+		startDate = sStartDate
 	}
     var body: some View {
 		VStack(alignment: .center) {

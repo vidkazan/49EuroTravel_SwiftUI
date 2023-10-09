@@ -21,7 +21,7 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	
 	init(refreshToken : String?,data: JourneyViewData) {
 		self.refreshToken = refreshToken
-		state = State(data: data, status: .loading(refreshToken: refreshToken))
+		state = State(data: data, status: .loadedJourneyData(data: data))
 		Publishers.system(
 			initial: state,
 			reduce: self.reduce,
