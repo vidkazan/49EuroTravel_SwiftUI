@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 struct JourneysViewData : Equatable {
 	let journeys : [JourneyViewData]
@@ -60,6 +61,7 @@ struct LegViewData : Equatable,Identifiable{
 
 struct StopViewData : Equatable,Identifiable {
 	let id = UUID()
+	let locationCoordinates : CLLocationCoordinate2D?
 	let name : String
 	let departurePlatform : PrognoseType<String?>
 	let arrivalPlatform : PrognoseType<String?>
@@ -88,28 +90,40 @@ struct LineViewData : Equatable {
 }
 
 extension StopViewData {
-	init(name : String,timeContainer : TimeContainer,type: StopOverType) {
-		self.timeContainer = timeContainer
-		self.name = name
-		self.departurePlatform  = PrognoseType(actual: "", planned: "")
-		self.arrivalPlatform  = PrognoseType(actual: "", planned: "")
-		self.type = type
-	}
 	init(name : String,timeContainer : TimeContainer, stop : StopOver,type: StopOverType) {
 		self.timeContainer = timeContainer
 		self.name = name
 		self.departurePlatform  = PrognoseType(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
 		self.arrivalPlatform  = PrognoseType(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
 		self.type = type
+		if let lat = stop.stop?.location?.latitude,let long = stop.stop?.location?.longitude {
+			self.locationCoordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
+		} else {
+			self.locationCoordinates = nil
+		}
 	}
-	init(name : String,timeContainer : TimeContainer, leg : Leg,type: StopOverType) {
+	init(name : String,timeContainer : TimeContainer,type: StopOverType, coordinates : Location?) {
 		self.timeContainer = timeContainer
 		self.name = name
-		self.departurePlatform  = PrognoseType(actual: leg.departurePlatform, planned: leg.plannedDeparturePlatform)
-		self.arrivalPlatform  = PrognoseType(actual: leg.arrivalPlatform, planned: leg.plannedArrivalPlatform)
+		self.departurePlatform  = PrognoseType(actual: nil, planned: nil)
+		self.arrivalPlatform  = PrognoseType(actual: nil, planned: nil)
 		self.type = type
-		
+		if let lat = coordinates?.latitude, let lon = coordinates?.longitude {
+			self.locationCoordinates = CLLocationCoordinate2D(latitude: lat, longitude: lon)
+		} else {
+			self.locationCoordinates = nil
+		}
 	}
+//	init(name : String,timeContainer : TimeContainer, leg : Leg,type: StopOverType) {
+//		self.timeContainer = timeContainer
+//		self.name = name
+//		self.departurePlatform  = PrognoseType(actual: leg.departurePlatform, planned: leg.plannedDeparturePlatform)
+//		self.arrivalPlatform  = PrognoseType(actual: leg.arrivalPlatform, planned: leg.plannedArrivalPlatform)
+//		self.type = type
+//		if let lat = stop.stop?.location?.latitude,let long = leg.lo {
+//			self.locationCoordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
+//		}
+//	}
 }
 
 extension LegViewData {

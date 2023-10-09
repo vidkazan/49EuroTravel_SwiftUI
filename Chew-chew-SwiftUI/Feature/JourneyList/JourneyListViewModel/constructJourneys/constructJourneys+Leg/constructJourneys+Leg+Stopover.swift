@@ -67,39 +67,46 @@ import SwiftUI
 			)
 			return [
 				StopViewData(
-					name: name ?? leg.origin?.name ?? "origin name",
+					name: name ?? leg.origin?.name ?? "name",
 					timeContainer: first,
-					leg: leg,
-					type: .footTop
+					type: .footTop,
+					coordinates: leg.origin?.location
 				),
 				StopViewData(
-					name: name ?? leg.destination?.name ?? "dest name",
+					name: name ?? leg.destination?.name ?? "name",
 					timeContainer: last,
-					leg: leg,
-					type: .footTop
+					type: .footTop,
+					coordinates: leg.destination?.location
 				)
 			]
 		case .footMiddle:
-			let c = TimeContainer(
-				plannedDeparture: leg.plannedDeparture,
-				plannedArrival: leg.plannedArrival,
+			let first = TimeContainer(
+				plannedDeparture: leg.departure,
+				plannedArrival: leg.departure,
 				actualDeparture: leg.departure,
+				actualArrival: leg.departure,
+				cancelled: nil
+			)
+			let last = TimeContainer(
+				plannedDeparture: leg.arrival,
+				plannedArrival: leg.arrival,
+				actualDeparture: leg.arrival,
 				actualArrival: leg.arrival,
 				cancelled: nil
 			)
 			return [
 				StopViewData(
-					name: name ?? leg.origin?.name ?? "origin name",
-					timeContainer: c,
-					leg: leg,
-					type: .footMiddle
+					name: name ?? leg.origin?.name ?? "name",
+					timeContainer: first,
+					type: .footMiddle,
+					coordinates: leg.origin?.location
+				),
+				StopViewData(
+					name: name ?? leg.destination?.name ?? "name",
+					timeContainer: last,
+					type: .footMiddle,
+					coordinates: leg.destination?.location
 				)
-//				StopViewData(
-//					name: name ?? leg.destination?.name ?? "dest name",
-//					timeContainer: c,
-//					leg: leg,
-//					type: .destination
-//				)
 			]
 		case .footEnd:
 			let first = TimeContainer(
@@ -118,38 +125,46 @@ import SwiftUI
 			)
 			return [
 				StopViewData(
-					name: name ?? leg.origin?.name ?? "origin name",
+					name: name ?? leg.origin?.name ?? "name",
 					timeContainer: first,
-					leg: leg,
-					type: .footBottom
+					type: .footBottom,
+					coordinates: leg.origin?.location
 				),
 				StopViewData(
-					name: name ?? leg.destination?.name ?? "dest name",
+					name: name ?? leg.destination?.name ?? "name",
 					timeContainer: last,
-					leg: leg,
-					type: .footBottom
+					type: .footBottom,
+					coordinates: leg.destination?.location
 				)
 			]
 		case .transfer:
-			let c = TimeContainer(
-				plannedDeparture: leg.plannedDeparture,
-				plannedArrival: leg.plannedArrival,
+			let first = TimeContainer(
+				plannedDeparture: leg.departure,
+				plannedArrival: leg.departure,
 				actualDeparture: leg.departure,
+				actualArrival: leg.departure,
+				cancelled: nil
+			)
+			let last = TimeContainer(
+				plannedDeparture: leg.arrival,
+				plannedArrival: leg.arrival,
+				actualDeparture: leg.arrival,
 				actualArrival: leg.arrival,
 				cancelled: nil
 			)
 			return [
 				StopViewData(
-					name: name ?? leg.origin?.name ?? "origin name",
-					timeContainer: c,
-					leg: leg,
-					type: .transfer
+					name: name ?? leg.origin?.name ?? "name",
+					timeContainer: first,
+					type: .transfer,
+					coordinates: leg.origin?.location
+				),
+				StopViewData(
+					name: name ?? leg.destination?.name ?? "name",
+					timeContainer: last,
+					type: .transfer,
+					coordinates: leg.destination?.location
 				)
-//				StopViewData(
-//					name: name ?? leg.destination?.name ?? "dest name",
-//					timeContainer: c,
-//					leg: leg
-//				)
 			]
 		}
 	}

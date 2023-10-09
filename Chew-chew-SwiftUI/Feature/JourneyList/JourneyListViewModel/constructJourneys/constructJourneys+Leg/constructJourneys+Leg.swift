@@ -101,6 +101,20 @@ struct Segments : Equatable, Hashable {
 	}
 	
 	func constructTransferViewData(fromLeg : Leg, toLeg : Leg) -> LegViewData? {
+		let first = TimeContainer(
+			plannedDeparture: fromLeg.plannedArrival,
+			plannedArrival: fromLeg.plannedArrival,
+			actualDeparture: fromLeg.arrival,
+			actualArrival: fromLeg.arrival,
+			cancelled: nil
+		)
+		let last = TimeContainer(
+			plannedDeparture: toLeg.plannedDeparture,
+			plannedArrival: toLeg.plannedDeparture,
+			actualDeparture: toLeg.departure,
+			actualArrival: toLeg.departure,
+			cancelled: nil
+		)
 		let container = TimeContainer(
 			plannedDeparture: fromLeg.plannedArrival,
 			plannedArrival: toLeg.plannedDeparture,
@@ -122,11 +136,20 @@ struct Segments : Equatable, Hashable {
 			legBottomPosition: 0,
 			delayedAndNextIsNotReachable: nil,
 			remarks: [],
-			legStopsViewData: [StopViewData(
-				name: "transfer",
-				timeContainer: container,
-				type: .transfer
-			)],
+			legStopsViewData: [
+				StopViewData(
+					name: "",
+					timeContainer: first,
+					type: .transfer,
+					coordinates: fromLeg.destination?.location
+				),
+				StopViewData(
+					name: "",
+					timeContainer: last,
+					type: .transfer,
+					coordinates: toLeg.origin?.location
+				)
+			],
 			footDistance: 0,
 			lineViewData: LineViewData(type: .transfer, name: "transfer", shortName: "transfer"),
 			progressSegments: Segments(
