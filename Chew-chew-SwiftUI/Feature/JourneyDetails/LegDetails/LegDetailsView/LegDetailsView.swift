@@ -53,7 +53,7 @@ struct LegDetailsView: View {
 							stopOver: stop,
 							leg: vm.state.leg
 						)
-						.padding(.top,10)
+//						.padding(.top,10)
 					}
 					if case .stopovers = vm.state.status {
 						ForEach(vm.state.leg.legStopsViewData) { stop in
@@ -80,15 +80,19 @@ struct LegDetailsView: View {
 			.background {
 				ZStack(alignment: .top) {
 						// MARK: Full Line
-						HStack {
+					VStack{
+						HStack(alignment: .top) {
 							Rectangle()
 								.fill(Color.chewGrayScale10)
 								.frame(width: 18,height:  vm.state.totalProgressHeight)
 								.padding(.leading,26)
 							Spacer()
 						}
+						Spacer(minLength: 0)
 						// MARK: Progress Line
-						HStack {
+					}
+					VStack {
+						HStack(alignment: .top) {
 							Rectangle()
 								.fill(Color.chewGreenScale20)
 								.cornerRadius(vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
@@ -96,6 +100,8 @@ struct LegDetailsView: View {
 								.padding(.leading,25)
 							Spacer()
 						}
+						Spacer(minLength: 0)
+					}
 					// MARK: Background for but Line
 					switch vm.state.leg.legType {
 					case .transfer,.footMiddle:
@@ -123,7 +129,8 @@ struct LegDetailsView: View {
 						EmptyView()
 					}
 				}
-				.frame(height: vm.state.totalProgressHeight)
+//				.frame(height: vm.state.totalProgressHeight)
+				.frame(maxHeight: .infinity)
 			}
 		}
 		.onTapGesture {
