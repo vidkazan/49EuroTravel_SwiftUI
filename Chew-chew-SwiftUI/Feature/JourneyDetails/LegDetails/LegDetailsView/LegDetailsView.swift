@@ -138,6 +138,7 @@ struct LegDetailsView: View {
 				vm.send(event: .didtapExpandButton)
 			}
 		}
+		// TODO: move to mapDetailsViewModel
 		.onLongPressGesture {
 			if let locFirst = vm.state.leg.legStopsViewData.first?.locationCoordinates,
 			   let locLast = vm.state.leg.legStopsViewData.last?.locationCoordinates {
@@ -166,7 +167,6 @@ struct LegDetailsView: View {
 						]
 					))
 			}
-			print("long")
 		}
 	}
 }

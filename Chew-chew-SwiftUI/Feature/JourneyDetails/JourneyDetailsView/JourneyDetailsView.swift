@@ -29,10 +29,15 @@ struct JourneyDetailsView: View {
 					.padding(10)
 				}
 			}
-			if case .locationDetails(coordRegion: let reg, coordinates: let coords) = viewModel.state.status {
-				let _ = print("reg")
-				MapView(mapRect: reg, coords: coords,viewModel: viewModel)
-			}
+				if case .locationDetails(coordRegion: let reg, coordinates: let coords) = viewModel.state.status {
+					let _ = print("reg")
+					MapView(mapRect: reg, coords: coords,viewModel: viewModel)
+						.transition(.move(edge: .bottom))
+						.opacity(viewModel.state.status.description == "locationDetails" ? 1 : 0)
+						.animation(.spring(), value: viewModel.state.status)
+				}
 		}
+		.transition(.move(edge: .bottom))
+		.animation(.spring(), value: viewModel.state.status)
 	}
 }
