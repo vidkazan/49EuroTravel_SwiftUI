@@ -42,19 +42,24 @@ struct DatePickerView: View {
 				.frame(maxWidth: .infinity,maxHeight: 150)
 				.background(.ultraThinMaterial)
 				.cornerRadius(10)
-			DatePicker(
-				"",
-				selection: $date,
-				displayedComponents: [.date]
-			)
-					.onAppear {
-						  date = startDate
-					}
-					.frame(minHeight: 400,alignment: .top)
-					.datePickerStyle(.graphical)
-					.padding(7)
-					.cornerRadius(10)
-			
+			HStack {
+				DatePicker(
+					"",
+					selection: $date,
+					displayedComponents: [.date]
+				)
+				.onAppear {
+					date = startDate
+				}
+//				.frame(minHeight: 200,alignment: .top)
+				.datePickerStyle(.wheel)
+				.padding(7)
+				.cornerRadius(10)
+				.padding(EdgeInsets(top: 0, leading: 0, bottom:0, trailing: 15))
+			}
+			.frame(maxWidth: .infinity,maxHeight: 150)
+			.background(.ultraThinMaterial)
+			.cornerRadius(10)
 			Spacer()
 			Button("Done") {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {

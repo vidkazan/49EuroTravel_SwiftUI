@@ -22,7 +22,12 @@ struct MapView: View {
 	var body: some View {
 		VStack(alignment: .center) {
 			Map(coordinateRegion: $mapRect,interactionModes: .all,showsUserLocation: true, annotationItems: coords) { coord in
-				MapPin(coordinate: coord, tint: .red)
+				MapAnnotation(coordinate: coord) {
+					Color.chewRedScale80
+						.shadow(radius: 2)
+						.cornerRadius(10)
+						.frame(width: 20, height: 20)
+				}
 			}
 				.cornerRadius(8)
 				.padding(5)
@@ -38,6 +43,9 @@ struct MapView: View {
 		.font(.system(size: 17,weight: .semibold))
 		.background(.ultraThinMaterial)
 		.cornerRadius(10)
+		.transition(.move(edge: .bottom))
+		.opacity(viewModel.state.status.description == "locationDetails" ? 1 : 0)
+		.animation(.spring(), value: viewModel.state.status)
 	}
 }
 
