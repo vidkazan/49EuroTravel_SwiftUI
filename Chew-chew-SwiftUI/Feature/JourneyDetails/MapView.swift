@@ -41,11 +41,10 @@ struct MapView: View {
 				.padding(5)
 		}
 		.font(.system(size: 17,weight: .semibold))
-		.background(.ultraThinMaterial)
-		.cornerRadius(8)
-		.transition(.move(edge: .bottom))
-		.opacity(viewModel.state.status.description == "locationDetails" ? 1 : 0)
-		.animation(.spring(), value: viewModel.state.status)
+		.background(Color.chewGrayScale10)
+		.onDisappear {
+			viewModel.send(event: .didCloseLocationDetails)
+		}
 	}
 }
 

@@ -39,9 +39,6 @@ struct JourneyDetailsView: View {
 					.sheet(isPresented: $bottomSheetIsPresented, content: {
 						if case .locationDetails(coordRegion: let reg, coordinates: let coords) = viewModel.state.status {
 							MapView(mapRect: reg, coords: coords,viewModel: viewModel)
-								.transition(.move(edge: .bottom))
-								.opacity(viewModel.state.status.description == "locationDetails" ? 1 : 0)
-								.animation(.spring(), value: viewModel.state.status)
 						}
 					})
 				case .error(error: let error):
