@@ -27,7 +27,7 @@ struct JourneyHeaderView: View {
 				Spacer()
 				Text(journey.durationLabelText)
 					.foregroundColor(.primary)
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 				Spacer()
 				TimeLabelView(
 					isSmall: false,

@@ -24,7 +24,7 @@ struct JourneysListView: View {
 					Text("connections not found")
 						.padding(5)
 						.foregroundColor(.secondary)
-						.font(.system(size: 17,weight: .semibold))
+						.chewTextSize(.big)
 						.frame(maxWidth: .infinity,alignment: .center)
 				case false:
 					ScrollView()  {
@@ -51,7 +51,7 @@ struct JourneysListView: View {
 				Text(error.description)
 					.padding(5)
 					.foregroundColor(.secondary)
-					.font(.system(size: 17,weight: .semibold))
+					.chewTextSize(.big)
 					.frame(maxWidth: .infinity,alignment: .center)
 			}
 			Spacer()

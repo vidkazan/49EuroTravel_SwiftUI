@@ -8,7 +8,7 @@
 import Foundation
 
 extension ChewViewModel {
-	enum DateType : Hashable {
+	enum DateType : Equatable,Hashable {
 		case now
 		case specificDate(Date)
 		

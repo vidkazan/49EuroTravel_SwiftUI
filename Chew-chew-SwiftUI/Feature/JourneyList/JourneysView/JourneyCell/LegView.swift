@@ -45,18 +45,18 @@ struct LegView: View {
 								if (Int(geo.size.width / 4) - 15 > duration.count) {
 									Text(duration)
 										.foregroundColor(.primary)
-										.font(.system(size: 12,weight: .semibold))
+										.chewTextSize(.medium)
 								}
 							}
 						case .line:
 							if (Int(geo.size.width / 7) > leg.lineViewData.name.count) {
 								Text(leg.lineViewData.name)
 									.foregroundColor(.primary)
-									.font(.system(size: 12,weight: .semibold))
+									.chewTextSize(.medium)
 							} else if (Int(geo.size.width / 7) > leg.lineViewData.shortName.count) {
 								Text(leg.lineViewData.shortName)
 									.foregroundColor(.primary)
-									.font(.system(size: 12,weight: .semibold))
+									.chewTextSize(.medium)
 							}
 						case .transfer:
 							EmptyView()

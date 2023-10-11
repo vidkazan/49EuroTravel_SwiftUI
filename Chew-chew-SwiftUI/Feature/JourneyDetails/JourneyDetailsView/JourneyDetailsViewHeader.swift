@@ -14,11 +14,11 @@ extension JourneyDetailsView {
 				HStack {
 					HStack {
 						Text(viewModel.state.data.origin)
-							.font(.system(size: 17,weight: .semibold))
+							.chewTextSize(.big)
 							.foregroundColor(.primary)
 						Image(systemName: "arrow.right")
 						Text(viewModel.state.data.destination)
-							.font(.system(size: 17,weight: .semibold))
+							.chewTextSize(.big)
 							.foregroundColor(.primary)
 					}
 					.padding(7)
@@ -31,7 +31,7 @@ extension JourneyDetailsView {
 						Text(viewModel.state.data.startDateString)
 					}
 						.padding(5)
-						.font(.system(size: 12,weight: .medium))
+						.chewTextSize(.medium)
 						.background(Color.chewGray10)
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
@@ -41,13 +41,13 @@ extension JourneyDetailsView {
 						Text(viewModel.state.data.timeContainer.stringValue.arrival.actual ?? "time")
 					}
 						.padding(5)
-						.font(.system(size: 12,weight: .medium))
+						.chewTextSize(.medium)
 						.background(Color.chewGray10)
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
 					Text(viewModel.state.data.durationLabelText)
 						.padding(5)
-						.font(.system(size: 12,weight: .medium))
+						.chewTextSize(.medium)
 						.background(Color.chewGray10)
 						.foregroundColor(.primary.opacity(0.6))
 						.cornerRadius(8)
@@ -57,7 +57,7 @@ extension JourneyDetailsView {
 							Text(String(viewModel.state.data.transferCount))
 						}
 							.padding(5)
-							.font(.system(size: 12,weight: .medium))
+							.chewTextSize(.medium)
 							.background(Color.chewGray10)
 							.foregroundColor(.primary.opacity(0.6))
 							.cornerRadius(8)

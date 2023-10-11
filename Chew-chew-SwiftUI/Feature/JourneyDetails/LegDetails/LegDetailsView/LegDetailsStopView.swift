@@ -71,7 +71,7 @@ struct LegStopView : View {
 					}
 					// MARK: Location Name under Badges
 					Text(stopOver.name)
-						.font(.system(size: 17,weight: .semibold))
+						.chewTextSize(.big)
 				}
 				Spacer()
 			}
@@ -119,10 +119,10 @@ struct LegStopView : View {
 					switch stopType {
 					case .origin, .destination,.footTop:
 						Text(stopOver.name)
-							.font(.system(size: 17,weight: .semibold))
+							.chewTextSize(.big)
 					case .stopover:
 						Text(stopOver.name)
-							.font(.system(size: 12,weight: .semibold))
+							.chewTextSize(.medium)
 							.foregroundColor(.gray)
 					case .transfer,.footBottom,.footMiddle:
 						EmptyView()
@@ -172,7 +172,7 @@ struct LegStopView : View {
 					// MARK: Location Name under Badges
 					if case .footBottom = stopType{
 						Text(stopOver.name)
-							.font(.system(size: 17,weight: .semibold))
+							.chewTextSize(.big)
 					}
 				}
 				Spacer()

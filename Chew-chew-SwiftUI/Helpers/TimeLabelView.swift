@@ -72,12 +72,12 @@ extension TimeLabelView {
 		case true:
 			return Text(delay > 0 ? "+" + String(delay) : "")
 				.foregroundColor(isSmall ? .gray : .secondary)
-				.font(.system(size: 12,weight: .semibold))
+				.chewTextSize(.medium)
 		case false:
 			return Text(delay > 0 ? time.planned : time.actual)
 				.strikethrough()
 				.foregroundColor(isSmall ? .gray : .secondary)
-				.font(.system(size: 12,weight: .semibold))
+				.chewTextSize(.medium)
 		}
 	}
 	func mainTime(delay : Int, cancelled : Bool) -> some View {

@@ -31,7 +31,7 @@ struct BadgeView : View {
 				.cornerRadius(8)
 		case .lineNumber(lineType: let type, num: let num):
 			Text(badge.badgeData.name)
-				.font(.system(size: 12,weight: .semibold))
+				.chewTextSize(.medium)
 				.foregroundColor(.primary)
 				.padding(4)
 				.background( .linearGradient(
@@ -47,7 +47,7 @@ struct BadgeView : View {
 		case .legDuration(dur: let dur):
 			HStack(spacing: 2) {
 				Text(badge.badgeData.name)
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
@@ -59,13 +59,13 @@ struct BadgeView : View {
 		case .legDirection(dir: let dir):
 			HStack(spacing: 2) {
 				Text("to")
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
 					.lineLimit(1)
 				Text(badge.badgeData.name)
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.primary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
@@ -77,15 +77,15 @@ struct BadgeView : View {
 		case .walking(duration: let dur):
 			HStack(spacing: 2) {
 				Image(systemName: "figure.walk.circle")
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
 				Text("walk")
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
 				Text(badge.badgeData.name)
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.primary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
@@ -94,16 +94,16 @@ struct BadgeView : View {
 		case .transfer(duration: let duration):
 			HStack(spacing: 2) {
 				Image(systemName: "arrow.triangle.2.circlepath")
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.primary)
 				Text("transfer")
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
 					.lineLimit(1)
 				Text(badge.badgeData.name)
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.primary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)
@@ -112,7 +112,7 @@ struct BadgeView : View {
 		case .stopsCount:
 			HStack(spacing: 2) {
 				Text(badge.badgeData.name)
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
 					.background(badge.badgeData.style)
 					.lineSpacing(2)

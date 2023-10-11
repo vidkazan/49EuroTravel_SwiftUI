@@ -25,7 +25,8 @@ struct ContentView: View {
 						JourneysListView(journeyViewModel: vm)
 							.padding(.top,10)
 					} else {
-						Spacer()
+						FavouriteRidesView()
+							.padding(.top,10)
 					}
 				}
 				.padding(10)

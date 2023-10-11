@@ -26,6 +26,8 @@
 		7D02CE342A98E8130048ADE6 /* JourneysListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE332A98E8130048ADE6 /* JourneysListView.swift */; };
 		7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */; };
 		7D15EEE82AD494D400833170 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D15EEE72AD494D400833170 /* MapView.swift */; };
+		7D181D642AD6D595003AB021 /* FavouriteRidesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D181D632AD6D595003AB021 /* FavouriteRidesView.swift */; };
+		7D181D672AD6D6BB003AB021 /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D181D662AD6D6BB003AB021 /* TextModifiers.swift */; };
 		7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E4492A98F9800037C3E1 /* LegsView.swift */; };
 		7D23E44C2A98FD700037C3E1 /* LegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E44B2A98FD700037C3E1 /* LegView.swift */; };
 		7D3E5F012AB321580064213A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3E5F002AB321580064213A /* LocationManager.swift */; };
@@ -143,6 +145,8 @@
 		7D02CE332A98E8130048ADE6 /* JourneysListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneysListView.swift; sourceTree = "<group>"; };
 		7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeContainer.swift; sourceTree = "<group>"; };
 		7D15EEE72AD494D400833170 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		7D181D632AD6D595003AB021 /* FavouriteRidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRidesView.swift; sourceTree = "<group>"; };
+		7D181D662AD6D6BB003AB021 /* TextModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifiers.swift; sourceTree = "<group>"; };
 		7D23E4492A98F9800037C3E1 /* LegsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegsView.swift; sourceTree = "<group>"; };
 		7D23E44B2A98FD700037C3E1 /* LegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegView.swift; sourceTree = "<group>"; };
 		7D3E5F002AB321580064213A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -317,8 +321,17 @@
 				7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */,
 				7D53705B2ACED7300009BA20 /* PlannedActual.swift */,
 				7DA885292ACF23F400263DB6 /* PrintThread.swift */,
+				7D181D662AD6D6BB003AB021 /* TextModifiers.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7D181D652AD6D5C1003AB021 /* FavouriteRides */ = {
+			isa = PBXGroup;
+			children = (
+				7D181D632AD6D595003AB021 /* FavouriteRidesView.swift */,
+			);
+			path = FavouriteRides;
 			sourceTree = "<group>";
 		};
 		7D462D3F2AAC93AA00BC0D65 /* reduce */ = {
@@ -339,6 +352,7 @@
 				7D6C5C282AAF77A700DEFC57 /* JourneyDetails */,
 				7DA8D3462A9A0DDC005DF550 /* SearchStop */,
 				7D9E108F2AA77CA200820B92 /* JourneyList */,
+				7D181D652AD6D5C1003AB021 /* FavouriteRides */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -817,6 +831,7 @@
 				7D7B3DA22AB9CC7E0070E44D /* LegDetailsStopView.swift in Sources */,
 				7D6C5C362AAF7C4500DEFC57 /* JourneyDetailsView.swift in Sources */,
 				7D000CF02AB86A4700566120 /* chewVM+sideEffect+userLocaiton.swift in Sources */,
+				7D181D672AD6D6BB003AB021 /* TextModifiers.swift in Sources */,
 				7DBF1E572ABB8084009B85EF /* TimeLabelView.swift in Sources */,
 				7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */,
 				7D6C5C142AAF482D00DEFC57 /* chewVM.swift in Sources */,
@@ -858,6 +873,7 @@
 				7D68D9F82ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift in Sources */,
 				7D462D5C2AACE5D100BC0D65 /* JourneyCell.swift in Sources */,
 				7DE3599F2AB9E9430028CA59 /* chewVM+reduce+LoadingLocaiton.swift in Sources */,
+				7D181D642AD6D595003AB021 /* FavouriteRidesView.swift in Sources */,
 				7D23E44C2A98FD700037C3E1 /* LegView.swift in Sources */,
 				7D7B3D9F2AB8DBFD0070E44D /* LegDetailsView.swift in Sources */,
 				7D7B3DAE2AB9D3620070E44D /* LegDetailsVM+reduce.swift in Sources */,

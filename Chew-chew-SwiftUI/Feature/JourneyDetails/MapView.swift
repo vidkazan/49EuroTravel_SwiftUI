@@ -41,7 +41,7 @@ struct MapSheet: View {
 	var body: some View {
 		VStack(alignment: .center,spacing: 0) {
 			Label("Map", systemImage: "map.circle")
-				.font(.system(size: 17,weight: .semibold))
+				.chewTextSize(.big)
 				.padding(10)
 			switch viewModel.state.status {
 			case .loadingLocationDetails:
@@ -62,7 +62,7 @@ struct MapSheet: View {
 				.cornerRadius(8)
 				.padding(5)
 		}
-		.font(.system(size: 17,weight: .semibold))
+		.chewTextSize(.big)
 		.background(Color.chewGrayScale10)
 		.onDisappear {
 			viewModel.send(event: .didCloseLocationDetails)

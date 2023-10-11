@@ -72,7 +72,7 @@ struct DatePickerView: View {
 				.foregroundColor(.primary)
 				.cornerRadius(10)
 		}
-		.font(.system(size: 17,weight: .semibold))
+		.chewTextSize(.big)
 		.padding(5)
 		.background(.ultraThinMaterial)
 		.cornerRadius(10)

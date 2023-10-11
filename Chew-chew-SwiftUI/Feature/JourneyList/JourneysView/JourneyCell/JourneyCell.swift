@@ -26,7 +26,7 @@ struct JourneyCell: View {
 					platform: journey.legs.first?.legStopsViewData.first?.departurePlatform.actual,
 					plannedPlatform: journey.legs.first?.legStopsViewData.first?.departurePlatform.planned)
 				Text(journey.legs.first?.legStopsViewData.first?.name != chewVM.topSearchFieldText ? journey.legs.first?.legStopsViewData.first?.name ?? "" : "")
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
 				Spacer()
 				BadgesView(badges: journey.badges)
@@ -61,7 +61,7 @@ struct PlatformView: View {
 					.frame(minWidth: 20)
 					.background(Color(red: 0.1255, green: 0.156, blue: 0.4))
 					.foregroundColor(pl == plannedPlatform ? .primary : .red)
-					.font(.system(size: 12,weight: .semibold))
+					.chewTextSize(.medium)
 					
 			}
 		}
