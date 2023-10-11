@@ -11,9 +11,10 @@ import MapKit
 struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	
+	@State var bottomSheetIsPresented : Bool
 	init(token : String?,data : JourneyViewData,depStop: StopType?,arrStop: StopType?) {
 		viewModel = JourneyDetailsViewModel(refreshToken: token, data: data,depStop: depStop,arrStop: arrStop)
+		bottomSheetIsPresented = false
 	}
 	var body: some View {
 		ZStack {
@@ -35,18 +36,21 @@ struct JourneyDetailsView: View {
 						}
 						.padding(10)
 					}
+					.sheet(isPresented: $bottomSheetIsPresented, content: {
+						if case .locationDetails(coordRegion: let reg, coordinates: let coords) = viewModel.state.status {
+							MapView(mapRect: reg, coords: coords,viewModel: viewModel)
+								.transition(.move(edge: .bottom))
+								.opacity(viewModel.state.status.description == "locationDetails" ? 1 : 0)
+								.animation(.spring(), value: viewModel.state.status)
+						}
+					})
 				case .error(error: let error):
 					Spacer()
 					Label(error.description, systemImage: "exclamationmark.circle.fill")
 					Spacer()
 				}
 			}
-			if case .locationDetails(coordRegion: let reg, coordinates: let coords) = viewModel.state.status {
-				MapView(mapRect: reg, coords: coords,viewModel: viewModel)
-					.transition(.move(edge: .bottom))
-					.opacity(viewModel.state.status.description == "locationDetails" ? 1 : 0)
-					.animation(.spring(), value: viewModel.state.status)
-			}
+			
 		}
 		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: viewModel.state.status)
@@ -55,5 +59,8 @@ struct JourneyDetailsView: View {
 				viewModel.send(event: .didTapReloadJourneys)
 			}, label: {Image(systemName: "arrow.clockwise")})
 		}
+		.onChange(of: viewModel.state.status, perform: { status in
+			bottomSheetIsPresented = status.description == "locationDetails"
+		})
 	}
 }
