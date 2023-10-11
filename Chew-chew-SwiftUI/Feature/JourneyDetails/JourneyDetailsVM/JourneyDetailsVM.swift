@@ -25,7 +25,6 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 		self.refreshToken = refreshToken
 		self.depStop = depStop
 		self.arrStop = arrStop
-//		state = State(data: data, status: .loadedJourneyData(data: data))
 		state = State(data: data, status: .loading(refreshToken: data.refreshToken))
 		Publishers.system(
 			initial: state,
@@ -33,7 +32,8 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenLoadingJourneyByRefreshToken()
+				self.whenLoadingJourneyByRefreshToken(),
+				Self.whenLoadingLocationDetails()
 			]
 		)
 			.assign(to: \.state, on: self)

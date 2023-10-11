@@ -27,7 +27,7 @@ struct JourneyDetailsView: View {
 					Spacer()
 					ProgressView()
 					Spacer()
-				case .loadedJourneyData,.locationDetails:
+				case .loadedJourneyData,.locationDetails,.loadingLocationDetails:
 					ScrollView() {
 						LazyVStack(spacing: 0){
 							ForEach(viewModel.state.data.legs) { leg in
@@ -37,8 +37,11 @@ struct JourneyDetailsView: View {
 						.padding(10)
 					}
 					.sheet(isPresented: $bottomSheetIsPresented, content: {
-						if case .locationDetails(coordRegion: let reg, coordinates: let coords) = viewModel.state.status {
-							MapView(mapRect: reg, coords: coords,viewModel: viewModel)
+						switch viewModel.state.status {
+						case .loadingLocationDetails,.locationDetails:
+							MapSheet(viewModel: viewModel)
+						case .loading, .loadedJourneyData, .error:
+							EmptyView()
 						}
 					})
 				case .error(error: let error):
@@ -47,8 +50,8 @@ struct JourneyDetailsView: View {
 					Spacer()
 				}
 			}
-			
 		}
+		.navigationBarTitle("Journey details", displayMode: .inline)
 		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: viewModel.state.status)
 		.toolbar {
@@ -57,7 +60,12 @@ struct JourneyDetailsView: View {
 			}, label: {Image(systemName: "arrow.clockwise")})
 		}
 		.onChange(of: viewModel.state.status, perform: { status in
-			bottomSheetIsPresented = status.description == "locationDetails"
+			switch status {
+			case .loadingLocationDetails,.locationDetails:
+				bottomSheetIsPresented = true
+			case .loading, .loadedJourneyData, .error:
+				bottomSheetIsPresented = false
+			}
 		})
 	}
 }

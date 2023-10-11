@@ -9,7 +9,7 @@ import Combine
 import Foundation
 
 extension ChewViewModel {
-	
+	// TODO: reverse geocoding https://medium.com/aeturnuminc/geocoding-in-swift-611bda45efe1 or https://nominatim.openstreetmap.org/reverse?lon=10.78008628451338&lat=52.4212646484375&format=json&pretty=true
 	func whenLoadingUserLocation() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingLocation = state.status else {

@@ -25,6 +25,7 @@ extension JourneyDetailsViewModel {
 		case loading(refreshToken : String?)
 		case loadedJourneyData
 		case error(error : ApiServiceError)
+		case loadingLocationDetails(leg : LegViewData)
 		case locationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
 		
 		var description : String {
@@ -37,6 +38,8 @@ extension JourneyDetailsViewModel {
 				return "error"
 			case .locationDetails:
 				return "locationDetails"
+			case .loadingLocationDetails:
+				return "loadingLocationDetails"
 			}
 		}
 	}
@@ -46,7 +49,8 @@ extension JourneyDetailsViewModel {
 		case didFailedToLoadJourneyData(error : ApiServiceError)
 		case didTapReloadJourneys
 		case didExpandLegDetails
-		case didTapLocationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
+		case didLoadLocationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
+		case didTapLocationDetails(leg : LegViewData)
 		case didCloseLocationDetails
 		
 		var description : String {
@@ -63,6 +67,8 @@ extension JourneyDetailsViewModel {
 				return "didTapLocationDetails"
 			case .didCloseLocationDetails:
 				return "didCloseLocationDetails"
+			case .didLoadLocationDetails:
+				return "didLoadLocationDetails"
 			}
 		}
 	}

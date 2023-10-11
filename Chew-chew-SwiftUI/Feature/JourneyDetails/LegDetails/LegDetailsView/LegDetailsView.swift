@@ -138,35 +138,8 @@ struct LegDetailsView: View {
 				vm.send(event: .didtapExpandButton)
 			}
 		}
-		// TODO: move to mapDetailsViewModel
 		.onLongPressGesture {
-			if let locFirst = vm.state.leg.legStopsViewData.first?.locationCoordinates,
-			   let locLast = vm.state.leg.legStopsViewData.last?.locationCoordinates {
-				let centerCoordinate = CLLocationCoordinate2D(
-					latitude: (locFirst.latitude + locLast.latitude) / 2,
-					longitude: (locFirst.longitude + locLast.longitude) / 2
-				)
-
-				// Calculate the span (delta) between the two coordinates
-				let latitudinalDelta = abs(locFirst.latitude - locLast.latitude)
-				let longitudinalDelta = abs(locFirst.longitude - locLast.longitude)
-
-				// Add a little padding to the span
-				let span = MKCoordinateSpan(
-					latitudeDelta: latitudinalDelta * 1.4, // You can adjust this factor as needed
-					longitudeDelta: longitudinalDelta * 1.4 // You can adjust this factor as needed
-				)
-
-				// Create and return the region
-				let region = MKCoordinateRegion(center: centerCoordinate, span: span)
-				journeyVM.send(
-					event: .didTapLocationDetails(
-						coordRegion: region,
-						coordinates: [
-							locFirst,locLast
-						]
-					))
-			}
+			journeyVM.send(event: .didTapLocationDetails(leg: vm.state.leg))
 		}
 	}
 }

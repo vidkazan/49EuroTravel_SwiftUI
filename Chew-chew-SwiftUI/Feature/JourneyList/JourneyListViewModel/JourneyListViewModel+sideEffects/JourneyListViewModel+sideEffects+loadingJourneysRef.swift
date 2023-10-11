@@ -18,7 +18,9 @@ extension JourneyListViewModel {
 		  case .earlierRef:
 			  guard let ref = state.earlierRef else { return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher() }
 			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
-				  .map({data in JourneysViewData.init(data: data, depStop: self.depStop, arrStop: self.arrStop)})
+				  .map({ data in
+					  JourneysViewData(data: data, depStop: self.depStop, arrStop: self.arrStop)
+				  })
 				  .map {Event.onNewJourneysData($0,type)}
 				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
 				  .eraseToAnyPublisher()
@@ -28,7 +30,7 @@ extension JourneyListViewModel {
 				  return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
 			  }
 			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
-				  .map({data in JourneysViewData.init(data: data, depStop: self.depStop, arrStop: self.arrStop)})
+				  .map({data in JourneysViewData(data: data, depStop: self.depStop, arrStop: self.arrStop)})
 				  .map {Event.onNewJourneysData($0,type)}
 				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
 				  .eraseToAnyPublisher()

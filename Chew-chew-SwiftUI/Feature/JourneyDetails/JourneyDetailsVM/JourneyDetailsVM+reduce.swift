@@ -31,6 +31,8 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didCloseLocationDetails:
 				return state
+			case .didLoadLocationDetails:
+				return state
 			}
 		case .loadedJourneyData:
 			switch event {
@@ -45,12 +47,14 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
 				)
-			case .didTapLocationDetails(coordRegion: let reg, coordinates: let coords):
+			case .didTapLocationDetails(leg: let leg):
 				return State(
 					data: state.data,
-					status: .locationDetails(coordRegion: reg,coordinates: coords)
+					status: .loadingLocationDetails(leg: leg)
 				)
 			case .didCloseLocationDetails:
+				return state
+			case .didLoadLocationDetails:
 				return state
 			}
 		case .error:
@@ -70,6 +74,8 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didCloseLocationDetails:
 				return state
+			case .didLoadLocationDetails:
+				return state
 			}
 		case .locationDetails:
 			switch event {
@@ -81,6 +87,37 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didTapReloadJourneys:
 				return state
+			case .didTapLocationDetails:
+				return state
+			case .didCloseLocationDetails:
+				return State(
+					data: state.data,
+					status: .loadedJourneyData
+				)
+			case .didLoadLocationDetails:
+				return state
+			}
+		case .loadingLocationDetails:
+			switch event {
+			case .didLoadJourneyData(let data):
+				return State(
+					data: data,
+					status: state.status
+				)
+			case .didFailedToLoadJourneyData:
+				return state
+			case .didTapReloadJourneys:
+				return State(
+					data: state.data,
+					status: .loading(refreshToken: state.data.refreshToken)
+				)
+			case .didExpandLegDetails:
+				return state
+			case .didLoadLocationDetails(let coordRegion, let coordinates):
+				return State(
+					data: state.data,
+					status: .locationDetails(coordRegion: coordRegion, coordinates: coordinates)
+				)
 			case .didTapLocationDetails:
 				return state
 			case .didCloseLocationDetails:

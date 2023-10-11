@@ -13,7 +13,7 @@ extension JourneyListViewModel {
 	  Feedback {(state: State) -> AnyPublisher<Event, Never> in
 		  guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
 		  return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date)
-			  .map({data in JourneysViewData.init(data: data, depStop: self.depStop, arrStop: self.arrStop)})
+			  .map({data in JourneysViewData(data: data, depStop: self.depStop, arrStop: self.arrStop)})
 			  .map {Event.onNewJourneysData($0,.initial)}
 			  .catch { error in Just(.onFailedToLoadJourneysData(error))}
 			  .eraseToAnyPublisher()

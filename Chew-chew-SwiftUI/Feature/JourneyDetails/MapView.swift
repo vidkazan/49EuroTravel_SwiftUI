@@ -15,22 +15,44 @@ extension CLLocationCoordinate2D: Identifiable {
 	}
 }
 
+
+// TODO: routing https://www.hackingwithswift.com/example-code/location/how-to-find-directions-using-mkmapview-and-mkdirectionsrequest
 struct MapView: View {
 	@State var mapRect : MKCoordinateRegion
-	var coords : [CLLocationCoordinate2D]
+	let coords : [CLLocationCoordinate2D]
+	var body: some View {
+		Map(coordinateRegion: $mapRect,interactionModes: .all,showsUserLocation: true, annotationItems: coords) { coord in
+			MapAnnotation(coordinate: coord) {
+				Color.chewRedScale80
+					.shadow(radius: 2)
+					.cornerRadius(10)
+					.frame(width: 20, height: 20)
+			}
+		}
+		.background(Color.chewGray15)
+		.cornerRadius(8)
+		.padding(5)
+	}
+}
+
+
+struct MapSheet: View {
 	@ObservedObject var viewModel : JourneyDetailsViewModel
 	var body: some View {
-		VStack(alignment: .center) {
-			Map(coordinateRegion: $mapRect,interactionModes: .all,showsUserLocation: true, annotationItems: coords) { coord in
-				MapAnnotation(coordinate: coord) {
-					Color.chewRedScale80
-						.shadow(radius: 2)
-						.cornerRadius(10)
-						.frame(width: 20, height: 20)
-				}
+		VStack(alignment: .center,spacing: 0) {
+			Label("Map", systemImage: "map.circle")
+				.font(.system(size: 17,weight: .semibold))
+				.padding(10)
+			switch viewModel.state.status {
+			case .loadingLocationDetails:
+				Spacer()
+				ProgressView()
+				Spacer()
+			case .locationDetails(coordRegion: let reg, coordinates: let coords):
+				MapView(mapRect: reg, coords: coords)
+			case .error,.loadedJourneyData,.loading:
+				Spacer()
 			}
-				.cornerRadius(8)
-				.padding(5)
 			Button("Close") {
 				viewModel.send(event: .didCloseLocationDetails)
 			}
