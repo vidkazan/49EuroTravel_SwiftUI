@@ -9,14 +9,10 @@ import SwiftUI
 
 struct TimeChoosingView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var searchStopViewModel : SearchLocationViewModel
 	@State private var selectedOption = 0
 	private var datePickerIsShowing = false
 	private var options = ["now","date"]
-   
-	init(searchStopViewModel: SearchLocationViewModel) {
-		self.searchStopViewModel = searchStopViewModel
-	}
+	
 	var body: some View {
 		ZStack {
 			Rectangle()
