@@ -11,12 +11,12 @@ extension JourneyDetailsViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
 		print("🟣🔥 > details event:",event.description,"state:",state.status.description)
 		switch state.status {
-		case .loading(refreshToken: let refreshToken):
+		case .loading:
 			switch event {
 			case .didLoadJourneyData(let data):
 				return State(
-					data: state.data,
-					status: .loadedJourneyData(data: data)
+					data: data,
+					status: .loadedJourneyData
 				)
 			case .didFailedToLoadJourneyData(let error):
 				return State(
@@ -24,10 +24,7 @@ extension JourneyDetailsViewModel {
 					status: .error(error: error)
 				)
 			case .didTapReloadJourneys:
-				return State(
-					data: state.data,
-					status: .loading(refreshToken: refreshToken)
-				)
+				return state
 			case .didExpandLegDetails:
 				return state
 			case .didTapLocationDetails:
@@ -74,7 +71,7 @@ extension JourneyDetailsViewModel {
 			case .didCloseLocationDetails:
 				return state
 			}
-		case .locationDetails(coordRegion: let region):
+		case .locationDetails:
 			switch event {
 			case .didExpandLegDetails:
 				return state
@@ -89,7 +86,7 @@ extension JourneyDetailsViewModel {
 			case .didCloseLocationDetails:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData(data: state.data)
+					status: .loadedJourneyData
 				)
 			}
 		}

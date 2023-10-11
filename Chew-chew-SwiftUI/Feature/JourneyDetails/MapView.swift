@@ -35,14 +35,14 @@ struct MapView: View {
 				viewModel.send(event: .didCloseLocationDetails)
 			}
 				.frame(maxWidth: .infinity,minHeight: 43)
-				.background(Color.chewGray10)
+				.background(Color.chewGray15)
 				.foregroundColor(.primary)
 				.cornerRadius(8)
 				.padding(5)
 		}
 		.font(.system(size: 17,weight: .semibold))
 		.background(.ultraThinMaterial)
-		.cornerRadius(10)
+		.cornerRadius(8)
 		.transition(.move(edge: .bottom))
 		.opacity(viewModel.state.status.description == "locationDetails" ? 1 : 0)
 		.animation(.spring(), value: viewModel.state.status)

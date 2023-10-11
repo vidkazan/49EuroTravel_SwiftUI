@@ -9,12 +9,16 @@ import CoreLocation
 
 func constructJourneyViewData(
 	journey : Journey,
-	timeContainer : TimeContainer,
-	firstDelay : Int,
-	lastDelay : Int,
-	depStop: StopType,
-	arrStop : StopType
+	depStop: StopType?,
+	arrStop : StopType?
 ) -> JourneyViewData {
+	let timeContainer = TimeContainer(
+		plannedDeparture: journey.legs.first?.plannedDeparture,
+		plannedArrival: journey.legs.last?.plannedArrival,
+		actualDeparture: journey.legs.first?.departure,
+		actualArrival: journey.legs.last?.arrival,
+		cancelled: nil
+	)
 	var isReachable = true
 	var remarks : [Remark] = []
 	var legsData : [LegViewData] = []
@@ -45,12 +49,12 @@ func constructJourneyViewData(
 	}
 	let sunEventGenerator = SunEventGenerator(
 		locationStart: CLLocationCoordinate2D(
-			latitude: depStop.stop.location?.latitude ?? 0,
-			longitude: depStop.stop.location?.longitude ?? 0
+			latitude: depStop?.stop.location?.latitude ?? 0,
+			longitude: depStop?.stop.location?.longitude ?? 0
 		),
 		locationFinal : CLLocationCoordinate2D(
-			latitude: arrStop.stop.location?.latitude ?? 0,
-			longitude: arrStop.stop.location?.longitude ?? 0
+			latitude: arrStop?.stop.location?.latitude ?? 0,
+			longitude: arrStop?.stop.location?.longitude ?? 0
 		),
 		dateStart: startTS,
 		dateFinal: endTS)

@@ -103,6 +103,10 @@ struct Price : Codable,Equatable {
 	let currency	: String?
 	let hint		: String?
 }
+
+struct JourneyWrapper : Codable,Equatable {
+	let journey : Journey
+}
 struct Journey : Codable,Identifiable,Equatable {
 	let id = UUID()
 	let type : String?
@@ -123,7 +127,7 @@ struct JourneysContainer : Codable,Equatable {
 	let earlierRef: String?
 	let laterRef: String?
 	let journeys : [Journey]
-	let realtimeDataUpdatedAt: Int64?
+//	let realtimeDataUpdatedAt: Int64?
 }
 
 enum StopType : Equatable {

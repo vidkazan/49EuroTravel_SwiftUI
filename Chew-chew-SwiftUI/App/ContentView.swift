@@ -22,7 +22,7 @@ struct ContentView: View {
 					SearchStopsView(searchStopViewModel: chewViewModel.state.searchStopViewModel)
 					TimeChoosingView(searchStopViewModel: chewViewModel.state.searchStopViewModel)
 					if case .journeys(let vm) = chewViewModel.state.status {
-						JourneysView(journeyViewModel: vm)
+						JourneysListView(journeyViewModel: vm)
 							.padding(.top,10)
 					} else {
 						Spacer()

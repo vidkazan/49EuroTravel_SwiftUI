@@ -206,9 +206,9 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneyListViewModel/constructJourneys/constructJourneys+Journey/constructJourneys+Journey.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "constructJourneyViewData(journey:timeContainer:firstDelay:lastDelay:depStop:arrStop:)"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
+            landmarkName = "constructJourneyViewData(journey:depStop:arrStop:)"
             landmarkType = "9">
          </BreakpointContent>
       </BreakpointProxy>
@@ -371,84 +371,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E8E5D151-21E7-4F9E-819E-B67F30399947"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "26"
-            endingLineNumber = "26"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "E8E5D151-21E7-4F9E-819E-B67F30399947 - 1a2f1dc444b24bf5"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, Chew_chew_SwiftUI.LegDetailsView&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0, SwiftUI.ScrollView&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0&gt;)&gt; in Chew_chew_SwiftUI.JourneyDetailsView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "25"
-                  endingLineNumber = "25"
-                  offsetFromSymbolStart = "544">
-               </Location>
-               <Location
-                  uuid = "E8E5D151-21E7-4F9E-819E-B67F30399947 - 626aa35d12ab2bea"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Chew_chew_SwiftUI.LegViewData) -&gt; Chew_chew_SwiftUI.LegDetailsView in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, Chew_chew_SwiftUI.LegDetailsView&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0, SwiftUI.ScrollView&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0&gt;)&gt; in Chew_chew_SwiftUI.JourneyDetailsView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "26"
-                  endingLineNumber = "26"
-                  offsetFromSymbolStart = "152">
-               </Location>
-               <Location
-                  uuid = "E8E5D151-21E7-4F9E-819E-B67F30399947 - 8a60f77e8f57840c"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.EmptyView&gt;, SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, Chew_chew_SwiftUI.LegDetailsView&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0, SwiftUI.ScrollView&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0&gt;)&gt; in Chew_chew_SwiftUI.JourneyDetailsView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "27"
-                  endingLineNumber = "27"
-                  offsetFromSymbolStart = "764">
-               </Location>
-               <Location
-                  uuid = "E8E5D151-21E7-4F9E-819E-B67F30399947 - b6598a4b9a84e69e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Chew_chew_SwiftUI.LegViewData) -&gt; Chew_chew_SwiftUI.LegDetailsView in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.ForEach&lt;Swift.Range&lt;Swift.Int&gt;, Swift.Int, SwiftUI.EmptyView&gt;, SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, Chew_chew_SwiftUI.LegDetailsView&gt;)&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0, SwiftUI.ScrollView&lt;&lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0&gt;)&gt; in Chew_chew_SwiftUI.JourneyDetailsView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "28"
-                  endingLineNumber = "28"
-                  offsetFromSymbolStart = "152">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E17050E7-E5F5-4CEF-B615-E53FCC8DD05A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -456,10 +378,10 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
-            landmarkName = "body"
-            landmarkType = "24">
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "JourneyDetailsView"
+            landmarkType = "14">
             <Locations>
                <Location
                   uuid = "E17050E7-E5F5-4CEF-B615-E53FCC8DD05A - 3eec403fd49698f7"

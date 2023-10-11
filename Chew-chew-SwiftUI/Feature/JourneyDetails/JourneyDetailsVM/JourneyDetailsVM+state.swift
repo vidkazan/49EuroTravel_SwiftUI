@@ -23,7 +23,7 @@ extension JourneyDetailsViewModel {
 			return lhs.description == rhs.description
 		}
 		case loading(refreshToken : String?)
-		case loadedJourneyData(data : JourneyViewData)
+		case loadedJourneyData
 		case error(error : ApiServiceError)
 		case locationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
 		

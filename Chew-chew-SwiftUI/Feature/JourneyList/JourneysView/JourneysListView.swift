@@ -8,7 +8,7 @@
 import SwiftUI
 
 
-struct JourneysView: View {
+struct JourneysListView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var journeyViewModel : JourneyListViewModel
     var body: some View {
@@ -31,7 +31,7 @@ struct JourneysView: View {
 						LazyVStack{
 							ForEach(journeyViewModel.state.journeys,id: \.id) { journey in
 								NavigationLink(destination: {
-									NavigationLazyView(JourneyDetailsView(token: journey.refreshToken, data: journey))
+									NavigationLazyView(JourneyDetailsView(token: journey.refreshToken, data: journey,depStop: chewVM.state.depStop,arrStop: chewVM.state.arrStop))
 								}, label: {
 									JourneyCell(journey: journey)
 								})	

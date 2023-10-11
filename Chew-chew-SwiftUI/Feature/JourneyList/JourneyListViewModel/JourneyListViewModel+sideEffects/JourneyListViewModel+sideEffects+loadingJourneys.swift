@@ -88,7 +88,7 @@ extension JourneyListViewModel {
 			Query.taxi(taxi: false),
 			Query.remarks(showRemarks: true),
 			Query.results(max: 5),
-			Query.stopovers(isShowing: true)
+//			Query.stopovers(isShowing: true)
 		])
 		return ApiService.fetchCombine(JourneysContainer.self,query: query, type: ApiService.Requests.journeys, requestGroupId: "")
 	}

@@ -23,7 +23,7 @@ class ApiService  {
 	
 	enum Requests {
 		case journeys
-		case journeyByRefreshToken(ref : String?)
+		case journeyByRefreshToken(ref : String)
 		case locations(name : String)
 		case customGet(path : String)
 		
@@ -76,7 +76,7 @@ class ApiService  {
 			case .customGet(let path):
 				return path
 			case .journeyByRefreshToken(let ref):
-				return Constants.apiData.urlPathJourneys + "/" + (ref ?? "")
+				return Constants.apiData.urlPathJourneys + "/" + ref
 			}
 		}
 		

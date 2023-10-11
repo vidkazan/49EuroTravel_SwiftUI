@@ -9,6 +9,7 @@
 import Foundation
 import Combine
 
+@MainActor
 final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
 		didSet {
@@ -18,16 +19,21 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	var refreshToken : String?
-	
-	init(refreshToken : String?,data: JourneyViewData) {
+	var depStop : StopType?
+	var arrStop : StopType?
+	init(refreshToken : String?,data: JourneyViewData,depStop : StopType?, arrStop : StopType?) {
 		self.refreshToken = refreshToken
-		state = State(data: data, status: .loadedJourneyData(data: data))
+		self.depStop = depStop
+		self.arrStop = arrStop
+//		state = State(data: data, status: .loadedJourneyData(data: data))
+		state = State(data: data, status: .loading(refreshToken: data.refreshToken))
 		Publishers.system(
 			initial: state,
 			reduce: self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
-				Self.userInput(input: input.eraseToAnyPublisher())
+				Self.userInput(input: input.eraseToAnyPublisher()),
+				self.whenLoadingJourneyByRefreshToken()
 			]
 		)
 			.assign(to: \.state, on: self)

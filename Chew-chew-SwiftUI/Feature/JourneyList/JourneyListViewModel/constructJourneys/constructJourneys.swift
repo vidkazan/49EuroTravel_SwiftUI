@@ -10,18 +10,8 @@ import CoreLocation
 	
 func constructJourneysViewData(journeysData : JourneysContainer, depStop : StopType, arrStop : StopType) -> [JourneyViewData] {
 	let res = journeysData.journeys.compactMap { (journey) -> JourneyViewData? in
-		let container = TimeContainer(
-			plannedDeparture: journey.legs.first?.plannedDeparture,
-			plannedArrival: journey.legs.last?.plannedArrival,
-			actualDeparture: journey.legs.first?.departure,
-			actualArrival: journey.legs.last?.arrival,
-			cancelled: nil
-		)
 		return constructJourneyViewData(
 			journey: journey,
-			timeContainer: container,
-			firstDelay: journey.legs.first?.departureDelay ?? 0,
-			lastDelay: journey.legs.last?.arrivalDelay ?? 0,
 			depStop: depStop,
 			arrStop: arrStop
 		)
