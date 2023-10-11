@@ -17,7 +17,8 @@ extension SearchLocationViewModel {
 	
 	func whenLoadingStops() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .loading(let string, let type) = state.status else {
+			guard case .loading(let string) = state.status,
+				  let type = state.type else {
 				return Empty().eraseToAnyPublisher()
 			}
 			return SearchLocationViewModel.fetchLocations(text: string, type: type)

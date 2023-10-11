@@ -27,22 +27,18 @@ extension ChewViewModel {
 				status: .idle
 			)
 		case .onDepartureEdit:
-			self.topSearchFieldText = ""
 			return State(
 				depStop: nil,
 				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
-				status: .editingDepartureStop,
-				searchStopViewModel: SearchLocationViewModel(type: .departure)
+				status: .editingDepartureStop
 			)
 		case .onArrivalEdit:
-			self.bottomSearchFieldText = ""
 			return State(
 				depStop: state.depStop,
 				arrStop: nil,
 				timeChooserDate: state.timeChooserDate,
-				status: .editingArrivalStop,
-				searchStopViewModel: SearchLocationViewModel(type: .departure)
+				status: .editingArrivalStop
 			)
 		case .onDatePickerDidPressed:
 			return State(

@@ -54,7 +54,7 @@ struct TimeChoosingView: View {
 		.cornerRadius(10)
 		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: chewVM.state.status)
-		.animation(.spring(), value: chewVM.state.searchStopViewModel.state.status)
+//		.animation(.spring(), value: chewVM.state.searchStopViewModel.state.status)
 	}
 
 	func optionPressed(_ index: Int) {

@@ -16,8 +16,7 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: nil,
 				timeChooserDate: state.timeChooserDate,
-				status: .editingArrivalStop,
-				searchStopViewModel: SearchLocationViewModel(type: .arrival)
+				status: .editingArrivalStop
 			)
 		case .onDatePickerDidPressed:
 			return State(
@@ -41,7 +40,6 @@ extension ChewViewModel {
 				status: .editingArrivalStop
 			)
 		case .onNewDeparture(let stop):
-			self.topSearchFieldText = stop?.stop.name ?? "no name"
 			return State(
 				depStop: stop,
 				arrStop: state.arrStop,

@@ -14,9 +14,8 @@ extension SearchLocationViewModel {
 		case .onSearchFieldDidChanged(let string, let type):
 			return State(
 				stops: state.stops,
-				previousSearchLineString: state.previousSearchLineString,
-				status: .loading(string, type),
-				type: state.type
+				status: .loading(string),
+				type: type
 			)
 		case
 			.onDataLoaded,

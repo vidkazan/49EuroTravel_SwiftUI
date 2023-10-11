@@ -25,7 +25,7 @@ struct JourneyCell: View {
 					isShowingPlatormWord: false,
 					platform: journey.legs.first?.legStopsViewData.first?.departurePlatform.actual,
 					plannedPlatform: journey.legs.first?.legStopsViewData.first?.departurePlatform.planned)
-				Text(journey.legs.first?.legStopsViewData.first?.name != chewVM.topSearchFieldText ? journey.legs.first?.legStopsViewData.first?.name ?? "" : "")
+				Text(journey.legs.first?.legStopsViewData.first?.name ?? "")
 					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
 				Spacer()

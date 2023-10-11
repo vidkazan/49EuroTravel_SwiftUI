@@ -8,13 +8,7 @@
 import Foundation
 
 extension ChewViewModel {
-	func transform(_ state: State, _ event: Event){
-		if case .didReceiveLocationData = event{
-			self.topSearchFieldText = "My Location"
-		}
-	}
 	func reduce(_ state: State, _ event: Event) -> State {
-		transform(state, event)
 		print("⚪🔥 > main event:",event.description,"state:",state.status.description)
 		switch state.status {
 		case .idle:

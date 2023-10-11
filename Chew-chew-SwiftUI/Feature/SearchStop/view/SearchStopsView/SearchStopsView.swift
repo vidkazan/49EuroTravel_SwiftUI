@@ -12,9 +12,12 @@ struct SearchStopsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
 	@ObservedObject var searchStopViewModel : SearchLocationViewModel
 	@FocusState	var focusedField : LocationDirectionType?
-	
-	init(searchStopViewModel: SearchLocationViewModel) {
-		self.searchStopViewModel = searchStopViewModel
+	@State var topText : String
+	@State var bottomText : String
+	init() {
+		self.searchStopViewModel = SearchLocationViewModel()
+		self.topText = ""
+		self.bottomText = ""
 	}
 	
 	var body: some View {
@@ -24,8 +27,8 @@ struct SearchStopsView: View {
 				HStack {
 					textField(
 						type: .departure,
-						text: chewViewModel.topSearchFieldText,
-						textBinding: $chewViewModel.topSearchFieldText,
+						text: topText,
+						textBinding: $topText,
 						focusedField: focusedField,
 						focusedFieldBinding: $focusedField
 					)
@@ -34,7 +37,7 @@ struct SearchStopsView: View {
 				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
-				if searchStopViewModel.state.type == .departure {
+				if case .departure = searchStopViewModel.state.type {
 					stopList(type: .departure)
 				}
 			}
@@ -47,8 +50,8 @@ struct SearchStopsView: View {
 				HStack {
 					textField(
 						type: .arrival,
-						text: chewViewModel.bottomSearchFieldText,
-						textBinding: $chewViewModel.bottomSearchFieldText,
+						text: bottomText,
+						textBinding: $bottomText,
 						focusedField: focusedField,
 						focusedFieldBinding: $focusedField
 					)
@@ -57,7 +60,7 @@ struct SearchStopsView: View {
 				.background(chewViewModel.state.status == .editingArrivalStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
-				if searchStopViewModel.state.type == .arrival {
+				if case .arrival = searchStopViewModel.state.type {
 					stopList(type: .arrival)
 				}
 			}
@@ -67,17 +70,25 @@ struct SearchStopsView: View {
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: searchStopViewModel.state.status)
 		}
-		.onChange(of: chewViewModel.state.status, perform: { s in
-			focusedField = {
-				switch s {
+		.onChange(of: chewViewModel.state, perform: { state in
+			if let depStop = state.depStop {
+				topText = depStop.stop.name ?? "Origin"
+			} else {
+				topText = ""
+			}
+			if let arrStop = state.arrStop {
+				bottomText = arrStop.stop.name ?? "Destination"
+			}  else {
+				bottomText = ""
+			}
+				switch state.status {
 				case .editingDepartureStop:
-					return .departure
+					focusedField =  .departure
 				case .editingArrivalStop:
-					return .arrival
+					focusedField =  .arrival
 				default:
-					return nil
+					focusedField = nil
 				}
-			}()
 		})
 	}
 }

@@ -22,25 +22,22 @@ extension ChewViewModel {
 		}
 	}
 	
-	struct State {
+	struct State : Equatable {
 		var depStop : StopType?
 		var arrStop : StopType?
 		var timeChooserDate : DateType
 		var status : Status
-		let searchStopViewModel : SearchLocationViewModel
 		
 		init(
 			depStop: StopType?,
 			arrStop: StopType?,
 			timeChooserDate: DateType,
-			status: Status,
-			searchStopViewModel: SearchLocationViewModel = SearchLocationViewModel(type: .departure)
+			status: Status
 		) {
 			self.depStop = depStop
 			self.arrStop = arrStop
 			self.timeChooserDate = timeChooserDate
 			self.status = status
-			self.searchStopViewModel = searchStopViewModel
 		}
 	}
 	

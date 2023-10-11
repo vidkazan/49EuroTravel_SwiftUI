@@ -19,7 +19,7 @@ struct ContentView: View {
 		NavigationView {
 			ZStack {
 				VStack(spacing: 5) {
-					SearchStopsView(searchStopViewModel: chewViewModel.state.searchStopViewModel)
+					SearchStopsView()
 					TimeChoosingView()
 					if case .journeys(let vm) = chewViewModel.state.status {
 						JourneysListView(journeyViewModel: vm)

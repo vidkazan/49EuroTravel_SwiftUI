@@ -15,37 +15,32 @@ extension SearchLocationViewModel {
 		case .onDataLoaded(let stops, let type):
 			return State(
 				stops: stops,
-				previousSearchLineString: state.previousSearchLineString,
 				status: .loaded,
 				type: type
 			)
 		case .onDataLoadError(let error):
 			return State(
 				stops: [],
-				previousSearchLineString: state.previousSearchLineString,
 				status: .error(error),
 				type: state.type
 			)
 		case .onSearchFieldDidChanged(let string, let type):
 			return State(
 				stops: state.stops,
-				previousSearchLineString: state.previousSearchLineString,
-				status: .loading(string, type),
+				status: .loading(string),
 				type: type
 			)
-		case .onReset(_):
+		case .onReset(let type):
 			return State(
 				stops: [],
-				previousSearchLineString: "",
-				status: .idle,
-				type: state.type
-			)
-		case .onStopDidTap((_), let type):
-			return State(
-				stops: [],
-				previousSearchLineString: "",
 				status: .idle,
 				type: type
+			)
+		case .onStopDidTap:
+			return State(
+				stops: [],
+				status: .idle,
+				type: nil
 			)
 		}
 	}

@@ -12,13 +12,11 @@ extension ChewViewModel {
 		guard case .editingArrivalStop = state.status else { return state }
 		switch event {
 		case .onDepartureEdit:
-			self.topSearchFieldText = ""
 			return State(
 				depStop: nil,
 				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
-				status: .editingDepartureStop,
-				searchStopViewModel: SearchLocationViewModel(type: .departure)
+				status: .editingDepartureStop
 			)
 		case .onDatePickerDidPressed:
 			return State(
@@ -42,7 +40,6 @@ extension ChewViewModel {
 				status: .editingDepartureStop
 			)
 		case .onNewArrival(let stop):
-			self.bottomSearchFieldText = stop?.stop.name ?? "no name"
 			return State(
 				depStop: state.depStop,
 				arrStop: stop,

@@ -58,7 +58,7 @@ struct JourneysListView: View {
 		}
 		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: journeyViewModel.state.status)
-		.animation(.spring(), value: chewVM.state.searchStopViewModel.state)
+//		.animation(.spring(), value: chewVM.state.searchStopViewModel.state)
 		.frame(maxWidth: .infinity)
 		.cornerRadius(10)
     }

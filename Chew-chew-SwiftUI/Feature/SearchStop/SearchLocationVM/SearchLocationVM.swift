@@ -21,12 +21,11 @@ class SearchLocationViewModel : ObservableObject {
 		}
 	}
 	
-	init(type : LocationDirectionType) {
+	init() {
 		state = State(
 			stops: [],
-			previousSearchLineString: "",
 			status: .idle,
-			type: type
+			type: .departure
 		)
 		Publishers.system(
 			initial: state,

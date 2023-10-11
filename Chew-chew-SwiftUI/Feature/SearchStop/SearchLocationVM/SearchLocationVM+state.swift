@@ -11,9 +11,8 @@ extension SearchLocationViewModel {
 	
 	struct State : Equatable, Hashable {
 		var stops : [Stop]
-		var previousSearchLineString : String
 		var status : Status
-		var type : LocationDirectionType
+		var type : LocationDirectionType?
 	}
 	
 	enum Status : Equatable,Hashable {
@@ -21,7 +20,7 @@ extension SearchLocationViewModel {
 			return lhs.description == rhs.description
 		}
 		case idle
-		case loading(String,LocationDirectionType)
+		case loading(String)
 		case loaded
 		case error(ApiServiceError)
 

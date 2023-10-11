@@ -23,13 +23,9 @@ extension SearchStopsView {
 				switch type {
 				case .departure:
 					chewViewModel.send(event: .didLocationButtonPressed)
-//					searchStopViewModel.send(event: .didLocationButtonPressed)
 					break
 				case .arrival:
 					chewViewModel.send(event: .onStopsSwitch)
-					let tmp = chewViewModel.topSearchFieldText
-					chewViewModel.topSearchFieldText = chewViewModel.bottomSearchFieldText
-					chewViewModel.bottomSearchFieldText = tmp
 				}
 			}, label: {
 				switch searchStopViewModel.state.status {
