@@ -91,6 +91,13 @@ extension ChewViewModel {
 				status: .idle
 			)
 
+		case .didSetBothLocations(let dep, let arr):
+			return State(
+				depStop: dep,
+				arrStop: arr,
+				timeChooserDate: state.timeChooserDate,
+				status: .idle
+			)
 		}
 	}
 }

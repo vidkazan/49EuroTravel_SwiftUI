@@ -86,6 +86,7 @@ extension ChewViewModel {
 		case didLocationButtonPressed
 		case didReceiveLocationData(lat: Double,long: Double)
 		case didFailToLoadLocationData
+		case didSetBothLocations(StopType,StopType)
 		
 		
 		var description : String {
@@ -112,6 +113,8 @@ extension ChewViewModel {
 				return "didFailToLoadLocationData"
 			case .didLocationButtonPressed:
 				return "didLocationButtonPressed"
+			case .didSetBothLocations:
+				return "didSetBothLocations"
 			}
 		}
 	}

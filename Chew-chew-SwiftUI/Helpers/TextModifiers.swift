@@ -32,6 +32,6 @@ struct ChewPrimaryStyle: ViewModifier {
 struct ChewSecondaryStyle: ViewModifier {
 	func body(content: Content) -> some View {
 		content
-			.font(.system(size: 12,weight: .medium))
+			.font(.system(size: 12,weight: .semibold))
 	}
 }

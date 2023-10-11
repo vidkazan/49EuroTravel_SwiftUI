@@ -62,7 +62,8 @@ extension ChewViewModel {
 			return state
 		case .didFailToLoadLocationData:
 			return state
-			
+		case .didSetBothLocations(_, _):
+			return state
 		}
 	}
 }

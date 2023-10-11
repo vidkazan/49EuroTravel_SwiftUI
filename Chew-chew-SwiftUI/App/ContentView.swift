@@ -27,6 +27,7 @@ struct ContentView: View {
 					} else {
 						FavouriteRidesView()
 							.padding(.top,10)
+						Spacer()
 					}
 				}
 				.padding(10)
