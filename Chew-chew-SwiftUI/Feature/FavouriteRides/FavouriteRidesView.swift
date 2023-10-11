@@ -49,6 +49,9 @@ struct FavouriteRidesView : View {
 			.frame(maxWidth: .infinity,maxHeight: 100)
 			.cornerRadius(10)
 		}
+		.transition(.opacity)
+		.animation(.spring(), value: chewVM.state.status)
+//		.animation(.spring(), value: chewVM.state.searchStopViewModel.state)
 	}
 }
 
