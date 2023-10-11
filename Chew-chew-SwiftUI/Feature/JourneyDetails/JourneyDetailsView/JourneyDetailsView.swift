@@ -52,7 +52,7 @@ struct JourneyDetailsView: View {
 			}
 		}
 		.navigationBarTitle("Journey details", displayMode: .inline)
-		.transition(.move(edge: .bottom))
+		.transition(.opacity)
 		.animation(.spring(), value: viewModel.state.status)
 		.toolbar {
 			Button(action: {

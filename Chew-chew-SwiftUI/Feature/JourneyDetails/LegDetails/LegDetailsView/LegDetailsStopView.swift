@@ -93,6 +93,7 @@ struct LegStopView : View {
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
 						.cornerRadius(7)
+						.offset(x: delay.value != nil ? delay.value! > 0 ? 8 : 0 : 0)
 					case .origin,.destination:
 						TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
 						.background {

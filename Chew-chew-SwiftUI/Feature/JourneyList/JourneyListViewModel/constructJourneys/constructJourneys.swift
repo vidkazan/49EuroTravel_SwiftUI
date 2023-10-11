@@ -9,7 +9,8 @@ import Foundation
 import CoreLocation
 	
 func constructJourneysViewData(journeysData : JourneysContainer, depStop : StopType, arrStop : StopType) -> [JourneyViewData] {
-	let res = journeysData.journeys.compactMap { (journey) -> JourneyViewData? in
+	guard let journeys = journeysData.journeys else { return [] }
+	let res = journeys.compactMap { (journey) -> JourneyViewData? in
 		return constructJourneyViewData(
 			journey: journey,
 			depStop: depStop,

@@ -126,8 +126,8 @@ struct Journey : Codable,Identifiable,Equatable {
 struct JourneysContainer : Codable,Equatable {
 	let earlierRef: String?
 	let laterRef: String?
-	let journeys : [Journey]
-//	let realtimeDataUpdatedAt: Int64?
+	let journeys : [Journey]?
+	let realtimeDataUpdatedAt: Int64?
 }
 
 enum StopType : Equatable {

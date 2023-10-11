@@ -12,6 +12,17 @@ struct TimeContainer : Equatable{
 		case onTime
 		case delay(Int)
 		case cancelled
+		
+		var value : Int? {
+			switch self {
+			case .cancelled:
+				return nil
+			case .delay(let d):
+				return d
+			case .onTime:
+				return 0
+			}
+		}
 	}
 	let iso : ISOTimeContainer
 	let date : DateTimeContainer
