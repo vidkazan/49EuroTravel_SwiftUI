@@ -75,7 +75,8 @@ struct LegsView: View {
 								startPoint: UnitPoint(x: 0, y: 0),
 								endPoint: UnitPoint(x: 1, y: 0))
 						}
-						.frame(maxWidth: (geo.size.width - 8) > 0 ? geo.size.width - 8 : 0 ,maxHeight: 18)
+//						.frame(maxWidth: (geo.size.width - 8) > 0 ? geo.size.width - 8 : 0 ,maxHeight: 18)
+						.frame(maxWidth: (geo.size.width) > 0 ? geo.size.width : 0 ,maxHeight: 18)
 						.cornerRadius(5)
 					ForEach(journey.legs) { leg in
 						LegView(leg: leg)
