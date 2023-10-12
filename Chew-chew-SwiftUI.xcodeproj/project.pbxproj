@@ -62,6 +62,7 @@
 		7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */; };
 		7D68D9F52ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift */; };
 		7D68D9F82ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F72ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift */; };
+		7D69BE7F2AD7ECF1007855B3 /* Publisher+AsyncMap.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D69BE7E2AD7ECF1007855B3 /* Publisher+AsyncMap.swift */; };
 		7D6C5C142AAF482D00DEFC57 /* chewVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C132AAF482D00DEFC57 /* chewVM.swift */; };
 		7D6C5C162AAF485F00DEFC57 /* chewVM+sideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C152AAF485F00DEFC57 /* chewVM+sideEffect.swift */; };
 		7D6C5C182AAF486700DEFC57 /* chewVM+state.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C172AAF486700DEFC57 /* chewVM+state.swift */; };
@@ -186,6 +187,7 @@
 		7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Type.swift"; sourceTree = "<group>"; };
 		7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Stopover.swift"; sourceTree = "<group>"; };
 		7D68D9F72ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Journey+TransferCount.swift"; sourceTree = "<group>"; };
+		7D69BE7E2AD7ECF1007855B3 /* Publisher+AsyncMap.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+AsyncMap.swift"; sourceTree = "<group>"; };
 		7D6C5C132AAF482D00DEFC57 /* chewVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = chewVM.swift; sourceTree = "<group>"; };
 		7D6C5C152AAF485F00DEFC57 /* chewVM+sideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+sideEffect.swift"; sourceTree = "<group>"; };
 		7D6C5C172AAF486700DEFC57 /* chewVM+state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+state.swift"; sourceTree = "<group>"; };
@@ -324,6 +326,7 @@
 				7D53705B2ACED7300009BA20 /* PlannedActual.swift */,
 				7DA885292ACF23F400263DB6 /* PrintThread.swift */,
 				7D181D662AD6D6BB003AB021 /* TextModifiers.swift */,
+				7D69BE7E2AD7ECF1007855B3 /* Publisher+AsyncMap.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -843,6 +846,7 @@
 				7D462D4B2AAC948700BC0D65 /* JourneyListViewModel+reduce+JourneysLoaded.swift in Sources */,
 				7D6C5C1B2AAF495B00DEFC57 /* chewVM+reduce.swift in Sources */,
 				7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */,
+				7D69BE7F2AD7ECF1007855B3 /* Publisher+AsyncMap.swift in Sources */,
 				7D462D602AACED6D00BC0D65 /* constructJourneys+Journey.swift in Sources */,
 				7D68D9F52ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift in Sources */,
 				7DD4A8D62AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift in Sources */,

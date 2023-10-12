@@ -7,7 +7,12 @@
 
 import Foundation
 import CoreLocation
-	
+
+func constructJourneysViewDataAsync(journeysData : JourneysContainer, depStop : StopType, arrStop : StopType) async -> [JourneyViewData] {
+	Thread.printCurrent()
+	return constructJourneysViewData(journeysData: journeysData, depStop: depStop, arrStop: arrStop)
+}
+
 func constructJourneysViewData(journeysData : JourneysContainer, depStop : StopType, arrStop : StopType) -> [JourneyViewData] {
 	guard let journeys = journeysData.journeys else { return [] }
 	let res = journeys.compactMap { (journey) -> JourneyViewData? in

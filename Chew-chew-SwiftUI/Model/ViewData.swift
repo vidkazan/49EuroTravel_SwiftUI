@@ -13,6 +13,11 @@ struct JourneysViewData : Equatable {
 	let journeys : [JourneyViewData]
 	let laterRef : String?
 	let earlierRef : String?
+	init(journeysViewData : [JourneyViewData],data: JourneysContainer,depStop: StopType, arrStop : StopType) {
+		self.journeys = journeysViewData
+		self.laterRef = data.laterRef
+		self.earlierRef = data.earlierRef
+	}
 	init(data: JourneysContainer,depStop: StopType, arrStop : StopType) {
 		self.journeys = constructJourneysViewData(journeysData: data, depStop: depStop, arrStop: arrStop)
 		self.laterRef = data.laterRef

@@ -8,14 +8,22 @@
 import Foundation
 import Combine
 
+enum ChewError : Error {
+	case error
+}
+
 extension JourneyListViewModel {
+	
 	func whenLoadingJourneys() -> Feedback<State, Event> {
 	  Feedback {(state: State) -> AnyPublisher<Event, Never> in
 		  guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
 		  return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date)
-			  .map({data in JourneysViewData(data: data, depStop: self.depStop, arrStop: self.arrStop)})
-			  .map {Event.onNewJourneysData($0,.initial)}
-			  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+			  .mapError{ $0 }
+			  .asyncFlatMap { data in
+				  let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
+				  return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.initial)
+			  }
+			  .catch { _ in Just(Event.onFailedToLoadJourneysData(.badRequest))}
 			  .eraseToAnyPublisher()
 	  }
 	}

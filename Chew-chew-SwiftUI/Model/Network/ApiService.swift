@@ -193,7 +193,7 @@ class ApiService  {
 				.mapError{ error -> ApiServiceError in
 					switch error {
 						case let error as ApiServiceError:
-						print("🔴> api: error:",type,error)
+							print("🔴> api: error:",type,error)
 							return error
 						default:
 							print("🔴> api: error:",type,error)

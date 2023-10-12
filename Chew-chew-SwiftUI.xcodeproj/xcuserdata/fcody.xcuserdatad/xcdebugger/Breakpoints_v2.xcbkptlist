@@ -190,8 +190,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneyListViewModel/JourneyListViewModel+sideEffects/JourneyListViewModel+sideEffects+loadingJourneys.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
             landmarkName = "whenLoadingJourneys()"
             landmarkType = "7">
          </BreakpointContent>
