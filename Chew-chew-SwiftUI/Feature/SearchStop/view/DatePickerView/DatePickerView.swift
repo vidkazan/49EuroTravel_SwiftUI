@@ -81,13 +81,8 @@ struct DatePickerView: View {
 				chewVM.send(event: .onNewDate(.now))
 			}
 		}
-		.chewTextSize(.big)
 		.padding(5)
-		.background(.ultraThinMaterial)
 		.cornerRadius(10)
 		.padding(5)
-		.transition(.move(edge: .bottom))
-		.opacity(chewVM.state.status == .datePicker ? 1 : 0)
-		.animation(.spring(), value: chewVM.state.status)
 	}
 }

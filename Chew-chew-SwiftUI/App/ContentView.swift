@@ -33,9 +33,6 @@ struct ContentView: View {
 					}
 				}
 				.padding(10)
-//				if chewViewModel.state.status == .datePicker {
-//					DatePickerView(sStartDate: chewViewModel.state.timeChooserDate.date)
-//				}
 			}
 			.background( .linearGradient(
 				colors: colorScheme == .dark ? [.black] : [Color(hue: 0, saturation: 0, brightness: 0.85)],
