@@ -12,7 +12,7 @@ struct Chew_chew_SwiftUIApp: App {
 	@StateObject private var chewJourneyViewModel = ChewViewModel()
     var body: some Scene {
         WindowGroup {
-			ContentView()
+			ContentView(bottomSheetIsPresented: false)
 				.environmentObject(chewJourneyViewModel)
         }
     }

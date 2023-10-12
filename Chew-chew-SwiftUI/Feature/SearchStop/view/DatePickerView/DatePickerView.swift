@@ -74,6 +74,13 @@ struct DatePickerView: View {
 				.foregroundColor(.primary)
 				.cornerRadius(10)
 		}
+		.onDisappear {
+			if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
+				chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
+			} else {
+				chewVM.send(event: .onNewDate(.now))
+			}
+		}
 		.chewTextSize(.big)
 		.padding(5)
 		.background(.ultraThinMaterial)
