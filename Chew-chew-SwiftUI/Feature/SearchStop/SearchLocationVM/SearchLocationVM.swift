@@ -17,7 +17,7 @@ class SearchLocationViewModel : ObservableObject {
 	@FocusState	 var textBottomFieldIsFocused: Bool
 	@Published private(set) var state : State {
 		didSet {
-			print("🔵 >> stops state:",state.status.description,state.type)
+			print("🔵 >> stops state:",state.status.description,state.type ?? "nil")
 		}
 	}
 	

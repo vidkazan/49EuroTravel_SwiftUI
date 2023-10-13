@@ -14,25 +14,41 @@ extension JourneyListViewModel {
 		  guard case .loadingRef(let type) = state.status else { return Empty().eraseToAnyPublisher() }
 		  switch type {
 		  case .initial:
-			  return  Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
+			  return  Empty().eraseToAnyPublisher()
 		  case .earlierRef:
-			  guard let ref = state.earlierRef else { return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher() }
+			  guard let ref = state.earlierRef else {
+				  return Empty().eraseToAnyPublisher()
+			  }
 			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
-				  .map({ data in
-					  JourneysViewData(data: data, depStop: self.depStop, arrStop: self.arrStop)
-				  })
-				  .map {Event.onNewJourneysData($0,type)}
-				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+				  .mapError{ $0 }
+				  .asyncFlatMap { data in
+					  let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
+					  return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.earlierRef)
+				  }
+				  .catch { _ in Just(Event.onFailedToLoadJourneysData(.badRequest))}
 				  .eraseToAnyPublisher()
+//				  .map({ data in
+//					  JourneysViewData(data: data, depStop: self.depStop, arrStop: self.arrStop)
+//				  })
+//				  .map {Event.onNewJourneysData($0,type)}
+//				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+//				  .eraseToAnyPublisher()
 		  case .laterRef:
 			  guard let ref = state.laterRef else {
 				  print("🟤❌ >> laterRef is nil")
 				  return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
 			  }
 			  return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
-				  .map({data in JourneysViewData(data: data, depStop: self.depStop, arrStop: self.arrStop)})
-				  .map {Event.onNewJourneysData($0,type)}
-				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+//				  .map({data in JourneysViewData(data: data, depStop: self.depStop, arrStop: self.arrStop)})
+//				  .map {Event.onNewJourneysData($0,type)}
+//				  .catch { error in Just(.onFailedToLoadJourneysData(error))}
+//				  .eraseToAnyPublisher()
+				  .mapError{ $0 }
+				  .asyncFlatMap { data in
+					  let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
+					  return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.laterRef)
+				  }
+				  .catch { _ in Just(Event.onFailedToLoadJourneysData(.badRequest))}
 				  .eraseToAnyPublisher()
 		  }
 	  }

@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 // TODO: move view to sheet
 struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel

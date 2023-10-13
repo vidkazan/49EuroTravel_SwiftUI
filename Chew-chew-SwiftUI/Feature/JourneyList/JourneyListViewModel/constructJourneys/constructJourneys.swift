@@ -9,7 +9,6 @@ import Foundation
 import CoreLocation
 
 func constructJourneysViewDataAsync(journeysData : JourneysContainer, depStop : StopType, arrStop : StopType) async -> [JourneyViewData] {
-	Thread.printCurrent()
 	return constructJourneysViewData(journeysData: journeysData, depStop: depStop, arrStop: arrStop)
 }
 

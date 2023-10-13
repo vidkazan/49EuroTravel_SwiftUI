@@ -38,7 +38,7 @@ extension JourneyListViewModel {
 			])
 		case .pointOfInterest(let stop):
 			guard let id = stop.id else {
-				print("fetchJourneys","departure poi id is NIL")
+//				print("fetchJourneys","departure poi id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
@@ -48,7 +48,7 @@ extension JourneyListViewModel {
 			])
 		case .stop(let stop):
 			guard let depStop = stop.id else {
-				print("fetchJourneys","departure stop id is NIL")
+//				print("fetchJourneys","departure stop id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
@@ -65,7 +65,7 @@ extension JourneyListViewModel {
 			])
 		case .pointOfInterest(let stop):
 			guard let id = stop.id else {
-				print("fetchJourneys","arr pointOfInterest id is NIL")
+//				print("fetchJourneys","arr pointOfInterest id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
@@ -75,7 +75,7 @@ extension JourneyListViewModel {
 			])
 		case .stop(let stop):
 			guard let depStop = stop.id else {
-				print("fetchJourneys","arr stop id is NIL")
+//				print("fetchJourneys","arr stop id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
