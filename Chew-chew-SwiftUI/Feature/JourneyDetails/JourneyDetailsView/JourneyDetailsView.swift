@@ -53,7 +53,7 @@ struct JourneyDetailsView: View {
 		}
 		.navigationBarTitle("Journey details", displayMode: .inline)
 		.transition(.opacity)
-		.animation(.spring(), value: viewModel.state.status)
+		.animation(.easeInOut, value: viewModel.state.status)
 		.toolbar {
 			Button(action: {
 				viewModel.send(event: .didTapReloadJourneys)

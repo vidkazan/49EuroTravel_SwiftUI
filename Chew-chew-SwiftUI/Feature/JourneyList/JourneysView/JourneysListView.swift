@@ -44,7 +44,7 @@ struct JourneysListView: View {
 						}
 					}
 					.transition(.move(edge: .bottom))
-					.animation(.interactiveSpring(), value: journeyViewModel.state.status)
+					.animation(.spring(), value: journeyViewModel.state.status)
 				}
 			case .failedToLoadJourneys(let error):
 				Spacer()
@@ -58,7 +58,6 @@ struct JourneysListView: View {
 		}
 		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: journeyViewModel.state.status)
-//		.animation(.spring(), value: chewVM.state.searchStopViewModel.state)
 		.frame(maxWidth: .infinity)
 		.cornerRadius(10)
     }

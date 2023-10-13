@@ -23,7 +23,7 @@ extension JourneyListViewModel {
 				  let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
 				  return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.initial)
 			  }
-			  .catch { _ in Just(Event.onFailedToLoadJourneysData(.badRequest))}
+			  .catch { error in Just(Event.onFailedToLoadJourneysData(.badRequest))}
 			  .eraseToAnyPublisher()
 	  }
 	}
@@ -96,7 +96,7 @@ extension JourneyListViewModel {
 			Query.taxi(taxi: false),
 			Query.remarks(showRemarks: true),
 			Query.results(max: 5),
-//			Query.stopovers(isShowing: true)
+			Query.stopovers(isShowing: true)
 		])
 		return ApiService.fetchCombine(JourneysContainer.self,query: query, type: ApiService.Requests.journeys, requestGroupId: "")
 	}

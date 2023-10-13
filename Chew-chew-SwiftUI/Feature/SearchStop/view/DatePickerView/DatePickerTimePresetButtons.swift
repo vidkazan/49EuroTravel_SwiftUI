@@ -17,20 +17,20 @@ struct DatePickerTimePresetButtons: View {
 			.padding(7)
 			.foregroundColor(.primary)
 			.cornerRadius(10)
-			.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
+			.padding(7)
 		Button("in 15 min") {
 			chewVM.send(event: .onNewDate(.specificDate(Date.now + (15 * 60))))
 		}
 			.padding(7)
 			.foregroundColor(.primary)
 			.cornerRadius(10)
-			.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
+			.padding(7)
 		Button("in 1 hour") {
 			chewVM.send(event: .onNewDate(.specificDate(Date.now + (60 * 60))))
 		}
 			.padding(7)
 			.foregroundColor(.primary)
 			.cornerRadius(10)
-			.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 0))
+			.padding(7)
     }
 }

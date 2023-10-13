@@ -9,6 +9,8 @@ import Foundation
 import DequeModule
 import Combine
 
+
+// TODO: remove api calls duplicates
 class ApiService  {
 	struct Response<T> {
 		 let value: T
@@ -97,13 +99,6 @@ class ApiService  {
 		self.fetchLobbyDeque.removeAll()
 	}
 	
-	static func fetchCombine<T : Decodable>(
-		_ t : T.Type,
-		query : [URLQueryItem],
-		type : Requests,
-		requestGroupId : String) -> AnyPublisher<T,ApiServiceError> {
-			return Self.executeCombine(T.self, query: query, type: type)
-	}
 	
 	static func fetch<T : Decodable>(
 		_ t : T.Type,
@@ -169,39 +164,7 @@ class ApiService  {
 			}
 		}
 	}
-	
-	static private func executeCombine<T: Decodable>(
-		_ t : T.Type,
-		query : [URLQueryItem],
-		type : Requests
-	) -> AnyPublisher<T, ApiServiceError> {
-		guard let url = generateUrl(query: query, type: type) else {
-			let subject = Future<T,ApiServiceError> { promise in
-				return promise(.failure(.badUrl))
-			}
-			return subject.eraseToAnyPublisher()
-		}
-		let request = type.getRequest(urlEndPoint: url)
-		return URLSession.shared
-				.dataTaskPublisher(for: request)
-				.tryMap { result -> T in
-					let value = try JSONDecoder().decode(T.self, from: result.data)
-					print("🟢 > api: done:",type,url)
-					return value
-				}
-				.receive(on: DispatchQueue.main)
-				.mapError{ error -> ApiServiceError in
-					switch error {
-						case let error as ApiServiceError:
-							print("🔴> api: error:",type,error)
-							return error
-						default:
-							print("🔴> api: error:",type,error)
-							return .generic(error)
-						}
-				}
-				.eraseToAnyPublisher()
-	}
+
 	
 	static private func execute<T : Decodable>(
 		_ t : T.Type,
@@ -294,7 +257,7 @@ class ApiService  {
 		return
 	}
 	
-	static private func generateUrl(query : [URLQueryItem],
+	static func generateUrl(query : [URLQueryItem],
 										type : Requests) -> URL? {
 		let url : URL? = {
 			switch type {
@@ -312,7 +275,7 @@ class ApiService  {
 		return url
 	}
 	
-	static private func generateSession() -> URLSession {
+	static func generateSession() -> URLSession {
 		let sessionConfig = URLSessionConfiguration.default
 		sessionConfig.timeoutIntervalForRequest = 5.0
 		return URLSession(configuration: sessionConfig)
