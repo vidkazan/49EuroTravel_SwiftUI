@@ -60,13 +60,11 @@ struct Leg : Codable,Equatable,Identifiable{
 	let reachable: Bool?
 	let tripId : String?
 	let direction: String?
-	////	let currentLocation: CurrentLocation	
+	let currentLocation: LocationCoordinates?
 	let arrivalPlatform,
 		plannedArrivalPlatform: String?
-	//	let arrivalPrognosisType: String?
 	let departurePlatform,
-		plannedDeparturePlatform,
-		departurePrognosisType: String?
+		plannedDeparturePlatform : String?
 	let walking : Bool?
 	let distance : Int?
 	let stopovers : [StopOver]?
@@ -85,13 +83,11 @@ struct Leg : Codable,Equatable,Identifiable{
 		case reachable
 		case tripId
 		case direction
-//		case currentLocation
+		case currentLocation
 		case arrivalPlatform
 		case plannedArrivalPlatform
-//		case arrivalPrognosisType
 		case departurePlatform
 		case plannedDeparturePlatform
-		case departurePrognosisType
 		case walking
 		case stopovers
 		case distance
@@ -130,7 +126,7 @@ struct JourneysContainer : Codable,Equatable {
 	let realtimeDataUpdatedAt: Int64?
 }
 
-enum StopType : Equatable {
+enum LocationType : Equatable {
 	case pointOfInterest(Stop)
 	case location(Stop)
 	case stop(Stop)
@@ -152,7 +148,7 @@ struct Stop : Codable, Identifiable, Equatable,Hashable {
 	let id		: String?
 	let name	: String?
 	let address : String?
-	let location : Location?
+	let location : LocationCoordinates?
 	let products : Products?
 	
 	private enum CodingKeys : String, CodingKey {
@@ -190,7 +186,7 @@ struct Departure : Codable,Equatable {
 
 
 // MARK: - Location
-struct Location : Codable,Equatable,Hashable {
+struct LocationCoordinates : Codable,Equatable,Hashable {
 	let type		: String?
 	let id			: String?
 	let latitude	: Double?

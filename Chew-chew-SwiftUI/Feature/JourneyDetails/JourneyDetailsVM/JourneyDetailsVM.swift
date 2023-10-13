@@ -19,9 +19,9 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	var refreshToken : String?
-	var depStop : StopType?
-	var arrStop : StopType?
-	init(refreshToken : String?,data: JourneyViewData,depStop : StopType?, arrStop : StopType?) {
+	var depStop : LocationType?
+	var arrStop : LocationType?
+	init(refreshToken : String?,data: JourneyViewData,depStop : LocationType?, arrStop : LocationType?) {
 		self.refreshToken = refreshToken
 		self.depStop = depStop
 		self.arrStop = arrStop

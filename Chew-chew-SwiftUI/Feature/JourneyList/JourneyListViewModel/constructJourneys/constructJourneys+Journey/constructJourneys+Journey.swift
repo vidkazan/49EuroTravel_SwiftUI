@@ -9,8 +9,8 @@ import CoreLocation
 
 func constructJourneyViewData(
 	journey : Journey,
-	depStop: StopType?,
-	arrStop : StopType?
+	depStop: LocationType?,
+	arrStop : LocationType?
 ) -> JourneyViewData {
 	let timeContainer = TimeContainer(
 		plannedDeparture: journey.legs.first?.plannedDeparture,

@@ -41,9 +41,9 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
-		case .onNewDeparture(let stopType):
+		case .onNewDeparture(let LocationType):
 			return State(
-				depStop: stopType,
+				depStop: LocationType,
 				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
@@ -66,12 +66,12 @@ extension ChewViewModel {
 			)
 		case .didReceiveLocationData(let lat, let long):
 			return State(
-				depStop: StopType.location(Stop(
+				depStop: LocationType.location(Stop(
 					type: "location",
 					id: nil,
 					name: "My Location",
 					address: "My Location",
-					location: Location(
+					location: LocationCoordinates(
 						type: "location",
 						id: nil,
 						latitude: lat,
@@ -98,6 +98,8 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
+		case .didDismissDatePicker:
+			return state
 		}
 	}
 }

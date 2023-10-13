@@ -64,6 +64,8 @@ extension ChewViewModel {
 			return state
 		case .didSetBothLocations(_, _):
 			return state
+		case .didDismissDatePicker:
+			return state
 		}
 	}
 }

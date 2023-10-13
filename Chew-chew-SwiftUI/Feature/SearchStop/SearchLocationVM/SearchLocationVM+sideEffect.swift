@@ -26,6 +26,7 @@ extension SearchLocationViewModel {
 					if stops.isEmpty {
 						return Event.onDataLoadError(ApiServiceError.stopNotFound)
 					}
+					stops.map{print($0.type,$0.name)}
 					return Event.onDataLoaded(stops,type)
 				}
 				.catch { error in Just(.onDataLoadError(error)) }
@@ -41,10 +42,10 @@ extension SearchLocationViewModel {
 		query = Query.getQueryItems(methods: [
 			Query.location(location: text),
 			Query.results(max: 5),
-			Query.showAddresses(showAddresses: false),
-			Query.showPointsOfInterests(showPointsOfInterests: false)
+//			Query.showAddresses(showAddresses: false),
+//			Query.showPointsOfInterests(showPointsOfInterests: false)
 		])
-		return ApiService.fetchCombine([Stop].self,query: query, type: ApiService.Requests.locations(name: text ), requestGroupId: "")
+		return ApiService.fetchCombine([Stop].self,query: query, type: ApiService.Requests.locations(name: text), requestGroupId: "")
 	}
 }
 

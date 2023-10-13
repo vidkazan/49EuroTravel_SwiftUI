@@ -23,14 +23,14 @@ extension ChewViewModel {
 	}
 	
 	struct State : Equatable {
-		var depStop : StopType?
-		var arrStop : StopType?
+		var depStop : LocationType?
+		var arrStop : LocationType?
 		var timeChooserDate : DateType
 		var status : Status
 		
 		init(
-			depStop: StopType?,
-			arrStop: StopType?,
+			depStop: LocationType?,
+			arrStop: LocationType?,
 			timeChooserDate: DateType,
 			status: Status
 		) {
@@ -78,15 +78,16 @@ extension ChewViewModel {
 		case onDepartureEdit
 		case onArrivalEdit
 		case onDatePickerDidPressed
-		case onNewDeparture(StopType?)
-		case onNewArrival(StopType?)
+		case onNewDeparture(LocationType?)
+		case onNewArrival(LocationType?)
 		case onStopsSwitch
 		case onNewDate(DateType)
 		case onJourneyDataUpdated
 		case didLocationButtonPressed
 		case didReceiveLocationData(lat: Double,long: Double)
 		case didFailToLoadLocationData
-		case didSetBothLocations(StopType,StopType)
+		case didSetBothLocations(LocationType,LocationType)
+		case didDismissDatePicker
 		
 		
 		var description : String {
@@ -115,6 +116,8 @@ extension ChewViewModel {
 				return "didLocationButtonPressed"
 			case .didSetBothLocations:
 				return "didSetBothLocations"
+			case .didDismissDatePicker:
+				return "didDismissDatePicker"
 			}
 		}
 	}

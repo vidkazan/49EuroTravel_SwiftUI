@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreLocation
 
+
+// TODO: move all logic from views
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject private var chewViewModel : ChewViewModel
@@ -39,7 +41,9 @@ struct ContentView: View {
 				startPoint: UnitPoint(x: 0.5, y: 0.1),
 				endPoint: UnitPoint(x: 0.5, y: 0.4))
 			)
-			.sheet(isPresented: $bottomSheetIsPresented, content: {
+			.sheet(isPresented: $bottomSheetIsPresented,onDismiss: {
+				chewViewModel.send(event: .didDismissDatePicker)
+			}, content: {
 				switch chewViewModel.state.status {
 				case .datePicker:
 					DatePickerView(sStartDate: chewViewModel.state.timeChooserDate.date)

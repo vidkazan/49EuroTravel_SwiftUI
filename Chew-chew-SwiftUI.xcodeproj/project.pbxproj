@@ -88,6 +88,7 @@
 		7D7B3DAE2AB9D3620070E44D /* LegDetailsVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DAD2AB9D3620070E44D /* LegDetailsVM+reduce.swift */; };
 		7D7B3DB02AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DAF2AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift */; };
 		7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81AB252A978CDC0055AEAF /* DatePickerView.swift */; };
+		7D942A092AD9578800301666 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942A082AD9578800301666 /* Location.swift */; };
 		7D9E10872AA6752B00820B92 /* SearchStopsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E10862AA6752B00820B92 /* SearchStopsView.swift */; };
 		7D9E10932AA77E0B00820B92 /* SearchLocationVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E10922AA77E0B00820B92 /* SearchLocationVM.swift */; };
 		7DA8852A2ACF23F400263DB6 /* PrintThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA885292ACF23F400263DB6 /* PrintThread.swift */; };
@@ -215,6 +216,7 @@
 		7D7B3DAD2AB9D3620070E44D /* LegDetailsVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsVM+reduce.swift"; sourceTree = "<group>"; };
 		7D7B3DAF2AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsVM+sideEffects.swift"; sourceTree = "<group>"; };
 		7D81AB252A978CDC0055AEAF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		7D942A082AD9578800301666 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7D9E10862AA6752B00820B92 /* SearchStopsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStopsView.swift; sourceTree = "<group>"; };
 		7D9E10922AA77E0B00820B92 /* SearchLocationVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchLocationVM.swift; sourceTree = "<group>"; };
 		7DA885292ACF23F400263DB6 /* PrintThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintThread.swift; sourceTree = "<group>"; };
@@ -296,6 +298,7 @@
 				7D02CE082A97E32D0048ADE6 /* DTO.swift */,
 				7D02CE0F2A97E4100048ADE6 /* ViewData.swift */,
 				7DBF1E582ABC522E009B85EF /* Badges.swift */,
+				7D942A082AD9578800301666 /* Location.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -874,6 +877,7 @@
 				7D7A553A2AA4B3E5000256EF /* Feedback.swift in Sources */,
 				7D6C5C272AAF4BD300DEFC57 /* chewVM+reduce+Journeys.swift in Sources */,
 				7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */,
+				7D942A092AD9578800301666 /* Location.swift in Sources */,
 				7D4B1B912AA8DB5B0096F372 /* SearchStopsView+TextField.swift in Sources */,
 				7D9E10932AA77E0B00820B92 /* SearchLocationVM.swift in Sources */,
 				7D02CE102A97E4100048ADE6 /* ViewData.swift in Sources */,

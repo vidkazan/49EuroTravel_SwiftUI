@@ -13,12 +13,12 @@ struct JourneysViewData : Equatable {
 	let journeys : [JourneyViewData]
 	let laterRef : String?
 	let earlierRef : String?
-	init(journeysViewData : [JourneyViewData],data: JourneysContainer,depStop: StopType, arrStop : StopType) {
+	init(journeysViewData : [JourneyViewData],data: JourneysContainer,depStop: LocationType, arrStop : LocationType) {
 		self.journeys = journeysViewData
 		self.laterRef = data.laterRef
 		self.earlierRef = data.earlierRef
 	}
-	init(data: JourneysContainer,depStop: StopType, arrStop : StopType) {
+	init(data: JourneysContainer,depStop: LocationType, arrStop : LocationType) {
 		self.journeys = constructJourneysViewData(journeysData: data, depStop: depStop, arrStop: arrStop)
 		self.laterRef = data.laterRef
 		self.earlierRef = data.earlierRef
@@ -107,7 +107,7 @@ extension StopViewData {
 			self.locationCoordinates = nil
 		}
 	}
-	init(name : String,timeContainer : TimeContainer,type: StopOverType, coordinates : Location?) {
+	init(name : String,timeContainer : TimeContainer,type: StopOverType, coordinates : LocationCoordinates?) {
 		self.timeContainer = timeContainer
 		self.name = name
 		self.departurePlatform  = PrognoseType(actual: nil, planned: nil)
@@ -119,16 +119,6 @@ extension StopViewData {
 			self.locationCoordinates = nil
 		}
 	}
-//	init(name : String,timeContainer : TimeContainer, leg : Leg,type: StopOverType) {
-//		self.timeContainer = timeContainer
-//		self.name = name
-//		self.departurePlatform  = PrognoseType(actual: leg.departurePlatform, planned: leg.plannedDeparturePlatform)
-//		self.arrivalPlatform  = PrognoseType(actual: leg.arrivalPlatform, planned: leg.plannedArrivalPlatform)
-//		self.type = type
-//		if let lat = stop.stop?.location?.latitude,let long = leg.lo {
-//			self.locationCoordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
-//		}
-//	}
 }
 
 extension LegViewData {

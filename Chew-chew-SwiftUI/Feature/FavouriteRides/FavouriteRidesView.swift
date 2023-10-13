@@ -10,8 +10,8 @@ import SwiftUI
 
 struct Locations : Identifiable {
 	let id = UUID()
-	let departure : StopType
-	let arrival : StopType
+	let departure : LocationType
+	let arrival : LocationType
 }
 
 struct FavouriteRidesView : View {
@@ -20,8 +20,8 @@ struct FavouriteRidesView : View {
 	init() {
 		self.stops = [
 			Locations(
-				departure: StopType.stop(Stop(type: "station", id: "\(586640)", name: "Zolltor,Neuss", address: nil, location: nil, products: nil)),
-				arrival: StopType.stop(Stop(type: "station", id: "\(8089222)", name: "Wolfsburg ZOB", address: nil, location: nil, products: nil))
+				departure: LocationType.stop(Stop(type: "station", id: "\(586640)", name: "Zolltor,Neuss", address: nil, location: nil, products: nil)),
+				arrival: LocationType.stop(Stop(type: "station", id: "\(8089222)", name: "Wolfsburg ZOB", address: nil, location: nil, products: nil))
 			)
 		]
 	}

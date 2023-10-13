@@ -19,6 +19,13 @@ extension ChewViewModel {
 				timeChooserDate: date,
 				status: .idle
 			)
+		case .didDismissDatePicker:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				timeChooserDate: state.timeChooserDate,
+				status: .idle
+			)
 		default:
 			return state
 		}

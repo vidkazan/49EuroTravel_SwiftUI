@@ -12,7 +12,7 @@ struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
 	@State var bottomSheetIsPresented : Bool
-	init(token : String?,data : JourneyViewData,depStop: StopType?,arrStop: StopType?) {
+	init(token : String?,data : JourneyViewData,depStop: LocationType?,arrStop: LocationType?) {
 		viewModel = JourneyDetailsViewModel(refreshToken: token, data: data,depStop: depStop,arrStop: arrStop)
 		bottomSheetIsPresented = false
 	}

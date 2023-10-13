@@ -27,7 +27,9 @@ extension JourneyListViewModel {
 			  .eraseToAnyPublisher()
 	  }
 	}
-	func addJourneysStopsQuery(dep : StopType,arr : StopType) -> [URLQueryItem] {
+	
+	
+	func addJourneysStopsQuery(dep : LocationType,arr : LocationType) -> [URLQueryItem] {
 		var query : [URLQueryItem] = []
 		switch dep {
 		case .location(let stop):
@@ -41,6 +43,7 @@ extension JourneyListViewModel {
 //				print("fetchJourneys","departure poi id is NIL")
 				return query
 			}
+			
 			query += Query.getQueryItems(methods: [
 				Query.departurePoiId(poiId: id),
 				Query.departureLatitude(departureLatitude: (stop.location?.latitude?.description ?? "")),
@@ -85,7 +88,7 @@ extension JourneyListViewModel {
 		return query
 	}
 	
-	func fetchJourneys(dep : StopType,arr : StopType,time: Date) -> AnyPublisher<JourneysContainer,ApiServiceError> {
+	func fetchJourneys(dep : LocationType,arr : LocationType,time: Date) -> AnyPublisher<JourneysContainer,ApiServiceError> {
 		var query = addJourneysStopsQuery(dep: dep, arr: arr)
 		query += Query.getQueryItems(methods: [
 			Query.departureTime(departureTime: time),
@@ -93,6 +96,7 @@ extension JourneyListViewModel {
 			Query.nationalExpress(iceTrains: false),
 			Query.regionalExpress(reTrains: false),
 //			Query.pretty(pretyIntend: false),
+			Query.transferTime(transferTime: "-1"),
 			Query.taxi(taxi: false),
 			Query.remarks(showRemarks: true),
 			Query.results(max: 5),
