@@ -138,6 +138,7 @@ struct LegDetailsView: View {
 				vm.send(event: .didtapExpandButton)
 			}
 		}
+		// TODO: make action sheet with map and full trip
 		.onLongPressGesture {
 			journeyVM.send(event: .didTapLocationDetails(leg: vm.state.leg))
 		}
