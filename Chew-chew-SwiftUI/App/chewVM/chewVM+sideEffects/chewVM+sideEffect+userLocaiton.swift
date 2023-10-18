@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import CoreLocation
 
 extension ChewViewModel {
 	// TODO: reverse geocoding https://medium.com/aeturnuminc/geocoding-in-swift-611bda45efe1 or https://nominatim.openstreetmap.org/reverse?lon=10.78008628451338&lat=52.4212646484375&format=json&pretty=true
@@ -17,29 +18,39 @@ extension ChewViewModel {
 			}
 			return self.requestUserLocation()
 				.map { res in
-					return Event.didReceiveLocationData(lat: res.lat, long: res.long)
+					switch res {
+					case .success(let coord):
+						return Event.didReceiveLocationData(coord)
+					case .failure:
+						return Event.didFailToLoadLocationData
+					}
 				}
-				.catch { error in Just(.didFailToLoadLocationData) }
 				.eraseToAnyPublisher()
 		}
 	}
-	func requestUserLocation() -> AnyPublisher<(lat:Double,long:Double),ApiServiceError> {
+	func requestUserLocation() -> AnyPublisher<Result<CLLocationCoordinate2D,ApiServiceError>,Never> {
 		switch locationDataManager.authorizationStatus {
-		case .notDetermined:
-			return Empty().eraseToAnyPublisher()
-		case .restricted,.denied:
-			let subject = Future<(lat:Double,long:Double),ApiServiceError> { promise in
-				return promise(.failure(.failedToGetUserLocation))
-			}
-			return subject.eraseToAnyPublisher()
+		case .notDetermined,.restricted,.denied,.none:
+			return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
+				.eraseToAnyPublisher()
 		case .authorizedAlways,.authorizedWhenInUse:
-			let lat = locationDataManager.locationManager.location?.coordinate.latitude ?? 0
-			let long = locationDataManager.locationManager.location?.coordinate.longitude ?? 0
-			return Just((lat:lat,long:long)).setFailureType(to: ApiServiceError.self).eraseToAnyPublisher()
-		case .none:
-			return Empty().eraseToAnyPublisher()
+			let lat = locationDataManager.locationManager.location?.coordinate.latitude
+			let long = locationDataManager.locationManager.location?.coordinate.longitude
+			guard let lat = lat,let long = long else {
+				return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
+					.eraseToAnyPublisher()
+			}
+			return Just(
+				Result.success(
+					CLLocationCoordinate2D(
+						latitude: lat,
+						longitude: long
+					)
+				)
+			).eraseToAnyPublisher()
 		@unknown default:
-			return Empty().eraseToAnyPublisher()
+			return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
+				.eraseToAnyPublisher()
 		}
 	}
 }

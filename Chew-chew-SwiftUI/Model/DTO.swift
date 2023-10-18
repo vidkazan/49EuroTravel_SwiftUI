@@ -11,7 +11,7 @@ import Foundation
 
 struct StopOver : Codable,Equatable,Identifiable {
 	let id = UUID()
-	let stop				: Stop?
+	let stop				: StopDTO?
 	let departure,
 		plannedDeparture	: String?
 	let arrival,
@@ -47,8 +47,8 @@ struct StopOver : Codable,Equatable,Identifiable {
 
 struct Leg : Codable,Equatable,Identifiable{
 	let id = UUID()
-	let origin : Stop?
-	let destination : Stop?
+	let origin : StopDTO?
+	let destination : StopDTO?
 	let line : Line?
 	let remarks : [Remark]?
 	let departure: String?
@@ -127,29 +127,22 @@ struct JourneysContainer : Codable,Equatable {
 }
 
 enum LocationType : Equatable {
-	case pointOfInterest(Stop)
-	case location(Stop)
-	case stop(Stop)
-	
-	var stop : Stop {
-		switch self {
-		case .pointOfInterest(let stop):
-			return stop
-		case .location(let stop):
-			return stop
-		case .stop(let stop):
-			return stop
-		}
-	}
+	case pointOfInterest
+	case location
+	case stop
+
 }
 
-struct Stop : Codable, Identifiable, Equatable,Hashable {
+struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 	let type	: String?
 	let id		: String?
 	let name	: String?
-	let address : String?
-	let location : LocationCoordinates?
-	let products : Products?
+	let address		: String?
+	let location	: LocationCoordinates?
+	let latitude	: Double?
+	let longitude	: Double?
+	let poi			: Bool?
+	let products	: Products?
 	
 	private enum CodingKeys : String, CodingKey {
 		case type
@@ -158,6 +151,9 @@ struct Stop : Codable, Identifiable, Equatable,Hashable {
 		case address
 		case location
 		case products
+		case latitude
+		case longitude
+		case poi
 	}
 }
 
@@ -166,7 +162,7 @@ struct Stop : Codable, Identifiable, Equatable,Hashable {
 
 struct Departure : Codable,Equatable {
 	let tripId				: String?
-	let stop				: Stop?
+	let stop				: StopDTO?
 	let when				: String?
 	let plannedWhen			: String?
 	let prognosedWhen		: String?
@@ -180,7 +176,7 @@ struct Departure : Codable,Equatable {
 	let line				: Line?
 	let remarks				: [Remark]?
 	let origin				: String?
-	let destination			: Stop?
+	let destination			: StopDTO?
 	let cancelled			: Bool?
 }
 

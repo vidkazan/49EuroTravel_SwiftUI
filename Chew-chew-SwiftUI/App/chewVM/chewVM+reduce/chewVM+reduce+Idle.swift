@@ -49,9 +49,9 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status:  .idle
 			)
-		case .onNewDeparture(let LocationType):
+		case .onNewDeparture(let stop):
 			return State(
-				depStop: LocationType,
+				depStop: stop,
 				arrStop: state.arrStop,
 				timeChooserDate: state.timeChooserDate,
 				status: .idle

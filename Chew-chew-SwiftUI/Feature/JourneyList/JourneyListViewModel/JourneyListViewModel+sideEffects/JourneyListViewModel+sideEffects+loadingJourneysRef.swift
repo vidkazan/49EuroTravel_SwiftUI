@@ -44,7 +44,7 @@ extension JourneyListViewModel {
 	  }
 	}
 	
-	func fetchEarlierOrLaterRef(dep : LocationType,arr : LocationType,ref : String, type : JourneyUpdateType) -> AnyPublisher<JourneysContainer,ApiServiceError> {
+	func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType) -> AnyPublisher<JourneysContainer,ApiServiceError> {
 		var query = addJourneysStopsQuery(dep: dep, arr: arr)
 			query += Query.getQueryItems(methods: [
 				type == .earlierRef ? Query.earlierThan(earlierRef: ref) : Query.laterThan(laterRef: ref),

@@ -14,20 +14,20 @@ extension SearchStopsView {
 			switch searchStopViewModel.state.status {
 			case .loaded,.loading:
 				ForEach(searchStopViewModel.state.stops) { stop in
-					if let text = stop.name {
-						Button(text){
-							switch type {
-							case .departure:
-								chewViewModel.send(event: .onNewDeparture(.stop(stop)))
-								searchStopViewModel.send(event: .onStopDidTap(stop, type))
-							case .arrival:
-								chewViewModel.send(event: .onNewArrival(.stop(stop)))
-								searchStopViewModel.send(event: .onStopDidTap(stop, type))
-							}
+					Button(action: {
+						switch type {
+						case .departure:
+							chewViewModel.send(event: .onNewDeparture(stop))
+							searchStopViewModel.send(event: .onStopDidTap(stop, type))
+						case .arrival:
+							chewViewModel.send(event: .onNewArrival(stop))
+							searchStopViewModel.send(event: .onStopDidTap(stop, type))
 						}
-						.foregroundColor(.primary)
-						.padding(7)
-					}
+					}, label: {
+						Label(stop.name, systemImage: "train.side.front.car")
+					})
+					.foregroundColor(.primary)
+					.padding(7)
 				}
 				.frame(maxWidth: .infinity,alignment: .leading)
 			case .error(let error):

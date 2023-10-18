@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 extension ChewViewModel {
 	enum DateType : Equatable,Hashable {
@@ -23,14 +24,14 @@ extension ChewViewModel {
 	}
 	
 	struct State : Equatable {
-		var depStop : LocationType?
-		var arrStop : LocationType?
+		var depStop : Stop?
+		var arrStop : Stop?
 		var timeChooserDate : DateType
 		var status : Status
 		
 		init(
-			depStop: LocationType?,
-			arrStop: LocationType?,
+			depStop: Stop?,
+			arrStop: Stop?,
 			timeChooserDate: DateType,
 			status: Status
 		) {
@@ -78,15 +79,15 @@ extension ChewViewModel {
 		case onDepartureEdit
 		case onArrivalEdit
 		case onDatePickerDidPressed
-		case onNewDeparture(LocationType?)
-		case onNewArrival(LocationType?)
+		case onNewDeparture(Stop?)
+		case onNewArrival(Stop?)
 		case onStopsSwitch
 		case onNewDate(DateType)
 		case onJourneyDataUpdated
 		case didLocationButtonPressed
-		case didReceiveLocationData(lat: Double,long: Double)
+		case didReceiveLocationData(CLLocationCoordinate2D)
 		case didFailToLoadLocationData
-		case didSetBothLocations(LocationType,LocationType)
+		case didSetBothLocations(Stop,Stop)
 		case didDismissDatePicker
 		
 		

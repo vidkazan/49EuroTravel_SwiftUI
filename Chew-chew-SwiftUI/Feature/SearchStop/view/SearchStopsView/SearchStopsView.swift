@@ -72,12 +72,12 @@ struct SearchStopsView: View {
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
 			if let depStop = state.depStop {
-				topText = depStop.stop.name ?? "Origin"
+				topText = depStop.name
 			} else {
 				topText = ""
 			}
 			if let arrStop = state.arrStop {
-				bottomText = arrStop.stop.name ?? "Destination"
+				bottomText = arrStop.name
 			}  else {
 				bottomText = ""
 			}

@@ -17,11 +17,11 @@ struct FavouriteRideCell: View {
 				.cornerRadius(4)
 				.padding(5)
 			VStack(alignment: .leading) {
-				Text(locations.departure.stop.name ?? locations.departure.stop.address ?? "Origin")
+				Text(locations.departure.name)
 					.chewTextSize(.medium)
 					.padding(5)
 				Spacer()
-				Text(locations.arrival.stop.name ?? locations.arrival.stop.address ?? "Destination")
+				Text(locations.arrival.name)
 					.chewTextSize(.medium)
 					.padding(5)
 			}

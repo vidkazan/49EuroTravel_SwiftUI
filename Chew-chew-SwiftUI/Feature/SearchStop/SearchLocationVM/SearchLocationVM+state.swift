@@ -9,7 +9,7 @@ import Foundation
 
 extension SearchLocationViewModel {
 	
-	struct State : Equatable, Hashable {
+	struct State : Equatable {
 		var stops : [Stop]
 		var status : Status
 		var type : LocationDirectionType?

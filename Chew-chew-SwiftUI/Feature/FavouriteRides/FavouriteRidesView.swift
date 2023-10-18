@@ -7,11 +7,12 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 struct Locations : Identifiable {
 	let id = UUID()
-	let departure : LocationType
-	let arrival : LocationType
+	let departure : Stop
+	let arrival : Stop
 }
 
 struct FavouriteRidesView : View {
@@ -20,8 +21,26 @@ struct FavouriteRidesView : View {
 	init() {
 		self.stops = [
 			Locations(
-				departure: LocationType.stop(Stop(type: "station", id: "\(586640)", name: "Zolltor,Neuss", address: nil, location: nil, products: nil)),
-				arrival: LocationType.stop(Stop(type: "station", id: "\(8089222)", name: "Wolfsburg ZOB", address: nil, location: nil, products: nil))
+				departure: Stop(
+					coordinates: CLLocationCoordinate2D(latitude: 51.2, longitude: 6.7),
+					type: .location,
+					stopDTO: nil
+				),
+				arrival: Stop(
+					coordinates: CLLocationCoordinate2D(latitude: 52, longitude: 10),
+					type: .stop,
+					stopDTO: StopDTO(
+						type: "station",
+						id: "\(8089222)",
+						name: "Wolfsburg ZOB",
+						address: nil,
+						location: nil,
+						latitude: nil,
+						longitude: nil,
+						poi: false,
+						products: nil
+					)
+				)
 			)
 		]
 	}

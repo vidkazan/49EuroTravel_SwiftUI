@@ -13,12 +13,12 @@ struct JourneysViewData : Equatable {
 	let journeys : [JourneyViewData]
 	let laterRef : String?
 	let earlierRef : String?
-	init(journeysViewData : [JourneyViewData],data: JourneysContainer,depStop: LocationType, arrStop : LocationType) {
+	init(journeysViewData : [JourneyViewData],data: JourneysContainer,depStop: Stop, arrStop : Stop) {
 		self.journeys = journeysViewData
 		self.laterRef = data.laterRef
 		self.earlierRef = data.earlierRef
 	}
-	init(data: JourneysContainer,depStop: LocationType, arrStop : LocationType) {
+	init(data: JourneysContainer,depStop: Stop, arrStop : Stop) {
 		self.journeys = constructJourneysViewData(journeysData: data, depStop: depStop, arrStop: arrStop)
 		self.laterRef = data.laterRef
 		self.earlierRef = data.earlierRef
@@ -66,7 +66,7 @@ struct LegViewData : Equatable,Identifiable{
 
 struct StopViewData : Equatable,Identifiable {
 	let id = UUID()
-	let locationCoordinates : CLLocationCoordinate2D?
+	let locationCoordinates : CLLocationCoordinate2D
 	let name : String
 	let departurePlatform : PrognoseType<String?>
 	let arrivalPlatform : PrognoseType<String?>
@@ -101,11 +101,10 @@ extension StopViewData {
 		self.departurePlatform  = PrognoseType(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
 		self.arrivalPlatform  = PrognoseType(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
 		self.type = type
-		if let lat = stop.stop?.location?.latitude,let long = stop.stop?.location?.longitude {
-			self.locationCoordinates = CLLocationCoordinate2D(latitude: lat, longitude: long)
-		} else {
-			self.locationCoordinates = nil
-		}
+		self.locationCoordinates = CLLocationCoordinate2D(
+			latitude: stop.stop?.location?.latitude ?? 0,
+			longitude: stop.stop?.location?.longitude ?? 0
+		)
 	}
 	init(name : String,timeContainer : TimeContainer,type: StopOverType, coordinates : LocationCoordinates?) {
 		self.timeContainer = timeContainer
@@ -113,11 +112,10 @@ extension StopViewData {
 		self.departurePlatform  = PrognoseType(actual: nil, planned: nil)
 		self.arrivalPlatform  = PrognoseType(actual: nil, planned: nil)
 		self.type = type
-		if let lat = coordinates?.latitude, let lon = coordinates?.longitude {
-			self.locationCoordinates = CLLocationCoordinate2D(latitude: lat, longitude: lon)
-		} else {
-			self.locationCoordinates = nil
-		}
+		self.locationCoordinates = CLLocationCoordinate2D(
+			latitude: coordinates?.latitude ?? 0,
+			longitude: coordinates?.longitude ?? 0
+		)
 	}
 }
 

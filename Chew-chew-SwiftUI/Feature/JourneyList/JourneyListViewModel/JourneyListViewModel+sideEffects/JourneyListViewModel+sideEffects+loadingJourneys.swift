@@ -29,29 +29,29 @@ extension JourneyListViewModel {
 	}
 	
 	
-	func addJourneysStopsQuery(dep : LocationType,arr : LocationType) -> [URLQueryItem] {
+	func addJourneysStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
 		var query : [URLQueryItem] = []
-		switch dep {
-		case .location(let stop):
+		switch dep.type {
+		case .location:
 			query += Query.getQueryItems(methods: [
-				Query.departureAddress(addr: "My Location"),
-				Query.departureLatitude(departureLatitude: (stop.location?.latitude?.description ?? "")),
-				Query.departureLongitude(departureLongitude: (stop.location?.longitude?.description ?? ""))
+				Query.departureAddress(addr: dep.name),
+				Query.departureLatitude(departureLatitude: (String(dep.coordinates.latitude))),
+				Query.departureLongitude(departureLongitude: (String(dep.coordinates.longitude)))
 			])
-		case .pointOfInterest(let stop):
-			guard let id = stop.id else {
-//				print("fetchJourneys","departure poi id is NIL")
+		case .pointOfInterest:
+			guard let id = dep.stopDTO?.id else {
+				print("fetchJourneys","departure poi id is NIL")
 				return query
 			}
 			
 			query += Query.getQueryItems(methods: [
 				Query.departurePoiId(poiId: id),
-				Query.departureLatitude(departureLatitude: (stop.location?.latitude?.description ?? "")),
-				Query.departureLongitude(departureLongitude: (stop.location?.longitude?.description ?? ""))
+				Query.departureLatitude(departureLatitude: (String(dep.coordinates.latitude ))),
+				Query.departureLongitude(departureLongitude: (String(dep.coordinates.longitude )))
 			])
-		case .stop(let stop):
-			guard let depStop = stop.id else {
-//				print("fetchJourneys","departure stop id is NIL")
+		case .stop:
+			guard let depStop = dep.stopDTO?.id else {
+				print("fetchJourneys","departure stop id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
@@ -59,26 +59,26 @@ extension JourneyListViewModel {
 			])
 		}
 		
-		switch arr {
-		case .location(let stop):
+		switch arr.type {
+		case .location:
 			query += Query.getQueryItems(methods: [
-				Query.arrivalAddress(addr: "My Location"),
-				Query.arrivalLatitude(arrivalLatitude: (stop.location?.latitude?.description ?? "")),
-				Query.arrivalLongitude(arrivalLongitude: (stop.location?.longitude?.description ?? ""))
+				Query.arrivalAddress(addr: dep.name),
+				Query.arrivalLatitude(arrivalLatitude: (String(arr.coordinates.latitude))),
+				Query.arrivalLongitude(arrivalLongitude: (String(arr.coordinates.longitude)))
 			])
-		case .pointOfInterest(let stop):
-			guard let id = stop.id else {
-//				print("fetchJourneys","arr pointOfInterest id is NIL")
+		case .pointOfInterest:
+			guard let id = arr.stopDTO?.id else {
+				print("fetchJourneys","arr pointOfInterest id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
 				Query.arrivalPoiId(poiId: id),
-				Query.arrivalLatitude(arrivalLatitude: (stop.location?.latitude?.description ?? "")),
-				Query.arrivalLongitude(arrivalLongitude: (stop.location?.longitude?.description ?? ""))
+				Query.arrivalLatitude(arrivalLatitude: (String(arr.coordinates.latitude))),
+				Query.arrivalLongitude(arrivalLongitude: (String(arr.coordinates.longitude)))
 			])
-		case .stop(let stop):
-			guard let depStop = stop.id else {
-//				print("fetchJourneys","arr stop id is NIL")
+		case .stop:
+			guard let depStop = arr.stopDTO?.id else {
+				print("fetchJourneys","arr stop id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
@@ -88,7 +88,7 @@ extension JourneyListViewModel {
 		return query
 	}
 	
-	func fetchJourneys(dep : LocationType,arr : LocationType,time: Date) -> AnyPublisher<JourneysContainer,ApiServiceError> {
+	func fetchJourneys(dep : Stop,arr : Stop,time: Date) -> AnyPublisher<JourneysContainer,ApiServiceError> {
 		var query = addJourneysStopsQuery(dep: dep, arr: arr)
 		query += Query.getQueryItems(methods: [
 			Query.departureTime(departureTime: time),
@@ -96,7 +96,6 @@ extension JourneyListViewModel {
 			Query.nationalExpress(iceTrains: false),
 			Query.regionalExpress(reTrains: false),
 //			Query.pretty(pretyIntend: false),
-			Query.transferTime(transferTime: "-1"),
 			Query.taxi(taxi: false),
 			Query.remarks(showRemarks: true),
 			Query.results(max: 5),

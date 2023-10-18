@@ -12,14 +12,14 @@ struct LegStopView : View {
 	@ObservedObject var vm : LegDetailsViewModel
 	let legViewData : LegViewData
 	let stopOver : StopViewData
-	let LocationType : StopOverType
+	let stopOverType : StopOverType
 	var time : PrognoseType<String>
 	var delay : TimeContainer.Status
 	let now = Date.now.timeIntervalSince1970
 	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : StopViewData,leg : LegViewData) {
 		self.vm = vm
 		self.stopOver = stopOver
-		self.LocationType = type
+		self.stopOverType = type
 		self.legViewData = leg
 		switch type {
 		case .origin,.stopover,.transfer, .footTop,.footMiddle:
@@ -31,7 +31,7 @@ struct LegStopView : View {
 		}
 	}
 	var body : some View {
-		switch LocationType {
+		switch stopOverType {
 		case .transfer,.footMiddle:
 			HStack(alignment:  .center) {
 				VStack(alignment: .leading) {
@@ -40,12 +40,12 @@ struct LegStopView : View {
 				}
 				.frame(width: 70)
 				VStack(alignment: .leading) {
-					if case .transfer=LocationType {
+					if case .transfer=stopOverType {
 						HStack(spacing: 3) {
 							BadgeView(badge: .transfer(duration: legViewData.duration))
 						}
 					}
-					if case .footMiddle=LocationType {
+					if case .footMiddle=stopOverType {
 						HStack(spacing: 3) {
 							BadgeView(badge: .walking(duration: legViewData.duration))
 						}
@@ -53,7 +53,7 @@ struct LegStopView : View {
 				}
 				Spacer()
 			}
-			.frame(height: LocationType.viewHeight)
+			.frame(height: stopOverType.viewHeight)
 		case .footBottom:
 			HStack(alignment:  .bottom) {
 				// MARK: Time Label
@@ -75,16 +75,16 @@ struct LegStopView : View {
 				}
 				Spacer()
 			}
-			.frame(height: LocationType.viewHeight)
+			.frame(height: stopOverType.viewHeight)
 		default:
 			HStack(alignment:  .top) {
 				// MARK: Time Label
 				VStack(alignment: .leading) {
-					switch LocationType {
+					switch stopOverType {
 					case .stopover:
 						TimeLabelView(
 							isSmall: true,arragement: .right,time: time,delay: delay)
-						.frame(height: LocationType.timeLabelHeight)
+						.frame(height: stopOverType.timeLabelHeight)
 						.background {
 							LinearGradient(stops: [
 								Gradient.Stop(color: .chewGrayScale10, location: 0),
@@ -117,7 +117,7 @@ struct LegStopView : View {
 				.frame(width: 70)
 				VStack(alignment: .leading, spacing: 2) {
 					// MARK: Location Name above Badges
-					switch LocationType {
+					switch stopOverType {
 					case .origin, .destination,.footTop:
 						Text(stopOver.name)
 							.chewTextSize(.big)
@@ -130,7 +130,7 @@ struct LegStopView : View {
 					}
 					// MARK: Badges
 
-					switch LocationType {
+					switch stopOverType {
 					case .footBottom,.footMiddle,.footTop:
 						HStack(spacing: 3) {
 							BadgeView(badge: .walking(duration: legViewData.duration))
@@ -171,14 +171,14 @@ struct LegStopView : View {
 						}
 					}
 					// MARK: Location Name under Badges
-					if case .footBottom = LocationType{
+					if case .footBottom = stopOverType{
 						Text(stopOver.name)
 							.chewTextSize(.big)
 					}
 				}
 				Spacer()
 			}
-			.frame(height: LocationType.viewHeight)
+			.frame(height: stopOverType.viewHeight)
 		}
 	}
 }
