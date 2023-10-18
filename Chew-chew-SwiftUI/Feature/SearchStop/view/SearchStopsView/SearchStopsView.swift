@@ -34,10 +34,11 @@ struct SearchStopsView: View {
 					)
 					rightButton(type: .departure)
 				}
-				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray20 : Color.chewGray10)
+				.background(Color.chewGray10)
+//				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
-				if case .departure = searchStopViewModel.state.type {
+				if case .departure = searchStopViewModel.state.type, case .editingDepartureStop=chewViewModel.state.status {
 					stopList(type: .departure)
 				}
 			}
@@ -57,10 +58,11 @@ struct SearchStopsView: View {
 					)
 					rightButton(type: .arrival)
 				}
-				.background(chewViewModel.state.status == .editingArrivalStop ?  Color.chewGray20 : Color.chewGray10)
+				.background(Color.chewGray10)
+//				.background(chewViewModel.state.status == .editingArrivalStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
-				if case .arrival = searchStopViewModel.state.type {
+				if case .arrival = searchStopViewModel.state.type, case .editingArrivalStop=chewViewModel.state.status {
 					stopList(type: .arrival)
 				}
 			}
@@ -72,7 +74,7 @@ struct SearchStopsView: View {
 		.toolbar {
 			ToolbarItem(placement: .keyboard) {
 				HStack{
-					Button(role: .cancel, action: {
+					Button(action: {
 						chewViewModel.send(event: .onNewDate(chewViewModel.state.timeChooserDate))
 					}, label: {
 						Text("cancel")
@@ -81,13 +83,14 @@ struct SearchStopsView: View {
 					Spacer()
 				}
 				.background(.clear)
-				.frame(alignment: .leading)
 			}
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
 			topText = state.depStop?.name ?? ""
 			bottomText = state.arrStop?.name ?? ""
-		
+			if let type = searchStopViewModel.state.type {
+				searchStopViewModel.send(event: .onReset(type))
+			}
 			switch state.status {
 			case .editingDepartureStop:
 				focusedField =  .departure

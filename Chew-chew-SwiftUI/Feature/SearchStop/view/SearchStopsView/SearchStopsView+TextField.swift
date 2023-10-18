@@ -41,7 +41,7 @@ extension SearchStopsView {
 					}
 				}
 			VStack {
-				if focusedField != nil && text.count > 0 {
+				if focusedField == type && text.count > 0 {
 					Button(action: {
 						textBinding.wrappedValue = ""
 					}, label: {

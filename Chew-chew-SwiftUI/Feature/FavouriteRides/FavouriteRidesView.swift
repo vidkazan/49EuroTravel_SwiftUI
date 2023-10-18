@@ -70,7 +70,7 @@ struct FavouriteRidesView : View {
 		}
 		.transition(.opacity)
 		.animation(.spring(), value: chewVM.state.status)
-//		.animation(.spring(), value: chewVM.state.searchStopViewModel.state)
+		.animation(.spring(), value: chewVM.searchStopsViewModel.state.status)
 	}
 }
 

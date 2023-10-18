@@ -50,7 +50,7 @@ struct LegView: View {
 							}
 						case .line:
 							if (Int(geo.size.width / 7) > leg.lineViewData.name.count) {
-								Text(leg.lineViewData.name)
+								Text(leg.lineViewData.name.replacingOccurrences(of: " ", with: ""))
 									.foregroundColor(.primary)
 									.chewTextSize(.medium)
 							} else if (Int(geo.size.width / 7) > leg.lineViewData.shortName.count) {
