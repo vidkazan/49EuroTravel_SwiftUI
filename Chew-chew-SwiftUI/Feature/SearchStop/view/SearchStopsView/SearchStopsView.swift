@@ -66,29 +66,21 @@ struct SearchStopsView: View {
 			}
 			.background(Color.chewGray10)
 			.cornerRadius(10)
-			.padding(EdgeInsets(top: 0, leading: 0, bottom: 1, trailing: 0))
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: searchStopViewModel.state.status)
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
-			if let depStop = state.depStop {
-				topText = depStop.name
-			} else {
-				topText = ""
+			topText = state.depStop?.name ?? ""
+			bottomText = state.arrStop?.name ?? ""
+		
+			switch state.status {
+			case .editingDepartureStop:
+				focusedField =  .departure
+			case .editingArrivalStop:
+				focusedField =  .arrival
+			default:
+				focusedField = nil
 			}
-			if let arrStop = state.arrStop {
-				bottomText = arrStop.name
-			}  else {
-				bottomText = ""
-			}
-				switch state.status {
-				case .editingDepartureStop:
-					focusedField =  .departure
-				case .editingArrivalStop:
-					focusedField =  .arrival
-				default:
-					focusedField = nil
-				}
 		})
 	}
 }

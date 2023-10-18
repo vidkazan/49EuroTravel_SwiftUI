@@ -28,7 +28,7 @@ extension JourneyListViewModel {
 	  }
 	}
 	
-	// TODO: duplicating
+	// TODO: duplicating code
 	func addJourneysStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
 		var query : [URLQueryItem] = []
 		switch dep.type {
@@ -95,11 +95,12 @@ extension JourneyListViewModel {
 			Query.national(icTrains: false),
 			Query.nationalExpress(iceTrains: false),
 			Query.regionalExpress(reTrains: false),
-//			Query.pretty(pretyIntend: false),
 			Query.taxi(taxi: false),
 			Query.remarks(showRemarks: true),
 			Query.results(max: 5),
-			Query.stopovers(isShowing: true)
+			Query.stopovers(isShowing: true),
+			Query.pretty(pretyIntend: false),
+//			Query.transferTime(transferTime: "1")
 		])
 		return ApiService.fetchCombine(JourneysContainer.self,query: query, type: ApiService.Requests.journeys, requestGroupId: "")
 	}

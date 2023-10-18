@@ -8,8 +8,6 @@
 import SwiftUI
 import CoreLocation
 
-
-// TODO: move all logic from views
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject private var chewViewModel : ChewViewModel
@@ -28,9 +26,11 @@ struct ContentView: View {
 					if case .journeys(let vm) = chewViewModel.state.status {
 						JourneysListView(journeyViewModel: vm)
 							.padding(.top,10)
-					} else {
+					} else if case .idle = chewViewModel.state.status  {
 						FavouriteRidesView()
 							.padding(.top,10)
+						Spacer()
+					} else {
 						Spacer()
 					}
 				}

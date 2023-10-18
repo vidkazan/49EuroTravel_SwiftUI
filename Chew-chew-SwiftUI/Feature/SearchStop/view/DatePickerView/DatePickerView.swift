@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// TODO: move view to sheet
+
 struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
 	@State private var date = Date()
@@ -52,12 +52,14 @@ struct DatePickerView: View {
 				.onAppear {
 					date = startDate
 				}
-				.datePickerStyle(.wheel)
+				// ".graphical" because it gives you info about current day,
+				// ".wheels" you dont understand which day is now
+				.datePickerStyle(.graphical)
 				.padding(7)
 				.cornerRadius(10)
 				.padding(EdgeInsets(top: 0, leading: 0, bottom:0, trailing: 15))
 			}
-			.frame(maxWidth: .infinity,maxHeight: 150)
+			.frame(maxWidth: .infinity,maxHeight: 350)
 			.background(.ultraThinMaterial)
 			.cornerRadius(10)
 			Spacer()

@@ -12,30 +12,34 @@ extension SearchStopsView {
 	func stopList(type : LocationDirectionType) -> some View {
 		return VStack {
 			switch searchStopViewModel.state.status {
-			case .loaded,.loading:
-				ForEach(searchStopViewModel.state.stops) { stop in
-					Button(action: {
-						switch type {
-						case .departure:
-							chewViewModel.send(event: .onNewDeparture(stop))
-							searchStopViewModel.send(event: .onStopDidTap(stop, type))
-						case .arrival:
-							chewViewModel.send(event: .onNewArrival(stop))
-							searchStopViewModel.send(event: .onStopDidTap(stop, type))
+			case .loaded:
+				ScrollView{
+					ForEach(searchStopViewModel.state.stops) { stop in
+						HStack {
+							Button(action: {
+								switch type {
+								case .departure:
+									chewViewModel.send(event: .onNewDeparture(stop))
+									searchStopViewModel.send(event: .onStopDidTap(stop, type))
+								case .arrival:
+									chewViewModel.send(event: .onNewArrival(stop))
+									searchStopViewModel.send(event: .onStopDidTap(stop, type))
+								}
+							}, label: {
+								Label(stop.name, systemImage: "train.side.front.car")
+							})
+							.foregroundColor(.primary)
+							.padding(7)
+							Spacer()
 						}
-					}, label: {
-						Label(stop.name, systemImage: "train.side.front.car")
-					})
-					.foregroundColor(.primary)
-					.padding(7)
+					}
 				}
-				.frame(maxWidth: .infinity,alignment: .leading)
 			case .error(let error):
 				Text(error.description)
 					.foregroundColor(.secondary)
 					.padding(5)
 					.frame(maxWidth: .infinity,alignment: .center)
-			case .idle:
+			case .idle,.loading:
 				EmptyView()
 			}
 		}

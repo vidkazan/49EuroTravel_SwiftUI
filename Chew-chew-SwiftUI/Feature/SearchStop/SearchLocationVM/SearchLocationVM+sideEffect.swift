@@ -43,7 +43,7 @@ extension SearchLocationViewModel {
 		var query : [URLQueryItem] = []
 		query = Query.getQueryItems(methods: [
 			Query.location(location: text),
-			Query.results(max: 5),
+			Query.results(max: 10),
 //			Query.showAddresses(showAddresses: false),
 //			Query.showPointsOfInterests(showPointsOfInterests: false)
 		])
