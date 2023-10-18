@@ -95,27 +95,45 @@ struct LineViewData : Equatable {
 }
 
 extension StopViewData {
-	init(name : String,timeContainer : TimeContainer, stop : StopOver,type: StopOverType) {
+	init(
+		name : String,
+		timeContainer : TimeContainer,
+		stop : StopOver,
+		type: StopOverType
+	) {
 		self.timeContainer = timeContainer
 		self.name = name
 		self.departurePlatform  = PrognoseType(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
 		self.arrivalPlatform  = PrognoseType(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
 		self.type = type
 		self.locationCoordinates = CLLocationCoordinate2D(
-			latitude: stop.stop?.location?.latitude ?? 0,
-			longitude: stop.stop?.location?.longitude ?? 0
+			latitude: stop.stop?.location?.latitude ?? stop.stop?.latitude ?? -1,
+			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
 		)
 	}
-	init(name : String,timeContainer : TimeContainer,type: StopOverType, coordinates : LocationCoordinates?) {
+//	init(name : String,timeContainer : TimeContainer,type: StopOverType, coordinates : LocationCoordinates?) {
+//		self.timeContainer = timeContainer
+//		self.name = name
+//		self.departurePlatform  = PrognoseType(actual: nil, planned: nil)
+//		self.arrivalPlatform  = PrognoseType(actual: nil, planned: nil)
+//		self.type = type
+//		self.locationCoordinates = CLLocationCoordinate2D(
+//			latitude: coordinates?.latitude ?? 0,
+//			longitude: coordinates?.longitude ?? 0
+//		)
+//	}
+	init(
+		name : String,
+		timeContainer : TimeContainer,
+		type: StopOverType,
+		coordinates : CLLocationCoordinate2D
+	) {
 		self.timeContainer = timeContainer
 		self.name = name
 		self.departurePlatform  = PrognoseType(actual: nil, planned: nil)
 		self.arrivalPlatform  = PrognoseType(actual: nil, planned: nil)
 		self.type = type
-		self.locationCoordinates = CLLocationCoordinate2D(
-			latitude: coordinates?.latitude ?? 0,
-			longitude: coordinates?.longitude ?? 0
-		)
+		self.locationCoordinates = coordinates
 	}
 }
 

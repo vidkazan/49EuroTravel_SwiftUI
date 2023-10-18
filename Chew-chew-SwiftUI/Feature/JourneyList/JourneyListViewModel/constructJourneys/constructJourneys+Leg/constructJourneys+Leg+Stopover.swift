@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import CoreLocation
 
 	func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopViewData] {
 		var name : String? {
@@ -70,13 +71,19 @@ import SwiftUI
 					name: name ?? leg.origin?.name ?? "name",
 					timeContainer: first,
 					type: .footTop,
-					coordinates: leg.origin?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: leg.origin?.latitude ?? leg.origin?.location?.latitude ?? 0,
+						longitude: leg.origin?.longitude ?? leg.origin?.location?.longitude ?? 0
+					)
 				),
 				StopViewData(
 					name: name ?? leg.destination?.name ?? "name",
 					timeContainer: last,
 					type: .footTop,
-					coordinates: leg.destination?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: leg.destination?.latitude ?? leg.destination?.location?.latitude ?? 0,
+						longitude: leg.destination?.longitude ?? leg.destination?.location?.longitude ?? 0
+					)
 				)
 			]
 		case .footMiddle:
@@ -99,13 +106,19 @@ import SwiftUI
 					name: name ?? leg.origin?.name ?? "name",
 					timeContainer: first,
 					type: .footMiddle,
-					coordinates: leg.origin?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: leg.origin?.latitude ?? leg.origin?.location?.latitude ?? 0,
+						longitude: leg.origin?.longitude ?? leg.origin?.location?.longitude ?? 0
+					)
 				),
 				StopViewData(
 					name: name ?? leg.destination?.name ?? "name",
 					timeContainer: last,
 					type: .footMiddle,
-					coordinates: leg.destination?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: leg.destination?.latitude ?? leg.destination?.location?.latitude ?? 0,
+						longitude: leg.destination?.longitude ?? leg.destination?.location?.longitude ?? 0
+					)
 				)
 			]
 		case .footEnd:
@@ -128,13 +141,19 @@ import SwiftUI
 					name: name ?? leg.origin?.name ?? "name",
 					timeContainer: first,
 					type: .footBottom,
-					coordinates: leg.origin?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: leg.origin?.latitude ?? leg.origin?.location?.latitude ?? 0,
+						longitude: leg.origin?.longitude ?? leg.origin?.location?.longitude ?? 0
+					)
 				),
 				StopViewData(
 					name: name ?? leg.destination?.name ?? "name",
 					timeContainer: last,
 					type: .footBottom,
-					coordinates: leg.destination?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: leg.destination?.latitude ?? leg.destination?.location?.latitude ?? 0,
+						longitude: leg.destination?.longitude ?? leg.destination?.location?.longitude ?? 0
+					)
 				)
 			]
 		case .transfer:
@@ -157,13 +176,19 @@ import SwiftUI
 					name: name ?? leg.origin?.name ?? "name",
 					timeContainer: first,
 					type: .transfer,
-					coordinates: leg.origin?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: leg.origin?.latitude ?? leg.origin?.location?.latitude ?? 0,
+						longitude: leg.origin?.longitude ?? leg.origin?.location?.longitude ?? 0
+					)
 				),
 				StopViewData(
 					name: name ?? leg.destination?.name ?? "name",
 					timeContainer: last,
 					type: .transfer,
-					coordinates: leg.destination?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: leg.destination?.latitude ?? leg.destination?.location?.latitude ?? 0,
+						longitude: leg.destination?.longitude ?? leg.destination?.location?.longitude ?? 0
+					)
 				)
 			]
 		}

@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SwiftUI
+import CoreLocation
 
 struct Segments : Equatable, Hashable {
 	enum EvalType : Int,Equatable, Hashable {
@@ -141,13 +142,19 @@ struct Segments : Equatable, Hashable {
 					name: "",
 					timeContainer: first,
 					type: .transfer,
-					coordinates: fromLeg.destination?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: fromLeg.destination?.latitude ?? fromLeg.destination?.location?.latitude ?? 0,
+						longitude: fromLeg.destination?.longitude ?? fromLeg.destination?.location?.longitude ?? 0
+					)
 				),
 				StopViewData(
 					name: "",
 					timeContainer: last,
 					type: .transfer,
-					coordinates: toLeg.origin?.location
+					coordinates: CLLocationCoordinate2D(
+						latitude: toLeg.origin?.latitude ?? toLeg.origin?.location?.latitude ?? 0,
+						longitude: toLeg.origin?.longitude ?? toLeg.origin?.location?.longitude ?? 0
+					)
 				)
 			],
 			footDistance: 0,

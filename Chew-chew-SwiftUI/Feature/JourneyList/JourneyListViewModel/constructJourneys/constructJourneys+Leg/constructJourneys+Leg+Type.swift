@@ -12,9 +12,9 @@ import SwiftUI
 		if let dist = leg.distance {
 			switch legs.firstIndex(of: leg) {
 			case 0:
-				return .footStart(startPointName: leg.origin?.name ?? (leg.origin?.address ?? "Origin"))
+				return .footStart(startPointName: leg.origin?.name ?? (leg.origin?.address ?? "Origin(legType)"))
 			case legs.count - 1 :
-				return .footEnd(finishPointName: leg.destination?.name ?? (leg.destination?.address ?? "Destination"))
+				return .footEnd(finishPointName: leg.destination?.name ?? (leg.destination?.address ?? "Destination(legType)"))
 			default:
 				return .footMiddle
 			}

@@ -28,7 +28,7 @@ extension JourneyListViewModel {
 	  }
 	}
 	
-	
+	// TODO: duplicating
 	func addJourneysStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
 		var query : [URLQueryItem] = []
 		switch dep.type {
@@ -62,7 +62,7 @@ extension JourneyListViewModel {
 		switch arr.type {
 		case .location:
 			query += Query.getQueryItems(methods: [
-				Query.arrivalAddress(addr: dep.name),
+				Query.arrivalAddress(addr: arr.name),
 				Query.arrivalLatitude(arrivalLatitude: (String(arr.coordinates.latitude))),
 				Query.arrivalLongitude(arrivalLongitude: (String(arr.coordinates.longitude)))
 			])

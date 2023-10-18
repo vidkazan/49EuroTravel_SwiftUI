@@ -22,7 +22,10 @@ func constructStopFromStopDTO(data : StopDTO?) -> Stop? {
 		}
 	}()
 	return Stop(
-		coordinates: CLLocationCoordinate2D(latitude: data.latitude ?? data.location?.latitude ?? 0 , longitude: data.longitude ?? data.location?.longitude ?? 0),
+		coordinates: CLLocationCoordinate2D(
+			latitude: data.latitude ?? data.location?.latitude ?? 0 ,
+			longitude: data.longitude ?? data.location?.longitude ?? 0
+		),
 		type: type,
 		stopDTO: data
 	)
