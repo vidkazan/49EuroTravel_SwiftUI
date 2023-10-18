@@ -12,7 +12,7 @@ import CoreLocation
 // TODO: actionSheet and alert at top
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
-	@EnvironmentObject private var chewViewModel : ChewViewModel
+	@EnvironmentObject var chewViewModel : ChewViewModel
 	@State var bottomSheetIsPresented : Bool
 	let solar = Solar(coordinate: CLLocationCoordinate2D(
 		latitude: 51.3,
@@ -23,8 +23,8 @@ struct ContentView: View {
 		NavigationView {
 			ZStack {
 				VStack(spacing: 5) {
-					SearchStopsView()
-					TimeChoosingView()
+					SearchStopsView(vm: chewViewModel.searchStopsViewModel)
+					TimeChoosingView(searchStopsVM: chewViewModel.searchStopsViewModel)
 					if case .journeys(let vm) = chewViewModel.state.status {
 						JourneysListView(journeyViewModel: vm)
 							.padding(.top,10)
@@ -65,6 +65,7 @@ struct ContentView: View {
 			.navigationBarHidden(true)
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: chewViewModel.state.status)
+			.animation(.spring(), value: chewViewModel.searchStopsViewModel.state)
 		}
 	}
 }

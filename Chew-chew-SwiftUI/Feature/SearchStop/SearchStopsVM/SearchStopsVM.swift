@@ -1,5 +1,5 @@
 //
-//  SearchLocationViewModel.swift
+//  SearchStopsViewModel.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 05.09.23.
@@ -9,7 +9,7 @@ import Foundation
 import Combine
 import SwiftUI
 
-class SearchLocationViewModel : ObservableObject {
+class SearchStopsViewModel : ObservableObject {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	

@@ -11,6 +11,7 @@ import Combine
 
 final class ChewViewModel : ObservableObject, Identifiable {
 	@ObservedObject var  locationDataManager = LocationDataManager()
+	@Published var searchStopsViewModel = SearchStopsViewModel()
 	@Published private(set) var state : State {
 		didSet {
 			print("⚪ > main new state:",state.status.description)

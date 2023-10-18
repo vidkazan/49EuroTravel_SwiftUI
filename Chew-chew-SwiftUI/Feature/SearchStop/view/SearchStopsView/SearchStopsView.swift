@@ -10,14 +10,14 @@ import CoreLocation
 
 struct SearchStopsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
-	@ObservedObject var searchStopViewModel : SearchLocationViewModel
+	@ObservedObject var searchStopViewModel : SearchStopsViewModel
 	@FocusState	var focusedField : LocationDirectionType?
 	@State var topText : String
 	@State var bottomText : String
-	init() {
-		self.searchStopViewModel = SearchLocationViewModel()
+	init(vm : SearchStopsViewModel) {
 		self.topText = ""
 		self.bottomText = ""
+		self.searchStopViewModel = vm
 	}
 	
 	var body: some View {
@@ -68,6 +68,21 @@ struct SearchStopsView: View {
 			.cornerRadius(10)
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: searchStopViewModel.state.status)
+		}
+		.toolbar {
+			ToolbarItem(placement: .keyboard) {
+				HStack{
+					Button(role: .cancel, action: {
+						chewViewModel.send(event: .onNewDate(chewViewModel.state.timeChooserDate))
+					}, label: {
+						Text("cancel")
+							.tint(.gray)
+					})
+					Spacer()
+				}
+				.background(.clear)
+				.frame(alignment: .leading)
+			}
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
 			topText = state.depStop?.name ?? ""

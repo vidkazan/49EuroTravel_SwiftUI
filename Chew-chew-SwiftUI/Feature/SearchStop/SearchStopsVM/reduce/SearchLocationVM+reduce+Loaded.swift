@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension SearchLocationViewModel {
+extension SearchStopsViewModel {
 	static func reduceLoaded(_ state:  State, _ event: Event) -> State {
 		guard case .loaded = state.status else { return state }
 		switch event {

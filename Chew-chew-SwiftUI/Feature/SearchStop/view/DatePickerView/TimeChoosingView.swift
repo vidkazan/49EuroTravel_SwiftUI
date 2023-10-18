@@ -9,10 +9,17 @@ import SwiftUI
 
 struct TimeChoosingView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
+	@ObservedObject var searchStopsVM : SearchStopsViewModel
 	@State private var selectedOption = 0
 	private var datePickerIsShowing = false
 	private var options = ["now","date"]
-	
+
+	init(searchStopsVM: SearchStopsViewModel, selectedOption: Int = 0, datePickerIsShowing: Bool = false, options: [String] = ["now","date"]) {
+		self.searchStopsVM = searchStopsVM
+		self.selectedOption = selectedOption
+		self.datePickerIsShowing = datePickerIsShowing
+		self.options = options
+	}
 	var body: some View {
 		ZStack {
 			Rectangle()
@@ -54,7 +61,7 @@ struct TimeChoosingView: View {
 		.cornerRadius(10)
 		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: chewVM.state.status)
-//		.animation(.spring(), value: chewVM.state.searchStopViewModel.state.status)
+		.animation(.spring(), value: chewVM.searchStopsViewModel.state.status)
 	}
 
 	func optionPressed(_ index: Int) {

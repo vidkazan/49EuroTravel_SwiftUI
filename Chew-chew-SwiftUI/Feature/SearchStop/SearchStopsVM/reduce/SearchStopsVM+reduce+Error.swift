@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension SearchLocationViewModel {
+extension SearchStopsViewModel {
 	static func reduceError(_ state:  State, _ event: Event) -> State {
 		guard case .error = state.status else { return state }
 		switch event {

@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-extension SearchLocationViewModel {
+extension SearchStopsViewModel {
 	func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
 		Feedback { _ in
 			input
@@ -21,7 +21,7 @@ extension SearchLocationViewModel {
 				  let type = state.type else {
 				return Empty().eraseToAnyPublisher()
 			}
-			return SearchLocationViewModel.fetchLocations(text: string, type: type)
+			return SearchStopsViewModel.fetchLocations(text: string, type: type)
 				.map { stops in
 					if stops.isEmpty {
 						return Event.onDataLoadError(ApiServiceError.stopNotFound)
@@ -38,7 +38,7 @@ extension SearchLocationViewModel {
 }
 
 
-extension SearchLocationViewModel {
+extension SearchStopsViewModel {
 	static func fetchLocations(text : String, type : LocationDirectionType) -> AnyPublisher<[StopDTO],ApiServiceError> {
 		var query : [URLQueryItem] = []
 		query = Query.getQueryItems(methods: [

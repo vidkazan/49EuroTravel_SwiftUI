@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension SearchLocationViewModel {
+extension SearchStopsViewModel {
 	static func reduceIdle(_ state:  State, _ event: Event) -> State {
 		guard case .idle = state.status else { return state }
 		switch event {

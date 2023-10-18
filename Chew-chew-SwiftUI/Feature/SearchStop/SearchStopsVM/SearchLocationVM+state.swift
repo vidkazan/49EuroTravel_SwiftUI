@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension SearchLocationViewModel {
+extension SearchStopsViewModel {
 	
 	struct State : Equatable {
 		var stops : [Stop]
@@ -16,7 +16,7 @@ extension SearchLocationViewModel {
 	}
 	
 	enum Status : Equatable,Hashable {
-		static func == (lhs: SearchLocationViewModel.Status, rhs: SearchLocationViewModel.Status) -> Bool {
+		static func == (lhs: SearchStopsViewModel.Status, rhs: SearchStopsViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
 		case idle

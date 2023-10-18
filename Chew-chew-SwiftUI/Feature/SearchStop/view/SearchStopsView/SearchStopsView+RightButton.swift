@@ -39,7 +39,8 @@ extension SearchStopsView {
 					image
 				}
 			})
-			.padding(12)
+			.frame(width: 20)
+			.padding(EdgeInsets(top: 12, leading: 0, bottom: 12, trailing: 12))
 			.foregroundColor(.primary)
 	}
 }

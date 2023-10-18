@@ -15,7 +15,7 @@ extension SearchStopsView {
 			case .loaded:
 				ScrollView{
 					ForEach(searchStopViewModel.state.stops) { stop in
-						HStack {
+						HStack(alignment: .center) {
 							Button(action: {
 								switch type {
 								case .departure:
@@ -26,14 +26,23 @@ extension SearchStopsView {
 									searchStopViewModel.send(event: .onStopDidTap(stop, type))
 								}
 							}, label: {
-								Label(stop.name, systemImage: "train.side.front.car")
+								switch stop.type {
+								case .stop:
+									Label(stop.name, systemImage: "train.side.front.car")
+								case .pointOfInterest:
+									Label(stop.name, systemImage: "building.2.crop.circle")
+								case .location:
+									Label(stop.name, systemImage: "building.2.crop.circle.fill")
+								}
 							})
+							.frame(height: 20)
 							.foregroundColor(.primary)
 							.padding(7)
 							Spacer()
 						}
 					}
 				}
+				.frame(minHeight: 0,maxHeight: 300)
 			case .error(let error):
 				Text(error.description)
 					.foregroundColor(.secondary)
