@@ -50,11 +50,12 @@ struct MapSheet: View {
 				Spacer()
 			case .locationDetails(coordRegion: let reg, coordinates: let coords):
 				MapView(mapRect: reg, coords: coords)
-			case .error,.loadedJourneyData,.loading:
+			case .error,.loadedJourneyData,.loading,.fullLeg,.loadingFullLeg,.actionSheet:
 				Spacer()
 			}
+			Spacer()
 			Button("Close") {
-				viewModel.send(event: .didCloseLocationDetails)
+				viewModel.send(event: .didCloseBottomSheet)
 			}
 				.frame(maxWidth: .infinity,minHeight: 43)
 				.background(Color.chewGray15)
@@ -63,10 +64,7 @@ struct MapSheet: View {
 				.padding(5)
 		}
 		.chewTextSize(.big)
-		.background(Color.chewGrayScale10)
-		.onDisappear {
-			viewModel.send(event: .didCloseLocationDetails)
-		}
+		.background(Color.chewGrayScale07)
 	}
 }
 

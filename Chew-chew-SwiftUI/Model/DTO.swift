@@ -9,6 +9,43 @@ import Foundation
 
 // /journeys
 
+enum StopOverType : Equatable {
+	case origin
+	case stopover
+	case destination
+	case footTop
+	case footMiddle
+	case footBottom
+	case transfer
+	
+	var timeLabelHeight : Double {
+		switch self {
+		case .destination,.origin,.footBottom,.footTop:
+			return 30
+		case .transfer,.footMiddle,.stopover:
+			return 15
+		}
+	}
+	
+	var viewHeight : Double {
+		switch self {
+		case .destination:
+			return 50
+		case .origin:
+			return 90
+		case .stopover:
+			return 35
+		case .transfer,.footMiddle:
+			return 70
+		case .footTop:
+			return 70
+		case .footBottom:
+			return 70
+		}
+	}
+}
+
+
 struct StopOver : Codable,Equatable,Identifiable {
 	let id = UUID()
 	let stop				: StopDTO?
@@ -43,6 +80,15 @@ struct StopOver : Codable,Equatable,Identifiable {
 		case plannedDeparturePlatform
 		case remarks
 	}
+}
+
+struct Trip : Codable,Equatable,Identifiable {
+	let id = UUID()
+	let trip : Leg
+	private enum CodingKeys : String, CodingKey {
+		case trip
+	}
+	
 }
 
 struct Leg : Codable,Equatable,Identifiable{

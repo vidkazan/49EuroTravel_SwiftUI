@@ -16,6 +16,7 @@ struct Constants {
 		static let urlPathDepartures = "/departures"
 		static let urlPathLocations = "/locations"
 		static let urlPathJourneys = "/journeys"
+		static let urlPathTrip = "/trips"
 	}
 	
 	struct CornerRadius {

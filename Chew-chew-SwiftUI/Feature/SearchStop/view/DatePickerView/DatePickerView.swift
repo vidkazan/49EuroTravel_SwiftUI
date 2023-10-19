@@ -22,7 +22,7 @@ struct DatePickerView: View {
 				DatePickerTimePresetButtons()
 			}
 				.frame(maxWidth: .infinity,maxHeight: 50)
-				.background(.ultraThinMaterial)
+				.background(Color.chewGrayScale15)
 				.cornerRadius(10)
 			HStack {
 				DatePicker(
@@ -41,7 +41,7 @@ struct DatePickerView: View {
 				Spacer()
 			}
 				.frame(maxWidth: .infinity,maxHeight: 150)
-				.background(.ultraThinMaterial)
+				.background(Color.chewGrayScale15)
 				.cornerRadius(10)
 			HStack {
 				DatePicker(
@@ -58,6 +58,7 @@ struct DatePickerView: View {
 				.padding(7)
 				.cornerRadius(10)
 				.padding(EdgeInsets(top: 0, leading: 0, bottom:0, trailing: 15))
+				.background(Color.chewGrayScale15)
 			}
 			.frame(maxWidth: .infinity,maxHeight: 350)
 			.background(.ultraThinMaterial)
@@ -75,8 +76,7 @@ struct DatePickerView: View {
 				.foregroundColor(.primary)
 				.cornerRadius(10)
 		}
-		.padding(5)
-		.cornerRadius(10)
-		.padding(5)
+		.padding(10)
+		.background(Color.chewGrayScale10)
 	}
 }

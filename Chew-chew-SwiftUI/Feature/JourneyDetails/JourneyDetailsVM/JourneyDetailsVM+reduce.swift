@@ -13,25 +13,24 @@ extension JourneyDetailsViewModel {
 		switch state.status {
 		case .loading:
 			switch event {
-			case .didLoadJourneyData(let data):
+			case 	.didLoadJourneyData(let data):
 				return State(
 					data: data,
 					status: .loadedJourneyData
 				)
-			case .didFailedToLoadJourneyData(let error):
+			case 	.didFailedToLoadJourneyData(let error):
 				return State(
 					data: state.data,
 					status: .error(error: error)
 				)
-			case .didTapReloadJourneys:
-				return state
-			case .didExpandLegDetails:
-				return state
-			case .didTapLocationDetails:
-				return state
-			case .didCloseLocationDetails:
-				return state
-			case .didLoadLocationDetails:
+			case	.didTapReloadJourneys,
+					.didCloseActionSheet,
+					.didExpandLegDetails,
+					.didLongTapOnLeg,
+					.didTapBottomSheetDetails,
+					.didCloseBottomSheet,
+					.didLoadFullLegData,
+					.didLoadLocationDetails:
 				return state
 			}
 		case .loadedJourneyData:
@@ -47,14 +46,17 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
 				)
-			case .didTapLocationDetails(leg: let leg):
+			case .didLoadLocationDetails:
+				return state
+			case .didLongTapOnLeg(leg: let leg):
 				return State(
 					data: state.data,
-					status: .loadingLocationDetails(leg: leg)
+					status: .actionSheet(leg: leg)
 				)
-			case .didCloseLocationDetails:
-				return state
-			case .didLoadLocationDetails:
+			case	.didCloseActionSheet,
+					.didTapBottomSheetDetails,
+					.didLoadFullLegData,
+					.didCloseBottomSheet:
 				return state
 			}
 		case .error:
@@ -70,32 +72,31 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
 				)
-			case .didTapLocationDetails:
-				return state
-			case .didCloseLocationDetails:
-				return state
-			case .didLoadLocationDetails:
+			case	.didLoadLocationDetails,
+					.didLongTapOnLeg,
+					.didCloseActionSheet,
+					.didTapBottomSheetDetails,
+					.didLoadFullLegData,
+					.didCloseBottomSheet:
 				return state
 			}
 		case .locationDetails:
 			switch event {
-			case .didExpandLegDetails:
+			case	.didExpandLegDetails,
+					.didLoadJourneyData,
+					.didLoadFullLegData,
+					.didFailedToLoadJourneyData,
+					.didTapReloadJourneys,
+					.didLoadLocationDetails,
+					.didLongTapOnLeg,
+					.didCloseActionSheet,
+					.didTapBottomSheetDetails:
 				return state
-			case .didLoadJourneyData:
-				return state
-			case .didFailedToLoadJourneyData:
-				return state
-			case .didTapReloadJourneys:
-				return state
-			case .didTapLocationDetails:
-				return state
-			case .didCloseLocationDetails:
+			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
 					status: .loadedJourneyData
 				)
-			case .didLoadLocationDetails:
-				return state
 			}
 		case .loadingLocationDetails:
 			switch event {
@@ -104,27 +105,102 @@ extension JourneyDetailsViewModel {
 					data: data,
 					status: state.status
 				)
-			case .didFailedToLoadJourneyData:
-				return state
-			case .didTapReloadJourneys:
-				return State(
-					data: state.data,
-					status: .loading(refreshToken: state.data.refreshToken)
-				)
-			case .didExpandLegDetails:
-				return state
 			case .didLoadLocationDetails(let coordRegion, let coordinates):
 				return State(
 					data: state.data,
 					status: .locationDetails(coordRegion: coordRegion, coordinates: coordinates)
 				)
-			case .didTapLocationDetails:
-				return state
-			case .didCloseLocationDetails:
+			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
 					status: .loadedJourneyData
 				)
+			case	.didCloseActionSheet,
+					.didLoadFullLegData,
+					.didFailedToLoadJourneyData,
+					.didExpandLegDetails,
+					.didLongTapOnLeg,
+					.didTapBottomSheetDetails,
+					.didTapReloadJourneys:
+				return state
+			}
+		case .fullLeg:
+			switch event {
+			case	.didLoadJourneyData,
+					.didLoadFullLegData,
+					.didFailedToLoadJourneyData,
+					.didTapReloadJourneys,
+					.didExpandLegDetails,
+					.didLoadLocationDetails,
+					.didLongTapOnLeg,
+					.didCloseActionSheet,
+					.didTapBottomSheetDetails:
+				return state
+			case .didCloseBottomSheet:
+				return State(
+					data: state.data,
+					status: .loadedJourneyData
+				)
+			}
+		case .loadingFullLeg:
+			switch event {
+			case .didLoadJourneyData(let data):
+				return State(
+					data: data,
+					status: state.status
+				)
+			case .didLoadFullLegData(let data):
+				return State(
+					data: state.data,
+					status: .fullLeg(leg: data)
+				)
+			case .didCloseBottomSheet:
+				return State(
+					data: state.data,
+					status: .loadedJourneyData
+				)
+			case	.didCloseActionSheet,
+					.didFailedToLoadJourneyData,
+					.didExpandLegDetails,
+					.didLongTapOnLeg,
+					.didTapBottomSheetDetails,
+					.didTapReloadJourneys,
+					.didLoadLocationDetails:
+				return state
+			}
+		case .actionSheet:
+			switch event {
+			case .didLoadJourneyData(let data):
+				return State(
+					data: data,
+					status: state.status
+				)
+			case	.didFailedToLoadJourneyData,
+					.didTapReloadJourneys,
+					.didExpandLegDetails,
+					.didLoadLocationDetails,
+					.didCloseBottomSheet,
+					.didLoadFullLegData,
+					.didLongTapOnLeg:
+				return state
+			case .didCloseActionSheet:
+				return State(
+					data: state.data,
+					status: .loadedJourneyData
+				)
+			case .didTapBottomSheetDetails(let leg, let type):
+				switch type {
+				case .locationDetails:
+					return State(
+						data: state.data,
+						status: .loadingLocationDetails(leg: leg)
+					)
+				case .fullLeg:
+					return State(
+						data: state.data,
+						status: .loadingFullLeg(leg: leg)
+					)
+				}
 			}
 		}
 	}

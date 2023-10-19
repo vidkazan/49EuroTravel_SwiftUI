@@ -9,6 +9,10 @@ import Foundation
 import MapKit
 
 extension JourneyDetailsViewModel {
+	enum BottomSheetType : Equatable,Hashable {
+		case locationDetails
+		case fullLeg
+	}
 	struct State : Equatable {
 		let data : JourneyViewData
 		let status : Status
@@ -27,6 +31,9 @@ extension JourneyDetailsViewModel {
 		case error(error : ApiServiceError)
 		case loadingLocationDetails(leg : LegViewData)
 		case locationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
+		case fullLeg(leg : LegViewData)
+		case loadingFullLeg(leg : LegViewData)
+		case actionSheet(leg : LegViewData)
 		
 		var description : String {
 			switch self {
@@ -40,6 +47,12 @@ extension JourneyDetailsViewModel {
 				return "locationDetails"
 			case .loadingLocationDetails:
 				return "loadingLocationDetails"
+			case .fullLeg:
+				return "fullLeg"
+			case .actionSheet:
+				return "actionSheet"
+			case .loadingFullLeg:
+				return "loadingFullLeg"
 			}
 		}
 	}
@@ -50,8 +63,12 @@ extension JourneyDetailsViewModel {
 		case didTapReloadJourneys
 		case didExpandLegDetails
 		case didLoadLocationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
-		case didTapLocationDetails(leg : LegViewData)
-		case didCloseLocationDetails
+		case didLoadFullLegData(data : LegViewData)
+		case didLongTapOnLeg(leg : LegViewData)
+		case didCloseActionSheet
+		
+		case didTapBottomSheetDetails(leg : LegViewData, type : BottomSheetType)
+		case didCloseBottomSheet
 		
 		var description : String {
 			switch self {
@@ -63,12 +80,18 @@ extension JourneyDetailsViewModel {
 				return "didReloadJourneys"
 			case .didExpandLegDetails:
 				return "didExpandLegDetails"
-			case .didTapLocationDetails:
-				return "didTapLocationDetails"
-			case .didCloseLocationDetails:
-				return "didCloseLocationDetails"
 			case .didLoadLocationDetails:
 				return "didLoadLocationDetails"
+			case .didLongTapOnLeg:
+				return "didLongTapOnLeg"
+			case .didCloseActionSheet:
+				return "didCloseActionSheet"
+			case .didTapBottomSheetDetails:
+				return "didCloseActionSheet"
+			case .didCloseBottomSheet:
+				return "didCloseBottomSheet"
+			case .didLoadFullLegData:
+				return "didLoadFullLegData"
 			}
 		}
 	}

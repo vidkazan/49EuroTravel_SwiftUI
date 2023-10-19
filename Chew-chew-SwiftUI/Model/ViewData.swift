@@ -48,6 +48,8 @@ struct LegViewData : Equatable,Identifiable{
 	let isReachable : Bool
 	let legType : LegType
 	
+	let tripId : String
+	
 	let direction : String
 	let duration : String
 	
@@ -111,17 +113,6 @@ extension StopViewData {
 			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
 		)
 	}
-//	init(name : String,timeContainer : TimeContainer,type: StopOverType, coordinates : LocationCoordinates?) {
-//		self.timeContainer = timeContainer
-//		self.name = name
-//		self.departurePlatform  = PrognoseType(actual: nil, planned: nil)
-//		self.arrivalPlatform  = PrognoseType(actual: nil, planned: nil)
-//		self.type = type
-//		self.locationCoordinates = CLLocationCoordinate2D(
-//			latitude: coordinates?.latitude ?? 0,
-//			longitude: coordinates?.longitude ?? 0
-//		)
-//	}
 	init(
 		name : String,
 		timeContainer : TimeContainer,
@@ -144,5 +135,20 @@ extension LegViewData {
 		case footEnd(finishPointName : String)
 		case transfer
 		case line
+		
+		var caseDescription : String {
+			switch self {
+			case .footStart(startPointName: let startPointName):
+				return "footStart"
+			case .footMiddle:
+				return "footMiddle"
+			case .footEnd(finishPointName: let finishPointName):
+				return "footEnd"
+			case .transfer:
+				return "transfer"
+			case .line:
+				return "line"
+			}
+		}
 	}
 }

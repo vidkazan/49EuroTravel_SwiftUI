@@ -13,13 +13,24 @@ final class LegDetailsViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
-	init(leg : LegViewData) {
-		state = State(
-			status: .idle,
-				leg: leg,
-				currentHeight: leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970,type: .collapsed),
-				totalHeight: leg.progressSegments.heightTotalCollapsed
-			)
+	init(leg : LegViewData, isExpanded : Bool = false) {
+		switch isExpanded {
+		case true:
+			state = State(
+				status: .stopovers,
+					leg: leg,
+					currentHeight: leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970,type: .expanded),
+					totalHeight: leg.progressSegments.heightTotalExtended
+				)
+		case false:
+			state = State(
+				status: .idle,
+					leg: leg,
+					currentHeight: leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970,type: .collapsed),
+					totalHeight: leg.progressSegments.heightTotalCollapsed
+				)
+		}
+		
 		Publishers.system(
 			initial: state,
 			reduce: self.reduce,

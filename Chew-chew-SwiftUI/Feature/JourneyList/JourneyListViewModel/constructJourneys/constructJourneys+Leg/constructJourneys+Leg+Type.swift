@@ -8,8 +8,8 @@
 import Foundation
 import SwiftUI
 
-	func constructLegType(leg : Leg, legs: [Leg]) -> LegViewData.LegType {
-		if let dist = leg.distance {
+	func constructLegType(leg : Leg, legs: [Leg]?) -> LegViewData.LegType {
+		if let dist = leg.distance, let legs = legs {
 			switch legs.firstIndex(of: leg) {
 			case 0:
 				return .footStart(startPointName: leg.origin?.name ?? (leg.origin?.address ?? "Origin(legType)"))

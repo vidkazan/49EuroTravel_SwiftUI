@@ -100,7 +100,7 @@ extension JourneyListViewModel {
 			Query.results(max: 5),
 			Query.stopovers(isShowing: true),
 			Query.pretty(pretyIntend: false),
-//			Query.transferTime(transferTime: "1")
+			Query.transferTime(transferTime: 1)
 		])
 		return ApiService.fetchCombine(JourneysContainer.self,query: query, type: ApiService.Requests.journeys, requestGroupId: "")
 	}

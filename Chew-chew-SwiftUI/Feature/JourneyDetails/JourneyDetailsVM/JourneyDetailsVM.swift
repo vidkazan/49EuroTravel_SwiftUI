@@ -33,7 +33,8 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenLoadingJourneyByRefreshToken(),
-				Self.whenLoadingLocationDetails()
+				Self.whenLoadingLocationDetails(),
+				Self.whenLoadingFullLeg()
 			]
 		)
 			.assign(to: \.state, on: self)

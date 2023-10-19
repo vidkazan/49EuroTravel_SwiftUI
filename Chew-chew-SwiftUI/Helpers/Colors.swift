@@ -34,6 +34,10 @@ extension Color {
 	public static var chewGrayScale10: Color {
 		return Color(hue: 0, saturation: 0, brightness: 0.1)
 	}
+	public static var chewGrayScale05: Color {
+		return Color(hue: 0, saturation: 0, brightness: 0.05)
+	}
+		
 	public static var chewGrayScale07: Color {
 		return Color(hue: 0, saturation: 0, brightness: 0.07)
 	}

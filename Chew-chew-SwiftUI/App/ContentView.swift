@@ -13,7 +13,7 @@ import CoreLocation
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
-	@State var bottomSheetIsPresented : Bool
+	@State var dateViewSheetIsPresented : Bool
 	let solar = Solar(coordinate: CLLocationCoordinate2D(
 		latitude: 51.3,
 		longitude: 9.4)
@@ -43,7 +43,7 @@ struct ContentView: View {
 				startPoint: UnitPoint(x: 0.5, y: 0.1),
 				endPoint: UnitPoint(x: 0.5, y: 0.4))
 			)
-			.sheet(isPresented: $bottomSheetIsPresented,onDismiss: {
+			.sheet(isPresented: $dateViewSheetIsPresented,onDismiss: {
 				chewViewModel.send(event: .didDismissDatePicker)
 			}, content: {
 				switch chewViewModel.state.status {
@@ -56,9 +56,9 @@ struct ContentView: View {
 			.onChange(of: chewViewModel.state.status, perform: { status in
 				switch status {
 				case .datePicker:
-					bottomSheetIsPresented = true
+					dateViewSheetIsPresented = true
 				default:
-					bottomSheetIsPresented = false
+					dateViewSheetIsPresented = false
 				}
 			})
 			.navigationBarTitle("")

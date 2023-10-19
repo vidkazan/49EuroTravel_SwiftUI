@@ -99,7 +99,7 @@ extension TimeContainer {
 				}
 			}()
 			
-			if cancelled == true {
+			if cancelled == true && time.actual == nil {
 				return .cancelled
 			}
 			let delay = Int((time.actual ?? 0) - (time.planned ?? 0)) / 60

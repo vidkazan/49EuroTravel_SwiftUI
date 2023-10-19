@@ -182,37 +182,3 @@ struct LegStopView : View {
 		}
 	}
 }
-
-enum StopOverType : Equatable {
-	case origin
-	case stopover
-	case destination
-	case footTop
-	case footMiddle
-	case footBottom
-	case transfer
-	
-	var timeLabelHeight : Double {
-		switch self {
-		case .destination,.origin,.footBottom,.footTop:
-			return 30
-		case .transfer,.footMiddle,.stopover:
-			return 15
-		}
-	}
-	
-	var viewHeight : Double {
-		switch self {
-		case .destination:
-			return 50
-		case .origin:
-			return 90
-		case .stopover:
-			return 35
-		case .transfer,.footMiddle:
-			return 70
-		case .footBottom,.footTop:
-			return 90
-		}
-	}
-}

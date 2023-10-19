@@ -50,8 +50,8 @@ extension JourneyDetailsViewModel {
 		
 		// Add a little padding to the span
 		let span = MKCoordinateSpan(
-			latitudeDelta: latitudinalDelta * 1.4,
-			longitudeDelta: longitudinalDelta * 1.4
+			latitudeDelta: latitudinalDelta * 2,
+			longitudeDelta: longitudinalDelta * 2
 		)
 		
 		// Create and return the region
@@ -74,6 +74,43 @@ extension JourneyDetailsViewModel {
 			}
 			return Empty().eraseToAnyPublisher()
 		}
+	}
+
+	static func whenLoadingFullLeg() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			guard case .loadingFullLeg(leg: let leg) = state.status else {
+				return Empty().eraseToAnyPublisher()
+			}
+			return fetchTrip(tripId: leg.tripId)
+				.mapError{ $0 }
+				.map { res in
+					let leg = constructLegData(
+						leg: res,
+						firstTS: DateParcer.getDateFromDateString(dateString: res.plannedDeparture),
+						lastTS: DateParcer.getDateFromDateString(dateString: res.plannedArrival),
+						legs: nil
+					)
+					if let leg = leg {
+						return Event.didLoadFullLegData(data: leg)
+					} else {
+						return Event.didCloseBottomSheet
+					}
+				}
+				.catch { error in Empty().eraseToAnyPublisher()}
+				.eraseToAnyPublisher()
+		}
+	}
+	
+	
+	static func fetchTrip(tripId : String) -> AnyPublisher<Leg,ApiServiceError> {
+		return ApiService.fetchCombine(
+			Trip.self,
+			query: [],
+			type: ApiService.Requests.trips(tripId: tripId),
+			requestGroupId: ""
+		)
+		.map {return $0.trip}
+		.eraseToAnyPublisher()
 	}
 	
 	static func fetchJourneyByRefreshToken(ref : String) -> AnyPublisher<Journey,ApiServiceError> {

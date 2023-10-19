@@ -47,6 +47,7 @@ struct LegDetailsView: View {
 							stopOver: stop,
 							leg: vm.state.leg
 						)
+						.padding(.bottom,10)
 					}
 				case .line:
 					if let stop = vm.state.leg.legStopsViewData.first {
@@ -56,7 +57,6 @@ struct LegDetailsView: View {
 							stopOver: stop,
 							leg: vm.state.leg
 						)
-//						.padding(.top,10)
 					}
 					if case .stopovers = vm.state.status {
 						ForEach(vm.state.leg.legStopsViewData) { stop in
@@ -126,21 +126,24 @@ struct LegDetailsView: View {
 							.cornerRadius(10)
 							.offset(y: 10)
 					case .line:
-						Color.chewGray11
-							.cornerRadius(10)
+						EmptyView()
 					}
 				}
 				.frame(maxHeight: .infinity)
 			}
 		}
+		// 🤢
+		.padding(.top,vm.state.leg.legType == LegViewData.LegType.line || vm.state.leg.legType.caseDescription == "footStart" ?  10 : 0)
+		.background(vm.state.leg.legType == LegViewData.LegType.line ? Color.chewGray11 : .clear )
+		.cornerRadius(10)
 		.onTapGesture {
 			if case .line=vm.state.leg.legType {
 				vm.send(event: .didtapExpandButton)
 			}
 		}
 		// TODO: make action sheet with map and full trip
-		.onLongPressGesture {
-			journeyVM.send(event: .didTapLocationDetails(leg: vm.state.leg))
-		}
+		.onLongPressGesture(minimumDuration: 0.1,maximumDistance: 10, perform: {
+			journeyVM.send(event: .didLongTapOnLeg(leg: vm.state.leg))
+		})
 	}
 }

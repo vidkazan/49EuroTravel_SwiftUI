@@ -42,10 +42,10 @@ extension ApiService  {
 				.mapError{ error -> ApiServiceError in
 					switch error {
 						case let error as ApiServiceError:
-							print("🔴> api: error:",type,error)
+						print("🔴> api: error:",type,request.url ?? "url",error)
 							return error
 						default:
-							print("🔴> api: error:",type,error)
+							print("🔴> api: error:",type,request.url ?? "url",error)
 							return .generic(error)
 						}
 				}

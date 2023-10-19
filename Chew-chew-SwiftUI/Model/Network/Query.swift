@@ -30,7 +30,7 @@ import Foundation
 
 
 enum Query{
-	case transferTime(transferTime: String)
+	case transferTime(transferTime: Int)
 	case location(location : String?)
 	case when(time : Date?)
 	case direction(dir : String)
@@ -172,7 +172,7 @@ enum Query{
 		case .transferTime(let transferTime):
 			return URLQueryItem(
 				name: "transferTime",
-				value: transferTime)
+				value: String(transferTime))
 		case .earlierThan(earlierRef: let earlierRef):
 			return URLQueryItem(
 				name: "earlierThan",

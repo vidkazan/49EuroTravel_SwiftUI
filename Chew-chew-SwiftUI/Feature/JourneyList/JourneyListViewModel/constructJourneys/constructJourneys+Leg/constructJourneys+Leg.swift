@@ -127,6 +127,7 @@ struct Segments : Equatable, Hashable {
 		let res = LegViewData(
 			isReachable: true,
 			legType: .transfer,
+			tripId: "",
 			direction: "transfer direction",
 			duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 				minutes: DateParcer.getTwoDateIntervalInMinutes(
@@ -212,7 +213,7 @@ func constructLineViewData(mode : String,product : String, name : String, produc
 		)
 	}
 
-	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]) -> LegViewData? {
+	func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) -> LegViewData? {
 		let container = TimeContainer(
 			plannedDeparture: leg.plannedDeparture,
 			plannedArrival: leg.plannedArrival,
@@ -222,16 +223,17 @@ func constructLineViewData(mode : String,product : String, name : String, produc
 		)
 		
 		guard let plannedDeparturePosition = getTimeLabelPosition(firstTS: firstTS, lastTS: lastTS,currentTS: container.date.departure.planned),
-			  let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.departure.actual),
-			  let plannedArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.planned),
-			  let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) else { return nil }
-		
+			  let plannedArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.planned)  else { return nil }
+		let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.departure.actual) ?? 0
+		let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) ?? 0
+		 
 		let stops = constructLineStopOverData(leg: leg, type: constructLegType(leg: leg, legs: legs))
 		let segments = constructSegmentsFromStopOverData(stopovers: stops)
 		
 		let res = LegViewData(
 			isReachable: leg.reachable ?? true,
 			legType: constructLegType(leg: leg, legs: legs),
+			tripId: leg.tripId ?? "tripIdError",
 			direction: leg.direction ?? "direction",
 			duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 				minutes: DateParcer.getTwoDateIntervalInMinutes(
