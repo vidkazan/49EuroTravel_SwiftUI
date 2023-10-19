@@ -54,7 +54,7 @@ struct PlatformView: View {
 				if isShowingPlatormWord == true {
 					Text("platform")
 						.foregroundColor(.gray)
-					.font(.system(size: 12,weight: .regular))
+						.font(.system(size: 12,weight: .regular))
 				}
 				Text(pl)
 					.padding(3)
@@ -62,7 +62,7 @@ struct PlatformView: View {
 					.background(Color(red: 0.1255, green: 0.156, blue: 0.4))
 					.foregroundColor(pl == plannedPlatform ? .primary : .red)
 					.chewTextSize(.medium)
-					
+				
 			}
 		}
 	}

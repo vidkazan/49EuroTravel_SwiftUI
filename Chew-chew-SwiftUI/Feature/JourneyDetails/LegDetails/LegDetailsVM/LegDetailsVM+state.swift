@@ -57,4 +57,4 @@ extension LegDetailsViewModel {
 		}
 	}
 }
- 
+

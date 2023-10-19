@@ -58,7 +58,7 @@ func constructJourneyViewData(
 		),
 		dateStart: startTS,
 		dateFinal: endTS)
-		
+	
 	return JourneyViewData(
 		origin: journey.legs.first?.origin?.name ?? journey.legs.first?.origin?.address ?? "Origin(journeyViewData)",
 		destination: journey.legs.last?.destination?.name ?? journey.legs.last?.destination?.address ?? "Destination(journeyViewData)",

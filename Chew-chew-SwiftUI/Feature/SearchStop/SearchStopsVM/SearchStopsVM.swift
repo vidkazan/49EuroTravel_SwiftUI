@@ -36,13 +36,13 @@ class SearchStopsViewModel : ObservableObject {
 				self.whenLoadingStops()
 			]
 		)
-			.assign(to: \.state, on: self)
-			.store(in: &bag)
+		.assign(to: \.state, on: self)
+		.store(in: &bag)
 	}
 	deinit {
-		   bag.removeAll()
+		bag.removeAll()
 	}
-	   
+	
 	func send(event: Event) {
 		input.send(event)
 	}

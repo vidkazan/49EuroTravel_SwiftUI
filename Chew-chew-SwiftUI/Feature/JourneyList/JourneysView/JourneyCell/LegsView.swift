@@ -17,7 +17,7 @@ struct LegsView: View {
 		
 		let nightColor = Color(hue: 0.58, saturation: 1, brightness: 0.15)
 		let dayColor = Color(hue: 0.12, saturation: 1, brightness: 0.7)
-
+		
 		self.gradientStops = {
 			var stops : [Gradient.Stop] = []
 			for event in journey.sunEvents {
@@ -62,7 +62,7 @@ struct LegsView: View {
 			}
 			return stops
 		}()
-
+		
 	}
 	var body: some View {
 		VStack {
@@ -75,7 +75,7 @@ struct LegsView: View {
 								startPoint: UnitPoint(x: 0, y: 0),
 								endPoint: UnitPoint(x: 1, y: 0))
 						}
-//						.frame(maxWidth: (geo.size.width - 8) > 0 ? geo.size.width - 8 : 0 ,maxHeight: 18)
+					//						.frame(maxWidth: (geo.size.width - 8) > 0 ? geo.size.width - 8 : 0 ,maxHeight: 18)
 						.frame(maxWidth: (geo.size.width) > 0 ? geo.size.width : 0 ,maxHeight: 18)
 						.cornerRadius(5)
 					ForEach(journey.legs) { leg in

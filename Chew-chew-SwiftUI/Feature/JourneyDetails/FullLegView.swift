@@ -16,7 +16,7 @@ struct FullLegView: View {
 		self.journeyVM = journeyDetailsViewModel
 	}
 	var body : some View {
-		VStack {
+		VStack(alignment: .center) {
 			Label("Full leg", systemImage: "arrow.up.left.and.arrow.down.right.circle")
 				.chewTextSize(.big)
 				.padding(10)

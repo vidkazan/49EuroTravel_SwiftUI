@@ -35,17 +35,17 @@ struct SearchStopsView: View {
 					rightButton(type: .departure)
 				}
 				.background(Color.chewGray10)
-//				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray20 : Color.chewGray10)
+				//				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
 				if case .departure = searchStopViewModel.state.type, case .editingDepartureStop=chewViewModel.state.status {
 					stopList(type: .departure)
 				}
 			}
-				.background(Color.chewGray10)
-				.cornerRadius(10)
-				.transition(.move(edge: .bottom))
-				.animation(.spring(), value: searchStopViewModel.state.status)
+			.background(Color.chewGray10)
+			.cornerRadius(10)
+			.transition(.move(edge: .bottom))
+			.animation(.spring(), value: searchStopViewModel.state.status)
 			// MARK: BottomField
 			VStack {
 				HStack {
@@ -59,7 +59,7 @@ struct SearchStopsView: View {
 					rightButton(type: .arrival)
 				}
 				.background(Color.chewGray10)
-//				.background(chewViewModel.state.status == .editingArrivalStop ?  Color.chewGray20 : Color.chewGray10)
+				//				.background(chewViewModel.state.status == .editingArrivalStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
 				if case .arrival = searchStopViewModel.state.type, case .editingArrivalStop=chewViewModel.state.status {

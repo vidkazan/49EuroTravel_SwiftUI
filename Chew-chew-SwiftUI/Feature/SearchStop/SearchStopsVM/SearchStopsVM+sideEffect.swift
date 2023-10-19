@@ -44,8 +44,8 @@ extension SearchStopsViewModel {
 		query = Query.getQueryItems(methods: [
 			Query.location(location: text),
 			Query.results(max: 10),
-//			Query.showAddresses(showAddresses: false),
-//			Query.showPointsOfInterests(showPointsOfInterests: false)
+			//			Query.showAddresses(showAddresses: false),
+			//			Query.showPointsOfInterests(showPointsOfInterests: false)
 		])
 		return ApiService.fetchCombine([StopDTO].self,query: query, type: ApiService.Requests.locations(name: text), requestGroupId: "")
 	}

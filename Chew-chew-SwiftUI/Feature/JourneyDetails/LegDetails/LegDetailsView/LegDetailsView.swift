@@ -82,7 +82,7 @@ struct LegDetailsView: View {
 			}
 			.background {
 				ZStack(alignment: .top) {
-						// MARK: Full Line
+					// MARK: Full Line
 					VStack{
 						HStack(alignment: .top) {
 							Rectangle()
@@ -141,8 +141,7 @@ struct LegDetailsView: View {
 				vm.send(event: .didtapExpandButton)
 			}
 		}
-		// TODO: make action sheet with map and full trip
-		.onLongPressGesture(minimumDuration: 0.1,maximumDistance: 10, perform: {
+		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
 			journeyVM.send(event: .didLongTapOnLeg(leg: vm.state.leg))
 		})
 	}

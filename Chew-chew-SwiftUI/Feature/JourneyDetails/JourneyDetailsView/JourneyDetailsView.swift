@@ -8,8 +8,6 @@
 import SwiftUI
 import MapKit
 
-// TODO: fullTripView
-
 struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel

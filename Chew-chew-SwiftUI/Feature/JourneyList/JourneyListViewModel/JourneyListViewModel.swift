@@ -19,7 +19,7 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
-		
+	
 	
 	init(depStop: Stop, arrStop: Stop, timeChooserDate: ChewViewModel.DateType) {
 		self.depStop = depStop
@@ -36,13 +36,13 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 				self.whenLoadingJourneys()
 			]
 		)
-			.assign(to: \.state, on: self)
-			.store(in: &bag)
-		}
-	deinit {
-		   bag.removeAll()
+		.assign(to: \.state, on: self)
+		.store(in: &bag)
 	}
-	   
+	deinit {
+		bag.removeAll()
+	}
+	
 	func send(event: Event) {
 		input.send(event)
 	}

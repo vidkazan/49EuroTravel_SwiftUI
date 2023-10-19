@@ -57,11 +57,11 @@ struct MapSheet: View {
 			Button("Close") {
 				viewModel.send(event: .didCloseBottomSheet)
 			}
-				.frame(maxWidth: .infinity,minHeight: 43)
-				.background(Color.chewGray15)
-				.foregroundColor(.primary)
-				.cornerRadius(8)
-				.padding(5)
+			.frame(maxWidth: .infinity,minHeight: 43)
+			.background(Color.chewGray15)
+			.foregroundColor(.primary)
+			.cornerRadius(8)
+			.padding(5)
 		}
 		.chewTextSize(.big)
 		.background(Color.chewGrayScale07)

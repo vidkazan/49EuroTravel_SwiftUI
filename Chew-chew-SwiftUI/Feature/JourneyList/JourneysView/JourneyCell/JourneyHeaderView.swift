@@ -11,7 +11,7 @@ import SwiftUI
 struct JourneyHeaderView: View {
 	let journey : JourneyViewData
 	
-    var body: some View {
+	var body: some View {
 		ZStack {
 			HStack {
 				TimeLabelView(
@@ -44,5 +44,5 @@ struct JourneyHeaderView: View {
 		}
 		.frame(maxHeight: 40)
 		.cornerRadius(10)
-    }
+	}
 }

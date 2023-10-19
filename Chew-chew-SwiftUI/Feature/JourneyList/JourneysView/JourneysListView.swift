@@ -11,7 +11,7 @@ import SwiftUI
 struct JourneysListView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var journeyViewModel : JourneyListViewModel
-    var body: some View {
+	var body: some View {
 		VStack{
 			switch journeyViewModel.state.status {
 			case .loadingJourneys:
@@ -67,5 +67,5 @@ struct JourneysListView: View {
 		.animation(.spring(), value: journeyViewModel.state.status)
 		.frame(maxWidth: .infinity)
 		.cornerRadius(10)
-    }
+	}
 }

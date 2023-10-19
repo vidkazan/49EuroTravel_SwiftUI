@@ -210,8 +210,8 @@ extension Solar {
 		guard
 			let sunrise = sunrise,
 			let sunset = sunset
-			else {
-				return false
+		else {
+			return false
 		}
 		
 		let beginningOfDay = sunrise.timeIntervalSince1970

@@ -16,33 +16,33 @@ struct DatePickerView: View {
 	init(sStartDate: Date = Date()) {
 		startDate = sStartDate
 	}
-    var body: some View {
+	var body: some View {
 		VStack(alignment: .center) {
 			HStack {
 				DatePickerTimePresetButtons()
 			}
-				.frame(maxWidth: .infinity,maxHeight: 50)
-				.background(Color.chewGrayScale15)
-				.cornerRadius(10)
+			.frame(maxWidth: .infinity,maxHeight: 50)
+			.background(Color.chewGrayScale15)
+			.cornerRadius(10)
 			HStack {
 				DatePicker(
 					"",
 					selection: $time,
 					displayedComponents: [.hourAndMinute]
 				)
-					.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
-					.datePickerStyle(.wheel)
-					.cornerRadius(10)
-					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 15))
-					.onAppear {
-						UIDatePicker.appearance().minuteInterval = 5
-						time = startDate
-					}
+				.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
+				.datePickerStyle(.wheel)
+				.cornerRadius(10)
+				.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 15))
+				.onAppear {
+					UIDatePicker.appearance().minuteInterval = 5
+					time = startDate
+				}
 				Spacer()
 			}
-				.frame(maxWidth: .infinity,maxHeight: 150)
-				.background(Color.chewGrayScale15)
-				.cornerRadius(10)
+			.frame(maxWidth: .infinity,maxHeight: 150)
+			.background(Color.chewGrayScale15)
+			.cornerRadius(10)
 			HStack {
 				DatePicker(
 					"",
@@ -71,10 +71,10 @@ struct DatePickerView: View {
 					chewVM.send(event: .onNewDate(.now))
 				}
 			}
-				.frame(maxWidth: .infinity,minHeight: 43)
-				.background(Color.chewGray10)
-				.foregroundColor(.primary)
-				.cornerRadius(10)
+			.frame(maxWidth: .infinity,minHeight: 43)
+			.background(Color.chewGray10)
+			.foregroundColor(.primary)
+			.cornerRadius(10)
 		}
 		.padding(10)
 		.background(Color.chewGrayScale10)

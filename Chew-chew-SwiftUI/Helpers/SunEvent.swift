@@ -20,7 +20,7 @@ enum SunEventType : Equatable,Hashable {
 struct SunEvent : Equatable,Hashable {
 	static func == (lhs: SunEvent, rhs: SunEvent) -> Bool {
 		return
-			lhs.type == rhs.type &&
+		lhs.type == rhs.type &&
 		lhs.timeStart == rhs.timeStart &&
 		lhs.timeFinal == rhs.timeFinal
 		
@@ -61,12 +61,12 @@ class SunEventGenerator {
 		
 		guard let solar = Solar(for: self.dateStart,coordinate: self.locationStart) else { return [] }
 		
-			sunEvents.append(SunEvent(
-				type: solar.isDaytime ? .day : .night,
-				location: self.locationStart,
-				timeStart: self.dateStart,
-				timeFinal: nil
-			))
+		sunEvents.append(SunEvent(
+			type: solar.isDaytime ? .day : .night,
+			location: self.locationStart,
+			timeStart: self.dateStart,
+			timeFinal: nil
+		))
 		
 		let dates = DateParcer.getDaysIncludedInRange(startDateUnnormalised: self.dateStart, endDateUnnormalised: self.dateFinal)
 		for date in dates {

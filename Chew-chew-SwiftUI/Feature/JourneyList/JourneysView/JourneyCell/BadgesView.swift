@@ -12,13 +12,13 @@ struct BadgesView: View {
 	init(badges: [Badges]) {
 		self.badges = badges
 	}
-    var body: some View {
+	var body: some View {
 		HStack{
 			ForEach(badges) { badge in
 				BadgeView(badge: badge)
 			}
 		}
-    }
+	}
 }
 
 //struct BadgesView_Previews: PreviewProvider {

@@ -13,15 +13,15 @@ import Combine
 // TODO: remove api calls duplicates
 class ApiService  {
 	struct Response<T> {
-		 let value: T
-		 let response: URLResponse
-	 }
+		let value: T
+		let response: URLResponse
+	}
 	
-	private static var set : [(Int, URLSessionDataTask?)] = (0 ..< 6).map { ($0,nil) }
-	private static var currentRequestGroupId : String = ""
-	private static var token : String =  ""
-	private static let queue = DispatchQueue(label: "com.fcody.49euroTraveller.requestSerialQueue", qos: .utility)
-	private static var fetchLobbyDeque = Deque<((type : String, query : String), function : (()->Void))>()
+	//	private static var set : [(Int, URLSessionDataTask?)] = (0 ..< 6).map { ($0,nil) }
+	//	private static var currentRequestGroupId : String = ""
+	//	private static var token : String =  ""
+	//	private static let queue = DispatchQueue(label: "com.fcody.49euroTraveller.requestSerialQueue", qos: .utility)
+	//	private static var fetchLobbyDeque = Deque<((type : String, query : String), function : (()->Void))>()
 	
 	enum Requests {
 		case journeys
@@ -102,12 +102,11 @@ class ApiService  {
 		}
 	}
 	
-	static func cancelAllOngoingRequests(){
-		self.fetchLobbyDeque.removeAll()
-	}
+	//	static func cancelAllOngoingRequests(){
+	//		self.fetchLobbyDeque.removeAll()
+	//	}
 	
-	static func generateUrl(query : [URLQueryItem],
-										type : Requests) -> URL? {
+	static func generateUrl(query : [URLQueryItem], type : Requests) -> URL? {
 		let url : URL? = {
 			switch type {
 			case .locations,.journeys,.journeyByRefreshToken,.trips:

@@ -25,7 +25,7 @@ struct Stop : ChewLocation,Equatable,Identifiable {
 		self.type = type
 		self.stopDTO = stopDTO
 		self.name = stopDTO?.name ??
-					stopDTO?.address ??
+		stopDTO?.address ??
 		"\(String(coordinates.latitude).prefix(5)) , \(String(coordinates.longitude).prefix(5))"
 	}
 }

@@ -15,20 +15,19 @@ enum ChewError : Error {
 extension JourneyListViewModel {
 	
 	func whenLoadingJourneys() -> Feedback<State, Event> {
-	  Feedback {(state: State) -> AnyPublisher<Event, Never> in
-		  guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
-		  return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date)
-			  .mapError{ $0 }
-			  .asyncFlatMap { data in
-				  let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
-				  return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.initial)
-			  }
-			  .catch { error in Just(Event.onFailedToLoadJourneysData(.badRequest))}
-			  .eraseToAnyPublisher()
-	  }
+		Feedback {(state: State) -> AnyPublisher<Event, Never> in
+			guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
+			return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date)
+				.mapError{ $0 }
+				.asyncFlatMap { data in
+					let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
+					return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.initial)
+				}
+				.catch { error in Just(Event.onFailedToLoadJourneysData(.badRequest))}
+				.eraseToAnyPublisher()
+		}
 	}
 	
-	// TODO: duplicating code
 	func addJourneysStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
 		var query : [URLQueryItem] = []
 		switch dep.type {

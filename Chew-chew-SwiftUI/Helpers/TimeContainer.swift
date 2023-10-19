@@ -49,7 +49,7 @@ extension TimeContainer {
 			)
 		}
 	}
-
+	
 	struct DateTimeContainer : Equatable {
 		let departure : PrognoseType<Date?>
 		let arrival : PrognoseType<Date?>
@@ -79,12 +79,12 @@ extension TimeContainer {
 			)
 		}
 	}
-
+	
 	struct TimeStringContainer : Equatable {
 		let departure : PrognoseType<String?>
 		let arrival : PrognoseType<String?>
 	}
-
+	
 	struct TimestampTimeContainer : Equatable {
 		let departure : PrognoseType<Double?>
 		let arrival : PrognoseType<Double?>
@@ -140,4 +140,4 @@ extension TimeContainer {
 		return res > 0 ? (res > 1 ? 1 : res) : 0
 	}
 }
-	
+

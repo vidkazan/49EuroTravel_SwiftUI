@@ -8,8 +8,6 @@
 import SwiftUI
 import CoreLocation
 
-
-// TODO: actionSheet and alert at top
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel

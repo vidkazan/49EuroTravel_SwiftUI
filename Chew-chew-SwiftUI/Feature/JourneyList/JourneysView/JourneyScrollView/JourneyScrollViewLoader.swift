@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct JourneyScrollViewLoader: View {
-    var body: some View {
+	var body: some View {
 		VStack{
 			Spacer()
 			ProgressView()
@@ -16,7 +16,7 @@ struct JourneyScrollViewLoader: View {
 				.tint(.white)
 			Spacer()
 		}
-    }
+	}
 }
 
 //struct JourneyScrollViewLoader_Previews: PreviewProvider {

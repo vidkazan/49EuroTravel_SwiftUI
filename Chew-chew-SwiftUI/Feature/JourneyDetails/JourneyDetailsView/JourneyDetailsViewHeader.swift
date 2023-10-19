@@ -30,21 +30,21 @@ extension JourneyDetailsView {
 					HStack {
 						Text(viewModel.state.data.startDateString)
 					}
-						.padding(5)
-						.chewTextSize(.medium)
-						.background(Color.chewGray10)
-						.foregroundColor(.primary.opacity(0.6))
-						.cornerRadius(8)
+					.padding(5)
+					.chewTextSize(.medium)
+					.background(Color.chewGray10)
+					.foregroundColor(.primary.opacity(0.6))
+					.cornerRadius(8)
 					HStack {
 						Text(viewModel.state.data.timeContainer.stringValue.departure.actual ?? "time")
 						Text("-")
 						Text(viewModel.state.data.timeContainer.stringValue.arrival.actual ?? "time")
 					}
-						.padding(5)
-						.chewTextSize(.medium)
-						.background(Color.chewGray10)
-						.foregroundColor(.primary.opacity(0.6))
-						.cornerRadius(8)
+					.padding(5)
+					.chewTextSize(.medium)
+					.background(Color.chewGray10)
+					.foregroundColor(.primary.opacity(0.6))
+					.cornerRadius(8)
 					Text(viewModel.state.data.durationLabelText)
 						.padding(5)
 						.chewTextSize(.medium)
@@ -56,11 +56,11 @@ extension JourneyDetailsView {
 							Image(systemName: "arrow.triangle.2.circlepath")
 							Text(String(viewModel.state.data.transferCount))
 						}
-							.padding(5)
-							.chewTextSize(.medium)
-							.background(Color.chewGray10)
-							.foregroundColor(.primary.opacity(0.6))
-							.cornerRadius(8)
+						.padding(5)
+						.chewTextSize(.medium)
+						.background(Color.chewGray10)
+						.foregroundColor(.primary.opacity(0.6))
+						.cornerRadius(8)
 					}
 					Spacer()
 				}

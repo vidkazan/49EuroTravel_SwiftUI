@@ -138,11 +138,11 @@ extension LegViewData {
 		
 		var caseDescription : String {
 			switch self {
-			case .footStart(startPointName: let startPointName):
+			case .footStart:
 				return "footStart"
 			case .footMiddle:
 				return "footMiddle"
-			case .footEnd(finishPointName: let finishPointName):
+			case .footEnd:
 				return "footEnd"
 			case .transfer:
 				return "transfer"

@@ -18,10 +18,10 @@ extension SearchStopsViewModel {
 				type: type
 			)
 		case
-			.onDataLoaded,
-			.onDataLoadError,
-			.onReset,
-			.onStopDidTap:
+				.onDataLoaded,
+				.onDataLoadError,
+				.onReset,
+				.onStopDidTap:
 			return state
 		}
 	}

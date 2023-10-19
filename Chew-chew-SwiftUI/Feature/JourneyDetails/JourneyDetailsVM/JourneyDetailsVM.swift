@@ -37,9 +37,9 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 				Self.whenLoadingFullLeg()
 			]
 		)
-			.assign(to: \.state, on: self)
-			.store(in: &bag)
-		}
+		.assign(to: \.state, on: self)
+		.store(in: &bag)
+	}
 	deinit {
 		bag.removeAll()
 	}

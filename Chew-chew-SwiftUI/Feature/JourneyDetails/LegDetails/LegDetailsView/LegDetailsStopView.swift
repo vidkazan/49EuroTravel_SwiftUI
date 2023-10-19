@@ -61,7 +61,7 @@ struct LegStopView : View {
 					Spacer()
 					TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
 						.background(Color.chewGrayScale10)
-					.cornerRadius(10)
+						.cornerRadius(10)
 				}
 				.frame(width: 70)
 				VStack(alignment: .leading, spacing: 2) {
@@ -96,18 +96,18 @@ struct LegStopView : View {
 						.offset(x: delay.value != nil ? delay.value! > 0 ? 8 : 0 : 0)
 					case .origin,.destination:
 						TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
-						.background {
-							LinearGradient(stops: [
-								Gradient.Stop(color: .chewGrayScale10, location: 0),
-								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
-							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
-						}
-						.cornerRadius(10)
+							.background {
+								LinearGradient(stops: [
+									Gradient.Stop(color: .chewGrayScale10, location: 0),
+									Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+									Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+								], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
+							}
+							.cornerRadius(10)
 					case .footTop,.footBottom:
 						TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
 							.background(Color.chewGrayScale10)
-						.cornerRadius(10)
+							.cornerRadius(10)
 					case .footMiddle,.transfer:
 						Rectangle()
 							.fill(.clear)
@@ -129,7 +129,7 @@ struct LegStopView : View {
 						EmptyView()
 					}
 					// MARK: Badges
-
+					
 					switch stopOverType {
 					case .footBottom,.footMiddle,.footTop:
 						HStack(spacing: 3) {

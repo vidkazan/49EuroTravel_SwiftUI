@@ -18,24 +18,24 @@ extension JourneyDetailsViewModel {
 	}
 	
 	func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
-	  Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
-		  guard
-			case .loading(refreshToken: let ref) = state.status,
-			let ref = ref else { return Empty().eraseToAnyPublisher() }
-			  return Self.fetchJourneyByRefreshToken(ref: ref)
-				  .map { data in
-					  return Event.didLoadJourneyData(
+		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
+			guard
+				case .loading(refreshToken: let ref) = state.status,
+				let ref = ref else { return Empty().eraseToAnyPublisher() }
+			return Self.fetchJourneyByRefreshToken(ref: ref)
+				.map { data in
+					return Event.didLoadJourneyData(
 						data: constructJourneyViewData(
 							journey: data,
 							depStop: self?.depStop,
 							arrStop: self?.arrStop
 						))
-				  }
-				  .catch {
-					  error in Just(.didFailedToLoadJourneyData(error: error))
-				  }
-				  .eraseToAnyPublisher()
-		  }
+				}
+				.catch {
+					error in Just(.didFailedToLoadJourneyData(error: error))
+				}
+				.eraseToAnyPublisher()
+		}
 	}
 	
 	private static func constructMapRegion(locFirst : CLLocationCoordinate2D, locLast : CLLocationCoordinate2D) -> MKCoordinateRegion {
@@ -67,15 +67,15 @@ extension JourneyDetailsViewModel {
 			   let locLast = leg.legStopsViewData.last?.locationCoordinates {
 				
 				return Just(Event.didLoadLocationDetails(
-						coordRegion: constructMapRegion(locFirst: locFirst, locLast: locLast),
-						coordinates: [locFirst,locLast]
+					coordRegion: constructMapRegion(locFirst: locFirst, locLast: locLast),
+					coordinates: [locFirst,locLast]
 				))
 				.eraseToAnyPublisher()
 			}
 			return Empty().eraseToAnyPublisher()
 		}
 	}
-
+	
 	static func whenLoadingFullLeg() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingFullLeg(leg: let leg) = state.status else {
@@ -120,7 +120,7 @@ extension JourneyDetailsViewModel {
 			type: ApiService.Requests.journeyByRefreshToken(ref: ref),
 			requestGroupId: ""
 		)
-			.map { return $0.journey }
-			.eraseToAnyPublisher()
+		.map { return $0.journey }
+		.eraseToAnyPublisher()
 	}
 }

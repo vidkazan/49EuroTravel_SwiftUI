@@ -13,7 +13,7 @@ struct TimeChoosingView: View {
 	@State private var selectedOption = 0
 	private var datePickerIsShowing = false
 	private var options = ["now","date"]
-
+	
 	init(searchStopsVM: SearchStopsViewModel, selectedOption: Int = 0, datePickerIsShowing: Bool = false, options: [String] = ["now","date"]) {
 		self.searchStopsVM = searchStopsVM
 		self.selectedOption = selectedOption
@@ -34,15 +34,15 @@ struct TimeChoosingView: View {
 			HStack(alignment: .top) {
 				ForEach(0..<2) { index in
 					Button(action: {
-							selectedOption = index
-							optionPressed(index)
+						selectedOption = index
+						optionPressed(index)
 					}) {
 						var text : String {
-						switch index {
+							switch index {
 							case 0:
 								return "now"
 							case 1:
-							return DateParcer.getTimeAndDateStringFromDate(date: chewVM.state.timeChooserDate.date)
+								return DateParcer.getTimeAndDateStringFromDate(date: chewVM.state.timeChooserDate.date)
 							default:
 								return ""
 							}
@@ -63,7 +63,7 @@ struct TimeChoosingView: View {
 		.animation(.spring(), value: chewVM.state.status)
 		.animation(.spring(), value: chewVM.searchStopsViewModel.state.status)
 	}
-
+	
 	func optionPressed(_ index: Int) {
 		switch selectedOption {
 		case 0:

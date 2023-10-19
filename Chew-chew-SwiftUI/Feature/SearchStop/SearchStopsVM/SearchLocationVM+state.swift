@@ -23,7 +23,7 @@ extension SearchStopsViewModel {
 		case loading(String)
 		case loaded
 		case error(ApiServiceError)
-
+		
 		var description : String {
 			switch self {
 			case .idle:

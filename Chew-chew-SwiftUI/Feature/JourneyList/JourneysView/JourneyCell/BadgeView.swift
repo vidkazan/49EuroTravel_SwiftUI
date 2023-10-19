@@ -29,7 +29,7 @@ struct BadgeView : View {
 				.padding(4)
 				.background(badge.badgeData.style)
 				.cornerRadius(8)
-		case .lineNumber(lineType: let type, num: let num):
+		case .lineNumber(lineType: let type, _):
 			Text(badge.badgeData.name)
 				.chewTextSize(.medium)
 				.foregroundColor(.primary)
@@ -44,7 +44,7 @@ struct BadgeView : View {
 				)
 				.cornerRadius(8)
 				.lineLimit(1)
-		case .legDuration(dur: let dur):
+		case .legDuration:
 			HStack(spacing: 2) {
 				Text(badge.badgeData.name)
 					.chewTextSize(.medium)
@@ -56,7 +56,7 @@ struct BadgeView : View {
 			.padding(4)
 			.background(Color.chewGray10)
 			.cornerRadius(8)
-		case .legDirection(dir: let dir):
+		case .legDirection:
 			HStack(spacing: 2) {
 				Text("to")
 					.chewTextSize(.medium)
@@ -74,7 +74,7 @@ struct BadgeView : View {
 			.padding(4)
 			.background(Color.chewGray10)
 			.cornerRadius(8)
-		case .walking(duration: let dur):
+		case .walking:
 			HStack(spacing: 2) {
 				Image(systemName: "figure.walk.circle")
 					.chewTextSize(.medium)
@@ -91,7 +91,7 @@ struct BadgeView : View {
 					.lineSpacing(2)
 					.lineLimit(1)
 			}
-		case .transfer(duration: let duration):
+		case .transfer:
 			HStack(spacing: 2) {
 				Image(systemName: "arrow.triangle.2.circlepath")
 					.chewTextSize(.medium)

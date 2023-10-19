@@ -96,4 +96,4 @@ extension JourneyDetailsViewModel {
 		}
 	}
 }
- 
+
