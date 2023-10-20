@@ -18,7 +18,7 @@ extension ApiService  {
 			return Self.executeCombine(T.self, query: query, type: type)
 		}
 	
-	
+	// TODO: handle error codes
 	static private func executeCombine<T: Decodable>(
 		_ t : T.Type,
 		query : [URLQueryItem],

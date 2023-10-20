@@ -43,6 +43,8 @@ struct JourneyViewData : Equatable {
 	let timeContainer : TimeContainer
 }
 
+
+
 struct LegViewData : Equatable,Identifiable{
 	let id = UUID()
 	let isReachable : Bool

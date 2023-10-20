@@ -19,10 +19,9 @@ enum SunEventType : Equatable,Hashable {
 
 struct SunEvent : Equatable,Hashable {
 	static func == (lhs: SunEvent, rhs: SunEvent) -> Bool {
-		return
-		lhs.type == rhs.type &&
-		lhs.timeStart == rhs.timeStart &&
-		lhs.timeFinal == rhs.timeFinal
+		return lhs.type == rhs.type &&
+				lhs.timeStart == rhs.timeStart &&
+				lhs.timeFinal == rhs.timeFinal
 		
 	}
 	

@@ -47,8 +47,8 @@ struct JourneyDetailsView: View {
 							switch viewModel.state.status {
 							case .loadingLocationDetails,.locationDetails:
 								MapSheet(viewModel: viewModel)
-							case .loadingFullLeg(leg: let leg), .fullLeg(let leg):
-								FullLegView(leg: leg, journeyDetailsViewModel: viewModel)
+							case .loadingFullLeg, .fullLeg:
+								FullLegSheet(viewModel: viewModel)
 							default:
 								Text("error")
 							}
