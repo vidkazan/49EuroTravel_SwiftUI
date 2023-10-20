@@ -206,8 +206,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneyListViewModel/constructJourneys/constructJourneys+Journey/constructJourneys+Journey.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "42"
-            endingLineNumber = "42"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "constructJourneyViewData(journey:depStop:arrStop:)"
             landmarkType = "9">
          </BreakpointContent>

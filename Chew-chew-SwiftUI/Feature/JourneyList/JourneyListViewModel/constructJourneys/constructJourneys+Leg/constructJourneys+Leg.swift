@@ -213,6 +213,9 @@ func constructLineViewData(mode : String,product : String, name : String, produc
 	)
 }
 
+func constructLegDataAsync(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) async -> LegViewData? {
+	return constructLegData(leg: leg, firstTS: firstTS, lastTS: lastTS, legs: legs)
+}
 func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) -> LegViewData? {
 	let container = TimeContainer(
 		plannedDeparture: leg.plannedDeparture,

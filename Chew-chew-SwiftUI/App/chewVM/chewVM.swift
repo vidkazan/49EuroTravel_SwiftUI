@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 import Combine
+import CoreLocation
 
 final class ChewViewModel : ObservableObject, Identifiable {
 	@ObservedObject var  locationDataManager = LocationDataManager()
@@ -18,7 +19,6 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		}}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
-	
 	init() {
 		state = State(depStop: nil, arrStop: nil, timeChooserDate: .now, status: .idle)
 		Publishers.system(

@@ -5,7 +5,6 @@
 //  Created by Dmitrii Grigorev on 29.09.23.
 //
 
-// TODO: add date string to time container
 import Foundation
 
 // MARK: TimeContainer

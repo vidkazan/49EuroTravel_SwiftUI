@@ -32,7 +32,17 @@ func constructStopFromStopDTO(data : StopDTO?) -> Stop? {
 }
 
 func constructJourneysViewDataAsync(journeysData : JourneysContainer, depStop : Stop, arrStop : Stop) async -> [JourneyViewData] {
-	return constructJourneysViewData(journeysData: journeysData, depStop: depStop, arrStop: arrStop)
+	guard let journeys = journeysData.journeys else { return [] }
+	var res = [JourneyViewData]()
+	
+	for j in journeys {
+		res.append( await constructJourneyViewDataAsync(
+			journey: j,
+			depStop: depStop,
+			arrStop: arrStop
+		))
+	}
+	return res
 }
 
 func constructJourneysViewData(journeysData : JourneysContainer, depStop : Stop, arrStop : Stop) -> [JourneyViewData] {

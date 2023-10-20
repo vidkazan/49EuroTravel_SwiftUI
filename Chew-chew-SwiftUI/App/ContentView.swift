@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreLocation
 
 
 // TODO: move all logic from views
@@ -14,10 +13,6 @@ struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@State var dateViewSheetIsPresented : Bool
-	let solar = Solar(coordinate: CLLocationCoordinate2D(
-		latitude: 51.3,
-		longitude: 9.4)
-	)
 	
 	var body: some View {
 		NavigationView {
