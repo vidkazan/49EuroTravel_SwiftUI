@@ -8,6 +8,8 @@
 import SwiftUI
 import CoreLocation
 
+
+// TODO: move all logic from views
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel

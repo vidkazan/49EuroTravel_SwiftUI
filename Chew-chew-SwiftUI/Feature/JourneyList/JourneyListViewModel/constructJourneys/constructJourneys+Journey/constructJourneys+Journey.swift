@@ -62,8 +62,8 @@ func constructJourneyViewData(
 	return JourneyViewData(
 		origin: journey.legs.first?.origin?.name ?? journey.legs.first?.origin?.address ?? "Origin(journeyViewData)",
 		destination: journey.legs.last?.destination?.name ?? journey.legs.last?.destination?.address ?? "Destination(journeyViewData)",
-		startDateString: DateParcer.getDateOnlyStringFromDate(date: timeContainer.date.departure.actual ?? .now),
-		endDateString: DateParcer.getDateOnlyStringFromDate(date: timeContainer.date.arrival.actual ?? .now),
+		startDateString: DateParcer.getDateOnlyStringFromDate(date: timeContainer.date.departure.actual) ?? "startDate",
+		endDateString: DateParcer.getDateOnlyStringFromDate(date: timeContainer.date.arrival.actual) ?? "endDate",
 		durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 			minutes: DateParcer.getTwoDateIntervalInMinutes(
 				date1: timeContainer.date.departure.actual,

@@ -24,10 +24,10 @@ struct LegStopView : View {
 		self.legViewData = leg
 		switch type {
 		case .origin,.stopover,.transfer, .footTop,.footMiddle:
-			self.time = PrognoseType(actual: stopOver.timeContainer.stringValue.departure.actual ?? "", planned: stopOver.timeContainer.stringValue.departure.planned ?? "")
+			self.time = PrognoseType(actual: stopOver.timeContainer.stringTimeValue.departure.actual ?? "", planned: stopOver.timeContainer.stringTimeValue.departure.planned ?? "")
 			self.delay = stopOver.timeContainer.departureDelay
 		case .destination, .footBottom:
-			self.time = PrognoseType(actual: stopOver.timeContainer.stringValue.arrival.actual ?? "", planned: stopOver.timeContainer.stringValue.arrival.planned ?? "")
+			self.time = PrognoseType(actual: stopOver.timeContainer.stringTimeValue.arrival.actual ?? "", planned: stopOver.timeContainer.stringTimeValue.arrival.planned ?? "")
 			self.delay = stopOver.timeContainer.arrivalDelay
 		}
 	}

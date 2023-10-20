@@ -156,21 +156,24 @@ extension FullLegView {
 						badge: .lineNumber(
 							lineType:vm.state.leg.lineViewData.type,
 							num: vm.state.leg.lineViewData.name
-						),
-						isBig: true
+						)
 					)
+					.chewTextSize(.big)
 					BadgeView(
 						badge: .legDirection(
 							dir: vm.state.leg.direction
-						),
-						isBig: true
+						)
 					)
+					.chewTextSize(.big)
 					Spacer()
 				}
 				HStack {
 					// MARK: Date
 					HStack {
-						Text(DateParcer.getDateOnlyStringFromDate(date: vm.state.leg.timeContainer.date.departure.actual ?? .now))
+						Text(vm.state.leg.timeContainer.stringDateValue.departure.actual ??
+							 vm.state.leg.timeContainer.stringDateValue.departure.planned ??
+							 "date"
+						)
 					}
 					.padding(5)
 					.chewTextSize(.medium)
@@ -179,9 +182,13 @@ extension FullLegView {
 					.cornerRadius(8)
 					// MARK: Time
 					HStack {
-						Text(vm.state.leg.timeContainer.stringValue.departure.actual ?? "time")
+						Text(vm.state.leg.timeContainer.stringTimeValue.departure.actual ??
+							 vm.state.leg.timeContainer.stringTimeValue.departure.planned ??
+							 "time")
 						Text("-")
-						Text(vm.state.leg.timeContainer.stringValue.arrival.actual ?? "time")
+						Text(vm.state.leg.timeContainer.stringTimeValue.arrival.actual ??
+							 vm.state.leg.timeContainer.stringTimeValue.arrival.planned ??
+							 "time")
 					}
 					.padding(5)
 					.chewTextSize(.medium)

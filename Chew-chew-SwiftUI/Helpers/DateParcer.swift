@@ -80,7 +80,8 @@ class DateParcer {
 		return timeString
 	}
 	
-	static func getDateOnlyStringFromDate(date : Date) -> String {
+	static func getDateOnlyStringFromDate(date : Date?) -> String? {
+		guard let date = date else { return nil }
 		let dateFormatter = DateFormatter()
 		dateFormatter.dateFormat = "dd MMM YYYY"
 		let timeString = dateFormatter.string(from: date)

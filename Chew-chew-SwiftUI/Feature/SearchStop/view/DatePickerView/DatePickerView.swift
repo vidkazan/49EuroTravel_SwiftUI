@@ -7,14 +7,16 @@
 
 import SwiftUI
 
-
+// MARK: load it quiker
 struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
-	@State private var date = Date()
-	@State private var time = Date()
+	@State var date = Date()
+	@State var time = Date()
 	var startDate : Date
-	init(sStartDate: Date = Date()) {
-		startDate = sStartDate
+	init(sStartDate: Date) {
+		self.startDate = sStartDate
+		self.date = sStartDate
+		self.time = sStartDate
 	}
 	var body: some View {
 		VStack(alignment: .center) {
@@ -36,7 +38,6 @@ struct DatePickerView: View {
 				.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 15))
 				.onAppear {
 					UIDatePicker.appearance().minuteInterval = 5
-					time = startDate
 				}
 				Spacer()
 			}
@@ -49,9 +50,6 @@ struct DatePickerView: View {
 					selection: $date,
 					displayedComponents: [.date]
 				)
-				.onAppear {
-					date = startDate
-				}
 				// ".graphical" because it gives you info about current day,
 				// ".wheels" you dont understand which day is now
 				.datePickerStyle(.graphical)
