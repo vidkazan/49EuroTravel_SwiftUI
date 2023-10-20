@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+protocol ChewTextStyle {}
+
 extension View {
 	func chewTextSize<Style: ViewModifier>(_ style: Style) -> some View {
 		ModifiedContent(content: self, modifier: style)
@@ -15,11 +17,16 @@ extension View {
 }
 
 extension ViewModifier where Self == ChewPrimaryStyle {
-	static var big: ChewPrimaryStyle { ChewPrimaryStyle() }
+	static var big: ChewPrimaryStyle {
+		ChewPrimaryStyle()
+	}
 }
 
 extension ViewModifier where Self == ChewSecondaryStyle {
-	static var medium: ChewSecondaryStyle { ChewSecondaryStyle() }
+	static var medium: ChewSecondaryStyle {
+		ChewSecondaryStyle()
+		
+	}
 }
 
 struct ChewPrimaryStyle: ViewModifier {

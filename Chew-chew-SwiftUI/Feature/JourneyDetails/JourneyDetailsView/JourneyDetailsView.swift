@@ -9,27 +9,33 @@ import SwiftUI
 import MapKit
 
 struct JourneyDetailsView: View {
+	// MARK: Fields
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
 	@State var bottomSheetIsPresented : Bool
 	@State var actionSheetIsPresented : Bool
+	// MARK: Init
 	init(token : String?,data : JourneyViewData,depStop: Stop?,arrStop: Stop?) {
 		viewModel = JourneyDetailsViewModel(refreshToken: token, data: data,depStop: depStop,arrStop: arrStop)
 		bottomSheetIsPresented = false
 		actionSheetIsPresented = false
 	}
+	
 	var body: some View {
 		ZStack {
 			VStack {
+				// MARK: Header
 				header()
 					.animation(nil, value: viewModel.state.status)
 					.padding(10)
 				switch viewModel.state.status {
 				case .loading:
+					// MARK: Loading
 					Spacer()
 					ProgressView()
 					Spacer()
 				case .loadedJourneyData,.locationDetails,.loadingLocationDetails,.actionSheet,.fullLeg,.loadingFullLeg:
+					// MARK: LegDetails
 					ScrollView() {
 						LazyVStack(spacing: 0){
 							ForEach(viewModel.state.data.legs) { leg in
@@ -38,6 +44,7 @@ struct JourneyDetailsView: View {
 						}
 						.padding(10)
 					}
+					// MARK: LegDetails - sheet
 					.sheet(
 						isPresented: $bottomSheetIsPresented,
 						onDismiss: {
@@ -54,6 +61,7 @@ struct JourneyDetailsView: View {
 							}
 						}
 					)
+					// MARK: LegDetails - action sheet
 					.confirmationDialog("Name", isPresented: $actionSheetIsPresented) {
 						if case .actionSheet(leg: let leg)=viewModel.state.status, case .line=leg.legType {
 							Button(action: {
@@ -86,12 +94,14 @@ struct JourneyDetailsView: View {
 						})
 						.foregroundColor(Color.primary)
 					}
+				// MARK: Error
 				case .error(error: let error):
 					Spacer()
 					Label(error.description, systemImage: "exclamationmark.circle.fill")
 					Spacer()
 				}
 			}
+			// MARK: Modifiers
 			.navigationBarTitle("Journey details", displayMode: .inline)
 			.transition(.opacity)
 			.animation(.easeInOut, value: viewModel.state.status)
@@ -100,6 +110,7 @@ struct JourneyDetailsView: View {
 					viewModel.send(event: .didTapReloadJourneys)
 				}, label: {Image(systemName: "arrow.clockwise")})
 			}
+			// MARK: Modifiers - onChange
 			.onChange(of: viewModel.state.status, perform: { status in
 				switch status {
 				case .loading, .loadedJourneyData, .error:

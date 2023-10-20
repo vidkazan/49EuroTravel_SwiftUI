@@ -20,6 +20,7 @@ struct LegDetailsView: View {
 	var body : some View {
 		VStack {
 			VStack(spacing: 0) {
+				// MARK: Stop foot + transfer
 				switch vm.state.leg.legType {
 				case .transfer,.footMiddle:
 					if let stop = vm.state.leg.legStopsViewData.first {
@@ -49,6 +50,7 @@ struct LegDetailsView: View {
 						)
 						.padding(.bottom,10)
 					}
+				// MARK: Stop line
 				case .line:
 					if let stop = vm.state.leg.legStopsViewData.first {
 						LegStopView(
@@ -82,7 +84,7 @@ struct LegDetailsView: View {
 			}
 			.background {
 				ZStack(alignment: .top) {
-					// MARK: Full Line
+					// MARK: BG - progress line
 					VStack{
 						HStack(alignment: .top) {
 							Rectangle()
@@ -92,7 +94,6 @@ struct LegDetailsView: View {
 							Spacer()
 						}
 						Spacer(minLength: 0)
-						// MARK: Progress Line
 					}
 					VStack {
 						HStack(alignment: .top) {
@@ -105,7 +106,7 @@ struct LegDetailsView: View {
 						}
 						Spacer(minLength: 0)
 					}
-					// MARK: Background for but Line
+					// MARK: BG - colors
 					switch vm.state.leg.legType {
 					case .transfer,.footMiddle:
 						VStack {
@@ -132,7 +133,7 @@ struct LegDetailsView: View {
 				.frame(maxHeight: .infinity)
 			}
 		}
-		// 🤢
+		// MARK: 🤢
 		.padding(.top,vm.state.leg.legType == LegViewData.LegType.line || vm.state.leg.legType.caseDescription == "footStart" ?  10 : 0)
 		.background(vm.state.leg.legType == LegViewData.LegType.line ? Color.chewGray11 : .clear )
 		.cornerRadius(10)
@@ -141,6 +142,7 @@ struct LegDetailsView: View {
 				vm.send(event: .didtapExpandButton)
 			}
 		}
+		// MARK: longGesture
 		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
 			journeyVM.send(event: .didLongTapOnLeg(leg: vm.state.leg))
 		})

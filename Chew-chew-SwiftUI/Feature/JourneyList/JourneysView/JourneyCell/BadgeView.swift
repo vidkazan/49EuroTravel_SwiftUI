@@ -8,10 +8,14 @@
 import Foundation
 import SwiftUI
 
+
+// TODO: refactor badge service
 struct BadgeView : View {
 	var badge : Badges
-	init(badge : Badges) {
+	let isBig : Bool
+	init(badge : Badges,isBig : Bool = false) {
 		self.badge = badge
+		self.isBig = isBig
 	}
 	var body : some View {
 		switch badge {
@@ -30,20 +34,38 @@ struct BadgeView : View {
 				.background(badge.badgeData.style)
 				.cornerRadius(8)
 		case .lineNumber(lineType: let type, _):
-			Text(badge.badgeData.name)
-				.chewTextSize(.medium)
-				.foregroundColor(.primary)
-				.padding(4)
-				.background( .linearGradient(
-					colors: [
-						badge.badgeData.style,
-						type.color
-					],
-					startPoint: UnitPoint(x: 0, y: 0),
-					endPoint: UnitPoint(x: 1, y: 0))
-				)
-				.cornerRadius(8)
-				.lineLimit(1)
+			switch isBig {
+			case true:
+				Text(badge.badgeData.name)
+					.chewTextSize(.big)
+					.foregroundColor(.primary)
+					.padding(4)
+					.background( .linearGradient(
+						colors: [
+							badge.badgeData.style,
+							type.color
+						],
+						startPoint: UnitPoint(x: 0, y: 0),
+						endPoint: UnitPoint(x: 1, y: 0))
+					)
+					.cornerRadius(8)
+					.lineLimit(1)
+			case false:
+				Text(badge.badgeData.name)
+					.chewTextSize(.medium)
+					.foregroundColor(.primary)
+					.padding(4)
+					.background( .linearGradient(
+						colors: [
+							badge.badgeData.style,
+							type.color
+						],
+						startPoint: UnitPoint(x: 0, y: 0),
+						endPoint: UnitPoint(x: 1, y: 0))
+					)
+					.cornerRadius(8)
+					.lineLimit(1)
+			}
 		case .legDuration:
 			HStack(spacing: 2) {
 				Text(badge.badgeData.name)
@@ -57,23 +79,44 @@ struct BadgeView : View {
 			.background(Color.chewGray10)
 			.cornerRadius(8)
 		case .legDirection:
-			HStack(spacing: 2) {
-				Text("to")
-					.chewTextSize(.medium)
-					.foregroundColor(.secondary)
-					.background(badge.badgeData.style)
-					.lineSpacing(2)
-					.lineLimit(1)
-				Text(badge.badgeData.name)
-					.chewTextSize(.medium)
-					.foregroundColor(.primary)
-					.background(badge.badgeData.style)
-					.lineSpacing(2)
-					.lineLimit(1)
+			switch isBig {
+			case true:
+				HStack(spacing: 2) {
+					Text("to")
+						.chewTextSize(.big)
+						.foregroundColor(.secondary)
+						.background(badge.badgeData.style)
+						.lineSpacing(2)
+						.lineLimit(1)
+					Text(badge.badgeData.name)
+						.chewTextSize(.big)
+						.foregroundColor(.primary)
+						.background(badge.badgeData.style)
+						.lineSpacing(2)
+						.lineLimit(1)
+				}
+				.padding(4)
+				.background(Color.chewGray10)
+				.cornerRadius(8)
+			case false:
+				HStack(spacing: 2) {
+					Text("to")
+						.chewTextSize(.medium)
+						.foregroundColor(.secondary)
+						.background(badge.badgeData.style)
+						.lineSpacing(2)
+						.lineLimit(1)
+					Text(badge.badgeData.name)
+						.chewTextSize(.medium)
+						.foregroundColor(.primary)
+						.background(badge.badgeData.style)
+						.lineSpacing(2)
+						.lineLimit(1)
+				}
+				.padding(4)
+				.background(Color.chewGray10)
+				.cornerRadius(8)
 			}
-			.padding(4)
-			.background(Color.chewGray10)
-			.cornerRadius(8)
 		case .walking:
 			HStack(spacing: 2) {
 				Image(systemName: "figure.walk.circle")
