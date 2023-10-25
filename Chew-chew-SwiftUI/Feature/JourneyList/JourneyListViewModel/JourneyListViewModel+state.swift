@@ -37,6 +37,8 @@ extension JourneyListViewModel {
 		case loadingRef(JourneyUpdateType)
 		case loadingJourneys
 		case journeysLoaded
+		case failedToLoadLaterRef(ApiServiceError)
+		case failedToLoadEarlierRef(ApiServiceError)
 		case failedToLoadJourneys(ApiServiceError)
 		
 		var description : String {
@@ -49,6 +51,10 @@ extension JourneyListViewModel {
 				return "journeysLoaded"
 			case .loadingRef:
 				return "loadingRef"
+			case .failedToLoadLaterRef:
+				return "didFailedToLoadLaterRef"
+			case .failedToLoadEarlierRef:
+				return "didFailedToLoadEarlierRef"
 			}
 		}
 	}
@@ -59,7 +65,8 @@ extension JourneyListViewModel {
 		case onReloadJourneys
 		case onLaterRef
 		case onEarlierRef
-		
+		case didFailToLoadLaterRef(ApiServiceError)
+		case didFailToLoadEarlierRef(ApiServiceError)
 		var description : String {
 			switch self {
 			case .onNewJourneysData:
@@ -72,6 +79,10 @@ extension JourneyListViewModel {
 				return "onLaterRef"
 			case .onEarlierRef:
 				return "onEarlierRef"
+			case .didFailToLoadLaterRef:
+				return "didFailToLoadLaterRef"
+			case .didFailToLoadEarlierRef:
+				return "didFailToLoadEarlierRef"
 			}
 		}
 	}

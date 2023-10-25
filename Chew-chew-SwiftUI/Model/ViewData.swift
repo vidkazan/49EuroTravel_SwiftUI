@@ -18,11 +18,6 @@ struct JourneysViewData : Equatable {
 		self.laterRef = data.laterRef
 		self.earlierRef = data.earlierRef
 	}
-	init(data: JourneysContainer,depStop: Stop, arrStop : Stop) {
-		self.journeys = constructJourneysViewData(journeysData: data, depStop: depStop, arrStop: arrStop)
-		self.laterRef = data.laterRef
-		self.earlierRef = data.earlierRef
-	}
 }
 
 struct JourneyViewData : Equatable {

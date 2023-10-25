@@ -213,10 +213,7 @@ func constructLineViewData(mode : String,product : String, name : String, produc
 	)
 }
 
-func constructLegDataAsync(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) async -> LegViewData? {
-	return constructLegData(leg: leg, firstTS: firstTS, lastTS: lastTS, legs: legs)
-}
-func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) -> LegViewData? {
+func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) async -> LegViewData? {
 	let container = TimeContainer(
 		plannedDeparture: leg.plannedDeparture,
 		plannedArrival: leg.plannedArrival,
@@ -231,7 +228,7 @@ func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) ->
 	let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) ?? 0
 	
 	let stops = constructLineStopOverData(leg: leg, type: constructLegType(leg: leg, legs: legs))
-	let segments = constructSegmentsFromStopOverData(stopovers: stops)
+	let segments =  constructSegmentsFromStopOverData(stopovers: stops)
 	
 	let res = LegViewData(
 		isReachable: leg.reachable ?? true,

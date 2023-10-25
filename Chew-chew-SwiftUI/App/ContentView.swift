@@ -8,6 +8,7 @@
 import SwiftUI
 
 
+// TODO: fix all TapZones
 // TODO: move all logic from views
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme

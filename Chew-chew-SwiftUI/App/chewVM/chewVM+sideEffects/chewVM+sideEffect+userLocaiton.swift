@@ -28,6 +28,8 @@ extension ChewViewModel {
 				.eraseToAnyPublisher()
 		}
 	}
+	
+	// TODO: show location error on view
 	func requestUserLocation() -> AnyPublisher<Result<CLLocationCoordinate2D,ApiServiceError>,Never> {
 		switch locationDataManager.authorizationStatus {
 		case .notDetermined,.restricted,.denied,.none:

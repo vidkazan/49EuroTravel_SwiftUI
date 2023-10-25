@@ -31,7 +31,15 @@ extension JourneyListViewModel {
 				laterRef: nil,
 				status: .failedToLoadJourneys(err)
 			)
-		default:
+		case .onReloadJourneys:
+			return state
+		case .onLaterRef:
+			return state
+		case .onEarlierRef:
+			return state
+		case .didFailToLoadLaterRef:
+			return state
+		case .didFailToLoadEarlierRef:
 			return state
 		}
 	}

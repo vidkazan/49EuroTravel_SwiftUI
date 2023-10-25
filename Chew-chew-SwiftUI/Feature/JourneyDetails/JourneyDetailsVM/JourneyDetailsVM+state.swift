@@ -30,7 +30,11 @@ extension JourneyDetailsViewModel {
 		case loadedJourneyData
 		case error(error : ApiServiceError)
 		case loadingLocationDetails(leg : LegViewData)
-		case locationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
+		case locationDetails(
+			coordRegion : MKCoordinateRegion,
+			stops : [StopViewData],
+			route : MKRoute?
+		)
 		case fullLeg(leg : LegViewData)
 		case loadingFullLeg(leg : LegViewData)
 		case actionSheet(leg : LegViewData)
@@ -62,7 +66,11 @@ extension JourneyDetailsViewModel {
 		case didFailedToLoadJourneyData(error : ApiServiceError)
 		case didTapReloadJourneys
 		case didExpandLegDetails
-		case didLoadLocationDetails(coordRegion : MKCoordinateRegion, coordinates : [CLLocationCoordinate2D])
+		case didLoadLocationDetails(
+			coordRegion : MKCoordinateRegion,
+			stops : [StopViewData],
+			route : MKRoute?
+		)
 		case didLoadFullLegData(data : LegViewData)
 		case didLongTapOnLeg(leg : LegViewData)
 		case didCloseActionSheet

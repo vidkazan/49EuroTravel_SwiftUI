@@ -33,8 +33,19 @@ extension ApiService  {
 		let request = type.getRequest(urlEndPoint: url)
 		return URLSession.shared
 			.dataTaskPublisher(for: request)
-			.tryMap { result -> T in
-				let value = try JSONDecoder().decode(T.self, from: result.data)
+			.tryMap { data, response -> T in
+				guard let response = response as? HTTPURLResponse else {
+					throw ApiServiceError.cannotDecodeRawData
+				}
+				switch response.statusCode {
+				case 500...599:
+					throw ApiServiceError.badServerResponse(code: response.statusCode)
+				case 400...499:
+					throw ApiServiceError.badServerResponse(code: response.statusCode)
+				default:
+					break
+				}
+				let value = try JSONDecoder().decode(T.self, from: data)
 				print("🟢 > api: done:",type,url)
 				return value
 			}

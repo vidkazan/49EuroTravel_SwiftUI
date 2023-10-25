@@ -32,7 +32,13 @@ extension JourneyListViewModel {
 				laterRef: state.laterRef,
 				status: .loadingRef(.earlierRef)
 			)
-		default:
+		case .onNewJourneysData(_, _):
+			return state
+		case .onFailedToLoadJourneysData(_):
+			return state
+		case .didFailToLoadLaterRef(_):
+			return state
+		case .didFailToLoadEarlierRef(_):
 			return state
 		}
 	}

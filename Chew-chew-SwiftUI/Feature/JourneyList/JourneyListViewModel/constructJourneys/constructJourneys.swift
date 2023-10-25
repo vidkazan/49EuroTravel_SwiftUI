@@ -44,15 +44,3 @@ func constructJourneysViewDataAsync(journeysData : JourneysContainer, depStop : 
 	}
 	return res
 }
-
-func constructJourneysViewData(journeysData : JourneysContainer, depStop : Stop, arrStop : Stop) -> [JourneyViewData] {
-	guard let journeys = journeysData.journeys else { return [] }
-	let res = journeys.compactMap { (journey) -> JourneyViewData? in
-		return constructJourneyViewData(
-			journey: journey,
-			depStop: depStop,
-			arrStop: arrStop
-		)
-	}
-	return res
-}

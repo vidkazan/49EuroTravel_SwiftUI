@@ -199,22 +199,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9A0A6282-2CB8-471F-B53B-4672060EE80D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneyListViewModel/constructJourneys/constructJourneys+Journey/constructJourneys+Journey.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "43"
-            endingLineNumber = "43"
-            landmarkName = "constructJourneyViewData(journey:depStop:arrStop:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "A52F5803-B534-428C-8B7E-FFB43402D063"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -674,8 +658,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/JourneyDetailsVM+sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "whenLoadingFullLeg()"
             landmarkType = "7">
             <Locations>
@@ -710,6 +694,22 @@
                   offsetFromSymbolStart = "452">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2456F0A8-EE5A-4C24-86E0-6537B61A385C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/MapView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

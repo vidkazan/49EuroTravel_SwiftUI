@@ -19,6 +19,36 @@ extension JourneyListViewModel {
 			return reduceFailedToLoadJourneys(state, event)
 		case .loadingRef:
 			return reduceLoadingUpdate(state, event)
+		case .failedToLoadLaterRef, .failedToLoadEarlierRef:
+			switch event {
+			case .onNewJourneysData:
+				return state
+			case .onFailedToLoadJourneysData:
+				return state
+			case .onReloadJourneys:
+				return State(
+					journeys: state.journeys,
+					earlierRef: state.earlierRef,
+					laterRef: state.laterRef,
+					status: .loadingJourneys
+				)
+			case .onLaterRef:
+				return State(
+					journeys: state.journeys,
+					earlierRef: state.earlierRef,
+					laterRef: state.laterRef,
+					status: .loadingRef(.laterRef)
+				)
+			case .onEarlierRef:
+				return State(
+					journeys: state.journeys,
+					earlierRef: state.earlierRef,
+					laterRef: state.laterRef,
+					status: .loadingRef(.earlierRef)
+				)
+			case .didFailToLoadLaterRef, .didFailToLoadEarlierRef:
+				return state
+			}
 		}
 	}
 }

@@ -17,7 +17,7 @@ struct FullLegSheet: View {
 			Label("Full leg", systemImage: "arrow.up.left.and.arrow.down.right.circle")
 				.chewTextSize(.big)
 				.padding(10)
-			// MARK: FullLegView
+			// MARK: FullLegView call
 			switch viewModel.state.status {
 			case .loadingFullLeg:
 				Spacer()
@@ -58,7 +58,7 @@ struct FullLegView: View {
 	}
 	var body : some View {
 		VStack(alignment: .center) {
-			// MARK: Header
+			// MARK: Header call
 			fullLegHeader()
 				.padding(.horizontal,10)
 			VStack {
@@ -142,7 +142,7 @@ struct FullLegView: View {
 }
 
 
-// MARK: FullLegView - Header
+// MARK: Header
 extension FullLegView {
 	func fullLegHeader() -> some View {
 		VStack(alignment: .leading) {
@@ -156,15 +156,15 @@ extension FullLegView {
 						badge: .lineNumber(
 							lineType:vm.state.leg.lineViewData.type,
 							num: vm.state.leg.lineViewData.name
-						)
+						),
+						isBig: true
 					)
-					.chewTextSize(.big)
 					BadgeView(
 						badge: .legDirection(
 							dir: vm.state.leg.direction
-						)
+						),
+						isBig: true
 					)
-					.chewTextSize(.big)
 					Spacer()
 				}
 				HStack {

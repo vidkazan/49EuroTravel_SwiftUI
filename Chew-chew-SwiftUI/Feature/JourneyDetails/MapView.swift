@@ -15,20 +15,60 @@ extension CLLocationCoordinate2D: Identifiable {
 	}
 }
 
+struct MapUIView: UIViewRepresentable {
+	let stops : [StopViewData]
+	let region: MKCoordinateRegion
+	let route : MKRoute?
+	
+	func makeUIView(context: Context) -> MKMapView {
+		let annotations : [MKPointAnnotation] = stops.map {
+			let annotation = MKPointAnnotation()
+			annotation.coordinate = $0.locationCoordinates
+			annotation.title = $0.name
+			return annotation
+		}
+		let mapView = MKMapView()
+		if let route = route {
+			mapView.addOverlay(route.polyline)
+			mapView.addAnnotations(annotations)
+			mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+		}
+		
+		mapView.delegate = context.coordinator
+		mapView.region = region
+		mapView.showsUserLocation = true
+		mapView.isZoomEnabled = true
+		mapView.isUserInteractionEnabled = true
+		return mapView
+	}
+
+	// We don't need to worry about this as the view will never be updated.
+	func updateUIView(_ view: MKMapView, context: Context) {}
+
+	// Link it to the coordinator which is defined below.
+	func makeCoordinator() -> Coordinator {
+		Coordinator()
+	}
+
+}
+
+class Coordinator: NSObject, MKMapViewDelegate {
+	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+		let renderer = MKPolylineRenderer(overlay: overlay)
+		renderer.strokeColor = UIColor.white
+		renderer.lineWidth = 5
+		return renderer
+	}
+}
+
 
 // TODO: routing https://www.hackingwithswift.com/example-code/location/how-to-find-directions-using-mkmapview-and-mkdirectionsrequest
 struct MapView: View {
 	@State var mapRect : MKCoordinateRegion
-	let coords : [CLLocationCoordinate2D]
+	let stops : [StopViewData]
+	let route : MKRoute?
 	var body: some View {
-		Map(coordinateRegion: $mapRect,interactionModes: .all,showsUserLocation: true, annotationItems: coords) { coord in
-			MapAnnotation(coordinate: coord) {
-				Color.chewRedScale80
-					.shadow(radius: 2)
-					.cornerRadius(10)
-					.frame(width: 20, height: 20)
-			}
-		}
+		MapUIView(stops: stops, region: mapRect, route: route)
 		.background(Color.chewGray15)
 		.cornerRadius(8)
 		.padding(5)
@@ -38,7 +78,7 @@ struct MapView: View {
 
 struct MapSheet: View {
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	var body: some View {
+	var body: some View { 
 		VStack(alignment: .center,spacing: 0) {
 			Label("Map", systemImage: "map.circle")
 				.chewTextSize(.big)
@@ -48,8 +88,8 @@ struct MapSheet: View {
 				Spacer()
 				ProgressView()
 				Spacer()
-			case .locationDetails(coordRegion: let reg, coordinates: let coords):
-				MapView(mapRect: reg, coords: coords)
+			case .locationDetails(coordRegion: let reg, stops: let stops, let route):
+				MapView(mapRect: reg, stops: stops,route: route)
 			case .error,.loadedJourneyData,.loading,.fullLeg,.loadingFullLeg,.actionSheet:
 				Spacer()
 			}

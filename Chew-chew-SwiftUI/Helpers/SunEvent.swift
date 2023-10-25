@@ -23,7 +23,6 @@ struct SunEvent : Equatable,Hashable {
 			lhs.type == rhs.type &&
 			lhs.timeStart == rhs.timeStart &&
 			lhs.timeFinal == rhs.timeFinal
-		
 	}
 	
 	let type : SunEventType

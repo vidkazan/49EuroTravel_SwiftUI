@@ -38,8 +38,26 @@ extension JourneyListViewModel {
 				laterRef: state.laterRef,
 				status: .failedToLoadJourneys(err)
 			)
-		default:
+		case .onReloadJourneys:
 			return state
+		case .onLaterRef:
+			return state
+		case .onEarlierRef:
+			return state
+		case .didFailToLoadLaterRef(let error):
+			return State(
+				journeys: state.journeys,
+				earlierRef: state.earlierRef,
+				laterRef: state.laterRef,
+				status: .failedToLoadLaterRef(error)
+			)
+		case .didFailToLoadEarlierRef(let error):
+			return State(
+				journeys: state.journeys,
+				earlierRef: state.earlierRef,
+				laterRef: state.laterRef,
+				status: .failedToLoadEarlierRef(error)
+			)
 		}
 	}
 }

@@ -11,17 +11,6 @@ import SwiftUI
 import CoreLocation
 
 func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopViewData] {
-	var name : String? {
-		switch type {
-		case .transfer,.line,.footMiddle:
-			return nil
-		case .footStart(startPointName: let name):
-			return name
-		case .footEnd(finishPointName: let name):
-			return name
-		}
-	}
-	
 	switch type {
 	case .line:
 		let stops = leg.stopovers ?? []
@@ -68,7 +57,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 		)
 		return [
 			StopViewData(
-				name: name ?? leg.origin?.name ?? "name",
+				name: leg.origin?.name ?? "name",
 				timeContainer: first,
 				type: .footTop,
 				coordinates: CLLocationCoordinate2D(
@@ -77,7 +66,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 				)
 			),
 			StopViewData(
-				name: name ?? leg.destination?.name ?? "name",
+				name: leg.destination?.name ?? "name",
 				timeContainer: last,
 				type: .footTop,
 				coordinates: CLLocationCoordinate2D(
@@ -103,7 +92,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 		)
 		return [
 			StopViewData(
-				name: name ?? leg.origin?.name ?? "name",
+				name: leg.origin?.name ?? "name",
 				timeContainer: first,
 				type: .footMiddle,
 				coordinates: CLLocationCoordinate2D(
@@ -112,7 +101,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 				)
 			),
 			StopViewData(
-				name: name ?? leg.destination?.name ?? "name",
+				name: leg.destination?.name ?? "name",
 				timeContainer: last,
 				type: .footMiddle,
 				coordinates: CLLocationCoordinate2D(
@@ -138,7 +127,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 		)
 		return [
 			StopViewData(
-				name: name ?? leg.origin?.name ?? "name",
+				name: leg.origin?.name ?? "name",
 				timeContainer: first,
 				type: .footBottom,
 				coordinates: CLLocationCoordinate2D(
@@ -147,7 +136,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 				)
 			),
 			StopViewData(
-				name: name ?? leg.destination?.name ?? "name",
+				name: leg.destination?.name ?? "name",
 				timeContainer: last,
 				type: .footBottom,
 				coordinates: CLLocationCoordinate2D(
@@ -173,7 +162,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 		)
 		return [
 			StopViewData(
-				name: name ?? leg.origin?.name ?? "name",
+				name: leg.origin?.name ?? "name",
 				timeContainer: first,
 				type: .transfer,
 				coordinates: CLLocationCoordinate2D(
@@ -182,7 +171,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 				)
 			),
 			StopViewData(
-				name: name ?? leg.destination?.name ?? "name",
+				name: leg.destination?.name ?? "name",
 				timeContainer: last,
 				type: .transfer,
 				coordinates: CLLocationCoordinate2D(

@@ -23,16 +23,18 @@ extension JourneyDetailsViewModel {
 				case .loading(refreshToken: let ref) = state.status,
 				let ref = ref else { return Empty().eraseToAnyPublisher() }
 			return Self.fetchJourneyByRefreshToken(ref: ref)
-				.map { data in
+				.mapError{ $0 }
+				.asyncFlatMap{ data in
+					let res = await constructJourneyViewDataAsync(
+						journey: data,
+						   depStop: self?.depStop,
+						   arrStop: self?.arrStop
+					   )
 					return Event.didLoadJourneyData(
-						data: constructJourneyViewData(
-							journey: data,
-							depStop: self?.depStop,
-							arrStop: self?.arrStop
-						))
+						data: res)
 				}
 				.catch {
-					error in Just(.didFailedToLoadJourneyData(error: error))
+					error in Just(.didFailedToLoadJourneyData(error: error as! ApiServiceError))
 				}
 				.eraseToAnyPublisher()
 		}
@@ -50,32 +52,78 @@ extension JourneyDetailsViewModel {
 		
 		// Add a little padding to the span
 		let span = MKCoordinateSpan(
-			latitudeDelta: latitudinalDelta * 2,
-			longitudeDelta: longitudinalDelta * 2
+			latitudeDelta: latitudinalDelta * 2 + 0.006,
+			longitudeDelta: longitudinalDelta * 2 + 0.006
 		)
 		
 		// Create and return the region
 		return MKCoordinateRegion(center: centerCoordinate, span: span)
 	}
 	
+	
+	static func makeDirecitonsRequest(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D
+	) -> AnyPublisher<MKDirections.Response, ApiServiceError> {
+		let request = MKDirections.Request()
+		request.source = MKMapItem(
+			placemark: MKPlacemark(
+				coordinate: from,
+				addressDictionary: nil
+			)
+		)
+		request.destination = MKMapItem(
+			placemark: MKPlacemark(
+				coordinate: to,
+				addressDictionary: nil
+			)
+		)
+		request.transportType = .walking
+	
+		let directions = MKDirections(request: request)
+		
+		
+		let subject = Future<MKDirections.Response,ApiServiceError> { promise in
+			directions.calculate { resp, error in
+				if let error = error {
+					return promise(.failure(.connectionNotFound))
+				}
+				guard let resp = resp else {
+					return promise(.failure(ApiServiceError.cannotDecodeRawData))
+				}
+				return promise(.success(resp))
+			}
+		}
+		return subject.eraseToAnyPublisher()
+	}
+	
+	
 	static func whenLoadingLocationDetails() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingLocationDetails(leg: let leg) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			if let locFirst = leg.legStopsViewData.first?.locationCoordinates,
-			   let locLast = leg.legStopsViewData.last?.locationCoordinates {
-				
-				return Just(Event.didLoadLocationDetails(
-					coordRegion: constructMapRegion(locFirst: locFirst, locLast: locLast),
-					coordinates: [locFirst,locLast]
-				))
-				.eraseToAnyPublisher()
+			if let locFirst = leg.legStopsViewData.first,
+			   let locLast = leg.legStopsViewData.last {
+				return makeDirecitonsRequest(from: locFirst.locationCoordinates, to: locLast.locationCoordinates)
+					.map { res in
+						return Event.didLoadLocationDetails(
+							coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
+							stops: [locFirst,locLast],
+							route: res.routes.first)
+					}
+					.catch { _ in
+						return Just(Event.didLoadLocationDetails(
+							coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
+							stops: [locFirst,locLast],
+							route: nil)
+						)
+					}
+					.eraseToAnyPublisher()
+					
 			}
 			return Empty().eraseToAnyPublisher()
 		}
 	}
-	
+
 	static func whenLoadingFullLeg() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingFullLeg(leg: let leg) = state.status else {
@@ -83,8 +131,8 @@ extension JourneyDetailsViewModel {
 			}
 			return fetchTrip(tripId: leg.tripId)
 				.mapError{ $0 }
-				.map { res in
-					let leg = constructLegData(
+				.asyncFlatMap { res in
+					let leg = await constructLegData(
 						leg: res,
 						firstTS: DateParcer.getDateFromDateString(dateString: res.plannedDeparture),
 						lastTS: DateParcer.getDateFromDateString(dateString: res.plannedArrival),

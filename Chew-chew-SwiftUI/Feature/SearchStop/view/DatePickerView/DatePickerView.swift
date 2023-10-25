@@ -57,10 +57,10 @@ struct DatePickerView: View {
 				.cornerRadius(10)
 				.padding(EdgeInsets(top: 0, leading: 0, bottom:0, trailing: 15))
 				.background(Color.chewGrayScale15)
+				.cornerRadius(10)
 			}
 			.frame(maxWidth: .infinity,maxHeight: 350)
-			.background(.ultraThinMaterial)
-			.cornerRadius(10)
+			
 			Spacer()
 			Button("Done") {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {

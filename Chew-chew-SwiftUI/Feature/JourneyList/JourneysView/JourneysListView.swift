@@ -17,7 +17,7 @@ struct JourneysListView: View {
 			case .loadingJourneys:
 				Spacer()
 				JourneyScrollViewLoader()
-			case .journeysLoaded,.loadingRef:
+			case .journeysLoaded,.loadingRef,.failedToLoadLaterRef,.failedToLoadEarlierRef:
 				switch journeyViewModel.state.journeys.isEmpty {
 				case true:
 					Spacer()
@@ -43,11 +43,31 @@ struct JourneysListView: View {
 									JourneyCell(journey: journey)
 								})	
 							}
-							ProgressView()
-								.onAppear{
+							switch journeyViewModel.state.status {
+							case .journeysLoaded, .failedToLoadEarlierRef:
+								if journeyViewModel.state.laterRef != nil {
+									ProgressView()
+										.onAppear{
+											journeyViewModel.send(event: .onLaterRef)
+										}
+										.frame(maxHeight: 100)
+								} else {
+									Label("change the time of your search to find later connections", systemImage: "exclamationmark.circle")
+										.chewTextSize(.medium)
+								}
+							case .loadingRef(let type):
+								if type == .laterRef {
+									ProgressView()
+										.frame(maxHeight: 100)
+								}
+							case .failedToLoadLaterRef:
+								Label("error: try reload", systemImage: "exclamationmark.circle")
+								.onTapGesture {
 									journeyViewModel.send(event: .onLaterRef)
 								}
-								.frame(maxHeight: 100)
+							case .loadingJourneys, .failedToLoadJourneys:
+								Label("", systemImage: "exclamationmark.circle.fill")
+							}
 						}
 					}
 					.transition(.move(edge: .bottom))

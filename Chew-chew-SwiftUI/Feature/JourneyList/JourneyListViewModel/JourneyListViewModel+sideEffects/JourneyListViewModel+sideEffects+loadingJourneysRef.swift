@@ -17,7 +17,8 @@ extension JourneyListViewModel {
 				return  Empty().eraseToAnyPublisher()
 			case .earlierRef:
 				guard let ref = state.earlierRef else {
-					return Empty().eraseToAnyPublisher()
+					print("🟤❌ >> earlierRef is nil")
+					return Just(Event.didFailToLoadEarlierRef(.badUrl)).eraseToAnyPublisher()
 				}
 				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
 					.mapError{ $0 }
@@ -25,12 +26,14 @@ extension JourneyListViewModel {
 						let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
 						return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.earlierRef)
 					}
-					.catch { _ in Just(Event.onFailedToLoadJourneysData(.badRequest))}
+					.catch { error in Just(
+						Event.didFailToLoadEarlierRef(error as? ApiServiceError ?? .badRequest))
+					}
 					.eraseToAnyPublisher()
 			case .laterRef:
 				guard let ref = state.laterRef else {
 					print("🟤❌ >> laterRef is nil")
-					return Just(.onFailedToLoadJourneysData(.badRequest)).eraseToAnyPublisher()
+					return Just(Event.didFailToLoadLaterRef(.badUrl)).eraseToAnyPublisher()
 				}
 				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
 					.mapError{ $0 }
@@ -38,7 +41,9 @@ extension JourneyListViewModel {
 						let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
 						return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.laterRef)
 					}
-					.catch { _ in Just(Event.onFailedToLoadJourneysData(.badRequest))}
+					.catch { error in Just(
+						Event.didFailToLoadLaterRef(error as? ApiServiceError ?? .badRequest))
+					}
 					.eraseToAnyPublisher()
 			}
 		}

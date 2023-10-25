@@ -23,7 +23,7 @@ extension JourneyListViewModel {
 					let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
 					return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.initial)
 				}
-				.catch { error in Just(Event.onFailedToLoadJourneysData(.badRequest))}
+				.catch { error in Just(Event.onFailedToLoadJourneysData(error as? ApiServiceError ?? .badRequest))}
 				.eraseToAnyPublisher()
 		}
 	}

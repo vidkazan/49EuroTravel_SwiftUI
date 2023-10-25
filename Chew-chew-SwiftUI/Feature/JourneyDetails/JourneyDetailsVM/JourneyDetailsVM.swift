@@ -13,7 +13,7 @@ import Combine
 final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
 		didSet {
-			print("🟣 > details new state:",state.status.description)
+			print("🟣 > journey details new state:",state.status.description)
 		}
 	}
 	private var bag = Set<AnyCancellable>()

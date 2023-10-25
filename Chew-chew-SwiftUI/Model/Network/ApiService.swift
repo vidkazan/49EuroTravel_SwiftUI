@@ -17,12 +17,6 @@ class ApiService  {
 		let response: URLResponse
 	}
 	
-	//	private static var set : [(Int, URLSessionDataTask?)] = (0 ..< 6).map { ($0,nil) }
-	//	private static var currentRequestGroupId : String = ""
-	//	private static var token : String =  ""
-	//	private static let queue = DispatchQueue(label: "com.fcody.49euroTraveller.requestSerialQueue", qos: .utility)
-	//	private static var fetchLobbyDeque = Deque<((type : String, query : String), function : (()->Void))>()
-	
 	enum Requests {
 		case journeys
 		case journeyByRefreshToken(ref : String)

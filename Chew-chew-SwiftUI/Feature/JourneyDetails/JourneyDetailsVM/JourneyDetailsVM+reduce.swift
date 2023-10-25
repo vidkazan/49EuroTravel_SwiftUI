@@ -9,7 +9,7 @@ import Foundation
 
 extension JourneyDetailsViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
-		print("🟣🔥 > details event:",event.description,"state:",state.status.description)
+		print("🟣🔥 > journey details event:",event.description,"state:",state.status.description)
 		switch state.status {
 		case .loading:
 			switch event {
@@ -105,10 +105,10 @@ extension JourneyDetailsViewModel {
 					data: data,
 					status: state.status
 				)
-			case .didLoadLocationDetails(let coordRegion, let coordinates):
+			case .didLoadLocationDetails(let coordRegion, let coordinates,let route):
 				return State(
 					data: state.data,
-					status: .locationDetails(coordRegion: coordRegion, coordinates: coordinates)
+					status: .locationDetails(coordRegion: coordRegion, stops: coordinates,route: route)
 				)
 			case .didCloseBottomSheet:
 				return State(
