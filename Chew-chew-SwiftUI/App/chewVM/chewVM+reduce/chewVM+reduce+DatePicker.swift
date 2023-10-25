@@ -16,6 +16,7 @@ extension ChewViewModel {
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
+				settings: state.settings,
 				timeChooserDate: date,
 				status: .idle
 			)
@@ -23,6 +24,7 @@ extension ChewViewModel {
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
+				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)

@@ -123,7 +123,7 @@ extension JourneyDetailsViewModel {
 				case .line:
 					var polyline : MKPolyline? = nil
 					if let features = leg.polyline?.features {
-						var polylinePoints = features.compactMap {
+						let polylinePoints = features.compactMap {
 							if let lat = $0.geometry?.coordinates[1],let long = $0.geometry?.coordinates[0] {
 								return CLLocationCoordinate2DMake(lat, long)
 							}

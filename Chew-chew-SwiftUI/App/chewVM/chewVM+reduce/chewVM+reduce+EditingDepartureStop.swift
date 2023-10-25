@@ -15,6 +15,7 @@ extension ChewViewModel {
 			return State(
 				depStop: state.depStop,
 				arrStop: nil,
+				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .editingArrivalStop
 			)
@@ -22,6 +23,7 @@ extension ChewViewModel {
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
+				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .datePicker
 			)
@@ -29,6 +31,7 @@ extension ChewViewModel {
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
+				settings: state.settings,
 				timeChooserDate: date,
 				status: .idle
 			)
@@ -36,6 +39,7 @@ extension ChewViewModel {
 			return State(
 				depStop: state.arrStop,
 				arrStop: state.depStop,
+				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .editingArrivalStop
 			)
@@ -43,6 +47,7 @@ extension ChewViewModel {
 			return State(
 				depStop: stop,
 				arrStop: state.arrStop,
+				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
@@ -56,6 +61,7 @@ extension ChewViewModel {
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
+				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .loadingLocation
 			)
@@ -67,11 +73,20 @@ extension ChewViewModel {
 			return State(
 				depStop: dep,
 				arrStop: arr,
+				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
-		case .didDismissDatePicker:
+		case .didDismissDatePicker,.didCloseSettings:
 			return state
+		case .didTapSettings:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				settings: state.settings,
+				timeChooserDate: state.timeChooserDate,
+				status: .settings
+			)
 		}
 	}
 }

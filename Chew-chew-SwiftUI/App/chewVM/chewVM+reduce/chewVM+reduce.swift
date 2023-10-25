@@ -25,6 +25,33 @@ extension ChewViewModel {
 			return reduceJourneyDetails(state, event)
 		case .loadingLocation:
 			return reduceLoadingLocation(state, event)
+		case .settings:
+			switch event {
+			case .didCloseSettings(let new):
+				return State(
+					depStop: state.depStop,
+					arrStop: state.arrStop,
+					settings: new,
+					timeChooserDate: state.timeChooserDate,
+					status: .idle
+				)
+			case
+					.onDepartureEdit,
+					.onArrivalEdit,
+					.onStopsSwitch,
+					.didSetBothLocations,
+					.onDatePickerDidPressed,
+					.didDismissDatePicker,
+					.onNewDate,
+					.didTapSettings,
+					.onNewDeparture,
+					.onNewArrival,
+					.onJourneyDataUpdated,
+					.didLocationButtonPressed,
+					.didReceiveLocationData,
+					.didFailToLoadLocationData:
+						return state
+			}
 		}
 	}
 }

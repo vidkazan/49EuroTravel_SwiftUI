@@ -17,11 +17,19 @@ extension JourneyListViewModel {
 	func whenLoadingJourneys() -> Feedback<State, Event> {
 		Feedback {(state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
-			return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date)
+			return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date,settings: self.settings)
 				.mapError{ $0 }
 				.asyncFlatMap { data in
 					let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
-					return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.initial)
+					return Event.onNewJourneysData(
+						JourneysViewData(
+							journeysViewData: res,
+							data: data,
+							depStop: self.depStop,
+							arrStop: self.arrStop
+						),
+						JourneyUpdateType.initial
+					)
 				}
 				.catch { error in Just(Event.onFailedToLoadJourneysData(error as? ApiServiceError ?? .badRequest))}
 				.eraseToAnyPublisher()
@@ -87,20 +95,61 @@ extension JourneyListViewModel {
 		return query
 	}
 	
-	func fetchJourneys(dep : Stop,arr : Stop,time: Date) -> AnyPublisher<JourneysContainer,ApiServiceError> {
+	
+	func addJourneysTransfersQuery(settings : ChewSettings) -> [URLQueryItem] {
+		switch settings.transferTime {
+		case .direct:
+			return Query.getQueryItems(methods: [
+				Query.transfersCount(0)
+			])
+		case .time(minutes: let minutes):
+			return Query.getQueryItems(methods: [
+				Query.transferTime(transferTime: minutes)
+			])
+		}
+	}
+	
+	func addJourneysTransportModes(settings : ChewSettings) -> [URLQueryItem] {
+		switch settings.transportMode {
+		case .all:
+			return []
+		case .deutschlandTicket:
+			return Query.getQueryItems(
+				methods: [
+					Query.national(icTrains: false),
+					Query.nationalExpress(iceTrains: false),
+					Query.regionalExpress(reTrains: false),
+				]
+			)
+		case .custom(types: let products):
+			return Query.getQueryItems(
+				methods: [
+					Query.national(icTrains: products.national ?? true),
+					Query.nationalExpress(iceTrains: products.nationalExpress ?? true),
+					Query.regionalExpress(reTrains: products.regionalExpress ?? true),
+					Query.regional(rbTrains: products.regional ?? true),
+					Query.suburban(sBahn: products.suburban ?? true),
+					Query.ferry(ferry: products.ferry ?? true),
+					Query.tram(tram: products.tram ?? true),
+					Query.taxi(taxi: products.taxi ?? true),
+				]
+			)
+		}
+	}
+	
+	func fetchJourneys(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneysContainer,ApiServiceError> {
 		var query = addJourneysStopsQuery(dep: dep, arr: arr)
-		query += Query.getQueryItems(methods: [
-			Query.departureTime(departureTime: time),
-			Query.national(icTrains: false),
-			Query.nationalExpress(iceTrains: false),
-			Query.regionalExpress(reTrains: false),
-			Query.taxi(taxi: false),
-			Query.remarks(showRemarks: true),
-			Query.results(max: 5),
-			Query.stopovers(isShowing: true),
-			Query.pretty(pretyIntend: false),
-			Query.transferTime(transferTime: 1)
-		])
+		query += addJourneysTransfersQuery(settings: settings)
+		query += addJourneysTransportModes(settings: settings)
+		query += Query.getQueryItems(
+			methods: [
+				Query.departureTime(departureTime: time),
+				Query.remarks(showRemarks: true),
+				Query.results(max: 5),
+				Query.stopovers(isShowing: true),
+				Query.pretty(pretyIntend: settings.debugSettings.prettyJSON),
+			]
+		)
 		return ApiService.fetchCombine(JourneysContainer.self,query: query, type: ApiService.Requests.journeys, requestGroupId: "")
 	}
 }

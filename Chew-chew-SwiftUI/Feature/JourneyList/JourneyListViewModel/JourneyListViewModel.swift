@@ -12,6 +12,7 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	var depStop : Stop
 	var arrStop : Stop
 	var timeChooserDate : ChewViewModel.DateType
+	var settings : ChewSettings
 	@Published private(set) var state : State {
 		didSet {
 			print("🟤 >> journeys state: ",state.status.description)
@@ -20,11 +21,11 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
-	
-	init(depStop: Stop, arrStop: Stop, timeChooserDate: ChewViewModel.DateType) {
+	init(depStop: Stop, arrStop: Stop, timeChooserDate: ChewViewModel.DateType, settings : ChewSettings) {
 		self.depStop = depStop
 		self.arrStop = arrStop
 		self.timeChooserDate = timeChooserDate
+		self.settings = settings
 		state = State(journeys: [], earlierRef: nil, laterRef: nil, status: .loadingJourneys)
 		Publishers.system(
 			initial: state,

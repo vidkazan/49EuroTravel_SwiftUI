@@ -37,6 +37,16 @@ extension ChewViewModel {
 			return state
 		case .didDismissDatePicker:
 			return state
+		case .didCloseSettings:
+			return state
+		case .didTapSettings:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				settings: state.settings,
+				timeChooserDate: state.timeChooserDate,
+				status: .settings
+			)
 		}
 	}
 }

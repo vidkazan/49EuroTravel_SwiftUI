@@ -26,17 +26,20 @@ extension ChewViewModel {
 	struct State : Equatable {
 		var depStop : Stop?
 		var arrStop : Stop?
+		var settings : ChewSettings
 		var timeChooserDate : DateType
 		var status : Status
 		
 		init(
 			depStop: Stop?,
 			arrStop: Stop?,
+			settings : ChewSettings,
 			timeChooserDate: DateType,
 			status: Status
 		) {
 			self.depStop = depStop
 			self.arrStop = arrStop
+			self.settings = settings
 			self.timeChooserDate = timeChooserDate
 			self.status = status
 		}
@@ -54,6 +57,7 @@ extension ChewViewModel {
 		case journeys(JourneyListViewModel)
 		case journeyDetails(JourneyDetailsViewModel)
 		case loadingLocation
+		case settings
 		
 		var description : String {
 			switch self {
@@ -71,6 +75,8 @@ extension ChewViewModel {
 				return "journeyDetails"
 			case .loadingLocation:
 				return "loadingLocation"
+			case .settings:
+				return "settings"
 			}
 		}
 	}
@@ -78,17 +84,29 @@ extension ChewViewModel {
 	enum Event {
 		case onDepartureEdit
 		case onArrivalEdit
+		case onStopsSwitch
+		case didSetBothLocations(Stop,Stop)
+		
+		
 		case onDatePickerDidPressed
+		case didDismissDatePicker
+		case onNewDate(DateType)
+		
+		case didTapSettings
+		case didCloseSettings(ChewSettings)
+		
 		case onNewDeparture(Stop?)
 		case onNewArrival(Stop?)
-		case onStopsSwitch
-		case onNewDate(DateType)
+		
+		
+		
 		case onJourneyDataUpdated
+		
 		case didLocationButtonPressed
 		case didReceiveLocationData(CLLocationCoordinate2D)
 		case didFailToLoadLocationData
-		case didSetBothLocations(Stop,Stop)
-		case didDismissDatePicker
+		
+		
 		
 		
 		var description : String {
@@ -99,9 +117,9 @@ extension ChewViewModel {
 				return "onDepartureEdit"
 			case .onDatePickerDidPressed:
 				return "onDatePickerDidPressed"
-			case .onNewDeparture(_):
+			case .onNewDeparture:
 				return "onNewDeparture"
-			case .onNewArrival(_):
+			case .onNewArrival:
 				return "onNewArrival"
 			case .onStopsSwitch:
 				return "onStopsSwitch"
@@ -119,6 +137,10 @@ extension ChewViewModel {
 				return "didSetBothLocations"
 			case .didDismissDatePicker:
 				return "didDismissDatePicker"
+			case .didTapSettings:
+				return "didTapSettings"
+			case .didCloseSettings:
+				return "didTapSettings"
 			}
 		}
 	}
