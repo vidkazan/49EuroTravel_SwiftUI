@@ -27,11 +27,19 @@ extension ChewViewModel {
 			return reduceLoadingLocation(state, event)
 		case .settings:
 			switch event {
-			case .didCloseSettings(let new):
+			case .didUpdateSettings(let new):
 				return State(
 					depStop: state.depStop,
 					arrStop: state.arrStop,
 					settings: new,
+					timeChooserDate: state.timeChooserDate,
+					status: .idle
+				)
+			case .didDismissBottomSheet:
+				return State(
+					depStop: state.depStop,
+					arrStop: state.arrStop,
+					settings: state.settings,
 					timeChooserDate: state.timeChooserDate,
 					status: .idle
 				)
@@ -41,7 +49,6 @@ extension ChewViewModel {
 					.onStopsSwitch,
 					.didSetBothLocations,
 					.onDatePickerDidPressed,
-					.didDismissDatePicker,
 					.onNewDate,
 					.didTapSettings,
 					.onNewDeparture,

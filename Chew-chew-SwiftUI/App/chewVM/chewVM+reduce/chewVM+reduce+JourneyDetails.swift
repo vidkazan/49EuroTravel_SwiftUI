@@ -35,9 +35,9 @@ extension ChewViewModel {
 			return state
 		case .didSetBothLocations(_, _):
 			return state
-		case .didDismissDatePicker:
+		case .didDismissBottomSheet:
 			return state
-		case .didCloseSettings:
+		case .didUpdateSettings:
 			return state
 		case .didTapSettings:
 			return State(

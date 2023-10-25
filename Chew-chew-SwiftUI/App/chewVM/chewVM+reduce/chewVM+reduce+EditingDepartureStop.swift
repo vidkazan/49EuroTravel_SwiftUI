@@ -77,7 +77,7 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
-		case .didDismissDatePicker,.didCloseSettings:
+		case .didDismissBottomSheet:
 			return state
 		case .didTapSettings:
 			return State(
@@ -87,6 +87,8 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .settings
 			)
+		case .didUpdateSettings:
+			return state
 		}
 	}
 }

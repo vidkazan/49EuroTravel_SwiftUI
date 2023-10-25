@@ -7,6 +7,8 @@
 
 import SwiftUI
 
+
+// TODO: reimplement segmentedControl width making
 struct TimeChoosingView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var searchStopsVM : SearchStopsViewModel
@@ -24,12 +26,12 @@ struct TimeChoosingView: View {
 		ZStack {
 			Rectangle()
 				.fill(Color.chewGray10)
-				.frame(width: UIScreen.main.bounds.width / 2.15, height: 36)
+				.frame(width: UIScreen.main.bounds.width / 2.15 - 25, height: 36)
 				.cornerRadius(8)
 				.padding(4)
 				.offset(x: (selectedOption != 0) ?
-						UIScreen.main.bounds.width / 4.4 :
-							-UIScreen.main.bounds.width / 4.4)
+						UIScreen.main.bounds.width / 4.4 - 12.5 :
+							-UIScreen.main.bounds.width / 4.4 + 12.5 )
 				.animation(.spring(response: 0.5), value: selectedOption)
 			HStack(alignment: .top) {
 				ForEach(0..<2) { index in
@@ -48,7 +50,7 @@ struct TimeChoosingView: View {
 							}
 						}
 						Text(text)
-							.frame(width: UIScreen.main.bounds.width / 2.25)
+							.frame(width: UIScreen.main.bounds.width / 2.25 - 25 )
 							.font(.system(size: 15,weight: selectedOption == index ? .semibold : .regular))
 							.foregroundColor(.primary)
 							.cornerRadius(10)

@@ -89,16 +89,15 @@ extension ChewViewModel {
 		
 		
 		case onDatePickerDidPressed
-		case didDismissDatePicker
 		case onNewDate(DateType)
 		
 		case didTapSettings
-		case didCloseSettings(ChewSettings)
+		case didUpdateSettings(ChewSettings)
 		
 		case onNewDeparture(Stop?)
 		case onNewArrival(Stop?)
 		
-		
+		case didDismissBottomSheet
 		
 		case onJourneyDataUpdated
 		
@@ -135,12 +134,12 @@ extension ChewViewModel {
 				return "didLocationButtonPressed"
 			case .didSetBothLocations:
 				return "didSetBothLocations"
-			case .didDismissDatePicker:
-				return "didDismissDatePicker"
+			case .didDismissBottomSheet:
+				return "didDismissBottomSheet"
 			case .didTapSettings:
 				return "didTapSettings"
-			case .didCloseSettings:
-				return "didTapSettings"
+			case .didUpdateSettings:
+				return "didUpdateSettings"
 			}
 		}
 	}

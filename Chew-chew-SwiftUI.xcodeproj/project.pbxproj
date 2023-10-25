@@ -33,6 +33,7 @@
 		7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E4492A98F9800037C3E1 /* LegsView.swift */; };
 		7D23E44C2A98FD700037C3E1 /* LegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E44B2A98FD700037C3E1 /* LegView.swift */; };
 		7D345E4A2AE95E7C003CA948 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E492AE95E7C003CA948 /* Settings.swift */; };
+		7D345E4C2AE97FC8003CA948 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E4B2AE97FC8003CA948 /* SettingsView.swift */; };
 		7D3E5F012AB321580064213A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3E5F002AB321580064213A /* LocationManager.swift */; };
 		7D4208CB2AE122FF003D9BFB /* FullLegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4208CA2AE122FF003D9BFB /* FullLegView.swift */; };
 		7D462D492AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D462D482AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift */; };
@@ -160,6 +161,7 @@
 		7D23E4492A98F9800037C3E1 /* LegsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegsView.swift; sourceTree = "<group>"; };
 		7D23E44B2A98FD700037C3E1 /* LegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegView.swift; sourceTree = "<group>"; };
 		7D345E492AE95E7C003CA948 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		7D345E4B2AE97FC8003CA948 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7D3E5F002AB321580064213A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7D4208CA2AE122FF003D9BFB /* FullLegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullLegView.swift; sourceTree = "<group>"; };
 		7D462D482AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyListViewModel+reduce+LoadingJourneys.swift"; sourceTree = "<group>"; };
@@ -383,6 +385,7 @@
 			children = (
 				7D4B1B8F2AA8DB090096F372 /* SearchStopsView */,
 				7DAF62B42A9E5833006F1A17 /* DatePickerView */,
+				7D345E4B2AE97FC8003CA948 /* SettingsView.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -418,6 +421,7 @@
 				7D4B1B902AA8DB5B0096F372 /* SearchStopsView+TextField.swift */,
 				7D462D512AAC96C000BC0D65 /* SearchStopsView+RightButton.swift */,
 				7D462D532AAC972200BC0D65 /* SearchStopsView+StopList.swift */,
+				7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */,
 			);
 			path = SearchStopsView;
 			sourceTree = "<group>";
@@ -641,7 +645,6 @@
 			children = (
 				7D81AB252A978CDC0055AEAF /* DatePickerView.swift */,
 				7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */,
-				7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */,
 			);
 			path = DatePickerView;
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				7D69BE7F2AD7ECF1007855B3 /* Publisher+AsyncMap.swift in Sources */,
 				7D462D602AACED6D00BC0D65 /* constructJourneys+Journey.swift in Sources */,
 				7D68D9F52ABDB36D00579711 /* constructJourneys+Leg+Stopover.swift in Sources */,
+				7D345E4C2AE97FC8003CA948 /* SettingsView.swift in Sources */,
 				7DD4A8D62AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift in Sources */,
 				7DE640F02AB079710087FC64 /* JourneyListViewModel+reduce+LoadingUpdate.swift in Sources */,
 				7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */,

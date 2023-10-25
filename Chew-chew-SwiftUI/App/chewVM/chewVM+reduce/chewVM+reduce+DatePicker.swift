@@ -20,7 +20,7 @@ extension ChewViewModel {
 				timeChooserDate: date,
 				status: .idle
 			)
-		case .didDismissDatePicker:
+		case .didDismissBottomSheet:
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,

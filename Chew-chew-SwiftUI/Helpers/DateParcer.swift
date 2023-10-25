@@ -73,9 +73,15 @@ class DateParcer {
 		return timeString
 	}
 	
-	static func getTimeAndDateStringFromDate(date : Date) -> String {
+	static func getTimeAndDateStringFromDate(date : Date, withYear : Bool = false) -> String {
 		let dateFormatter = DateFormatter()
-		dateFormatter.dateFormat = "dd MMM YYYY HH:mm"
+		switch withYear {
+		case true:
+			dateFormatter.dateFormat = "dd MMM YYYY HH:mm"
+		case false:
+			dateFormatter.dateFormat = "dd MMM HH:mm"
+		}
+		
 		let timeString = dateFormatter.string(from: date)
 		return timeString
 	}

@@ -13,14 +13,23 @@ import SwiftUI
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
-	@State var dateViewSheetIsPresented : Bool
+	@State var bottomSheetIsPresented : Bool = false
 	
 	var body: some View {
 		NavigationView {
 			ZStack {
 				VStack(spacing: 5) {
 					SearchStopsView(vm: chewViewModel.searchStopsViewModel)
-					TimeChoosingView(searchStopsVM: chewViewModel.searchStopsViewModel)
+					HStack {
+						TimeChoosingView(searchStopsVM: chewViewModel.searchStopsViewModel)
+						Image(systemName: "gearshape")
+							.frame(maxWidth: 43,maxHeight: 43)
+							.onTapGesture {
+								chewViewModel.send(event: .didTapSettings)
+							}
+							.background(Color.chewGray10)
+							.cornerRadius(8)
+					}
 					if case .journeys(let vm) = chewViewModel.state.status {
 						JourneysListView(journeyViewModel: vm)
 							.padding(.top,10)
@@ -39,25 +48,33 @@ struct ContentView: View {
 				startPoint: UnitPoint(x: 0.5, y: 0.1),
 				endPoint: UnitPoint(x: 0.5, y: 0.4))
 			)
-			.sheet(isPresented: $dateViewSheetIsPresented,onDismiss: {
-				chewViewModel.send(event: .didDismissDatePicker)
-			}, content: {
-				switch chewViewModel.state.status {
-				case .datePicker:
-					DatePickerView(
-						date: chewViewModel.state.timeChooserDate.date,
-						time: chewViewModel.state.timeChooserDate.date
-					)
-				default:
-					EmptyView()
-				}
+			.sheet(
+				isPresented: $bottomSheetIsPresented,
+				onDismiss: {
+					chewViewModel.send(event: .didDismissBottomSheet)
+				},
+				content: {
+					switch chewViewModel.state.status {
+					case .settings:
+						SettingsView(
+							settings: chewViewModel.state.settings,
+							transportMode: chewViewModel.state.settings.transportMode
+						)
+					case .datePicker:
+						DatePickerView(
+							date: chewViewModel.state.timeChooserDate.date,
+							time: chewViewModel.state.timeChooserDate.date
+						)
+					default:
+						EmptyView()
+					}
 			})
 			.onChange(of: chewViewModel.state.status, perform: { status in
 				switch status {
-				case .datePicker:
-					dateViewSheetIsPresented = true
+				case .datePicker,.settings:
+					bottomSheetIsPresented = true
 				default:
-					dateViewSheetIsPresented = false
+					bottomSheetIsPresented = false
 				}
 			})
 			.navigationBarTitle("")
