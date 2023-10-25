@@ -44,7 +44,10 @@ struct ContentView: View {
 			}, content: {
 				switch chewViewModel.state.status {
 				case .datePicker:
-					DatePickerView(sStartDate: chewViewModel.state.timeChooserDate.date)
+					DatePickerView(
+						date: chewViewModel.state.timeChooserDate.date,
+						time: chewViewModel.state.timeChooserDate.date
+					)
 				default:
 					EmptyView()
 				}

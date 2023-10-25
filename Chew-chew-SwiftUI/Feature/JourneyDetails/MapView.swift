@@ -28,9 +28,9 @@ struct MapUIView: UIViewRepresentable {
 			return annotation
 		}
 		let mapView = MKMapView()
+		mapView.addAnnotations(annotations)
 		if let route = route {
 			mapView.addOverlay(route.polyline)
-			mapView.addAnnotations(annotations)
 			mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
 		}
 		

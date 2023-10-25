@@ -41,7 +41,7 @@ struct LegDetailsView: View {
 						)
 					}
 				case .footEnd:
-					if let stop = vm.state.leg.legStopsViewData.first {
+					if let stop = vm.state.leg.legStopsViewData.last {
 						LegStopView(
 							type: stop.type,
 							vm: vm,
@@ -89,7 +89,7 @@ struct LegDetailsView: View {
 						HStack(alignment: .top) {
 							Rectangle()
 								.fill(Color.chewGrayScale10)
-								.frame(width: 18,height:  vm.state.totalProgressHeight)
+								.frame(width: 20,height:  vm.state.totalProgressHeight)
 								.padding(.leading,26)
 							Spacer()
 						}
@@ -100,7 +100,7 @@ struct LegDetailsView: View {
 							Rectangle()
 								.fill(Color.chewGreenScale20)
 								.cornerRadius(vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
-								.frame(width: 20,height: vm.state.currentProgressHeight)
+								.frame(width: 22,height: vm.state.currentProgressHeight)
 								.padding(.leading,25)
 							Spacer()
 						}

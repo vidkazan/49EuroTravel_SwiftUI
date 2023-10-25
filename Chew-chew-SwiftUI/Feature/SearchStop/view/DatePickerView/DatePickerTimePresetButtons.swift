@@ -8,29 +8,34 @@
 import SwiftUI
 
 struct DatePickerTimePresetButtons: View {
-	@EnvironmentObject var viewModel : SearchStopsViewModel
 	@EnvironmentObject var chewVM : ChewViewModel
 	var body: some View {
-		Button("now") {
+		Button(action: {
 			chewVM.send(event: .onNewDate(.now))
-		}
-		.padding(7)
+		}, label: {
+			Text("now")
+				.padding(14)
+				.chewTextSize(.big)
+		})
 		.foregroundColor(.primary)
 		.cornerRadius(10)
-		.padding(7)
-		Button("in 15 min") {
+		Button(action: {
 			chewVM.send(event: .onNewDate(.specificDate(Date.now + (15 * 60))))
-		}
-		.padding(7)
+		}, label: {
+			Text("in 15 min")
+				.padding(14)
+				.chewTextSize(.big)
+		})
 		.foregroundColor(.primary)
 		.cornerRadius(10)
-		.padding(7)
-		Button("in 1 hour") {
+		Button(action: {
 			chewVM.send(event: .onNewDate(.specificDate(Date.now + (60 * 60))))
-		}
-		.padding(7)
+		}, label: {
+			Text("in 1 hour")
+				.padding(14)
+				.chewTextSize(.big)
+		})
 		.foregroundColor(.primary)
 		.cornerRadius(10)
-		.padding(7)
 	}
 }

@@ -10,14 +10,8 @@ import SwiftUI
 // MARK: load it quiker
 struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
-	@State var date = Date()
-	@State var time = Date()
-	var startDate : Date
-	init(sStartDate: Date) {
-		self.startDate = sStartDate
-		self.date = sStartDate
-		self.time = sStartDate
-	}
+	@State var date : Date
+	@State var time : Date
 	var body: some View {
 		VStack(alignment: .center) {
 			HStack {
@@ -26,6 +20,7 @@ struct DatePickerView: View {
 			.frame(maxWidth: .infinity,maxHeight: 50)
 			.background(Color.chewGrayScale15)
 			.cornerRadius(10)
+			.padding(.vertical,5)
 			HStack {
 				DatePicker(
 					"",
@@ -62,15 +57,20 @@ struct DatePickerView: View {
 			.frame(maxWidth: .infinity,maxHeight: 350)
 			
 			Spacer()
-			Button("Done") {
+			Button(action: {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
 					chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
 				} else {
 					chewVM.send(event: .onNewDate(.now))
 				}
-			}
+			}, label: {
+				Text("Done")
+					.padding(14)
+					.chewTextSize(.big)
+			})
 			.frame(maxWidth: .infinity,minHeight: 43)
 			.background(Color.chewGray10)
+			.chewTextSize(.big)
 			.foregroundColor(.primary)
 			.cornerRadius(10)
 		}

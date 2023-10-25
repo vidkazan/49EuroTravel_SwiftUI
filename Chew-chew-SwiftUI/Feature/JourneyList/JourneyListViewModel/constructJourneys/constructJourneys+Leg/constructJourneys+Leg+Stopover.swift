@@ -40,7 +40,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 			}
 		}
 		return res
-	case .footStart:
+	case .footStart(startPointName: let startName):
 		let first = TimeContainer(
 			plannedDeparture: leg.departure,
 			plannedArrival: leg.departure,
@@ -57,7 +57,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 		)
 		return [
 			StopViewData(
-				name: leg.origin?.name ?? "name",
+				name: startName,
 				timeContainer: first,
 				type: .footTop,
 				coordinates: CLLocationCoordinate2D(
@@ -110,7 +110,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 				)
 			)
 		]
-	case .footEnd:
+	case .footEnd(finishPointName: let endName):
 		let first = TimeContainer(
 			plannedDeparture: leg.departure,
 			plannedArrival: leg.departure,
@@ -136,7 +136,7 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 				)
 			),
 			StopViewData(
-				name: leg.destination?.name ?? "name",
+				name: endName,
 				timeContainer: last,
 				type: .footBottom,
 				coordinates: CLLocationCoordinate2D(

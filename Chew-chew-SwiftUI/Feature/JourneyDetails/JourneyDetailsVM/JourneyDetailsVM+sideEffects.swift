@@ -103,22 +103,38 @@ extension JourneyDetailsViewModel {
 			}
 			if let locFirst = leg.legStopsViewData.first,
 			   let locLast = leg.legStopsViewData.last {
-				return makeDirecitonsRequest(from: locFirst.locationCoordinates, to: locLast.locationCoordinates)
-					.map { res in
-						return Event.didLoadLocationDetails(
-							coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
-							stops: [locFirst,locLast],
-							route: res.routes.first)
-					}
-					.catch { _ in
-						return Just(Event.didLoadLocationDetails(
-							coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
-							stops: [locFirst,locLast],
-							route: nil)
-						)
-					}
+				switch leg.legType {
+				case .footEnd,.footMiddle,.footStart:
+					return makeDirecitonsRequest(from: locFirst.locationCoordinates, to: locLast.locationCoordinates)
+						.map { res in
+							return Event.didLoadLocationDetails(
+								coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
+								stops: [locFirst,locLast],
+								route: res.routes.first)
+						}
+						.catch { _ in
+							return Just(Event.didLoadLocationDetails(
+								coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
+								stops: [locFirst,locLast],
+								route: nil)
+							)
+						}
+						.eraseToAnyPublisher()
+				case .line:
+					return Just(Event.didLoadLocationDetails(
+						coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
+						stops: [locFirst,locLast],
+						route: nil)
+					)
 					.eraseToAnyPublisher()
-					
+				case .transfer:
+					return Just(Event.didLoadLocationDetails(
+						coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
+						stops: [locFirst,locLast],
+						route: nil)
+					)
+					.eraseToAnyPublisher()
+				}
 			}
 			return Empty().eraseToAnyPublisher()
 		}
