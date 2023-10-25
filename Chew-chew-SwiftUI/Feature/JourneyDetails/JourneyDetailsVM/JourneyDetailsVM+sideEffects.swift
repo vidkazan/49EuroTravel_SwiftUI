@@ -83,7 +83,7 @@ extension JourneyDetailsViewModel {
 		
 		let subject = Future<MKDirections.Response,ApiServiceError> { promise in
 			directions.calculate { resp, error in
-				if let error = error {
+				if error == nil {
 					return promise(.failure(.connectionNotFound))
 				}
 				guard let resp = resp else {
@@ -110,7 +110,7 @@ extension JourneyDetailsViewModel {
 							return Event.didLoadLocationDetails(
 								coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
 								stops: [locFirst,locLast],
-								route: res.routes.first)
+								route: res.routes.first?.polyline)
 						}
 						.catch { _ in
 							return Just(Event.didLoadLocationDetails(
@@ -121,10 +121,20 @@ extension JourneyDetailsViewModel {
 						}
 						.eraseToAnyPublisher()
 				case .line:
+					var polyline : MKPolyline? = nil
+					if let features = leg.polyline?.features {
+						var polylinePoints = features.compactMap {
+							if let lat = $0.geometry?.coordinates[1],let long = $0.geometry?.coordinates[0] {
+								return CLLocationCoordinate2DMake(lat, long)
+							}
+							return nil
+						}
+						polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
+					}
 					return Just(Event.didLoadLocationDetails(
 						coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
 						stops: [locFirst,locLast],
-						route: nil)
+						route: polyline)
 					)
 					.eraseToAnyPublisher()
 				case .transfer:
@@ -180,7 +190,12 @@ extension JourneyDetailsViewModel {
 	static func fetchJourneyByRefreshToken(ref : String) -> AnyPublisher<Journey,ApiServiceError> {
 		return ApiService.fetchCombine(
 			JourneyWrapper.self,
-			query: Query.getQueryItems(methods: [Query.stopovers(isShowing: true)]),
+			query: Query.getQueryItems(
+				methods: [
+					Query.stopovers(isShowing: true),
+					Query.polylines(true),
+				]
+			),
 			type: ApiService.Requests.journeyByRefreshToken(ref: ref),
 			requestGroupId: ""
 		)

@@ -25,7 +25,7 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 		self.refreshToken = refreshToken
 		self.depStop = depStop
 		self.arrStop = arrStop
-		state = State(data: data, status: .loadedJourneyData)
+		state = State(data: data, status: .loading(refreshToken: refreshToken))
 		Publishers.system(
 			initial: state,
 			reduce: self.reduce,

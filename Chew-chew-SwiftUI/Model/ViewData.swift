@@ -61,6 +61,7 @@ struct LegViewData : Equatable,Identifiable{
 	let lineViewData : LineViewData
 	let progressSegments : Segments
 	let timeContainer : TimeContainer
+	let polyline : Polyline?
 }
 
 struct StopViewData : Equatable,Identifiable {

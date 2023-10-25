@@ -28,13 +28,8 @@ struct JourneyDetailsView: View {
 				header()
 					.animation(nil, value: viewModel.state.status)
 					.padding(10)
-				switch viewModel.state.status {
-				case .loading:
-					// MARK: Loading
-					Spacer()
-					ProgressView()
-					Spacer()
-				case .loadedJourneyData,.locationDetails,.loadingLocationDetails,.actionSheet,.fullLeg,.loadingFullLeg:
+//				switch viewModel.state.status {
+//				case .loadedJourneyData,.locationDetails,.loadingLocationDetails,.actionSheet,.fullLeg,.loadingFullLeg,.loading:
 					// MARK: LegDetails
 					ScrollView() {
 						LazyVStack(spacing: 0){
@@ -95,20 +90,36 @@ struct JourneyDetailsView: View {
 						.foregroundColor(Color.primary)
 					}
 				// MARK: Error
-				case .error(error: let error):
-					Spacer()
-					Label(error.description, systemImage: "exclamationmark.circle.fill")
-					Spacer()
-				}
+//				case .error(error: let error):
+//					Spacer()
+//					Label(error.description, systemImage: "exclamationmark.circle.fill")
+//					Spacer()
+//				}
 			}
 			// MARK: Modifiers
 			.navigationBarTitle("Journey details", displayMode: .inline)
-			.transition(.opacity)
-			.animation(.easeInOut, value: viewModel.state.status)
 			.toolbar {
-				Button(action: {
-					viewModel.send(event: .didTapReloadJourneys)
-				}, label: {Image(systemName: "arrow.clockwise")})
+				Button(
+					action: {
+						viewModel.send(event: .didTapReloadJourneys)
+					},
+					label: {
+						switch viewModel.state.status {
+						case .loading:
+							ProgressView()
+								.frame(width: 15,height: 15)
+								.padding(5)
+						case .loadedJourneyData,.locationDetails,.loadingLocationDetails,.actionSheet,.fullLeg,.loadingFullLeg:
+							Image(systemName: "arrow.clockwise")
+								.frame(width: 15,height: 15)
+								.padding(5)
+						case .error:
+							Image(systemName: "exclamationmark.circle")
+								.frame(width: 15,height: 15)
+								.padding(5)
+						}
+					}
+				)
 			}
 			// MARK: Modifiers - onChange
 			.onChange(of: viewModel.state.status, perform: { status in

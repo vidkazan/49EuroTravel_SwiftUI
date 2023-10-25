@@ -174,7 +174,8 @@ func constructTransferViewData(fromLeg : Leg, toLeg : Leg) -> LegViewData? {
 			heightTotalCollapsed: StopOverType.transfer.viewHeight,
 			heightTotalExtended: StopOverType.transfer.viewHeight
 		),
-		timeContainer: container
+		timeContainer: container,
+		polyline: nil
 	)
 	return res
 }
@@ -253,7 +254,8 @@ func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) as
 			productName: leg.line?.productName ?? ""
 		),
 		progressSegments: segments,
-		timeContainer: container
+		timeContainer: container,
+		polyline: leg.polyline
 	)
 	return res
 }

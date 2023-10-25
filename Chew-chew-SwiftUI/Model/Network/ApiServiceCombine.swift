@@ -46,7 +46,7 @@ extension ApiService  {
 					break
 				}
 				let value = try JSONDecoder().decode(T.self, from: data)
-				print("🟢 > api: done:",type,url)
+				print("🟢 > api: done:",url)
 				return value
 			}
 			.receive(on: DispatchQueue.main)

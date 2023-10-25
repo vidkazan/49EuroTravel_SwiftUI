@@ -40,6 +40,8 @@ enum Query{
 	case remarks(showRemarks: Bool)
 	case language(language : String)
 	case pretty(pretyIntend: Bool)
+	case polylines(_ isShowing : Bool)
+	
 	
 	case nationalExpress(iceTrains: Bool)
 	case national(icTrains: Bool)
@@ -225,6 +227,10 @@ enum Query{
 			return URLQueryItem(
 				name: "stopovers",
 				value: String(isShowing))
+		case .polylines(let show):
+			return URLQueryItem(
+				name: "polylines",
+				value: String(show))
 		}
 	}
 	static func getQueryItems(methods : [Query]) -> [URLQueryItem] {

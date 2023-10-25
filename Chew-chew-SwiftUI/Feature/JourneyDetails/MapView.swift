@@ -18,7 +18,7 @@ extension CLLocationCoordinate2D: Identifiable {
 struct MapUIView: UIViewRepresentable {
 	let stops : [StopViewData]
 	let region: MKCoordinateRegion
-	let route : MKRoute?
+	let route : MKPolyline?
 	
 	func makeUIView(context: Context) -> MKMapView {
 		let annotations : [MKPointAnnotation] = stops.map {
@@ -30,13 +30,13 @@ struct MapUIView: UIViewRepresentable {
 		let mapView = MKMapView()
 		mapView.addAnnotations(annotations)
 		if let route = route {
-			mapView.addOverlay(route.polyline)
-			mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+			mapView.addOverlay(route)
 		}
-		
+
 		mapView.delegate = context.coordinator
 		mapView.region = region
 		mapView.showsUserLocation = true
+		
 		mapView.isZoomEnabled = true
 		mapView.isUserInteractionEnabled = true
 		return mapView
@@ -66,7 +66,7 @@ class Coordinator: NSObject, MKMapViewDelegate {
 struct MapView: View {
 	@State var mapRect : MKCoordinateRegion
 	let stops : [StopViewData]
-	let route : MKRoute?
+	let route : MKPolyline?
 	var body: some View {
 		MapUIView(stops: stops, region: mapRect, route: route)
 		.background(Color.chewGray15)

@@ -33,7 +33,7 @@ extension JourneyDetailsViewModel {
 		case locationDetails(
 			coordRegion : MKCoordinateRegion,
 			stops : [StopViewData],
-			route : MKRoute?
+			route : MKPolyline?
 		)
 		case fullLeg(leg : LegViewData)
 		case loadingFullLeg(leg : LegViewData)
@@ -69,7 +69,7 @@ extension JourneyDetailsViewModel {
 		case didLoadLocationDetails(
 			coordRegion : MKCoordinateRegion,
 			stops : [StopViewData],
-			route : MKRoute?
+			route : MKPolyline?
 		)
 		case didLoadFullLegData(data : LegViewData)
 		case didLongTapOnLeg(leg : LegViewData)

@@ -114,6 +114,7 @@ struct Leg : Codable,Equatable,Identifiable{
 	let walking : Bool?
 	let distance : Int?
 	let stopovers : [StopOver]?
+	let polyline : Polyline?
 	
 	private enum CodingKeys : String, CodingKey {
 		case origin
@@ -137,6 +138,7 @@ struct Leg : Codable,Equatable,Identifiable{
 		case walking
 		case stopovers
 		case distance
+		case polyline
 	}
 }
 
