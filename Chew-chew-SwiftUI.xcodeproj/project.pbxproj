@@ -82,6 +82,9 @@
 		7D6C5C312AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C302AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift */; };
 		7D6C5C332AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C322AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift */; };
 		7D6C5C362AAF7C4500DEFC57 /* JourneyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C352AAF7C4500DEFC57 /* JourneyDetailsView.swift */; };
+		7D740CC42AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC32AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift */; };
+		7D740CC72AEA796B00E9FFD4 /* SettingsView+TransportModesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC62AEA796B00E9FFD4 /* SettingsView+TransportModesSection.swift */; };
+		7D740CC92AEA79C800E9FFD4 /* Set+Toogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */; };
 		7D7A55322AA4A27C000256EF /* JourneyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A55312AA4A27C000256EF /* JourneyListViewModel.swift */; };
 		7D7A553A2AA4B3E5000256EF /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A55392AA4B3E5000256EF /* Feedback.swift */; };
 		7D7A553D2AA4B407000256EF /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A553C2AA4B407000256EF /* System.swift */; };
@@ -214,6 +217,9 @@
 		7D6C5C302AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyDetailsVM+reduce.swift"; sourceTree = "<group>"; };
 		7D6C5C322AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+reduce+JourneyDetails.swift"; sourceTree = "<group>"; };
 		7D6C5C352AAF7C4500DEFC57 /* JourneyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDetailsView.swift; sourceTree = "<group>"; };
+		7D740CC32AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+HuggingPriority.swift"; sourceTree = "<group>"; };
+		7D740CC62AEA796B00E9FFD4 /* SettingsView+TransportModesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportModesSection.swift"; sourceTree = "<group>"; };
+		7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Toogle.swift"; sourceTree = "<group>"; };
 		7D7A55312AA4A27C000256EF /* JourneyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyListViewModel.swift; sourceTree = "<group>"; };
 		7D7A55392AA4B3E5000256EF /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		7D7A553C2AA4B407000256EF /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
@@ -343,6 +349,8 @@
 				7DA885292ACF23F400263DB6 /* PrintThread.swift */,
 				7D181D662AD6D6BB003AB021 /* TextModifiers.swift */,
 				7D69BE7E2AD7ECF1007855B3 /* Publisher+AsyncMap.swift */,
+				7D740CC32AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift */,
+				7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -385,7 +393,7 @@
 			children = (
 				7D4B1B8F2AA8DB090096F372 /* SearchStopsView */,
 				7DAF62B42A9E5833006F1A17 /* DatePickerView */,
-				7D345E4B2AE97FC8003CA948 /* SettingsView.swift */,
+				7D740CC52AEA795E00E9FFD4 /* SettingsView */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -549,6 +557,15 @@
 				7D000CF82AB8768400566120 /* JourneyDetailsViewHeader.swift */,
 			);
 			path = JourneyDetailsView;
+			sourceTree = "<group>";
+		};
+		7D740CC52AEA795E00E9FFD4 /* SettingsView */ = {
+			isa = PBXGroup;
+			children = (
+				7D740CC62AEA796B00E9FFD4 /* SettingsView+TransportModesSection.swift */,
+				7D345E4B2AE97FC8003CA948 /* SettingsView.swift */,
+			);
+			path = SettingsView;
 			sourceTree = "<group>";
 		};
 		7D7A55382AA4B3DD000256EF /* feedback */ = {
@@ -876,6 +893,7 @@
 				7D462D4B2AAC948700BC0D65 /* JourneyListViewModel+reduce+JourneysLoaded.swift in Sources */,
 				7DE727C92AD93955002FF033 /* ApiServiceCombine.swift in Sources */,
 				7D6C5C1B2AAF495B00DEFC57 /* chewVM+reduce.swift in Sources */,
+				7D740CC92AEA79C800E9FFD4 /* Set+Toogle.swift in Sources */,
 				7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */,
 				7D69BE7F2AD7ECF1007855B3 /* Publisher+AsyncMap.swift in Sources */,
 				7D462D602AACED6D00BC0D65 /* constructJourneys+Journey.swift in Sources */,
@@ -887,6 +905,7 @@
 				7D181D692AD6F7C6003AB021 /* FavouriteRideCell.swift in Sources */,
 				7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift in Sources */,
 				7D6734B32A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift in Sources */,
+				7D740CC42AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift in Sources */,
 				7D6C5C182AAF486700DEFC57 /* chewVM+state.swift in Sources */,
 				7D7A553A2AA4B3E5000256EF /* Feedback.swift in Sources */,
 				7D6C5C272AAF4BD300DEFC57 /* chewVM+reduce+Journeys.swift in Sources */,
@@ -929,6 +948,7 @@
 				7D6C5C312AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift in Sources */,
 				7D4B1B8E2AA8CBB00096F372 /* JourneyListViewModel+state.swift in Sources */,
 				7D02CE252A97E6620048ADE6 /* Errors.swift in Sources */,
+				7D740CC72AEA796B00E9FFD4 /* SettingsView+TransportModesSection.swift in Sources */,
 				7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */,
 				7D000CF72AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef.swift in Sources */,
 				7DE727C62AD93869002FF033 /* JourneyFollowRideView.swift in Sources */,

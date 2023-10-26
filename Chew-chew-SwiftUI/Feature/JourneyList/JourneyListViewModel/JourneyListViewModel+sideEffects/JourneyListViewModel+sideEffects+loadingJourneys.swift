@@ -124,14 +124,15 @@ extension JourneyListViewModel {
 		case .custom(types: let products):
 			return Query.getQueryItems(
 				methods: [
-					Query.national(icTrains: products.national ?? true),
-					Query.nationalExpress(iceTrains: products.nationalExpress ?? true),
-					Query.regionalExpress(reTrains: products.regionalExpress ?? true),
-					Query.regional(rbTrains: products.regional ?? true),
-					Query.suburban(sBahn: products.suburban ?? true),
-					Query.ferry(ferry: products.ferry ?? true),
-					Query.tram(tram: products.tram ?? true),
-					Query.taxi(taxi: products.taxi ?? true),
+					Query.national(icTrains: products.contains(.national)),
+					Query.nationalExpress(iceTrains: products.contains(.nationalExpress)),
+					Query.regionalExpress(reTrains: products.contains(.regionalExpress)),
+					Query.regional(rbTrains: products.contains(.regional)),
+					Query.suburban(sBahn: products.contains(.suburban)),
+					Query.ferry(ferry: products.contains(.ferry)),
+					Query.tram(tram: products.contains(.tram)),
+					Query.taxi(taxi: products.contains(.taxi)),
+					Query.subway(uBahn: products.contains(.subway))
 				]
 			)
 		}

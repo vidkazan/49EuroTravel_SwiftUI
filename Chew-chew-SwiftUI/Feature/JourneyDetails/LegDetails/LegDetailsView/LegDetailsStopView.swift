@@ -41,7 +41,6 @@ struct LegStopView : View {
 						.fill(.clear)
 				}
 				.frame(width: 70)
-						// MARK: badges
 				VStack(alignment: .leading) {
 					if case .transfer=stopOverType {
 						HStack(spacing: 3) {

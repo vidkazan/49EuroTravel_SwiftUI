@@ -83,8 +83,8 @@ extension JourneyDetailsViewModel {
 		
 		let subject = Future<MKDirections.Response,ApiServiceError> { promise in
 			directions.calculate { resp, error in
-				if error == nil {
-					return promise(.failure(.connectionNotFound))
+				if let error=error {
+					return promise(.failure(.cannotConnectToHost(error.localizedDescription)))
 				}
 				guard let resp = resp else {
 					return promise(.failure(ApiServiceError.cannotDecodeRawData))
@@ -112,7 +112,8 @@ extension JourneyDetailsViewModel {
 								stops: [locFirst,locLast],
 								route: res.routes.first?.polyline)
 						}
-						.catch { _ in
+						.catch { error in
+							print("❌ whenLoadingLocationDetails: makeDirecitonsRequest: error:",error)
 							return Just(Event.didLoadLocationDetails(
 								coordRegion: constructMapRegion(locFirst: locFirst.locationCoordinates, locLast: locLast.locationCoordinates),
 								stops: [locFirst,locLast],

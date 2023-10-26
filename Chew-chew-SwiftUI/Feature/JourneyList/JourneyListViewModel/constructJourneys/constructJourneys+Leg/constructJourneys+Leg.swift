@@ -180,7 +180,7 @@ func constructTransferViewData(fromLeg : Leg, toLeg : Leg) -> LegViewData? {
 	return res
 }
 
-func constructLineViewData(mode : String,product : String, name : String, productName : String) -> LineViewData{
+func constructLineViewData(mode : String,product : String, name : String, productName : String) -> LineViewData {
 	let mode : LineType = {
 		switch product {
 		case "nationalExpress":
@@ -204,7 +204,7 @@ func constructLineViewData(mode : String,product : String, name : String, produc
 		case "taxi":
 			return .taxi
 		default:
-			return .other(type: mode)
+			return .taxi
 		}
 	}()
 	return LineViewData(

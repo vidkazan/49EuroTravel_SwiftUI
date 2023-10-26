@@ -8,10 +8,35 @@
 import Foundation
 
 struct ChewSettings : Equatable,Hashable {
+//	struct TransportTypeValue : Equatable,Hashable, Identifiable, Comparable {
+//		static func < (lhs: TransportTypeValue, rhs: TransportTypeValue) -> Bool {
+//			lhs.type.rawValue < rhs.type.rawValue
+//		}
+//		
+//		let id = UUID()
+//		let type : LineType
+//		let value : Bool
+//		
+//		init(_ type: LineType,_ value: Bool) {
+//			self.type = type
+//			self.value = value
+//		}
+//	}
 	enum TransportMode : Equatable, Hashable {
 		case deutschlandTicket
 		case all
-		case custom(types : Products)
+		case custom(types : Set<LineType>)
+		
+		var id : Int {
+			switch self {
+			case .all:
+				return 0
+			case .deutschlandTicket:
+				return 1
+			case .custom:
+				return 2
+			}
+		}
 	}
 	enum TransferTime : Equatable, Hashable {
 		case direct
