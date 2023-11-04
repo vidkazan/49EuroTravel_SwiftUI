@@ -47,7 +47,7 @@ func constructJourneyViewDataAsync(
 			legsData.append(res)
 		}
 	}
-	let sunEventGenerator = SunEventGenerator(
+	let sunEventService = SunEventService(
 		locationStart: CLLocationCoordinate2D(
 			latitude: depStop?.coordinates.latitude ?? 0,
 			longitude: depStop?.coordinates.longitude ?? 0
@@ -71,7 +71,7 @@ func constructJourneyViewDataAsync(
 		) ?? "error",
 		legs: legsData,
 		transferCount: constructTransferCount(legs: legsData),
-		sunEvents: await sunEventGenerator.getSunEventsAsync(),
+		sunEvents: await sunEventService.getSunEventsAsync(),
 		isReachable: isReachable,
 		badges: constructBadges(remarks: remarks,isReachable: isReachable),
 		refreshToken: journey.refreshToken,

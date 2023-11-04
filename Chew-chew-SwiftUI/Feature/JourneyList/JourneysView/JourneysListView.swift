@@ -74,12 +74,25 @@ struct JourneysListView: View {
 					.animation(.spring(), value: journeyViewModel.state.status)
 				}
 			case .failedToLoadJourneys(let error):
+				// TODO: test this place
 				Spacer()
-				Text(error.description)
-					.padding(5)
-					.foregroundColor(.secondary)
-					.chewTextSize(.big)
-					.frame(maxWidth: .infinity,alignment: .center)
+				VStack {
+					Text("connections not found")
+						.padding(5)
+						.foregroundColor(.secondary)
+						.chewTextSize(.big)
+					Text(error.description)
+						.font(.system(size: 8,weight: .semibold))
+						.padding(5)
+						.foregroundColor(.secondary)
+					Button(action: {
+						journeyViewModel.send(event: .onLaterRef)
+					}, label: {
+						Image(systemName: "exclamationmark.circle")
+							.chewTextSize(.medium)
+							.foregroundColor(.secondary)
+					})
+				}
 			}
 			Spacer()
 		}

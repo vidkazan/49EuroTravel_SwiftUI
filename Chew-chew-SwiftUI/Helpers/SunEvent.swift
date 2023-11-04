@@ -39,9 +39,9 @@ struct SunEvent : Equatable,Hashable {
 	}
 }
 
-class SunEventGenerator {
+class SunEventService {
 	private let locationStart : CLLocationCoordinate2D
-	private let locationFinal: CLLocationCoordinate2D
+	private let locationFinal : CLLocationCoordinate2D
 	private let dateStart : Date
 	private let dateFinal : Date
 	private let duration : Double?
@@ -63,43 +63,62 @@ class SunEventGenerator {
 		
 		guard let solar = Solar(for: self.dateStart,coordinate: self.locationStart) else { return [] }
 		
-		sunEvents.append(SunEvent(
-			type: solar.isDaytime ? .day : .night,
-			location: self.locationStart,
-			timeStart: self.dateStart,
-			timeFinal: nil
-		))
+		//MARK: fix setting initial sun state
+		sunEvents.append(
+			SunEvent(
+				type: solar.isDaytime ? .day : .night, // in the middle of sunset/sunrise ?
+				location: self.locationStart,
+				timeStart: self.dateStart,
+				timeFinal: nil
+			)
+		)
 		
-		let dates = DateParcer.getDaysIncludedInRange(startDateUnnormalised: self.dateStart, endDateUnnormalised: self.dateFinal)
+		//MARK: getting all dates which are included to given range
+		// ex: (date0,date3) -> [date0,date1,date2,date3]
+		let dates = DateParcer.getDaysIncludedInRange(
+			startDateUnnormalised: self.dateStart,
+			endDateUnnormalised: self.dateFinal
+		)
+		
+		
+		//MARK: going through all dates and getting all sun events from them
 		for date in dates {
 			guard let solar = Solar(for: date,coordinate: self.locationStart) else { return [] }
 			
 			if let sunriseStart = solar.sunrise {
+				
+				// correcting location by date
 				guard let correctadLocation = self.getLocationByDate(date: sunriseStart) else { return [] }
+				
+				// correcting solar model by new corrected location
 				guard let correctedSolar = Solar(for: date,coordinate: correctadLocation) else { return [] }
-				if let correctedSunriseStart = correctedSolar.civilSunrise, let correctedSunriseEnd = correctedSolar.sunrise {
-					if self.dateStart < correctedSunriseStart && correctedSunriseEnd < self.dateFinal {
+				
+				
+				if	let correctedSunriseStart = correctedSolar.civilSunrise,
+					let correctedSunriseEnd = correctedSolar.sunrise {
+					
+//					if self.dateStart < correctedSunriseStart && correctedSunriseEnd < self.dateFinal {
 						sunEvents.append(SunEvent(
 							type: .sunrise,
 							location: self.locationStart,
 							timeStart: correctedSunriseStart,
 							timeFinal: correctedSunriseEnd
 						))
-					}
+//					}
 				}
 			}
 			if let sunsetEnd = solar.sunset {
 				guard let correctadLocation = self.getLocationByDate(date: sunsetEnd) else { return [] }
 				guard let correctedSolar = Solar(for: date,coordinate: correctadLocation) else { return [] }
 				if let correctedSunsetStart = correctedSolar.sunset, let correctedSunsetEnd = correctedSolar.civilSunset {
-					if self.dateStart < correctedSunsetStart && correctedSunsetEnd < self.dateFinal {
+//					if self.dateStart < correctedSunsetStart && correctedSunsetEnd < self.dateFinal {
 						sunEvents.append(SunEvent(
 							type: .sunset,
 							location: self.locationStart,
 							timeStart: correctedSunsetStart,
 							timeFinal: correctedSunsetEnd
 						))
-					}
+//					}
 				}
 			}
 			

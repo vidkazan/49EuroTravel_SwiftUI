@@ -18,7 +18,6 @@ extension ApiService  {
 			return Self.executeCombine(T.self, query: query, type: type)
 		}
 	
-	// TODO: handle error codes
 	static private func executeCombine<T: Decodable>(
 		_ t : T.Type,
 		query : [URLQueryItem],
@@ -46,7 +45,7 @@ extension ApiService  {
 					break
 				}
 				let value = try JSONDecoder().decode(T.self, from: data)
-				print("🟢 > api: done:",url)
+				print("🟢 > api: done:",type.description, url)
 				return value
 			}
 			.receive(on: DispatchQueue.main)

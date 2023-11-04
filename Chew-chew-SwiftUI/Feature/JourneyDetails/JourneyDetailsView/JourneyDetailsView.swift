@@ -28,8 +28,6 @@ struct JourneyDetailsView: View {
 				header()
 					.animation(nil, value: viewModel.state.status)
 					.padding(10)
-//				switch viewModel.state.status {
-//				case .loadedJourneyData,.locationDetails,.loadingLocationDetails,.actionSheet,.fullLeg,.loadingFullLeg,.loading:
 					// MARK: LegDetails
 					ScrollView() {
 						LazyVStack(spacing: 0){
@@ -89,12 +87,6 @@ struct JourneyDetailsView: View {
 						})
 						.foregroundColor(Color.primary)
 					}
-				// MARK: Error
-//				case .error(error: let error):
-//					Spacer()
-//					Label(error.description, systemImage: "exclamationmark.circle.fill")
-//					Spacer()
-//				}
 			}
 			// MARK: Modifiers
 			.navigationBarTitle("Journey details", displayMode: .inline)

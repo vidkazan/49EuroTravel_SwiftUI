@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+// TODO: feature: check when train arrives at starting point
 extension JourneyDetailsViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
 		print("🟣🔥 > journey details event:",event.description,"state:",state.status.description)
@@ -23,10 +23,14 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .error(error: error)
 				)
+			case .didLongTapOnLeg(leg: let leg):
+				return State(
+					data: state.data,
+					status: .actionSheet(leg: leg)
+				)
 			case	.didTapReloadJourneys,
 					.didCloseActionSheet,
 					.didExpandLegDetails,
-					.didLongTapOnLeg,
 					.didTapBottomSheetDetails,
 					.didCloseBottomSheet,
 					.didLoadFullLegData,
@@ -72,8 +76,12 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
 				)
+			case .didLongTapOnLeg(leg: let leg):
+				return State(
+					data: state.data,
+					status: .actionSheet(leg: leg)
+				)
 			case	.didLoadLocationDetails,
-					.didLongTapOnLeg,
 					.didCloseActionSheet,
 					.didTapBottomSheetDetails,
 					.didLoadFullLegData,

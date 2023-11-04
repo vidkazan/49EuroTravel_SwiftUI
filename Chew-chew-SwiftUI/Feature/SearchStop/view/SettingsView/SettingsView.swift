@@ -9,12 +9,19 @@ import Foundation
 import SwiftUI
 
 struct SettingsView: View {
+	let arr = [0,5,7,10,15,20,30,45,60,90,120]
 	@ObservedObject var chewVM : ChewViewModel
 	@State var transportModeSegment : Int = 0
 	@State var allTypes : Set<LineType> = Set(LineType.allCases)
 	@State var selectedTypes : Set<LineType> = Set(LineType.allCases)
+	
+	@State var transferTime : Int = 0
+	@State var showWithTransfers : Int = 0
 	init(vm : ChewViewModel) {
 		self.chewVM = vm
+		UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.chewGray10)
+		UISegmentedControl.appearance().backgroundColor = UIColor(Color(hue: 0, saturation: 0, brightness: 0.04))
+		UISegmentedControl.appearance().layer.cornerRadius = 10
 	}
 	var columns: [GridItem] = [
 			GridItem(.adaptive(minimum: 110), spacing: 10),
@@ -25,13 +32,12 @@ struct SettingsView: View {
 		VStack(alignment: .center) {
 			Label("Settings", systemImage: "gearshape")
 				.chewTextSize(.big)
-			transportModesSection
-//			Section(content: {
-//
-//			}, header: {
-//
-//			})
-			Spacer()
+			ScrollView {
+				transportModesSection
+				transferSettings
+				Spacer()
+			}
+			.frame(maxWidth: .infinity,maxHeight: .infinity)
 			Button(action: {
 				let transportMode = {
 					switch self.transportModeSegment {
@@ -42,12 +48,24 @@ struct SettingsView: View {
 					case 2:
 						return ChewSettings.TransportMode.custom(types: selectedTypes)
 					default:
-					 	return ChewSettings.TransportMode.all
+						return ChewSettings.TransportMode.all
 					}
 				}()
+//				print(showWithTransfers,transferTime)
+				let transfer : ChewSettings.TransferTime =  {
+					switch self.showWithTransfers {
+					case 0:
+						return ChewSettings.TransferTime.direct
+					case 1:
+						return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
+					default:
+						return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
+					}
+				}()
+				
 				let res = ChewSettings(
 					transportMode: transportMode,
-					transferTime: .time(minutes: 0),
+					transferTime: transfer,
 					accessiblity: .partial,
 					walkingSpeed: .fast,
 					language: .english,
@@ -68,6 +86,15 @@ struct SettingsView: View {
 			.cornerRadius(10)
 		}
 		.onAppear {
+			switch chewVM.state.settings.transferTime {
+				case .direct:
+					self.showWithTransfers = 0
+					self.transferTime = 0
+				case .time(let time):
+					self.showWithTransfers = 1
+					self.transferTime = time
+			}
+			
 			self.transportModeSegment = chewVM.state.settings.transportMode.id
 			self.selectedTypes = {
 				switch chewVM.state.settings.transportMode {

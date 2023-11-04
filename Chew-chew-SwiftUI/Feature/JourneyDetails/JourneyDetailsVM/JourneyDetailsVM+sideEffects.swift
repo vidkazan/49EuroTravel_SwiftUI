@@ -10,6 +10,8 @@ import Combine
 import CoreLocation
 import MapKit
 
+
+// TODO: report refreshToken usage issue
 extension JourneyDetailsViewModel {
 	static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
 		Feedback { _ in
@@ -129,6 +131,11 @@ extension JourneyDetailsViewModel {
 								return CLLocationCoordinate2DMake(lat, long)
 							}
 							return nil
+						}
+						polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
+					} else {
+						let polylinePoints = leg.legStopsViewData.compactMap {
+							return $0.locationCoordinates
 						}
 						polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
 					}

@@ -54,8 +54,6 @@ extension SettingsView {
 						.padding(.bottom,5)
 					}
 				}
-				.transition(.move(edge: .top))
-				.animation(.spring(), value: transportModeSegment)
 				.background(Color.chewGray10)
 				.cornerRadius(8)
 			}, header: {
