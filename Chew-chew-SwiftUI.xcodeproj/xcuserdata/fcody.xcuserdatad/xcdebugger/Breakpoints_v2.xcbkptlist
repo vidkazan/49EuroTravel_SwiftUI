@@ -284,8 +284,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "138"
-            endingLineNumber = "138"
+            startingLineNumber = "130"
+            endingLineNumber = "130"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -658,8 +658,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/JourneyDetailsVM+sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "169"
+            endingLineNumber = "169"
             landmarkName = "whenLoadingFullLeg()"
             landmarkType = "7">
             <Locations>

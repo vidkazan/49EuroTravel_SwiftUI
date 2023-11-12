@@ -14,25 +14,29 @@ extension SettingsView {
 				VStack {
 					Picker("Settings", selection: $showWithTransfers ){
 						Text("direct")
-							.chewTextSize(.medium)
+//							.chewTextSize(.medium)
 							.tag(0)
 						Text("with transfers")
-							.chewTextSize(.medium)
+//							.chewTextSize(.medium)
 							.tag(1)
 					}
 					.pickerStyle(.segmented)
 					.frame(height: 43)
 					if showWithTransfers == 1 {
-						Text("transfer duration")
-							.chewTextSize(.medium)
-						Picker("title", selection: $transferTime, content: {
-							ForEach(arr,id:\.self) {
-								Text("\(String($0)) min ")
-									.tag($0)
-							}
-						})
-						.frame(height: 100)
-						.pickerStyle(.wheel)
+						HStack {
+							Label("Transfer duration", systemImage: "clock.fill")
+								.padding(.horizontal,10)
+							Spacer()
+							Picker("title", selection: $transferTime, content: {
+								ForEach(arr,id:\.self) {
+									Text("\(String($0)) min ")
+										.tag($0)
+								}
+							})
+							.padding(5)
+							.pickerStyle(.automatic)
+						}
+						.padding(5)
 					}
 				}
 				.background(Color.chewGray07)
@@ -40,7 +44,6 @@ extension SettingsView {
 			}, header: {
 				HStack {
 					Text("Connections")
-						.chewTextSize(.medium)
 					Spacer()
 				}
 			})

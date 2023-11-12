@@ -7,38 +7,50 @@
 
 import SwiftUI
 
-// MARK: load it quiker
+// TODO: load it quiker
 struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
 	@State var date : Date
 	@State var time : Date
 	var body: some View {
-		VStack(alignment: .center) {
+		VStack(alignment: .center,spacing: 0) {
+			
+			
+			// MARK: header buttons
 			HStack {
 				DatePickerTimePresetButtons()
 			}
 			.frame(maxWidth: .infinity,maxHeight: 50)
 			.background(Color.chewGrayScale15)
 			.cornerRadius(10)
-			.padding(.vertical,5)
+			.padding(.bottom,7)
+			
+			
+			// MARK: time
 			HStack {
-				DatePicker(
-					"",
-					selection: $time,
-					displayedComponents: [.hourAndMinute]
-				)
-				.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
-				.datePickerStyle(.wheel)
-				.cornerRadius(10)
-				.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 15))
-				.onAppear {
-					UIDatePicker.appearance().minuteInterval = 5
+				HStack {
+					DatePicker(
+						"",
+						selection: $time,
+						displayedComponents: [.hourAndMinute]
+					)
+					.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
+					.datePickerStyle(.wheel)
+					.cornerRadius(10)
+					.padding(EdgeInsets(top: 7, leading: 7, bottom: 7, trailing: 15))
+					.onAppear {
+						UIDatePicker.appearance().minuteInterval = 5
+					}
+					Spacer()
 				}
-				Spacer()
+				.frame(maxWidth: .infinity,maxHeight: 130)
+				.padding(.vertical,5)
+				.background(Color.chewGrayScale15)
+				.cornerRadius(10)
 			}
-			.frame(maxWidth: .infinity,maxHeight: 150)
-			.background(Color.chewGrayScale15)
-			.cornerRadius(10)
+			.padding(.bottom,15)
+			
+			// MARK: header date
 			HStack {
 				DatePicker(
 					"",
@@ -54,9 +66,14 @@ struct DatePickerView: View {
 				.background(Color.chewGrayScale15)
 				.cornerRadius(10)
 			}
-			.frame(maxWidth: .infinity,maxHeight: 350)
+			.frame(maxWidth: .infinity,maxHeight: 330)
+			.padding(.bottom,5)
+			
 			
 			Spacer()
+			
+			
+			// MARK: done button
 			Button(action: {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
 					chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
@@ -77,5 +94,12 @@ struct DatePickerView: View {
 		}
 		.padding(10)
 		.background(Color.chewGrayScale10)
+	}
+}
+
+struct ContentView_Previews: PreviewProvider {
+
+	static var previews: some View {
+		DatePickerView(date: .now, time: .now)
 	}
 }

@@ -7,19 +7,17 @@
 
 import Foundation
 import SwiftUI
+
 extension SettingsView {
 	var transportModesSection: some View {
 			Section(content: {
 				VStack {
 					Picker("Settings", selection: $transportModeSegment ){
 						DTicketLabel()
-							.chewTextSize(.medium)
 							.tag(ChewSettings.TransportMode.deutschlandTicket.id)
 						Text("all")
-							.chewTextSize(.medium)
 							.tag(ChewSettings.TransportMode.all.id)
 						Text("specific")
-							.chewTextSize(.medium)
 							.tag(ChewSettings.TransportMode.custom(types: Set(LineType.allCases)).id)
 					}
 					.pickerStyle(.segmented)
@@ -35,7 +33,6 @@ extension SettingsView {
 									},
 									label: {
 										Text(type.shortValue)
-											.chewTextSize(.medium)
 											.frame(minWidth: 100,minHeight: 43)
 											.padding(2)
 											.background(selectedTypes.contains(type) ?
@@ -59,7 +56,7 @@ extension SettingsView {
 			}, header: {
 				HStack {
 					Text("Transport modes")
-						.chewTextSize(.medium)
+						.padding(1)
 					Spacer()
 				}
 			})
