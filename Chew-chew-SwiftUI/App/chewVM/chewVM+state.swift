@@ -7,6 +7,7 @@
 
 import Foundation
 import CoreLocation
+import CoreData
 
 extension ChewViewModel {
 	enum DateType : Equatable,Hashable {
@@ -50,6 +51,8 @@ extension ChewViewModel {
 		static func == (lhs: ChewViewModel.Status, rhs: ChewViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
+		case start
+		case loadingInitialData(viewContext: NSManagedObjectContext)
 		case idle
 		case editingDepartureStop
 		case editingArrivalStop
@@ -77,11 +80,18 @@ extension ChewViewModel {
 				return "loadingLocation"
 			case .settings:
 				return "settings"
+			case .start:
+				return "start"
+			case .loadingInitialData:
+				return "loadingInitialData"
 			}
 		}
 	}
 	
 	enum Event {
+		case didStartViewAppear(NSManagedObjectContext)
+		case didLoadInitialData(DateType)
+		
 		case onDepartureEdit
 		case onArrivalEdit
 		case onStopsSwitch
@@ -140,6 +150,10 @@ extension ChewViewModel {
 				return "didTapSettings"
 			case .didUpdateSettings:
 				return "didUpdateSettings"
+			case .didLoadInitialData:
+				return "didLoadInitialData"
+			case .didStartViewAppear:
+				return "didStartViewAppear"
 			}
 		}
 	}

@@ -114,7 +114,7 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .settings
 			)
-		case .didUpdateSettings:
+		case .didUpdateSettings,.didLoadInitialData,.didStartViewAppear:
 			return state
 		}
 	}

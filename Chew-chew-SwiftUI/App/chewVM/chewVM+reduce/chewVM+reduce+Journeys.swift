@@ -51,6 +51,8 @@ extension ChewViewModel {
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .datePicker)
+		case .didLoadInitialData:
+			return state
 		case .onNewDeparture(_):
 			return state
 		case .onNewArrival(_):
@@ -81,6 +83,8 @@ extension ChewViewModel {
 				status: .settings
 			)
 		case .didUpdateSettings:
+			return state
+		case .didStartViewAppear:
 			return state
 		}
 	}

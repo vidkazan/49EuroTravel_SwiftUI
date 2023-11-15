@@ -25,7 +25,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 			arrStop: nil,
 			settings: ChewSettings(),
 			timeChooserDate: .now,
-			status: .idle
+			status: .start
 		)
 		Publishers.system(
 			initial: state,
@@ -34,7 +34,8 @@ final class ChewViewModel : ObservableObject, Identifiable {
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenIdleCheckForSufficientDataForJourneyRequest(),
-				self.whenLoadingUserLocation()
+				self.whenLoadingUserLocation(),
+				self.whenLoadingInitialData()
 			]
 		)
 		.assign(to: \.state, on: self)

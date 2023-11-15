@@ -11,6 +11,8 @@ extension ChewViewModel {
 	func reduceJourneyDetails(_ state:  State, _ event: Event) -> State {
 		guard case .journeyDetails = state.status else { return state }
 		switch event {
+		case .didLoadInitialData:
+			return state
 		case .onDepartureEdit:
 			return state
 		case .onArrivalEdit:
@@ -47,6 +49,8 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .settings
 			)
+		case .didStartViewAppear(_):
+			return state
 		}
 	}
 }

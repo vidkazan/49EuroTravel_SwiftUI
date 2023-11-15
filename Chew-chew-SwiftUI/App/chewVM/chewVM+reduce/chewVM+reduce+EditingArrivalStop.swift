@@ -11,6 +11,8 @@ extension ChewViewModel {
 	func reduceEditingArrivalStop(_ state:  State, _ event: Event) -> State {
 		guard case .editingArrivalStop = state.status else { return state }
 		switch event {
+		case .didStartViewAppear:
+			return state
 		case .onDepartureEdit:
 			return State(
 				depStop: nil,
@@ -56,6 +58,8 @@ extension ChewViewModel {
 		case .onNewDeparture:
 			return state
 		case .onJourneyDataUpdated:
+			return state
+		case .didLoadInitialData:
 			return state
 		case .didLocationButtonPressed:
 			return State(

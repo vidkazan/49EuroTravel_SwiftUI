@@ -51,11 +51,7 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
-		case .onDepartureEdit:
-			return state
-		case .onNewArrival(_):
-			return state
-		case .onJourneyDataUpdated:
+		case .onDepartureEdit,.didLoadInitialData,.onNewArrival,.onJourneyDataUpdated,.didStartViewAppear:
 			return state
 		case .didLocationButtonPressed:
 			return State(

@@ -56,8 +56,36 @@ extension ChewViewModel {
 					.onJourneyDataUpdated,
 					.didLocationButtonPressed,
 					.didReceiveLocationData,
-					.didFailToLoadLocationData:
+					.didFailToLoadLocationData,
+					.didStartViewAppear,
+					.didLoadInitialData:
 						return state
+			}
+		case .loadingInitialData:
+			switch event {
+			case .didLoadInitialData(let date):
+				return State(
+					depStop: nil,
+					arrStop: nil,
+					settings: ChewSettings(),
+					timeChooserDate: date,
+					status: .idle
+				)
+			default:
+				return state
+			}
+		case .start:
+			switch event {
+			case .didStartViewAppear(let viewContext):
+				return State(
+					depStop: nil,
+					arrStop: nil,
+					settings: ChewSettings(),
+					timeChooserDate: state.timeChooserDate,
+					status: .loadingInitialData(viewContext: viewContext)
+				)
+			default:
+				return state
 			}
 		}
 	}

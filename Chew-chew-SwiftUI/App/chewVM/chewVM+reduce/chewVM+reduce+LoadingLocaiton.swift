@@ -11,7 +11,7 @@ extension ChewViewModel {
 	func reduceLoadingLocation(_ state:  State, _ event: Event) -> State {
 		guard case .loadingLocation = state.status else { return state }
 		switch event {
-		case .onJourneyDataUpdated:
+		case .onJourneyDataUpdated,.didLoadInitialData,.didStartViewAppear:
 			return state
 		case .onDepartureEdit:
 			return State(

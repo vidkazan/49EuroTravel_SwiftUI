@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
+        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="recentLocations" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location"/>
+    </entity>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="api_id" optional="YES" attributeType="String"/>
@@ -9,10 +13,5 @@
         <attribute name="name" attributeType="String" defaultValueString="default_stop_name"/>
         <attribute name="poi" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="type" optional="YES" attributeType="String"/>
-    </entity>
-    <entity name="User" representedClassName="User" syncable="YES" codeGenerationType="class">
-        <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="isFirstAppEntry" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="recentLocations" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location"/>
     </entity>
 </model>
