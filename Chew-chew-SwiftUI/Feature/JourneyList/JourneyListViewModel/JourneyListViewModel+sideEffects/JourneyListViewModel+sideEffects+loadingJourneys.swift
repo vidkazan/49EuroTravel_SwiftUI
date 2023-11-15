@@ -54,7 +54,8 @@ extension JourneyListViewModel {
 			query += Query.getQueryItems(methods: [
 				Query.departurePoiId(poiId: id),
 				Query.departureLatitude(departureLatitude: (String(dep.coordinates.latitude ))),
-				Query.departureLongitude(departureLongitude: (String(dep.coordinates.longitude )))
+				Query.departureLongitude(departureLongitude: (String(dep.coordinates.longitude ))),
+				Query.departurePoiName(poiName: "name")
 			])
 		case .stop:
 			guard let depStop = dep.stopDTO?.id else {
@@ -81,7 +82,8 @@ extension JourneyListViewModel {
 			query += Query.getQueryItems(methods: [
 				Query.arrivalPoiId(poiId: id),
 				Query.arrivalLatitude(arrivalLatitude: (String(arr.coordinates.latitude))),
-				Query.arrivalLongitude(arrivalLongitude: (String(arr.coordinates.longitude)))
+				Query.arrivalLongitude(arrivalLongitude: (String(arr.coordinates.longitude))),
+				Query.arrivalPoiName(poiName: "name")
 			])
 		case .stop:
 			guard let depStop = arr.stopDTO?.id else {
