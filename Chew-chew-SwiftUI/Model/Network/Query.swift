@@ -59,12 +59,14 @@ enum Query{
 	case departureLongitude(departureLongitude : String)
 	case departureAddress(addr: String)
 	case departurePoiId(poiId: String)
+	case departurePoiName(poiName: String)
 	
 	case arrivalStopId(arrivalStopId : String)
 	case arrivalLatitude(arrivalLatitude : String)
 	case arrivalLongitude(arrivalLongitude : String)
 	case arrivalAddress(addr: String)
 	case arrivalPoiId(poiId: String)
+	case arrivalPoiName(poiName: String)
 	
 	case departureTime(departureTime : Date)
 	case arrivalTime(arrivalTime : Date)
@@ -235,6 +237,14 @@ enum Query{
 			return URLQueryItem(
 				name: "transfers",
 				value: String(count))
+		case .departurePoiName(poiName: let poiName):
+			return URLQueryItem(
+				name: "from.name",
+				value: poiName)
+		case .arrivalPoiName(poiName: let poiName):
+			return URLQueryItem(
+				name: "to.name",
+				value: poiName)
 		}
 	}
 	static func getQueryItems(methods : [Query]) -> [URLQueryItem] {

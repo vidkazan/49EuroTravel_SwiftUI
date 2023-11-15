@@ -16,7 +16,12 @@ struct TimeChoosingView: View {
 	private var datePickerIsShowing = false
 	private var options = ["now","date"]
 	
-	init(searchStopsVM: SearchStopsViewModel, selectedOption: Int = 0, datePickerIsShowing: Bool = false, options: [String] = ["now","date"]) {
+	init(
+		searchStopsVM: SearchStopsViewModel,
+		selectedOption: Int = 0,
+		datePickerIsShowing: Bool = false,
+		options: [String] = ["now","date"]
+	) {
 		self.searchStopsVM = searchStopsVM
 		self.selectedOption = selectedOption
 		self.datePickerIsShowing = datePickerIsShowing
@@ -24,6 +29,7 @@ struct TimeChoosingView: View {
 	}
 	var body: some View {
 		ZStack {
+			// TODO: replace with another custom segmentedControl
 			Rectangle()
 				.fill(Color.chewGray10)
 				.frame(width: UIScreen.main.bounds.width / 2.15 - 25, height: 36)

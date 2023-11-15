@@ -10,10 +10,15 @@ import SwiftUI
 @main
 struct Chew_chew_SwiftUIApp: App {
 	@StateObject private var chewJourneyViewModel = ChewViewModel()
+	let persistenceController = PersistenceController.shared
+	
     var body: some Scene {
         WindowGroup {
 			ContentView()
 				.environmentObject(chewJourneyViewModel)
+				.environment(
+					\.managedObjectContext,
+					 persistenceController.container.viewContext)
         }
     }
 }

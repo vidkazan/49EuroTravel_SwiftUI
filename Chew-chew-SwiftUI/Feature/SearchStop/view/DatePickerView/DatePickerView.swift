@@ -96,10 +96,10 @@ struct DatePickerView: View {
 		.background(Color.chewGrayScale10)
 	}
 }
-
-struct ContentView_Previews: PreviewProvider {
-
-	static var previews: some View {
-		DatePickerView(date: .now, time: .now)
-	}
-}
+//
+//struct ContentView_Previews: PreviewProvider {
+//
+//	static var previews: some View {
+//		DatePickerView(date: .now, time: .now)
+//	}
+//}
