@@ -174,7 +174,7 @@ struct JourneysContainer : Codable,Equatable {
 	let realtimeDataUpdatedAt: Int64?
 }
 
-enum LocationType : Equatable {
+enum LocationType : Int16, Equatable, Hashable {
 	case pointOfInterest
 	case location
 	case stop
