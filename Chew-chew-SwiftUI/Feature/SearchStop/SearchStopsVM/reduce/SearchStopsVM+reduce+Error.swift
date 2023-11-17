@@ -13,20 +13,23 @@ extension SearchStopsViewModel {
 		switch event {
 		case .onSearchFieldDidChanged(let string, let type):
 			return State(
+				previousStops: state.previousStops,
 				stops: state.stops,
 				status: .loading(string),
 				type: type
 			)
 		case .onStopDidTap:
 			return State(
+				previousStops: state.previousStops,
 				stops: [],
 				status: .idle,
 				type: nil
 			)
-		case .onDataLoaded, .onDataLoadError:
+		case .onDataLoaded, .onDataLoadError,.didRecentStopsUpdated:
 			return state
 		case .onReset(let type):
 			return State(
+				previousStops: state.previousStops,
 				stops: [],
 				status: .idle,
 				type: type

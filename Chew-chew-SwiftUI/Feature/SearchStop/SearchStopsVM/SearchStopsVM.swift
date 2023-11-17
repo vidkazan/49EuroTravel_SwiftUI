@@ -23,6 +23,7 @@ class SearchStopsViewModel : ObservableObject {
 	
 	init() {
 		state = State(
+			previousStops: [],
 			stops: [],
 			status: .idle,
 			type: .departure
@@ -33,7 +34,8 @@ class SearchStopsViewModel : ObservableObject {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenLoadingStops()
+				self.whenLoadingStops(),
+				self.whenUpdatingRecentStops()
 			]
 		)
 		.assign(to: \.state, on: self)

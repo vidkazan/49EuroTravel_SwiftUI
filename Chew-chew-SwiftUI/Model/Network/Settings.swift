@@ -38,6 +38,7 @@ struct ChewSettings : Equatable,Hashable {
 			}
 		}
 	}
+	// TODO: transfer time -Xmin -> Xmin
 	enum TransferTime : Equatable, Hashable {
 		case direct
 		case time(minutes : Int)

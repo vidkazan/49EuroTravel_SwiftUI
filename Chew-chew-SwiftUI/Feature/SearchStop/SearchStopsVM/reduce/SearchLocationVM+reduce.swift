@@ -10,8 +10,26 @@ import Foundation
 extension SearchStopsViewModel {
 	func reduce(_ state:  State, _ event: Event) -> State {
 		print("🔵🔥 >> stops event:",event.description,"state:",state.status.description)
-		
 		switch state.status {
+		case .updatingRecentStops:
+			switch event {
+			case .onSearchFieldDidChanged:
+				return state
+			case .onDataLoaded:
+				return state
+			case .onDataLoadError:
+				return state
+			case .onReset:
+				return state
+			case .onStopDidTap:
+				return state
+			case .didRecentStopsUpdated(let recentStops):
+				return State(
+					previousStops: recentStops,
+					stops: [],
+					status: .idle
+				)
+			}
 		case .idle:
 			return SearchStopsViewModel.reduceIdle(state, event)
 		case .loading:

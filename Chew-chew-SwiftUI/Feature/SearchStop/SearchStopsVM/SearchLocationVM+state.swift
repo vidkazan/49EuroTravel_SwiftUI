@@ -10,6 +10,7 @@ import Foundation
 extension SearchStopsViewModel {
 	
 	struct State : Equatable {
+		var previousStops : [Stop]
 		var stops : [Stop]
 		var status : Status
 		var type : LocationDirectionType?
@@ -22,6 +23,7 @@ extension SearchStopsViewModel {
 		case idle
 		case loading(String)
 		case loaded
+		case updatingRecentStops(Stop)
 		case error(ApiServiceError)
 		
 		var description : String {
@@ -34,6 +36,8 @@ extension SearchStopsViewModel {
 				return "loaded"
 			case .error:
 				return "error"
+			case .updatingRecentStops:
+				return "updatingRecentStops"
 			}
 		}
 	}
@@ -44,6 +48,7 @@ extension SearchStopsViewModel {
 		case onDataLoadError(ApiServiceError)
 		case onReset(LocationDirectionType)
 		case onStopDidTap(Stop, LocationDirectionType)
+		case didRecentStopsUpdated(recentStops : [Stop])
 		
 		
 		var description : String {
@@ -58,6 +63,8 @@ extension SearchStopsViewModel {
 				return "onReset"
 			case .onStopDidTap:
 				return "onStopDidTap"
+			case .didRecentStopsUpdated:
+				return "didRecentStopsUpdated"
 			}
 		}
 	}

@@ -35,7 +35,7 @@ extension SearchStopsView {
 					} else {
 						image
 					}
-				case .idle,.loaded,.error:
+				case .idle,.loaded,.error,.updatingRecentStops:
 					image
 				}
 			})

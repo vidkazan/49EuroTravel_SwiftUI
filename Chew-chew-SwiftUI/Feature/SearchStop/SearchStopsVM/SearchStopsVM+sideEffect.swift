@@ -35,6 +35,25 @@ extension SearchStopsViewModel {
 				.eraseToAnyPublisher()
 		}
 	}
+	
+	func whenUpdatingRecentStops() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			guard case .updatingRecentStops(let stop) = state.status else {
+				return Empty().eraseToAnyPublisher()
+			}
+			var recentStops = state.previousStops
+			
+			if !recentStops.contains(stop) {
+				recentStops.insert(stop, at: 0)
+
+				if recentStops.count > 2 {
+					recentStops.removeLast()
+				}
+			}
+			return Just(Event.didRecentStopsUpdated(recentStops: recentStops))
+				.eraseToAnyPublisher()
+		}
+	}
 }
 
 

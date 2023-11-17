@@ -9,17 +9,26 @@ import SwiftUI
 import CoreLocation
 
 struct SearchStopsView: View {
+	@Environment(\.managedObjectContext) var viewContext
 	@EnvironmentObject  var chewViewModel : ChewViewModel
 	@ObservedObject var searchStopViewModel : SearchStopsViewModel
 	@FocusState	var focusedField : LocationDirectionType?
+	@State var topTextStore : String
+	@State var bottomTextStore : String
 	@State var topText : String
 	@State var bottomText : String
 	init(vm : SearchStopsViewModel) {
 		self.topText = ""
 		self.bottomText = ""
+		self.topTextStore = ""
+		self.bottomTextStore = ""
 		self.searchStopViewModel = vm
 	}
 	
+	// TODO: textField red border if:
+	//	- finished editing text
+	//	- field not empty
+	//	- field not valid
 	var body: some View {
 		VStack(spacing: 5) {
 			// MARK: TopField
@@ -38,7 +47,8 @@ struct SearchStopsView: View {
 				//				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
-				if case .departure = searchStopViewModel.state.type, case .editingDepartureStop=chewViewModel.state.status {
+//				if case .departure = searchStopViewModel.state.type, case .editingDepartureStop=chewViewModel.state.status {
+					if case .editingDepartureStop=chewViewModel.state.status {
 					stopList(type: .departure)
 				}
 			}
@@ -59,10 +69,10 @@ struct SearchStopsView: View {
 					rightButton(type: .arrival)
 				}
 				.background(Color.chewGray10)
-				//				.background(chewViewModel.state.status == .editingArrivalStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
-				if case .arrival = searchStopViewModel.state.type, case .editingArrivalStop=chewViewModel.state.status {
+//				if case .arrival = searchStopViewModel.state.type, case .editingArrivalStop=chewViewModel.state.status {
+				if case .editingArrivalStop=chewViewModel.state.status {
 					stopList(type: .arrival)
 				}
 			}
@@ -70,20 +80,6 @@ struct SearchStopsView: View {
 			.cornerRadius(10)
 			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: searchStopViewModel.state.status)
-		}
-		.toolbar {
-			ToolbarItem(placement: .keyboard) {
-				HStack{
-					Button(action: {
-						chewViewModel.send(event: .onNewDate(chewViewModel.state.timeChooserDate))
-					}, label: {
-						Text("cancel")
-							.tint(.gray)
-					})
-					Spacer()
-				}
-				.background(.clear)
-			}
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
 			topText = state.depStop?.name ?? ""

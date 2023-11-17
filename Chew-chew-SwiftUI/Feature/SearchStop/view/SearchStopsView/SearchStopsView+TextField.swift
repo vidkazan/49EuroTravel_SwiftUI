@@ -40,6 +40,9 @@ extension SearchStopsView {
 						chewViewModel.send(event: .onArrivalEdit)
 					}
 				}
+				.onSubmit {
+					chewViewModel.send(event: .onNewDate(chewViewModel.state.timeChooserDate))
+				}
 			VStack {
 				if focusedField == type && text.count > 0 {
 					Button(action: {

@@ -232,7 +232,7 @@ func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) as
 	let segments =  constructSegmentsFromStopOverData(stopovers: stops)
 	
 	let res = LegViewData(
-		isReachable: leg.reachable ?? true,
+		isReachable: leg.reachable ?? true, // TODO: can not work proreply
 		legType: constructLegType(leg: leg, legs: legs),
 		tripId: leg.tripId ?? "tripIdError",
 		direction: leg.direction ?? "direction",

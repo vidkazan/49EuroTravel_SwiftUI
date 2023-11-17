@@ -20,7 +20,7 @@ extension JourneyListViewModel {
 					print("🟤❌ >> earlierRef is nil")
 					return Just(Event.didFailToLoadEarlierRef(.badUrl)).eraseToAnyPublisher()
 				}
-				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
+				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type,settings: self.settings)
 					.mapError{ $0 }
 					.asyncFlatMap { data in
 						let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
@@ -35,7 +35,7 @@ extension JourneyListViewModel {
 					print("🟤❌ >> laterRef is nil")
 					return Just(Event.didFailToLoadLaterRef(.badUrl)).eraseToAnyPublisher()
 				}
-				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type)
+				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type,settings: self.settings)
 					.mapError{ $0 }
 					.asyncFlatMap { data in
 						let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
@@ -49,19 +49,15 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType) -> AnyPublisher<JourneysContainer,ApiServiceError> {
+	func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneysContainer,ApiServiceError> {
 		var query = addJourneysStopsQuery(dep: dep, arr: arr)
 		query += Query.getQueryItems(methods: [
 			type == .earlierRef ? Query.earlierThan(earlierRef: ref) : Query.laterThan(laterRef: ref),
-			Query.national(icTrains: false),
-			Query.nationalExpress(iceTrains: false),
-			Query.regionalExpress(reTrains: false),
-			Query.pretty(pretyIntend: false),
-			Query.taxi(taxi: false),
 			Query.remarks(showRemarks: true),
 			Query.results(max: 3),
 			Query.stopovers(isShowing: true)
 		])
+		query += self.addJourneysTransportModes(settings: settings)
 		return ApiService.fetchCombine(JourneysContainer.self,query: query, type: ApiService.Requests.journeys, requestGroupId: "")
 	}
 }
