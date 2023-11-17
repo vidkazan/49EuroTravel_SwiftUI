@@ -13,7 +13,7 @@ protocol ChewLocation {
 	var type : LocationType { get }
 }
 
-struct Stop : ChewLocation,Equatable,Identifiable {
+struct Stop : ChewLocation,Equatable,Identifiable, Hashable {
 	let id = UUID()
 	var coordinates: CLLocationCoordinate2D
 	var type: LocationType
