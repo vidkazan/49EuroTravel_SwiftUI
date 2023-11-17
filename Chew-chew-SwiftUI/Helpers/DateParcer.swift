@@ -31,15 +31,15 @@ class DateParcer {
 	static func getTwoDateIntervalInMinutes(date1String : String?,date2String : String?) -> Int? {
 		guard let date1 = parseDate(from: date1String),
 			  let date2 = parseDate(from: date2String) else { return nil }
-		let interval = date1.timeIntervalSinceReferenceDate - date2.timeIntervalSinceReferenceDate
-		return Int(abs(interval / 60))
+		let interval = date2.timeIntervalSinceReferenceDate - date1.timeIntervalSinceReferenceDate
+		return Int((interval / 60))
 	}
 	
 	static func getTwoDateIntervalInMinutes(date1 : Date?,date2 : Date?) -> Int? {
 		guard let date1 = date1,
 			  let date2 = date2 else { return nil }
-		let interval = date1.timeIntervalSinceReferenceDate - date2.timeIntervalSinceReferenceDate
-		return Int(abs(interval / 60))
+		let interval = date2.timeIntervalSinceReferenceDate - date1.timeIntervalSinceReferenceDate
+		return Int((interval / 60))
 	}
 	
 	static func getTwoDateInterval(date1 : Date?,date2 : Date?) -> Double? {
@@ -96,6 +96,10 @@ class DateParcer {
 	
 	static func getTimeStringWithHoursAndMinutesFormat(minutes: Int?) -> String? {
 		guard let minutes = minutes else { return nil }
+		print(minutes)
+		if minutes < 0 {
+			return "0 min"
+		}
 		let hours = minutes / 60
 		let remainingMinutes = minutes % 60
 		
