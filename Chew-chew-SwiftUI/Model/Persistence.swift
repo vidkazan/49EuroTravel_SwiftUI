@@ -15,9 +15,9 @@ struct PersistenceController {
 	let result = PersistenceController(inMemory: true)
 	let viewContext = result.container.viewContext
 	  
-	let item = Item(context: result.container.viewContext)
-	item.timestamp = .distantPast
-	  
+	let user = ChewUser(context: result.container.viewContext)
+	user.timestamp = .distantPast
+
 	do {
 	  try viewContext.save()
 	} catch {
@@ -30,7 +30,7 @@ struct PersistenceController {
   let container: NSPersistentContainer
 
   init(inMemory: Bool = false) {
-	container = NSPersistentContainer(name: "CoreDataTest")
+	container = NSPersistentContainer(name: "ChewDataModel")
 		if inMemory {
 			container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
 		}
@@ -39,9 +39,5 @@ struct PersistenceController {
 				fatalError("Unresolved error \(error), \(error.userInfo)")
 			}
 		}
-		container.viewContext.automaticallyMergesChangesFromParent = true
-
-//		container.viewContext.name = "viewContext"
-//		container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
 	}
 }
