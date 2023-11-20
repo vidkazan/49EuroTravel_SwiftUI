@@ -17,7 +17,7 @@ class SearchStopsViewModel : ObservableObject {
 	@FocusState	 var textBottomFieldIsFocused: Bool
 	@Published private(set) var state : State {
 		didSet {
-			print("🔵 >> stops state:",state.status.description,state.type ?? "nil")
+			print("🔵 >> stops ",state.type ?? "nil","state:",state.status.description)
 		}
 	}
 	

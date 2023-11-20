@@ -10,8 +10,16 @@ import SwiftUI
 
 extension SearchStopsView {
 	func stopList(type : LocationDirectionType) -> some View {
+		let recentStops = searchStopViewModel.state.previousStops.filter{ stop in
+			switch type {
+			   case .departure:
+				   return stop.name.hasPrefix(topText)
+			   case .arrival:
+				   return stop.name.hasPrefix(bottomText)
+			   }
+		   }.prefix(2)
 		return VStack {
-			ForEach(searchStopViewModel.state.previousStops) { stop in
+			ForEach(recentStops) { stop in
 				HStack(alignment: .center) {
 					Button(action: {
 						switch type {
@@ -41,8 +49,8 @@ extension SearchStopsView {
 			}
 			switch searchStopViewModel.state.status {
 			case .loaded,.updatingRecentStops:
-				if searchStopViewModel.state.previousStops.count > 0,
-				   searchStopViewModel.state.stops.count > 0 {
+				if !recentStops.isEmpty,
+				   !searchStopViewModel.state.stops.isEmpty {
 					Divider()
 				}
 				ScrollView {

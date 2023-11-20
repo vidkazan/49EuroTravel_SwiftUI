@@ -13,16 +13,12 @@ struct SearchStopsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
 	@ObservedObject var searchStopViewModel : SearchStopsViewModel
 	@FocusState	var focusedField : LocationDirectionType?
-	@State var topTextStore : String
-	@State var bottomTextStore : String
 	@State var topText : String
 	@State var bottomText : String
 	@State var fieldRedBorder : LocationDirectionType? = nil
 	init(vm : SearchStopsViewModel) {
 		self.topText = ""
 		self.bottomText = ""
-		self.topTextStore = ""
-		self.bottomTextStore = ""
 		self.searchStopViewModel = vm
 	}
 	
