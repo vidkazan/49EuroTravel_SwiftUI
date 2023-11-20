@@ -43,12 +43,19 @@ extension ChewViewModel {
 					timeChooserDate: state.timeChooserDate,
 					status: .idle
 				)
+			case .onDatePickerDidPressed:
+				return State(
+					depStop: state.depStop,
+					arrStop: state.arrStop,
+					settings: state.settings,
+					timeChooserDate: state.timeChooserDate,
+					status: .datePicker
+				)
 			case
 					.onDepartureEdit,
 					.onArrivalEdit,
 					.onStopsSwitch,
 					.didSetBothLocations,
-					.onDatePickerDidPressed,
 					.onNewDate,
 					.didTapSettings,
 					.onNewDeparture,

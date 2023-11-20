@@ -82,8 +82,8 @@ struct ContentView: View {
 				.navigationBarTitle("")
 				.navigationBarHidden(true)
 				.transition(.move(edge: .bottom))
-				.animation(.spring(), value: chewViewModel.state.status)
-				.animation(.spring(), value: chewViewModel.searchStopsViewModel.state)
+				.animation(.spring().speed(2), value: chewViewModel.state.status)
+				.animation(.spring().speed(2), value: chewViewModel.searchStopsViewModel.state)
 			}
 			}
 			.onAppear {
