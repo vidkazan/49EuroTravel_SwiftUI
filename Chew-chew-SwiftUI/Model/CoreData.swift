@@ -9,6 +9,7 @@ import CoreData
 
 extension Location {
 	static func createWith(stop : Stop,using managedObjectContext: NSManagedObjectContext) {
+		
 		let location = Location(context: managedObjectContext)
 		location.id = stop.id
 		location.address = stop.stopDTO?.address

@@ -69,7 +69,6 @@ struct SearchStopsView: View {
 					rightButton(type: .arrival)
 				}
 				.background(Color.chewGray10)
-//				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
 				.overlay(
 					RoundedRectangle(cornerRadius: 10)
