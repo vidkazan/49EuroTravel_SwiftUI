@@ -32,6 +32,9 @@
 		7D1AD8EC2AE94A7500868056 /* GeoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1AD8EB2AE94A7500868056 /* GeoDTO.swift */; };
 		7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E4492A98F9800037C3E1 /* LegsView.swift */; };
 		7D23E44C2A98FD700037C3E1 /* LegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E44B2A98FD700037C3E1 /* LegView.swift */; };
+		7D2CAF642B0BEA0200577FD4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */; };
+		7D2CAF662B0BEAC000577FD4 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2CAF652B0BEAC000577FD4 /* Persistence.swift */; };
+		7D2CAF682B0BEAE500577FD4 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D2CAF672B0BEAE500577FD4 /* CoreData.swift */; };
 		7D345E4A2AE95E7C003CA948 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E492AE95E7C003CA948 /* Settings.swift */; };
 		7D345E4C2AE97FC8003CA948 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E4B2AE97FC8003CA948 /* SettingsView.swift */; };
 		7D3E5F012AB321580064213A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3E5F002AB321580064213A /* LocationManager.swift */; };
@@ -96,7 +99,6 @@
 		7D7B3DAE2AB9D3620070E44D /* LegDetailsVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DAD2AB9D3620070E44D /* LegDetailsVM+reduce.swift */; };
 		7D7B3DB02AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DAF2AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift */; };
 		7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81AB252A978CDC0055AEAF /* DatePickerView.swift */; };
-		7D8E31C52AF7CB41004FE18B /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D8E31C32AF7CB41004FE18B /* Model.xcdatamodeld */; };
 		7D942A092AD9578800301666 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942A082AD9578800301666 /* Location.swift */; };
 		7D9E10872AA6752B00820B92 /* SearchStopsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E10862AA6752B00820B92 /* SearchStopsView.swift */; };
 		7D9E10932AA77E0B00820B92 /* SearchStopsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E10922AA77E0B00820B92 /* SearchStopsVM.swift */; };
@@ -165,6 +167,9 @@
 		7D1AD8EB2AE94A7500868056 /* GeoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDTO.swift; sourceTree = "<group>"; };
 		7D23E4492A98F9800037C3E1 /* LegsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegsView.swift; sourceTree = "<group>"; };
 		7D23E44B2A98FD700037C3E1 /* LegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegView.swift; sourceTree = "<group>"; };
+		7D2CAF632B0BEA0200577FD4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		7D2CAF652B0BEAC000577FD4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		7D2CAF672B0BEAE500577FD4 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		7D345E492AE95E7C003CA948 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 		7D345E4B2AE97FC8003CA948 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7D3E5F002AB321580064213A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -233,7 +238,6 @@
 		7D7B3DAD2AB9D3620070E44D /* LegDetailsVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsVM+reduce.swift"; sourceTree = "<group>"; };
 		7D7B3DAF2AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsVM+sideEffects.swift"; sourceTree = "<group>"; };
 		7D81AB252A978CDC0055AEAF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
-		7D8E31C42AF7CB41004FE18B /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7D942A082AD9578800301666 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7D9E10862AA6752B00820B92 /* SearchStopsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStopsView.swift; sourceTree = "<group>"; };
 		7D9E10922AA77E0B00820B92 /* SearchStopsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStopsVM.swift; sourceTree = "<group>"; };
@@ -318,6 +322,8 @@
 				7D02CE0F2A97E4100048ADE6 /* ViewData.swift */,
 				7DBF1E582ABC522E009B85EF /* Badges.swift */,
 				7D942A082AD9578800301666 /* Location.swift */,
+				7D2CAF672B0BEAE500577FD4 /* CoreData.swift */,
+				7D2CAF652B0BEAC000577FD4 /* Persistence.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -466,7 +472,7 @@
 				7D462D552AACD1E000BC0D65 /* Feature */,
 				7D02CE0C2A97E38B0048ADE6 /* Model */,
 				7D6734B82A96334C00CBE9C1 /* Preview Content */,
-				7D8E31C32AF7CB41004FE18B /* Model.xcdatamodeld */,
+				7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */,
 			);
 			path = "Chew-chew-SwiftUI";
 			sourceTree = "<group>";
@@ -873,9 +879,11 @@
 				7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */,
 				7DA8852A2ACF23F400263DB6 /* PrintThread.swift in Sources */,
 				7DE640FB2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift in Sources */,
+				7D2CAF662B0BEAC000577FD4 /* Persistence.swift in Sources */,
 				7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */,
 				7D7B3DAA2AB9D31D0070E44D /* LegDetailsVM.swift in Sources */,
 				7D462D622AACEE2500BC0D65 /* constructJourneys+Leg.swift in Sources */,
+				7D2CAF682B0BEAE500577FD4 /* CoreData.swift in Sources */,
 				7D02CE132A97E4700048ADE6 /* DateParcer.swift in Sources */,
 				7DBF1E592ABC522E009B85EF /* Badges.swift in Sources */,
 				7D53705C2ACED7300009BA20 /* PlannedActual.swift in Sources */,
@@ -923,9 +931,9 @@
 				7D02CE102A97E4100048ADE6 /* ViewData.swift in Sources */,
 				7D7A55322AA4A27C000256EF /* JourneyListViewModel.swift in Sources */,
 				7D4208CB2AE122FF003D9BFB /* FullLegView.swift in Sources */,
+				7D2CAF642B0BEA0200577FD4 /* Model.xcdatamodeld in Sources */,
 				7D7B3DB02AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift in Sources */,
 				7D000CFB2AB87ACD00566120 /* NavigationLazyView.swift in Sources */,
-				7D8E31C52AF7CB41004FE18B /* Model.xcdatamodeld in Sources */,
 				7D000CF32AB86AD700566120 /* JourneyListViewModel+sideEffects+loadingJourneys.swift in Sources */,
 				7D6C5C332AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift in Sources */,
 				7D6C5C2F2AAF792200DEFC57 /* JourneyDetailsVM+state.swift in Sources */,
@@ -1344,12 +1352,12 @@
 /* End XCSwiftPackageProductDependency section */
 
 /* Begin XCVersionGroup section */
-		7D8E31C32AF7CB41004FE18B /* Model.xcdatamodeld */ = {
+		7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				7D8E31C42AF7CB41004FE18B /* Model.xcdatamodel */,
+				7D2CAF632B0BEA0200577FD4 /* Model.xcdatamodel */,
 			);
-			currentVersion = 7D8E31C42AF7CB41004FE18B /* Model.xcdatamodel */;
+			currentVersion = 7D2CAF632B0BEA0200577FD4 /* Model.xcdatamodel */;
 			path = Model.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;

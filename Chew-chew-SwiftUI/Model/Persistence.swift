@@ -30,7 +30,7 @@ struct PersistenceController {
   let container: NSPersistentContainer
 
   init(inMemory: Bool = false) {
-	container = NSPersistentContainer(name: "ChewDataModel")
+	container = NSPersistentContainer(name: "Model")
 		if inMemory {
 			container.persistentStoreDescriptions.first!.url = URL(fileURLWithPath: "/dev/null")
 		}
