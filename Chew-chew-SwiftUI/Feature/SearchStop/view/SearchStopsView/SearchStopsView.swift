@@ -17,6 +17,7 @@ struct SearchStopsView: View {
 	@State var bottomTextStore : String
 	@State var topText : String
 	@State var bottomText : String
+	@State var fieldRedBorder : LocationDirectionType? = nil
 	init(vm : SearchStopsViewModel) {
 		self.topText = ""
 		self.bottomText = ""
@@ -47,8 +48,11 @@ struct SearchStopsView: View {
 				//				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
-//				if case .departure = searchStopViewModel.state.type, case .editingDepartureStop=chewViewModel.state.status {
-					if case .editingDepartureStop=chewViewModel.state.status {
+				.overlay(
+					RoundedRectangle(cornerRadius: 10)
+						.stroke(fieldRedBorder == .departure ? .red : .clear, lineWidth: 1.5)
+				)
+				if case .editingDepartureStop=chewViewModel.state.status {
 					stopList(type: .departure)
 				}
 			}
@@ -69,9 +73,12 @@ struct SearchStopsView: View {
 					rightButton(type: .arrival)
 				}
 				.background(Color.chewGray10)
-				.animation(.spring(), value: chewViewModel.state.status)
+//				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
-//				if case .arrival = searchStopViewModel.state.type, case .editingArrivalStop=chewViewModel.state.status {
+				.overlay(
+					RoundedRectangle(cornerRadius: 10)
+						.stroke(fieldRedBorder == .arrival ? .red : .clear, lineWidth: 1.5)
+				)
 				if case .editingArrivalStop=chewViewModel.state.status {
 					stopList(type: .arrival)
 				}
@@ -82,16 +89,28 @@ struct SearchStopsView: View {
 			.animation(.spring(), value: searchStopViewModel.state.status)
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
-			topText = state.depStop?.name ?? ""
-			bottomText = state.arrStop?.name ?? ""
-			if let type = searchStopViewModel.state.type {
-				searchStopViewModel.send(event: .onReset(type))
+			fieldRedBorder = nil
+			if let dep = chewViewModel.state.depStop {
+				topText = dep.name
+			} else if !topText.isEmpty, state.status != .editingDepartureStop {
+				fieldRedBorder = .departure
 			}
+			if let arr = chewViewModel.state.arrStop {
+				bottomText = arr.name
+			} else if !bottomText.isEmpty, state.status != .editingArrivalStop {
+				fieldRedBorder = .arrival
+			}
+			
+//			if let type = searchStopViewModel.state.type {
+//				searchStopViewModel.send(event: .onReset(type))
+//			}
 			switch state.status {
 			case .editingDepartureStop:
 				focusedField =  .departure
+				topText = ""
 			case .editingArrivalStop:
 				focusedField =  .arrival
+				bottomText = ""
 			default:
 				focusedField = nil
 			}

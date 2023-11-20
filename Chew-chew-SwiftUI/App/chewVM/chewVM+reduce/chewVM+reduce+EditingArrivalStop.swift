@@ -15,7 +15,7 @@ extension ChewViewModel {
 			return state
 		case .onDepartureEdit:
 			return State(
-				depStop: nil,
+				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
