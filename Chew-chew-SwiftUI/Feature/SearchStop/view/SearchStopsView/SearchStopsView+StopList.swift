@@ -10,7 +10,7 @@ import SwiftUI
 
 extension SearchStopsView {
 	func stopList(type : LocationDirectionType) -> some View {
-		let recentStops = searchStopViewModel.state.previousStops.filter{ stop in
+		let recentStops = searchStopViewModel.state.previousStops.filter { stop in
 			switch type {
 			   case .departure:
 				   return stop.name.hasPrefix(topText)
@@ -22,14 +22,6 @@ extension SearchStopsView {
 			ForEach(recentStops) { stop in
 				HStack(alignment: .center) {
 					Button(action: {
-						if searchStopViewModel.state.previousStops.first(
-							where: { elem in
-								return elem == stop
-							}
-						) == nil {
-							print("write")
-							Location.createWith(stop: stop, using: viewContext)
-						}
 						switch type {
 						case .departure:
 							chewViewModel.send(event: .onNewDeparture(stop))
@@ -65,6 +57,9 @@ extension SearchStopsView {
 						ForEach(searchStopViewModel.state.stops) { stop in
 							HStack(alignment: .center) {
 								Button(action: {
+									if !searchStopViewModel.state.previousStops.contains(stop) {
+										Location.createWith(stop: stop, using: viewContext)
+									}
 									switch type {
 									case .departure:
 										chewViewModel.send(event: .onNewDeparture(stop))
@@ -73,7 +68,6 @@ extension SearchStopsView {
 										chewViewModel.send(event: .onNewArrival(stop))
 										searchStopViewModel.send(event: .onStopDidTap(stop, type))
 									}
-									Location.createWith(stop: stop, using: viewContext)
 								}, label: {
 									switch stop.type {
 									case .stop:

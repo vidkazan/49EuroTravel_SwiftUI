@@ -32,6 +32,9 @@ extension ChewViewModel {
 				return Just(Event.didLoadInitialData(nil))
 					.eraseToAnyPublisher()
 			}
+			if let stops = Location.basicFetchRequest(context: context) {
+				self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
+			}
 			self.user = user
 			return Just(Event.didLoadInitialData(user))
 				.eraseToAnyPublisher()

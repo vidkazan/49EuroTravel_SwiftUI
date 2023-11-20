@@ -25,9 +25,15 @@ extension SearchStopsViewModel {
 				status: .idle,
 				type: type
 			)
+		case .didRecentStopsUpdated(recentStops: let stops):
+			return State(
+				previousStops: stops,
+				stops: state.stops,
+				status: .idle,
+				type: state.type
+			)
 		case
 				.onDataLoaded,
-				.didRecentStopsUpdated,
 				.onDataLoadError,
 				.onStopDidTap:
 			return state

@@ -6,17 +6,19 @@
 //
 
 import CoreData
+import CoreLocation
 
 extension Location {
 	static func createWith(stop : Stop,using managedObjectContext: NSManagedObjectContext) {
-		
 		let location = Location(context: managedObjectContext)
 		location.id = stop.id
+		location.api_id = stop.stopDTO?.id
 		location.address = stop.stopDTO?.address
 		location.latitude = stop.coordinates.latitude
 		location.longitude = stop.coordinates.longitude
 		location.name = stop.name
 		location.type = stop.type.rawValue
+
 		do {
 			try managedObjectContext.save()
 		} catch {
@@ -24,6 +26,49 @@ extension Location {
 			print("🔴 > save Location: fialed to create Location", nserror.localizedDescription)
 		}
 	}
+	
+	static func basicFetchRequest(context : NSManagedObjectContext) -> [Stop]? {
+		if let res = fetch(context: context)  {
+			let stops = res.map { elem in
+				let type = LocationType(rawValue: elem.type)
+				return Stop(
+					coordinates: CLLocationCoordinate2D(
+						latitude: elem.latitude,
+						longitude: elem.longitude
+					),
+					type: type ?? LocationType.location,
+					stopDTO: StopDTO(
+						type: nil,
+						id: elem.api_id,
+						name: elem.name,
+						address: elem.address,
+						location: nil,
+						latitude: elem.latitude,
+						longitude: elem.longitude,
+						poi: LocationType.pointOfInterest == type,
+						products: nil
+					)
+				)
+			}
+			return stops
+		}
+		return nil
+	}
+	
+	static private func fetch(context : NSManagedObjectContext) -> [Location]? {
+		do {
+			let res = try context.fetch(.init(entityName: "Location")) as? [Location]
+			if let res = res {
+				return res
+			}
+			print("🔴 > basicFetchRequest Location: context.fetch: result is empty")
+			return nil
+		} catch {
+			print("🔴 > basicFetchRequest Location: context.fetch error")
+			return nil
+		}
+	}
+	
 }
 
 // MARK: DataProperties
@@ -66,10 +111,10 @@ extension ChewUser {
 			if let res = res {
 				return res
 			}
-			print("🔴 > basicFetchRequest: context.fetch: result is empty")
+			print("🔴 > basicFetchRequest User: context.fetch: result is empty")
 			return nil
 		} catch {
-			print("🔴 > basicFetchRequest: context.fetch error")
+			print("🔴 > basicFetchRequest User: context.fetch error")
 			return nil
 		}
 	}

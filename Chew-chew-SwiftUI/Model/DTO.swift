@@ -178,7 +178,6 @@ enum LocationType : Int16, Equatable, Hashable {
 	case pointOfInterest
 	case location
 	case stop
-	
 }
 
 struct StopDTO : Codable, Identifiable, Equatable,Hashable {

@@ -45,10 +45,6 @@ extension SearchStopsViewModel {
 			
 			if !recentStops.contains(stop) {
 				recentStops.insert(stop, at: 0)
-
-//				if recentStops.count > 2 {
-//					recentStops.removeLast()
-//				}
 			}
 			return Just(Event.didRecentStopsUpdated(recentStops: recentStops))
 				.eraseToAnyPublisher()

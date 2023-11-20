@@ -8,7 +8,6 @@
 import Foundation
 
 extension SearchStopsViewModel {
-	
 	struct State : Equatable {
 		var previousStops : [Stop]
 		var stops : [Stop]

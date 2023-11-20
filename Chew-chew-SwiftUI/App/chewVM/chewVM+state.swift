@@ -15,7 +15,7 @@ extension ChewViewModel {
 		case specificDate(Date)
 		
 		var date : Date {
-			switch self{
+			switch self {
 			case .now:
 				return .now
 			case .specificDate(let date):
