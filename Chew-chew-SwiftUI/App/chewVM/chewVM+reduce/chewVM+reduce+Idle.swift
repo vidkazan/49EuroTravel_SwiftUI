@@ -114,7 +114,15 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .settings
 			)
-		case .didUpdateSettings,.didLoadInitialData,.didStartViewAppear:
+		case .didUpdateSettings(let settings):
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				settings: settings,
+				timeChooserDate: state.timeChooserDate,
+				status: state.status
+			)
+		case.didLoadInitialData,.didStartViewAppear:
 			return state
 		}
 	}
