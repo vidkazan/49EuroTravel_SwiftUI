@@ -11,7 +11,7 @@ import SwiftUI
 
 
 extension SearchStopsView {
-	
+
 	func stopList(type : LocationDirectionType) -> some View {
 		let recentStops = searchStopViewModel.state.previousStops.filter { stop in
 			switch type {

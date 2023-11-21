@@ -22,7 +22,7 @@ struct ChewSettings : Equatable,Hashable {
 //			self.value = value
 //		}
 //	}
-	enum TransportMode : Equatable, Hashable {
+	enum TransportMode : Int, Equatable, Hashable {
 		case deutschlandTicket
 		case all
 		case custom

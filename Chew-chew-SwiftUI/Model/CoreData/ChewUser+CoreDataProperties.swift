@@ -9,13 +9,14 @@
 import Foundation
 import CoreData
 
+extension ChewUser {
+	@NSManaged public var timestamp: Date?
+	@NSManaged public var recentLocations: [Location]
+	@NSManaged public var settings: Settings
+	@NSManaged public var savedJourneys: [SavedJourney]
+}
 
 extension ChewUser {
-	
-	@nonobjc public class func fetchRequest() -> NSFetchRequest<ChewUser> {
-		return NSFetchRequest<ChewUser>(entityName: "ChewUser")
-	}
-	
 	static func updateWith(date : Date,using managedObjectContext: NSManagedObjectContext, user : ChewUser?) {
 		guard let user = user else {return}
 		user.timestamp = date
@@ -61,8 +62,39 @@ extension ChewUser {
 			return nil
 		}
 	}
-	@NSManaged public var timestamp: Date?
-	@NSManaged public var recentLocations: [Location]
-	@NSManaged public var savedJourneys: [SavedJourney]
-	
+}
+
+
+// MARK: Generated accessors for recentLocations
+extension ChewUser {
+
+	@objc(addRecentLocationsObject:)
+	@NSManaged public func addToRecentLocations(_ value: Location)
+
+	@objc(removeRecentLocationsObject:)
+	@NSManaged public func removeFromRecentLocations(_ value: Location)
+
+	@objc(addRecentLocations:)
+	@NSManaged public func addToRecentLocations(_ values: NSSet)
+
+	@objc(removeRecentLocations:)
+	@NSManaged public func removeFromRecentLocations(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for savedJourneys
+extension ChewUser {
+
+	@objc(addSavedJourneysObject:)
+	@NSManaged public func addToSavedJourneys(_ value: SavedJourney)
+
+	@objc(removeSavedJourneysObject:)
+	@NSManaged public func removeFromSavedJourneys(_ value: SavedJourney)
+
+	@objc(addSavedJourneys:)
+	@NSManaged public func addToSavedJourneys(_ values: NSSet)
+
+	@objc(removeSavedJourneys:)
+	@NSManaged public func removeFromSavedJourneys(_ values: NSSet)
+
 }

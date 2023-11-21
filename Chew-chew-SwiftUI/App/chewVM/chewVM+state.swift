@@ -90,7 +90,7 @@ extension ChewViewModel {
 	
 	enum Event {
 		case didStartViewAppear(NSManagedObjectContext)
-		case didLoadInitialData(ChewUser?)
+		case didLoadInitialData(ChewUser?,ChewSettings)
 		
 		case onDepartureEdit
 		case onArrivalEdit

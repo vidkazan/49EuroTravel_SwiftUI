@@ -70,11 +70,11 @@ extension ChewViewModel {
 			}
 		case .loadingInitialData:
 			switch event {
-			case .didLoadInitialData:
+			case .didLoadInitialData(_, let settings):
 				return State(
 					depStop: nil,
 					arrStop: nil,
-					settings: ChewSettings(),
+					settings: settings,
 					// MARK: set timePicker default date here
 					timeChooserDate: .now,
 					status: .idle

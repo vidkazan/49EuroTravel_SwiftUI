@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ChewUser" representedClassName="ChewUser" syncable="YES">
-        <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="user" inverseEntity="Location"/>
         <relationship name="savedJourneys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="user" inverseEntity="SavedJourney"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="user" inverseEntity="Settings"/>
@@ -24,15 +24,24 @@
         <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyDep" inverseEntity="Location"/>
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="savedJourneys" inverseEntity="ChewUser"/>
     </entity>
-    <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
-        <attribute name="isWithTransfers" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+    <entity name="Settings" representedClassName="Settings" syncable="YES">
+        <attribute name="isWithTransfers" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="transportModes" toMany="YES" deletionRule="Nullify" destinationEntity="TransportMode" inverseName="modes" inverseEntity="TransportMode"/>
+        <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TransportModes" inverseName="settings" inverseEntity="TransportModes"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="settings" inverseEntity="ChewUser"/>
     </entity>
-    <entity name="TransportMode" representedClassName="TransportMode" syncable="YES" codeGenerationType="class">
-        <attribute name="mode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="modes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="transportModes" inverseEntity="Settings"/>
+    <entity name="TransportModes" representedClassName="TransportModes" syncable="YES">
+        <attribute name="bus" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="ferry" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="national" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="nationalExpress" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="regional" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="regionalExpress" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="suburban" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="subway" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="taxi" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="tram" attributeType="Boolean" usesScalarValueType="YES"/>
+        <relationship name="settings" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="transportModes" inverseEntity="Settings"/>
     </entity>
 </model>

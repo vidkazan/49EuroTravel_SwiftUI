@@ -10,6 +10,18 @@ import Foundation
 import CoreData
 import CoreLocation
 
+extension Location {
+	@NSManaged public var address: String?
+	@NSManaged public var api_id: String?
+	@NSManaged public var id: UUID
+	@NSManaged public var latitude: Double
+	@NSManaged public var longitude: Double
+	@NSManaged public var name: String
+	@NSManaged public var type: Int16
+	
+	@NSManaged public var savedJourneyDeparture: SavedJourney
+	@NSManaged public var user: ChewUser
+}
 
 extension Location {
 	static func createWith(user : ChewUser?,stop : Stop,using managedObjectContext: NSManagedObjectContext) {
@@ -31,7 +43,7 @@ extension Location {
 			try managedObjectContext.save()
 		} catch {
 			let nserror = error as NSError
-			print("🔴 > save Location: fialed to create Location", nserror.localizedDescription)
+			print("🔴 > save Location: fialed to create Location: ", nserror.localizedDescription)
 		}
 	}
 	
@@ -76,16 +88,4 @@ extension Location {
 			return nil
 		}
 	}
-    @NSManaged public var address: String?
-    @NSManaged public var api_id: String?
-    @NSManaged public var id: UUID?
-    @NSManaged public var latitude: Double
-    @NSManaged public var longitude: Double
-    @NSManaged public var name: String?
-    @NSManaged public var type: Int16
-    @NSManaged public var savedJourneyDeparture: SavedJourney?
-    @NSManaged public var user: ChewUser?
-	
-	
-
 }

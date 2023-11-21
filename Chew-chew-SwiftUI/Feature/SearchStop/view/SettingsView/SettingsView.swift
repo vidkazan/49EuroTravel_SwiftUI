@@ -9,19 +9,20 @@ import Foundation
 import SwiftUI
 
 struct SettingsView: View {
+	@EnvironmentObject  var chewViewModel : ChewViewModel
+	@Environment(\.managedObjectContext) var viewContext
+	
 	let arr = [0,5,7,10,15,20,30,45,60,90,120]
-	@ObservedObject var chewVM : ChewViewModel
 	@State var transportModeSegment : Int
 	let allTypes : [LineType] = LineType.allCases
 	@State var selectedTypes = Set<LineType>()
 	@State var transferTime : Int
 	@State var showWithTransfers : Int
+	let oldSettings : ChewSettings
 	init(
-		chewVM: ChewViewModel,
 		settings : ChewSettings
 	) {
-		
-		self.chewVM = chewVM
+		self.oldSettings = settings
 		self.transportModeSegment = settings.transportMode.id
 		self.selectedTypes = settings.customTransferModes
 		
@@ -111,6 +112,20 @@ struct SettingsView: View {
 				Text("Connections")
 			})
 		}
+		.onChange(of: chewViewModel.state, perform: { state in
+			let settings = state.settings
+			self.transportModeSegment = settings.transportMode.id
+			self.selectedTypes = settings.customTransferModes
+			
+			switch settings.transferTime {
+			case .direct:
+				self.showWithTransfers = 0
+				self.transferTime = 0
+			case .time(minutes: let minutes):
+				self.showWithTransfers = 1
+				self.transferTime = minutes
+			}
+		})
 		.onDisappear {
 			let transportMode = {
 				switch self.transportModeSegment {
@@ -146,7 +161,10 @@ struct SettingsView: View {
 				startWithWalking: true,
 				withBicycle: false
 			)
-			chewVM.send(event: .didUpdateSettings(res))
+			chewViewModel.send(event: .didUpdateSettings(res))
+			if res != oldSettings {
+				Settings.createWith(newSettings: res, in: chewViewModel.user, using: viewContext)
+			}
 		}
 	}
 	struct DTicketLabel: View {

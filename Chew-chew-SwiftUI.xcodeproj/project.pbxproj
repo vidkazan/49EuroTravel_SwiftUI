@@ -110,6 +110,10 @@
 		7DA8852A2ACF23F400263DB6 /* PrintThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA885292ACF23F400263DB6 /* PrintThread.swift */; };
 		7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */; };
 		7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3492A9A118E005DF550 /* BadgesView.swift */; };
+		7DAE1F6A2B0D26CF0097AAD8 /* Settings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F662B0D26CF0097AAD8 /* Settings+CoreDataClass.swift */; };
+		7DAE1F6B2B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */; };
+		7DAE1F6C2B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */; };
+		7DAE1F6D2B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F692B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift */; };
 		7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */; };
 		7DAF62AF2A9E5494006F1A17 /* JourneyScrollViewLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */; };
 		7DAF62B12A9E54E3006F1A17 /* JourneyScrollViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */; };
@@ -254,6 +258,10 @@
 		7DA885292ACF23F400263DB6 /* PrintThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintThread.swift; sourceTree = "<group>"; };
 		7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		7DA8D3492A9A118E005DF550 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
+		7DAE1F662B0D26CF0097AAD8 /* Settings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransportMode+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7DAE1F692B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransportMode+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewHeader.swift; sourceTree = "<group>"; };
 		7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewLoader.swift; sourceTree = "<group>"; };
 		7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewFooter.swift; sourceTree = "<group>"; };
@@ -631,11 +639,11 @@
 		7D9BB1052B0CBF3B008A3616 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				7D9BB1062B0CBF53008A3616 /* Location+CoreDataClass.swift */,
+				7DAE1F6E2B0D26E40097AAD8 /* classes */,
+				7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */,
+				7DAE1F692B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift */,
 				7D9BB1072B0CBF53008A3616 /* Location+CoreDataProperties.swift */,
-				7D9BB1082B0CBF53008A3616 /* SavedJourney+CoreDataClass.swift */,
 				7D9BB1092B0CBF53008A3616 /* SavedJourney+CoreDataProperties.swift */,
-				7D9BB10A2B0CBF53008A3616 /* ChewUser+CoreDataClass.swift */,
 				7D9BB10B2B0CBF54008A3616 /* ChewUser+CoreDataProperties.swift */,
 			);
 			path = CoreData;
@@ -690,6 +698,18 @@
 				7D9E10902AA77CC200820B92 /* SearchStopsVM */,
 			);
 			path = SearchStop;
+			sourceTree = "<group>";
+		};
+		7DAE1F6E2B0D26E40097AAD8 /* classes */ = {
+			isa = PBXGroup;
+			children = (
+				7DAE1F662B0D26CF0097AAD8 /* Settings+CoreDataClass.swift */,
+				7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */,
+				7D9BB1062B0CBF53008A3616 /* Location+CoreDataClass.swift */,
+				7D9BB1082B0CBF53008A3616 /* SavedJourney+CoreDataClass.swift */,
+				7D9BB10A2B0CBF53008A3616 /* ChewUser+CoreDataClass.swift */,
+			);
+			path = classes;
 			sourceTree = "<group>";
 		};
 		7DAF62B42A9E5833006F1A17 /* DatePickerView */ = {
@@ -909,6 +929,7 @@
 				7D02CE132A97E4700048ADE6 /* DateParcer.swift in Sources */,
 				7DBF1E592ABC522E009B85EF /* Badges.swift in Sources */,
 				7D53705C2ACED7300009BA20 /* PlannedActual.swift in Sources */,
+				7DAE1F6C2B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift in Sources */,
 				7D6C5C252AAF4B1300DEFC57 /* chewVM+reduce+Idle.swift in Sources */,
 				7D462D542AAC972200BC0D65 /* SearchStopsView+StopList.swift in Sources */,
 				7D1AD8EC2AE94A7500868056 /* GeoDTO.swift in Sources */,
@@ -929,6 +950,7 @@
 				7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */,
 				7D9BB10F2B0CBF54008A3616 /* SavedJourney+CoreDataProperties.swift in Sources */,
 				7D462D4B2AAC948700BC0D65 /* JourneyListViewModel+reduce+JourneysLoaded.swift in Sources */,
+				7DAE1F6A2B0D26CF0097AAD8 /* Settings+CoreDataClass.swift in Sources */,
 				7DE727C92AD93955002FF033 /* ApiServiceCombine.swift in Sources */,
 				7D6C5C1B2AAF495B00DEFC57 /* chewVM+reduce.swift in Sources */,
 				7D740CC92AEA79C800E9FFD4 /* Set+Toogle.swift in Sources */,
@@ -983,6 +1005,7 @@
 				7D7B3DAE2AB9D3620070E44D /* LegDetailsVM+reduce.swift in Sources */,
 				7D02CE302A97E96E0048ADE6 /* BadgeView.swift in Sources */,
 				7D4B1B972AA8FDDB0096F372 /* SearchStopsVM+sideEffect.swift in Sources */,
+				7DAE1F6D2B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift in Sources */,
 				7D6C5C162AAF485F00DEFC57 /* chewVM+sideEffect.swift in Sources */,
 				7D6C5C212AAF4AE100DEFC57 /* chewVM+reduce+EditingDepartureStop.swift in Sources */,
 				7D3E5F012AB321580064213A /* LocationManager.swift in Sources */,
@@ -992,6 +1015,7 @@
 				7D02CE252A97E6620048ADE6 /* Errors.swift in Sources */,
 				7D740CC72AEA796B00E9FFD4 /* SettingsView+Transfer.swift in Sources */,
 				7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */,
+				7DAE1F6B2B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift in Sources */,
 				7D9BB1112B0CBF54008A3616 /* ChewUser+CoreDataProperties.swift in Sources */,
 				7D000CF72AB86BA500566120 /* JourneyListViewModel+sideEffects+loadingJourneysRef.swift in Sources */,
 				7DE727C62AD93869002FF033 /* JourneyFollowRideView.swift in Sources */,

@@ -28,15 +28,50 @@ extension ChewViewModel {
 	func whenLoadingInitialData() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingInitialData(viewContext: let context) = state.status else { return Empty().eraseToAnyPublisher() }
+			
 			guard let user = ChewUser.basicFetchRequest(context: context) else {
-				return Just(Event.didLoadInitialData(nil))
+				print("whenLoadingInitialData: user is nil")
+				return Just(Event.didLoadInitialData(nil,ChewSettings()))
 					.eraseToAnyPublisher()
 			}
+			
 			if let stops = Location.basicFetchRequest(context: context) {
 				self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
 			}
 			self.user = user
-			return Just(Event.didLoadInitialData(user))
+			
+			var transportModes = Set<LineType>()
+			if user.settings.transportModes.bus { transportModes.insert(.bus) }
+			if user.settings.transportModes.ferry { transportModes.insert(.ferry) }
+			if user.settings.transportModes.national { transportModes.insert(.national) }
+			if user.settings.transportModes.nationalExpress { transportModes.insert(.nationalExpress) }
+			if user.settings.transportModes.regional { transportModes.insert(.regional) }
+			if user.settings.transportModes.regionalExpress { transportModes.insert(.regionalExpress) }
+			if user.settings.transportModes.suburban { transportModes.insert(.suburban) }
+			if user.settings.transportModes.subway { transportModes.insert(.subway) }
+			if user.settings.transportModes.taxi { transportModes.insert(.taxi) }
+			if user.settings.transportModes.tram { transportModes.insert(.tram) }
+			
+			let transferTypes : ChewSettings.TransferTime = {
+				if !user.settings.isWithTransfers {
+					return .direct
+				}
+				return .time(minutes: Int(user.settings.transferTime))
+			}()
+			
+			let res = ChewSettings(
+				customTransferModes: transportModes,
+				transportMode: ChewSettings.TransportMode(
+					rawValue: Int(user.settings.transportModeSegment)) ?? .deutschlandTicket,
+				transferTime: transferTypes,
+				accessiblity: .partial,
+				walkingSpeed: .fast,
+				language: .english,
+				debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false),
+				startWithWalking: true,
+				withBicycle: false
+			)
+			return Just(Event.didLoadInitialData(user,res))
 				.eraseToAnyPublisher()
 		}
 	}

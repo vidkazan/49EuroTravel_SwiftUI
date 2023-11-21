@@ -61,7 +61,7 @@ struct ContentView: View {
 					content: {
 						switch chewViewModel.state.status {
 						case .settings:
-							SettingsView(chewVM: chewViewModel, settings: chewViewModel.state.settings)
+							SettingsView(settings: chewViewModel.state.settings)
 						case .datePicker:
 							DatePickerView(
 								date: chewViewModel.state.timeChooserDate.date,
