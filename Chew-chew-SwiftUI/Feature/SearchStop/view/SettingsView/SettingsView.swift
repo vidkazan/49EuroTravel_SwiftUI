@@ -12,81 +12,97 @@ struct SettingsView: View {
 	let arr = [0,5,7,10,15,20,30,45,60,90,120]
 	@ObservedObject var chewVM : ChewViewModel
 	@State var transportModeSegment : Int = 0
-	@State var allTypes : Set<LineType> = Set(LineType.allCases)
-	@State var selectedTypes : Set<LineType> = Set(LineType.allCases)
-	
+	let allTypes : [LineType] = LineType.allCases
+	@State var selectedTypes = Set<LineType>()
 	@State var transferTime : Int = 0
 	@State var showWithTransfers : Int = 0
 	init(vm : ChewViewModel) {
 		self.chewVM = vm
-		UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.chewGray10)
-		UISegmentedControl.appearance().backgroundColor = UIColor(Color(hue: 0, saturation: 0, brightness: 0.04))
-		UISegmentedControl.appearance().layer.cornerRadius = 10
 	}
-	var columns: [GridItem] = [
-			GridItem(.adaptive(minimum: 110), spacing: 10),
-			GridItem(.adaptive(minimum: 110), spacing: 10),
-			GridItem(.adaptive(minimum: 110), spacing: 10)
-	]
 	var body: some View {
-		VStack(alignment: .center) {
-			Label("Settings", systemImage: "gearshape")
-				.chewTextSize(.big)
-			ScrollView {
-				// MARK: transport modes section
+		Label("Settings", systemImage: "gearshape")
+			.padding(.top)
+			.chewTextSize(.big)
+		NavigationView {
+			Form {
 				Section(content: {
-					VStack {
-						Picker("Settings", selection: $transportModeSegment ){
+					Picker(
+						selection: $transportModeSegment,
+						content: {
 							DTicketLabel()
 								.tag(ChewSettings.TransportMode.deutschlandTicket.id)
-							Text("all")
+							Label("All", systemImage: "train.side.front.car")
 								.tag(ChewSettings.TransportMode.all.id)
-							Text("specific")
+							Label("Specific", systemImage: "pencil")
 								.tag(ChewSettings.TransportMode.custom(types: Set(LineType.allCases)).id)
-						}
-						.pickerStyle(.segmented)
-						.frame(height: 43)
-						if transportModeSegment == 2 {
-							LazyVGrid(
-								columns: columns
-							) {
-								ForEach(allTypes.sorted(by: <), id: \.id) { type in
-									Button(
-										action: {
-											selectedTypes.toogle(val: type)
-										},
-										label: {
-											Text(type.shortValue)
-												.frame(minWidth: 100,minHeight: 43)
-												.padding(2)
-												.background(selectedTypes.contains(type) ?
-															type.color.opacity(0.7) :
-																Color.chewGray10
-												)
-												.tint(selectedTypes.contains(type) ?
-													  Color.primary :
-														Color.secondary.opacity(0.7)
-												)
-												.cornerRadius(8)
-										}
-									)
-								}
-							}
-							.padding(.bottom,5)
-						}
-					}
-					.background(Color.chewGray10)
-					.cornerRadius(8)
+						},
+						label: {}
+					)
+					.pickerStyle(.inline)
 				}, header: {
-					HStack {
-						Text("Transport modes")
-							.padding(1)
-						Spacer()
-					}
+					Text("Transport types")
 				})
+				
+				if transportModeSegment == 2 {
+					Section(
+						content: {
+						ForEach(allTypes, id: \.id) { type in
+							Toggle(
+								isOn: Binding(
+									get: {
+										selectedTypes.contains(type)
+									},
+									set: { _ in
+										selectedTypes.toogle(val: type)
+									}
+								),
+								label: {
+									Text(type.shortValue)
+//										.background(selectedTypes.contains(type) ?
+//													type.color.opacity(0.7) :
+//														Color.chewGray10
+//										)
+//										.tint(selectedTypes.contains(type) ?
+//											  Color.primary :
+//												Color.secondary.opacity(0.7)
+//										)
+								}
+							)
+						}
+					},
+					header: {
+						Text("Chosen transport types")
+					})
+				}
 				// MARK: transfer settings
-				transferSettings
-				Spacer()
+				Section(content: {
+					Picker(
+						selection: $showWithTransfers,
+						content: {
+							Label("Direct", systemImage: "arrow.up.right")
+								.tag(0)
+							Label("With transfers", systemImage: "arrow.2.circlepath")
+								.tag(1)
+					}, label: {
+					})
+					.pickerStyle(.inline)
+				}, header: {
+					Text("Connections")
+				})
+				Section(content: {
+					if showWithTransfers == 1 {
+						Picker(
+							selection: $transferTime,
+							content: {
+								ForEach(arr.indices,id: \.self) { index in
+									Text("\(String(arr[index])) min ")
+										.tag(index)
+								}
+						}, label: {
+							Label("Transfer duration", systemImage: "clock.arrow.2.circlepath")
+						})
+					}
+				}, header: {})
 			}
 			.frame(maxWidth: .infinity,maxHeight: .infinity)
 			// MARK: save button
@@ -132,18 +148,17 @@ struct SettingsView: View {
 			})
 			.frame(maxWidth: .infinity,minHeight: 43)
 			.background(Color.chewGray10)
-			.chewTextSize(.big)
 			.foregroundColor(.primary)
 			.cornerRadius(10)
 		}
 		.onAppear {
 			switch chewVM.state.settings.transferTime {
-				case .direct:
-					self.showWithTransfers = 0
-					self.transferTime = 0
-				case .time(let time):
-					self.showWithTransfers = 1
-					self.transferTime = time
+			case .direct:
+				self.showWithTransfers = 0
+				self.transferTime = 0
+			case .time(let time):
+				self.showWithTransfers = 1
+				self.transferTime = time
 			}
 			
 			self.transportModeSegment = chewVM.state.settings.transportMode.id
@@ -158,16 +173,15 @@ struct SettingsView: View {
 				}
 			}()
 		}
-		.padding(10)
-		.background(Color.chewGrayScale10)
 	}
 	struct DTicketLabel: View {
 		var body: some View {
 			HStack {
-				DTicketLogo()
-					.chewTextSize(.medium)
-				Text("D-ticket")
-					.chewTextSize(.medium)
+				DTicketLogo(fontSize: 20)
+					.padding(5)
+					.background(Color.gray)
+					.cornerRadius(8)
+				Text("Deutschland ticket")
 			}
 		}
 	}

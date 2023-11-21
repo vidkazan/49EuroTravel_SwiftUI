@@ -8,6 +8,10 @@
 import SwiftUI
 
 struct DTicketLogo: View {
+	let fontSize : Int
+	init(fontSize: Int) {
+		self.fontSize = fontSize
+	}
 	var body: some View {
 		ZStack{
 			dTicketLogoTop()
@@ -17,7 +21,7 @@ struct DTicketLogo: View {
 			dTicketLogoBottom()
 				.fill(Color(uiColor: UIColor(red: 0.99, green: 0.75, blue: 0, alpha: 1)))
 		}
-		.frame(width: 0.7*17,height: 0.7*22)
+		.frame(width: 0.7*CGFloat(fontSize),height: 0.7 * CGFloat(fontSize * (22 / 17)))
 	}
 }
 

@@ -28,7 +28,7 @@ struct BadgeView : View {
 				.cornerRadius(8)
 				.lineLimit(1)
 		case .dticket:
-			DTicketLogo()
+			DTicketLogo(fontSize: 17)
 				.font(.system(size: 12))
 				.padding(4)
 				.background(badge.badgeData.style)
