@@ -23,9 +23,11 @@ extension SearchStopsView {
 				.frame(maxWidth: .infinity,alignment: .leading)
 				.focused(focusedFieldBinding, equals: type)
 				.onChange(of: text, perform: { text in
-					guard chewViewModel.state.status == .editingArrivalStop ||
-							chewViewModel.state.status == .editingDepartureStop else { return }
-					if focusedField != nil && text.count > 2 {
+					guard chewViewModel.state.status == .editingArrivalStop &&
+							searchStopViewModel.state.type == .arrival ||
+							chewViewModel.state.status == .editingDepartureStop &&
+							searchStopViewModel.state.type == .departure else { return }
+					if focusedField == searchStopViewModel.state.type && text.count > 2 {
 						searchStopViewModel.send(event: .onSearchFieldDidChanged(text,type))
 					}
 					if focusedField == nil || text.isEmpty {
