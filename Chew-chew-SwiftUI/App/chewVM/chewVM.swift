@@ -36,7 +36,8 @@ final class ChewViewModel : ObservableObject, Identifiable {
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenIdleCheckForSufficientDataForJourneyRequest(),
 				self.whenLoadingUserLocation(),
-				self.whenLoadingInitialData()
+				self.whenLoadingInitialData(),
+				self.whenEditingStops()
 			]
 		)
 		.assign(to: \.state, on: self)

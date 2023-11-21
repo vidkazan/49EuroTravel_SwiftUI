@@ -58,7 +58,7 @@ extension SearchStopsView {
 							HStack(alignment: .center) {
 								Button(action: {
 									if !searchStopViewModel.state.previousStops.contains(stop) {
-										Location.createWith(stop: stop, using: viewContext)
+										Location.createWith(user: chewViewModel.user,stop: stop, using: viewContext)
 									}
 									switch type {
 									case .departure:

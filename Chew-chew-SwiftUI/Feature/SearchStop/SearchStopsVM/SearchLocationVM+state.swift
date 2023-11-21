@@ -48,6 +48,7 @@ extension SearchStopsViewModel {
 		case onReset(LocationDirectionType)
 		case onStopDidTap(Stop, LocationDirectionType)
 		case didRecentStopsUpdated(recentStops : [Stop])
+		case didChangeFieldType(type : LocationDirectionType?)
 		
 		
 		var description : String {
@@ -64,6 +65,8 @@ extension SearchStopsViewModel {
 				return "onStopDidTap"
 			case .didRecentStopsUpdated:
 				return "didRecentStopsUpdated"
+			case .didChangeFieldType:
+				return "didChangeFieldType"
 			}
 		}
 	}

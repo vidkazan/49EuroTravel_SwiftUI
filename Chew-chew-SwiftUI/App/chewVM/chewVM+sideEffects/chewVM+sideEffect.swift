@@ -40,5 +40,19 @@ extension ChewViewModel {
 				.eraseToAnyPublisher()
 		}
 	}
+	
+	func whenEditingStops() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			switch state.status {
+			case .editingArrivalStop:
+				self.searchStopsViewModel.send(event: .didChangeFieldType(type: .arrival))
+			case .editingDepartureStop:
+				self.searchStopsViewModel.send(event: .didChangeFieldType(type: .departure))
+			default:
+				break
+			}
+			return Empty().eraseToAnyPublisher()
+		}
+	}
 }
 

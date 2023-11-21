@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct Locations : Identifiable {
+struct DepartureArrivalPair : Identifiable {
 	let id = UUID()
 	let departure : Stop
 	let arrival : Stop
@@ -17,10 +17,10 @@ struct Locations : Identifiable {
 
 struct FavouriteRidesView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	let stops : [Locations]
+	let stops : [DepartureArrivalPair]
 	init() {
 		self.stops = [
-			Locations(
+			DepartureArrivalPair(
 				departure: Stop(
 					coordinates: CLLocationCoordinate2D(latitude: 51.2, longitude: 6.7),
 					type: .location,

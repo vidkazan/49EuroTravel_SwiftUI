@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct FavouriteRideCell: View {
-	let locations : Locations
+	let locations : DepartureArrivalPair
 	var body: some View {
 		HStack(spacing: 0) {
 			Color.chewGreenScale20

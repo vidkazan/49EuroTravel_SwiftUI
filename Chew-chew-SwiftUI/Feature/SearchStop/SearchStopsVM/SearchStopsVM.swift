@@ -26,7 +26,7 @@ class SearchStopsViewModel : ObservableObject {
 			previousStops: [],
 			stops: [],
 			status: .idle,
-			type: .departure
+			type: nil
 		)
 		Publishers.system(
 			initial: state,
