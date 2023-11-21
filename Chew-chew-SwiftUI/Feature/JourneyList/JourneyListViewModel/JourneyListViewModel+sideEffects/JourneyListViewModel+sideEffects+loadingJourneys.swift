@@ -123,7 +123,8 @@ extension JourneyListViewModel {
 					Query.regionalExpress(reTrains: false),
 				]
 			)
-		case .custom(types: let products):
+		case .custom:
+			let products = settings.customTransferModes
 			return Query.getQueryItems(
 				methods: [
 					Query.national(icTrains: products.contains(.national)),

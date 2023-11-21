@@ -25,7 +25,7 @@ struct ChewSettings : Equatable,Hashable {
 	enum TransportMode : Equatable, Hashable {
 		case deutschlandTicket
 		case all
-		case custom(types : Set<LineType>)
+		case custom
 		
 		var id : Int {
 			switch self {
@@ -38,6 +38,7 @@ struct ChewSettings : Equatable,Hashable {
 			}
 		}
 	}
+	
 	// TODO: transfer time -Xmin -> Xmin
 	enum TransferTime : Equatable, Hashable {
 		case direct
@@ -59,7 +60,7 @@ struct ChewSettings : Equatable,Hashable {
 	struct ChewDebugSettings: Equatable, Hashable {
 		let prettyJSON : Bool
 	}
-	
+	let customTransferModes : Set<LineType>
 	let transportMode : TransportMode
 	let transferTime : TransferTime
 	let accessiblity : Accessiblity
@@ -72,6 +73,7 @@ struct ChewSettings : Equatable,Hashable {
 
 extension ChewSettings {
 	init() {
+		self.customTransferModes = []
 		self.accessiblity = .partial
 		self.debugSettings = Self.ChewDebugSettings(prettyJSON: false)
 		self.language = .english

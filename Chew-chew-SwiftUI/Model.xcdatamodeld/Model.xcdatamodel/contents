@@ -4,6 +4,7 @@
         <attribute name="timestamp" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="user" inverseEntity="Location"/>
         <relationship name="savedJourneys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="user" inverseEntity="SavedJourney"/>
+        <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="user" inverseEntity="Settings"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>
@@ -13,13 +14,25 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="default_stop_name"/>
         <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="savedJourneyDeparture" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="departureStop" inverseEntity="SavedJourney"/>
+        <relationship name="savedJourneyArr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="arrivalStop" inverseEntity="SavedJourney"/>
+        <relationship name="savedJourneyDep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="departureStop" inverseEntity="SavedJourney"/>
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="recentLocations" inverseEntity="ChewUser"/>
     </entity>
     <entity name="SavedJourney" representedClassName="SavedJourney" syncable="YES">
         <attribute name="journeyRef" attributeType="String"/>
-        <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location"/>
-        <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyDeparture" inverseEntity="Location"/>
+        <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyArr" inverseEntity="Location"/>
+        <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyDep" inverseEntity="Location"/>
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="savedJourneys" inverseEntity="ChewUser"/>
+    </entity>
+    <entity name="Settings" representedClassName="Settings" syncable="YES" codeGenerationType="class">
+        <attribute name="isWithTransfers" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="transportModes" toMany="YES" deletionRule="Nullify" destinationEntity="TransportMode" inverseName="modes" inverseEntity="TransportMode"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="settings" inverseEntity="ChewUser"/>
+    </entity>
+    <entity name="TransportMode" representedClassName="TransportMode" syncable="YES" codeGenerationType="class">
+        <attribute name="mode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="modes" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="transportModes" inverseEntity="Settings"/>
     </entity>
 </model>
