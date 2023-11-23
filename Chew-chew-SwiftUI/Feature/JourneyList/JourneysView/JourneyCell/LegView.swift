@@ -29,9 +29,8 @@ struct LegView: View {
 	var body: some View {
 		GeometryReader { geo in
 			ZStack {
-				Rectangle()
+				RoundedRectangle(cornerRadius: 8)
 					.fill(bgColor)
-					.cornerRadius(8)
 					.overlay {
 						switch leg.legType {
 						case .footStart,.footMiddle,.footEnd:

@@ -118,7 +118,7 @@ struct FullLegView: View {
 								}
 								VStack {
 									HStack(alignment: .top) {
-										Rectangle()
+										RoundedRectangle(cornerRadius: vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
 											.fill(Color.chewGreenScale20)
 											.cornerRadius(vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
 											.frame(width: 20,height: vm.state.currentProgressHeight)

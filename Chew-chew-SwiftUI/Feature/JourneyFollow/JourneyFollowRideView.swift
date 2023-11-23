@@ -7,5 +7,4 @@
 
 import Foundation
 
-// Ideas
-// TODO: make LegView zoomable, scrollable / show progress on it
+// TODO: feature: make LegView zoomable, scrollable / show progress on it

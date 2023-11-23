@@ -9,8 +9,6 @@ import Foundation
 import DequeModule
 import Combine
 
-
-// TODO: remove api calls duplicates
 class ApiService  {
 	struct Response<T> {
 		let value: T

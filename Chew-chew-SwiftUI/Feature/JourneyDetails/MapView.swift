@@ -61,8 +61,6 @@ class Coordinator: NSObject, MKMapViewDelegate {
 	}
 }
 
-
-// TODO: routing https://www.hackingwithswift.com/example-code/location/how-to-find-directions-using-mkmapview-and-mkdirectionsrequest
 struct MapView: View {
 	@State var mapRect : MKCoordinateRegion
 	let stops : [StopViewData]

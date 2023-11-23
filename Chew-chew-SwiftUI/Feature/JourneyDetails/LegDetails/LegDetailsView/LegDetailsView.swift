@@ -97,9 +97,9 @@ struct LegDetailsView: View {
 					}
 					VStack {
 						HStack(alignment: .top) {
-							Rectangle()
+							RoundedRectangle(cornerRadius:vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6
+							)
 								.fill(Color.chewGreenScale20)
-								.cornerRadius(vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
 								.frame(width: 22,height: vm.state.currentProgressHeight)
 								.padding(.leading,25)
 							Spacer()

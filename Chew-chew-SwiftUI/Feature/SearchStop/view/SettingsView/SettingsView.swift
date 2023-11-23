@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct SettingsView: View {
-// TODO: animations for this view
 	@EnvironmentObject  var chewViewModel : ChewViewModel
 	@Environment(\.managedObjectContext) var viewContext
 	

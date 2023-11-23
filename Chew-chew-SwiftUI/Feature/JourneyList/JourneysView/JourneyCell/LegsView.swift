@@ -68,7 +68,7 @@ struct LegsView: View {
 		VStack {
 			GeometryReader { geo in
 				ZStack {
-					Rectangle()
+					RoundedRectangle(cornerRadius: 5)
 						.overlay{
 							LinearGradient(
 								stops: gradientStops,
@@ -76,7 +76,6 @@ struct LegsView: View {
 								endPoint: UnitPoint(x: 1, y: 0))
 						}
 						.frame(maxWidth: (geo.size.width) > 0 ? geo.size.width : 0 ,maxHeight: 18)
-						.cornerRadius(5)
 					ForEach(journey.legs) { leg in
 						LegView(leg: leg)
 							.frame(

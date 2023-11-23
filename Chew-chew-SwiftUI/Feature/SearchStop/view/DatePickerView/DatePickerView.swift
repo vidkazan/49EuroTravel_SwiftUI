@@ -7,14 +7,12 @@
 
 import SwiftUI
 
-// TODO: load it quiker
 struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
 	@Environment(\.managedObjectContext) var viewContext
 	@State var date : Date
 	@State var time : Date
 	var body: some View {
-//		ScrollView {
 		VStack(alignment: .center,spacing: 5) {
 				// MARK: header buttons
 				DatePickerTimePresetButtons()
@@ -82,7 +80,6 @@ struct DatePickerView: View {
 				UIDatePicker.appearance().minuteInterval = 5
 			}
 		}
-//	}
 }
 //
 //struct ContentView_Previews: PreviewProvider {

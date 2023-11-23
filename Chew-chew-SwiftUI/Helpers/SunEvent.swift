@@ -15,8 +15,6 @@ enum SunEventType : Equatable,Hashable {
 	case night
 }
 
-// TODO: fix sunEvents rendering
-
 struct SunEvent : Equatable,Hashable {
 	static func == (lhs: SunEvent, rhs: SunEvent) -> Bool {
 		return

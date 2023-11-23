@@ -75,17 +75,17 @@ struct JourneysListView: View {
 					.animation(.spring(), value: journeyViewModel.state.status)
 				}
 			case .failedToLoadJourneys(let error):
-				// TODO: test this place
 				Spacer()
 				VStack {
 					Text("connections not found")
 						.padding(5)
 						.foregroundColor(.secondary)
 						.chewTextSize(.big)
-					Text(error.description)
-						.font(.system(size: 8,weight: .semibold))
-						.padding(5)
-						.foregroundColor(.secondary)
+					let _ = print(error)
+//					Text(error.description)
+//						.font(.system(size: 8,weight: .semibold))
+//						.padding(5)
+//						.foregroundColor(.secondary)
 					Button(action: {
 						journeyViewModel.send(event: .onLaterRef)
 					}, label: {

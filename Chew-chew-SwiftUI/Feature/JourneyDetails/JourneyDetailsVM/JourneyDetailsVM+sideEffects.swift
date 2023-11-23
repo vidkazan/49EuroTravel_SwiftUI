@@ -10,8 +10,6 @@ import Combine
 import CoreLocation
 import MapKit
 
-
-// TODO: report refreshToken usage issue
 extension JourneyDetailsViewModel {
 	static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
 		Feedback { _ in

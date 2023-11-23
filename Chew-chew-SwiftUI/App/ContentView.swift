@@ -9,7 +9,6 @@ import SwiftUI
 
 
 // TODO: coreData: settings entity: save: update line instead of creating new
-// TODO: fix all TapZones
 // TODO: move all logic from views
 // TODO: bug: db: stops can duplicate in db
 // TODO: bug: journey: if arrival stop cancelled, duration is NULL
