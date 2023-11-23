@@ -62,6 +62,7 @@ struct JourneysListView: View {
 								}
 							case .failedToLoadLaterRef:
 								Label("error: try reload", systemImage: "exclamationmark.circle")
+								
 								.onTapGesture {
 									journeyViewModel.send(event: .onLaterRef)
 								}
@@ -92,6 +93,7 @@ struct JourneysListView: View {
 							.chewTextSize(.medium)
 							.foregroundColor(.secondary)
 					})
+					
 				}
 			}
 			Spacer()

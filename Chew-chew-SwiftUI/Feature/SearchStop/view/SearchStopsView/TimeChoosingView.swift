@@ -64,7 +64,7 @@ struct TimeChoosingView: View {
 				}
 			}
 		}
-		.frame(maxWidth: .infinity,maxHeight: 43)
+		.frame(maxWidth: .infinity,maxHeight: 40)
 		.background(Color.chewGray10)
 		.cornerRadius(10)
 		.transition(.move(edge: .bottom))

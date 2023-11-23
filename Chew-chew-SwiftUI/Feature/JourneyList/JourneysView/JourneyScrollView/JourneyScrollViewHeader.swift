@@ -14,6 +14,7 @@ struct JourneyScrollViewHeader: View {
 			Button("Reload", action: {
 				journeyViewModel.send(event: .onReloadJourneys)
 			})
+			
 			.foregroundColor(.secondary)
 			.frame(maxWidth: 80)
 			.padding(5)
@@ -25,6 +26,7 @@ struct JourneyScrollViewHeader: View {
 			Button("Earlier", action: {
 				journeyViewModel.send(event: .onEarlierRef)
 			})
+			
 			.foregroundColor(.secondary)
 			.frame(maxWidth: 80)
 			.padding(5)

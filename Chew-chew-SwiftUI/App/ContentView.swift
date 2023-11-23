@@ -8,8 +8,12 @@
 import SwiftUI
 
 
+// TODO: coreData: settings entity: save: update line instead of creating new
 // TODO: fix all TapZones
 // TODO: move all logic from views
+// TODO: bug: db: stops can duplicate in db
+// TODO: bug: journey: if arrival stop cancelled, duration is NULL
+// TODO: bug: journey: stop is showing totally cancelled if only exit / entrance is allowed
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
@@ -27,13 +31,15 @@ struct ContentView: View {
 						SearchStopsView(vm: chewViewModel.searchStopsViewModel)
 						HStack {
 							TimeChoosingView(searchStopsVM: chewViewModel.searchStopsViewModel)
-							Image(systemName: "gearshape")
-								.frame(maxWidth: 43,maxHeight: 43)
-								.onTapGesture {
-									chewViewModel.send(event: .didTapSettings)
-								}
-								.background(Color.chewGray10)
-								.cornerRadius(8)
+							Button(action: {
+								chewViewModel.send(event: .didTapSettings)
+							}, label: {
+								Image(systemName: "gearshape")
+									.tint(.white)
+									.frame(maxWidth: 43,maxHeight: 40)
+									.background(Color.chewGray10)
+									.cornerRadius(8)
+							})
 						}
 						if case .journeys(let vm) = chewViewModel.state.status {
 							JourneysListView(journeyViewModel: vm)

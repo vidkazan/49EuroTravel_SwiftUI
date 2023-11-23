@@ -97,7 +97,8 @@ struct MapSheet: View {
 			Button("Close") {
 				viewModel.send(event: .didCloseBottomSheet)
 			}
-			.frame(maxWidth: .infinity,minHeight: 43)
+			
+			.frame(maxWidth: .infinity,minHeight: 40)
 			.background(Color.chewGray15)
 			.foregroundColor(.primary)
 			.cornerRadius(8)

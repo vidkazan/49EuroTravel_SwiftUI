@@ -54,6 +54,7 @@ struct FavouriteRidesView : View {
 				LazyHStack(spacing: 2) {
 					ForEach(stops) { locations in
 						FavouriteRideCell(locations:locations)
+							
 							.onTapGesture {
 								chewVM.send(event: .didSetBothLocations(locations.departure, locations.arrival))
 							}

@@ -42,14 +42,14 @@ extension SearchStopsView {
 						case .location:
 							Label(stop.name, systemImage: "building.2.crop.circle.fill")
 						}
+						Spacer()
+						Image(systemName: "clock.arrow.circlepath")
+							.foregroundColor(.chewGrayScale30)
+							.padding(.horizontal,7)
 					})
 					.frame(height: 40)
-					.padding(.horizontal,5)
+					.padding(.leading,5)
 					.foregroundColor(.primary)
-					Spacer()
-					Image(systemName: "clock.arrow.circlepath")
-						.foregroundColor(.chewGrayScale30)
-						.padding(.horizontal,7)
 				}
 			}
 			switch searchStopViewModel.state.status {
@@ -84,6 +84,7 @@ extension SearchStopsView {
 										case .location:
 											Label(stop.name, systemImage: "building.2.crop.circle.fill")
 										}
+										Spacer()
 									})
 									.frame(height: 40)
 									.padding(.horizontal,5)

@@ -55,8 +55,9 @@ extension SearchStopsView {
 							.tint(.gray)
 						
 					})
+					.frame(width: 40,height: 40)
 				}
-			}
+			} 
 			.transition(.opacity)
 			.animation(.spring(response: 0.1), value: text.count)
 			Spacer()

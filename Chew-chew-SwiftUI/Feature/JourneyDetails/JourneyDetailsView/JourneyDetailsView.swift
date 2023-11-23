@@ -67,6 +67,7 @@ struct JourneyDetailsView: View {
 							}, label: {
 								Label("Show full leg", systemImage: "arrow.up.backward.and.arrow.down.forward.circle")
 							})
+							
 							.foregroundColor(Color.primary)
 						}
 						Button(action: {
@@ -79,12 +80,14 @@ struct JourneyDetailsView: View {
 						}, label: {
 							Label("Show map", systemImage: "map.circle")
 						})
+						
 						.foregroundColor(Color.primary)
 						Button(role: .cancel, action: {
 							viewModel.send(event: .didCloseActionSheet)
 						}, label: {
 							Text("Cancel")
 						})
+						
 						.foregroundColor(Color.primary)
 					}
 			}
@@ -112,6 +115,7 @@ struct JourneyDetailsView: View {
 						}
 					}
 				)
+				
 			}
 			// MARK: Modifiers - onChange
 			.onChange(of: viewModel.state.status, perform: { status in

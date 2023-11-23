@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct SettingsView: View {
+// TODO: animations for this view
 	@EnvironmentObject  var chewViewModel : ChewViewModel
 	@Environment(\.managedObjectContext) var viewContext
 	
@@ -111,6 +112,14 @@ struct SettingsView: View {
 			}, header: {
 				Text("Connections")
 			})
+			Section {
+				Button(action: {
+					saveSettings()
+				}, label: {
+					Text("Done")
+						.frame(maxWidth: .infinity,minHeight: 35,maxHeight: 43)
+				})
+			}
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
 			let settings = state.settings
@@ -127,44 +136,7 @@ struct SettingsView: View {
 			}
 		})
 		.onDisappear {
-			let transportMode = {
-				switch self.transportModeSegment {
-				case 1:
-					return ChewSettings.TransportMode.deutschlandTicket
-				case 0:
-					return ChewSettings.TransportMode.all
-				case 2:
-					return ChewSettings.TransportMode.custom
-				default:
-					return ChewSettings.TransportMode.all
-				}
-			}()
-			let transfer : ChewSettings.TransferTime =  {
-				switch self.showWithTransfers {
-				case 0:
-					return ChewSettings.TransferTime.direct
-				case 1:
-					return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
-				default:
-					return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
-				}
-			}()
-			
-			let res = ChewSettings(
-				customTransferModes: selectedTypes,
-				transportMode: transportMode,
-				transferTime: transfer,
-				accessiblity: .partial,
-				walkingSpeed: .fast,
-				language: .english,
-				debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false),
-				startWithWalking: true,
-				withBicycle: false
-			)
-			chewViewModel.send(event: .didUpdateSettings(res))
-			if res != oldSettings {
-				Settings.createWith(newSettings: res, in: chewViewModel.user, using: viewContext)
-			}
+			saveSettings()
 		}
 	}
 	struct DTicketLabel: View {
@@ -176,6 +148,49 @@ struct SettingsView: View {
 					.cornerRadius(8)
 				Text("Deutschland ticket")
 			}
+		}
+	}
+}
+
+extension SettingsView {
+	private func saveSettings(){
+		let transportMode = {
+			switch self.transportModeSegment {
+			case 1:
+				return ChewSettings.TransportMode.deutschlandTicket
+			case 0:
+				return ChewSettings.TransportMode.all
+			case 2:
+				return ChewSettings.TransportMode.custom
+			default:
+				return ChewSettings.TransportMode.all
+			}
+		}()
+		let transfer : ChewSettings.TransferTime =  {
+			switch self.showWithTransfers {
+			case 0:
+				return ChewSettings.TransferTime.direct
+			case 1:
+				return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
+			default:
+				return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
+			}
+		}()
+		
+		let res = ChewSettings(
+			customTransferModes: selectedTypes,
+			transportMode: transportMode,
+			transferTime: transfer,
+			accessiblity: .partial,
+			walkingSpeed: .fast,
+			language: .english,
+			debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false),
+			startWithWalking: true,
+			withBicycle: false
+		)
+		chewViewModel.send(event: .didUpdateSettings(res))
+		if res != oldSettings {
+			Settings.createWith(newSettings: res, in: chewViewModel.user, using: viewContext)
 		}
 	}
 }

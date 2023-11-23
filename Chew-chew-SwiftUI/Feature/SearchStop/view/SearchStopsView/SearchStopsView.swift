@@ -22,10 +22,6 @@ struct SearchStopsView: View {
 		self.searchStopViewModel = vm
 	}
 	
-	// TODO: textField red border if:
-	//	- finished editing text
-	//	- field not empty
-	//	- field not valid
 	var body: some View {
 		VStack(spacing: 5) {
 			// MARK: TopField
@@ -41,7 +37,6 @@ struct SearchStopsView: View {
 					rightButton(type: .departure)
 				}
 				.background(Color.chewGray10)
-				//				.background(chewViewModel.state.status == .editingDepartureStop ?  Color.chewGray20 : Color.chewGray10)
 				.animation(.spring(), value: chewViewModel.state.status)
 				.cornerRadius(10)
 				.overlay(
@@ -95,10 +90,6 @@ struct SearchStopsView: View {
 			} else if !bottomText.isEmpty, state.status != .editingArrivalStop {
 				fieldRedBorder = .arrival
 			}
-			
-//			if let type = searchStopViewModel.state.type {
-//				searchStopViewModel.send(event: .onReset(type))
-//			}
 			switch state.status {
 			case .editingDepartureStop:
 				focusedField =  .departure

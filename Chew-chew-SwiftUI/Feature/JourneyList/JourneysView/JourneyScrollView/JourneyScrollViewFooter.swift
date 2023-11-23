@@ -15,6 +15,7 @@ struct JourneyScrollViewFooter: View {
 			Button("Later", action: {
 				journeyViewModel.send(event: .onLaterRef)
 			})
+			
 			.foregroundColor(.secondary)
 			.frame(maxWidth: 80)
 			.padding(5)
