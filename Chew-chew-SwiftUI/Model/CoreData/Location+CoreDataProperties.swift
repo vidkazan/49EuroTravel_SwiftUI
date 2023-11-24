@@ -13,7 +13,6 @@ import CoreLocation
 extension Location {
 	@NSManaged public var address: String?
 	@NSManaged public var api_id: String?
-	@NSManaged public var id: UUID
 	@NSManaged public var latitude: Double
 	@NSManaged public var longitude: Double
 	@NSManaged public var name: String
@@ -26,12 +25,12 @@ extension Location {
 extension Location {
 	static func createWith(user : ChewUser?,stop : Stop,using managedObjectContext: NSManagedObjectContext) {
 		let location = Location(context: managedObjectContext)
-		guard let user = user else {
+		guard let user = user,
+		let id = stop.stopDTO?.id else {
 			print("🔴 > save Location: fialed to create Location: user is nil")
 			return
 		}
-		location.id = stop.id
-		location.api_id = stop.stopDTO?.id
+		location.api_id = id
 		location.address = stop.stopDTO?.address
 		location.latitude = stop.coordinates.latitude
 		location.longitude = stop.coordinates.longitude

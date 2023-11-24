@@ -10,7 +10,6 @@ import SwiftUI
 
 // TODO: coreData: settings entity: save: update line instead of creating new
 // TODO: move all logic from views
-// TODO: bug: db: stops can duplicate in db
 // TODO: bug: journey: if arrival stop cancelled, duration is NULL
 // TODO: bug: journey: stop is showing totally cancelled if only exit / entrance is allowed
 struct ContentView: View {

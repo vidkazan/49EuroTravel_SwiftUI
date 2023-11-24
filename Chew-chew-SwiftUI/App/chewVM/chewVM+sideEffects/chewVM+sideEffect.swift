@@ -30,7 +30,7 @@ extension ChewViewModel {
 			guard case .loadingInitialData(viewContext: let context) = state.status else { return Empty().eraseToAnyPublisher() }
 			
 			guard let user = ChewUser.basicFetchRequest(context: context) else {
-				print("whenLoadingInitialData: user is nil")
+				print("whenLoadingInitialData: user is nil: loading default data")
 				return Just(Event.didLoadInitialData(nil,ChewSettings()))
 					.eraseToAnyPublisher()
 			}
