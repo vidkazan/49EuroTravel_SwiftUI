@@ -15,7 +15,7 @@ struct SearchStopsView: View {
 	@FocusState	var focusedField : LocationDirectionType?
 	@State var topText : String
 	@State var bottomText : String
-	@State var fieldRedBorder : LocationDirectionType? = nil
+	@State var fieldRedBorder : (top: Bool,bottom: Bool) = (false,false)
 	init(vm : SearchStopsViewModel) {
 		self.topText = ""
 		self.bottomText = ""
@@ -41,7 +41,7 @@ struct SearchStopsView: View {
 				.cornerRadius(10)
 				.overlay(
 					RoundedRectangle(cornerRadius: 10)
-						.stroke(fieldRedBorder == .departure ? .red : .clear, lineWidth: 1.5)
+						.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
 				)
 				if case .editingDepartureStop=chewViewModel.state.status {
 					stopList(type: .departure)
@@ -67,7 +67,7 @@ struct SearchStopsView: View {
 				.cornerRadius(10)
 				.overlay(
 					RoundedRectangle(cornerRadius: 10)
-						.stroke(fieldRedBorder == .arrival ? .red : .clear, lineWidth: 1.5)
+						.stroke(fieldRedBorder.bottom == true ? .red : .clear, lineWidth: 1.5)
 				)
 				if case .editingArrivalStop=chewViewModel.state.status {
 					stopList(type: .arrival)
@@ -79,17 +79,41 @@ struct SearchStopsView: View {
 			.animation(.spring(), value: searchStopViewModel.state.status)
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
-			fieldRedBorder = nil
-			if let dep = chewViewModel.state.depStop {
-				topText = dep.name
-			} else if !topText.isEmpty, state.status != .editingDepartureStop {
-				fieldRedBorder = .departure
+			
+			fieldRedBorder.bottom = false
+			fieldRedBorder.top = false
+			
+			switch state.depStop {
+			case .location(let stop):
+				topText = stop.name
+			case .textOnly(let text):
+				topText = text
+				if !topText.isEmpty, state.status != .editingDepartureStop {
+					fieldRedBorder.top = true
+				}
 			}
-			if let arr = chewViewModel.state.arrStop {
-				bottomText = arr.name
-			} else if !bottomText.isEmpty, state.status != .editingArrivalStop {
-				fieldRedBorder = .arrival
+			
+			switch state.arrStop {
+			case .location(let stop):
+				bottomText = stop.name
+			case .textOnly(let text):
+				bottomText = text
+				if !bottomText.isEmpty, state.status != .editingArrivalStop {
+					fieldRedBorder.bottom = true
+				}
 			}
+			
+//			if let dep = state.depStop.stop {
+//				topText = dep.name
+//			} else if !topText.isEmpty, state.status != .editingDepartureStop {
+//				fieldRedBorder.top = true
+//			}
+//			if let arr = state.arrStop.stop {
+//				bottomText = arr.name
+//			} else if !bottomText.isEmpty, state.status != .editingArrivalStop {
+//				fieldRedBorder.bottom = true
+//			}
+			
 			switch state.status {
 			case .editingDepartureStop:
 				focusedField =  .departure
