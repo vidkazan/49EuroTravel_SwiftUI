@@ -75,8 +75,8 @@ extension ChewViewModel {
 			return state
 		case .didSetBothLocations(let dep, let arr):
 			return State(
-				depStop: dep,
-				arrStop: arr,
+				depStop: .location(dep),
+				arrStop: .location(arr),
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .idle

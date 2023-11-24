@@ -29,7 +29,7 @@ extension SearchStopsViewModel {
 					stops: [],
 					status: .idle
 				)
-			case .didChangeFieldType(type: let type):
+			case .didChangeFieldFocus(type: let type):
 				return State(
 					previousStops: state.previousStops,
 					stops: state.stops,

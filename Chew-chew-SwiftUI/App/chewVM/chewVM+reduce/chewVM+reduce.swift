@@ -72,8 +72,8 @@ extension ChewViewModel {
 			switch event {
 			case .didLoadInitialData(_, let settings):
 				return State(
-					depStop: nil,
-					arrStop: nil,
+					depStop: .textOnly(""),
+					arrStop: .textOnly(""),
 					settings: settings,
 					// MARK: set timePicker default date here
 					timeChooserDate: .now,
@@ -86,8 +86,8 @@ extension ChewViewModel {
 			switch event {
 			case .didStartViewAppear(let viewContext):
 				return State(
-					depStop: nil,
-					arrStop: nil,
+					depStop: .textOnly(""),
+					arrStop: .textOnly(""),
 					settings: ChewSettings(),
 					timeChooserDate: state.timeChooserDate,
 					status: .loadingInitialData(viewContext: viewContext)

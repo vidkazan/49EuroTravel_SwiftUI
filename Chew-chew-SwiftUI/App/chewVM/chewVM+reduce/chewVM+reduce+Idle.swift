@@ -12,7 +12,7 @@ extension ChewViewModel {
 		guard case .idle = state.status else { return state }
 		switch event {
 		case .onJourneyDataUpdated:
-			guard let dep = state.depStop,let arr = state.arrStop else {
+			guard let dep = state.depStop.stop,let arr = state.arrStop.stop else {
 				return State(
 					depStop: state.depStop,
 					arrStop: state.arrStop,
@@ -92,8 +92,8 @@ extension ChewViewModel {
 			return state
 		case .didSetBothLocations(let dep, let arr):
 			return State(
-				depStop: dep,
-				arrStop: arr,
+				depStop: .location(dep),
+				arrStop: .location(arr),
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .idle

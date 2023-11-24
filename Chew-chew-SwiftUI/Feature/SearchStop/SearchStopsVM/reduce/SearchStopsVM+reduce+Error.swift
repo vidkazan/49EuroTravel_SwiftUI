@@ -11,7 +11,7 @@ extension SearchStopsViewModel {
 	static func reduceError(_ state:  State, _ event: Event) -> State {
 		guard case .error = state.status else { return state }
 		switch event {
-		case .didChangeFieldType(type: let type):
+		case .didChangeFieldFocus(type: let type):
 			return State(
 				previousStops: state.previousStops,
 				stops: state.stops,

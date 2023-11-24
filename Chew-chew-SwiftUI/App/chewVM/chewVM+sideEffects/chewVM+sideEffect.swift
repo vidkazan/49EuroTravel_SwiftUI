@@ -19,7 +19,7 @@ extension ChewViewModel {
 	func whenIdleCheckForSufficientDataForJourneyRequest() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .idle = state.status else { return Empty().eraseToAnyPublisher() }
-			guard state.depStop != nil && state.arrStop != nil else { return Empty().eraseToAnyPublisher() }
+			guard state.depStop.stop != nil && state.arrStop.stop != nil else { return Empty().eraseToAnyPublisher() }
 			return Just(Event.onJourneyDataUpdated)
 				.eraseToAnyPublisher()
 		}
@@ -80,9 +80,9 @@ extension ChewViewModel {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			switch state.status {
 			case .editingArrivalStop:
-				self.searchStopsViewModel.send(event: .didChangeFieldType(type: .arrival))
+				self.searchStopsViewModel.send(event: .didChangeFieldFocus(type: .arrival))
 			case .editingDepartureStop:
-				self.searchStopsViewModel.send(event: .didChangeFieldType(type: .departure))
+				self.searchStopsViewModel.send(event: .didChangeFieldFocus(type: .departure))
 			default:
 				break
 			}

@@ -35,8 +35,8 @@ struct JourneysListView: View {
 										JourneyDetailsView(
 											token: journey.refreshToken,
 											data: journey,
-											depStop: chewVM.state.depStop,
-											arrStop: chewVM.state.arrStop
+											depStop: chewVM.state.depStop.stop,
+											arrStop: chewVM.state.arrStop.stop
 										)
 									)
 								}, label: {

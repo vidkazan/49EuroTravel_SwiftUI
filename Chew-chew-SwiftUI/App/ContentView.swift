@@ -83,7 +83,6 @@ struct ContentView: View {
 						bottomSheetIsPresented = false
 					}
 				})
-				.navigationBarTitle("")
 				.navigationBarHidden(true)
 				.transition(.move(edge: .bottom))
 				.animation(.spring().speed(2), value: chewViewModel.state.status)

@@ -11,7 +11,7 @@ import Combine
 import CoreLocation
 
 final class ChewViewModel : ObservableObject, Identifiable {
-	var user : ChewUser? = nil
+	public var user : ChewUser? = nil
 	@ObservedObject var  locationDataManager = LocationDataManager()
 	@Published var searchStopsViewModel = SearchStopsViewModel()
 	@Published private(set) var state : State {
@@ -22,8 +22,8 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	init() {
 		state = State(
-			depStop: nil,
-			arrStop: nil,
+			depStop: .textOnly(""),
+			arrStop: .textOnly(""),
 			settings: ChewSettings(),
 			timeChooserDate: .now,
 			status: .start

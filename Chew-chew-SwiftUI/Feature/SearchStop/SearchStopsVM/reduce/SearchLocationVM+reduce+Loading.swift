@@ -12,7 +12,7 @@ extension SearchStopsViewModel {
 	static func reduceLoading(_ state:  State, _ event: Event) -> State {
 		guard case .loading = state.status else { return state }
 		switch event {
-		case .didChangeFieldType(type: let type):
+		case .didChangeFieldFocus(type: let type):
 			return State(
 				previousStops: state.previousStops,
 				stops: state.stops,

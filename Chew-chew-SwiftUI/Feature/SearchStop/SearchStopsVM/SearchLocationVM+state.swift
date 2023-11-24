@@ -22,7 +22,7 @@ extension SearchStopsViewModel {
 		case idle
 		case loading(String)
 		case loaded
-		case updatingRecentStops(Stop)
+		case updatingRecentStops(Stop?)
 		case error(ApiServiceError)
 		
 		var description : String {
@@ -46,9 +46,9 @@ extension SearchStopsViewModel {
 		case onDataLoaded([Stop],LocationDirectionType)
 		case onDataLoadError(ApiServiceError)
 		case onReset(LocationDirectionType)
-		case onStopDidTap(Stop, LocationDirectionType)
+		case onStopDidTap(ChewViewModel.TextFieldContent, LocationDirectionType)
 		case didRecentStopsUpdated(recentStops : [Stop])
-		case didChangeFieldType(type : LocationDirectionType?)
+		case didChangeFieldFocus(type : LocationDirectionType?)
 		
 		
 		var description : String {
@@ -65,8 +65,8 @@ extension SearchStopsViewModel {
 				return "onStopDidTap"
 			case .didRecentStopsUpdated:
 				return "didRecentStopsUpdated"
-			case .didChangeFieldType:
-				return "didChangeFieldType"
+			case .didChangeFieldFocus:
+				return "didChangeFieldFocus"
 			}
 		}
 	}

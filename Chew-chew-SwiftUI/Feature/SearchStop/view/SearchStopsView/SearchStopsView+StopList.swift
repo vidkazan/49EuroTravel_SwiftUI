@@ -27,12 +27,11 @@ extension SearchStopsView {
 					Button(action: {
 						switch type {
 						case .departure:
-							chewViewModel.send(event: .onNewDeparture(stop))
-							searchStopViewModel.send(event: .onStopDidTap(stop, type))
+							chewViewModel.send(event: .onNewDeparture(.location(stop)))
 						case .arrival:
-							chewViewModel.send(event: .onNewArrival(stop))
-							searchStopViewModel.send(event: .onStopDidTap(stop, type))
+							chewViewModel.send(event: .onNewArrival(.location(stop)))
 						}
+						searchStopViewModel.send(event: .onStopDidTap(.location(stop), type))
 					}, label: {
 						switch stop.type {
 						case .stop:
@@ -69,12 +68,12 @@ extension SearchStopsView {
 										}
 										switch type {
 										case .departure:
-											chewViewModel.send(event: .onNewDeparture(stop))
-											searchStopViewModel.send(event: .onStopDidTap(stop, type))
+											chewViewModel.send(event: .onNewDeparture(.location(stop)))
+											
 										case .arrival:
-											chewViewModel.send(event: .onNewArrival(stop))
-											searchStopViewModel.send(event: .onStopDidTap(stop, type))
+											chewViewModel.send(event: .onNewArrival(.location(stop)))
 										}
+										searchStopViewModel.send(event: .onStopDidTap(.location(stop), type))
 									}, label: {
 										switch stop.type {
 										case .stop:

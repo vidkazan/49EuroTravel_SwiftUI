@@ -23,17 +23,39 @@ extension ChewViewModel {
 			}
 		}
 	}
+	enum TextFieldContent : Equatable,Hashable {
+		case textOnly(String)
+		case location(Stop)
+		
+		var text : String {
+			switch self {
+			case .textOnly(let text):
+				return text
+			case .location(let stop):
+				return stop.name
+			}
+		}
+		
+		var stop : Stop? {
+			switch self {
+			case .textOnly:
+				return nil
+			case .location(let stop):
+				return stop
+			}
+		}
+	}
 	
 	struct State : Equatable {
-		var depStop : Stop?
-		var arrStop : Stop?
+		var depStop : TextFieldContent
+		var arrStop : TextFieldContent
 		var settings : ChewSettings
 		var timeChooserDate : DateType
 		var status : Status
 		
 		init(
-			depStop: Stop?,
-			arrStop: Stop?,
+			depStop: TextFieldContent,
+			arrStop: TextFieldContent,
 			settings : ChewSettings,
 			timeChooserDate: DateType,
 			status: Status
@@ -104,8 +126,8 @@ extension ChewViewModel {
 		case didTapSettings
 		case didUpdateSettings(ChewSettings)
 		
-		case onNewDeparture(Stop?)
-		case onNewArrival(Stop?)
+		case onNewDeparture(TextFieldContent)
+		case onNewArrival(TextFieldContent)
 		
 		case didDismissBottomSheet
 		

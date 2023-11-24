@@ -73,10 +73,12 @@ extension ChewViewModel {
 			)
 		case .didReceiveLocationData(let coords):
 			return State(
-				depStop: Stop(
-					coordinates: coords,
-					type: .location,
-					stopDTO: nil
+				depStop: .location(
+					Stop(
+						coordinates: coords,
+						type: .location,
+						stopDTO: nil
+					)
 				),
 				arrStop: state.arrStop,
 				settings: state.settings,
@@ -94,8 +96,8 @@ extension ChewViewModel {
 			
 		case .didSetBothLocations(let dep, let arr):
 			return State(
-				depStop: dep,
-				arrStop: arr,
+				depStop: .location(dep),
+				arrStop: .location(arr),
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
