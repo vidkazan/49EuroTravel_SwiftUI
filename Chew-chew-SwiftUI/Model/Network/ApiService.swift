@@ -10,24 +10,25 @@ import DequeModule
 import Combine
 
 class ApiService  {
-	struct Response<T> {
-		let value: T
-		let response: URLResponse
+	let client : HTTPClient
+	
+	init(client : HTTPClient = ApiClient()) {
+		self.client = client
 	}
 	
-	enum Requests {
+	enum Requests : Equatable {
 		case journeys
 		case journeyByRefreshToken(ref : String)
-		case locations(name : String)
+		case locations
 		case trips(tripId : String)
-		case customGet(path : String)
+		case generic(path : String)
 		
 		var description : String {
 			switch self {
 			case .locations:
 				return "locations"
-			case .customGet:
-				return "customGet"
+			case .generic:
+				return "generic"
 			case .journeys:
 				return "journeys"
 			case .journeyByRefreshToken:
@@ -37,31 +38,16 @@ class ApiService  {
 			}
 		}
 		
-		var index : Int {
-			switch self {
-			case .customGet:
-				return 0
-			case .locations:
-				return 2
-			case .journeys:
-				return 3
-			case .journeyByRefreshToken:
-				return 4
-			case .trips:
-				return 5
-			}
-		}
-		
 		var method : String {
 			switch self {
-			case .locations, .customGet, .journeys,.journeyByRefreshToken,.trips:
+			case .locations, .generic, .journeys,.journeyByRefreshToken,.trips:
 				return "GET"
 			}
 		}
 		
 		var headers : [(value : String, key : String)] {
 			switch self {
-			case .customGet, .locations, .journeys,.journeyByRefreshToken,.trips:
+			case .generic, .locations, .journeys,.journeyByRefreshToken,.trips:
 				return []
 			}
 		}
@@ -72,7 +58,7 @@ class ApiService  {
 				return Constants.apiData.urlPathJourneys
 			case .locations:
 				return Constants.apiData.urlPathLocations
-			case .customGet(let path):
+			case .generic(let path):
 				return path
 			case .journeyByRefreshToken(let ref):
 				return Constants.apiData.urlPathJourneys + "/" + ref
@@ -83,7 +69,7 @@ class ApiService  {
 		
 		func getRequest(urlEndPoint : URL) -> URLRequest {
 			switch self {
-			case .customGet, .locations,.journeys,.journeyByRefreshToken,.trips:
+			case .generic, .locations,.journeys,.journeyByRefreshToken,.trips:
 				var req = URLRequest(url : urlEndPoint)
 				req.httpMethod = self.method
 				for header in self.headers {
@@ -93,11 +79,7 @@ class ApiService  {
 			}
 		}
 	}
-	
-	//	static func cancelAllOngoingRequests(){
-	//		self.fetchLobbyDeque.removeAll()
-	//	}
-	
+
 	static func generateUrl(query : [URLQueryItem], type : Requests) -> URL? {
 		let url : URL? = {
 			switch type {
@@ -108,16 +90,11 @@ class ApiService  {
 				components.scheme = "https"
 				components.queryItems = query
 				return components.url
-			case .customGet(let path):
+			case .generic(let path):
 				return URL(string: path)
 			}
 		}()
 		return url
 	}
-	
-	static func generateSession() -> URLSession {
-		let sessionConfig = URLSessionConfiguration.default
-		sessionConfig.timeoutIntervalForRequest = 5.0
-		return URLSession(configuration: sessionConfig)
-	}
 }
+

@@ -24,6 +24,7 @@
 		7D02CE2E2A97E80D0048ADE6 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 7D02CE2D2A97E80D0048ADE6 /* OrderedCollections */; };
 		7D02CE302A97E96E0048ADE6 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */; };
 		7D02CE342A98E8130048ADE6 /* JourneysListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE332A98E8130048ADE6 /* JourneysListView.swift */; };
+		7D0719392B1382D100BF846B /* Chew_chew_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */; };
 		7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */; };
 		7D15EEE82AD494D400833170 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D15EEE72AD494D400833170 /* MapView.swift */; };
 		7D181D642AD6D595003AB021 /* FavouriteRidesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D181D632AD6D595003AB021 /* FavouriteRidesView.swift */; };
@@ -61,8 +62,6 @@
 		7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B42A96334B00CBE9C1 /* ContentView.swift */; };
 		7D6734B72A96334C00CBE9C1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D6734B62A96334C00CBE9C1 /* Assets.xcassets */; };
 		7D6734BA2A96334C00CBE9C1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D6734B92A96334C00CBE9C1 /* Preview Assets.xcassets */; };
-		7D6734C42A96334C00CBE9C1 /* Chew_chew_SwiftUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734C32A96334C00CBE9C1 /* Chew_chew_SwiftUITests.swift */; };
-		7D6734CE2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */; };
 		7D6734D02A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734CF2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift */; };
 		7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */; };
 		7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */; };
@@ -84,7 +83,6 @@
 		7D6C5C312AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C302AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift */; };
 		7D6C5C332AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C322AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift */; };
 		7D6C5C362AAF7C4500DEFC57 /* JourneyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C352AAF7C4500DEFC57 /* JourneyDetailsView.swift */; };
-		7D740CC42AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC32AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift */; };
 		7D740CC72AEA796B00E9FFD4 /* SettingsView+Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC62AEA796B00E9FFD4 /* SettingsView+Transfer.swift */; };
 		7D740CC92AEA79C800E9FFD4 /* Set+Toogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */; };
 		7D740CCB2AEAB8F900E9FFD4 /* SettingsView+TransportModesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CCA2AEAB8F900E9FFD4 /* SettingsView+TransportModesSection.swift */; };
@@ -108,7 +106,6 @@
 		7D9E10872AA6752B00820B92 /* SearchStopsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E10862AA6752B00820B92 /* SearchStopsView.swift */; };
 		7D9E10932AA77E0B00820B92 /* SearchStopsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9E10922AA77E0B00820B92 /* SearchStopsVM.swift */; };
 		7DA001FD2B0F88B6009BB79D /* SegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA001FC2B0F88B6009BB79D /* SegmentedPicker.swift */; };
-		7DA8852A2ACF23F400263DB6 /* PrintThread.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA885292ACF23F400263DB6 /* PrintThread.swift */; };
 		7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */; };
 		7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3492A9A118E005DF550 /* BadgesView.swift */; };
 		7DAE1F6A2B0D26CF0097AAD8 /* Settings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F662B0D26CF0097AAD8 /* Settings+CoreDataClass.swift */; };
@@ -135,17 +132,18 @@
 		7DE727C62AD93869002FF033 /* JourneyFollowRideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE727C52AD93869002FF033 /* JourneyFollowRideView.swift */; };
 		7DE727C92AD93955002FF033 /* ApiServiceCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */; };
 		7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */; };
+		7DFC91D92B13BE5000990A2F /* Chew_chew_UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC91D82B13BE5000990A2F /* Chew_chew_UnitTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		7D6734C02A96334C00CBE9C1 /* PBXContainerItemProxy */ = {
+		7D6734CA2A96334D00CBE9C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7D6734A72A96334B00CBE9C1 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 7D6734AE2A96334B00CBE9C1;
 			remoteInfo = "Chew-chew-SwiftUI";
 		};
-		7D6734CA2A96334D00CBE9C1 /* PBXContainerItemProxy */ = {
+		7DFC91DA2B13BE5000990A2F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7D6734A72A96334B00CBE9C1 /* Project object */;
 			proxyType = 1;
@@ -177,6 +175,7 @@
 		7D1AD8EB2AE94A7500868056 /* GeoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDTO.swift; sourceTree = "<group>"; };
 		7D23E4492A98F9800037C3E1 /* LegsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegsView.swift; sourceTree = "<group>"; };
 		7D23E44B2A98FD700037C3E1 /* LegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegView.swift; sourceTree = "<group>"; };
+		7D2B6A9E2B13C6090023BFC3 /* Chew-chew-SwiftUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Chew-chew-SwiftUI.xctestplan"; sourceTree = "<group>"; };
 		7D2CAF632B0BEA0200577FD4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7D2CAF652B0BEAC000577FD4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		7D345E492AE95E7C003CA948 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -208,8 +207,6 @@
 		7D6734B42A96334B00CBE9C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		7D6734B62A96334C00CBE9C1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D6734B92A96334C00CBE9C1 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		7D6734BF2A96334C00CBE9C1 /* Chew-chew-SwiftUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chew-chew-SwiftUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D6734C32A96334C00CBE9C1 /* Chew_chew_SwiftUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUITests.swift; sourceTree = "<group>"; };
 		7D6734C92A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chew-chew-SwiftUIUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUIUITests.swift; sourceTree = "<group>"; };
 		7D6734CF2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUIUITestsLaunchTests.swift; sourceTree = "<group>"; };
@@ -233,7 +230,6 @@
 		7D6C5C302AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyDetailsVM+reduce.swift"; sourceTree = "<group>"; };
 		7D6C5C322AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+reduce+JourneyDetails.swift"; sourceTree = "<group>"; };
 		7D6C5C352AAF7C4500DEFC57 /* JourneyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDetailsView.swift; sourceTree = "<group>"; };
-		7D740CC32AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+HuggingPriority.swift"; sourceTree = "<group>"; };
 		7D740CC62AEA796B00E9FFD4 /* SettingsView+Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+Transfer.swift"; sourceTree = "<group>"; };
 		7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Toogle.swift"; sourceTree = "<group>"; };
 		7D740CCA2AEAB8F900E9FFD4 /* SettingsView+TransportModesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportModesSection.swift"; sourceTree = "<group>"; };
@@ -257,7 +253,6 @@
 		7D9E10862AA6752B00820B92 /* SearchStopsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStopsView.swift; sourceTree = "<group>"; };
 		7D9E10922AA77E0B00820B92 /* SearchStopsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStopsVM.swift; sourceTree = "<group>"; };
 		7DA001FC2B0F88B6009BB79D /* SegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPicker.swift; sourceTree = "<group>"; };
-		7DA885292ACF23F400263DB6 /* PrintThread.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintThread.swift; sourceTree = "<group>"; };
 		7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		7DA8D3492A9A118E005DF550 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
 		7DAE1F662B0D26CF0097AAD8 /* Settings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -284,6 +279,8 @@
 		7DE727C52AD93869002FF033 /* JourneyFollowRideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFollowRideView.swift; sourceTree = "<group>"; };
 		7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceCombine.swift; sourceTree = "<group>"; };
 		7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Badges.swift"; sourceTree = "<group>"; };
+		7DFC91D62B13BE5000990A2F /* Chew-chew-UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chew-chew-UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7DFC91D82B13BE5000990A2F /* Chew_chew_UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_UnitTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,14 +294,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D6734BC2A96334C00CBE9C1 /* Frameworks */ = {
+		7D6734C62A96334D00CBE9C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D6734C62A96334D00CBE9C1 /* Frameworks */ = {
+		7DFC91D32B13BE5000990A2F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -351,6 +348,7 @@
 		7D02CE0E2A97E3C00048ADE6 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */,
 				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
 				7D6C5C122AAF482400DEFC57 /* chewVM */,
 				7D7A55382AA4B3DD000256EF /* feedback */,
@@ -361,7 +359,6 @@
 		7D02CE112A97E4650048ADE6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */,
 				7D62AF5C2AAA7BB800D3827D /* res.geojson */,
 				7D63285C2AB75B0900E1EF2B /* tmp.geojson */,
 				7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */,
@@ -376,10 +373,8 @@
 				7DCD200F2AC470AD00788B38 /* Colors.swift */,
 				7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */,
 				7D53705B2ACED7300009BA20 /* PlannedActual.swift */,
-				7DA885292ACF23F400263DB6 /* PrintThread.swift */,
 				7D181D662AD6D6BB003AB021 /* TextModifiers.swift */,
 				7D69BE7E2AD7ECF1007855B3 /* Publisher+AsyncMap.swift */,
-				7D740CC32AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift */,
 				7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */,
 				7DA001FC2B0F88B6009BB79D /* SegmentedPicker.swift */,
 			);
@@ -393,6 +388,16 @@
 				7D181D682AD6F7C6003AB021 /* FavouriteRideCell.swift */,
 			);
 			path = FavouriteRides;
+			sourceTree = "<group>";
+		};
+		7D2B6A9F2B13CBDE0023BFC3 /* Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7D2B6A9E2B13C6090023BFC3 /* Chew-chew-SwiftUI.xctestplan */,
+				7D6734CC2A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests */,
+				7DFC91D72B13BE5000990A2F /* Chew-chew-UnitTests */,
+			);
+			path = Tests;
 			sourceTree = "<group>";
 		};
 		7D462D3F2AAC93AA00BC0D65 /* reduce */ = {
@@ -469,8 +474,6 @@
 			isa = PBXGroup;
 			children = (
 				7D6734B12A96334B00CBE9C1 /* Chew-chew-SwiftUI */,
-				7D6734C22A96334C00CBE9C1 /* Chew-chew-SwiftUITests */,
-				7D6734CC2A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests */,
 				7D6734B02A96334B00CBE9C1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -479,8 +482,8 @@
 			isa = PBXGroup;
 			children = (
 				7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */,
-				7D6734BF2A96334C00CBE9C1 /* Chew-chew-SwiftUITests.xctest */,
 				7D6734C92A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests.xctest */,
+				7DFC91D62B13BE5000990A2F /* Chew-chew-UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -488,6 +491,7 @@
 		7D6734B12A96334B00CBE9C1 /* Chew-chew-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				7D2B6A9F2B13CBDE0023BFC3 /* Tests */,
 				7D02CE112A97E4650048ADE6 /* Helpers */,
 				7D02CE0E2A97E3C00048ADE6 /* App */,
 				7D462D552AACD1E000BC0D65 /* Feature */,
@@ -505,14 +509,6 @@
 				7D6734B92A96334C00CBE9C1 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
-			sourceTree = "<group>";
-		};
-		7D6734C22A96334C00CBE9C1 /* Chew-chew-SwiftUITests */ = {
-			isa = PBXGroup;
-			children = (
-				7D6734C32A96334C00CBE9C1 /* Chew_chew_SwiftUITests.swift */,
-			);
-			path = "Chew-chew-SwiftUITests";
 			sourceTree = "<group>";
 		};
 		7D6734CC2A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests */ = {
@@ -777,6 +773,14 @@
 			path = JourneyFollow;
 			sourceTree = "<group>";
 		};
+		7DFC91D72B13BE5000990A2F /* Chew-chew-UnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				7DFC91D82B13BE5000990A2F /* Chew_chew_UnitTests.swift */,
+			);
+			path = "Chew-chew-UnitTests";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -802,24 +806,6 @@
 			productReference = 7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7D6734BE2A96334C00CBE9C1 /* Chew-chew-SwiftUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7D6734D62A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "Chew-chew-SwiftUITests" */;
-			buildPhases = (
-				7D6734BB2A96334C00CBE9C1 /* Sources */,
-				7D6734BC2A96334C00CBE9C1 /* Frameworks */,
-				7D6734BD2A96334C00CBE9C1 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7D6734C12A96334C00CBE9C1 /* PBXTargetDependency */,
-			);
-			name = "Chew-chew-SwiftUITests";
-			productName = "Chew-chew-SwiftUITests";
-			productReference = 7D6734BF2A96334C00CBE9C1 /* Chew-chew-SwiftUITests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		7D6734C82A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7D6734D92A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "Chew-chew-SwiftUIUITests" */;
@@ -838,6 +824,24 @@
 			productReference = 7D6734C92A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
+		7DFC91D52B13BE5000990A2F /* Chew-chew-UnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7DFC91DE2B13BE5000990A2F /* Build configuration list for PBXNativeTarget "Chew-chew-UnitTests" */;
+			buildPhases = (
+				7DFC91D22B13BE5000990A2F /* Sources */,
+				7DFC91D32B13BE5000990A2F /* Frameworks */,
+				7DFC91D42B13BE5000990A2F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				7DFC91DB2B13BE5000990A2F /* PBXTargetDependency */,
+			);
+			name = "Chew-chew-UnitTests";
+			productName = "Chew-chew-UnitTests";
+			productReference = 7DFC91D62B13BE5000990A2F /* Chew-chew-UnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -851,11 +855,11 @@
 					7D6734AE2A96334B00CBE9C1 = {
 						CreatedOnToolsVersion = 14.3.1;
 					};
-					7D6734BE2A96334C00CBE9C1 = {
+					7D6734C82A96334D00CBE9C1 = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = 7D6734AE2A96334B00CBE9C1;
 					};
-					7D6734C82A96334D00CBE9C1 = {
+					7DFC91D52B13BE5000990A2F = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = 7D6734AE2A96334B00CBE9C1;
 					};
@@ -878,8 +882,8 @@
 			projectRoot = "";
 			targets = (
 				7D6734AE2A96334B00CBE9C1 /* Chew-chew-SwiftUI */,
-				7D6734BE2A96334C00CBE9C1 /* Chew-chew-SwiftUITests */,
 				7D6734C82A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests */,
+				7DFC91D52B13BE5000990A2F /* Chew-chew-UnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -895,14 +899,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D6734BD2A96334C00CBE9C1 /* Resources */ = {
+		7D6734C72A96334D00CBE9C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D6734C72A96334D00CBE9C1 /* Resources */ = {
+		7DFC91D42B13BE5000990A2F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -923,7 +927,6 @@
 				7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */,
 				7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */,
 				7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */,
-				7DA8852A2ACF23F400263DB6 /* PrintThread.swift in Sources */,
 				7DE640FB2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift in Sources */,
 				7D2CAF662B0BEAC000577FD4 /* Persistence.swift in Sources */,
 				7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */,
@@ -971,7 +974,6 @@
 				7D181D692AD6F7C6003AB021 /* FavouriteRideCell.swift in Sources */,
 				7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift in Sources */,
 				7D6734B32A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift in Sources */,
-				7D740CC42AEA575F00E9FFD4 /* UISegmentedControl+HuggingPriority.swift in Sources */,
 				7D6C5C182AAF486700DEFC57 /* chewVM+state.swift in Sources */,
 				7D7A553A2AA4B3E5000256EF /* Feedback.swift in Sources */,
 				7D6C5C272AAF4BD300DEFC57 /* chewVM+reduce+Journeys.swift in Sources */,
@@ -1038,35 +1040,35 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7D6734BB2A96334C00CBE9C1 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7D6734C42A96334C00CBE9C1 /* Chew_chew_SwiftUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7D6734C52A96334D00CBE9C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7D6734D02A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift in Sources */,
-				7D6734CE2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift in Sources */,
+				7D0719392B1382D100BF846B /* Chew_chew_SwiftUIUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		7DFC91D22B13BE5000990A2F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7DFC91D92B13BE5000990A2F /* Chew_chew_UnitTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		7D6734C12A96334C00CBE9C1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7D6734AE2A96334B00CBE9C1 /* Chew-chew-SwiftUI */;
-			targetProxy = 7D6734C02A96334C00CBE9C1 /* PBXContainerItemProxy */;
-		};
 		7D6734CB2A96334D00CBE9C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7D6734AE2A96334B00CBE9C1 /* Chew-chew-SwiftUI */;
 			targetProxy = 7D6734CA2A96334D00CBE9C1 /* PBXContainerItemProxy */;
+		};
+		7DFC91DB2B13BE5000990A2F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7D6734AE2A96334B00CBE9C1 /* Chew-chew-SwiftUI */;
+			targetProxy = 7DFC91DA2B13BE5000990A2F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1263,46 +1265,6 @@
 			};
 			name = Release;
 		};
-		7D6734D72A96334D00CBE9C1 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M82325R967;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-SwiftUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chew-chew-SwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chew-chew-SwiftUI";
-			};
-			name = Debug;
-		};
-		7D6734D82A96334D00CBE9C1 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = M82325R967;
-				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-SwiftUITests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chew-chew-SwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chew-chew-SwiftUI";
-			};
-			name = Release;
-		};
 		7D6734DA2A96334D00CBE9C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1314,9 +1276,12 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-SwiftUIUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = "Chew-chew-SwiftUI";
 			};
 			name = Debug;
@@ -1332,10 +1297,57 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-SwiftUIUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				TEST_TARGET_NAME = "Chew-chew-SwiftUI";
+			};
+			name = Release;
+		};
+		7DFC91DC2B13BE5000990A2F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M82325R967;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-UnitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chew-chew-SwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chew-chew-SwiftUI";
+			};
+			name = Debug;
+		};
+		7DFC91DD2B13BE5000990A2F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M82325R967;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-UnitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 1;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chew-chew-SwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chew-chew-SwiftUI";
 			};
 			name = Release;
 		};
@@ -1360,20 +1372,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D6734D62A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "Chew-chew-SwiftUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7D6734D72A96334D00CBE9C1 /* Debug */,
-				7D6734D82A96334D00CBE9C1 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		7D6734D92A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "Chew-chew-SwiftUIUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D6734DA2A96334D00CBE9C1 /* Debug */,
 				7D6734DB2A96334D00CBE9C1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7DFC91DE2B13BE5000990A2F /* Build configuration list for PBXNativeTarget "Chew-chew-UnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7DFC91DC2B13BE5000990A2F /* Debug */,
+				7DFC91DD2B13BE5000990A2F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

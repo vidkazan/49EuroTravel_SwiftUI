@@ -26,8 +26,13 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
-      shouldUseLaunchSchemeArgsEnv = "YES"
-      shouldAutocreateTestPlan = "YES">
+      shouldUseLaunchSchemeArgsEnv = "YES">
+      <TestPlans>
+         <TestPlanReference
+            reference = "container:Chew-chew-SwiftUI.xctestplan"
+            default = "YES">
+         </TestPlanReference>
+      </TestPlans>
       <Testables>
          <TestableReference
             skipped = "NO"
@@ -41,13 +46,24 @@
             </BuildableReference>
          </TestableReference>
          <TestableReference
-            skipped = "NO"
+            skipped = "YES"
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7D6734C82A96334D00CBE9C1"
                BuildableName = "Chew-chew-SwiftUIUITests.xctest"
                BlueprintName = "Chew-chew-SwiftUIUITests"
+               ReferencedContainer = "container:Chew-chew-SwiftUI.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7DFC91D52B13BE5000990A2F"
+               BuildableName = "Chew-chew-UnitTests.xctest"
+               BlueprintName = "Chew-chew-UnitTests"
                ReferencedContainer = "container:Chew-chew-SwiftUI.xcodeproj">
             </BuildableReference>
          </TestableReference>

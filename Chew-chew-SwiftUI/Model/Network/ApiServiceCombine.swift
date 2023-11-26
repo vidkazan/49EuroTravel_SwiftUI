@@ -9,27 +9,34 @@ import Foundation
 import DequeModule
 import Combine
 
-extension ApiService  {
-	static func fetchCombine<T : Decodable>(
-		_ t : T.Type,
-		query : [URLQueryItem],
-		type : Requests,
-		requestGroupId : String) -> AnyPublisher<T,ApiServiceError> {
-			return Self.executeCombine(T.self, query: query, type: type)
-		}
+protocol HTTPClient {
+	func execute<T:Decodable>(_ t : T.Type,request: URLRequest, type : ApiService.Requests) -> AnyPublisher<T,ApiServiceError>
+}
+
+class MockClient : HTTPClient {
 	
-	static private func executeCombine<T: Decodable>(
+	var inputRequest: URLRequest?
+	var executeCalled = false
+	var requestType : ApiService.Requests?
+	
+	func execute<T: Decodable>(
 		_ t : T.Type,
-		query : [URLQueryItem],
-		type : Requests
+		request : URLRequest,
+		type : ApiService.Requests
 	) -> AnyPublisher<T, ApiServiceError> {
-		guard let url = generateUrl(query: query, type: type) else {
-			let subject = Future<T,ApiServiceError> { promise in
-				return promise(.failure(.badUrl))
-			}
-			return subject.eraseToAnyPublisher()
-		}
-		let request = type.getRequest(urlEndPoint: url)
+		executeCalled = true
+		inputRequest = request
+		requestType = type
+		return Empty().eraseToAnyPublisher()
+	}
+}
+
+class ApiClient : HTTPClient {
+	func execute<T: Decodable>(
+		_ t : T.Type,
+		request : URLRequest,
+		type : ApiService.Requests
+	) -> AnyPublisher<T, ApiServiceError> {
 		return URLSession.shared
 			.dataTaskPublisher(for: request)
 			.tryMap { data, response -> T in
@@ -45,7 +52,7 @@ extension ApiService  {
 					break
 				}
 				let value = try JSONDecoder().decode(T.self, from: data)
-				print("🟢 > api: done:",type.description, url)
+				print("🟢 > api: done:",type.description, request.url ?? "")
 				return value
 			}
 			.receive(on: DispatchQueue.main)
@@ -60,5 +67,23 @@ extension ApiService  {
 				}
 			}
 			.eraseToAnyPublisher()
+	}
+}
+
+extension ApiService {
+	func fetch<T: Decodable>(
+		_ t : T.Type,
+		query : [URLQueryItem],
+		type : Requests
+	) -> AnyPublisher<T, ApiServiceError> {
+		
+		guard let url = ApiService.generateUrl(query: query, type: type) else {
+			return Future<T,ApiServiceError> {
+				return $0(.failure(.badUrl))
+			}.eraseToAnyPublisher()
+		}
+		
+		let request = type.getRequest(urlEndPoint: url)
+		return self.client.execute(t.self, request: request, type: type)
 	}	
 }

@@ -6,8 +6,9 @@
 //
 
 import SwiftUI
-
-
+// TODO: legView: place transport icons
+// TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce
+// TODO: .reducted (placeholder view) with mock data
 // TODO: coreData: settings entity: save: update line instead of creating new
 // TODO: move all logic from views
 // TODO: bug: journey: if arrival stop cancelled, duration is NULL
@@ -34,7 +35,7 @@ struct ContentView: View {
 							}, label: {
 								Image(systemName: "gearshape")
 									.tint(.white)
-									.frame(maxWidth: 43,maxHeight: 40)
+									.frame(maxWidth: 43,maxHeight: 43)
 									.background(Color.chewGray10)
 									.cornerRadius(8)
 							})
@@ -84,7 +85,7 @@ struct ContentView: View {
 					}
 				})
 				.navigationBarHidden(true)
-				.transition(.move(edge: .bottom))
+				.transition(.opacity)
 				.animation(.spring().speed(2), value: chewViewModel.state.status)
 				.animation(.spring().speed(2), value: chewViewModel.searchStopsViewModel.state)
 			}
