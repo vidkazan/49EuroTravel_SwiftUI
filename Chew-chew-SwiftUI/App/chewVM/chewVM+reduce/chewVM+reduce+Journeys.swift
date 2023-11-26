@@ -53,9 +53,7 @@ extension ChewViewModel {
 				status: .datePicker)
 		case .didLoadInitialData:
 			return state
-		case .onNewDeparture(_):
-			return state
-		case .onNewArrival(_):
+		case .onNewStop:
 			return state
 		case .onJourneyDataUpdated:
 			return state

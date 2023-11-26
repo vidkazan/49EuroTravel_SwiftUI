@@ -45,14 +45,25 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .idle
 			)
-		case .onNewDeparture(let stop):
-			return State(
-				depStop: stop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
-				status: .idle
-			)
+		case .onNewStop(let stop, let type):
+			switch type {
+			case .departure:
+				return State(
+					depStop: stop,
+					arrStop: state.arrStop,
+					settings: state.settings,
+					timeChooserDate: state.timeChooserDate,
+					status: .idle
+				)
+			case .arrival:
+				return State(
+					depStop: state.depStop,
+					arrStop: stop,
+					settings: state.settings,
+					timeChooserDate: state.timeChooserDate,
+					status: .idle
+				)
+			}
 		case .didLocationButtonPressed:
 			return State(
 				depStop: state.depStop,
@@ -61,8 +72,6 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .loadingLocation
 			)
-		case .onNewArrival:
-			return state
 		case .onNewDate(let date):
 			return State(
 				depStop: state.depStop,

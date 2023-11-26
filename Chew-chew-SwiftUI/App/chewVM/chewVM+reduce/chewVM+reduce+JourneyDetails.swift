@@ -19,9 +19,7 @@ extension ChewViewModel {
 			return state
 		case .onDatePickerDidPressed:
 			return state
-		case .onNewDeparture(_):
-			return state
-		case .onNewArrival(_):
+		case .onNewStop:
 			return state
 		case .onStopsSwitch:
 			return state

@@ -126,8 +126,7 @@ extension ChewViewModel {
 		case didTapSettings
 		case didUpdateSettings(ChewSettings)
 		
-		case onNewDeparture(TextFieldContent)
-		case onNewArrival(TextFieldContent)
+		case onNewStop(TextFieldContent,LocationDirectionType)
 		
 		case didDismissBottomSheet
 		
@@ -148,10 +147,8 @@ extension ChewViewModel {
 				return "onDepartureEdit"
 			case .onDatePickerDidPressed:
 				return "onDatePickerDidPressed"
-			case .onNewDeparture:
-				return "onNewDeparture"
-			case .onNewArrival:
-				return "onNewArrival"
+			case .onNewStop:
+				return "onNewStop"
 			case .onStopsSwitch:
 				return "onStopsSwitch"
 			case .onNewDate:
