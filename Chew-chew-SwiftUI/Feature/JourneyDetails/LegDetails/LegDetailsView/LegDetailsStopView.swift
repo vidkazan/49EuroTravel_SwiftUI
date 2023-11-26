@@ -13,21 +13,32 @@ struct LegStopView : View {
 	let legViewData : LegViewData
 	let stopOver : StopViewData
 	let stopOverType : StopOverType
-	var time : PrognoseType<String>
-	var delay : TimeContainer.Status
+	var time : PrognosedTime<String>
+	var delay : TimeContainer.DelayStatus
 	let now = Date.now.timeIntervalSince1970
 	// MARK: Init
-	init(type : StopOverType, vm : LegDetailsViewModel,stopOver : StopViewData,leg : LegViewData) {
+	init(
+		type : StopOverType,
+		vm : LegDetailsViewModel,
+		stopOver : StopViewData,
+		leg : LegViewData
+	) {
 		self.vm = vm
 		self.stopOver = stopOver
 		self.stopOverType = type
 		self.legViewData = leg
 		switch type {
 		case .origin,.stopover,.transfer, .footTop,.footMiddle:
-			self.time = PrognoseType(actual: stopOver.timeContainer.stringTimeValue.departure.actual ?? "", planned: stopOver.timeContainer.stringTimeValue.departure.planned ?? "")
+			self.time = PrognosedTime(
+				actual: stopOver.timeContainer.stringTimeValue.departure.actual ?? "",
+				planned: stopOver.timeContainer.stringTimeValue.departure.planned ?? ""
+			)
 			self.delay = stopOver.timeContainer.departureDelay
 		case .destination, .footBottom:
-			self.time = PrognoseType(actual: stopOver.timeContainer.stringTimeValue.arrival.actual ?? "", planned: stopOver.timeContainer.stringTimeValue.arrival.planned ?? "")
+			self.time = PrognosedTime(
+				actual: stopOver.timeContainer.stringTimeValue.arrival.actual ?? "",
+				planned: stopOver.timeContainer.stringTimeValue.arrival.planned ?? ""
+			)
 			self.delay = stopOver.timeContainer.arrivalDelay
 		}
 	}
@@ -44,12 +55,16 @@ struct LegStopView : View {
 				VStack(alignment: .leading) {
 					if case .transfer=stopOverType {
 						HStack(spacing: 3) {
-							BadgeView(badge: .transfer(duration: legViewData.duration))
+							BadgeView(
+								badge: .transfer(duration: legViewData.duration)
+							)
 						}
 					}
 					if case .footMiddle=stopOverType {
 						HStack(spacing: 3) {
-							BadgeView(badge: .walking(duration: legViewData.duration))
+							BadgeView(
+								badge: .walking(duration: legViewData.duration)
+							)
 						}
 					}
 				}
@@ -61,7 +76,12 @@ struct LegStopView : View {
 			HStack(alignment:  .bottom) {
 				VStack(alignment: .leading) {
 					Spacer()
-					TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
+					TimeLabelView(
+						isSmall: false,
+						arragement: .bottom,
+						time: time,
+						delay: delay
+					)
 						.background(Color.chewGrayScale10)
 						.cornerRadius(10)
 				}

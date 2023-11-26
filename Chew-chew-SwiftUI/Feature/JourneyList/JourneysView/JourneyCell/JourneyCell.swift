@@ -10,11 +10,16 @@ import SwiftUI
 
 struct JourneyCell: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	let journey : JourneyViewData
+	let journey : JourneyViewData?
+	let isPlaceholder : Bool
 	init(journey: JourneyViewData) {
 		self.journey = journey
+		self.isPlaceholder = false
 	}
-	
+	init(isPlaceholder : Bool = true) {
+		self.isPlaceholder = isPlaceholder
+		self.journey = nil
+	}
 	var body: some View {
 		VStack {
 			JourneyHeaderView(journey: journey)
@@ -23,23 +28,23 @@ struct JourneyCell: View {
 			HStack(alignment: .center) {
 				PlatformView(
 					isShowingPlatormWord: false,
-					platform: journey.legs.first?.legStopsViewData.first?.departurePlatform.actual,
-					plannedPlatform: journey.legs.first?.legStopsViewData.first?.departurePlatform.planned)
-				Text(journey.legs.first?.legStopsViewData.first?.name ?? "")
+					platform: journey?.legs.first?.legStopsViewData.first?.departurePlatform.actual,
+					plannedPlatform: journey?.legs.first?.legStopsViewData.first?.departurePlatform.planned)
+				Text(journey?.legs.first?.legStopsViewData.first?.name ?? "")
 					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
 				Spacer()
-				BadgesView(badges: journey.badges)
+				BadgesView(badges: journey?.badges ?? [])
 			}
 			.padding(7)
-			
 		}
 		.background(Color.chewGray10)
 		.overlay {
-			if !journey.isReachable {
+			if journey?.isReachable == false {
 				Color.black.opacity(0.7)
 			}
 		}
+		.redacted(reason: isPlaceholder ? .placeholder : [])
 		.cornerRadius(10)
 	}
 }

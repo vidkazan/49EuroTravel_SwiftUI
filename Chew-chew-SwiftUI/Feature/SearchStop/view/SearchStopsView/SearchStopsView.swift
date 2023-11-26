@@ -12,7 +12,8 @@ struct SearchStopsView: View {
 	@Environment(\.managedObjectContext) var viewContext
 	@EnvironmentObject  var chewViewModel : ChewViewModel
 	@ObservedObject var searchStopViewModel : SearchStopsViewModel
-	@FocusState	var focusedField : LocationDirectionType?
+	@FocusState 	var focusedField : LocationDirectionType?
+	@State var previuosStatus : ChewViewModel.Status?
 	@State var topText : String
 	@State var bottomText : String
 	@State var fieldRedBorder : (top: Bool,bottom: Bool) = (false,false)
@@ -49,7 +50,8 @@ struct SearchStopsView: View {
 			}
 			.background(Color.chewGray10)
 			.cornerRadius(10)
-			.transition(.move(edge: .bottom))
+			.transition(.opacity)
+//			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: searchStopViewModel.state.status)
 			// MARK: BottomField
 			VStack {
@@ -75,44 +77,16 @@ struct SearchStopsView: View {
 			}
 			.background(Color.chewGray10)
 			.cornerRadius(10)
-			.transition(.move(edge: .bottom))
+			.transition(.opacity)
+//			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: searchStopViewModel.state.status)
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
+			topText = state.depStop.text
+			bottomText = state.arrStop.text
 			
-			fieldRedBorder.bottom = false
-			fieldRedBorder.top = false
-			
-			switch state.depStop {
-			case .location(let stop):
-				topText = stop.name
-			case .textOnly(let text):
-				topText = text
-				if !topText.isEmpty, state.status != .editingDepartureStop {
-					fieldRedBorder.top = true
-				}
-			}
-			
-			switch state.arrStop {
-			case .location(let stop):
-				bottomText = stop.name
-			case .textOnly(let text):
-				bottomText = text
-				if !bottomText.isEmpty, state.status != .editingArrivalStop {
-					fieldRedBorder.bottom = true
-				}
-			}
-			
-//			if let dep = state.depStop.stop {
-//				topText = dep.name
-//			} else if !topText.isEmpty, state.status != .editingDepartureStop {
-//				fieldRedBorder.top = true
-//			}
-//			if let arr = state.arrStop.stop {
-//				bottomText = arr.name
-//			} else if !bottomText.isEmpty, state.status != .editingArrivalStop {
-//				fieldRedBorder.bottom = true
-//			}
+			fieldRedBorder.bottom = state.arrStop.stop == nil && !state.arrStop.text.isEmpty && state.status != .editingArrivalStop
+			fieldRedBorder.top = state.depStop.stop == nil && !state.depStop.text.isEmpty && state.status != .editingDepartureStop
 			
 			switch state.status {
 			case .editingDepartureStop:
@@ -124,6 +98,8 @@ struct SearchStopsView: View {
 			default:
 				focusedField = nil
 			}
+			
+			previuosStatus = chewViewModel.state.status
 		})
 	}
 }

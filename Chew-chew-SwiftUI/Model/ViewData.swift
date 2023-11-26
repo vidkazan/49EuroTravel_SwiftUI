@@ -68,8 +68,8 @@ struct StopViewData : Equatable,Identifiable {
 	let id = UUID()
 	let locationCoordinates : CLLocationCoordinate2D
 	let name : String
-	let departurePlatform : PrognoseType<String?>
-	let arrivalPlatform : PrognoseType<String?>
+	let departurePlatform : PrognosedTime<String?>
+	let arrivalPlatform : PrognosedTime<String?>
 	let timeContainer : TimeContainer
 	let type : StopOverType
 }
@@ -103,8 +103,8 @@ extension StopViewData {
 	) {
 		self.timeContainer = timeContainer
 		self.name = name
-		self.departurePlatform  = PrognoseType(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
-		self.arrivalPlatform  = PrognoseType(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
+		self.departurePlatform  = PrognosedTime(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
+		self.arrivalPlatform  = PrognosedTime(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
 		self.type = type
 		self.locationCoordinates = CLLocationCoordinate2D(
 			latitude: stop.stop?.location?.latitude ?? stop.stop?.latitude ?? -1,
@@ -119,8 +119,8 @@ extension StopViewData {
 	) {
 		self.timeContainer = timeContainer
 		self.name = name
-		self.departurePlatform  = PrognoseType(actual: nil, planned: nil)
-		self.arrivalPlatform  = PrognoseType(actual: nil, planned: nil)
+		self.departurePlatform  = PrognosedTime(actual: nil, planned: nil)
+		self.arrivalPlatform  = PrognosedTime(actual: nil, planned: nil)
 		self.type = type
 		self.locationCoordinates = coordinates
 	}

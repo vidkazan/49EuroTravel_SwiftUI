@@ -9,10 +9,10 @@ import SwiftUI
 
 struct LegsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	var journey : JourneyViewData
+	var journey : JourneyViewData?
 	var gradientStops : [Gradient.Stop]
 	
-	init(journey: JourneyViewData) {
+	init(journey: JourneyViewData?) {
 		self.journey = journey
 		
 		let nightColor = Color(hue: 0.58, saturation: 1, brightness: 0.15)
@@ -20,6 +20,7 @@ struct LegsView: View {
 		
 		self.gradientStops = {
 			var stops : [Gradient.Stop] = []
+			guard let journey = journey else { return [] }
 			for event in journey.sunEvents {
 				if
 					let startDateTS = journey.timeContainer.timestamp.departure.actual,
@@ -69,6 +70,7 @@ struct LegsView: View {
 			GeometryReader { geo in
 				ZStack {
 					RoundedRectangle(cornerRadius: 5)
+						.fill(.gray)
 						.overlay{
 							LinearGradient(
 								stops: gradientStops,
@@ -76,13 +78,15 @@ struct LegsView: View {
 								endPoint: UnitPoint(x: 1, y: 0))
 						}
 						.frame(maxWidth: (geo.size.width) > 0 ? geo.size.width : 0 ,maxHeight: 18)
-					ForEach(journey.legs) { leg in
-						LegView(leg: leg)
-							.frame(
-								width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
-								height:leg.delayedAndNextIsNotReachable == true ? 30 : 27)
-							.position(x:geo.size.width * (leg.legTopPosition + (( leg.legBottomPosition - leg.legTopPosition ) / 2)),y: geo.size.height/2)
-							.opacity(0.90)
+					if let journey = journey {
+						ForEach(journey.legs) { leg in
+							LegView(leg: leg)
+								.frame(
+									width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
+									height:leg.delayedAndNextIsNotReachable == true ? 30 : 27)
+								.position(x:geo.size.width * (leg.legTopPosition + (( leg.legBottomPosition - leg.legTopPosition ) / 2)),y: geo.size.height/2)
+								.opacity(0.90)
+						}
 					}
 				}
 			}

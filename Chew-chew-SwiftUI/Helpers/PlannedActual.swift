@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PrognoseType<T : Equatable > : Equatable {
+struct PrognosedTime<T : Equatable > : Equatable {
 	let actual : T
 	let planned : T
 }

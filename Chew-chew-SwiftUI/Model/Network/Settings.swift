@@ -8,20 +8,6 @@
 import Foundation
 
 struct ChewSettings : Equatable,Hashable {
-//	struct TransportTypeValue : Equatable,Hashable, Identifiable, Comparable {
-//		static func < (lhs: TransportTypeValue, rhs: TransportTypeValue) -> Bool {
-//			lhs.type.rawValue < rhs.type.rawValue
-//		}
-//		
-//		let id = UUID()
-//		let type : LineType
-//		let value : Bool
-//		
-//		init(_ type: LineType,_ value: Bool) {
-//			self.type = type
-//			self.value = value
-//		}
-//	}
 	enum TransportMode : Int, Equatable, Hashable {
 		case deutschlandTicket
 		case all

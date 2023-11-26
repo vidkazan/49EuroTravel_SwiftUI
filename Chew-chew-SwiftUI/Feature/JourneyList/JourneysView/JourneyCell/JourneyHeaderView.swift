@@ -9,7 +9,7 @@ import SwiftUI
 
 
 struct JourneyHeaderView: View {
-	let journey : JourneyViewData
+	let journey : JourneyViewData?
 	
 	var body: some View {
 		ZStack {
@@ -17,26 +17,26 @@ struct JourneyHeaderView: View {
 				TimeLabelView(
 					isSmall: false,
 					arragement: .right,
-					time : PrognoseType(
-						actual: journey.timeContainer.stringTimeValue.departure.actual ?? "time",
-						planned:  journey.timeContainer.stringTimeValue.departure.planned ?? "time"
+					time : PrognosedTime(
+						actual: journey?.timeContainer.stringTimeValue.departure.actual ?? "time",
+						planned:  journey?.timeContainer.stringTimeValue.departure.planned ?? "time"
 					),
-					delay: journey.timeContainer.departureDelay
+					delay: journey?.timeContainer.departureDelay ?? .onTime
 				)
 				.padding(7)
 				Spacer()
-				Text(journey.durationLabelText)
+				Text(journey?.durationLabelText ?? "11:11")
 					.foregroundColor(.primary)
 					.chewTextSize(.medium)
 				Spacer()
 				TimeLabelView(
 					isSmall: false,
 					arragement: .left,
-					time : PrognoseType(
-						actual: journey.timeContainer.stringTimeValue.arrival.actual ?? "time",
-						planned:  journey.timeContainer.stringTimeValue.arrival.planned ?? "time"
+					time : PrognosedTime(
+						actual: journey?.timeContainer.stringTimeValue.arrival.actual ?? "time",
+						planned:  journey?.timeContainer.stringTimeValue.arrival.planned ?? "time"
 					),
-					delay: journey.timeContainer.arrivalDelay
+					delay: journey?.timeContainer.arrivalDelay ?? .onTime
 				)
 				.padding(7)
 			}

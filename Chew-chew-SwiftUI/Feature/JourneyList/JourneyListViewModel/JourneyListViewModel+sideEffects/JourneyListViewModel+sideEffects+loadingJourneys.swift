@@ -154,7 +154,7 @@ extension JourneyListViewModel {
 				Query.pretty(pretyIntend: settings.debugSettings.prettyJSON),
 			]
 		)
-		return ApiService.fetchCombine(JourneysContainer.self,query: query, type: ApiService.Requests.journeys, requestGroupId: "")
+		return ApiService().fetch(JourneysContainer.self,query: query, type: ApiService.Requests.journeys)
 	}
 }
 

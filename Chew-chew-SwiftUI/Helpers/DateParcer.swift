@@ -7,6 +7,7 @@
 
 import Foundation
 
+// TODO: tests
 class DateParcer {
 	static private let formatDateAndTime = "yyyyMMdd'T'HHmmssZ"
 	

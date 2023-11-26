@@ -7,28 +7,6 @@
 
 import Foundation
 
-//Query Parameters
-//	parameter	description	type	default value
-//	when	Date & time to get departures for. See date/time parameters.	date+time	now
-//direction	Filter departures by direction.	string
-//duration	Show departures for how many minutes?	integer	10
-//results	Max. number of departures.	integer	whatever HAFAS wants
-//linesOfStops	Parse & return lines of each stop/station?	boolean	false
-//remarks	Parse & return hints & warnings?	boolean	true
-//language	Language of the results.	string	en
-//nationalExpress	Include InterCityExpress (ICE)?	boolean	true
-//national	Include InterCity & EuroCity (IC/EC)?	boolean	true
-//regionalExpress	Include RegionalExpress & InterRegio (RE/IR)?	boolean	true
-//regional	Include Regio (RB)?	boolean	true
-//suburban	Include S-Bahn (S)?	boolean	true
-//bus	Include Bus (B)?	boolean	true
-//ferry	Include Ferry (F)?	boolean	true
-//subway	Include U-Bahn (U)?	boolean	true
-//tram	Include Tram (T)?	boolean	true
-//taxi	Include Group Taxi (Taxi)?	boolean	true
-//pretty	Pretty-print JSON responses?	boolean	true
-
-
 enum Query{
 	case transferTime(transferTime: Int)
 	case location(location : String?)
@@ -248,30 +226,8 @@ enum Query{
 		}
 	}
 	static func getQueryItems(methods : [Query]) -> [URLQueryItem] {
-		return methods.map { $0.getQueryMethod() }
-	}
-}
-
-enum QueryRange{
-	case beginAt(dateFrom: Date,dateTo: Date)
-	case login(login : String)
-	
-	var queryPrefix : String {
-		switch self {
-		case .beginAt:
-			return "range[begin_at]"
-		case .login:
-			return "range[login]"
-		}
-	}
-	func getRange() -> URLQueryItem {
-		switch self {
-		case .beginAt(let date1, let date2):
-			let value = "\(DateParcer.getStringFromDate(date: date1) ?? ""),\(DateParcer.getStringFromDate(date: date2) ?? "")"
-			return URLQueryItem(name: self.queryPrefix, value: value)
-		case .login(let login):
-			let value = "\(login.lowercased()),\(login.lowercased())z"
-			return URLQueryItem(name: self.queryPrefix, value: value)
+		return methods.map {
+			$0.getQueryMethod()
 		}
 	}
 }

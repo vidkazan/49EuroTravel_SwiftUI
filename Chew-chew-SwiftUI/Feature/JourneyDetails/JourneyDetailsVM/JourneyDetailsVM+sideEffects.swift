@@ -183,18 +183,17 @@ extension JourneyDetailsViewModel {
 	
 	
 	static func fetchTrip(tripId : String) -> AnyPublisher<Leg,ApiServiceError> {
-		return ApiService.fetchCombine(
+		return ApiService().fetch(
 			Trip.self,
 			query: [],
-			type: ApiService.Requests.trips(tripId: tripId),
-			requestGroupId: ""
+			type: ApiService.Requests.trips(tripId: tripId)
 		)
 		.map {return $0.trip}
 		.eraseToAnyPublisher()
 	}
 	
 	static func fetchJourneyByRefreshToken(ref : String) -> AnyPublisher<Journey,ApiServiceError> {
-		return ApiService.fetchCombine(
+		return ApiService().fetch(
 			JourneyWrapper.self,
 			query: Query.getQueryItems(
 				methods: [
@@ -202,8 +201,7 @@ extension JourneyDetailsViewModel {
 					Query.polylines(true),
 				]
 			),
-			type: ApiService.Requests.journeyByRefreshToken(ref: ref),
-			requestGroupId: ""
+			type: ApiService.Requests.journeyByRefreshToken(ref: ref)
 		)
 		.map { return $0.journey }
 		.eraseToAnyPublisher()

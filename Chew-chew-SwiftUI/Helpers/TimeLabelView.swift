@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+// TODO: tests
 struct TimeLabelView: View {
 	enum Arragement {
 		case left
@@ -17,9 +18,9 @@ struct TimeLabelView: View {
 	}
 	let isSmall : Bool
 	let arragement : Arragement
-	var delay : TimeContainer.Status
-	var time : PrognoseType<String>
-	init(isSmall: Bool, arragement : Arragement, time : PrognoseType<String>, delay: TimeContainer.Status) {
+	var delay : TimeContainer.DelayStatus
+	var time : PrognosedTime<String>
+	init(isSmall: Bool, arragement : Arragement, time : PrognosedTime<String>, delay: TimeContainer.DelayStatus) {
 		self.delay = delay
 		self.isSmall = isSmall
 		self.arragement = arragement
@@ -84,12 +85,24 @@ extension TimeLabelView {
 		if cancelled == true {
 			return	Text(time.planned)
 				.foregroundColor(Color.chewRedScale80)
-				.font(.system(size: isSmall == false ? 17 : 12,weight: isSmall == false ? .semibold : .medium))
+				.font(
+					.system(
+						size: isSmall == false ? 17 : 12,
+						weight: isSmall == false ? .semibold : .medium
+					)
+				)
 				.strikethrough()
 		} else {
 			return	Text(delay < 1 ? time.planned : time.actual)
-				.foregroundColor(delay < 5 ? isSmall ? .gray : .primary.opacity(0.85) : Color.chewRedScale80)
-				.font(.system(size: isSmall == false ? 17 : 12,weight: isSmall == false ? .semibold : .medium))
+				.foregroundColor(
+					delay < 5 ? isSmall ? .gray : .primary.opacity(0.85) : Color.chewRedScale80
+				)
+				.font(
+					.system(
+						size: isSmall == false ? 17 : 12,
+						weight: isSmall == false ? .semibold : .medium
+					)
+				)
 		}
 	}
 }

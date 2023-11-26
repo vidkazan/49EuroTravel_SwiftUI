@@ -15,6 +15,8 @@ struct JourneysListView: View {
 		VStack{
 			switch journeyViewModel.state.status {
 			case .loadingJourneys:
+//				JourneyCell()
+//					.redacted(reason: .placeholder)
 				Spacer()
 				JourneyScrollViewLoader()
 			case .journeysLoaded,.loadingRef,.failedToLoadLaterRef,.failedToLoadEarlierRef:
@@ -71,7 +73,8 @@ struct JourneysListView: View {
 							}
 						}
 					}
-					.transition(.move(edge: .bottom))
+					.transition(.opacity)
+//					.transition(.move(edge: .bottom))
 					.animation(.spring(), value: journeyViewModel.state.status)
 				}
 			case .failedToLoadJourneys(let error):
@@ -98,7 +101,8 @@ struct JourneysListView: View {
 			}
 			Spacer()
 		}
-		.transition(.move(edge: .bottom))
+		.transition(.opacity)
+//		.transition(.move(edge: .bottom))
 		.animation(.spring(), value: journeyViewModel.state.status)
 		.frame(maxWidth: .infinity)
 		.cornerRadius(10)

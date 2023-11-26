@@ -16,6 +16,7 @@ extension SearchStopsView {
 	) -> some View {
 		return HStack(spacing: 0){
 			TextField(type.placeholder, text: textBinding)
+				.submitLabel(.done)
 				.keyboardType(.alphabet)
 				.autocorrectionDisabled(true)
 				.padding(10)
@@ -43,12 +44,7 @@ extension SearchStopsView {
 					}
 				}
 				.onSubmit {
-					switch type {
-					case .departure:
-						chewViewModel.send(event: .onNewDeparture(.textOnly(topText)))
-					case .arrival:
-						chewViewModel.send(event: .onNewArrival(.textOnly(bottomText)))
-					}
+					chewViewModel.send(event: .onNewStop(.textOnly(text), type))
 				}
 			VStack {
 				if focusedField == type && text.count > 0 {
@@ -62,7 +58,7 @@ extension SearchStopsView {
 					})
 					.frame(width: 40,height: 40)
 				}
-			} 
+			}
 			.transition(.opacity)
 			.animation(.spring(response: 0.1), value: text.count)
 			Spacer()

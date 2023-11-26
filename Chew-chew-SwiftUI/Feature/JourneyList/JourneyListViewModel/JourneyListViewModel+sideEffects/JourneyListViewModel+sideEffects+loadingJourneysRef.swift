@@ -58,7 +58,7 @@ extension JourneyListViewModel {
 			Query.stopovers(isShowing: true)
 		])
 		query += self.addJourneysTransportModes(settings: settings)
-		return ApiService.fetchCombine(JourneysContainer.self,query: query, type: ApiService.Requests.journeys, requestGroupId: "")
+		return ApiService().fetch(JourneysContainer.self,query: query, type: ApiService.Requests.journeys)
 	}
 }
 

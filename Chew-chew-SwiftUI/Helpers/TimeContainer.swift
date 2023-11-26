@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: TimeContainer
 struct TimeContainer : Equatable{
-	enum Status : Equatable {
+	enum DelayStatus : Equatable {
 		case onTime
 		case delay(Int)
 		case cancelled
@@ -18,8 +18,8 @@ struct TimeContainer : Equatable{
 			switch self {
 			case .cancelled:
 				return nil
-			case .delay(let d):
-				return d
+			case .delay(let time):
+				return time
 			case .onTime:
 				return 0
 			}
@@ -30,17 +30,23 @@ struct TimeContainer : Equatable{
 	let timestamp : TimestampTimeContainer
 	let stringTimeValue : TimeStringContainer
 	let stringDateValue : DateStringContainer
-	let departureDelay : Status
-	let arrivalDelay : Status
+	let departureDelay : DelayStatus
+	let arrivalDelay : DelayStatus
 }
 extension TimeContainer {
 	// MARK: Init
-	init(plannedDeparture: String?, plannedArrival: String?, actualDeparture: String?, actualArrival: String?, cancelled : Bool?) {
-		let departure = PrognoseType(
+	init(
+		plannedDeparture: String?,
+		plannedArrival: String?,
+		actualDeparture: String?,
+		actualArrival: String?,
+		cancelled : Bool?
+	) {
+		let departure = PrognosedTime(
 			actual: actualDeparture,
 			planned: plannedDeparture
 		)
-		let arrival = PrognoseType(
+		let arrival = PrognosedTime(
 			actual: actualArrival,
 			planned: plannedArrival
 		)
@@ -54,16 +60,16 @@ extension TimeContainer {
 	}
 	// MARK: ISO Container
 	struct ISOTimeContainer : Equatable {
-		let departure : PrognoseType<String?>
-		let arrival : PrognoseType<String?>
+		let departure : PrognosedTime<String?>
+		let arrival : PrognosedTime<String?>
 		
 		func getDateContainer() -> DateTimeContainer {
 			return DateTimeContainer(
-				departure: PrognoseType(
+				departure: PrognosedTime(
 					actual: DateParcer.getDateFromDateString(dateString: departure.actual),
 					planned: DateParcer.getDateFromDateString(dateString: departure.planned)
 				),
-				arrival: PrognoseType(
+				arrival: PrognosedTime(
 					actual: DateParcer.getDateFromDateString(dateString: arrival.actual),
 					planned: DateParcer.getDateFromDateString(dateString: arrival.planned)
 				)
@@ -72,16 +78,16 @@ extension TimeContainer {
 	}
 	// MARK: Date Container
 	struct DateTimeContainer : Equatable {
-		let departure : PrognoseType<Date?>
-		let arrival : PrognoseType<Date?>
+		let departure : PrognosedTime<Date?>
+		let arrival : PrognosedTime<Date?>
 		
 		func getTSContainer() -> TimestampTimeContainer {
 			return TimestampTimeContainer(
-				departure: PrognoseType(
+				departure: PrognosedTime(
 					actual: departure.actual?.timeIntervalSince1970,
 					planned: departure.planned?.timeIntervalSince1970
 				),
-				arrival: PrognoseType(
+				arrival: PrognosedTime(
 					actual: arrival.actual?.timeIntervalSince1970,
 					planned: arrival.planned?.timeIntervalSince1970
 				)
@@ -89,11 +95,11 @@ extension TimeContainer {
 		}
 		func getStringTimeValueContainer() -> TimeStringContainer {
 			return TimeStringContainer(
-				departure: PrognoseType(
+				departure: PrognosedTime(
 					actual: DateParcer.getTimeStringFromDate(date: departure.actual),
 					planned: DateParcer.getTimeStringFromDate(date: departure.planned)
 				),
-				arrival: PrognoseType(
+				arrival: PrognosedTime(
 					actual: DateParcer.getTimeStringFromDate(date: arrival.actual),
 					planned: DateParcer.getTimeStringFromDate(date: arrival.planned)
 				)
@@ -101,11 +107,11 @@ extension TimeContainer {
 		}
 		func getStringDateValueContainer() -> DateStringContainer {
 			return DateStringContainer(
-				departure: PrognoseType(
+				departure: PrognosedTime(
 					actual: DateParcer.getDateOnlyStringFromDate(date: departure.actual),
 					planned: DateParcer.getDateOnlyStringFromDate(date: departure.planned)
 				),
-				arrival: PrognoseType(
+				arrival: PrognosedTime(
 					actual: DateParcer.getDateOnlyStringFromDate(date: arrival.actual),
 					planned: DateParcer.getDateOnlyStringFromDate(date: arrival.planned)
 				)
@@ -115,20 +121,20 @@ extension TimeContainer {
 	
 	// MARK: TimeString Container
 	struct TimeStringContainer : Equatable {
-		let departure : PrognoseType<String?>
-		let arrival : PrognoseType<String?>
+		let departure : PrognosedTime<String?>
+		let arrival : PrognosedTime<String?>
 	}
 	struct DateStringContainer : Equatable {
-		let departure : PrognoseType<String?>
-		let arrival : PrognoseType<String?>
+		let departure : PrognosedTime<String?>
+		let arrival : PrognosedTime<String?>
 	}
 	// MARK: TS Container
 	struct TimestampTimeContainer : Equatable {
-		let departure : PrognoseType<Double?>
-		let arrival : PrognoseType<Double?>
+		let departure : PrognosedTime<Double?>
+		let arrival : PrognosedTime<Double?>
 		
-		func generateDelayStatus(type: LocationDirectionType, cancelled : Bool?) -> Status {
-			let time : PrognoseType<Double?> = {
+		func generateDelayStatus(type: LocationDirectionType, cancelled : Bool?) -> DelayStatus {
+			let time : PrognosedTime<Double?> = {
 				switch type {
 				case .departure:
 					return self.departure

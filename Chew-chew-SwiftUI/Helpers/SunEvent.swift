@@ -15,6 +15,7 @@ enum SunEventType : Equatable,Hashable {
 	case night
 }
 
+// TODO: tests
 struct SunEvent : Equatable,Hashable {
 	static func == (lhs: SunEvent, rhs: SunEvent) -> Bool {
 		return
@@ -33,7 +34,6 @@ struct SunEvent : Equatable,Hashable {
 		self.location = location
 		self.timeStart = timeStart
 		self.timeFinal = timeFinal
-		
 	}
 }
 
@@ -64,7 +64,7 @@ class SunEventService {
 		//MARK: fix setting initial sun state
 		sunEvents.append(
 			SunEvent(
-				type: solar.isDaytime ? .day : .night, // in the middle of sunset/sunrise ?
+				type: solar.isDaytime ? .day : .night,
 				location: self.locationStart,
 				timeStart: self.dateStart,
 				timeFinal: nil
@@ -94,32 +94,28 @@ class SunEventService {
 				
 				if	let correctedSunriseStart = correctedSolar.civilSunrise,
 					let correctedSunriseEnd = correctedSolar.sunrise {
-					
-//					if self.dateStart < correctedSunriseStart && correctedSunriseEnd < self.dateFinal {
 						sunEvents.append(SunEvent(
 							type: .sunrise,
 							location: self.locationStart,
 							timeStart: correctedSunriseStart,
 							timeFinal: correctedSunriseEnd
 						))
-//					}
 				}
 			}
 			if let sunsetEnd = solar.sunset {
 				guard let correctadLocation = self.getLocationByDate(date: sunsetEnd) else { return [] }
 				guard let correctedSolar = Solar(for: date,coordinate: correctadLocation) else { return [] }
-				if let correctedSunsetStart = correctedSolar.sunset, let correctedSunsetEnd = correctedSolar.civilSunset {
-//					if self.dateStart < correctedSunsetStart && correctedSunsetEnd < self.dateFinal {
-						sunEvents.append(SunEvent(
-							type: .sunset,
-							location: self.locationStart,
-							timeStart: correctedSunsetStart,
-							timeFinal: correctedSunsetEnd
-						))
-//					}
+				
+				if	let correctedSunsetStart = correctedSolar.sunset,
+					let correctedSunsetEnd = correctedSolar.civilSunset {
+					sunEvents.append(SunEvent(
+						type: .sunset,
+						location: self.locationStart,
+						timeStart: correctedSunsetStart,
+						timeFinal: correctedSunsetEnd
+					))
 				}
 			}
-			
 		}
 		return sunEvents
 	}
