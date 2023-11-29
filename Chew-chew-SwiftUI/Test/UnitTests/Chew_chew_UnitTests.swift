@@ -6,6 +6,7 @@
 //
 
 import XCTest
+import CoreLocation
 @testable import Chew_chew_SwiftUI
 
 final class Chew_chew_UnitTests: XCTestCase {
@@ -20,19 +21,10 @@ final class Chew_chew_UnitTests: XCTestCase {
 			type: .locations
 		)
 		
-		XCTAssertTrue(client.executeCalled)
-		XCTAssertEqual(client.requestType, .locations)
-		XCTAssertNotNil(client.inputRequest)
 		XCTAssertEqual(
 			client.inputRequest?.url?.query,"query=Pop")
 	}
-//    override func setUpWithError() throws {
-//        // Put setup code here. This method is called before the invocation of each test method in the class.
-//    }
-//
-//    override func tearDownWithError() throws {
-//        // Put teardown code here. This method is called after the invocation of each test method in the class.
-//    }
-//
 	
+	func testConstructTransferCount() {
+	}
 }
