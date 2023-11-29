@@ -11,6 +11,9 @@ import CoreLocation
 
 final class Chew_chew_UnitTests: XCTestCase {
 
+	
+	let data = Mock.trip.test.getData()
+	
 	func testFetchLocations() {
 		let client = MockClient()
 		let service = ApiService(client: client)
@@ -25,6 +28,8 @@ final class Chew_chew_UnitTests: XCTestCase {
 			client.inputRequest?.url?.query,"query=Pop")
 	}
 	
-	func testConstructTransferCount() {
+	func testJourneyNotNil() {
+		
+		XCTAssertNotNil(data)
 	}
 }

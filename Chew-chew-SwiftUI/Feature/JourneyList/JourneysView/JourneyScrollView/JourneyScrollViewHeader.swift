@@ -12,7 +12,7 @@ struct JourneyScrollViewHeader: View {
 	var body: some View {
 		HStack{
 			Button("Reload", action: {
-				journeyViewModel.send(event: .onReloadJourneys)
+				journeyViewModel.send(event: .onReloadJourneyList)
 			})
 			
 			.foregroundColor(.secondary)

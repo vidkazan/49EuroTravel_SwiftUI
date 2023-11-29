@@ -9,8 +9,8 @@ import Foundation
 
 
 extension JourneyListViewModel {
-	func reduceFailedToLoadJourneys(_ state:  State, _ event: Event) -> State {
-		guard case .failedToLoadJourneys = state.status else { return state }
+	func reduceFailedToLoadJourneyList(_ state:  State, _ event: Event) -> State {
+		guard case .failedToLoadJourneyList = state.status else { return state }
 			return state
 	}
 }

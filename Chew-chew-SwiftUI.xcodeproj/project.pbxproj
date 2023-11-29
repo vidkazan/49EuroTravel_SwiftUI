@@ -31,6 +31,9 @@
 		7D181D672AD6D6BB003AB021 /* TextModifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D181D662AD6D6BB003AB021 /* TextModifiers.swift */; };
 		7D181D692AD6F7C6003AB021 /* FavouriteRideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D181D682AD6F7C6003AB021 /* FavouriteRideCell.swift */; };
 		7D1AD8EC2AE94A7500868056 /* GeoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1AD8EB2AE94A7500868056 /* GeoDTO.swift */; };
+		7D1C59EC2B16A37D00286E3A /* Directions.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D1C59EB2B16A37D00286E3A /* Directions.json */; };
+		7D1C59EE2B16A39C00286E3A /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D91B6D32B16335600FCBE76 /* Mock.swift */; };
+		7D1C59EF2B16A39D00286E3A /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D91B6D32B16335600FCBE76 /* Mock.swift */; };
 		7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E4492A98F9800037C3E1 /* LegsView.swift */; };
 		7D23E44C2A98FD700037C3E1 /* LegView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D23E44B2A98FD700037C3E1 /* LegView.swift */; };
 		7D2CAF642B0BEA0200577FD4 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */; };
@@ -96,6 +99,13 @@
 		7D7B3DAE2AB9D3620070E44D /* LegDetailsVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DAD2AB9D3620070E44D /* LegDetailsVM+reduce.swift */; };
 		7D7B3DB02AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DAF2AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift */; };
 		7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81AB252A978CDC0055AEAF /* DatePickerView.swift */; };
+		7D932BA62B14E46F00A1A390 /* Chew_chew_UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC91D82B13BE5000990A2F /* Chew_chew_UnitTests.swift */; };
+		7D932BAB2B14F05A00A1A390 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json in Resources */ = {isa = PBXBuildFile; fileRef = 7DCC89362B14C8A8007B9DC9 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json */; };
+		7D932BAC2B14F05E00A1A390 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json in Resources */ = {isa = PBXBuildFile; fileRef = 7DCC89362B14C8A8007B9DC9 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json */; };
+		7D932BAD2B14F06300A1A390 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json in Resources */ = {isa = PBXBuildFile; fileRef = 7DCC89372B14CE94007B9DC9 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json */; };
+		7D932BAE2B14F06300A1A390 /* RE6-Neuss-Minden.json in Resources */ = {isa = PBXBuildFile; fileRef = 7DCC89352B14C6EC007B9DC9 /* RE6-Neuss-Minden.json */; };
+		7D932BAF2B14F06300A1A390 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json in Resources */ = {isa = PBXBuildFile; fileRef = 7DCC89372B14CE94007B9DC9 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json */; };
+		7D932BB02B14F06300A1A390 /* RE6-Neuss-Minden.json in Resources */ = {isa = PBXBuildFile; fileRef = 7DCC89352B14C6EC007B9DC9 /* RE6-Neuss-Minden.json */; };
 		7D942A092AD9578800301666 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942A082AD9578800301666 /* Location.swift */; };
 		7D9BB10C2B0CBF54008A3616 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BB1062B0CBF53008A3616 /* Location+CoreDataClass.swift */; };
 		7D9BB10D2B0CBF54008A3616 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BB1072B0CBF53008A3616 /* Location+CoreDataProperties.swift */; };
@@ -132,7 +142,6 @@
 		7DE727C62AD93869002FF033 /* JourneyFollowRideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE727C52AD93869002FF033 /* JourneyFollowRideView.swift */; };
 		7DE727C92AD93955002FF033 /* ApiServiceCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */; };
 		7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */; };
-		7DFC91D92B13BE5000990A2F /* Chew_chew_UnitTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC91D82B13BE5000990A2F /* Chew_chew_UnitTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -143,7 +152,7 @@
 			remoteGlobalIDString = 7D6734AE2A96334B00CBE9C1;
 			remoteInfo = "Chew-chew-SwiftUI";
 		};
-		7DFC91DA2B13BE5000990A2F /* PBXContainerItemProxy */ = {
+		7D932BA12B14E46A00A1A390 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 7D6734A72A96334B00CBE9C1 /* Project object */;
 			proxyType = 1;
@@ -173,9 +182,9 @@
 		7D181D662AD6D6BB003AB021 /* TextModifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifiers.swift; sourceTree = "<group>"; };
 		7D181D682AD6F7C6003AB021 /* FavouriteRideCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRideCell.swift; sourceTree = "<group>"; };
 		7D1AD8EB2AE94A7500868056 /* GeoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoDTO.swift; sourceTree = "<group>"; };
+		7D1C59EB2B16A37D00286E3A /* Directions.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Directions.json; sourceTree = "<group>"; };
 		7D23E4492A98F9800037C3E1 /* LegsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegsView.swift; sourceTree = "<group>"; };
 		7D23E44B2A98FD700037C3E1 /* LegView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegView.swift; sourceTree = "<group>"; };
-		7D2B6A9E2B13C6090023BFC3 /* Chew-chew-SwiftUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; path = "Chew-chew-SwiftUI.xctestplan"; sourceTree = "<group>"; };
 		7D2CAF632B0BEA0200577FD4 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
 		7D2CAF652B0BEAC000577FD4 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		7D345E492AE95E7C003CA948 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -243,6 +252,9 @@
 		7D7B3DAD2AB9D3620070E44D /* LegDetailsVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsVM+reduce.swift"; sourceTree = "<group>"; };
 		7D7B3DAF2AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsVM+sideEffects.swift"; sourceTree = "<group>"; };
 		7D81AB252A978CDC0055AEAF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
+		7D91B6D32B16335600FCBE76 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
+		7D932B9D2B14E46A00A1A390 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D932BA92B14E64B00A1A390 /* Chew-chew-SwiftUI.xctestplan */ = {isa = PBXFileReference; lastKnownFileType = text; name = "Chew-chew-SwiftUI.xctestplan"; path = "Chew-chew-SwiftUI/Test/Config/Chew-chew-SwiftUI.xctestplan"; sourceTree = SOURCE_ROOT; };
 		7D942A082AD9578800301666 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
 		7D9BB1062B0CBF53008A3616 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D9BB1072B0CBF53008A3616 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -269,6 +281,11 @@
 		7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabelView.swift; sourceTree = "<group>"; };
 		7DBF1E582ABC522E009B85EF /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		7DCB2BFE2AAC8831007C672A /* SearchLocationVM+reduce+Idle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Idle.swift"; sourceTree = "<group>"; };
+		7DCC89312B14C420007B9DC9 /* JourneyList-Neuss-Wolfsburg.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "JourneyList-Neuss-Wolfsburg.json"; sourceTree = "<group>"; };
+		7DCC89342B14C640007B9DC9 /* Journey-Neuss-Wolfsburg.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Journey-Neuss-Wolfsburg.json"; sourceTree = "<group>"; };
+		7DCC89352B14C6EC007B9DC9 /* RE6-Neuss-Minden.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "RE6-Neuss-Minden.json"; sourceTree = "<group>"; };
+		7DCC89362B14C8A8007B9DC9 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "CancelledFirstStop-Trip-RE11-Duss-Kassel.json"; sourceTree = "<group>"; };
+		7DCC89372B14CE94007B9DC9 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "CancelledLastStop-Trip-RE11-Duss-Kassel.json"; sourceTree = "<group>"; };
 		7DCD200F2AC470AD00788B38 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		7DD4A8D52AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Loading.swift"; sourceTree = "<group>"; };
 		7DD4A8D72AAC90C3001AA30C /* SearchLocationVM+reduce+Loaded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchLocationVM+reduce+Loaded.swift"; sourceTree = "<group>"; };
@@ -279,7 +296,6 @@
 		7DE727C52AD93869002FF033 /* JourneyFollowRideView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFollowRideView.swift; sourceTree = "<group>"; };
 		7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceCombine.swift; sourceTree = "<group>"; };
 		7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Badges.swift"; sourceTree = "<group>"; };
-		7DFC91D62B13BE5000990A2F /* Chew-chew-UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Chew-chew-UnitTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7DFC91D82B13BE5000990A2F /* Chew_chew_UnitTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_UnitTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -301,7 +317,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7DFC91D32B13BE5000990A2F /* Frameworks */ = {
+		7D932B9A2B14E46A00A1A390 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -333,6 +349,7 @@
 		7D02CE0C2A97E38B0048ADE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */,
 				7D9BB1052B0CBF3B008A3616 /* CoreData */,
 				7D9E108E2AA7722700820B92 /* Network */,
 				7D02CE082A97E32D0048ADE6 /* DTO.swift */,
@@ -390,14 +407,16 @@
 			path = FavouriteRides;
 			sourceTree = "<group>";
 		};
-		7D2B6A9F2B13CBDE0023BFC3 /* Tests */ = {
+		7D2B6A9F2B13CBDE0023BFC3 /* Test */ = {
 			isa = PBXGroup;
 			children = (
-				7D2B6A9E2B13C6090023BFC3 /* Chew-chew-SwiftUI.xctestplan */,
-				7D6734CC2A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests */,
-				7DFC91D72B13BE5000990A2F /* Chew-chew-UnitTests */,
+				7DCC89382B14D0E2007B9DC9 /* Helpers */,
+				7DCC892D2B14C279007B9DC9 /* Mock */,
+				7DCC892C2B14C266007B9DC9 /* Config */,
+				7D6734CC2A96334D00CBE9C1 /* UITests */,
+				7DFC91D72B13BE5000990A2F /* UnitTests */,
 			);
-			path = Tests;
+			path = Test;
 			sourceTree = "<group>";
 		};
 		7D462D3F2AAC93AA00BC0D65 /* reduce */ = {
@@ -483,7 +502,7 @@
 			children = (
 				7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */,
 				7D6734C92A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests.xctest */,
-				7DFC91D62B13BE5000990A2F /* Chew-chew-UnitTests.xctest */,
+				7D932B9D2B14E46A00A1A390 /* UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -491,13 +510,12 @@
 		7D6734B12A96334B00CBE9C1 /* Chew-chew-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				7D2B6A9F2B13CBDE0023BFC3 /* Tests */,
+				7D2B6A9F2B13CBDE0023BFC3 /* Test */,
 				7D02CE112A97E4650048ADE6 /* Helpers */,
 				7D02CE0E2A97E3C00048ADE6 /* App */,
 				7D462D552AACD1E000BC0D65 /* Feature */,
 				7D02CE0C2A97E38B0048ADE6 /* Model */,
 				7D6734B82A96334C00CBE9C1 /* Preview Content */,
-				7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */,
 			);
 			path = "Chew-chew-SwiftUI";
 			sourceTree = "<group>";
@@ -511,13 +529,13 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
-		7D6734CC2A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests */ = {
+		7D6734CC2A96334D00CBE9C1 /* UITests */ = {
 			isa = PBXGroup;
 			children = (
 				7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */,
 				7D6734CF2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift */,
 			);
-			path = "Chew-chew-SwiftUIUITests";
+			path = UITests;
 			sourceTree = "<group>";
 		};
 		7D68D9F62ABDB39A00579711 /* constructJourneys+Journey */ = {
@@ -633,6 +651,16 @@
 				7D7B3D9E2AB8DBFD0070E44D /* LegDetailsView.swift */,
 			);
 			path = LegDetailsView;
+			sourceTree = "<group>";
+		};
+		7D932BAA2B14E69900A1A390 /* Trip */ = {
+			isa = PBXGroup;
+			children = (
+				7DCC89362B14C8A8007B9DC9 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json */,
+				7DCC89372B14CE94007B9DC9 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json */,
+				7DCC89352B14C6EC007B9DC9 /* RE6-Neuss-Minden.json */,
+			);
+			path = Trip;
 			sourceTree = "<group>";
 		};
 		7D9BB1052B0CBF3B008A3616 /* CoreData */ = {
@@ -765,6 +793,57 @@
 			path = reduce;
 			sourceTree = "<group>";
 		};
+		7DCC892C2B14C266007B9DC9 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		7DCC892D2B14C279007B9DC9 /* Mock */ = {
+			isa = PBXGroup;
+			children = (
+				7D1C59EB2B16A37D00286E3A /* Directions.json */,
+				7D91B6D32B16335600FCBE76 /* Mock.swift */,
+				7D932BAA2B14E69900A1A390 /* Trip */,
+				7DCC89332B14C5FC007B9DC9 /* Journey */,
+				7DCC892F2B14C2CC007B9DC9 /* JourneyList */,
+				7DCC892E2B14C2C6007B9DC9 /* Locations */,
+			);
+			path = Mock;
+			sourceTree = "<group>";
+		};
+		7DCC892E2B14C2C6007B9DC9 /* Locations */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Locations;
+			sourceTree = "<group>";
+		};
+		7DCC892F2B14C2CC007B9DC9 /* JourneyList */ = {
+			isa = PBXGroup;
+			children = (
+				7DCC89312B14C420007B9DC9 /* JourneyList-Neuss-Wolfsburg.json */,
+			);
+			path = JourneyList;
+			sourceTree = "<group>";
+		};
+		7DCC89332B14C5FC007B9DC9 /* Journey */ = {
+			isa = PBXGroup;
+			children = (
+				7DCC89342B14C640007B9DC9 /* Journey-Neuss-Wolfsburg.json */,
+			);
+			path = Journey;
+			sourceTree = "<group>";
+		};
+		7DCC89382B14D0E2007B9DC9 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				7D932BA92B14E64B00A1A390 /* Chew-chew-SwiftUI.xctestplan */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
 		7DE727C72AD93874002FF033 /* JourneyFollow */ = {
 			isa = PBXGroup;
 			children = (
@@ -773,12 +852,12 @@
 			path = JourneyFollow;
 			sourceTree = "<group>";
 		};
-		7DFC91D72B13BE5000990A2F /* Chew-chew-UnitTests */ = {
+		7DFC91D72B13BE5000990A2F /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
 				7DFC91D82B13BE5000990A2F /* Chew_chew_UnitTests.swift */,
 			);
-			path = "Chew-chew-UnitTests";
+			path = UnitTests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -824,22 +903,22 @@
 			productReference = 7D6734C92A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
-		7DFC91D52B13BE5000990A2F /* Chew-chew-UnitTests */ = {
+		7D932B9C2B14E46A00A1A390 /* UnitTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7DFC91DE2B13BE5000990A2F /* Build configuration list for PBXNativeTarget "Chew-chew-UnitTests" */;
+			buildConfigurationList = 7D932BA32B14E46A00A1A390 /* Build configuration list for PBXNativeTarget "UnitTests" */;
 			buildPhases = (
-				7DFC91D22B13BE5000990A2F /* Sources */,
-				7DFC91D32B13BE5000990A2F /* Frameworks */,
-				7DFC91D42B13BE5000990A2F /* Resources */,
+				7D932B992B14E46A00A1A390 /* Sources */,
+				7D932B9A2B14E46A00A1A390 /* Frameworks */,
+				7D932B9B2B14E46A00A1A390 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				7DFC91DB2B13BE5000990A2F /* PBXTargetDependency */,
+				7D932BA22B14E46A00A1A390 /* PBXTargetDependency */,
 			);
-			name = "Chew-chew-UnitTests";
-			productName = "Chew-chew-UnitTests";
-			productReference = 7DFC91D62B13BE5000990A2F /* Chew-chew-UnitTests.xctest */;
+			name = UnitTests;
+			productName = UnitTests;
+			productReference = 7D932B9D2B14E46A00A1A390 /* UnitTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -859,7 +938,7 @@
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = 7D6734AE2A96334B00CBE9C1;
 					};
-					7DFC91D52B13BE5000990A2F = {
+					7D932B9C2B14E46A00A1A390 = {
 						CreatedOnToolsVersion = 14.3.1;
 						TestTargetID = 7D6734AE2A96334B00CBE9C1;
 					};
@@ -883,7 +962,7 @@
 			targets = (
 				7D6734AE2A96334B00CBE9C1 /* Chew-chew-SwiftUI */,
 				7D6734C82A96334D00CBE9C1 /* Chew-chew-SwiftUIUITests */,
-				7DFC91D52B13BE5000990A2F /* Chew-chew-UnitTests */,
+				7D932B9C2B14E46A00A1A390 /* UnitTests */,
 			);
 		};
 /* End PBXProject section */
@@ -903,13 +982,20 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D932BAC2B14F05E00A1A390 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json in Resources */,
+				7D932BAD2B14F06300A1A390 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json in Resources */,
+				7D932BAE2B14F06300A1A390 /* RE6-Neuss-Minden.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7DFC91D42B13BE5000990A2F /* Resources */ = {
+		7D932B9B2B14E46A00A1A390 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7D932BAB2B14F05A00A1A390 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json in Resources */,
+				7D932BAF2B14F06300A1A390 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json in Resources */,
+				7D932BB02B14F06300A1A390 /* RE6-Neuss-Minden.json in Resources */,
+				7D1C59EC2B16A37D00286E3A /* Directions.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1046,14 +1132,16 @@
 			files = (
 				7D6734D02A96334D00CBE9C1 /* Chew_chew_SwiftUIUITestsLaunchTests.swift in Sources */,
 				7D0719392B1382D100BF846B /* Chew_chew_SwiftUIUITests.swift in Sources */,
+				7D1C59EF2B16A39D00286E3A /* Mock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7DFC91D22B13BE5000990A2F /* Sources */ = {
+		7D932B992B14E46A00A1A390 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7DFC91D92B13BE5000990A2F /* Chew_chew_UnitTests.swift in Sources */,
+				7D932BA62B14E46F00A1A390 /* Chew_chew_UnitTests.swift in Sources */,
+				7D1C59EE2B16A39C00286E3A /* Mock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1065,10 +1153,10 @@
 			target = 7D6734AE2A96334B00CBE9C1 /* Chew-chew-SwiftUI */;
 			targetProxy = 7D6734CA2A96334D00CBE9C1 /* PBXContainerItemProxy */;
 		};
-		7DFC91DB2B13BE5000990A2F /* PBXTargetDependency */ = {
+		7D932BA22B14E46A00A1A390 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 7D6734AE2A96334B00CBE9C1 /* Chew-chew-SwiftUI */;
-			targetProxy = 7DFC91DA2B13BE5000990A2F /* PBXContainerItemProxy */;
+			targetProxy = 7D932BA12B14E46A00A1A390 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1307,7 +1395,7 @@
 			};
 			name = Release;
 		};
-		7DFC91DC2B13BE5000990A2F /* Debug */ = {
+		7D932BA42B14E46A00A1A390 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1315,21 +1403,18 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M82325R967;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-UnitTests";
+				PRODUCT_BUNDLE_IDENTIFIER = fcody.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chew-chew-SwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chew-chew-SwiftUI";
 			};
 			name = Debug;
 		};
-		7DFC91DD2B13BE5000990A2F /* Release */ = {
+		7D932BA52B14E46A00A1A390 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -1337,16 +1422,13 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = M82325R967;
 				GENERATE_INFOPLIST_FILE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.4;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-UnitTests";
+				PRODUCT_BUNDLE_IDENTIFIER = fcody.UnitTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Chew-chew-SwiftUI.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Chew-chew-SwiftUI";
 			};
 			name = Release;
@@ -1381,11 +1463,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7DFC91DE2B13BE5000990A2F /* Build configuration list for PBXNativeTarget "Chew-chew-UnitTests" */ = {
+		7D932BA32B14E46A00A1A390 /* Build configuration list for PBXNativeTarget "UnitTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				7DFC91DC2B13BE5000990A2F /* Debug */,
-				7DFC91DD2B13BE5000990A2F /* Release */,
+				7D932BA42B14E46A00A1A390 /* Debug */,
+				7D932BA52B14E46A00A1A390 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

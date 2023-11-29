@@ -13,7 +13,7 @@ extension ChewUser {
 	@NSManaged public var timestamp: Date?
 	@NSManaged public var recentLocations: [Location]
 	@NSManaged public var settings: Settings
-	@NSManaged public var savedJourneys: [SavedJourney]
+	@NSManaged public var savedJourneyList: [SavedJourney]
 }
 
 extension ChewUser {
@@ -82,19 +82,19 @@ extension ChewUser {
 
 }
 
-// MARK: Generated accessors for savedJourneys
+// MARK: Generated accessors for savedJourneyList
 extension ChewUser {
 
-	@objc(addSavedJourneysObject:)
-	@NSManaged public func addToSavedJourneys(_ value: SavedJourney)
+	@objc(addSavedJourneyListObject:)
+	@NSManaged public func addToSavedJourneyList(_ value: SavedJourney)
 
-	@objc(removeSavedJourneysObject:)
-	@NSManaged public func removeFromSavedJourneys(_ value: SavedJourney)
+	@objc(removeSavedJourneyListObject:)
+	@NSManaged public func removeFromSavedJourneyList(_ value: SavedJourney)
 
-	@objc(addSavedJourneys:)
-	@NSManaged public func addToSavedJourneys(_ values: NSSet)
+	@objc(addSavedJourneyList:)
+	@NSManaged public func addToSavedJourneyList(_ values: NSSet)
 
-	@objc(removeSavedJourneys:)
-	@NSManaged public func removeFromSavedJourneys(_ values: NSSet)
+	@objc(removeSavedJourneyList:)
+	@NSManaged public func removeFromSavedJourneyList(_ values: NSSet)
 
 }

@@ -1,0 +1,28 @@
+{
+  "configurations" : [
+    {
+      "id" : "BC0264C7-F9ED-447B-BCAA-2ADE032B5FBB",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:Chew-chew-SwiftUI.xcodeproj",
+      "identifier" : "7D6734AE2A96334B00CBE9C1",
+      "name" : "Chew-chew-SwiftUI"
+    }
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:Chew-chew-SwiftUI.xcodeproj",
+        "identifier" : "7D932B9C2B14E46A00A1A390",
+        "name" : "UnitTests"
+      }
+    }
+  ],
+  "version" : 1
+}

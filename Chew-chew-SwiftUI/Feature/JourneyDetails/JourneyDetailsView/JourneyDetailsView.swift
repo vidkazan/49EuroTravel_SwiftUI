@@ -96,7 +96,7 @@ struct JourneyDetailsView: View {
 			.toolbar {
 				Button(
 					action: {
-						viewModel.send(event: .didTapReloadJourneys)
+						viewModel.send(event: .didTapReloadJourneyList)
 					},
 					label: {
 						switch viewModel.state.status {

@@ -11,26 +11,26 @@ extension JourneyListViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
 		print("🟤🔥 >> journeys event:",event.description)
 		switch state.status {
-		case .loadingJourneys:
-			return reduceLoadingJourneys(state, event)
+		case .loadingJourneyList:
+			return reduceLoadingJourneyList(state, event)
 		case .journeysLoaded:
-			return reduceJourneysLoaded(state, event)
-		case .failedToLoadJourneys:
-			return reduceFailedToLoadJourneys(state, event)
+			return reduceJourneyListLoaded(state, event)
+		case .failedToLoadJourneyList:
+			return reduceFailedToLoadJourneyList(state, event)
 		case .loadingRef:
 			return reduceLoadingUpdate(state, event)
 		case .failedToLoadLaterRef, .failedToLoadEarlierRef:
 			switch event {
-			case .onNewJourneysData:
+			case .onNewJourneyListData:
 				return state
-			case .onFailedToLoadJourneysData:
+			case .onFailedToLoadJourneyListData:
 				return state
-			case .onReloadJourneys:
+			case .onReloadJourneyList:
 				return State(
 					journeys: state.journeys,
 					earlierRef: state.earlierRef,
 					laterRef: state.laterRef,
-					status: .loadingJourneys
+					status: .loadingJourneyList
 				)
 			case .onLaterRef:
 				return State(

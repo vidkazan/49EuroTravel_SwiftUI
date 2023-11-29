@@ -28,7 +28,7 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .actionSheet(leg: leg)
 				)
-			case	.didTapReloadJourneys,
+			case	.didTapReloadJourneyList,
 					.didCloseActionSheet,
 					.didExpandLegDetails,
 					.didTapBottomSheetDetails,
@@ -45,7 +45,7 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didFailedToLoadJourneyData:
 				return state
-			case .didTapReloadJourneys:
+			case .didTapReloadJourneyList:
 				return State(
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
@@ -71,7 +71,7 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didFailedToLoadJourneyData:
 				return state
-			case .didTapReloadJourneys:
+			case .didTapReloadJourneyList:
 				return State(
 					data: state.data,
 					status: .loading(refreshToken: self.refreshToken)
@@ -94,7 +94,7 @@ extension JourneyDetailsViewModel {
 					.didLoadJourneyData,
 					.didLoadFullLegData,
 					.didFailedToLoadJourneyData,
-					.didTapReloadJourneys,
+					.didTapReloadJourneyList,
 					.didLoadLocationDetails,
 					.didLongTapOnLeg,
 					.didCloseActionSheet,
@@ -129,7 +129,7 @@ extension JourneyDetailsViewModel {
 					.didExpandLegDetails,
 					.didLongTapOnLeg,
 					.didTapBottomSheetDetails,
-					.didTapReloadJourneys:
+					.didTapReloadJourneyList:
 				return state
 			}
 		case .fullLeg:
@@ -137,7 +137,7 @@ extension JourneyDetailsViewModel {
 			case	.didLoadJourneyData,
 					.didLoadFullLegData,
 					.didFailedToLoadJourneyData,
-					.didTapReloadJourneys,
+					.didTapReloadJourneyList,
 					.didExpandLegDetails,
 					.didLoadLocationDetails,
 					.didLongTapOnLeg,
@@ -172,7 +172,7 @@ extension JourneyDetailsViewModel {
 					.didExpandLegDetails,
 					.didLongTapOnLeg,
 					.didTapBottomSheetDetails,
-					.didTapReloadJourneys,
+					.didTapReloadJourneyList,
 					.didLoadLocationDetails:
 				return state
 			}
@@ -184,7 +184,7 @@ extension JourneyDetailsViewModel {
 					status: state.status
 				)
 			case	.didFailedToLoadJourneyData,
-					.didTapReloadJourneys,
+					.didTapReloadJourneyList,
 					.didExpandLegDetails,
 					.didLoadLocationDetails,
 					.didCloseBottomSheet,

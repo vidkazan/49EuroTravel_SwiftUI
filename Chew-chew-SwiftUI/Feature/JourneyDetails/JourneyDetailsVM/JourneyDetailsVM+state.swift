@@ -64,7 +64,7 @@ extension JourneyDetailsViewModel {
 	enum Event {
 		case didLoadJourneyData(data : JourneyViewData)
 		case didFailedToLoadJourneyData(error : ApiServiceError)
-		case didTapReloadJourneys
+		case didTapReloadJourneyList
 		case didExpandLegDetails
 		case didLoadLocationDetails(
 			coordRegion : MKCoordinateRegion,
@@ -84,8 +84,8 @@ extension JourneyDetailsViewModel {
 				return "didLoadJourneyData"
 			case .didFailedToLoadJourneyData:
 				return "didFailedToLoadJourneyData"
-			case .didTapReloadJourneys:
-				return "didReloadJourneys"
+			case .didTapReloadJourneyList:
+				return "didReloadJourneyList"
 			case .didExpandLegDetails:
 				return "didExpandLegDetails"
 			case .didLoadLocationDetails:

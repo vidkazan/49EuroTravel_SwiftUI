@@ -12,13 +12,10 @@ struct JourneyCell: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	let journey : JourneyViewData?
 	let isPlaceholder : Bool
-	init(journey: JourneyViewData) {
+	
+	init(journey: JourneyViewData, isPlaceholder : Bool = false) {
 		self.journey = journey
-		self.isPlaceholder = false
-	}
-	init(isPlaceholder : Bool = true) {
 		self.isPlaceholder = isPlaceholder
-		self.journey = nil
 	}
 	var body: some View {
 		VStack {

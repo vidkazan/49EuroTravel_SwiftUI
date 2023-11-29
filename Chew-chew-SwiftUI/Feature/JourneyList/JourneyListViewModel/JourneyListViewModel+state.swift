@@ -35,18 +35,18 @@ extension JourneyListViewModel {
 		}
 		
 		case loadingRef(JourneyUpdateType)
-		case loadingJourneys
+		case loadingJourneyList
 		case journeysLoaded
 		case failedToLoadLaterRef(ApiServiceError)
 		case failedToLoadEarlierRef(ApiServiceError)
-		case failedToLoadJourneys(ApiServiceError)
+		case failedToLoadJourneyList(ApiServiceError)
 		
 		var description : String {
 			switch self {
-			case .loadingJourneys:
-				return "loadingJourneys"
-			case .failedToLoadJourneys:
-				return "failedToLoadJourneys"
+			case .loadingJourneyList:
+				return "loadingJourneyList"
+			case .failedToLoadJourneyList:
+				return "failedToLoadJourneyList"
 			case .journeysLoaded:
 				return "journeysLoaded"
 			case .loadingRef:
@@ -60,21 +60,21 @@ extension JourneyListViewModel {
 	}
 	
 	enum Event {
-		case onNewJourneysData(JourneysViewData,JourneyUpdateType)
-		case onFailedToLoadJourneysData(ApiServiceError)
-		case onReloadJourneys
+		case onNewJourneyListData(JourneyListViewData,JourneyUpdateType)
+		case onFailedToLoadJourneyListData(ApiServiceError)
+		case onReloadJourneyList
 		case onLaterRef
 		case onEarlierRef
 		case didFailToLoadLaterRef(ApiServiceError)
 		case didFailToLoadEarlierRef(ApiServiceError)
 		var description : String {
 			switch self {
-			case .onNewJourneysData:
-				return "onNewJourneysData"
-			case .onFailedToLoadJourneysData:
-				return "onFailedToLoadJourneysData"
-			case .onReloadJourneys:
-				return "onReloadJourneys"
+			case .onNewJourneyListData:
+				return "onNewJourneyListData"
+			case .onFailedToLoadJourneyListData:
+				return "onFailedToLoadJourneyListData"
+			case .onReloadJourneyList:
+				return "onReloadJourneyList"
 			case .onLaterRef:
 				return "onLaterRef"
 			case .onEarlierRef:

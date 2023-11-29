@@ -14,15 +14,15 @@ enum ChewError : Error {
 
 extension JourneyListViewModel {
 	
-	func whenLoadingJourneys() -> Feedback<State, Event> {
+	func whenLoadingJourneyList() -> Feedback<State, Event> {
 		Feedback {(state: State) -> AnyPublisher<Event, Never> in
-			guard case .loadingJourneys = state.status else { return Empty().eraseToAnyPublisher() }
-			return self.fetchJourneys(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date,settings: self.settings)
+			guard case .loadingJourneyList = state.status else { return Empty().eraseToAnyPublisher() }
+			return self.fetchJourneyList(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date,settings: self.settings)
 				.mapError{ $0 }
 				.asyncFlatMap { data in
-					let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
-					return Event.onNewJourneysData(
-						JourneysViewData(
+					let res = await constructJourneyListViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
+					return Event.onNewJourneyListData(
+						JourneyListViewData(
 							journeysViewData: res,
 							data: data,
 							depStop: self.depStop,
@@ -31,12 +31,12 @@ extension JourneyListViewModel {
 						JourneyUpdateType.initial
 					)
 				}
-				.catch { error in Just(Event.onFailedToLoadJourneysData(error as? ApiServiceError ?? .badRequest))}
+				.catch { error in Just(Event.onFailedToLoadJourneyListData(error as? ApiServiceError ?? .badRequest))}
 				.eraseToAnyPublisher()
 		}
 	}
 	
-	func addJourneysStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
+	func addJourneyListStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
 		var query : [URLQueryItem] = []
 		switch dep.type {
 		case .location:
@@ -47,7 +47,7 @@ extension JourneyListViewModel {
 			])
 		case .pointOfInterest:
 			guard let id = dep.stopDTO?.id else {
-				print("fetchJourneys","departure poi id is NIL")
+				print("fetchJourneyList","departure poi id is NIL")
 				return query
 			}
 			
@@ -59,7 +59,7 @@ extension JourneyListViewModel {
 			])
 		case .stop:
 			guard let depStop = dep.stopDTO?.id else {
-				print("fetchJourneys","departure stop id is NIL")
+				print("fetchJourneyList","departure stop id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
@@ -76,7 +76,7 @@ extension JourneyListViewModel {
 			])
 		case .pointOfInterest:
 			guard let id = arr.stopDTO?.id else {
-				print("fetchJourneys","arr pointOfInterest id is NIL")
+				print("fetchJourneyList","arr pointOfInterest id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
@@ -87,7 +87,7 @@ extension JourneyListViewModel {
 			])
 		case .stop:
 			guard let depStop = arr.stopDTO?.id else {
-				print("fetchJourneys","arr stop id is NIL")
+				print("fetchJourneyList","arr stop id is NIL")
 				return query
 			}
 			query += Query.getQueryItems(methods: [
@@ -98,7 +98,7 @@ extension JourneyListViewModel {
 	}
 	
 	
-	func addJourneysTransfersQuery(settings : ChewSettings) -> [URLQueryItem] {
+	func addJourneyListTransfersQuery(settings : ChewSettings) -> [URLQueryItem] {
 		switch settings.transferTime {
 		case .direct:
 			return Query.getQueryItems(methods: [
@@ -111,7 +111,7 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func addJourneysTransportModes(settings : ChewSettings) -> [URLQueryItem] {
+	func addJourneyListTransportModes(settings : ChewSettings) -> [URLQueryItem] {
 		switch settings.transportMode {
 		case .all:
 			return []
@@ -141,10 +141,10 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func fetchJourneys(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneysContainer,ApiServiceError> {
-		var query = addJourneysStopsQuery(dep: dep, arr: arr)
-		query += addJourneysTransfersQuery(settings: settings)
-		query += addJourneysTransportModes(settings: settings)
+	func fetchJourneyList(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneyListContainer,ApiServiceError> {
+		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
+		query += addJourneyListTransfersQuery(settings: settings)
+		query += addJourneyListTransportModes(settings: settings)
 		query += Query.getQueryItems(
 			methods: [
 				Query.departureTime(departureTime: time),
@@ -154,7 +154,7 @@ extension JourneyListViewModel {
 				Query.pretty(pretyIntend: settings.debugSettings.prettyJSON),
 			]
 		)
-		return ApiService().fetch(JourneysContainer.self,query: query, type: ApiService.Requests.journeys)
+		return ApiService().fetch(JourneyListContainer.self,query: query, type: ApiService.Requests.journeys)
 	}
 }
 

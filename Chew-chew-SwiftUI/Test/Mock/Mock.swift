@@ -18,7 +18,7 @@ struct MockFile {
 	
 	private var url: URL {
 		let thisSourceFile = URL(fileURLWithPath: #file)
-		let thisDirectory = thisSourceFile.deletingLastPathComponent().deletingLastPathComponent()
+		let thisDirectory = thisSourceFile.deletingLastPathComponent()
 		return thisDirectory.appendingPathComponent(type.directoryPath + fileName)
 	}
 	

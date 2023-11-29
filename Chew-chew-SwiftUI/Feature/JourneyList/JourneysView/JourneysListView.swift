@@ -8,13 +8,13 @@
 import SwiftUI
 
 
-struct JourneysListView: View {
+struct JourneyListListView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var journeyViewModel : JourneyListViewModel
 	var body: some View {
 		VStack{
 			switch journeyViewModel.state.status {
-			case .loadingJourneys:
+			case .loadingJourneyList:
 //				JourneyCell()
 //					.redacted(reason: .placeholder)
 				Spacer()
@@ -68,16 +68,15 @@ struct JourneysListView: View {
 								.onTapGesture {
 									journeyViewModel.send(event: .onLaterRef)
 								}
-							case .loadingJourneys, .failedToLoadJourneys:
+							case .loadingJourneyList, .failedToLoadJourneyList:
 								Label("", systemImage: "exclamationmark.circle.fill")
 							}
 						}
 					}
 					.transition(.opacity)
-//					.transition(.move(edge: .bottom))
 					.animation(.spring(), value: journeyViewModel.state.status)
 				}
-			case .failedToLoadJourneys(let error):
+			case .failedToLoadJourneyList(let error):
 				Spacer()
 				VStack {
 					Text("connections not found")
@@ -85,10 +84,6 @@ struct JourneysListView: View {
 						.foregroundColor(.secondary)
 						.chewTextSize(.big)
 					let _ = print(error)
-//					Text(error.description)
-//						.font(.system(size: 8,weight: .semibold))
-//						.padding(5)
-//						.foregroundColor(.secondary)
 					Button(action: {
 						journeyViewModel.send(event: .onLaterRef)
 					}, label: {

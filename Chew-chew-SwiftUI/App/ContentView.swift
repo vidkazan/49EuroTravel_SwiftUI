@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+
+// TODO: place save / done buttons in sheet at top
 // TODO: legView: place transport icons
 // TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce
 // TODO: .reducted (placeholder view) with mock data
@@ -41,7 +43,7 @@ struct ContentView: View {
 							})
 						}
 						if case .journeys(let vm) = chewViewModel.state.status {
-							JourneysListView(journeyViewModel: vm)
+							JourneyListListView(journeyViewModel: vm)
 								.padding(.top,10)
 						} else if case .idle = chewViewModel.state.status  {
 							FavouriteRidesView()

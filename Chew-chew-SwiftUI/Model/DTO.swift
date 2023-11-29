@@ -167,7 +167,7 @@ struct Journey : Codable,Identifiable,Equatable {
 	}
 }
 
-struct JourneysContainer : Codable,Equatable {
+struct JourneyListContainer : Codable,Equatable {
 	let earlierRef: String?
 	let laterRef: String?
 	let journeys : [Journey]?

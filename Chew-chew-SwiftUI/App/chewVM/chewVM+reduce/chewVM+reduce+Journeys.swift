@@ -9,7 +9,7 @@ import Foundation
 
 
 extension ChewViewModel {
-	func reduceJourneys(_ state:  State, _ event: Event) -> State {
+	func reduceJourneyList(_ state:  State, _ event: Event) -> State {
 		guard case .journeys = state.status else { return state }
 		switch event {
 		case .onStopsSwitch:

@@ -9,11 +9,11 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct JourneysViewData : Equatable {
+struct JourneyListViewData : Equatable {
 	let journeys : [JourneyViewData]
 	let laterRef : String?
 	let earlierRef : String?
-	init(journeysViewData : [JourneyViewData],data: JourneysContainer,depStop: Stop, arrStop : Stop) {
+	init(journeysViewData : [JourneyViewData],data: JourneyListContainer,depStop: Stop, arrStop : Stop) {
 		self.journeys = journeysViewData
 		self.laterRef = data.laterRef
 		self.earlierRef = data.earlierRef

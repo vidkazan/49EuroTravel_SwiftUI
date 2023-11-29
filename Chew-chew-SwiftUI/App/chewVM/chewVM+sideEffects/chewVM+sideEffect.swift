@@ -41,6 +41,8 @@ extension ChewViewModel {
 			self.user = user
 			
 			var transportModes = Set<LineType>()
+			
+			// buuueeeeeeee
 			if user.settings.transportModes.bus { transportModes.insert(.bus) }
 			if user.settings.transportModes.ferry { transportModes.insert(.ferry) }
 			if user.settings.transportModes.national { transportModes.insert(.national) }

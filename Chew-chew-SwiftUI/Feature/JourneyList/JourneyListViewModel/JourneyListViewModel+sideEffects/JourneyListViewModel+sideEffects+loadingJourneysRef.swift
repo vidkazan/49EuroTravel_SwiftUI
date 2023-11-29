@@ -23,8 +23,8 @@ extension JourneyListViewModel {
 				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type,settings: self.settings)
 					.mapError{ $0 }
 					.asyncFlatMap { data in
-						let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
-						return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.earlierRef)
+						let res = await constructJourneyListViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
+						return Event.onNewJourneyListData(JourneyListViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.earlierRef)
 					}
 					.catch { error in Just(
 						Event.didFailToLoadEarlierRef(error as? ApiServiceError ?? .badRequest))
@@ -38,8 +38,8 @@ extension JourneyListViewModel {
 				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type,settings: self.settings)
 					.mapError{ $0 }
 					.asyncFlatMap { data in
-						let res = await constructJourneysViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
-						return Event.onNewJourneysData(JourneysViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.laterRef)
+						let res = await constructJourneyListViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
+						return Event.onNewJourneyListData(JourneyListViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.laterRef)
 					}
 					.catch { error in Just(
 						Event.didFailToLoadLaterRef(error as? ApiServiceError ?? .badRequest))
@@ -49,16 +49,16 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneysContainer,ApiServiceError> {
-		var query = addJourneysStopsQuery(dep: dep, arr: arr)
+	func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneyListContainer,ApiServiceError> {
+		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
 		query += Query.getQueryItems(methods: [
 			type == .earlierRef ? Query.earlierThan(earlierRef: ref) : Query.laterThan(laterRef: ref),
 			Query.remarks(showRemarks: true),
 			Query.results(max: 3),
 			Query.stopovers(isShowing: true)
 		])
-		query += self.addJourneysTransportModes(settings: settings)
-		return ApiService().fetch(JourneysContainer.self,query: query, type: ApiService.Requests.journeys)
+		query += self.addJourneyListTransportModes(settings: settings)
+		return ApiService().fetch(JourneyListContainer.self,query: query, type: ApiService.Requests.journeys)
 	}
 }
 

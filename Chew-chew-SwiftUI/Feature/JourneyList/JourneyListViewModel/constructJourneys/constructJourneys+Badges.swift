@@ -1,5 +1,5 @@
 //
-//  constructJourneys+Badges.swift
+//  constructJourneyList+Badges.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 12.09.23.

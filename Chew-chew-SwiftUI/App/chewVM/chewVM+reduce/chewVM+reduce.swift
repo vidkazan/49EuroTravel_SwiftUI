@@ -20,7 +20,7 @@ extension ChewViewModel {
 		case .datePicker:
 			return reduceDatePicker(state, event)
 		case .journeys:
-			return reduceJourneys(state, event)
+			return reduceJourneyList(state, event)
 		case .journeyDetails:
 			return reduceJourneyDetails(state, event)
 		case .loadingLocation:

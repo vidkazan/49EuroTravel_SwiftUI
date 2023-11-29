@@ -9,7 +9,10 @@ import SwiftUI
 
 @main
 struct Chew_chew_SwiftUIApp: App {
-	@StateObject private var chewJourneyViewModel = ChewViewModel()
+	@StateObject private var chewJourneyViewModel = ChewViewModel(
+		locationDataManager: LocationDataManager(),
+		searchStopsViewModel: SearchStopsViewModel()
+	)
 	let persistenceController = PersistenceController.shared
 	
     var body: some Scene {

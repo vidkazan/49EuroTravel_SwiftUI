@@ -55,13 +55,13 @@ class ApiService  {
 		var urlString : String {
 			switch self {
 			case .journeys:
-				return Constants.apiData.urlPathJourneys
+				return Constants.apiData.urlPathJourneyList
 			case .locations:
 				return Constants.apiData.urlPathLocations
 			case .generic(let path):
 				return path
 			case .journeyByRefreshToken(let ref):
-				return Constants.apiData.urlPathJourneys + "/" + ref
+				return Constants.apiData.urlPathJourneyList + "/" + ref
 			case .trips(tripId: let tripId):
 				return Constants.apiData.urlPathTrip + "/" + tripId
 			}

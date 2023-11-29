@@ -12,7 +12,7 @@ extension JourneyListViewModel {
 	func reduceLoadingUpdate(_ state:  State, _ event: Event) -> State {
 		guard case .loadingRef = state.status else { return state }
 		switch event {
-		case .onNewJourneysData(let data, let type):
+		case .onNewJourneyListData(let data, let type):
 			switch type {
 			case .initial:
 				return state
@@ -31,14 +31,14 @@ extension JourneyListViewModel {
 					status: .journeysLoaded
 				)
 			}
-		case .onFailedToLoadJourneysData(let err):
+		case .onFailedToLoadJourneyListData(let err):
 			return State(
 				journeys: state.journeys,
 				earlierRef: state.earlierRef,
 				laterRef: state.laterRef,
-				status: .failedToLoadJourneys(err)
+				status: .failedToLoadJourneyList(err)
 			)
-		case .onReloadJourneys:
+		case .onReloadJourneyList:
 			return state
 		case .onLaterRef:
 			return state

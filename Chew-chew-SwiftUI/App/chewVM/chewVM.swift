@@ -12,15 +12,19 @@ import CoreLocation
 
 final class ChewViewModel : ObservableObject, Identifiable {
 	public var user : ChewUser? = nil
-	@ObservedObject var  locationDataManager = LocationDataManager()
-	@Published var searchStopsViewModel = SearchStopsViewModel()
+	@ObservedObject var  locationDataManager : LocationDataManager
+	@Published var searchStopsViewModel : SearchStopsViewModel
 	@Published private(set) var state : State {
-		didSet {
-			print("⚪ > main new state:",state.status.description)
-		}}
+		didSet { print("⚪ > main new state:",state.status.description) }
+	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
-	init() {
+	init (
+		locationDataManager : LocationDataManager,
+		searchStopsViewModel : SearchStopsViewModel
+	) {
+		self.locationDataManager = locationDataManager
+		self.searchStopsViewModel = searchStopsViewModel
 		state = State(
 			depStop: .textOnly(""),
 			arrStop: .textOnly(""),

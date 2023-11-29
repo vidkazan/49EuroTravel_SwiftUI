@@ -9,19 +9,21 @@
 import Foundation
 import Combine
 
-@MainActor
 final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
-		didSet {
-			print("🟣 > journey details new state:",state.status.description)
-		}
+		didSet { print("🟣 > journey details new state:",state.status.description) }
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	var refreshToken : String?
 	var depStop : Stop?
 	var arrStop : Stop?
-	init(refreshToken : String?,data: JourneyViewData,depStop : Stop?, arrStop : Stop?) {
+	init (
+		refreshToken : String?,
+		data: JourneyViewData,
+		depStop : Stop?,
+		arrStop : Stop?
+	) {
 		self.refreshToken = refreshToken
 		self.depStop = depStop
 		self.arrStop = arrStop

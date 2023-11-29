@@ -1,5 +1,5 @@
 //
-//  constructJourneys+Leg.swift
+//  constructJourneyList+Leg.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 09.09.23.
