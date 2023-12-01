@@ -11,10 +11,15 @@ import CoreLocation
 import MapKit
 
 struct LegDetailsView: View {
+	@State var currentProgressHeight : Double
+	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+
 	@ObservedObject var vm : LegDetailsViewModel
 	let journeyVM : JourneyDetailsViewModel
 	init(leg : LegViewData, journeyDetailsViewModel: JourneyDetailsViewModel) {
-		self.vm = LegDetailsViewModel(leg: leg)
+		let vm = LegDetailsViewModel(leg: leg)
+		self.vm = vm
+		self.currentProgressHeight = vm.state.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970 , type: vm.state.status == .stopovers ? .expanded : .collapsed)
 		self.journeyVM = journeyDetailsViewModel
 	}
 	var body : some View {
@@ -97,10 +102,11 @@ struct LegDetailsView: View {
 					}
 					VStack {
 						HStack(alignment: .top) {
-							RoundedRectangle(cornerRadius:vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6
+							RoundedRectangle(
+								cornerRadius : vm.state.totalProgressHeight == currentProgressHeight ? 0 : 6
 							)
 								.fill(Color.chewGreenScale20)
-								.frame(width: 22,height: vm.state.currentProgressHeight)
+								.frame(width: 22,height: currentProgressHeight)
 								.padding(.leading,25)
 							Spacer()
 						}
@@ -133,6 +139,15 @@ struct LegDetailsView: View {
 				.frame(maxHeight: .infinity)
 			}
 		}
+		.onReceive(timer, perform: { _ in
+			currentProgressHeight = vm.state.leg.progressSegments.evaluate(
+				time: Date.now.timeIntervalSince1970,
+				type: vm.state.status == .stopovers ? .expanded : .collapsed
+			)
+		})
+		.onChange(of: vm.state.status, perform: { _ in
+			currentProgressHeight = vm.state.currentProgressHeight
+		})
 		// MARK: 🤢
 		.padding(.top,vm.state.leg.legType == LegViewData.LegType.line || vm.state.leg.legType.caseDescription == "footStart" ?  10 : 0)
 		.background(vm.state.leg.legType == LegViewData.LegType.line ? Color.chewGray11 : .clear )

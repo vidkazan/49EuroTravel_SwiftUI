@@ -12,6 +12,13 @@ func constructJourneyViewDataAsync(
 	depStop: Stop?,
 	arrStop : Stop?
 ) async -> JourneyViewData {
+	return constructJourneyViewData(journey: journey, depStop: depStop, arrStop: arrStop)
+}
+func constructJourneyViewData(
+	journey : Journey,
+	depStop: Stop?,
+	arrStop : Stop?
+) -> JourneyViewData {
 	let timeContainer = TimeContainer(
 		plannedDeparture: journey.legs.first?.plannedDeparture,
 		plannedArrival: journey.legs.last?.plannedArrival,
@@ -32,7 +39,7 @@ func constructJourneyViewDataAsync(
 		if leg.reachable == false {
 			isReachable = false
 		}
-		if let res = await constructLegData(leg: leg, firstTS: startTS, lastTS: endTS, legs: legs) {
+		if let res = constructLegData(leg: leg, firstTS: startTS, lastTS: endTS, legs: legs) {
 			if let last = legsData.last {
 				if currentLegIsNotReachable(currentLeg: res, previousLeg: last) {
 					legsData[legsData.count-1].delayedAndNextIsNotReachable = true
@@ -71,7 +78,7 @@ func constructJourneyViewDataAsync(
 		) ?? "error",
 		legs: legsData,
 		transferCount: constructTransferCount(legs: legsData),
-		sunEvents: await sunEventService.getSunEventsAsync(),
+		sunEvents: sunEventService.getSunEvents(),
 		isReachable: isReachable,
 		badges: constructBadges(remarks: remarks,isReachable: isReachable),
 		refreshToken: journey.refreshToken,

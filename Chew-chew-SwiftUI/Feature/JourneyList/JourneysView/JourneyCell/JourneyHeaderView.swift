@@ -21,11 +21,12 @@ struct JourneyHeaderView: View {
 						actual: journey?.timeContainer.stringTimeValue.departure.actual ?? "time",
 						planned:  journey?.timeContainer.stringTimeValue.departure.planned ?? "time"
 					),
-					delay: journey?.timeContainer.departureDelay ?? .onTime
+					delay: journey?.timeContainer.departureStatus.value,
+					isCancelled: false
 				)
 				.padding(7)
 				Spacer()
-				Text(journey?.durationLabelText ?? "11:11")
+				Text(journey?.durationLabelText ?? "duraton")
 					.foregroundColor(.primary)
 					.chewTextSize(.medium)
 				Spacer()
@@ -36,7 +37,8 @@ struct JourneyHeaderView: View {
 						actual: journey?.timeContainer.stringTimeValue.arrival.actual ?? "time",
 						planned:  journey?.timeContainer.stringTimeValue.arrival.planned ?? "time"
 					),
-					delay: journey?.timeContainer.arrivalDelay ?? .onTime
+					delay: journey?.timeContainer.arrivalStatus.value,
+					isCancelled: false
 				)
 				.padding(7)
 			}

@@ -18,52 +18,80 @@ struct TimeLabelView: View {
 	}
 	let isSmall : Bool
 	let arragement : Arragement
-	var delay : TimeContainer.DelayStatus
+	var delay : Int?
 	var time : PrognosedTime<String>
-	init(isSmall: Bool, arragement : Arragement, time : PrognosedTime<String>, delay: TimeContainer.DelayStatus) {
+	var isCancelled : Bool
+	init(
+		isSmall: Bool,
+		arragement : Arragement,
+		time : PrognosedTime<String>,
+		delay: Int?,
+		isCancelled : Bool
+	) {
 		self.delay = delay
 		self.isSmall = isSmall
 		self.arragement = arragement
 		self.time = time
+		self.isCancelled = isCancelled
 	}
 	
 	var body: some View {
-		switch delay {
-		case .onTime:
-			mainTime(delay: 0, cancelled: false)
-				.padding(4)
-		case .delay(let delay):
-			switch arragement {
-			case .left,.right:
-				HStack(spacing: 2){
-					switch arragement == .left {
-					case true:
-						optionalTime(delay: delay)
-						mainTime(delay: delay, cancelled: false)
-					case false:
-						mainTime(delay: delay, cancelled: false)
-						optionalTime(delay: delay)
-					}
-				}
-				.padding(4)
-			case .bottom,.top:
-				VStack(spacing: 2){
-					switch arragement == .top {
-					case true:
-						optionalTime(delay: delay)
-						mainTime(delay: delay, cancelled: false)
-					case false:
-						mainTime(delay: delay, cancelled: false)
-						optionalTime(delay: delay)
-					}
-				}
-				.padding(4)
-				.padding(.horizontal, 2)
-			}
-		case .cancelled:
+		switch isCancelled {
+		case true:
 			mainTime(delay: 0, cancelled: true)
 				.padding(4)
+		case false:
+			switch delay {
+			case .none:
+				mainTime(delay: 0, cancelled: false)
+					.padding(4)
+			case .some(let delay):
+				switch delay {
+				case 0:
+					mainTime(delay: 0, cancelled: false)
+						.padding(4)
+				default:
+					switch arragement {
+					case .left,.right:
+						HStack(spacing: 2){
+							switch arragement == .left {
+							case true:
+								optionalTime(delay: delay)
+								mainTime(delay: delay, cancelled: false)
+							case false:
+								mainTime(delay: delay, cancelled: false)
+								optionalTime(delay: delay)
+							}
+						}
+						.padding(4)
+					case .bottom,.top:
+						VStack(spacing: 2){
+							switch arragement == .top {
+							case true:
+								optionalTime(delay: delay)
+								mainTime(delay: delay, cancelled: false)
+							case false:
+								mainTime(delay: delay, cancelled: false)
+								optionalTime(delay: delay)
+							}
+						}
+						.padding(4)
+						.padding(.horizontal, 2)
+					}
+				}
+			}
 		}
+		
+		
+//		switch delay {
+//		case .onTime:
+//			mainTime(delay: 0, cancelled: false)
+//				.padding(4)
+//		case .delay(let delay):
+//
+//		case .cancelled:
+//
+//		}
 	}
 }
 

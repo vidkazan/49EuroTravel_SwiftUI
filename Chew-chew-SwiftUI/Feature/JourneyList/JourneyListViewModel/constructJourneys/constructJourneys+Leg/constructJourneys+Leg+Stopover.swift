@@ -15,7 +15,13 @@ func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopVi
 	case .line:
 		let stops = leg.stopovers ?? []
 		let res = stops.map { stop -> StopViewData in
-			let c = TimeContainer(plannedDeparture: stop.plannedDeparture, plannedArrival: stop.plannedArrival, actualDeparture: stop.departure, actualArrival: stop.arrival,cancelled: stop.cancelled)
+			let c = TimeContainer(
+				plannedDeparture: stop.plannedDeparture,
+				plannedArrival: stop.plannedArrival,
+				actualDeparture: stop.departure,
+				actualArrival: stop.arrival,
+				cancelled: stop.cancelled
+			)
 			if stop == stops.first {
 				return StopViewData(
 					name: stop.stop?.name ?? "stop",

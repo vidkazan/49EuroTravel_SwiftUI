@@ -15,6 +15,7 @@ struct LegStopView : View {
 	let stopOverType : StopOverType
 	var time : PrognosedTime<String>
 	var delay : TimeContainer.DelayStatus
+	var cancelType : StopOverCancelledType
 	let now = Date.now.timeIntervalSince1970
 	// MARK: Init
 	init(
@@ -28,18 +29,30 @@ struct LegStopView : View {
 		self.stopOverType = type
 		self.legViewData = leg
 		switch type {
-		case .origin,.stopover,.transfer, .footTop,.footMiddle:
+		case .origin,.transfer, .footTop,.footMiddle:
 			self.time = PrognosedTime(
 				actual: stopOver.timeContainer.stringTimeValue.departure.actual ?? "",
 				planned: stopOver.timeContainer.stringTimeValue.departure.planned ?? ""
 			)
-			self.delay = stopOver.timeContainer.departureDelay
+			self.delay = stopOver.timeContainer.departureStatus
+			self.cancelType = (stopOver.timeContainer.departureStatus == TimeContainer.DelayStatus.cancelled) ? .fullyCancelled : .notCancelled
+		case .stopover:
+			self.time = PrognosedTime(
+				actual: stopOver.timeContainer.stringTimeValue.departure.actual ?? "",
+				planned: stopOver.timeContainer.stringTimeValue.departure.planned ?? ""
+			)
+			self.delay = stopOver.timeContainer.departureStatus
+			self.cancelType = StopOverCancelledType.getCancelledTypeFromDelayStatus(
+				arrivalStatus: stopOver.timeContainer.arrivalStatus,
+				departureStatus: stopOver.timeContainer.departureStatus
+			)
 		case .destination, .footBottom:
 			self.time = PrognosedTime(
 				actual: stopOver.timeContainer.stringTimeValue.arrival.actual ?? "",
 				planned: stopOver.timeContainer.stringTimeValue.arrival.planned ?? ""
 			)
-			self.delay = stopOver.timeContainer.arrivalDelay
+			self.delay = stopOver.timeContainer.arrivalStatus
+			self.cancelType = (stopOver.timeContainer.arrivalStatus == TimeContainer.DelayStatus.cancelled) ? .fullyCancelled : .notCancelled
 		}
 	}
 	var body : some View {
@@ -80,7 +93,8 @@ struct LegStopView : View {
 						isSmall: false,
 						arragement: .bottom,
 						time: time,
-						delay: delay
+						delay: delay.value,
+						isCancelled: cancelType == .fullyCancelled
 					)
 						.background(Color.chewGrayScale10)
 						.cornerRadius(10)
@@ -105,7 +119,12 @@ struct LegStopView : View {
 					switch stopOverType {
 					case .stopover:
 						TimeLabelView(
-							isSmall: true,arragement: .right,time: time,delay: delay)
+							isSmall: true,
+							arragement: .right,
+							time: time,
+							delay: delay.value,
+							isCancelled: cancelType == .fullyCancelled
+						)
 						.frame(height: stopOverType.timeLabelHeight)
 						.background {
 							LinearGradient(stops: [
@@ -117,7 +136,13 @@ struct LegStopView : View {
 						.cornerRadius(7)
 						.offset(x: delay.value != nil ? delay.value! > 0 ? 8 : 0 : 0)
 					case .origin,.destination:
-						TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
+						TimeLabelView(
+							isSmall: false,
+							arragement: .bottom,
+							time: time,
+							delay: delay.value,
+							isCancelled: cancelType == .fullyCancelled
+						)
 							.background {
 								LinearGradient(stops: [
 									Gradient.Stop(color: .chewGrayScale10, location: 0),
@@ -127,7 +152,13 @@ struct LegStopView : View {
 							}
 							.cornerRadius(10)
 					case .footTop:
-						TimeLabelView(isSmall: false,arragement: .bottom,time: time,delay: delay)
+						TimeLabelView(
+							isSmall: false,
+							arragement: .bottom,
+							time: time,
+							delay: delay.value,
+							isCancelled: cancelType == .fullyCancelled
+						)
 							.background(Color.chewGrayScale10)
 							.cornerRadius(10)
 					case .footMiddle,.transfer,.footBottom:

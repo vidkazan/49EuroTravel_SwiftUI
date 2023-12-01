@@ -30,8 +30,8 @@ struct TimeContainer : Equatable{
 	let timestamp : TimestampTimeContainer
 	let stringTimeValue : TimeStringContainer
 	let stringDateValue : DateStringContainer
-	let departureDelay : DelayStatus
-	let arrivalDelay : DelayStatus
+	let departureStatus : DelayStatus
+	let arrivalStatus : DelayStatus
 }
 extension TimeContainer {
 	// MARK: Init
@@ -55,8 +55,8 @@ extension TimeContainer {
 		self.timestamp = self.date.getTSContainer()
 		self.stringTimeValue = self.date.getStringTimeValueContainer()
 		self.stringDateValue = self.date.getStringDateValueContainer()
-		self.departureDelay = self.timestamp.generateDelayStatus(type: .departure, cancelled: cancelled)
-		self.arrivalDelay = self.timestamp.generateDelayStatus(type: .arrival, cancelled:  cancelled)
+		self.departureStatus = self.timestamp.generateDelayStatus(type: .departure, cancelled: cancelled)
+		self.arrivalStatus = self.timestamp.generateDelayStatus(type: .arrival, cancelled:  cancelled)
 	}
 	// MARK: ISO Container
 	struct ISOTimeContainer : Equatable {
@@ -146,6 +146,7 @@ extension TimeContainer {
 			if cancelled == true && time.actual == nil {
 				return .cancelled
 			}
+			
 			let delay = Int((time.actual ?? 0) - (time.planned ?? 0)) / 60
 			if delay >= 1 {
 				return .delay(delay)

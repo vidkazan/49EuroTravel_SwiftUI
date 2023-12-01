@@ -158,13 +158,14 @@ extension JourneyDetailsViewModel {
 
 	static func whenLoadingFullLeg() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .loadingFullLeg(leg: let leg) = state.status else {
+			guard case .loadingFullLeg(leg: let leg) = state.status,
+				  let tripId = leg.tripId else {
 				return Empty().eraseToAnyPublisher()
 			}
-			return fetchTrip(tripId: leg.tripId)
+			return fetchTrip(tripId: tripId)
 				.mapError{ $0 }
 				.asyncFlatMap { res in
-					let leg = await constructLegData(
+					let leg = constructLegData(
 						leg: res,
 						firstTS: DateParcer.getDateFromDateString(dateString: res.plannedDeparture),
 						lastTS: DateParcer.getDateFromDateString(dateString: res.plannedArrival),
@@ -182,7 +183,10 @@ extension JourneyDetailsViewModel {
 	}
 	
 	
-	static func fetchTrip(tripId : String) -> AnyPublisher<Leg,ApiServiceError> {
+	static func fetchTrip(tripId : String?) -> AnyPublisher<Leg,ApiServiceError> {
+		guard let tripId = tripId else {
+			return Empty().eraseToAnyPublisher()
+		}
 		return ApiService().fetch(
 			Trip.self,
 			query: [],

@@ -127,8 +127,8 @@ func constructTransferViewData(fromLeg : Leg, toLeg : Leg) -> LegViewData? {
 	let res = LegViewData(
 		isReachable: true,
 		legType: .transfer,
-		tripId: "",
-		direction: "transfer direction",
+		tripId: nil,
+		direction: toLeg.origin?.name ?? "transfer direction",
 		duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 			minutes: DateParcer.getTwoDateIntervalInMinutes(
 				date1: container.date.departure.actual,
@@ -180,7 +180,8 @@ func constructTransferViewData(fromLeg : Leg, toLeg : Leg) -> LegViewData? {
 	return res
 }
 
-func constructLineViewData(mode : String,product : String, name : String, productName : String) -> LineViewData {
+func constructLineViewData(mode : String,product : String, name : String, productName : String
+) -> LineViewData {
 	let mode : LineType = {
 		switch product {
 		case "nationalExpress":
@@ -214,7 +215,7 @@ func constructLineViewData(mode : String,product : String, name : String, produc
 	)
 }
 
-func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) async -> LegViewData? {
+func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) -> LegViewData? {
 	let container = TimeContainer(
 		plannedDeparture: leg.plannedDeparture,
 		plannedArrival: leg.plannedArrival,
@@ -223,24 +224,38 @@ func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) as
 		cancelled: nil
 	)
 	
-	guard let plannedDeparturePosition = getTimeLabelPosition(firstTS: firstTS, lastTS: lastTS,currentTS: container.date.departure.planned),
-		  let plannedArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.planned)  else { return nil }
+	guard
+		let plannedDeparturePosition = getTimeLabelPosition(
+			firstTS: firstTS,
+			lastTS: lastTS,
+			currentTS: container.date.departure.planned
+		),
+		let plannedArrivalPosition = getTimeLabelPosition(
+			firstTS: firstTS,
+			lastTS: lastTS,
+			currentTS: container.date.arrival.planned
+		) else { return nil }
+	
 	let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.departure.actual) ?? 0
 	let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) ?? 0
 	
 	let stops = constructLineStopOverData(leg: leg, type: constructLegType(leg: leg, legs: legs))
-	let segments =  constructSegmentsFromStopOverData(stopovers: stops)
+	let segments = constructSegmentsFromStopOverData(stopovers: stops)
 	
 	let res = LegViewData(
 		isReachable: leg.reachable ?? true, // TODO: can not work proreply
 		legType: constructLegType(leg: leg, legs: legs),
-		tripId: leg.tripId ?? "tripIdError",
+		tripId: leg.tripId,
 		direction: leg.direction ?? "direction",
 		duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 			minutes: DateParcer.getTwoDateIntervalInMinutes(
 				date1: container.date.departure.actual,
 				date2: container.date.arrival.actual
-			)) ?? "duration",
+			)) ?? DateParcer.getTimeStringWithHoursAndMinutesFormat(
+				minutes: DateParcer.getTwoDateIntervalInMinutes(
+				 date1: container.date.departure.planned,
+				 date2: container.date.arrival.planned
+			 )) ?? "duration",
 		legTopPosition: max(plannedDeparturePosition,actualDeparturePosition),
 		legBottomPosition: max(plannedArrivalPosition,actualArrivalPosition),
 		delayedAndNextIsNotReachable: nil,
@@ -248,10 +263,10 @@ func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) as
 		legStopsViewData: stops,
 		footDistance: leg.distance ?? 0,
 		lineViewData: constructLineViewData(
-			mode: leg.line?.mode ?? "",
-			product: leg.line?.product ?? "",
-			name: leg.line?.name ?? "",
-			productName: leg.line?.productName ?? ""
+			mode: leg.line?.mode ?? "mode",
+			product: leg.line?.product ?? "product",
+			name: leg.line?.name ?? "lineName",
+			productName: leg.line?.productName ?? "productName"
 		),
 		progressSegments: segments,
 		timeContainer: container,
@@ -259,6 +274,10 @@ func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) as
 	)
 	return res
 }
+
+//func getActualDirection() -> Stop {
+//
+//}
 
 func currentLegIsNotReachable(currentLeg: LegViewData?, previousLeg: LegViewData?) -> Bool {
 	guard let currentLeg = currentLeg, let previousLeg = previousLeg else { return false }

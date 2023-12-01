@@ -9,6 +9,8 @@ import SwiftUI
 import MapKit
 
 struct JourneyDetailsView: View {
+//	let timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
+	
 	// MARK: Fields
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel

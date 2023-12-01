@@ -45,6 +45,27 @@ enum StopOverType : Equatable {
 	}
 }
 
+enum StopOverCancelledType : Equatable {
+	case notCancelled
+	case exitOnly
+	case entryOnly
+	case fullyCancelled
+	
+	static func getCancelledTypeFromDelayStatus(
+		arrivalStatus : TimeContainer.DelayStatus ,
+		departureStatus: TimeContainer.DelayStatus
+	) -> Self {
+		if arrivalStatus == .cancelled && departureStatus == .cancelled {
+			return .fullyCancelled
+		} else if arrivalStatus == .cancelled {
+			return .entryOnly
+		} else if departureStatus == .cancelled {
+			return .exitOnly
+		} else {
+			return .notCancelled
+		}
+	}
+}
 
 struct StopOver : Codable,Equatable,Identifiable {
 	let id = UUID()

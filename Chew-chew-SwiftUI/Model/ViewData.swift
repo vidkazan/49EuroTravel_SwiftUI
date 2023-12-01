@@ -45,8 +45,8 @@ struct LegViewData : Equatable,Identifiable{
 	let isReachable : Bool
 	let legType : LegType
 	
-	let tripId : String
-	
+	let tripId : String?
+//	PrognosedDirection<String>
 	let direction : String
 	let duration : String
 	
