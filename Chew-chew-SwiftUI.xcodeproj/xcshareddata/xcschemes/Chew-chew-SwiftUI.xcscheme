@@ -29,7 +29,7 @@
       shouldUseLaunchSchemeArgsEnv = "YES">
       <TestPlans>
          <TestPlanReference
-            reference = "container:Chew-chew-SwiftUI/Test/Config/Chew-chew-SwiftUI.xctestplan"
+            reference = "container:Chew-chew-SwiftUI/Test/Config/Tests.xctestplan"
             default = "YES">
          </TestPlanReference>
       </TestPlans>
@@ -75,6 +75,17 @@
                BlueprintIdentifier = "7D932B9C2B14E46A00A1A390"
                BuildableName = "UnitTests.xctest"
                BlueprintName = "UnitTests"
+               ReferencedContainer = "container:Chew-chew-SwiftUI.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO"
+            parallelizable = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "7D3964FC2B188FB2008CD5FF"
+               BuildableName = "UnitTesting.xctest"
+               BlueprintName = "UnitTesting"
                ReferencedContainer = "container:Chew-chew-SwiftUI.xcodeproj">
             </BuildableReference>
          </TestableReference>
