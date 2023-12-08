@@ -12,7 +12,7 @@ struct FavouriteRideCell: View {
 	let locations : DepartureArrivalPair
 	var body: some View {
 		HStack(spacing: 0) {
-			Color.chewGreenScale20
+			Color.chewFillGreenPrimary
 				.frame(width: 10)
 				.cornerRadius(4)
 				.padding(5)

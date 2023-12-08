@@ -29,18 +29,18 @@ struct JourneyCell: View {
 					plannedPlatform: journey?.legs.first?.legStopsViewData.first?.departurePlatform.planned)
 				Text(journey?.legs.first?.legStopsViewData.first?.name ?? "")
 					.chewTextSize(.medium)
-					.foregroundColor(.secondary)
+					.tint(.primary)
 				Spacer()
 				BadgesView(badges: journey?.badges ?? [])
 			}
 			.padding(7)
 		}
-		.background(Color.chewGray10)
-		.overlay {
-			if journey?.isReachable == false {
-				Color.black.opacity(0.7)
-			}
-		}
+		.background(Color.chewFillAccent)
+//		.overlay {
+//			if journey?.isReachable == false {
+//				Color.black.opacity(0.7)
+//			}
+//		}
 		.redacted(reason: isPlaceholder ? .placeholder : [])
 		.cornerRadius(10)
 	}

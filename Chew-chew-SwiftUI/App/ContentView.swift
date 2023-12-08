@@ -15,6 +15,7 @@ import SwiftUI
 // TODO: move all logic from views
 // TODO: bug: journey: if arrival stop cancelled, duration is NULL
 // TODO: bug: journey: stop is showing totally cancelled if only exit / entrance is allowed
+
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
@@ -36,9 +37,9 @@ struct ContentView: View {
 								chewViewModel.send(event: .didTapSettings)
 							}, label: {
 								Image(systemName: "gearshape")
-									.tint(.white)
+									.tint(.primary)
 									.frame(maxWidth: 43,maxHeight: 43)
-									.background(Color.chewGray10)
+									.background(Color.chewFillAccent)
 									.cornerRadius(8)
 							})
 						}
@@ -55,11 +56,7 @@ struct ContentView: View {
 					}
 					.padding(10)
 				}
-				.background( .linearGradient(
-					colors: colorScheme == .dark ? [.black] : [Color(hue: 0, saturation: 0, brightness: 0.85)],
-					startPoint: UnitPoint(x: 0.5, y: 0.1),
-					endPoint: UnitPoint(x: 0.5, y: 0.4))
-				)
+				.background(Color.chewFillPrimary)
 				.sheet(
 					isPresented: $bottomSheetIsPresented,
 					onDismiss: {
@@ -91,16 +88,9 @@ struct ContentView: View {
 				.animation(.spring().speed(2), value: chewViewModel.state.status)
 				.animation(.spring().speed(2), value: chewViewModel.searchStopsViewModel.state)
 			}
-			}
-			.onAppear {
-				chewViewModel.send(event: .didStartViewAppear(viewContext))
-			}
+		}
+		.onAppear {
+			chewViewModel.send(event: .didStartViewAppear(viewContext))
 		}
 	}
-
-//struct Preview : PreviewProvider {
-//	static var previews: some View {
-//		ContentView()
-//			.environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-//	}
-//}
+}

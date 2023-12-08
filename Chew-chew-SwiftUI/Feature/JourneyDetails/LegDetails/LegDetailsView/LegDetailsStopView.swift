@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct LegStopView : View {
+	static let timeLabelColor = Color.chewTimeLabelGray
 	@ObservedObject var vm : LegDetailsViewModel
 	let legViewData : LegViewData
 	let stopOver : StopViewData
@@ -96,7 +97,7 @@ struct LegStopView : View {
 						delay: delay.value,
 						isCancelled: cancelType == .fullyCancelled
 					)
-						.background(Color.chewGrayScale10)
+					.background(Self.timeLabelColor)
 						.cornerRadius(10)
 				}
 				.frame(width: 70)
@@ -128,9 +129,9 @@ struct LegStopView : View {
 						.frame(height: stopOverType.timeLabelHeight)
 						.background {
 							LinearGradient(stops: [
-								Gradient.Stop(color: .chewGrayScale10, location: 0),
-								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-								Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+								Gradient.Stop(color: Self.timeLabelColor, location: 0),
+								Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+								Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
 						.cornerRadius(7)
@@ -145,9 +146,9 @@ struct LegStopView : View {
 						)
 							.background {
 								LinearGradient(stops: [
-									Gradient.Stop(color: .chewGrayScale10, location: 0),
-									Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-									Gradient.Stop(color: .chewGrayScale10, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+									Gradient.Stop(color: Self.timeLabelColor, location: 0),
+									Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+									Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 								], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 							}
 							.cornerRadius(10)
@@ -159,7 +160,7 @@ struct LegStopView : View {
 							delay: delay.value,
 							isCancelled: cancelType == .fullyCancelled
 						)
-							.background(Color.chewGrayScale10)
+							.background(Self.timeLabelColor)
 							.cornerRadius(10)
 					case .footMiddle,.transfer,.footBottom:
 						EmptyView()
@@ -205,7 +206,7 @@ struct LegStopView : View {
 										.animation(.spring(), value: vm.state.status)
 								}
 							}
-							.background(Color.chewGray10)
+							.background(Color.chewFillPrimary)
 							.cornerRadius(8)
 						}
 					case  .destination:

@@ -54,18 +54,17 @@ struct FavouriteRidesView : View {
 				LazyHStack(spacing: 2) {
 					ForEach(stops) { locations in
 						FavouriteRideCell(locations:locations)
-							
 							.onTapGesture {
 								chewVM.send(event: .didSetBothLocations(locations.departure, locations.arrival))
 							}
 					}
 					.padding(10)
-					.background(Color.chewGrayScale10)
+					.background(Color.chewFillAccent)
 					.cornerRadius(8)
 				}
 			}
 			.padding(5)
-			.background(Color.chewGray10)
+			.background(Color.chewFillSecondary)
 			.frame(maxWidth: .infinity,maxHeight: 100)
 			.cornerRadius(10)
 		}

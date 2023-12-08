@@ -94,6 +94,7 @@ struct JourneyDetailsView: View {
 					}
 			}
 			// MARK: Modifiers
+			.background(Color.chewFillPrimary)
 			.navigationBarTitle("Journey details", displayMode: .inline)
 			.toolbar {
 				Button(

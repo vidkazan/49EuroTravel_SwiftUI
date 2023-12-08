@@ -26,32 +26,31 @@ struct SearchStopsView: View {
 	var body: some View {
 		VStack(spacing: 5) {
 			// MARK: TopField
-			VStack {
-				HStack {
-					textField(
-						type: .departure,
-						text: topText,
-						textBinding: $topText,
-						focusedField: focusedField,
-						focusedFieldBinding: $focusedField
+				VStack {
+					HStack {
+						textField(
+							type: .departure,
+							text: topText,
+							textBinding: $topText,
+							focusedField: focusedField,
+							focusedFieldBinding: $focusedField
+						)
+						rightButton(type: .departure)
+					}
+					.background(Color.chewFillAccent)
+					.animation(.spring(), value: chewViewModel.state.status)
+					.cornerRadius(10)
+					.overlay(
+						RoundedRectangle(cornerRadius: 10)
+							.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
 					)
-					rightButton(type: .departure)
+					if case .editingDepartureStop=chewViewModel.state.status {
+						stopList(type: .departure)
+					}
 				}
-				.background(Color.chewGray10)
-				.animation(.spring(), value: chewViewModel.state.status)
-				.cornerRadius(10)
-				.overlay(
-					RoundedRectangle(cornerRadius: 10)
-						.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
-				)
-				if case .editingDepartureStop=chewViewModel.state.status {
-					stopList(type: .departure)
-				}
-			}
-			.background(Color.chewGray10)
+			.background(Color.chewFillSecondary)
 			.cornerRadius(10)
 			.transition(.opacity)
-//			.transition(.move(edge: .bottom))
 			.animation(.spring(), value: searchStopViewModel.state.status)
 			// MARK: BottomField
 			VStack {
@@ -65,7 +64,7 @@ struct SearchStopsView: View {
 					)
 					rightButton(type: .arrival)
 				}
-				.background(Color.chewGray10)
+				.background(Color.chewFillAccent)
 				.cornerRadius(10)
 				.overlay(
 					RoundedRectangle(cornerRadius: 10)
@@ -75,7 +74,7 @@ struct SearchStopsView: View {
 					stopList(type: .arrival)
 				}
 			}
-			.background(Color.chewGray10)
+			.background(Color.chewFillSecondary)
 			.cornerRadius(10)
 			.transition(.opacity)
 //			.transition(.move(edge: .bottom))

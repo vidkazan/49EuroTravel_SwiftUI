@@ -15,8 +15,8 @@ struct LegsView: View {
 	init(journey: JourneyViewData?) {
 		self.journey = journey
 		
-		let nightColor = Color(hue: 0.58, saturation: 1, brightness: 0.15)
-		let dayColor = Color(hue: 0.12, saturation: 1, brightness: 0.7)
+		let nightColor = Color.chewFillBluePrimary
+		let dayColor = Color.chewFillYellowPrimary
 		
 		self.gradientStops = {
 			var stops : [Gradient.Stop] = []
@@ -77,7 +77,8 @@ struct LegsView: View {
 								startPoint: UnitPoint(x: 0, y: 0),
 								endPoint: UnitPoint(x: 1, y: 0))
 						}
-						.frame(maxWidth: (geo.size.width) > 0 ? geo.size.width : 0 ,maxHeight: 18)
+						.frame(maxWidth: (geo.size.width) > 0 ? geo.size.width - 1 : 0 ,maxHeight: 18)
+						.cornerRadius(5)
 					if let journey = journey {
 						ForEach(journey.legs) { leg in
 							LegView(leg: leg)
@@ -88,7 +89,7 @@ struct LegsView: View {
 								.opacity(0.90)
 						}
 					}
-				}
+				}	
 			}
 			.frame(height:25)
 		}

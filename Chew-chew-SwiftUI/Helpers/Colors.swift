@@ -9,6 +9,41 @@ import Foundation
 import SwiftUI
 
 extension Color {
+	static var chewFillPrimary: Color {
+		Color("ChewFillPrimary")
+	}
+	static var chewFillSecondary: Color {
+		Color("ChewFillSecondary")
+	}
+	static var chewFillAccent: Color {
+		Color("ChewFillAccent")
+	}
+	static var chewFillTertiary: Color {
+		Color("ChewFillTertiary")
+	}
+	
+	static var chewFillGreenSecondary: Color {
+		Color("ChewFillGreenSecondary")
+	}
+	static var chewFillGreenPrimary: Color {
+		Color("ChewFillGreenPrimary")
+	}
+	
+	static var chewFillBluePrimary: Color {
+		Color("ChewFillBluePrimary")
+	}
+	static var chewFillYellowPrimary: Color {
+		Color("ChewFillYellowPrimary")
+	}
+	static var chewProgressLineGray: Color {
+		Color("ChewProgressLineGray")
+	}
+	static var chewTimeLabelGray: Color {
+		Color("ChewTimeLabelGray")
+	}
+}
+
+extension Color {
 	public static var chewGray07: Color {
 		return Color.gray.opacity(0.07)
 	}

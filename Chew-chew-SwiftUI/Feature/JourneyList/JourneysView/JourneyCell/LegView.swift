@@ -17,9 +17,9 @@ struct LegView: View {
 		case true:
 			switch leg.legType {
 			case .footMiddle,.footStart,.footEnd:
-				self.bgColor = Color.chewGrayScale20.opacity(90)
+				self.bgColor = Color.chewFillTertiary.opacity(0.7)
 			case .line,.transfer:
-				self.bgColor = Color.chewGrayScale15.opacity(90)
+				self.bgColor = Color.chewFillTertiary
 			}
 		case false:
 			self.bgColor =  Color.chewRedScale20

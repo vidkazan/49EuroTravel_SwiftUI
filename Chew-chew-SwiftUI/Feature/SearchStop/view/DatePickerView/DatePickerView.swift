@@ -13,6 +13,13 @@ struct DatePickerView: View {
 	@State var date : Date
 	@State var time : Date
 	var body: some View {
+		Label("Date settings", systemImage: "clock")
+			.padding(.top)
+			.chewTextSize(.big)
+		Form {
+			
+		}
+		
 		VStack(alignment: .center,spacing: 5) {
 				// MARK: header buttons
 				DatePickerTimePresetButtons()
@@ -33,7 +40,7 @@ struct DatePickerView: View {
 						.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 15))
 						Spacer()
 					}
-					.background(Color.chewGrayScale15)
+					.background(Color.chewFillAccent)
 					.cornerRadius(10)
 				}
 				// MARK: header date
@@ -48,7 +55,7 @@ struct DatePickerView: View {
 					.padding(5)
 					.cornerRadius(10)
 					.padding(EdgeInsets(top: 0, leading: 0, bottom:0, trailing: 15))
-					.background(Color.chewGrayScale15)
+					.background(Color.chewFillAccent)
 					.cornerRadius(10)
 				}
 				Spacer()
@@ -69,13 +76,13 @@ struct DatePickerView: View {
 						.chewTextSize(.big)
 						.frame(maxWidth: .infinity,minHeight: 43)
 				})
-				.background(Color.chewGray10)
+				.background(Color.chewFillAccent)
 				.chewTextSize(.big)
 				.foregroundColor(.primary)
 				.cornerRadius(10)
 			}
 			.padding(5)
-			.background(Color.chewGrayScale10)
+			.background(Color.chewFillPrimary)
 			.onAppear {
 				UIDatePicker.appearance().minuteInterval = 5
 			}

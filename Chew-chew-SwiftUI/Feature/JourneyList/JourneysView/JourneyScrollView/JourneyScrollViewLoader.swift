@@ -13,7 +13,6 @@ struct JourneyScrollViewLoader: View {
 			Spacer()
 			ProgressView()
 				.progressViewStyle(.circular)
-				.tint(.white)
 			Spacer()
 		}
 	}

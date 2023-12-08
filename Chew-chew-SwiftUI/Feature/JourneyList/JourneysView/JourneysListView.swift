@@ -25,7 +25,6 @@ struct JourneyListListView: View {
 					Spacer()
 					Text("connections not found")
 						.padding(5)
-						.foregroundColor(.secondary)
 						.chewTextSize(.big)
 						.frame(maxWidth: .infinity,alignment: .center)
 				case false:
@@ -81,7 +80,6 @@ struct JourneyListListView: View {
 				VStack {
 					Text("connections not found")
 						.padding(5)
-						.foregroundColor(.secondary)
 						.chewTextSize(.big)
 					let _ = print(error)
 					Button(action: {

@@ -42,7 +42,7 @@ struct TimeChoosingView: View {
 			}
 		)
 		.padding(5)
-		.background(Color.chewGray10)
+		.background(Color.chewFillSecondary)
 		.cornerRadius(10)
 	}
 	

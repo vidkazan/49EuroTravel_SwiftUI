@@ -123,7 +123,7 @@ extension TimeLabelView {
 		} else {
 			return	Text(delay < 1 ? time.planned : time.actual)
 				.foregroundColor(
-					delay < 5 ? isSmall ? .gray : .primary.opacity(0.85) : Color.chewRedScale80
+					delay < 5 ? isSmall ? .primary : .primary : Color.chewRedScale80
 				)
 				.font(
 					.system(

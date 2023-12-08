@@ -93,7 +93,7 @@ struct LegDetailsView: View {
 					VStack{
 						HStack(alignment: .top) {
 							Rectangle()
-								.fill(Color.chewGrayScale10)
+								.fill(Color.chewProgressLineGray)
 								.frame(width: 20,height:  vm.state.totalProgressHeight)
 								.padding(.leading,26)
 							Spacer()
@@ -105,7 +105,7 @@ struct LegDetailsView: View {
 							RoundedRectangle(
 								cornerRadius : vm.state.totalProgressHeight == currentProgressHeight ? 0 : 6
 							)
-								.fill(Color.chewGreenScale20)
+								.fill(Color.chewFillGreenPrimary)
 								.frame(width: 22,height: currentProgressHeight)
 								.padding(.leading,25)
 							Spacer()
@@ -117,18 +117,18 @@ struct LegDetailsView: View {
 					case .transfer,.footMiddle:
 						VStack {
 							Spacer()
-							Color.chewGrayScale07.opacity(0.6)
+							Color.chewFillAccent.opacity(0.6)
 								.frame(height: vm.state.totalProgressHeight - 20)
 								.cornerRadius(10)
 							Spacer()
 						}
 					case .footStart:
-						Color.chewGrayScale07.opacity(0.6)
+						Color.chewFillAccent.opacity(0.6)
 							.frame(height: vm.state.totalProgressHeight)
 							.cornerRadius(10)
 							.offset(y: -10)
 					case .footEnd:
-						Color.chewGrayScale07.opacity(0.6)
+						Color.chewFillAccent.opacity(0.6)
 							.frame(height: vm.state.totalProgressHeight)
 							.cornerRadius(10)
 							.offset(y: 10)
@@ -150,7 +150,7 @@ struct LegDetailsView: View {
 		})
 		// MARK: 🤢
 		.padding(.top,vm.state.leg.legType == LegViewData.LegType.line || vm.state.leg.legType.caseDescription == "footStart" ?  10 : 0)
-		.background(vm.state.leg.legType == LegViewData.LegType.line ? Color.chewGray11 : .clear )
+		.background(vm.state.leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
 		.cornerRadius(10)
 		.onTapGesture {
 			if case .line=vm.state.leg.legType {

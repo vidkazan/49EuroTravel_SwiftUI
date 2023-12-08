@@ -199,84 +199,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A52F5803-B534-428C-8B7E-FFB43402D063"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/LegDetails/LegDetailsView/LegDetailsStopView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "A52F5803-B534-428C-8B7E-FFB43402D063 - 206197dcc6d3c1d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Chew_chew_SwiftUI.LegStopView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/LegDetails/LegDetailsView/LegDetailsStopView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "3348">
-               </Location>
-               <Location
-                  uuid = "A52F5803-B534-428C-8B7E-FFB43402D063 - 98e96c6e93579666"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI.Text&gt;, SwiftUI.EmptyView&gt;, SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.HStack&lt;Chew_chew_SwiftUI.BadgeView&gt;, SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.PlatformView, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.BadgeView, Chew_chew_SwiftUI.BadgeView, Chew_chew_SwiftUI.BadgeView, &lt;&lt;opaque return type of SwiftUI.View.cornerRadius(_: CoreGraphics.CGFloat, antialiased: Swift.Bool) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt;&gt;, SwiftUI._ConditionalContent&lt;Chew_chew_SwiftUI.PlatformView, SwiftUI.EmptyView&gt;&gt;, SwiftUI.HStack&lt;Chew_chew_SwiftUI.BadgeView&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt;&gt;, SwiftUI.Spacer)&gt; in Chew_chew_SwiftUI.LegStopView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/LegDetails/LegDetailsView/LegDetailsStopView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "520">
-               </Location>
-               <Location
-                  uuid = "A52F5803-B534-428C-8B7E-FFB43402D063 - 206197dcc6d3c1d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Chew_chew_SwiftUI.LegStopView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/LegDetails/LegDetailsView/LegDetailsStopView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "61"
-                  endingLineNumber = "61"
-                  offsetFromSymbolStart = "3192">
-               </Location>
-               <Location
-                  uuid = "A52F5803-B534-428C-8B7E-FFB43402D063 - 98e96c6e93579666"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.Text, SwiftUI.Text&gt;, SwiftUI.EmptyView&gt;, SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI._ConditionalContent&lt;SwiftUI.HStack&lt;Chew_chew_SwiftUI.BadgeView&gt;, SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.PlatformView, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.BadgeView, Chew_chew_SwiftUI.BadgeView, Chew_chew_SwiftUI.BadgeView, &lt;&lt;opaque return type of SwiftUI.View.cornerRadius(_: CoreGraphics.CGFloat, antialiased: Swift.Bool) -&gt; some&gt;&gt;.0)&gt;&gt;)&gt;&gt;, SwiftUI._ConditionalContent&lt;Chew_chew_SwiftUI.PlatformView, SwiftUI.EmptyView&gt;&gt;, SwiftUI.HStack&lt;Chew_chew_SwiftUI.BadgeView&gt;&gt;, Swift.Optional&lt;SwiftUI.Text&gt;)&gt;&gt;, SwiftUI.Spacer)&gt; in Chew_chew_SwiftUI.LegStopView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/LegDetails/LegDetailsView/LegDetailsStopView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "63"
-                  endingLineNumber = "63"
-                  offsetFromSymbolStart = "352">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "E17050E7-E5F5-4CEF-B615-E53FCC8DD05A"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -284,8 +206,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "134"
-            endingLineNumber = "134"
+            startingLineNumber = "135"
+            endingLineNumber = "135"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
