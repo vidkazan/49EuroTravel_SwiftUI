@@ -11,7 +11,8 @@ import SwiftUI
 struct Chew_chew_SwiftUIApp: App {
 	@StateObject private var chewJourneyViewModel = ChewViewModel(
 		locationDataManager: LocationDataManager(),
-		searchStopsViewModel: SearchStopsViewModel()
+		searchStopsViewModel: SearchStopsViewModel(),
+		journeyFollowViewModel: JourneyFollowViewModel(journeys: [])
 	)
 	let persistenceController = PersistenceController.shared
 	

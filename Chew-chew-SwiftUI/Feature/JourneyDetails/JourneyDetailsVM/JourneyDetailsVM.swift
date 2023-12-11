@@ -36,7 +36,8 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenLoadingJourneyByRefreshToken(),
 				Self.whenLoadingLocationDetails(),
-				Self.whenLoadingFullLeg()
+				Self.whenLoadingFullLeg(),
+				Self.whenChangingSubscribitionType()
 			]
 		)
 		.assign(to: \.state, on: self)

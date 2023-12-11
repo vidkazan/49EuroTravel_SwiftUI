@@ -18,6 +18,7 @@
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="recentLocations" inverseEntity="ChewUser"/>
     </entity>
     <entity name="SavedJourney" representedClassName="SavedJourney" syncable="YES">
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="journeyRef" attributeType="String"/>
         <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyArr" inverseEntity="Location"/>
         <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyDep" inverseEntity="Location"/>

@@ -9,7 +9,6 @@ import SwiftUI
 import MapKit
 
 struct JourneyDetailsView: View {
-//	let timer = Timer.publish(every: 2, on: .main, in: .common).autoconnect()
 	
 	// MARK: Fields
 	@EnvironmentObject var chewVM : ChewViewModel
@@ -69,7 +68,6 @@ struct JourneyDetailsView: View {
 							}, label: {
 								Label("Show full leg", systemImage: "arrow.up.backward.and.arrow.down.forward.circle")
 							})
-							
 							.foregroundColor(Color.primary)
 						}
 						Button(action: {
@@ -89,7 +87,6 @@ struct JourneyDetailsView: View {
 						}, label: {
 							Text("Cancel")
 						})
-						
 						.foregroundColor(Color.primary)
 					}
 			}
@@ -97,33 +94,71 @@ struct JourneyDetailsView: View {
 			.background(Color.chewFillPrimary)
 			.navigationBarTitle("Journey details", displayMode: .inline)
 			.toolbar {
-				Button(
-					action: {
-						viewModel.send(event: .didTapReloadJourneyList)
-					},
-					label: {
-						switch viewModel.state.status {
-						case .loading:
-							ProgressView()
-								.frame(width: 15,height: 15)
-								.padding(5)
-						case .loadedJourneyData,.locationDetails,.loadingLocationDetails,.actionSheet,.fullLeg,.loadingFullLeg:
-							Image(systemName: "arrow.clockwise")
-								.frame(width: 15,height: 15)
-								.padding(5)
-						case .error:
-							Image(systemName: "exclamationmark.circle")
-								.frame(width: 15,height: 15)
-								.padding(5)
-						}
+				HStack {
+					switch viewModel.state.data.refreshToken {
+					case .none:
+						Image(systemName: "bookmark")
+							.frame(width: 15,height: 15)
+							.padding(5)
+							.foregroundColor(.gray)
+					case .some(let ref):
+						Button(
+							action: {
+								viewModel.send(event: .didTapSubscribingButton)
+								switch viewModel.state.data.isFollowed {
+								case true:
+									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .deleting, journeyRef: ref))
+								case false:
+									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .adding, journeyRef: ref))
+								}
+							},
+							label: {
+								switch viewModel.state.data.isFollowed {
+								case true:
+									Image(systemName: "bookmark.fill")
+										.frame(width: 15,height: 15)
+										.padding(5)
+								case false:
+									Image(systemName: "bookmark")
+										.frame(width: 15,height: 15)
+										.padding(5)
+								}
+							}
+						)
 					}
-				)
-				
+					Button(
+						action: {
+							viewModel.send(event: .didTapReloadJourneyList)
+						},
+						label: {
+							switch viewModel.state.status {
+							case .loading:
+								ProgressView()
+									.frame(width: 15,height: 15)
+									.padding(5)
+							case .loadedJourneyData,
+									.locationDetails,
+									.loadingLocationDetails,
+									.actionSheet,
+									.fullLeg,
+									.loadingFullLeg,
+									.changingSubscribingState:
+								Image(systemName: "arrow.clockwise")
+									.frame(width: 15,height: 15)
+									.padding(5)
+							case .error:
+								Image(systemName: "exclamationmark.circle")
+									.frame(width: 15,height: 15)
+									.padding(5)
+							}
+						}
+					)
+				}
 			}
 			// MARK: Modifiers - onChange
 			.onChange(of: viewModel.state.status, perform: { status in
 				switch status {
-				case .loading, .loadedJourneyData, .error:
+				case .loading, .loadedJourneyData, .error, .changingSubscribingState:
 					bottomSheetIsPresented = false
 					actionSheetIsPresented = false
 				case .fullLeg,.loadingLocationDetails,.locationDetails,.loadingFullLeg:

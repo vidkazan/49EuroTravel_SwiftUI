@@ -22,8 +22,12 @@ struct JourneyListViewData : Equatable {
 
 struct JourneyViewData : Equatable {
 	let id = UUID()
+	
+	let isFollowed : Bool
+	
 	let origin : String
 	let destination : String
+	
 	
 	let startDateString : String
 	let endDateString : String
@@ -38,7 +42,23 @@ struct JourneyViewData : Equatable {
 	let timeContainer : TimeContainer
 }
 
-
+extension JourneyViewData {
+	init(from data: JourneyViewData, isFollowed : Bool) {
+		self.isFollowed = isFollowed
+		self.origin = data.origin
+		self.destination = data.destination
+		self.startDateString = data.startDateString
+		self.endDateString = data.endDateString
+		self.durationLabelText = data.durationLabelText
+		self.legs = data.legs
+		self.transferCount = data.transferCount
+		self.sunEvents = data.sunEvents
+		self.isReachable = data.isReachable
+		self.badges = data.badges
+		self.refreshToken = data.refreshToken
+		self.timeContainer = data.timeContainer
+	}
+}
 
 struct LegViewData : Equatable,Identifiable{
 	let id = UUID()

@@ -39,8 +39,12 @@ extension JourneyDetailsViewModel {
 		case loadingFullLeg(leg : LegViewData)
 		case actionSheet(leg : LegViewData)
 		
+		case changingSubscribingState
+		
 		var description : String {
 			switch self {
+			case .changingSubscribingState:
+				return "changingSubscribingState"
 			case .loading:
 				return "loading"
 			case .loadedJourneyData:
@@ -64,13 +68,18 @@ extension JourneyDetailsViewModel {
 	enum Event {
 		case didLoadJourneyData(data : JourneyViewData)
 		case didFailedToLoadJourneyData(error : ApiServiceError)
+		
 		case didTapReloadJourneyList
+		case didTapSubscribingButton
+		
 		case didExpandLegDetails
 		case didLoadLocationDetails(
 			coordRegion : MKCoordinateRegion,
 			stops : [StopViewData],
 			route : MKPolyline?
 		)
+		
+		case didChangedSubscribingState(data : JourneyViewData)
 		case didLoadFullLegData(data : LegViewData)
 		case didLongTapOnLeg(leg : LegViewData)
 		case didCloseActionSheet
@@ -80,6 +89,10 @@ extension JourneyDetailsViewModel {
 		
 		var description : String {
 			switch self {
+			case .didChangedSubscribingState:
+				return "didChangedSubscribingState"
+			case .didTapSubscribingButton:
+				return "didTapSubscribingButton"
 			case .didLoadJourneyData:
 				return "didLoadJourneyData"
 			case .didFailedToLoadJourneyData:

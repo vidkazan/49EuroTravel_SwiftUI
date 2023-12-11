@@ -15,6 +15,7 @@ extension SavedJourney {
     @NSManaged public var arrivalStop: Location
     @NSManaged public var departureStop: Location
 	@NSManaged public var user: ChewUser
+	@NSManaged public var isActive: Bool
 }
 
 extension SavedJourney {

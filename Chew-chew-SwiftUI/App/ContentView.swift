@@ -90,22 +90,18 @@ struct ContentView: View {
 					.tabItem {
 						Label("Search", systemImage: "magnifyingglass")
 					}
-					Text("Follow")
+					JourneyFollowView(viewModel: chewViewModel.journeyFollowViewModel)
 					.tabItem {
-						VStack {
-							Label("Follow", systemImage: "train.side.front.car")
-							Spacer()
-						}
+						Label("Follow", systemImage: "train.side.front.car")
 					}
 				}
 			}
 			.navigationBarHidden(true)
 			.navigationBarTitle("", displayMode: .inline)
 		}
-//		.background(Color.chewFillPrimary)
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear(viewContext))
-			UITabBar.appearance().backgroundColor = UIColor.white
+			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillAccent)
 		}
 	}
 }

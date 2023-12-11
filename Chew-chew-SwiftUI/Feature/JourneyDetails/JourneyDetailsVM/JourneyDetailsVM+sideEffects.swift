@@ -17,6 +17,17 @@ extension JourneyDetailsViewModel {
 		}
 	}
 	
+	static func whenChangingSubscribitionType() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			guard case .changingSubscribingState = state.status else {
+				return Empty().eraseToAnyPublisher()
+			}
+			let data = JourneyViewData(from: state.data, isFollowed: !state.data.isFollowed)
+			return Just(Event.didChangedSubscribingState(data: data))
+				.eraseToAnyPublisher()
+		}
+	}
+	
 	func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
 		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
 			guard

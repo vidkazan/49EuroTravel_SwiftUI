@@ -88,7 +88,7 @@ struct MapSheet: View {
 				Spacer()
 			case .locationDetails(coordRegion: let reg, stops: let stops, let route):
 				MapView(mapRect: reg, stops: stops,route: route)
-			case .error,.loadedJourneyData,.loading,.fullLeg,.loadingFullLeg,.actionSheet:
+			case .error,.loadedJourneyData,.loading,.fullLeg,.loadingFullLeg,.actionSheet, .changingSubscribingState:
 				Spacer()
 			}
 			Spacer()

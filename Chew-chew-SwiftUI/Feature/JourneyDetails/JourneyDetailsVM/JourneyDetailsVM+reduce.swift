@@ -11,9 +11,19 @@ extension JourneyDetailsViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
 		print("🟣🔥 > journey details event:",event.description,"state:",state.status.description)
 		switch state.status {
+		case .changingSubscribingState:
+			switch event {
+			case .didChangedSubscribingState(let data):
+				return State(
+					data: data,
+					status: .loadedJourneyData
+				)
+			default:
+				return state
+			}
 		case .loading:
 			switch event {
-			case 	.didLoadJourneyData(let data):
+			case .didLoadJourneyData(let data):
 				return State(
 					data: data,
 					status: .loadedJourneyData
@@ -34,11 +44,18 @@ extension JourneyDetailsViewModel {
 					.didTapBottomSheetDetails,
 					.didCloseBottomSheet,
 					.didLoadFullLegData,
+					.didChangedSubscribingState,
+					.didTapSubscribingButton,
 					.didLoadLocationDetails:
 				return state
 			}
 		case .loadedJourneyData:
 			switch event {
+			case .didTapSubscribingButton:
+				return State(
+					data: state.data,
+					status: .changingSubscribingState
+				)
 			case .didExpandLegDetails:
 				return state
 			case .didLoadJourneyData:
@@ -58,6 +75,7 @@ extension JourneyDetailsViewModel {
 					status: .actionSheet(leg: leg)
 				)
 			case	.didCloseActionSheet,
+					.didChangedSubscribingState,
 					.didTapBottomSheetDetails,
 					.didLoadFullLegData,
 					.didCloseBottomSheet:
@@ -85,6 +103,8 @@ extension JourneyDetailsViewModel {
 					.didCloseActionSheet,
 					.didTapBottomSheetDetails,
 					.didLoadFullLegData,
+					.didChangedSubscribingState,
+					.didTapSubscribingButton,
 					.didCloseBottomSheet:
 				return state
 			}
@@ -98,6 +118,8 @@ extension JourneyDetailsViewModel {
 					.didLoadLocationDetails,
 					.didLongTapOnLeg,
 					.didCloseActionSheet,
+					.didChangedSubscribingState,
+					.didTapSubscribingButton,
 					.didTapBottomSheetDetails:
 				return state
 			case .didCloseBottomSheet:
@@ -129,6 +151,8 @@ extension JourneyDetailsViewModel {
 					.didExpandLegDetails,
 					.didLongTapOnLeg,
 					.didTapBottomSheetDetails,
+					.didChangedSubscribingState,
+					.didTapSubscribingButton,
 					.didTapReloadJourneyList:
 				return state
 			}
@@ -142,6 +166,8 @@ extension JourneyDetailsViewModel {
 					.didLoadLocationDetails,
 					.didLongTapOnLeg,
 					.didCloseActionSheet,
+					.didChangedSubscribingState,
+					.didTapSubscribingButton,
 					.didTapBottomSheetDetails:
 				return state
 			case .didCloseBottomSheet:
@@ -173,6 +199,8 @@ extension JourneyDetailsViewModel {
 					.didLongTapOnLeg,
 					.didTapBottomSheetDetails,
 					.didTapReloadJourneyList,
+					.didChangedSubscribingState,
+					.didTapSubscribingButton,
 					.didLoadLocationDetails:
 				return state
 			}
@@ -189,6 +217,8 @@ extension JourneyDetailsViewModel {
 					.didLoadLocationDetails,
 					.didCloseBottomSheet,
 					.didLoadFullLegData,
+					.didChangedSubscribingState,
+					.didTapSubscribingButton,
 					.didLongTapOnLeg:
 				return state
 			case .didCloseActionSheet:

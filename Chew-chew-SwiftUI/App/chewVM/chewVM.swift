@@ -14,6 +14,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	public var user : ChewUser? = nil
 	@ObservedObject var  locationDataManager : LocationDataManager
 	@Published var searchStopsViewModel : SearchStopsViewModel
+	@Published var journeyFollowViewModel : JourneyFollowViewModel
 	@Published private(set) var state : State {
 		didSet { print("⚪ > main new state:",state.status.description) }
 	}
@@ -21,10 +22,12 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	init (
 		locationDataManager : LocationDataManager,
-		searchStopsViewModel : SearchStopsViewModel
+		searchStopsViewModel : SearchStopsViewModel,
+		journeyFollowViewModel : JourneyFollowViewModel
 	) {
 		self.locationDataManager = locationDataManager
 		self.searchStopsViewModel = searchStopsViewModel
+		self.journeyFollowViewModel = journeyFollowViewModel
 		state = State(
 			depStop: .textOnly(""),
 			arrStop: .textOnly(""),
