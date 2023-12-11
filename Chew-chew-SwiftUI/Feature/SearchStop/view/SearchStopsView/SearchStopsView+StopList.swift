@@ -58,7 +58,10 @@ extension SearchStopsView {
 							ForEach(searchStopViewModel.state.stops) { stop in
 								HStack(alignment: .center) {
 									Button(action: {
-										if !searchStopViewModel.state.previousStops.contains(stop) {
+										if (searchStopViewModel.state.previousStops.first(where: { elem in
+												elem.name == stop.name
+											}) == nil
+										) {
 											Location.createWith(user: chewViewModel.user,stop: stop, using: viewContext)
 										}
 										chewViewModel.send(event: .onNewStop(.location(stop), type))

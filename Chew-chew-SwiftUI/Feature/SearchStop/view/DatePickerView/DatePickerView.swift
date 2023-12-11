@@ -13,20 +13,16 @@ struct DatePickerView: View {
 	@State var date : Date
 	@State var time : Date
 	var body: some View {
-		Label("Date settings", systemImage: "clock")
-			.padding(.top)
-			.chewTextSize(.big)
-		Form {
-			
-		}
-		
-		VStack(alignment: .center,spacing: 5) {
+		ScrollView {
+			VStack(alignment: .center,spacing: 5) {
+				//			Label("Date settings", systemImage: "clock")
+				//				.padding(.top)
+				//				.chewTextSize(.big)
 				// MARK: header buttons
 				DatePickerTimePresetButtons()
 				// MARK: time
 				HStack {
 					HStack {
-						
 						DatePicker(
 							"",
 							selection: $time,
@@ -87,6 +83,7 @@ struct DatePickerView: View {
 				UIDatePicker.appearance().minuteInterval = 5
 			}
 		}
+	}
 }
 //
 //struct ContentView_Previews: PreviewProvider {

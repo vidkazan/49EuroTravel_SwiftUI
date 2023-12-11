@@ -24,11 +24,11 @@ struct ContentView: View {
 	
 	var body: some View {
 		NavigationView {
+			TabView {
 			switch chewViewModel.state.status {
 			case .start:
 				EmptyView()
 			default:
-				ZStack {
 					VStack(spacing: 5) {
 						SearchStopsView(vm: chewViewModel.searchStopsViewModel)
 						HStack {
@@ -54,43 +54,58 @@ struct ContentView: View {
 							Spacer()
 						}
 					}
-					.padding(10)
-				}
-				.background(Color.chewFillPrimary)
-				.sheet(
-					isPresented: $bottomSheetIsPresented,
-					onDismiss: {
-						chewViewModel.send(event: .didDismissBottomSheet)
-					},
-					content: {
-						switch chewViewModel.state.status {
-						case .settings:
-							SettingsView(settings: chewViewModel.state.settings)
-						case .datePicker:
-							DatePickerView(
-								date: chewViewModel.state.timeChooserDate.date,
-								time: chewViewModel.state.timeChooserDate.date
-							)
+					.padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
+					.background(Color.chewFillPrimary)
+					.sheet(
+						isPresented: $bottomSheetIsPresented,
+						onDismiss: {
+							chewViewModel.send(event: .didDismissBottomSheet)
+						},
+						content: {
+							switch chewViewModel.state.status {
+							case .settings:
+								SettingsView(settings: chewViewModel.state.settings)
+							case .datePicker:
+								DatePickerView(
+									date: chewViewModel.state.timeChooserDate.date,
+									time: chewViewModel.state.timeChooserDate.date
+								)
+							default:
+								EmptyView()
+							}
+						})
+					.onChange(of: chewViewModel.state.status, perform: { status in
+						switch status {
+						case .datePicker,.settings:
+							bottomSheetIsPresented = true
 						default:
-							EmptyView()
+							bottomSheetIsPresented = false
 						}
-				})
-				.onChange(of: chewViewModel.state.status, perform: { status in
-					switch status {
-					case .datePicker,.settings:
-						bottomSheetIsPresented = true
-					default:
-						bottomSheetIsPresented = false
+					})
+					.navigationBarHidden(true)
+					.navigationBarTitle("", displayMode: .inline)
+					.transition(.opacity)
+					.animation(.spring().speed(2), value: chewViewModel.state.status)
+					.animation(.spring().speed(2), value: chewViewModel.searchStopsViewModel.state)
+					.tabItem {
+						Label("Search", systemImage: "magnifyingglass")
 					}
-				})
-				.navigationBarHidden(true)
-				.transition(.opacity)
-				.animation(.spring().speed(2), value: chewViewModel.state.status)
-				.animation(.spring().speed(2), value: chewViewModel.searchStopsViewModel.state)
+					Text("Follow")
+					.tabItem {
+						VStack {
+							Label("Follow", systemImage: "train.side.front.car")
+							Spacer()
+						}
+					}
+				}
 			}
+			.navigationBarHidden(true)
+			.navigationBarTitle("", displayMode: .inline)
 		}
+//		.background(Color.chewFillPrimary)
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear(viewContext))
+			UITabBar.appearance().backgroundColor = UIColor.white
 		}
 	}
 }

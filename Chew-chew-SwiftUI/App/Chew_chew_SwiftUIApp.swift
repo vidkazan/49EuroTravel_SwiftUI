@@ -18,10 +18,10 @@ struct Chew_chew_SwiftUIApp: App {
     var body: some Scene {
         WindowGroup {
 			ContentView()
-				.environmentObject(chewJourneyViewModel)
-				.environment(
-					\.managedObjectContext,
-					 persistenceController.container.viewContext)
+			.environmentObject(chewJourneyViewModel)
+			.environment(
+				\.managedObjectContext,
+				 persistenceController.container.viewContext)
         }
     }
 }
