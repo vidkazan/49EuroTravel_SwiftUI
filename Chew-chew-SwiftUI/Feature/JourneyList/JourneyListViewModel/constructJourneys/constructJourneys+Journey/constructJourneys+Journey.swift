@@ -67,7 +67,6 @@ func constructJourneyViewData(
 		dateFinal: endTS)
 	
 	return JourneyViewData(
-		isFollowed: false,
 		origin: journey.legs.first?.origin?.name ?? journey.legs.first?.origin?.address ?? "Origin(journeyViewData)",
 		destination: journey.legs.last?.destination?.name ?? journey.legs.last?.destination?.address ?? "Destination(journeyViewData)",
 		startDateString: DateParcer.getDateOnlyStringFromDate(date: timeContainer.date.departure.actual) ?? "startDate",

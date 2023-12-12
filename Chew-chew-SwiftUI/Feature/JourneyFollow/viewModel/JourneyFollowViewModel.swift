@@ -14,7 +14,6 @@ struct JourneyFollowData : Equatable {
 }
 
 final class JourneyFollowViewModel : ObservableObject, Identifiable {
-	
 	@Published private(set) var state : State {
 		didSet {print("🔵🔵 >> follow state: ",state.status.description)}
 	}
@@ -70,7 +69,6 @@ extension JourneyFollowViewModel {
 		static func == (lhs: JourneyFollowViewModel.Status, rhs: JourneyFollowViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
-		
 		case idle
 		case editing(_ action: Action, journeyRef : String)
 		case updating
@@ -159,8 +157,11 @@ extension JourneyFollowViewModel {
 				return state
 			case .didTapUpdate:
 				return state
-			case .didUpdateData:
-				return state
+			case .didUpdateData(let data):
+				return State(
+					journeys: data,
+					status: .idle
+				)
 			case .didTapEdit(action: let action, journeyRef: let ref):
 				return State(
 					journeys: state.journeys,

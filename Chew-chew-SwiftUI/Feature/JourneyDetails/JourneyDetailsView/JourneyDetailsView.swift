@@ -9,15 +9,21 @@ import SwiftUI
 import MapKit
 
 struct JourneyDetailsView: View {
-	
 	// MARK: Fields
+	@Environment(\.managedObjectContext) var viewContext
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
 	@State var bottomSheetIsPresented : Bool
 	@State var actionSheetIsPresented : Bool
 	// MARK: Init
-	init(token : String?,data : JourneyViewData,depStop: Stop?,arrStop: Stop?) {
-		viewModel = JourneyDetailsViewModel(refreshToken: token, data: data,depStop: depStop,arrStop: arrStop)
+	init(token : String?,data : JourneyViewData,depStop: Stop?,arrStop: Stop?, followList : [String]) {
+		viewModel = JourneyDetailsViewModel(
+			refreshToken: token,
+			data: data,
+			depStop: depStop,
+			arrStop: arrStop,
+			followList: followList
+		)
 		bottomSheetIsPresented = false
 		actionSheetIsPresented = false
 	}
@@ -51,7 +57,7 @@ struct JourneyDetailsView: View {
 							case .loadingFullLeg, .fullLeg:
 								FullLegSheet(viewModel: viewModel)
 							default:
-								Text("error")
+								Text("error \(viewModel.state.status.description)")
 							}
 						}
 					)
@@ -95,25 +101,38 @@ struct JourneyDetailsView: View {
 			.navigationBarTitle("Journey details", displayMode: .inline)
 			.toolbar {
 				HStack {
-					switch viewModel.state.data.refreshToken {
+					switch viewModel.refreshToken {
 					case .none:
 						Image(systemName: "bookmark")
 							.frame(width: 15,height: 15)
 							.padding(5)
-							.foregroundColor(.gray)
+							.tint(.gray)
 					case .some(let ref):
 						Button(
 							action: {
 								viewModel.send(event: .didTapSubscribingButton)
-								switch viewModel.state.data.isFollowed {
+								switch viewModel.state.isFollowed {
 								case true:
 									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .deleting, journeyRef: ref))
+									SavedJourney.delete(
+										deleteRef: ref,
+										in: chewVM.savedJourneys,
+										context: viewContext
+									)
 								case false:
 									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .adding, journeyRef: ref))
+									SavedJourney.createWith(
+										user: chewVM.user,
+										depStop: nil,
+										arrStop: nil,
+										ref: ref,
+										using: viewContext,
+										in: chewVM.savedJourneys
+									)
 								}
 							},
 							label: {
-								switch viewModel.state.data.isFollowed {
+								switch viewModel.state.isFollowed {
 								case true:
 									Image(systemName: "bookmark.fill")
 										.frame(width: 15,height: 15)

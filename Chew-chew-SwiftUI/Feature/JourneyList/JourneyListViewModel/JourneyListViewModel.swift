@@ -7,12 +7,14 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 final class JourneyListViewModel : ObservableObject, Identifiable {
 	var depStop : Stop
 	var arrStop : Stop
-	var timeChooserDate : ChewViewModel.DateType
+	var timeChooserDate : ChewViewModel.ChewDate
 	var settings : ChewSettings
+	var followList : [String]
 	@Published private(set) var state : State {
 		didSet {print("🟤 >> journeys state: ",state.status.description)}
 	}
@@ -22,13 +24,15 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	init(
 		depStop: Stop,
 		arrStop: Stop,
-		timeChooserDate: ChewViewModel.DateType,
-		settings : ChewSettings
+		timeChooserDate: ChewViewModel.ChewDate,
+		settings : ChewSettings,
+		followList : [String]
 	) {
 		self.depStop = depStop
 		self.arrStop = arrStop
 		self.timeChooserDate = timeChooserDate
 		self.settings = settings
+		self.followList = followList
 		
 		state = State(
 			journeys: [],

@@ -8,10 +8,6 @@
 import Foundation
 import Combine
 
-enum ChewError : Error {
-	case error
-}
-
 extension JourneyListViewModel {
 	
 	func whenLoadingJourneyList() -> Feedback<State, Event> {

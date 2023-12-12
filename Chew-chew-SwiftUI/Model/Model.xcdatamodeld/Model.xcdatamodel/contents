@@ -3,7 +3,7 @@
     <entity name="ChewUser" representedClassName="ChewUser" syncable="YES">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="user" inverseEntity="Location"/>
-        <relationship name="savedJourneyList" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="user" inverseEntity="SavedJourney"/>
+        <relationship name="savedJourneys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="user" inverseEntity="SavedJourney"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="user" inverseEntity="Settings"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
@@ -22,7 +22,7 @@
         <attribute name="journeyRef" attributeType="String"/>
         <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyArr" inverseEntity="Location"/>
         <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyDep" inverseEntity="Location"/>
-        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="savedJourneyList" inverseEntity="ChewUser"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="savedJourneys" inverseEntity="ChewUser"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES">
         <attribute name="isWithTransfers" attributeType="Boolean" usesScalarValueType="YES"/>
@@ -42,6 +42,6 @@
         <attribute name="subway" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="taxi" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="tram" attributeType="Boolean" usesScalarValueType="YES"/>
-        <relationship name="settings" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="transportModes" inverseEntity="Settings"/>
+        <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="transportModes" inverseEntity="Settings"/>
     </entity>
 </model>

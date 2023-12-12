@@ -11,7 +11,12 @@ import Combine
 import CoreLocation
 
 final class ChewViewModel : ObservableObject, Identifiable {
+	
 	public var user : ChewUser? = nil
+	public var settings : Settings? = nil
+	public var transportModes : TransportModes? = nil
+	public var savedJourneys : [SavedJourney]? = nil
+	
 	@ObservedObject var  locationDataManager : LocationDataManager
 	@Published var searchStopsViewModel : SearchStopsViewModel
 	@Published var journeyFollowViewModel : JourneyFollowViewModel

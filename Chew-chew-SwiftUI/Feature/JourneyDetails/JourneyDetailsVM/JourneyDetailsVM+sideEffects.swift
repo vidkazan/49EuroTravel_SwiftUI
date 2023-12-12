@@ -22,8 +22,7 @@ extension JourneyDetailsViewModel {
 			guard case .changingSubscribingState = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			let data = JourneyViewData(from: state.data, isFollowed: !state.data.isFollowed)
-			return Just(Event.didChangedSubscribingState(data: data))
+			return Just(Event.didChangedSubscribingState(isFollowed: !state.isFollowed))
 				.eraseToAnyPublisher()
 		}
 	}

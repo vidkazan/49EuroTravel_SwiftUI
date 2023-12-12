@@ -35,36 +35,62 @@ extension ChewViewModel {
 					.eraseToAnyPublisher()
 			}
 			
+			guard let settings = Settings.basicFetchRequest(user: user, context: context) else {
+				print("whenLoadingInitialData: settings is nil: loading default data")
+				return Just(Event.didLoadInitialData(user,ChewSettings()))
+					.eraseToAnyPublisher()
+			}
+			
+			guard let modes = TransportModes.basicFetchRequest(
+				modes: ChewSettings().customTransferModes,
+				in: settings,
+				using: context
+			) else {
+				print("whenLoadingInitialData: settings is nil: loading default data")
+				return Just(Event.didLoadInitialData(user,ChewSettings()))
+					.eraseToAnyPublisher()
+			}
+			
 			if let stops = Location.basicFetchRequest(context: context) {
 				self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
 			}
 			self.user = user
+			self.settings = settings
+			self.transportModes = modes
+			if let savedJourneys = SavedJourney.basicFetchRequest(context: context) {
+				self.savedJourneys = savedJourneys
+				self.journeyFollowViewModel.send(
+					event: .didUpdateData(savedJourneys.map { elem in
+						JourneyFollowData(journeyRef: elem.journeyRef, journeyViewData: nil)
+					})
+				)
+			}
 			
 			var transportModes = Set<LineType>()
 			
 			// buuueeeeeeee
-			if user.settings.transportModes.bus { transportModes.insert(.bus) }
-			if user.settings.transportModes.ferry { transportModes.insert(.ferry) }
-			if user.settings.transportModes.national { transportModes.insert(.national) }
-			if user.settings.transportModes.nationalExpress { transportModes.insert(.nationalExpress) }
-			if user.settings.transportModes.regional { transportModes.insert(.regional) }
-			if user.settings.transportModes.regionalExpress { transportModes.insert(.regionalExpress) }
-			if user.settings.transportModes.suburban { transportModes.insert(.suburban) }
-			if user.settings.transportModes.subway { transportModes.insert(.subway) }
-			if user.settings.transportModes.taxi { transportModes.insert(.taxi) }
-			if user.settings.transportModes.tram { transportModes.insert(.tram) }
+			if modes.bus { transportModes.insert(.bus) }
+			if modes.ferry { transportModes.insert(.ferry) }
+			if modes.national { transportModes.insert(.national) }
+			if modes.nationalExpress { transportModes.insert(.nationalExpress) }
+			if modes.regional { transportModes.insert(.regional) }
+			if modes.regionalExpress { transportModes.insert(.regionalExpress) }
+			if modes.suburban { transportModes.insert(.suburban) }
+			if modes.subway { transportModes.insert(.subway) }
+			if modes.taxi { transportModes.insert(.taxi) }
+			if modes.tram { transportModes.insert(.tram) }
 			
 			let transferTypes : ChewSettings.TransferTime = {
-				if !user.settings.isWithTransfers {
+				if !settings.isWithTransfers {
 					return .direct
 				}
-				return .time(minutes: Int(user.settings.transferTime))
+				return .time(minutes: Int(settings.transferTime))
 			}()
 			
 			let res = ChewSettings(
 				customTransferModes: transportModes,
 				transportMode: ChewSettings.TransportMode(
-					rawValue: Int(user.settings.transportModeSegment)) ?? .deutschlandTicket,
+					rawValue: Int(settings.transportModeSegment)) ?? .deutschlandTicket,
 				transferTime: transferTypes,
 				accessiblity: .partial,
 				walkingSpeed: .fast,

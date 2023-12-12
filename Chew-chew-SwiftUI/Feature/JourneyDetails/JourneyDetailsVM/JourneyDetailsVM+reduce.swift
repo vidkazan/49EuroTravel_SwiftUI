@@ -13,10 +13,11 @@ extension JourneyDetailsViewModel {
 		switch state.status {
 		case .changingSubscribingState:
 			switch event {
-			case .didChangedSubscribingState(let data):
+			case .didChangedSubscribingState(let isFollowed):
 				return State(
-					data: data,
-					status: .loadedJourneyData
+					data: state.data,
+					status: .loadedJourneyData,
+					isFollowed: isFollowed
 				)
 			default:
 				return state
@@ -26,17 +27,20 @@ extension JourneyDetailsViewModel {
 			case .didLoadJourneyData(let data):
 				return State(
 					data: data,
-					status: .loadedJourneyData
+					status: .loadedJourneyData,
+					isFollowed: state.isFollowed
 				)
 			case 	.didFailedToLoadJourneyData(let error):
 				return State(
 					data: state.data,
-					status: .error(error: error)
+					status: .error(error: error),
+					isFollowed: state.isFollowed
 				)
 			case .didLongTapOnLeg(leg: let leg):
 				return State(
 					data: state.data,
-					status: .actionSheet(leg: leg)
+					status: .actionSheet(leg: leg),
+					isFollowed: state.isFollowed
 				)
 			case	.didTapReloadJourneyList,
 					.didCloseActionSheet,
@@ -54,7 +58,8 @@ extension JourneyDetailsViewModel {
 			case .didTapSubscribingButton:
 				return State(
 					data: state.data,
-					status: .changingSubscribingState
+					status: .changingSubscribingState,
+					isFollowed: state.isFollowed
 				)
 			case .didExpandLegDetails:
 				return state
@@ -65,14 +70,16 @@ extension JourneyDetailsViewModel {
 			case .didTapReloadJourneyList:
 				return State(
 					data: state.data,
-					status: .loading(refreshToken: self.refreshToken)
+					status: .loading(refreshToken: self.refreshToken),
+					isFollowed: state.isFollowed
 				)
 			case .didLoadLocationDetails:
 				return state
 			case .didLongTapOnLeg(leg: let leg):
 				return State(
 					data: state.data,
-					status: .actionSheet(leg: leg)
+					status: .actionSheet(leg: leg),
+					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
 					.didChangedSubscribingState,
@@ -92,12 +99,14 @@ extension JourneyDetailsViewModel {
 			case .didTapReloadJourneyList:
 				return State(
 					data: state.data,
-					status: .loading(refreshToken: self.refreshToken)
+					status: .loading(refreshToken: self.refreshToken),
+					isFollowed: state.isFollowed
 				)
 			case .didLongTapOnLeg(leg: let leg):
 				return State(
 					data: state.data,
-					status: .actionSheet(leg: leg)
+					status: .actionSheet(leg: leg),
+					isFollowed: state.isFollowed
 				)
 			case	.didLoadLocationDetails,
 					.didCloseActionSheet,
@@ -125,7 +134,8 @@ extension JourneyDetailsViewModel {
 			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData
+					status: .loadedJourneyData,
+					isFollowed: state.isFollowed
 				)
 			}
 		case .loadingLocationDetails:
@@ -133,17 +143,20 @@ extension JourneyDetailsViewModel {
 			case .didLoadJourneyData(let data):
 				return State(
 					data: data,
-					status: state.status
+					status: state.status,
+					isFollowed: state.isFollowed
 				)
 			case .didLoadLocationDetails(let coordRegion, let coordinates,let route):
 				return State(
 					data: state.data,
-					status: .locationDetails(coordRegion: coordRegion, stops: coordinates,route: route)
+					status: .locationDetails(coordRegion: coordRegion, stops: coordinates,route: route),
+					isFollowed: state.isFollowed
 				)
 			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData
+					status: .loadedJourneyData,
+					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
 					.didLoadFullLegData,
@@ -173,7 +186,8 @@ extension JourneyDetailsViewModel {
 			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData
+					status: .loadedJourneyData,
+					isFollowed: state.isFollowed
 				)
 			}
 		case .loadingFullLeg:
@@ -181,17 +195,20 @@ extension JourneyDetailsViewModel {
 			case .didLoadJourneyData(let data):
 				return State(
 					data: data,
-					status: state.status
+					status: state.status,
+					isFollowed: state.isFollowed
 				)
 			case .didLoadFullLegData(let data):
 				return State(
 					data: state.data,
-					status: .fullLeg(leg: data)
+					status: .fullLeg(leg: data),
+					isFollowed: state.isFollowed
 				)
 			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData
+					status: .loadedJourneyData,
+					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
 					.didFailedToLoadJourneyData,
@@ -209,7 +226,8 @@ extension JourneyDetailsViewModel {
 			case .didLoadJourneyData(let data):
 				return State(
 					data: data,
-					status: state.status
+					status: state.status,
+					isFollowed: state.isFollowed
 				)
 			case	.didFailedToLoadJourneyData,
 					.didTapReloadJourneyList,
@@ -224,19 +242,22 @@ extension JourneyDetailsViewModel {
 			case .didCloseActionSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData
+					status: .loadedJourneyData,
+					isFollowed: state.isFollowed
 				)
 			case .didTapBottomSheetDetails(let leg, let type):
 				switch type {
 				case .locationDetails:
 					return State(
 						data: state.data,
-						status: .loadingLocationDetails(leg: leg)
+						status: .loadingLocationDetails(leg: leg),
+						isFollowed: state.isFollowed
 					)
 				case .fullLeg:
 					return State(
 						data: state.data,
-						status: .loadingFullLeg(leg: leg)
+						status: .loadingFullLeg(leg: leg),
+						isFollowed: state.isFollowed
 					)
 				}
 			}

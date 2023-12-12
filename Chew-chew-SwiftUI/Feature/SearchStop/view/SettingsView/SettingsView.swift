@@ -189,7 +189,7 @@ extension SettingsView {
 		)
 		chewViewModel.send(event: .didUpdateSettings(res))
 		if res != oldSettings {
-			Settings.createWith(newSettings: res, in: chewViewModel.user, using: viewContext)
+			Settings.updateWith(with: res, using: viewContext, settings: chewViewModel.settings,transportModes: self.chewViewModel.transportModes)
 		}
 	}
 }

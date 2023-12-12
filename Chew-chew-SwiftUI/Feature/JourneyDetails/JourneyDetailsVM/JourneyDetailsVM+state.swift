@@ -16,9 +16,17 @@ extension JourneyDetailsViewModel {
 	struct State : Equatable {
 		let data : JourneyViewData
 		let status : Status
-		init(data: JourneyViewData, status: Status) {
+		let isFollowed : Bool
+		
+		init(data: JourneyViewData, status: Status, followList : [String]) {
 			self.data = data
 			self.status = status
+			self.isFollowed = followList.contains(where: {elem in elem == data.refreshToken})
+		}
+		init(data: JourneyViewData, status: Status, isFollowed : Bool) {
+			self.data = data
+			self.status = status
+			self.isFollowed = isFollowed
 		}
 	}
 	
@@ -79,7 +87,7 @@ extension JourneyDetailsViewModel {
 			route : MKPolyline?
 		)
 		
-		case didChangedSubscribingState(data : JourneyViewData)
+		case didChangedSubscribingState(isFollowed : Bool)
 		case didLoadFullLegData(data : LegViewData)
 		case didLongTapOnLeg(leg : LegViewData)
 		case didCloseActionSheet

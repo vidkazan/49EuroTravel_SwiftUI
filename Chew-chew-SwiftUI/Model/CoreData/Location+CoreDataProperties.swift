@@ -18,11 +18,13 @@ extension Location {
 	@NSManaged public var name: String
 	@NSManaged public var type: Int16
 	
-	@NSManaged public var savedJourneyDeparture: SavedJourney
+	@NSManaged public var savedJourneyDep: SavedJourney?
+	@NSManaged public var savedJourneyArr: SavedJourney?
 	@NSManaged public var user: ChewUser
 }
 
 extension Location {
+	// TODO: rearrange function
 	static func createWith(user : ChewUser?,stop : Stop,using managedObjectContext: NSManagedObjectContext) {
 		let location = Location(context: managedObjectContext)
 		guard let user = user,

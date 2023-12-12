@@ -23,8 +23,6 @@ struct JourneyListViewData : Equatable {
 struct JourneyViewData : Equatable {
 	let id = UUID()
 	
-	let isFollowed : Bool
-	
 	let origin : String
 	let destination : String
 	
@@ -43,8 +41,7 @@ struct JourneyViewData : Equatable {
 }
 
 extension JourneyViewData {
-	init(from data: JourneyViewData, isFollowed : Bool) {
-		self.isFollowed = isFollowed
+	init(from data: JourneyViewData) {
 		self.origin = data.origin
 		self.destination = data.destination
 		self.startDateString = data.startDateString

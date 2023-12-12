@@ -23,7 +23,11 @@ extension JourneyListViewModel {
 				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type,settings: self.settings)
 					.mapError{ $0 }
 					.asyncFlatMap { data in
-						let res = await constructJourneyListViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
+						let res = await constructJourneyListViewDataAsync(
+							journeysData: data,
+							depStop: self.depStop,
+							arrStop: self.arrStop
+						)
 						return Event.onNewJourneyListData(JourneyListViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.earlierRef)
 					}
 					.catch { error in Just(

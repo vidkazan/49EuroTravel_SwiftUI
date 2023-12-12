@@ -10,7 +10,7 @@ import CoreLocation
 import CoreData
 
 extension ChewViewModel {
-	enum DateType : Equatable,Hashable {
+	enum ChewDate : Equatable,Hashable {
 		case now
 		case specificDate(Date)
 		
@@ -50,14 +50,14 @@ extension ChewViewModel {
 		var depStop : TextFieldContent
 		var arrStop : TextFieldContent
 		var settings : ChewSettings
-		var timeChooserDate : DateType
+		var timeChooserDate : ChewDate
 		var status : Status
 		
 		init(
 			depStop: TextFieldContent,
 			arrStop: TextFieldContent,
 			settings : ChewSettings,
-			timeChooserDate: DateType,
+			timeChooserDate: ChewDate,
 			status: Status
 		) {
 			self.depStop = depStop
@@ -121,7 +121,7 @@ extension ChewViewModel {
 		
 		
 		case onDatePickerDidPressed
-		case onNewDate(DateType)
+		case onNewDate(ChewDate)
 		
 		case didTapSettings
 		case didUpdateSettings(ChewSettings)

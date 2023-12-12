@@ -22,12 +22,19 @@ extension TransportModes {
 	@NSManaged public var taxi: Bool
     @NSManaged public var settings: Settings
 	
-	static func createWith(
-		modes : Set<LineType>,
-		in settings : Settings,
-		using managedObjectContext: NSManagedObjectContext
+	static func updateWith(
+		with modes : Set<LineType>,
+		using managedObjectContext: NSManagedObjectContext,
+		settings : Settings?,
+		object transportModes : TransportModes
 	) {
-		let item = TransportModes(context: managedObjectContext)
+		guard let settings = settings else {
+			return
+		}
+		saveSettings(item: transportModes, modes: modes, settings: settings, managedObjectContext: managedObjectContext)
+	}
+	
+	private static func saveSettings(item : TransportModes, modes : Set<LineType>, settings : Settings, managedObjectContext : NSManagedObjectContext) {
 		item.bus = modes.contains(.bus)
 		item.ferry = modes.contains(.ferry)
 		item.national = modes.contains(.national)
@@ -42,9 +49,48 @@ extension TransportModes {
 		
 		do {
 			try managedObjectContext.save()
+			print("📗 > saved TransportModes")
 		} catch {
 			let nserror = error as NSError
-			print("🔴 > save TransportModes: fialed to save new TransportModes", nserror.localizedDescription)
+			print("📕 > save TransportModes: fialed to save new TransportModes", nserror.localizedDescription)
+		}
+	}
+	
+	static func createWith(
+		modes : Set<LineType>,
+		in settings : Settings,
+		using managedObjectContext: NSManagedObjectContext
+	) {
+		let item = TransportModes(context: managedObjectContext)
+		saveSettings(item: item, modes: modes, settings: settings, managedObjectContext: managedObjectContext)
+		print("📙 > create TransportModes: created new TransportModes")
+	}
+	
+	
+	static func basicFetchRequest(
+		modes : Set<LineType>,
+		in settings : Settings,
+		using context: NSManagedObjectContext
+	) -> TransportModes? {
+		if let res = fetch(context: context) {
+			return res
+		}
+		TransportModes.createWith(modes: modes, in: settings, using: context)
+		return fetch(context: context)
+	}
+	
+	static private func fetch(context : NSManagedObjectContext) -> TransportModes? {
+		do {
+			let res = try context.fetch(.init(entityName: "TransportModes")).first as? TransportModes
+			if let res = res {
+				print("📗 > basicFetchRequest TransportModes")
+				return res
+			}
+			print("📕 > basicFetchRequest TransportModes: context.fetch: result is empty")
+			return nil
+		} catch {
+			print("📕 > basicFetchRequest TransportModes: context.fetch error")
+			return nil
 		}
 	}
 }

@@ -26,7 +26,15 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status: .journeys(JourneyListViewModel(depStop: dep, arrStop: arr, timeChooserDate: state.timeChooserDate,settings: state.settings))
+				status: .journeys(
+					JourneyListViewModel(
+						depStop: dep,
+						arrStop: arr,
+						timeChooserDate: state.timeChooserDate,
+						settings: state.settings,
+						followList: self.journeyFollowViewModel.state.journeys.map { $0.journeyRef }
+					)
+				)
 			)
 		case .onDepartureEdit:
 			return State(

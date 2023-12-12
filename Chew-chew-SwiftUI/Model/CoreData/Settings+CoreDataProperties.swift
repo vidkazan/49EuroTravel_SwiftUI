@@ -19,15 +19,42 @@ extension Settings {
 }
 
 extension Settings {
+	static func updateWith(
+		with newSettings : ChewSettings,
+		using managedObjectContext: NSManagedObjectContext,
+		settings : Settings?,
+		transportModes : TransportModes?
+	) {
+		guard let settings = settings,let transportModes = transportModes else {
+			return
+		}
+		saveSettings(newSettings: newSettings, settings: settings, managedObjectContext: managedObjectContext,transportModes: transportModes)
+	}
+	
+	
 	static func createWith(
 		newSettings : ChewSettings,
 		in user : ChewUser?,
-		using managedObjectContext: NSManagedObjectContext) {
+		using managedObjectContext: NSManagedObjectContext
+	) {
 		guard let user = user else {
-			print("🔴 > save Settings: failed to save Settings: user is nil")
+			print("📕 > create Settings: failed : user is nil")
 			return
 		}
 		let settings = Settings(context: managedObjectContext)
+		let modes = TransportModes(context: managedObjectContext)
+		settings.user = user
+		saveSettings(newSettings: newSettings, settings: settings, managedObjectContext: managedObjectContext,transportModes: modes)
+		print("📙 > create Settings: created new Settings")
+	}
+	
+	
+	private static func saveSettings(
+		newSettings : ChewSettings,
+		settings : Settings,
+		managedObjectContext : NSManagedObjectContext,
+		transportModes : TransportModes
+	) {
 		switch newSettings.transferTime {
 		case .direct:
 			settings.isWithTransfers = false
@@ -38,18 +65,41 @@ extension Settings {
 		}
 		
 		settings.transportModeSegment = Int16(newSettings.transportMode.rawValue)
-		settings.user = user
 		
 		do {
+			TransportModes.updateWith(with: newSettings.customTransferModes, using: managedObjectContext, settings: settings, object: transportModes)
 			try managedObjectContext.save()
-			TransportModes.createWith(
-				modes: newSettings.customTransferModes,
-				in: settings,
-				using: managedObjectContext
-			)
+			print("📗 > save Settings: saved Settings")
 		} catch {
 			let nserror = error as NSError
-			print("🔴 > save Settings: failed to save new Settings:", nserror.localizedDescription)
+			print("📕 > save Settings: failed to save Setttings: \(nserror)")
+		}
+	}
+	
+	static func basicFetchRequest(user : ChewUser?,context : NSManagedObjectContext) -> Settings? {
+		if let res = fetch(context: context) {
+			return res
+		}
+		Settings.createWith(
+			newSettings: ChewSettings(),
+			in: user,
+			using: context
+		)
+		return fetch(context: context)
+	}
+	
+	static private func fetch(context : NSManagedObjectContext) -> Settings? {
+		do {
+			let res = try context.fetch(.init(entityName: "Settings")).first as? Settings
+			if let res = res {
+				print("📗 > basicFetchRequest Settings: loaded Settings")
+				return res
+			}
+			print("📕 > basicFetchRequest Settings: context.fetch: result is empty")
+			return nil
+		} catch {
+			print("📕 > basicFetchRequest Settings: context.fetch error")
+			return nil
 		}
 	}
 }

@@ -40,7 +40,8 @@ struct JourneyListListView: View {
 										token: journey.refreshToken,
 										data: journey,
 										depStop: chewVM.state.depStop.stop,
-										arrStop: chewVM.state.arrStop.stop
+										arrStop: chewVM.state.arrStop.stop,
+										followList: chewVM.journeyFollowViewModel.state.journeys.map { elem in elem.journeyRef}
 									)
 								)
 							}, label: {
