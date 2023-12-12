@@ -16,7 +16,7 @@ extension ChewTime {
 	@NSManaged public var plannedDeparture : String?
 	@NSManaged public var cancelled : Bool
 	
-	@NSManaged public var savedJourney : SavedJourney?
+	@NSManaged public var chewJourney : ChewJourney?
 }
 
 extension ChewTime {
@@ -43,7 +43,7 @@ extension ChewTime {
 	static func createWith(
 		container : TimeContainer,
 		using managedObjectContext: NSManagedObjectContext,
-		for savedJourney : SavedJourney,
+		for chewJourney : ChewJourney,
 		isCancelled : Bool
 	) {
 		let time = ChewTime(
@@ -51,7 +51,7 @@ extension ChewTime {
 			container: container,
 			cancelled: isCancelled
 		)
-		time.savedJourney = savedJourney
+		time.chewJourney = chewJourney
 		do {
 			try managedObjectContext.save()
 		} catch {

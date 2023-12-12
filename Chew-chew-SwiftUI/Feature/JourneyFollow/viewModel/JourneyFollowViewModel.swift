@@ -15,7 +15,9 @@ struct JourneyFollowData : Equatable {
 
 final class JourneyFollowViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
-		didSet {print("🔵🔵 >> follow state: ",state.status.description)}
+		didSet {
+			print("🔵🔵 >> follow state: ",state.status.description)
+		}
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
@@ -70,7 +72,7 @@ extension JourneyFollowViewModel {
 			return lhs.description == rhs.description
 		}
 		case idle
-		case editing(_ action: Action, journeyRef : String)
+		case editing(_ action: Action, journeyRef : String, viewData : JourneyViewData?)
 		case updating
 		
 		var description : String {
@@ -79,7 +81,7 @@ extension JourneyFollowViewModel {
 				return "idle"
 			case .updating:
 				return "updating"
-			case .editing(let action, let ref):
+			case .editing(let action, let ref,_):
 				return "editing \(action.rawValue) \(ref)"
 			}
 		}
@@ -89,7 +91,7 @@ extension JourneyFollowViewModel {
 		case didTapUpdate
 		case didUpdateData([JourneyFollowData])
 		
-		case didTapEdit(action : Action, journeyRef : String)
+		case didTapEdit(action : Action, journeyRef : String, viewData : JourneyViewData?)
 		case didEdit(data : [JourneyFollowData])
 		
 		var description : String {
@@ -117,7 +119,7 @@ extension JourneyFollowViewModel {
 	static func whenEditing() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			switch state.status {
-			case .editing(let action, journeyRef: let ref):
+			case .editing(let action, journeyRef: let ref, let viewData):
 				var journeys = state.journeys
 				switch action {
 				case .adding:
@@ -126,7 +128,7 @@ extension JourneyFollowViewModel {
 					} ) == nil {
 						journeys.append(JourneyFollowData(
 							journeyRef: ref,
-							journeyViewData: nil
+							journeyViewData: viewData
 						))
 					}
 					return Just(Event.didEdit(data: journeys))
@@ -162,10 +164,10 @@ extension JourneyFollowViewModel {
 					journeys: data,
 					status: .idle
 				)
-			case .didTapEdit(action: let action, journeyRef: let ref):
+			case .didTapEdit(action: let action, journeyRef: let ref, let data):
 				return State(
 					journeys: state.journeys,
-					status: .editing(action, journeyRef: ref)
+					status: .editing(action, journeyRef: ref,viewData: data)
 				)
 			}
 		case .updating:
@@ -176,10 +178,10 @@ extension JourneyFollowViewModel {
 				return state
 			case .didEdit:
 				return state
-			case .didTapEdit(action: let action, journeyRef: let ref):
+			case .didTapEdit(action: let action, journeyRef: let ref,let data):
 				return State(
 					journeys: state.journeys,
-					status: .editing(action, journeyRef: ref)
+					status: .editing(action, journeyRef: ref,viewData: data)
 				)
 			}
 		case .editing:

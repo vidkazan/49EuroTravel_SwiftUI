@@ -11,5 +11,17 @@ import CoreData
 
 @objc(Location)
 public class Location: NSManagedObject {
+}
 
+extension Location {
+	convenience init(context : NSManagedObjectContext,stop : Stop){
+		self.init(context: context)
+		
+		self.api_id = stop.stopDTO?.id
+		self.address = stop.stopDTO?.address
+		self.latitude = stop.coordinates.latitude
+		self.longitude = stop.coordinates.longitude
+		self.name = stop.name
+		self.type = stop.type.rawValue
+	}
 }

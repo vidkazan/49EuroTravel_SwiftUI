@@ -18,33 +18,48 @@ extension Location {
 	@NSManaged public var name: String
 	@NSManaged public var type: Int16
 	
-	@NSManaged public var savedJourneyDep: SavedJourney?
-	@NSManaged public var savedJourneyArr: SavedJourney?
+	@NSManaged public var chewJourneyDep: ChewJourney?
+	@NSManaged public var chewJourneyArr: ChewJourney?
 	@NSManaged public var user: ChewUser
 }
 
 extension Location {
 	// TODO: rearrange function
+	func stop() -> Stop {
+		let type = LocationType(rawValue: self.type)
+		return Stop(
+			coordinates: CLLocationCoordinate2D(
+				latitude: self.latitude,
+				longitude: self.longitude
+			),
+			type: type ?? LocationType.location,
+			stopDTO: StopDTO(
+				type: nil,
+				id: self.api_id,
+				name: self.name,
+				address: self.address,
+				location: nil,
+				latitude: self.latitude,
+				longitude: self.longitude,
+				poi: LocationType.pointOfInterest == type,
+				products: nil
+			)
+		)
+	}
+	
 	static func createWith(user : ChewUser?,stop : Stop,using managedObjectContext: NSManagedObjectContext) {
-		let location = Location(context: managedObjectContext)
-		guard let user = user,
-		let id = stop.stopDTO?.id else {
-			print("🔴 > save Location: fialed to create Location: user is nil")
+		guard let user = user else {
+			print("🔴 > create Location: : user is nil")
 			return
 		}
-		location.api_id = id
-		location.address = stop.stopDTO?.address
-		location.latitude = stop.coordinates.latitude
-		location.longitude = stop.coordinates.longitude
-		location.name = stop.name
-		location.type = stop.type.rawValue
+		let location = Location(context: managedObjectContext,stop: stop)
 		location.user = user
 
 		do {
 			try managedObjectContext.save()
 		} catch {
 			let nserror = error as NSError
-			print("🔴 > save Location: fialed to create Location: ", nserror.localizedDescription)
+			print("📕 > create Location: ", nserror.localizedDescription)
 		}
 	}
 	
@@ -82,10 +97,10 @@ extension Location {
 			if let res = res {
 				return res
 			}
-			print("🔴 > basicFetchRequest Location: context.fetch: result is empty")
+			print("📕 > basicFetchRequest Location: context.fetch: result is empty")
 			return nil
 		} catch {
-			print("🔴 > basicFetchRequest Location: context.fetch error")
+			print("📕 > basicFetchRequest Location: context.fetch error")
 			return nil
 		}
 	}

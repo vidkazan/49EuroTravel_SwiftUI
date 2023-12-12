@@ -113,21 +113,23 @@ struct JourneyDetailsView: View {
 								viewModel.send(event: .didTapSubscribingButton)
 								switch viewModel.state.isFollowed {
 								case true:
-									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .deleting, journeyRef: ref))
-									SavedJourney.delete(
+									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .deleting, journeyRef: ref, viewData: viewModel.state.data))
+									ChewJourney.delete(
 										deleteRef: ref,
-										in: chewVM.savedJourneys,
+										in: chewVM.chewJourneys,
 										context: viewContext
 									)
 								case false:
-									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .adding, journeyRef: ref))
-									SavedJourney.createWith(
+									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .adding, journeyRef: ref, viewData: viewModel.state.data))
+									ChewJourney.createWith(
 										user: chewVM.user,
-										depStop: nil,
-										arrStop: nil,
+										depStop: viewModel.depStop,
+										arrStop: viewModel.arrStop,
 										ref: ref,
 										using: viewContext,
-										in: chewVM.savedJourneys
+										in: chewVM.chewJourneys,
+										timeContainer: viewModel.state.data.timeContainer,
+										isCancelled: !viewModel.state.data.isReachable
 									)
 								}
 							},

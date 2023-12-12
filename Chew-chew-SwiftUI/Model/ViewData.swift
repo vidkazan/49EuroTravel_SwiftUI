@@ -27,8 +27,8 @@ struct JourneyViewData : Equatable {
 	let destination : String
 	
 	
-	let startDateString : String
-	let endDateString : String
+//	let startDateString : String
+//	let endDateString : String
 	let durationLabelText : String
 	
 	let legs : [LegViewData]
@@ -44,8 +44,6 @@ extension JourneyViewData {
 	init(from data: JourneyViewData) {
 		self.origin = data.origin
 		self.destination = data.destination
-		self.startDateString = data.startDateString
-		self.endDateString = data.endDateString
 		self.durationLabelText = data.durationLabelText
 		self.legs = data.legs
 		self.transferCount = data.transferCount

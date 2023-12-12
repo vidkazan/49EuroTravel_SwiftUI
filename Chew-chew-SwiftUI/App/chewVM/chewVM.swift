@@ -15,7 +15,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	public var user : ChewUser? = nil
 	public var settings : Settings? = nil
 	public var transportModes : TransportModes? = nil
-	public var savedJourneys : [SavedJourney]? = nil
+	public var chewJourneys : [ChewJourney]? = nil
 	
 	@ObservedObject var  locationDataManager : LocationDataManager
 	@Published var searchStopsViewModel : SearchStopsViewModel

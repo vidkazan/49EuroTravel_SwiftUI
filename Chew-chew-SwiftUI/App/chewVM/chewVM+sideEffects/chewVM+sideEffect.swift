@@ -46,7 +46,6 @@ extension ChewViewModel {
 				in: settings,
 				using: context
 			) else {
-				print("whenLoadingInitialData: settings is nil: loading default data")
 				return Just(Event.didLoadInitialData(user,ChewSettings()))
 					.eraseToAnyPublisher()
 			}
@@ -57,11 +56,26 @@ extension ChewViewModel {
 			self.user = user
 			self.settings = settings
 			self.transportModes = modes
-			if let savedJourneys = SavedJourney.basicFetchRequest(context: context) {
-				self.savedJourneys = savedJourneys
+			
+			if let chewJourneys = ChewJourney.basicFetchRequest(context: context) {
+				self.chewJourneys = chewJourneys
 				self.journeyFollowViewModel.send(
-					event: .didUpdateData(savedJourneys.map { elem in
-						JourneyFollowData(journeyRef: elem.journeyRef, journeyViewData: nil)
+					event: .didUpdateData(chewJourneys.map { elem in
+						JourneyFollowData(
+							journeyRef: elem.journeyRef,
+							journeyViewData: JourneyViewData(
+								origin: elem.departureStop?.name ?? "",
+								destination: elem.arrivalStop?.name ?? "",
+								durationLabelText: "",
+								legs: [],
+								transferCount: 0,
+								sunEvents: [],
+								isReachable: true,
+								badges: [],
+								refreshToken: elem.journeyRef,
+								timeContainer: TimeContainer(chewTime: elem.time)
+							)
+						)
 					})
 				)
 			}

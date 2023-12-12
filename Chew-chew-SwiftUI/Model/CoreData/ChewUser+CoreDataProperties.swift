@@ -13,7 +13,7 @@ extension ChewUser {
 	@NSManaged public var timestamp: Date?
 	@NSManaged public var recentLocations: [Location]?
 	@NSManaged public var settings: Settings?
-	@NSManaged public var savedJourneys : [SavedJourney]?
+	@NSManaged public var chewJourneys : [ChewJourney]?
 }
 
 extension ChewUser {
@@ -24,7 +24,7 @@ extension ChewUser {
 			try managedObjectContext.save()
 		} catch {
 			let nserror = error as NSError
-			print("🔴 > save User: fialed to update User", nserror.localizedDescription)
+			print("📕 > save User: fialed to update User", nserror.localizedDescription)
 		}
 	}
 	
@@ -37,7 +37,7 @@ extension ChewUser {
 			try managedObjectContext.save()
 		} catch {
 			let nserror = error as NSError
-			print("🔴 > save User: fialed to save new User", nserror.localizedDescription)
+			print("📕 > save User: fialed to save new User", nserror.localizedDescription)
 		}
 	}
 	
@@ -55,10 +55,10 @@ extension ChewUser {
 			if let res = res {
 				return res
 			}
-			print("🔴 > basicFetchRequest User: context.fetch: result is empty")
+			print("📕 > basicFetchRequest User: context.fetch: result is empty")
 			return nil
 		} catch {
-			print("🔴 > basicFetchRequest User: context.fetch error")
+			print("📕 > basicFetchRequest User: context.fetch error")
 			return nil
 		}
 	}
@@ -82,19 +82,19 @@ extension ChewUser {
 //
 //}
 
-//// MARK: Generated accessors for savedJourneyList
+//// MARK: Generated accessors for chewJourneyList
 //extension ChewUser {
 //
-//	@objc(addSavedJourneyListObject:)
-//	@NSManaged public func addToSavedJourneyList(_ value: SavedJourney)
+//	@objc(addChewJourneyListObject:)
+//	@NSManaged public func addToChewJourneyList(_ value: ChewJourney)
 //
-//	@objc(removeSavedJourneyListObject:)
-//	@NSManaged public func removeFromSavedJourneyList(_ value: SavedJourney)
+//	@objc(removeChewJourneyListObject:)
+//	@NSManaged public func removeFromChewJourneyList(_ value: ChewJourney)
 //
-//	@objc(addSavedJourneyList:)
-//	@NSManaged public func addToSavedJourneyList(_ values: NSSet)
+//	@objc(addChewJourneyList:)
+//	@NSManaged public func addToChewJourneyList(_ values: NSSet)
 //
-//	@objc(removeSavedJourneyList:)
-//	@NSManaged public func removeFromSavedJourneyList(_ values: NSSet)
+//	@objc(removeChewJourneyList:)
+//	@NSManaged public func removeFromChewJourneyList(_ values: NSSet)
 //
 //}

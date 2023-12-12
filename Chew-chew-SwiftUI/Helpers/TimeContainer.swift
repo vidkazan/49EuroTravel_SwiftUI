@@ -8,7 +8,7 @@
 import Foundation
 
 // MARK: TimeContainer
-struct TimeContainer : Equatable{
+struct TimeContainer : Equatable {
 	enum DelayStatus : Equatable {
 		case onTime
 		case delay(Int)
@@ -33,8 +33,39 @@ struct TimeContainer : Equatable{
 	let departureStatus : DelayStatus
 	let arrivalStatus : DelayStatus
 }
+
+extension TimeContainer {
+	init(chewTime : ChewTime?) {
+		self.init(
+			plannedDeparture: chewTime?.plannedDeparture,
+			plannedArrival: chewTime?.plannedArrival,
+			actualDeparture: chewTime?.actualDeparture,
+			actualArrival: chewTime?.actualArrival,
+			cancelled: chewTime?.cancelled
+		)
+	}
+}
+
 extension TimeContainer {
 	// MARK: Init
+	init() {
+		let departure = PrognosedTime<String?>(
+			actual: nil,
+			planned: nil
+		)
+		let arrival = PrognosedTime<String?>(
+			actual: nil,
+			planned: nil
+		)
+		self.iso = ISOTimeContainer(departure: departure,arrival: arrival)
+		self.date = self.iso.getDateContainer()
+		self.timestamp = self.date.getTSContainer()
+		self.stringTimeValue = self.date.getStringTimeValueContainer()
+		self.stringDateValue = self.date.getStringDateValueContainer()
+		self.departureStatus = self.timestamp.generateDelayStatus(type: .departure, cancelled: false)
+		self.arrivalStatus = self.timestamp.generateDelayStatus(type: .arrival, cancelled:  false)
+	}
+	
 	init(
 		plannedDeparture: String?,
 		plannedArrival: String?,

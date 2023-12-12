@@ -1,9 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="ChewJourney" representedClassName="ChewJourney" syncable="YES">
+        <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="journeyRef" attributeType="String"/>
+        <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="chewJourneyArr" inverseEntity="Location"/>
+        <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="chewJourneyDep" inverseEntity="Location"/>
+        <relationship name="time" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewTime" inverseName="chewJourney" inverseEntity="ChewTime"/>
+        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="chewJourneys" inverseEntity="ChewUser"/>
+    </entity>
+    <entity name="ChewTime" representedClassName="ChewTime" syncable="YES">
+        <attribute name="actualArrival" optional="YES" attributeType="String"/>
+        <attribute name="actualDeparture" optional="YES" attributeType="String"/>
+        <attribute name="cancelled" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="plannedArrival" optional="YES" attributeType="String"/>
+        <attribute name="plannedDeparture" optional="YES" attributeType="String"/>
+        <relationship name="chewJourney" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="time" inverseEntity="ChewJourney"/>
+    </entity>
     <entity name="ChewUser" representedClassName="ChewUser" syncable="YES">
         <attribute name="timestamp" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="chewJourneys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="user" inverseEntity="ChewJourney"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Location" inverseName="user" inverseEntity="Location"/>
-        <relationship name="savedJourneys" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="user" inverseEntity="SavedJourney"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="user" inverseEntity="Settings"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
@@ -13,16 +29,9 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="default_stop_name"/>
         <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="savedJourneyArr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="arrivalStop" inverseEntity="SavedJourney"/>
-        <relationship name="savedJourneyDep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="SavedJourney" inverseName="departureStop" inverseEntity="SavedJourney"/>
-        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="recentLocations" inverseEntity="ChewUser"/>
-    </entity>
-    <entity name="SavedJourney" representedClassName="SavedJourney" syncable="YES">
-        <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="journeyRef" attributeType="String"/>
-        <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyArr" inverseEntity="Location"/>
-        <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="savedJourneyDep" inverseEntity="Location"/>
-        <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="savedJourneys" inverseEntity="ChewUser"/>
+        <relationship name="chewJourneyArr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="arrivalStop" inverseEntity="ChewJourney"/>
+        <relationship name="chewJourneyDep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="departureStop" inverseEntity="ChewJourney"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="recentLocations" inverseEntity="ChewUser"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES">
         <attribute name="isWithTransfers" attributeType="Boolean" usesScalarValueType="YES"/>

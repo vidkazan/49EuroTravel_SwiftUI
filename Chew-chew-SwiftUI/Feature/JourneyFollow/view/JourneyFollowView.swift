@@ -14,9 +14,16 @@ struct JourneyFollowView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyFollowViewModel
 	var body: some View {
-//		VStack {
 			List(viewModel.state.journeys, id: \.journeyRef, rowContent: { journey in
-				Text(journey.journeyRef)
+				VStack {
+					Text(journey.journeyViewData?.origin ?? "")
+					Text(journey.journeyViewData?.destination ?? "")
+					HStack {
+						Text(journey.journeyViewData?.timeContainer.stringTimeValue.departure.actual ?? "time")
+						Text("-")
+						Text(journey.journeyViewData?.timeContainer.stringTimeValue.arrival.actual ?? "time")
+					}
+					Text(journey.journeyRef)
 					.font(.system(size: 7, weight: .medium))
 					.swipeActions(edge: .leading) {
 						Button {
@@ -28,15 +35,15 @@ struct JourneyFollowView : View {
 					}
 					.swipeActions(edge: .trailing) {
 						Button {
-							viewModel.send(event: .didTapEdit(action: .deleting, journeyRef: journey.journeyRef))
-							SavedJourney.delete(deleteRef: journey.journeyRef, in: chewVM.savedJourneys, context: viewContext)
+							viewModel.send(event: .didTapEdit(action: .deleting, journeyRef: journey.journeyRef,viewData: journey.journeyViewData))
+							ChewJourney.delete(deleteRef: journey.journeyRef, in: chewVM.chewJourneys, context: viewContext)
 						} label: {
 							Label("Delete", systemImage: "xmark.bin.circle")
 						}
 						.tint(.red)
 					}
+				}
 			})
-//		}
 		.transition(.opacity)
 		.animation(.spring().speed(2), value: chewVM.state.status)
 		.animation(.spring().speed(2), value: chewVM.searchStopsViewModel.state.status)

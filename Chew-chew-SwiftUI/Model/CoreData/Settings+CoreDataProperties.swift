@@ -26,6 +26,7 @@ extension Settings {
 		transportModes : TransportModes?
 	) {
 		guard let settings = settings,let transportModes = transportModes else {
+			print("📕 > update Settings: failed : setttings / transportMode is nil")
 			return
 		}
 		saveSettings(newSettings: newSettings, settings: settings, managedObjectContext: managedObjectContext,transportModes: transportModes)
@@ -78,6 +79,7 @@ extension Settings {
 	
 	static func basicFetchRequest(user : ChewUser?,context : NSManagedObjectContext) -> Settings? {
 		if let res = fetch(context: context) {
+			print("📗 > basicFetchRequest Settings: loaded Settings")
 			return res
 		}
 		Settings.createWith(
@@ -92,7 +94,6 @@ extension Settings {
 		do {
 			let res = try context.fetch(.init(entityName: "Settings")).first as? Settings
 			if let res = res {
-				print("📗 > basicFetchRequest Settings: loaded Settings")
 				return res
 			}
 			print("📕 > basicFetchRequest Settings: context.fetch: result is empty")

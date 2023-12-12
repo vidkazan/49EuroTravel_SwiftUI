@@ -28,7 +28,7 @@ extension JourneyDetailsView {
 				}
 				HStack {
 					HStack {
-						Text(viewModel.state.data.startDateString)
+						Text(viewModel.state.data.timeContainer.stringDateValue.departure.actual ?? "")
 					}
 					.padding(5)
 					.chewTextSize(.medium)
