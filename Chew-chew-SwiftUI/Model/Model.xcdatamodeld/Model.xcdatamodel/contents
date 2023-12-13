@@ -6,6 +6,7 @@
         <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="chewJourneyArr" inverseEntity="Location"/>
         <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="chewJourneyDep" inverseEntity="Location"/>
         <relationship name="legs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ChewLeg" inverseName="journey" inverseEntity="ChewLeg"/>
+        <relationship name="sunEvents" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ChewSunEvent" inverseName="journey" inverseEntity="ChewSunEvent"/>
         <relationship name="time" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewTime" inverseName="chewJourney" inverseEntity="ChewTime"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="chewJourneys" inverseEntity="ChewUser"/>
     </entity>
@@ -25,6 +26,14 @@
         <attribute name="finishPointName" optional="YES" attributeType="String"/>
         <attribute name="startPointName" optional="YES" attributeType="String"/>
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLeg" inverseName="chewLegType" inverseEntity="ChewLeg"/>
+    </entity>
+    <entity name="ChewSunEvent" representedClassName="ChewSunEvent" syncable="YES">
+        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longtitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="timeFinal" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="timeStart" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="type" attributeType="String"/>
+        <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="sunEvents" inverseEntity="ChewJourney"/>
     </entity>
     <entity name="ChewTime" representedClassName="ChewTime" syncable="YES">
         <attribute name="actualArrival" optional="YES" attributeType="String"/>

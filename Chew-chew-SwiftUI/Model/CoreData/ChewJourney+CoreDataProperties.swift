@@ -18,6 +18,7 @@ extension ChewJourney {
 	@NSManaged public var isActive: Bool
 	@NSManaged public var legs: [ChewLeg]?
 	@NSManaged public var time: ChewTime?
+	@NSManaged public var sunEvents: [ChewSunEvent]?
 }
 
 extension ChewJourney {
@@ -68,6 +69,13 @@ extension ChewJourney {
 			let _ = ChewLeg(context: managedObjectContext, leg: leg,for: journey)
 		}
 		
+		for sun in viewData.sunEvents {
+			let _ = ChewSunEvent(
+				context: managedObjectContext,
+				sun: sun,
+				for: journey
+			)
+		}
 
 		if let depStop = depStop ,let arrStop = arrStop {
 			let departure = Location(context: managedObjectContext,stop: depStop)

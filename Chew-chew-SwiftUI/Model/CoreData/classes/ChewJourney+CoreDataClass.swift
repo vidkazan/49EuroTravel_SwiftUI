@@ -17,12 +17,20 @@ public class ChewJourney: NSManagedObject {
 extension ChewJourney {
 	func journeyViewData() -> JourneyFollowData {
 		var legsViewData = [LegViewData]()
-	
+		var sunEvents = [SunEvent]()
+		
 		if let legs = self.legs {
-		legsViewData = legs.map {
+			legsViewData = legs.map {
 				$0.legViewData()
 			}
 		}
+		
+		if let suns = self.sunEvents {
+			sunEvents = suns.map {
+				$0.sunEvent()
+			}
+		}
+		
 		let time = TimeContainer(chewTime: self.time)
 		return JourneyFollowData(
 			journeyRef: self.journeyRef,
@@ -31,8 +39,8 @@ extension ChewJourney {
 				destination: self.arrivalStop?.name ?? "destination",
 				durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: time.durationInMinutes) ?? "duration",
 				legs: legsViewData,
-				transferCount: 0,
-				sunEvents: [],
+				transferCount: constructTransferCount(legs: legsViewData),
+				sunEvents: sunEvents,
 				isReachable: true,
 				badges: [],
 				refreshToken: self.journeyRef,

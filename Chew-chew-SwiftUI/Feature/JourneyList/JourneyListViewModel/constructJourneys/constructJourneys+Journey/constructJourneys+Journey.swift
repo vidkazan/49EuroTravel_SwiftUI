@@ -69,11 +69,7 @@ func constructJourneyViewData(
 	return JourneyViewData(
 		origin: journey.legs.first?.origin?.name ?? journey.legs.first?.origin?.address ?? "Origin(journeyViewData)",
 		destination: journey.legs.last?.destination?.name ?? journey.legs.last?.destination?.address ?? "Destination(journeyViewData)",
-		durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(
-			minutes: DateParcer.getTwoDateIntervalInMinutes(
-				date1: timeContainer.date.departure.actual,
-				date2: timeContainer.date.arrival.actual)
-		) ?? "error",
+		durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: timeContainer.durationInMinutes) ?? "duration",
 		legs: legsData,
 		transferCount: constructTransferCount(legs: legsData),
 		sunEvents: sunEventService.getSunEvents(),

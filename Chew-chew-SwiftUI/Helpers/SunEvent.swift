@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-enum SunEventType : Equatable,Hashable {
+enum SunEventType : String,Equatable,Hashable {
 	case sunrise
 	case day
 	case sunset
