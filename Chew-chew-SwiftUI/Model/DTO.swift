@@ -135,7 +135,7 @@ struct LegDTO : Codable,Equatable,Identifiable{
 	let walking : Bool?
 	let distance : Int?
 	let stopovers : [StopOverDTO]?
-	let polyline : Polyline?
+	let polyline : PolylineDTO?
 	
 	private enum CodingKeys : String, CodingKey {
 		case origin

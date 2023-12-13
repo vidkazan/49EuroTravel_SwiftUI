@@ -27,15 +27,9 @@ struct JourneyListViewData : Equatable {
 
 struct JourneyViewData : Equatable {
 	let id = UUID()
-	
 	let origin : String
 	let destination : String
-	
-	
-//	let startDateString : String
-//	let endDateString : String
 	let durationLabelText : String
-	
 	let legs : [LegViewData]
 	let transferCount : Int
 	let sunEvents : [SunEvent]
@@ -101,7 +95,7 @@ struct LegViewData : Equatable,Identifiable{
 	let lineViewData : LineViewData
 	let progressSegments : Segments
 	let timeContainer : TimeContainer
-	let polyline : Polyline?
+	let polyline : PolylineDTO?
 }
 
 struct StopViewData : Equatable,Identifiable {

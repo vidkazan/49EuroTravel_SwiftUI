@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeatureGeometry : Codable,Equatable,Identifiable {
+struct FeatureGeometryDTO : Codable,Equatable,Identifiable {
 	let id = UUID()
 	let type : String?
 	// MARK: coordinates[0] : long
@@ -19,10 +19,10 @@ struct FeatureGeometry : Codable,Equatable,Identifiable {
 	}
 }
 
-struct PolylineFeature : Codable,Equatable,Identifiable {
+struct PolylineFeatureDTO : Codable,Equatable,Identifiable {
 	let id = UUID()
 	let type : String?
-	let geometry : FeatureGeometry?
+	let geometry : FeatureGeometryDTO?
 	private enum CodingKeys : String, CodingKey {
 		case type
 		case geometry
@@ -30,10 +30,10 @@ struct PolylineFeature : Codable,Equatable,Identifiable {
 }
 
 
-struct Polyline : Codable,Equatable,Identifiable {
+struct PolylineDTO : Codable,Equatable,Identifiable {
 	let id = UUID()
 	let type : String?
-	let features : [PolylineFeature]?
+	let features : [PolylineFeatureDTO]?
 	private enum CodingKeys : String, CodingKey {
 		case type
 		case features
