@@ -63,10 +63,19 @@ extension ChewJourney {
 		journey.journeyRef = ref
 		journey.user = user
 		
-		let _ = ChewTime(context: managedObjectContext, container: viewData.timeContainer, cancelled: !viewData.isReachable,for: journey)
+		let _ = ChewTime(
+			context: managedObjectContext,
+			container: viewData.timeContainer,
+			cancelled: !viewData.isReachable,
+			for: journey
+		)
 		
 		for leg in viewData.legs {
-			let _ = ChewLeg(context: managedObjectContext, leg: leg,for: journey)
+			let _ = ChewLeg(
+				context: managedObjectContext,
+				leg: leg,
+				for: journey
+			)
 		}
 		
 		for sun in viewData.sunEvents {
@@ -98,14 +107,21 @@ extension ChewJourney {
 			print("📕 > delete ChewJourneys: object is nil")
 			return
 		}
-		if let obj = objects.first(where: { elem in elem.journeyRef == deleteRef}) {
+		if let obj = objects.first(where: {
+			elem in elem.journeyRef == deleteRef
+		}) {
 			if let depStop = obj.departureStop { context.delete(depStop) }
 			if let arrStop = obj.arrivalStop { context.delete(arrStop) }
 			if let time = obj.time { context.delete(time) }
 			if let legs = obj.legs {
-			for leg in legs {
+				for leg in legs {
 					context.delete(leg)
 					if let time = leg.time { context.delete(time) }
+				}
+			}
+			if let suns = obj.sunEvents {
+				for sun in suns {
+					context.delete(sun)
 				}
 			}
 			context.delete(obj)

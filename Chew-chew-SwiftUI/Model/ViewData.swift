@@ -13,7 +13,12 @@ struct JourneyListViewData : Equatable {
 	let journeys : [JourneyViewData]
 	let laterRef : String?
 	let earlierRef : String?
-	init(journeysViewData : [JourneyViewData],data: JourneyListContainer,depStop: Stop, arrStop : Stop) {
+	init(
+		journeysViewData : [JourneyViewData],
+		data: JourneyListDTO,
+		depStop: Stop,
+		arrStop : Stop
+	) {
 		self.journeys = journeysViewData
 		self.laterRef = data.laterRef
 		self.earlierRef = data.earlierRef
@@ -52,6 +57,26 @@ extension JourneyViewData {
 		self.badges = data.badges
 		self.refreshToken = data.refreshToken
 		self.timeContainer = data.timeContainer
+	}
+	init(
+		journeyRef : String?,
+		badges : [Badges],
+		sunEvents : [SunEvent],
+		legs : [LegViewData],
+		depStopName : String?,
+		arrStopName : String?,
+		time : TimeContainer
+	){
+		self.origin = depStopName ?? "origin"
+		self.destination = arrStopName ?? "destination"
+		self.durationLabelText  = DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: time.durationInMinutes) ?? "duration"
+		self.legs = legs
+		self.transferCount = constructTransferCount(legs: legs)
+		self.sunEvents = sunEvents
+		self.isReachable = true
+		self.badges = badges
+		self.refreshToken = journeyRef
+		self.timeContainer = time
 	}
 }
 
@@ -113,7 +138,7 @@ extension StopViewData {
 	init(
 		name : String,
 		timeContainer : TimeContainer,
-		stop : StopOver,
+		stop : StopOverDTO,
 		type: StopOverType
 	) {
 		self.timeContainer = timeContainer
@@ -126,6 +151,7 @@ extension StopViewData {
 			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
 		)
 	}
+	
 	init(
 		name : String,
 		timeContainer : TimeContainer,

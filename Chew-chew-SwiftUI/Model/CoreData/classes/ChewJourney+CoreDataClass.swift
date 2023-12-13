@@ -35,16 +35,13 @@ extension ChewJourney {
 		return JourneyFollowData(
 			journeyRef: self.journeyRef,
 			journeyViewData: JourneyViewData(
-				origin: self.departureStop?.name ?? "origin",
-				destination: self.arrivalStop?.name ?? "destination",
-				durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: time.durationInMinutes) ?? "duration",
-				legs: legsViewData,
-				transferCount: constructTransferCount(legs: legsViewData),
-				sunEvents: sunEvents,
-				isReachable: true,
+				journeyRef: journeyRef,
 				badges: [],
-				refreshToken: self.journeyRef,
-				timeContainer: time
+				sunEvents: sunEvents,
+				legs: legsViewData,
+				depStopName: departureStop?.name,
+				arrStopName: arrivalStop?.name,
+				time: time
 			)
 		)
 	}

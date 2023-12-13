@@ -53,7 +53,7 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneyListContainer,ApiServiceError> {
+	func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiServiceError> {
 		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
 		query += Query.getQueryItems(methods: [
 			type == .earlierRef ? Query.earlierThan(earlierRef: ref) : Query.laterThan(laterRef: ref),
@@ -62,7 +62,7 @@ extension JourneyListViewModel {
 			Query.stopovers(isShowing: true)
 		])
 		query += self.addJourneyListTransportModes(settings: settings)
-		return ApiService().fetch(JourneyListContainer.self,query: query, type: ApiService.Requests.journeys)
+		return ApiService().fetch(JourneyListDTO.self,query: query, type: ApiService.Requests.journeys)
 	}
 }
 

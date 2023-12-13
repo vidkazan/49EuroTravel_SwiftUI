@@ -8,14 +8,14 @@ import Foundation
 import CoreLocation
 
 func constructJourneyViewDataAsync(
-	journey : Journey,
+	journey : JourneyDTO,
 	depStop: Stop?,
 	arrStop : Stop?
 ) async -> JourneyViewData {
 	return constructJourneyViewData(journey: journey, depStop: depStop, arrStop: arrStop)
 }
 func constructJourneyViewData(
-	journey : Journey,
+	journey : JourneyDTO,
 	depStop: Stop?,
 	arrStop : Stop?
 ) -> JourneyViewData {

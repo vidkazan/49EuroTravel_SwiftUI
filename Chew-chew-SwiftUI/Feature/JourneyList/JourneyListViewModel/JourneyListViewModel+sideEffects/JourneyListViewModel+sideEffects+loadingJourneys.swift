@@ -137,7 +137,7 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func fetchJourneyList(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneyListContainer,ApiServiceError> {
+	func fetchJourneyList(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiServiceError> {
 		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
 		query += addJourneyListTransfersQuery(settings: settings)
 		query += addJourneyListTransportModes(settings: settings)
@@ -150,7 +150,7 @@ extension JourneyListViewModel {
 				Query.pretty(pretyIntend: settings.debugSettings.prettyJSON),
 			]
 		)
-		return ApiService().fetch(JourneyListContainer.self,query: query, type: ApiService.Requests.journeys)
+		return ApiService().fetch(JourneyListDTO.self,query: query, type: ApiService.Requests.journeys)
 	}
 }
 

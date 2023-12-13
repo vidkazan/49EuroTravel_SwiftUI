@@ -193,12 +193,12 @@ extension JourneyDetailsViewModel {
 	}
 	
 	
-	static func fetchTrip(tripId : String?) -> AnyPublisher<Leg,ApiServiceError> {
+	static func fetchTrip(tripId : String?) -> AnyPublisher<LegDTO,ApiServiceError> {
 		guard let tripId = tripId else {
 			return Empty().eraseToAnyPublisher()
 		}
 		return ApiService().fetch(
-			Trip.self,
+			TripDTO.self,
 			query: [],
 			type: ApiService.Requests.trips(tripId: tripId)
 		)
@@ -206,7 +206,7 @@ extension JourneyDetailsViewModel {
 		.eraseToAnyPublisher()
 	}
 	
-	static func fetchJourneyByRefreshToken(ref : String) -> AnyPublisher<Journey,ApiServiceError> {
+	static func fetchJourneyByRefreshToken(ref : String) -> AnyPublisher<JourneyDTO,ApiServiceError> {
 		return ApiService().fetch(
 			JourneyWrapper.self,
 			query: Query.getQueryItems(

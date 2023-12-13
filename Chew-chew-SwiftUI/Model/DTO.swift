@@ -45,7 +45,7 @@ enum StopOverType : Equatable {
 	}
 }
 
-enum StopOverCancelledType : Equatable {
+enum StopOverCancellationType : Equatable {
 	case notCancelled
 	case exitOnly
 	case entryOnly
@@ -67,7 +67,7 @@ enum StopOverCancelledType : Equatable {
 	}
 }
 
-struct StopOver : Codable,Equatable,Identifiable {
+struct StopOverDTO : Codable,Equatable,Identifiable {
 	let id = UUID()
 	let stop				: StopDTO?
 	let departure,
@@ -103,16 +103,16 @@ struct StopOver : Codable,Equatable,Identifiable {
 	}
 }
 
-struct Trip : Codable,Equatable,Identifiable {
+struct TripDTO : Codable,Equatable,Identifiable {
 	let id = UUID()
-	let trip : Leg
+	let trip : LegDTO
 	private enum CodingKeys : String, CodingKey {
 		case trip
 	}
 	
 }
 
-struct Leg : Codable,Equatable,Identifiable{
+struct LegDTO : Codable,Equatable,Identifiable{
 	let id = UUID()
 	let origin : StopDTO?
 	let destination : StopDTO?
@@ -127,14 +127,14 @@ struct Leg : Codable,Equatable,Identifiable{
 	let reachable: Bool?
 	let tripId : String?
 	let direction: String?
-	let currentLocation: LocationCoordinates?
+	let currentLocation: LocationCoordinatesDTO?
 	let arrivalPlatform,
 		plannedArrivalPlatform: String?
 	let departurePlatform,
 		plannedDeparturePlatform : String?
 	let walking : Bool?
 	let distance : Int?
-	let stopovers : [StopOver]?
+	let stopovers : [StopOverDTO]?
 	let polyline : Polyline?
 	
 	private enum CodingKeys : String, CodingKey {
@@ -163,22 +163,22 @@ struct Leg : Codable,Equatable,Identifiable{
 	}
 }
 
-struct Price : Codable,Equatable {
+struct PriceDTO : Codable,Equatable {
 	let amount		: Double?
 	let currency	: String?
 	let hint		: String?
 }
 
 struct JourneyWrapper : Codable,Equatable {
-	let journey : Journey
+	let journey : JourneyDTO
 }
-struct Journey : Codable,Identifiable,Equatable {
+struct JourneyDTO : Codable,Identifiable,Equatable {
 	let id = UUID()
 	let type : String?
-	let legs : [Leg]
+	let legs : [LegDTO]
 	let refreshToken : String?
 	let remarks : [Remark]?
-	let price : Price?
+	let price : PriceDTO?
 	private enum CodingKeys : String, CodingKey {
 		case type
 		case legs
@@ -188,10 +188,10 @@ struct Journey : Codable,Identifiable,Equatable {
 	}
 }
 
-struct JourneyListContainer : Codable,Equatable {
+struct JourneyListDTO : Codable,Equatable {
 	let earlierRef: String?
 	let laterRef: String?
-	let journeys : [Journey]?
+	let journeys : [JourneyDTO]?
 	let realtimeDataUpdatedAt: Int64?
 }
 
@@ -206,7 +206,7 @@ struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 	let id		: String?
 	let name	: String?
 	let address		: String?
-	let location	: LocationCoordinates?
+	let location	: LocationCoordinatesDTO?
 	let latitude	: Double?
 	let longitude	: Double?
 	let poi			: Bool?
@@ -250,7 +250,7 @@ struct Departure : Codable,Equatable {
 
 
 // MARK: - Location
-struct LocationCoordinates : Codable,Equatable,Hashable {
+struct LocationCoordinatesDTO : Codable,Equatable,Hashable {
 	let type		: String?
 	let id			: String?
 	let latitude	: Double?

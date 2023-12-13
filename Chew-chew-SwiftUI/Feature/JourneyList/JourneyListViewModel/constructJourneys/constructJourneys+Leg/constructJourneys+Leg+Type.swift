@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-func constructLegType(leg : Leg, legs: [Leg]?) -> LegViewData.LegType {
+func constructLegType(leg : LegDTO, legs: [LegDTO]?) -> LegViewData.LegType {
 	if leg.distance != nil, let legs = legs {
 		switch legs.firstIndex(of: leg) {
 		case 0:

@@ -16,7 +16,7 @@ struct LegStopView : View {
 	let stopOverType : StopOverType
 	var time : PrognosedTime<String>
 	var delay : TimeContainer.DelayStatus
-	var cancelType : StopOverCancelledType
+	var cancelType : StopOverCancellationType
 	let now = Date.now.timeIntervalSince1970
 	
 	// MARK: Init
@@ -44,7 +44,7 @@ struct LegStopView : View {
 				planned: stopOver.timeContainer.stringTimeValue.departure.planned ?? ""
 			)
 			self.delay = stopOver.timeContainer.departureStatus
-			self.cancelType = StopOverCancelledType.getCancelledTypeFromDelayStatus(
+			self.cancelType = StopOverCancellationType.getCancelledTypeFromDelayStatus(
 				arrivalStatus: stopOver.timeContainer.arrivalStatus,
 				departureStatus: stopOver.timeContainer.departureStatus
 			)

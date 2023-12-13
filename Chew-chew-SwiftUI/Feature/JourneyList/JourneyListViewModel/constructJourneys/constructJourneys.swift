@@ -31,7 +31,7 @@ func constructStopFromStopDTO(data : StopDTO?) -> Stop? {
 	)
 }
 
-func constructJourneyListViewDataAsync(journeysData : JourneyListContainer, depStop : Stop, arrStop : Stop) async -> [JourneyViewData] {
+func constructJourneyListViewDataAsync(journeysData : JourneyListDTO, depStop : Stop, arrStop : Stop) async -> [JourneyViewData] {
 	guard let journeys = journeysData.journeys else { return [] }
 	var res = [JourneyViewData]()
 	

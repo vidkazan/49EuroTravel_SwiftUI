@@ -101,7 +101,7 @@ func constructSegmentsFromStopOverData(stopovers : [StopViewData]) -> Segments {
 	)
 }
 
-func constructTransferViewData(fromLeg : Leg, toLeg : Leg) -> LegViewData? {
+func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData? {
 	let first = TimeContainer(
 		plannedDeparture: fromLeg.plannedArrival,
 		plannedArrival: fromLeg.plannedArrival,
@@ -215,7 +215,7 @@ func constructLineViewData(mode : String,product : String, name : String, produc
 	)
 }
 
-func constructLegData(leg : Leg,firstTS: Date?, lastTS: Date?, legs : [Leg]?) -> LegViewData? {
+func constructLegData(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [LegDTO]?) -> LegViewData? {
 	let container = TimeContainer(
 		plannedDeparture: leg.plannedDeparture,
 		plannedArrival: leg.plannedArrival,

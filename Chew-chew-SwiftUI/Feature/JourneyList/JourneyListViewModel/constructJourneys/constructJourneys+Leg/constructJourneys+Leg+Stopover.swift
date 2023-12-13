@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 import CoreLocation
 
-func constructLineStopOverData(leg : Leg, type : LegViewData.LegType) -> [StopViewData] {
+func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [StopViewData] {
 	switch type {
 	case .line:
 		let stops = leg.stopovers ?? []

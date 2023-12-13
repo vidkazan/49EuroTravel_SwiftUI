@@ -17,7 +17,6 @@ extension ChewSunEvent {
     @NSManaged public var timeStart: Date?
     @NSManaged public var timeFinal: Date?
     @NSManaged public var journey: ChewJourney?
-
 }
 
 extension ChewSunEvent : Identifiable {
