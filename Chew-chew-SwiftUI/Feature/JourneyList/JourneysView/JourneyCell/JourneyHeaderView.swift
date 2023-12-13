@@ -17,7 +17,7 @@ struct JourneyHeaderView: View {
 				TimeLabelView(
 					isSmall: false,
 					arragement: .right,
-					time : PrognosedTime(
+					time : Prognosed(
 						actual: journey?.timeContainer.stringTimeValue.departure.actual ?? "time",
 						planned:  journey?.timeContainer.stringTimeValue.departure.planned ?? "time"
 					),
@@ -33,7 +33,7 @@ struct JourneyHeaderView: View {
 				TimeLabelView(
 					isSmall: false,
 					arragement: .left,
-					time : PrognosedTime(
+					time : Prognosed(
 						actual: journey?.timeContainer.stringTimeValue.arrival.actual ?? "time",
 						planned:  journey?.timeContainer.stringTimeValue.arrival.planned ?? "time"
 					),

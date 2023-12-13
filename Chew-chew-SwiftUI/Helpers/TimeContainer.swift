@@ -48,11 +48,11 @@ extension TimeContainer {
 		)
 	}
 	init() {
-		let departure = PrognosedTime<String?>(
+		let departure = Prognosed<String?>(
 			actual: nil,
 			planned: nil
 		)
-		let arrival = PrognosedTime<String?>(
+		let arrival = Prognosed<String?>(
 			actual: nil,
 			planned: nil
 		)
@@ -73,11 +73,11 @@ extension TimeContainer {
 		actualArrival: String?,
 		cancelled : Bool?
 	) {
-		let departure = PrognosedTime(
+		let departure = Prognosed(
 			actual: actualDeparture,
 			planned: plannedDeparture
 		)
-		let arrival = PrognosedTime(
+		let arrival = Prognosed(
 			actual: actualArrival,
 			planned: plannedArrival
 		)
@@ -95,16 +95,16 @@ extension TimeContainer {
 extension TimeContainer {
 	// MARK: ISO Container
 	struct ISOTimeContainer : Equatable {
-		let departure : PrognosedTime<String?>
-		let arrival : PrognosedTime<String?>
+		let departure : Prognosed<String?>
+		let arrival : Prognosed<String?>
 		
 		func getDateContainer() -> DateTimeContainer {
 			return DateTimeContainer(
-				departure: PrognosedTime(
+				departure: Prognosed(
 					actual: DateParcer.getDateFromDateString(dateString: departure.actual),
 					planned: DateParcer.getDateFromDateString(dateString: departure.planned)
 				),
-				arrival: PrognosedTime(
+				arrival: Prognosed(
 					actual: DateParcer.getDateFromDateString(dateString: arrival.actual),
 					planned: DateParcer.getDateFromDateString(dateString: arrival.planned)
 				)
@@ -113,16 +113,16 @@ extension TimeContainer {
 	}
 	// MARK: Date Container
 	struct DateTimeContainer : Equatable {
-		let departure : PrognosedTime<Date?>
-		let arrival : PrognosedTime<Date?>
+		let departure : Prognosed<Date?>
+		let arrival : Prognosed<Date?>
 		
 		func getTSContainer() -> TimestampTimeContainer {
 			return TimestampTimeContainer(
-				departure: PrognosedTime(
+				departure: Prognosed(
 					actual: departure.actual?.timeIntervalSince1970,
 					planned: departure.planned?.timeIntervalSince1970
 				),
-				arrival: PrognosedTime(
+				arrival: Prognosed(
 					actual: arrival.actual?.timeIntervalSince1970,
 					planned: arrival.planned?.timeIntervalSince1970
 				)
@@ -130,11 +130,11 @@ extension TimeContainer {
 		}
 		func getStringTimeValueContainer() -> TimeStringContainer {
 			return TimeStringContainer(
-				departure: PrognosedTime(
+				departure: Prognosed(
 					actual: DateParcer.getTimeStringFromDate(date: departure.actual),
 					planned: DateParcer.getTimeStringFromDate(date: departure.planned)
 				),
-				arrival: PrognosedTime(
+				arrival: Prognosed(
 					actual: DateParcer.getTimeStringFromDate(date: arrival.actual),
 					planned: DateParcer.getTimeStringFromDate(date: arrival.planned)
 				)
@@ -142,11 +142,11 @@ extension TimeContainer {
 		}
 		func getStringDateValueContainer() -> DateStringContainer {
 			return DateStringContainer(
-				departure: PrognosedTime(
+				departure: Prognosed(
 					actual: DateParcer.getDateOnlyStringFromDate(date: departure.actual),
 					planned: DateParcer.getDateOnlyStringFromDate(date: departure.planned)
 				),
-				arrival: PrognosedTime(
+				arrival: Prognosed(
 					actual: DateParcer.getDateOnlyStringFromDate(date: arrival.actual),
 					planned: DateParcer.getDateOnlyStringFromDate(date: arrival.planned)
 				)
@@ -156,20 +156,20 @@ extension TimeContainer {
 	
 	// MARK: TimeString Container
 	struct TimeStringContainer : Equatable {
-		let departure : PrognosedTime<String?>
-		let arrival : PrognosedTime<String?>
+		let departure : Prognosed<String?>
+		let arrival : Prognosed<String?>
 	}
 	struct DateStringContainer : Equatable {
-		let departure : PrognosedTime<String?>
-		let arrival : PrognosedTime<String?>
+		let departure : Prognosed<String?>
+		let arrival : Prognosed<String?>
 	}
 	// MARK: TS Container
 	struct TimestampTimeContainer : Equatable {
-		let departure : PrognosedTime<Double?>
-		let arrival : PrognosedTime<Double?>
+		let departure : Prognosed<Double?>
+		let arrival : Prognosed<Double?>
 		
 		func generateDelayStatus(type: LocationDirectionType, cancelled : Bool?) -> DelayStatus {
-			let time : PrognosedTime<Double?> = {
+			let time : Prognosed<Double?> = {
 				switch type {
 				case .departure:
 					return self.departure

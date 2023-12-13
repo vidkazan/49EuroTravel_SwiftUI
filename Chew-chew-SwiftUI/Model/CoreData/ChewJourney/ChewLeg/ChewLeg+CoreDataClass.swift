@@ -30,6 +30,11 @@ extension ChewLeg {
 		
 		let _ = ChewTime(context: context, container: leg.timeContainer, cancelled: !leg.isReachable,for: self)
 		
+		for stop in leg.legStopsViewData {
+			let _ = ChewStop(insertInto: context, with: stop, to: self)
+		}
+		
+		
 		do {
 			try context.save()
 		} catch {
@@ -41,7 +46,15 @@ extension ChewLeg {
 
 extension ChewLeg {
 	func legViewData() -> LegViewData {
+		var stopsViewData = [StopViewData]()
+		
+		if let stops = self.stops {
+			stopsViewData = stops.map {
+				$0.stopViewData()
+			}
+		}
 		let time = TimeContainer(chewTime: self.time)
+		
 		return LegViewData(
 			isReachable: self.isReachable,
 			legType: self.chewLegType?.legType ?? .line,
@@ -51,7 +64,7 @@ extension ChewLeg {
 			legTopPosition: self.legTopPosition,
 			legBottomPosition: self.legBottomPosition,
 			remarks: nil,
-			legStopsViewData: [],
+			legStopsViewData: stopsViewData,
 			footDistance: 0,
 			lineViewData: LineViewData(
 				type: LineType(rawValue: self.lineType) ?? .taxi,

@@ -20,6 +20,7 @@ extension ChewLeg {
     @NSManaged public var time: ChewTime?
 	@NSManaged public var journey: ChewJourney?
 	@NSManaged public var chewLegType: ChewLegType?
+	@NSManaged public var stops: [ChewStop]?
 }
 
 extension ChewLeg : Identifiable {

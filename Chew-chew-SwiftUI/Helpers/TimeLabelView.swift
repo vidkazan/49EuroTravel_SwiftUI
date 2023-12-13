@@ -19,12 +19,12 @@ struct TimeLabelView: View {
 	let isSmall : Bool
 	let arragement : Arragement
 	var delay : Int?
-	var time : PrognosedTime<String>
+	var time : Prognosed<String>
 	var isCancelled : Bool
 	init(
 		isSmall: Bool,
 		arragement : Arragement,
-		time : PrognosedTime<String>,
+		time : Prognosed<String>,
 		delay: Int?,
 		isCancelled : Bool
 	) {

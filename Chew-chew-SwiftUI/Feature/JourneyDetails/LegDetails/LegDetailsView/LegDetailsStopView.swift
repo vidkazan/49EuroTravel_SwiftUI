@@ -14,7 +14,7 @@ struct LegStopView : View {
 	let legViewData : LegViewData
 	let stopOver : StopViewData
 	let stopOverType : StopOverType
-	var time : PrognosedTime<String>
+	var time : Prognosed<String>
 	var delay : TimeContainer.DelayStatus
 	var cancelType : StopOverCancellationType
 	let now = Date.now.timeIntervalSince1970
@@ -32,14 +32,14 @@ struct LegStopView : View {
 		self.legViewData = leg
 		switch type {
 		case .origin,.transfer, .footTop,.footMiddle:
-			self.time = PrognosedTime(
+			self.time = Prognosed(
 				actual: stopOver.timeContainer.stringTimeValue.departure.actual ?? "",
 				planned: stopOver.timeContainer.stringTimeValue.departure.planned ?? ""
 			)
 			self.delay = stopOver.timeContainer.departureStatus
 			self.cancelType = (stopOver.timeContainer.departureStatus == TimeContainer.DelayStatus.cancelled) ? .fullyCancelled : .notCancelled
 		case .stopover:
-			self.time = PrognosedTime(
+			self.time = Prognosed(
 				actual: stopOver.timeContainer.stringTimeValue.departure.actual ?? "",
 				planned: stopOver.timeContainer.stringTimeValue.departure.planned ?? ""
 			)
@@ -49,7 +49,7 @@ struct LegStopView : View {
 				departureStatus: stopOver.timeContainer.departureStatus
 			)
 		case .destination, .footBottom:
-			self.time = PrognosedTime(
+			self.time = Prognosed(
 				actual: stopOver.timeContainer.stringTimeValue.arrival.actual ?? "",
 				planned: stopOver.timeContainer.stringTimeValue.arrival.planned ?? ""
 			)

@@ -146,7 +146,8 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 				coordinates: CLLocationCoordinate2D(
 					latitude: fromLeg.destination?.latitude ?? fromLeg.destination?.location?.latitude ?? 0,
 					longitude: fromLeg.destination?.longitude ?? fromLeg.destination?.location?.longitude ?? 0
-				)
+				),
+				isCancelled: nil
 			),
 			StopViewData(
 				name: "",
@@ -155,7 +156,8 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 				coordinates: CLLocationCoordinate2D(
 					latitude: toLeg.origin?.latitude ?? toLeg.origin?.location?.latitude ?? 0,
 					longitude: toLeg.origin?.longitude ?? toLeg.origin?.location?.longitude ?? 0
-				)
+				),
+				isCancelled: nil
 			)
 		],
 		footDistance: 0,

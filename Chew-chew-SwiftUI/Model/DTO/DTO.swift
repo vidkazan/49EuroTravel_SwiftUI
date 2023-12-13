@@ -9,7 +9,7 @@ import Foundation
 
 // /journeys
 
-enum StopOverType : Equatable {
+enum StopOverType : String,Equatable {
 	case origin
 	case stopover
 	case destination
@@ -67,7 +67,7 @@ enum StopOverCancellationType : Equatable {
 	}
 }
 
-struct StopOverDTO : Codable,Equatable,Identifiable {
+struct StopWithTimeDTO : Codable,Equatable,Identifiable {
 	let id = UUID()
 	let stop				: StopDTO?
 	let departure,
@@ -109,7 +109,6 @@ struct TripDTO : Codable,Equatable,Identifiable {
 	private enum CodingKeys : String, CodingKey {
 		case trip
 	}
-	
 }
 
 struct LegDTO : Codable,Equatable,Identifiable{
@@ -134,7 +133,7 @@ struct LegDTO : Codable,Equatable,Identifiable{
 		plannedDeparturePlatform : String?
 	let walking : Bool?
 	let distance : Int?
-	let stopovers : [StopOverDTO]?
+	let stopovers : [StopWithTimeDTO]?
 	let polyline : PolylineDTO?
 	
 	private enum CodingKeys : String, CodingKey {

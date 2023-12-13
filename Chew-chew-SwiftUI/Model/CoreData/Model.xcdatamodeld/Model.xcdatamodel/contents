@@ -19,6 +19,7 @@
         <attribute name="lineType" attributeType="String"/>
         <relationship name="chewLegType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLegType" inverseName="leg" inverseEntity="ChewLegType"/>
         <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="legs" inverseEntity="ChewJourney"/>
+        <relationship name="stops" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="ChewStop" inverseName="leg" inverseEntity="ChewStop"/>
         <relationship name="time" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewTime" inverseName="leg" inverseEntity="ChewTime"/>
     </entity>
     <entity name="ChewLegType" representedClassName="ChewLegType" syncable="YES">
@@ -26,6 +27,23 @@
         <attribute name="finishPointName" optional="YES" attributeType="String"/>
         <attribute name="startPointName" optional="YES" attributeType="String"/>
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLeg" inverseName="chewLegType" inverseEntity="ChewLeg"/>
+    </entity>
+    <entity name="ChewPrognosedPlatform" representedClassName="ChewPrognosedPlatform" syncable="YES">
+        <attribute name="actual" optional="YES" attributeType="String"/>
+        <attribute name="planned" optional="YES" attributeType="String"/>
+        <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewStop" inverseName="arrPlatform" inverseEntity="ChewStop"/>
+        <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewStop" inverseName="depPlatform" inverseEntity="ChewStop"/>
+    </entity>
+    <entity name="ChewStop" representedClassName="ChewStop" syncable="YES">
+        <attribute name="isCancelled" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="lat" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="long" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="type" optional="YES" attributeType="String"/>
+        <relationship name="arrPlatform" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewPrognosedPlatform" inverseName="arrivalStop" inverseEntity="ChewPrognosedPlatform"/>
+        <relationship name="depPlatform" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewPrognosedPlatform" inverseName="departureStop" inverseEntity="ChewPrognosedPlatform"/>
+        <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLeg" inverseName="stops" inverseEntity="ChewLeg"/>
+        <relationship name="time" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewTime" inverseName="chewStop" inverseEntity="ChewTime"/>
     </entity>
     <entity name="ChewSunEvent" representedClassName="ChewSunEvent" syncable="YES">
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -42,6 +60,7 @@
         <attribute name="plannedArrival" optional="YES" attributeType="String"/>
         <attribute name="plannedDeparture" optional="YES" attributeType="String"/>
         <relationship name="chewJourney" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="time" inverseEntity="ChewJourney"/>
+        <relationship name="chewStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewStop" inverseName="time" inverseEntity="ChewStop"/>
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLeg" inverseName="time" inverseEntity="ChewLeg"/>
     </entity>
     <entity name="ChewUser" representedClassName="ChewUser" syncable="YES">

@@ -67,6 +67,10 @@
 		7D5D78532B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78512B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift */; };
 		7D5D78552B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78542B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift */; };
 		7D62AF5D2AAA7BB800D3827D /* res.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 7D62AF5C2AAA7BB800D3827D /* res.geojson */; };
+		7D65DF1C2B2A2BFE00692601 /* ChewStop+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65DF182B2A2BFE00692601 /* ChewStop+CoreDataClass.swift */; };
+		7D65DF1D2B2A2BFE00692601 /* ChewStop+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65DF192B2A2BFE00692601 /* ChewStop+CoreDataProperties.swift */; };
+		7D65DF1E2B2A2BFE00692601 /* PrognosedPlatform+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65DF1A2B2A2BFE00692601 /* PrognosedPlatform+CoreDataClass.swift */; };
+		7D65DF1F2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65DF1B2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift */; };
 		7D6734B32A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */; };
 		7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B42A96334B00CBE9C1 /* ContentView.swift */; };
 		7D6734BA2A96334C00CBE9C1 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D6734B92A96334C00CBE9C1 /* Preview Assets.xcassets */; };
@@ -229,6 +233,10 @@
 		7D5D78542B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewLegType+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D62AF5C2AAA7BB800D3827D /* res.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = res.geojson; sourceTree = "<group>"; };
 		7D63285C2AB75B0900E1EF2B /* tmp.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = tmp.geojson; sourceTree = "<group>"; };
+		7D65DF182B2A2BFE00692601 /* ChewStop+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewStop+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D65DF192B2A2BFE00692601 /* ChewStop+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewStop+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7D65DF1A2B2A2BFE00692601 /* PrognosedPlatform+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrognosedPlatform+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7D65DF1B2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrognosedPlatform+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Chew-chew-SwiftUI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6734B22A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Chew_chew_SwiftUIApp.swift; sourceTree = "<group>"; };
 		7D6734B42A96334B00CBE9C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -512,6 +520,10 @@
 		7D65DF0C2B2A264700692601 /* ChewLeg */ = {
 			isa = PBXGroup;
 			children = (
+				7D65DF182B2A2BFE00692601 /* ChewStop+CoreDataClass.swift */,
+				7D65DF192B2A2BFE00692601 /* ChewStop+CoreDataProperties.swift */,
+				7D65DF1A2B2A2BFE00692601 /* PrognosedPlatform+CoreDataClass.swift */,
+				7D65DF1B2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift */,
 				7D65DF102B2A26B800692601 /* ChewLegType */,
 				7D5D78512B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift */,
 				7D5D78502B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift */,
@@ -1152,6 +1164,7 @@
 				7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */,
 				7D3D88EC2B2A166E00B269E7 /* ChewSunEvent+CoreDataClass.swift in Sources */,
 				7D462D4F2AAC956B00BC0D65 /* JourneyListViewModel+reduce+FailedToLoadJourneys.swift in Sources */,
+				7D65DF1D2B2A2BFE00692601 /* ChewStop+CoreDataProperties.swift in Sources */,
 				7D4B1B952AA8FDA20096F372 /* SearchLocationVM+state.swift in Sources */,
 				7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */,
 				7D462D522AAC96C000BC0D65 /* SearchStopsView+RightButton.swift in Sources */,
@@ -1186,6 +1199,7 @@
 				7D9BB10D2B0CBF54008A3616 /* Location+CoreDataProperties.swift in Sources */,
 				7D181D692AD6F7C6003AB021 /* FavouriteRideCell.swift in Sources */,
 				7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift in Sources */,
+				7D65DF1F2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift in Sources */,
 				7DA13A412B28D5F10045061F /* Settings+CoreDataClass.swift in Sources */,
 				7D6734B32A96334B00CBE9C1 /* Chew_chew_SwiftUIApp.swift in Sources */,
 				7D6C5C182AAF486700DEFC57 /* chewVM+state.swift in Sources */,
@@ -1200,6 +1214,7 @@
 				7D4208CB2AE122FF003D9BFB /* FullLegView.swift in Sources */,
 				7D2CAF642B0BEA0200577FD4 /* Model.xcdatamodeld in Sources */,
 				7D7B3DB02AB9D36B0070E44D /* LegDetailsVM+sideEffects.swift in Sources */,
+				7D65DF1C2B2A2BFE00692601 /* ChewStop+CoreDataClass.swift in Sources */,
 				7D000CFB2AB87ACD00566120 /* NavigationLazyView.swift in Sources */,
 				7D000CF32AB86AD700566120 /* JourneyListViewModel+sideEffects+loadingJourneys.swift in Sources */,
 				7D6C5C332AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift in Sources */,
@@ -1214,6 +1229,7 @@
 				7D6C5C2D2AAF791400DEFC57 /* JourneyDetailsVM+sideEffects.swift in Sources */,
 				7D9BB10E2B0CBF54008A3616 /* ChewJourney+CoreDataClass.swift in Sources */,
 				7D02CE342A98E8130048ADE6 /* JourneysListView.swift in Sources */,
+				7D65DF1E2B2A2BFE00692601 /* PrognosedPlatform+CoreDataClass.swift in Sources */,
 				7DAF62AF2A9E5494006F1A17 /* JourneyScrollViewLoader.swift in Sources */,
 				7D02CE272A97E6790048ADE6 /* ApiService.swift in Sources */,
 				7D68D9F82ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift in Sources */,

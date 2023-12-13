@@ -83,12 +83,9 @@ struct LegViewData : Equatable,Identifiable{
 //	PrognosedDirection<String>
 	let direction : String
 	let duration : String
-	
 	let legTopPosition : Double
 	let legBottomPosition : Double
-	
 	var delayedAndNextIsNotReachable : Bool?
-	
 	let remarks : [Remark]?
 	let legStopsViewData : [StopViewData]
 	let footDistance : Int
@@ -102,10 +99,11 @@ struct StopViewData : Equatable,Identifiable {
 	let id = UUID()
 	let locationCoordinates : CLLocationCoordinate2D
 	let name : String
-	let departurePlatform : PrognosedTime<String?>
-	let arrivalPlatform : PrognosedTime<String?>
+	let departurePlatform : Prognosed<String?>
+	let arrivalPlatform : Prognosed<String?>
 	let timeContainer : TimeContainer
 	let type : StopOverType
+	let isCancelled : Bool?
 }
 
 enum LocationDirectionType :Int, Hashable {
@@ -132,32 +130,36 @@ extension StopViewData {
 	init(
 		name : String,
 		timeContainer : TimeContainer,
-		stop : StopOverDTO,
-		type: StopOverType
+		stop : StopWithTimeDTO,
+		type: StopOverType,
+		isCancelled : Bool?
 	) {
 		self.timeContainer = timeContainer
 		self.name = name
-		self.departurePlatform  = PrognosedTime(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
-		self.arrivalPlatform  = PrognosedTime(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
+		self.departurePlatform  = Prognosed(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
+		self.arrivalPlatform  = Prognosed(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
 		self.type = type
 		self.locationCoordinates = CLLocationCoordinate2D(
 			latitude: stop.stop?.location?.latitude ?? stop.stop?.latitude ?? -1,
 			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
 		)
+		self.isCancelled = isCancelled
 	}
 	
 	init(
 		name : String,
 		timeContainer : TimeContainer,
 		type: StopOverType,
-		coordinates : CLLocationCoordinate2D
+		coordinates : CLLocationCoordinate2D,
+		isCancelled : Bool?
 	) {
 		self.timeContainer = timeContainer
 		self.name = name
-		self.departurePlatform  = PrognosedTime(actual: nil, planned: nil)
-		self.arrivalPlatform  = PrognosedTime(actual: nil, planned: nil)
+		self.departurePlatform  = Prognosed(actual: nil, planned: nil)
+		self.arrivalPlatform  = Prognosed(actual: nil, planned: nil)
 		self.type = type
 		self.locationCoordinates = coordinates
+		self.isCancelled = isCancelled
 	}
 }
 
