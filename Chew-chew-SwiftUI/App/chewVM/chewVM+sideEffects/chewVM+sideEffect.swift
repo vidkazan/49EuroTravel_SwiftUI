@@ -27,7 +27,9 @@ extension ChewViewModel {
 	
 	func whenLoadingInitialData() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .loadingInitialData(viewContext: let context) = state.status else { return Empty().eraseToAnyPublisher() }
+			guard case .loadingInitialData(viewContext: let context) = state.status else {
+				return Empty().eraseToAnyPublisher()
+			}
 			
 			guard let user = ChewUser.basicFetchRequest(context: context) else {
 				print("whenLoadingInitialData: user is nil: loading default data")
@@ -60,22 +62,8 @@ extension ChewViewModel {
 			if let chewJourneys = ChewJourney.basicFetchRequest(context: context) {
 				self.chewJourneys = chewJourneys
 				self.journeyFollowViewModel.send(
-					event: .didUpdateData(chewJourneys.map { elem in
-						JourneyFollowData(
-							journeyRef: elem.journeyRef,
-							journeyViewData: JourneyViewData(
-								origin: elem.departureStop?.name ?? "",
-								destination: elem.arrivalStop?.name ?? "",
-								durationLabelText: "",
-								legs: [],
-								transferCount: 0,
-								sunEvents: [],
-								isReachable: true,
-								badges: [],
-								refreshToken: elem.journeyRef,
-								timeContainer: TimeContainer(chewTime: elem.time)
-							)
-						)
+					event: .didUpdateData(chewJourneys.map {
+						$0.journeyViewData()
 					})
 				)
 			}
@@ -83,6 +71,7 @@ extension ChewViewModel {
 			var transportModes = Set<LineType>()
 			
 			// buuueeeeeeee
+			
 			if modes.bus { transportModes.insert(.bus) }
 			if modes.ferry { transportModes.insert(.ferry) }
 			if modes.national { transportModes.insert(.national) }

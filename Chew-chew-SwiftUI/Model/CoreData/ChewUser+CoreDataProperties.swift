@@ -55,10 +55,10 @@ extension ChewUser {
 			if let res = res {
 				return res
 			}
-			print("📕 > basicFetchRequest User: context.fetch: result is empty")
+			print("📙 > basicFetchRequest \(Self.self): context.fetch: result is empty")
 			return nil
 		} catch {
-			print("📕 > basicFetchRequest User: context.fetch error")
+			print("📕 > basicFetchRequest \(Self.self): context.fetch error")
 			return nil
 		}
 	}

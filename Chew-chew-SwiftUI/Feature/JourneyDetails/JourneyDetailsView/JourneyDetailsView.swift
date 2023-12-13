@@ -120,16 +120,16 @@ struct JourneyDetailsView: View {
 										context: viewContext
 									)
 								case false:
+									let _ = print(">> here")
 									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .adding, journeyRef: ref, viewData: viewModel.state.data))
 									ChewJourney.createWith(
+										viewData: viewModel.state.data,
 										user: chewVM.user,
 										depStop: viewModel.depStop,
 										arrStop: viewModel.arrStop,
 										ref: ref,
 										using: viewContext,
-										in: chewVM.chewJourneys,
-										timeContainer: viewModel.state.data.timeContainer,
-										isCancelled: !viewModel.state.data.isReachable
+										in: chewVM.chewJourneys
 									)
 								}
 							},

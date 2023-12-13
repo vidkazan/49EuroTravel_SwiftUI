@@ -14,9 +14,9 @@ extension ChewJourney {
     @NSManaged public var journeyRef: String
     @NSManaged public var arrivalStop: Location?
     @NSManaged public var departureStop: Location?
-	@NSManaged public var user: ChewUser
+	@NSManaged public var user: ChewUser?
 	@NSManaged public var isActive: Bool
-	
+	@NSManaged public var legs: [ChewLeg]?
 	@NSManaged public var time: ChewTime?
 }
 
@@ -32,23 +32,22 @@ extension ChewJourney {
 				print("📗 > basicFetchRequest ChewJourney")
 				return res
 			}
-			print("📕 > basicFetchRequest ChewJourney: context.fetch: result is empty")
+			print("📙 > basicFetchRequest \(Self.self): context.fetch: result is empty")
 			return nil
 		} catch {
-			print("📕 > basicFetchRequest ChewJourney: context.fetch error")
+			print("📕 > basicFetchRequest \(Self.self): context.fetch error")
 			return nil
 		}
 	}
 	
 	static func createWith(
+		viewData : JourneyViewData,
 		user : ChewUser?,
 		depStop : Stop?,
 		arrStop : Stop?,
 		ref : String,
 		using managedObjectContext: NSManagedObjectContext,
-		in object : [ChewJourney]?,
-		timeContainer : TimeContainer,
-		isCancelled : Bool
+		in object : [ChewJourney]?
 	) {
 		guard object?.contains(where: { elem in elem.journeyRef == ref}) != true else {
 			print("📕 > create ChewJourney: return by duplication")
@@ -63,9 +62,12 @@ extension ChewJourney {
 		journey.journeyRef = ref
 		journey.user = user
 		
-		let time = ChewTime(context: managedObjectContext, container: timeContainer, cancelled: isCancelled)
+		let _ = ChewTime(context: managedObjectContext, container: viewData.timeContainer, cancelled: !viewData.isReachable,for: journey)
 		
-		time.chewJourney = journey
+		for leg in viewData.legs {
+			let _ = ChewLeg(context: managedObjectContext, leg: leg,for: journey)
+		}
+		
 
 		if let depStop = depStop ,let arrStop = arrStop {
 			let departure = Location(context: managedObjectContext,stop: depStop)
@@ -92,6 +94,12 @@ extension ChewJourney {
 			if let depStop = obj.departureStop { context.delete(depStop) }
 			if let arrStop = obj.arrivalStop { context.delete(arrStop) }
 			if let time = obj.time { context.delete(time) }
+			if let legs = obj.legs {
+			for leg in legs {
+					context.delete(leg)
+					if let time = leg.time { context.delete(time) }
+				}
+			}
 			context.delete(obj)
 		}
 

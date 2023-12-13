@@ -17,6 +17,7 @@ extension ChewTime {
 	@NSManaged public var cancelled : Bool
 	
 	@NSManaged public var chewJourney : ChewJourney?
+	@NSManaged public var leg: ChewLeg?
 }
 
 extension ChewTime {
@@ -46,12 +47,7 @@ extension ChewTime {
 		for chewJourney : ChewJourney,
 		isCancelled : Bool
 	) {
-		let time = ChewTime(
-			context: managedObjectContext,
-			container: container,
-			cancelled: isCancelled
-		)
-		time.chewJourney = chewJourney
+		let _ = ChewTime(context: managedObjectContext,container: container,cancelled: isCancelled,for: chewJourney)
 		do {
 			try managedObjectContext.save()
 		} catch {
@@ -74,10 +70,10 @@ extension ChewTime {
 			if let res = res {
 				return res
 			}
-			print("📕 > basicFetchRequest ChewTime: context.fetch: result is empty")
+			print("📙 > basicFetchRequest \(Self.self): context.fetch: result is empty")
 			return nil
 		} catch {
-			print("📕 > basicFetchRequest ChewTime: context.fetch error")
+			print("📕 > basicFetchRequest \(Self.self): context.fetch error")
 			return nil
 		}
 	}

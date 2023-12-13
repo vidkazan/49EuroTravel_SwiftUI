@@ -25,6 +25,7 @@ struct TimeContainer : Equatable {
 			}
 		}
 	}
+	
 	let iso : ISOTimeContainer
 	let date : DateTimeContainer
 	let timestamp : TimestampTimeContainer
@@ -32,9 +33,11 @@ struct TimeContainer : Equatable {
 	let stringDateValue : DateStringContainer
 	let departureStatus : DelayStatus
 	let arrivalStatus : DelayStatus
+	let durationInMinutes : Int
 }
 
 extension TimeContainer {
+	// MARK: Init
 	init(chewTime : ChewTime?) {
 		self.init(
 			plannedDeparture: chewTime?.plannedDeparture,
@@ -44,10 +47,6 @@ extension TimeContainer {
 			cancelled: chewTime?.cancelled
 		)
 	}
-}
-
-extension TimeContainer {
-	// MARK: Init
 	init() {
 		let departure = PrognosedTime<String?>(
 			actual: nil,
@@ -63,7 +62,8 @@ extension TimeContainer {
 		self.stringTimeValue = self.date.getStringTimeValueContainer()
 		self.stringDateValue = self.date.getStringDateValueContainer()
 		self.departureStatus = self.timestamp.generateDelayStatus(type: .departure, cancelled: false)
-		self.arrivalStatus = self.timestamp.generateDelayStatus(type: .arrival, cancelled:  false)
+		self.arrivalStatus = self.timestamp.generateDelayStatus(type: .arrival, cancelled: false)
+		self.durationInMinutes = -1
 	}
 	
 	init(
@@ -88,7 +88,11 @@ extension TimeContainer {
 		self.stringDateValue = self.date.getStringDateValueContainer()
 		self.departureStatus = self.timestamp.generateDelayStatus(type: .departure, cancelled: cancelled)
 		self.arrivalStatus = self.timestamp.generateDelayStatus(type: .arrival, cancelled:  cancelled)
+		self.durationInMinutes = DateParcer.getTwoDateIntervalInMinutes(date1: self.date.departure.actual, date2: self.date.arrival.actual) ?? -1
 	}
+}
+
+extension TimeContainer {
 	// MARK: ISO Container
 	struct ISOTimeContainer : Equatable {
 		let departure : PrognosedTime<String?>

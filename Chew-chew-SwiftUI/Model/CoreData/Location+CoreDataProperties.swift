@@ -49,7 +49,7 @@ extension Location {
 	
 	static func createWith(user : ChewUser?,stop : Stop,using managedObjectContext: NSManagedObjectContext) {
 		guard let user = user else {
-			print("🔴 > create Location: : user is nil")
+			print("🔴 > create \(Self.self): : user is nil")
 			return
 		}
 		let location = Location(context: managedObjectContext,stop: stop)
@@ -59,7 +59,7 @@ extension Location {
 			try managedObjectContext.save()
 		} catch {
 			let nserror = error as NSError
-			print("📕 > create Location: ", nserror.localizedDescription)
+			print("📕 > create \(Self.self): ", nserror.localizedDescription)
 		}
 	}
 	
@@ -93,14 +93,14 @@ extension Location {
 	
 	static private func fetch(context : NSManagedObjectContext) -> [Location]? {
 		do {
-			let res = try context.fetch(.init(entityName: "Location")) as? [Location]
+			let res = try context.fetch(.init(entityName: "\(Self.self)")) as? [Location]
 			if let res = res {
 				return res
 			}
-			print("📕 > basicFetchRequest Location: context.fetch: result is empty")
+			print("📙 > basicFetchRequest \(Self.self): context.fetch: result is empty")
 			return nil
 		} catch {
-			print("📕 > basicFetchRequest Location: context.fetch error")
+			print("📕 > basicFetchRequest \(Self.self): context.fetch error")
 			return nil
 		}
 	}

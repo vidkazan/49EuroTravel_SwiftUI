@@ -26,7 +26,7 @@ extension Settings {
 		transportModes : TransportModes?
 	) {
 		guard let settings = settings,let transportModes = transportModes else {
-			print("📕 > update Settings: failed : setttings / transportMode is nil")
+			print("📕 > update \(Self.self): failed : setttings / transportMode is nil")
 			return
 		}
 		saveSettings(newSettings: newSettings, settings: settings, managedObjectContext: managedObjectContext,transportModes: transportModes)
@@ -39,14 +39,14 @@ extension Settings {
 		using managedObjectContext: NSManagedObjectContext
 	) {
 		guard let user = user else {
-			print("📕 > create Settings: failed : user is nil")
+			print("📕 > create \(Self.self): failed : user is nil")
 			return
 		}
 		let settings = Settings(context: managedObjectContext)
 		let modes = TransportModes(context: managedObjectContext)
 		settings.user = user
 		saveSettings(newSettings: newSettings, settings: settings, managedObjectContext: managedObjectContext,transportModes: modes)
-		print("📙 > create Settings: created new Settings")
+		print("📙 > create \(Self.self): created new Settings")
 	}
 	
 	
@@ -70,16 +70,16 @@ extension Settings {
 		do {
 			TransportModes.updateWith(with: newSettings.customTransferModes, using: managedObjectContext, settings: settings, object: transportModes)
 			try managedObjectContext.save()
-			print("📗 > save Settings: saved Settings")
+			print("📗 > save \(Self.self): saved")
 		} catch {
 			let nserror = error as NSError
-			print("📕 > save Settings: failed to save Setttings: \(nserror)")
+			print("📕 > save \(Self.self): failed to save: \(nserror)")
 		}
 	}
 	
 	static func basicFetchRequest(user : ChewUser?,context : NSManagedObjectContext) -> Settings? {
 		if let res = fetch(context: context) {
-			print("📗 > basicFetchRequest Settings: loaded Settings")
+			print("📗 > basicFetchRequest \(Self.self): loaded")
 			return res
 		}
 		Settings.createWith(
@@ -92,14 +92,14 @@ extension Settings {
 	
 	static private func fetch(context : NSManagedObjectContext) -> Settings? {
 		do {
-			let res = try context.fetch(.init(entityName: "Settings")).first as? Settings
+			let res = try context.fetch(.init(entityName: "\(Self.self)")).first as? Settings
 			if let res = res {
 				return res
 			}
-			print("📕 > basicFetchRequest Settings: context.fetch: result is empty")
+			print("📙 > basicFetchRequest \(Self.self): context.fetch: result is empty")
 			return nil
 		} catch {
-			print("📕 > basicFetchRequest Settings: context.fetch error")
+			print("📕 > basicFetchRequest \(Self.self): context.fetch error")
 			return nil
 		}
 	}

@@ -194,26 +194,22 @@ struct LegStopView : View {
 							platform: stopOver.departurePlatform.actual,
 							plannedPlatform: stopOver.departurePlatform.planned
 						)
-//						VStack(alignment: .leading,spacing: 3) {
-							HStack(spacing: 3) {
-								BadgeView(badge: .lineNumber(lineType:legViewData.lineViewData.type ,num: legViewData.lineViewData.name))
-								BadgeView(badge: .legDirection(dir: legViewData.direction))
-//							}
-//							HStack(spacing: 3) {
-								BadgeView(badge: .legDuration(dur: legViewData.duration))
-								HStack(spacing: 0) {
-									BadgeView(badge: .stopsCount(legViewData.legStopsViewData.count - 1))
-									if legViewData.legStopsViewData.count > 2 {
-										Image(systemName: "chevron.down.circle")
-											.font(.system(size: 15,weight: .semibold))
-											.rotationEffect(vm.state.status == .idle ? .degrees(0) : .degrees(180))
-											.animation(.spring(), value: vm.state.status)
-									}
+						HStack(spacing: 2) {
+							BadgeView(badge: .lineNumber(lineType:legViewData.lineViewData.type ,num: legViewData.lineViewData.name))
+							BadgeView(badge: .legDirection(dir: legViewData.direction))
+							BadgeView(badge: .legDuration(dur: legViewData.duration))
+							HStack(spacing: 0) {
+								BadgeView(badge: .stopsCount(legViewData.legStopsViewData.count - 1))
+								if legViewData.legStopsViewData.count > 2 {
+									Image(systemName: "chevron.down.circle")
+										.font(.system(size: 15,weight: .semibold))
+										.rotationEffect(vm.state.status == .idle ? .degrees(0) : .degrees(180))
+										.animation(.spring(), value: vm.state.status)
 								}
-								.background(Color.chewFillTertiary)
-								.cornerRadius(8)
 							}
-//						}
+							.background(Color.chewFillTertiary)
+							.cornerRadius(8)
+						}
 					case  .destination:
 						PlatformView(
 							isShowingPlatormWord: true,

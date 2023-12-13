@@ -49,10 +49,10 @@ extension TransportModes {
 		
 		do {
 			try managedObjectContext.save()
-			print("📗 > saved TransportModes")
+			print("📗 > saved \(Self.self)")
 		} catch {
 			let nserror = error as NSError
-			print("📕 > save TransportModes: fialed to save new TransportModes", nserror.localizedDescription)
+			print("📕 > save \(Self.self): fialed to save", nserror.localizedDescription)
 		}
 	}
 	
@@ -63,7 +63,7 @@ extension TransportModes {
 	) {
 		let item = TransportModes(context: managedObjectContext)
 		saveSettings(item: item, modes: modes, settings: settings, managedObjectContext: managedObjectContext)
-		print("📙 > create TransportModes: created new TransportModes")
+		print("📙 > create \(Self.self): created new")
 	}
 	
 	
@@ -81,15 +81,15 @@ extension TransportModes {
 	
 	static private func fetch(context : NSManagedObjectContext) -> TransportModes? {
 		do {
-			let res = try context.fetch(.init(entityName: "TransportModes")).first as? TransportModes
+			let res = try context.fetch(.init(entityName: "\(Self.self)")).first as? TransportModes
 			if let res = res {
-				print("📗 > basicFetchRequest TransportModes")
+				print("📗 > basicFetchRequest \(Self.self)")
 				return res
 			}
-			print("📕 > basicFetchRequest TransportModes: context.fetch: result is empty")
+			print("📙 > basicFetchRequest \(Self.self): context.fetch: result is empty")
 			return nil
 		} catch {
-			print("📕 > basicFetchRequest TransportModes: context.fetch error")
+			print("📕 > basicFetchRequest \(Self.self): context.fetch error")
 			return nil
 		}
 	}
