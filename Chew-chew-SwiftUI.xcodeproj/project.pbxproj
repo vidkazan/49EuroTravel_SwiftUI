@@ -512,6 +512,91 @@
 			path = SearchStopsView;
 			sourceTree = "<group>";
 		};
+		7D65DF0C2B2A264700692601 /* ChewLeg */ = {
+			isa = PBXGroup;
+			children = (
+				7D65DF102B2A26B800692601 /* ChewLegType */,
+				7D5D78512B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift */,
+				7D5D78502B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift */,
+			);
+			path = ChewLeg;
+			sourceTree = "<group>";
+		};
+		7D65DF0F2B2A266400692601 /* ChewTime */ = {
+			isa = PBXGroup;
+			children = (
+				7DA13A422B28D66D0045061F /* ChewTime+CoreDataProperties.swift */,
+				7DAE1F662B0D26CF0097AAD8 /* ChewTime+CoreDataClass.swift */,
+			);
+			path = ChewTime;
+			sourceTree = "<group>";
+		};
+		7D65DF102B2A26B800692601 /* ChewLegType */ = {
+			isa = PBXGroup;
+			children = (
+				7D5D78542B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift */,
+				7D3C52002B29F0DC00AA887A /* ChewLegType+CoreDataProperties.swift */,
+			);
+			path = ChewLegType;
+			sourceTree = "<group>";
+		};
+		7D65DF112B2A26BA00692601 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7D65DF132B2A26BE00692601 /* TransportMode */,
+				7DA13A402B28D5F10045061F /* Settings+CoreDataClass.swift */,
+				7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		7D65DF122B2A26BC00692601 /* ChewSunEvent */ = {
+			isa = PBXGroup;
+			children = (
+				7D3D88EB2B2A166E00B269E7 /* ChewSunEvent+CoreDataProperties.swift */,
+				7D3D88EA2B2A166E00B269E7 /* ChewSunEvent+CoreDataClass.swift */,
+			);
+			path = ChewSunEvent;
+			sourceTree = "<group>";
+		};
+		7D65DF132B2A26BE00692601 /* TransportMode */ = {
+			isa = PBXGroup;
+			children = (
+				7DAE1F692B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift */,
+				7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */,
+			);
+			path = TransportMode;
+			sourceTree = "<group>";
+		};
+		7D65DF142B2A270B00692601 /* ChewJourney */ = {
+			isa = PBXGroup;
+			children = (
+				7D65DF0C2B2A264700692601 /* ChewLeg */,
+				7D65DF122B2A26BC00692601 /* ChewSunEvent */,
+				7D9BB1082B0CBF53008A3616 /* ChewJourney+CoreDataClass.swift */,
+				7D9BB1092B0CBF53008A3616 /* ChewJourney+CoreDataProperties.swift */,
+			);
+			path = ChewJourney;
+			sourceTree = "<group>";
+		};
+		7D65DF152B2A271200692601 /* ChewUser */ = {
+			isa = PBXGroup;
+			children = (
+				7D9BB10A2B0CBF53008A3616 /* ChewUser+CoreDataClass.swift */,
+				7D9BB10B2B0CBF54008A3616 /* ChewUser+CoreDataProperties.swift */,
+			);
+			path = ChewUser;
+			sourceTree = "<group>";
+		};
+		7D65DF162B2A271400692601 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				7D9BB1062B0CBF53008A3616 /* Location+CoreDataClass.swift */,
+				7D9BB1072B0CBF53008A3616 /* Location+CoreDataProperties.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
 		7D6734A62A96334B00CBE9C1 = {
 			isa = PBXGroup;
 			children = (
@@ -690,16 +775,11 @@
 		7D9BB1052B0CBF3B008A3616 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				7DAE1F6E2B0D26E40097AAD8 /* classes */,
-				7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */,
-				7DAE1F692B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift */,
-				7D9BB1072B0CBF53008A3616 /* Location+CoreDataProperties.swift */,
-				7D9BB1092B0CBF53008A3616 /* ChewJourney+CoreDataProperties.swift */,
-				7DA13A422B28D66D0045061F /* ChewTime+CoreDataProperties.swift */,
-				7D9BB10B2B0CBF54008A3616 /* ChewUser+CoreDataProperties.swift */,
-				7D3C52002B29F0DC00AA887A /* ChewLegType+CoreDataProperties.swift */,
-				7D5D78512B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift */,
-				7D3D88EB2B2A166E00B269E7 /* ChewSunEvent+CoreDataProperties.swift */,
+				7D65DF142B2A270B00692601 /* ChewJourney */,
+				7D65DF0F2B2A266400692601 /* ChewTime */,
+				7D65DF112B2A26BA00692601 /* Settings */,
+				7D65DF162B2A271400692601 /* Location */,
+				7D65DF152B2A271200692601 /* ChewUser */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -769,22 +849,6 @@
 				7DAC0C922B2780C0001FC6EA /* JourneyFollowViewModel.swift */,
 			);
 			path = viewModel;
-			sourceTree = "<group>";
-		};
-		7DAE1F6E2B0D26E40097AAD8 /* classes */ = {
-			isa = PBXGroup;
-			children = (
-				7D3D88EA2B2A166E00B269E7 /* ChewSunEvent+CoreDataClass.swift */,
-				7D5D78502B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift */,
-				7DAE1F662B0D26CF0097AAD8 /* ChewTime+CoreDataClass.swift */,
-				7DA13A402B28D5F10045061F /* Settings+CoreDataClass.swift */,
-				7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */,
-				7D9BB1062B0CBF53008A3616 /* Location+CoreDataClass.swift */,
-				7D9BB1082B0CBF53008A3616 /* ChewJourney+CoreDataClass.swift */,
-				7D9BB10A2B0CBF53008A3616 /* ChewUser+CoreDataClass.swift */,
-				7D5D78542B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift */,
-			);
-			path = classes;
 			sourceTree = "<group>";
 		};
 		7DAF62B42A9E5833006F1A17 /* DatePickerView */ = {
