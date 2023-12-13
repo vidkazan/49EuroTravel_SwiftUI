@@ -371,16 +371,13 @@
 		7D02CE0C2A97E38B0048ADE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */,
+				7D65DF172B2A27E500692601 /* DTO */,
 				7D9BB1052B0CBF3B008A3616 /* CoreData */,
 				7D9E108E2AA7722700820B92 /* Network */,
-				7D02CE082A97E32D0048ADE6 /* DTO.swift */,
-				7D1AD8EB2AE94A7500868056 /* GeoDTO.swift */,
 				7D02CE0F2A97E4100048ADE6 /* ViewData.swift */,
 				7DA13A442B28F01F0045061F /* LineType.swift */,
 				7DBF1E582ABC522E009B85EF /* Badges.swift */,
 				7D942A082AD9578800301666 /* Location.swift */,
-				7D2CAF652B0BEAC000577FD4 /* Persistence.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -597,6 +594,15 @@
 			path = Location;
 			sourceTree = "<group>";
 		};
+		7D65DF172B2A27E500692601 /* DTO */ = {
+			isa = PBXGroup;
+			children = (
+				7D02CE082A97E32D0048ADE6 /* DTO.swift */,
+				7D1AD8EB2AE94A7500868056 /* GeoDTO.swift */,
+			);
+			path = DTO;
+			sourceTree = "<group>";
+		};
 		7D6734A62A96334B00CBE9C1 = {
 			isa = PBXGroup;
 			children = (
@@ -775,6 +781,8 @@
 		7D9BB1052B0CBF3B008A3616 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				7D2CAF652B0BEAC000577FD4 /* Persistence.swift */,
+				7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */,
 				7D65DF142B2A270B00692601 /* ChewJourney */,
 				7D65DF0F2B2A266400692601 /* ChewTime */,
 				7D65DF112B2A26BA00692601 /* Settings */,
