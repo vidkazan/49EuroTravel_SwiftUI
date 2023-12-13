@@ -29,12 +29,18 @@ extension Color {
 		Color("ChewFillGreenPrimary")
 	}
 	
+	
 	static var chewFillBluePrimary: Color {
 		Color("ChewFillBluePrimary")
 	}
 	static var chewFillYellowPrimary: Color {
 		Color("ChewFillYellowPrimary")
 	}
+	static var chewFillRedPrimary: Color {
+		Color("ChewFillRedPrimary")
+	}
+	
+	
 	static var chewProgressLineGray: Color {
 		Color("ChewProgressLineGray")
 	}

@@ -36,11 +36,11 @@ struct JourneyCell: View {
 			.padding(7)
 		}
 		.background(Color.chewFillAccent)
-//		.overlay {
-//			if journey?.isReachable == false {
-//				Color.black.opacity(0.7)
-//			}
-//		}
+		.overlay {
+			if journey?.isReachable == false {
+				Color.primary.opacity(0.4)
+			}
+		}
 		.redacted(reason: isPlaceholder ? .placeholder : [])
 		.cornerRadius(10)
 	}

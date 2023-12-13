@@ -10,7 +10,7 @@ import Combine
 
 struct JourneyFollowData : Equatable {
 	let journeyRef : String
-	let journeyViewData : JourneyViewData?
+	let journeyViewData : JourneyViewData
 }
 
 final class JourneyFollowViewModel : ObservableObject, Identifiable {
@@ -72,7 +72,7 @@ extension JourneyFollowViewModel {
 			return lhs.description == rhs.description
 		}
 		case idle
-		case editing(_ action: Action, journeyRef : String, viewData : JourneyViewData?)
+		case editing(_ action: Action, journeyRef : String, viewData : JourneyViewData)
 		case updating
 		
 		var description : String {
@@ -91,7 +91,7 @@ extension JourneyFollowViewModel {
 		case didTapUpdate
 		case didUpdateData([JourneyFollowData])
 		
-		case didTapEdit(action : Action, journeyRef : String, viewData : JourneyViewData?)
+		case didTapEdit(action : Action, journeyRef : String, viewData : JourneyViewData)
 		case didEdit(data : [JourneyFollowData])
 		
 		var description : String {

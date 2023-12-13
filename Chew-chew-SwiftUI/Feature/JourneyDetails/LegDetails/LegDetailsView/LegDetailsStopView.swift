@@ -18,6 +18,7 @@ struct LegStopView : View {
 	var delay : TimeContainer.DelayStatus
 	var cancelType : StopOverCancelledType
 	let now = Date.now.timeIntervalSince1970
+	
 	// MARK: Init
 	init(
 		type : StopOverType,
@@ -129,8 +130,8 @@ struct LegStopView : View {
 						.frame(height: stopOverType.timeLabelHeight)
 						.background {
 							LinearGradient(stops: [
-								Gradient.Stop(color: Self.timeLabelColor, location: 0),
-								Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+								Gradient.Stop(color: Color.chewFillGreenSecondary, location: 0),
+								Gradient.Stop(color: Color.chewFillGreenSecondary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
 								Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
@@ -146,8 +147,8 @@ struct LegStopView : View {
 						)
 							.background {
 								LinearGradient(stops: [
-									Gradient.Stop(color: Self.timeLabelColor, location: 0),
-									Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+									Gradient.Stop(color: Color.chewFillGreenSecondary, location: 0),
+									Gradient.Stop(color: Color.chewFillGreenSecondary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
 									Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 								], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 							}
@@ -193,22 +194,26 @@ struct LegStopView : View {
 							platform: stopOver.departurePlatform.actual,
 							plannedPlatform: stopOver.departurePlatform.planned
 						)
-						HStack(spacing: 3) {
-							BadgeView(badge: .lineNumber(lineType:legViewData.lineViewData.type ,num: legViewData.lineViewData.name))
-							BadgeView(badge: .legDirection(dir: legViewData.direction))
-							BadgeView(badge: .legDuration(dur: legViewData.duration))
-							HStack(spacing: 0) {
-								BadgeView(badge: .stopsCount(legViewData.legStopsViewData.count - 1))
-								if legViewData.legStopsViewData.count > 2 {
-									Image(systemName: "chevron.down.circle")
-										.font(.system(size: 15,weight: .semibold))
-										.rotationEffect(vm.state.status == .idle ? .degrees(0) : .degrees(180))
-										.animation(.spring(), value: vm.state.status)
+//						VStack(alignment: .leading,spacing: 3) {
+							HStack(spacing: 3) {
+								BadgeView(badge: .lineNumber(lineType:legViewData.lineViewData.type ,num: legViewData.lineViewData.name))
+								BadgeView(badge: .legDirection(dir: legViewData.direction))
+//							}
+//							HStack(spacing: 3) {
+								BadgeView(badge: .legDuration(dur: legViewData.duration))
+								HStack(spacing: 0) {
+									BadgeView(badge: .stopsCount(legViewData.legStopsViewData.count - 1))
+									if legViewData.legStopsViewData.count > 2 {
+										Image(systemName: "chevron.down.circle")
+											.font(.system(size: 15,weight: .semibold))
+											.rotationEffect(vm.state.status == .idle ? .degrees(0) : .degrees(180))
+											.animation(.spring(), value: vm.state.status)
+									}
 								}
+								.background(Color.chewFillTertiary)
+								.cornerRadius(8)
 							}
-							.background(Color.chewFillPrimary)
-							.cornerRadius(8)
-						}
+//						}
 					case  .destination:
 						PlatformView(
 							isShowingPlatormWord: true,

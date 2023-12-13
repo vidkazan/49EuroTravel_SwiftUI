@@ -8,6 +8,7 @@
         <relationship name="time" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewTime" inverseName="chewJourney" inverseEntity="ChewTime"/>
         <relationship name="user" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="chewJourneys" inverseEntity="ChewUser"/>
     </entity>
+    <entity name="ChewLeg" representedClassName="ChewLeg" syncable="YES"/>
     <entity name="ChewTime" representedClassName="ChewTime" syncable="YES">
         <attribute name="actualArrival" optional="YES" attributeType="String"/>
         <attribute name="actualDeparture" optional="YES" attributeType="String"/>

@@ -8,6 +8,39 @@
 import Foundation
 import SwiftUI
 
+struct ChewText : View {
+	let text : String
+	init(_ text : String) {
+		self.text = text
+	}
+	var body: some View {
+		Text(text)
+			.padding(.vertical,4)
+			.lineSpacing(2)
+			.lineLimit(1)
+	}
+}
+
+private struct BaseBadgeView : View {
+	let text : String
+	let bgColor : Color
+	let fgColor : Color
+	let iconName : String?
+	init(bgColor : Color, fgColor : Color = .primary, text : String, sfIconName : String? = nil) {
+		self.bgColor = bgColor
+		self.fgColor = bgColor
+		self.text = text
+		self.iconName = sfIconName
+	}
+	var body : some View {
+		ChewText(text)
+			.foregroundColor(.primary)
+			.padding(.horizontal,4)
+			.background(bgColor)
+			.cornerRadius(8)
+	}
+}
+
 
 // TODO: refactor badge service
 struct BadgeView : View {
@@ -20,13 +53,11 @@ struct BadgeView : View {
 	var body : some View {
 		switch badge {
 		case .price,.cancelled,.connectionNotReachable,.alertFromRemark:
-			Text(badge.badgeData.name)
-				.font(.system(size: 12))
-				.foregroundColor(.primary)
-				.padding(4)
-				.background(badge.badgeData.style)
-				.cornerRadius(8)
-				.lineLimit(1)
+			BaseBadgeView(
+				bgColor: badge.badgeData.style,
+				text: badge.badgeData.name
+			)
+			.chewTextSize(.medium)
 		case .dticket:
 			DTicketLogo(fontSize: 17)
 				.font(.system(size: 12))
@@ -36,132 +67,100 @@ struct BadgeView : View {
 		case .lineNumber(lineType: let type, _):
 			switch isBig {
 			case true:
-				Text(badge.badgeData.name)
-					.chewTextSize(.big)
-					.foregroundColor(.primary)
-					.padding(4)
-					.background( .linearGradient(
-						colors: [
-							badge.badgeData.style,
-							type.color
-						],
-						startPoint: UnitPoint(x: 0, y: 0),
-						endPoint: UnitPoint(x: 1, y: 0))
-					)
-					.cornerRadius(8)
-					.lineLimit(1)
+				HStack(spacing: 0) {
+					Image(systemName: "train.side.front.car")
+						.chewTextSize(.big)
+					ChewText(badge.badgeData.name)
+						.padding(.horizontal,4)
+						.chewTextSize(.big)
+						.foregroundColor(.primary)
+				}
+				.background( .linearGradient(
+					colors: [
+						badge.badgeData.style,
+						type.color
+					],
+					startPoint: UnitPoint(x: 0, y: 0),
+					endPoint: UnitPoint(x: 1, y: 0))
+				)
+				.cornerRadius(8)
 			case false:
-				Text(badge.badgeData.name)
-					.chewTextSize(.medium)
-					.foregroundColor(.primary)
-					.padding(4)
-					.background( .linearGradient(
-						colors: [
-							badge.badgeData.style,
-							type.color
-						],
-						startPoint: UnitPoint(x: 0, y: 0),
-						endPoint: UnitPoint(x: 1, y: 0))
-					)
-					.cornerRadius(8)
-					.lineLimit(1)
+				HStack(spacing: 0) {
+					Image(systemName: "train.side.front.car")
+						.chewTextSize(.medium)
+					ChewText(badge.badgeData.name)
+						.padding(.horizontal,4)
+						.chewTextSize(.medium)
+				}
+				.background( .linearGradient(
+					colors: [
+						badge.badgeData.style,
+						type.color
+					],
+					startPoint: UnitPoint(x: 0, y: 0),
+					endPoint: UnitPoint(x: 1, y: 0))
+				)
+				.cornerRadius(6)
 			}
 		case .legDuration:
-			HStack(spacing: 2) {
-				Text(badge.badgeData.name)
-					.chewTextSize(.medium)
-					.foregroundColor(.secondary)
-					.background(badge.badgeData.style)
-					.lineSpacing(2)
-					.lineLimit(1)
-			}
-			.padding(4)
-			.background(Color.chewGray10)
-			.cornerRadius(8)
+			BaseBadgeView(
+				bgColor: badge.badgeData.style,
+				fgColor: .secondary,
+				text: badge.badgeData.name
+			)
+			.chewTextSize(.medium)
+		case .stopsCount:
+			BaseBadgeView(
+				bgColor: Color.clear,
+				fgColor: .secondary,
+				text: badge.badgeData.name
+			)
+			.chewTextSize(.medium)
 		case .legDirection:
 			switch isBig {
 			case true:
 				HStack(spacing: 2) {
-					Text("to")
+					ChewText("to")
 						.chewTextSize(.big)
 						.foregroundColor(.secondary)
-						.background(badge.badgeData.style)
-						.lineSpacing(2)
-						.lineLimit(1)
-					Text(badge.badgeData.name)
+					ChewText(badge.badgeData.name)
 						.chewTextSize(.big)
-						.foregroundColor(.primary)
-						.background(badge.badgeData.style)
-						.lineSpacing(2)
-						.lineLimit(1)
 				}
 				.padding(4)
 				.background(Color.chewGray10)
 				.cornerRadius(8)
 			case false:
 				HStack(spacing: 2) {
-					Text("to")
+					ChewText("to")
 						.chewTextSize(.medium)
 						.foregroundColor(.secondary)
-						.background(badge.badgeData.style)
-						.lineSpacing(2)
-						.lineLimit(1)
-					Text(badge.badgeData.name)
+					ChewText(badge.badgeData.name)
 						.chewTextSize(.medium)
-						.foregroundColor(.primary)
-						.background(badge.badgeData.style)
-						.lineSpacing(2)
-						.lineLimit(1)
 				}
-				.padding(4)
-				.background(Color.chewGray10)
+				.padding(.horizontal,4)
+				.background(badge.badgeData.style)
 				.cornerRadius(8)
 			}
 		case .walking:
 			HStack(spacing: 2) {
 				Image(systemName: "figure.walk.circle")
 					.chewTextSize(.medium)
-					.foregroundColor(.secondary)
-				Text("walk")
+				ChewText("walk")
 					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
-					.background(badge.badgeData.style)
-					.lineSpacing(2)
-				Text(badge.badgeData.name)
+				ChewText(badge.badgeData.name)
 					.chewTextSize(.medium)
-					.foregroundColor(.primary)
-					.background(badge.badgeData.style)
-					.lineSpacing(2)
-					.lineLimit(1)
 			}
 		case .transfer:
 			HStack(spacing: 2) {
 				Image(systemName: "arrow.triangle.2.circlepath")
 					.chewTextSize(.medium)
-					.foregroundColor(.primary)
-				Text("transfer")
+				ChewText("transfer")
 					.chewTextSize(.medium)
 					.foregroundColor(.secondary)
-					.background(badge.badgeData.style)
-					.lineSpacing(2)
-					.lineLimit(1)
-				Text(badge.badgeData.name)
+				ChewText(badge.badgeData.name)
 					.chewTextSize(.medium)
-					.foregroundColor(.primary)
-					.background(badge.badgeData.style)
-					.lineSpacing(2)
-					.lineLimit(1)
 			}
-		case .stopsCount:
-			HStack(spacing: 2) {
-				Text(badge.badgeData.name)
-					.chewTextSize(.medium)
-					.foregroundColor(.secondary)
-					.background(badge.badgeData.style)
-					.lineSpacing(2)
-					.lineLimit(1)
-			}
-			.padding(4)
 		}
 	}
 }
