@@ -33,4 +33,19 @@ extension ChewLegType {
 				return nil
 			}
 		}
+	static func delete(object: ChewLegType?,in context : NSManagedObjectContext) {
+		guard let object = object else {
+			print("📕 > delete \(Self.self): object is nil")
+			return
+		}
+		context.delete(object)
+
+		do {
+			try context.save()
+			print("📗 > delete \(Self.self)")
+		} catch {
+			let nserror = error as NSError
+			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
+		}
+	}
 }

@@ -114,7 +114,7 @@ struct JourneyDetailsView: View {
 								switch viewModel.state.isFollowed {
 								case true:
 									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .deleting, journeyRef: ref, viewData: viewModel.state.data))
-									ChewJourney.delete(
+									ChewJourney.deleteIfFound(
 										deleteRef: ref,
 										in: chewVM.chewJourneys,
 										context: viewContext

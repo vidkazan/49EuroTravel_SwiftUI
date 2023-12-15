@@ -170,6 +170,7 @@ struct PriceDTO : Codable,Equatable {
 
 struct JourneyWrapper : Codable,Equatable {
 	let journey : JourneyDTO
+	let realtimeDataUpdatedAt: Int64?
 }
 struct JourneyDTO : Codable,Identifiable,Equatable {
 	let id = UUID()

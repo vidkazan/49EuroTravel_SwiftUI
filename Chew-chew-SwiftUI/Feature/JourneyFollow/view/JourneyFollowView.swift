@@ -10,12 +10,42 @@ import SwiftUI
 // TODO: feature: make LegView zoomable, scrollable / show progress on it
 
 struct JourneyFollowView : View {
+	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+	
 	@Environment(\.managedObjectContext) var viewContext
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyFollowViewModel
 	var body: some View {
 		List(viewModel.state.journeys, id: \.journeyRef, rowContent: { journey in
-				JourneyCell(journey: journey.journeyViewData)
+			NavigationLink(destination: {
+				JourneyDetailsView(
+					token: journey.journeyRef,
+					data: journey.journeyViewData,
+					depStop: nil,
+					arrStop: nil,
+					followList: viewModel.state.journeys.map { elem in elem.journeyRef }
+				)
+			}, label: {
+				VStack {
+					JourneyHeaderView(journey: journey.journeyViewData)
+					LegsView(journey : journey.journeyViewData)
+						.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
+					HStack(alignment: .center) {
+						Spacer()
+						#warning("place timer to this view")
+						BadgeView(badge: .updatedAtTime(dur: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: DateParcer.getTwoDateIntervalInMinutes(
+							date1: Date(timeIntervalSince1970: .init(floatLiteral: journey.journeyViewData.updatedAt)),
+							date2: .now
+						)) ?? "error"))
+					}
+					.padding(.top,7)
+				}
+//				.overlay {
+//					if journey?.isReachable == false {
+//						Color.primary.opacity(0.4)
+//					}
+//				}
+//				.redacted(reason: isPlaceholder ? .placeholder : [])
 				.swipeActions(edge: .leading) {
 					Button {
 						viewModel.send(event: .didTapUpdate)
@@ -27,13 +57,15 @@ struct JourneyFollowView : View {
 				.swipeActions(edge: .trailing) {
 					Button {
 						viewModel.send(event: .didTapEdit(action: .deleting, journeyRef: journey.journeyRef,viewData: journey.journeyViewData))
-						ChewJourney.delete(deleteRef: journey.journeyRef, in: chewVM.chewJourneys, context: viewContext)
+						ChewJourney.deleteIfFound(deleteRef: journey.journeyRef, in: chewVM.chewJourneys, context: viewContext)
 					} label: {
 						Label("Delete", systemImage: "xmark.bin.circle")
 					}
 					.tint(.red)
 				}
 			})
+		})
+//		.onReceive(timer, perform: { _ in})
 		.transition(.opacity)
 		.animation(.spring().speed(2), value: chewVM.state.status)
 		.animation(.spring().speed(2), value: chewVM.searchStopsViewModel.state.status)

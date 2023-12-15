@@ -18,7 +18,6 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 	var refreshToken : String?
 	var depStop : Stop?
 	var arrStop : Stop?
-//	var followList: [String]
 	init (
 		refreshToken : String?,
 		data: JourneyViewData,
@@ -29,7 +28,6 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 		self.refreshToken = refreshToken
 		self.depStop = depStop
 		self.arrStop = arrStop
-//		self.followList = followList
 		state = State(data: data, status: .loading(refreshToken: refreshToken),followList: followList)
 		Publishers.system(
 			initial: state,

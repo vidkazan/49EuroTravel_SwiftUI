@@ -40,4 +40,28 @@ extension ChewLeg : Identifiable {
 			return nil
 		}
 	}
+	static func delete(object: ChewLeg?,in context : NSManagedObjectContext) {
+		guard let object = object else {
+			print("📕 > delete \(Self.self): object is nil")
+			return
+		}
+		
+		if let time = object.time { ChewTime.delete(time: time, in: context) }
+		if let type = object.chewLegType { ChewLegType.delete(object: type, in: context) }
+		if let stops = object.stops {
+			for stop in stops {
+				ChewStop.delete(object: stop, in: context)
+			}
+		}
+		
+		context.delete(object)
+
+		do {
+			try context.save()
+			print("📗 > delete \(Self.self)")
+		} catch {
+			let nserror = error as NSError
+			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
+		}
+	}
 }

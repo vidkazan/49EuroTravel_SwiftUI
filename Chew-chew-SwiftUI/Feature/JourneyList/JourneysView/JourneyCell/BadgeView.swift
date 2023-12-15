@@ -52,6 +52,12 @@ struct BadgeView : View {
 	}
 	var body : some View {
 		switch badge {
+		case .updatedAtTime(dur: let duration):
+			BaseBadgeView(
+				bgColor: badge.badgeData.style,
+				text: "updated " + duration + " ago"
+			)
+			.chewTextSize(.medium)
 		case .price,.cancelled,.connectionNotReachable,.alertFromRemark:
 			BaseBadgeView(
 				bgColor: badge.badgeData.style,

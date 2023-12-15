@@ -41,7 +41,8 @@ extension ChewJourney {
 				legs: legsViewData,
 				depStopName: departureStop?.name,
 				arrStopName: arrivalStop?.name,
-				time: time
+				time: time,
+				updatedAt: self.updatedAt
 			)
 		)
 	}

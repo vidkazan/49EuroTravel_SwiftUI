@@ -19,6 +19,7 @@ extension ChewJourney {
 	@NSManaged public var legs: [ChewLeg]?
 	@NSManaged public var time: ChewTime?
 	@NSManaged public var sunEvents: [ChewSunEvent]?
+	@NSManaged public var updatedAt: Double
 }
 
 extension ChewJourney {
@@ -61,6 +62,7 @@ extension ChewJourney {
 		let journey = ChewJourney(context: managedObjectContext)
 		journey.isActive = false
 		journey.journeyRef = ref
+		journey.updatedAt = viewData.updatedAt
 		journey.user = user
 		
 		let _ = ChewTime(
@@ -95,44 +97,54 @@ extension ChewJourney {
 		}
 		do {
 			try managedObjectContext.save()
-			print("📙 > create ChewJourney: created new ChewJourney")
+			print("📙 > create \(Self.self): created")
 		} catch {
 			let nserror = error as NSError
-			print("📕 > create ChewJourney: ", nserror.localizedDescription)
+			print("📕 > create \(Self.self): ", nserror.localizedDescription)
 		}
 	}
 	
-	static func delete(deleteRef : String,in objects : [ChewJourney]?, context : NSManagedObjectContext) {
-		guard let objects = objects else {
-			print("📕 > delete ChewJourneys: object is nil")
+	static func delete(object: ChewJourney?,in context : NSManagedObjectContext) {
+		guard let object = object else {
+			print("📕 > delete \(Self.self): object is nil")
 			return
 		}
-		if let obj = objects.first(where: {
-			elem in elem.journeyRef == deleteRef
-		}) {
-			if let depStop = obj.departureStop { context.delete(depStop) }
-			if let arrStop = obj.arrivalStop { context.delete(arrStop) }
-			if let time = obj.time { context.delete(time) }
-			if let legs = obj.legs {
-				for leg in legs {
-					context.delete(leg)
-					if let time = leg.time { context.delete(time) }
-				}
+		
+		if let depStop = object.departureStop { Location.delete(object: depStop, in: context)}
+		if let arrStop = object.arrivalStop { Location.delete(object: arrStop, in: context) }
+		if let time = object.time { ChewTime.delete(time: time, in: context) }
+		if let legs = object.legs {
+			for leg in legs {
+				ChewLeg.delete(object: leg, in: context)
 			}
-			if let suns = obj.sunEvents {
-				for sun in suns {
-					context.delete(sun)
-				}
-			}
-			context.delete(obj)
 		}
+		if let suns = object.sunEvents {
+			for sun in suns {
+				ChewSunEvent.delete(object: sun, in: context)
+			}
+		}
+		
+		context.delete(object)
 
 		do {
 			try context.save()
-			print("📗 > delete ChewJourney")
+			print("📗 > delete \(Self.self)")
 		} catch {
 			let nserror = error as NSError
-			print("📕 > delete ChewJourneys: ", nserror.localizedDescription)
+			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
+		}
+	}
+	
+	static func deleteIfFound(deleteRef : String,in objects : [ChewJourney]?, context : NSManagedObjectContext) {
+		
+		guard let objects = Self.basicFetchRequest(context: context) else {
+			print("📕 > delete \(Self.self): list is nil")
+			return
+		}
+		if let obj = objects.first(where: {elem in elem.journeyRef == deleteRef}) {
+			ChewJourney.delete(object: obj, in: context)
+		} else {
+			print("📕 > delete \(Self.self): not found")
 		}
 	}
 }

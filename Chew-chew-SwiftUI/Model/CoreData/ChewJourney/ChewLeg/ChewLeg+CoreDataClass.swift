@@ -34,7 +34,6 @@ extension ChewLeg {
 			let _ = ChewStop(insertInto: context, with: stop, to: self)
 		}
 		
-		
 		do {
 			try context.save()
 		} catch {
@@ -54,7 +53,7 @@ extension ChewLeg {
 			}
 		}
 		let time = TimeContainer(chewTime: self.time)
-		
+		let segments = constructSegmentsFromStopOverData(stopovers: stopsViewData)
 		return LegViewData(
 			isReachable: self.isReachable,
 			legType: self.chewLegType?.legType ?? .line,
@@ -71,7 +70,7 @@ extension ChewLeg {
 				name: self.lineName,
 				shortName: self.lineShortName
 			),
-			progressSegments: Segments(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0),
+			progressSegments: segments,
 			timeContainer: time,
 			polyline: nil
 		)

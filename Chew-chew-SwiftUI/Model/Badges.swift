@@ -36,9 +36,13 @@ enum Badges : Hashable {
 	case walking(duration : String)
 	case transfer(duration : String)
 	
+	case updatedAtTime(dur : String)
+	
 	
 	var badgeData : BadgeData {
 		switch self {
+		case .updatedAtTime(let dur):
+			return BadgeData(name: dur)
 		case .price(let price):
 			return BadgeData(
 				style: Color(hue: 0.5, saturation: 1, brightness: 0.4),

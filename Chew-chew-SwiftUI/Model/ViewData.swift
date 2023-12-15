@@ -13,6 +13,7 @@ struct JourneyListViewData : Equatable {
 	let journeys : [JourneyViewData]
 	let laterRef : String?
 	let earlierRef : String?
+	let realtimeDataUpdatedAt: Double?
 	init(
 		journeysViewData : [JourneyViewData],
 		data: JourneyListDTO,
@@ -22,6 +23,7 @@ struct JourneyListViewData : Equatable {
 		self.journeys = journeysViewData
 		self.laterRef = data.laterRef
 		self.earlierRef = data.earlierRef
+		self.realtimeDataUpdatedAt = Double(data.realtimeDataUpdatedAt ?? 0)
 	}
 }
 
@@ -37,6 +39,7 @@ struct JourneyViewData : Equatable {
 	let badges : [Badges]
 	let refreshToken : String?
 	let timeContainer : TimeContainer
+	let updatedAt : Double
 }
 
 extension JourneyViewData {
@@ -51,6 +54,7 @@ extension JourneyViewData {
 		self.badges = data.badges
 		self.refreshToken = data.refreshToken
 		self.timeContainer = data.timeContainer
+		self.updatedAt = data.updatedAt
 	}
 	init(
 		journeyRef : String?,
@@ -59,7 +63,8 @@ extension JourneyViewData {
 		legs : [LegViewData],
 		depStopName : String?,
 		arrStopName : String?,
-		time : TimeContainer
+		time : TimeContainer,
+		updatedAt : Double
 	){
 		self.origin = depStopName ?? "origin"
 		self.destination = arrStopName ?? "destination"
@@ -71,6 +76,7 @@ extension JourneyViewData {
 		self.badges = badges
 		self.refreshToken = journeyRef
 		self.timeContainer = time
+		self.updatedAt = updatedAt
 	}
 }
 

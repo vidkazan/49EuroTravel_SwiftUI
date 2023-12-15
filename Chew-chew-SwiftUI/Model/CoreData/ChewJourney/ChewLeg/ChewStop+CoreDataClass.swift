@@ -26,7 +26,7 @@ extension ChewStop {
 		self.isCancelled = stopData.isCancelled ?? false
 		
 		self.leg = leg
-		let _ = ChewTime(context: context, container: stopData.timeContainer, cancelled: stopData.isCancelled ?? false, for: leg)
+		let _ = ChewTime(context: context, container: stopData.timeContainer, cancelled: stopData.isCancelled ?? false, for: self)
 		
 		let _ = ChewPrognosedPlatform(insertInto: context, with: stopData.departurePlatform, to: self, type: .departure)
 		let _ = ChewPrognosedPlatform(insertInto: context, with: stopData.arrivalPlatform, to: self, type: .arrival)

@@ -36,9 +36,10 @@ extension JourneyDetailsViewModel {
 				.mapError{ $0 }
 				.asyncFlatMap{ data in
 					let res = await constructJourneyViewDataAsync(
-						journey: data,
+						journey: data.journey,
 						   depStop: self?.depStop,
-						   arrStop: self?.arrStop
+						   arrStop: self?.arrStop,
+						realtimeDataUpdatedAt: Double(data.realtimeDataUpdatedAt ?? 0)
 					   )
 					return Event.didLoadJourneyData(
 						data: res)
@@ -206,7 +207,7 @@ extension JourneyDetailsViewModel {
 		.eraseToAnyPublisher()
 	}
 	
-	static func fetchJourneyByRefreshToken(ref : String) -> AnyPublisher<JourneyDTO,ApiServiceError> {
+	static func fetchJourneyByRefreshToken(ref : String) -> AnyPublisher<JourneyWrapper,ApiServiceError> {
 		return ApiService().fetch(
 			JourneyWrapper.self,
 			query: Query.getQueryItems(
@@ -217,7 +218,6 @@ extension JourneyDetailsViewModel {
 			),
 			type: ApiService.Requests.journeyByRefreshToken(ref: ref)
 		)
-		.map { return $0.journey }
 		.eraseToAnyPublisher()
 	}
 }

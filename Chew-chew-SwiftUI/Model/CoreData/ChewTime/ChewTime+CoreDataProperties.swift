@@ -18,6 +18,7 @@ extension ChewTime {
 	
 	@NSManaged public var chewJourney : ChewJourney?
 	@NSManaged public var leg: ChewLeg?
+	@NSManaged public var stop: ChewStop?
 }
 
 extension ChewTime {
@@ -75,6 +76,21 @@ extension ChewTime {
 		} catch {
 			print("📕 > basicFetchRequest \(Self.self): context.fetch error")
 			return nil
+		}
+	}
+	static func delete(time: ChewTime?,in context : NSManagedObjectContext) {
+		guard let time = time else {
+			print("📕 > delete \(Self.self): object is nil")
+			return
+		}
+		context.delete(time)
+
+		do {
+			try context.save()
+			print("📗 > delete \(Self.self)")
+		} catch {
+			let nserror = error as NSError
+			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
 		}
 	}
 }

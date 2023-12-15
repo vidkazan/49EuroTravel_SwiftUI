@@ -13,19 +13,8 @@ struct BadgesView: View {
 		self.badges = badges
 	}
 	
-	let columns = [
-		GridItem(.adaptive(minimum: 40)),
-		GridItem(.adaptive(minimum: 40))
-	]
-	
 	var body: some View {
-//		LazyVGrid(columns: columns,alignment: .trailing, spacing: 2) {
-//			ForEach(badges,id: \.hashValue) { badge in
-//				BadgeView(badge: badge)
-//			}
-//		}
-
-		HStack{
+		HStack {
 			ForEach(badges,id: \.hashValue) { badge in
 				BadgeView(badge: badge)
 			}

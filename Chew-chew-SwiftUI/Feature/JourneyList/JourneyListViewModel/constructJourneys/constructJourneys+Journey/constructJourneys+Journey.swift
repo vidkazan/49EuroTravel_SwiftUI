@@ -10,14 +10,21 @@ import CoreLocation
 func constructJourneyViewDataAsync(
 	journey : JourneyDTO,
 	depStop: Stop?,
-	arrStop : Stop?
+	arrStop : Stop?,
+	realtimeDataUpdatedAt: Double
 ) async -> JourneyViewData {
-	return constructJourneyViewData(journey: journey, depStop: depStop, arrStop: arrStop)
+	return constructJourneyViewData(
+		journey: journey,
+		depStop: depStop,
+		arrStop: arrStop,
+		realtimeDataUpdatedAt: realtimeDataUpdatedAt
+	)
 }
 func constructJourneyViewData(
 	journey : JourneyDTO,
 	depStop: Stop?,
-	arrStop : Stop?
+	arrStop : Stop?,
+	realtimeDataUpdatedAt: Double
 ) -> JourneyViewData {
 	let timeContainer = TimeContainer(
 		plannedDeparture: journey.legs.first?.plannedDeparture,
@@ -76,6 +83,7 @@ func constructJourneyViewData(
 		isReachable: isReachable,
 		badges: constructBadges(remarks: remarks,isReachable: isReachable),
 		refreshToken: journey.refreshToken,
-		timeContainer: timeContainer
+		timeContainer: timeContainer,
+		updatedAt: realtimeDataUpdatedAt
 	)
 }

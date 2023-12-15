@@ -37,4 +37,16 @@ extension ChewTime {
 		self.plannedDeparture = container.iso.departure.planned
 		self.actualDeparture = container.iso.departure.actual
 	}
+	
+	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for stop : ChewStop){
+		self.init(context: context)
+		
+		self.stop = stop
+		
+		self.cancelled =  cancelled
+		self.actualArrival = container.iso.arrival.actual
+		self.plannedArrival = container.iso.arrival.planned
+		self.plannedDeparture = container.iso.departure.planned
+		self.actualDeparture = container.iso.departure.actual
+	}
 }

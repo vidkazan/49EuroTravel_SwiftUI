@@ -44,7 +44,7 @@ struct ContentView: View {
 							})
 						}
 						if case .journeys(let vm) = chewViewModel.state.status {
-							JourneyListListView(journeyViewModel: vm)
+							JourneyListView(journeyViewModel: vm)
 								.padding(.top,10)
 						} else if case .idle = chewViewModel.state.status  {
 							FavouriteRidesView()

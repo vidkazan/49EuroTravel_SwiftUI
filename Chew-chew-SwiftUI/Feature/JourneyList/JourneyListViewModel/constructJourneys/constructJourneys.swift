@@ -39,7 +39,8 @@ func constructJourneyListViewDataAsync(journeysData : JourneyListDTO, depStop : 
 		res.append( await constructJourneyViewDataAsync(
 			journey: j,
 			depStop: depStop,
-			arrStop: arrStop
+			arrStop: arrStop,
+			realtimeDataUpdatedAt: Double(journeysData.realtimeDataUpdatedAt ?? 0)
 		))
 	}
 	return res
