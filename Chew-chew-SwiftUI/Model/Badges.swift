@@ -13,12 +13,20 @@ struct BadgeData : Equatable {
 		lhs.name == rhs.name
 	}
 	
-	let style : Color
+	var style : Color = Color.chewFillTertiary
 	let name : String
 	
-	init(style : Color = Color.chewFillTertiary, name : String){
+	
+	
+	init(style : Color, name : String){
 		self.name = name
 		self.style = style
+	}
+	init(name : String){
+		self.name = name
+	}
+	init(){
+		self.name = "BadgeName"
 	}
 }
 
@@ -36,13 +44,13 @@ enum Badges : Hashable {
 	case walking(duration : String)
 	case transfer(duration : String)
 	
-	case updatedAtTime(dur : String)
+	case updatedAtTime(referenceTime : Double)
 	
 	
 	var badgeData : BadgeData {
 		switch self {
-		case .updatedAtTime(let dur):
-			return BadgeData(name: dur)
+		case .updatedAtTime:
+			return BadgeData()
 		case .price(let price):
 			return BadgeData(
 				style: Color(hue: 0.5, saturation: 1, brightness: 0.4),

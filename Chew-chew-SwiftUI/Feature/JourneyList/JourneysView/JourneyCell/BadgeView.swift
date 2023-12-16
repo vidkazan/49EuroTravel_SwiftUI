@@ -21,6 +21,40 @@ struct ChewText : View {
 	}
 }
 
+private struct UpdatedAtBadgeView : View {
+	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+	
+	let refTime : Double
+	let bgColor : Color
+	let fgColor : Color
+	let iconName : String?
+	@State var updatedAt : String
+	init(bgColor : Color, fgColor : Color = .primary, refTime : Double, sfIconName : String? = nil) {
+		self.bgColor = bgColor
+		self.fgColor = bgColor
+		self.refTime = refTime
+		self.iconName = sfIconName
+		self.updatedAt = Self.updatedAt(refTime: refTime)
+	}
+	var body : some View {
+		ChewText("updated \(updatedAt) ago")
+			.foregroundColor(.primary)
+			.padding(.horizontal,4)
+			.background(bgColor)
+			.cornerRadius(8)
+			.onReceive(timer, perform: { _ in
+				updatedAt = Self.updatedAt(refTime: self.refTime)
+			})
+	}
+	static func updatedAt(refTime : Double) -> String {
+		DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: DateParcer.getTwoDateIntervalInMinutes(
+			date1: Date(timeIntervalSince1970: .init(floatLiteral: refTime)),
+			date2: .now)) ?? "error"
+	}
+
+}
+
+
 private struct BaseBadgeView : View {
 	let text : String
 	let bgColor : Color
@@ -52,10 +86,10 @@ struct BadgeView : View {
 	}
 	var body : some View {
 		switch badge {
-		case .updatedAtTime(dur: let duration):
-			BaseBadgeView(
+		case .updatedAtTime(referenceTime: let refTime):
+			UpdatedAtBadgeView(
 				bgColor: badge.badgeData.style,
-				text: "updated " + duration + " ago"
+				refTime: refTime
 			)
 			.chewTextSize(.medium)
 		case .price,.cancelled,.connectionNotReachable,.alertFromRemark:

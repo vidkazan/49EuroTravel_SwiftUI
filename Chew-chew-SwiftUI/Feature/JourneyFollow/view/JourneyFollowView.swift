@@ -10,7 +10,6 @@ import SwiftUI
 // TODO: feature: make LegView zoomable, scrollable / show progress on it
 
 struct JourneyFollowView : View {
-	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	
 	@Environment(\.managedObjectContext) var viewContext
 	@EnvironmentObject var chewVM : ChewViewModel
@@ -33,10 +32,7 @@ struct JourneyFollowView : View {
 					HStack(alignment: .center) {
 						Spacer()
 						#warning("place timer to this view")
-						BadgeView(badge: .updatedAtTime(dur: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: DateParcer.getTwoDateIntervalInMinutes(
-							date1: Date(timeIntervalSince1970: .init(floatLiteral: journey.journeyViewData.updatedAt)),
-							date2: .now
-						)) ?? "error"))
+						BadgeView(badge: .updatedAtTime(referenceTime: journey.journeyViewData.updatedAt))
 					}
 					.padding(.top,7)
 				}
@@ -65,7 +61,6 @@ struct JourneyFollowView : View {
 				}
 			})
 		})
-//		.onReceive(timer, perform: { _ in})
 		.transition(.opacity)
 		.animation(.spring().speed(2), value: chewVM.state.status)
 		.animation(.spring().speed(2), value: chewVM.searchStopsViewModel.state.status)
