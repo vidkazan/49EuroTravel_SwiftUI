@@ -32,6 +32,7 @@ extension ChewJourney {
 		}
 		
 		let time = TimeContainer(chewTime: self.time)
+		#warning("add badges")
 		return JourneyFollowData(
 			journeyRef: self.journeyRef,
 			journeyViewData: JourneyViewData(
@@ -45,5 +46,52 @@ extension ChewJourney {
 				updatedAt: self.updatedAt
 			)
 		)
+	}
+}
+
+extension ChewJourney {
+	static func updateWith(
+		of obj : ChewLeg?,
+		with leg : LegViewData,
+		using managedObjectContext: NSManagedObjectContext
+	) {
+		guard let obj = obj else { return }
+
+		obj.isReachable = leg.isReachable
+		obj.legBottomPosition = leg.legBottomPosition
+		obj.legTopPosition = leg.legTopPosition
+		obj.lineName = leg.lineViewData.name
+		obj.lineShortName = leg.lineViewData.shortName
+		obj.lineType = leg.lineViewData.type.rawValue
+
+		ChewTime.updateWith(
+			container: leg.timeContainer,
+			isCancelled: !leg.isReachable,
+			using: managedObjectContext,
+			chewTime: obj.time
+		)
+
+		ChewLegType.updateWith(
+			of: obj.chewLegType,
+			with: leg.legType,
+			using: managedObjectContext
+		)
+
+		if let stops = obj.stops {
+			for stop in stops {
+				ChewStop.delete(object: stop, in: managedObjectContext)
+			}
+		}
+
+		for stop in leg.legStopsViewData {
+			let _ = ChewStop(insertInto: managedObjectContext, with: stop, to: obj)
+		}
+
+		do {
+			try managedObjectContext.save()
+		} catch {
+			let nserror = error as NSError
+			print("📕 > update \(Self.self): fialed to update", nserror.localizedDescription)
+		}
 	}
 }

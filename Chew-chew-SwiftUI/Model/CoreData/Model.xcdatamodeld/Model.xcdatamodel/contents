@@ -38,9 +38,10 @@
     <entity name="ChewStop" representedClassName="ChewStop" syncable="YES">
         <attribute name="isCancelled" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lat" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="locationType" optional="YES" attributeType="String"/>
         <attribute name="long" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <attribute name="type" optional="YES" attributeType="String"/>
+        <attribute name="stopOverType" optional="YES" attributeType="String"/>
         <relationship name="arrPlatform" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewPrognosedPlatform" inverseName="arrivalStop" inverseEntity="ChewPrognosedPlatform"/>
         <relationship name="depPlatform" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewPrognosedPlatform" inverseName="departureStop" inverseEntity="ChewPrognosedPlatform"/>
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLeg" inverseName="stops" inverseEntity="ChewLeg"/>

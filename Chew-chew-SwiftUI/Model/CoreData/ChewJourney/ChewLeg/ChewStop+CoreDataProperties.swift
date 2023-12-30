@@ -14,7 +14,8 @@ extension ChewStop {
     @NSManaged public var lat: Double
     @NSManaged public var long: Double
     @NSManaged public var name: String
-    @NSManaged public var type: String
+    @NSManaged public var stopOverType: String
+	@NSManaged public var locationType: Int16
     @NSManaged public var time: ChewTime?
     @NSManaged public var depPlatform: ChewPrognosedPlatform?
     @NSManaged public var arrPlatform: ChewPrognosedPlatform?
@@ -38,12 +39,12 @@ extension ChewStop : Identifiable {
 		
 		context.delete(object)
 
-		do {
-			try context.save()
-			print("📗 > delete \(Self.self)")
-		} catch {
-			let nserror = error as NSError
-			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
-		}
+//		do {
+//			try context.save()
+//			print("📗 > delete \(Self.self)")
+//		} catch {
+//			let nserror = error as NSError
+//			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
+//		}
 	}
 }
