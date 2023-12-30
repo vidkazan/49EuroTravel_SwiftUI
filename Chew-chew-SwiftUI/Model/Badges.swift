@@ -16,10 +16,12 @@ struct BadgeData : Equatable {
 	var style : Color = Color.chewFillTertiary
 	let name : String
 	
-	
-	
 	init(style : Color, name : String){
-		self.name = name
+		self.init(name: name)
+		self.style = style
+	}
+	init(style : Color){
+		self.init()
 		self.style = style
 	}
 	init(name : String){
@@ -31,6 +33,8 @@ struct BadgeData : Equatable {
 }
 
 enum Badges : Hashable {
+	case timeDepartureTimeArrival(timeDeparture: String,timeArrival: String)
+	case date(dateString : String)
 	case price(price: String)
 	case dticket
 	case cancelled
@@ -49,8 +53,12 @@ enum Badges : Hashable {
 	
 	var badgeData : BadgeData {
 		switch self {
+		case .timeDepartureTimeArrival:
+			return BadgeData(style: Color.chewFillSecondary)
+		case .date:
+			return BadgeData(style: Color.chewFillSecondary)
 		case .updatedAtTime:
-			return BadgeData()
+			return BadgeData(style: Color.chewFillSecondary)
 		case .price(let price):
 			return BadgeData(
 				style: Color(hue: 0.5, saturation: 1, brightness: 0.4),

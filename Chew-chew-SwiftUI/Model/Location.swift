@@ -8,12 +8,9 @@
 import Foundation
 import CoreLocation
 
-protocol ChewLocation {
-	var coordinates : CLLocationCoordinate2D { get }
-	var type : LocationType { get }
-}
 
-struct Stop : ChewLocation,Equatable,Identifiable, Hashable {
+
+struct Stop : Equatable,Identifiable, Hashable {
 	let id : String
 	var coordinates: CLLocationCoordinate2D
 	var type: LocationType

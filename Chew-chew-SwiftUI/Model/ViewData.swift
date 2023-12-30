@@ -108,7 +108,7 @@ struct StopViewData : Equatable,Identifiable {
 	let departurePlatform : Prognosed<String?>
 	let arrivalPlatform : Prognosed<String?>
 	let timeContainer : TimeContainer
-	let type : StopOverType
+	let stopOverType : StopOverType
 	let isCancelled : Bool?
 }
 
@@ -144,7 +144,7 @@ extension StopViewData {
 		self.name = name
 		self.departurePlatform  = Prognosed(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
 		self.arrivalPlatform  = Prognosed(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
-		self.type = type
+		self.stopOverType = type
 		self.locationCoordinates = CLLocationCoordinate2D(
 			latitude: stop.stop?.location?.latitude ?? stop.stop?.latitude ?? -1,
 			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
@@ -163,7 +163,7 @@ extension StopViewData {
 		self.name = name
 		self.departurePlatform  = Prognosed(actual: nil, planned: nil)
 		self.arrivalPlatform  = Prognosed(actual: nil, planned: nil)
-		self.type = type
+		self.stopOverType = type
 		self.locationCoordinates = coordinates
 		self.isCancelled = isCancelled
 	}
