@@ -6,24 +6,29 @@
 //
 
 import SwiftUI
+import CoreData
 
 @main
 struct Chew_chew_SwiftUIApp: App {
-	@StateObject private var chewJourneyViewModel = ChewViewModel(
-		locationDataManager: LocationDataManager(),
-		searchStopsViewModel: SearchStopsViewModel(),
-		journeyFollowViewModel: JourneyFollowViewModel(journeys: []),
-		viewContext: PersistenceController.shared.container.viewContext
-	)
-	let persistenceController = PersistenceController.shared
+	let persistenceController : PersistenceController
+	let context : NSManagedObjectContext
+	var chewJourneyViewModel : ChewViewModel
+	init() {
+		persistenceController = PersistenceController.shared
+		context = PersistenceController.shared.container.newBackgroundContext()
+		chewJourneyViewModel = ChewViewModel(
+			locationDataManager: LocationDataManager(),
+			searchStopsViewModel: SearchStopsViewModel(),
+			journeyFollowViewModel: JourneyFollowViewModel(journeys: []),
+			viewContext: context
+		)
+	}
 	
     var body: some Scene {
         WindowGroup {
 			ContentView()
 			.environmentObject(chewJourneyViewModel)
-			.environment(
-				\.managedObjectContext,
-				 persistenceController.container.viewContext)
+			.environment(\.managedObjectContext,context)
         }
     }
 }

@@ -14,7 +14,7 @@ extension JourneyDetailsViewModel {
 	static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
 		Feedback { _ in
 			return input
-		}
+		} 
 	}
 	
 	static func whenChangingSubscribitionType() -> Feedback<State, Event> {
@@ -23,30 +23,6 @@ extension JourneyDetailsViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			return Just(Event.didChangedSubscribingState(isFollowed: !state.isFollowed))
-				.eraseToAnyPublisher()
-		}
-	}
-	
-	func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
-		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
-			guard
-				case .loading(refreshToken: let ref) = state.status,
-				let ref = ref else { return Empty().eraseToAnyPublisher() }
-			return Self.fetchJourneyByRefreshToken(ref: ref)
-				.mapError{ $0 }
-				.asyncFlatMap{ data in
-					let res = await constructJourneyViewDataAsync(
-						journey: data.journey,
-						   depStop: self?.depStop,
-						   arrStop: self?.arrStop,
-						realtimeDataUpdatedAt: Double(data.realtimeDataUpdatedAt ?? 0)
-					   )
-					return Event.didLoadJourneyData(
-						data: res)
-				}
-				.catch {
-					error in Just(.didFailedToLoadJourneyData(error: error as! ApiServiceError))
-				}
 				.eraseToAnyPublisher()
 		}
 	}
@@ -219,5 +195,39 @@ extension JourneyDetailsViewModel {
 			type: ApiService.Requests.journeyByRefreshToken(ref: ref)
 		)
 		.eraseToAnyPublisher()
+	}
+	
+	func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
+		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
+			guard
+				case .loading(refreshToken: let ref) = state.status,
+				let ref = ref else { return Empty().eraseToAnyPublisher() }
+			return Self.fetchJourneyByRefreshToken(ref: ref)
+				.mapError{ $0 }
+				.asyncFlatMap{ data in
+					let res = await constructJourneyViewDataAsync(
+						journey: data.journey,
+							depStop: self?.depStop,
+							arrStop: self?.arrStop,
+						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
+					   )
+					if Date.now.timeIntervalSince1970 - state.data.updatedAt > 60 {
+						await ChewJourney.updateIfFound(
+							of: ref,
+							in: self?.chewVM.chewJourneys,
+							with: res,
+							context: self?.chewVM.viewContext,
+							chewUser: self?.chewVM.user,
+							depStop: self?.depStop,
+							arrStop: self?.arrStop
+						)
+					}
+					return Event.didLoadJourneyData(data: res)
+				}
+				.catch {
+					error in Just(.didFailedToLoadJourneyData(error: error as! ApiServiceError))
+				}
+				.eraseToAnyPublisher()
+		}
 	}
 }
