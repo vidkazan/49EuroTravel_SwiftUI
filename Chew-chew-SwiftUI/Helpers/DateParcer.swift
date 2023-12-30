@@ -97,8 +97,8 @@ class DateParcer {
 	
 	static func getTimeStringWithHoursAndMinutesFormat(minutes: Int?) -> String? {
 		guard let minutes = minutes else { return nil }
-		if minutes < 0 {
-			return "0 min"
+		if minutes < 1 {
+			return "0min"
 		}
 		let hours = minutes / 60
 		let remainingMinutes = minutes % 60

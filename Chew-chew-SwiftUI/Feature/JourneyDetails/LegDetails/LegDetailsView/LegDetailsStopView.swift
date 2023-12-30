@@ -182,7 +182,7 @@ struct LegStopView : View {
 					case .transfer,.footBottom,.footMiddle:
 						EmptyView()
 					}
-							// MARK: badges
+					// MARK: badges
 					switch stopOverType {
 					case .footBottom,.footMiddle,.footTop:
 						HStack(spacing: 3) {

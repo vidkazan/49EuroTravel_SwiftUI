@@ -43,12 +43,10 @@ func constructJourneyViewData(
 	
 	for (index,leg) in legs.enumerated() {
 		remarks += leg.remarks ?? []
-		if leg.reachable == false {
-			isReachable = false
-		}
+		isReachable = leg.reachable ?? true
 		if let res = constructLegData(leg: leg, firstTS: startTS, lastTS: endTS, legs: legs) {
 			if let last = legsData.last {
-				if currentLegIsNotReachable(currentLeg: res, previousLeg: last) {
+				if currentLegIsNotReachable(currentLeg: res, previousLeg: last) == true {
 					legsData[legsData.count-1].delayedAndNextIsNotReachable = true
 					isReachable = false
 				}
@@ -71,7 +69,8 @@ func constructJourneyViewData(
 			longitude: arrStop?.coordinates.longitude ?? 0
 		),
 		dateStart: startTS,
-		dateFinal: endTS)
+		dateFinal: endTS
+	)
 	
 	return JourneyViewData(
 		origin: journey.legs.first?.origin?.name ?? journey.legs.first?.origin?.address ?? "Origin(journeyViewData)",

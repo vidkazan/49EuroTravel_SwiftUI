@@ -38,7 +38,7 @@ private struct UpdatedAtBadgeView : View {
 	}
 	var body : some View {
 		ChewText("updated \(updatedAt) ago")
-			.foregroundColor(.primary)
+			.foregroundColor(.primary.opacity(0.7))
 			.padding(.horizontal,4)
 			.background(bgColor)
 			.cornerRadius(8)
@@ -80,21 +80,36 @@ private struct BaseBadgeView : View {
 struct BadgeView : View {
 	var badge : Badges
 	let isBig : Bool
-	init(badge : Badges,isBig : Bool = false) {
+	let color : Color
+	init(badge : Badges,isBig : Bool = false, color : Color? = nil) {
 		self.badge = badge
 		self.isBig = isBig
+		self.color = color ?? badge.badgeData.style
 	}
 	var body : some View {
 		switch badge {
+		case .timeDepartureTimeArrival(timeDeparture: let dep, timeArrival: let arr):
+			BaseBadgeView(
+				bgColor: self.color,
+				text: dep + " - " + arr
+			)
+			.chewTextSize(.medium)
+		case .date(let dateString):
+			BaseBadgeView(
+				bgColor: self.color,
+				text: dateString
+			)
+			.chewTextSize(.medium)
 		case .updatedAtTime(referenceTime: let refTime):
 			UpdatedAtBadgeView(
-				bgColor: badge.badgeData.style,
+				bgColor: self.color,
+				fgColor: .primary.opacity(1),
 				refTime: refTime
 			)
 			.chewTextSize(.medium)
 		case .price,.cancelled,.connectionNotReachable,.alertFromRemark:
 			BaseBadgeView(
-				bgColor: badge.badgeData.style,
+				bgColor: self.color,
 				text: badge.badgeData.name
 			)
 			.chewTextSize(.medium)
@@ -102,7 +117,7 @@ struct BadgeView : View {
 			DTicketLogo(fontSize: 17)
 				.font(.system(size: 12))
 				.padding(4)
-				.background(badge.badgeData.style)
+				.background(self.color)
 				.cornerRadius(8)
 		case .lineNumber(lineType: let type, _):
 			switch isBig {
@@ -117,7 +132,7 @@ struct BadgeView : View {
 				}
 				.background( .linearGradient(
 					colors: [
-						badge.badgeData.style,
+						self.color,
 						type.color
 					],
 					startPoint: UnitPoint(x: 0, y: 0),
@@ -134,7 +149,7 @@ struct BadgeView : View {
 				}
 				.background( .linearGradient(
 					colors: [
-						badge.badgeData.style,
+						self.color,
 						type.color
 					],
 					startPoint: UnitPoint(x: 0, y: 0),
@@ -144,7 +159,7 @@ struct BadgeView : View {
 			}
 		case .legDuration:
 			BaseBadgeView(
-				bgColor: badge.badgeData.style,
+				bgColor: self.color,
 				fgColor: .secondary,
 				text: badge.badgeData.name
 			)
@@ -178,7 +193,7 @@ struct BadgeView : View {
 						.chewTextSize(.medium)
 				}
 				.padding(.horizontal,4)
-				.background(badge.badgeData.style)
+				.background(self.color)
 				.cornerRadius(8)
 			}
 		case .walking:

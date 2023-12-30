@@ -82,7 +82,7 @@ func constructSegmentsFromStopOverData(stopovers : [StopViewData]) -> Segments {
 				)
 			)
 		}
-		currentHeight += stop.type.timeLabelHeight
+		currentHeight += stop.stopOverType.timeLabelHeight
 		if let time = stop.timeContainer.timestamp.departure.actual {
 			segs.append(
 				Segments.SegmentPoint(
@@ -91,12 +91,12 @@ func constructSegmentsFromStopOverData(stopovers : [StopViewData]) -> Segments {
 				)
 			)
 		}
-		currentHeight += (stop.type.viewHeight - stop.type.timeLabelHeight)
+		currentHeight += (stop.stopOverType.viewHeight - stop.stopOverType.timeLabelHeight)
 	}
 	
 	return Segments(
 		segments: segs,
-		heightTotalCollapsed: stopovers.first?.type.viewHeight ?? 0,
+		heightTotalCollapsed: stopovers.first?.stopOverType.viewHeight ?? 0,
 		heightTotalExtended: segs.last?.height ?? 0
 	)
 }
@@ -121,7 +121,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 		plannedArrival: toLeg.plannedDeparture,
 		actualDeparture: fromLeg.arrival,
 		actualArrival: toLeg.departure,
-		cancelled: nil
+		cancelled: toLeg.reachable
 	)
 	
 	let res = LegViewData(
@@ -136,11 +136,11 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 			)) ?? "duration",
 		legTopPosition: 0,
 		legBottomPosition: 0,
-		delayedAndNextIsNotReachable: nil,
+		delayedAndNextIsNotReachable: toLeg.reachable ?? false,
 		remarks: [],
 		legStopsViewData: [
 			StopViewData(
-				name: "",
+				name: fromLeg.destination?.name ?? "from",
 				timeContainer: first,
 				type: .transfer,
 				coordinates: CLLocationCoordinate2D(
@@ -150,7 +150,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 				isCancelled: nil
 			),
 			StopViewData(
-				name: "",
+				name: toLeg.origin?.name ?? "to",
 				timeContainer: last,
 				type: .transfer,
 				coordinates: CLLocationCoordinate2D(
@@ -281,7 +281,9 @@ func constructLegData(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [LegDTO
 //
 //}
 
-func currentLegIsNotReachable(currentLeg: LegViewData?, previousLeg: LegViewData?) -> Bool {
-	guard let currentLeg = currentLeg, let previousLeg = previousLeg else { return false }
-	return previousLeg.legBottomPosition > currentLeg.legTopPosition
+func currentLegIsNotReachable(currentLeg: LegViewData?, previousLeg: LegViewData?) -> Bool? {
+	
+	guard let currentLeg = currentLeg?.timeContainer.timestamp.departure.actual,
+			let previousLeg = previousLeg?.timeContainer.timestamp.arrival.actual else { return nil }
+	return previousLeg > currentLeg
 }

@@ -71,7 +71,7 @@ struct FullLegView: View {
 								// MARK: Leg top stop
 								if let stop = vm.state.leg.legStopsViewData.first {
 									LegStopView(
-										type: stop.type,
+										type: stop.stopOverType,
 										vm: vm,
 										stopOver: stop,
 										leg: vm.state.leg
@@ -82,7 +82,7 @@ struct FullLegView: View {
 									ForEach(vm.state.leg.legStopsViewData) { stop in
 										if stop != vm.state.leg.legStopsViewData.first,stop != vm.state.leg.legStopsViewData.last {
 											LegStopView(
-												type: stop.type,
+												type: stop.stopOverType,
 												vm: vm,
 												stopOver: stop,
 												leg: vm.state.leg
@@ -93,7 +93,7 @@ struct FullLegView: View {
 								// MARK: Leg bottom stop
 								if let stop = vm.state.leg.legStopsViewData.last {
 									LegStopView(
-										type: stop.type,
+										type: stop.stopOverType,
 										vm: vm,
 										stopOver: stop,
 										leg: vm.state.leg

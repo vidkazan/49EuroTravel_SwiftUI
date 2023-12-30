@@ -130,6 +130,7 @@
 		7DA13A452B28F01F0045061F /* LineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA13A442B28F01F0045061F /* LineType.swift */; };
 		7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */; };
 		7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3492A9A118E005DF550 /* BadgesView.swift */; };
+		7DABB02D2B2E18F1002BBA97 /* JourneyFollowCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DABB02C2B2E18F1002BBA97 /* JourneyFollowCellView.swift */; };
 		7DAC0C932B2780C0001FC6EA /* JourneyFollowViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC0C922B2780C0001FC6EA /* JourneyFollowViewModel.swift */; };
 		7DAE1F6A2B0D26CF0097AAD8 /* ChewTime+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F662B0D26CF0097AAD8 /* ChewTime+CoreDataClass.swift */; };
 		7DAE1F6B2B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */; };
@@ -295,6 +296,7 @@
 		7DA13A442B28F01F0045061F /* LineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineType.swift; sourceTree = "<group>"; };
 		7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		7DA8D3492A9A118E005DF550 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
+		7DABB02C2B2E18F1002BBA97 /* JourneyFollowCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFollowCellView.swift; sourceTree = "<group>"; };
 		7DAC0C922B2780C0001FC6EA /* JourneyFollowViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFollowViewModel.swift; sourceTree = "<group>"; };
 		7DAE1F662B0D26CF0097AAD8 /* ChewTime+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewTime+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -858,6 +860,7 @@
 		7DAC0C8F2B278099001FC6EA /* view */ = {
 			isa = PBXGroup;
 			children = (
+				7DABB02C2B2E18F1002BBA97 /* JourneyFollowCellView.swift */,
 				7DE727C52AD93869002FF033 /* JourneyFollowView.swift */,
 			);
 			path = view;
@@ -1180,6 +1183,7 @@
 				7D6C5C142AAF482D00DEFC57 /* chewVM.swift in Sources */,
 				7D6C5C232AAF4AE400DEFC57 /* chewVM+reduce+DatePicker.swift in Sources */,
 				7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */,
+				7DABB02D2B2E18F1002BBA97 /* JourneyFollowCellView.swift in Sources */,
 				7D9BB10F2B0CBF54008A3616 /* ChewJourney+CoreDataProperties.swift in Sources */,
 				7D462D4B2AAC948700BC0D65 /* JourneyListViewModel+reduce+JourneysLoaded.swift in Sources */,
 				7DAE1F6A2B0D26CF0097AAD8 /* ChewTime+CoreDataClass.swift in Sources */,

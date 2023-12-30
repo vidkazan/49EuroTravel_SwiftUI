@@ -30,7 +30,7 @@ struct LegDetailsView: View {
 				case .transfer,.footMiddle:
 					if let stop = vm.state.leg.legStopsViewData.first {
 						LegStopView(
-							type: stop.type,
+							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
 							leg: vm.state.leg
@@ -39,7 +39,7 @@ struct LegDetailsView: View {
 				case .footStart:
 					if let stop = vm.state.leg.legStopsViewData.first {
 						LegStopView(
-							type: stop.type,
+							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
 							leg: vm.state.leg
@@ -48,7 +48,7 @@ struct LegDetailsView: View {
 				case .footEnd:
 					if let stop = vm.state.leg.legStopsViewData.last {
 						LegStopView(
-							type: stop.type,
+							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
 							leg: vm.state.leg
@@ -59,7 +59,7 @@ struct LegDetailsView: View {
 				case .line:
 					if let stop = vm.state.leg.legStopsViewData.first {
 						LegStopView(
-							type: stop.type,
+							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
 							leg: vm.state.leg
@@ -69,7 +69,7 @@ struct LegDetailsView: View {
 						ForEach(vm.state.leg.legStopsViewData) { stop in
 							if stop != vm.state.leg.legStopsViewData.first,stop != vm.state.leg.legStopsViewData.last {
 								LegStopView(
-									type: stop.type,
+									type: stop.stopOverType,
 									vm: vm,
 									stopOver: stop,
 									leg: vm.state.leg
@@ -79,7 +79,7 @@ struct LegDetailsView: View {
 					}
 					if let stop = vm.state.leg.legStopsViewData.last {
 						LegStopView(
-							type: stop.type,
+							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
 							leg: vm.state.leg

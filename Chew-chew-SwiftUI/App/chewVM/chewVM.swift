@@ -9,13 +9,14 @@ import Foundation
 import SwiftUI
 import Combine
 import CoreLocation
+import CoreData
 
 final class ChewViewModel : ObservableObject, Identifiable {
-	
 	public var user : ChewUser? = nil
 	public var settings : Settings? = nil
 	public var transportModes : TransportModes? = nil
 	public var chewJourneys : [ChewJourney]? = nil
+	public var viewContext : NSManagedObjectContext
 	
 	@ObservedObject var  locationDataManager : LocationDataManager
 	@Published var searchStopsViewModel : SearchStopsViewModel
@@ -28,8 +29,10 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	init (
 		locationDataManager : LocationDataManager,
 		searchStopsViewModel : SearchStopsViewModel,
-		journeyFollowViewModel : JourneyFollowViewModel
+		journeyFollowViewModel : JourneyFollowViewModel,
+		viewContext : NSManagedObjectContext
 	) {
+		self.viewContext = viewContext
 		self.locationDataManager = locationDataManager
 		self.searchStopsViewModel = searchStopsViewModel
 		self.journeyFollowViewModel = journeyFollowViewModel

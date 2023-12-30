@@ -8,8 +8,13 @@
 
 import Foundation
 import Combine
+import CoreData
 
-final class JourneyDetailsViewModel : ObservableObject, Identifiable {
+final class JourneyDetailsViewModel : ObservableObject, Identifiable, Equatable {
+	static func == (lhs: JourneyDetailsViewModel, rhs: JourneyDetailsViewModel) -> Bool {
+		lhs.state == rhs.state && lhs.refreshToken == rhs.refreshToken 
+	}
+	var chewVM : ChewViewModel
 	@Published private(set) var state : State {
 		didSet { print("🟣 > journey details new state:",state.status.description) }
 	}
@@ -23,12 +28,15 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable {
 		data: JourneyViewData,
 		depStop : Stop?,
 		arrStop : Stop?,
-		followList: [String]
+		followList: [String],
+		chewVM : ChewViewModel
 	) {
+		print(">> vm init")
+		self.chewVM = chewVM
 		self.refreshToken = refreshToken
 		self.depStop = depStop
 		self.arrStop = arrStop
-		state = State(data: data, status: .loading(refreshToken: refreshToken),followList: followList)
+		state = State(data: data, status: .loadedJourneyData,followList: followList)
 		Publishers.system(
 			initial: state,
 			reduce: self.reduce,

@@ -37,11 +37,14 @@ struct JourneyListView: View {
 							NavigationLink(destination: {
 								NavigationLazyView(
 									JourneyDetailsView(
-										token: journey.refreshToken,
-										data: journey,
-										depStop: chewVM.state.depStop.stop,
-										arrStop: chewVM.state.arrStop.stop,
-										followList: chewVM.journeyFollowViewModel.state.journeys.map { elem in elem.journeyRef}
+										journeyDetailsViewModel: JourneyDetailsViewModel(
+											refreshToken: journey.refreshToken,
+											data: journey,
+											depStop: chewVM.state.depStop.stop,
+											arrStop: chewVM.state.arrStop.stop,
+											followList: chewVM.journeyFollowViewModel.state.journeys.map { elem in elem.journeyRef},
+											chewVM: chewVM
+										)
 									)
 								)
 							}, label: {
