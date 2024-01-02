@@ -46,7 +46,7 @@ struct JourneyFollowCellView : View {
 			BadgeView(badge: .updatedAtTime(referenceTime: journeyDetailsViewModel.state.data.updatedAt),color: Color.chewFillTertiary.opacity(0.2))
 		}
 		.onAppear {
-			journeyDetailsViewModel.send(event: .didTapReloadJourneyList)
+			journeyDetailsViewModel.send(event: .didRequestReloadIfNeeded)
 		}
 //		.swipeActions(edge: .leading) {
 //			Button {

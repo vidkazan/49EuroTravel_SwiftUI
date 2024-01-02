@@ -140,11 +140,11 @@ struct JourneyDetailsView: View {
 					}
 					Button(
 						action: {
-							viewModel.send(event: .didTapReloadJourneyList)
+							viewModel.send(event: .didTapReloadButton)
 						},
 						label: {
 							switch viewModel.state.status {
-							case .loading:
+							case .loading, .loadingIfNeeded:
 								ProgressView()
 									.frame(width: 15,height: 15)
 									.padding(5)
@@ -168,12 +168,12 @@ struct JourneyDetailsView: View {
 				}
 			}
 			.onAppear {
-				viewModel.send(event: .didTapReloadJourneyList)
+				viewModel.send(event: .didRequestReloadIfNeeded)
 			}
 			// MARK: Modifiers - onChange
 			.onChange(of: viewModel.state.status, perform: { status in
 				switch status {
-				case .loading, .loadedJourneyData, .error, .changingSubscribingState:
+				case .loading, .loadedJourneyData, .error, .changingSubscribingState,.loadingIfNeeded:
 					bottomSheetIsPresented = false
 					actionSheetIsPresented = false
 				case .fullLeg,.loadingLocationDetails,.locationDetails,.loadingFullLeg:

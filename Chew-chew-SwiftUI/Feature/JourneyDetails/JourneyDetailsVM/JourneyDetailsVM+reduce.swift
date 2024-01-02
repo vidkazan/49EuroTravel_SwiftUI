@@ -22,8 +22,20 @@ extension JourneyDetailsViewModel {
 			default:
 				return state
 			}
-		case .loading:
+		case .loading, .loadingIfNeeded:
 			switch event {
+			case .didTapReloadButton:
+				return State(
+					data: state.data,
+					status: .loading(token: self.refreshToken),
+					isFollowed: state.isFollowed
+				)
+			case .didRequestReloadIfNeeded:
+				return State(
+					data: state.data,
+					status: .loadingIfNeeded(token: self.refreshToken),
+					isFollowed: state.isFollowed
+				)
 			case .didLoadJourneyData(let data):
 				return State(
 					data: data,
@@ -42,8 +54,7 @@ extension JourneyDetailsViewModel {
 					status: .actionSheet(leg: leg),
 					isFollowed: state.isFollowed
 				)
-			case	.didTapReloadJourneyList,
-					.didCloseActionSheet,
+			case	.didCloseActionSheet,
 					.didExpandLegDetails,
 					.didTapBottomSheetDetails,
 					.didCloseBottomSheet,
@@ -67,10 +78,16 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didFailedToLoadJourneyData:
 				return state
-			case .didTapReloadJourneyList:
+			case .didTapReloadButton:
 				return State(
 					data: state.data,
-					status: .loading(refreshToken: self.refreshToken),
+					status: .loading(token: self.refreshToken),
+					isFollowed: state.isFollowed
+				)
+			case .didRequestReloadIfNeeded:
+				return State(
+					data: state.data,
+					status: .loadingIfNeeded(token: self.refreshToken),
 					isFollowed: state.isFollowed
 				)
 			case .didLoadLocationDetails:
@@ -96,10 +113,16 @@ extension JourneyDetailsViewModel {
 				return state
 			case .didFailedToLoadJourneyData:
 				return state
-			case .didTapReloadJourneyList:
+			case .didRequestReloadIfNeeded:
 				return State(
 					data: state.data,
-					status: .loading(refreshToken: self.refreshToken),
+					status: .loadingIfNeeded(token: self.refreshToken),
+					isFollowed: state.isFollowed
+				)
+			case .didTapReloadButton:
+				return State(
+					data: state.data,
+					status: .loading(token: self.refreshToken),
 					isFollowed: state.isFollowed
 				)
 			case .didLongTapOnLeg(leg: let leg):
@@ -123,12 +146,13 @@ extension JourneyDetailsViewModel {
 					.didLoadJourneyData,
 					.didLoadFullLegData,
 					.didFailedToLoadJourneyData,
-					.didTapReloadJourneyList,
+					.didTapReloadButton,
 					.didLoadLocationDetails,
 					.didLongTapOnLeg,
 					.didCloseActionSheet,
 					.didChangedSubscribingState,
 					.didTapSubscribingButton,
+					.didRequestReloadIfNeeded,
 					.didTapBottomSheetDetails:
 				return state
 			case .didCloseBottomSheet:
@@ -159,6 +183,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
+					.didRequestReloadIfNeeded,
 					.didLoadFullLegData,
 					.didFailedToLoadJourneyData,
 					.didExpandLegDetails,
@@ -166,7 +191,7 @@ extension JourneyDetailsViewModel {
 					.didTapBottomSheetDetails,
 					.didChangedSubscribingState,
 					.didTapSubscribingButton,
-					.didTapReloadJourneyList:
+					.didTapReloadButton:
 				return state
 			}
 		case .fullLeg:
@@ -174,11 +199,12 @@ extension JourneyDetailsViewModel {
 			case	.didLoadJourneyData,
 					.didLoadFullLegData,
 					.didFailedToLoadJourneyData,
-					.didTapReloadJourneyList,
+					.didTapReloadButton,
 					.didExpandLegDetails,
 					.didLoadLocationDetails,
 					.didLongTapOnLeg,
 					.didCloseActionSheet,
+					.didRequestReloadIfNeeded,
 					.didChangedSubscribingState,
 					.didTapSubscribingButton,
 					.didTapBottomSheetDetails:
@@ -215,7 +241,8 @@ extension JourneyDetailsViewModel {
 					.didExpandLegDetails,
 					.didLongTapOnLeg,
 					.didTapBottomSheetDetails,
-					.didTapReloadJourneyList,
+					.didRequestReloadIfNeeded,
+					.didTapReloadButton,
 					.didChangedSubscribingState,
 					.didTapSubscribingButton,
 					.didLoadLocationDetails:
@@ -230,7 +257,8 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didFailedToLoadJourneyData,
-					.didTapReloadJourneyList,
+					.didTapReloadButton,
+					.didRequestReloadIfNeeded,
 					.didExpandLegDetails,
 					.didLoadLocationDetails,
 					.didCloseBottomSheet,

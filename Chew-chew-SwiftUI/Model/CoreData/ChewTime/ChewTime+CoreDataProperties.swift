@@ -22,6 +22,7 @@ extension ChewTime {
 }
 
 extension ChewTime {
+	
 	static func updateWith(
 		container : TimeContainer,
 		isCancelled : Bool,
@@ -48,7 +49,8 @@ extension ChewTime {
 		for chewJourney : ChewJourney,
 		isCancelled : Bool
 	) {
-		let _ = ChewTime(context: managedObjectContext,container: container,cancelled: isCancelled,for: chewJourney)
+		let time = ChewTime(context: managedObjectContext,container: container,cancelled: isCancelled,for: chewJourney)
+		chewJourney.time = time
 		do {
 			try managedObjectContext.save()
 		} catch {

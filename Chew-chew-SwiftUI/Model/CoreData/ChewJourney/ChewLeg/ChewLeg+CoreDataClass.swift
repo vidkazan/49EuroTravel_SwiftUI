@@ -30,9 +30,9 @@ extension ChewLeg {
 		
 		let _ = ChewTime(context: context, container: leg.timeContainer, cancelled: !leg.isReachable,for: self)
 		
-//		for stop in leg.legStopsViewData {
-//			let _ = ChewStop(insertInto: context, with: stop, to: self)
-//		}
+		for stop in leg.legStopsViewData {
+			let _ = ChewStop(insertInto: context, with: stop, to: self)
+		}
 		
 		do {
 			try context.save()

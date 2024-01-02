@@ -199,10 +199,25 @@ extension JourneyDetailsViewModel {
 	
 	func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
 		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
-			guard
-				case .loading(refreshToken: let ref) = state.status,
-				let ref = ref else { return Empty().eraseToAnyPublisher() }
-			return Self.fetchJourneyByRefreshToken(ref: ref)
+			var token : String? = nil
+			
+			switch state.status {
+			case .loading(token: let ref), .loadingIfNeeded(token: let ref):
+				token = ref
+			default:
+				return Empty().eraseToAnyPublisher()
+			}
+			
+			guard let token = token else {
+				return Empty().eraseToAnyPublisher()
+			}
+			
+			if case .loadingIfNeeded = state.status,
+				Date.now.timeIntervalSince1970 - state.data.updatedAt < 60 {
+				return Just(Event.didLoadJourneyData(data: state.data)).eraseToAnyPublisher()
+			}
+			
+			return Self.fetchJourneyByRefreshToken(ref: token)
 				.mapError{ $0 }
 				.asyncFlatMap{ data in
 					let res = await constructJourneyViewDataAsync(
@@ -211,17 +226,15 @@ extension JourneyDetailsViewModel {
 							arrStop: self?.arrStop,
 						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
 					   )
-					if Date.now.timeIntervalSince1970 - state.data.updatedAt > 60 {
-						await ChewJourney.updateIfFound(
-							of: ref,
-							in: self?.chewVM.chewJourneys,
-							with: res,
-							context: self?.chewVM.viewContext,
-							chewUser: self?.chewVM.user,
-							depStop: self?.depStop,
-							arrStop: self?.arrStop
-						)
-					}
+					await ChewJourney.updateIfFound(
+						of: token,
+						in: self?.chewVM.chewJourneys,
+						with: res,
+						context: self?.chewVM.viewContext,
+						chewUser: self?.chewVM.user,
+						depStop: self?.depStop,
+						arrStop: self?.arrStop
+					)
 					return Event.didLoadJourneyData(data: res)
 				}
 				.catch {

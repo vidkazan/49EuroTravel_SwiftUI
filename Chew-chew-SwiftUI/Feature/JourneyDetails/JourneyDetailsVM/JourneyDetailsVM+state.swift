@@ -34,7 +34,8 @@ extension JourneyDetailsViewModel {
 		static func == (lhs: JourneyDetailsViewModel.Status, rhs: JourneyDetailsViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
-		case loading(refreshToken : String?)
+		case loading(token : String?)
+		case loadingIfNeeded(token : String?)
 		case loadedJourneyData
 		case error(error : ApiServiceError)
 		case loadingLocationDetails(leg : LegViewData)
@@ -53,6 +54,8 @@ extension JourneyDetailsViewModel {
 			switch self {
 			case .changingSubscribingState:
 				return "changingSubscribingState"
+			case .loadingIfNeeded:
+				return "loadingIfNeeded"
 			case .loading:
 				return "loading"
 			case .loadedJourneyData:
@@ -77,7 +80,9 @@ extension JourneyDetailsViewModel {
 		case didLoadJourneyData(data : JourneyViewData)
 		case didFailedToLoadJourneyData(error : ApiServiceError)
 		
-		case didTapReloadJourneyList
+		
+		case didRequestReloadIfNeeded
+		case didTapReloadButton
 		case didTapSubscribingButton
 		
 		case didExpandLegDetails
@@ -97,6 +102,8 @@ extension JourneyDetailsViewModel {
 		
 		var description : String {
 			switch self {
+			case .didRequestReloadIfNeeded:
+				return "didRequestReloadIfNeeded"
 			case .didChangedSubscribingState:
 				return "didChangedSubscribingState"
 			case .didTapSubscribingButton:
@@ -105,7 +112,7 @@ extension JourneyDetailsViewModel {
 				return "didLoadJourneyData"
 			case .didFailedToLoadJourneyData:
 				return "didFailedToLoadJourneyData"
-			case .didTapReloadJourneyList:
+			case .didTapReloadButton:
 				return "didReloadJourneyList"
 			case .didExpandLegDetails:
 				return "didExpandLegDetails"

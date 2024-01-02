@@ -25,7 +25,7 @@ struct FullLegSheet: View {
 				Spacer()
 			case .fullLeg(leg: let leg):
 				FullLegView(leg: leg, journeyDetailsViewModel: viewModel)
-			case .error,.loadedJourneyData,.loading,.actionSheet,.loadingLocationDetails,.locationDetails,.changingSubscribingState:
+			case .error,.loadedJourneyData,.loading,.actionSheet,.loadingLocationDetails,.locationDetails,.changingSubscribingState,.loadingIfNeeded:
 				Spacer()
 				Text("Error")
 				Spacer()

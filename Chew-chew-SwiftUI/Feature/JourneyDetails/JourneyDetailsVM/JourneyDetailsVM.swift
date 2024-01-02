@@ -31,7 +31,6 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable, Equatable 
 		followList: [String],
 		chewVM : ChewViewModel
 	) {
-		print(">> vm init")
 		self.chewVM = chewVM
 		self.refreshToken = refreshToken
 		self.depStop = depStop

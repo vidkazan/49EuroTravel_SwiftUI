@@ -385,38 +385,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "5DEFE8B4-77DB-4C02-8F3E-C4D7E576410D"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneyListViewModel/constructJourneys/constructJourneys+Leg/constructJourneys+Leg.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
-            landmarkName = "constructTransferViewData(fromLeg:toLeg:)"
-            landmarkType = "9">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5CAC90D4-CCE5-4796-AC64-123199C9F855"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneyListViewModel/constructJourneys/constructJourneys+Leg/constructJourneys+Leg.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "evaluate(time:type:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "4ECB60B2-952F-4362-8892-4050B638AD80"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -424,8 +392,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/JourneyDetailsVM+sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "154"
+            endingLineNumber = "154"
             landmarkName = "whenLoadingFullLeg()"
             landmarkType = "7">
             <Locations>

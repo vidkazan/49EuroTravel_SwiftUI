@@ -39,12 +39,12 @@ extension ChewStop : Identifiable {
 		
 		context.delete(object)
 
-//		do {
-//			try context.save()
-//			print("📗 > delete \(Self.self)")
-//		} catch {
-//			let nserror = error as NSError
-//			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
-//		}
+		do {
+			try context.save()
+			print("📗 > delete \(Self.self)")
+		} catch {
+			let nserror = error as NSError
+			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
+		}
 	}
 }
