@@ -60,7 +60,7 @@ extension ChewJourney {
 				for: journey
 			)
 		}
-		
+
 		for sun in viewData.sunEvents {
 			let _ = ChewSunEvent(
 				context: managedObjectContext,
@@ -68,11 +68,11 @@ extension ChewJourney {
 				for: journey
 			)
 		}
-		
+
 		if let depStop = depStop ,let arrStop = arrStop {
 			let departure = Location(context: managedObjectContext,stop: depStop)
 			let arrival = Location(context: managedObjectContext,stop: arrStop)
-			
+
 			departure.chewJourneyDep = journey
 			arrival.chewJourneyArr = journey
 		}
@@ -103,7 +103,6 @@ extension ChewJourney {
 			return
 		}
 		if let obj = objects.first(where: { elem in
-			print(">>> ",elem.journeyRef)
 			return elem.journeyRef == updateRef
 		}) {
 			ChewJourney.delete(object: obj, in: context)
@@ -197,22 +196,7 @@ extension ChewJourney {
 			print("📕 > delete \(Self.self): object is nil")
 			return
 		}
-		
-		if let depStop = object.departureStop { Location.delete(object: depStop, in: context)}
-		if let arrStop = object.arrivalStop { Location.delete(object: arrStop, in: context) }
-		if let time = object.time { ChewTime.delete(time: time, in: context) }
-		if let legs = object.legs {
-			for leg in legs {
-				ChewLeg.delete(object: leg, in: context)
-			}
-		}
-		
-		if let suns = object.sunEvents {
-			for sun in suns {
-				ChewSunEvent.delete(object: sun, in: context)
-			}
-		}
-		
+
 		context.delete(object)
 
 		do {

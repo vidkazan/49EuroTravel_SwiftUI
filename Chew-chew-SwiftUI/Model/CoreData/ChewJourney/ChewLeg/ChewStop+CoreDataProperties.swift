@@ -30,13 +30,7 @@ extension ChewStop : Identifiable {
 			print("📕 > delete \(Self.self): object is nil")
 			return
 		}
-		
-		if let time = object.time { ChewTime.delete(time: time, in: context) }
-		
-		if let dep = object.depPlatform { ChewPrognosedPlatform.delete(object: dep, in: context)}
-		if let arr = object.arrPlatform { ChewPrognosedPlatform.delete(object: arr, in: context) }
-		
-		
+
 		context.delete(object)
 
 		do {

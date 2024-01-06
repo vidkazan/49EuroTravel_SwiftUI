@@ -795,8 +795,8 @@
 		7D9BB1052B0CBF3B008A3616 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
-				7D2CAF652B0BEAC000577FD4 /* Persistence.swift */,
 				7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */,
+				7D2CAF652B0BEAC000577FD4 /* Persistence.swift */,
 				7D65DF142B2A270B00692601 /* ChewJourney */,
 				7D65DF0F2B2A266400692601 /* ChewTime */,
 				7D65DF112B2A26BA00692601 /* Settings */,

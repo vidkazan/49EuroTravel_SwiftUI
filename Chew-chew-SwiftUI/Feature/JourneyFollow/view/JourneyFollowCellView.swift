@@ -21,8 +21,11 @@ struct JourneyFollowCellView : View {
 				Text(journeyDetailsViewModel.state.data.legs.last?.legStopsViewData.last?.name ?? "destination")
 					.chewTextSize(.big)
 				Spacer()
-				if case .loading = journeyDetailsViewModel.state.status {
+				switch journeyDetailsViewModel.state.status {
+				case .loading,.loadingIfNeeded:
 					ProgressView()
+				default:
+					EmptyView()
 				}
 			}
 			HStack {
