@@ -12,11 +12,7 @@ import CoreLocation
 import CoreData
 
 final class ChewViewModel : ObservableObject, Identifiable {
-	public var user : ChewUser? = nil
-	public var settings : Settings? = nil
-	public var transportModes : TransportModes? = nil
-	public var chewJourneys : [ChewJourney]? = nil
-	public var viewContext : NSManagedObjectContext
+	public let coreDataStore : CoreDataStore
 	
 	@ObservedObject var  locationDataManager : LocationDataManager
 	@Published var searchStopsViewModel : SearchStopsViewModel
@@ -30,9 +26,9 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		locationDataManager : LocationDataManager,
 		searchStopsViewModel : SearchStopsViewModel,
 		journeyFollowViewModel : JourneyFollowViewModel,
-		viewContext : NSManagedObjectContext
+		coreDataStore : CoreDataStore
 	) {
-		self.viewContext = viewContext
+		self.coreDataStore = coreDataStore
 		self.locationDataManager = locationDataManager
 		self.searchStopsViewModel = searchStopsViewModel
 		self.journeyFollowViewModel = journeyFollowViewModel

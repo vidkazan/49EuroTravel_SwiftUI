@@ -38,7 +38,9 @@ extension ChewSunEvent {
 		self.timeStart = sun.timeStart
 		self.type = sun.type.rawValue
 		
-		self.journey = journey
+		journey.managedObjectContext?.performAndWait {
+			self.journey = journey
+		}
 		
 		do {
 			try context.save()

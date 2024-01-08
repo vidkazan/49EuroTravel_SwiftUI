@@ -9,7 +9,6 @@ import SwiftUI
 
 struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
-	@Environment(\.managedObjectContext) var viewContext
 	@State var date : Date
 	@State var time : Date
 	var body: some View {
@@ -61,11 +60,11 @@ struct DatePickerView: View {
 				Button(action: {
 					if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
 						chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
-						ChewUser.updateWith(date: dateCombined, using: viewContext, user: chewVM.user)
+//						ChewUser.updateWith(date: dateCombined, using: viewContext, user: chewVM.user)
 					} else {
 						print("DatePicker: DateParcer.getCombinedDate returned nil")
 						chewVM.send(event: .onNewDate(.now))
-						ChewUser.updateWith(date: .now, using: viewContext, user: chewVM.user)
+//						ChewUser.updateWith(date: .now, using: viewContext, user: chewVM.user)
 					}
 				}, label: {
 					Text("Done")

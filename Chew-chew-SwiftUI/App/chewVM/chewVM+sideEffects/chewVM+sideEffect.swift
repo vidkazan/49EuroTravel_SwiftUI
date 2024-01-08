@@ -27,40 +27,27 @@ extension ChewViewModel {
 	
 	func whenLoadingInitialData() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .loadingInitialData(viewContext: let context) = state.status else {
+			guard case .loadingInitialData = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
 			
-			guard let user = ChewUser.basicFetchRequest(context: context) else {
+			guard let user = self.coreDataStore.fetchUser() else {
 				print("whenLoadingInitialData: user is nil: loading default data")
 				return Just(Event.didLoadInitialData(nil,ChewSettings()))
 					.eraseToAnyPublisher()
 			}
 			
-			guard let settings = Settings.basicFetchRequest(user: user, context: context) else {
-				print("whenLoadingInitialData: settings is nil: loading default data")
+			guard let settings = user.settings else {
 				return Just(Event.didLoadInitialData(user,ChewSettings()))
 					.eraseToAnyPublisher()
 			}
-			
-			guard let modes = TransportModes.basicFetchRequest(
-				modes: ChewSettings().customTransferModes,
-				in: settings,
-				using: context
-			) else {
-				return Just(Event.didLoadInitialData(user,ChewSettings()))
-					.eraseToAnyPublisher()
-			}
-			
-			if let stops = Location.basicFetchRequest(context: context) {
+			let modes = settings.transportModes
+
+			if let stops = self.coreDataStore.fetchLocations() {
 				self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
 			}
-			self.user = user
-			self.settings = settings
-			self.transportModes = modes
 			
-			if let chewJourneys = ChewJourney.basicFetchRequest(context: context) {
-				self.chewJourneys = chewJourneys
+			if let chewJourneys = self.coreDataStore.fetchJourneys() {
 				self.journeyFollowViewModel.send(
 					event: .didUpdateData(chewJourneys.map {
 						$0.journeyViewData()
@@ -84,7 +71,7 @@ extension ChewViewModel {
 			if modes.tram { transportModes.insert(.tram) }
 			
 			let transferTypes : ChewSettings.TransferTime = {
-				if !settings.isWithTransfers {
+				if user.settings?.isWithTransfers == false {
 					return .direct
 				}
 				return .time(minutes: Int(settings.transferTime))

@@ -9,7 +9,6 @@ import SwiftUI
 import CoreLocation
 
 struct SearchStopsView: View {
-	@Environment(\.managedObjectContext) var viewContext
 	@EnvironmentObject  var chewViewModel : ChewViewModel
 	@ObservedObject var searchStopViewModel : SearchStopsViewModel
 	@FocusState 	var focusedField : LocationDirectionType?

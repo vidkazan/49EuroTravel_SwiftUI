@@ -1,4 +1,4 @@
-//
+ //
 //  Chew_chew_SwiftUIApp.swift
 //  Chew-chew-SwiftUI
 //
@@ -10,26 +10,23 @@ import CoreData
 
 @main
 struct Chew_chew_SwiftUIApp: App {
-	let persistenceController : PersistenceController
-	let context : NSManagedObjectContext
 	var chewJourneyViewModel : ChewViewModel
+	let coreDataStore : CoreDataStore
+	
 	init() {
-		persistenceController = PersistenceController.shared
-		context = PersistenceController.shared.container.newBackgroundContext()
+		coreDataStore = CoreDataStore()
 		chewJourneyViewModel = ChewViewModel(
 			locationDataManager: LocationDataManager(),
 			searchStopsViewModel: SearchStopsViewModel(),
 			journeyFollowViewModel: JourneyFollowViewModel(journeys: []),
-			viewContext: context
+			coreDataStore: coreDataStore
 		)
 	}
 	
     var body: some Scene {
         WindowGroup {
 			ContentView()
-			.environmentObject(chewJourneyViewModel)
-			.environment(\.managedObjectContext,context)
+				.environmentObject(chewJourneyViewModel)
         }
     }
 }
-	

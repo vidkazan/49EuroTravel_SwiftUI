@@ -25,6 +25,7 @@
 		7D02CE302A97E96E0048ADE6 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */; };
 		7D02CE342A98E8130048ADE6 /* JourneysListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE332A98E8130048ADE6 /* JourneysListView.swift */; };
 		7D0719392B1382D100BF846B /* Chew_chew_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */; };
+		7D08885E2B4A3F1B00283A34 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */; };
 		7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */; };
 		7D15EEE82AD494D400833170 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D15EEE72AD494D400833170 /* MapView.swift */; };
 		7D181D642AD6D595003AB021 /* FavouriteRidesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D181D632AD6D595003AB021 /* FavouriteRidesView.swift */; };
@@ -192,6 +193,7 @@
 		7D02CE262A97E6790048ADE6 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		7D02CE332A98E8130048ADE6 /* JourneysListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneysListView.swift; sourceTree = "<group>"; };
+		7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeContainer.swift; sourceTree = "<group>"; };
 		7D15EEE72AD494D400833170 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		7D181D632AD6D595003AB021 /* FavouriteRidesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteRidesView.swift; sourceTree = "<group>"; };
@@ -802,6 +804,7 @@
 				7D65DF112B2A26BA00692601 /* Settings */,
 				7D65DF162B2A271400692601 /* Location */,
 				7D65DF152B2A271200692601 /* ChewUser */,
+				7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1248,6 +1251,7 @@
 				7D4B1B972AA8FDDB0096F372 /* SearchStopsVM+sideEffect.swift in Sources */,
 				7DAE1F6D2B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift in Sources */,
 				7D6C5C162AAF485F00DEFC57 /* chewVM+sideEffect.swift in Sources */,
+				7D08885E2B4A3F1B00283A34 /* CoreDataStore.swift in Sources */,
 				7D6C5C212AAF4AE100DEFC57 /* chewVM+reduce+EditingDepartureStop.swift in Sources */,
 				7D3E5F012AB321580064213A /* LocationManager.swift in Sources */,
 				7D02CE232A97E64E0048ADE6 /* Query.swift in Sources */,

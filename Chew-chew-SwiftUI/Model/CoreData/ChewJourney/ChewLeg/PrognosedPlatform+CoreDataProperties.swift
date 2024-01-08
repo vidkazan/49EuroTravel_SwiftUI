@@ -16,21 +16,3 @@ extension ChewPrognosedPlatform {
     @NSManaged public var departureStop: ChewStop?
     @NSManaged public var arrivalStop: ChewStop?
 }
-
-extension ChewPrognosedPlatform : Identifiable {
-	static func delete(object: ChewPrognosedPlatform?,in context : NSManagedObjectContext) {
-		guard let object = object else {
-			print("📕 > delete \(Self.self): object is nil")
-			return
-		}
-		context.delete(object)
-
-		do {
-			try context.save()
-			print("📗 > delete \(Self.self)")
-		} catch {
-			let nserror = error as NSError
-			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
-		}
-	}
-}

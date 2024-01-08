@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct JourneyFollowView : View {
-	@Environment(\.managedObjectContext) var viewContext
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyFollowViewModel
 	init(viewModel: JourneyFollowViewModel) {
@@ -36,6 +35,7 @@ struct JourneyFollowView : View {
 		}
 		.transition(.opacity)
 		.animation(.spring().speed(2), value: viewModel.state.status)
+		.navigationBarHidden(true)
 	}
 }
 

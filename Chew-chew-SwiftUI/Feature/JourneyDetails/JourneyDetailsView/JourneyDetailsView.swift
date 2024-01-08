@@ -10,7 +10,6 @@ import MapKit
 
 struct JourneyDetailsView: View {
 	// MARK: Fields
-	@Environment(\.managedObjectContext) var viewContext
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
 	@State var bottomSheetIsPresented : Bool = false
@@ -106,21 +105,13 @@ struct JourneyDetailsView: View {
 								switch viewModel.state.isFollowed {
 								case true:
 									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .deleting, journeyRef: ref, viewData: viewModel.state.data))
-									ChewJourney.deleteIfFound(
-										deleteRef: ref,
-										in: chewVM.chewJourneys,
-										context: viewContext
-									)
+									chewVM.coreDataStore.deleteJourneyIfFound(journeyRef: ref)
 								case false:
 									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .adding, journeyRef: ref, viewData: viewModel.state.data))
-									ChewJourney.createWith(
+									chewVM.coreDataStore.addOrUpdateJourney(
 										viewData: viewModel.state.data,
-										user: chewVM.user,
 										depStop: viewModel.depStop,
-										arrStop: viewModel.arrStop,
-										ref: ref,
-										using: viewContext,
-										in: chewVM.chewJourneys
+										arrStop: viewModel.arrStop
 									)
 								}
 							},
@@ -141,6 +132,11 @@ struct JourneyDetailsView: View {
 					Button(
 						action: {
 							viewModel.send(event: .didTapReloadButton)
+							chewVM.coreDataStore.addOrUpdateJourney(
+								viewData: viewModel.state.data,
+								depStop: viewModel.depStop,
+								arrStop: viewModel.arrStop
+							)
 						},
 						label: {
 							switch viewModel.state.status {
@@ -183,21 +179,6 @@ struct JourneyDetailsView: View {
 					bottomSheetIsPresented = false
 					actionSheetIsPresented = true
 				}
-//				guard case .loadedJourneyData = status else { return }
-//				if let ref = viewModel.state.data.refreshToken {
-//					print(">> \(Self.self) updating DB")
-//					ChewJourney.updateIfFound(
-//						of: ref,
-//						in: chewVM.chewJourneys,
-//						with: viewModel.state.data,
-//						context: viewContext,
-//						chewUser: chewVM.user,
-//						depStop: viewModel.depStop,
-//						arrStop: viewModel.arrStop
-//					)
-//				} else {
-//					print(">> \(Self.self) update DB by ref: ref is nil")
-//				}
 			})
 		}
 	}

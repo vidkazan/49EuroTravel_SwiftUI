@@ -24,7 +24,9 @@ extension ChewLeg {
 		self.lineName = leg.lineViewData.name
 		self.lineShortName = leg.lineViewData.shortName
 		self.lineType = leg.lineViewData.type.rawValue
-		self.journey = journey
+		journey.managedObjectContext?.performAndWait {
+			self.journey = journey
+		}
 		
 		let _ = ChewLegType(insertIntoManagedObjectContext: context, type: leg.legType, for: self)
 		
@@ -39,53 +41,6 @@ extension ChewLeg {
 		} catch {
 			let nserror = error as NSError
 			print("📕 > save \(Self.self): failed to save new ", nserror.localizedDescription)
-		}
-	}
-}
-
-extension ChewLeg {
-	static func updateWith(
-		of obj : ChewLeg?,
-		with leg : LegViewData,
-		using managedObjectContext: NSManagedObjectContext
-	) {
-		guard let obj = obj else { return }
-		
-		obj.isReachable = leg.isReachable
-		obj.legBottomPosition = leg.legBottomPosition
-		obj.legTopPosition = leg.legTopPosition
-		obj.lineName = leg.lineViewData.name
-		obj.lineShortName = leg.lineViewData.shortName
-		obj.lineType = leg.lineViewData.type.rawValue
-		
-		ChewTime.updateWith(
-			container: leg.timeContainer,
-			isCancelled: !leg.isReachable,
-			using: managedObjectContext,
-			chewTime: obj.time
-		)
-		
-		ChewLegType.updateWith(
-			of: obj.chewLegType,
-			with: leg.legType,
-			using: managedObjectContext
-		)
-		
-		if let stops = obj.stops {
-			for stop in stops {
-				ChewStop.delete(object: stop, in: managedObjectContext)
-			}
-		}
-		
-		for stop in leg.legStopsViewData {
-			let _ = ChewStop(insertInto: managedObjectContext, with: stop, to: obj)
-		}
-		
-		do {
-			try managedObjectContext.save()
-		} catch {
-			let nserror = error as NSError
-			print("📕 > update \(Self.self): fialed to update", nserror.localizedDescription)
 		}
 	}
 }

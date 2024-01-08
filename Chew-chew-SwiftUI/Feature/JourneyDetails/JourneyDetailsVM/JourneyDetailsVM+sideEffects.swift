@@ -226,15 +226,6 @@ extension JourneyDetailsViewModel {
 							arrStop: self?.arrStop,
 						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
 					   )
-					await ChewJourney.updateIfFound(
-						of: token,
-						in: self?.chewVM.chewJourneys,
-						with: res,
-						context: self?.chewVM.viewContext,
-						chewUser: self?.chewVM.user,
-						depStop: self?.depStop,
-						arrStop: self?.arrStop
-					)
 					return Event.didLoadJourneyData(data: res)
 				}
 				.catch {

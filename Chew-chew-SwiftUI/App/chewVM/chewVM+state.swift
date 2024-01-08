@@ -74,7 +74,7 @@ extension ChewViewModel {
 			return lhs.description == rhs.description
 		}
 		case start
-		case loadingInitialData(viewContext: NSManagedObjectContext)
+		case loadingInitialData
 		case idle
 		case editingDepartureStop
 		case editingArrivalStop
@@ -111,7 +111,7 @@ extension ChewViewModel {
 	}
 	
 	enum Event {
-		case didStartViewAppear(NSManagedObjectContext)
+		case didStartViewAppear
 		case didLoadInitialData(ChewUser?,ChewSettings)
 		
 		case onDepartureEdit

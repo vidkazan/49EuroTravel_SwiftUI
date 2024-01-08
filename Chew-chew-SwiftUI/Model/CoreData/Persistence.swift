@@ -11,22 +11,6 @@ import CoreData
 struct PersistenceController {
   static let shared = PersistenceController()
 
-  static var preview: PersistenceController = {
-	let result = PersistenceController(inMemory: true)
-	let viewContext = result.container.viewContext
-	  
-	let user = ChewUser(context: result.container.viewContext)
-	user.timestamp = .distantPast
-
-	do {
-	  try viewContext.save()
-	} catch {
-	  let nsError = error as NSError
-	  fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-	}
-	return result
-  }()
-
   let container: NSPersistentContainer
 
   init(inMemory: Bool = false) {

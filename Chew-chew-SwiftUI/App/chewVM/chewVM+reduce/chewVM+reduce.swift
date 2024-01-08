@@ -83,13 +83,13 @@ extension ChewViewModel {
 			}
 		case .start:
 			switch event {
-			case .didStartViewAppear(let viewContext):
+			case .didStartViewAppear:
 				return State(
 					depStop: .textOnly(""),
 					arrStop: .textOnly(""),
 					settings: ChewSettings(),
 					timeChooserDate: state.timeChooserDate,
-					status: .loadingInitialData(viewContext: viewContext)
+					status: .loadingInitialData
 				)
 			default:
 				return state

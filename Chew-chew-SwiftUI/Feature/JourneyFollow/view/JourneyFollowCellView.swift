@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct JourneyFollowCellView : View {
-	@Environment(\.managedObjectContext) var viewContext
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var journeyDetailsViewModel : JourneyDetailsViewModel
 	var body: some View {

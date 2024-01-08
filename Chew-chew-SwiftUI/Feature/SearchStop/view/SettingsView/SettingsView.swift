@@ -10,7 +10,6 @@ import SwiftUI
 
 struct SettingsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
-	@Environment(\.managedObjectContext) var viewContext
 	
 	let arr = [0,5,7,10,15,20,30,45,60,90,120]
 	@State var transportModeSegment : Int
@@ -189,7 +188,9 @@ extension SettingsView {
 		)
 		chewViewModel.send(event: .didUpdateSettings(res))
 		if res != oldSettings {
-			Settings.updateWith(with: res, using: viewContext, settings: chewViewModel.settings,transportModes: self.chewViewModel.transportModes)
+			chewViewModel.coreDataStore.updateSettings(
+				newSettings: res
+			)
 		}
 	}
 }

@@ -19,7 +19,6 @@ import SwiftUI
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
-	@Environment(\.managedObjectContext) var viewContext
 	@State var bottomSheetIsPresented : Bool = false
 	
 	var body: some View {
@@ -97,10 +96,9 @@ struct ContentView: View {
 				}
 			}
 			.navigationBarHidden(true)
-			.navigationBarTitle("", displayMode: .inline)
 		}
 		.onAppear {
-			chewViewModel.send(event: .didStartViewAppear(viewContext))
+			chewViewModel.send(event: .didStartViewAppear)
 			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillAccent)
 		}
 	}
