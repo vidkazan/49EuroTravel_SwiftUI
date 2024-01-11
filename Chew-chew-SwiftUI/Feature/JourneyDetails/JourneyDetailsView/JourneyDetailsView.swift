@@ -101,18 +101,15 @@ struct JourneyDetailsView: View {
 					case .some(let ref):
 						Button(
 							action: {
-								viewModel.send(event: .didTapSubscribingButton)
-								switch viewModel.state.isFollowed {
-								case true:
-									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .deleting, journeyRef: ref, viewData: viewModel.state.data))
-									chewVM.coreDataStore.deleteJourneyIfFound(journeyRef: ref)
-								case false:
-									chewVM.journeyFollowViewModel.send(event: .didTapEdit(action: .adding, journeyRef: ref, viewData: viewModel.state.data))
-									chewVM.coreDataStore.addOrUpdateJourney(
-										viewData: viewModel.state.data,
-										depStop: viewModel.depStop,
-										arrStop: viewModel.arrStop
-									)
+								switch viewModel.state.status {
+								case .loading:
+									break
+								default:
+									viewModel.send(event: .didTapSubscribingButton(
+										ref: ref,
+										depStop: chewVM.state.depStop.stop,
+										arrStop: chewVM.state.arrStop.stop
+									))
 								}
 							},
 							label: {
@@ -120,9 +117,11 @@ struct JourneyDetailsView: View {
 								case true:
 									Image(systemName: "bookmark.fill")
 										.frame(width: 15,height: 15)
+										.tint(viewModel.state.status == .loading(token: ref) ? .chewGray30 : .blue)
 										.padding(5)
 								case false:
 									Image(systemName: "bookmark")
+										.tint(viewModel.state.status == .loading(token: ref) ? .chewGray30 : .blue)
 										.frame(width: 15,height: 15)
 										.padding(5)
 								}
@@ -132,11 +131,6 @@ struct JourneyDetailsView: View {
 					Button(
 						action: {
 							viewModel.send(event: .didTapReloadButton)
-							chewVM.coreDataStore.addOrUpdateJourney(
-								viewData: viewModel.state.data,
-								depStop: viewModel.depStop,
-								arrStop: viewModel.arrStop
-							)
 						},
 						label: {
 							switch viewModel.state.status {

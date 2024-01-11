@@ -48,7 +48,7 @@ extension JourneyDetailsViewModel {
 		case loadingFullLeg(leg : LegViewData)
 		case actionSheet(leg : LegViewData)
 		
-		case changingSubscribingState
+		case changingSubscribingState(ref : String, depStop : Stop?, arrStop : Stop?)
 		
 		var description : String {
 			switch self {
@@ -83,7 +83,7 @@ extension JourneyDetailsViewModel {
 		
 		case didRequestReloadIfNeeded
 		case didTapReloadButton
-		case didTapSubscribingButton
+		case didTapSubscribingButton(ref : String, depStop : Stop?, arrStop : Stop?)
 		
 		case didExpandLegDetails
 		case didLoadLocationDetails(
@@ -92,6 +92,7 @@ extension JourneyDetailsViewModel {
 			route : MKPolyline?
 		)
 		
+		case didFailToChangeSubscribingState
 		case didChangedSubscribingState(isFollowed : Bool)
 		case didLoadFullLegData(data : LegViewData)
 		case didLongTapOnLeg(leg : LegViewData)
@@ -102,6 +103,8 @@ extension JourneyDetailsViewModel {
 		
 		var description : String {
 			switch self {
+			case .didFailToChangeSubscribingState:
+				return "didFailToChangeSubscribingState"
 			case .didRequestReloadIfNeeded:
 				return "didRequestReloadIfNeeded"
 			case .didChangedSubscribingState:

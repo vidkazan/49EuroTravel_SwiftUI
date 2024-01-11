@@ -16,7 +16,7 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	var settings : ChewSettings
 	var followList : [String]
 	@Published private(set) var state : State {
-		didSet {print("🟤 >> journeys state: ",state.status.description)}
+		didSet {print("[🚂] >> journeys state: ",state.status.description)}
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()

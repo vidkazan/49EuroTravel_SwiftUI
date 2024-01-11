@@ -9,7 +9,7 @@ import Foundation
 
 extension SearchStopsViewModel {
 	func reduce(_ state:  State, _ event: Event) -> State {
-		print("🔵🔥 >> stops event:",event.description,"state:",state.status.description)
+		print("🔎🔥 >",event.description,"state:",state.status.description)
 		switch state.status {
 		case .updatingRecentStops:
 			switch event {

@@ -17,16 +17,159 @@ extension JourneyDetailsViewModel {
 		} 
 	}
 	
-	static func whenChangingSubscribitionType() -> Feedback<State, Event> {
+	func whenChangingSubscribitionType() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .changingSubscribingState = state.status else {
+			guard case .changingSubscribingState(let ref,let dep,let arr) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
+			switch self.state.isFollowed {
+			case true:
+				self.chewVM.journeyFollowViewModel.send(
+					event: .didTapEdit(
+						action: .deleting,
+						journeyRef: ref,
+						followData: nil
+					)
+				)
+			case false:
+				self.chewVM.journeyFollowViewModel.send(
+					event: .didTapEdit(
+						action: .adding,
+						journeyRef: ref,
+						followData: JourneyFollowData(
+							journeyRef: ref,
+							journeyViewData: state.data,
+							depStop: self.depStop,
+							arrStop: self.arrStop
+						)
+					)
+				)
+			}
+			#warning("send this event from JourneyFollowViewModel")
 			return Just(Event.didChangedSubscribingState(isFollowed: !state.isFollowed))
 				.eraseToAnyPublisher()
 		}
 	}
+
+	static func whenLoadingFullLeg() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			guard case .loadingFullLeg(leg: let leg) = state.status,
+				  let tripId = leg.tripId else {
+				return Empty().eraseToAnyPublisher()
+			}
+			return fetchTrip(tripId: tripId)
+				.mapError{ $0 }
+				.asyncFlatMap { res in
+					let leg = constructLegData(
+						leg: res,
+						firstTS: DateParcer.getDateFromDateString(dateString: res.plannedDeparture),
+						lastTS: DateParcer.getDateFromDateString(dateString: res.plannedArrival),
+						legs: nil
+					)
+					if let leg = leg {
+						return Event.didLoadFullLegData(data: leg)
+					} else {
+						return Event.didCloseBottomSheet
+					}
+				}
+				.catch { error in Empty().eraseToAnyPublisher()}
+				.eraseToAnyPublisher()
+		}
+	}
 	
+	
+	static func fetchTrip(tripId : String?) -> AnyPublisher<LegDTO,ApiServiceError> {
+		guard let tripId = tripId else {
+			return Empty().eraseToAnyPublisher()
+		}
+		return ApiService().fetch(
+			TripDTO.self,
+			query: [],
+			type: ApiService.Requests.trips(tripId: tripId)
+		)
+		.map {return $0.trip}
+		.eraseToAnyPublisher()
+	}
+	
+	static func fetchJourneyByRefreshToken(ref : String) -> AnyPublisher<JourneyWrapper,ApiServiceError> {
+		return ApiService().fetch(
+			JourneyWrapper.self,
+			query: Query.getQueryItems(
+				methods: [
+					Query.stopovers(isShowing: true),
+					Query.polylines(true),
+				]
+			),
+			type: ApiService.Requests.journeyByRefreshToken(ref: ref)
+		)
+		.eraseToAnyPublisher()
+	}
+	
+	static func whenLoadingIfNeeded() -> Feedback<State, Event> {
+		Feedback {(state: State) -> AnyPublisher<Event, Never> in
+			switch state.status {
+			case .loadingIfNeeded:
+				if Date.now.timeIntervalSince1970 - state.data.updatedAt < 60 {
+					return Just(Event.didLoadJourneyData(data: state.data)).eraseToAnyPublisher()
+				}
+				return Just(Event.didTapReloadButton).eraseToAnyPublisher()
+			default:
+				return Empty().eraseToAnyPublisher()
+			}
+		}
+	}
+	
+	func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
+		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
+			var token : String!
+			
+			switch state.status {
+			case .loading(token: let ref):
+				token = ref
+			default:
+				return Empty().eraseToAnyPublisher()
+			}
+			
+			guard let token = token else {
+				return Just(Event.didFailedToLoadJourneyData(error: .cannotDecodeRawData)).eraseToAnyPublisher()
+			}
+
+			
+			return Self.fetchJourneyByRefreshToken(ref: token)
+				.mapError{ $0 }
+				.asyncFlatMap{ data in
+					guard self != nil else {
+						return .didFailedToLoadJourneyData(error: .cannotDecodeContentData)
+					}
+					let res = await constructJourneyViewDataAsync(
+						journey: data.journey,
+						depStop: self!.depStop,
+						arrStop: self!.arrStop,
+						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
+					   )
+					switch state.isFollowed {
+					case true:
+						guard self!.chewVM.coreDataStore.updateJourney(
+							   viewData: state.data,
+							   depStop: self!.depStop,
+							   arrStop: self!.arrStop
+						) == true else {
+							return Event.didFailedToLoadJourneyData(error: .cannotDecodeContentData)
+						}
+					case false:
+						break
+					}
+					return Event.didLoadJourneyData(data: res)
+				}
+				.catch {
+					error in Just(.didFailedToLoadJourneyData(error: error as! ApiServiceError))
+				}
+				.eraseToAnyPublisher()
+		}
+	}
+}
+
+extension JourneyDetailsViewModel {
 	private static func constructMapRegion(locFirst : CLLocationCoordinate2D, locLast : CLLocationCoordinate2D) -> MKCoordinateRegion {
 		let centerCoordinate = CLLocationCoordinate2D(
 			latitude: (locFirst.latitude + locLast.latitude) / 2,
@@ -140,98 +283,6 @@ extension JourneyDetailsViewModel {
 				}
 			}
 			return Empty().eraseToAnyPublisher()
-		}
-	}
-
-	static func whenLoadingFullLeg() -> Feedback<State, Event> {
-		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .loadingFullLeg(leg: let leg) = state.status,
-				  let tripId = leg.tripId else {
-				return Empty().eraseToAnyPublisher()
-			}
-			return fetchTrip(tripId: tripId)
-				.mapError{ $0 }
-				.asyncFlatMap { res in
-					let leg = constructLegData(
-						leg: res,
-						firstTS: DateParcer.getDateFromDateString(dateString: res.plannedDeparture),
-						lastTS: DateParcer.getDateFromDateString(dateString: res.plannedArrival),
-						legs: nil
-					)
-					if let leg = leg {
-						return Event.didLoadFullLegData(data: leg)
-					} else {
-						return Event.didCloseBottomSheet
-					}
-				}
-				.catch { error in Empty().eraseToAnyPublisher()}
-				.eraseToAnyPublisher()
-		}
-	}
-	
-	
-	static func fetchTrip(tripId : String?) -> AnyPublisher<LegDTO,ApiServiceError> {
-		guard let tripId = tripId else {
-			return Empty().eraseToAnyPublisher()
-		}
-		return ApiService().fetch(
-			TripDTO.self,
-			query: [],
-			type: ApiService.Requests.trips(tripId: tripId)
-		)
-		.map {return $0.trip}
-		.eraseToAnyPublisher()
-	}
-	
-	static func fetchJourneyByRefreshToken(ref : String) -> AnyPublisher<JourneyWrapper,ApiServiceError> {
-		return ApiService().fetch(
-			JourneyWrapper.self,
-			query: Query.getQueryItems(
-				methods: [
-					Query.stopovers(isShowing: true),
-					Query.polylines(true),
-				]
-			),
-			type: ApiService.Requests.journeyByRefreshToken(ref: ref)
-		)
-		.eraseToAnyPublisher()
-	}
-	
-	func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
-		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
-			var token : String? = nil
-			
-			switch state.status {
-			case .loading(token: let ref), .loadingIfNeeded(token: let ref):
-				token = ref
-			default:
-				return Empty().eraseToAnyPublisher()
-			}
-			
-			guard let token = token else {
-				return Empty().eraseToAnyPublisher()
-			}
-			
-			if case .loadingIfNeeded = state.status,
-				Date.now.timeIntervalSince1970 - state.data.updatedAt < 60 {
-				return Just(Event.didLoadJourneyData(data: state.data)).eraseToAnyPublisher()
-			}
-			
-			return Self.fetchJourneyByRefreshToken(ref: token)
-				.mapError{ $0 }
-				.asyncFlatMap{ data in
-					let res = await constructJourneyViewDataAsync(
-						journey: data.journey,
-							depStop: self?.depStop,
-							arrStop: self?.arrStop,
-						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
-					   )
-					return Event.didLoadJourneyData(data: res)
-				}
-				.catch {
-					error in Just(.didFailedToLoadJourneyData(error: error as! ApiServiceError))
-				}
-				.eraseToAnyPublisher()
 		}
 	}
 }

@@ -16,18 +16,18 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable, Equatable 
 	}
 	var chewVM : ChewViewModel
 	@Published private(set) var state : State {
-		didSet { print("🟣 > journey details new state:",state.status.description) }
+		didSet { print("🚂 > state:",state.status.description) }
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	var refreshToken : String?
-	var depStop : Stop?
-	var arrStop : Stop?
+	var depStop : Stop
+	var arrStop : Stop
 	init (
 		refreshToken : String?,
 		data: JourneyViewData,
-		depStop : Stop?,
-		arrStop : Stop?,
+		depStop : Stop,
+		arrStop : Stop,
 		followList: [String],
 		chewVM : ChewViewModel
 	) {
@@ -43,9 +43,10 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable, Equatable 
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenLoadingJourneyByRefreshToken(),
-				Self.whenLoadingLocationDetails(),
 				Self.whenLoadingFullLeg(),
-				Self.whenChangingSubscribitionType()
+				self.whenChangingSubscribitionType(),
+				Self.whenLoadingIfNeeded(),
+				Self.whenLoadingLocationDetails()
 			]
 		)
 		.assign(to: \.state, on: self)

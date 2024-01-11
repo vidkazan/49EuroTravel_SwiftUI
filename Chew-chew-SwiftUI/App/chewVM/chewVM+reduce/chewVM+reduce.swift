@@ -9,7 +9,7 @@ import Foundation
 
 extension ChewViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
-		print("⚪🔥 > main event:",event.description,"state:",state.status.description)
+		print("📱🔥 > ",event.description,"state:",state.status.description)
 		switch state.status {
 		case .idle:
 			return reduceIdle(state, event)

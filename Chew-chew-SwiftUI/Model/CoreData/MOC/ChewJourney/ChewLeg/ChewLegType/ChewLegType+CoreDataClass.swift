@@ -72,31 +72,6 @@ extension ChewLegType {
 		self.init(context: context)
 		self.legType = type
 		self.leg = leg
-
-		do {
-			try context.save()
-		} catch {
-			let nserror = error as NSError
-			print("📕 > save \(Self.self): failed to save new ", nserror.localizedDescription)
-		}
 	}
 }
 
-extension ChewLegType {
-	static func updateWith(
-		of obj : ChewLegType?,
-		with type : LegViewData.LegType,
-		using managedObjectContext: NSManagedObjectContext
-	) {
-		guard let obj = obj else { return }
-		
-		obj.legType = type
-		
-		do {
-			try managedObjectContext.save()
-		} catch {
-			let nserror = error as NSError
-			print("📕 > update \(Self.self): fialed to update", nserror.localizedDescription)
-		}
-	}
-}

@@ -16,7 +16,7 @@ extension ChewStop {
     @NSManaged public var name: String
     @NSManaged public var stopOverType: String
 	@NSManaged public var locationType: Int16
-    @NSManaged public var time: ChewTime?
+    @NSManaged public var time: ChewTime
     @NSManaged public var depPlatform: ChewPrognosedPlatform?
     @NSManaged public var arrPlatform: ChewPrognosedPlatform?
 	@NSManaged public var leg: ChewLeg?

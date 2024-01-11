@@ -446,5 +446,273 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A7EB5B4A-EDDB-4DA4-B8EB-D22D3B21F1C9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "21"
+            endingLineNumber = "21"
+            landmarkName = "whenChangingSubscribitionType()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "A7EB5B4A-EDDB-4DA4-B8EB-D22D3B21F1C9 - d25db9dfd56810ec"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.JourneyDetailsViewModel.whenChangingSubscribitionType() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.State, Chew_chew_SwiftUI.JourneyDetailsViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "52">
+               </Location>
+               <Location
+                  uuid = "A7EB5B4A-EDDB-4DA4-B8EB-D22D3B21F1C9 - 5d1771f9c5f084ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Chew_chew_SwiftUI.JourneyDetailsViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.Event, Swift.Never&gt; in Chew_chew_SwiftUI.JourneyDetailsViewModel.whenChangingSubscribitionType() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.State, Chew_chew_SwiftUI.JourneyDetailsViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "496">
+               </Location>
+               <Location
+                  uuid = "A7EB5B4A-EDDB-4DA4-B8EB-D22D3B21F1C9 - 5d1771f9c5f084ad"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Chew_chew_SwiftUI.JourneyDetailsViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.Event, Swift.Never&gt; in Chew_chew_SwiftUI.JourneyDetailsViewModel.whenChangingSubscribitionType() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.State, Chew_chew_SwiftUI.JourneyDetailsViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "21"
+                  endingLineNumber = "21"
+                  offsetFromSymbolStart = "572">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "46B3D5DA-207A-41E2-AA53-30687AE6222F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "22"
+            endingLineNumber = "22"
+            landmarkName = "whenChangingSubscribitionType()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "46B3D5DA-207A-41E2-AA53-30687AE6222F - 5d1771f9c5f0848c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Chew_chew_SwiftUI.JourneyDetailsViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.Event, Swift.Never&gt; in Chew_chew_SwiftUI.JourneyDetailsViewModel.whenChangingSubscribitionType() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.State, Chew_chew_SwiftUI.JourneyDetailsViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "508">
+               </Location>
+               <Location
+                  uuid = "46B3D5DA-207A-41E2-AA53-30687AE6222F - 5d1771f9c5f0848c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Chew_chew_SwiftUI.JourneyDetailsViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.Event, Swift.Never&gt; in Chew_chew_SwiftUI.JourneyDetailsViewModel.whenChangingSubscribitionType() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.State, Chew_chew_SwiftUI.JourneyDetailsViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "736">
+               </Location>
+               <Location
+                  uuid = "46B3D5DA-207A-41E2-AA53-30687AE6222F - 5d1771f9c5f0848c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Chew_chew_SwiftUI.JourneyDetailsViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.Event, Swift.Never&gt; in Chew_chew_SwiftUI.JourneyDetailsViewModel.whenChangingSubscribitionType() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.State, Chew_chew_SwiftUI.JourneyDetailsViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "584">
+               </Location>
+               <Location
+                  uuid = "46B3D5DA-207A-41E2-AA53-30687AE6222F - 5d1771f9c5f0848c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Chew_chew_SwiftUI.JourneyDetailsViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.Event, Swift.Never&gt; in Chew_chew_SwiftUI.JourneyDetailsViewModel.whenChangingSubscribitionType() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.State, Chew_chew_SwiftUI.JourneyDetailsViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "772">
+               </Location>
+               <Location
+                  uuid = "46B3D5DA-207A-41E2-AA53-30687AE6222F - 5d1771f9c5f0848c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Chew_chew_SwiftUI.JourneyDetailsViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.Event, Swift.Never&gt; in Chew_chew_SwiftUI.JourneyDetailsViewModel.whenChangingSubscribitionType() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.JourneyDetailsViewModel.State, Chew_chew_SwiftUI.JourneyDetailsViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "22"
+                  endingLineNumber = "22"
+                  offsetFromSymbolStart = "776">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "54DA7239-1E47-43A1-91ED-514BD87E0441"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5F96382C-F970-4EA4-9EAE-8D6EEA886642"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "108"
+            endingLineNumber = "108"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "A2E40ACC-9946-482E-8B34-507978F34151"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "whenChangingSubscribitionType()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E59B9F33-0796-4A61-BF2F-2B19C3CBE771"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyFollow/viewModel/JourneyFollowViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
+            landmarkName = "whenEditing()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "985E792C-CBF6-4AAE-AF8B-1B4305E59EF5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Model/CoreData/CoreDataStore/CoreDataStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "addJourney(viewData:depStop:arrStop:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E47D98BC-2B0F-4977-8D69-141B48015F17"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyFollow/viewModel/JourneyFollowViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
+            landmarkName = "whenEditing()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "880FA44C-3CC2-4489-B81C-BCDACEED67CA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "whenLoadingInitialData()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

@@ -11,20 +11,24 @@ import Combine
 struct JourneyFollowData : Equatable {
 	let journeyRef : String
 	let journeyViewData : JourneyViewData
+	let depStop: Stop
+	let arrStop : Stop
 }
 
 final class JourneyFollowViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
 		didSet {
-			print("🔵🔵 >> follow state: ",state.status.description)
+			print("📌 >> state: ",state.status.description)
 		}
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
-	
+	var chewVM : ChewViewModel?
 	init(
+		chewVM : ChewViewModel?,
 		journeys : [JourneyFollowData]
 	) {
+		self.chewVM = chewVM
 		state = State(
 			journeys: journeys,
 			status: .idle
@@ -35,7 +39,7 @@ final class JourneyFollowViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				Self.whenEditing()
+				self.whenEditing()
 			]
 		)
 		.assign(to: \.state, on: self)
@@ -71,31 +75,37 @@ extension JourneyFollowViewModel {
 		static func == (lhs: JourneyFollowViewModel.Status, rhs: JourneyFollowViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
+		case error(error : String)
 		case idle
-		case editing(_ action: Action, journeyRef : String, viewData : JourneyViewData)
+		case editing(_ action: Action, journeyRef : String, followData : JourneyFollowData?)
 		case updating
 		
 		var description : String {
 			switch self {
+			case .error(let action):
+				return "error \(action.description)"
 			case .idle:
 				return "idle"
 			case .updating:
 				return "updating"
-			case .editing(let action, let ref,_):
-				return "editing \(action.rawValue) \(ref)"
+			case .editing:
+				return "editing"
 			}
 		}
 	}
 	
 	enum Event {
+		case didFailToEdit(action : Action, msg: String)
 		case didTapUpdate
 		case didUpdateData([JourneyFollowData])
 		
-		case didTapEdit(action : Action, journeyRef : String, viewData : JourneyViewData)
+		case didTapEdit(action : Action, journeyRef : String, followData : JourneyFollowData?)
 		case didEdit(data : [JourneyFollowData])
 		
 		var description : String {
 			switch self {
+			case .didFailToEdit:
+				return "didFailToEdit"
 			case .didEdit:
 				return "didEdit"
 			case .didTapEdit:
@@ -116,29 +126,48 @@ extension JourneyFollowViewModel {
 			return input
 		}
 	}
-	static func whenEditing() -> Feedback<State, Event> {
-		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+	func whenEditing() -> Feedback<State, Event> {
+		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
 			switch state.status {
 			case .editing(let action, journeyRef: let ref, let viewData):
 				var journeys = state.journeys
 				switch action {
 				case .adding:
-					if journeys.first(where: { elem in
-						elem.journeyRef == ref
-					} ) == nil {
-						journeys.append(JourneyFollowData(
-							journeyRef: ref,
-							journeyViewData: viewData
-						))
+					guard let viewData = viewData else {
+						return Just(Event.didFailToEdit(
+							action: action,
+						msg: "view data is nil"
+						)).eraseToAnyPublisher()
 					}
+					guard !journeys.contains(where: {$0.journeyRef == ref}) else {
+						return Just(Event.didFailToEdit(
+							action: action,
+						msg: "journey has been followed already"
+						)).eraseToAnyPublisher()
+					}
+					guard
+						self?.chewVM?.coreDataStore.addJourney(
+							viewData: viewData.journeyViewData,
+							depStop: viewData.depStop,
+							arrStop: viewData.arrStop
+						) == true
+					else {
+						return Just(Event.didFailToEdit(
+							action: action,
+						msg: "coredata: failed to add"
+						)).eraseToAnyPublisher()
+					}
+					journeys.append(viewData)
 					return Just(Event.didEdit(data: journeys))
 						.eraseToAnyPublisher()
 				case .deleting:
-					if let index = journeys.firstIndex(where: { elem in
-						elem.journeyRef == ref
-					} ) {
-						journeys.remove(at: index)
+					guard
+						let index = journeys.firstIndex(where: { $0.journeyRef == ref} ),
+						self?.chewVM?.coreDataStore.deleteJourneyIfFound(journeyRef: ref) == true
+					else {
+						return Just(Event.didFailToEdit(action: action,msg: "")).eraseToAnyPublisher()
 					}
+					journeys.remove(at: index)
 					return Just(Event.didEdit(data: journeys))
 						.eraseToAnyPublisher()
 				}
@@ -152,10 +181,11 @@ extension JourneyFollowViewModel {
 
 extension JourneyFollowViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
+		print("📌🔥 > :",event.description,"state:",state.status.description)
 		switch state.status {
-		case .idle:
+		case .idle,.error:
 			switch event {
-			case .didEdit:
+			case .didEdit,.didFailToEdit:
 				return state
 			case .didTapUpdate:
 				return state
@@ -167,11 +197,13 @@ extension JourneyFollowViewModel {
 			case .didTapEdit(action: let action, journeyRef: let ref, let data):
 				return State(
 					journeys: state.journeys,
-					status: .editing(action, journeyRef: ref,viewData: data)
+					status: .editing(action, journeyRef: ref,followData: data)
 				)
 			}
 		case .updating:
 			switch event {
+			case .didFailToEdit:
+				return state
 			case .didTapUpdate:
 				return state
 			case .didUpdateData:
@@ -181,11 +213,16 @@ extension JourneyFollowViewModel {
 			case .didTapEdit(action: let action, journeyRef: let ref,let data):
 				return State(
 					journeys: state.journeys,
-					status: .editing(action, journeyRef: ref,viewData: data)
+					status: .editing(action, journeyRef: ref,followData: data)
 				)
 			}
 		case .editing:
 			switch event {
+			case .didFailToEdit:
+				return State(
+					journeys: state.journeys,
+					status: .idle
+				)
 			case .didTapUpdate:
 				return state
 			case .didUpdateData:

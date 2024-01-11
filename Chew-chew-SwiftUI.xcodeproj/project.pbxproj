@@ -24,6 +24,7 @@
 		7D02CE2E2A97E80D0048ADE6 /* OrderedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 7D02CE2D2A97E80D0048ADE6 /* OrderedCollections */; };
 		7D02CE302A97E96E0048ADE6 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */; };
 		7D02CE342A98E8130048ADE6 /* JourneysListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE332A98E8130048ADE6 /* JourneysListView.swift */; };
+		7D0685ED2B50304500CCBE6B /* CoreDataStore+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0685EC2B50304500CCBE6B /* CoreDataStore+Fetch.swift */; };
 		7D0719392B1382D100BF846B /* Chew_chew_SwiftUIUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734CD2A96334D00CBE9C1 /* Chew_chew_SwiftUIUITests.swift */; };
 		7D08885E2B4A3F1B00283A34 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */; };
 		7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */; };
@@ -193,6 +194,8 @@
 		7D02CE262A97E6790048ADE6 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
 		7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		7D02CE332A98E8130048ADE6 /* JourneysListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneysListView.swift; sourceTree = "<group>"; };
+		7D0685EC2B50304500CCBE6B /* CoreDataStore+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataStore+Fetch.swift"; sourceTree = "<group>"; };
+		7D0685EF2B50425A00CCBE6B /* sideEffects+userLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "sideEffects+userLocation.swift"; sourceTree = "<group>"; };
 		7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeContainer.swift; sourceTree = "<group>"; };
 		7D15EEE72AD494D400833170 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
@@ -428,6 +431,36 @@
 				7DA001FC2B0F88B6009BB79D /* SegmentedPicker.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		7D0685EA2B50300000CCBE6B /* MOC */ = {
+			isa = PBXGroup;
+			children = (
+				7D65DF142B2A270B00692601 /* ChewJourney */,
+				7D65DF0F2B2A266400692601 /* ChewTime */,
+				7D65DF112B2A26BA00692601 /* Settings */,
+				7D65DF162B2A271400692601 /* Location */,
+				7D65DF152B2A271200692601 /* ChewUser */,
+			);
+			path = MOC;
+			sourceTree = "<group>";
+		};
+		7D0685EB2B50303100CCBE6B /* CoreDataStore */ = {
+			isa = PBXGroup;
+			children = (
+				7D0685EC2B50304500CCBE6B /* CoreDataStore+Fetch.swift */,
+				7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */,
+			);
+			path = CoreDataStore;
+			sourceTree = "<group>";
+		};
+		7D0685EE2B50424F00CCBE6B /* sideEffects */ = {
+			isa = PBXGroup;
+			children = (
+				7D6C5C2C2AAF791400DEFC57 /* JourneyDetailsVM+sideEffects.swift */,
+				7D0685EF2B50425A00CCBE6B /* sideEffects+userLocation.swift */,
+			);
+			path = sideEffects;
 			sourceTree = "<group>";
 		};
 		7D181D652AD6D5C1003AB021 /* FavouriteRides */ = {
@@ -719,8 +752,8 @@
 		7D6C5C2B2AAF78F400DEFC57 /* JourneyDetailsVM */ = {
 			isa = PBXGroup;
 			children = (
+				7D0685EE2B50424F00CCBE6B /* sideEffects */,
 				7D6C5C292AAF77CF00DEFC57 /* JourneyDetailsVM.swift */,
-				7D6C5C2C2AAF791400DEFC57 /* JourneyDetailsVM+sideEffects.swift */,
 				7D6C5C302AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift */,
 				7D6C5C2E2AAF792200DEFC57 /* JourneyDetailsVM+state.swift */,
 			);
@@ -797,14 +830,10 @@
 		7D9BB1052B0CBF3B008A3616 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				7D0685EB2B50303100CCBE6B /* CoreDataStore */,
+				7D0685EA2B50300000CCBE6B /* MOC */,
 				7D2CAF622B0BEA0200577FD4 /* Model.xcdatamodeld */,
 				7D2CAF652B0BEAC000577FD4 /* Persistence.swift */,
-				7D65DF142B2A270B00692601 /* ChewJourney */,
-				7D65DF0F2B2A266400692601 /* ChewTime */,
-				7D65DF112B2A26BA00692601 /* Settings */,
-				7D65DF162B2A271400692601 /* Location */,
-				7D65DF152B2A271200692601 /* ChewUser */,
-				7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */,
 			);
 			path = CoreData;
 			sourceTree = "<group>";
@@ -1278,6 +1307,7 @@
 				7D4B1B992AA950780096F372 /* constructJourneys.swift in Sources */,
 				7D462D492AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift in Sources */,
 				7D9BB10C2B0CBF54008A3616 /* Location+CoreDataClass.swift in Sources */,
+				7D0685ED2B50304500CCBE6B /* CoreDataStore+Fetch.swift in Sources */,
 				7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

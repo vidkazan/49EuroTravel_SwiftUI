@@ -20,8 +20,8 @@ struct JourneyFollowView : View {
 				let vm = JourneyDetailsViewModel(
 					refreshToken: journey.journeyRef,
 					data: journey.journeyViewData,
-					depStop: nil,
-					arrStop: nil,
+					depStop: journey.depStop,
+					arrStop: journey.arrStop,
 					followList: viewModel.state.journeys.map { elem in elem.journeyRef },
 					chewVM: chewVM
 				)

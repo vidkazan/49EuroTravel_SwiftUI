@@ -9,7 +9,7 @@ import Foundation
 
 extension LegDetailsViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
-		print("🔥 > leg details event:",event.description,"state:",state.status.description, state.leg.lineViewData.name)
+		print("🦵🔥 > ",event.description,"state:",state.status.description, state.leg.lineViewData.name)
 		switch state.status {
 		case .idle:
 			switch event {

@@ -18,7 +18,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	@Published var searchStopsViewModel : SearchStopsViewModel
 	@Published var journeyFollowViewModel : JourneyFollowViewModel
 	@Published private(set) var state : State {
-		didSet { print("⚪ > main new state:",state.status.description) }
+		didSet { print("📱 >  state:",state.status.description) }
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()

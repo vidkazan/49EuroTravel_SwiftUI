@@ -34,22 +34,25 @@ struct JourneyListView: View {
 				ScrollView()  {
 					LazyVStack{
 						ForEach(journeyViewModel.state.journeys,id: \.id) { journey in
-							NavigationLink(destination: {
-								NavigationLazyView(
-									JourneyDetailsView(
-										journeyDetailsViewModel: JourneyDetailsViewModel(
-											refreshToken: journey.refreshToken,
-											data: journey,
-											depStop: chewVM.state.depStop.stop,
-											arrStop: chewVM.state.arrStop.stop,
-											followList: chewVM.journeyFollowViewModel.state.journeys.map { elem in elem.journeyRef},
-											chewVM: chewVM
+							if let dep = chewVM.state.depStop.stop,
+							   let arr = chewVM.state.arrStop.stop {
+								NavigationLink(destination: {
+									NavigationLazyView(
+										JourneyDetailsView(
+											journeyDetailsViewModel: JourneyDetailsViewModel(
+												refreshToken: journey.refreshToken,
+												data: journey,
+												depStop: dep,
+												arrStop: arr,
+												followList: chewVM.journeyFollowViewModel.state.journeys.map { elem in elem.journeyRef},
+												chewVM: chewVM
+											)
 										)
 									)
-								)
-							}, label: {
-								JourneyCell(journey: journey)
-							})
+								}, label: {
+									JourneyCell(journey: journey)
+								})
+							}
 						}
 						switch journeyViewModel.state.status {
 						case .journeysLoaded, .failedToLoadEarlierRef:

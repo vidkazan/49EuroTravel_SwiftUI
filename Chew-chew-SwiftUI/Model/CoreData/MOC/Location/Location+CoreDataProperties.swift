@@ -20,31 +20,36 @@ extension Location {
 	
 	@NSManaged public var chewJourneyDep: ChewJourney?
 	@NSManaged public var chewJourneyArr: ChewJourney?
-	@NSManaged public var user: ChewUser
+	@NSManaged public var user: ChewUser?
 }
 
 extension Location {
 	// TODO: rearrange function
 	func stop() -> Stop {
-		let type = LocationType(rawValue: self.type)
-		return Stop(
-			coordinates: CLLocationCoordinate2D(
-				latitude: self.latitude,
-				longitude: self.longitude
-			),
-			type: type ?? LocationType.location,
-			stopDTO: StopDTO(
-				type: nil,
-				id: self.api_id,
-				name: self.name,
-				address: self.address,
-				location: nil,
-				latitude: self.latitude,
-				longitude: self.longitude,
-				poi: LocationType.pointOfInterest == type,
-				products: nil
+		var type : LocationType?
+		var stop : Stop!
+		self.managedObjectContext?.performAndWait {
+			type = LocationType(rawValue: self.type)
+			stop = Stop(
+				coordinates: CLLocationCoordinate2D(
+				 latitude: self.latitude,
+				 longitude: self.longitude
+			 ),
+			 type: type ?? LocationType.location,
+			 stopDTO: StopDTO(
+				 type: nil,
+				 id: self.api_id,
+				 name: self.name,
+				 address: self.address,
+				 location: nil,
+				 latitude: self.latitude,
+				 longitude: self.longitude,
+				 poi: LocationType.pointOfInterest == type,
+				 products: nil
+			 )
 			)
-		)
+		}
+		return stop
 	}
 	
 	static func delete(object: Location?,in context : NSManagedObjectContext) {
@@ -54,12 +59,12 @@ extension Location {
 		}
 		context.delete(object)
 
-		do {
-			try context.save()
-			print("📗 > delete \(Self.self)")
-		} catch {
-			let nserror = error as NSError
-			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
-		}
+//		do {
+//			try context.save()
+//			print("📗 > delete \(Self.self)")
+//		} catch {
+//			let nserror = error as NSError
+//			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
+//		}
 	}
 }

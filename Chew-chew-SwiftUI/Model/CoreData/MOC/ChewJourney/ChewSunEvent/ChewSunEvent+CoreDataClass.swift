@@ -19,9 +19,9 @@ public class ChewSunEvent: NSManagedObject {
 extension ChewSunEvent {
 	func sunEvent() -> SunEvent {
 		SunEvent(
-			type: SunEventType(rawValue: self.type ?? "") ?? .day,
+			type: SunEventType(rawValue: self.type) ?? .day,
 			location: CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longtitude),
-			timeStart: self.timeStart ?? .distantPast,
+			timeStart: self.timeStart,
 			timeFinal: self.timeFinal
 			
 		)
@@ -31,22 +31,13 @@ extension ChewSunEvent {
 extension ChewSunEvent {
 	convenience init(context : NSManagedObjectContext,sun : SunEvent,for journey : ChewJourney){
 		self.init(context: context)
-		
 		self.latitude = sun.location.latitude
 		self.longtitude = sun.location.longitude
 		self.timeFinal = sun.timeFinal
 		self.timeStart = sun.timeStart
 		self.type = sun.type.rawValue
-		
-		journey.managedObjectContext?.performAndWait {
+//		journey.managedObjectContext?.performAndWait {
 			self.journey = journey
-		}
-		
-		do {
-			try context.save()
-		} catch {
-			let nserror = error as NSError
-			print("📕 > save \(Self.self): failed to save new ", nserror.localizedDescription)
-		}
+//		}
 	}
 }

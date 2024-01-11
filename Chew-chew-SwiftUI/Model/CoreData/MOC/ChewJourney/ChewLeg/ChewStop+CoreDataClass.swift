@@ -24,20 +24,12 @@ extension ChewStop {
 		self.name = stopData.name
 		self.stopOverType = stopData.stopOverType.rawValue
 		self.isCancelled = stopData.isCancelled ?? false
-		
 		self.leg = leg
+		
 		let _ = ChewTime(context: context, container: stopData.timeContainer, cancelled: stopData.isCancelled ?? false, for: self)
 		
 		let _ = ChewPrognosedPlatform(insertInto: context, with: stopData.departurePlatform, to: self, type: .departure)
 		let _ = ChewPrognosedPlatform(insertInto: context, with: stopData.arrivalPlatform, to: self, type: .arrival)
-		
-		
-		do {
-			try context.save()
-		} catch {
-			let nserror = error as NSError
-			print("📕 > save \(Self.self): failed to save new ", nserror.localizedDescription)
-		}
 	}
 }
 

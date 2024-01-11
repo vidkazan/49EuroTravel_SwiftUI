@@ -15,12 +15,14 @@ struct Chew_chew_SwiftUIApp: App {
 	
 	init() {
 		coreDataStore = CoreDataStore()
+		
 		chewJourneyViewModel = ChewViewModel(
 			locationDataManager: LocationDataManager(),
 			searchStopsViewModel: SearchStopsViewModel(),
-			journeyFollowViewModel: JourneyFollowViewModel(journeys: []),
+			journeyFollowViewModel: JourneyFollowViewModel(chewVM: nil, journeys: []),
 			coreDataStore: coreDataStore
 		)
+		
 	}
 	
     var body: some Scene {

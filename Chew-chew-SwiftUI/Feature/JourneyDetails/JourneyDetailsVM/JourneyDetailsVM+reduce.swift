@@ -9,10 +9,16 @@ import Foundation
 // TODO: feature: check when train arrives at starting point
 extension JourneyDetailsViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
-		print("🟣🔥 > journey details event:",event.description,"state:",state.status.description)
+		print("🚂🔥 >",event.description,"state:",state.status.description)
 		switch state.status {
 		case .changingSubscribingState:
 			switch event {
+			case .didFailToChangeSubscribingState:
+				return State(
+					data: state.data,
+					status: .error(error: .cannotDecodeRawData),
+					isFollowed: state.isFollowed
+				)
 			case .didChangedSubscribingState(let isFollowed):
 				return State(
 					data: state.data,
@@ -55,6 +61,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
+					.didFailToChangeSubscribingState,
 					.didExpandLegDetails,
 					.didTapBottomSheetDetails,
 					.didCloseBottomSheet,
@@ -66,10 +73,10 @@ extension JourneyDetailsViewModel {
 			}
 		case .loadedJourneyData:
 			switch event {
-			case .didTapSubscribingButton:
+			case .didTapSubscribingButton(let ref,let dep,let arr):
 				return State(
 					data: state.data,
-					status: .changingSubscribingState,
+					status: .changingSubscribingState(ref: ref, depStop: dep, arrStop: arr),
 					isFollowed: state.isFollowed
 				)
 			case .didExpandLegDetails:
@@ -99,6 +106,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
+					.didFailToChangeSubscribingState,
 					.didChangedSubscribingState,
 					.didTapBottomSheetDetails,
 					.didLoadFullLegData,
@@ -132,6 +140,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didLoadLocationDetails,
+					.didFailToChangeSubscribingState,
 					.didCloseActionSheet,
 					.didTapBottomSheetDetails,
 					.didLoadFullLegData,
@@ -143,6 +152,7 @@ extension JourneyDetailsViewModel {
 		case .locationDetails:
 			switch event {
 			case	.didExpandLegDetails,
+					.didFailToChangeSubscribingState,
 					.didLoadJourneyData,
 					.didLoadFullLegData,
 					.didFailedToLoadJourneyData,
@@ -183,6 +193,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
+					.didFailToChangeSubscribingState,
 					.didRequestReloadIfNeeded,
 					.didLoadFullLegData,
 					.didFailedToLoadJourneyData,
@@ -197,6 +208,7 @@ extension JourneyDetailsViewModel {
 		case .fullLeg:
 			switch event {
 			case	.didLoadJourneyData,
+					.didFailToChangeSubscribingState,
 					.didLoadFullLegData,
 					.didFailedToLoadJourneyData,
 					.didTapReloadButton,
@@ -237,6 +249,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
+					.didFailToChangeSubscribingState,
 					.didFailedToLoadJourneyData,
 					.didExpandLegDetails,
 					.didLongTapOnLeg,
@@ -257,6 +270,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didFailedToLoadJourneyData,
+					.didFailToChangeSubscribingState,
 					.didTapReloadButton,
 					.didRequestReloadIfNeeded,
 					.didExpandLegDetails,

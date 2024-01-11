@@ -14,7 +14,7 @@ public class Location: NSManagedObject {
 }
 
 extension Location {
-	convenience init(context : NSManagedObjectContext,stop : Stop, chewJourneyDep : ChewJourney){
+	convenience init(context : NSManagedObjectContext,stop : Stop, journeyDep : ChewJourney){
 		self.init(context: context)
 		
 		self.api_id = stop.stopDTO?.id
@@ -23,10 +23,12 @@ extension Location {
 		self.longitude = stop.coordinates.longitude
 		self.name = stop.name
 		self.type = stop.type.rawValue
-		self.chewJourneyDep = chewJourneyDep
+//		context.performAndWait {
+			self.chewJourneyDep = journeyDep
+//		}
 	}
 	
-	convenience init(context : NSManagedObjectContext,stop : Stop, chewJourneyArr : ChewJourney){
+	convenience init(context : NSManagedObjectContext,stop : Stop, journeyArr : ChewJourney){
 		self.init(context: context)
 		
 		self.api_id = stop.stopDTO?.id
@@ -35,18 +37,9 @@ extension Location {
 		self.longitude = stop.coordinates.longitude
 		self.name = stop.name
 		self.type = stop.type.rawValue
-		self.chewJourneyArr = chewJourneyArr
-	}
-	
-	convenience init(context : NSManagedObjectContext,stop : Stop){
-		self.init(context: context)
-		
-		self.api_id = stop.stopDTO?.id
-		self.address = stop.stopDTO?.address
-		self.latitude = stop.coordinates.latitude
-		self.longitude = stop.coordinates.longitude
-		self.name = stop.name
-		self.type = stop.type.rawValue
+//		context.performAndWait {
+			self.chewJourneyArr = journeyArr
+//		}
 	}
 	convenience init(context : NSManagedObjectContext,stop : Stop, user : ChewUser){
 		self.init(context: context)

@@ -18,10 +18,7 @@ extension ChewTime {
 	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for journey : ChewJourney){
 		self.init(context: context)
 		
-		journey.managedObjectContext?.performAndWait {
-			self.chewJourney = journey
-		}
-		
+		self.chewJourney = journey
 		self.cancelled =  cancelled
 		self.actualArrival = container.iso.arrival.actual
 		self.plannedArrival = container.iso.arrival.planned

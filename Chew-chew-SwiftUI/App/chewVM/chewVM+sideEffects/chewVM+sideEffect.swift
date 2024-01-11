@@ -31,17 +31,14 @@ extension ChewViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			
+			self.journeyFollowViewModel.chewVM = self
 			guard let user = self.coreDataStore.fetchUser() else {
 				print("whenLoadingInitialData: user is nil: loading default data")
 				return Just(Event.didLoadInitialData(nil,ChewSettings()))
 					.eraseToAnyPublisher()
 			}
 			
-			guard let settings = user.settings else {
-				return Just(Event.didLoadInitialData(user,ChewSettings()))
-					.eraseToAnyPublisher()
-			}
-			let modes = settings.transportModes
+			let settings = self.coreDataStore.fetchSettings()
 
 			if let stops = self.coreDataStore.fetchLocations() {
 				self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
@@ -54,42 +51,7 @@ extension ChewViewModel {
 					})
 				)
 			}
-			
-			var transportModes = Set<LineType>()
-			
-			// buuueeeeeeee
-			
-			if modes.bus { transportModes.insert(.bus) }
-			if modes.ferry { transportModes.insert(.ferry) }
-			if modes.national { transportModes.insert(.national) }
-			if modes.nationalExpress { transportModes.insert(.nationalExpress) }
-			if modes.regional { transportModes.insert(.regional) }
-			if modes.regionalExpress { transportModes.insert(.regionalExpress) }
-			if modes.suburban { transportModes.insert(.suburban) }
-			if modes.subway { transportModes.insert(.subway) }
-			if modes.taxi { transportModes.insert(.taxi) }
-			if modes.tram { transportModes.insert(.tram) }
-			
-			let transferTypes : ChewSettings.TransferTime = {
-				if user.settings?.isWithTransfers == false {
-					return .direct
-				}
-				return .time(minutes: Int(settings.transferTime))
-			}()
-			
-			let res = ChewSettings(
-				customTransferModes: transportModes,
-				transportMode: ChewSettings.TransportMode(
-					rawValue: Int(settings.transportModeSegment)) ?? .deutschlandTicket,
-				transferTime: transferTypes,
-				accessiblity: .partial,
-				walkingSpeed: .fast,
-				language: .english,
-				debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false),
-				startWithWalking: true,
-				withBicycle: false
-			)
-			return Just(Event.didLoadInitialData(user,res))
+			return Just(Event.didLoadInitialData(user,settings))
 				.eraseToAnyPublisher()
 		}
 	}
