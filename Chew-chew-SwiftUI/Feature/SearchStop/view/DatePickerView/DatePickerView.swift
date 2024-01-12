@@ -12,13 +12,8 @@ struct DatePickerView: View {
 	@State var date : Date
 	@State var time : Date
 	var body: some View {
-		ScrollView {
+		NavigationView {
 			VStack(alignment: .center,spacing: 5) {
-				//			Label("Date settings", systemImage: "clock")
-				//				.padding(.top)
-				//				.chewTextSize(.big)
-				// MARK: header buttons
-				DatePickerTimePresetButtons()
 				// MARK: time
 				HStack {
 					HStack {
@@ -35,7 +30,7 @@ struct DatePickerView: View {
 						.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 15))
 						Spacer()
 					}
-					.background(Color.chewFillAccent)
+					.background(Color.chewFillTertiary.opacity(0.15))
 					.cornerRadius(10)
 				}
 				// MARK: header date
@@ -47,47 +42,45 @@ struct DatePickerView: View {
 					)
 					.datePickerStyle(.graphical)
 					.scaleEffect(0.9)
-					.padding(5)
-					.cornerRadius(10)
 					.padding(EdgeInsets(top: 0, leading: 0, bottom:0, trailing: 15))
-					.background(Color.chewFillAccent)
+					.background(Color.chewFillTertiary.opacity(0.15))
 					.cornerRadius(10)
 				}
+				// MARK: header buttons
+				DatePickerTimePresetButtons()
 				Spacer()
-				
-				
-				// MARK: done button
-				Button(action: {
-					if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
-						chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
-//						ChewUser.updateWith(date: dateCombined, using: viewContext, user: chewVM.user)
-					} else {
-						print("DatePicker: DateParcer.getCombinedDate returned nil")
-						chewVM.send(event: .onNewDate(.now))
-//						ChewUser.updateWith(date: .now, using: viewContext, user: chewVM.user)
-					}
-				}, label: {
-					Text("Done")
-						.chewTextSize(.big)
-						.frame(maxWidth: .infinity,minHeight: 43)
-				})
-				.background(Color.chewFillAccent)
-				.chewTextSize(.big)
-				.foregroundColor(.primary)
-				.cornerRadius(10)
 			}
-			.padding(5)
-			.background(Color.chewFillPrimary)
+			.padding(.horizontal,10)
+//			.background(Color.chewFillPrimary)
 			.onAppear {
 				UIDatePicker.appearance().minuteInterval = 5
 			}
+			.onDisappear {
+				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
+					chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
+				}
+			}
+			.toolbar {
+				ToolbarItem(placement: .navigationBarLeading, content: {
+					Button(action: {
+						chewVM.send(event: .didDismissBottomSheet)
+					}, label: {
+						Text("Cancel")
+							.foregroundColor(.chewGray30)
+					})
+				})
+				ToolbarItem(placement: .navigationBarTrailing, content: {
+					Button(action: {
+						if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
+							chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
+						}
+					}, label: {
+						Text("Done")
+							.chewTextSize(.big)
+							.frame(maxWidth: 100,maxHeight: 43)
+					})
+				}
+			)}
 		}
 	}
 }
-//
-//struct ContentView_Previews: PreviewProvider {
-//
-//	static var previews: some View {
-//		DatePickerView(date: .now, time: .now)
-//	}
-//}

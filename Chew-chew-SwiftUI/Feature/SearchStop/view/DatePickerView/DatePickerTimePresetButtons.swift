@@ -45,7 +45,7 @@ struct DatePickerTimePresetButtons: View {
 			.cornerRadius(10)
 		}
 		.frame(maxWidth: .infinity)
-		.background(Color.chewFillAccent)
+		.background(Color.chewFillTertiary.opacity(0.4))
 		.cornerRadius(10)
 	}
 }
