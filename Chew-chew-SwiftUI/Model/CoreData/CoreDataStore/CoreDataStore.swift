@@ -32,7 +32,7 @@ extension CoreDataStore {
 				if let res = objects.first(where: { obj in
 					obj.journeyRef == journeyRef
 				}) {
-					print("> ⚡️ delete journeys thread ",Thread.current)
+//					print("> ⚡️ delete journeys thread ",Thread.current)
 					self.asyncContext.delete(res)
 					self.saveAsyncContext()
 					result = true
@@ -54,7 +54,7 @@ extension CoreDataStore {
 	func addRecentLocation(stop : Stop){
 		guard let user = self.user else { return }
 		 asyncContext.performAndWait {
-			print("> ⚡️ create locations thread ",Thread.current)
+//			print("> ⚡️ create locations thread ",Thread.current)
 			let _ = Location(context: self.asyncContext, stop: stop, user: user)
 			self.saveAsyncContext()
 		}
@@ -98,7 +98,7 @@ extension CoreDataStore {
 	}
 	func updateSettings(newSettings : ChewSettings){
 		 asyncContext.performAndWait {
-			print("> ⚡️ update Settings thread ",Thread.current)
+//			print("> ⚡️ update Settings thread ",Thread.current)
 			guard let user = self.user else {
 				print("📕 > update Settings : error : user entity is null")
 				return

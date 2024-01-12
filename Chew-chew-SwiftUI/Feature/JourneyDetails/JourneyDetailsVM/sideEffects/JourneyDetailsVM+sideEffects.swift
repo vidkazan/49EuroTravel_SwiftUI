@@ -18,36 +18,39 @@ extension JourneyDetailsViewModel {
 	}
 	
 	func whenChangingSubscribitionType() -> Feedback<State, Event> {
-		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .changingSubscribingState(let ref,let dep,let arr) = state.status else {
+		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
+			guard case .changingSubscribingState(let ref) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			switch self.state.isFollowed {
+			guard let dep = self?.depStop,let arr = self?.arrStop,let state = self?.state else {
+				return Just(Event.didFailToChangeSubscribingState).eraseToAnyPublisher()
+			}
+			switch state.isFollowed {
 			case true:
-				self.chewVM.journeyFollowViewModel.send(
+				self?.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .deleting,
 						journeyRef: ref,
-						followData: nil
+						followData: nil,
+						journeyDetailsViewModel: self
 					)
 				)
 			case false:
-				self.chewVM.journeyFollowViewModel.send(
+				self?.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .adding,
 						journeyRef: ref,
 						followData: JourneyFollowData(
 							journeyRef: ref,
 							journeyViewData: state.data,
-							depStop: self.depStop,
-							arrStop: self.arrStop
-						)
+							depStop: dep,
+							arrStop: arr
+						),
+						journeyDetailsViewModel: self
 					)
 				)
 			}
-			#warning("send this event from JourneyFollowViewModel")
-			return Just(Event.didChangedSubscribingState(isFollowed: !state.isFollowed))
-				.eraseToAnyPublisher()
+			return Empty().eraseToAnyPublisher()
 		}
 	}
 
@@ -138,21 +141,21 @@ extension JourneyDetailsViewModel {
 			return Self.fetchJourneyByRefreshToken(ref: token)
 				.mapError{ $0 }
 				.asyncFlatMap{ data in
-					guard self != nil else {
-						return .didFailedToLoadJourneyData(error: .cannotDecodeContentData)
+					guard let dep = self?.depStop,let arr = self?.arrStop,let state = self?.state else {
+						return Event.didFailedToLoadJourneyData(error: .badRequest)
 					}
 					let res = await constructJourneyViewDataAsync(
 						journey: data.journey,
-						depStop: self!.depStop,
-						arrStop: self!.arrStop,
+						depStop: dep,
+						arrStop: arr,
 						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
 					   )
 					switch state.isFollowed {
 					case true:
-						guard self!.chewVM.coreDataStore.updateJourney(
+						guard self?.chewVM?.coreDataStore.updateJourney(
 							   viewData: state.data,
-							   depStop: self!.depStop,
-							   arrStop: self!.arrStop
+							   depStop: dep,
+							   arrStop: arr
 						) == true else {
 							return Event.didFailedToLoadJourneyData(error: .cannotDecodeContentData)
 						}

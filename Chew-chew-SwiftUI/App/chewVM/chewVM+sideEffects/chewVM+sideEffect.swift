@@ -44,12 +44,14 @@ extension ChewViewModel {
 				self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
 			}
 			
-			if let chewJourneys = self.coreDataStore.fetchJourneys() {
-				self.journeyFollowViewModel.send(
-					event: .didUpdateData(chewJourneys.map {
-						$0.journeyViewData()
-					})
-				)
+			Task.detached {
+				if let chewJourneys = self.coreDataStore.fetchJourneys() {
+					await self.journeyFollowViewModel.send(
+						event: .didUpdateData(chewJourneys.map {
+							$0.journeyViewData()
+						})
+					)
+				}
 			}
 			return Just(Event.didLoadInitialData(user,settings))
 				.eraseToAnyPublisher()
@@ -57,12 +59,12 @@ extension ChewViewModel {
 	}
 	
 	func whenEditingStops() -> Feedback<State, Event> {
-		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
 			switch state.status {
 			case .editingArrivalStop:
-				self.searchStopsViewModel.send(event: .didChangeFieldFocus(type: .arrival))
+				self?.searchStopsViewModel.send(event: .didChangeFieldFocus(type: .arrival))
 			case .editingDepartureStop:
-				self.searchStopsViewModel.send(event: .didChangeFieldFocus(type: .departure))
+				self?.searchStopsViewModel.send(event: .didChangeFieldFocus(type: .departure))
 			default:
 				break
 			}

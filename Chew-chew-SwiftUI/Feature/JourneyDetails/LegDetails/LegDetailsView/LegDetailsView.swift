@@ -11,15 +11,14 @@ import CoreLocation
 import MapKit
 
 struct LegDetailsView: View {
-	@State var currentProgressHeight : Double
+	@State var currentProgressHeight : Double = 0
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 
 	@ObservedObject var vm : LegDetailsViewModel
-	let journeyVM : JourneyDetailsViewModel
+	weak var journeyVM : JourneyDetailsViewModel?
 	init(leg : LegViewData, journeyDetailsViewModel: JourneyDetailsViewModel) {
 		let vm = LegDetailsViewModel(leg: leg)
 		self.vm = vm
-		self.currentProgressHeight = vm.state.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970 , type: vm.state.status == .stopovers ? .expanded : .collapsed)
 		self.journeyVM = journeyDetailsViewModel
 	}
 	var body : some View {
@@ -139,7 +138,10 @@ struct LegDetailsView: View {
 				.frame(maxHeight: .infinity)
 			}
 		}
-		.onReceive(timer, perform: { _ in
+		.onAppear {
+			self.currentProgressHeight = vm.state.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970 , type: vm.state.status == .stopovers ? .expanded : .collapsed)
+		}
+		.onReceive(timer, perform: { timer in
 			currentProgressHeight = vm.state.leg.progressSegments.evaluate(
 				time: Date.now.timeIntervalSince1970,
 				type: vm.state.status == .stopovers ? .expanded : .collapsed
@@ -159,7 +161,7 @@ struct LegDetailsView: View {
 		}
 		// MARK: longGesture
 		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
-			journeyVM.send(event: .didLongTapOnLeg(leg: vm.state.leg))
+			journeyVM?.send(event: .didLongTapOnLeg(leg: vm.state.leg))
 		})
 	}
 }

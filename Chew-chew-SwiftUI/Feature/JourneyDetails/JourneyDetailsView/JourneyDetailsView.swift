@@ -54,7 +54,8 @@ struct JourneyDetailsView: View {
 					)
 					// MARK: LegDetails - action sheet
 					.confirmationDialog("Name", isPresented: $actionSheetIsPresented) {
-						if case .actionSheet(leg: let leg)=viewModel.state.status, case .line=leg.legType {
+						if case .actionSheet(leg: let leg)=viewModel.state.status,
+							case .line = leg.legType {
 							Button(action: {
 								switch viewModel.state.status {
 								case .actionSheet(leg: let leg):
@@ -105,25 +106,28 @@ struct JourneyDetailsView: View {
 								case .loading:
 									break
 								default:
-									viewModel.send(event: .didTapSubscribingButton(
-										ref: ref,
-										depStop: chewVM.state.depStop.stop,
-										arrStop: chewVM.state.arrStop.stop
-									))
+									viewModel.send(event: .didTapSubscribingButton(ref: ref))
 								}
 							},
 							label: {
-								switch viewModel.state.isFollowed {
-								case true:
-									Image(systemName: "bookmark.fill")
-										.frame(width: 15,height: 15)
-										.tint(viewModel.state.status == .loading(token: ref) ? .chewGray30 : .blue)
-										.padding(5)
-								case false:
-									Image(systemName: "bookmark")
-										.tint(viewModel.state.status == .loading(token: ref) ? .chewGray30 : .blue)
+								switch viewModel.state.status {
+								case .changingSubscribingState:
+									ProgressView()
 										.frame(width: 15,height: 15)
 										.padding(5)
+								default:
+									switch viewModel.state.isFollowed {
+									case true:
+										Image(systemName: "bookmark.fill")
+											.frame(width: 15,height: 15)
+											.tint(viewModel.state.status == .loading(token: ref) ? .chewGray30 : .blue)
+											.padding(5)
+									case false:
+										Image(systemName: "bookmark")
+											.tint(viewModel.state.status == .loading(token: ref) ? .chewGray30 : .blue)
+											.frame(width: 15,height: 15)
+											.padding(5)
+									}
 								}
 							}
 						)

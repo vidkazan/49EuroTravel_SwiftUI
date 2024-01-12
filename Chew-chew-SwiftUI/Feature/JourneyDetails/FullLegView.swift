@@ -52,8 +52,8 @@ struct FullLegSheet: View {
 // MARK: FullLegView
 struct FullLegView: View {
 	@ObservedObject var vm : LegDetailsViewModel
-	let journeyVM : JourneyDetailsViewModel
-	init(leg : LegViewData,journeyDetailsViewModel: JourneyDetailsViewModel) {
+	weak var journeyVM : JourneyDetailsViewModel?
+	init(leg : LegViewData,journeyDetailsViewModel: JourneyDetailsViewModel?) {
 		self.vm = LegDetailsViewModel(leg: leg,isExpanded: true)
 		self.journeyVM = journeyDetailsViewModel
 	}

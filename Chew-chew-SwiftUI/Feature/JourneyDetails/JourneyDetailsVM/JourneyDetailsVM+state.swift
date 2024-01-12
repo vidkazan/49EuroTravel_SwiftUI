@@ -4,7 +4,6 @@
 //
 //  Created by Dmitrii Grigorev on 11.09.23.
 //
-
 import Foundation
 import MapKit
 
@@ -19,9 +18,10 @@ extension JourneyDetailsViewModel {
 		let isFollowed : Bool
 		
 		init(data: JourneyViewData, status: Status, followList : [String]) {
+			#warning("mak new PK for journeys instead of journeyRef(can change after refresh api call)")
 			self.data = data
 			self.status = status
-			self.isFollowed = followList.contains(where: {elem in elem == data.refreshToken})
+			self.isFollowed = followList.contains(where: {$0 == data.refreshToken})
 		}
 		init(data: JourneyViewData, status: Status, isFollowed : Bool) {
 			self.data = data
@@ -48,7 +48,7 @@ extension JourneyDetailsViewModel {
 		case loadingFullLeg(leg : LegViewData)
 		case actionSheet(leg : LegViewData)
 		
-		case changingSubscribingState(ref : String, depStop : Stop?, arrStop : Stop?)
+		case changingSubscribingState(ref : String)
 		
 		var description : String {
 			switch self {
@@ -83,7 +83,7 @@ extension JourneyDetailsViewModel {
 		
 		case didRequestReloadIfNeeded
 		case didTapReloadButton
-		case didTapSubscribingButton(ref : String, depStop : Stop?, arrStop : Stop?)
+		case didTapSubscribingButton(ref : String)
 		
 		case didExpandLegDetails
 		case didLoadLocationDetails(

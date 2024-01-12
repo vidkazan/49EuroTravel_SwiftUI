@@ -16,22 +16,27 @@ struct JourneyFollowView : View {
 	}
 	var body: some View {
 		NavigationView {
-			List(viewModel.state.journeys, id: \.journeyRef, rowContent: { journey in
-				let vm = JourneyDetailsViewModel(
-					refreshToken: journey.journeyRef,
-					data: journey.journeyViewData,
-					depStop: journey.depStop,
-					arrStop: journey.arrStop,
-					followList: viewModel.state.journeys.map { elem in elem.journeyRef },
-					chewVM: chewVM
-				)
-				NavigationLink(destination: {
-					JourneyDetailsView(journeyDetailsViewModel: vm)
-				}, label: {
-					JourneyFollowCellView(journeyDetailsViewModel: vm)
-						.padding(.vertical,5)
+			switch viewModel.state.status {
+			case .updating:
+				ProgressView()
+			default:
+				List(viewModel.state.journeys, id: \.journeyRef, rowContent: { journey in
+					let vm = JourneyDetailsViewModel(
+						refreshToken: journey.journeyRef,
+						data: journey.journeyViewData,
+						depStop: journey.depStop,
+						arrStop: journey.arrStop,
+						followList: viewModel.state.journeys.map { $0.journeyRef },
+						chewVM: chewVM
+					)
+					NavigationLink(destination: {
+						JourneyDetailsView(journeyDetailsViewModel: vm)
+					}, label: {
+						JourneyFollowCellView(journeyDetailsViewModel: vm)
+							.padding(.vertical,5)
+					})
 				})
-			})
+			}
 		}
 		.transition(.opacity)
 		.animation(.spring().speed(2), value: viewModel.state.status)

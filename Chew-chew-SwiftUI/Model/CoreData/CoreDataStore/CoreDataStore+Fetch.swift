@@ -92,7 +92,6 @@ extension CoreDataStore {
 		if let res = fetch(t) {
 			return res
 		}
-		
 		 asyncContext.performAndWait {
 			self.user = ChewUser.createWith(date: .now, using: self.asyncContext)
 		}
@@ -100,11 +99,8 @@ extension CoreDataStore {
 	}
 	
 	func fetch<T : NSManagedObject>(_ t : T.Type) -> [T]? {
-		var object : [T]? = nil
-		
-		
+		var object : [T]? = [T]()
 		 asyncContext.performAndWait {
-			print("> ⚡️ fetch \(T.self) thread: ",Thread.current, "context:",self.asyncContext )
 			guard let fetchRequest = T.fetchRequest() as? NSFetchRequest<T> else {
 				print("📕 > basicFetchRequest \(T.self): generate fetch request error")
 				return

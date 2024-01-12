@@ -14,7 +14,7 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable, Equatable 
 	static func == (lhs: JourneyDetailsViewModel, rhs: JourneyDetailsViewModel) -> Bool {
 		lhs.state == rhs.state && lhs.refreshToken == rhs.refreshToken 
 	}
-	var chewVM : ChewViewModel
+	var chewVM : ChewViewModel?
 	@Published private(set) var state : State {
 		didSet { print("🚂 > state:",state.status.description) }
 	}

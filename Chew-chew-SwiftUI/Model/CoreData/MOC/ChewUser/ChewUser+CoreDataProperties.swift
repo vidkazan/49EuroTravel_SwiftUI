@@ -19,7 +19,7 @@ extension ChewUser {
 	
 	static func createWith(date : Date,using managedObjectContext: NSManagedObjectContext) -> ChewUser? {
 		managedObjectContext.performAndWait {
-			print("> ⚡️ create \(Self.self) thread ",Thread.current)
+//			print("> ⚡️ create \(Self.self) thread ",Thread.current)
 			let user = ChewUser(context: managedObjectContext)
 
 			let settings = Settings(context: managedObjectContext)

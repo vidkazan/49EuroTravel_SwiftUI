@@ -9,7 +9,6 @@ import Foundation
 import Combine
 
 extension JourneyListViewModel {
-	
 	func whenLoadingJourneyList() -> Feedback<State, Event> {
 		Feedback {(state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingJourneyList = state.status else { return Empty().eraseToAnyPublisher() }

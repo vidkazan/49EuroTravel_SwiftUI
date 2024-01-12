@@ -73,10 +73,10 @@ extension JourneyDetailsViewModel {
 			}
 		case .loadedJourneyData:
 			switch event {
-			case .didTapSubscribingButton(let ref,let dep,let arr):
+			case .didTapSubscribingButton(let ref):
 				return State(
 					data: state.data,
-					status: .changingSubscribingState(ref: ref, depStop: dep, arrStop: arr),
+					status: .changingSubscribingState(ref: ref),
 					isFollowed: state.isFollowed
 				)
 			case .didExpandLegDetails:
@@ -115,6 +115,12 @@ extension JourneyDetailsViewModel {
 			}
 		case .error:
 			switch event {
+			case .didTapSubscribingButton(let ref):
+				return State(
+					data: state.data,
+					status: .changingSubscribingState(ref: ref),
+					isFollowed: state.isFollowed
+				)
 			case .didExpandLegDetails:
 				return state
 			case .didLoadJourneyData:
@@ -145,7 +151,6 @@ extension JourneyDetailsViewModel {
 					.didTapBottomSheetDetails,
 					.didLoadFullLegData,
 					.didChangedSubscribingState,
-					.didTapSubscribingButton,
 					.didCloseBottomSheet:
 				return state
 			}

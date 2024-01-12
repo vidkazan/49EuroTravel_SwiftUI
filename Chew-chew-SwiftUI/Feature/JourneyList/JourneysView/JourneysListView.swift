@@ -44,7 +44,7 @@ struct JourneyListView: View {
 												data: journey,
 												depStop: dep,
 												arrStop: arr,
-												followList: chewVM.journeyFollowViewModel.state.journeys.map { elem in elem.journeyRef},
+												followList: chewVM.journeyFollowViewModel.state.journeys.map { $0.journeyRef},
 												chewVM: chewVM
 											)
 										)

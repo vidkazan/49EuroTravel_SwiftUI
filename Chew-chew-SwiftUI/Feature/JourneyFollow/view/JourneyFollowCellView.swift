@@ -45,7 +45,12 @@ struct JourneyFollowCellView : View {
 			}
 			
 			LegsView(journey : journeyDetailsViewModel.state.data)
-			BadgeView(badge: .updatedAtTime(referenceTime: journeyDetailsViewModel.state.data.updatedAt),color: Color.chewFillTertiary.opacity(0.2))
+			BadgeView(
+				badge: .updatedAtTime(
+					referenceTime: journeyDetailsViewModel.state.data.updatedAt
+				),
+				color: Color.chewFillTertiary.opacity(0.2)
+			)
 		}
 		.onAppear {
 			journeyDetailsViewModel.send(event: .didRequestReloadIfNeeded)
