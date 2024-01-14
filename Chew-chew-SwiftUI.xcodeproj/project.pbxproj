@@ -81,10 +81,10 @@
 		7D33A9992B5343320005D723 /* Chew_chew_LocationTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A96B2B5343320005D723 /* Chew_chew_LocationTest.swift */; };
 		7D33A99B2B5343320005D723 /* Chew_chew_JourneyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A96C2B5343320005D723 /* Chew_chew_JourneyTest.swift */; };
 		7D33A99C2B5343320005D723 /* Chew_chew_JourneyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A96C2B5343320005D723 /* Chew_chew_JourneyTest.swift */; };
-		7D33A99E2B5343CC0005D723 /* TripMockFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A9662B5343320005D723 /* TripMockFile.swift */; };
 		7D33A99F2B5346B50005D723 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A9642B5343320005D723 /* Mock.swift */; };
 		7D33A9A02B5346BD0005D723 /* TripMockFilesListing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A9682B5343320005D723 /* TripMockFilesListing.swift */; };
 		7D33A9A42B5433AA0005D723 /* BadgeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A9A32B5433A90005D723 /* BadgeStyle.swift */; };
+		7D33A9A52B54868C0005D723 /* TripMockFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A9662B5343320005D723 /* TripMockFile.swift */; };
 		7D345E4A2AE95E7C003CA948 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E492AE95E7C003CA948 /* Settings.swift */; };
 		7D345E4C2AE97FC8003CA948 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E4B2AE97FC8003CA948 /* SettingsView.swift */; };
 		7D3C52012B29F0DC00AA887A /* ChewLegType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C52002B29F0DC00AA887A /* ChewLegType+CoreDataProperties.swift */; };
@@ -1292,6 +1292,7 @@
 				7D462D542AAC972200BC0D65 /* SearchStopsView+StopList.swift in Sources */,
 				7D1AD8EC2AE94A7500868056 /* GeoDTO.swift in Sources */,
 				7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */,
+				7D33A9A52B54868C0005D723 /* TripMockFile.swift in Sources */,
 				7D3D88EC2B2A166E00B269E7 /* ChewSunEvent+CoreDataClass.swift in Sources */,
 				7D33A94D2B51A7E60005D723 /* Styles.swift in Sources */,
 				7D462D4F2AAC956B00BC0D65 /* JourneyListViewModel+reduce+FailedToLoadJourneys.swift in Sources */,
@@ -1372,7 +1373,6 @@
 				7D68D9F82ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift in Sources */,
 				7DA13A432B28D66D0045061F /* ChewTime+CoreDataProperties.swift in Sources */,
 				7D462D5C2AACE5D100BC0D65 /* JourneyCell.swift in Sources */,
-				7D33A99E2B5343CC0005D723 /* TripMockFile.swift in Sources */,
 				7DE3599F2AB9E9430028CA59 /* chewVM+reduce+LoadingLocaiton.swift in Sources */,
 				7D181D642AD6D595003AB021 /* FavouriteRidesView.swift in Sources */,
 				7D23E44C2A98FD700037C3E1 /* LegView.swift in Sources */,

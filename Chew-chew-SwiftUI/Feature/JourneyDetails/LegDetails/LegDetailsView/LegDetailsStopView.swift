@@ -18,14 +18,17 @@ struct LegStopView : View {
 	var delay : TimeContainer.DelayStatus
 	var cancelType : StopOverCancellationType
 	let now = Date.now.timeIntervalSince1970
+	let showBadges : Bool
 	
 	// MARK: Init
 	init(
 		type : StopOverType,
 		vm : LegDetailsViewModel,
 		stopOver : StopViewData,
-		leg : LegViewData
+		leg : LegViewData,
+		showBadges : Bool = true
 	) {
+		self.showBadges = showBadges
 		self.vm = vm
 		self.stopOver = stopOver
 		self.stopOverType = type
@@ -192,25 +195,19 @@ struct LegStopView : View {
 							platform: stopOver.departurePlatform.actual,
 							plannedPlatform: stopOver.departurePlatform.planned
 						)
-						HStack(spacing: 2) {
-							BadgeView(.lineNumber(
-								lineType:legViewData.lineViewData.type ,
-								num: legViewData.lineViewData.name
-							))
-							BadgeView(.legDirection(dir: legViewData.direction))
-								.badgeBackgroundStyle(.primary)
-							BadgeView(.legDuration(dur: legViewData.duration))
-								.badgeBackgroundStyle(.primary)
-							HStack(spacing: 0) {
-								BadgeView(.stopsCount(legViewData.legStopsViewData.count - 1))
-								if legViewData.legStopsViewData.count > 2 {
-									Image(systemName: "chevron.down.circle")
-										.font(.system(size: 15,weight: .semibold))
-										.rotationEffect(vm.state.status == .idle ? .degrees(0) : .degrees(180))
-										.animation(.spring(), value: vm.state.status)
-								}
+						if showBadges == true {
+							HStack(spacing: 2) {
+								BadgeView(.lineNumber(
+									lineType:legViewData.lineViewData.type ,
+									num: legViewData.lineViewData.name
+								))
+								BadgeView(.legDirection(dir: legViewData.direction))
+									.badgeBackgroundStyle(.primary)
+								BadgeView(.legDuration(dur: legViewData.duration))
+									.badgeBackgroundStyle(.primary)
+								BadgeView(.stopsCount(legViewData.legStopsViewData.count - 1,vm.state.status == .idle ? .showShevronUp: .showShevronDown))
+									.badgeBackgroundStyle(.primary)
 							}
-							.badgeBackgroundStyle(.primary)
 						}
 					case  .destination:
 						PlatformView(
@@ -248,7 +245,8 @@ struct LegDetailsStopPreview : PreviewProvider {
 				type: .origin,
 				vm: .init(leg: viewData),
 				stopOver: stop,
-				leg: viewData
+				leg: viewData,
+				showBadges: false
 			)
 		} else {
 			Text("error")

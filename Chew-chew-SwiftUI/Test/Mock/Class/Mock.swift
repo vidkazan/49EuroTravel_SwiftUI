@@ -10,7 +10,7 @@ import Foundation
 
 enum Mock {
 	static let trip = TripMockFiles.self
-//	static let journeys = JourneyListMockFiles.self
+	static let journeys = JourneyMockFiles.self
 //	static let journey = JourneyMockFiles.self
 //	static let location = LocationsMockFiles.self
 }

@@ -32,6 +32,12 @@ extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 	}
 }
 
+extension ViewModifier where Self == BadgeBackgroundBaseStyle {
+	static var accent: BadgeBackgroundBaseStyle {
+		BadgeBackgroundBaseStyle(Color.chewFillAccent)
+	}
+}
+
 
 
 

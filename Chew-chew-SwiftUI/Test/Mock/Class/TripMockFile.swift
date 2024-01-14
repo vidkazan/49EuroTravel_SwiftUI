@@ -6,7 +6,6 @@
 //
 
 import Foundation
-@testable import Chew_chew_SwiftUI
 
 struct TripExpectedData {
 	let durationString : String
@@ -16,14 +15,33 @@ struct TripExpectedData {
 class TripMockFile : MockFile {
 	static let type : MockType = .trip
 	
-//	let fileName : String
 	let rawData : Data?
 	let decodedData : TripDTO?
 	let expectedData : TripExpectedData
 	
 	init(_ filename : String,expectedData : TripExpectedData) {
-//		self.fileName = filename
 		self.expectedData = expectedData
+		
+		let rawData = Self.APIRawData(
+			url: Self.url(
+				type: Self.type,
+				fileName: filename
+			)
+		)
+		self.rawData = rawData
+		self.decodedData = Self.APIDecodedData(rawData: rawData)
+	}
+}
+
+class JourneyMockFile : MockFile {
+	static let type : MockType = .journey
+	
+	let rawData : Data?
+	let decodedData : JourneyWrapper?
+//	let expectedData : TripExpectedData
+	
+	init(_ filename : String) {
+//		self.expectedData = expectedData
 		
 		let rawData = Self.APIRawData(
 			url: Self.url(

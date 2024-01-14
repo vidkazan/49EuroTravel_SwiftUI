@@ -13,13 +13,14 @@ import MapKit
 struct LegDetailsView: View {
 	@State var currentProgressHeight : Double = 0
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-
+	let followedJourney : Bool
 	@ObservedObject var vm : LegDetailsViewModel
 	weak var journeyVM : JourneyDetailsViewModel?
-	init(leg : LegViewData, journeyDetailsViewModel: JourneyDetailsViewModel?) {
+	init(leg : LegViewData, journeyDetailsViewModel: JourneyDetailsViewModel?,followedJourney : Bool = false) {
 		let vm = LegDetailsViewModel(leg: leg)
 		self.vm = vm
 		self.journeyVM = journeyDetailsViewModel
+		self.followedJourney = followedJourney
 	}
 	var body : some View {
 		VStack {
@@ -32,7 +33,8 @@ struct LegDetailsView: View {
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg
+							leg: vm.state.leg,
+							showBadges : !followedJourney
 						)
 					}
 				case .footStart:
@@ -41,7 +43,8 @@ struct LegDetailsView: View {
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg
+							leg: vm.state.leg,
+							showBadges : !followedJourney
 						)
 					}
 				case .footEnd:
@@ -50,7 +53,8 @@ struct LegDetailsView: View {
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg
+							leg: vm.state.leg,
+							showBadges : !followedJourney
 						)
 						.padding(.bottom,10)
 					}
@@ -61,7 +65,8 @@ struct LegDetailsView: View {
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg
+							leg: vm.state.leg,
+							showBadges : !followedJourney
 						)
 					}
 					if case .stopovers = vm.state.status {
@@ -71,7 +76,8 @@ struct LegDetailsView: View {
 									type: stop.stopOverType,
 									vm: vm,
 									stopOver: stop,
-									leg: vm.state.leg
+									leg: vm.state.leg,
+									showBadges : !followedJourney
 								)
 							}
 						}
@@ -81,7 +87,8 @@ struct LegDetailsView: View {
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg
+							leg: vm.state.leg,
+							showBadges : !followedJourney
 						)
 					}
 				}
@@ -147,9 +154,9 @@ struct LegDetailsView: View {
 				type: vm.state.status == .stopovers ? .expanded : .collapsed
 			)
 		})
-//		.onChange(of: vm.state.status, perform: { _ in
-//			currentProgressHeight = vm.state.currentProgressHeight
-//		})
+		.onChange(of: vm.state.status, perform: { _ in
+			currentProgressHeight = vm.state.currentProgressHeight
+		})
 		// MARK: 🤢
 		.padding(.top,vm.state.leg.legType == LegViewData.LegType.line || vm.state.leg.legType.caseDescription == "footStart" ?  10 : 0)
 		.background(vm.state.leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
@@ -176,7 +183,8 @@ struct LegDetailsPreview : PreviewProvider {
 			ScrollView {
 				LegDetailsView(
 					leg: viewData,
-					journeyDetailsViewModel: nil
+					journeyDetailsViewModel: nil,
+					followedJourney: false
 				)
 			}
 		} else {

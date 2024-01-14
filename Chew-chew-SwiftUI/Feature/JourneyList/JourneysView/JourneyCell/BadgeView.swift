@@ -99,10 +99,17 @@ struct BadgeView : View {
 			case .legDuration:
 				OneLineText(badge.badgeData.name)
 					.chewTextSize(size)
-			case .stopsCount:
-				OneLineText(badge.badgeData.name)
-					.chewTextSize(size)
-				
+			case .stopsCount(let count,let mode):
+				HStack(spacing: 2) {
+					OneLineText(badge.badgeData.name)
+						.chewTextSize(size)
+					if count > 1, mode != .hideShevron {
+						Image(systemName: "chevron.down.circle")
+							.chewTextSize(size)
+							.rotationEffect(.degrees(mode.angle))
+							.animation(.spring(), value: mode)
+					}
+				}
 			case .legDirection:
 				HStack(spacing: 2) {
 					OneLineText("to")
@@ -131,6 +138,22 @@ struct BadgeView : View {
 					OneLineText(badge.badgeData.name)
 						.chewTextSize(size)
 				}
+			case .departureArrivalStops(departure: let departure, arrival: let arrival):
+				HStack(spacing: 2) {
+					OneLineText(departure)
+						.chewTextSize(size)
+					Image(systemName: "arrow.right")
+						.chewTextSize(size)
+					OneLineText(arrival)
+						.chewTextSize(size)
+				}
+			case .changesCount(let count):
+				HStack(spacing: 2) {
+					Image(systemName: "arrow.triangle.2.circlepath")
+						.chewTextSize(size)
+					OneLineText(String(count))
+						.chewTextSize(size)
+				}
 			}
 		}
 		.padding(4)
@@ -140,6 +163,12 @@ struct BadgeView : View {
 struct BadgeViewPreview : PreviewProvider {
 	static var previews: some View {
 		VStack(spacing: 5) {
+			HStack {
+				BadgeView(.changesCount(3))
+					.badgeBackgroundStyle(.primary)
+				BadgeView(.departureArrivalStops(departure: "Blablablablabla Hbf", arrival: "Plaplaplaplapla Hbf"),.big)
+					.badgeBackgroundStyle(.primary)
+			}
 			HStack {
 				BadgeView(.alertFromRemark)
 					.badgeBackgroundStyle(.red)
@@ -163,7 +192,7 @@ struct BadgeViewPreview : PreviewProvider {
 				BadgeView(.lineNumber(lineType: .regionalExpress, num: "RE 666"))
 				BadgeView(.price("50EUR"))
 					.badgeBackgroundStyle(.primary)
-				BadgeView(.stopsCount(10))
+				BadgeView(.stopsCount(10,.showShevronDown),.medium)
 					.badgeBackgroundStyle(.primary)
 				BadgeView(.timeDepartureTimeArrival(timeDeparture: "10:00", timeArrival: "11:00"))
 					.badgeBackgroundStyle(.primary)

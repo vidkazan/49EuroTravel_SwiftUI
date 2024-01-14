@@ -14,8 +14,6 @@ struct JourneyListView: View {
 	var body: some View {
 		switch journeyViewModel.state.status {
 		case .loadingJourneyList:
-//				JourneyCell()
-//					.redacted(reason: .placeholder)
 			VStack {
 				Spacer()
 				JourneyScrollViewLoader()

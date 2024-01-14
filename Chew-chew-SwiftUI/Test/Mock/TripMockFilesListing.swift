@@ -6,7 +6,6 @@
 //
 
 import Foundation
-//@testable import Chew_chew_SwiftUI
 
 struct TripMockFiles {
 	static let cancelledFirstStopRE11DussKassel = TripMockFile(
@@ -31,10 +30,10 @@ struct TripMockFiles {
 		)
 	)
 }
-
-//struct JourneyMockFiles{
-//	static let journeyNeussWolfsburg = MockFile("Journey-Neuss-Wolfsburg.json", mockType: .journey)
-//}
+#warning("make proper expected data")
+struct JourneyMockFiles{
+	static let journeyNeussWolfsburg = JourneyMockFile("Journey-Neuss-Wolfsburg.json")
+}
 //
 //struct JourneyListMockFiles {
 //	static let mutlipleAuthors = MockFile("JourneyList-Neuss-Wolfsburg.json", mockType: .journeyList)

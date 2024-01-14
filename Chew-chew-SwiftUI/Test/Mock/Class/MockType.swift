@@ -6,7 +6,6 @@
 //
 
 import Foundation
-@testable import Chew_chew_SwiftUI
 
 enum MockType {
 	case locations

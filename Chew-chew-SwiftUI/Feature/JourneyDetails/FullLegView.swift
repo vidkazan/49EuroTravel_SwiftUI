@@ -79,7 +79,7 @@ struct FullLegView: View {
 						HStack(spacing: 2) {
 							BadgeView(.legDuration(dur: vm.state.leg.duration))
 								.badgeBackgroundStyle(.secondary)
-							BadgeView(.stopsCount(vm.state.leg.legStopsViewData.count - 1))
+							BadgeView(.stopsCount(vm.state.leg.legStopsViewData.count - 1,.hideShevron))
 								.badgeBackgroundStyle(.secondary)
 							Spacer()
 						}
@@ -97,7 +97,8 @@ struct FullLegView: View {
 									type: stop.stopOverType,
 									vm: vm,
 									stopOver: stop,
-									leg: vm.state.leg
+									leg: vm.state.leg,
+									showBadges: false
 								)
 							}
 							// MARK: Leg midlle stops
@@ -108,7 +109,8 @@ struct FullLegView: View {
 											type: stop.stopOverType,
 											vm: vm,
 											stopOver: stop,
-											leg: vm.state.leg
+											leg: vm.state.leg,
+											showBadges: false
 										)
 									}
 								}
@@ -119,7 +121,8 @@ struct FullLegView: View {
 									type: stop.stopOverType,
 									vm: vm,
 									stopOver: stop,
-									leg: vm.state.leg
+									leg: vm.state.leg,
+									showBadges: false
 								)
 							}
 						default:
@@ -142,7 +145,7 @@ struct FullLegView: View {
 							VStack {
 								HStack(alignment: .top) {
 									RoundedRectangle(cornerRadius: vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
-										.fill(Color.chewGreenScale20)
+										.fill(Color.chewFillGreenPrimary)
 										.cornerRadius(vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
 										.frame(width: 20,height: vm.state.currentProgressHeight)
 										.padding(.leading,25)
@@ -151,8 +154,6 @@ struct FullLegView: View {
 								Spacer(minLength: 0)
 							}
 						}
-//						.frame(maxHeight: .infinity)
-//						.background(Color.chewGrayScale07)
 					}
 				}
 				.cornerRadius(10)

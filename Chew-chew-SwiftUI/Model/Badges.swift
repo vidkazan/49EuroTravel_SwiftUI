@@ -32,7 +32,26 @@ struct BadgeData : Equatable {
 	}
 }
 
+enum StopsCountBadgeMode {
+	case hideShevron
+	case showShevronUp
+	case showShevronDown
+	
+	var angle : Double {
+		switch self {
+		case .hideShevron:
+			return 0
+		case .showShevronUp:
+			return 0
+		case .showShevronDown:
+			return 180
+		}
+	}
+}
+
 enum Badges : Hashable {
+	case departureArrivalStops(departure: String,arrival: String)
+	case changesCount(_ count : Int)
 	case timeDepartureTimeArrival(timeDeparture: String,timeArrival: String)
 	case date(dateString : String)
 	case price(_ price: String)
@@ -42,7 +61,7 @@ enum Badges : Hashable {
 	case alertFromRemark
 	
 	case lineNumber(lineType:LineType,num : String)
-	case stopsCount(Int)
+	case stopsCount(_ count : Int,_ mode : StopsCountBadgeMode)
 	case legDuration(dur : String)
 	case legDirection(dir : String)
 	case walking(duration : String)
@@ -91,10 +110,14 @@ enum Badges : Hashable {
 		case .transfer(duration: let dur):
 			return BadgeData(
 				name: String(dur))
-		case .stopsCount(let num):
+		case .stopsCount(let num, _):
 			let tail = num == 1 ? " stop" : " stops"
 			return BadgeData(
 				name: String(num) + tail)
+		case .departureArrivalStops(departure: let departure, arrival: let arrival):
+			return BadgeData(name: "")
+		case .changesCount(let count):
+			return BadgeData(name: "")
 		}
 	}
 }

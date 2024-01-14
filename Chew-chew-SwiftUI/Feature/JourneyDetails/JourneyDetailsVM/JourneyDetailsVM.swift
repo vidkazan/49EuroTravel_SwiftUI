@@ -29,7 +29,7 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable, Equatable 
 		depStop : Stop,
 		arrStop : Stop,
 		followList: [String],
-		chewVM : ChewViewModel
+		chewVM : ChewViewModel?
 	) {
 		self.chewVM = chewVM
 		self.refreshToken = refreshToken

@@ -62,7 +62,7 @@ struct PlatformView: View {
 					.padding(3)
 					.frame(minWidth: 20)
 					.background(Color(red: 0.1255, green: 0.156, blue: 0.4))
-					.foregroundColor(pl == plannedPlatform ? .primary : .red)
+					.foregroundColor(pl == plannedPlatform ? .white : .red)
 					.chewTextSize(.medium)
 				
 			}
