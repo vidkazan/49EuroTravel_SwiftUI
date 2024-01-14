@@ -81,17 +81,6 @@ struct TimeLabelView: View {
 				}
 			}
 		}
-		
-		
-//		switch delay {
-//		case .onTime:
-//			mainTime(delay: 0, cancelled: false)
-//				.padding(4)
-//		case .delay(let delay):
-//
-//		case .cancelled:
-//
-//		}
 	}
 }
 

@@ -33,14 +33,13 @@ struct JourneyFollowView : View {
 						JourneyDetailsView(journeyDetailsViewModel: vm)
 					}, label: {
 						JourneyFollowCellView(journeyDetailsViewModel: vm)
-							.padding(.vertical,5)
 					})
 				})
+//				.navigationBarHidden(true)
 			}
 		}
 		.transition(.opacity)
 		.animation(.spring().speed(2), value: viewModel.state.status)
-		.navigationBarHidden(true)
 	}
 }
 

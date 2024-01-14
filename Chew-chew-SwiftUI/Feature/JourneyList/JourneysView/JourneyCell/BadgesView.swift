@@ -16,7 +16,7 @@ struct BadgesView: View {
 	var body: some View {
 		HStack {
 			ForEach(badges,id: \.hashValue) { badge in
-				BadgeView(badge: badge)
+				BadgeView(badge)
 			}
 		}
 	}

@@ -35,7 +35,7 @@ struct BadgeData : Equatable {
 enum Badges : Hashable {
 	case timeDepartureTimeArrival(timeDeparture: String,timeArrival: String)
 	case date(dateString : String)
-	case price(price: String)
+	case price(_ price: String)
 	case dticket
 	case cancelled
 	case connectionNotReachable

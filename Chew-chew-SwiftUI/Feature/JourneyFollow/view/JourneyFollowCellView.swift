@@ -29,28 +29,32 @@ struct JourneyFollowCellView : View {
 			}
 			HStack {
 				BadgeView(
-					badge: .date(dateString: journeyDetailsViewModel.state.data.timeContainer.stringDateValue.departure.actual ?? "date"),
+					.date(dateString: journeyDetailsViewModel.state.data.timeContainer.stringDateValue.departure.actual ?? "date"),
 					color: Color.chewFillTertiary.opacity(0.3)
 				)
+				.badgeBackgroundStyle(.secondary)
 				BadgeView(
-					badge: .timeDepartureTimeArrival(
+					.timeDepartureTimeArrival(
 						timeDeparture: journeyDetailsViewModel.state.data.timeContainer.stringTimeValue.departure.actual ?? "time",
 						timeArrival: journeyDetailsViewModel.state.data.timeContainer.stringTimeValue.arrival.actual ?? "time"),
 					color: Color.chewFillTertiary.opacity(0.3)
 				)
+				.badgeBackgroundStyle(.secondary)
 				BadgeView(
-					badge: .legDuration(dur: journeyDetailsViewModel.state.data.durationLabelText),
+					.legDuration(dur: journeyDetailsViewModel.state.data.durationLabelText),
 					color: Color.chewFillTertiary.opacity(0.3)
 				)
+				.badgeBackgroundStyle(.secondary)
 			}
 			
 			LegsView(journey : journeyDetailsViewModel.state.data)
 			BadgeView(
-				badge: .updatedAtTime(
+				.updatedAtTime(
 					referenceTime: journeyDetailsViewModel.state.data.updatedAt
 				),
-				color: Color.chewFillTertiary.opacity(0.2)
+				color: Color.chewFillTertiary
 			)
+			.badgeBackgroundStyle(.secondary)
 		}
 		.onAppear {
 			journeyDetailsViewModel.send(event: .didRequestReloadIfNeeded)

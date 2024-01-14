@@ -18,7 +18,7 @@ class TripMockFile : MockFile {
 	
 //	let fileName : String
 	let rawData : Data?
-	let decodedData : Trip?
+	let decodedData : TripDTO?
 	let expectedData : TripExpectedData
 	
 	init(_ filename : String,expectedData : TripExpectedData) {

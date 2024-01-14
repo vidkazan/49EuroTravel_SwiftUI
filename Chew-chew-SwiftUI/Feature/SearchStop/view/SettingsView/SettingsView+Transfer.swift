@@ -7,11 +7,3 @@
 
 import Foundation
 import SwiftUI
-extension SettingsView {
-
-var transferSettings: some View {
-		NavigationView {
-			
-		}
-	}
-}

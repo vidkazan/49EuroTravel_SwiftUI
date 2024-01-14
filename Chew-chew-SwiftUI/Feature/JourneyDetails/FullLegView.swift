@@ -35,7 +35,8 @@ struct FullLegSheet: View {
 			}
 			.chewTextSize(.big)
 			.frame(maxWidth: .infinity)
-			.background(Color.chewGrayScale05)
+//			.background(Color.chewGrayScale05)
+//			.navigationBarHidden(true)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button("Close") {
@@ -59,19 +60,33 @@ struct FullLegView: View {
 	var body : some View {
 //		VStack(alignment: .center) {
 //			 MARK: Header call
-//			fullLegHeader()
-//				.padding(.horizontal,10)
 				ScrollView {
-					let c = LabelStyleConfiguration()
-					HStack(spacing: 2) {
-						
-						BadgeView(badge: .lineNumber(lineType:vm.state.leg.lineViewData.type ,num: vm.state.leg.lineViewData.name))
-						BadgeView(badge: .legDirection(dir: vm.state.leg.direction))
-						BadgeView(badge: .legDuration(dur: vm.state.leg.duration))
-						BadgeView(badge: .stopsCount(vm.state.leg.legStopsViewData.count - 1))
-							.background(Color.chewFillTertiary)
-							.cornerRadius(8)
+					VStack(spacing: 2) {
+						HStack(spacing: 2) {
+							BadgeView(
+								.lineNumber(
+									lineType:vm.state.leg.lineViewData.type ,
+									num: vm.state.leg.lineViewData.name),
+								.big
+							)
+							BadgeView(
+								.legDirection(dir: vm.state.leg.direction),
+								.big
+							)
+							.badgeBackgroundStyle(.primary)
+							Spacer()
+						}
+						HStack(spacing: 2) {
+							BadgeView(.legDuration(dur: vm.state.leg.duration))
+								.badgeBackgroundStyle(.secondary)
+							BadgeView(.stopsCount(vm.state.leg.legStopsViewData.count - 1))
+								.badgeBackgroundStyle(.secondary)
+							Spacer()
+						}
+						.padding(3)
 					}
+					.padding(5)
+					.badgeBackgroundStyle(.secondary)
 					.padding(5)
 					LazyVStack(spacing: 0) {
 						switch vm.state.leg.legType {
@@ -136,8 +151,8 @@ struct FullLegView: View {
 								Spacer(minLength: 0)
 							}
 						}
-						.frame(maxHeight: .infinity)
-						.background(Color.chewGrayScale07)
+//						.frame(maxHeight: .infinity)
+//						.background(Color.chewGrayScale07)
 					}
 				}
 				.cornerRadius(10)
@@ -146,71 +161,14 @@ struct FullLegView: View {
 	}
 }
 
-
-// MARK: Header
-extension FullLegView {
-	func fullLegHeader() -> some View {
-		VStack(alignment: .leading) {
-			VStack {
-				// MARK: Train Number +  From-To
-				HStack {
-					Spacer()
-				}
-				HStack {
-					BadgeView(
-						badge: .lineNumber(
-							lineType:vm.state.leg.lineViewData.type,
-							num: vm.state.leg.lineViewData.name
-						),
-						isBig: true
-					)
-					BadgeView(
-						badge: .legDirection(
-							dir: vm.state.leg.direction
-						),
-						isBig: true
-					)
-					Spacer()
-				}
-				HStack {
-					// MARK: Date
-					HStack {
-						Text(vm.state.leg.timeContainer.stringDateValue.departure.actual ??
-							 vm.state.leg.timeContainer.stringDateValue.departure.planned ??
-							 "date"
-						)
-					}
-					.padding(5)
-					.chewTextSize(.medium)
-					.background(Color.chewGray10)
-					.foregroundColor(.primary.opacity(0.6))
-					.cornerRadius(8)
-					// MARK: Time
-					HStack {
-						Text(vm.state.leg.timeContainer.stringTimeValue.departure.actual ??
-							 vm.state.leg.timeContainer.stringTimeValue.departure.planned ??
-							 "time")
-						Text("-")
-						Text(vm.state.leg.timeContainer.stringTimeValue.arrival.actual ??
-							 vm.state.leg.timeContainer.stringTimeValue.arrival.planned ??
-							 "time")
-					}
-					.padding(5)
-					.chewTextSize(.medium)
-					.background(Color.chewGray10)
-					.foregroundColor(.primary.opacity(0.6))
-					.cornerRadius(8)
-					// MARK: Duration
-					Text(vm.state.leg.duration)
-						.padding(5)
-						.chewTextSize(.medium)
-						.background(Color.chewGray10)
-						.foregroundColor(.primary.opacity(0.6))
-						.cornerRadius(8)
-					Spacer()
-				}
-			}
-			
+struct Preview : PreviewProvider {
+	static var previews: some View {
+		let mock = Mock.trip.RE6NeussMinden.decodedData
+		if let mock = mock?.trip {
+			let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock])
+			FullLegView(leg: viewData!, journeyDetailsViewModel: nil)
+		} else {
+			Text("error")
 		}
 	}
 }

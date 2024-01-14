@@ -29,7 +29,6 @@ struct Chew_chew_SwiftUIApp: App {
         WindowGroup {
 			ContentView()
 				.environmentObject(chewJourneyViewModel)
-				.navigationBarHidden(true)
         }
     }
 }

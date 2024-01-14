@@ -129,6 +129,7 @@ struct SettingsView: View {
 			.onDisappear {
 				saveSettings()
 			}
+//			.navigationBarHidden(true)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button(action: {

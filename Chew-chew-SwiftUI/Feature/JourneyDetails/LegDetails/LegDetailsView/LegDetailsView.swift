@@ -16,7 +16,7 @@ struct LegDetailsView: View {
 
 	@ObservedObject var vm : LegDetailsViewModel
 	weak var journeyVM : JourneyDetailsViewModel?
-	init(leg : LegViewData, journeyDetailsViewModel: JourneyDetailsViewModel) {
+	init(leg : LegViewData, journeyDetailsViewModel: JourneyDetailsViewModel?) {
 		let vm = LegDetailsViewModel(leg: leg)
 		self.vm = vm
 		self.journeyVM = journeyDetailsViewModel
@@ -147,9 +147,9 @@ struct LegDetailsView: View {
 				type: vm.state.status == .stopovers ? .expanded : .collapsed
 			)
 		})
-		.onChange(of: vm.state.status, perform: { _ in
-			currentProgressHeight = vm.state.currentProgressHeight
-		})
+//		.onChange(of: vm.state.status, perform: { _ in
+//			currentProgressHeight = vm.state.currentProgressHeight
+//		})
 		// MARK: 🤢
 		.padding(.top,vm.state.leg.legType == LegViewData.LegType.line || vm.state.leg.legType.caseDescription == "footStart" ?  10 : 0)
 		.background(vm.state.leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
@@ -163,5 +163,24 @@ struct LegDetailsView: View {
 		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
 			journeyVM?.send(event: .didLongTapOnLeg(leg: vm.state.leg))
 		})
+	}
+}
+
+
+
+struct LegDetailsPreview : PreviewProvider {
+	static var previews : some View {
+		let mock = Mock.trip.RE6NeussMinden.decodedData
+		if let mock = mock?.trip,
+		   let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]) {
+			ScrollView {
+				LegDetailsView(
+					leg: viewData,
+					journeyDetailsViewModel: nil
+				)
+			}
+		} else {
+			Text("error")
+		}
 	}
 }

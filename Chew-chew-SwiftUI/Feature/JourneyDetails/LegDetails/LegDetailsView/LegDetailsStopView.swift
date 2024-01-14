@@ -70,15 +70,13 @@ struct LegStopView : View {
 				VStack(alignment: .leading) {
 					if case .transfer=stopOverType {
 						HStack(spacing: 3) {
-							BadgeView(
-								badge: .transfer(duration: legViewData.duration)
-							)
+							BadgeView(.transfer(duration: legViewData.duration))
 						}
 					}
 					if case .footMiddle=stopOverType {
 						HStack(spacing: 3) {
 							BadgeView(
-								badge: .walking(duration: legViewData.duration)
+								.walking(duration: legViewData.duration)
 							)
 						}
 					}
@@ -105,7 +103,7 @@ struct LegStopView : View {
 						// MARK: badges
 				VStack(alignment: .leading, spacing: 2) {
 					HStack(spacing: 3) {
-						BadgeView(badge: .walking(duration: legViewData.duration))
+						BadgeView(.walking(duration: legViewData.duration))
 					}
 					Text(stopOver.name)
 						.chewTextSize(.big)
@@ -186,7 +184,7 @@ struct LegStopView : View {
 					switch stopOverType {
 					case .footBottom,.footMiddle,.footTop:
 						HStack(spacing: 3) {
-							BadgeView(badge: .walking(duration: legViewData.duration))
+							BadgeView(.walking(duration: legViewData.duration))
 						}
 					case .origin:
 						PlatformView(
@@ -195,11 +193,16 @@ struct LegStopView : View {
 							plannedPlatform: stopOver.departurePlatform.planned
 						)
 						HStack(spacing: 2) {
-							BadgeView(badge: .lineNumber(lineType:legViewData.lineViewData.type ,num: legViewData.lineViewData.name))
-							BadgeView(badge: .legDirection(dir: legViewData.direction))
-							BadgeView(badge: .legDuration(dur: legViewData.duration))
+							BadgeView(.lineNumber(
+								lineType:legViewData.lineViewData.type ,
+								num: legViewData.lineViewData.name
+							))
+							BadgeView(.legDirection(dir: legViewData.direction))
+								.badgeBackgroundStyle(.primary)
+							BadgeView(.legDuration(dur: legViewData.duration))
+								.badgeBackgroundStyle(.primary)
 							HStack(spacing: 0) {
-								BadgeView(badge: .stopsCount(legViewData.legStopsViewData.count - 1))
+								BadgeView(.stopsCount(legViewData.legStopsViewData.count - 1))
 								if legViewData.legStopsViewData.count > 2 {
 									Image(systemName: "chevron.down.circle")
 										.font(.system(size: 15,weight: .semibold))
@@ -207,8 +210,7 @@ struct LegStopView : View {
 										.animation(.spring(), value: vm.state.status)
 								}
 							}
-							.background(Color.chewFillTertiary)
-							.cornerRadius(8)
+							.badgeBackgroundStyle(.primary)
 						}
 					case  .destination:
 						PlatformView(
@@ -220,10 +222,10 @@ struct LegStopView : View {
 						EmptyView()
 					case .transfer:
 						HStack(spacing: 3) {
-							BadgeView(badge: .transfer(duration: legViewData.duration))
+							BadgeView(.transfer(duration: legViewData.duration))
 						}
 					}
-							// MARK: stopName sub Badges
+					// MARK: stopName sub Badges
 					if case .footBottom = stopOverType{
 						Text(stopOver.name)
 							.chewTextSize(.big)
@@ -232,6 +234,24 @@ struct LegStopView : View {
 				Spacer()
 			}
 			.frame(height: stopOverType.viewHeight)
+		}
+	}
+}
+
+struct LegDetailsStopPreview : PreviewProvider {
+	static var previews : some View {
+		let mock = Mock.trip.RE6NeussMinden.decodedData
+		if let mock = mock?.trip,
+			let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]),
+		   let stop = viewData.legStopsViewData.first {
+			LegStopView(
+				type: .origin,
+				vm: .init(leg: viewData),
+				stopOver: stop,
+				leg: viewData
+			)
+		} else {
+			Text("error")
 		}
 	}
 }

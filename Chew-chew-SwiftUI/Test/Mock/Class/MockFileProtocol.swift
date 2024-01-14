@@ -17,7 +17,6 @@ import Foundation
 //}
 
 class MockFile {
-	
 	static func url(type : MockType,fileName : String) -> URL {
 		let thisSourceFile = URL(fileURLWithPath: #file)
 		let thisDirectory = thisSourceFile.deletingLastPathComponent().deletingLastPathComponent()

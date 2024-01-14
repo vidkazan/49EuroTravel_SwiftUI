@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import Chew_chew_SwiftUI
+//@testable import Chew_chew_SwiftUI
 
 enum Mock {
 	static let trip = TripMockFiles.self

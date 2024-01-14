@@ -8,44 +8,43 @@
 import Foundation
 import SwiftUI
 
-struct ChewText : View {
-	let text : String
+struct OneLineText : View {
+	let text : String!
 	init(_ text : String) {
 		self.text = text
 	}
-	var body: some View {
+	var body : some View {
 		Text(text)
-			.padding(.vertical,4)
-			.lineSpacing(2)
 			.lineLimit(1)
 	}
 }
 
 private struct UpdatedAtBadgeView : View {
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-	
 	let refTime : Double
 	let bgColor : Color
-	let fgColor : Color
 	let iconName : String?
 	@State var updatedAt : String
+	
 	init(bgColor : Color, fgColor : Color = .primary, refTime : Double, sfIconName : String? = nil) {
 		self.bgColor = bgColor
-		self.fgColor = bgColor
 		self.refTime = refTime
 		self.iconName = sfIconName
 		self.updatedAt = Self.updatedAt(refTime: refTime)
 	}
+	
 	var body : some View {
-		ChewText("updated \(updatedAt) ago")
-			.foregroundColor(.primary.opacity(0.7))
-			.padding(.horizontal,4)
-			.background(bgColor)
-			.cornerRadius(8)
+		Text("updated \(updatedAt) ago")
+			.lineLimit(1)
+			.foregroundColor(.primary.opacity(0.6))
+			.onAppear {
+				updatedAt = Self.updatedAt(refTime: self.refTime)
+			}
 			.onReceive(timer, perform: { _ in
 				updatedAt = Self.updatedAt(refTime: self.refTime)
 			})
 	}
+	
 	static func updatedAt(refTime : Double) -> String {
 		DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: DateParcer.getTwoDateIntervalInMinutes(
 			date1: Date(timeIntervalSince1970: .init(floatLiteral: refTime)),
@@ -54,167 +53,128 @@ private struct UpdatedAtBadgeView : View {
 
 }
 
-
-private struct BaseBadgeView : View {
-	let text : String
-	let bgColor : Color
-	let fgColor : Color
-	let iconName : String?
-	init(bgColor : Color, fgColor : Color = .primary, text : String, sfIconName : String? = nil) {
-		self.bgColor = bgColor
-		self.fgColor = bgColor
-		self.text = text
-		self.iconName = sfIconName
+struct BadgeView : View {
+	var badge : Badges
+	let size : ChewPrimaryStyle
+	let color : Color = .chewFillTertiary
+	init(_ badge : Badges,_ size : ChewPrimaryStyle = .medium, color : Color? = nil) {
+		self.badge = badge
+		self.size = size
 	}
 	var body : some View {
-		ChewText(text)
-			.foregroundColor(.primary)
-			.padding(.horizontal,4)
-			.background(bgColor)
-			.cornerRadius(8)
+		Group {
+			switch badge {
+			case .timeDepartureTimeArrival(timeDeparture: let dep, timeArrival: let arr):
+				OneLineText(dep + " - " + arr)
+					.chewTextSize(size)
+			case .date(let dateString):
+				OneLineText(dateString)
+					.chewTextSize(size)
+			case .updatedAtTime(referenceTime: let refTime):
+				UpdatedAtBadgeView(bgColor: self.color,fgColor: .primary,refTime: refTime)
+					.chewTextSize(size)
+			case .alertFromRemark:
+				OneLineText(badge.badgeData.name)
+					.chewTextSize(size)
+					.padding(.horizontal,4)
+			case .price,.cancelled,.connectionNotReachable:
+				OneLineText(badge.badgeData.name)
+					.chewTextSize(size)
+			case .dticket:
+				DTicketLogo(fontSize: 17)
+					.font(.system(size: 12))
+					.padding(2)
+					.background(self.color)
+					.cornerRadius(8)
+			case .lineNumber(lineType: let type, _):
+				HStack(spacing: 0) {
+					Image(systemName: "train.side.front.car")
+						.chewTextSize(size)
+						.padding(.leading,2)
+					OneLineText(badge.badgeData.name)
+						.padding(4)
+						.chewTextSize(size)
+				}
+				.badgeBackgroundStyle(BadgeBackgroundGradientStyle(colors: (.chewFillTertiary.opacity(0.5),type.color)))
+			case .legDuration:
+				OneLineText(badge.badgeData.name)
+					.chewTextSize(size)
+			case .stopsCount:
+				OneLineText(badge.badgeData.name)
+					.chewTextSize(size)
+				
+			case .legDirection:
+				HStack(spacing: 2) {
+					OneLineText("to")
+						.chewTextSize(size)
+						.foregroundColor(.secondary)
+					OneLineText(badge.badgeData.name)
+						.chewTextSize(size)
+				}
+			case .walking:
+				HStack(spacing: 2) {
+					Image(systemName: "figure.walk.circle")
+						.chewTextSize(size)
+					OneLineText("walk")
+						.chewTextSize(size)
+						.foregroundColor(.secondary)
+					OneLineText(badge.badgeData.name)
+						.chewTextSize(size)
+				}
+			case .transfer:
+				HStack(spacing: 2) {
+					Image(systemName: "arrow.triangle.2.circlepath")
+						.chewTextSize(size)
+					OneLineText("transfer")
+						.chewTextSize(size)
+						.foregroundColor(.secondary)
+					OneLineText(badge.badgeData.name)
+						.chewTextSize(size)
+				}
+			}
+		}
+		.padding(4)
 	}
 }
 
-
-// TODO: refactor badge service
-struct BadgeView : View {
-	var badge : Badges
-	let isBig : Bool
-	let color : Color
-	init(badge : Badges,isBig : Bool = false, color : Color? = nil) {
-		self.badge = badge
-		self.isBig = isBig
-		self.color = color ?? badge.badgeData.style
-	}
-	var body : some View {
-		switch badge {
-		case .timeDepartureTimeArrival(timeDeparture: let dep, timeArrival: let arr):
-			BaseBadgeView(
-				bgColor: self.color,
-				text: dep + " - " + arr
-			)
-			.chewTextSize(.medium)
-		case .date(let dateString):
-			BaseBadgeView(
-				bgColor: self.color,
-				text: dateString
-			)
-			.chewTextSize(.medium)
-		case .updatedAtTime(referenceTime: let refTime):
-			UpdatedAtBadgeView(
-				bgColor: self.color,
-				fgColor: .primary.opacity(1),
-				refTime: refTime
-			)
-			.chewTextSize(.medium)
-		case .price,.cancelled,.connectionNotReachable,.alertFromRemark:
-			BaseBadgeView(
-				bgColor: self.color,
-				text: badge.badgeData.name
-			)
-			.chewTextSize(.medium)
-		case .dticket:
-			DTicketLogo(fontSize: 17)
-				.font(.system(size: 12))
-				.padding(4)
-				.background(self.color)
-				.cornerRadius(8)
-		case .lineNumber(lineType: let type, _):
-			switch isBig {
-			case true:
-				HStack(spacing: 0) {
-					Image(systemName: "train.side.front.car")
-						.chewTextSize(.big)
-					ChewText(badge.badgeData.name)
-						.padding(.horizontal,4)
-						.chewTextSize(.big)
-						.foregroundColor(.primary)
-				}
-				.background( .linearGradient(
-					colors: [
-						self.color,
-						type.color
-					],
-					startPoint: UnitPoint(x: 0, y: 0),
-					endPoint: UnitPoint(x: 1, y: 0))
-				)
-				.cornerRadius(8)
-			case false:
-				HStack(spacing: 0) {
-					Image(systemName: "train.side.front.car")
-						.chewTextSize(.medium)
-					ChewText(badge.badgeData.name)
-						.padding(.horizontal,4)
-						.chewTextSize(.medium)
-				}
-				.background( .linearGradient(
-					colors: [
-						self.color,
-						type.color
-					],
-					startPoint: UnitPoint(x: 0, y: 0),
-					endPoint: UnitPoint(x: 1, y: 0))
-				)
-				.cornerRadius(6)
+struct BadgeViewPreview : PreviewProvider {
+	static var previews: some View {
+		VStack(spacing: 5) {
+			HStack {
+				BadgeView(.alertFromRemark)
+					.badgeBackgroundStyle(.red)
+				BadgeView(.cancelled)
+					.badgeBackgroundStyle(.red)
+				BadgeView(.connectionNotReachable)
+					.badgeBackgroundStyle(.red)
 			}
-		case .legDuration:
-			BaseBadgeView(
-				bgColor: self.color,
-				fgColor: .secondary,
-				text: badge.badgeData.name
-			)
-			.chewTextSize(.medium)
-		case .stopsCount:
-			BaseBadgeView(
-				bgColor: Color.clear,
-				fgColor: .secondary,
-				text: badge.badgeData.name
-			)
-			.chewTextSize(.medium)
-		case .legDirection:
-			switch isBig {
-			case true:
-				HStack(spacing: 2) {
-					ChewText("to")
-						.chewTextSize(.big)
-						.foregroundColor(.secondary)
-					ChewText(badge.badgeData.name)
-						.chewTextSize(.big)
-				}
-				.padding(4)
-				.background(Color.chewGray10)
-				.cornerRadius(8)
-			case false:
-				HStack(spacing: 2) {
-					ChewText("to")
-						.chewTextSize(.medium)
-						.foregroundColor(.secondary)
-					ChewText(badge.badgeData.name)
-						.chewTextSize(.medium)
-				}
-				.padding(.horizontal,4)
-				.background(self.color)
-				.cornerRadius(8)
+			HStack {
+				BadgeView(.date(dateString: "12.12.2012"))
+					.badgeBackgroundStyle(.primary)
+				BadgeView(.dticket)
+					.badgeBackgroundStyle(.primary)
 			}
-		case .walking:
-			HStack(spacing: 2) {
-				Image(systemName: "figure.walk.circle")
-					.chewTextSize(.medium)
-				ChewText("walk")
-					.chewTextSize(.medium)
-					.foregroundColor(.secondary)
-				ChewText(badge.badgeData.name)
-					.chewTextSize(.medium)
+			BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf"))
+				.badgeBackgroundStyle(.primary)
+			BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf"),.big)
+				.badgeBackgroundStyle(.primary)
+			BadgeView(.lineNumber(lineType: .regionalExpress, num: "RE 666"),.big)
+			HStack {
+				BadgeView(.lineNumber(lineType: .regionalExpress, num: "RE 666"))
+				BadgeView(.price("50EUR"))
+					.badgeBackgroundStyle(.primary)
+				BadgeView(.stopsCount(10))
+					.badgeBackgroundStyle(.primary)
+				BadgeView(.timeDepartureTimeArrival(timeDeparture: "10:00", timeArrival: "11:00"))
+					.badgeBackgroundStyle(.primary)
 			}
-		case .transfer:
-			HStack(spacing: 2) {
-				Image(systemName: "arrow.triangle.2.circlepath")
-					.chewTextSize(.medium)
-				ChewText("transfer")
-					.chewTextSize(.medium)
-					.foregroundColor(.secondary)
-				ChewText(badge.badgeData.name)
-					.chewTextSize(.medium)
+			HStack {
+				BadgeView(.transfer(duration: "100 min"))
+					.badgeBackgroundStyle(.primary)
+				BadgeView(.updatedAtTime(referenceTime: 1705220000))
+					.badgeBackgroundStyle(.primary)
+				BadgeView(.walking(duration: "100 min"))
+					.badgeBackgroundStyle(.primary)
 			}
 		}
 	}

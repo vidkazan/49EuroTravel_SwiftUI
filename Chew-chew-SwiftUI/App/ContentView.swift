@@ -52,6 +52,7 @@ struct ContentView: View {
 						} else {
 							Spacer()
 						}
+		#warning("https://serialcoder.dev/text-tutorials/swiftui/presenting-sheets-of-various-heights-in-swiftui/")
 					}
 					.padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
 					.background(Color.chewFillPrimary)
@@ -81,8 +82,7 @@ struct ContentView: View {
 							bottomSheetIsPresented = false
 						}
 					})
-					.navigationBarHidden(true)
-					.navigationBarTitle("", displayMode: .inline)
+//					.navigationBarHidden(true)
 					.transition(.opacity)
 					.animation(.spring().speed(2), value: chewViewModel.state.status)
 					.animation(.spring().speed(2), value: chewViewModel.searchStopsViewModel.state)
@@ -95,7 +95,6 @@ struct ContentView: View {
 					}
 				}
 			}
-			.navigationBarHidden(true)
 		}
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)

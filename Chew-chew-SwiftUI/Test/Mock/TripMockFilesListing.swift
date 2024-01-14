@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import Chew_chew_SwiftUI
+//@testable import Chew_chew_SwiftUI
 
 struct TripMockFiles {
 	static let cancelledFirstStopRE11DussKassel = TripMockFile(
