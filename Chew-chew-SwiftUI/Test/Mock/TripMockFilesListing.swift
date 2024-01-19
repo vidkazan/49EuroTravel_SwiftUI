@@ -35,9 +35,9 @@ struct JourneyMockFiles{
 	static let journeyNeussWolfsburg = JourneyMockFile("Journey-Neuss-Wolfsburg.json")
 }
 //
-//struct JourneyListMockFiles {
-//	static let mutlipleAuthors = MockFile("JourneyList-Neuss-Wolfsburg.json", mockType: .journeyList)
-//}
+struct JourneyListMockFiles {
+	static let journeyNeussWolfsburg = JourneyListMockFile("JourneyList-Neuss-Wolfsburg.json")
+}
 //
 //struct LocationsMockFiles {
 ////	static let mutlipleAuthors = MockFile("", .locations)

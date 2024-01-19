@@ -53,3 +53,24 @@ class JourneyMockFile : MockFile {
 		self.decodedData = Self.APIDecodedData(rawData: rawData)
 	}
 }
+
+class JourneyListMockFile : MockFile {
+	static let type : MockType = .journeyList
+	
+	let rawData : Data?
+	let decodedData : JourneyListDTO?
+//	let expectedData : TripExpectedData
+	
+	init(_ filename : String) {
+//		self.expectedData = expectedData
+		
+		let rawData = Self.APIRawData(
+			url: Self.url(
+				type: Self.type,
+				fileName: filename
+			)
+		)
+		self.rawData = rawData
+		self.decodedData = Self.APIDecodedData(rawData: rawData)
+	}
+}

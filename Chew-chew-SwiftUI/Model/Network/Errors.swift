@@ -74,11 +74,11 @@ enum ApiServiceError : Error,Equatable,Hashable {
 		case .generic(let error):
 			return error.localizedDescription
 		case .stopNotFound:
-			return "stop not found"
+			return "Stop not found"
 		case .connectionNotFound:
-			return "connection not found"
+			return "Connection not found"
 		case .failedToGetUserLocation:
-			return "failedToGetUserLocation"
+			return "Failed to get user location"
 		}
 	}
 }

@@ -35,82 +35,83 @@ struct SettingsView: View {
 		}
 	}
 	var body: some View {
-		NavigationView {
-			//		Label("Settings", systemImage: "gearshape")
-			//			.padding(.top)
-			//			.chewTextSize(.big)
-			Form {
-				Section(content: {
-					Picker(
-						selection: $transportModeSegment,
-						content: {
-							DTicketLabel()
-								.tag(ChewSettings.TransportMode.deutschlandTicket.id)
-							Label("All", systemImage: "train.side.front.car")
-								.tag(ChewSettings.TransportMode.all.id)
-							Label("Specific", systemImage: "pencil")
-								.tag(ChewSettings.TransportMode.custom.id)
-						},
-						label: {}
-					)
-					.pickerStyle(.inline)
-				}, header: {
-					Text("Transport types")
-				})
-				
-				if transportModeSegment == 2 {
-					Section(
-						content: {
-							ForEach(allTypes, id: \.id) { type in
-								Toggle(
-									isOn: Binding(
-										get: {
-											selectedTypes.contains(type)
-										},
-										set: { _ in
-											selectedTypes.toogle(val: type)
-										}
-									),
-									label: {
-										Text(type.shortValue)
-									}
-								)
-							}
-						},
-						header: {
-							Text("Chosen transport types")
-						})
-				}
-				// MARK: transfer settings
-				Section(content: {
-					Picker(
-						selection: $showWithTransfers,
-						content: {
-							Label("Direct", systemImage: "arrow.up.right")
-								.tag(0)
-							Label("With transfers", systemImage: "arrow.2.circlepath")
-								.tag(1)
-						}, label: {
-						})
-					.pickerStyle(.inline)
-					if showWithTransfers == 1 {
+//		NavigationView {
+
+				//		Label("Settings", systemImage: "gearshape")
+				//			.padding(.top)
+				//			.chewTextSize(.big)
+				Form {
+					Section(content: {
 						Picker(
-							selection: $transferTime,
+							selection: $transportModeSegment,
 							content: {
-								ForEach(arr.indices,id: \.self) { index in
-									Text("\(String(arr[index])) min ")
-										.tag(index)
-								}
-							}, label: {
-								
-							}
+								DTicketLabel()
+									.tag(ChewSettings.TransportMode.deutschlandTicket.id)
+								Label("All", systemImage: "train.side.front.car")
+									.tag(ChewSettings.TransportMode.all.id)
+								Label("Specific", systemImage: "pencil")
+									.tag(ChewSettings.TransportMode.custom.id)
+							},
+							label: {}
 						)
-						.pickerStyle(.wheel)
-						.frame(idealHeight: 100)
+						.pickerStyle(.inline)
+					}, header: {
+						Text("Transport types")
+					})
+					
+					if transportModeSegment == 2 {
+						Section(
+							content: {
+								ForEach(allTypes, id: \.id) { type in
+									Toggle(
+										isOn: Binding(
+											get: {
+												selectedTypes.contains(type)
+											},
+											set: { _ in
+												selectedTypes.toogle(val: type)
+											}
+										),
+										label: {
+											Text(type.shortValue)
+										}
+									)
+								}
+							},
+							header: {
+								Text("Chosen transport types")
+							})
 					}
-				}, header: {
-					Text("Connections")
-				})
+					// MARK: transfer settings
+					Section(content: {
+						Picker(
+							selection: $showWithTransfers,
+							content: {
+								Label("Direct", systemImage: "arrow.up.right")
+									.tag(0)
+								Label("With transfers", systemImage: "arrow.2.circlepath")
+									.tag(1)
+							}, label: {
+							})
+						.pickerStyle(.inline)
+						if showWithTransfers == 1 {
+							Picker(
+								selection: $transferTime,
+								content: {
+									ForEach(arr.indices,id: \.self) { index in
+										Text("\(String(arr[index])) min ")
+											.tag(index)
+									}
+								}, label: {
+									
+								}
+							)
+							.pickerStyle(.wheel)
+							.frame(idealHeight: 100)
+						}
+					}, header: {
+						Text("Connections")
+					})
 			}
 			.onChange(of: chewViewModel.state, perform: { state in
 				let settings = state.settings
@@ -138,7 +139,7 @@ struct SettingsView: View {
 						Text("Cancel")
 							.foregroundColor(.chewGray30)
 					})
-				})
+				})	
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
 						saveSettings()
@@ -149,7 +150,7 @@ struct SettingsView: View {
 					})
 				}
 			)}
-		}
+//		}
 	}
 	struct DTicketLabel: View {
 		var body: some View {

@@ -19,6 +19,24 @@ import SwiftUI
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
+	
+	
+	var body: some View {
+		VStack(spacing: 0) {
+			AlertView(alertVM: chewViewModel.alertViewModel)
+			MainContentView()
+		}
+		.background(Color.chewFillPrimary)
+	}
+}
+
+#warning("error and alerts")
+#warning("recent rides")
+#warning("favourite ride")
+
+struct MainContentView: View {
+	@Environment(\.colorScheme) var colorScheme
+	@EnvironmentObject var chewViewModel : ChewViewModel
 	@State var bottomSheetIsPresented : Bool = false
 	
 	var body: some View {
@@ -28,8 +46,9 @@ struct ContentView: View {
 			case .start:
 				EmptyView()
 			default:
-					VStack(spacing: 5) {
+					VStack(spacing: 0) {
 						SearchStopsView(vm: chewViewModel.searchStopsViewModel)
+							.padding(.horizontal,10)
 						HStack {
 							TimeChoosingView(searchStopsVM: chewViewModel.searchStopsViewModel)
 							Button(action: {
@@ -42,19 +61,19 @@ struct ContentView: View {
 									.cornerRadius(8)
 							})
 						}
+						.padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
 						if case .journeys(let vm) = chewViewModel.state.status {
 							JourneyListView(journeyViewModel: vm)
-								.padding(.top,10)
+								.padding(.horizontal,10)
 						} else if case .idle = chewViewModel.state.status  {
 							FavouriteRidesView()
-								.padding(.top,10)
+								.padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
 							Spacer()
 						} else {
 							Spacer()
 						}
 		#warning("https://serialcoder.dev/text-tutorials/swiftui/presenting-sheets-of-various-heights-in-swiftui/")
 					}
-					.padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
 					.background(Color.chewFillPrimary)
 					.sheet(
 						isPresented: $bottomSheetIsPresented,
@@ -83,9 +102,10 @@ struct ContentView: View {
 						}
 					})
 //					.navigationBarHidden(true)
-					.transition(.opacity)
+					.transition(.move(edge: .bottom))
 					.animation(.spring().speed(2), value: chewViewModel.state.status)
-					.animation(.spring().speed(2), value: chewViewModel.searchStopsViewModel.state)
+					.animation(.spring().speed(2), value: chewViewModel.searchStopsViewModel.state.status)
+					.animation(.spring().speed(2), value: chewViewModel.alertViewModel.state.status)
 					.tabItem {
 						Label("Search", systemImage: "magnifyingglass")
 					}
@@ -98,7 +118,46 @@ struct ContentView: View {
 		}
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)
-			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillAccent)
+//			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillAccent)
+		}
+	}
+}
+
+struct MainContentViewPreview : PreviewProvider {
+	static var previews: some View {
+		let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData
+		if let mock = mock {
+			let viewData = constructJourneyListViewData(
+				journeysData: mock,
+				depStop: .init(),
+				arrStop: .init()
+			)
+			let data = JourneyListViewData(
+				journeysViewData: viewData,
+				data: mock,
+				depStop: .init(),
+				arrStop: .init()
+			)
+			let vm = JourneyListViewModel(
+				viewData: data
+			)
+			ContentView()
+				.environmentObject(ChewViewModel(
+					locationDataManager: .init(),
+		   searchStopsViewModel: .init(),
+		   journeyFollowViewModel: .init(journeys: []),
+		   coreDataStore: .init(),
+					alertViewModel: .init(.showing),
+			initialState: .init(
+				depStop: .textOnly(""),
+				arrStop: .textOnly(""),
+				settings: .init(),
+				timeChooserDate: .now,
+				status: .start
+			)
+	   ))
+		} else {
+			Text("error")
 		}
 	}
 }

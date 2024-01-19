@@ -28,14 +28,14 @@ struct FullLegSheet: View {
 					FullLegView(leg: leg, journeyDetailsViewModel: viewModel)
 				case .error,.loadedJourneyData,.loading,.actionSheet,.loadingLocationDetails,.locationDetails,.changingSubscribingState,.loadingIfNeeded:
 					Spacer()
-					Text("Error")
+					Text("Error",comment: "")
 					Spacer()
 				}
 				Spacer()
 			}
 			.chewTextSize(.big)
 			.frame(maxWidth: .infinity)
-//			.background(Color.chewGrayScale05)
+			.background(Color.chewFillAccent)
 //			.navigationBarHidden(true)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
@@ -44,6 +44,7 @@ struct FullLegSheet: View {
 					}
 				})
 			}
+			
 		}
 	}
 }
@@ -58,107 +59,115 @@ struct FullLegView: View {
 		self.journeyVM = journeyDetailsViewModel
 	}
 	var body : some View {
-//		VStack(alignment: .center) {
-//			 MARK: Header call
-				ScrollView {
-					VStack(spacing: 2) {
-						HStack(spacing: 2) {
-							BadgeView(
-								.lineNumber(
-									lineType:vm.state.leg.lineViewData.type ,
-									num: vm.state.leg.lineViewData.name),
-								.big
-							)
-							BadgeView(
-								.legDirection(dir: vm.state.leg.direction),
-								.big
-							)
-							.badgeBackgroundStyle(.primary)
-							Spacer()
-						}
-						HStack(spacing: 2) {
-							BadgeView(.legDuration(dur: vm.state.leg.duration))
-								.badgeBackgroundStyle(.secondary)
-							BadgeView(.stopsCount(vm.state.leg.legStopsViewData.count - 1,.hideShevron))
-								.badgeBackgroundStyle(.secondary)
-							Spacer()
-						}
-						.padding(3)
-					}
-					.padding(5)
+		VStack(alignment: .center) {
+			//			 MARK: Header call
+			VStack {
+				HStack(alignment: .bottom){
+					BadgeView(
+						.lineNumber(
+							lineType:vm.state.leg.lineViewData.type ,
+							num: vm.state.leg.lineViewData.name),
+						.big
+					)
+					Spacer()
+				}
+				HStack(alignment: .bottom){
+					BadgeView(.departureArrivalStops(
+						departure: vm.state.leg.legStopsViewData.first?.name ?? "",
+						arrival: vm.state.leg.legStopsViewData.last?.name ?? ""
+					),.big)
+					.badgeBackgroundStyle(.primary)
+					Spacer()
+				}
+				HStack {
+					BadgeView(.date(dateString: vm.state.leg.timeContainer.stringDateValue.departure.actual ?? ""))
+						.badgeBackgroundStyle(.secondary)
+					BadgeView(
+						.timeDepartureTimeArrival(
+							timeDeparture: vm.state.leg.timeContainer.stringTimeValue.departure.actual ?? "",
+							timeArrival: vm.state.leg.timeContainer.stringTimeValue.arrival.actual ?? ""
+						)
+					)
 					.badgeBackgroundStyle(.secondary)
-					.padding(5)
-					LazyVStack(spacing: 0) {
-						switch vm.state.leg.legType {
-						case .line:
-							// MARK: Leg top stop
-							if let stop = vm.state.leg.legStopsViewData.first {
-								LegStopView(
-									type: stop.stopOverType,
-									vm: vm,
-									stopOver: stop,
-									leg: vm.state.leg,
-									showBadges: false
-								)
-							}
-							// MARK: Leg midlle stops
-							if case .stopovers = vm.state.status {
-								ForEach(vm.state.leg.legStopsViewData) { stop in
-									if stop != vm.state.leg.legStopsViewData.first,stop != vm.state.leg.legStopsViewData.last {
-										LegStopView(
-											type: stop.stopOverType,
-											vm: vm,
-											stopOver: stop,
-											leg: vm.state.leg,
-											showBadges: false
-										)
-									}
-								}
-							}
-							// MARK: Leg bottom stop
-							if let stop = vm.state.leg.legStopsViewData.last {
-								LegStopView(
-									type: stop.stopOverType,
-									vm: vm,
-									stopOver: stop,
-									leg: vm.state.leg,
-									showBadges: false
-								)
-							}
-						default:
-							Text("error")
+					BadgeView(.legDuration(dur: vm.state.leg.duration))
+						.badgeBackgroundStyle(.secondary)
+					BadgeView(.stopsCount(vm.state.leg.legStopsViewData.count - 1,.hideShevron))
+						.badgeBackgroundStyle(.secondary)
+					Spacer()
+				}
+			}
+			.padding(5)
+			ScrollView {
+				LazyVStack(spacing: 0) {
+					switch vm.state.leg.legType {
+					case .line:
+						// MARK: Leg top stop
+						if let stop = vm.state.leg.legStopsViewData.first {
+							LegStopView(
+								type: stop.stopOverType,
+								vm: vm,
+								stopOver: stop,
+								leg: vm.state.leg,
+								showBadges: false
+							)
 						}
+						// MARK: Leg midlle stops
+						if case .stopovers = vm.state.status {
+							ForEach(vm.state.leg.legStopsViewData) { stop in
+								if stop != vm.state.leg.legStopsViewData.first,stop != vm.state.leg.legStopsViewData.last {
+									LegStopView(
+										type: stop.stopOverType,
+										vm: vm,
+										stopOver: stop,
+										leg: vm.state.leg,
+										showBadges: false
+									)
+								}
+							}
+						}
+						// MARK: Leg bottom stop
+						if let stop = vm.state.leg.legStopsViewData.last {
+							LegStopView(
+								type: stop.stopOverType,
+								vm: vm,
+								stopOver: stop,
+								leg: vm.state.leg,
+								showBadges: false
+							)
+						}
+					default:
+						Text("error")
 					}
-					// MARK: Progress line
-					.background {
-						ZStack(alignment: .top) {
-							VStack{
-								HStack(alignment: .top) {
-									Rectangle()
-										.fill(Color.chewGrayScale10)
-										.frame(width: 18,height:  vm.state.totalProgressHeight)
-										.padding(.leading,26)
-									Spacer()
-								}
-								Spacer(minLength: 0)
+				}
+				// MARK: Progress line
+				.background {
+					ZStack(alignment: .top) {
+						VStack{
+							HStack(alignment: .top) {
+								Rectangle()
+									.fill(Color.chewGrayScale10)
+									.frame(width: 18,height:  vm.state.totalProgressHeight)
+									.padding(.leading,26)
+								Spacer()
 							}
-							VStack {
-								HStack(alignment: .top) {
-									RoundedRectangle(cornerRadius: vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
-										.fill(Color.chewFillGreenPrimary)
-										.cornerRadius(vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
-										.frame(width: 20,height: vm.state.currentProgressHeight)
-										.padding(.leading,25)
-									Spacer()
-								}
-								Spacer(minLength: 0)
+							Spacer(minLength: 0)
+						}
+						VStack {
+							HStack(alignment: .top) {
+								RoundedRectangle(cornerRadius: vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
+									.fill(Color.chewFillGreenPrimary)
+									.cornerRadius(vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
+									.frame(width: 20,height: vm.state.currentProgressHeight)
+									.padding(.leading,25)
+								Spacer()
 							}
+							Spacer(minLength: 0)
 						}
 					}
 				}
-				.cornerRadius(10)
-				.padding(5)
-				Spacer()
+			}
+		}
+		.padding(5)
 	}
 }
 

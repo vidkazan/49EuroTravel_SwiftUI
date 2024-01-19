@@ -10,17 +10,20 @@ import SwiftUI
 
 struct JourneyFollowCellView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var journeyDetailsViewModel : JourneyDetailsViewModel
+	@ObservedObject var vm : JourneyDetailsViewModel
+	init(journeyDetailsViewModel: JourneyDetailsViewModel) {
+		self.vm = journeyDetailsViewModel
+	}
 	var body: some View {
 		VStack(alignment: .leading) {
 			HStack {
-				Text(journeyDetailsViewModel.state.data.legs.first?.legStopsViewData.first?.name ?? "origin")
+				Text(vm.state.data.legs.first?.legStopsViewData.first?.name ?? "origin")
 					.chewTextSize(.big)
 				Image(systemName: "arrow.right")
-				Text(journeyDetailsViewModel.state.data.legs.last?.legStopsViewData.last?.name ?? "destination")
+				Text(vm.state.data.legs.last?.legStopsViewData.last?.name ?? "destination")
 					.chewTextSize(.big)
 				Spacer()
-				switch journeyDetailsViewModel.state.status {
+				switch vm.state.status {
 				case .loading,.loadingIfNeeded:
 					ProgressView()
 				default:
@@ -29,61 +32,35 @@ struct JourneyFollowCellView : View {
 			}
 			HStack {
 				BadgeView(
-					.date(dateString: journeyDetailsViewModel.state.data.timeContainer.stringDateValue.departure.actual ?? "date"),
+					.date(dateString: vm.state.data.timeContainer.stringDateValue.departure.actual ?? "date"),
 					color: Color.chewFillTertiary.opacity(0.3)
 				)
 				.badgeBackgroundStyle(.secondary)
 				BadgeView(
 					.timeDepartureTimeArrival(
-						timeDeparture: journeyDetailsViewModel.state.data.timeContainer.stringTimeValue.departure.actual ?? "time",
-						timeArrival: journeyDetailsViewModel.state.data.timeContainer.stringTimeValue.arrival.actual ?? "time"),
+						timeDeparture: vm.state.data.timeContainer.stringTimeValue.departure.actual ?? "time",
+						timeArrival: vm.state.data.timeContainer.stringTimeValue.arrival.actual ?? "time"),
 					color: Color.chewFillTertiary.opacity(0.3)
 				)
 				.badgeBackgroundStyle(.secondary)
 				BadgeView(
-					.legDuration(dur: journeyDetailsViewModel.state.data.durationLabelText),
+					.legDuration(dur: vm.state.data.durationLabelText),
 					color: Color.chewFillTertiary.opacity(0.3)
 				)
 				.badgeBackgroundStyle(.secondary)
 			}
 			
-			LegsView(journey : journeyDetailsViewModel.state.data)
+			LegsView(journey : vm.state.data,showProgressBar: true)
 			BadgeView(
 				.updatedAtTime(
-					referenceTime: journeyDetailsViewModel.state.data.updatedAt
+					referenceTime: vm.state.data.updatedAt
 				),
 				color: Color.chewFillTertiary
 			)
 			.badgeBackgroundStyle(.secondary)
 		}
 		.onAppear {
-			journeyDetailsViewModel.send(event: .didRequestReloadIfNeeded)
+			vm.send(event: .didRequestReloadIfNeeded)
 		}
-//		.swipeActions(edge: .leading) {
-//			Button {
-//				journeyDetailsViewModel.send(event: .didTapReloadJourneyList)
-//			} label: {
-//				Label("Reload", systemImage: "arrow.clockwise")
-//			}
-//			.tint(.green)
-//		}
-//		.swipeActions(edge: .trailing) {
-//			Button {
-//				if let ref = journeyDetailsViewModel.state.data.refreshToken {
-//					journeyFollowViewModel.send(event: .didTapEdit(
-//						action: .deleting, journeyRef: ref,
-//						viewData: journeyDetailsViewModel.state.data
-//					))
-//					ChewJourney.deleteIfFound(
-//						deleteRef: ref,
-//						in: chewVM.chewJourneys,
-//						context: viewContext
-//					)
-//				}
-//			} label: {
-//				Label("Delete", systemImage: "xmark.bin.circle")
-//			}
-//			.tint(.red)
-//		}
 	}
 }

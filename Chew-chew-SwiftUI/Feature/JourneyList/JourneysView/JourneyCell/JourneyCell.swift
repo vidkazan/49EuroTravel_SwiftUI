@@ -20,7 +20,7 @@ struct JourneyCell: View {
 	var body: some View {
 		VStack {
 			JourneyHeaderView(journey: journey)
-			LegsView(journey : journey)
+			LegsView(journey : journey,showProgressBar: false)
 				.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
 			HStack(alignment: .center) {
 				PlatformView(

@@ -33,6 +33,12 @@ extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 }
 
 extension ViewModifier where Self == BadgeBackgroundBaseStyle {
+	static var blue: BadgeBackgroundBaseStyle {
+		BadgeBackgroundBaseStyle(Color.chewFillBluePrimary)
+	}
+}
+
+extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 	static var accent: BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillAccent)
 	}
@@ -57,7 +63,7 @@ struct BadgeBackgroundGradientStyle: BadgeStyle {
 				startPoint: UnitPoint(x: 0, y: 0),
 				endPoint: UnitPoint(x: 1, y: 0))
 			)
-			.cornerRadius(6,antialiased: true)
+			.cornerRadius(8,antialiased: true)
 	}
 }
 
@@ -69,6 +75,6 @@ struct BadgeBackgroundBaseStyle: BadgeStyle {
 	func body(content: Content) -> some View {
 		content
 			.background(color)
-			.cornerRadius(6,antialiased: true)
+			.cornerRadius(8,antialiased: true)
 	}
 }

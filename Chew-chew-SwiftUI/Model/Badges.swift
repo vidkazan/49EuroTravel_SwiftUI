@@ -50,6 +50,7 @@ enum StopsCountBadgeMode {
 }
 
 enum Badges : Hashable {
+	case offlineMode
 	case departureArrivalStops(departure: String,arrival: String)
 	case changesCount(_ count : Int)
 	case timeDepartureTimeArrival(timeDeparture: String,timeArrival: String)
@@ -69,9 +70,49 @@ enum Badges : Hashable {
 	
 	case updatedAtTime(referenceTime : Double)
 	
+	var badgeDefaultStyle : BadgeBackgroundBaseStyle {
+		switch self {
+		case .offlineMode:
+			return .primary
+		case .departureArrivalStops:
+			return .primary
+		case .changesCount:
+			return .primary
+		case .timeDepartureTimeArrival:
+			return .primary
+		case .date:
+			return .primary
+		case .price:
+			return .primary
+		case .dticket:
+			return .primary
+		case .cancelled:
+			return .red
+		case .connectionNotReachable:
+			return .red
+		case .alertFromRemark:
+			return .red	
+		case .lineNumber:
+			return .primary
+		case .stopsCount:
+			return .primary
+		case .legDuration:
+			return .primary
+		case .legDirection:
+			return .primary
+		case .walking:
+			return .primary
+		case .transfer:
+			return .primary
+		case .updatedAtTime:
+			return .primary
+		}
+	}
 	
 	var badgeData : BadgeData {
 		switch self {
+		case .offlineMode:
+			return BadgeData(name: "Offline Mode")
 		case .timeDepartureTimeArrival:
 			return BadgeData(style: Color.chewFillSecondary)
 		case .date:
@@ -79,9 +120,7 @@ enum Badges : Hashable {
 		case .updatedAtTime:
 			return BadgeData(style: Color.chewFillSecondary)
 		case .price(let price):
-			return BadgeData(
-				style: Color(hue: 0.5, saturation: 1, brightness: 0.4),
-				name: price)
+			return BadgeData(name: price)
 		case .dticket:
 			return BadgeData(
 				style: Color.chewGray10,
@@ -114,9 +153,9 @@ enum Badges : Hashable {
 			let tail = num == 1 ? " stop" : " stops"
 			return BadgeData(
 				name: String(num) + tail)
-		case .departureArrivalStops(departure: let departure, arrival: let arrival):
+		case .departureArrivalStops:
 			return BadgeData(name: "")
-		case .changesCount(let count):
+		case .changesCount:
 			return BadgeData(name: "")
 		}
 	}

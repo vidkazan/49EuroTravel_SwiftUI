@@ -21,6 +21,34 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
+	// testing init
+	init(viewData : JourneyListViewData) {
+		self.timeChooserDate = .now
+		self.followList = []
+		self.settings = ChewSettings()
+		self.depStop = .init(coordinates: .init(), type: .stop, stopDTO: nil)
+		self.arrStop = .init(coordinates: .init(), type: .stop, stopDTO: nil)
+		
+		state = State(
+			journeys: viewData.journeys,
+			earlierRef: nil,
+			laterRef: nil,
+			status: .journeysLoaded
+		)
+		Publishers.system(
+			initial: state,
+			reduce: self.reduce,
+			scheduler: RunLoop.main,
+			feedbacks: [
+				Self.userInput(input: input.eraseToAnyPublisher()),
+				self.whenLoadingJourneyRef(),
+				self.whenLoadingJourneyList()
+			]
+		)
+		.assign(to: \.state, on: self)
+		.store(in: &bag)
+	}
+	
 	init(
 		depStop: Stop,
 		arrStop: Stop,

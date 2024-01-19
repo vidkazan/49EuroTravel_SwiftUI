@@ -27,7 +27,7 @@ struct JourneyListViewData : Equatable {
 	}
 }
 
-struct JourneyViewData : Equatable {
+struct JourneyViewData : Equatable, Identifiable {
 	let id = UUID()
 	let origin : String
 	let destination : String

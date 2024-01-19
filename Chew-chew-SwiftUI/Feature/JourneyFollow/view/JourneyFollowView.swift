@@ -34,8 +34,34 @@ struct JourneyFollowView : View {
 					}, label: {
 						JourneyFollowCellView(journeyDetailsViewModel: vm)
 					})
+					.swipeActions(edge: .leading) {
+						Button {
+							vm.send(event: .didTapReloadButton)
+						} label: {
+							Label("Reload", systemImage: "arrow.clockwise")
+						}
+						.tint(.chewFillGreenPrimary)
+					}
+					.swipeActions(edge: .trailing) {
+						Button {
+							if let ref = vm.state.data.refreshToken {
+								chewVM.journeyFollowViewModel.send(event: .didTapEdit(
+									action: .deleting,
+									journeyRef: ref,
+									followData: nil,
+									journeyDetailsViewModel: vm
+								))
+							}
+						} label: {
+							Label("Delete", systemImage: "xmark.bin.circle")
+						}
+						.tint(.chewFillRedPrimary)
+					}
 				})
-//				.navigationBarHidden(true)
+//				.listStyle(.grouped)
+				.listRowSeparator(.hidden)
+				.listSectionSeparator(.hidden)
+				.listItemTint(Color.clear)
 			}
 		}
 		.transition(.opacity)

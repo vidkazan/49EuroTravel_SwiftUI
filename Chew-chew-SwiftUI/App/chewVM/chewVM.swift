@@ -15,6 +15,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	public let coreDataStore : CoreDataStore
 	
 	@ObservedObject var  locationDataManager : LocationDataManager
+	@Published var alertViewModel : AlertViewModel
 	@Published var searchStopsViewModel : SearchStopsViewModel
 	@Published var journeyFollowViewModel : JourneyFollowViewModel
 	@Published private(set) var state : State {
@@ -26,19 +27,23 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		locationDataManager : LocationDataManager,
 		searchStopsViewModel : SearchStopsViewModel,
 		journeyFollowViewModel : JourneyFollowViewModel,
-		coreDataStore : CoreDataStore
-	) {
-		self.coreDataStore = coreDataStore
-		self.locationDataManager = locationDataManager
-		self.searchStopsViewModel = searchStopsViewModel
-		self.journeyFollowViewModel = journeyFollowViewModel
-		state = State(
+		coreDataStore : CoreDataStore,
+		alertViewModel : AlertViewModel,
+		initialState : State = State(
 			depStop: .textOnly(""),
 			arrStop: .textOnly(""),
 			settings: ChewSettings(),
 			timeChooserDate: .now,
 			status: .start
 		)
+	) {
+		self.state = initialState
+		self.alertViewModel = alertViewModel
+		self.coreDataStore = coreDataStore
+		self.locationDataManager = locationDataManager
+		self.searchStopsViewModel = searchStopsViewModel
+		self.journeyFollowViewModel = journeyFollowViewModel
+		
 		Publishers.system(
 			initial: state,
 			reduce: self.reduce,

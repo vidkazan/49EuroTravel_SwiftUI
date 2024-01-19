@@ -64,41 +64,52 @@ struct BadgeView : View {
 	var body : some View {
 		Group {
 			switch badge {
+			case .offlineMode:
+				OneLineText(badge.badgeData.name)
+					.chewTextSize(size)
+					.padding(4)
 			case .timeDepartureTimeArrival(timeDeparture: let dep, timeArrival: let arr):
 				OneLineText(dep + " - " + arr)
 					.chewTextSize(size)
+					.padding(4)
 			case .date(let dateString):
 				OneLineText(dateString)
 					.chewTextSize(size)
+					.padding(4)
 			case .updatedAtTime(referenceTime: let refTime):
 				UpdatedAtBadgeView(bgColor: self.color,fgColor: .primary,refTime: refTime)
 					.chewTextSize(size)
+					.padding(4)
 			case .alertFromRemark:
 				OneLineText(badge.badgeData.name)
 					.chewTextSize(size)
 					.padding(.horizontal,4)
+					.padding(4)
 			case .price,.cancelled,.connectionNotReachable:
 				OneLineText(badge.badgeData.name)
 					.chewTextSize(size)
+					.padding(4)
 			case .dticket:
 				DTicketLogo(fontSize: 17)
 					.font(.system(size: 12))
 					.padding(2)
 					.background(self.color)
 					.cornerRadius(8)
+					.padding(4)
 			case .lineNumber(lineType: let type, _):
 				HStack(spacing: 0) {
 					Image(systemName: "train.side.front.car")
 						.chewTextSize(size)
 						.padding(.leading,2)
 					OneLineText(badge.badgeData.name)
-						.padding(4)
 						.chewTextSize(size)
 				}
+				.padding(4)
 				.badgeBackgroundStyle(BadgeBackgroundGradientStyle(colors: (.chewFillTertiary.opacity(0.5),type.color)))
 			case .legDuration:
 				OneLineText(badge.badgeData.name)
 					.chewTextSize(size)
+					.padding(4)
 			case .stopsCount(let count,let mode):
 				HStack(spacing: 2) {
 					OneLineText(badge.badgeData.name)
@@ -110,6 +121,7 @@ struct BadgeView : View {
 							.animation(.spring(), value: mode)
 					}
 				}
+				.padding(4)
 			case .legDirection:
 				HStack(spacing: 2) {
 					OneLineText("to")
@@ -118,6 +130,7 @@ struct BadgeView : View {
 					OneLineText(badge.badgeData.name)
 						.chewTextSize(size)
 				}
+				.padding(4)
 			case .walking:
 				HStack(spacing: 2) {
 					Image(systemName: "figure.walk.circle")
@@ -128,6 +141,7 @@ struct BadgeView : View {
 					OneLineText(badge.badgeData.name)
 						.chewTextSize(size)
 				}
+				.padding(4)
 			case .transfer:
 				HStack(spacing: 2) {
 					Image(systemName: "arrow.triangle.2.circlepath")
@@ -138,6 +152,7 @@ struct BadgeView : View {
 					OneLineText(badge.badgeData.name)
 						.chewTextSize(size)
 				}
+				.padding(4)
 			case .departureArrivalStops(departure: let departure, arrival: let arrival):
 				HStack(spacing: 2) {
 					OneLineText(departure)
@@ -147,6 +162,7 @@ struct BadgeView : View {
 					OneLineText(arrival)
 						.chewTextSize(size)
 				}
+				.padding(4)
 			case .changesCount(let count):
 				HStack(spacing: 2) {
 					Image(systemName: "arrow.triangle.2.circlepath")
@@ -154,9 +170,9 @@ struct BadgeView : View {
 					OneLineText(String(count))
 						.chewTextSize(size)
 				}
+				.padding(4)
 			}
 		}
-		.padding(4)
 	}
 }
 
@@ -179,6 +195,8 @@ struct BadgeViewPreview : PreviewProvider {
 			}
 			HStack {
 				BadgeView(.date(dateString: "12.12.2012"))
+					.badgeBackgroundStyle(.primary)
+				BadgeView(.legDuration(dur: "30 min"))
 					.badgeBackgroundStyle(.primary)
 				BadgeView(.dticket)
 					.badgeBackgroundStyle(.primary)
