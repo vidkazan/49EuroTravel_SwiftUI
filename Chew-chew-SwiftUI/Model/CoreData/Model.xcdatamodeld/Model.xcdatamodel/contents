@@ -40,6 +40,18 @@
         <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewStop" inverseName="arrPlatform" inverseEntity="ChewStop"/>
         <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewStop" inverseName="depPlatform" inverseEntity="ChewStop"/>
     </entity>
+    <entity name="ChewRecentSearch" representedClassName="ChewRecentSearch" syncable="YES">
+        <attribute name="id" attributeType="String"/>
+        <attribute name="searchDate" attributeType="Date" usesScalarValueType="NO"/>
+        <relationship name="arrStop" maxCount="1" deletionRule="Cascade" destinationEntity="Location" inverseName="chewRecentSearchArrStop" inverseEntity="Location"/>
+        <relationship name="depStop" maxCount="1" deletionRule="Cascade" destinationEntity="Location" inverseName="chewRecentSearchDepStop" inverseEntity="Location"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="recentSearches" inverseEntity="ChewUser"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="id"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
+    </entity>
     <entity name="ChewStop" representedClassName="ChewStop" syncable="YES">
         <attribute name="isCancelled" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lat" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -73,6 +85,7 @@
     <entity name="ChewUser" representedClassName="ChewUser" syncable="YES">
         <relationship name="chewJourneys" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChewJourney" inverseName="user" inverseEntity="ChewJourney"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Location" inverseName="user" inverseEntity="Location"/>
+        <relationship name="recentSearches" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChewRecentSearch" inverseName="user" inverseEntity="ChewRecentSearch"/>
         <relationship name="settings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Settings" inverseName="user" inverseEntity="Settings"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
@@ -84,6 +97,8 @@
         <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="chewJourneyArr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="arrivalStop" inverseEntity="ChewJourney"/>
         <relationship name="chewJourneyDep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="departureStop" inverseEntity="ChewJourney"/>
+        <relationship name="chewRecentSearchArrStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewRecentSearch" inverseName="arrStop" inverseEntity="ChewRecentSearch"/>
+        <relationship name="chewRecentSearchDepStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewRecentSearch" inverseName="depStop" inverseEntity="ChewRecentSearch"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="recentLocations" inverseEntity="ChewUser"/>
     </entity>
     <entity name="Settings" representedClassName="Settings" syncable="YES">

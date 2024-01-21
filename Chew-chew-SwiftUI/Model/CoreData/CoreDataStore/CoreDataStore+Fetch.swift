@@ -80,9 +80,25 @@ extension CoreDataStore {
 		return nil
 	}
 	
+	func fetchRecentSearches() -> [DepartureArrivalPair]? {
+		if let res = fetch(ChewRecentSearch.self)  {
+			var stops : [DepartureArrivalPair] = []
+			asyncContext.performAndWait {
+				res.forEach {
+					if let dep = $0.depStop?.stop(), let arr = $0.arrStop?.stop() {
+						stops.append(DepartureArrivalPair(departure: dep, arrival: arr))
+					}
+				}
+			}
+			return stops
+		}
+		return nil
+	}
+	
 	func fetchJourneys() -> [ChewJourney]? {
 		fetch(ChewJourney.self)
 	}
+	
 	
 	private func fetchOrCreate<T : NSManagedObject>(
 		entity : CoreDataStore.Entities,
@@ -99,7 +115,7 @@ extension CoreDataStore {
 	}
 	
 	func fetch<T : NSManagedObject>(_ t : T.Type) -> [T]? {
-		var object : [T]? = [T]()
+		var object : [T]? = nil
 		 asyncContext.performAndWait {
 			guard let fetchRequest = T.fetchRequest() as? NSFetchRequest<T> else {
 				print("📕 > basicFetchRequest \(T.self): generate fetch request error")

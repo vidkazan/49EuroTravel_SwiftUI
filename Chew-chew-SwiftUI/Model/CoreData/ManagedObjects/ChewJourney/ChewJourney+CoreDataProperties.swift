@@ -48,7 +48,7 @@ extension ChewJourney {
 				viewData.sunEvents.forEach {
 					let _ = ChewSunEvent(context: managedObjectContext,sun: $0,for: self)
 				}
-				let _ = Location(context: managedObjectContext,stop: depStop,journeyDep: self)
-				let _ = Location(context: managedObjectContext,stop: arrStop,journeyArr: self)
+			let _ = Location(context: managedObjectContext,stop: depStop,parent: .followedJourneyDepStop(self))
+			let _ = Location(context: managedObjectContext,stop: arrStop,parent: .followedJourneyArrStop(self))
 			}
 }

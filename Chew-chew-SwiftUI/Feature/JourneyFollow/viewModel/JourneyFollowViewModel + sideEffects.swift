@@ -36,7 +36,7 @@ extension JourneyFollowViewModel {
 						)).eraseToAnyPublisher()
 					}
 					guard
-						self?.chewVM?.coreDataStore.addJourney(
+						self?.coreDataStore?.addJourney(
 							viewData: viewData.journeyViewData,
 							depStop: viewData.depStop,
 							arrStop: viewData.arrStop
@@ -59,7 +59,7 @@ extension JourneyFollowViewModel {
 						return Just(Event.didFailToEdit(action: action,msg: "not found in follow list to delete")).eraseToAnyPublisher()
 					}
 					guard
-						self?.chewVM?.coreDataStore.deleteJourneyIfFound(journeyRef: ref) == true
+						self?.coreDataStore?.deleteJourneyIfFound(journeyRef: ref) == true
 					else {
 						return Just(Event.didFailToEdit(action: action,msg: "not found in db to delete")).eraseToAnyPublisher()
 					}

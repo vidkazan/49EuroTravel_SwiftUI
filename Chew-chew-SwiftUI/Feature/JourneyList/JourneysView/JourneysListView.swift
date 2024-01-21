@@ -29,55 +29,55 @@ struct JourneyListView: View {
 					.frame(maxWidth: .infinity,alignment: .center)
 				Spacer()
 			case false:
-					ScrollView {
-						LazyVStack(spacing: 5) {
-							ForEach(journeyViewModel.state.journeys,id: \.id) { journey in
-								NavigationLink(destination: {
-									NavigationLazyView(
-										JourneyDetailsView(
-											journeyDetailsViewModel: JourneyDetailsViewModel(
-												refreshToken: journey.refreshToken,
-												data: journey,
-												depStop: journeyViewModel.depStop,
-												arrStop: journeyViewModel.arrStop,
-												followList: chewVM.journeyFollowViewModel.state.journeys.map { $0.journeyRef},
-												chewVM: chewVM
-											)
+				ScrollView {
+					LazyVStack(spacing: 5) {
+						ForEach(journeyViewModel.state.journeys,id: \.id) { journey in
+							NavigationLink(destination: {
+								NavigationLazyView(
+									JourneyDetailsView(
+										journeyDetailsViewModel: JourneyDetailsViewModel(
+											refreshToken: journey.refreshToken,
+											data: journey,
+											depStop: journeyViewModel.depStop,
+											arrStop: journeyViewModel.arrStop,
+											followList: chewVM.journeyFollowViewModel.state.journeys.map { $0.journeyRef},
+											chewVM: chewVM
 										)
-									)}, label: {
-										JourneyCell(journey: journey)
-									})
-							}
-							switch journeyViewModel.state.status {
-							case .journeysLoaded, .failedToLoadEarlierRef:
-								if journeyViewModel.state.laterRef != nil {
-									ProgressView()
-										.onAppear{
-											journeyViewModel.send(event: .onLaterRef)
-										}
-										.frame(maxHeight: 100)
-								} else {
-									Label("change the time of your search to find later connections", systemImage: "exclamationmark.circle")
-										.chewTextSize(.medium)
-								}
-							case .loadingRef(let type):
-								if type == .laterRef {
-									ProgressView()
-										.frame(maxHeight: 100)
-								}
-							case .failedToLoadLaterRef:
-								Label("error: try reload", systemImage: "exclamationmark.circle")
-									.onTapGesture {
+									)
+								)}, label: {
+									JourneyCell(journey: journey)
+								})
+						}
+						switch journeyViewModel.state.status {
+						case .journeysLoaded, .failedToLoadEarlierRef:
+							if journeyViewModel.state.laterRef != nil {
+								ProgressView()
+									.onAppear{
 										journeyViewModel.send(event: .onLaterRef)
 									}
-							case .loadingJourneyList, .failedToLoadJourneyList:
-								Label("", systemImage: "exclamationmark.circle.fill")
+									.frame(maxHeight: 100)
+							} else {
+								Label("change the time of your search to find later connections", systemImage: "exclamationmark.circle")
+									.chewTextSize(.medium)
 							}
+						case .loadingRef(let type):
+							if type == .laterRef {
+								ProgressView()
+									.frame(maxHeight: 100)
+							}
+						case .failedToLoadLaterRef:
+							Label("error: try reload", systemImage: "exclamationmark.circle")
+								.onTapGesture {
+									journeyViewModel.send(event: .onLaterRef)
+								}
+						case .loadingJourneyList, .failedToLoadJourneyList:
+							Label("", systemImage: "exclamationmark.circle.fill")
 						}
-						.transition(.opacity)
-						.animation(.spring(), value: journeyViewModel.state.status)
-						.cornerRadius(10)
 					}
+					.transition(.opacity)
+					.animation(.spring(), value: journeyViewModel.state.status)
+					.cornerRadius(10)
+				}
 			}
 		case .failedToLoadJourneyList(let error):
 			VStack {
@@ -118,13 +118,7 @@ struct JourneyListPreview : PreviewProvider {
 				viewData: data
 			)
 			JourneyListView(journeyViewModel: vm)
-				.environmentObject(ChewViewModel(
-					locationDataManager: .init(),
-		   searchStopsViewModel: .init(),
-		   journeyFollowViewModel: .init(journeys: []),
-		   coreDataStore: .init(),
-				alertViewModel: .init()
-	   ))
+				.environmentObject(ChewViewModel())
 		} else {
 			Text("error")
 		}

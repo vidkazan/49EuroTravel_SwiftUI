@@ -23,12 +23,12 @@ final class JourneyFollowViewModel : ObservableObject, Identifiable {
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
-	var chewVM : ChewViewModel?
+	weak var coreDataStore : CoreDataStore?
 	init(
-		chewVM : ChewViewModel? = nil,
+		coreDataStore : CoreDataStore?,
 		journeys : [JourneyFollowData]
 	) {
-		self.chewVM = chewVM
+		self.coreDataStore = coreDataStore
 		state = State(
 			journeys: journeys,
 			status: .updating

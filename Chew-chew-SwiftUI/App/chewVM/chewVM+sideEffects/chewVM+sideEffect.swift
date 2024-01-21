@@ -19,7 +19,12 @@ extension ChewViewModel {
 	func whenIdleCheckForSufficientDataForJourneyRequest() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .idle = state.status else { return Empty().eraseToAnyPublisher() }
-			guard state.depStop.stop != nil && state.arrStop.stop != nil else { return Empty().eraseToAnyPublisher() }
+			guard let dep = state.depStop.stop, let arr = state.arrStop.stop else { return Empty().eraseToAnyPublisher() }
+			self.recentSearchesViewModel.send(
+				event: .didTapEdit(
+					action: .adding,
+					search: DepartureArrivalPair(departure: dep, arrival: arr)
+				))
 			return Just(Event.onJourneyDataUpdated)
 				.eraseToAnyPublisher()
 		}
@@ -31,7 +36,6 @@ extension ChewViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			
-			self.journeyFollowViewModel.chewVM = self
 			guard let user = self.coreDataStore.fetchUser() else {
 				print("whenLoadingInitialData: user is nil: loading default data")
 				return Just(Event.didLoadInitialData(nil,ChewSettings()))
@@ -45,6 +49,11 @@ extension ChewViewModel {
 			}
 			
 			Task.detached {
+				if let recentSearches = self.coreDataStore.fetchRecentSearches() {
+					await self.recentSearchesViewModel.send(
+						event: .didUpdateData(recentSearches)
+					)
+				}
 				if let chewJourneys = self.coreDataStore.fetchJourneys() {
 					await self.journeyFollowViewModel.send(
 						event: .didUpdateData(chewJourneys.map {

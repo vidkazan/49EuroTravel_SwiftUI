@@ -20,6 +20,8 @@ extension Location {
 	
 	@NSManaged public var chewJourneyDep: ChewJourney?
 	@NSManaged public var chewJourneyArr: ChewJourney?
+	@NSManaged public var chewRecentSearchArrStop: ChewRecentSearch?
+	@NSManaged public var chewRecentSearchDepStop: ChewRecentSearch?
 	@NSManaged public var user: ChewUser?
 }
 
@@ -58,13 +60,5 @@ extension Location {
 			return
 		}
 		context.delete(object)
-
-//		do {
-//			try context.save()
-//			print("📗 > delete \(Self.self)")
-//		} catch {
-//			let nserror = error as NSError
-//			print("📕 > delete \(Self.self): ", nserror.localizedDescription)
-//		}
 	}
 }

@@ -64,9 +64,9 @@ struct MainContentView: View {
 						.padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
 						if case .journeys(let vm) = chewViewModel.state.status {
 							JourneyListView(journeyViewModel: vm)
-								.padding(.horizontal,10)
+								.padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
 						} else if case .idle = chewViewModel.state.status  {
-							FavouriteRidesView()
+							RecentSearchesView(recentSearchesVM: chewViewModel.recentSearchesViewModel)
 								.padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
 							Spacer()
 						} else {
@@ -118,7 +118,7 @@ struct MainContentView: View {
 		}
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)
-//			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillAccent)
+			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillAccent.opacity(0.5))
 		}
 	}
 }
@@ -142,20 +142,7 @@ struct MainContentViewPreview : PreviewProvider {
 				viewData: data
 			)
 			ContentView()
-				.environmentObject(ChewViewModel(
-					locationDataManager: .init(),
-		   searchStopsViewModel: .init(),
-		   journeyFollowViewModel: .init(journeys: []),
-		   coreDataStore: .init(),
-					alertViewModel: .init(.showing),
-			initialState: .init(
-				depStop: .textOnly(""),
-				arrStop: .textOnly(""),
-				settings: .init(),
-				timeChooserDate: .now,
-				status: .start
-			)
-	   ))
+				.environmentObject(ChewViewModel())
 		} else {
 			Text("error")
 		}

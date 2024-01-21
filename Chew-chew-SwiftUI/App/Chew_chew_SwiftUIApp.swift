@@ -19,7 +19,8 @@ struct Chew_chew_SwiftUIApp: App {
 		chewJourneyViewModel = ChewViewModel(
 			locationDataManager: LocationDataManager(),
 			searchStopsViewModel: SearchStopsViewModel(),
-			journeyFollowViewModel: JourneyFollowViewModel(chewVM: nil, journeys: []),
+			journeyFollowViewModel: JourneyFollowViewModel(coreDataStore: coreDataStore, journeys: []),
+			recentSearchesViewModel: RecentSearchesViewModel(coreDataStore: coreDataStore, searches: []),
 			coreDataStore: coreDataStore,
 			alertViewModel: AlertViewModel()
 		)
@@ -57,20 +58,7 @@ struct AppViewPreview : PreviewProvider {
 				viewData: data
 			)
 			ContentView()
-				.environmentObject(ChewViewModel(
-					locationDataManager: .init(),
-					searchStopsViewModel: .init(),
-					journeyFollowViewModel: .init(journeys: []),
-					coreDataStore: .init(),
-					alertViewModel: .init(),
-					initialState: .init(
-						depStop: .textOnly(""),
-						arrStop: .textOnly(""),
-						settings: .init(),
-						timeChooserDate: .now,
-						status: .start
-					)
-				))
+				.environmentObject(ChewViewModel())
 		} else {
 			Text("error")
 		}

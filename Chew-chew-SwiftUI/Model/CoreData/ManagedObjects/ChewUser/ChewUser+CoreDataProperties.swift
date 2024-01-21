@@ -13,10 +13,10 @@ extension ChewUser {
 	@NSManaged public var recentLocations: [Location]?
 	@NSManaged public var settings: Settings?
 	@NSManaged public var chewJourneys : [ChewJourney]?
+	@NSManaged public var chewRecentSearches : [ChewRecentSearch]?
 }
 
 extension ChewUser {
-	
 	static func createWith(date : Date,using managedObjectContext: NSManagedObjectContext) -> ChewUser? {
 		managedObjectContext.performAndWait {
 //			print("> ⚡️ create \(Self.self) thread ",Thread.current)

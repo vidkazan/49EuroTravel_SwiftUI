@@ -41,13 +41,23 @@ extension CoreDataStore {
 		}
 		return result
 	}
+	func deleteRecentSearchIfFound(id : String) -> Bool {
+		var result = false
+		if let objects = self.fetch(ChewRecentSearch.self) {
+			 asyncContext.performAndWait {
+				if let res = objects.first(where: { obj in
+					return obj.id == id
+				}) {
+//					print("> ⚡️ delete journeys thread ",Thread.current)
+					self.asyncContext.delete(res)
+					self.saveAsyncContext()
+					result = true
+				}
+			}
+		}
+		return result
+	}
 }
-
-
-
-
-
-
 
 // MARK: add
 extension CoreDataStore {
@@ -55,7 +65,7 @@ extension CoreDataStore {
 		guard let user = self.user else { return }
 		 asyncContext.performAndWait {
 //			print("> ⚡️ create locations thread ",Thread.current)
-			let _ = Location(context: self.asyncContext, stop: stop, user: user)
+			let _ = Location(context: self.asyncContext, stop: stop, parent: .recentLocation(user))
 			self.saveAsyncContext()
 		}
 	}
@@ -64,19 +74,36 @@ extension CoreDataStore {
 		var res = false
 		guard let ref = viewData.refreshToken,
 		let user = self.user else {
-			print("📕 > add Journeys : error : ref / user/ journeys")
+			print("📕 > \(#function) : error : ref / user/ journeys")
 			return false
 		}
-		 asyncContext.performAndWait {
+		asyncContext.performAndWait {
 			let _ = ChewJourney(
-				viewData: viewData, 
+				viewData: viewData,
 				user: user,
 				depStop: depStop,
 				arrStop: arrStop,
 				ref: ref,
 				using: self.asyncContext
 			)
-			self.cleanupJourneys()
+			self.saveAsyncContext()
+			res = true
+		}
+		return res
+	}
+	
+	func addRecentSearch(stops : DepartureArrivalPair) -> Bool {
+		var res = false
+		guard let user = self.user else {
+			print("📕 > \(#function) : error : user")
+			return false
+		}
+		 asyncContext.performAndWait {
+			let _ = ChewRecentSearch(
+				user: user,
+				stops: stops,
+				using: self.asyncContext
+			)
 			self.saveAsyncContext()
 			res = true
 		}
@@ -156,43 +183,18 @@ extension CoreDataStore {
 		case user
 		case locations(stop : Stop, user : ChewUser)
 		case journeys
+		case recentSearches
 		
 		var type : NSManagedObject.Type {
 			switch self {
+			case .recentSearches:
+				return ChewRecentSearch.self
 			case .user:
 				return ChewUser.self
 			case .locations:
 				return Location.self
 			case .journeys:
 				return ChewJourney.self
-			}
-		}
-	}
-}
-
-// MARK: cleanup
-
-extension CoreDataStore {
-	func cleanupJourneys(){
-		if let objects = self.fetch(ChewLeg.self) {
-			objects.forEach {
-				if $0.journey == nil {
-					asyncContext.delete($0)
-				}
-			}
-		}
-		if let objects = self.fetch(ChewSunEvent.self) {
-			objects.forEach {
-				if $0.journey == nil {
-					asyncContext.delete($0)
-				}
-			}
-		}
-		if let objects = self.fetch(ChewTime.self) {
-			objects.forEach {
-				if $0.leg == nil,$0.chewJourney == nil,$0.stop == nil {
-					asyncContext.delete($0)
-				}
 			}
 		}
 	}

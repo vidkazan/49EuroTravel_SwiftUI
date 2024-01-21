@@ -9,56 +9,38 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct DepartureArrivalPair : Identifiable {
-	let id = UUID()
+struct DepartureArrivalPair : Equatable, Hashable {
 	let departure : Stop
 	let arrival : Stop
+	let id : String
+	init(departure: Stop, arrival: Stop) {
+		self.departure = departure
+		self.arrival = arrival
+		self.id = departure.name + arrival.name
+	}
 }
 
-struct FavouriteRidesView : View {
+struct RecentSearchesView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	let stops : [DepartureArrivalPair]
-	init() {
-		self.stops = [
-			DepartureArrivalPair(
-				departure: Stop(
-					coordinates: CLLocationCoordinate2D(latitude: 51.2, longitude: 6.7),
-					type: .location,
-					stopDTO: nil
-				),
-				arrival: Stop(
-					coordinates: CLLocationCoordinate2D(latitude: 52, longitude: 10),
-					type: .stop,
-					stopDTO: StopDTO(
-						type: "station",
-						id: "\(8089222)",
-						name: "Wolfsburg ZOB",
-						address: nil,
-						location: nil,
-						latitude: nil,
-						longitude: nil,
-						poi: false,
-						products: nil
-					)
-				)
-			)
-		]
+	@ObservedObject var recentSearchesVM : RecentSearchesViewModel
+	init(recentSearchesVM : RecentSearchesViewModel) {
+		self.recentSearchesVM = recentSearchesVM
 	}
 	var body: some View {
 		VStack(alignment: .leading,spacing: 1) {
-			Text("Favorite journeys")
-				.chewTextSize(.medium)
+			Text("Recent searches")
+				.chewTextSize(.big)
 				.offset(x: 10)
 				.foregroundColor(.secondary)
 			ScrollView(.horizontal) {
-				LazyHStack(spacing: 2) {
-					ForEach(stops) { locations in
-						FavouriteRideCell(locations:locations)
+				LazyHStack {
+					ForEach(recentSearchesVM.state.searches, id: \.hashValue) { locations in
+						RecentSearchCell(send: recentSearchesVM.send, locations:locations)
 							.onTapGesture {
 								chewVM.send(event: .didSetBothLocations(locations.departure, locations.arrival))
 							}
 					}
-					.padding(10)
+//					.padding(10)
 					.background(Color.chewFillAccent)
 					.cornerRadius(8)
 				}
@@ -73,5 +55,4 @@ struct FavouriteRidesView : View {
 		.animation(.spring().speed(2), value: chewVM.searchStopsViewModel.state.status)
 	}
 }
-
 

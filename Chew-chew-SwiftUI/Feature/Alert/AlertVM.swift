@@ -7,6 +7,41 @@
 
 import Foundation
 import Combine
+import Network
+
+final class AlertViewModel : ObservableObject, Identifiable {
+	@Published private(set) var state : State {
+		didSet { print("‼️ >  state:",state.status.description) }
+	}
+	private var bag = Set<AnyCancellable>()
+	private let input = PassthroughSubject<Event,Never>()
+	var networkMonitor : NetworkMonitor? = nil
+	
+	init(_ initaialStatus : Status = .start) {
+		self.state = State(
+			status: initaialStatus
+		)
+		Publishers.system(
+			initial: state,
+			reduce: self.reduce,
+			scheduler: RunLoop.main,
+			feedbacks: [
+				Self.userInput(input: input.eraseToAnyPublisher()),
+				self.whenLoadinginitialData()
+			]
+		)
+		.assign(to: \.state, on: self)
+		.store(in: &bag)
+	}
+	
+	deinit {
+		bag.removeAll()
+	}
+
+	func send(event: Event) {
+		input.send(event)
+	}
+}
 
 extension AlertViewModel {
 	struct State : Equatable {

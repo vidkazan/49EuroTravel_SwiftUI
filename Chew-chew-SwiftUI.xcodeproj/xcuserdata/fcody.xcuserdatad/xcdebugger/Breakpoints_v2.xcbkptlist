@@ -628,25 +628,9 @@
             filePath = "Chew-chew-SwiftUI/Model/CoreData/CoreDataStore/CoreDataStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
             landmarkName = "addJourney(viewData:depStop:arrStop:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "880FA44C-3CC2-4489-B81C-BCDACEED67CA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "49"
-            endingLineNumber = "49"
-            landmarkName = "whenLoadingInitialData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -896,8 +880,8 @@
             filePath = "Chew-chew-SwiftUI/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "whenLoadingInitialData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -964,6 +948,86 @@
             endingLineNumber = "9"
             landmarkName = "unknown"
             landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "492B3C1C-19D4-4277-B4CB-978C3364171C"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/RecentSearches/vm/RecentSearchesViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
+            landmarkName = "whenEditing()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "492B3C1C-19D4-4277-B4CB-978C3364171C - 38422d76a3762edb"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Chew_chew_SwiftUI.RecentSearchesViewModel.whenEditing() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.RecentSearchesViewModel.State, Chew_chew_SwiftUI.RecentSearchesViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/RecentSearches/vm/RecentSearchesViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "492B3C1C-19D4-4277-B4CB-978C3364171C - 5090a387a52c4caf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Chew_chew_SwiftUI.RecentSearchesViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.RecentSearchesViewModel.Event, Swift.Never&gt; in Chew_chew_SwiftUI.RecentSearchesViewModel.whenEditing() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.RecentSearchesViewModel.State, Chew_chew_SwiftUI.RecentSearchesViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/RecentSearches/vm/RecentSearchesViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "125"
+                  endingLineNumber = "125"
+                  offsetFromSymbolStart = "760">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1B38A45C-259B-44BB-A618-7C73701390FF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Model/CoreData/CoreDataStore/CoreDataStore.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "addRecentSearch(stops:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "91B4AB44-B1D2-48B9-B45D-D8E92D78F298"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/RecentSearches/vm/RecentSearchesViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "whenEditing()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
