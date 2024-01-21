@@ -11,7 +11,13 @@ extension ChewViewModel {
 	func reduceLoadingLocation(_ state:  State, _ event: Event) -> State {
 		guard case .loadingLocation = state.status else { return state }
 		switch event {
-		case .onJourneyDataUpdated,.didLoadInitialData,.didStartViewAppear:
+		case .didTapCloseJourneyList,
+				.onJourneyDataUpdated,
+				.didLoadInitialData,
+				.didStartViewAppear,
+				.onNotEnoughSearchData,
+				.didUpdateSettings:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		case .onDepartureEdit:
 			return State(
@@ -43,7 +49,7 @@ extension ChewViewModel {
 				arrStop: state.depStop,
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status: .idle
+				status: .checkingSearchData
 			)
 		case .onNewStop(let stop, let type):
 			switch type {
@@ -53,7 +59,7 @@ extension ChewViewModel {
 					arrStop: state.arrStop,
 					settings: state.settings,
 					timeChooserDate: state.timeChooserDate,
-					status: .idle
+					status: .checkingSearchData
 				)
 			case .arrival:
 				return State(
@@ -61,7 +67,7 @@ extension ChewViewModel {
 					arrStop: stop,
 					settings: state.settings,
 					timeChooserDate: state.timeChooserDate,
-					status: .idle
+					status: .checkingSearchData
 				)
 			}
 		case .didLocationButtonPressed:
@@ -78,7 +84,7 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: date,
-				status: .idle
+				status: .checkingSearchData
 			)
 		case .didReceiveLocationData(let coords):
 			return State(
@@ -92,7 +98,7 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status: .idle
+				status: .checkingSearchData
 			)
 		case .didFailToLoadLocationData:
 			return State(
@@ -100,7 +106,7 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status: .idle
+				status: .checkingSearchData
 			)
 			
 		case .didSetBothLocations(let dep, let arr):
@@ -109,7 +115,7 @@ extension ChewViewModel {
 				arrStop: .location(arr),
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status: .idle
+				status: .checkingSearchData
 			)
 		case .didDismissBottomSheet:
 			return state
@@ -121,8 +127,6 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .settings
 			)
-		case .didUpdateSettings:
-			return state
 		}
 	}
 }

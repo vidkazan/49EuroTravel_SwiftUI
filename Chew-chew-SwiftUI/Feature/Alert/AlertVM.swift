@@ -105,18 +105,18 @@ extension AlertViewModel {
 			case .didLoadInitialData:
 				return State(status: .hidden)
 			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .hidden:
 			switch event {
-			case .didLoadInitialData:
+			case .didLoadInitialData,.didTapDismiss:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didRequestUpdate:
 				return State(
 					status: .updating
 				)
-			case .didTapDismiss:
-				return state
 			case .didRequestShow:
 				return State(
 					status: .showing
@@ -124,7 +124,8 @@ extension AlertViewModel {
 			}
 		case .showing:
 			switch event {
-			case .didLoadInitialData:
+			case .didLoadInitialData,.didRequestShow:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didRequestUpdate:
 				return State(
@@ -134,14 +135,11 @@ extension AlertViewModel {
 				return State(
 					status: .hidden
 				)
-			case .didRequestShow:
-				return state
 			}
 		case .updating:
 			switch event {
-			case .didLoadInitialData:
-				return state
-			case .didRequestUpdate:
+			case .didLoadInitialData,.didRequestUpdate:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didTapDismiss:
 				return State(

@@ -25,6 +25,36 @@ extension ChewViewModel {
 			return reduceJourneyDetails(state, event)
 		case .loadingLocation:
 			return reduceLoadingLocation(state, event)
+		case .checkingSearchData:
+			switch event {
+			case .onJourneyDataUpdated(let dep, let arr):
+				return State(
+					depStop: state.depStop,
+					arrStop: state.arrStop,
+					settings: state.settings,
+					timeChooserDate: state.timeChooserDate,
+					status: .journeys(
+						JourneyListViewModel(
+							depStop: dep,
+							arrStop: arr,
+							timeChooserDate: state.timeChooserDate,
+							settings: state.settings,
+							followList: self.journeyFollowViewModel.state.journeys.map { $0.journeyRef }
+						)
+					)
+				)
+			case .onNotEnoughSearchData:
+				return State(
+					depStop: state.depStop,
+					arrStop: state.arrStop,
+					settings: state.settings,
+					timeChooserDate: state.timeChooserDate,
+					status: .idle
+				)
+			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+				return state
+			}
 		case .settings:
 			switch event {
 			case .didUpdateSettings(let new):
@@ -33,7 +63,7 @@ extension ChewViewModel {
 					arrStop: state.arrStop,
 					settings: new,
 					timeChooserDate: state.timeChooserDate,
-					status: .idle
+					status: .checkingSearchData
 				)
 			case .didDismissBottomSheet:
 				return State(
@@ -53,6 +83,7 @@ extension ChewViewModel {
 				)
 			case
 					.onDepartureEdit,
+					.didTapCloseJourneyList,
 					.onArrivalEdit,
 					.onStopsSwitch,
 					.didSetBothLocations,
@@ -64,12 +95,14 @@ extension ChewViewModel {
 					.didReceiveLocationData,
 					.didFailToLoadLocationData,
 					.didStartViewAppear,
-					.didLoadInitialData:
+					.didLoadInitialData,
+					.onNotEnoughSearchData:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 						return state
 			}
 		case .loadingInitialData:
 			switch event {
-			case .didLoadInitialData(_, let settings):
+			case .didLoadInitialData(let settings):
 				return State(
 					depStop: .textOnly(""),
 					arrStop: .textOnly(""),
@@ -79,6 +112,7 @@ extension ChewViewModel {
 					status: .idle
 				)
 			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .start:
@@ -92,6 +126,7 @@ extension ChewViewModel {
 					status: .loadingInitialData
 				)
 			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		}

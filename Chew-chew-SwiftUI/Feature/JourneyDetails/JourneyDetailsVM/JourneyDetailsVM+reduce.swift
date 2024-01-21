@@ -26,6 +26,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: isFollowed
 				)
 			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .loading, .loadingIfNeeded:
@@ -69,6 +70,7 @@ extension JourneyDetailsViewModel {
 					.didChangedSubscribingState,
 					.didTapSubscribingButton,
 					.didLoadLocationDetails:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .loadedJourneyData:
@@ -79,12 +81,6 @@ extension JourneyDetailsViewModel {
 					status: .changingSubscribingState(ref: ref),
 					isFollowed: state.isFollowed
 				)
-			case .didExpandLegDetails:
-				return state
-			case .didLoadJourneyData:
-				return state
-			case .didFailedToLoadJourneyData:
-				return state
 			case .didTapReloadButton:
 				return State(
 					data: state.data,
@@ -97,20 +93,23 @@ extension JourneyDetailsViewModel {
 					status: .loadingIfNeeded(token: self.refreshToken),
 					isFollowed: state.isFollowed
 				)
-			case .didLoadLocationDetails:
-				return state
 			case .didLongTapOnLeg(leg: let leg):
 				return State(
 					data: state.data,
 					status: .actionSheet(leg: leg),
 					isFollowed: state.isFollowed
 				)
-			case	.didCloseActionSheet,
+			case .didExpandLegDetails,
+					.didLoadJourneyData,
+					.didFailedToLoadJourneyData,
+					.didLoadLocationDetails,
+					.didCloseActionSheet,
 					.didFailToChangeSubscribingState,
 					.didChangedSubscribingState,
 					.didTapBottomSheetDetails,
 					.didLoadFullLegData,
 					.didCloseBottomSheet:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .error:
@@ -121,11 +120,10 @@ extension JourneyDetailsViewModel {
 					status: .changingSubscribingState(ref: ref),
 					isFollowed: state.isFollowed
 				)
-			case .didExpandLegDetails:
-				return state
-			case .didLoadJourneyData:
-				return state
-			case .didFailedToLoadJourneyData:
+			case .didExpandLegDetails,
+				 .didLoadJourneyData,
+				 .didFailedToLoadJourneyData:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didRequestReloadIfNeeded:
 				return State(
@@ -152,6 +150,7 @@ extension JourneyDetailsViewModel {
 					.didLoadFullLegData,
 					.didChangedSubscribingState,
 					.didCloseBottomSheet:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .locationDetails:
@@ -169,6 +168,7 @@ extension JourneyDetailsViewModel {
 					.didTapSubscribingButton,
 					.didRequestReloadIfNeeded,
 					.didTapBottomSheetDetails:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didCloseBottomSheet:
 				return State(
@@ -208,6 +208,7 @@ extension JourneyDetailsViewModel {
 					.didChangedSubscribingState,
 					.didTapSubscribingButton,
 					.didTapReloadButton:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .fullLeg:
@@ -225,6 +226,7 @@ extension JourneyDetailsViewModel {
 					.didChangedSubscribingState,
 					.didTapSubscribingButton,
 					.didTapBottomSheetDetails:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didCloseBottomSheet:
 				return State(
@@ -264,6 +266,7 @@ extension JourneyDetailsViewModel {
 					.didChangedSubscribingState,
 					.didTapSubscribingButton,
 					.didLoadLocationDetails:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .actionSheet:
@@ -285,6 +288,7 @@ extension JourneyDetailsViewModel {
 					.didChangedSubscribingState,
 					.didTapSubscribingButton,
 					.didLongTapOnLeg:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didCloseActionSheet:
 				return State(

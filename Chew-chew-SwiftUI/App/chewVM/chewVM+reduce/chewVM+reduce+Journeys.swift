@@ -18,7 +18,7 @@ extension ChewViewModel {
 				arrStop: state.depStop,
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status: .idle
+				status: .checkingSearchData
 			)
 		case .onNewDate(let date):
 			return State(
@@ -26,7 +26,7 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: date,
-				status: .idle
+				status: .checkingSearchData
 			)
 		case .onDepartureEdit:
 			return State(
@@ -51,12 +51,14 @@ extension ChewViewModel {
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .datePicker)
-		case .didLoadInitialData:
-			return state
-		case .onNewStop:
-			return state
-		case .onJourneyDataUpdated:
-			return state
+		case .didTapCloseJourneyList:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				settings: state.settings,
+				timeChooserDate: state.timeChooserDate,
+				status: .idle
+			)
 		case .didLocationButtonPressed:
 			return State(
 				depStop: state.depStop,
@@ -64,14 +66,6 @@ extension ChewViewModel {
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
 				status: .loadingLocation)
-		case .didReceiveLocationData:
-			return state
-		case .didFailToLoadLocationData:
-			return state
-		case .didSetBothLocations(_, _):
-			return state
-		case .didDismissBottomSheet:
-			return state
 		case .didTapSettings:
 			return State(
 				depStop: state.depStop,
@@ -80,9 +74,17 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .settings
 			)
-		case .didUpdateSettings:
-			return state
-		case .didStartViewAppear:
+		case .didReceiveLocationData,
+			 .didFailToLoadLocationData,
+			 .didSetBothLocations(_, _),
+			 .didDismissBottomSheet,
+			 .didLoadInitialData,
+			 .onNewStop,
+			 .onJourneyDataUpdated,
+			 .didUpdateSettings,
+			 .onNotEnoughSearchData,
+			 .didStartViewAppear:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		}
 	}

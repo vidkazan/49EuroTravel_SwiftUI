@@ -15,6 +15,7 @@ extension JourneyListViewModel {
 		case .onNewJourneyListData(let data, let type):
 			switch type {
 			case .initial:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .earlierRef:
 				return State(

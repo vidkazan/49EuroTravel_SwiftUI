@@ -33,6 +33,7 @@ extension SearchStopsViewModel {
 				type: nil
 			)
 		case .onDataLoaded, .onDataLoadError,.didRecentStopsUpdated:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		case .onReset(let type):
 			return State(

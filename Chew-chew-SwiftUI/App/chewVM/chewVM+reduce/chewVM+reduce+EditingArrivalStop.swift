@@ -11,7 +11,17 @@ extension ChewViewModel {
 	func reduceEditingArrivalStop(_ state:  State, _ event: Event) -> State {
 		guard case .editingArrivalStop = state.status else { return state }
 		switch event {
-		case .didStartViewAppear:
+		case .onArrivalEdit,
+		 .onJourneyDataUpdated,
+		 .didLoadInitialData,
+		 .didReceiveLocationData,
+		 .didFailToLoadLocationData,
+		 .didDismissBottomSheet,
+		 .didUpdateSettings,
+		 .didStartViewAppear,
+		 .onNotEnoughSearchData,
+		 .didTapCloseJourneyList:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		case .onDepartureEdit:
 			return State(
@@ -35,7 +45,7 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: date,
-				status: .idle
+				status: .checkingSearchData
 			)
 		case .onStopsSwitch:
 			return State(
@@ -53,7 +63,7 @@ extension ChewViewModel {
 					arrStop: state.arrStop,
 					settings: state.settings,
 					timeChooserDate: state.timeChooserDate,
-					status: .idle
+					status: .checkingSearchData
 				)
 			case .arrival:
 				return State(
@@ -61,15 +71,9 @@ extension ChewViewModel {
 					arrStop: stop,
 					settings: state.settings,
 					timeChooserDate: state.timeChooserDate,
-					status: .idle
+					status: .checkingSearchData
 				)
 			}
-		case .onArrivalEdit:
-			return state
-		case .onJourneyDataUpdated:
-			return state
-		case .didLoadInitialData:
-			return state
 		case .didLocationButtonPressed:
 			return State(
 				depStop: state.depStop,
@@ -78,20 +82,14 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .loadingLocation
 			)
-		case .didReceiveLocationData:
-			return state
-		case .didFailToLoadLocationData:
-			return state
 		case .didSetBothLocations(let dep, let arr):
 			return State(
 				depStop: .location(dep),
 				arrStop: .location(arr),
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status: .idle
+				status: .checkingSearchData
 			)
-		case .didDismissBottomSheet:
-			return state
 		case .didTapSettings:
 			return State(
 				depStop: state.depStop,
@@ -100,8 +98,6 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .settings
 			)
-		case .didUpdateSettings:
-			return state
 		}
 	}
 }

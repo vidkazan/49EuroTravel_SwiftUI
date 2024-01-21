@@ -27,32 +27,34 @@ struct RecentSearchesView : View {
 		self.recentSearchesVM = recentSearchesVM
 	}
 	var body: some View {
-		VStack(alignment: .leading,spacing: 1) {
-			Text("Recent searches")
-				.chewTextSize(.big)
-				.offset(x: 10)
-				.foregroundColor(.secondary)
-			ScrollView(.horizontal) {
-				LazyHStack {
-					ForEach(recentSearchesVM.state.searches, id: \.hashValue) { locations in
-						RecentSearchCell(send: recentSearchesVM.send, locations:locations)
-							.onTapGesture {
-								chewVM.send(event: .didSetBothLocations(locations.departure, locations.arrival))
-							}
+		if !recentSearchesVM.state.searches.isEmpty {
+			VStack(alignment: .leading,spacing: 1) {
+				Text("Recent searches")
+					.chewTextSize(.big)
+					.offset(x: 10)
+					.foregroundColor(.secondary)
+				ScrollView(.horizontal,showsIndicators: false) {
+					LazyHStack {
+						ForEach(recentSearchesVM.state.searches, id: \.hashValue) { locations in
+							RecentSearchCell(send: recentSearchesVM.send, locations:locations)
+								.onTapGesture {
+									chewVM.send(event: .didSetBothLocations(locations.departure, locations.arrival))
+								}
+						}
+						.background(Color.chewFillAccent)
+						.cornerRadius(8)
 					}
-//					.padding(10)
-					.background(Color.chewFillAccent)
-					.cornerRadius(8)
 				}
+				.padding(5)
+				.background(Color.chewFillSecondary)
+				.frame(maxWidth: .infinity,maxHeight: 100)
+				.cornerRadius(10)
 			}
-			.padding(5)
-			.background(Color.chewFillSecondary)
-			.frame(maxWidth: .infinity,maxHeight: 100)
-			.cornerRadius(10)
+			.transition(.opacity)
+			.animation(.spring().speed(2), value: chewVM.state.status)
+			.animation(.spring().speed(2), value: chewVM.searchStopsViewModel.state.status)
+			.animation(.spring().speed(2), value: chewVM.recentSearchesViewModel.state.status)
 		}
-		.transition(.opacity)
-		.animation(.spring().speed(2), value: chewVM.state.status)
-		.animation(.spring().speed(2), value: chewVM.searchStopsViewModel.state.status)
 	}
 }
 

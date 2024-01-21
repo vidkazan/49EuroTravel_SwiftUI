@@ -55,6 +55,7 @@ extension SearchStopsViewModel {
 				type: nil
 			)
 		case .didRecentStopsUpdated:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		}
 	}

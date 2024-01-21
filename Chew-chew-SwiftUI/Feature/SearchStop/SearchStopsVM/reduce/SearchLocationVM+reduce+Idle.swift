@@ -43,6 +43,7 @@ extension SearchStopsViewModel {
 				.onDataLoaded,
 				.onDataLoadError,
 				.onStopDidTap:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		}
 	}

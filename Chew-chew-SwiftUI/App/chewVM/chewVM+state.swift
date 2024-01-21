@@ -23,6 +23,7 @@ extension ChewViewModel {
 			}
 		}
 	}
+	
 	enum TextFieldContent : Equatable,Hashable {
 		case textOnly(String)
 		case location(Stop)
@@ -74,6 +75,7 @@ extension ChewViewModel {
 			return lhs.description == rhs.description
 		}
 		case start
+		case checkingSearchData
 		case loadingInitialData
 		case idle
 		case editingDepartureStop
@@ -88,6 +90,8 @@ extension ChewViewModel {
 			switch self {
 			case .idle:
 				return "idle"
+			case .checkingSearchData:
+				return "checkingSearchData"
 			case .editingDepartureStop:
 				return "editingDepartureStop"
 			case .editingArrivalStop:
@@ -111,8 +115,10 @@ extension ChewViewModel {
 	}
 	
 	enum Event {
+		case onNotEnoughSearchData
+		case didTapCloseJourneyList
 		case didStartViewAppear
-		case didLoadInitialData(ChewUser?,ChewSettings)
+		case didLoadInitialData(ChewSettings)
 		
 		case onDepartureEdit
 		case onArrivalEdit
@@ -130,17 +136,18 @@ extension ChewViewModel {
 		
 		case didDismissBottomSheet
 		
-		case onJourneyDataUpdated
+		case onJourneyDataUpdated(depStop: Stop, arrStop : Stop)
 		
 		case didLocationButtonPressed
 		case didReceiveLocationData(CLLocationCoordinate2D)
 		case didFailToLoadLocationData
 		
-		
-		
-		
 		var description : String {
 			switch self {
+			case .onNotEnoughSearchData:
+				return "onNotEnoughSearchData"
+			case .didTapCloseJourneyList:
+				return "didTapCloseJourneyList"
 			case .onArrivalEdit:
 				return "onArrivalEdit"
 			case .onDepartureEdit:

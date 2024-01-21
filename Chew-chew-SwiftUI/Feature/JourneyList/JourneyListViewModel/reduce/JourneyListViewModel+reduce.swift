@@ -21,10 +21,6 @@ extension JourneyListViewModel {
 			return reduceLoadingUpdate(state, event)
 		case .failedToLoadLaterRef, .failedToLoadEarlierRef:
 			switch event {
-			case .onNewJourneyListData:
-				return state
-			case .onFailedToLoadJourneyListData:
-				return state
 			case .onReloadJourneyList:
 				return State(
 					journeys: state.journeys,
@@ -46,7 +42,8 @@ extension JourneyListViewModel {
 					laterRef: state.laterRef,
 					status: .loadingRef(.earlierRef)
 				)
-			case .didFailToLoadLaterRef, .didFailToLoadEarlierRef:
+			case .didFailToLoadLaterRef, .didFailToLoadEarlierRef,.onNewJourneyListData,.onFailedToLoadJourneyListData:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		}

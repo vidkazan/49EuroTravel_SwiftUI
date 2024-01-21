@@ -32,6 +32,7 @@ extension JourneyListViewModel {
 				status: .failedToLoadJourneyList(err)
 			)
 		case .onReloadJourneyList:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		case .onLaterRef:
 			return state

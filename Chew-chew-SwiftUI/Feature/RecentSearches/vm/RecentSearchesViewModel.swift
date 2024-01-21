@@ -186,6 +186,7 @@ extension RecentSearchesViewModel {
 		case .idle,.error:
 			switch event {
 			case .didEdit,.didFailToEdit:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didTapUpdate:
 				return state

@@ -160,7 +160,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "16"
             endingLineNumber = "16"
-            landmarkName = "reduceLoadingJourneys(_:_:)"
+            landmarkName = "reduceLoadingJourneyList(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -176,7 +176,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "15"
             endingLineNumber = "15"
-            landmarkName = "reduceLoadingJourneys(_:_:)"
+            landmarkName = "reduceLoadingJourneyList(_:_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -880,8 +880,8 @@
             filePath = "Chew-chew-SwiftUI/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "whenLoadingInitialData()"
             landmarkType = "7">
          </BreakpointContent>

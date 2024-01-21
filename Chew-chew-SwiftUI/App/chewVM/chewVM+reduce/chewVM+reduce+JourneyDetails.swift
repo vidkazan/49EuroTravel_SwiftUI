@@ -11,33 +11,24 @@ extension ChewViewModel {
 	func reduceJourneyDetails(_ state:  State, _ event: Event) -> State {
 		guard case .journeyDetails = state.status else { return state }
 		switch event {
-		case .didLoadInitialData:
-			return state
-		case .onDepartureEdit:
-			return state
-		case .onArrivalEdit:
-			return state
-		case .onDatePickerDidPressed:
-			return state
-		case .onNewStop:
-			return state
-		case .onStopsSwitch:
-			return state
-		case .onNewDate(_):
-			return state
-		case .onJourneyDataUpdated:
-			return state
-		case .didLocationButtonPressed:
-			return state
-		case .didReceiveLocationData:
-			return state
-		case .didFailToLoadLocationData:
-			return state
-		case .didSetBothLocations(_, _):
-			return state
-		case .didDismissBottomSheet:
-			return state
-		case .didUpdateSettings:
+		case .didLoadInitialData,
+		 .onDepartureEdit,
+		 .onArrivalEdit,
+		 .onDatePickerDidPressed,
+		 .onNewStop,
+		 .onStopsSwitch,
+		 .onNewDate(_),
+		 .onJourneyDataUpdated,
+		 .didLocationButtonPressed,
+		 .didReceiveLocationData,
+		 .didFailToLoadLocationData,
+		 .didSetBothLocations(_, _),
+		 .didDismissBottomSheet,
+		 .didTapCloseJourneyList,
+		 .didStartViewAppear,
+		 .onNotEnoughSearchData,
+		 .didUpdateSettings:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		case .didTapSettings:
 			return State(
@@ -47,8 +38,6 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .settings
 			)
-		case .didStartViewAppear:
-			return state
 		}
 	}
 }

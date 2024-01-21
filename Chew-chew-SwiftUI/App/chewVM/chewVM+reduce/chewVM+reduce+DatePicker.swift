@@ -18,7 +18,7 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: date,
-				status: .idle
+				status: .checkingSearchData
 			)
 		case .didDismissBottomSheet:
 			return State(
@@ -29,6 +29,7 @@ extension ChewViewModel {
 				status: .idle
 			)
 		default:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		}
 	}

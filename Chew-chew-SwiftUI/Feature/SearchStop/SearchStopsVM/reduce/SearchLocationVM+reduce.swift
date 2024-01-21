@@ -13,15 +13,12 @@ extension SearchStopsViewModel {
 		switch state.status {
 		case .updatingRecentStops:
 			switch event {
-			case .onSearchFieldDidChanged:
-				return state
-			case .onDataLoaded:
-				return state
-			case .onDataLoadError:
-				return state
-			case .onReset:
-				return state
-			case .onStopDidTap:
+			case .onDataLoaded,
+				 .onDataLoadError,
+				 .onReset,
+				 .onStopDidTap,
+				 .onSearchFieldDidChanged:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didRecentStopsUpdated(let recentStops):
 				return State(

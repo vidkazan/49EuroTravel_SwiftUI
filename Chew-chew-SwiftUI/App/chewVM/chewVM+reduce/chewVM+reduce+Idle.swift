@@ -11,6 +11,14 @@ extension ChewViewModel {
 	func reduceIdle(_ state:  State, _ event: Event) -> State {
 		guard case .idle = state.status else { return state }
 		switch event {
+		case .didLoadInitialData,
+				.didStartViewAppear,
+				.didReceiveLocationData,
+				.didFailToLoadLocationData,
+				.didTapCloseJourneyList,
+				.onNotEnoughSearchData:
+			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+			return state
 		case .onJourneyDataUpdated:
 			guard let dep = state.depStop.stop,let arr = state.arrStop.stop else {
 				return State(
@@ -66,7 +74,7 @@ extension ChewViewModel {
 				arrStop: state.depStop,
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status:  .idle
+				status:  .checkingSearchData
 			)
 		case .onNewStop(let stop, let type):
 			switch type {
@@ -76,7 +84,7 @@ extension ChewViewModel {
 					arrStop: state.arrStop,
 					settings: state.settings,
 					timeChooserDate: state.timeChooserDate,
-					status: .idle
+					status: .checkingSearchData
 				)
 			case .arrival:
 				return State(
@@ -84,7 +92,7 @@ extension ChewViewModel {
 					arrStop: stop,
 					settings: state.settings,
 					timeChooserDate: state.timeChooserDate,
-					status: .idle
+					status: .checkingSearchData
 				)
 			}
 		case .didLocationButtonPressed:
@@ -101,19 +109,15 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: date,
-				status: .idle
+				status: .checkingSearchData
 			)
-		case .didReceiveLocationData:
-			return state
-		case .didFailToLoadLocationData:
-			return state
 		case .didSetBothLocations(let dep, let arr):
 			return State(
 				depStop: .location(dep),
 				arrStop: .location(arr),
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status: .idle
+				status: .checkingSearchData
 			)
 		case .didDismissBottomSheet:
 			return State(
@@ -137,10 +141,8 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: settings,
 				timeChooserDate: state.timeChooserDate,
-				status: state.status
+				status: .checkingSearchData
 			)
-		case.didLoadInitialData,.didStartViewAppear:
-			return state
 		}
 	}
 }
