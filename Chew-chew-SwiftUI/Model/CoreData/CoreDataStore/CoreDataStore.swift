@@ -9,14 +9,11 @@ import Foundation
 import CoreData
 import CoreLocation
 
-
-// https://www.reddit.com/r/SwiftUI/comments/tjeb2n/how_to_make_newbackgroundcontext_saveadd_data/
 final class CoreDataStore : ObservableObject {
 	var asyncContext: NSManagedObjectContext!
 	var user : ChewUser? = nil
 
 	init() {
-//		self.asyncContext = PersistenceController.shared.container.viewContext
 			self.asyncContext = PersistenceController.shared.container.newBackgroundContext()
 			self.asyncContext.mergePolicy = NSMergeByPropertyStoreTrumpMergePolicy
 		}

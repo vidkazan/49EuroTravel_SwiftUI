@@ -17,6 +17,10 @@ final class AlertViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	var networkMonitor : NetworkMonitor? = nil
 	
+	
+	
+	
+	
 	init(_ initaialStatus : Status = .start) {
 		self.state = State(
 			status: initaialStatus
@@ -42,6 +46,8 @@ final class AlertViewModel : ObservableObject, Identifiable {
 		input.send(event)
 	}
 }
+
+
 
 extension AlertViewModel {
 	struct State : Equatable {

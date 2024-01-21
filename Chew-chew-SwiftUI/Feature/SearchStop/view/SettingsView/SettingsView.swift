@@ -35,7 +35,7 @@ struct SettingsView: View {
 		}
 	}
 	var body: some View {
-//		NavigationView {
+		NavigationView {
 
 				//		Label("Settings", systemImage: "gearshape")
 				//			.padding(.top)
@@ -150,7 +150,7 @@ struct SettingsView: View {
 					})
 				}
 			)}
-//		}
+		}
 	}
 	struct DTicketLabel: View {
 		var body: some View {

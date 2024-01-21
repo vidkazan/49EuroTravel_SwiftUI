@@ -15,6 +15,9 @@ import SwiftUI
 // TODO: move all logic from views
 // TODO: bug: journey: if arrival stop cancelled, duration is NULL
 // TODO: bug: journey: stop is showing totally cancelled if only exit / entrance is allowed
+#warning("error and alerts")
+#warning("favourite ride")
+#warning("sheet detents")
 
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
@@ -29,10 +32,6 @@ struct ContentView: View {
 		.background(Color.chewFillPrimary)
 	}
 }
-
-#warning("error and alerts")
-#warning("recent rides")
-#warning("favourite ride")
 
 struct MainContentView: View {
 	@Environment(\.colorScheme) var colorScheme
@@ -49,7 +48,8 @@ struct MainContentView: View {
 					default:
 						VStack(spacing: 0) {
 							SearchStopsView(vm: chewViewModel.searchStopsViewModel)
-								.padding(10)
+								.padding(.horizontal,10)
+								.padding(.top,10)
 							TimeAndSettingsView()
 								.padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
 							BottomView()

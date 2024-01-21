@@ -6,15 +6,6 @@
 //
 
 import Foundation
-@testable import Chew_chew_SwiftUI
-
-//protocol MockFile {
-//	associatedtype T : Decodable
-//	
-//	func APIRawData() -> Data?
-//	
-//	func APIDecodedData() -> T?
-//}
 
 class MockFile {
 	static func url(type : MockType,fileName : String) -> URL {

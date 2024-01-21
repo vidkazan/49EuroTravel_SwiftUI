@@ -628,8 +628,8 @@
             filePath = "Chew-chew-SwiftUI/Model/CoreData/CoreDataStore/CoreDataStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
             landmarkName = "addJourney(viewData:depStop:arrStop:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1008,8 +1008,8 @@
             filePath = "Chew-chew-SwiftUI/Model/CoreData/CoreDataStore/CoreDataStore.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "93"
+            endingLineNumber = "93"
             landmarkName = "addRecentSearch(stops:)"
             landmarkType = "7">
          </BreakpointContent>
