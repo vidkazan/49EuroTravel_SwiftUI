@@ -20,32 +20,19 @@ extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 	static var secondary : BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillTertiary.opacity(0.3))
 	}
-}
-extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 	static var primary: BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillTertiary)
 	}
-}
-extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 	static var red: BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillRedPrimary)
 	}
-}
-
-extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 	static var blue: BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillBluePrimary)
 	}
-}
-
-extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 	static var accent: BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillAccent)
 	}
 }
-
-
-
 
 
 struct BadgeBackgroundGradientStyle: BadgeStyle {

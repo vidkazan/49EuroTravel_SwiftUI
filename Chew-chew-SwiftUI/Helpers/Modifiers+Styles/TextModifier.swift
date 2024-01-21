@@ -17,24 +17,15 @@ extension View {
 }
 
 extension ViewModifier where Self == ChewPrimaryStyle {
-	static var big: ChewPrimaryStyle {
-		ChewPrimaryStyle(17)
-	}
-}
-
-extension ViewModifier where Self == ChewPrimaryStyle {
 	static var huge: ChewPrimaryStyle {
 		ChewPrimaryStyle(20)
 	}
-}
-
-extension ViewModifier where Self == ChewPrimaryStyle {
+	static var big: ChewPrimaryStyle {
+		ChewPrimaryStyle(17)
+	}
 	static var small: ChewPrimaryStyle {
 		ChewPrimaryStyle(9)
 	}
-}
-
-extension ViewModifier where Self == ChewPrimaryStyle {
 	static var medium: ChewPrimaryStyle {
 		ChewPrimaryStyle(12)
 	}

@@ -60,7 +60,9 @@ struct DatePickerView: View {
 					chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
 				}
 			}
-//			.navigationBarHidden(true)
+
+			.navigationTitle("Date Settings")
+			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button(action: {
@@ -83,5 +85,13 @@ struct DatePickerView: View {
 				}
 			)}
 		}
+	}
+}
+
+
+struct DateSettingsPreview: PreviewProvider {
+	static var previews: some View {
+		DatePickerView(date: .now, time: .now)
+			.environmentObject(ChewViewModel())
 	}
 }

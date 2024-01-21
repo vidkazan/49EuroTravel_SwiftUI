@@ -36,10 +36,6 @@ struct SettingsView: View {
 	}
 	var body: some View {
 		NavigationView {
-
-				//		Label("Settings", systemImage: "gearshape")
-				//			.padding(.top)
-				//			.chewTextSize(.big)
 				Form {
 					Section(content: {
 						Picker(
@@ -130,7 +126,8 @@ struct SettingsView: View {
 			.onDisappear {
 				saveSettings()
 			}
-//			.navigationBarHidden(true)
+			.navigationTitle("Settings")
+			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button(action: {
@@ -207,5 +204,12 @@ extension SettingsView {
 				newSettings: res
 			)
 		}
+	}
+}
+
+struct SettingsPreview: PreviewProvider {
+	static var previews: some View {
+		SettingsView(settings: .init())
+			.environmentObject(ChewViewModel())
 	}
 }
