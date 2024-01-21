@@ -49,7 +49,7 @@ struct MainContentView: View {
 					default:
 						VStack(spacing: 0) {
 							SearchStopsView(vm: chewViewModel.searchStopsViewModel)
-								.padding(.horizontal,10)
+								.padding(10)
 							TimeAndSettingsView()
 								.padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
 							BottomView()
@@ -88,7 +88,7 @@ struct MainContentView: View {
 						.animation(.spring().speed(2), value: chewViewModel.alertViewModel.state.status)
 					}
 				}
-				.tabItem {
+				.tabItem { 	
 					Label("Search", systemImage: "magnifyingglass")
 				}
 				JourneyFollowView(viewModel: chewViewModel.journeyFollowViewModel)
@@ -98,11 +98,11 @@ struct MainContentView: View {
 			}
 			.onAppear {
 				chewViewModel.send(event: .didStartViewAppear)
-				UITabBar.appearance().backgroundColor = UIColor(Color.chewFillAccent.opacity(0.5))
+				UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)
 			}
 		}
 	}
-	
+		
 	struct MainContentViewPreview : PreviewProvider {
 		static var previews: some View {
 			let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData
