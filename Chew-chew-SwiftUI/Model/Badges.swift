@@ -68,7 +68,7 @@ enum Badges : Hashable {
 	case walking(duration : String)
 	case transfer(duration : String)
 	
-	case updatedAtTime(referenceTime : Double)
+	case updatedAtTime(referenceTime : Double, isLoading : Bool = false)
 	
 	var badgeDefaultStyle : BadgeBackgroundBaseStyle {
 		switch self {

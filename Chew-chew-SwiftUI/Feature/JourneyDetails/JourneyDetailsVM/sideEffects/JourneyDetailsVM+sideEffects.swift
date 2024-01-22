@@ -56,26 +56,28 @@ extension JourneyDetailsViewModel {
 
 	static func whenLoadingFullLeg() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .loadingFullLeg(leg: let leg) = state.status,
-				  let tripId = leg.tripId else {
+			guard case .loadingFullLeg(leg: let leg) = state.status else {
 				return Empty().eraseToAnyPublisher()
+			}
+			guard let tripId = leg.tripId else {
+				return Just(Event.didFailToLoadTripData(error: JourneyDetailsError.tripIdIsNil))
+					.eraseToAnyPublisher()
 			}
 			return fetchTrip(tripId: tripId)
 				.mapError{ $0 }
 				.asyncFlatMap { res in
-					let leg = constructLegData(
+					let leg = try constructLegDataThrows(
 						leg: res,
 						firstTS: DateParcer.getDateFromDateString(dateString: res.plannedDeparture),
 						lastTS: DateParcer.getDateFromDateString(dateString: res.plannedArrival),
 						legs: nil
 					)
-					if let leg = leg {
-						return Event.didLoadFullLegData(data: leg)
-					} else {
-						return Event.didCloseBottomSheet
-					}
+					return Event.didLoadFullLegData(data: leg)
 				}
-				.catch { error in Empty().eraseToAnyPublisher()}
+				.catch { error in
+					Just(Event.didFailToLoadTripData(error: error as! (any ChewError)))
+					.eraseToAnyPublisher()
+				}
 				.eraseToAnyPublisher()
 		}
 	}
@@ -134,7 +136,7 @@ extension JourneyDetailsViewModel {
 			}
 			
 			guard let token = token else {
-				return Just(Event.didFailedToLoadJourneyData(error: .cannotDecodeRawData)).eraseToAnyPublisher()
+				return Just(Event.didFailedToLoadJourneyData(error: ApiServiceError.cannotDecodeRawData)).eraseToAnyPublisher()
 			}
 
 			
@@ -142,7 +144,7 @@ extension JourneyDetailsViewModel {
 				.mapError{ $0 }
 				.asyncFlatMap{ data in
 					guard let dep = self?.depStop,let arr = self?.arrStop,let state = self?.state else {
-						return Event.didFailedToLoadJourneyData(error: .badRequest)
+						return Event.didFailedToLoadJourneyData(error: ApiServiceError.badRequest)
 					}
 					let res = await constructJourneyViewDataAsync(
 						journey: data.journey,
@@ -155,9 +157,8 @@ extension JourneyDetailsViewModel {
 						guard self?.chewVM?.coreDataStore.updateJourney(
 							   viewData: state.data,
 							   depStop: dep,
-							   arrStop: arr
-						) == true else {
-							return Event.didFailedToLoadJourneyData(error: .cannotDecodeContentData)
+							   arrStop: arr) == true else {
+							return Event.didFailedToLoadJourneyData(error: ApiServiceError.cannotDecodeContentData)
 						}
 					case false:
 						break

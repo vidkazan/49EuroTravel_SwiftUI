@@ -218,6 +218,14 @@ func constructLineViewData(mode : String,product : String, name : String, produc
 }
 
 func constructLegData(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [LegDTO]?) -> LegViewData? {
+	do {
+		return try constructLegDataThrows(leg: leg, firstTS: firstTS, lastTS: lastTS, legs: legs)
+	} catch  {
+		return nil
+	}
+}
+
+func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [LegDTO]?) throws -> LegViewData {
 	let container = TimeContainer(
 		plannedDeparture: leg.plannedDeparture,
 		plannedArrival: leg.plannedArrival,
@@ -236,7 +244,9 @@ func constructLegData(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [LegDTO
 			firstTS: firstTS,
 			lastTS: lastTS,
 			currentTS: container.date.arrival.planned
-		) else { return nil }
+		) else {
+		throw ConstructLegDataError.departureOrArrivalPosition
+	}
 	
 	let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.departure.actual) ?? 0
 	let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) ?? 0
@@ -282,7 +292,6 @@ func constructLegData(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [LegDTO
 //}
 
 func currentLegIsNotReachable(currentLeg: LegViewData?, previousLeg: LegViewData?) -> Bool? {
-	
 	guard let currentLeg = currentLeg?.timeContainer.timestamp.departure.actual,
 			let previousLeg = previousLeg?.timeContainer.timestamp.arrival.actual else { return nil }
 	return previousLeg > currentLeg

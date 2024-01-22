@@ -111,7 +111,7 @@ struct LegDetailsView: View {
 							RoundedRectangle(
 								cornerRadius : vm.state.totalProgressHeight == currentProgressHeight ? 0 : 6
 							)
-								.fill(Color.chewFillGreenPrimary)
+							.fill(Color.chewFillGreenPrimary.opacity(0.7))
 								.frame(width: 22,height: currentProgressHeight)
 								.padding(.leading,25)
 							Spacer()

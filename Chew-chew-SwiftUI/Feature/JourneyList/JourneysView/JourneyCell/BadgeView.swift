@@ -23,26 +23,34 @@ private struct UpdatedAtBadgeView : View {
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	let refTime : Double
 	let bgColor : Color
-	let iconName : String?
+	let isLoading : Bool
 	@State var updatedAt : String
 	
-	init(bgColor : Color, fgColor : Color = .primary, refTime : Double, sfIconName : String? = nil) {
+	init(bgColor : Color, refTime : Double, isLoading : Bool) {
 		self.bgColor = bgColor
 		self.refTime = refTime
-		self.iconName = sfIconName
 		self.updatedAt = Self.updatedAt(refTime: refTime)
+		self.isLoading = isLoading
 	}
 	
 	var body : some View {
-		Text("updated \(updatedAt) ago")
-			.lineLimit(1)
-			.foregroundColor(.primary.opacity(0.6))
-			.onAppear {
-				updatedAt = Self.updatedAt(refTime: self.refTime)
+		HStack(spacing: 2) {
+			Text("updated \(updatedAt) ago")
+				.lineLimit(1)
+				.foregroundColor(.primary.opacity(0.6))
+				.onAppear {
+					updatedAt = Self.updatedAt(refTime: self.refTime)
+				}
+				.onReceive(timer, perform: { _ in
+					updatedAt = Self.updatedAt(refTime: self.refTime)
+				})
+			if isLoading == true {
+				ProgressView()
+					.scaleEffect(0.65)
+					.frame(width: 15, height: 15)
+					.transition(.slide)
 			}
-			.onReceive(timer, perform: { _ in
-				updatedAt = Self.updatedAt(refTime: self.refTime)
-			})
+		}
 	}
 	
 	static func updatedAt(refTime : Double) -> String {
@@ -76,8 +84,8 @@ struct BadgeView : View {
 				OneLineText(dateString)
 					.chewTextSize(size)
 					.padding(4)
-			case .updatedAtTime(referenceTime: let refTime):
-				UpdatedAtBadgeView(bgColor: self.color,fgColor: .primary,refTime: refTime)
+			case .updatedAtTime(referenceTime: let refTime, let isLoading):
+				UpdatedAtBadgeView(bgColor: self.color,refTime: refTime, isLoading: isLoading)
 					.chewTextSize(size)
 					.padding(4)
 			case .alertFromRemark:
@@ -218,11 +226,13 @@ struct BadgeViewPreview : PreviewProvider {
 			HStack {
 				BadgeView(.transfer(duration: "100 min"))
 					.badgeBackgroundStyle(.primary)
-				BadgeView(.updatedAtTime(referenceTime: 1705220000))
-					.badgeBackgroundStyle(.primary)
 				BadgeView(.walking(duration: "100 min"))
 					.badgeBackgroundStyle(.primary)
 			}
+			BadgeView(.updatedAtTime(referenceTime: 1705930000,isLoading: true))
+				.badgeBackgroundStyle(.primary)
+			BadgeView(.updatedAtTime(referenceTime: 1705930000,isLoading: false))
+				.badgeBackgroundStyle(.primary)
 		}
 	}
 }

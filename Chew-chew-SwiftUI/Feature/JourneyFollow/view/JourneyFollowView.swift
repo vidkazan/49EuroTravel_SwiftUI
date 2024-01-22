@@ -29,11 +29,7 @@ struct JourneyFollowView : View {
 						followList: viewModel.state.journeys.map { $0.journeyRef },
 						chewVM: chewVM
 					)
-					NavigationLink(destination: {
-						JourneyDetailsView(journeyDetailsViewModel: vm)
-					}, label: {
-						JourneyFollowCellView(journeyDetailsViewModel: vm)
-					})
+					JourneyFollowCellView(journeyDetailsViewModel: vm)
 					.swipeActions(edge: .leading) {
 						Button {
 							vm.send(event: .didTapReloadButton)
@@ -58,7 +54,6 @@ struct JourneyFollowView : View {
 						.tint(.chewFillRedPrimary)
 					}
 				})
-//				.listStyle(.grouped)
 				.listRowSeparator(.hidden)
 				.listSectionSeparator(.hidden)
 				.listItemTint(Color.clear)
@@ -70,3 +65,29 @@ struct JourneyFollowView : View {
 }
 
 
+struct FollowPreviews: PreviewProvider {
+	static var previews: some View {
+		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
+		if let mock = mock {
+			let viewData = constructJourneyViewData(
+				journey: mock,
+				depStop:  .init(),
+				arrStop:  .init(),
+				realtimeDataUpdatedAt: 0
+			)
+			JourneyFollowView(viewModel: .init(
+				coreDataStore: .init(),
+				journeys: [.init(
+					journeyRef: viewData.refreshToken ?? "",
+					journeyViewData: viewData,
+					depStop: .init(),
+					arrStop: .init()
+				)],
+				initialStatus: .idle
+			))
+			.environmentObject(ChewViewModel())
+		} else {
+			Text("error")
+		}
+	}
+}

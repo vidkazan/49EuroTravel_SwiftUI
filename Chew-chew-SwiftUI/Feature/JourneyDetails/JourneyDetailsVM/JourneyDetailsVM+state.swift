@@ -37,7 +37,7 @@ extension JourneyDetailsViewModel {
 		case loading(token : String?)
 		case loadingIfNeeded(token : String?)
 		case loadedJourneyData
-		case error(error : ApiServiceError)
+		case error(error : any ChewError)
 		case loadingLocationDetails(leg : LegViewData)
 		case locationDetails(
 			coordRegion : MKCoordinateRegion,
@@ -77,8 +77,9 @@ extension JourneyDetailsViewModel {
 	}
 	
 	enum Event {
+		case didFailToLoadTripData(error : any ChewError)
 		case didLoadJourneyData(data : JourneyViewData)
-		case didFailedToLoadJourneyData(error : ApiServiceError)
+		case didFailedToLoadJourneyData(error : any ChewError)
 		
 		
 		case didRequestReloadIfNeeded
@@ -103,6 +104,8 @@ extension JourneyDetailsViewModel {
 		
 		var description : String {
 			switch self {
+			case .didFailToLoadTripData(let error):
+				return "didFailToLoadTripData \(error)"
 			case .didFailToChangeSubscribingState:
 				return "didFailToChangeSubscribingState"
 			case .didRequestReloadIfNeeded:
@@ -113,8 +116,8 @@ extension JourneyDetailsViewModel {
 				return "didTapSubscribingButton"
 			case .didLoadJourneyData:
 				return "didLoadJourneyData"
-			case .didFailedToLoadJourneyData:
-				return "didFailedToLoadJourneyData"
+			case .didFailedToLoadJourneyData(let error):
+				return "didFailedToLoadJourneyData \(error)"
 			case .didTapReloadButton:
 				return "didReloadJourneyList"
 			case .didExpandLegDetails:

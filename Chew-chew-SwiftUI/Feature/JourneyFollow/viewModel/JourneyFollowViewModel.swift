@@ -26,12 +26,13 @@ final class JourneyFollowViewModel : ObservableObject, Identifiable {
 	weak var coreDataStore : CoreDataStore?
 	init(
 		coreDataStore : CoreDataStore?,
-		journeys : [JourneyFollowData]
+		journeys : [JourneyFollowData],
+		initialStatus : Status = .updating
 	) {
 		self.coreDataStore = coreDataStore
 		state = State(
 			journeys: journeys,
-			status: .updating
+			status: initialStatus
 		)
 		Publishers.system(
 			initial: state,

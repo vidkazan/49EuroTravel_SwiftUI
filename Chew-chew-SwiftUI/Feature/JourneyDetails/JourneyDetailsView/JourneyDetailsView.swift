@@ -20,12 +20,13 @@ struct JourneyDetailsView: View {
 	}
 	
 	var body: some View {
-		ZStack {
-			VStack {
-				// MARK: Header
-				header()
-					.animation(nil, value: viewModel.state.status)
-					.padding(10)
+		NavigationView {
+			ZStack {
+				VStack {
+					// MARK: Header
+					header()
+						.animation(nil, value: viewModel.state.status)
+						.padding(10)
 					// MARK: LegDetails
 					ScrollView() {
 						LazyVStack(spacing: 0){
@@ -55,7 +56,7 @@ struct JourneyDetailsView: View {
 					// MARK: LegDetails - action sheet
 					.confirmationDialog("Name", isPresented: $actionSheetIsPresented) {
 						if case .actionSheet(leg: let leg)=viewModel.state.status,
-							case .line = leg.legType {
+						   case .line = leg.legType {
 							Button(action: {
 								switch viewModel.state.status {
 								case .actionSheet(leg: let leg):
@@ -87,30 +88,35 @@ struct JourneyDetailsView: View {
 						})
 						.foregroundColor(Color.primary)
 					}
-			}
-			// MARK: Modifiers
-			.background(Color.chewFillPrimary)
-			.navigationBarTitle("Journey details", displayMode: .inline)
-			.toolbar {
-				toolbar()
-			}
-			.onAppear {
-				viewModel.send(event: .didRequestReloadIfNeeded)
-			}
-			// MARK: Modifiers - onChange
-			.onChange(of: viewModel.state.status, perform: { status in
-				switch status {
-				case .loading, .loadedJourneyData, .error, .changingSubscribingState,.loadingIfNeeded:
-					bottomSheetIsPresented = false
-					actionSheetIsPresented = false
-				case .fullLeg,.loadingLocationDetails,.locationDetails,.loadingFullLeg:
-					bottomSheetIsPresented = true
-					actionSheetIsPresented = false
-				case .actionSheet:
-					bottomSheetIsPresented = false
-					actionSheetIsPresented = true
 				}
-			})
+				// MARK: Modifiers
+				.background(Color.chewFillPrimary)
+				.navigationBarTitle("Journey details", displayMode: .inline)
+				.toolbar {
+					toolbar()
+				}
+//				.onDisappear {
+//					bottomSheetIsPresented = false
+//					actionSheetIsPresented = false
+//				}
+				.onAppear {
+					viewModel.send(event: .didRequestReloadIfNeeded)
+				}
+				// MARK: Modifiers - onChange
+				.onChange(of: viewModel.state.status, perform: { status in
+					switch status {
+					case .loading, .loadedJourneyData, .error, .changingSubscribingState,.loadingIfNeeded:
+						bottomSheetIsPresented = false
+						actionSheetIsPresented = false
+					case .fullLeg,.loadingLocationDetails,.locationDetails,.loadingFullLeg:
+						bottomSheetIsPresented = true
+						actionSheetIsPresented = false
+					case .actionSheet:
+						bottomSheetIsPresented = false
+						actionSheetIsPresented = true
+					}
+				})
+			}
 		}
 	}
 }

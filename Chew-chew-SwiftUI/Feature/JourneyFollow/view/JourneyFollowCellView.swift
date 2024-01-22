@@ -11,24 +11,23 @@ import SwiftUI
 struct JourneyFollowCellView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var vm : JourneyDetailsViewModel
+	@State var isLoading : Bool = false
 	init(journeyDetailsViewModel: JourneyDetailsViewModel) {
 		self.vm = journeyDetailsViewModel
 	}
 	var body: some View {
 		VStack(alignment: .leading) {
 			HStack {
-				Text(vm.state.data.legs.first?.legStopsViewData.first?.name ?? "origin")
-					.chewTextSize(.big)
-				Image(systemName: "arrow.right")
-				Text(vm.state.data.legs.last?.legStopsViewData.last?.name ?? "destination")
-					.chewTextSize(.big)
-				Spacer()
-				switch vm.state.status {
-				case .loading,.loadingIfNeeded:
-					ProgressView()
-				default:
-					EmptyView()
-				}
+				NavigationLink(destination: {
+					JourneyDetailsView(journeyDetailsViewModel: vm)
+				}, label: {
+					Text(vm.state.data.legs.first?.legStopsViewData.first?.name ?? "origin")
+						.chewTextSize(.big)
+					Image(systemName: "arrow.right")
+					Text(vm.state.data.legs.last?.legStopsViewData.last?.name ?? "destination")
+						.chewTextSize(.big)
+					Spacer()
+				})
 			}
 			HStack {
 				BadgeView(
@@ -53,12 +52,21 @@ struct JourneyFollowCellView : View {
 			LegsView(journey : vm.state.data,showProgressBar: true)
 			BadgeView(
 				.updatedAtTime(
-					referenceTime: vm.state.data.updatedAt
+					referenceTime: vm.state.data.updatedAt,
+					isLoading: isLoading
 				),
 				color: Color.chewFillTertiary
 			)
 			.badgeBackgroundStyle(.secondary)
 		}
+		.onChange(of: vm.state.status, perform: { status in
+			switch status {
+			case .loading,.loadingIfNeeded:
+				isLoading = true
+			default:
+				isLoading = false
+			}
+		})
 		.onAppear {
 			vm.send(event: .didRequestReloadIfNeeded)
 		}

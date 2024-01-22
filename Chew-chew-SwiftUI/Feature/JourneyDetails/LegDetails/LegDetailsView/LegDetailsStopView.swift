@@ -131,8 +131,8 @@ struct LegStopView : View {
 						.frame(height: stopOverType.timeLabelHeight)
 						.background {
 							LinearGradient(stops: [
-								Gradient.Stop(color: Color.chewFillGreenSecondary, location: 0),
-								Gradient.Stop(color: Color.chewFillGreenSecondary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+								Gradient.Stop(color: Color.chewFillGreenPrimary, location: 0),
+								Gradient.Stop(color: Color.chewFillGreenPrimary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
 								Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 						}
@@ -148,8 +148,8 @@ struct LegStopView : View {
 						)
 							.background {
 								LinearGradient(stops: [
-									Gradient.Stop(color: Color.chewFillGreenSecondary, location: 0),
-									Gradient.Stop(color: Color.chewFillGreenSecondary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+									Gradient.Stop(color: Color.chewFillGreenPrimary, location: 0),
+									Gradient.Stop(color: Color.chewFillGreenPrimary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
 									Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
 								], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
 							}

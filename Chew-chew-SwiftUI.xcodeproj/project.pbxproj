@@ -111,6 +111,7 @@
 		7D4B1B972AA8FDDB0096F372 /* SearchStopsVM+sideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B1B962AA8FDDB0096F372 /* SearchStopsVM+sideEffect.swift */; };
 		7D4B1B992AA950780096F372 /* constructJourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B1B982AA950780096F372 /* constructJourneys.swift */; };
 		7D53705C2ACED7300009BA20 /* PlannedActual.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D53705B2ACED7300009BA20 /* PlannedActual.swift */; };
+		7D55BD9E2B5EA39900A0CE08 /* ChewDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D55BD9D2B5EA39900A0CE08 /* ChewDatePicker.swift */; };
 		7D5D78522B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78502B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift */; };
 		7D5D78532B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78512B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift */; };
 		7D5D78552B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78542B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift */; };
@@ -207,6 +208,8 @@
 		7DE6FDA52B5BE5B300AC8DE3 /* RecentSearchesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE6FDA42B5BE5B300AC8DE3 /* RecentSearchesViewModel.swift */; };
 		7DE727C62AD93869002FF033 /* JourneyFollowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE727C52AD93869002FF033 /* JourneyFollowView.swift */; };
 		7DE727C92AD93955002FF033 /* ApiServiceCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */; };
+		7DF5871D2B5EC01100A4F99A /* ApiServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF5871C2B5EC01100A4F99A /* ApiServiceErrors.swift */; };
+		7DF5871F2B5EC02800A4F99A /* JourneyDetailsError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF5871E2B5EC02800A4F99A /* JourneyDetailsError.swift */; };
 		7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */; };
 /* End PBXBuildFile section */
 
@@ -301,6 +304,7 @@
 		7D4B1B962AA8FDDB0096F372 /* SearchStopsVM+sideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchStopsVM+sideEffect.swift"; sourceTree = "<group>"; };
 		7D4B1B982AA950780096F372 /* constructJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = constructJourneys.swift; sourceTree = "<group>"; };
 		7D53705B2ACED7300009BA20 /* PlannedActual.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlannedActual.swift; sourceTree = "<group>"; };
+		7D55BD9D2B5EA39900A0CE08 /* ChewDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChewDatePicker.swift; sourceTree = "<group>"; };
 		7D5D78502B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewLeg+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D5D78512B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewLeg+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D5D78542B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewLegType+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -400,6 +404,8 @@
 		7DE6FDA42B5BE5B300AC8DE3 /* RecentSearchesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesViewModel.swift; sourceTree = "<group>"; };
 		7DE727C52AD93869002FF033 /* JourneyFollowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFollowView.swift; sourceTree = "<group>"; };
 		7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceCombine.swift; sourceTree = "<group>"; };
+		7DF5871C2B5EC01100A4F99A /* ApiServiceErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceErrors.swift; sourceTree = "<group>"; };
+		7DF5871E2B5EC02800A4F99A /* JourneyDetailsError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDetailsError.swift; sourceTree = "<group>"; };
 		7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Badges.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -453,6 +459,7 @@
 		7D02CE0C2A97E38B0048ADE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7DF5871B2B5EBFFA00A4F99A /* Errors */,
 				7D65DF172B2A27E500692601 /* DTO */,
 				7D9BB1052B0CBF3B008A3616 /* CoreData */,
 				7D9E108E2AA7722700820B92 /* Network */,
@@ -661,6 +668,7 @@
 				7D000CFA2AB87ACD00566120 /* NavigationLazyView.swift */,
 				7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */,
 				7DA001FC2B0F88B6009BB79D /* SegmentedPicker.swift */,
+				7D55BD9D2B5EA39900A0CE08 /* ChewDatePicker.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1016,7 +1024,6 @@
 			isa = PBXGroup;
 			children = (
 				7D02CE222A97E64E0048ADE6 /* Query.swift */,
-				7D02CE242A97E6620048ADE6 /* Errors.swift */,
 				7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */,
 				7D02CE262A97E6790048ADE6 /* ApiService.swift */,
 				7D345E492AE95E7C003CA948 /* Settings.swift */,
@@ -1168,6 +1175,16 @@
 				7DAC0C8F2B278099001FC6EA /* view */,
 			);
 			path = JourneyFollow;
+			sourceTree = "<group>";
+		};
+		7DF5871B2B5EBFFA00A4F99A /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				7D02CE242A97E6620048ADE6 /* Errors.swift */,
+				7DF5871E2B5EC02800A4F99A /* JourneyDetailsError.swift */,
+				7DF5871C2B5EC01100A4F99A /* ApiServiceErrors.swift */,
+			);
+			path = Errors;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1341,6 +1358,7 @@
 				7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */,
 				7DD4A8DA2AAC90C9001AA30C /* SearchStopsVM+reduce+Error.swift in Sources */,
 				7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */,
+				7DF5871F2B5EC02800A4F99A /* JourneyDetailsError.swift in Sources */,
 				7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */,
 				7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */,
 				7DE640FB2AB08EF80087FC64 /* CLLOcationCoordinate2D+hash.swift in Sources */,
@@ -1368,6 +1386,7 @@
 				7D65DF1D2B2A2BFE00692601 /* ChewStop+CoreDataProperties.swift in Sources */,
 				7D4B1B952AA8FDA20096F372 /* SearchLocationVM+state.swift in Sources */,
 				7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */,
+				7DF5871D2B5EC01100A4F99A /* ApiServiceErrors.swift in Sources */,
 				7D462D522AAC96C000BC0D65 /* SearchStopsView+RightButton.swift in Sources */,
 				7D7B3DA22AB9CC7E0070E44D /* LegDetailsStopView.swift in Sources */,
 				7D6C5C362AAF7C4500DEFC57 /* JourneyDetailsView.swift in Sources */,
@@ -1452,6 +1471,7 @@
 				7D23E44C2A98FD700037C3E1 /* LegView.swift in Sources */,
 				7D7B3D9F2AB8DBFD0070E44D /* LegDetailsView.swift in Sources */,
 				7D7B3DAE2AB9D3620070E44D /* LegDetailsVM+reduce.swift in Sources */,
+				7D55BD9E2B5EA39900A0CE08 /* ChewDatePicker.swift in Sources */,
 				7D02CE302A97E96E0048ADE6 /* BadgeView.swift in Sources */,
 				7D4B1B972AA8FDDB0096F372 /* SearchStopsVM+sideEffect.swift in Sources */,
 				7DAE1F6D2B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift in Sources */,

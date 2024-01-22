@@ -14,10 +14,6 @@ struct FullLegSheet: View {
 	var body: some View {
 		NavigationView {
 			VStack(alignment: .center,spacing: 0) {
-				// MARK: Header label
-//				Label("Full leg", systemImage: "arrow.up.left.and.arrow.down.right.circle")
-//					.chewTextSize(.big)
-//					.padding(10)
 				// MARK: FullLegView call
 				switch viewModel.state.status {
 				case .loadingFullLeg:
@@ -26,17 +22,16 @@ struct FullLegSheet: View {
 					Spacer()
 				case .fullLeg(leg: let leg):
 					FullLegView(leg: leg, journeyDetailsViewModel: viewModel)
-				case .error,.loadedJourneyData,.loading,.actionSheet,.loadingLocationDetails,.locationDetails,.changingSubscribingState,.loadingIfNeeded:
-					Spacer()
-					Text("Error",comment: "")
-					Spacer()
+				default:
+					EmptyView()
 				}
 				Spacer()
 			}
 			.chewTextSize(.big)
 			.frame(maxWidth: .infinity)
 			.background(Color.chewFillAccent)
-//			.navigationBarHidden(true)
+			.navigationTitle("Full leg")
+			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button("Close") {
@@ -44,7 +39,6 @@ struct FullLegSheet: View {
 					}
 				})
 			}
-			
 		}
 	}
 }
@@ -59,8 +53,8 @@ struct FullLegView: View {
 		self.journeyVM = journeyDetailsViewModel
 	}
 	var body : some View {
-		VStack(alignment: .center) {
-			//			 MARK: Header call
+			VStack(alignment: .center) {
+			//			 MARK: Header cell
 			VStack {
 				HStack(alignment: .bottom){
 					BadgeView(
@@ -174,9 +168,9 @@ struct FullLegView: View {
 struct Preview : PreviewProvider {
 	static var previews: some View {
 		let mock = Mock.trip.RE6NeussMinden.decodedData
-		if let mock = mock?.trip {
-			let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock])
-			FullLegView(leg: viewData!, journeyDetailsViewModel: nil)
+		if let mock = mock?.trip,
+		   let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]) {
+			FullLegView(leg: viewData, journeyDetailsViewModel: nil)
 		} else {
 			Text("error")
 		}

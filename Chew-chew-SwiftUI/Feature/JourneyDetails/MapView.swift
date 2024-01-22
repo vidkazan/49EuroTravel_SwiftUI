@@ -67,43 +67,46 @@ struct MapView: View {
 	let route : MKPolyline?
 	var body: some View {
 		MapUIView(stops: stops, region: mapRect, route: route)
-		.background(Color.chewGray15)
-		.cornerRadius(8)
-		.padding(5)
+			.background(Color.chewFillPrimary)
+			.cornerRadius(8)
+			.padding(5)
 	}
 }
 
 
 struct MapSheet: View {
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	var body: some View { 
-		VStack(alignment: .center,spacing: 0) {
-			Label("Map", systemImage: "map.circle")
-				.chewTextSize(.big)
-				.padding(10)
-			switch viewModel.state.status {
-			case .loadingLocationDetails:
-				Spacer()
-				ProgressView()
-				Spacer()
-			case .locationDetails(coordRegion: let reg, stops: let stops, let route):
-				MapView(mapRect: reg, stops: stops,route: route)
-			case .error,.loadedJourneyData,.loading,.fullLeg,.loadingFullLeg,.actionSheet, .changingSubscribingState,.loadingIfNeeded:
-				Spacer()
+	var body: some View {
+		NavigationView {
+			VStack(alignment: .center,spacing: 0) {
+				switch viewModel.state.status {
+				case .loadingLocationDetails:
+					Spacer()
+					ProgressView()
+					Spacer()
+				case .locationDetails(coordRegion: let reg, stops: let stops, let route):
+					MapView(mapRect: reg, stops: stops,route: route)
+				case .error,
+					.loadedJourneyData,
+					.loading,
+					.fullLeg,
+					.loadingFullLeg,
+					.actionSheet,
+					.changingSubscribingState,
+					.loadingIfNeeded:
+					Spacer()
+				}
 			}
-			Spacer()
-			Button("Close") {
-				viewModel.send(event: .didCloseBottomSheet)
+			.navigationTitle("Map")
+			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItem(placement: .navigationBarLeading, content: {
+					Button("Close") {
+						viewModel.send(event: .didCloseBottomSheet)
+					}
+				})
 			}
-			
-			.frame(maxWidth: .infinity,minHeight: 40)
-			.background(Color.chewGray15)
-			.foregroundColor(.primary)
-			.cornerRadius(8)
-			.padding(5)
 		}
-		.chewTextSize(.big)
-		.background(Color.chewGrayScale07)
 	}
 }
 

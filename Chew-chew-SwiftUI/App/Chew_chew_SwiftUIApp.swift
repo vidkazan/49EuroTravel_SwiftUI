@@ -54,9 +54,9 @@ struct AppViewPreview : PreviewProvider {
 				depStop: .init(),
 				arrStop: .init()
 			)
-			let vm = JourneyListViewModel(
-				viewData: data
-			)
+//			let vm = JourneyListViewModel(
+//				viewData: data
+//			)
 			ContentView()
 				.environmentObject(ChewViewModel())
 		} else {

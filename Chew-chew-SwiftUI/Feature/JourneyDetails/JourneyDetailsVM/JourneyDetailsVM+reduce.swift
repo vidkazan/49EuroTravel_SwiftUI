@@ -16,7 +16,7 @@ extension JourneyDetailsViewModel {
 			case .didFailToChangeSubscribingState:
 				return State(
 					data: state.data,
-					status: .error(error: .cannotDecodeRawData),
+					status: .error(error: ApiServiceError.cannotDecodeRawData),
 					isFollowed: state.isFollowed
 				)
 			case .didChangedSubscribingState(let isFollowed):
@@ -62,6 +62,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
+					.didFailToLoadTripData,
 					.didFailToChangeSubscribingState,
 					.didExpandLegDetails,
 					.didTapBottomSheetDetails,
@@ -100,6 +101,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case .didExpandLegDetails,
+					.didFailToLoadTripData,
 					.didLoadJourneyData,
 					.didFailedToLoadJourneyData,
 					.didLoadLocationDetails,
@@ -147,6 +149,7 @@ extension JourneyDetailsViewModel {
 					.didFailToChangeSubscribingState,
 					.didCloseActionSheet,
 					.didTapBottomSheetDetails,
+					.didFailToLoadTripData,
 					.didLoadFullLegData,
 					.didChangedSubscribingState,
 					.didCloseBottomSheet:
@@ -156,6 +159,7 @@ extension JourneyDetailsViewModel {
 		case .locationDetails:
 			switch event {
 			case	.didExpandLegDetails,
+					.didFailToLoadTripData,
 					.didFailToChangeSubscribingState,
 					.didLoadJourneyData,
 					.didLoadFullLegData,
@@ -198,6 +202,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didCloseActionSheet,
+					.didFailToLoadTripData,
 					.didFailToChangeSubscribingState,
 					.didRequestReloadIfNeeded,
 					.didLoadFullLegData,
@@ -214,6 +219,7 @@ extension JourneyDetailsViewModel {
 		case .fullLeg:
 			switch event {
 			case	.didLoadJourneyData,
+					.didFailToLoadTripData,
 					.didFailToChangeSubscribingState,
 					.didLoadFullLegData,
 					.didFailedToLoadJourneyData,
@@ -237,6 +243,12 @@ extension JourneyDetailsViewModel {
 			}
 		case .loadingFullLeg:
 			switch event {
+			case .didFailToLoadTripData:
+				return State(
+					data: state.data,
+					status: .loadedJourneyData,
+					isFollowed: state.isFollowed
+				)
 			case .didLoadJourneyData(let data):
 				return State(
 					data: data,
@@ -278,6 +290,7 @@ extension JourneyDetailsViewModel {
 					isFollowed: state.isFollowed
 				)
 			case	.didFailedToLoadJourneyData,
+					.didFailToLoadTripData,
 					.didFailToChangeSubscribingState,
 					.didTapReloadButton,
 					.didRequestReloadIfNeeded,

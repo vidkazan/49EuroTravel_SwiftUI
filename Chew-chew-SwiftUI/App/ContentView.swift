@@ -6,13 +6,10 @@
 //
 
 import SwiftUI
-
-#warning("TODO: place save / done buttons in sheet at top")
+#warning("TODO: split chewVM reducer")
 #warning("TODO: legView: place transport icons")
 #warning("TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce")
 #warning("TODO: .reducted (placeholder view) with mock data")
-#warning("TODO: coreData: settings entity: save: update line instead of creating new")
-#warning("TODO: move all logic from views")
 #warning("TODO: bug: journey: if arrival stop cancelled, duration is NULL")
 #warning("TODO: bug: journey: stop is showing totally cancelled if only exit / entrance is allowed")
 #warning("TODO: error and alerts")
@@ -28,6 +25,10 @@ struct ContentView: View {
 		VStack(spacing: 0) {
 			AlertView(alertVM: chewViewModel.alertViewModel)
 			MainContentView()
+		}
+		.onAppear {
+			chewViewModel.send(event: .didStartViewAppear)
+			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)
 		}
 		.background(Color.chewFillPrimary)
 	}
@@ -95,10 +96,6 @@ struct MainContentView: View {
 				.tabItem {
 					Label("Follow", systemImage: "train.side.front.car")
 				}
-			}
-			.onAppear {
-				chewViewModel.send(event: .didStartViewAppear)
-				UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)
 			}
 		}
 	}

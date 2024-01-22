@@ -124,7 +124,7 @@ struct SettingsView: View {
 				}
 			})
 			.onDisappear {
-				saveSettings()
+				chewViewModel.send(event: .didDismissBottomSheet)
 			}
 			.navigationTitle("Settings")
 			.navigationBarTitleDisplayMode(.inline)
@@ -141,7 +141,7 @@ struct SettingsView: View {
 					Button(action: {
 						saveSettings()
 					}, label: {
-						Text("Done")
+						Text("Save")
 							.chewTextSize(.big)
 							.frame(maxWidth: .infinity,minHeight: 35,maxHeight: 43)
 					})

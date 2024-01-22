@@ -440,8 +440,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/MapView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "87"
+            endingLineNumber = "87"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -644,8 +644,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "144"
+            endingLineNumber = "144"
             landmarkName = "whenLoadingJourneyByRefreshToken()"
             landmarkType = "7">
             <Locations>
@@ -692,8 +692,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "143"
-            endingLineNumber = "143"
+            startingLineNumber = "145"
+            endingLineNumber = "145"
             landmarkName = "whenLoadingJourneyByRefreshToken()"
             landmarkType = "7">
             <Locations>
@@ -800,8 +800,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "135"
-            endingLineNumber = "135"
+            startingLineNumber = "137"
+            endingLineNumber = "137"
             landmarkName = "whenLoadingJourneyByRefreshToken()"
             landmarkType = "7">
             <Locations>
@@ -848,8 +848,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "136"
-            endingLineNumber = "136"
+            startingLineNumber = "138"
+            endingLineNumber = "138"
             landmarkName = "whenLoadingJourneyByRefreshToken()"
             landmarkType = "7">
          </BreakpointContent>
@@ -864,8 +864,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "144"
-            endingLineNumber = "144"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
             landmarkName = "whenLoadingJourneyByRefreshToken()"
             landmarkType = "7">
          </BreakpointContent>
@@ -912,8 +912,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsVM/sideEffects/JourneyDetailsVM+sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
             landmarkName = "whenLoadingFullLeg()"
             landmarkType = "7">
          </BreakpointContent>
@@ -928,8 +928,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/FullLegView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
             landmarkName = "previews"
             landmarkType = "24">
          </BreakpointContent>
@@ -1028,6 +1028,38 @@
             endingLineNumber = "155"
             landmarkName = "whenEditing()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8F6A019E-1223-46EB-9D18-4B909CF9EC8D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneyListViewModel/JourneyListViewModel+sideEffects/JourneyListViewModel+sideEffects+loadingJourneys.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "155"
+            endingLineNumber = "155"
+            landmarkName = "unknown"
+            landmarkType = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9D6464CA-131D-4A53-B409-31164C375CA0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyDetails/JourneyDetailsView/JourneyDetailsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
