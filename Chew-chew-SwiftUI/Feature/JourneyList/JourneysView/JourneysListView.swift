@@ -51,12 +51,9 @@ struct JourneyListView: View {
 											)
 										)}, label: {
 											JourneyCell(journey: journey)
-												.id(journey.id)
 										})
 								}
-								.onAppear {
-									val.scrollTo(journeyViewModel.state.journeys.first?.id)
-								}
+								.id(1)
 								switch journeyViewModel.state.status {
 								case .journeysLoaded, .failedToLoadEarlierRef:
 									if journeyViewModel.state.laterRef != nil {
@@ -86,6 +83,9 @@ struct JourneyListView: View {
 							.transition(.opacity)
 							.animation(.spring(), value: journeyViewModel.state.status)
 							.cornerRadius(10)
+						}
+						.onAppear {
+							val.scrollTo(1, anchor: .top)
 						}
 					}
 				}
