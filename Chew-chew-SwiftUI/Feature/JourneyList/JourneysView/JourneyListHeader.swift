@@ -17,7 +17,7 @@ struct JourneyListHeaderView: View {
 				journeyViewModel.send(event: .onReloadJourneyList)
 			}, label: {
 				Label("Reload", systemImage: "arrow.clockwise")
-					.padding(.horizontal,5)
+					.padding(5)
 					.frame(maxHeight: 35)
 					.chewTextSize(.big)
 					.tint(.chewFillTertiary)
@@ -28,7 +28,7 @@ struct JourneyListHeaderView: View {
 				chewVM.send(event: .didTapCloseJourneyList)
 			}, label: {
 				Label("Close", systemImage: "xmark.circle")
-					.padding(.horizontal,5)
+					.padding(5)
 					.frame(maxHeight: 35)
 					.chewTextSize(.big)
 					.tint(.chewFillTertiary)

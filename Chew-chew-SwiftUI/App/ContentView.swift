@@ -30,7 +30,6 @@ struct ContentView: View {
 			chewViewModel.send(event: .didStartViewAppear)
 			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)
 		}
-		.background(Color.chewFillPrimary)
 	}
 }
 
@@ -55,7 +54,6 @@ struct MainContentView: View {
 								.padding(EdgeInsets(top: 5, leading: 10, bottom: 0, trailing: 10))
 							BottomView()
 								.padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
-								.background(Color.chewFillPrimary)
 						}
 						.sheet(
 							isPresented: $bottomSheetIsPresented,
@@ -87,9 +85,10 @@ struct MainContentView: View {
 						.animation(.spring().speed(2), value: chewViewModel.state.status)
 						.animation(.spring().speed(2), value: chewViewModel.searchStopsViewModel.state.status)
 						.animation(.spring().speed(2), value: chewViewModel.alertViewModel.state.status)
+						.background(Color.chewFillPrimary)
 					}
 				}
-				.tabItem { 	
+				.tabItem {
 					Label("Search", systemImage: "magnifyingglass")
 				}
 				JourneyFollowView(viewModel: chewViewModel.journeyFollowViewModel)
@@ -118,14 +117,18 @@ struct MainContentView: View {
 				let vm = JourneyListViewModel(
 					viewData: data
 				)
-				ContentView()
-					.environmentObject(ChewViewModel(initialState: .init(
-						depStop: .textOnly(""),
-						arrStop: .textOnly(""),
-						settings: .init(),
-						timeChooserDate: .now,
-						status: .journeys(vm)
-					)))
+				Group {
+					ContentView()
+						.environmentObject(ChewViewModel(initialState: .init(
+							depStop: .textOnly(""),
+							arrStop: .textOnly(""),
+							settings: .init(),
+							timeChooserDate: .now,
+							status: .journeys(vm)
+						)))
+					ContentView()
+						.environmentObject(ChewViewModel())
+				}
 			} else {
 				Text("error")
 			}

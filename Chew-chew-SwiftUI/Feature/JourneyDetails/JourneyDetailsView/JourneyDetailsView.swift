@@ -20,7 +20,6 @@ struct JourneyDetailsView: View {
 	}
 	
 	var body: some View {
-		NavigationView {
 			ZStack {
 				VStack {
 					// MARK: Header
@@ -95,10 +94,6 @@ struct JourneyDetailsView: View {
 				.toolbar {
 					toolbar()
 				}
-//				.onDisappear {
-//					bottomSheetIsPresented = false
-//					actionSheetIsPresented = false
-//				}
 				.onAppear {
 					viewModel.send(event: .didRequestReloadIfNeeded)
 				}
@@ -117,7 +112,6 @@ struct JourneyDetailsView: View {
 					}
 				})
 			}
-		}
 	}
 }
 

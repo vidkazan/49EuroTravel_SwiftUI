@@ -30,6 +30,7 @@ struct Chew_chew_SwiftUIApp: App {
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
+				.background(Color.chewFillPrimary)
 				.environmentObject(chewJourneyViewModel)
 				.transition(.move(edge: .bottom))
 				.animation(.spring().speed(2), value: chewJourneyViewModel.state.status)
