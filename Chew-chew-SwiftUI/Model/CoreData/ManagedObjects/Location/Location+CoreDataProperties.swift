@@ -26,7 +26,7 @@ extension Location {
 }
 
 extension Location {
-	// TODO: rearrange function
+	// TODO: rearrange locations by calling time
 	func stop() -> Stop {
 		var type : LocationType?
 		var stop : Stop!

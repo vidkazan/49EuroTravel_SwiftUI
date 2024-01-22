@@ -7,17 +7,17 @@
 
 import SwiftUI
 
-// TODO: place save / done buttons in sheet at top
-// TODO: legView: place transport icons
-// TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce
-// TODO: .reducted (placeholder view) with mock data
-// TODO: coreData: settings entity: save: update line instead of creating new
-// TODO: move all logic from views
-// TODO: bug: journey: if arrival stop cancelled, duration is NULL
-// TODO: bug: journey: stop is showing totally cancelled if only exit / entrance is allowed
-#warning("error and alerts")
-#warning("favourite ride")
-#warning("sheet detents")
+#warning("TODO: place save / done buttons in sheet at top")
+#warning("TODO: legView: place transport icons")
+#warning("TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce")
+#warning("TODO: .reducted (placeholder view) with mock data")
+#warning("TODO: coreData: settings entity: save: update line instead of creating new")
+#warning("TODO: move all logic from views")
+#warning("TODO: bug: journey: if arrival stop cancelled, duration is NULL")
+#warning("TODO: bug: journey: stop is showing totally cancelled if only exit / entrance is allowed")
+#warning("TODO: error and alerts")
+#warning("TODO: favourite ride")
+#warning("TODO: sheet detents")
 
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme

@@ -6,7 +6,7 @@
 //
 
 import Foundation
-// TODO: feature: check when train arrives at starting point
+#warning("TODO: feature: check when train arrives at starting point")
 extension JourneyDetailsViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
 		print("🚂🔥 >",event.description,"state:",state.status.description)

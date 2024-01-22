@@ -7,6 +7,46 @@
 
 import SwiftUI
 
+struct ChewDatePicker: UIViewRepresentable {
+	
+	@Binding var date: Date
+	let mode : UIDatePicker.Mode
+	let style : UIDatePickerStyle
+
+	func makeUIView(context: Context) -> UIDatePicker {
+		let picker = UIDatePicker()
+
+		picker.datePickerMode = mode
+		picker.preferredDatePickerStyle = style
+		picker.minuteInterval = 5
+		picker.setDate(date, animated: true)
+		picker.addTarget(context.coordinator, action: #selector(Coordinator.changed(_:)), for: .valueChanged)
+		picker.locale = .init(identifier: "en_GB")
+		return picker
+	}
+
+	func updateUIView(_ datePicker: UIDatePicker, context: Context) {
+		datePicker.date = date
+	}
+
+	func makeCoordinator() -> ChewDatePicker.Coordinator {
+		Coordinator(date: $date)
+	}
+
+	class Coordinator: NSObject {
+		private let date: Binding<Date>
+
+		init(date: Binding<Date>) {
+			self.date = date
+		}
+
+		@objc func changed(_ sender: UIDatePicker) {
+			self.date.wrappedValue = sender.date
+		}
+	}
+}
+
+
 struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
 	@State var date : Date
@@ -15,52 +55,26 @@ struct DatePickerView: View {
 		NavigationView {
 			VStack(alignment: .center,spacing: 5) {
 				// MARK: time
-				HStack {
-					HStack {
-						DatePicker(
-							"",
-							selection: $time,
-							displayedComponents: [.hourAndMinute]
-						)
-						.environment(\.locale,NSLocale(localeIdentifier: "en_GB") as Locale)
-						.frame(maxWidth: .infinity,maxHeight: 150)
-						.scaleEffect(0.85)
-						.datePickerStyle(.wheel)
-						.cornerRadius(10)
-						.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 15))
-						Spacer()
-					}
+				ChewDatePicker(date: $time,mode: .time, style: .wheels)
+					.frame(maxWidth: .infinity,maxHeight: 150)
+					.padding(5)
 					.background(Color.chewFillTertiary.opacity(0.15))
 					.cornerRadius(10)
-				}
-				// MARK: header date
-				HStack {
-					DatePicker(
-						"",
-						selection: $date,
-						displayedComponents: [.date]
-					)
-					.datePickerStyle(.graphical)
-					.scaleEffect(0.9)
-					.padding(EdgeInsets(top: 0, leading: 0, bottom:0, trailing: 15))
+				// MARK: date
+				ChewDatePicker(date: $date,mode: .date, style: .inline)
+					.frame(maxWidth: .infinity,maxHeight: 350)
+					.padding(5)
 					.background(Color.chewFillTertiary.opacity(0.15))
 					.cornerRadius(10)
-				}
-				// MARK: header buttons
 				DatePickerTimePresetButtons()
 				Spacer()
 			}
 			.padding(.horizontal,10)
-//			.background(Color.chewFillPrimary)
-			.onAppear {
-				UIDatePicker.appearance().minuteInterval = 5
-			}
 			.onDisappear {
 				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
 					chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
 				}
 			}
-
 			.navigationTitle("Date Settings")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
@@ -89,9 +103,9 @@ struct DatePickerView: View {
 }
 
 
-struct DateSettingsPreview: PreviewProvider {
-	static var previews: some View {
-		DatePickerView(date: .now, time: .now)
-			.environmentObject(ChewViewModel())
-	}
-}
+//struct DateSettingsPreview: PreviewProvider {
+//	static var previews: some View {
+//		DatePickerView(date: .now, time: .now)
+//			.environmentObject(ChewViewModel())
+//	}
+//}
