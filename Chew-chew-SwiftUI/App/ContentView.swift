@@ -55,6 +55,8 @@ struct MainContentView: View {
 							BottomView()
 								.padding(EdgeInsets(top: 10, leading: 10, bottom: 0, trailing: 10))
 						}
+						.navigationTitle("ChewChew")
+						.navigationBarTitleDisplayMode(.inline)
 						.sheet(
 							isPresented: $bottomSheetIsPresented,
 							onDismiss: {

@@ -16,9 +16,7 @@ struct BottomView: View {
 		if case .journeys(let vm) = chewViewModel.state.status {
 			JourneyListView(journeyViewModel: vm)
 		} else if case .idle = chewViewModel.state.status  {
-			if !chewViewModel.recentSearchesViewModel.state.searches.isEmpty {
-				RecentSearchesView(recentSearchesVM: chewViewModel.recentSearchesViewModel)
-			}
+			RecentSearchesView(recentSearchesVM: chewViewModel.recentSearchesViewModel)
 			Spacer()
 		} else {
 			Spacer()

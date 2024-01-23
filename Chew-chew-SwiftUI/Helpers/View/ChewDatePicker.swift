@@ -8,20 +8,24 @@
 import Foundation
 import SwiftUI
 
+
 struct ChewDatePicker: UIViewRepresentable {
 	
 	@Binding var date: Date
 	let mode : UIDatePicker.Mode
 	let style : UIDatePickerStyle
-
 	func makeUIView(context: Context) -> UIDatePicker {
 		let picker = UIDatePicker()
 		picker.datePickerMode = mode
-		picker.preferredDatePickerStyle = style
 		picker.minuteInterval = 5
-		picker.setDate(date, animated: true)
+		picker.setDate(date, animated: false)
 		picker.addTarget(context.coordinator, action: #selector(Coordinator.changed(_:)), for: .valueChanged)
 		picker.locale = .init(identifier: "en_GB")
+		picker.isHidden = true
+		Task {
+			picker.preferredDatePickerStyle = style
+			picker.isHidden = false
+		}
 		return picker
 	}
 
@@ -30,7 +34,7 @@ struct ChewDatePicker: UIViewRepresentable {
 	}
 
 	func makeCoordinator() -> ChewDatePicker.Coordinator {
-		Coordinator(date: $date)
+		return Coordinator(date: $date)
 	}
 
 	class Coordinator: NSObject {

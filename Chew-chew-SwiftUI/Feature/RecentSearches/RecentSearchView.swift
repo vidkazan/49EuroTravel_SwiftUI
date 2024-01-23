@@ -27,6 +27,7 @@ struct RecentSearchesView : View {
 		self.recentSearchesVM = recentSearchesVM
 	}
 	var body: some View {
+		if !recentSearchesVM.state.searches.isEmpty {
 			VStack(alignment: .leading,spacing: 1) {
 				Text("Recent searches")
 					.chewTextSize(.big)
@@ -53,6 +54,7 @@ struct RecentSearchesView : View {
 			.animation(.spring().speed(2), value: chewVM.state.status)
 			.animation(.spring().speed(2), value: chewVM.searchStopsViewModel.state.status)
 			.animation(.spring().speed(2), value: chewVM.recentSearchesViewModel.state.status)
+		}
 	}
 }
 

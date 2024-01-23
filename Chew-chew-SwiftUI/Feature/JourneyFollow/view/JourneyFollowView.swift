@@ -15,56 +15,56 @@ struct JourneyFollowView : View {
 		self.viewModel = viewModel
 	}
 	var body: some View {
-		NavigationView {
-			Group {
-				switch viewModel.state.status {
-				case .updating:
-					ProgressView()
-						.frame(maxWidth: .infinity,maxHeight: .infinity)
-				default:
-					List(viewModel.state.journeys, id: \.journeyRef, rowContent: { journey in
-						let vm = JourneyDetailsViewModel(
-							refreshToken: journey.journeyRef,
-							data: journey.journeyViewData,
-							depStop: journey.depStop,
-							arrStop: journey.arrStop,
-							followList: viewModel.state.journeys.map { $0.journeyRef },
-							chewVM: chewVM
-						)
-						JourneyFollowCellView(journeyDetailsViewModel: vm)
-							.swipeActions(edge: .leading) {
-								Button {
-									vm.send(event: .didTapReloadButton)
-								} label: {
-									Label("Reload", systemImage: "arrow.clockwise")
-								}
-								.tint(.chewFillGreenPrimary)
+		Group {
+			switch viewModel.state.status {
+			case .updating:
+				ProgressView()
+					.frame(maxWidth: .infinity,maxHeight: .infinity)
+			default:
+				List(viewModel.state.journeys, id: \.journeyRef, rowContent: { journey in
+					let vm = JourneyDetailsViewModel(
+						refreshToken: journey.journeyRef,
+						data: journey.journeyViewData,
+						depStop: journey.depStop,
+						arrStop: journey.arrStop,
+						followList: viewModel.state.journeys.map { $0.journeyRef },
+						chewVM: chewVM
+					)
+					JourneyFollowCellView(journeyDetailsViewModel: vm)
+						.swipeActions(edge: .leading) {
+							Button {
+								vm.send(event: .didTapReloadButton)
+							} label: {
+								Label("Reload", systemImage: "arrow.clockwise")
 							}
-							.swipeActions(edge: .trailing) {
-								Button {
-									if let ref = vm.state.data.refreshToken {
-										chewVM.journeyFollowViewModel.send(event: .didTapEdit(
-											action: .deleting,
-											journeyRef: ref,
-											followData: nil,
-											journeyDetailsViewModel: vm
-										))
-									}
-								} label: {
-									Label("Delete", systemImage: "xmark.bin.circle")
+							.tint(.chewFillGreenPrimary)
+						}
+						.swipeActions(edge: .trailing) {
+							Button {
+								if let ref = vm.state.data.refreshToken {
+									chewVM.journeyFollowViewModel.send(event: .didTapEdit(
+										action: .deleting,
+										journeyRef: ref,
+										followData: nil,
+										journeyDetailsViewModel: vm
+									))
 								}
-								.tint(.chewFillRedPrimary)
+							} label: {
+								Label("Delete", systemImage: "xmark.bin.circle")
 							}
-					})
-					.listRowSeparator(.hidden)
-					.listSectionSeparator(.hidden)
-					.listItemTint(Color.clear)
-				}
+							.tint(.chewFillRedPrimary)
+						}
+				})
+				.navigationBarTitle("Journey follow")
+				.navigationBarTitleDisplayMode(.inline)
+				.listRowSeparator(.hidden)
+				.listSectionSeparator(.hidden)
+				.listItemTint(Color.clear)
 			}
-			.background(Color.chewFillPrimary)
-			.transition(.opacity)
-			.animation(.spring().speed(2), value: viewModel.state.status)
 		}
+		.background(Color.chewFillPrimary)
+		.transition(.opacity)
+		.animation(.spring().speed(2), value: viewModel.state.status)
 	}
 }
 

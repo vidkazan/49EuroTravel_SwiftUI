@@ -15,10 +15,8 @@ struct DatePickerView: View {
 		NavigationView {
 			VStack(alignment: .center,spacing: 5) {
 				ChewDatePicker(date: $time,mode: .time, style: .wheels)
-					.frame(maxWidth: .infinity,maxHeight: 150)
+					.frame(maxWidth: .infinity,maxHeight: 170)
 					.padding(5)
-					.background(Color.chewFillTertiary.opacity(0.15))
-					.cornerRadius(10)
 				ChewDatePicker(date: $date,mode: .date, style: .inline)
 					.scaleEffect(0.9)
 					.frame(maxWidth: .infinity,maxHeight: 350)

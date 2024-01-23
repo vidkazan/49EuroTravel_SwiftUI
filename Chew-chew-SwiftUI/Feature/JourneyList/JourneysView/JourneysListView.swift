@@ -11,6 +11,7 @@ import SwiftUI
 struct JourneyListView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var journeyViewModel : JourneyListViewModel
+	@State var firstAppear : Bool = true
 	var body: some View {
 		VStack {
 			switch journeyViewModel.state.status {
@@ -85,7 +86,10 @@ struct JourneyListView: View {
 							.cornerRadius(10)
 						}
 						.onAppear {
-							val.scrollTo(1, anchor: .top)
+							if firstAppear == true {
+								firstAppear.toggle()
+								val.scrollTo(1, anchor: .top)
+							}
 						}
 					}
 				}
