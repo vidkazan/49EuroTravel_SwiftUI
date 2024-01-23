@@ -59,3 +59,28 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable, Equatable 
 		input.send(event)
 	}
 }
+
+extension JourneyDetailsViewModel {
+	enum Error : ChewError {
+		static func == (lhs: Error, rhs: Error) -> Bool {
+			return lhs.description == rhs.description
+		}
+		
+		func hash(into hasher: inout Hasher) {
+			switch self {
+			case .inputValIsNil:
+				break
+			}
+		}
+		case inputValIsNil(_ msg: String)
+		
+		
+		var description : String  {
+			switch self {
+			case .inputValIsNil(let msg):
+				return "Input value is nil: \(msg)"
+			}
+		}
+	}
+
+}

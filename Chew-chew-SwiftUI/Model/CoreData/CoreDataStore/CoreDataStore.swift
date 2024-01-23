@@ -33,8 +33,12 @@ extension CoreDataStore {
 					self.asyncContext.delete(res)
 					self.saveAsyncContext()
 					result = true
+				} else {
+					print("📕 > delete JourneysIfFound : error : not found")
 				}
 			}
+		} else {
+			print("📕 > delete JourneysIfFound : error : fetch fault")
 		}
 		return result
 	}
@@ -118,6 +122,7 @@ extension CoreDataStore {
 		if deleteJourneyIfFound(journeyRef: ref) {
 			return addJourney(viewData: viewData, depStop: depStop, arrStop: arrStop)
 		}
+		print("📕 > update Journeys : error : delete fault")
 		return false
 	}
 	func updateSettings(newSettings : ChewSettings){
@@ -193,6 +198,40 @@ extension CoreDataStore {
 			case .journeys:
 				return ChewJourney.self
 			}
+		}
+	}
+}
+
+
+
+enum CoreDataError : ChewError {
+	static func == (lhs: CoreDataError, rhs: CoreDataError) -> Bool {
+		return lhs.description == rhs.description
+	}
+	
+	func hash(into hasher: inout Hasher) {
+		switch self {
+		case .failedToUpdateDatabase:
+			break
+		case .failedToAdd:
+			break
+		case .failedToDelete:
+			break
+		}
+	}
+	case failedToUpdateDatabase(type : NSManagedObject.Type)
+	case failedToAdd(type : NSManagedObject.Type)
+	case failedToDelete(type : NSManagedObject.Type)
+	
+	
+	var description : String  {
+		switch self {
+		case .failedToUpdateDatabase(type: let type):
+			return "failedToUpdateDatabase type: \(type)"
+		case .failedToAdd(type: let type):
+			return "failedToAddToDatabase type: \(type)"
+		case .failedToDelete(type: let type):
+			return "failedToAddToDelete type: \(type)"
 		}
 	}
 }

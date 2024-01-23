@@ -23,7 +23,8 @@ extension JourneyDetailsViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			guard let dep = self?.depStop,let arr = self?.arrStop,let state = self?.state else {
-				return Just(Event.didFailToChangeSubscribingState).eraseToAnyPublisher()
+				return Just(Event.didFailToChangeSubscribingState(
+					error: Error.inputValIsNil("depStop/arrStop/state"))).eraseToAnyPublisher()
 			}
 			switch state.isFollowed {
 			case true:
@@ -60,7 +61,7 @@ extension JourneyDetailsViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			guard let tripId = leg.tripId else {
-				return Just(Event.didFailToLoadTripData(error: JourneyDetailsError.tripIdIsNil))
+				return Just(Event.didFailToLoadTripData(error: Error.inputValIsNil("tripId")))
 					.eraseToAnyPublisher()
 			}
 			return fetchTrip(tripId: tripId)
@@ -136,29 +137,38 @@ extension JourneyDetailsViewModel {
 			}
 			
 			guard let token = token else {
-				return Just(Event.didFailedToLoadJourneyData(error: ApiServiceError.cannotDecodeRawData)).eraseToAnyPublisher()
+				return Just(Event.didFailedToLoadJourneyData(
+					error: Error.inputValIsNil("journeyRef"))
+				)
+				.eraseToAnyPublisher()
 			}
 
 			
 			return Self.fetchJourneyByRefreshToken(ref: token)
 				.mapError{ $0 }
 				.asyncFlatMap{ data in
-					guard let dep = self?.depStop,let arr = self?.arrStop,let state = self?.state else {
-						return Event.didFailedToLoadJourneyData(error: ApiServiceError.badRequest)
+					guard let self = self else {
+						return Event.didFailedToLoadJourneyData(
+							error: Error.inputValIsNil("self"))
+					}
+					guard let chewVM = self.chewVM else {
+						return Event.didFailedToLoadJourneyData(
+							error: Error.inputValIsNil("chewVM"))
 					}
 					let res = await constructJourneyViewDataAsync(
 						journey: data.journey,
-						depStop: dep,
-						arrStop: arr,
+						depStop: self.depStop,
+						arrStop: self.arrStop,
 						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
-					   )
+					)
 					switch state.isFollowed {
 					case true:
-						guard self?.chewVM?.coreDataStore.updateJourney(
+						guard chewVM.coreDataStore.updateJourney(
 							   viewData: state.data,
-							   depStop: dep,
-							   arrStop: arr) == true else {
-							return Event.didFailedToLoadJourneyData(error: ApiServiceError.cannotDecodeContentData)
+							   depStop: self.depStop,
+							   arrStop: self.arrStop) == true else {
+							return Event.didFailedToLoadJourneyData(
+								error: CoreDataError.failedToUpdateDatabase(type: ChewJourney.self))
 						}
 					case false:
 						break
@@ -166,7 +176,7 @@ extension JourneyDetailsViewModel {
 					return Event.didLoadJourneyData(data: res)
 				}
 				.catch {
-					error in Just(.didFailedToLoadJourneyData(error: error as! ApiServiceError))
+					error in Just(.didFailedToLoadJourneyData(error: error as! (any ChewError)))
 				}
 				.eraseToAnyPublisher()
 		}

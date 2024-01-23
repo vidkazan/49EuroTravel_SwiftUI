@@ -119,7 +119,7 @@ class DateParcer {
 	}
 	
 	
-	static func	getCombinedDate(date: Date, time: Date) -> Date? {
+	static func getCombinedDate(date: Date, time: Date) -> Date? {
 		let timeComponents: DateComponents = Calendar.current.dateComponents([.hour,.minute,.second,.timeZone], from: time)
 		let dateComponents: DateComponents = Calendar.current.dateComponents([.year,.month,.day], from: date)
 		let combined = DateComponents(calendar: .current, timeZone: timeComponents.timeZone, year: dateComponents.year, month: dateComponents.month, day: dateComponents.day, hour: timeComponents.hour, minute: timeComponents.minute, second: timeComponents.second)

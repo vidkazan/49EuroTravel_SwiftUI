@@ -74,9 +74,15 @@ extension JourneyViewData {
 		self.sunEvents = sunEvents
 		self.isReachable = true
 		self.badges = badges
-		self.refreshToken = journeyRef
+		self.refreshToken = Self.fixRefreshToken(token: journeyRef)
 		self.timeContainer = time
 		self.updatedAt = updatedAt
+	}
+	
+	static func fixRefreshToken(token : String?) -> String? {
+		let pattern = "\\$\\$\\d+\\$\\$\\$\\$\\$\\$"
+		let res = token?.replacingOccurrences(of: pattern, with: "",options: .regularExpression)
+		return res
 	}
 }
 

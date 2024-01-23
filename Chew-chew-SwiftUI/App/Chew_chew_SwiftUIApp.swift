@@ -42,26 +42,7 @@ struct Chew_chew_SwiftUIApp: App {
 
 struct AppViewPreview : PreviewProvider {
 	static var previews: some View {
-		let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData
-		if let mock = mock {
-			let viewData = constructJourneyListViewData(
-				journeysData: mock,
-				depStop: .init(),
-				arrStop: .init()
-			)
-			let data = JourneyListViewData(
-				journeysViewData: viewData,
-				data: mock,
-				depStop: .init(),
-				arrStop: .init()
-			)
-//			let vm = JourneyListViewModel(
-//				viewData: data
-//			)
-			ContentView()
-				.environmentObject(ChewViewModel())
-		} else {
-			Text("error")
-		}
+		ContentView()
+			.environmentObject(ChewViewModel())
 	}
 }

@@ -10,7 +10,6 @@ import SwiftUI
 
 struct SettingsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
-	
 	let arr = [0,5,7,10,15,20,30,45,60,90,120]
 	@State var transportModeSegment : Int
 	let allTypes : [LineType] = LineType.allCases
@@ -18,9 +17,7 @@ struct SettingsView: View {
 	@State var transferTime : Int
 	@State var showWithTransfers : Int
 	let oldSettings : ChewSettings
-	init(
-		settings : ChewSettings
-	) {
+	init(settings : ChewSettings) {
 		self.oldSettings = settings
 		self.transportModeSegment = settings.transportMode.id
 		self.selectedTypes = settings.customTransferModes
@@ -34,95 +31,17 @@ struct SettingsView: View {
 			self.transferTime = minutes
 		}
 	}
+	
 	var body: some View {
 		NavigationView {
-				Form {
-					Section(content: {
-						Picker(
-							selection: $transportModeSegment,
-							content: {
-								DTicketLabel()
-									.tag(ChewSettings.TransportMode.deutschlandTicket.id)
-								Label("All", systemImage: "train.side.front.car")
-									.tag(ChewSettings.TransportMode.all.id)
-								Label("Specific", systemImage: "pencil")
-									.tag(ChewSettings.TransportMode.custom.id)
-							},
-							label: {}
-						)
-						.pickerStyle(.inline)
-					}, header: {
-						Text("Transport types")
-					})
-					
-					if transportModeSegment == 2 {
-						Section(
-							content: {
-								ForEach(allTypes, id: \.id) { type in
-									Toggle(
-										isOn: Binding(
-											get: {
-												selectedTypes.contains(type)
-											},
-											set: { _ in
-												selectedTypes.toogle(val: type)
-											}
-										),
-										label: {
-											Text(type.shortValue)
-										}
-									)
-								}
-							},
-							header: {
-								Text("Chosen transport types")
-							})
-					}
-					// MARK: transfer settings
-					Section(content: {
-						Picker(
-							selection: $showWithTransfers,
-							content: {
-								Label("Direct", systemImage: "arrow.up.right")
-									.tag(0)
-								Label("With transfers", systemImage: "arrow.2.circlepath")
-									.tag(1)
-							}, label: {
-							})
-						.pickerStyle(.inline)
-						if showWithTransfers == 1 {
-							Picker(
-								selection: $transferTime,
-								content: {
-									ForEach(arr.indices,id: \.self) { index in
-										Text("\(String(arr[index])) min ")
-											.tag(index)
-									}
-								}, label: {
-									
-								}
-							)
-							.pickerStyle(.wheel)
-							.frame(idealHeight: 100)
-						}
-					}, header: {
-						Text("Connections")
-					})
-			}
-			.onChange(of: chewViewModel.state, perform: { state in
-				let settings = state.settings
-				self.transportModeSegment = settings.transportMode.id
-				self.selectedTypes = settings.customTransferModes
-				
-				switch settings.transferTime {
-				case .direct:
-					self.showWithTransfers = 0
-					self.transferTime = 0
-				case .time(minutes: let minutes):
-					self.showWithTransfers = 1
-					self.transferTime = minutes
+			Form {
+				transportTypes
+				if transportModeSegment == 2 {
+					segments
 				}
-			})
+				connections
+			}
+			.onChange(of: chewViewModel.state, perform: loadSettings)
 			.onDisappear {
 				chewViewModel.send(event: .didDismissBottomSheet)
 			}
@@ -142,8 +61,8 @@ struct SettingsView: View {
 						saveSettings()
 					}, label: {
 						Text("Save")
-							.chewTextSize(.big)
-							.frame(maxWidth: .infinity,minHeight: 35,maxHeight: 43)
+						.chewTextSize(.big)
+						.frame(maxWidth: .infinity,minHeight: 35,maxHeight: 43)
 					})
 				}
 			)}
@@ -162,54 +81,26 @@ struct SettingsView: View {
 	}
 }
 
-extension SettingsView {
-	private func saveSettings(){
-		let transportMode = {
-			switch self.transportModeSegment {
-			case 1:
-				return ChewSettings.TransportMode.deutschlandTicket
-			case 0:
-				return ChewSettings.TransportMode.all
-			case 2:
-				return ChewSettings.TransportMode.custom
-			default:
-				return ChewSettings.TransportMode.all
-			}
-		}()
-		let transfer : ChewSettings.TransferTime =  {
-			switch self.showWithTransfers {
-			case 0:
-				return ChewSettings.TransferTime.direct
-			case 1:
-				return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
-			default:
-				return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
-			}
-		}()
-		
-		let res = ChewSettings(
-			customTransferModes: selectedTypes,
-			transportMode: transportMode,
-			transferTime: transfer,
-			accessiblity: .partial,
-			walkingSpeed: .fast,
-			language: .english,
-			debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false),
-			startWithWalking: true,
-			withBicycle: false
-		)
-		chewViewModel.send(event: .didUpdateSettings(res))
-		if res != oldSettings {
-			chewViewModel.coreDataStore.updateSettings(
-				newSettings: res
-			)
-		}
-	}
-}
-
 struct SettingsPreview: PreviewProvider {
 	static var previews: some View {
 		SettingsView(settings: .init())
 			.environmentObject(ChewViewModel())
+	}
+}
+
+extension SettingsView {
+	func loadSettings(state : ChewViewModel.State) {
+		let settings = state.settings
+		self.transportModeSegment = settings.transportMode.id
+		self.selectedTypes = settings.customTransferModes
+		
+		switch settings.transferTime {
+		case .direct:
+			self.showWithTransfers = 0
+			self.transferTime = 0
+		case .time(minutes: let minutes):
+			self.showWithTransfers = 1
+			self.transferTime = minutes
+		}
 	}
 }

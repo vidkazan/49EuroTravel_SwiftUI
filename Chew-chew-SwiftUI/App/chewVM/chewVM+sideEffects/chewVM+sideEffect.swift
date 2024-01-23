@@ -39,7 +39,7 @@ extension ChewViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			
-			guard let user = self.coreDataStore.fetchUser() else {
+			guard self.coreDataStore.fetchUser() != nil else {
 				print("whenLoadingInitialData: user is nil: loading default data")
 				return Just(Event.didLoadInitialData(ChewSettings()))
 					.eraseToAnyPublisher()

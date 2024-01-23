@@ -82,8 +82,8 @@ extension JourneyFollowViewModel {
 		
 		var description : String {
 			switch self {
-			case .error(let action):
-				return "error \(action.description)"
+			case .error(let error):
+				return "error \(error.description)"
 			case .idle:
 				return "idle"
 			case .updating:
@@ -95,7 +95,7 @@ extension JourneyFollowViewModel {
 	}
 	
 	enum Event {
-		case didFailToEdit(action : Action, msg: String)
+		case didFailToEdit(action : Action, error : any ChewError)
 		case didTapUpdate
 		case didUpdateData([JourneyFollowData])
 		
@@ -106,11 +106,11 @@ extension JourneyFollowViewModel {
 			journeyDetailsViewModel : JourneyDetailsViewModel?
 		)
 		case didEdit(data : [JourneyFollowData])
-		
+			
 		var description : String {
 			switch self {
-			case .didFailToEdit:
-				return "didFailToEdit"
+			case .didFailToEdit(action: let action, error: let error):
+				return "didFailToEdit: \(action): \(error)"
 			case .didEdit:
 				return "didEdit"
 			case .didTapEdit:
@@ -119,6 +119,36 @@ extension JourneyFollowViewModel {
 				return "didTapUpdate"
 			case .didUpdateData:
 				return "didUpdatedData"
+			}
+		}
+	}
+	
+	enum Error : ChewError {
+		static func == (lhs: Error, rhs: Error) -> Bool {
+			return lhs.description == rhs.description
+		}
+		
+		func hash(into hasher: inout Hasher) {
+			switch self {
+			case .inputValIsNil,
+				.alreadyContains,
+				.notFoundInFollowList:
+				break
+			}
+		}
+		case inputValIsNil(_ msg: String)
+		case alreadyContains(_ msg: String)
+		case notFoundInFollowList(_ msg: String)
+		
+		
+		var description : String  {
+			switch self {
+			case .inputValIsNil(let msg):
+				return "Input value is nil: \(msg)"
+			case.alreadyContains(let msg):
+				return "Already contains: \(msg)"
+			case .notFoundInFollowList(let msg):
+				return "notFoundInFollowList: \(msg)"
 			}
 		}
 	}

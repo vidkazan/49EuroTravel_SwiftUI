@@ -73,16 +73,13 @@ func constructJourneyViewData(
 	)
 	
 	return JourneyViewData(
-		origin: journey.legs.first?.origin?.name ?? journey.legs.first?.origin?.address ?? "Origin(journeyViewData)",
-		destination: journey.legs.last?.destination?.name ?? journey.legs.last?.destination?.address ?? "Destination(journeyViewData)",
-		durationLabelText: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: timeContainer.durationInMinutes) ?? "duration",
-		legs: legsData,
-		transferCount: constructTransferCount(legs: legsData),
-		sunEvents: sunEventService.getSunEvents(),
-		isReachable: isReachable,
+		journeyRef: journey.refreshToken,
 		badges: constructBadges(remarks: remarks,isReachable: isReachable),
-		refreshToken: journey.refreshToken,
-		timeContainer: timeContainer,
+		sunEvents: sunEventService.getSunEvents(),
+		legs: legsData,
+		depStopName: journey.legs.first?.origin?.name ?? journey.legs.first?.origin?.address ?? "Origin(journeyViewData)",
+		arrStopName: journey.legs.last?.destination?.name ?? journey.legs.last?.destination?.address ?? "Destination(journeyViewData)",
+		time: timeContainer,
 		updatedAt: realtimeDataUpdatedAt
 	)
 }

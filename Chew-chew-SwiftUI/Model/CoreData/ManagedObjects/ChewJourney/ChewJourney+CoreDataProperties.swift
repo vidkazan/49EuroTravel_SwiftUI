@@ -32,23 +32,23 @@ extension ChewJourney {
 		using managedObjectContext: NSManagedObjectContext) {
 			self.init(context: managedObjectContext)
 //				print("> ⚡️ create \(ChewJourney.self) thread: ",Thread.current, "context:",managedObjectContext)
-				self.isActive = false
-				self.journeyRef = ref
+			self.isActive = false
+			self.journeyRef = ref
 			self.updatedAt = Date.now.timeIntervalSince1970
-				self.user = user
-				let _ = ChewTime(
-					context: managedObjectContext,
-					container: viewData.timeContainer,
-					cancelled: !viewData.isReachable,
-					for: self
-				)
-				viewData.legs.forEach {
-					let _ = ChewLeg(context: managedObjectContext,leg: $0,for: self)
-				}
-				viewData.sunEvents.forEach {
-					let _ = ChewSunEvent(context: managedObjectContext,sun: $0,for: self)
-				}
+			self.user = user
+			let _ = ChewTime(
+				context: managedObjectContext,
+				container: viewData.timeContainer,
+				cancelled: !viewData.isReachable,
+				for: self
+			)
+			viewData.legs.forEach {
+				let _ = ChewLeg(context: managedObjectContext,leg: $0,for: self)
+			}
+			viewData.sunEvents.forEach {
+				let _ = ChewSunEvent(context: managedObjectContext,sun: $0,for: self)
+			}
 			let _ = Location(context: managedObjectContext,stop: depStop,parent: .followedJourneyDepStop(self))
 			let _ = Location(context: managedObjectContext,stop: arrStop,parent: .followedJourneyArrStop(self))
-			}
+		}
 }

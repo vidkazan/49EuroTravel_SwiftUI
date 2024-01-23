@@ -87,8 +87,8 @@ struct JourneyListView: View {
 						}
 						.onAppear {
 							if firstAppear == true {
-								firstAppear.toggle()
 								val.scrollTo(1, anchor: .top)
+								firstAppear.toggle()
 							}
 						}
 					}
