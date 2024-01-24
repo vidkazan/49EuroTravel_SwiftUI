@@ -24,9 +24,8 @@ struct AlertView: View {
 					.frame(maxWidth: .infinity,maxHeight: 35)
 					.overlay(alignment: .trailing) {
 						HStack {
-							Button(action: {
-								UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
-							}, label: {
+							Button(
+								action: type.infoAction, label: {
 								Label("", systemImage: "info.circle")
 									.labelStyle(.iconOnly)
 									.foregroundColor(.white)

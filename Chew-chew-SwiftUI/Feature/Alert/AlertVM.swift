@@ -85,6 +85,17 @@ extension AlertViewModel {
 			}
 		}
 		
+		var infoAction : () -> Void {
+			switch self {
+			case .offlineMode:
+				return {}
+			case .userLocation:
+				return {
+					UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+				}
+			}
+		}
+		
 		var badgeType : Badges {
 			switch self {
 			case .offlineMode:
