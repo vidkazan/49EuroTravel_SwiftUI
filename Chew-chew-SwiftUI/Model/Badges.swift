@@ -50,6 +50,7 @@ enum StopsCountBadgeMode {
 }
 
 enum Badges : Hashable {
+	case failedToGetUserLocation
 	case offlineMode
 	case departureArrivalStops(departure: String,arrival: String)
 	case changesCount(_ count : Int)
@@ -72,6 +73,8 @@ enum Badges : Hashable {
 	
 	var badgeDefaultStyle : BadgeBackgroundBaseStyle {
 		switch self {
+		case .failedToGetUserLocation:
+			return .primary
 		case .offlineMode:
 			return .primary
 		case .departureArrivalStops:
@@ -111,6 +114,8 @@ enum Badges : Hashable {
 	
 	var badgeData : BadgeData {
 		switch self {
+		case .failedToGetUserLocation:
+			return BadgeData(name: "Failed to get user Location")
 		case .offlineMode:
 			return BadgeData(name: "Offline Mode")
 		case .timeDepartureTimeArrival:

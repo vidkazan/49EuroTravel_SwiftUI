@@ -23,6 +23,7 @@ struct ContentView: View {
 	
 	var body: some View {
 		VStack(spacing: 0) {
+			
 			AlertView(alertVM: chewViewModel.alertViewModel)
 			MainContentView()
 		}

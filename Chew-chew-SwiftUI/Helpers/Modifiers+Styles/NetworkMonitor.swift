@@ -18,11 +18,11 @@ class NetworkMonitor {
 		networkMonitor.pathUpdateHandler = { path in
 			switch path.status {
 			case .requiresConnection:
-				alertVM?.send(event: .didRequestShow)
+				alertVM?.send(event: .didRequestShow(.offlineMode))
 			case .satisfied:
-				alertVM?.send(event: .didTapDismiss)
+				alertVM?.send(event: .didTapDismiss(.offlineMode))
 			case .unsatisfied:
-				alertVM?.send(event: .didRequestShow)
+				alertVM?.send(event: .didRequestShow(.offlineMode))
 			@unknown default:
 				fatalError("\(Self.self): unknown networkMonitor status")
 			}

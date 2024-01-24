@@ -16,40 +16,65 @@ struct AlertView: View {
 		switch alertVM.state.status {
 		case .hidden,.start:
 			EmptyView()
-		case .showing,.updating:
+		case .showing(let type),.updating(let type):
 			ZStack {
 				RoundedRectangle(cornerRadius: 10)
-					.fill(Color.chewFillBluePrimary)
+					.fill(type.bgColor)
 					.cornerRadius(10)
 					.frame(maxWidth: .infinity,maxHeight: 35)
 					.overlay(alignment: .trailing) {
-						Button(action: {
-							
-						}, label: {
-							Label("", systemImage: "arrow.clockwise")
-								.labelStyle(.iconOnly)
-								.foregroundColor(.white)
-								.chewTextSize(.big)
-								.lineLimit(1)
-						})
-						.padding(.horizontal,15)
+						HStack {
+							Button(action: {
+								UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+							}, label: {
+								Label("", systemImage: "info.circle")
+									.labelStyle(.iconOnly)
+									.foregroundColor(.white)
+									.chewTextSize(.big)
+									.lineLimit(1)
+							})
+							.padding(.leading,15)
+							Spacer()
+							Button(action: {
+								switch type.action {
+								case .dismiss:
+									alertVM.send(event: .didTapDismiss(type))
+								case .reload(let action):
+									action()
+								case .none:
+									break
+								}
+							}, label: {
+								if case .none = type.action {
+									EmptyView()
+								} else {
+									Label("", systemImage: type.action.iconName)
+										.labelStyle(.iconOnly)
+										.foregroundColor(.chewFillAccent)
+										.chewTextSize(.big)
+										.lineLimit(1)
+								}
+							})
+							.padding(.trailing,15)
+						}
 					}
-				BadgeView(.offlineMode)
+				BadgeView(type.badgeType)
 					.foregroundColor(.white)
-//					.badgeBackgroundStyle(.blue)
 					.chewTextSize(.medium)
 					.cornerRadius(10)
 			}
 			.padding(.horizontal,10)
 			.padding(.vertical,5)
-//			.background(Color.chewFillPrimary)
 		}
 	}
 }
 
 struct AlertViewPreview : PreviewProvider {
 	static var previews: some View {
-		AlertView(alertVM: .init(.showing))
+		VStack{
+			AlertView(alertVM: .init(.showing(.offlineMode)))
+			AlertView(alertVM: .init(.showing(.userLocation)))
+		}
 	}
 }
 

@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import Network
+import SwiftUI
 
 final class AlertViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
@@ -16,10 +17,6 @@ final class AlertViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	var networkMonitor : NetworkMonitor? = nil
-	
-	
-	
-	
 	
 	init(_ initaialStatus : Status = .start) {
 		self.state = State(
@@ -50,12 +47,55 @@ final class AlertViewModel : ObservableObject, Identifiable {
 
 
 extension AlertViewModel {
+	enum Action {
+		case none
+		case dismiss
+		case reload(_ perform: () -> Void)
+		
+		var iconName : String {
+			switch self {
+			case .dismiss:
+				return "xmark.circle"
+			case .none:
+				return ""
+			case .reload:
+				return "arrow.clockwise"
+			}
+		}
+	}
+	enum AlertType {
+		case offlineMode
+		case userLocation
+		
+		var bgColor : Color {
+			switch self {
+			case .offlineMode:
+				return Color.chewFillBluePrimary
+			case .userLocation:
+				return Color.chewFillRedPrimary.opacity(0.5)
+			}
+		}
+		
+		var action : Action {
+			switch self {
+			case .offlineMode:
+				return .none
+			case .userLocation:
+				return .dismiss
+			}
+		}
+		
+		var badgeType : Badges {
+			switch self {
+			case .offlineMode:
+				return .offlineMode
+			case .userLocation:
+				return .failedToGetUserLocation
+			}
+		}
+	}
 	struct State : Equatable {
 		let status : Status
-
-		init(status: Status) {
-			self.status = status
-		}
 	}
 	
 	enum Status : Equatable {
@@ -64,8 +104,8 @@ extension AlertViewModel {
 		}
 		case start
 		case hidden
-		case updating
-		case showing
+		case updating(_ type: AlertType)
+		case showing(_ type: AlertType)
 		
 		var description : String {
 			switch self {
@@ -73,29 +113,29 @@ extension AlertViewModel {
 				return "start"
 			case .hidden:
 				return "hidden"
-			case .showing:
-				return "showing"
-			case .updating:
-				return "updating"
+			case .showing(let type):
+				return "showing \(type)"
+			case .updating(let type):
+				return "updating \(type)"
 			}
 		}
 	}
 	
 	enum Event {
 		case didLoadInitialData
-		case didRequestUpdate
-		case didTapDismiss
-		case didRequestShow
+		case didRequestUpdate(_ type : AlertType)
+		case didTapDismiss(_ type : AlertType)
+		case didRequestShow(_ type : AlertType)
 		var description : String {
 			switch self {
 			case .didLoadInitialData:
 				return "didLoadInitialData"
-			case .didTapDismiss:
-				return "didTapDismiss"
-			case .didRequestShow:
-				return "didRequestShow"
-			case .didRequestUpdate:
-				return "didRequestReload"
+			case .didTapDismiss(let type):
+				return "didTapDismiss \(type)"
+			case .didRequestShow(let type):
+				return "didRequestShow \(type)"
+			case .didRequestUpdate(let type):
+				return "didRequestReload \(type)"
 			}
 		}
 	}
@@ -119,13 +159,13 @@ extension AlertViewModel {
 			case .didLoadInitialData,.didTapDismiss:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
-			case .didRequestUpdate:
+			case .didRequestUpdate(let type):
 				return State(
-					status: .updating
+					status: .updating(type)
 				)
-			case .didRequestShow:
+			case .didRequestShow(let type):
 				return State(
-					status: .showing
+					status: .showing(type)
 				)
 			}
 		case .showing:
@@ -133,9 +173,9 @@ extension AlertViewModel {
 			case .didLoadInitialData,.didRequestShow:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
-			case .didRequestUpdate:
+			case .didRequestUpdate(let type):
 				return State(
-					status: .updating
+					status: .updating(type)
 				)
 			case .didTapDismiss:
 				return State(
@@ -151,9 +191,9 @@ extension AlertViewModel {
 				return State(
 					status: .hidden
 				)
-			case .didRequestShow:
+			case .didRequestShow(let type):
 				return State(
-					status: .showing
+					status: .showing(type)
 				)
 			}
 		}
