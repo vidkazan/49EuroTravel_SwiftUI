@@ -356,6 +356,7 @@
 		7D7547B32B616E3D002BE434 /* ContentView+sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+sheet.swift"; sourceTree = "<group>"; };
 		7D7547B52B616EA9002BE434 /* ContentView+onStateChange.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView+onStateChange.swift"; sourceTree = "<group>"; };
 		7D7547B72B616FD3002BE434 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
+		7D7547BA2B61935A002BE434 /* Placeholder.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Placeholder.json; sourceTree = "<group>"; };
 		7D787DD32B5D9E7D007D2A3A /* TimeAndSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndSettingsView.swift; sourceTree = "<group>"; };
 		7D787DD52B5DA113007D2A3A /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		7D787DD72B5DBF35007D2A3A /* JourneyListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyListHeader.swift; sourceTree = "<group>"; };
@@ -495,6 +496,7 @@
 		7D02CE112A97E4650048ADE6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7D33A9572B5343320005D723 /* Mock */,
 				7D33A9A22B54335E0005D723 /* View */,
 				7D33A9A12B54332C0005D723 /* Modifiers+Styles */,
 				7D62AF5C2AAA7BB800D3827D /* res.geojson */,
@@ -561,7 +563,6 @@
 			children = (
 				7D33A9532B5343320005D723 /* UITests */,
 				7D33A9542B5343320005D723 /* Config */,
-				7D33A9572B5343320005D723 /* Mock */,
 				7D33A9692B5343320005D723 /* UnitTests */,
 			);
 			path = Test;
@@ -633,6 +634,7 @@
 		7D33A9612B5343320005D723 /* JourneyList */ = {
 			isa = PBXGroup;
 			children = (
+				7D7547BA2B61935A002BE434 /* Placeholder.json */,
 				7D33A9622B5343320005D723 /* JourneyList-Neuss-Wolfsburg.json */,
 			);
 			path = JourneyList;

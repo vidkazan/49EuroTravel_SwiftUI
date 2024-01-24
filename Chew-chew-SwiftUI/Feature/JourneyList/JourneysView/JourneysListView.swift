@@ -18,7 +18,7 @@ struct JourneyListView: View {
 			case .loadingJourneyList:
 				VStack {
 					Spacer()
-					JourneyScrollViewLoader()
+					JourneyScrollViewLoader(viewData: ChewViewModel.mockViewData.first!)
 					Spacer()
 				}
 			case .journeysLoaded,.loadingRef,.failedToLoadLaterRef,.failedToLoadEarlierRef:
@@ -81,8 +81,6 @@ struct JourneyListView: View {
 									Label("", systemImage: "exclamationmark.circle.fill")
 								}
 							}
-							.transition(.opacity)
-							.animation(.spring(), value: journeyViewModel.state.status)
 							.cornerRadius(10)
 						}
 						.onAppear {

@@ -30,13 +30,13 @@ struct TripMockFiles {
 		)
 	)
 }
-#warning("make proper expected data")
 struct JourneyMockFiles{
 	static let journeyNeussWolfsburg = JourneyMockFile("Journey-Neuss-Wolfsburg.json")
 }
 //
 struct JourneyListMockFiles {
 	static let journeyNeussWolfsburg = JourneyListMockFile("JourneyList-Neuss-Wolfsburg.json")
+	static let journeyListPlaceholder = JourneyListMockFile("Placeholder.json")
 }
 //
 //struct LocationsMockFiles {
