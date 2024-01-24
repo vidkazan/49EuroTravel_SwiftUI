@@ -28,7 +28,9 @@ struct DatePickerView: View {
 			}
 			.padding(.horizontal,10)
 			.onDisappear {
-				chewVM.send(event: .didDismissBottomSheet)
+				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
+					chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
+				}
 			}
 			.navigationTitle("Date Settings")
 			.navigationBarTitleDisplayMode(.inline)

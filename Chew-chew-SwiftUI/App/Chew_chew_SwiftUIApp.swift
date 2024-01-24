@@ -32,10 +32,6 @@ struct Chew_chew_SwiftUIApp: App {
 			ContentView()
 				.background(Color.chewFillPrimary)
 				.environmentObject(chewJourneyViewModel)
-				.transition(.move(edge: .bottom))
-				.animation(.spring().speed(2), value: chewJourneyViewModel.state.status)
-				.animation(.spring().speed(2), value: chewJourneyViewModel.searchStopsViewModel.state.status)
-				.animation(.spring().speed(2), value: chewJourneyViewModel.alertViewModel.state.status)
 		}
 	}
 }
