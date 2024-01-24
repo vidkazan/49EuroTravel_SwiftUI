@@ -164,7 +164,7 @@ extension JourneyDetailsViewModel {
 					switch state.isFollowed {
 					case true:
 						guard chewVM.coreDataStore.updateJourney(
-							   viewData: state.data,
+							viewData: res,
 							   depStop: self.depStop,
 							   arrStop: self.arrStop) == true else {
 							return Event.didFailedToLoadJourneyData(

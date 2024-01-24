@@ -10,6 +10,11 @@
         <relationship name="sunEvents" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ChewSunEvent" inverseName="journey" inverseEntity="ChewSunEvent"/>
         <relationship name="time" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChewTime" inverseName="chewJourney" inverseEntity="ChewTime"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="chewJourneys" inverseEntity="ChewUser"/>
+        <uniquenessConstraints>
+            <uniquenessConstraint>
+                <constraint value="journeyRef"/>
+            </uniquenessConstraint>
+        </uniquenessConstraints>
     </entity>
     <entity name="ChewLeg" representedClassName="ChewLeg" syncable="YES">
         <attribute name="isReachable" attributeType="Boolean" usesScalarValueType="YES"/>
