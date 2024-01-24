@@ -106,7 +106,7 @@ extension ChewViewModel {
 				arrStop: state.arrStop,
 				settings: state.settings,
 				timeChooserDate: state.timeChooserDate,
-				status: .checkingSearchData
+				status: .idle
 			)
 			
 		case .didSetBothLocations(let dep, let arr):

@@ -20,7 +20,7 @@ class NetworkMonitor {
 			case .requiresConnection:
 				alertVM?.send(event: .didRequestShow(.offlineMode))
 			case .satisfied:
-				alertVM?.send(event: .didTapDismiss(.offlineMode))
+				alertVM?.send(event: .didRequestDismiss(.offlineMode))
 			case .unsatisfied:
 				alertVM?.send(event: .didRequestShow(.offlineMode))
 			@unknown default:

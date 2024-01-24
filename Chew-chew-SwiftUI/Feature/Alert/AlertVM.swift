@@ -11,6 +11,7 @@ import Network
 import SwiftUI
 
 final class AlertViewModel : ObservableObject, Identifiable {
+
 	@Published private(set) var state : State {
 		didSet { print("‼️ >  state:",state.status.description) }
 	}
@@ -18,8 +19,9 @@ final class AlertViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	var networkMonitor : NetworkMonitor? = nil
 	
-	init(_ initaialStatus : Status = .start) {
+	init(_ initaialStatus : Status = .start, alerts : Set<AlertType> = Set<AlertType>() ) {
 		self.state = State(
+			alerts: alerts,
 			status: initaialStatus
 		)
 		Publishers.system(
@@ -28,7 +30,8 @@ final class AlertViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenLoadinginitialData()
+				self.whenLoadinginitialData(),
+				Self.whenEditing()
 			]
 		)
 		.assign(to: \.state, on: self)
@@ -63,7 +66,7 @@ extension AlertViewModel {
 			}
 		}
 	}
-	enum AlertType {
+	enum AlertType : Equatable, Hashable, Comparable {
 		case offlineMode
 		case userLocation
 		
@@ -85,10 +88,10 @@ extension AlertViewModel {
 			}
 		}
 		
-		var infoAction : () -> Void {
+		var infoAction : (() -> Void)? {
 			switch self {
 			case .offlineMode:
-				return {}
+				return nil
 			case .userLocation:
 				return {
 					UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
@@ -106,47 +109,51 @@ extension AlertViewModel {
 		}
 	}
 	struct State : Equatable {
+		let alerts : Set<AlertType>
 		let status : Status
 	}
 	
-	enum Status : Equatable {
+	enum Status : Equatable, Hashable {
 		static func == (lhs: AlertViewModel.Status, rhs: AlertViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
 		case start
-		case hidden
-		case updating(_ type: AlertType)
-		case showing(_ type: AlertType)
+		case adding(_ type: AlertType)
+		case showing
+		case deleting(_ type: AlertType)
 		
 		var description : String {
 			switch self {
+			case .adding:
+				return "adding"
+			case .deleting:
+				return "deleting"
 			case .start:
 				return "start"
-			case .hidden:
-				return "hidden"
-			case .showing(let type):
-				return "showing \(type)"
-			case .updating(let type):
-				return "updating \(type)"
+			case .showing:
+				return "showing"
 			}
 		}
 	}
 	
 	enum Event {
 		case didLoadInitialData
-		case didRequestUpdate(_ type : AlertType)
-		case didTapDismiss(_ type : AlertType)
-		case didRequestShow(_ type : AlertType)
+		case didDismiss(_ types: Set<AlertType>)
+		case didAdd(_ types: Set<AlertType>)
+		case didRequestDismiss(_ type: AlertType)
+		case didRequestShow(_ type: AlertType)
 		var description : String {
 			switch self {
+			case .didAdd:
+				return "didAdd"
+			case .didDismiss:
+				return "didDismiss"
 			case .didLoadInitialData:
 				return "didLoadInitialData"
-			case .didTapDismiss(let type):
-				return "didTapDismiss \(type)"
-			case .didRequestShow(let type):
-				return "didRequestShow \(type)"
-			case .didRequestUpdate(let type):
-				return "didRequestReload \(type)"
+			case .didRequestDismiss:
+				return "didTapDismiss"
+			case .didRequestShow:
+				return "didRequestShow"
 			}
 		}
 	}
@@ -160,52 +167,51 @@ extension AlertViewModel {
 		case .start:
 			switch event {
 			case .didLoadInitialData:
-				return State(status: .hidden)
+				return State(
+					alerts: Set<AlertType>(),
+					status: .showing
+				)
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
-		case .hidden:
-			switch event {
-			case .didLoadInitialData,.didTapDismiss:
-				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
-				return state
-			case .didRequestUpdate(let type):
-				return State(
-					status: .updating(type)
-				)
-			case .didRequestShow(let type):
-				return State(
-					status: .showing(type)
-				)
-			}
 		case .showing:
 			switch event {
-			case .didLoadInitialData,.didRequestShow:
+			case .didLoadInitialData,.didAdd,.didDismiss:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
-			case .didRequestUpdate(let type):
-				return State(
-					status: .updating(type)
-				)
-			case .didTapDismiss:
-				return State(
-					status: .hidden
-				)
-			}
-		case .updating:
-			switch event {
-			case .didLoadInitialData,.didRequestUpdate:
-				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
-				return state
-			case .didTapDismiss:
-				return State(
-					status: .hidden
-				)
 			case .didRequestShow(let type):
 				return State(
-					status: .showing(type)
+					alerts: state.alerts,
+					status: .adding(type)
 				)
+			case .didRequestDismiss(let type):
+				return State(
+					alerts: state.alerts,
+					status: .deleting(type)
+				)
+			}
+		case .adding:
+			switch event {
+			case .didAdd(let types):
+				return State(
+					alerts: types,
+					status: .showing
+				)
+			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+				return state
+			}
+		case .deleting:
+			switch event {
+			case .didDismiss(let types):
+				return State(
+					alerts: types,
+					status: .showing
+				)
+			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+				return state
 			}
 		}
 	}
@@ -218,6 +224,29 @@ extension AlertViewModel {
 		}
 	}
 	
+	static func whenEditing() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			switch state.status {
+			case .adding(let alert):
+				let result = {
+					var tmp = state.alerts
+					tmp.insert(alert)
+					return tmp
+				}()
+				return Just(Event.didAdd(result)).eraseToAnyPublisher()
+			case .deleting(let alert):
+				let result = {
+					var tmp = state.alerts
+					tmp.remove(alert)
+					return tmp
+				}()
+				return Just(Event.didDismiss(result)).eraseToAnyPublisher()
+			default:
+				return Empty().eraseToAnyPublisher()
+			}
+		}
+	}
+	
 	func whenLoadinginitialData() -> Feedback<State, Event> {
 		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
 			guard case .start = state.status else {
@@ -225,15 +254,6 @@ extension AlertViewModel {
 			}
 			self?.networkMonitor = NetworkMonitor(alertVM: self)
 			return Just(Event.didLoadInitialData).eraseToAnyPublisher()
-		}
-	}
-	
-	static func checkInternetConnection(state : State) -> Feedback<State, Event> {
-		Feedback {(state: State) -> AnyPublisher<Event, Never> in
-			guard case .updating = state.status else {
-				return Empty().eraseToAnyPublisher()
-			}
-			return Empty().eraseToAnyPublisher()
 		}
 	}
 }

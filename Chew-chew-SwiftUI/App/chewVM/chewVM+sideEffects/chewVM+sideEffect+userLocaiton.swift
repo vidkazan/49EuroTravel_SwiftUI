@@ -20,7 +20,7 @@ extension ChewViewModel {
 				.map { res in
 					switch res {
 					case .success(let coord):
-						self.alertViewModel.send(event: .didTapDismiss(.userLocation))
+						self.alertViewModel.send(event: .didRequestDismiss(.userLocation))
 						return Event.didReceiveLocationData(coord)
 					case .failure:
 						self.alertViewModel.send(event: .didRequestShow(.userLocation))
