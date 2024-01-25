@@ -43,7 +43,7 @@ final class JourneyDetailsViewModel : ObservableObject, Identifiable, Equatable 
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenLoadingJourneyByRefreshToken(),
-				Self.whenLoadingFullLeg(),
+				self.whenLoadingFullLeg(),
 				self.whenChangingSubscribitionType(),
 				Self.whenLoadingIfNeeded(),
 				Self.whenLoadingLocationDetails()

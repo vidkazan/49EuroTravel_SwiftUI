@@ -50,6 +50,7 @@ enum StopsCountBadgeMode {
 }
 
 enum Badges : Hashable {
+	case fullLegError
 	case followError(_ action : JourneyFollowViewModel.Action)
 	case locationError
 	case offlineMode
@@ -74,6 +75,8 @@ enum Badges : Hashable {
 	
 	var badgeDefaultStyle : BadgeBackgroundBaseStyle {
 		switch self {
+		case .fullLegError:
+			return .primary
 		case .followError:
 			return .primary
 		case .locationError:
@@ -117,6 +120,8 @@ enum Badges : Hashable {
 	
 	var badgeData : BadgeData {
 		switch self {
+		case .fullLegError:
+			return BadgeData(name: "Failed to load full leg")
 		case .followError(let action):
 			return BadgeData(name: "Failed to \(action.description) this journey")
 		case .locationError:

@@ -28,8 +28,8 @@ extension ChewJourney {
 				$0.sunEvent()
 			}
 			let time = TimeContainer(chewTime: self.time)
-		#warning("add badges")
-			data =  JourneyFollowData(
+			#warning("add badges")
+			data = JourneyFollowData(
 				journeyRef: self.journeyRef,
 				journeyViewData: JourneyViewData(
 					journeyRef: journeyRef,

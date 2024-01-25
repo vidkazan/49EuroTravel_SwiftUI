@@ -72,6 +72,10 @@ struct BadgeView : View {
 	var body : some View {
 		Group {
 			switch badge {
+			case .fullLegError:
+				OneLineText(badge.badgeData.name)
+					.chewTextSize(size)
+					.padding(4)
 			case .followError:
 				OneLineText(badge.badgeData.name)
 					.chewTextSize(size)

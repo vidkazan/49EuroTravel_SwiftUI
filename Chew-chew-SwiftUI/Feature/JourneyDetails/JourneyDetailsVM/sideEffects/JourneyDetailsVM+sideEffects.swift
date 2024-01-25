@@ -57,17 +57,13 @@ extension JourneyDetailsViewModel {
 		}
 	}
 
-	static func whenLoadingFullLeg() -> Feedback<State, Event> {
-		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+	func whenLoadingFullLeg() -> Feedback<State, Event> {
+		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingFullLeg(leg: let leg) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-//			guard let tripId = leg.tripId else {
-//				
-//				return Just(Event.didFailToLoadTripData(error: Error.inputValIsNil("tripId")))
-//					.eraseToAnyPublisher()
-//			}
-			return fetchTrip(tripId: leg.tripId)
+			
+			return Self.fetchTrip(tripId: leg.tripId)
 				.mapError{ $0 }
 				.asyncFlatMap { res in
 					let leg = try constructLegDataThrows(
@@ -79,24 +75,21 @@ extension JourneyDetailsViewModel {
 					return Event.didLoadFullLegData(data: leg)
 				}
 				.catch { error in
-					Just(Event.didFailToLoadTripData(error: error as! (any ChewError)))
-					.eraseToAnyPublisher()
+					self?.chewVM?.alertViewModel.send(event: .didRequestShow(.fullLegError))
+					return Just(Event.didFailToLoadTripData(error: error as! (any ChewError))).eraseToAnyPublisher()
 				}
 				.eraseToAnyPublisher()
 		}
 	}
 	
 	
-	static func fetchTrip(tripId : String?) -> AnyPublisher<LegDTO,ApiServiceError> {
-		guard let tripId = tripId else {
-			return Empty().eraseToAnyPublisher()
-		}
+	static func fetchTrip(tripId : String) -> AnyPublisher<LegDTO,ApiServiceError> {
 		return ApiService().fetch(
 			TripDTO.self,
 			query: [],
 			type: ApiService.Requests.trips(tripId: tripId)
 		)
-		.map {return $0.trip}
+		.map { $0.trip }
 		.eraseToAnyPublisher()
 	}
 	

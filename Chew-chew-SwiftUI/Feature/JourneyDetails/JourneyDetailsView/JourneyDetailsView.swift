@@ -20,6 +20,8 @@ struct JourneyDetailsView: View {
 	}
 	
 	var body: some View {
+		VStack {
+			AlertsView(alertVM: chewVM.alertViewModel)
 			ZStack {
 				VStack {
 					// MARK: Header
@@ -53,7 +55,7 @@ struct JourneyDetailsView: View {
 						}
 					)
 					// MARK: LegDetails - action sheet
-					.confirmationDialog("Name", isPresented: $actionSheetIsPresented) {
+					.confirmationDialog("", isPresented: $actionSheetIsPresented) {
 						if case .actionSheet(leg: let leg)=viewModel.state.status,
 						   case .line = leg.legType {
 							Button(action: {
@@ -112,6 +114,7 @@ struct JourneyDetailsView: View {
 					}
 				})
 			}
+		}
 	}
 }
 

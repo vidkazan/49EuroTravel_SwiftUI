@@ -70,51 +70,59 @@ extension AlertViewModel {
 		static func < (lhs: AlertViewModel.AlertType, rhs: AlertViewModel.AlertType) -> Bool {
 			return lhs.id < rhs.id
 		}
-		
-		
+
 		case offlineMode
-		case userLocation
-		case journeyFollow(type : JourneyFollowViewModel.Action)
+		case fullLegError
+		case userLocationError
+		case journeyFollowError(type : JourneyFollowViewModel.Action)
 		
 		var id : Int {
 			switch self {
-			case .journeyFollow:
+			case .fullLegError:
+				return 3
+			case .journeyFollowError:
 				return 2
 			case .offlineMode:
 				return 0
-			case .userLocation:
+			case .userLocationError:
 				return 1
 			}
 		}
 		var bgColor : Color {
 			switch self {
-			case .journeyFollow:
+			case .fullLegError:
+				return Color.chewFillRedPrimary.opacity(0.5)
+			case .journeyFollowError:
 				return Color.chewFillRedPrimary.opacity(0.5)
 			case .offlineMode:
 				return Color.chewFillBluePrimary
-			case .userLocation:
+			case .userLocationError:
 				return Color.chewFillRedPrimary.opacity(0.5)
 			}
 		}
 		
 		var action : Action {
 			switch self {
-			case .journeyFollow:
+			case .fullLegError:
+				return .dismiss
+			case .journeyFollowError:
 				return .dismiss
 			case .offlineMode:
 				return .none
-			case .userLocation:
+			case .userLocationError:
 				return .dismiss
 			}
 		}
 		
 		var infoAction : (() -> Void)? {
 			switch self {
-			case .journeyFollow:
+			case .fullLegError:
+				return nil
+			case .journeyFollowError:
 				return nil
 			case .offlineMode:
 				return nil
-			case .userLocation:
+			case .userLocationError:
 				return {
 					UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,options: [:], completionHandler: nil)
 				}
@@ -123,11 +131,13 @@ extension AlertViewModel {
 		
 		var badgeType : Badges {
 			switch self {
-			case .journeyFollow(type: let action):
+			case .fullLegError:
+				return .fullLegError
+			case .journeyFollowError(type: let action):
 				return .followError(action)
 			case .offlineMode:
 				return .offlineMode
-			case .userLocation:
+			case .userLocationError:
 				return .locationError
 			}
 		}

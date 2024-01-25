@@ -41,9 +41,7 @@ extension ChewLeg {
 	func legViewData() -> LegViewData {
 		var stopsViewData = [StopViewData]()
 		
-		stopsViewData = stops.map {
-			$0.stopViewData()
-		}
+		stopsViewData = stops.map { $0.stopViewData() }
 		
 		let time = TimeContainer(chewTime: self.time)
 		let segments = constructSegmentsFromStopOverData(stopovers: stopsViewData)

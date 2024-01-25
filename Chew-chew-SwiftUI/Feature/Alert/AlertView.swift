@@ -94,7 +94,7 @@ struct AlertViewPreview : PreviewProvider {
 	static var previews: some View {
 		AlertsView(alertVM: .init(
 			.showing,
-			alerts: .init(arrayLiteral: .offlineMode,.userLocation)
+			alerts: .init(arrayLiteral: .offlineMode,.userLocationError)
 		))
 	}
 }
