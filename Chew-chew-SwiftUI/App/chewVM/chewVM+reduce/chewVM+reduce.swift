@@ -13,10 +13,8 @@ extension ChewViewModel {
 		switch state.status {
 		case .idle:
 			return reduceIdle(state, event)
-		case .editingDepartureStop:
-			return reduceEditingDepartureStop(state, event)
-		case .editingArrivalStop:
-			return reduceEditingArrivalStop(state, event)
+		case .editingStop:
+			return reduceEditingStop(state, event)
 		case .journeys:
 			return reduceJourneyList(state, event)
 		case .loadingLocation:

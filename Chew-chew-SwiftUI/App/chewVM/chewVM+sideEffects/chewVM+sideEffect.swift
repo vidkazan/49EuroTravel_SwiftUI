@@ -79,10 +79,8 @@ extension ChewViewModel {
 	func whenEditingStops() -> Feedback<State, Event> {
 		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
 			switch state.status {
-			case .editingArrivalStop:
-				self?.searchStopsViewModel.send(event: .didChangeFieldFocus(type: .arrival))
-			case .editingDepartureStop:
-				self?.searchStopsViewModel.send(event: .didChangeFieldFocus(type: .departure))
+			case .editingStop(let type):
+				self?.searchStopsViewModel.send(event: .didChangeFieldFocus(type: type))
 			default:
 				break
 			}

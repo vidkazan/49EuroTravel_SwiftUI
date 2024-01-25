@@ -8,11 +8,10 @@
 import Foundation
 
 extension ChewViewModel {
-	func reduceEditingArrivalStop(_ state:  State, _ event: Event) -> State {
-		guard case .editingArrivalStop = state.status else { return state }
+	func reduceEditingStop(_ state:  State, _ event: Event) -> State {
+		guard case .editingStop(let type) = state.status else { return state }
 		switch event {
-		case .onArrivalEdit,
-		 .onJourneyDataUpdated,
+		case .onJourneyDataUpdated,
 		 .didLoadInitialData,
 		 .didReceiveLocationData,
 		 .didFailToLoadLocationData,
@@ -23,13 +22,13 @@ extension ChewViewModel {
 		 .didTapCloseJourneyList:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
-		case .onDepartureEdit:
+		case .onStopEdit(let type):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
 				date: state.date,
-				status: .editingDepartureStop
+				status: .editingStop(type)
 			)
 		case .didTapSheet(let type):
 			return State(
@@ -48,12 +47,20 @@ extension ChewViewModel {
 				status: .checkingSearchData
 			)
 		case .onStopsSwitch:
+			let newType : LocationDirectionType = {
+				switch type {
+				case .departure:
+					return .arrival
+				case .arrival:
+					return .departure
+				}
+			}()
 			return State(
 				depStop: state.arrStop,
 				arrStop: state.depStop,
 				settings: state.settings,
 				date: state.date,
-				status: .editingDepartureStop
+				status: .editingStop(newType)
 			)
 		case .onNewStop(let stop, let type):
 			switch type {

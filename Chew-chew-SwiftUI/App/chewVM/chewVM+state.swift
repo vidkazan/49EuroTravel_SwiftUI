@@ -65,30 +65,23 @@ extension ChewViewModel {
 		case start
 		case loadingInitialData
 		case idle
-		
 		case checkingSearchData
 		case journeys(JourneyListViewModel)
-		
-		case editingDepartureStop
-		case editingArrivalStop
-		
+		case editingStop(LocationDirectionType)
 		case sheet(SheetType)
-		
 		case loadingLocation
 		
 		
 		var description : String {
 			switch self {
+			case .editingStop(let type):
+				return "editingStop \(type)"
 			case .sheet:
 				return "sheet"
 			case .idle:
 				return "idle"
 			case .checkingSearchData:
 				return "checkingSearchData"
-			case .editingDepartureStop:
-				return "editingDepartureStop"
-			case .editingArrivalStop:
-				return "editingArrivalStop"
 			case .journeys:
 				return "journeys"
 			case .loadingLocation:
@@ -108,21 +101,24 @@ extension ChewViewModel {
 	enum Event {
 		case didStartViewAppear
 		case didLoadInitialData(ChewSettings)
+	
+		case onStopEdit(LocationDirectionType)
+		case onNewStop(TextFieldContent,LocationDirectionType)
 		
-		case onDepartureEdit
-		case onArrivalEdit
 		case onStopsSwitch
 		
+		case didSetBothLocations(Stop,Stop)
+		
+		case onJourneyDataUpdated(depStop: Stop, arrStop : Stop)
 		
 		
 		case onNotEnoughSearchData
 		case didTapCloseJourneyList
 		
 		
-		case didSetBothLocations(Stop,Stop)
-		case onNewStop(TextFieldContent,LocationDirectionType)
 		
-		case onJourneyDataUpdated(depStop: Stop, arrStop : Stop)
+		
+		
 		
 		
 		case didTapSheet(SheetType)
@@ -139,14 +135,12 @@ extension ChewViewModel {
 		
 		var description : String {
 			switch self {
+			case .onStopEdit(let type):
+				return "onStopEdit \(type)"
 			case .onNotEnoughSearchData:
 				return "onNotEnoughSearchData"
 			case .didTapCloseJourneyList:
 				return "didTapCloseJourneyList"
-			case .onArrivalEdit:
-				return "onArrivalEdit"
-			case .onDepartureEdit:
-				return "onDepartureEdit"
 			case .onNewStop:
 				return "onNewStop"
 			case .onStopsSwitch:

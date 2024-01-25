@@ -43,7 +43,7 @@ struct SearchStopsView: View {
 						RoundedRectangle(cornerRadius: 10)
 							.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
 					)
-					if case .editingDepartureStop=chewViewModel.state.status {
+					if case .editingStop(.departure) = chewViewModel.state.status {
 						stopList(type: .departure)
 					}
 				}
@@ -69,30 +69,32 @@ struct SearchStopsView: View {
 					RoundedRectangle(cornerRadius: 10)
 						.stroke(fieldRedBorder.bottom == true ? .red : .clear, lineWidth: 1.5)
 				)
-				if case .editingArrivalStop=chewViewModel.state.status {
+				if case .editingStop(.arrival) = chewViewModel.state.status {
 					stopList(type: .arrival)
 				}
 			}
 			.background(Color.chewFillSecondary)
 			.cornerRadius(10)
-			.transition(.opacity)
+//			.transition(.opacity)
 //			.transition(.move(edge: .bottom))
-			.animation(.spring(), value: searchStopViewModel.state.status)
+//			.animation(.spring(), value: searchStopViewModel.state.status)
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
 			topText = state.depStop.text
 			bottomText = state.arrStop.text
 			
-			fieldRedBorder.bottom = state.arrStop.stop == nil && !state.arrStop.text.isEmpty && state.status != .editingArrivalStop
-			fieldRedBorder.top = state.depStop.stop == nil && !state.depStop.text.isEmpty && state.status != .editingDepartureStop
+			fieldRedBorder.bottom = state.arrStop.stop == nil && !state.arrStop.text.isEmpty && state.status != .editingStop(.arrival)
+			fieldRedBorder.top = state.depStop.stop == nil && !state.depStop.text.isEmpty && state.status != .editingStop(.departure)
 			
 			switch state.status {
-			case .editingDepartureStop:
-				focusedField =  .departure
-				topText = ""
-			case .editingArrivalStop:
-				focusedField =  .arrival
-				bottomText = ""
+			case .editingStop(let type):
+				focusedField = type
+				switch type {
+				case .arrival:
+					bottomText = ""
+				case .departure:
+					topText = ""
+				}
 			default:
 				focusedField = nil
 			}

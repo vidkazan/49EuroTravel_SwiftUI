@@ -24,9 +24,9 @@ extension SearchStopsView {
 				.frame(maxWidth: .infinity,alignment: .leading)
 				.focused(focusedFieldBinding, equals: type)
 				.onChange(of: text, perform: { text in
-					guard chewViewModel.state.status == .editingArrivalStop &&
+					guard chewViewModel.state.status == .editingStop(.arrival) &&
 							searchStopViewModel.state.type == .arrival ||
-							chewViewModel.state.status == .editingDepartureStop &&
+							chewViewModel.state.status == .editingStop(.departure) &&
 							searchStopViewModel.state.type == .departure else { return }
 					if focusedField == searchStopViewModel.state.type && text.count > 2 {
 						searchStopViewModel.send(event: .onSearchFieldDidChanged(text,type))
@@ -36,12 +36,7 @@ extension SearchStopsView {
 					}
 				})
 				.onTapGesture {
-					switch type {
-					case .departure:
-						chewViewModel.send(event: .onDepartureEdit)
-					case .arrival:
-						chewViewModel.send(event: .onArrivalEdit)
-					}
+					chewViewModel.send(event: .onStopEdit(type))
 				}
 				.onSubmit {
 					chewViewModel.send(event: .onNewStop(.textOnly(text), type))

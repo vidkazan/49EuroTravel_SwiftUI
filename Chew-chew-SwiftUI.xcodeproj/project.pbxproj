@@ -134,8 +134,7 @@
 		7D6C5C162AAF485F00DEFC57 /* chewVM+sideEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C152AAF485F00DEFC57 /* chewVM+sideEffect.swift */; };
 		7D6C5C182AAF486700DEFC57 /* chewVM+state.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C172AAF486700DEFC57 /* chewVM+state.swift */; };
 		7D6C5C1B2AAF495B00DEFC57 /* chewVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C1A2AAF495B00DEFC57 /* chewVM+reduce.swift */; };
-		7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C1E2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift */; };
-		7D6C5C212AAF4AE100DEFC57 /* chewVM+reduce+EditingDepartureStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C202AAF4AE100DEFC57 /* chewVM+reduce+EditingDepartureStop.swift */; };
+		7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingStop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C1E2AAF4ADC00DEFC57 /* chewVM+reduce+EditingStop.swift */; };
 		7D6C5C252AAF4B1300DEFC57 /* chewVM+reduce+Idle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C242AAF4B1300DEFC57 /* chewVM+reduce+Idle.swift */; };
 		7D6C5C272AAF4BD300DEFC57 /* chewVM+reduce+Journeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C262AAF4BD300DEFC57 /* chewVM+reduce+Journeys.swift */; };
 		7D6C5C2A2AAF77CF00DEFC57 /* JourneyDetailsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C292AAF77CF00DEFC57 /* JourneyDetailsVM.swift */; };
@@ -333,8 +332,7 @@
 		7D6C5C152AAF485F00DEFC57 /* chewVM+sideEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+sideEffect.swift"; sourceTree = "<group>"; };
 		7D6C5C172AAF486700DEFC57 /* chewVM+state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+state.swift"; sourceTree = "<group>"; };
 		7D6C5C1A2AAF495B00DEFC57 /* chewVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+reduce.swift"; sourceTree = "<group>"; };
-		7D6C5C1E2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+reduce+EditingArrivalStop.swift"; sourceTree = "<group>"; };
-		7D6C5C202AAF4AE100DEFC57 /* chewVM+reduce+EditingDepartureStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+reduce+EditingDepartureStop.swift"; sourceTree = "<group>"; };
+		7D6C5C1E2AAF4ADC00DEFC57 /* chewVM+reduce+EditingStop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+reduce+EditingStop.swift"; sourceTree = "<group>"; };
 		7D6C5C242AAF4B1300DEFC57 /* chewVM+reduce+Idle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+reduce+Idle.swift"; sourceTree = "<group>"; };
 		7D6C5C262AAF4BD300DEFC57 /* chewVM+reduce+Journeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+reduce+Journeys.swift"; sourceTree = "<group>"; };
 		7D6C5C292AAF77CF00DEFC57 /* JourneyDetailsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDetailsVM.swift; sourceTree = "<group>"; };
@@ -924,8 +922,7 @@
 				7D6C5C1A2AAF495B00DEFC57 /* chewVM+reduce.swift */,
 				7D6C5C242AAF4B1300DEFC57 /* chewVM+reduce+Idle.swift */,
 				7DE3599E2AB9E9430028CA59 /* chewVM+reduce+LoadingLocaiton.swift */,
-				7D6C5C1E2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift */,
-				7D6C5C202AAF4AE100DEFC57 /* chewVM+reduce+EditingDepartureStop.swift */,
+				7D6C5C1E2AAF4ADC00DEFC57 /* chewVM+reduce+EditingStop.swift */,
 				7D6C5C262AAF4BD300DEFC57 /* chewVM+reduce+Journeys.swift */,
 			);
 			path = "chewVM+reduce";
@@ -1438,7 +1435,7 @@
 				7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */,
 				7D9BB10D2B0CBF54008A3616 /* Location+CoreDataProperties.swift in Sources */,
 				7D181D692AD6F7C6003AB021 /* RecentSearchCell.swift in Sources */,
-				7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingArrivalStop.swift in Sources */,
+				7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingStop.swift in Sources */,
 				7D3957202B54911F00024736 /* JourneyDetailsView+Toolbar.swift in Sources */,
 				7D33A98E2B5343320005D723 /* MockType.swift in Sources */,
 				7D65DF1F2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift in Sources */,
@@ -1495,7 +1492,6 @@
 				7DAE1F6D2B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift in Sources */,
 				7D6C5C162AAF485F00DEFC57 /* chewVM+sideEffect.swift in Sources */,
 				7D08885E2B4A3F1B00283A34 /* CoreDataStore.swift in Sources */,
-				7D6C5C212AAF4AE100DEFC57 /* chewVM+reduce+EditingDepartureStop.swift in Sources */,
 				7D3E5F012AB321580064213A /* LocationManager.swift in Sources */,
 				7D787DD62B5DA113007D2A3A /* BottomView.swift in Sources */,
 				7D02CE232A97E64E0048ADE6 /* Query.swift in Sources */,

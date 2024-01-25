@@ -35,21 +35,13 @@ extension ChewViewModel {
 					)
 				)
 			)
-		case .onDepartureEdit:
+		case .onStopEdit(let type):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
 				date: state.date,
-				status: .editingDepartureStop
-			)
-		case .onArrivalEdit:
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .editingArrivalStop
+				status: .editingStop(type)
 			)
 		case .didTapSheet(let type):
 			return State(
