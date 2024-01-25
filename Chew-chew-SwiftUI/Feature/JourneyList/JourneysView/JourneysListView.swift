@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct JourneyListView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var journeyViewModel : JourneyListViewModel
@@ -18,7 +17,7 @@ struct JourneyListView: View {
 			case .loadingJourneyList:
 				VStack {
 					Spacer()
-					JourneyScrollViewLoader(viewData: ChewViewModel.mockViewData.first!)
+					JourneyListViewLoader()
 					Spacer()
 				}
 			case .journeysLoaded,.loadingRef,.failedToLoadLaterRef,.failedToLoadEarlierRef:

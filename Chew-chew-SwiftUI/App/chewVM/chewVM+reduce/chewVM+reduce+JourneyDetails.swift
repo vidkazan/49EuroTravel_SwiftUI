@@ -14,7 +14,7 @@ extension ChewViewModel {
 		case .didLoadInitialData,
 		 .onDepartureEdit,
 		 .onArrivalEdit,
-		 .onDatePickerDidPressed,
+		 .didTapDatePicker,
 		 .onNewStop,
 		 .onStopsSwitch,
 		 .onNewDate(_),

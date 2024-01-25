@@ -34,6 +34,7 @@ extension SettingsView {
 		}()
 		
 		let res = ChewSettings(
+			onboarding: false,
 			customTransferModes: selectedTypes,
 			transportMode: transportMode,
 			transferTime: transfer,

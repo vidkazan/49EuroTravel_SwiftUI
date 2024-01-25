@@ -94,43 +94,6 @@
 						{
 							"stop": {
 								"type": "stop",
-								"id": "8000274",
-								"name": "Neuss Hbf",
-								"location": {
-									"type": "location",
-									"id": "8000274",
-									"latitude": 51.204373,
-									"longitude": 6.684415
-								},
-								"products": {
-									"nationalExpress": true,
-									"national": false,
-									"regionalExpress": true,
-									"regional": true,
-									"suburban": true,
-									"bus": true,
-									"ferry": false,
-									"subway": true,
-									"tram": true,
-									"taxi": true
-								}
-							},
-							"arrival": null,
-							"plannedArrival": null,
-							"arrivalDelay": null,
-							"arrivalPlatform": null,
-							"arrivalPrognosisType": null,
-							"plannedArrivalPlatform": null,
-							"departure": "2023-11-27T13:36:00+01:00",
-							"plannedDeparture": "2023-11-27T13:36:00+01:00",
-							"departureDelay": 0,
-							"departurePlatform": "1",
-							"departurePrognosisType": "prognosed",
-							"plannedDeparturePlatform": "1"
-						},
-						{
-							"stop": {
-								"type": "stop",
 								"id": "8000233",
 								"name": "Löhne(Westf)",
 								"location": {
@@ -152,92 +115,18 @@
 									"taxi": true
 								}
 							},
-							"arrival": "2023-11-27T16:13:00+01:00",
-							"plannedArrival": "2023-11-27T16:13:00+01:00",
+							"arrival": "2023-11-27T13:13:00+01:00",
+							"plannedArrival": "2023-11-27T13:13:00+01:00",
 							"arrivalDelay": 0,
 							"arrivalPlatform": "12",
 							"arrivalPrognosisType": "prognosed",
 							"plannedArrivalPlatform": "12",
-							"departure": "2023-11-27T16:14:00+01:00",
-							"plannedDeparture": "2023-11-27T16:14:00+01:00",
+							"departure": "2023-11-27T13:14:00+01:00",
+							"plannedDeparture": "2023-11-27T13:14:00+01:00",
 							"departureDelay": 0,
 							"departurePlatform": "12",
 							"departurePrognosisType": "prognosed",
 							"plannedDeparturePlatform": "12"
-						},
-						{
-							"stop": {
-								"type": "stop",
-								"id": "8000732",
-								"name": "Bad Oeynhausen",
-								"location": {
-									"type": "location",
-									"id": "8000732",
-									"latitude": 52.205447,
-									"longitude": 8.796439
-								},
-								"products": {
-									"nationalExpress": true,
-									"national": true,
-									"regionalExpress": false,
-									"regional": true,
-									"suburban": false,
-									"bus": true,
-									"ferry": false,
-									"subway": false,
-									"tram": false,
-									"taxi": true
-								}
-							},
-							"arrival": "2023-11-27T16:18:00+01:00",
-							"plannedArrival": "2023-11-27T16:18:00+01:00",
-							"arrivalDelay": 0,
-							"arrivalPlatform": "1",
-							"arrivalPrognosisType": "prognosed",
-							"plannedArrivalPlatform": "1",
-							"departure": "2023-11-27T16:19:00+01:00",
-							"plannedDeparture": "2023-11-27T16:19:00+01:00",
-							"departureDelay": 0,
-							"departurePlatform": "1",
-							"departurePrognosisType": "prognosed",
-							"plannedDeparturePlatform": "1"
-						},
-						{
-							"stop": {
-								"type": "stop",
-								"id": "8004868",
-								"name": "Porta Westfalica",
-								"location": {
-									"type": "location",
-									"id": "8004868",
-									"latitude": 52.242645,
-									"longitude": 8.919627
-								},
-								"products": {
-									"nationalExpress": false,
-									"national": false,
-									"regionalExpress": false,
-									"regional": true,
-									"suburban": false,
-									"bus": true,
-									"ferry": false,
-									"subway": false,
-									"tram": false,
-									"taxi": true
-								}
-							},
-							"arrival": "2023-11-27T16:24:00+01:00",
-							"plannedArrival": "2023-11-27T16:24:00+01:00",
-							"arrivalDelay": 0,
-							"arrivalPlatform": "1",
-							"arrivalPrognosisType": "prognosed",
-							"plannedArrivalPlatform": "1",
-							"departure": "2023-11-27T16:25:00+01:00",
-							"plannedDeparture": "2023-11-27T16:25:00+01:00",
-							"departureDelay": 0,
-							"departurePlatform": "1",
-							"departurePrognosisType": "prognosed",
-							"plannedDeparturePlatform": "1"
 						},
 						{
 							"stop": {

@@ -114,6 +114,20 @@ extension CoreDataStore {
 
 // MARK: update
 extension CoreDataStore {
+	func disableOnboarding(){
+		asyncContext.performAndWait {
+			guard let user = self.user else {
+				print("📕 > update Settings : error : user entity is null")
+				return
+			}
+			guard let settings = user.settings else {
+				print("📕 > update Settings : error : settings entity is null")
+				return
+			}
+			settings.onboarding = false
+			self.saveAsyncContext()
+		}
+	}
 	func updateJourney(viewData : JourneyViewData,depStop : Stop, arrStop : Stop) -> Bool {
 		guard let ref = viewData.refreshToken else {
 			print("📕 > update Journeys : error : ref")

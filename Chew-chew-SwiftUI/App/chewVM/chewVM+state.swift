@@ -74,17 +74,22 @@ extension ChewViewModel {
 		static func == (lhs: ChewViewModel.Status, rhs: ChewViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
+		
 		case start
-		case checkingSearchData
 		case loadingInitialData
 		case idle
-		case editingDepartureStop
-		case editingArrivalStop
-		case datePicker
+		
+		case checkingSearchData
 		case journeys(JourneyListViewModel)
 		case journeyDetails(JourneyDetailsViewModel)
-		case loadingLocation
+		
+		case editingDepartureStop
+		case editingArrivalStop
 		case settings
+		case datePicker
+		
+		case loadingLocation
+		
 		
 		var description : String {
 			switch self {
@@ -114,29 +119,40 @@ extension ChewViewModel {
 		}
 	}
 	
+	enum SheetType {
+		case settings
+		case date
+	}
 	enum Event {
-		case onNotEnoughSearchData
-		case didTapCloseJourneyList
 		case didStartViewAppear
 		case didLoadInitialData(ChewSettings)
+		
 		
 		case onDepartureEdit
 		case onArrivalEdit
 		case onStopsSwitch
+		
+		
+		
+		case onNotEnoughSearchData
+		case didTapCloseJourneyList
+		
+		
 		case didSetBothLocations(Stop,Stop)
-		
-		
-		case onDatePickerDidPressed
-		case onNewDate(ChewDate)
-		
-		case didTapSettings
-		case didUpdateSettings(ChewSettings)
-		
 		case onNewStop(TextFieldContent,LocationDirectionType)
 		
+		case onJourneyDataUpdated(depStop: Stop, arrStop : Stop)
+		
+		
+//		case didTapSheet(SheetType)
+		case didTapDatePicker
+		case didTapSettings
+		
+		case onNewDate(ChewDate)
+		
+		case didUpdateSettings(ChewSettings)
 		case didDismissBottomSheet
 		
-		case onJourneyDataUpdated(depStop: Stop, arrStop : Stop)
 		
 		case didLocationButtonPressed
 		case didReceiveLocationData(CLLocationCoordinate2D)
@@ -152,7 +168,7 @@ extension ChewViewModel {
 				return "onArrivalEdit"
 			case .onDepartureEdit:
 				return "onDepartureEdit"
-			case .onDatePickerDidPressed:
+			case .didTapDatePicker:
 				return "onDatePickerDidPressed"
 			case .onNewStop:
 				return "onNewStop"

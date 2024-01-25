@@ -46,6 +46,7 @@ struct ChewSettings : Equatable,Hashable {
 	struct ChewDebugSettings: Equatable, Hashable {
 		let prettyJSON : Bool
 	}
+	let onboarding : Bool
 	let customTransferModes : Set<LineType>
 	let transportMode : TransportMode
 	let transferTime : TransferTime
@@ -68,5 +69,18 @@ extension ChewSettings {
 		self.transportMode = .deutschlandTicket
 		self.walkingSpeed = .fast
 		self.withBicycle = false
+		self.onboarding = true
+	}
+	init(settings : ChewSettings, onboarding : Bool) {
+		self.customTransferModes = settings.customTransferModes
+		self.accessiblity = settings.accessiblity
+		self.debugSettings = settings.debugSettings
+		self.language = settings.language
+		self.startWithWalking = settings.startWithWalking
+		self.transferTime = settings.transferTime
+		self.transportMode = settings.transportMode
+		self.walkingSpeed = settings.walkingSpeed
+		self.withBicycle = settings.withBicycle
+		self.onboarding = onboarding
 	}
 }

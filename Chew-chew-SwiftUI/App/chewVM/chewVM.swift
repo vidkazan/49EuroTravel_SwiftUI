@@ -13,10 +13,6 @@ import CoreData
 
 final class ChewViewModel : ObservableObject, Identifiable {
 	public let coreDataStore : CoreDataStore
-	
-	static let mockViewData = Array(constructJourneyListViewData(
-		journeysData: Mock.journeyList.journeyListPlaceholder.decodedData!,depStop: .init(),arrStop: .init())
-	)
 	@ObservedObject var  locationDataManager : LocationDataManager
 	@Published var alertViewModel : AlertViewModel
 	@Published var searchStopsViewModel : SearchStopsViewModel

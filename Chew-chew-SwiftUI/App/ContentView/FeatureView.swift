@@ -15,22 +15,17 @@ struct FeatureView: View {
 	var body: some View {
 		TabView {
 			Group {
-				switch chewViewModel.state.status {
-				case .start:
-					EmptyView()
-				default:
-					VStack(spacing: 5) {
-						SearchStopsView(vm: chewViewModel.searchStopsViewModel)
-						TimeAndSettingsView()
-						BottomView()
-					}
-					.padding(.horizontal,10)
-					.navigationTitle("ChewChew")
-					.navigationBarTitleDisplayMode(.inline)
-					.sheet(isPresented: $bottomSheetIsPresented,content: {sheet})
-					.onChange(of: chewViewModel.state, perform: {_ in onStateChange()})
-					.background(Color.chewFillPrimary)
+				VStack(spacing: 5) {
+					SearchStopsView(vm: chewViewModel.searchStopsViewModel)
+					TimeAndSettingsView()
+					BottomView()
 				}
+				.padding(.horizontal,10)
+				.navigationTitle("ChewChew")
+				.navigationBarTitleDisplayMode(.inline)
+				.sheet(isPresented: $bottomSheetIsPresented,content: {sheet})
+				.onChange(of: chewViewModel.state, perform: {_ in onStateChange()})
+				.background(Color.chewFillPrimary)
 			}
 			.tabItem {
 				Label("Search", systemImage: "magnifyingglass")

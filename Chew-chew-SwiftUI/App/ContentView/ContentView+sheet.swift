@@ -14,10 +14,18 @@ extension FeatureView {
 			case .settings:
 				SettingsView(settings: chewViewModel.state.settings)
 			case .datePicker:
-				DatePickerView(
-					date: chewViewModel.state.timeChooserDate.date,
-					time: chewViewModel.state.timeChooserDate.date
-				)
+				if #available(iOS 16.0, *) {
+					DatePickerView(
+						date: chewViewModel.state.timeChooserDate.date,
+						time: chewViewModel.state.timeChooserDate.date
+					)
+					.presentationDetents([.height(300),.large])
+				} else {
+					DatePickerView(
+						date: chewViewModel.state.timeChooserDate.date,
+						time: chewViewModel.state.timeChooserDate.date
+					)
+				}
 			default:
 				EmptyView()
 			}

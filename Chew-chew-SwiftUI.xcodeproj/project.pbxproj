@@ -145,7 +145,6 @@
 		7D6C5C312AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C302AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift */; };
 		7D6C5C332AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C322AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift */; };
 		7D6C5C362AAF7C4500DEFC57 /* JourneyDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C352AAF7C4500DEFC57 /* JourneyDetailsView.swift */; };
-		7D6CBEF92B55996600D4A86A /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 7D6CBEF72B55996600D4A86A /* Localizable.strings */; };
 		7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift */; };
 		7D6CCAF12B5FFB9200BCF62E /* SettingsView+saveSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */; };
 		7D6CCAF32B6004A200BCF62E /* VMTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */; };
@@ -200,6 +199,7 @@
 		7DBF1E592ABC522E009B85EF /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF1E582ABC522E009B85EF /* Badges.swift */; };
 		7DC0D2A12B2221D200B1FB5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D46ABE72B220B1600A4145E /* Assets.xcassets */; };
 		7DC0D2A32B2221E900B1FB5A /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DC0D2A22B2221D800B1FB5A /* Colors.xcassets */; };
+		7DC7F9D52B61C07500DAF6CB /* Placeholder.json in Resources */ = {isa = PBXBuildFile; fileRef = 7D7547BA2B61935A002BE434 /* Placeholder.json */; };
 		7DCB2BFF2AAC8831007C672A /* SearchLocationVM+reduce+Idle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCB2BFE2AAC8831007C672A /* SearchLocationVM+reduce+Idle.swift */; };
 		7DCD20102AC470AD00788B38 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DCD200F2AC470AD00788B38 /* Colors.swift */; };
 		7DD4A8D62AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD4A8D52AAC90B9001AA30C /* SearchLocationVM+reduce+Loading.swift */; };
@@ -346,7 +346,6 @@
 		7D6C5C302AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JourneyDetailsVM+reduce.swift"; sourceTree = "<group>"; };
 		7D6C5C322AAF7A4100DEFC57 /* chewVM+reduce+JourneyDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+reduce+JourneyDetails.swift"; sourceTree = "<group>"; };
 		7D6C5C352AAF7C4500DEFC57 /* JourneyDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDetailsView.swift; sourceTree = "<group>"; };
-		7D6CBEF82B55996600D4A86A /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportModesSection copy.swift"; sourceTree = "<group>"; };
 		7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+saveSettings.swift"; sourceTree = "<group>"; };
 		7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMTemplate.swift; sourceTree = "<group>"; };
@@ -874,7 +873,6 @@
 		7D6734B12A96334B00CBE9C1 /* Chew-chew-SwiftUI */ = {
 			isa = PBXGroup;
 			children = (
-				7D6CBEF72B55996600D4A86A /* Localizable.strings */,
 				7D33A9522B5343320005D723 /* Test */,
 				7D02CE112A97E4650048ADE6 /* Helpers */,
 				7D02CE0E2A97E3C00048ADE6 /* App */,
@@ -1334,10 +1332,10 @@
 				7D33A97F2B5343320005D723 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json in Resources */,
 				7D33A97C2B5343320005D723 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json in Resources */,
 				7D33A9702B5343320005D723 /* Tests.xctestplan in Resources */,
-				7D6CBEF92B55996600D4A86A /* Localizable.strings in Resources */,
 				7D62AF5D2AAA7BB800D3827D /* res.geojson in Resources */,
 				7D33A96D2B5343320005D723 /* Chew-chew-SwiftUI.xctestplan in Resources */,
 				7D33A9732B5343320005D723 /* Journey-Neuss-Wolfsburg.json in Resources */,
+				7DC7F9D52B61C07500DAF6CB /* Placeholder.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1586,17 +1584,6 @@
 			targetProxy = 7D932BA12B14E46A00A1A390 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		7D6CBEF72B55996600D4A86A /* Localizable.strings */ = {
-			isa = PBXVariantGroup;
-			children = (
-				7D6CBEF82B55996600D4A86A /* de */,
-			);
-			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		7D6734D12A96334D00CBE9C1 /* Debug */ = {

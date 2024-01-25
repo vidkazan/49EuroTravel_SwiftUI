@@ -60,7 +60,7 @@ extension ChewViewModel {
 				timeChooserDate: state.timeChooserDate,
 				status: .editingArrivalStop
 			)
-		case .onDatePickerDidPressed:
+		case .didTapDatePicker:
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,

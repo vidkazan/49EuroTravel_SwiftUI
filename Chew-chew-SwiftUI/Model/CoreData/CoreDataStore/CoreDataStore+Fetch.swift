@@ -22,6 +22,7 @@ extension CoreDataStore {
 		var settings : Settings?
 		var transferTypes : ChewSettings.TransferTime!
 		var transportMode : ChewSettings.TransportMode!
+		var onboarding : Bool!
 		 asyncContext.performAndWait {
 			settings = user?.settings
 			 transferTypes = {
@@ -31,11 +32,13 @@ extension CoreDataStore {
 				 return .time(minutes: Int(settings?.transferTime ?? 0))
 			 }()
 			 transportMode = ChewSettings.TransportMode(rawValue: Int(settings?.transportModeSegment ?? 0))
+			 onboarding = settings?.onboarding
 		}
 		guard settings != nil else { return ChewSettings() }
 		let transportModes = fetchTransportModes()
 		
 		return ChewSettings(
+			onboarding: onboarding,
 			customTransferModes: transportModes,
 			transportMode: transportMode,
 			transferTime: transferTypes,

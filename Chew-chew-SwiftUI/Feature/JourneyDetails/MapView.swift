@@ -73,10 +73,20 @@ struct MapView: View {
 	}
 }
 
-
 struct MapSheet: View {
 	@ObservedObject var viewModel : JourneyDetailsViewModel
 	var body: some View {
+		if #available(iOS 16.0, *) {
+			sheet
+				.presentationDetents([.medium])
+		} else {
+			sheet
+		}
+	}
+}
+
+extension MapSheet {
+	var sheet : some View {
 		NavigationView {
 			VStack(alignment: .center,spacing: 0) {
 				switch viewModel.state.status {
@@ -87,13 +97,13 @@ struct MapSheet: View {
 				case .locationDetails(coordRegion: let reg, stops: let stops, let route):
 					MapView(mapRect: reg, stops: stops,route: route)
 				case .error,
-					.loadedJourneyData,
-					.loading,
-					.fullLeg,
-					.loadingFullLeg,
-					.actionSheet,
-					.changingSubscribingState,
-					.loadingIfNeeded:
+						.loadedJourneyData,
+						.loading,
+						.fullLeg,
+						.loadingFullLeg,
+						.actionSheet,
+						.changingSubscribingState,
+						.loadingIfNeeded:
 					Spacer()
 				}
 			}
@@ -109,4 +119,3 @@ struct MapSheet: View {
 		}
 	}
 }
-

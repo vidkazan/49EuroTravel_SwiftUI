@@ -34,11 +34,14 @@ extension ChewViewModel {
 	}
 	
 	func whenLoadingInitialData() -> Feedback<State, Event> {
-		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingInitialData = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			
+			guard let self = self else {
+				return Just(Event.didLoadInitialData(ChewSettings()))
+					.eraseToAnyPublisher()
+			}
 			guard self.coreDataStore.fetchUser() != nil else {
 				print("whenLoadingInitialData: user is nil: loading default data")
 				return Just(Event.didLoadInitialData(ChewSettings()))
@@ -63,6 +66,9 @@ extension ChewViewModel {
 							$0.journeyViewData()
 						})
 					)
+				}
+				if settings.onboarding == true {
+					self.coreDataStore.disableOnboarding()
 				}
 			}
 			return Just(Event.didLoadInitialData(settings))

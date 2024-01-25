@@ -44,7 +44,7 @@ struct JourneyFollowView : View {
 								if let ref = vm.state.data.refreshToken {
 									chewVM.journeyFollowViewModel.send(event: .didTapEdit(
 										action: .deleting,
-										journeyRef: journey.journeyRef,
+										journeyRef: ref,
 										followData: nil,
 										journeyDetailsViewModel: vm
 									))

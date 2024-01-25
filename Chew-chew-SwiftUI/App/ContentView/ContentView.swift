@@ -6,27 +6,54 @@
 //
 
 import SwiftUI
-#warning("TODO: move all sheets to root sheet")
 #warning("TODO: split chewVM reducer")
 #warning("TODO: legView: place transport icons")
 #warning("TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce")
-#warning("TODO: .reducted (placeholder view) with mock data")
 #warning("TODO: bug: journey: if arrival stop cancelled, duration is NULL")
 #warning("TODO: bug: journey: stop is showing totally cancelled if only exit / entrance is allowed")
 #warning("TODO: error and alerts")
-#warning("TODO: sheet detents")
 
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
-		
+//	@State var sheetIsPresented : Bool = false
 	var body: some View {
 		NavigationView {
-			VStack(spacing: 5) {
-				AlertsView(alertVM: chewViewModel.alertViewModel)
-				FeatureView()
+			switch chewViewModel.state.status {
+			case .start:
+				EmptyView()
+			default:
+				VStack(spacing: 5) {
+					AlertsView(alertVM: chewViewModel.alertViewModel)
+					FeatureView()
+				}
+//				.sheet(
+//					isPresented: $sheetIsPresented,
+//					onDismiss: {
+//						sheetIsPresented = false
+//						chewViewModel.send(event: .didUpdateSettings(
+//							ChewSettings(
+//								settings: chewViewModel.state.settings,
+//								onboarding: false
+//							)
+//						))
+//						chewViewModel.coreDataStore.disableOnboarding()
+//					},
+//					content: {
+//						if chewViewModel.state.settings.onboarding == true {
+//							TabView {
+//								Text("Onboarding Blabla 1")
+//								Text("Onboarding Blabla 2")
+//							}
+//							.tabViewStyle(.page(indexDisplayMode: .always))
+//						}
+//					}
+//				)
 			}
 		}
+//		.onChange(of: chewViewModel.state.status, perform: { _ in
+//			sheetIsPresented = chewViewModel.state.settings.onboarding
+//		})
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)
 			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)
