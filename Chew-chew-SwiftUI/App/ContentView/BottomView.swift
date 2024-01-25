@@ -39,7 +39,8 @@ struct BottomView: View {
 					arrStop: .init()
 				)
 				let vm = JourneyListViewModel(
-					viewData: data
+					viewData: data,
+					chewVM: .init()
 				)
 				BottomView()
 					.environmentObject(ChewViewModel(initialState: .init(

@@ -27,6 +27,7 @@ extension ChewViewModel {
 				date: state.date,
 				status: .journeys(
 					JourneyListViewModel(
+						chewVM : self,
 						depStop: dep,
 						arrStop: arr,
 						date: state.date,

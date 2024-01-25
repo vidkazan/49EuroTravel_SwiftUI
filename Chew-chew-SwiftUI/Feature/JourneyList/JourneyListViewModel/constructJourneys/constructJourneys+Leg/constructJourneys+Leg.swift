@@ -253,7 +253,7 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 	}
 	
 	
-	let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.departure.actual) ?? 0
+	let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS, currentTS: container.date.departure.actual) ?? 0
 	let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) ?? 0
 	
 	let stops = constructLineStopOverData(leg: leg, type: constructLegType(leg: leg, legs: legs))

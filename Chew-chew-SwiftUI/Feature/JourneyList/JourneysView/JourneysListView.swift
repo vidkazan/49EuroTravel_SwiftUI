@@ -128,7 +128,8 @@ struct JourneyListPreview : PreviewProvider {
 				arrStop: .init()
 			)
 			let vm = JourneyListViewModel(
-				viewData: data
+				viewData: data,
+				chewVM: .init()
 			)
 			JourneyListView(journeyViewModel: vm)
 				.environmentObject(ChewViewModel())

@@ -82,5 +82,4 @@ extension JourneyDetailsViewModel {
 			}
 		}
 	}
-
 }

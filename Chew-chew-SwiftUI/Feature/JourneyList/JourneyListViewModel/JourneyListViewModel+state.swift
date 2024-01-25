@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 extension JourneyListViewModel {
 	
 	struct State : Equatable {
@@ -37,9 +38,9 @@ extension JourneyListViewModel {
 		case loadingRef(JourneyUpdateType)
 		case loadingJourneyList
 		case journeysLoaded
-		case failedToLoadLaterRef(ApiServiceError)
-		case failedToLoadEarlierRef(ApiServiceError)
-		case failedToLoadJourneyList(ApiServiceError)
+		case failedToLoadLaterRef(any ChewError)
+		case failedToLoadEarlierRef(any ChewError)
+		case failedToLoadJourneyList(any ChewError)
 		
 		var description : String {
 			switch self {
@@ -61,12 +62,12 @@ extension JourneyListViewModel {
 	
 	enum Event {
 		case onNewJourneyListData(JourneyListViewData,JourneyUpdateType)
-		case onFailedToLoadJourneyListData(ApiServiceError)
+		case onFailedToLoadJourneyListData(any ChewError)
 		case onReloadJourneyList
 		case onLaterRef
 		case onEarlierRef
-		case didFailToLoadLaterRef(ApiServiceError)
-		case didFailToLoadEarlierRef(ApiServiceError)
+		case didFailToLoadLaterRef(any ChewError)
+		case didFailToLoadEarlierRef(any ChewError)
 		var description : String {
 			switch self {
 			case .onNewJourneyListData:

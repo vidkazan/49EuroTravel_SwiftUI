@@ -65,7 +65,7 @@ struct ContentView: View {
 			if let mock = mock {
 				let viewData = constructJourneyListViewData(journeysData: mock,depStop: .init(),arrStop: .init())
 				let data = JourneyListViewData(journeysViewData: viewData,data: mock,depStop: .init(),arrStop: .init())
-				let vm = JourneyListViewModel(viewData: data)
+				let vm = JourneyListViewModel(viewData: data,chewVM: .init())
 				Group {
 					ContentView()
 						.environmentObject(ChewViewModel(initialState: .init(

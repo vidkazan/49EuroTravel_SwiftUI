@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 
 final class JourneyListViewModel : ObservableObject, Identifiable {
+	var chewVM : ChewViewModel?
 	var depStop : Stop
 	var arrStop : Stop
 	var date : ChewViewModel.ChewDate
@@ -22,7 +23,8 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	
 	// testing init
-	init(viewData : JourneyListViewData) {
+	init(viewData : JourneyListViewData, chewVM : ChewViewModel?) {
+		self.chewVM = chewVM
 		self.date = .now
 		self.followList = []
 		self.settings = ChewSettings()
@@ -50,12 +52,14 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	}
 	
 	init(
+		chewVM : ChewViewModel?,
 		depStop: Stop,
 		arrStop: Stop,
 		date: ChewViewModel.ChewDate,
 		settings : ChewSettings,
 		followList : [String]
 	) {
+		self.chewVM  = chewVM
 		self.depStop = depStop
 		self.arrStop = arrStop
 		self.date = date
@@ -88,4 +92,30 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	func send(event: Event) {
 		input.send(event)
 	}
+}
+
+
+extension JourneyListViewModel {
+	enum Error : ChewError {
+		static func == (lhs: Error, rhs: Error) -> Bool {
+			return lhs.description == rhs.description
+		}
+		
+		func hash(into hasher: inout Hasher) {
+			switch self {
+			case .inputValIsNil:
+				break
+			}
+		}
+		case inputValIsNil(_ msg: String)
+		
+		
+		var description : String  {
+			switch self {
+			case .inputValIsNil(let msg):
+				return "Input value is nil: \(msg)"
+			}
+		}
+	}
+
 }
