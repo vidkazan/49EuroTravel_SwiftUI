@@ -51,22 +51,9 @@ extension ChewViewModel {
 		var depStop : TextFieldContent
 		var arrStop : TextFieldContent
 		var settings : ChewSettings
-		var timeChooserDate : ChewDate
+		var date : ChewDate
 		var status : Status
 		
-		init(
-			depStop: TextFieldContent,
-			arrStop: TextFieldContent,
-			settings : ChewSettings,
-			timeChooserDate: ChewDate,
-			status: Status
-		) {
-			self.depStop = depStop
-			self.arrStop = arrStop
-			self.settings = settings
-			self.timeChooserDate = timeChooserDate
-			self.status = status
-		}
 	}
 	
 	
@@ -81,18 +68,19 @@ extension ChewViewModel {
 		
 		case checkingSearchData
 		case journeys(JourneyListViewModel)
-		case journeyDetails(JourneyDetailsViewModel)
 		
 		case editingDepartureStop
 		case editingArrivalStop
-		case settings
-		case datePicker
+		
+		case sheet(SheetType)
 		
 		case loadingLocation
 		
 		
 		var description : String {
 			switch self {
+			case .sheet:
+				return "sheet"
 			case .idle:
 				return "idle"
 			case .checkingSearchData:
@@ -101,16 +89,10 @@ extension ChewViewModel {
 				return "editingDepartureStop"
 			case .editingArrivalStop:
 				return "editingArrivalStop"
-			case .datePicker:
-				return "datePicker"
 			case .journeys:
 				return "journeys"
-			case .journeyDetails:
-				return "journeyDetails"
 			case .loadingLocation:
 				return "loadingLocation"
-			case .settings:
-				return "settings"
 			case .start:
 				return "start"
 			case .loadingInitialData:
@@ -126,7 +108,6 @@ extension ChewViewModel {
 	enum Event {
 		case didStartViewAppear
 		case didLoadInitialData(ChewSettings)
-		
 		
 		case onDepartureEdit
 		case onArrivalEdit
@@ -144,9 +125,7 @@ extension ChewViewModel {
 		case onJourneyDataUpdated(depStop: Stop, arrStop : Stop)
 		
 		
-//		case didTapSheet(SheetType)
-		case didTapDatePicker
-		case didTapSettings
+		case didTapSheet(SheetType)
 		
 		case onNewDate(ChewDate)
 		
@@ -168,8 +147,6 @@ extension ChewViewModel {
 				return "onArrivalEdit"
 			case .onDepartureEdit:
 				return "onDepartureEdit"
-			case .didTapDatePicker:
-				return "onDatePickerDidPressed"
 			case .onNewStop:
 				return "onNewStop"
 			case .onStopsSwitch:
@@ -188,14 +165,14 @@ extension ChewViewModel {
 				return "didSetBothLocations"
 			case .didDismissBottomSheet:
 				return "didDismissBottomSheet"
-			case .didTapSettings:
-				return "didTapSettings"
 			case .didUpdateSettings:
 				return "didUpdateSettings"
 			case .didLoadInitialData:
 				return "didLoadInitialData"
 			case .didStartViewAppear:
 				return "didStartViewAppear"
+			case .didTapSheet(let type):
+				return "didTapSheet \(type)"
 			}
 		}
 	}

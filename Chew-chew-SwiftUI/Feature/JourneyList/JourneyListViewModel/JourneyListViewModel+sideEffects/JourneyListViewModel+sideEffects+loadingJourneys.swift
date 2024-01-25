@@ -12,7 +12,7 @@ extension JourneyListViewModel {
 	func whenLoadingJourneyList() -> Feedback<State, Event> {
 		Feedback {(state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingJourneyList = state.status else { return Empty().eraseToAnyPublisher() }
-			return self.fetchJourneyList(dep: self.depStop, arr: self.arrStop, time: self.timeChooserDate.date,settings: self.settings)
+			return self.fetchJourneyList(dep: self.depStop, arr: self.arrStop, time: self.date.date,settings: self.settings)
 				.mapError{ $0 }
 				.asyncFlatMap { data in
 					let res = await constructJourneyListViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)

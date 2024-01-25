@@ -17,7 +17,7 @@ extension ChewViewModel {
 				depStop: state.arrStop,
 				arrStop: state.depStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .checkingSearchData
 			)
 		case .onNewDate(let date):
@@ -25,7 +25,7 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: date,
+				date: date,
 				status: .checkingSearchData
 			)
 		case .onDepartureEdit:
@@ -33,7 +33,7 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .editingDepartureStop
 			)
 		case .onArrivalEdit:
@@ -41,22 +41,23 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .editingArrivalStop
 			)
-		case .didTapDatePicker:
+		case .didTapSheet(let type):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
-				status: .datePicker)
+				date: state.date,
+				status: .sheet(type)
+			)
 		case .didTapCloseJourneyList:
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .idle
 			)
 		case .didLocationButtonPressed:
@@ -64,16 +65,8 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .loadingLocation)
-		case .didTapSettings:
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
-				status: .settings
-			)
 		case .didReceiveLocationData,
 			 .didFailToLoadLocationData,
 			 .didSetBothLocations(_, _),

@@ -10,7 +10,7 @@ import SwiftUI
 extension FeatureView {
 	func onStateChange() {
 		switch chewViewModel.state.status {
-		case .datePicker,.settings:
+		case .sheet:
 			bottomSheetIsPresented = true
 		default:
 			bottomSheetIsPresented = false

@@ -19,7 +19,7 @@ struct TimeAndSettingsView: View {
 			HStack {
 				TimeChoosingView(searchStopsVM: chewViewModel.searchStopsViewModel)
 				Button(action: {
-					chewViewModel.send(event: .didTapSettings)
+					chewViewModel.send(event: .didTapSheet(.settings))
 				}, label: {
 					Image(systemName: "gearshape")
 						.tint(.primary)

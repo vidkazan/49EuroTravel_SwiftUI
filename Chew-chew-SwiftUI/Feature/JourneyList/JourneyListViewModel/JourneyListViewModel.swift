@@ -12,7 +12,7 @@ import SwiftUI
 final class JourneyListViewModel : ObservableObject, Identifiable {
 	var depStop : Stop
 	var arrStop : Stop
-	var timeChooserDate : ChewViewModel.ChewDate
+	var date : ChewViewModel.ChewDate
 	var settings : ChewSettings
 	var followList : [String]
 	@Published private(set) var state : State {
@@ -23,7 +23,7 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	
 	// testing init
 	init(viewData : JourneyListViewData) {
-		self.timeChooserDate = .now
+		self.date = .now
 		self.followList = []
 		self.settings = ChewSettings()
 		self.depStop = .init(coordinates: .init(), type: .stop, stopDTO: nil)
@@ -52,13 +52,13 @@ final class JourneyListViewModel : ObservableObject, Identifiable {
 	init(
 		depStop: Stop,
 		arrStop: Stop,
-		timeChooserDate: ChewViewModel.ChewDate,
+		date: ChewViewModel.ChewDate,
 		settings : ChewSettings,
 		followList : [String]
 	) {
 		self.depStop = depStop
 		self.arrStop = arrStop
-		self.timeChooserDate = timeChooserDate
+		self.date = date
 		self.settings = settings
 		self.followList = followList
 		

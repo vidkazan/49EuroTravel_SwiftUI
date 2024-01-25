@@ -37,7 +37,7 @@ struct TimeChoosingView: View {
 				case .now:
 					chewVM.send(event: .onNewDate(.now))
 				case .specificDate:
-					chewVM.send(event: .didTapDatePicker)
+					chewVM.send(event: .didTapSheet(.date))
 				}
 			}
 		)
@@ -52,7 +52,7 @@ struct TimeChoosingView: View {
 				return "now"
 			case .specificDate:
 				return  DateParcer.getTimeAndDateStringFromDate(
-					date: chewVM.state.timeChooserDate.date
+					date: chewVM.state.date.date
 				)
 			}
 	}

@@ -11,21 +11,24 @@ extension FeatureView {
 	var sheet : some View {
 		Group {
 			switch chewViewModel.state.status {
-			case .settings:
-				SettingsView(settings: chewViewModel.state.settings)
-			case .datePicker:
-				if #available(iOS 16.0, *) {
-					DatePickerView(
-						date: chewViewModel.state.timeChooserDate.date,
-						time: chewViewModel.state.timeChooserDate.date
-					)
-					.presentationDetents([.height(300),.large])
-				} else {
-					DatePickerView(
-						date: chewViewModel.state.timeChooserDate.date,
-						time: chewViewModel.state.timeChooserDate.date
-					)
-				}
+			case .sheet(let type):
+				switch type {
+				case .settings:
+					SettingsView(settings: chewViewModel.state.settings)
+				case .date:
+					if #available(iOS 16.0, *) {
+						DatePickerView(
+							date: chewViewModel.state.date.date,
+							time: chewViewModel.state.date.date
+						)
+						.presentationDetents([.height(300),.large])
+					} else {
+						DatePickerView(
+							date: chewViewModel.state.date.date,
+							time: chewViewModel.state.date.date
+						)
+					}
+				}	
 			default:
 				EmptyView()
 			}

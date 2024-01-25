@@ -19,26 +19,17 @@ extension ChewViewModel {
 				.onNotEnoughSearchData:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
-		case .onJourneyDataUpdated:
-			guard let dep = state.depStop.stop,let arr = state.arrStop.stop else {
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					timeChooserDate: state.timeChooserDate,
-					status: .idle
-				)
-			}
+		case .onJourneyDataUpdated(depStop: let dep, arrStop: let arr):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .journeys(
 					JourneyListViewModel(
 						depStop: dep,
 						arrStop: arr,
-						timeChooserDate: state.timeChooserDate,
+						date: state.date,
 						settings: state.settings,
 						followList: self.journeyFollowViewModel.state.journeys.map { $0.journeyRef }
 					)
@@ -49,7 +40,7 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .editingDepartureStop
 			)
 		case .onArrivalEdit:
@@ -57,23 +48,23 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .editingArrivalStop
 			)
-		case .didTapDatePicker:
+		case .didTapSheet(let type):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
-				status: .datePicker
+				date: state.date,
+				status: .sheet(type)
 			)
 		case .onStopsSwitch:
 			return State(
 				depStop: state.arrStop,
 				arrStop: state.depStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status:  .checkingSearchData
 			)
 		case .onNewStop(let stop, let type):
@@ -83,7 +74,7 @@ extension ChewViewModel {
 					depStop: stop,
 					arrStop: state.arrStop,
 					settings: state.settings,
-					timeChooserDate: state.timeChooserDate,
+					date: state.date,
 					status: .checkingSearchData
 				)
 			case .arrival:
@@ -91,7 +82,7 @@ extension ChewViewModel {
 					depStop: state.depStop,
 					arrStop: stop,
 					settings: state.settings,
-					timeChooserDate: state.timeChooserDate,
+					date: state.date,
 					status: .checkingSearchData
 				)
 			}
@@ -100,7 +91,7 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .loadingLocation
 			)
 		case .onNewDate(let date):
@@ -108,7 +99,7 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: date,
+				date: date,
 				status: .checkingSearchData
 			)
 		case .didSetBothLocations(let dep, let arr):
@@ -116,7 +107,7 @@ extension ChewViewModel {
 				depStop: .location(dep),
 				arrStop: .location(arr),
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .checkingSearchData
 			)
 		case .didDismissBottomSheet:
@@ -124,23 +115,15 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .idle
-			)
-		case .didTapSettings:
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
-				status: .settings
 			)
 		case .didUpdateSettings(let settings):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .checkingSearchData
 			)
 		}

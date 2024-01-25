@@ -46,7 +46,7 @@ struct BottomView: View {
 						depStop: .textOnly("122"),
 						arrStop: .textOnly("123"),
 						settings: .init(),
-						timeChooserDate: .now,
+						date: .now,
 						status: .journeys(vm)
 					)))
 			} else {

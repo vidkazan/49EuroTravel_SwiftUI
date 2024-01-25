@@ -28,7 +28,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		depStop: .textOnly(""),
 		   arrStop: .textOnly(""),
 		   settings: ChewSettings(),
-		   timeChooserDate: .now,
+		   date: .now,
 		   status: .start
 	   )) {
 		let coreDataStore = CoreDataStore()
@@ -68,7 +68,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 			depStop: .textOnly(""),
 			arrStop: .textOnly(""),
 			settings: ChewSettings(),
-			timeChooserDate: .now,
+			date: .now,
 			status: .start
 		)
 	) {

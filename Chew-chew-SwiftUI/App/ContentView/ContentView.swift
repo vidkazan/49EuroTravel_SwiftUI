@@ -73,7 +73,7 @@ struct ContentView: View {
 							depStop: .textOnly(""),
 							arrStop: .textOnly(""),
 							settings: .init(),
-							timeChooserDate: .now,
+							date: .now,
 							status: .journeys(vm)
 						)))
 					ContentView()

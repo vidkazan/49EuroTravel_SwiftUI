@@ -28,23 +28,23 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .editingDepartureStop
 			)
-		case .didTapDatePicker:
+		case .didTapSheet(let type):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
-				status: .datePicker
+				date: state.date,
+				status: .sheet(type)
 			)
 		case .onNewDate(let date):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: date,
+				date: date,
 				status: .checkingSearchData
 			)
 		case .onStopsSwitch:
@@ -52,7 +52,7 @@ extension ChewViewModel {
 				depStop: state.arrStop,
 				arrStop: state.depStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .editingDepartureStop
 			)
 		case .onNewStop(let stop, let type):
@@ -62,7 +62,7 @@ extension ChewViewModel {
 					depStop: stop,
 					arrStop: state.arrStop,
 					settings: state.settings,
-					timeChooserDate: state.timeChooserDate,
+					date: state.date,
 					status: .checkingSearchData
 				)
 			case .arrival:
@@ -70,7 +70,7 @@ extension ChewViewModel {
 					depStop: state.depStop,
 					arrStop: stop,
 					settings: state.settings,
-					timeChooserDate: state.timeChooserDate,
+					date: state.date,
 					status: .checkingSearchData
 				)
 			}
@@ -79,7 +79,7 @@ extension ChewViewModel {
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .loadingLocation
 			)
 		case .didSetBothLocations(let dep, let arr):
@@ -87,16 +87,8 @@ extension ChewViewModel {
 				depStop: .location(dep),
 				arrStop: .location(arr),
 				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
+				date: state.date,
 				status: .checkingSearchData
-			)
-		case .didTapSettings:
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				timeChooserDate: state.timeChooserDate,
-				status: .settings
 			)
 		}
 	}
