@@ -67,11 +67,29 @@ extension AlertViewModel {
 		}
 	}
 	enum AlertType : Equatable, Hashable, Comparable {
+		static func < (lhs: AlertViewModel.AlertType, rhs: AlertViewModel.AlertType) -> Bool {
+			return lhs.id < rhs.id
+		}
+		
+		
 		case offlineMode
 		case userLocation
+		case journeyFollow(type : JourneyFollowViewModel.Action)
 		
+		var id : Int {
+			switch self {
+			case .journeyFollow:
+				return 2
+			case .offlineMode:
+				return 0
+			case .userLocation:
+				return 1
+			}
+		}
 		var bgColor : Color {
 			switch self {
+			case .journeyFollow:
+				return Color.chewFillRedPrimary.opacity(0.5)
 			case .offlineMode:
 				return Color.chewFillBluePrimary
 			case .userLocation:
@@ -81,6 +99,8 @@ extension AlertViewModel {
 		
 		var action : Action {
 			switch self {
+			case .journeyFollow:
+				return .dismiss
 			case .offlineMode:
 				return .none
 			case .userLocation:
@@ -90,21 +110,25 @@ extension AlertViewModel {
 		
 		var infoAction : (() -> Void)? {
 			switch self {
+			case .journeyFollow:
+				return nil
 			case .offlineMode:
 				return nil
 			case .userLocation:
 				return {
-					UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+					UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,options: [:], completionHandler: nil)
 				}
 			}
 		}
 		
 		var badgeType : Badges {
 			switch self {
+			case .journeyFollow(type: let action):
+				return .followError(action)
 			case .offlineMode:
 				return .offlineMode
 			case .userLocation:
-				return .failedToGetUserLocation
+				return .locationError
 			}
 		}
 	}

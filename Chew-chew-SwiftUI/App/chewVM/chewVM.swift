@@ -56,7 +56,6 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	   .store(in: &bag)
 	}
 	
-	
 	init (
 		locationDataManager : LocationDataManager,
 		searchStopsViewModel : SearchStopsViewModel,
@@ -64,13 +63,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		recentSearchesViewModel : RecentSearchesViewModel,
 		coreDataStore : CoreDataStore,
 		alertViewModel : AlertViewModel,
-		initialState : State = State(
-			depStop: .textOnly(""),
-			arrStop: .textOnly(""),
-			settings: ChewSettings(),
-			date: .now,
-			status: .start
-		)
+		initialState : State = State()
 	) {
 		self.state = initialState
 		self.alertViewModel = alertViewModel

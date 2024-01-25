@@ -69,6 +69,15 @@ extension JourneyFollowViewModel {
 	enum Action : String {
 		case adding
 		case deleting
+		
+		var description : String {
+			switch self {
+			case .adding:
+				return "follow"
+			case .deleting:
+				return "unfollow"
+			}
+		}
 	}
 	
 	enum Status : Equatable {

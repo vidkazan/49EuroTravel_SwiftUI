@@ -72,7 +72,11 @@ struct BadgeView : View {
 	var body : some View {
 		Group {
 			switch badge {
-			case .failedToGetUserLocation:
+			case .followError:
+				OneLineText(badge.badgeData.name)
+					.chewTextSize(size)
+					.padding(4)
+			case .locationError:
 				OneLineText(badge.badgeData.name)
 					.chewTextSize(size)
 					.padding(4)

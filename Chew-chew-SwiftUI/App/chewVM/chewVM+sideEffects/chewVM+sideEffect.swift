@@ -50,25 +50,19 @@ extension ChewViewModel {
 			
 			let settings = self.coreDataStore.fetchSettings()
 
-			if let stops = self.coreDataStore.fetchLocations() {
-				self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
-			}
 			
 			Task.detached {
-				if let recentSearches = self.coreDataStore.fetchRecentSearches() {
-					await self.recentSearchesViewModel.send(
-						event: .didUpdateData(recentSearches)
-					)
-				}
-				if let chewJourneys = self.coreDataStore.fetchJourneys() {
-					await self.journeyFollowViewModel.send(
-						event: .didUpdateData(chewJourneys.map {
-							$0.journeyViewData()
-						})
-					)
-				}
 				if settings.onboarding == true {
 					self.coreDataStore.disableOnboarding()
+				}
+				if let stops = self.coreDataStore.fetchLocations() {
+					await self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
+				}
+				if let recentSearches = self.coreDataStore.fetchRecentSearches() {
+					await self.recentSearchesViewModel.send(event: .didUpdateData(recentSearches))
+				}
+				if let chewJourneys = self.coreDataStore.fetchJourneys() {
+					await self.journeyFollowViewModel.send(event: .didUpdateData(chewJourneys.map {$0.journeyViewData()}))
 				}
 			}
 			return Just(Event.didLoadInitialData(settings))

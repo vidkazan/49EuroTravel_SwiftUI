@@ -81,7 +81,7 @@ extension JourneyViewData {
 	
 	static func fixRefreshToken(token : String?) -> String? {
 		let pattern = "\\$\\$\\d+\\$\\$\\$\\$\\$\\$"
-		let res = token?.replacingOccurrences(of: pattern, with: "",options: .regularExpression)
+		let res = token?.replacingOccurrences(of: pattern, with: "",options: .regularExpression).replacingOccurrences(of: "/", with: "%2F")
 		return res
 	}
 }
@@ -91,7 +91,7 @@ struct LegViewData : Equatable,Identifiable{
 	let isReachable : Bool
 	let legType : LegType
 	
-	let tripId : String?
+	let tripId : String
 //	PrognosedDirection<String>
 	let direction : String
 	let duration : String

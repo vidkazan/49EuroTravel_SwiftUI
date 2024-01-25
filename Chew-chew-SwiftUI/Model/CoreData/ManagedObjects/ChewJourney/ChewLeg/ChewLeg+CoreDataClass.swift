@@ -17,7 +17,7 @@ public class ChewLeg: NSManagedObject {
 extension ChewLeg {
 	convenience init(context : NSManagedObjectContext,leg : LegViewData,for journey : ChewJourney){
 		self.init(context: context)
-//		context.performAndWait {
+		self.tripId = leg.tripId
 		self.isReachable = leg.isReachable
 		self.legBottomPosition = leg.legBottomPosition
 		self.legTopPosition = leg.legTopPosition
@@ -26,7 +26,7 @@ extension ChewLeg {
 		self.lineType = leg.lineViewData.type.rawValue
 				
 		self.journey = journey
-//	}
+
 		let _ = ChewLegType(insertIntoManagedObjectContext: context, type: leg.legType, for: self)
 		
 		let _ = ChewTime(context: context, container: leg.timeContainer, cancelled: !leg.isReachable,for: self)
@@ -41,17 +41,16 @@ extension ChewLeg {
 	func legViewData() -> LegViewData {
 		var stopsViewData = [StopViewData]()
 		
-//		if let stops = self.stops {
-			stopsViewData = stops.map {
-				$0.stopViewData()
-			}
-//		}
+		stopsViewData = stops.map {
+			$0.stopViewData()
+		}
+		
 		let time = TimeContainer(chewTime: self.time)
 		let segments = constructSegmentsFromStopOverData(stopovers: stopsViewData)
 		return LegViewData(
 			isReachable: self.isReachable,
 			legType: self.chewLegType.legType ?? .line,
-			tripId: nil,
+			tripId: self.tripId,
 			direction: self.stops.last?.name ?? "direction",
 			duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: time.durationInMinutes) ?? "duration",
 			legTopPosition: self.legTopPosition,

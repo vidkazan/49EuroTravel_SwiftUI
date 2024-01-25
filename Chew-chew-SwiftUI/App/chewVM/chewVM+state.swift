@@ -54,6 +54,20 @@ extension ChewViewModel {
 		var date : ChewDate
 		var status : Status
 		
+		init(){
+			self.depStop =  .textOnly("")
+			self.arrStop = .textOnly("")
+			self.settings = ChewSettings()
+			self.date = .now
+			self.status = .start
+		}
+		init(depStop: TextFieldContent, arrStop: TextFieldContent, settings: ChewSettings, date: ChewDate, status: Status) {
+			self.depStop = depStop
+			self.arrStop = arrStop
+			self.settings = settings
+			self.date = date
+			self.status = status
+		}
 	}
 	
 	

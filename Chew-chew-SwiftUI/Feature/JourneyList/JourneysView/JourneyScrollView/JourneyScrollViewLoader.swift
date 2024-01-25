@@ -15,7 +15,7 @@ struct JourneyListViewLoader: View {
 		legs: [.init(
 			isReachable: true,
 			legType: .line,
-			tripId: nil,
+			tripId: "",
 			direction: "",
 			duration: "11111",
 			legTopPosition: 0,

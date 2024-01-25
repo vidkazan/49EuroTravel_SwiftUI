@@ -52,7 +52,7 @@ enum StopOverCancellationType : Equatable {
 	case fullyCancelled
 	
 	static func getCancelledTypeFromDelayStatus(
-		arrivalStatus : TimeContainer.DelayStatus ,
+		arrivalStatus : TimeContainer.DelayStatus,
 		departureStatus: TimeContainer.DelayStatus
 	) -> Self {
 		if arrivalStatus == .cancelled && departureStatus == .cancelled {

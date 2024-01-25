@@ -30,26 +30,18 @@ extension ChewViewModel {
 				.eraseToAnyPublisher()
 		}
 	}
-	func requestUserLocation() -> AnyPublisher<Result<CLLocationCoordinate2D,ApiServiceError>,Never> {
+	private func requestUserLocation() -> AnyPublisher<Result<CLLocationCoordinate2D,ApiServiceError>,Never> {
 		switch locationDataManager.authorizationStatus {
 		case .notDetermined,.restricted,.denied,.none:
 			return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
 				.eraseToAnyPublisher()
 		case .authorizedAlways,.authorizedWhenInUse:
-			let lat = locationDataManager.locationManager.location?.coordinate.latitude
-			let long = locationDataManager.locationManager.location?.coordinate.longitude
-			guard let lat = lat,let long = long else {
+			guard let lat = locationDataManager.locationManager.location?.coordinate.latitude,
+					let long = locationDataManager.locationManager.location?.coordinate.longitude else {
 				return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
 					.eraseToAnyPublisher()
 			}
-			return Just(
-				Result.success(
-					CLLocationCoordinate2D(
-						latitude: lat,
-						longitude: long
-					)
-				)
-			).eraseToAnyPublisher()
+			return Just(Result.success(CLLocationCoordinate2D(latitude: lat,longitude: long))).eraseToAnyPublisher()
 		@unknown default:
 			return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
 				.eraseToAnyPublisher()

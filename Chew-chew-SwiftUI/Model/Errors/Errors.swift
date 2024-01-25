@@ -23,17 +23,17 @@ enum ConstructLegDataError : ChewError {
 	
 	func hash(into hasher: inout Hasher) {
 		switch self {
-		case .departureOrArrivalPosition:
+		case .nilValue:
 			break
 		}
 	}
-	case departureOrArrivalPosition
+	case nilValue(type : String)
 	
 	
 	var description : String  {
 		switch self {
-		case .departureOrArrivalPosition:
-			return "plannedDeparturePosition or plannedArrivalPosition is NIL"
+		case .nilValue(type: let type):
+			return "value is nil: \(type)"
 		}
 	}
 }

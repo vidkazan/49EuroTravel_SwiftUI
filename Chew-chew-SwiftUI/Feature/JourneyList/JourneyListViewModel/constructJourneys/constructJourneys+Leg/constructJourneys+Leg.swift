@@ -127,7 +127,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 	let res = LegViewData(
 		isReachable: true,
 		legType: .transfer,
-		tripId: nil,
+		tripId: "",
 		direction: toLeg.origin?.name ?? "transfer direction",
 		duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 			minutes: DateParcer.getTwoDateIntervalInMinutes(
@@ -233,7 +233,6 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 		actualArrival: leg.arrival,
 		cancelled: nil
 	)
-	
 	guard
 		let plannedDeparturePosition = getTimeLabelPosition(
 			firstTS: firstTS,
@@ -245,7 +244,11 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 			lastTS: lastTS,
 			currentTS: container.date.arrival.planned
 		) else {
-		throw ConstructLegDataError.departureOrArrivalPosition
+		throw ConstructLegDataError.nilValue(type: "plannedArrivalPosition or plannedDeparturePosition")
+	}
+	
+	guard let tripId = leg.tripId  else {
+		throw ConstructLegDataError.nilValue(type: "tripId")
 	}
 	
 	let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.departure.actual) ?? 0
@@ -257,7 +260,7 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 	let res = LegViewData(
 		isReachable: leg.reachable ?? true, // TODO: can not work proreply
 		legType: constructLegType(leg: leg, legs: legs),
-		tripId: leg.tripId,
+		tripId: tripId,
 		direction: leg.direction ?? "direction",
 		duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 			minutes: DateParcer.getTwoDateIntervalInMinutes(

@@ -22,13 +22,15 @@ extension JourneyDetailsViewModel {
 			guard case .changingSubscribingState(let ref) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			guard let dep = self?.depStop,let arr = self?.arrStop,let state = self?.state else {
+			
+			guard let self = self else {
 				return Just(Event.didFailToChangeSubscribingState(
-					error: Error.inputValIsNil("depStop/arrStop/state"))).eraseToAnyPublisher()
+					error: Error.inputValIsNil("self"))).eraseToAnyPublisher()
 			}
+			
 			switch state.isFollowed {
 			case true:
-				self?.chewVM?.journeyFollowViewModel.send(
+				self.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .deleting,
 						journeyRef: ref,
@@ -37,15 +39,15 @@ extension JourneyDetailsViewModel {
 					)
 				)
 			case false:
-				self?.chewVM?.journeyFollowViewModel.send(
+				self.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .adding,
 						journeyRef: ref,
 						followData: JourneyFollowData(
 							journeyRef: ref,
 							journeyViewData: state.data,
-							depStop: dep,
-							arrStop: arr
+							depStop: self.depStop,
+							arrStop: self.arrStop
 						),
 						journeyDetailsViewModel: self
 					)
@@ -60,11 +62,12 @@ extension JourneyDetailsViewModel {
 			guard case .loadingFullLeg(leg: let leg) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			guard let tripId = leg.tripId else {
-				return Just(Event.didFailToLoadTripData(error: Error.inputValIsNil("tripId")))
-					.eraseToAnyPublisher()
-			}
-			return fetchTrip(tripId: tripId)
+//			guard let tripId = leg.tripId else {
+//				
+//				return Just(Event.didFailToLoadTripData(error: Error.inputValIsNil("tripId")))
+//					.eraseToAnyPublisher()
+//			}
+			return fetchTrip(tripId: leg.tripId)
 				.mapError{ $0 }
 				.asyncFlatMap { res in
 					let leg = try constructLegDataThrows(

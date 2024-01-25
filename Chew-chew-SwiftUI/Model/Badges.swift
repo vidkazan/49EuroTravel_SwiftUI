@@ -50,7 +50,8 @@ enum StopsCountBadgeMode {
 }
 
 enum Badges : Hashable {
-	case failedToGetUserLocation
+	case followError(_ action : JourneyFollowViewModel.Action)
+	case locationError
 	case offlineMode
 	case departureArrivalStops(departure: String,arrival: String)
 	case changesCount(_ count : Int)
@@ -73,7 +74,9 @@ enum Badges : Hashable {
 	
 	var badgeDefaultStyle : BadgeBackgroundBaseStyle {
 		switch self {
-		case .failedToGetUserLocation:
+		case .followError:
+			return .primary
+		case .locationError:
 			return .primary
 		case .offlineMode:
 			return .primary
@@ -114,8 +117,10 @@ enum Badges : Hashable {
 	
 	var badgeData : BadgeData {
 		switch self {
-		case .failedToGetUserLocation:
-			return BadgeData(name: "Failed to get user Location")
+		case .followError(let action):
+			return BadgeData(name: "Failed to \(action.description) this journey")
+		case .locationError:
+			return BadgeData(name: "Failed to get Location")
 		case .offlineMode:
 			return BadgeData(name: "Offline Mode")
 		case .timeDepartureTimeArrival:

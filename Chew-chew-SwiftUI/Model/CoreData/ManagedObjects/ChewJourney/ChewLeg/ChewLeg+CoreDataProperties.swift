@@ -11,6 +11,7 @@ import CoreData
 
 
 extension ChewLeg {
+	@NSManaged public var tripId: String
     @NSManaged public var isReachable: Bool
     @NSManaged public var legTopPosition: Double
     @NSManaged public var legBottomPosition: Double

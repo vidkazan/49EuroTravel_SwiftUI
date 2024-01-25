@@ -23,6 +23,7 @@
         <attribute name="lineName" attributeType="String"/>
         <attribute name="lineShortName" attributeType="String"/>
         <attribute name="lineType" attributeType="String"/>
+        <attribute name="tripId" attributeType="String"/>
         <relationship name="chewLegType" maxCount="1" deletionRule="Cascade" destinationEntity="ChewLegType" inverseName="leg" inverseEntity="ChewLegType"/>
         <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="legs" inverseEntity="ChewJourney"/>
         <relationship name="stops" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ChewStop" inverseName="leg" inverseEntity="ChewStop"/>
