@@ -25,7 +25,7 @@ struct JourneyListView: View {
 				case true:
 					JourneyListHeaderView(journeyViewModel: journeyViewModel)
 					Spacer()
-					Text("connections not found")
+					Text("Connections not found")
 						.padding(5)
 						.chewTextSize(.big)
 						.frame(maxWidth: .infinity,alignment: .center)

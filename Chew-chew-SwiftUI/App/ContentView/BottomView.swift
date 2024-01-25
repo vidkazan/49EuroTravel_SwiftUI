@@ -2,7 +2,7 @@
 //  BottomView.swift
 //  Chew-chew-SwiftUI
 //
-//  Created by Dmitrii Grigorev on 21.01.24.
+//  Created by Dmitrii Grigorev on 21.01.24.slo
 //
 
 import Foundation
@@ -13,12 +13,13 @@ struct BottomView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	
 	var body: some View {
-		if case .journeys(let vm) = chewViewModel.state.status {
+		switch chewViewModel.state.status {
+		case .journeys(let vm):
 			JourneyListView(journeyViewModel: vm)
-		} else if case .idle = chewViewModel.state.status  {
+		case .idle:
 			RecentSearchesView(recentSearchesVM: chewViewModel.recentSearchesViewModel)
 			Spacer()
-		} else {
+		default:
 			Spacer()
 		}
 	}

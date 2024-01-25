@@ -46,10 +46,10 @@ struct RecentSearchesView : View {
 					}
 				}
 				.padding(5)
-				.background(Color.chewFillSecondary)
 				.frame(maxWidth: .infinity,maxHeight: 100)
 				.cornerRadius(10)
 			}
+			.padding(.top,5)
 			.transition(.opacity)
 			.animation(.spring().speed(2), value: chewVM.state.status)
 			.animation(.spring().speed(2), value: chewVM.searchStopsViewModel.state.status)
