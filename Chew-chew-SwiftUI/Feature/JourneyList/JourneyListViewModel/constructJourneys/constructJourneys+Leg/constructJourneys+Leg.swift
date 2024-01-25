@@ -247,9 +247,11 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 		throw ConstructLegDataError.nilValue(type: "plannedArrivalPosition or plannedDeparturePosition")
 	}
 	
-	guard let tripId = leg.tripId  else  {
+	
+	guard let tripId = leg.walking == true ? "" : leg.tripId else  {
 		throw ConstructLegDataError.nilValue(type: "tripId")
 	}
+	
 	
 	let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.departure.actual) ?? 0
 	let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) ?? 0
