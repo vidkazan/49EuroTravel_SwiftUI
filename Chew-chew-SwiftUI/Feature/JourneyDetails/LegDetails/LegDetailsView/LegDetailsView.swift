@@ -14,80 +14,85 @@ struct LegDetailsView: View {
 	@State var currentProgressHeight : Double = 0
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	let followedJourney : Bool
-	@ObservedObject var vm : LegDetailsViewModel
-	weak var journeyVM : JourneyDetailsViewModel?
-	init(leg : LegViewData, journeyDetailsViewModel: JourneyDetailsViewModel?,followedJourney : Bool = false) {
-		let vm = LegDetailsViewModel(leg: leg)
-		self.vm = vm
-		self.journeyVM = journeyDetailsViewModel
+	@StateObject var vm : LegDetailsViewModel = LegDetailsViewModel(leg: .init(isReachable: true, legType: .line, tripId: "", direction: "", duration: "", legTopPosition: 0, legBottomPosition: 0, remarks: nil, legStopsViewData: [], footDistance: 0, lineViewData: .init(type: .bus, name: "", shortName: ""), progressSegments: .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0), timeContainer: .init(), polyline: nil))
+	let sendToJourneyVM : (JourneyDetailsViewModel.Event)->Void
+	
+	init(
+		followedJourney: Bool = false,
+		send : @escaping (JourneyDetailsViewModel.Event) -> Void,
+		viewData : LegViewData
+	) {
+		print("LDVM init")
 		self.followedJourney = followedJourney
+		self.sendToJourneyVM = send
+		self.currentProgressHeight = currentProgressHeight
 	}
 	var body : some View {
 		VStack {
 			VStack(spacing: 0) {
 				// MARK: Stop foot + transfer
-				switch vm.state.leg.legType {
+				switch vm.state.data.leg.legType {
 				case .transfer,.footMiddle:
-					if let stop = vm.state.leg.legStopsViewData.first {
+					if let stop = vm.state.data.leg.legStopsViewData.first {
 						LegStopView(
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg,
+							leg: vm.state.data.leg,
 							showBadges : !followedJourney
 						)
 					}
 				case .footStart:
-					if let stop = vm.state.leg.legStopsViewData.first {
+					if let stop = vm.state.data.leg.legStopsViewData.first {
 						LegStopView(
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg,
+							leg: vm.state.data.leg,
 							showBadges : !followedJourney
 						)
 					}
 				case .footEnd:
-					if let stop = vm.state.leg.legStopsViewData.last {
+					if let stop = vm.state.data.leg.legStopsViewData.last {
 						LegStopView(
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg,
+							leg: vm.state.data.leg,
 							showBadges : !followedJourney
 						)
 						.padding(.bottom,10)
 					}
 				// MARK: Stop line
 				case .line:
-					if let stop = vm.state.leg.legStopsViewData.first {
+					if let stop = vm.state.data.leg.legStopsViewData.first {
 						LegStopView(
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg,
+							leg: vm.state.data.leg,
 							showBadges : !followedJourney
 						)
 					}
 					if case .stopovers = vm.state.status {
-						ForEach(vm.state.leg.legStopsViewData) { stop in
-							if stop != vm.state.leg.legStopsViewData.first,stop != vm.state.leg.legStopsViewData.last {
+						ForEach(vm.state.data.leg.legStopsViewData) { stop in
+							if stop != vm.state.data.leg.legStopsViewData.first,stop != vm.state.data.leg.legStopsViewData.last {
 								LegStopView(
 									type: stop.stopOverType,
 									vm: vm,
 									stopOver: stop,
-									leg: vm.state.leg,
+									leg: vm.state.data.leg,
 									showBadges : !followedJourney
 								)
 							}
 						}
 					}
-					if let stop = vm.state.leg.legStopsViewData.last {
+					if let stop = vm.state.data.leg.legStopsViewData.last {
 						LegStopView(
 							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
-							leg: vm.state.leg,
+							leg: vm.state.data.leg,
 							showBadges : !followedJourney
 						)
 					}
@@ -100,7 +105,7 @@ struct LegDetailsView: View {
 						HStack(alignment: .top) {
 							Rectangle()
 								.fill(Color.chewProgressLineGray)
-								.frame(width: 20,height:  vm.state.totalProgressHeight)
+								.frame(width: 20,height:  vm.state.data.totalProgressHeight)
 								.padding(.leading,26)
 							Spacer()
 						}
@@ -109,7 +114,7 @@ struct LegDetailsView: View {
 					VStack {
 						HStack(alignment: .top) {
 							RoundedRectangle(
-								cornerRadius : vm.state.totalProgressHeight == currentProgressHeight ? 0 : 6
+								cornerRadius : vm.state.data.totalProgressHeight == currentProgressHeight ? 0 : 6
 							)
 							.fill(Color.chewFillGreenPrimary.opacity(0.7))
 								.frame(width: 22,height: currentProgressHeight)
@@ -119,23 +124,23 @@ struct LegDetailsView: View {
 						Spacer(minLength: 0)
 					}
 					// MARK: BG - colors
-					switch vm.state.leg.legType {
+					switch vm.state.data.leg.legType {
 					case .transfer,.footMiddle:
 						VStack {
 							Spacer()
 							Color.chewFillAccent.opacity(0.6)
-								.frame(height: vm.state.totalProgressHeight - 20)
+								.frame(height: vm.state.data.totalProgressHeight - 20)
 								.cornerRadius(10)
 							Spacer()
 						}
 					case .footStart:
 						Color.chewFillAccent.opacity(0.6)
-							.frame(height: vm.state.totalProgressHeight)
+							.frame(height: vm.state.data.totalProgressHeight)
 							.cornerRadius(10)
 							.offset(y: -10)
 					case .footEnd:
 						Color.chewFillAccent.opacity(0.6)
-							.frame(height: vm.state.totalProgressHeight)
+							.frame(height: vm.state.data.totalProgressHeight)
 							.cornerRadius(10)
 							.offset(y: 10)
 					case .line:
@@ -146,29 +151,29 @@ struct LegDetailsView: View {
 			}
 		}
 		.onAppear {
-			self.currentProgressHeight = vm.state.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970 , type: vm.state.status == .stopovers ? .expanded : .collapsed)
+			self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970 , type: vm.state.status == .stopovers ? .expanded : .collapsed)
 		}
 		.onReceive(timer, perform: { timer in
-			currentProgressHeight = vm.state.leg.progressSegments.evaluate(
+			currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(
 				time: Date.now.timeIntervalSince1970,
 				type: vm.state.status == .stopovers ? .expanded : .collapsed
 			)
 		})
 		.onChange(of: vm.state.status, perform: { _ in
-			currentProgressHeight = vm.state.currentProgressHeight
+			currentProgressHeight = vm.state.data.currentProgressHeight
 		})
 		// MARK: 🤢
-		.padding(.top,vm.state.leg.legType == LegViewData.LegType.line || vm.state.leg.legType.caseDescription == "footStart" ?  10 : 0)
-		.background(vm.state.leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
+		.padding(.top,vm.state.data.leg.legType == LegViewData.LegType.line || vm.state.data.leg.legType.caseDescription == "footStart" ?  10 : 0)
+		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
 		.cornerRadius(10)
 		.onTapGesture {
-			if case .line=vm.state.leg.legType {
+			if case .line=vm.state.data.leg.legType {
 				vm.send(event: .didtapExpandButton)
 			}
 		}
 		// MARK: longGesture
 		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
-			journeyVM?.send(event: .didLongTapOnLeg(leg: vm.state.leg))
+			sendToJourneyVM(.didLongTapOnLeg(leg: vm.state.data.leg))
 		})
 	}
 }
@@ -182,9 +187,8 @@ struct LegDetailsPreview : PreviewProvider {
 		   let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]) {
 			ScrollView {
 				LegDetailsView(
-					leg: viewData,
-					journeyDetailsViewModel: nil,
-					followedJourney: false
+					send: {_ in },
+					viewData: viewData
 				)
 			}
 		} else {

@@ -38,7 +38,7 @@ struct RecentSearchesView : View {
 						ForEach(recentSearchesVM.state.searches, id: \.hashValue) { locations in
 							RecentSearchCell(send: recentSearchesVM.send, locations:locations)
 								.onTapGesture {
-									chewVM.send(event: .didSetBothLocations(locations.departure, locations.arrival))
+									chewVM.send(event: .didSetBothLocations(locations))
 								}
 						}
 						.background(Color.chewFillAccent)

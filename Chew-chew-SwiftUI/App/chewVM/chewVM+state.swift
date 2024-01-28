@@ -80,7 +80,7 @@ extension ChewViewModel {
 		case loadingInitialData
 		case idle
 		case checkingSearchData
-		case journeys(JourneyListViewModel)
+		case journeys(_ stops : DepartureArrivalPair)
 		case editingStop(LocationDirectionType)
 		case sheet(SheetType)
 		case loadingLocation
@@ -121,9 +121,9 @@ extension ChewViewModel {
 		
 		case onStopsSwitch
 		
-		case didSetBothLocations(Stop,Stop)
+		case didSetBothLocations(_ stops : DepartureArrivalPair)
 		
-		case onJourneyDataUpdated(depStop: Stop, arrStop : Stop)
+		case onJourneyDataUpdated(_ stops : DepartureArrivalPair)
 		
 		
 		case onNotEnoughSearchData

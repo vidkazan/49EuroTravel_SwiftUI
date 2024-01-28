@@ -32,9 +32,10 @@ final class RecentSearchesViewModel : ObservableObject, Identifiable {
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenEditing()
-			]
+			],
+			name: "RSVM"
 		)
-		.assign(to: \.state, on: self)
+		.weakAssign(to: \.state, on: self)
 		.store(in: &bag)
 	}
 	

@@ -10,7 +10,8 @@ import SwiftUI
 
 struct JourneyListHeaderView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var journeyViewModel : JourneyListViewModel
+	var journeyViewModel : JourneyListViewModel
+	
 	var body: some View {
 		HStack {
 			Button(action: {

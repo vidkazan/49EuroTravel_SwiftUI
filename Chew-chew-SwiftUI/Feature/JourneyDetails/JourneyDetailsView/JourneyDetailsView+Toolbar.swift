@@ -11,7 +11,7 @@ import MapKit
 extension JourneyDetailsView {
 	func toolbar() -> some View {
 		HStack {
-			switch viewModel.refreshToken {
+			switch viewModel.state.data.viewData.refreshToken {
 			case .none:
 				Image(systemName: "bookmark.slash")
 					.frame(width: 15,height: 15)
@@ -24,7 +24,7 @@ extension JourneyDetailsView {
 						case .loading:
 							break
 						default:
-							viewModel.send(event: .didTapSubscribingButton(ref: ref))
+							viewModel.send(event: .didTapSubscribingButton(ref: ref, journeyDetailsViewModel: viewModel))
 						}
 					},
 					label: {
@@ -34,7 +34,7 @@ extension JourneyDetailsView {
 								.frame(width: 15,height: 15)
 								.padding(5)
 						default:
-							switch viewModel.state.isFollowed {
+							switch viewModel.state.data.isFollowed {
 							case true:
 								Image(systemName: "bookmark.fill")
 									.frame(width: 15,height: 15)
@@ -52,7 +52,11 @@ extension JourneyDetailsView {
 			}
 			Button(
 				action: {
-					viewModel.send(event: .didTapReloadButton)
+					guard let token = viewModel.state.data.viewData.refreshToken else {
+						return viewModel.send(event: .didFailedToLoadJourneyData(error: JourneyDetailsViewModel.Error.inputValIsNil("refreshToken")))
+					}
+					viewModel.send(event: .didTapReloadButton(ref: token))
+					
 				},
 				label: {
 					switch viewModel.state.status {

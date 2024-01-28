@@ -9,7 +9,7 @@ import Foundation
 
 
 extension JourneyListViewModel {
-	func reduceLoadingUpdate(_ state:  State, _ event: Event) -> State {
+	static func reduceLoadingUpdate(_ state:  State, _ event: Event) -> State {
 		guard case .loadingRef = state.status else { return state }
 		switch event {
 		case .onNewJourneyListData(let data, let type):
@@ -19,24 +19,32 @@ extension JourneyListViewModel {
 				return state
 			case .earlierRef:
 				return State(
-					journeys: data.journeys + state.journeys,
-					earlierRef: data.earlierRef,
-					laterRef: data.laterRef,
+					data: StateData(
+						stops: state.data.stops,
+						date: state.data.date,
+						settings: state.data.settings,
+						journeys: data.journeys + state.data.journeys,
+						earlierRef: data.earlierRef,
+						laterRef: data.laterRef
+					),
 					status: .journeysLoaded
 				)
 			case .laterRef:
 				return State(
-					journeys: state.journeys + data.journeys,
-					earlierRef: data.earlierRef,
-					laterRef: data.laterRef,
+					data: StateData(
+						stops: state.data.stops,
+						date: state.data.date,
+						settings: state.data.settings,
+						journeys: state.data.journeys + data.journeys,
+						earlierRef: data.earlierRef,
+						laterRef: data.laterRef
+					),
 					status: .journeysLoaded
 				)
 			}
 		case .onFailedToLoadJourneyListData(let err):
 			return State(
-				journeys: state.journeys,
-				earlierRef: state.earlierRef,
-				laterRef: state.laterRef,
+				data: state.data,
 				status: .failedToLoadJourneyList(err)
 			)
 		case .onReloadJourneyList:
@@ -47,16 +55,12 @@ extension JourneyListViewModel {
 			return state
 		case .didFailToLoadLaterRef(let error):
 			return State(
-				journeys: state.journeys,
-				earlierRef: state.earlierRef,
-				laterRef: state.laterRef,
+				data: state.data,
 				status: .failedToLoadLaterRef(error)
 			)
 		case .didFailToLoadEarlierRef(let error):
 			return State(
-				journeys: state.journeys,
-				earlierRef: state.earlierRef,
-				laterRef: state.laterRef,
+				data: state.data,
 				status: .failedToLoadEarlierRef(error)
 			)
 		}

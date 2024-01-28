@@ -8,7 +8,7 @@
 import Foundation
 
 extension ChewViewModel {
-	func reduceIdle(_ state:  State, _ event: Event) -> State {
+	static func reduceIdle(_ state:  State, _ event: Event) -> State {
 		guard case .idle = state.status else { return state }
 		switch event {
 		case .didLoadInitialData,
@@ -19,22 +19,13 @@ extension ChewViewModel {
 				.onNotEnoughSearchData:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
-		case .onJourneyDataUpdated(depStop: let dep, arrStop: let arr):
+		case .onJourneyDataUpdated(let stops):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
 				date: state.date,
-				status: .journeys(
-					JourneyListViewModel(
-						chewVM : self,
-						depStop: dep,
-						arrStop: arr,
-						date: state.date,
-						settings: state.settings,
-						followList: self.journeyFollowViewModel.state.journeys.map { $0.journeyRef }
-					)
-				)
+				status: .journeys(stops)
 			)
 		case .onStopEdit(let type):
 			return State(
@@ -95,10 +86,10 @@ extension ChewViewModel {
 				date: date,
 				status: .checkingSearchData
 			)
-		case .didSetBothLocations(let dep, let arr):
+		case .didSetBothLocations(let stops):
 			return State(
-				depStop: .location(dep),
-				arrStop: .location(arr),
+				depStop: .location(stops.departure),
+				arrStop: .location(stops.arrival),
 				settings: state.settings,
 				date: state.date,
 				status: .checkingSearchData

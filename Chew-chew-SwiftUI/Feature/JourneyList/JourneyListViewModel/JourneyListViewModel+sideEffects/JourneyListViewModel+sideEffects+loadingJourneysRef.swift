@@ -9,43 +9,41 @@ import Foundation
 import Combine
 
 extension JourneyListViewModel {
-	func whenLoadingJourneyRef() -> Feedback<State, Event> {
-		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
+	static func whenLoadingJourneyRef() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingRef(let type) = state.status else { return Empty().eraseToAnyPublisher() }
 			switch type {
 			case .initial:
 				return Just(Event.onReloadJourneyList).eraseToAnyPublisher()
 			case .earlierRef:
-				guard let self = self else { return Just(Event.didFailToLoadEarlierRef(Error.inputValIsNil("self"))).eraseToAnyPublisher() }
-				guard let ref = state.earlierRef else {
+				guard let ref = state.data.earlierRef else {
 					print("🟤❌ >> earlierRef is nil")
 					return Just(Event.didFailToLoadEarlierRef(Error.inputValIsNil("earlierRef"))).eraseToAnyPublisher()
 				}
-				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type,settings: self.settings)
+				return Self.fetchEarlierOrLaterRef(dep: state.data.stops.departure, arr: state.data.stops.arrival, ref: ref, type: type,settings: state.data.settings)
 					.mapError{ $0 }
 					.asyncFlatMap { data in
 						let res = await constructJourneyListViewDataAsync(
 							journeysData: data,
-							depStop: self.depStop,
-							arrStop: self.arrStop
+							depStop: state.data.stops.departure,
+							arrStop: state.data.stops.arrival
 						)
-						return Event.onNewJourneyListData(JourneyListViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.earlierRef)
+						return Event.onNewJourneyListData(JourneyListViewData(journeysViewData: res, data: data, depStop: state.data.stops.departure, arrStop: state.data.stops.arrival),.earlierRef)
 					}
 					.catch { error in
 						Just(Event.didFailToLoadEarlierRef(error as? any ChewError ?? ApiServiceError.generic(error)))
 					}
 					.eraseToAnyPublisher()
 			case .laterRef:
-				guard let self = self else { return Just(Event.didFailToLoadLaterRef(Error.inputValIsNil("self"))).eraseToAnyPublisher() }
-				guard let ref = state.laterRef else {
+				guard let ref = state.data.laterRef else {
 					print("🟤❌ >> laterRef is nil")
 					return Just(Event.didFailToLoadEarlierRef(Error.inputValIsNil("laterRef"))).eraseToAnyPublisher()
 				}
-				return self.fetchEarlierOrLaterRef(dep: depStop, arr: arrStop, ref: ref, type: type,settings: self.settings)
+				return Self.fetchEarlierOrLaterRef(dep: state.data.stops.departure, arr: state.data.stops.arrival, ref: ref, type: type,settings: state.data.settings)
 					.mapError{ $0 }
 					.asyncFlatMap { data in
-						let res = await constructJourneyListViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
-						return Event.onNewJourneyListData(JourneyListViewData(journeysViewData: res, data: data, depStop: self.depStop, arrStop: self.arrStop),.laterRef)
+						let res = await constructJourneyListViewDataAsync(journeysData: data, depStop: state.data.stops.departure, arrStop: state.data.stops.arrival)
+						return Event.onNewJourneyListData(JourneyListViewData(journeysViewData: res, data: data, depStop: state.data.stops.departure, arrStop: state.data.stops.arrival),.laterRef)
 					}
 					.catch { error in
 						Just(Event.didFailToLoadLaterRef(error as? any ChewError ?? ApiServiceError.generic(error)))
@@ -55,7 +53,7 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiServiceError> {
+	static func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiServiceError> {
 		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
 		query += Query.getQueryItems(methods: [
 			type == .earlierRef ? Query.earlierThan(earlierRef: ref) : Query.laterThan(laterRef: ref),

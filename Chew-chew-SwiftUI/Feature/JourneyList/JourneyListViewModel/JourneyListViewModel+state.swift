@@ -7,19 +7,76 @@
 
 import Foundation
 
+protocol ChewViewModelProtocol : Identifiable {
+	associatedtype ChewState
+	var state : ChewState { get }
+}
+
+protocol ChewState : Equatable {
+	associatedtype StateData : Equatable
+	associatedtype Status : Equatable
+	var data : StateData { get }
+	var status : Status { get }
+}
 
 extension JourneyListViewModel {
-	
-	struct State : Equatable {
+	enum Error : ChewError {
+		static func == (lhs: Error, rhs: Error) -> Bool {
+			return lhs.description == rhs.description
+		}
+		
+		func hash(into hasher: inout Hasher) {
+			switch self {
+			case .inputValIsNil:
+				break
+			}
+		}
+		case inputValIsNil(_ msg: String)
+		
+		
+		var description : String  {
+			switch self {
+			case .inputValIsNil(let msg):
+				return "Input value is nil: \(msg)"
+			}
+		}
+	}
+
+	struct StateData {
+		var date : ChewViewModel.ChewDate
+		var stops : DepartureArrivalPair
+		var settings : ChewSettings
 		var journeys :  [JourneyViewData]
 		var earlierRef : String?
 		var laterRef : String?
-		var status : Status
 		
-		init(journeys: [JourneyViewData], earlierRef: String?, laterRef: String?, status: Status) {
+		init(stops: DepartureArrivalPair,date : ChewViewModel.ChewDate, settings: ChewSettings, journeys: [JourneyViewData], earlierRef: String?, laterRef: String?) {
+			self.stops = stops
+			self.date = date
+			self.settings = settings
 			self.journeys = journeys
 			self.earlierRef = earlierRef
 			self.laterRef = laterRef
+		}
+	}
+	
+	struct State {
+		var data : StateData
+		var status : Status
+		
+		init(data : StateData,status: Status){
+			self.data = data
+			self.status = status
+		}
+		init(journeys: [JourneyViewData],date : ChewViewModel.ChewDate, earlierRef: String?, laterRef: String?, settings : ChewSettings,stops : DepartureArrivalPair, status: Status) {
+			self.data = StateData(
+				stops: stops,
+				date: date,
+				settings: settings,
+				journeys: journeys,
+				earlierRef: earlierRef,
+				laterRef: laterRef
+			)
 			self.status = status
 		}
 	}

@@ -154,6 +154,8 @@
 		7D787DD42B5D9E7D007D2A3A /* TimeAndSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D787DD32B5D9E7D007D2A3A /* TimeAndSettingsView.swift */; };
 		7D787DD62B5DA113007D2A3A /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D787DD52B5DA113007D2A3A /* BottomView.swift */; };
 		7D787DD82B5DBF35007D2A3A /* JourneyListHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D787DD72B5DBF35007D2A3A /* JourneyListHeader.swift */; };
+		7D7887702B6309B600CDEFF9 /* TimelaneCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 7D78876F2B6309B600CDEFF9 /* TimelaneCombine */; };
+		7D7887722B632B0500CDEFF9 /* CombineWeakAssign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7887712B632B0500CDEFF9 /* CombineWeakAssign.swift */; };
 		7D7A55322AA4A27C000256EF /* JourneyListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A55312AA4A27C000256EF /* JourneyListViewModel.swift */; };
 		7D7A553A2AA4B3E5000256EF /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A55392AA4B3E5000256EF /* Feedback.swift */; };
 		7D7A553D2AA4B407000256EF /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A553C2AA4B407000256EF /* System.swift */; };
@@ -353,6 +355,7 @@
 		7D787DD32B5D9E7D007D2A3A /* TimeAndSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndSettingsView.swift; sourceTree = "<group>"; };
 		7D787DD52B5DA113007D2A3A /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
 		7D787DD72B5DBF35007D2A3A /* JourneyListHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyListHeader.swift; sourceTree = "<group>"; };
+		7D7887712B632B0500CDEFF9 /* CombineWeakAssign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineWeakAssign.swift; sourceTree = "<group>"; };
 		7D7A55312AA4A27C000256EF /* JourneyListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyListViewModel.swift; sourceTree = "<group>"; };
 		7D7A55392AA4B3E5000256EF /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		7D7A553C2AA4B407000256EF /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
@@ -421,6 +424,7 @@
 				7D02CE2A2A97E80D0048ADE6 /* Collections in Frameworks */,
 				7D02CE2C2A97E80D0048ADE6 /* DequeModule in Frameworks */,
 				7D02CE2E2A97E80D0048ADE6 /* OrderedCollections in Frameworks */,
+				7D7887702B6309B600CDEFF9 /* TimelaneCombine in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -506,6 +510,7 @@
 				7D69BE7E2AD7ECF1007855B3 /* Publisher+AsyncMap.swift */,
 				7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */,
 				7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */,
+				7D7887712B632B0500CDEFF9 /* CombineWeakAssign.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1221,6 +1226,7 @@
 				7D02CE292A97E80D0048ADE6 /* Collections */,
 				7D02CE2B2A97E80D0048ADE6 /* DequeModule */,
 				7D02CE2D2A97E80D0048ADE6 /* OrderedCollections */,
+				7D78876F2B6309B600CDEFF9 /* TimelaneCombine */,
 			);
 			productName = "Chew-chew-SwiftUI";
 			productReference = 7D6734AF2A96334B00CBE9C1 /* Chew-chew-SwiftUI.app */;
@@ -1297,6 +1303,7 @@
 			mainGroup = 7D6734A62A96334B00CBE9C1;
 			packageReferences = (
 				7D02CE282A97E80D0048ADE6 /* XCRemoteSwiftPackageReference "swift-collections" */,
+				7D78876E2B6309B600CDEFF9 /* XCRemoteSwiftPackageReference "TimelaneCombine" */,
 			);
 			productRefGroup = 7D6734B02A96334B00CBE9C1 /* Products */;
 			projectDirPath = "";
@@ -1495,6 +1502,7 @@
 				7D3E5F012AB321580064213A /* LocationManager.swift in Sources */,
 				7D787DD62B5DA113007D2A3A /* BottomView.swift in Sources */,
 				7D02CE232A97E64E0048ADE6 /* Query.swift in Sources */,
+				7D7887722B632B0500CDEFF9 /* CombineWeakAssign.swift in Sources */,
 				7D6C5C312AAF792F00DEFC57 /* JourneyDetailsVM+reduce.swift in Sources */,
 				7D4B1B8E2AA8CBB00096F372 /* JourneyListViewModel+state.swift in Sources */,
 				7D02CE252A97E6620048ADE6 /* Errors.swift in Sources */,
@@ -1896,6 +1904,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		7D78876E2B6309B600CDEFF9 /* XCRemoteSwiftPackageReference "TimelaneCombine" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/icanzilb/TimelaneCombine";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1913,6 +1929,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 7D02CE282A97E80D0048ADE6 /* XCRemoteSwiftPackageReference "swift-collections" */;
 			productName = OrderedCollections;
+		};
+		7D78876F2B6309B600CDEFF9 /* TimelaneCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7D78876E2B6309B600CDEFF9 /* XCRemoteSwiftPackageReference "TimelaneCombine" */;
+			productName = TimelaneCombine;
 		};
 /* End XCSwiftPackageProductDependency section */
 

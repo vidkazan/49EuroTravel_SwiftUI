@@ -33,12 +33,12 @@ struct JourneyFollowView : View {
 							depStop: journey.depStop,
 							arrStop: journey.arrStop,
 							followList: viewModel.state.journeys.map { $0.journeyRef },
-							chewVM: chewVM
+							chewVM : chewVM
 						)
 						JourneyFollowCellView(journeyDetailsViewModel: vm)
 							.swipeActions(edge: .leading) {
 								Button {
-									vm.send(event: .didTapReloadButton)
+									vm.send(event: .didTapReloadButton(ref: journey.journeyRef))
 								} label: {
 									Label("Reload", systemImage: "arrow.clockwise")
 								}
@@ -46,7 +46,7 @@ struct JourneyFollowView : View {
 							}
 							.swipeActions(edge: .trailing) {
 								Button {
-									if let ref = vm.state.data.refreshToken {
+									if let ref = vm.state.data.viewData.refreshToken {
 										chewVM.journeyFollowViewModel.send(event: .didTapEdit(
 											action: .deleting,
 											journeyRef: ref,

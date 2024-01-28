@@ -8,7 +8,7 @@
 import Foundation
 #warning("TODO: feature: check when train arrives at starting point")
 extension JourneyDetailsViewModel {
-	func reduce(_ state: State, _ event: Event) -> State {
+	static func reduce(_ state: State, _ event: Event) -> State {
 		print("🚂🔥 >",event.description,"state:",state.status.description)
 		switch state.status {
 		case .changingSubscribingState:
@@ -16,14 +16,12 @@ extension JourneyDetailsViewModel {
 			case .didFailToChangeSubscribingState:
 				return State(
 					data: state.data,
-					status: .error(error: ApiServiceError.cannotDecodeRawData),
-					isFollowed: state.isFollowed
+					status: .error(error: ApiServiceError.cannotDecodeRawData)
 				)
 			case .didChangedSubscribingState(let isFollowed):
 				return State(
-					data: state.data,
-					status: .loadedJourneyData,
-					isFollowed: isFollowed
+					data: StateData(currentData: state.data, isFollowed: isFollowed),
+					status: .loadedJourneyData
 				)
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
@@ -31,253 +29,152 @@ extension JourneyDetailsViewModel {
 			}
 		case .loading, .loadingIfNeeded:
 			switch event {
-			case .didTapReloadButton:
-				return State(
-					data: state.data,
-					status: .loading(token: self.refreshToken),
-					isFollowed: state.isFollowed
-				)
-			case .didRequestReloadIfNeeded:
-				return State(
-					data: state.data,
-					status: .loadingIfNeeded(token: self.refreshToken),
-					isFollowed: state.isFollowed
-				)
+			case .didTapReloadButton(ref: let ref):
+				return State(data: state.data,status: .loading(token: ref))
+			case .didRequestReloadIfNeeded(ref: let ref):
+				return State(data: state.data,status: .loadingIfNeeded(token: ref))
 			case .didLoadJourneyData(let data):
 				return State(
-					data: data,
-					status: .loadedJourneyData,
-					isFollowed: state.isFollowed
+					data: StateData(currentData: state.data, viewData: data),
+					status: .loadedJourneyData
 				)
 			case 	.didFailedToLoadJourneyData(let error):
 				return State(
 					data: state.data,
-					status: .error(error: error),
-					isFollowed: state.isFollowed
+					status: .error(error: error)
 				)
 			case .didLongTapOnLeg(leg: let leg):
 				return State(
 					data: state.data,
-					status: .actionSheet(leg: leg),
-					isFollowed: state.isFollowed
+					status: .actionSheet(leg: leg)
 				)
-			case	.didCloseActionSheet,
-					.didFailToLoadTripData,
-					.didFailToChangeSubscribingState,
-					.didExpandLegDetails,
-					.didTapBottomSheetDetails,
-					.didCloseBottomSheet,
-					.didLoadFullLegData,
-					.didChangedSubscribingState,
-					.didTapSubscribingButton,
-					.didLoadLocationDetails:
+			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .loadedJourneyData:
 			switch event {
-			case .didTapSubscribingButton(let ref):
+			case let .didTapSubscribingButton(ref, vm):
 				return State(
 					data: state.data,
-					status: .changingSubscribingState(ref: ref),
-					isFollowed: state.isFollowed
+					status: .changingSubscribingState(ref: ref, journeyDetailsViewModel: vm)
 				)
-			case .didTapReloadButton:
+			case .didTapReloadButton(ref: let ref):
 				return State(
 					data: state.data,
-					status: .loading(token: self.refreshToken),
-					isFollowed: state.isFollowed
+					status: .loading(token: ref)
 				)
-			case .didRequestReloadIfNeeded:
+			case .didRequestReloadIfNeeded(ref: let ref):
 				return State(
 					data: state.data,
-					status: .loadingIfNeeded(token: self.refreshToken),
-					isFollowed: state.isFollowed
+					status: .loadingIfNeeded(token: ref)
 				)
 			case .didLongTapOnLeg(leg: let leg):
 				return State(
 					data: state.data,
-					status: .actionSheet(leg: leg),
-					isFollowed: state.isFollowed
+					status: .actionSheet(leg: leg)
 				)
-			case .didExpandLegDetails,
-					.didFailToLoadTripData,
-					.didLoadJourneyData,
-					.didFailedToLoadJourneyData,
-					.didLoadLocationDetails,
-					.didCloseActionSheet,
-					.didFailToChangeSubscribingState,
-					.didChangedSubscribingState,
-					.didTapBottomSheetDetails,
-					.didLoadFullLegData,
-					.didCloseBottomSheet:
+			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .error:
 			switch event {
-			case .didTapSubscribingButton(let ref):
+			case let .didTapSubscribingButton(ref, vm):
 				return State(
 					data: state.data,
-					status: .changingSubscribingState(ref: ref),
-					isFollowed: state.isFollowed
+					status: .changingSubscribingState(ref: ref, journeyDetailsViewModel: vm)
 				)
 			case .didExpandLegDetails,
 				 .didLoadJourneyData,
 				 .didFailedToLoadJourneyData:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
-			case .didRequestReloadIfNeeded:
+			case .didRequestReloadIfNeeded(ref: let ref):
 				return State(
 					data: state.data,
-					status: .loadingIfNeeded(token: self.refreshToken),
-					isFollowed: state.isFollowed
+					status: .loadingIfNeeded(token: ref)
 				)
-			case .didTapReloadButton:
+			case .didTapReloadButton(ref: let ref):
 				return State(
 					data: state.data,
-					status: .loading(token: self.refreshToken),
-					isFollowed: state.isFollowed
+					status: .loading(token: ref)
 				)
 			case .didLongTapOnLeg(leg: let leg):
 				return State(
 					data: state.data,
-					status: .actionSheet(leg: leg),
-					isFollowed: state.isFollowed
+					status: .actionSheet(leg: leg)
 				)
-			case	.didLoadLocationDetails,
-					.didFailToChangeSubscribingState,
-					.didCloseActionSheet,
-					.didTapBottomSheetDetails,
-					.didFailToLoadTripData,
-					.didLoadFullLegData,
-					.didChangedSubscribingState,
-					.didCloseBottomSheet:
+			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .locationDetails:
 			switch event {
-			case	.didExpandLegDetails,
-					.didFailToLoadTripData,
-					.didFailToChangeSubscribingState,
-					.didLoadJourneyData,
-					.didLoadFullLegData,
-					.didFailedToLoadJourneyData,
-					.didTapReloadButton,
-					.didLoadLocationDetails,
-					.didLongTapOnLeg,
-					.didCloseActionSheet,
-					.didChangedSubscribingState,
-					.didTapSubscribingButton,
-					.didRequestReloadIfNeeded,
-					.didTapBottomSheetDetails:
-				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
-				return state
 			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData,
-					isFollowed: state.isFollowed
+					status: .loadedJourneyData
 				)
+			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+				return state
 			}
 		case .loadingLocationDetails:
 			switch event {
 			case .didLoadJourneyData(let data):
 				return State(
-					data: data,
-					status: state.status,
-					isFollowed: state.isFollowed
+					data: StateData(currentData: state.data, viewData: data),
+					status: state.status
 				)
 			case .didLoadLocationDetails(let coordRegion, let coordinates,let route):
 				return State(
 					data: state.data,
-					status: .locationDetails(coordRegion: coordRegion, stops: coordinates,route: route),
-					isFollowed: state.isFollowed
+					status: .locationDetails(coordRegion: coordRegion, stops: coordinates,route: route)
 				)
 			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData,
-					isFollowed: state.isFollowed
+					status: .loadedJourneyData
 				)
-			case	.didCloseActionSheet,
-					.didFailToLoadTripData,
-					.didFailToChangeSubscribingState,
-					.didRequestReloadIfNeeded,
-					.didLoadFullLegData,
-					.didFailedToLoadJourneyData,
-					.didExpandLegDetails,
-					.didLongTapOnLeg,
-					.didTapBottomSheetDetails,
-					.didChangedSubscribingState,
-					.didTapSubscribingButton,
-					.didTapReloadButton:
+			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .fullLeg:
 			switch event {
-			case	.didLoadJourneyData,
-					.didFailToLoadTripData,
-					.didFailToChangeSubscribingState,
-					.didLoadFullLegData,
-					.didFailedToLoadJourneyData,
-					.didTapReloadButton,
-					.didExpandLegDetails,
-					.didLoadLocationDetails,
-					.didLongTapOnLeg,
-					.didCloseActionSheet,
-					.didRequestReloadIfNeeded,
-					.didChangedSubscribingState,
-					.didTapSubscribingButton,
-					.didTapBottomSheetDetails:
-				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
-				return state
 			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData,
-					isFollowed: state.isFollowed
+					status: .loadedJourneyData
 				)
+			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+				return state
 			}
 		case .loadingFullLeg:
 			switch event {
 			case .didFailToLoadTripData:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData,
-					isFollowed: state.isFollowed
+					status: .loadedJourneyData
 				)
 			case .didLoadJourneyData(let data):
 				return State(
-					data: data,
-					status: state.status,
-					isFollowed: state.isFollowed
+					data: StateData(currentData: state.data, viewData: data),
+					status: state.status
 				)
 			case .didLoadFullLegData(let data):
 				return State(
 					data: state.data,
-					status: .fullLeg(leg: data),
-					isFollowed: state.isFollowed
+					status: .fullLeg(leg: data)
 				)
 			case .didCloseBottomSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData,
-					isFollowed: state.isFollowed
+					status: .loadedJourneyData
 				)
-			case	.didCloseActionSheet,
-					.didFailToChangeSubscribingState,
-					.didFailedToLoadJourneyData,
-					.didExpandLegDetails,
-					.didLongTapOnLeg,
-					.didTapBottomSheetDetails,
-					.didRequestReloadIfNeeded,
-					.didTapReloadButton,
-					.didChangedSubscribingState,
-					.didTapSubscribingButton,
-					.didLoadLocationDetails:
+			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
@@ -285,45 +182,30 @@ extension JourneyDetailsViewModel {
 			switch event {
 			case .didLoadJourneyData(let data):
 				return State(
-					data: data,
-					status: state.status,
-					isFollowed: state.isFollowed
+					data: StateData(currentData: state.data, viewData: data),
+					status: state.status
 				)
-			case	.didFailedToLoadJourneyData,
-					.didFailToLoadTripData,
-					.didFailToChangeSubscribingState,
-					.didTapReloadButton,
-					.didRequestReloadIfNeeded,
-					.didExpandLegDetails,
-					.didLoadLocationDetails,
-					.didCloseBottomSheet,
-					.didLoadFullLegData,
-					.didChangedSubscribingState,
-					.didTapSubscribingButton,
-					.didLongTapOnLeg:
-				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
-				return state
 			case .didCloseActionSheet:
 				return State(
 					data: state.data,
-					status: .loadedJourneyData,
-					isFollowed: state.isFollowed
+					status: .loadedJourneyData
 				)
-			case .didTapBottomSheetDetails(let leg, let type):
+			case let .didTapBottomSheetDetails(leg, type):
 				switch type {
 				case .locationDetails:
 					return State(
 						data: state.data,
-						status: .loadingLocationDetails(leg: leg),
-						isFollowed: state.isFollowed
+						status: .loadingLocationDetails(leg: leg)
 					)
 				case .fullLeg:
 					return State(
 						data: state.data,
-						status: .loadingFullLeg(leg: leg),
-						isFollowed: state.isFollowed
+						status: .loadingFullLeg(leg: leg)
 					)
 				}
+			default:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+				return state
 			}
 		}
 	}

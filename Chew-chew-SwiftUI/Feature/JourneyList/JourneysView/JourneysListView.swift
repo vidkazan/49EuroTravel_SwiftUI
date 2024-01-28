@@ -11,6 +11,14 @@ struct JourneyListView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var journeyViewModel : JourneyListViewModel
 	@State var firstAppear : Bool = true
+	
+	init(stops : DepartureArrivalPair, date: ChewViewModel.ChewDate,settings : ChewSettings) {
+		self.journeyViewModel = JourneyListViewModel(
+			date: date,
+			settings: settings,
+			stops: stops
+	   )
+	}
 	var body: some View {
 		VStack {
 			switch journeyViewModel.state.status {
@@ -21,7 +29,7 @@ struct JourneyListView: View {
 					Spacer()
 				}
 			case .journeysLoaded,.loadingRef,.failedToLoadLaterRef,.failedToLoadEarlierRef:
-				switch journeyViewModel.state.journeys.isEmpty {
+				switch journeyViewModel.state.data.journeys.isEmpty {
 				case true:
 					JourneyListHeaderView(journeyViewModel: journeyViewModel)
 					Spacer()
@@ -36,15 +44,15 @@ struct JourneyListView: View {
 							LazyVStack(spacing: 5) {
 								JourneyListHeaderView(journeyViewModel: journeyViewModel)
 									.id(0)
-								ForEach(journeyViewModel.state.journeys,id: \.id) { journey in
+								ForEach(journeyViewModel.state.data.journeys,id: \.id) { journey in
 									NavigationLink(destination: {
 										NavigationLazyView(
 											JourneyDetailsView(
 												journeyDetailsViewModel: JourneyDetailsViewModel(
 													refreshToken: journey.refreshToken,
 													data: journey,
-													depStop: journeyViewModel.depStop,
-													arrStop: journeyViewModel.arrStop,
+													depStop: journeyViewModel.state.data.stops.departure,
+													arrStop: journeyViewModel.state.data.stops.arrival,
 													followList: chewVM.journeyFollowViewModel.state.journeys.map { $0.journeyRef},
 													chewVM: chewVM
 												)
@@ -56,7 +64,7 @@ struct JourneyListView: View {
 								.id(1)
 								switch journeyViewModel.state.status {
 								case .journeysLoaded, .failedToLoadEarlierRef:
-									if journeyViewModel.state.laterRef != nil {
+									if journeyViewModel.state.data.laterRef != nil {
 										ProgressView()
 											.onAppear{
 												journeyViewModel.send(event: .onLaterRef)
@@ -128,10 +136,10 @@ struct JourneyListPreview : PreviewProvider {
 				arrStop: .init()
 			)
 			let vm = JourneyListViewModel(
-				viewData: data,
-				chewVM: .init()
+				stops: .init(departure: .init(), arrival: .init()),
+				viewData: data
 			)
-			JourneyListView(journeyViewModel: vm)
+			JourneyListView(stops: .init(departure: .init(), arrival: .init()), date: .now, settings: .init())
 				.environmentObject(ChewViewModel())
 		} else {
 			Text("error")

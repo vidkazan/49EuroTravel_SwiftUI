@@ -59,7 +59,7 @@ extension JourneyFollowViewModel {
 						)).eraseToAnyPublisher()
 					}
 					journeys.append(viewData)
-					vm?.send(event: .didChangedSubscribingState(isFollowed: !(vm?.state.isFollowed ?? false)))
+					vm?.send(event: .didChangedSubscribingState(isFollowed: !(vm?.state.data.isFollowed ?? false)))
 					return Just(Event.didEdit(data: journeys))
 						.eraseToAnyPublisher()
 				case .deleting:
@@ -76,7 +76,7 @@ extension JourneyFollowViewModel {
 						)).eraseToAnyPublisher()
 					}
 					journeys.remove(at: index)
-					vm?.send(event: .didChangedSubscribingState(isFollowed: !(vm?.state.isFollowed ?? false)))
+					vm?.send(event: .didChangedSubscribingState(isFollowed: !(vm?.state.data.isFollowed ?? false)))
 					return Just(Event.didEdit(data: journeys))
 						.eraseToAnyPublisher()
 				}

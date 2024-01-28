@@ -42,7 +42,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		   
 	   Publishers.system(
 		   initial: state,
-		   reduce: self.reduce,
+		   reduce: Self.reduce,
 		   scheduler: RunLoop.main,
 		   feedbacks: [
 			   Self.userInput(input: input.eraseToAnyPublisher()),
@@ -50,7 +50,8 @@ final class ChewViewModel : ObservableObject, Identifiable {
 			   self.whenLoadingUserLocation(),
 			   self.whenLoadingInitialData(),
 			   self.whenEditingStops()
-		   ]
+		   ],
+		   name: "ChewVM"
 	   )
 	   .assign(to: \.state, on: self)
 	   .store(in: &bag)
@@ -75,7 +76,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		
 		Publishers.system(
 			initial: state,
-			reduce: self.reduce,
+			reduce: Self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
@@ -83,9 +84,10 @@ final class ChewViewModel : ObservableObject, Identifiable {
 				self.whenLoadingUserLocation(),
 				self.whenLoadingInitialData(),
 				self.whenEditingStops()
-			]
+			],
+			name: "ChewVM"
 		)
-		.assign(to: \.state, on: self)
+		.weakAssign(to: \.state, on: self)
 		.store(in: &bag)
 	}
 	deinit {

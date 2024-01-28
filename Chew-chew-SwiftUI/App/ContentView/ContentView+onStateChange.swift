@@ -11,10 +11,8 @@ extension FeatureView {
 	func onStateChange() {
 		switch chewViewModel.state.status {
 		case .sheet:
-			print(">>> true")
 			bottomSheetIsPresented = true
 		default:
-			print(">>> false")
 			bottomSheetIsPresented = false
 		}
 	}

@@ -41,9 +41,10 @@ final class JourneyFollowViewModel : ObservableObject, Identifiable {
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenEditing()
-			]
+			],
+			name: "JFVM"
 		)
-		.assign(to: \.state, on: self)
+		.weakAssign(to: \.state, on: self)
 		.store(in: &bag)
 	}
 	deinit {

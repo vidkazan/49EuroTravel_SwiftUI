@@ -9,16 +9,21 @@ import Foundation
 
 
 extension JourneyListViewModel {
-	func reduceLoadingJourneyList(_ state:  State, _ event: Event) -> State {
+	static func reduceLoadingJourneyList(_ state:  State, _ event: Event) -> State {
 		guard case .loadingJourneyList = state.status else { return state }
 		switch event {
 		case .onNewJourneyListData(let data, let type):
 			switch type {
 			case .initial:
 				return State(
-					journeys:  data.journeys,
-					earlierRef: data.earlierRef,
-					laterRef: data.laterRef,
+					data: StateData(
+						stops: state.data.stops,
+						date: state.data.date,
+						settings: state.data.settings,
+						journeys: data.journeys,
+						earlierRef: data.earlierRef,
+						laterRef: data.laterRef
+					),
 					status: .journeysLoaded
 				)
 			default:
@@ -26,9 +31,7 @@ extension JourneyListViewModel {
 			}
 		case .onFailedToLoadJourneyListData(let err):
 			return State(
-				journeys: [],
-				earlierRef: nil,
-				laterRef: nil,
+				data: state.data,
 				status: .failedToLoadJourneyList(err)
 			)
 		case .onReloadJourneyList:

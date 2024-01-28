@@ -17,18 +17,18 @@ extension ChewViewModel {
 	}
 	
 	func whenIdleCheckForSufficientDataForJourneyRequest() -> Feedback<State, Event> {
-		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+		Feedback { [ weak self ] (state: State) -> AnyPublisher<Event, Never> in
 			guard case .checkingSearchData = state.status else { return Empty().eraseToAnyPublisher() }
 			guard let dep = state.depStop.stop, let arr = state.arrStop.stop else {
 				return Just(Event.onNotEnoughSearchData)
 					.eraseToAnyPublisher()
 			}
-			self.recentSearchesViewModel.send(
+			self?.recentSearchesViewModel.send(
 				event: .didTapEdit(
 					action: .adding,
 					search: DepartureArrivalPair(departure: dep, arrival: arr)
 				))
-			return Just(Event.onJourneyDataUpdated(depStop: dep, arrStop: arr))
+			return Just(Event.onJourneyDataUpdated(DepartureArrivalPair(departure: dep, arrival: arr)))
 				.eraseToAnyPublisher()
 		}
 	}

@@ -12,11 +12,14 @@ import CoreLocation
 extension ChewViewModel {
 	#warning(" TODO: feature: reverse geocoding https://medium.com/aeturnuminc/geocoding-in-swift-611bda45efe1 or https://nominatim.openstreetmap.org/reverse?lon=10.78008628451338&lat=52.4212646484375&format=json&pretty=true")
 	func whenLoadingUserLocation() -> Feedback<State, Event> {
-		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingLocation = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			return self.requestUserLocation()
+			guard let self = self else {
+				return Just(Event.didFailToLoadLocationData).eraseToAnyPublisher()
+			}
+			return Self.requestUserLocation(locationDataManager: self.locationDataManager)
 				.map { res in
 					switch res {
 					case .success(let coord):
@@ -30,7 +33,7 @@ extension ChewViewModel {
 				.eraseToAnyPublisher()
 		}
 	}
-	private func requestUserLocation() -> AnyPublisher<Result<CLLocationCoordinate2D,ApiServiceError>,Never> {
+	static func requestUserLocation(locationDataManager : LocationDataManager) -> AnyPublisher<Result<CLLocationCoordinate2D,ApiServiceError>,Never> {
 		switch locationDataManager.authorizationStatus {
 		case .notDetermined,.restricted,.denied,.none:
 			return Just(Result.failure(ApiServiceError.failedToGetUserLocation))

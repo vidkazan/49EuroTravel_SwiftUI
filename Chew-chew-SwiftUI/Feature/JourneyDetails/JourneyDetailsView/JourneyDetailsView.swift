@@ -18,7 +18,6 @@ struct JourneyDetailsView: View {
 	init(journeyDetailsViewModel : JourneyDetailsViewModel) {
 		viewModel = journeyDetailsViewModel
 	}
-	
 	var body: some View {
 		VStack {
 			AlertsView(alertVM: chewVM.alertViewModel)
@@ -31,8 +30,8 @@ struct JourneyDetailsView: View {
 					// MARK: LegDetails
 					ScrollView() {
 						LazyVStack(spacing: 0){
-							ForEach(viewModel.state.data.legs) { leg in
-								LegDetailsView(leg : leg, journeyDetailsViewModel: viewModel)
+							ForEach(viewModel.state.data.viewData.legs) { leg in
+								LegDetailsView(send: viewModel.send, viewData: leg)
 							}
 						}
 						.padding(10)
@@ -97,7 +96,10 @@ struct JourneyDetailsView: View {
 					toolbar()
 				}
 				.onAppear {
-					viewModel.send(event: .didRequestReloadIfNeeded)
+					guard let token = viewModel.state.data.viewData.refreshToken else {
+						return viewModel.send(event: .didFailedToLoadJourneyData(error: JourneyDetailsViewModel.Error.inputValIsNil("refreshToken")))
+					}
+					viewModel.send(event: .didRequestReloadIfNeeded(ref: token))
 				}
 				// MARK: Modifiers - onChange
 				.onChange(of: viewModel.state.status, perform: { status in
@@ -135,7 +137,7 @@ struct JourneyDetailsPreview : PreviewProvider {
 					depStop: .init(coordinates: .init(),type: .stop,stopDTO: nil),
 					arrStop: .init(coordinates: .init(), type: .stop, stopDTO: nil),
 					followList: [],
-					chewVM: nil
+					chewVM: .init()
 				))
 		} else {
 			Text("error")

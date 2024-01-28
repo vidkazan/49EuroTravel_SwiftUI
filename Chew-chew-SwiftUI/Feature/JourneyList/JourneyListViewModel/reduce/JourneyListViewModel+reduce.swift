@@ -8,7 +8,7 @@
 import Foundation
 
 extension JourneyListViewModel {
-	func reduce(_ state: State, _ event: Event) -> State {
+	static func reduce(_ state: State, _ event: Event) -> State {
 		print("[🚂]🔥 > ",event.description)
 		switch state.status {
 		case .loadingJourneyList:
@@ -23,23 +23,17 @@ extension JourneyListViewModel {
 			switch event {
 			case .onReloadJourneyList:
 				return State(
-					journeys: state.journeys,
-					earlierRef: state.earlierRef,
-					laterRef: state.laterRef,
+					data: state.data,
 					status: .loadingJourneyList
 				)
 			case .onLaterRef:
 				return State(
-					journeys: state.journeys,
-					earlierRef: state.earlierRef,
-					laterRef: state.laterRef,
+					data: state.data,
 					status: .loadingRef(.laterRef)
 				)
 			case .onEarlierRef:
 				return State(
-					journeys: state.journeys,
-					earlierRef: state.earlierRef,
-					laterRef: state.laterRef,
+					data: state.data,
 					status: .loadingRef(.earlierRef)
 				)
 			case .didFailToLoadLaterRef, .didFailToLoadEarlierRef,.onNewJourneyListData,.onFailedToLoadJourneyListData:

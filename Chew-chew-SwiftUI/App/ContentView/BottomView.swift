@@ -11,17 +11,24 @@ import SwiftUI
 struct BottomView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
-	
+	@State var state : ChewViewModel.State = .init()
 	var body: some View {
-		switch chewViewModel.state.status {
-		case .journeys(let vm):
-			JourneyListView(journeyViewModel: vm)
-		case .idle:
-			RecentSearchesView(recentSearchesVM: chewViewModel.recentSearchesViewModel)
-			Spacer()
-		default:
-			Spacer()
+		Group {
+			switch state.status {
+			case let .journeys(stops):
+				JourneyListView(
+					stops: stops,
+					date: state.date,
+					settings: state.settings
+				)
+			case .idle:
+				RecentSearchesView(recentSearchesVM: chewViewModel.recentSearchesViewModel)
+				Spacer()
+			default:
+				Spacer()
+			}
 		}
+		.onReceive(chewViewModel.$state, perform: { state = $0 })
 	}
 	
 	struct BottomViewPreview : PreviewProvider {
@@ -39,17 +46,13 @@ struct BottomView: View {
 					depStop: .init(),
 					arrStop: .init()
 				)
-				let vm = JourneyListViewModel(
-					viewData: data,
-					chewVM: .init()
-				)
 				BottomView()
 					.environmentObject(ChewViewModel(initialState: .init(
 						depStop: .textOnly("122"),
 						arrStop: .textOnly("123"),
 						settings: .init(),
 						date: .now,
-						status: .journeys(vm)
+						status: .journeys(.init(departure: .init(), arrival: .init()))
 					)))
 			} else {
 				Text("error")

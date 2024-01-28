@@ -8,24 +8,102 @@ import Foundation
 import MapKit
 
 extension JourneyDetailsViewModel {
+	enum Error : ChewError {
+		static func == (lhs: Error, rhs: Error) -> Bool {
+			return lhs.description == rhs.description
+		}
+		
+		func hash(into hasher: inout Hasher) {
+			switch self {
+			case .inputValIsNil:
+				break
+			}
+		}
+		case inputValIsNil(_ msg: String)
+		
+		
+		var description : String  {
+			switch self {
+			case .inputValIsNil(let msg):
+				return "Input value is nil: \(msg)"
+			}
+		}
+	}
 	enum BottomSheetType : Equatable,Hashable {
 		case locationDetails
 		case fullLeg
 	}
-	struct State : Equatable {
-		let data : JourneyViewData
-		let status : Status
+	
+	struct StateData : Equatable {
+		static func == (lhs: JourneyDetailsViewModel.StateData, rhs: JourneyDetailsViewModel.StateData) -> Bool {
+			lhs.depStop == rhs.depStop &&
+			lhs.arrStop == rhs.arrStop &&
+			lhs.viewData == rhs.viewData &&
+			lhs.isFollowed == rhs.isFollowed
+		}
+		
+		weak var chewVM : ChewViewModel?
+		let depStop : Stop
+		let arrStop : Stop
+		let viewData : JourneyViewData
 		let isFollowed : Bool
 		
-		init(data: JourneyViewData, status: Status, followList : [String]) {
-			self.data = data
-			self.status = status
-			self.isFollowed = followList.contains(where: {$0 == data.refreshToken})
-		}
-		init(data: JourneyViewData, status: Status, isFollowed : Bool) {
-			self.data = data
-			self.status = status
+		
+		init(depStop: Stop, arrStop: Stop, viewData: JourneyViewData, isFollowed: Bool, chewVM : ChewViewModel?) {
+			self.depStop = depStop
+			self.arrStop = arrStop
+			self.viewData = viewData
 			self.isFollowed = isFollowed
+			self.chewVM = chewVM
+		}
+		
+		init(currentData : Self, isFollowed: Bool) {
+			self.chewVM = currentData.chewVM
+			self.depStop = currentData.depStop
+			self.arrStop = currentData.arrStop
+			self.viewData = currentData.viewData
+			self.isFollowed = isFollowed
+		}
+		
+		init(currentData : Self, viewData : JourneyViewData) {
+			self.chewVM = currentData.chewVM
+			self.depStop = currentData.depStop
+			self.arrStop = currentData.arrStop
+			self.viewData = viewData
+			self.isFollowed = currentData.isFollowed
+		}
+		
+	}
+	
+	struct State : Equatable {
+		let data : StateData
+		let status : Status
+		
+		
+		init(data : StateData, status : Status){
+			self.data = data
+			self.status = status
+		}
+		
+		init(chewVM : ChewViewModel?,depStop: Stop, arrStop: Stop,viewData: JourneyViewData, status: Status, followList : [String]) {
+			self.data = StateData(
+				depStop: depStop,
+				arrStop: arrStop,
+				viewData: viewData,
+				isFollowed: followList.contains(where: {$0 == viewData.refreshToken}),
+				chewVM: chewVM
+			)
+			self.status = status
+		}
+		init(chewVM: ChewViewModel?,depStop: Stop, arrStop: Stop,viewData: JourneyViewData, status: Status, isFollowed : Bool) {
+			self.data = StateData(
+				depStop: depStop,
+				arrStop: arrStop,
+				viewData: viewData,
+				isFollowed: isFollowed,
+				chewVM: chewVM
+			)
+			self.status = status
 		}
 	}
 	
@@ -47,7 +125,7 @@ extension JourneyDetailsViewModel {
 		case loadingFullLeg(leg : LegViewData)
 		case actionSheet(leg : LegViewData)
 		
-		case changingSubscribingState(ref : String)
+		case changingSubscribingState(ref : String, journeyDetailsViewModel: JourneyDetailsViewModel?)
 		
 		var description : String {
 			switch self {
@@ -81,9 +159,9 @@ extension JourneyDetailsViewModel {
 		case didFailedToLoadJourneyData(error : any ChewError)
 		
 		
-		case didRequestReloadIfNeeded
-		case didTapReloadButton
-		case didTapSubscribingButton(ref : String)
+		case didRequestReloadIfNeeded(ref : String)
+		case didTapReloadButton(ref : String)
+		case didTapSubscribingButton(ref : String,journeyDetailsViewModel: JourneyDetailsViewModel?)
 		
 		case didExpandLegDetails
 		case didLoadLocationDetails(

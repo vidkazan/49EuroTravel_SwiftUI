@@ -9,7 +9,7 @@ import Foundation
 
 
 extension ChewViewModel {
-	func reduceJourneyList(_ state:  State, _ event: Event) -> State {
+	static func reduceJourneyList(_ state:  State, _ event: Event) -> State {
 		guard case .journeys = state.status else { return state }
 		switch event {
 		case .onStopsSwitch:
@@ -45,6 +45,7 @@ extension ChewViewModel {
 				status: .sheet(type)
 			)
 		case .didTapCloseJourneyList:
+			print("reduce: didTapCloseJL")
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
@@ -61,7 +62,7 @@ extension ChewViewModel {
 				status: .loadingLocation)
 		case .didReceiveLocationData,
 			 .didFailToLoadLocationData,
-			 .didSetBothLocations(_, _),
+			 .didSetBothLocations,
 			 .didDismissBottomSheet,
 			 .didLoadInitialData,
 			 .onNewStop,

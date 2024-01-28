@@ -13,28 +13,28 @@ extension JourneyDetailsView {
 			let data = viewModel.state.data
 			VStack {
 				HStack {
-					BadgeView(.departureArrivalStops(departure: data.origin, arrival: data.destination),.huge)
+					BadgeView(.departureArrivalStops(departure: data.viewData.origin, arrival: data.viewData.destination),.huge)
 					Spacer()
 				}
 				HStack {
-					BadgeView(.date(dateString: data.timeContainer.stringDateValue.departure.actual ?? ""))
+					BadgeView(.date(dateString: data.viewData.timeContainer.stringDateValue.departure.actual ?? ""))
 						.badgeBackgroundStyle(.accent)
 					BadgeView(
 						.timeDepartureTimeArrival(
-							timeDeparture: data.timeContainer.stringTimeValue.departure.actual ?? "",
-							timeArrival: data.timeContainer.stringTimeValue.arrival.actual ?? ""
+							timeDeparture: data.viewData.timeContainer.stringTimeValue.departure.actual ?? "",
+							timeArrival: data.viewData.timeContainer.stringTimeValue.arrival.actual ?? ""
 						)
 					)
 						.badgeBackgroundStyle(.accent)
-					BadgeView(.legDuration(dur: data.durationLabelText))
+					BadgeView(.legDuration(dur: data.viewData.durationLabelText))
 						.badgeBackgroundStyle(.accent)
-					if viewModel.state.data.transferCount > 0 {
-						BadgeView(.changesCount(data.transferCount))
+					if viewModel.state.data.viewData.transferCount > 0 {
+						BadgeView(.changesCount(data.viewData.transferCount))
 							.badgeBackgroundStyle(.accent)
 					}
 					Spacer()
 				}
-				LegsView(journey : viewModel.state.data,showProgressBar: true)
+				LegsView(journey : viewModel.state.data.viewData,showProgressBar: true)
 					.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
 			}
 			

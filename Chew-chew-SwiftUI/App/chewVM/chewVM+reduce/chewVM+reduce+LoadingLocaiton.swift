@@ -8,7 +8,7 @@
 import Foundation
 
 extension ChewViewModel {
-	func reduceLoadingLocation(_ state:  State, _ event: Event) -> State {
+	static func reduceLoadingLocation(_ state:  State, _ event: Event) -> State {
 		guard case .loadingLocation = state.status else { return state }
 		switch event {
 		case .didTapCloseJourneyList,
@@ -98,10 +98,10 @@ extension ChewViewModel {
 				date: state.date,
 				status: .idle
 			)
-		case .didSetBothLocations(let dep, let arr):
+		case .didSetBothLocations(let stops):
 			return State(
-				depStop: .location(dep),
-				arrStop: .location(arr),
+				depStop: .location(stops.departure),
+				arrStop: .location(stops.arrival),
 				settings: state.settings,
 				date: state.date,
 				status: .checkingSearchData

@@ -8,10 +8,10 @@
 import Foundation
 import Combine
 
-final class LegDetailsViewModel : ObservableObject, Identifiable {
+final class LegDetailsViewModel : ObservableObject, ChewViewModelProtocol {
 	@Published private(set) var state : State
 	private var bag = Set<AnyCancellable>()
-	private let input = PassthroughSubject<Event,Never>()
+	private  var input = PassthroughSubject<Event,Never>()
 	
 	init(leg : LegViewData, isExpanded : Bool = false) {
 		switch isExpanded {
@@ -33,24 +33,23 @@ final class LegDetailsViewModel : ObservableObject, Identifiable {
 		
 		Publishers.system(
 			initial: state,
-			reduce: self.reduce,
+			reduce: Self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
-				Self.userInput(input: input.eraseToAnyPublisher()),
-				//				Self.updateByTimer()
-			]
+				Self.userInput(input: input.eraseToAnyPublisher())
+			],
+			name: leg.lineViewData.name
 		)
-		.assign(to: \.state, on: self)
+		.weakAssign(to: \.state, on: self)
 		.store(in: &bag)
 	}
 	
 	deinit {
 		bag.removeAll()
 	}
-	func cleanup(){
-		
-	}
+	
 	func send(event: Event) {
 		input.send(event)
 	}
 }
+

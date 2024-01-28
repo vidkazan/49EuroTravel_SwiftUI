@@ -26,15 +26,16 @@ final class AlertViewModel : ObservableObject, Identifiable {
 		)
 		Publishers.system(
 			initial: state,
-			reduce: self.reduce,
+			reduce: Self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenLoadinginitialData(),
 				Self.whenEditing()
-			]
+			],
+			name: "AVM"
 		)
-		.assign(to: \.state, on: self)
+		.weakAssign(to: \.state, on: self)
 		.store(in: &bag)
 	}
 	
@@ -195,7 +196,7 @@ extension AlertViewModel {
 
 
 extension AlertViewModel {
-	func reduce(_ state: State, _ event: Event) -> State {
+	static func reduce(_ state: State, _ event: Event) -> State {
 		print("‼️🔥 > ",event.description,"state:",state.status.description)
 		switch state.status {
 		case .start:

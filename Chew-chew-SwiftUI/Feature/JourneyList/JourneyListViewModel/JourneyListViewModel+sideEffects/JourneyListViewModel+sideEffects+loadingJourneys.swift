@@ -9,19 +9,19 @@ import Foundation
 import Combine
 
 extension JourneyListViewModel {
-	func whenLoadingJourneyList() -> Feedback<State, Event> {
-		Feedback {(state: State) -> AnyPublisher<Event, Never> in
+	static func whenLoadingJourneyList() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingJourneyList = state.status else { return Empty().eraseToAnyPublisher() }
-			return self.fetchJourneyList(dep: self.depStop, arr: self.arrStop, time: self.date.date,settings: self.settings)
+			return Self.fetchJourneyList(dep: state.data.stops.departure, arr: state.data.stops.arrival, time: state.data.date.date,settings: state.data.settings)
 				.mapError{ $0 }
 				.asyncFlatMap { data in
-					let res = await constructJourneyListViewDataAsync(journeysData: data, depStop: self.depStop, arrStop: self.arrStop)
+					let res = await constructJourneyListViewDataAsync(journeysData: data, depStop: state.data.stops.departure, arrStop: state.data.stops.arrival)
 					return Event.onNewJourneyListData(
 						JourneyListViewData(
 							journeysViewData: res,
 							data: data,
-							depStop: self.depStop,
-							arrStop: self.arrStop
+							depStop: state.data.stops.departure,
+							arrStop: state.data.stops.arrival
 						),
 						JourneyUpdateType.initial
 					)
@@ -31,7 +31,7 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func addJourneyListStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
+	static func addJourneyListStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
 		var query : [URLQueryItem] = []
 		switch dep.type {
 		case .location:
@@ -93,7 +93,7 @@ extension JourneyListViewModel {
 	}
 	
 	
-	func addJourneyListTransfersQuery(settings : ChewSettings) -> [URLQueryItem] {
+	static func addJourneyListTransfersQuery(settings : ChewSettings) -> [URLQueryItem] {
 		switch settings.transferTime {
 		case .direct:
 			return Query.getQueryItems(methods: [
@@ -106,7 +106,7 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func addJourneyListTransportModes(settings : ChewSettings) -> [URLQueryItem] {
+	static func addJourneyListTransportModes(settings : ChewSettings) -> [URLQueryItem] {
 		switch settings.transportMode {
 		case .all:
 			return []
@@ -136,7 +136,7 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	func fetchJourneyList(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiServiceError> {
+	static func fetchJourneyList(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiServiceError> {
 		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
 		query += addJourneyListTransfersQuery(settings: settings)
 		query += addJourneyListTransportModes(settings: settings)

@@ -8,7 +8,7 @@
 import Foundation
 
 extension ChewViewModel {
-	func reduce(_ state: State, _ event: Event) -> State {
+	static func reduce(_ state: State, _ event: Event) -> State {
 		print("📱🔥 > ",event.description,"state:",state.status.description)
 		switch state.status {
 		case .idle:
@@ -21,22 +21,13 @@ extension ChewViewModel {
 			return reduceLoadingLocation(state, event)
 		case .checkingSearchData:
 			switch event {
-			case .onJourneyDataUpdated(let dep, let arr):
+			case .onJourneyDataUpdated(let stops):
 				return State(
 					depStop: state.depStop,
 					arrStop: state.arrStop,
 					settings: state.settings,
 					date: state.date,
-					status: .journeys(
-						JourneyListViewModel(
-							chewVM : self,
-							depStop: dep,
-							arrStop: arr,
-							date: state.date,
-							settings: state.settings,
-							followList: self.journeyFollowViewModel.state.journeys.map { $0.journeyRef }
-						)
-					)
+					status: .journeys(stops)
 				)
 			case .onNotEnoughSearchData:
 				return State(

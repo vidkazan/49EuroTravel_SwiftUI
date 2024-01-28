@@ -59,33 +59,33 @@ struct FullLegView: View {
 				HStack(alignment: .bottom){
 					BadgeView(
 						.lineNumber(
-							lineType:vm.state.leg.lineViewData.type ,
-							num: vm.state.leg.lineViewData.name),
+							lineType:vm.state.data.leg.lineViewData.type ,
+							num: vm.state.data.leg.lineViewData.name),
 						.big
 					)
 					Spacer()
 				}
 				HStack(alignment: .bottom){
 					BadgeView(.departureArrivalStops(
-						departure: vm.state.leg.legStopsViewData.first?.name ?? "",
-						arrival: vm.state.leg.legStopsViewData.last?.name ?? ""
+						departure: vm.state.data.leg.legStopsViewData.first?.name ?? "",
+						arrival: vm.state.data.leg.legStopsViewData.last?.name ?? ""
 					),.big)
 					.badgeBackgroundStyle(.primary)
 					Spacer()
 				}
 				HStack {
-					BadgeView(.date(dateString: vm.state.leg.timeContainer.stringDateValue.departure.actual ?? ""))
+					BadgeView(.date(dateString: vm.state.data.leg.timeContainer.stringDateValue.departure.actual ?? ""))
 						.badgeBackgroundStyle(.secondary)
 					BadgeView(
 						.timeDepartureTimeArrival(
-							timeDeparture: vm.state.leg.timeContainer.stringTimeValue.departure.actual ?? "",
-							timeArrival: vm.state.leg.timeContainer.stringTimeValue.arrival.actual ?? ""
+							timeDeparture: vm.state.data.leg.timeContainer.stringTimeValue.departure.actual ?? "",
+							timeArrival: vm.state.data.leg.timeContainer.stringTimeValue.arrival.actual ?? ""
 						)
 					)
 					.badgeBackgroundStyle(.secondary)
-					BadgeView(.legDuration(dur: vm.state.leg.duration))
+					BadgeView(.legDuration(dur: vm.state.data.leg.duration))
 						.badgeBackgroundStyle(.secondary)
-					BadgeView(.stopsCount(vm.state.leg.legStopsViewData.count - 1,.hideShevron))
+					BadgeView(.stopsCount(vm.state.data.leg.legStopsViewData.count - 1,.hideShevron))
 						.badgeBackgroundStyle(.secondary)
 					Spacer()
 				}
@@ -93,39 +93,39 @@ struct FullLegView: View {
 			.padding(5)
 			ScrollView {
 				LazyVStack(spacing: 0) {
-					switch vm.state.leg.legType {
+					switch vm.state.data.leg.legType {
 					case .line:
 						// MARK: Leg top stop
-						if let stop = vm.state.leg.legStopsViewData.first {
+						if let stop = vm.state.data.leg.legStopsViewData.first {
 							LegStopView(
 								type: stop.stopOverType,
 								vm: vm,
 								stopOver: stop,
-								leg: vm.state.leg,
+								leg: vm.state.data.leg,
 								showBadges: false
 							)
 						}
 						// MARK: Leg midlle stops
 						if case .stopovers = vm.state.status {
-							ForEach(vm.state.leg.legStopsViewData) { stop in
-								if stop != vm.state.leg.legStopsViewData.first,stop != vm.state.leg.legStopsViewData.last {
+							ForEach(vm.state.data.leg.legStopsViewData) { stop in
+								if stop != vm.state.data.leg.legStopsViewData.first,stop != vm.state.data.leg.legStopsViewData.last {
 									LegStopView(
 										type: stop.stopOverType,
 										vm: vm,
 										stopOver: stop,
-										leg: vm.state.leg,
+										leg: vm.state.data.leg,
 										showBadges: false
 									)
 								}
 							}
 						}
 						// MARK: Leg bottom stop
-						if let stop = vm.state.leg.legStopsViewData.last {
+						if let stop = vm.state.data.leg.legStopsViewData.last {
 							LegStopView(
 								type: stop.stopOverType,
 								vm: vm,
 								stopOver: stop,
-								leg: vm.state.leg,
+								leg: vm.state.data.leg,
 								showBadges: false
 							)
 						}
@@ -140,7 +140,7 @@ struct FullLegView: View {
 							HStack(alignment: .top) {
 								Rectangle()
 									.fill(Color.chewGrayScale10)
-									.frame(width: 18,height:  vm.state.totalProgressHeight)
+									.frame(width: 18,height:  vm.state.data.totalProgressHeight)
 									.padding(.leading,26)
 								Spacer()
 							}
@@ -148,10 +148,10 @@ struct FullLegView: View {
 						}
 						VStack {
 							HStack(alignment: .top) {
-								RoundedRectangle(cornerRadius: vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
+								RoundedRectangle(cornerRadius: vm.state.data.totalProgressHeight == vm.state.data.currentProgressHeight ? 0 : 6)
 									.fill(Color.chewFillGreenPrimary)
-									.cornerRadius(vm.state.totalProgressHeight == vm.state.currentProgressHeight ? 0 : 6)
-									.frame(width: 20,height: vm.state.currentProgressHeight)
+									.cornerRadius(vm.state.data.totalProgressHeight == vm.state.data.currentProgressHeight ? 0 : 6)
+									.frame(width: 20,height: vm.state.data.currentProgressHeight)
 									.padding(.leading,25)
 								Spacer()
 							}

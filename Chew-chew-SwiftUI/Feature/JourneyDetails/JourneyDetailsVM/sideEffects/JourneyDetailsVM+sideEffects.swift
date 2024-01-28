@@ -17,39 +17,34 @@ extension JourneyDetailsViewModel {
 		} 
 	}
 	
-	func whenChangingSubscribitionType() -> Feedback<State, Event> {
-		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
-			guard case .changingSubscribingState(let ref) = state.status else {
+	static 	func whenChangingSubscribitionType() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			guard case let .changingSubscribingState(ref, vm) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
 			
-			guard let self = self else {
-				return Just(Event.didFailToChangeSubscribingState(
-					error: Error.inputValIsNil("self"))).eraseToAnyPublisher()
-			}
-			
-			switch state.isFollowed {
+			switch state.data.isFollowed {
 			case true:
-				self.chewVM?.journeyFollowViewModel.send(
+				state.data.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .deleting,
 						journeyRef: ref,
 						followData: nil,
-						journeyDetailsViewModel: self
+						journeyDetailsViewModel: vm
 					)
 				)
 			case false:
-				self.chewVM?.journeyFollowViewModel.send(
+				state.data.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .adding,
 						journeyRef: ref,
 						followData: JourneyFollowData(
 							journeyRef: ref,
-							journeyViewData: state.data,
-							depStop: self.depStop,
-							arrStop: self.arrStop
+							journeyViewData: state.data.viewData,
+							depStop: state.data.depStop,
+							arrStop: state.data.arrStop
 						),
-						journeyDetailsViewModel: self
+						journeyDetailsViewModel: vm
 					)
 				)
 			}
@@ -57,15 +52,15 @@ extension JourneyDetailsViewModel {
 		}
 	}
 
-	func whenLoadingFullLeg() -> Feedback<State, Event> {
-		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
+	static 	func whenLoadingFullLeg() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingFullLeg(leg: let leg) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
 			
 			return Self.fetchTrip(tripId: leg.tripId)
 				.mapError{ $0 }
-				.asyncFlatMap { res in
+				.asyncFlatMap {  res in
 					let leg = try constructLegDataThrows(
 						leg: res,
 						firstTS: DateParcer.getDateFromDateString(dateString: res.plannedDeparture),
@@ -75,7 +70,7 @@ extension JourneyDetailsViewModel {
 					return Event.didLoadFullLegData(data: leg)
 				}
 				.catch { error in
-					self?.chewVM?.alertViewModel.send(event: .didRequestShow(.fullLegError))
+					state.data.chewVM?.alertViewModel.send(event: .didRequestShow(.fullLegError))
 					return Just(Event.didFailToLoadTripData(error: error as! (any ChewError))).eraseToAnyPublisher()
 				}
 				.eraseToAnyPublisher()
@@ -111,18 +106,21 @@ extension JourneyDetailsViewModel {
 		Feedback {(state: State) -> AnyPublisher<Event, Never> in
 			switch state.status {
 			case .loadingIfNeeded:
-				if Date.now.timeIntervalSince1970 - state.data.updatedAt < 60 {
-					return Just(Event.didLoadJourneyData(data: state.data)).eraseToAnyPublisher()
+				if Date.now.timeIntervalSince1970 - state.data.viewData.updatedAt < 60 {
+					return Just(Event.didLoadJourneyData(data: state.data.viewData)).eraseToAnyPublisher()
 				}
-				return Just(Event.didTapReloadButton).eraseToAnyPublisher()
+				if let token = state.data.viewData.refreshToken {
+					return Just(Event.didTapReloadButton(ref: token)).eraseToAnyPublisher()
+				}
+				return Just(Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("token"))).eraseToAnyPublisher()
 			default:
 				return Empty().eraseToAnyPublisher()
 			}
 		}
 	}
 	
-	func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
-		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
+	static func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			var token : String!
 			
 			switch state.status {
@@ -143,26 +141,18 @@ extension JourneyDetailsViewModel {
 			return Self.fetchJourneyByRefreshToken(ref: token)
 				.mapError{ $0 }
 				.asyncFlatMap{ data in
-					guard let self = self else {
-						return Event.didFailedToLoadJourneyData(
-							error: Error.inputValIsNil("self"))
-					}
-					guard let chewVM = self.chewVM else {
-						return Event.didFailedToLoadJourneyData(
-							error: Error.inputValIsNil("chewVM"))
-					}
 					let res = await constructJourneyViewDataAsync(
 						journey: data.journey,
-						depStop: self.depStop,
-						arrStop: self.arrStop,
+						depStop: state.data.depStop,
+						arrStop: state.data.arrStop,
 						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
 					)
-					switch state.isFollowed {
+					switch state.data.isFollowed {
 					case true:
-						guard chewVM.coreDataStore.updateJourney(
+						guard state.data.chewVM?.coreDataStore.updateJourney(
 							viewData: res,
-							   depStop: self.depStop,
-							   arrStop: self.arrStop) == true else {
+							   depStop: state.data.depStop,
+							   arrStop: state.data.arrStop) == true else {
 							return Event.didFailedToLoadJourneyData(
 								error: CoreDataError.failedToUpdateDatabase(type: ChewJourney.self))
 						}
