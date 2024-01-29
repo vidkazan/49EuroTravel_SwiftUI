@@ -16,6 +16,7 @@ struct SettingsView: View {
 	@State var selectedTypes = Set<LineType>()
 	@State var transferTime : Int
 	@State var showWithTransfers : Int
+	@State var alternativeSearchPage : Bool
 	let oldSettings : ChewSettings
 	init(settings : ChewSettings) {
 		self.oldSettings = settings
@@ -30,6 +31,7 @@ struct SettingsView: View {
 			self.showWithTransfers = 1
 			self.transferTime = minutes
 		}
+		self.alternativeSearchPage = settings.debugSettings.alternativeSearchPage
 	}
 	
 	var body: some View {
@@ -40,6 +42,7 @@ struct SettingsView: View {
 					segments
 				}
 				connections
+				debug
 			}
 			.onChange(of: chewViewModel.state, perform: loadSettings)
 			.onDisappear {

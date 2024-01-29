@@ -23,8 +23,8 @@ struct FeatureView: View {
 				.padding(.horizontal,10)
 				.navigationTitle("ChewChew")
 				.navigationBarTitleDisplayMode(.inline)
-				.sheet(isPresented: $bottomSheetIsPresented,content: {sheet})
-				.onChange(of: chewViewModel.state, perform: {_ in onStateChange()})
+				.sheet(isPresented: $bottomSheetIsPresented,content: { sheet })
+				.onReceive(chewViewModel.$state, perform: onStateChange)
 				.background(Color.chewFillPrimary)
 			}
 			.tabItem {

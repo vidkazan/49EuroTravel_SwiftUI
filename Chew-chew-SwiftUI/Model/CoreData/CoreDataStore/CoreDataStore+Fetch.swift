@@ -37,6 +37,7 @@ extension CoreDataStore {
 		guard settings != nil else { return ChewSettings() }
 		let transportModes = fetchTransportModes()
 		
+		#warning("hardcode")
 		return ChewSettings(
 			onboarding: onboarding,
 			customTransferModes: transportModes,
@@ -45,7 +46,7 @@ extension CoreDataStore {
 			accessiblity: .partial,
 			walkingSpeed: .fast,
 			language: .english,
-			debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false),
+			debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false,alternativeSearchPage: false),
 			startWithWalking: true,
 			withBicycle: false
 		)

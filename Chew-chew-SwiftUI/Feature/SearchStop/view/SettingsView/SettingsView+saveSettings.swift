@@ -41,7 +41,7 @@ extension SettingsView {
 			accessiblity: .partial,
 			walkingSpeed: .fast,
 			language: .english,
-			debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false),
+			debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false,alternativeSearchPage: alternativeSearchPage),
 			startWithWalking: true,
 			withBicycle: false
 		)

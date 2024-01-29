@@ -127,7 +127,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 	let res = LegViewData(
 		isReachable: true,
 		legType: .transfer,
-		tripId: "",
+		tripId: UUID().uuidString,
 		direction: toLeg.origin?.name ?? "transfer direction",
 		duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
 			minutes: DateParcer.getTwoDateIntervalInMinutes(
@@ -248,7 +248,7 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 	}
 	
 	
-	guard let tripId = leg.walking == true ? "" : leg.tripId else  {
+	guard let tripId = leg.walking == true ? UUID().uuidString : leg.tripId else  {
 		throw ConstructDataError.nilValue(type: "tripId")
 	}
 	

@@ -17,7 +17,7 @@ final class Model {
 		if let vm = legDetailsViewModels[tripId] {
 			return vm
 		}
-		print("🏭 \(#function): not found: creating new")
+		print("🏭 \(#function): vm not found: creating new")
 		if let viewData = viewData, let isExpanded = isExpanded {
 			let vm = LegDetailsViewModel(leg: viewData,isExpanded: isExpanded)
 			legDetailsViewModels[tripId] = vm

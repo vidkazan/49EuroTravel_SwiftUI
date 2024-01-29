@@ -41,3 +41,21 @@ extension SettingsView {
 		})
 	}
 }
+
+extension SettingsView {
+	var debug : some View {
+		Section(content: {
+			Toggle(
+				isOn: Binding(
+					get: { alternativeSearchPage },
+					set: { _ in alternativeSearchPage.toggle()}
+				),
+				label: {
+					Text("Show alternative search page")
+				}
+			)
+		}, header: {
+			Text("Debug options")
+		})
+	}
+}

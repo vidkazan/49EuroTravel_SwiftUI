@@ -45,6 +45,7 @@ struct ChewSettings : Equatable,Hashable {
 	}
 	struct ChewDebugSettings: Equatable, Hashable {
 		let prettyJSON : Bool
+		let alternativeSearchPage : Bool
 	}
 	let onboarding : Bool
 	let customTransferModes : Set<LineType>
@@ -62,7 +63,7 @@ extension ChewSettings {
 	init() {
 		self.customTransferModes = []
 		self.accessiblity = .partial
-		self.debugSettings = Self.ChewDebugSettings(prettyJSON: false)
+		self.debugSettings = Self.ChewDebugSettings(prettyJSON: false, alternativeSearchPage: false)
 		self.language = .english
 		self.startWithWalking = true
 		self.transferTime = .time(minutes: 0)

@@ -8,8 +8,8 @@
 import SwiftUI
 
 extension FeatureView {
-	func onStateChange() {
-		switch chewViewModel.state.status {
+	func onStateChange(state : ChewViewModel.State) {
+		switch state.status {
 		case .sheet:
 			bottomSheetIsPresented = true
 		default:

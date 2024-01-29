@@ -15,12 +15,8 @@ extension SettingsView {
 				ForEach(allTypes, id: \.id) { type in
 					Toggle(
 						isOn: Binding(
-							get: {
-								selectedTypes.contains(type)
-							},
-							set: { _ in
-								selectedTypes.toogle(val: type)
-							}
+							get: { selectedTypes.contains(type) },
+							set: { _ in selectedTypes.toogle(val: type)}
 						),
 						label: {
 							Text(type.shortValue)

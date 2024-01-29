@@ -125,6 +125,7 @@ struct JourneyDetailsView: View {
 
 struct JourneyDetailsPreview : PreviewProvider {
 	static var previews: some View {
+		let model = Model.shared
 		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
 		if let mock = mock,
 		   let viewData = constructJourneyViewData(
@@ -134,14 +135,14 @@ struct JourneyDetailsPreview : PreviewProvider {
 			   realtimeDataUpdatedAt: 0
 		   ){
 			JourneyDetailsView(
-				journeyDetailsViewModel: .init(
-					refreshToken: nil,
-					data: viewData,
-					depStop: .init(coordinates: .init(),type: .stop,stopDTO: nil),
-					arrStop: .init(coordinates: .init(), type: .stop, stopDTO: nil),
+				journeyDetailsViewModel: model.journeyDetailsViewModel(
+					journeyRef: viewData.refreshToken,
+					viewData: viewData,
+					stops: .init(departure: .init(), arrival: .init()),
 					followList: [],
-					chewVM: .init()
+					chewVM: ChewViewModel()
 				))
+				.environmentObject(ChewViewModel())
 		} else {
 			Text("error")
 		}
