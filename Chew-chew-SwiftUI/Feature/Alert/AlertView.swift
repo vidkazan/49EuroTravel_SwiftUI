@@ -77,13 +77,11 @@ struct AlertsView: View {
 			EmptyView()
 		case .showing,.adding,.deleting :
 			if !alertVM.state.alerts.isEmpty {
-//				ScrollView(.vertical,showsIndicators: false) {
 					VStack(spacing: 2) {
 						ForEach(alertVM.state.alerts.sorted(by: <), id: \.hashValue, content: { alert in
 							AlertView(alertVM: alertVM, alert: alert)
 						})
 					}
-//				}
 				.padding(.horizontal,10)
 			}
 		}
