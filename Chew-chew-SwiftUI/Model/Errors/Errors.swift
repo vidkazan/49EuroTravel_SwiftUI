@@ -16,8 +16,8 @@ protocol ChewError : Error, Equatable, Hashable {
 	var description : String { get }
 }
 
-enum ConstructLegDataError : ChewError {
-	static func == (lhs: ConstructLegDataError, rhs: ConstructLegDataError) -> Bool {
+enum ConstructDataError : ChewError {
+	static func == (lhs: ConstructDataError, rhs: ConstructDataError) -> Bool {
 		return lhs.description == rhs.description
 	}
 	

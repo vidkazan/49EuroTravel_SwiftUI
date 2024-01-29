@@ -40,12 +40,14 @@ func constructJourneyListViewData(journeysData : JourneyListDTO, depStop : Stop,
 	var res = [JourneyViewData]()
 	
 	for j in journeys {
-		res.append( constructJourneyViewData(
+		if let data = constructJourneyViewData(
 			journey: j,
 			depStop: depStop,
 			arrStop: arrStop,
 			realtimeDataUpdatedAt: Double(journeysData.realtimeDataUpdatedAt ?? 0)
-		))
+		) {
+			res.append(data)
+		}
 	}
 	return res
 }

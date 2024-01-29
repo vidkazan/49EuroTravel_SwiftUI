@@ -244,12 +244,12 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 			lastTS: lastTS,
 			currentTS: container.date.arrival.planned
 		) else {
-		throw ConstructLegDataError.nilValue(type: "plannedArrivalPosition or plannedDeparturePosition")
+		throw ConstructDataError.nilValue(type: "plannedArrivalPosition or plannedDeparturePosition")
 	}
 	
 	
 	guard let tripId = leg.walking == true ? "" : leg.tripId else  {
-		throw ConstructLegDataError.nilValue(type: "tripId")
+		throw ConstructDataError.nilValue(type: "tripId")
 	}
 	
 	

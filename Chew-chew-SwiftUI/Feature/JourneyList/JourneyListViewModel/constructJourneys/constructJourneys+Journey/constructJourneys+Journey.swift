@@ -12,7 +12,7 @@ func constructJourneyViewDataAsync(
 	depStop: Stop?,
 	arrStop : Stop?,
 	realtimeDataUpdatedAt: Double
-) async -> JourneyViewData {
+) async -> JourneyViewData? {
 	return constructJourneyViewData(
 		journey: journey,
 		depStop: depStop,
@@ -20,12 +20,33 @@ func constructJourneyViewDataAsync(
 		realtimeDataUpdatedAt: realtimeDataUpdatedAt
 	)
 }
+
+
 func constructJourneyViewData(
 	journey : JourneyDTO,
 	depStop: Stop?,
 	arrStop : Stop?,
 	realtimeDataUpdatedAt: Double
-) -> JourneyViewData {
+) -> JourneyViewData? {
+	
+	do {
+		return try constructJourneyViewDataThrows(
+			journey: journey,
+			depStop: depStop,
+			arrStop: arrStop,
+			realtimeDataUpdatedAt: realtimeDataUpdatedAt
+		)
+	} catch  {
+		return nil
+	}
+}
+
+func constructJourneyViewDataThrows(
+	journey : JourneyDTO,
+	depStop: Stop?,
+	arrStop : Stop?,
+	realtimeDataUpdatedAt: Double
+) throws -> JourneyViewData {
 	let timeContainer = TimeContainer(
 		plannedDeparture: journey.legs.first?.plannedDeparture,
 		plannedArrival: journey.legs.last?.plannedArrival,
@@ -72,8 +93,11 @@ func constructJourneyViewData(
 		dateFinal: endTS
 	)
 	
+	guard let journeyRef = journey.refreshToken else  {
+		throw ConstructDataError.nilValue(type: "journeyRef")
+	}
 	return JourneyViewData(
-		journeyRef: journey.refreshToken,
+		journeyRef: journeyRef,
 		badges: constructBadges(remarks: remarks,isReachable: isReachable),
 		sunEvents: sunEventService.getSunEvents(),
 		legs: legsData,
