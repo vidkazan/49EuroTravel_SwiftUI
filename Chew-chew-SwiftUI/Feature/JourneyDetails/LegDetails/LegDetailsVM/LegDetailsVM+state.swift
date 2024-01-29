@@ -53,11 +53,11 @@ extension LegDetailsViewModel {
 	}
 	
 	enum Event {
-		case didtapExpandButton
+		case didTapExpandButton
 		case didDisappear
 		var description : String {
 			switch self {
-			case .didtapExpandButton:
+			case .didTapExpandButton:
 				return "didtapExpandButton"
 			case .didDisappear:
 				return "didDisappear"

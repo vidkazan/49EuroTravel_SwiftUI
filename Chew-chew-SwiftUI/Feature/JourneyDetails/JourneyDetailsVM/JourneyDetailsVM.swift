@@ -10,10 +10,8 @@ import Foundation
 import Combine
 import CoreData
 
-final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol, Equatable {
-	static func == (lhs: JourneyDetailsViewModel, rhs: JourneyDetailsViewModel) -> Bool {
-		lhs.state == rhs.state && lhs.state == rhs.state
-	}
+final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol {
+	let id = UUID()
 	@Published private(set) var state : State {
 		didSet { print("🚂 > state:",state.status.description) }
 	}
@@ -27,7 +25,7 @@ final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol, E
 		followList: [String],
 		chewVM : ChewViewModel?
 	) {
-		print(">> JDVM init")
+//		print("💾 JDVM \(self.id.uuidString.suffix(4)) init")
 		state = State(
 			chewVM : chewVM,
 			depStop: depStop,
@@ -55,7 +53,7 @@ final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol, E
 		.store(in: &bag)
 	}
 	deinit {
-		print(">> JDVM deinit")
+//		print("💾🗑️ JDVM \(self.id.uuidString.suffix(4)) deinit")
 		bag.removeAll()
 	}
 	func send(event: Event) {

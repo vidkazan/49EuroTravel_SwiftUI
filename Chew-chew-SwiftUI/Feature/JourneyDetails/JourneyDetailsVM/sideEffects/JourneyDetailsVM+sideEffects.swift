@@ -105,14 +105,11 @@ extension JourneyDetailsViewModel {
 	static func whenLoadingIfNeeded() -> Feedback<State, Event> {
 		Feedback {(state: State) -> AnyPublisher<Event, Never> in
 			switch state.status {
-			case .loadingIfNeeded:
+			case .loadingIfNeeded(token: let token):
 				if Date.now.timeIntervalSince1970 - state.data.viewData.updatedAt < 60 {
 					return Just(Event.didLoadJourneyData(data: state.data.viewData)).eraseToAnyPublisher()
 				}
-				if let token = state.data.viewData.refreshToken {
-					return Just(Event.didTapReloadButton(ref: token)).eraseToAnyPublisher()
-				}
-				return Just(Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("token"))).eraseToAnyPublisher()
+				return Just(Event.didTapReloadButton(ref: token)).eraseToAnyPublisher()
 			default:
 				return Empty().eraseToAnyPublisher()
 			}
@@ -147,10 +144,17 @@ extension JourneyDetailsViewModel {
 						arrStop: state.data.arrStop,
 						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
 					)
+					
+					guard let res = res else {
+						return Event.didFailedToLoadJourneyData(
+							error: Error.inputValIsNil("viewData")
+						)
+					}
+					
 					switch state.data.isFollowed {
 					case true:
 						guard state.data.chewVM?.coreDataStore.updateJourney(
-							viewData: res,
+								viewData: res,
 							   depStop: state.data.depStop,
 							   arrStop: state.data.arrStop) == true else {
 							return Event.didFailedToLoadJourneyData(

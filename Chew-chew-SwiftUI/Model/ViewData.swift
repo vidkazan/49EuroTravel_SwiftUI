@@ -37,7 +37,7 @@ struct JourneyViewData : Equatable, Identifiable {
 	let sunEvents : [SunEvent]
 	let isReachable : Bool
 	let badges : [Badges]
-	let refreshToken : String?
+	let refreshToken : String
 	let timeContainer : TimeContainer
 	let updatedAt : Double
 }
@@ -57,7 +57,7 @@ extension JourneyViewData {
 		self.updatedAt = data.updatedAt
 	}
 	init(
-		journeyRef : String?,
+		journeyRef : String,
 		badges : [Badges],
 		sunEvents : [SunEvent],
 		legs : [LegViewData],
@@ -79,9 +79,9 @@ extension JourneyViewData {
 		self.updatedAt = updatedAt
 	}
 	
-	static func fixRefreshToken(token : String?) -> String? {
+	static func fixRefreshToken(token : String) -> String {
 		let pattern = "\\$\\$\\d+\\$\\$\\$\\$\\$\\$"
-		let res = token?.replacingOccurrences(of: pattern, with: "",options: .regularExpression).replacingOccurrences(of: "/", with: "%2F")
+		let res = token.replacingOccurrences(of: pattern, with: "",options: .regularExpression).replacingOccurrences(of: "/", with: "%2F")
 		return res
 	}
 }
@@ -105,6 +105,26 @@ struct LegViewData : Equatable,Identifiable{
 	let progressSegments : Segments
 	let timeContainer : TimeContainer
 	let polyline : PolylineDTO?
+}
+
+extension LegViewData {
+	init(){
+		self.isReachable = false
+		self.legType = .line
+		self.tripId = ""
+		self.duration = ""
+		self.direction = ""
+		self.legTopPosition = 0
+		self.legBottomPosition = 0
+		self.delayedAndNextIsNotReachable = false
+		self.legStopsViewData = []
+		self.footDistance = 0
+		self.lineViewData = .init(type: .bus, name: "", shortName: "")
+		self.progressSegments = .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0)
+		self.timeContainer = .init(plannedDeparture: "", plannedArrival: "", actualDeparture: "", actualArrival: "", cancelled: false)
+		self.remarks = []
+		self.polyline = nil
+	}
 }
 
 struct StopViewData : Equatable,Identifiable {

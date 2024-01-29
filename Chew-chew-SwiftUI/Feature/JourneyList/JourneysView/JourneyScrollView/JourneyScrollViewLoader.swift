@@ -9,7 +9,7 @@ import SwiftUI
 
 struct JourneyListViewLoader: View {
 	static let mockViewData = JourneyViewData(
-		journeyRef: nil,
+		journeyRef: "",
 		badges: [],
 		sunEvents: [],
 		legs: [.init(

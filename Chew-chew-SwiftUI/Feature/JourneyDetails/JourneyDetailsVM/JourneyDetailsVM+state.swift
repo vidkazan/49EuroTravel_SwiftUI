@@ -111,8 +111,8 @@ extension JourneyDetailsViewModel {
 		static func == (lhs: JourneyDetailsViewModel.Status, rhs: JourneyDetailsViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
-		case loading(token : String?)
-		case loadingIfNeeded(token : String?)
+		case loading(token : String)
+		case loadingIfNeeded(token : String)
 		case loadedJourneyData
 		case error(error : any ChewError)
 		case loadingLocationDetails(leg : LegViewData)

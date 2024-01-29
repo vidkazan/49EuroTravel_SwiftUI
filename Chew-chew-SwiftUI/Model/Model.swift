@@ -23,7 +23,7 @@ final class Model {
 			legDetailsViewModels[tripId] = vm
 			return vm
 		}
-		let vm = LegDetailsViewModel()
+		let vm = LegDetailsViewModel(leg: .init())
 		legDetailsViewModels[tripId] = vm
 		return vm
 	}

@@ -10,12 +10,12 @@ import SwiftUI
 
 struct JourneyListHeaderView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	var journeyViewModel : JourneyListViewModel
+	weak var journeyViewModel : JourneyListViewModel?
 	
 	var body: some View {
 		HStack {
 			Button(action: {
-				journeyViewModel.send(event: .onReloadJourneyList)
+				journeyViewModel?.send(event: .onReloadJourneyList)
 			}, label: {
 				Label("Reload", systemImage: "arrow.clockwise")
 					.padding(5)

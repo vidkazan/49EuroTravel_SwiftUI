@@ -8,12 +8,14 @@
 import Foundation
 import Combine
 
-final class LegDetailsViewModel : ObservableObject, ChewViewModelProtocol {
+final class LegDetailsViewModel : ObservableObject, ChewViewModelProtocol, Identifiable {
+	let id = UUID()
 	@Published private(set) var state : State
 	private var bag = Set<AnyCancellable>()
 	private  var input = PassthroughSubject<Event,Never>()
 	
 	init(leg : LegViewData, isExpanded : Bool = false) {
+//		print("💾 LDVM \(self.id.uuidString.suffix(4)) init")
 		switch isExpanded {
 		case true:
 			state = State(
@@ -45,6 +47,7 @@ final class LegDetailsViewModel : ObservableObject, ChewViewModelProtocol {
 	}
 	
 	deinit {
+//		print("💾🗑️ LDVM \(self.id.uuidString.suffix(4)) deinit")
 		bag.removeAll()
 	}
 	

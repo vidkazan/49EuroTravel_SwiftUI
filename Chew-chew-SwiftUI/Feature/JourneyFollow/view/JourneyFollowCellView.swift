@@ -73,9 +73,7 @@ struct JourneyFollowCellView : View {
 //
 //		})
 		.onAppear {
-			if let token = vm.state.data.viewData.refreshToken {
-				vm.send(event: .didRequestReloadIfNeeded(ref: token))
-			}
+			vm.send(event: .didRequestReloadIfNeeded(ref: vm.state.data.viewData.refreshToken))
 		}
 	}
 }

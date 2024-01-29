@@ -31,7 +31,14 @@ struct JourneyDetailsView: View {
 					ScrollView() {
 						LazyVStack(spacing: 0){
 							ForEach(viewModel.state.data.viewData.legs) { leg in
-								LegDetailsView(send: viewModel.send, viewData: leg)
+								LegDetailsView(
+									send: viewModel.send,
+									vm: Model.shared.legDetailsViewModel(
+										tripId: leg.tripId,
+										isExpanded: false,
+										viewData: leg
+									))
+								}
 							}
 						}
 						.padding(10)
@@ -96,10 +103,7 @@ struct JourneyDetailsView: View {
 					toolbar()
 				}
 				.onAppear {
-					guard let token = viewModel.state.data.viewData.refreshToken else {
-						return viewModel.send(event: .didFailedToLoadJourneyData(error: JourneyDetailsViewModel.Error.inputValIsNil("refreshToken")))
-					}
-					viewModel.send(event: .didRequestReloadIfNeeded(ref: token))
+					viewModel.send(event: .didRequestReloadIfNeeded(ref: viewModel.state.data.viewData.refreshToken))
 				}
 				// MARK: Modifiers - onChange
 				.onChange(of: viewModel.state.status, perform: { status in
@@ -118,18 +122,17 @@ struct JourneyDetailsView: View {
 			}
 		}
 	}
-}
 
 struct JourneyDetailsPreview : PreviewProvider {
 	static var previews: some View {
 		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
-		if let mock = mock {
-			let viewData = constructJourneyViewData(
-				journey: mock,
-				depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
-				arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
-				realtimeDataUpdatedAt: 0
-			)
+		if let mock = mock,
+		   let viewData = constructJourneyViewData(
+			   journey: mock,
+			   depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
+			   arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
+			   realtimeDataUpdatedAt: 0
+		   ){
 			JourneyDetailsView(
 				journeyDetailsViewModel: .init(
 					refreshToken: nil,

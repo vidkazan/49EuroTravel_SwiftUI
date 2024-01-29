@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 
 final class JourneyListViewModel : ObservableObject, ChewViewModelProtocol {
+	let id = UUID()
 	@Published private(set) var state : State {
 		didSet {print("[🚂] >> journeys state: ",state.status.description)}
 	}
@@ -18,7 +19,7 @@ final class JourneyListViewModel : ObservableObject, ChewViewModelProtocol {
 	
 	// testing init
 	init(stops : DepartureArrivalPair,viewData : JourneyListViewData) {
-		print(">> JLVM init")
+//		print("💾 JLVM \(self.id.uuidString.suffix(4)) init")
 		state = State(
 			journeys: viewData.journeys,
 			date: .now,
@@ -48,7 +49,7 @@ final class JourneyListViewModel : ObservableObject, ChewViewModelProtocol {
 		settings : ChewSettings,
 		stops : DepartureArrivalPair
 	) {
-		print(">> JLVM init")
+//		print("💾 JLVM \(self.id.uuidString.suffix(4)) init")
 		state = State(
 			journeys: [],
 			date: date,
@@ -73,7 +74,7 @@ final class JourneyListViewModel : ObservableObject, ChewViewModelProtocol {
 		.store(in: &bag)
 	}
 	deinit {
-		print(">>JLVM deinit")
+//		print("💾🗑️ JLVM \(self.id.uuidString.suffix(4)) deinit")
 		bag.removeAll()
 	}
 	

@@ -45,19 +45,19 @@ struct JourneyListView: View {
 								JourneyListHeaderView(journeyViewModel: journeyViewModel)
 									.id(0)
 								ForEach(journeyViewModel.state.data.journeys,id: \.id) { journey in
-									NavigationLink(destination: {
-										NavigationLazyView(
-											JourneyDetailsView(
-												journeyDetailsViewModel: JourneyDetailsViewModel(
-													refreshToken: journey.refreshToken,
-													data: journey,
-													depStop: journeyViewModel.state.data.stops.departure,
-													arrStop: journeyViewModel.state.data.stops.arrival,
-													followList: chewVM.journeyFollowViewModel.state.journeys.map { $0.journeyRef},
+										NavigationLink(destination: {
+											NavigationLazyView(JourneyDetailsView(journeyDetailsViewModel: Model.shared.journeyDetailsViewModel(
+												journeyRef: journey.refreshToken,
+													viewData : journey,
+													stops : DepartureArrivalPair(
+														departure: journeyViewModel.state.data.stops.departure,
+														arrival: journeyViewModel.state.data.stops.arrival
+													),
+													followList: chewVM.journeyFollowViewModel.state.journeys.map { $0.journeyRef
+													},
 													chewVM: chewVM
-												)
-											)
-										)}, label: {
+											)))
+										}, label: {
 											JourneyCell(journey: journey)
 										})
 								}

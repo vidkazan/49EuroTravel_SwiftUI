@@ -73,8 +73,7 @@ extension CoreDataStore {
 	
 	func addJourney(viewData : JourneyViewData,depStop : Stop, arrStop : Stop) -> Bool {
 		var res = false
-		guard let ref = viewData.refreshToken,
-		let user = self.user else {
+		guard let user = self.user else {
 			print("📕 > \(#function) : error : ref / user/ journeys")
 			return false
 		}
@@ -84,7 +83,7 @@ extension CoreDataStore {
 				user: user,
 				depStop: depStop,
 				arrStop: arrStop,
-				ref: ref,
+				ref: viewData.refreshToken,
 				using: self.asyncContext
 			)
 			self.saveAsyncContext()
@@ -129,11 +128,7 @@ extension CoreDataStore {
 		}
 	}
 	func updateJourney(viewData : JourneyViewData,depStop : Stop, arrStop : Stop) -> Bool {
-		guard let ref = viewData.refreshToken else {
-			print("📕 > update Journeys : error : ref")
-			return false
-		}
-		if deleteJourneyIfFound(journeyRef: ref) {
+		if deleteJourneyIfFound(journeyRef: viewData.refreshToken) {
 			return addJourney(viewData: viewData, depStop: depStop, arrStop: arrStop)
 		}
 		print("📕 > update Journeys : error : delete fault")

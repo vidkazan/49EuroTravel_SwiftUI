@@ -14,15 +14,15 @@ struct LegDetailsView: View {
 	@State var currentProgressHeight : Double = 0
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	let followedJourney : Bool
-	@StateObject var vm : LegDetailsViewModel = LegDetailsViewModel(leg: .init(isReachable: true, legType: .line, tripId: "", direction: "", duration: "", legTopPosition: 0, legBottomPosition: 0, remarks: nil, legStopsViewData: [], footDistance: 0, lineViewData: .init(type: .bus, name: "", shortName: ""), progressSegments: .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0), timeContainer: .init(), polyline: nil))
-	let sendToJourneyVM : (JourneyDetailsViewModel.Event)->Void
-	
+	@ObservedObject var vm : LegDetailsViewModel
+	let sendToJourneyVM : ((JourneyDetailsViewModel.Event)->Void)?
+		
 	init(
 		followedJourney: Bool = false,
 		send : @escaping (JourneyDetailsViewModel.Event) -> Void,
-		viewData : LegViewData
+		vm : LegDetailsViewModel
 	) {
-		print("LDVM init")
+		self.vm = vm
 		self.followedJourney = followedJourney
 		self.sendToJourneyVM = send
 		self.currentProgressHeight = currentProgressHeight
@@ -150,6 +150,9 @@ struct LegDetailsView: View {
 				.frame(maxHeight: .infinity)
 			}
 		}
+		.onDisappear {
+			Model.shared.legDetailsViewModels.removeValue(forKey: vm.state.data.leg.tripId)
+		}
 		.onAppear {
 			self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970 , type: vm.state.status == .stopovers ? .expanded : .collapsed)
 		}
@@ -168,12 +171,12 @@ struct LegDetailsView: View {
 		.cornerRadius(10)
 		.onTapGesture {
 			if case .line=vm.state.data.leg.legType {
-				vm.send(event: .didtapExpandButton)
+				vm.send(event: .didTapExpandButton)
 			}
 		}
 		// MARK: longGesture
 		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
-			sendToJourneyVM(.didLongTapOnLeg(leg: vm.state.data.leg))
+			sendToJourneyVM?(.didLongTapOnLeg(leg: vm.state.data.leg))
 		})
 	}
 }
@@ -188,7 +191,7 @@ struct LegDetailsPreview : PreviewProvider {
 			ScrollView {
 				LegDetailsView(
 					send: {_ in },
-					viewData: viewData
+					vm : Model.shared.legDetailsViewModel(tripId: viewData.tripId, isExpanded: false,viewData: viewData)
 				)
 			}
 		} else {

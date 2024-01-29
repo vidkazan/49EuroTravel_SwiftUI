@@ -46,14 +46,14 @@ struct JourneyFollowView : View {
 							}
 							.swipeActions(edge: .trailing) {
 								Button {
-									if let ref = vm.state.data.viewData.refreshToken {
+//									if let ref = vm.state.data.viewData.refreshToken {
 										chewVM.journeyFollowViewModel.send(event: .didTapEdit(
 											action: .deleting,
-											journeyRef: ref,
+											journeyRef: vm.state.data.viewData.refreshToken,
 											followData: nil,
 											journeyDetailsViewModel: vm
 										))
-									}
+//									}
 								} label: {
 									Label("Delete", systemImage: "xmark.bin.circle")
 								}
@@ -78,18 +78,18 @@ struct JourneyFollowView : View {
 struct FollowPreviews: PreviewProvider {
 	static var previews: some View {
 		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
-		if let mock = mock {
-			let viewData = constructJourneyViewData(
-				journey: mock,
-				depStop:  .init(),
-				arrStop:  .init(),
-				realtimeDataUpdatedAt: 0
-			)
+		if let mock = mock,
+		   let viewData = constructJourneyViewData(
+			   journey: mock,
+			   depStop:  .init(),
+			   arrStop:  .init(),
+			   realtimeDataUpdatedAt: 0
+		   ){
 			Group {
 				JourneyFollowView(viewModel: .init(
 					coreDataStore: .init(),
 					journeys: [.init(
-						journeyRef: viewData.refreshToken ?? "",
+						journeyRef: viewData.refreshToken,
 						journeyViewData: viewData,
 						depStop: .init(),
 						arrStop: .init()

@@ -15,7 +15,7 @@ extension LegDetailsViewModel {
 		switch state.status {
 		case .idle:
 			switch event {
-			case .didtapExpandButton:
+			case .didTapExpandButton:
 				return State(
 					data: StateData(
 						leg: state.data.leg,
@@ -29,7 +29,7 @@ extension LegDetailsViewModel {
 			}
 		case .stopovers:
 			switch event {
-			case .didtapExpandButton:
+			case .didTapExpandButton:
 				return State(
 					data: StateData(
 						leg: state.data.leg,
