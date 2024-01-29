@@ -15,10 +15,10 @@ import SwiftUI
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
-//	@State var sheetIsPresented : Bool = false
+	@State var state : ChewViewModel.State = .init()
 	var body: some View {
 		NavigationView {
-			switch chewViewModel.state.status {
+			switch state.status {
 			case .start:
 				EmptyView()
 			default:
@@ -57,6 +57,9 @@ struct ContentView: View {
 			chewViewModel.send(event: .didStartViewAppear)
 			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)
 		}
+		.onReceive(chewViewModel.$state, perform: { newState in
+			state = newState
+		})
 	}
 	
 	struct ContentViewPreview : PreviewProvider {
@@ -65,7 +68,10 @@ struct ContentView: View {
 			if let mock = mock {
 				let viewData = constructJourneyListViewData(journeysData: mock,depStop: .init(),arrStop: .init())
 				let data = JourneyListViewData(journeysViewData: viewData,data: mock,depStop: .init(),arrStop: .init())
-				let vm = JourneyListViewModel(viewData: data,chewVM: .init())
+				let vm = JourneyListViewModel(
+					stops: .init(departure: .init(), arrival: .init()),
+					viewData: data
+				)
 				Group {
 					ContentView()
 						.environmentObject(ChewViewModel(initialState: .init(
@@ -73,7 +79,7 @@ struct ContentView: View {
 							arrStop: .textOnly(""),
 							settings: .init(),
 							date: .now,
-							status: .journeys(vm)
+							status: .journeys(.init(departure: .init(), arrival: .init()))
 						)))
 					ContentView()
 						.environmentObject(ChewViewModel())

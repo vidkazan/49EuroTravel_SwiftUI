@@ -30,7 +30,6 @@ struct Chew_chew_SwiftUIApp: App {
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
-				.background(Color.chewFillPrimary)
 				.environmentObject(chewJourneyViewModel)
 		}
 	}
