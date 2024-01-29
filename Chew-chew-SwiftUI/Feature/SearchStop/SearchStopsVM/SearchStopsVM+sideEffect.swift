@@ -9,13 +9,13 @@ import Foundation
 import Combine
 
 extension SearchStopsViewModel {
-	func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
+	static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
 		Feedback { _ in
 			input
 		}
 	}
 	
-	func whenLoadingStops() -> Feedback<State, Event> {
+	static func whenLoadingStops() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loading(let string) = state.status,
 				  let type = state.type else {
@@ -36,7 +36,7 @@ extension SearchStopsViewModel {
 		}
 	}
 	
-	func whenUpdatingRecentStops() -> Feedback<State, Event> {
+	static func whenUpdatingRecentStops() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .updatingRecentStops(let stop) = state.status,
 			let stop = stop else {

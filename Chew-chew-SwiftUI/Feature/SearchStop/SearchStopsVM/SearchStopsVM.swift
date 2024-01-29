@@ -30,12 +30,12 @@ class SearchStopsViewModel : ObservableObject {
 		)
 		Publishers.system(
 			initial: state,
-			reduce: self.reduce,
+			reduce: Self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
-				self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenLoadingStops(),
-				self.whenUpdatingRecentStops()
+				Self.userInput(input: input.eraseToAnyPublisher()),
+				Self.whenLoadingStops(),
+				Self.whenUpdatingRecentStops()
 			],
 			name: "SSVM"
 		)

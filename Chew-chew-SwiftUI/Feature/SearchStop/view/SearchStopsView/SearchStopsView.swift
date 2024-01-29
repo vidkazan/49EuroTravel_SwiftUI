@@ -49,8 +49,6 @@ struct SearchStopsView: View {
 				}
 			.background(Color.chewFillSecondary)
 			.cornerRadius(10)
-			.transition(.opacity)
-			.animation(.spring(), value: searchStopViewModel.state.status)
 			// MARK: BottomField
 			VStack {
 				HStack {
@@ -75,9 +73,6 @@ struct SearchStopsView: View {
 			}
 			.background(Color.chewFillSecondary)
 			.cornerRadius(10)
-//			.transition(.opacity)
-//			.transition(.move(edge: .bottom))
-//			.animation(.spring(), value: searchStopViewModel.state.status)
 		}
 		.onChange(of: chewViewModel.state, perform: { state in
 			topText = state.depStop.text
@@ -103,4 +98,3 @@ struct SearchStopsView: View {
 		})
 	}
 }
-
