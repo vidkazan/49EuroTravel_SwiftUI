@@ -35,6 +35,7 @@ struct JourneyViewData : Equatable, Identifiable {
 	let legs : [LegViewData]
 	let transferCount : Int
 	let sunEvents : [SunEvent]
+	let sunEventsGradientStops : [Gradient.Stop]
 	let isReachable : Bool
 	let badges : [Badges]
 	let refreshToken : String
@@ -55,6 +56,7 @@ extension JourneyViewData {
 		self.refreshToken = data.refreshToken
 		self.timeContainer = data.timeContainer
 		self.updatedAt = data.updatedAt
+		self.sunEventsGradientStops = data.sunEventsGradientStops
 	}
 	init(
 		journeyRef : String,
@@ -77,6 +79,11 @@ extension JourneyViewData {
 		self.refreshToken = Self.fixRefreshToken(token: journeyRef)
 		self.timeContainer = time
 		self.updatedAt = updatedAt
+		self.sunEventsGradientStops = getGradientStops(
+			startDateTS: timeContainer.timestamp.departure.actual,
+			endDateTS: timeContainer.timestamp.arrival.actual,
+			sunEvents: sunEvents
+		)
 	}
 	
 	static func fixRefreshToken(token : String) -> String {
@@ -86,7 +93,7 @@ extension JourneyViewData {
 	}
 }
 
-struct LegViewData : Equatable,Identifiable{
+struct LegViewData : Equatable,Identifiable {
 	let id = UUID()
 	let isReachable : Bool
 	let legType : LegType

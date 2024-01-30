@@ -50,7 +50,7 @@ struct JourneyFollowCellView : View {
 				.badgeBackgroundStyle(.secondary)
 			}
 			
-			LegsView(journey : data,showProgressBar: true)
+			LegsView(journey : data,progressBar: true)
 			BadgeView(
 				.updatedAtTime(
 					referenceTime: data.updatedAt,

@@ -6,6 +6,8 @@
 //
 import Foundation
 import CoreLocation
+import SwiftUI
+
 
 func constructJourneyViewDataAsync(
 	journey : JourneyDTO,
@@ -106,4 +108,53 @@ func constructJourneyViewDataThrows(
 		time: timeContainer,
 		updatedAt: realtimeDataUpdatedAt
 	)
+}
+
+
+
+func getGradientStops(startDateTS : Double?, endDateTS : Double?,sunEvents : [SunEvent] ) -> [Gradient.Stop] {
+	let nightColor = Color.chewFillBluePrimary
+	let dayColor = Color.chewFillYellowPrimary
+	var stops : [Gradient.Stop] = []
+	for event in sunEvents {
+		if
+			let startDateTS = startDateTS,
+			let endDateTS = endDateTS {
+			switch event.type {
+			case .sunrise:
+				stops.append(Gradient.Stop(
+					color: nightColor,
+					location: (event.timeStart.timeIntervalSince1970 - startDateTS) / (endDateTS - startDateTS)
+				))
+				if let final = event.timeFinal {
+					stops.append(Gradient.Stop(
+						color: dayColor,
+						location: (final.timeIntervalSince1970 - startDateTS) / (endDateTS - startDateTS)
+					))
+				}
+			case .day:
+				stops.append(Gradient.Stop(
+					color: dayColor,
+					location: 0
+				))
+			case .sunset:
+				stops.append(Gradient.Stop(
+					color: dayColor,
+					location: (event.timeStart.timeIntervalSince1970 - startDateTS) / (endDateTS - startDateTS)
+				))
+				if let final = event.timeFinal {
+					stops.append(Gradient.Stop(
+						color: nightColor,
+						location:  (final.timeIntervalSince1970 - startDateTS) / (endDateTS - startDateTS)
+					))
+				}
+			case .night:
+				stops.append(Gradient.Stop(
+					color: nightColor,
+					location: 0
+				))
+			}
+		}
+	}
+	return stops.sorted(by: {$0.location < $1.location})
 }

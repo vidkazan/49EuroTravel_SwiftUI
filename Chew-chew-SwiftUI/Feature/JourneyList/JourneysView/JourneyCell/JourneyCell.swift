@@ -20,7 +20,7 @@ struct JourneyCell: View {
 	var body: some View {
 		VStack {
 			JourneyHeaderView(journey: journey)
-			LegsView(journey : journey,showProgressBar: false)
+			LegsView(journey : journey,progressBar: false)
 				.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
 			HStack(alignment: .center) {
 				PlatformView(
@@ -35,7 +35,7 @@ struct JourneyCell: View {
 			}
 			.padding(7)
 		}
-		.background(Color.chewFillAccent)
+		.background(Color.chewFillAccent.opacity(0.5))
 		.overlay {
 			if journey?.isReachable == false {
 				Color.primary.opacity(0.4)

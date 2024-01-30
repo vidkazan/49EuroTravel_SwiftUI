@@ -34,7 +34,7 @@ extension JourneyDetailsView {
 					}
 					Spacer()
 				}
-				LegsView(journey : viewModel.state.data.viewData,showProgressBar: true)
+				LegsView(journey : viewModel.state.data.viewData,progressBar: true)
 					.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
 			}
 			
