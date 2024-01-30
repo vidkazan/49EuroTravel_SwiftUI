@@ -167,12 +167,12 @@ struct LegDetailsView: View {
 		})
 		// MARK: 🤢
 		.padding(.top,vm.state.data.leg.legType == LegViewData.LegType.line || vm.state.data.leg.legType.caseDescription == "footStart" ?  10 : 0)
-		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
+		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillSecondary : .clear )
 		.cornerRadius(10)
 		.onTapGesture {
-			if case .line=vm.state.data.leg.legType {
+//			if case .line=vm.state.data.leg.legType {
 				vm.send(event: .didTapExpandButton)
-			}
+//			}
 		}
 		// MARK: longGesture
 		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {

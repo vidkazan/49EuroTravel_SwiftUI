@@ -34,7 +34,7 @@ struct JourneyDetailsView: View {
 								LegDetailsView(
 									send: viewModel.send,
 									vm: Model.shared.legDetailsViewModel(
-										tripId: leg.tripId,
+										tripId: leg.tripId + (leg.legStopsViewData.first?.name ?? "") + (leg.legStopsViewData.last?.name ?? ""),
 										isExpanded: false,
 										viewData: leg
 									))
@@ -135,12 +135,13 @@ struct JourneyDetailsPreview : PreviewProvider {
 			   realtimeDataUpdatedAt: 0
 		   ){
 			JourneyDetailsView(
-				journeyDetailsViewModel: model.journeyDetailsViewModel(
-					journeyRef: viewData.refreshToken,
-					viewData: viewData,
-					stops: .init(departure: .init(), arrival: .init()),
+				journeyDetailsViewModel: JourneyDetailsViewModel(
+					refreshToken: viewData.refreshToken,
+					data: viewData,
+					depStop: .init(),
+					arrStop: .init(),
 					followList: [],
-					chewVM: ChewViewModel()
+					chewVM: .init()
 				))
 				.environmentObject(ChewViewModel())
 		} else {

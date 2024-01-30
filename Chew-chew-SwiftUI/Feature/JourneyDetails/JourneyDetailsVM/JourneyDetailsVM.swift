@@ -18,7 +18,7 @@ final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	init (
-		refreshToken : String?,
+		refreshToken : String,
 		data: JourneyViewData,
 		depStop : Stop,
 		arrStop : Stop,
