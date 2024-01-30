@@ -50,7 +50,7 @@ struct BadgeBackgroundGradientStyle: BadgeStyle {
 				startPoint: UnitPoint(x: 0, y: 0),
 				endPoint: UnitPoint(x: 1, y: 0))
 			)
-			.cornerRadius(8,antialiased: true)
+			.cornerRadius(8)
 	}
 }
 
@@ -62,6 +62,6 @@ struct BadgeBackgroundBaseStyle: BadgeStyle {
 	func body(content: Content) -> some View {
 		content
 			.background(color)
-			.cornerRadius(8,antialiased: true)
+			.cornerRadius(8)
 	}
 }

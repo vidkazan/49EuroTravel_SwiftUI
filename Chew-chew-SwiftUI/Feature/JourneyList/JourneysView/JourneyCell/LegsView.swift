@@ -78,7 +78,7 @@ struct LegsView: View {
 					}
 				}	
 			}
-			.frame(height:25)
+			.frame(height:40)
 		}
 	}
 }
@@ -103,16 +103,17 @@ struct SunEventsGradient : View {
 		switch isProgressLine {
 		case true:
 			RoundedRectangle(cornerRadius: 5)
-				.fill(Color.chewFillGreenPrimary.opacity(0.8))
+				.fill(Color.chewFillGreenPrimary)
 				.frame(
 					width: size.width * progressLineProportion,
-					height: 30
+					height: 27
 				)
 				.position(
 					x : size.width * progressLineProportion / 2,
 					y : size.height/2
 				)
 				.cornerRadius(5)
+				.shadow(radius: 1)
 		case false:
 			RoundedRectangle(cornerRadius: 5)
 				.fill(.gray)
@@ -124,7 +125,7 @@ struct SunEventsGradient : View {
 				}
 				.frame(
 					maxWidth: size.width > 0 ? size.width - 1 : 0 ,
-					maxHeight: 30
+					maxHeight: 26
 				)
 				.cornerRadius(5)
 		}

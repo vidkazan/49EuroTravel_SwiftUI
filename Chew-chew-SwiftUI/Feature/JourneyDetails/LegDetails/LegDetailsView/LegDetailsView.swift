@@ -116,13 +116,14 @@ struct LegDetailsView: View {
 							RoundedRectangle(
 								cornerRadius : vm.state.data.totalProgressHeight == currentProgressHeight ? 0 : 6
 							)
-							.fill(Color.chewFillGreenPrimary.opacity(0.7))
+							.fill(Color.chewFillGreenPrimary)
 								.frame(width: 22,height: currentProgressHeight)
 								.padding(.leading,25)
 							Spacer()
 						}
 						Spacer(minLength: 0)
 					}
+					.shadow(radius: 2)
 					// MARK: BG - colors
 					switch vm.state.data.leg.legType {
 					case .transfer,.footMiddle:

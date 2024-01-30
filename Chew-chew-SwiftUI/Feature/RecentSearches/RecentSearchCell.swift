@@ -37,6 +37,7 @@ struct RecentSearchCell: View {
 				.background(Color.chewFillAccent.opacity(0.3))
 				.cornerRadius(20)
 			}
+			.background(Color.clear)
 			.padding(10)
 	}
 }

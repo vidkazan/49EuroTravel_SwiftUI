@@ -28,7 +28,7 @@ struct RecentSearchesView : View {
 	}
 	var body: some View {
 		if !recentSearchesVM.state.searches.isEmpty {
-			VStack(alignment: .leading,spacing: 1) {
+			VStack(alignment: .leading,spacing: 2) {
 				Text("Recent searches")
 					.chewTextSize(.big)
 					.offset(x: 10)
@@ -43,6 +43,7 @@ struct RecentSearchesView : View {
 						}
 						.background(Color.chewFillAccent)
 						.cornerRadius(8)
+						.padding(5)
 					}
 				}
 				.padding(5)
@@ -51,9 +52,6 @@ struct RecentSearchesView : View {
 			}
 			.padding(.top,5)
 			.transition(.opacity)
-			.animation(.spring().speed(2), value: chewVM.state.status)
-			.animation(.spring().speed(2), value: chewVM.searchStopsViewModel.state.status)
-			.animation(.spring().speed(2), value: chewVM.recentSearchesViewModel.state.status)
 		}
 	}
 }
