@@ -174,16 +174,9 @@ struct BadgeView : View {
 				}
 				.padding(4)
 			case .departureArrivalStops(departure: let departure, arrival: let arrival):
-				HStack(spacing: 2) {
-					OneLineText(departure)
-						.chewTextSize(size)
-					OneLineText(" to ")
-						.chewTextSize(size)
-						.foregroundColor(.primary.opacity(0.6))
-					OneLineText(arrival)
-						.chewTextSize(size)
-				}
-				.padding(4)
+				Text(departure + " to " + arrival)
+					.chewTextSize(size)
+					.padding(4)
 			case .changesCount(let count):
 				HStack(spacing: 2) {
 					Image(systemName: "arrow.triangle.2.circlepath")

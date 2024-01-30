@@ -32,7 +32,7 @@ enum StopOverType : String,Equatable, CaseIterable {
 		case .destination:
 			return 50
 		case .origin:
-			return 90
+			return 110
 		case .stopover:
 			return 35
 		case .transfer,.footMiddle:
