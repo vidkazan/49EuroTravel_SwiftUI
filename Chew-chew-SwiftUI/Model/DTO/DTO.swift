@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 // /journeys
 
@@ -18,10 +19,57 @@ enum StopOverType : String,Equatable, CaseIterable {
 	case footBottom
 	case transfer
 	
+	var timeLabelCornerRadius : CGFloat {
+		switch self {
+		case .stopover:
+			return 5
+		default:
+			return 7
+		}
+	}
+	
+	var timeLabelArragament : TimeLabelView.Arragement {
+		switch self {
+		case .origin:
+			return .bottom
+		case .stopover:
+			return .right
+		case .destination:
+			return .bottom
+		case .footTop:
+			return .bottom
+		case .footMiddle:
+			return .right
+		case .footBottom:
+			return .bottom
+		case .transfer:
+			return .right
+		}
+	}
+	
+	var smallTimeLabel : Bool {
+		switch self {
+		case .origin:
+			return false
+		case .stopover:
+			return true
+		case .destination:
+			return false
+		case .footTop:
+			return false
+		case .footMiddle:
+			return false
+		case .footBottom:
+			return false
+		case .transfer:
+			return false
+		}
+	}
+	
 	var timeLabelHeight : Double {
 		switch self {
 		case .destination,.origin,.footBottom,.footTop:
-			return 30
+			return 25
 		case .transfer,.footMiddle,.stopover:
 			return 15
 		}

@@ -35,6 +35,22 @@ struct TimeLabelView: View {
 		self.isCancelled = isCancelled
 	}
 	
+	init(
+		stopOverType : StopOverType,
+		time : Prognosed<String?>,
+		delay: Int?,
+		isCancelled : Bool
+	) {
+		self.delay = delay
+		self.isSmall = stopOverType.smallTimeLabel
+		self.arragement = stopOverType.timeLabelArragament
+		self.time = Prognosed(
+			actual: time.actual ?? "",
+			planned: time.planned ?? ""
+		)
+		self.isCancelled = isCancelled
+	}
+	
 	var body: some View {
 		switch isCancelled {
 		case true:
