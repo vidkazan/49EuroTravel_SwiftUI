@@ -139,7 +139,7 @@ struct JourneyDetailsPreview : PreviewProvider {
 					chewVM: .init()
 				))
 				.environmentObject(ChewViewModel())
-				.previewDevice(PreviewDevice(stringLiteral: "iPhone SE (3rd generation)"))
+				.previewDevice(PreviewDevice(stringLiteral: iPhoneModel.iPhoneSE2.rawValue))
 		} else {
 			Text("error")
 		}

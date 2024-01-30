@@ -98,27 +98,18 @@ extension TimeLabelView {
 		}
 	}
 	func mainTime(delay : Int, cancelled : Bool) -> some View {
-		if cancelled == true {
-			return	Text(time.planned)
-				.foregroundColor(Color.chewRedScale80)
-				.font(
-					.system(
-						size: isSmall == false ? 17 : 12,
-						weight: isSmall == false ? .semibold : .medium
-					)
-				)
-				.strikethrough()
-		} else {
-			return	Text(delay < 1 ? time.planned : time.actual)
-				.foregroundColor(
-					delay < 5 ? isSmall ? .primary : .primary : Color.chewRedScale80
-				)
-				.font(
-					.system(
-						size: isSmall == false ? 17 : 12,
-						weight: isSmall == false ? .semibold : .medium
-					)
-				)
+		Group {
+			switch cancelled {
+			case true:
+				Text(time.planned)
+					.foregroundColor(Color.chewRedScale80)
+					.strikethrough()
+					.chewTextSize(isSmall == false ? .big : .medium)
+			case false:
+				Text(delay < 1 ? time.planned : time.actual)
+					.foregroundColor(delay < 5 ? isSmall ? .primary : .primary : Color.chewRedScale80)
+					.chewTextSize(isSmall == false ? .big : .medium)
+			}
 		}
 	}
 }
@@ -133,7 +124,7 @@ struct TimeLabelPreviews: PreviewProvider {
 				delay: 0,
 				isCancelled: false
 			)
-			.background(.green)
+			.background(Color.chewFillSecondary)
 			.cornerRadius(8)
 			TimeLabelView(
 				isSmall: false,
@@ -142,7 +133,7 @@ struct TimeLabelPreviews: PreviewProvider {
 				delay: 61,
 				isCancelled: false
 			)
-			.background(.green)
+			.background(Color.chewFillSecondary)
 			.cornerRadius(8)
 		}
 	}

@@ -118,7 +118,7 @@ struct BadgeView : View {
 					.padding(4)
 			case .lineNumber(lineType: let type, _):
 				HStack(spacing: 0) {
-					Image(systemName: "train.side.front.car")
+					Image(.trainSideFrontCar)
 						.chewTextSize(size)
 						.padding(.leading,2)
 					OneLineText(badge.badgeData.name)
@@ -135,7 +135,7 @@ struct BadgeView : View {
 					OneLineText(badge.badgeData.name)
 						.chewTextSize(size)
 					if count > 1, mode != .hideShevron {
-						Image(systemName: "chevron.down.circle")
+						Image(.chevronDownCircle)
 							.chewTextSize(size)
 							.rotationEffect(.degrees(mode.angle))
 							.animation(.spring(), value: mode)
@@ -153,7 +153,7 @@ struct BadgeView : View {
 				.padding(4)
 			case .walking:
 				HStack(spacing: 2) {
-					Image(systemName: "figure.walk.circle")
+					Image(.figureWalkCircle)
 						.chewTextSize(size)
 					OneLineText("walk")
 						.chewTextSize(size)
@@ -164,7 +164,7 @@ struct BadgeView : View {
 				.padding(4)
 			case .transfer:
 				HStack(spacing: 2) {
-					Image(systemName: "arrow.triangle.2.circlepath")
+					Image(.arrowTriangle2Circlepath)
 						.chewTextSize(size)
 					OneLineText("transfer")
 						.chewTextSize(size)
@@ -179,7 +179,7 @@ struct BadgeView : View {
 					.padding(4)
 			case .changesCount(let count):
 				HStack(spacing: 2) {
-					Image(systemName: "arrow.triangle.2.circlepath")
+					Image(.arrowTriangle2Circlepath)
 						.chewTextSize(size)
 					OneLineText(String(count))
 						.chewTextSize(size)

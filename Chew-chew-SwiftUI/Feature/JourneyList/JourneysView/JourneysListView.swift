@@ -106,7 +106,7 @@ struct JourneyListView: View {
 					Button(action: {
 						journeyViewModel.send(event: .onLaterRef)
 					}, label: {
-						Image(systemName: "exclamationmark.circle")
+						Image(.exclamationmarkCircle)
 							.chewTextSize(.medium)
 							.foregroundColor(.secondary)
 					})

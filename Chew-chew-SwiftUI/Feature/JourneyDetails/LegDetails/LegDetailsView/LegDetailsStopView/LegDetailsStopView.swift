@@ -40,7 +40,7 @@ struct LegStopView : View {
 				planned: stopOver.timeContainer.stringTimeValue.departure.planned ?? ""
 			)
 			self.delay = stopOver.timeContainer.departureStatus
-			self.cancelType = (stopOver.timeContainer.departureStatus == TimeContainer.DelayStatus.cancelled) ? .fullyCancelled : .notCancelled
+			self.cancelType = stopOver.timeContainer.departureStatus == TimeContainer.DelayStatus.cancelled ? .fullyCancelled : .notCancelled
 		case .stopover:
 			self.time = Prognosed(
 				actual: stopOver.timeContainer.stringTimeValue.departure.actual ?? "",
@@ -187,35 +187,7 @@ struct LegStopView : View {
 							platform: stopOver.departurePlatform.actual,
 							plannedPlatform: stopOver.departurePlatform.planned
 						)
-						if showBadges == true {
-							if #available(iOS 16.0, *) {
-								FlowLayout(spacing: .init(width: 2, height: 3)) {
-									BadgeView(.lineNumber(
-										lineType:legViewData.lineViewData.type ,
-										num: legViewData.lineViewData.name
-									))
-									BadgeView(.legDirection(dir: legViewData.direction))
-										.badgeBackgroundStyle(.primary)
-									BadgeView(.legDuration(dur: legViewData.duration))
-										.badgeBackgroundStyle(.primary)
-									BadgeView(.stopsCount(legViewData.legStopsViewData.count - 1,vm.state.status == .idle ? .showShevronUp: .showShevronDown))
-										.badgeBackgroundStyle(.primary)
-								}
-							} else {
-								HStack(spacing: 2) {
-									BadgeView(.lineNumber(
-										lineType:legViewData.lineViewData.type ,
-										num: legViewData.lineViewData.name
-									))
-									BadgeView(.legDirection(dir: legViewData.direction))
-										.badgeBackgroundStyle(.primary)
-									BadgeView(.legDuration(dur: legViewData.duration))
-										.badgeBackgroundStyle(.primary)
-									BadgeView(.stopsCount(legViewData.legStopsViewData.count - 1,vm.state.status == .idle ? .showShevronUp: .showShevronDown))
-										.badgeBackgroundStyle(.primary)
-								}
-							}
-						}
+						if showBadges == true { LegStopViewBadges }
 					case  .destination:
 						PlatformView(
 							isShowingPlatormWord: true,
@@ -242,27 +214,14 @@ struct LegStopView : View {
 	}
 }
 
-extension LegStopView {
-	var labelBackground : some View {
-		LinearGradient(
-			stops: [
-				Gradient.Stop(color: Color.chewFillGreenPrimary, location: 0),
-				Gradient.Stop(color: Color.chewFillGreenPrimary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-				Gradient.Stop(color: LegStopView.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
-			],
-			startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1)
-		)
-	}
-}
-
 struct LegDetailsStopPreview : PreviewProvider {
 	static var previews : some View {
 		let mock = Mock.trip.RE6NeussMinden.decodedData
 		if let mock = mock?.trip,
 		   let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]) {
-			ScrollView {
-				VStack {
-					ForEach(viewData.legStopsViewData.prefix(2)) { leg in
+			ScrollView(.horizontal) {
+				LazyHStack {
+					ForEach(viewData.legStopsViewData) { leg in
 						VStack {
 							ForEach(StopOverType.allCases, id: \.rawValue, content: {type in
 								LegStopView(
@@ -274,11 +233,13 @@ struct LegDetailsStopPreview : PreviewProvider {
 								)
 							})
 						}
+						.frame(minWidth: 350)
 						.padding(5)
+						.border(.gray)
 					}
 				}
 			}
-			.previewDevice(PreviewDevice(stringLiteral: iPhoneModel.iPhoneSE2.rawValue))
+			.previewDevice(PreviewDevice(stringLiteral: iPhoneModel.iPadMini6.rawValue))
 		} else {
 			Text("error")
 		}

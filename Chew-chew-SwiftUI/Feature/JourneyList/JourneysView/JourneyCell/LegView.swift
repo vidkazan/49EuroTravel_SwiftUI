@@ -37,7 +37,7 @@ struct LegView: View {
 							HStack(spacing: 1) {
 								let duration = "\(leg.duration)"
 								if (geo.size.width > 15) {
-									Image(systemName: "figure.walk.circle")
+									Image(.figureWalkCircle)
 										.font(.system(size: 12))
 										.foregroundColor(.primary)
 								}
@@ -98,7 +98,7 @@ struct LegViewLabels: View {
 							HStack(spacing: 1) {
 								let duration = "\(leg.duration)"
 								if (geo.size.width > 15) {
-									Image(systemName: "figure.walk.circle")
+									Image(.figureWalkCircle)
 										.font(.system(size: 12))
 										.foregroundColor(.primary)
 								}

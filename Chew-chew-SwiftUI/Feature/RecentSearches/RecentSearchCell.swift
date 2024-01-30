@@ -29,7 +29,7 @@ struct RecentSearchCell: View {
 				Button(action: {
 					send(.didTapEdit(action: .deleting, search: locations))
 				}, label: {
-					Image(systemName: "xmark.circle")
+					Image(.xmarkCircle)
 						.chewTextSize(.big)
 						.tint(.gray)
 				})

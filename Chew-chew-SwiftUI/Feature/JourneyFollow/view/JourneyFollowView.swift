@@ -8,6 +8,7 @@
 import Foundation
 import SwiftUI
 
+#warning("TODO: when closing view, updated viewData cleared and only previous coredata fetch viewData is available")
 struct JourneyFollowView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyFollowViewModel

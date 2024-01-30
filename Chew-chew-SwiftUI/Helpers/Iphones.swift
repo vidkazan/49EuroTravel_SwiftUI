@@ -31,4 +31,5 @@ enum iPhoneModel: String {
 	case iPhone13 = "iPhone 13"
 	case iPhone13Pro = "iPhone 13 Pro"
 	case iPhone13ProMax = "iPhone 13 Pro Max"
+	case iPadMini6 = "iPad mini (6th generation)"
 }

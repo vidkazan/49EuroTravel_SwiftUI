@@ -30,12 +30,12 @@ extension JourneyDetailsView {
 					default:
 						switch viewModel.state.data.isFollowed {
 						case true:
-							Image(systemName: "bookmark.fill")
+							Image(.bookmark)
 								.frame(width: 15,height: 15)
 								.tint(viewModel.state.status == .loading(token: viewModel.state.data.viewData.refreshToken) ? .chewGray30 : .blue)
 								.padding(5)
 						case false:
-							Image(systemName: "bookmark")
+							Image(.bookmark.fill)
 								.tint(viewModel.state.status == .loading(token: viewModel.state.data.viewData.refreshToken) ? .chewGray30 : .blue)
 								.frame(width: 15,height: 15)
 								.padding(5)
@@ -61,11 +61,11 @@ extension JourneyDetailsView {
 							.fullLeg,
 							.loadingFullLeg,
 							.changingSubscribingState:
-						Image(systemName: "arrow.clockwise")
+						Image(.arrowClockwise)
 							.frame(width: 15,height: 15)
 							.padding(5)
 					case .error:
-						Image(systemName: "exclamationmark.circle")
+						Image(.exclamationmarkCircle)
 							.frame(width: 15,height: 15)
 							.padding(5)
 					}

@@ -30,14 +30,14 @@ extension SearchStopsView {
 					}, label: {
 						switch stop.type {
 						case .stop:
-							Label(stop.name, systemImage: "train.side.front.car")
+							Label(stop.name, systemImage: ChewSFSymbols.trainSideFrontCar.rawValue)
 						case .pointOfInterest:
-							Label(stop.name, systemImage: "building.2.crop.circle")
+							Label(stop.name, systemImage: ChewSFSymbols.building2CropCircle.rawValue)
 						case .location:
-							Label(stop.name, systemImage: "building.2.crop.circle.fill")
+							Label(stop.name, systemImage: ChewSFSymbols.building2CropCircle.fill.rawValue)
 						}
 						Spacer()
-						Image(systemName: "clock.arrow.circlepath")
+						Image(.clockArrowCirclepath)
 							.foregroundColor(.chewGrayScale30)
 							.padding(.horizontal,7)
 					})

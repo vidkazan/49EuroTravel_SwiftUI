@@ -13,9 +13,9 @@ extension SearchStopsView {
 		let image : Image = {
 			switch type {
 			case .departure:
-				return Image(systemName: "location")
+				return Image(.location)
 			case .arrival:
-				return Image(systemName: "arrow.up.arrow.down")
+				return Image(.arrowUpArrowDown)
 			}
 		}()
 		return Button(

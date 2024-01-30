@@ -26,7 +26,7 @@ struct TimeAndSettingsView: View {
 						Button(action: {
 							chewViewModel.send(event: .didTapSheet(.settings))
 						}, label: {
-							Image(systemName: "gearshape")
+							Image(.gearshape)
 								.tint(.primary)
 								.frame(maxWidth: 43,maxHeight: 43)
 								.background(Color.chewFillAccent)

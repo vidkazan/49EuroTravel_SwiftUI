@@ -46,7 +46,7 @@ extension SearchStopsView {
 					Button(action: {
 						textBinding.wrappedValue = ""
 					}, label: {
-						Image(systemName: "xmark.circle")
+						Image(.xmarkCircle)
 							.chewTextSize(.big)
 							.tint(.gray)
 						
