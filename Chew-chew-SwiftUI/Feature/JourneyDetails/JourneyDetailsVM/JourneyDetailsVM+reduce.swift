@@ -29,6 +29,8 @@ extension JourneyDetailsViewModel {
 			}
 		case .loading, .loadingIfNeeded:
 			switch event {
+			case .didCancelToLoadData:
+				return State(data: state.data, status: .loadedJourneyData)
 			case .didTapReloadButton(ref: let ref):
 				return State(data: state.data,status: .loading(token: ref))
 			case .didRequestReloadIfNeeded(ref: let ref):
@@ -154,6 +156,8 @@ extension JourneyDetailsViewModel {
 			}
 		case .loadingFullLeg:
 			switch event {
+			case .didCancelToLoadData:
+				return State(data: state.data, status: .loadedJourneyData)
 			case .didFailToLoadTripData:
 				return State(
 					data: state.data,

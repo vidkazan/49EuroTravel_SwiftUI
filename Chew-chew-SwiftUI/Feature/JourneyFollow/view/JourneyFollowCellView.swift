@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct JourneyFollowCellView : View {
+	let timer = Timer.publish(every: 60, on: .main, in: .common).autoconnect()
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var vm : JourneyDetailsViewModel
 	@State var isLoading : Bool = false
@@ -22,12 +23,8 @@ struct JourneyFollowCellView : View {
 				NavigationLink(destination: {
 					JourneyDetailsView(journeyDetailsViewModel: vm)
 				}, label: {
-					Text(data.legs.first?.legStopsViewData.first?.name ?? "origin")
+					Text((data.legs.first?.legStopsViewData.first?.name ?? "origin") + " to " + (data.legs.last?.legStopsViewData.last?.name ?? "destination"))
 						.chewTextSize(.big)
-					Image(systemName: "arrow.right")
-					Text(data.legs.last?.legStopsViewData.last?.name ?? "destination")
-						.chewTextSize(.big)
-					Spacer()
 				})
 			}
 			HStack {
@@ -49,7 +46,7 @@ struct JourneyFollowCellView : View {
 				)
 				.badgeBackgroundStyle(.secondary)
 			}
-			
+
 			LegsView(journey : data,progressBar: true)
 			BadgeView(
 				.updatedAtTime(
@@ -69,11 +66,34 @@ struct JourneyFollowCellView : View {
 			}
 			
 		})
-//		.onChange(of: vm.state.status, perform: { status in
-//
-//		})
-		.onAppear {
+		.onReceive(timer, perform: { _ in
 			vm.send(event: .didRequestReloadIfNeeded(ref: vm.state.data.viewData.refreshToken))
+		})
+	}
+}
+
+
+struct FollowCellPreviews: PreviewProvider {
+	static var previews: some View {
+		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
+		if let mock = mock,
+		   let viewData = constructJourneyViewData(
+			   journey: mock,
+			   depStop:  .init(),
+			   arrStop:  .init(),
+			   realtimeDataUpdatedAt: 0
+		   ){
+			JourneyFollowCellView(journeyDetailsViewModel: .init(
+				refreshToken: "",
+				data: viewData,
+				depStop: .init(),
+				arrStop: .init(),
+				followList: [],
+				chewVM: .init()
+			))
+			.environmentObject(ChewViewModel())
+		} else {
+			Text("error")
 		}
 	}
 }

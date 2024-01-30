@@ -50,9 +50,6 @@ struct ContentView: View {
 //				)
 			}
 		}
-//		.onChange(of: chewViewModel.state.status, perform: { _ in
-//			sheetIsPresented = chewViewModel.state.settings.onboarding
-//		})
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)
 			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)

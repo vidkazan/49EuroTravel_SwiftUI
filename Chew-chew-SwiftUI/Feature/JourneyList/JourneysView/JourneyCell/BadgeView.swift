@@ -177,8 +177,9 @@ struct BadgeView : View {
 				HStack(spacing: 2) {
 					OneLineText(departure)
 						.chewTextSize(size)
-					Image(systemName: "arrow.right")
+					OneLineText(" to ")
 						.chewTextSize(size)
+						.foregroundColor(.primary.opacity(0.6))
 					OneLineText(arrival)
 						.chewTextSize(size)
 				}

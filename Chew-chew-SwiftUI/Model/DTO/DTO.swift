@@ -9,7 +9,7 @@ import Foundation
 
 // /journeys
 
-enum StopOverType : String,Equatable {
+enum StopOverType : String,Equatable, CaseIterable {
 	case origin
 	case stopover
 	case destination

@@ -99,8 +99,9 @@ struct LegStopView : View {
 						delay: delay.value,
 						isCancelled: cancelType == .fullyCancelled
 					)
-					.background(Self.timeLabelColor)
-						.cornerRadius(10)
+					.background { labelBackground }
+					.cornerRadius(7)
+					.shadow(radius: 2)
 				}
 				.frame(width: 70)
 						// MARK: badges
@@ -129,14 +130,8 @@ struct LegStopView : View {
 							isCancelled: cancelType == .fullyCancelled
 						)
 						.frame(height: stopOverType.timeLabelHeight)
-						.background {
-							LinearGradient(stops: [
-								Gradient.Stop(color: Color.chewFillGreenPrimary, location: 0),
-								Gradient.Stop(color: Color.chewFillGreenPrimary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-								Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
-							], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
-						}
-						.cornerRadius(7)
+						.background { labelBackground }
+						.cornerRadius(5)
 						.offset(x: delay.value != nil ? delay.value! > 0 ? 8 : 0 : 0)
 						.shadow(radius: 2)
 					case .origin,.destination:
@@ -147,14 +142,8 @@ struct LegStopView : View {
 							delay: delay.value,
 							isCancelled: cancelType == .fullyCancelled
 						)
-							.background {
-								LinearGradient(stops: [
-									Gradient.Stop(color: Color.chewFillGreenPrimary, location: 0),
-									Gradient.Stop(color: Color.chewFillGreenPrimary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
-									Gradient.Stop(color: Self.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
-								], startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1))
-							}
-							.cornerRadius(10)
+						.background { labelBackground }
+							.cornerRadius(7)
 							.shadow(radius: 2)
 					case .footTop:
 						TimeLabelView(
@@ -164,8 +153,9 @@ struct LegStopView : View {
 							delay: delay.value,
 							isCancelled: cancelType == .fullyCancelled
 						)
-							.background(Self.timeLabelColor)
-							.cornerRadius(10)
+						.background { labelBackground }
+						.cornerRadius(7)
+						.shadow(radius: 2)
 					case .footMiddle,.transfer,.footBottom:
 						EmptyView()
 					}
@@ -237,19 +227,43 @@ struct LegStopView : View {
 	}
 }
 
+extension LegStopView {
+	var labelBackground : some View {
+		LinearGradient(
+			stops: [
+				Gradient.Stop(color: Color.chewFillGreenPrimary, location: 0),
+				Gradient.Stop(color: Color.chewFillGreenPrimary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0),
+				Gradient.Stop(color: LegStopView.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: now) ?? 0)
+			],
+			startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1)
+		)
+	}
+}
+
 struct LegDetailsStopPreview : PreviewProvider {
 	static var previews : some View {
 		let mock = Mock.trip.RE6NeussMinden.decodedData
 		if let mock = mock?.trip,
-			let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]),
-		   let stop = viewData.legStopsViewData.first {
-			LegStopView(
-				type: .origin,
-				vm: .init(leg: viewData),
-				stopOver: stop,
-				leg: viewData,
-				showBadges: false
-			)
+		   let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]) {
+			ScrollView {
+				VStack {
+					ForEach(viewData.legStopsViewData.prefix(2)) { leg in
+						VStack {
+							ForEach(StopOverType.allCases, id: \.rawValue, content: {type in
+								LegStopView(
+									type: type,
+									vm: .init(leg: viewData),
+									stopOver: leg,
+									leg: viewData,
+									showBadges: true
+								)
+							})
+						}
+						.padding(5)
+					}
+				}
+			}
+			.previewDevice(PreviewDevice(stringLiteral: iPhoneModel.iPhoneSE2.rawValue))
 		} else {
 			Text("error")
 		}

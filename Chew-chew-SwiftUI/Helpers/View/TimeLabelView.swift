@@ -39,17 +39,17 @@ struct TimeLabelView: View {
 		switch isCancelled {
 		case true:
 			mainTime(delay: 0, cancelled: true)
-				.padding(4)
+				.padding(2)
 		case false:
 			switch delay {
 			case .none:
 				mainTime(delay: 0, cancelled: false)
-					.padding(4)
+					.padding(2)
 			case .some(let delay):
 				switch delay {
 				case 0:
 					mainTime(delay: 0, cancelled: false)
-						.padding(4)
+						.padding(2)
 				default:
 					switch arragement {
 					case .left,.right:
@@ -63,7 +63,7 @@ struct TimeLabelView: View {
 								optionalTime(delay: delay)
 							}
 						}
-						.padding(4)
+						.padding(2)
 					case .bottom,.top:
 						VStack(spacing: 2){
 							switch arragement == .top {
@@ -75,8 +75,7 @@ struct TimeLabelView: View {
 								optionalTime(delay: delay)
 							}
 						}
-						.padding(4)
-						.padding(.horizontal, 2)
+						.padding(2)
 					}
 				}
 			}
@@ -120,6 +119,31 @@ extension TimeLabelView {
 						weight: isSmall == false ? .semibold : .medium
 					)
 				)
+		}
+	}
+}
+
+struct TimeLabelPreviews: PreviewProvider {
+	static var previews: some View {
+		VStack {
+			TimeLabelView(
+				isSmall: false,
+				arragement: .bottom,
+				time: .init(actual: "00:00", planned: "00:00"),
+				delay: 0,
+				isCancelled: false
+			)
+			.background(.green)
+			.cornerRadius(8)
+			TimeLabelView(
+				isSmall: false,
+				arragement: .bottom,
+				time: .init(actual: "00:00", planned: "00:00"),
+				delay: 61,
+				isCancelled: false
+			)
+			.background(.green)
+			.cornerRadius(8)
 		}
 	}
 }

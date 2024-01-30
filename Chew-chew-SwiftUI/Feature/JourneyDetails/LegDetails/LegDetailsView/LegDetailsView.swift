@@ -106,7 +106,7 @@ struct LegDetailsView: View {
 							Rectangle()
 								.fill(Color.chewProgressLineGray)
 								.frame(width: 20,height:  vm.state.data.totalProgressHeight)
-								.padding(.leading,26)
+								.padding(.leading,24)
 							Spacer()
 						}
 						Spacer(minLength: 0)
@@ -118,7 +118,7 @@ struct LegDetailsView: View {
 							)
 							.fill(Color.chewFillGreenPrimary)
 								.frame(width: 22,height: currentProgressHeight)
-								.padding(.leading,25)
+								.padding(.leading,24)
 							Spacer()
 						}
 						Spacer(minLength: 0)
@@ -151,9 +151,6 @@ struct LegDetailsView: View {
 				.frame(maxHeight: .infinity)
 			}
 		}
-		.onDisappear {
-			Model.shared.legDetailsViewModels.removeValue(forKey: vm.state.data.leg.tripId)
-		}
 		.onAppear {
 			self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970 , type: vm.state.status == .stopovers ? .expanded : .collapsed)
 		}
@@ -171,9 +168,7 @@ struct LegDetailsView: View {
 		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillSecondary : .clear )
 		.cornerRadius(10)
 		.onTapGesture {
-//			if case .line=vm.state.data.leg.legType {
-				vm.send(event: .didTapExpandButton)
-//			}
+			vm.send(event: .didTapExpandButton)
 		}
 		// MARK: longGesture
 		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
@@ -186,17 +181,69 @@ struct LegDetailsView: View {
 
 struct LegDetailsPreview : PreviewProvider {
 	static var previews : some View {
-		let mock = Mock.trip.RE6NeussMinden.decodedData
-		if let mock = mock?.trip,
-		   let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]) {
+		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData
+		if let mock = mock?.journey {
 			ScrollView {
-				LegDetailsView(
-					send: {_ in },
-					vm : Model.shared.legDetailsViewModel(tripId: viewData.tripId, isExpanded: false,viewData: viewData)
-				)
+				ForEach(mock.legs, content: { leg in
+					if let viewData = constructLegData(
+						leg: leg,
+						firstTS: .now,
+						lastTS: .now,
+						legs: mock.legs
+					) {
+						LegDetailsView(
+							send: {_ in },
+							vm: LegDetailsViewModel(leg: viewData)
+						)
+						.padding(.horizontal,10)
+					}
+				})
 			}
+			.previewDevice(PreviewDevice(stringLiteral: "iPhone SE (3rd generation)"))
 		} else {
 			Text("error")
 		}
 	}
 }
+
+//struct LegDetailsStopPreview : PreviewProvider {
+//	static var previews : some View {
+//		let mock = Mock.trip.RE6NeussMinden.decodedData
+//		if let mock = mock?.trip,
+//		   let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]) {
+//			ScrollView(.horizontal) {
+//				HStack {
+//					VStack {
+//						ForEach(StopOverType.allCases, id: \.rawValue, content: {type in
+//							LegStopView(
+//								type: type,
+//								vm: .init(leg: viewData),
+//								stopOver: viewData.legStopsViewData[1],
+//								leg: viewData,
+//								showBadges: false
+//							)
+//						})
+//					}
+//					.padding(5)
+//					.border(.gray)
+//					VStack {
+//						ForEach(StopOverType.allCases, id: \.rawValue, content: {type in
+//							LegStopView(
+//								type: type,
+//								vm: .init(leg: viewData),
+//								stopOver: viewData.legStopsViewData[6],
+//								leg: viewData,
+//								showBadges: false
+//							)
+//						})
+//					}
+//					.padding(5)
+//					.border(.gray)
+//				}
+//			}
+//			.previewDevice(PreviewDevice(stringLiteral: "iPad mini (6th generation)"))
+//		} else {
+//			Text("error")
+//		}
+//	}
+//}

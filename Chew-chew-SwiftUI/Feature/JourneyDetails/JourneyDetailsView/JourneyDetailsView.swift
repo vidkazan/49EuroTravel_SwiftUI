@@ -25,20 +25,16 @@ struct JourneyDetailsView: View {
 				VStack {
 					// MARK: Header
 					header()
-						.animation(nil, value: viewModel.state.status)
-						.padding(10)
+						.padding(.horizontal,5)
+						.padding(5)
 					// MARK: LegDetails
 					ScrollView() {
 						LazyVStack(spacing: 0){
 							ForEach(viewModel.state.data.viewData.legs) { leg in
 								LegDetailsView(
 									send: viewModel.send,
-									vm: Model.shared.legDetailsViewModel(
-										tripId: leg.tripId + (leg.legStopsViewData.first?.name ?? "") + (leg.legStopsViewData.last?.name ?? ""),
-										isExpanded: false,
-										viewData: leg
-									))
-								}
+									vm: LegDetailsViewModel(leg: leg, isExpanded: false)
+								)}
 							}
 						}
 						.padding(10)
@@ -125,7 +121,6 @@ struct JourneyDetailsView: View {
 
 struct JourneyDetailsPreview : PreviewProvider {
 	static var previews: some View {
-		let model = Model.shared
 		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
 		if let mock = mock,
 		   let viewData = constructJourneyViewData(
@@ -144,6 +139,7 @@ struct JourneyDetailsPreview : PreviewProvider {
 					chewVM: .init()
 				))
 				.environmentObject(ChewViewModel())
+				.previewDevice(PreviewDevice(stringLiteral: "iPhone SE (3rd generation)"))
 		} else {
 			Text("error")
 		}

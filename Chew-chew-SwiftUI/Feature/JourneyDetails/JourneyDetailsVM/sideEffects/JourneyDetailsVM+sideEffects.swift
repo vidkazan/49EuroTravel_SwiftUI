@@ -107,7 +107,7 @@ extension JourneyDetailsViewModel {
 			switch state.status {
 			case .loadingIfNeeded(token: let token):
 				if Date.now.timeIntervalSince1970 - state.data.viewData.updatedAt < 60 {
-					return Just(Event.didLoadJourneyData(data: state.data.viewData)).eraseToAnyPublisher()
+					return Just(Event.didCancelToLoadData).eraseToAnyPublisher()
 				}
 				return Just(Event.didTapReloadButton(ref: token)).eraseToAnyPublisher()
 			default:

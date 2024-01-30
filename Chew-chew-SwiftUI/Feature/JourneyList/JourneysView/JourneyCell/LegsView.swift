@@ -88,9 +88,9 @@ extension LegsView {
 		guard let departureTS = departureTS, let arrivalTS = arrivalTS else {
 			return 0
 		}
-		var prorportion = (Date.now.timeIntervalSince1970 - departureTS) / (arrivalTS - departureTS)
-		prorportion = prorportion > 1 ? 1 : prorportion < 0 ? 0 : prorportion
-		return prorportion
+		var proportion = (Date.now.timeIntervalSince1970 - departureTS) / (arrivalTS - departureTS)
+		proportion = proportion > 1 ? 1 : proportion < 0 ? 0 : proportion
+		return proportion
 	}
 }
 
@@ -103,17 +103,16 @@ struct SunEventsGradient : View {
 		switch isProgressLine {
 		case true:
 			RoundedRectangle(cornerRadius: 5)
-				.fill(Color.chewFillGreenPrimary)
+				.fill(Color.chewFillGreenPrimary.opacity(0.95))
 				.frame(
 					width: size.width * progressLineProportion,
-					height: 27
+					height: 26
 				)
 				.position(
 					x : size.width * progressLineProportion / 2,
 					y : size.height/2
 				)
 				.cornerRadius(5)
-				.shadow(radius: 1)
 		case false:
 			RoundedRectangle(cornerRadius: 5)
 				.fill(.gray)

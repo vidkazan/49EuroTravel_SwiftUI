@@ -46,14 +46,12 @@ struct JourneyFollowView : View {
 							}
 							.swipeActions(edge: .trailing) {
 								Button {
-//									if let ref = vm.state.data.viewData.refreshToken {
-										chewVM.journeyFollowViewModel.send(event: .didTapEdit(
-											action: .deleting,
-											journeyRef: vm.state.data.viewData.refreshToken,
-											followData: nil,
-											journeyDetailsViewModel: vm
-										))
-//									}
+									chewVM.journeyFollowViewModel.send(event: .didTapEdit(
+										action: .deleting,
+										journeyRef: vm.state.data.viewData.refreshToken,
+										followData: nil,
+										journeyDetailsViewModel: vm
+									))
 								} label: {
 									Label("Delete", systemImage: "xmark.bin.circle")
 								}
@@ -68,9 +66,6 @@ struct JourneyFollowView : View {
 		}
 		.navigationBarTitle("Journey follow")
 		.navigationBarTitleDisplayMode(.inline)
-		.background(Color.chewFillPrimary)
-		.transition(.opacity)
-		.animation(.spring().speed(2), value: viewModel.state.status)
 	}
 }
 
@@ -89,6 +84,11 @@ struct FollowPreviews: PreviewProvider {
 				JourneyFollowView(viewModel: .init(
 					coreDataStore: .init(),
 					journeys: [.init(
+						journeyRef: viewData.refreshToken,
+						journeyViewData: viewData,
+						depStop: .init(),
+						arrStop: .init()
+					),.init(
 						journeyRef: viewData.refreshToken,
 						journeyViewData: viewData,
 						depStop: .init(),

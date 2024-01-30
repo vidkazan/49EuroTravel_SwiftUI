@@ -13,7 +13,10 @@ extension JourneyDetailsView {
 			let data = viewModel.state.data
 			VStack {
 				HStack {
-					BadgeView(.departureArrivalStops(departure: data.viewData.origin, arrival: data.viewData.destination),.huge)
+					BadgeView(
+						.departureArrivalStops(departure: data.viewData.origin, arrival: data.viewData.destination),
+						.huge
+					)
 					Spacer()
 				}
 				HStack {
@@ -35,7 +38,7 @@ extension JourneyDetailsView {
 					Spacer()
 				}
 				LegsView(journey : viewModel.state.data.viewData,progressBar: true)
-					.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
+//					.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
 			}
 			
 		}

@@ -155,6 +155,7 @@ extension JourneyDetailsViewModel {
 	
 	enum Event {
 		case didFailToLoadTripData(error : any ChewError)
+		case didCancelToLoadData
 		case didLoadJourneyData(data : JourneyViewData)
 		case didFailedToLoadJourneyData(error : any ChewError)
 		
@@ -211,6 +212,8 @@ extension JourneyDetailsViewModel {
 				return "didCloseBottomSheet"
 			case .didLoadFullLegData:
 				return "didLoadFullLegData"
+			case .didCancelToLoadData:
+				return "didCancelToLoadData"
 			}
 		}
 	}
