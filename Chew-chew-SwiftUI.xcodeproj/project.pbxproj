@@ -218,6 +218,8 @@
 		7DE6FDA52B5BE5B300AC8DE3 /* RecentSearchesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE6FDA42B5BE5B300AC8DE3 /* RecentSearchesViewModel.swift */; };
 		7DE727C62AD93869002FF033 /* JourneyFollowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE727C52AD93869002FF033 /* JourneyFollowView.swift */; };
 		7DE727C92AD93955002FF033 /* ApiServiceCombine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */; };
+		7DE8A34F2B6AB0AF00C3A378 /* TimeLabelView+Init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8A34E2B6AB0AE00C3A378 /* TimeLabelView+Init.swift */; };
+		7DE8A3512B6AB13800C3A378 /* TimeLabelView+subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8A3502B6AB13800C3A378 /* TimeLabelView+subviews.swift */; };
 		7DF0D98D2B69557D00861C4F /* Iphones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0D98C2B69557C00861C4F /* Iphones.swift */; };
 		7DF0D98F2B6956DD00861C4F /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */; };
 		7DF5871D2B5EC01100A4F99A /* ApiServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF5871C2B5EC01100A4F99A /* ApiServiceErrors.swift */; };
@@ -425,6 +427,8 @@
 		7DE6FDA42B5BE5B300AC8DE3 /* RecentSearchesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchesViewModel.swift; sourceTree = "<group>"; };
 		7DE727C52AD93869002FF033 /* JourneyFollowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFollowView.swift; sourceTree = "<group>"; };
 		7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceCombine.swift; sourceTree = "<group>"; };
+		7DE8A34E2B6AB0AE00C3A378 /* TimeLabelView+Init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeLabelView+Init.swift"; sourceTree = "<group>"; };
+		7DE8A3502B6AB13800C3A378 /* TimeLabelView+subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeLabelView+subviews.swift"; sourceTree = "<group>"; };
 		7DF0D98C2B69557C00861C4F /* Iphones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iphones.swift; sourceTree = "<group>"; };
 		7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		7DF5871C2B5EC01100A4F99A /* ApiServiceErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceErrors.swift; sourceTree = "<group>"; };
@@ -706,7 +710,7 @@
 			children = (
 				7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */,
 				7D000CFA2AB87ACD00566120 /* NavigationLazyView.swift */,
-				7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */,
+				7DE8A34D2B6AB09D00C3A378 /* TimeLabelView */,
 				7DA001FC2B0F88B6009BB79D /* SegmentedPicker.swift */,
 				7D55BD9D2B5EA39900A0CE08 /* ChewDatePicker.swift */,
 			);
@@ -1228,6 +1232,16 @@
 			path = JourneyFollow;
 			sourceTree = "<group>";
 		};
+		7DE8A34D2B6AB09D00C3A378 /* TimeLabelView */ = {
+			isa = PBXGroup;
+			children = (
+				7DE8A34E2B6AB0AE00C3A378 /* TimeLabelView+Init.swift */,
+				7DE8A3502B6AB13800C3A378 /* TimeLabelView+subviews.swift */,
+				7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */,
+			);
+			path = TimeLabelView;
+			sourceTree = "<group>";
+		};
 		7DF5871B2B5EBFFA00A4F99A /* Errors */ = {
 			isa = PBXGroup;
 			children = (
@@ -1453,6 +1467,7 @@
 				7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */,
 				7D6C5C142AAF482D00DEFC57 /* chewVM.swift in Sources */,
 				7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */,
+				7DE8A3512B6AB13800C3A378 /* TimeLabelView+subviews.swift in Sources */,
 				7DABB02D2B2E18F1002BBA97 /* JourneyFollowCellView.swift in Sources */,
 				7D9BB10F2B0CBF54008A3616 /* ChewJourney+CoreDataProperties.swift in Sources */,
 				7D462D4B2AAC948700BC0D65 /* JourneyListViewModel+reduce+JourneysLoaded.swift in Sources */,
@@ -1505,6 +1520,7 @@
 				7D345E4A2AE95E7C003CA948 /* Settings.swift in Sources */,
 				7D4B1B8A2AA8CB460096F372 /* JourneyListViewModel+reduce.swift in Sources */,
 				7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift in Sources */,
+				7DE8A34F2B6AB0AF00C3A378 /* TimeLabelView+Init.swift in Sources */,
 				7D2BF7A82B67D30800E1CED7 /* Color+random.swift in Sources */,
 				7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */,
 				7D9E10872AA6752B00820B92 /* SearchStopsView.swift in Sources */,
