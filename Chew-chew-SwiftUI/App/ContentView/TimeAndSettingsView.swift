@@ -30,7 +30,6 @@ struct TimeAndSettingsView: View {
 						TimeChoosingView(searchStopsVM: chewViewModel.searchStopsViewModel,setSheetType: setSheetType)
 						Button(action: {
 							setSheetType(.settings)
-//							chewViewModel.send(event: .didTapSheet(.settings))
 						}, label: {
 							Image(.gearshape)
 								.tint(.primary)
