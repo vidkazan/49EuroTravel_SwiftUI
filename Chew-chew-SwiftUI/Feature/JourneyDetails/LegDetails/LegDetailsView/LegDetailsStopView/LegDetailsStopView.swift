@@ -22,9 +22,6 @@ struct LegStopView : View {
 		// MARK: .transfer,.footMiddle
 		case .transfer,.footMiddle:
 			HStack(alignment:  .center) {
-				Rectangle()
-					.fill(.clear)
-					.frame(width: 70)
 				VStack(alignment: .leading) {
 					if stopOverType == .transfer {
 						BadgeView(.transfer(duration: legViewData.duration))
@@ -33,6 +30,7 @@ struct LegStopView : View {
 						BadgeView(.walking(duration: legViewData.duration))
 					}
 				}
+				.offset(x: 78)
 				Spacer()
 			}
 			.frame(height: stopOverType.viewHeight)
@@ -42,7 +40,7 @@ struct LegStopView : View {
 				VStack(alignment: .leading) {
 					Spacer()
 					TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
-					.background { labelBackground }
+					.background { timeLabelBackground }
 					.cornerRadius(stopOverType.timeLabelCornerRadius)
 					.shadow(radius: 2)
 				}
@@ -64,13 +62,13 @@ struct LegStopView : View {
 					switch stopOverType {
 					case .stopover:
 						TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
-						.background { labelBackground }
+						.background { timeLabelBackground }
 						.cornerRadius(stopOverType.timeLabelCornerRadius)
 						.shadow(radius: 2)
 						.offset(x: stopOver.timeContainer.departureStatus.value != nil ? stopOver.timeContainer.departureStatus.value! > 0 ? 8 : 0 : 0)
 					case .origin, .footTop,.destination:
 						TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
-						.background { labelBackground }
+						.background { timeLabelBackground }
 						.cornerRadius(stopOverType.timeLabelCornerRadius)
 						.shadow(radius: 2)
 					case .footMiddle,.transfer,.footBottom:
@@ -99,10 +97,12 @@ struct LegStopView : View {
 					case .origin,.destination:
 						PlatformView(
 							isShowingPlatormWord: true,
-							platform: stopOver.departurePlatform.actual,
-							plannedPlatform: stopOver.departurePlatform.planned
+							platform: stopOver.stopOverType.platform(stopOver: stopOver)?.actual,
+							plannedPlatform: stopOver.stopOverType.platform(stopOver: stopOver)?.planned
 						)
-						if showBadges == true, stopOverType == .origin { LegStopViewBadges }
+						if showBadges == true, stopOverType == .origin {
+							legStopViewBadges
+						}
 					case .transfer:
 						BadgeView(.transfer(duration: legViewData.duration))
 					case .stopover:
@@ -130,10 +130,10 @@ extension LegStopView {
 		showBadges : Bool
 	) {
 		self.showBadges = showBadges
-		self.vm = vm
 		self.stopOver = stopOver
 		self.stopOverType = type
 		self.legViewData = leg
+		self.vm = vm
 	}
 	init(
 		vm : LegDetailsViewModel,
@@ -148,6 +148,7 @@ extension LegStopView {
 		self.legViewData = leg
 	}
 }
+
 
 struct LegDetailsStopPreview : PreviewProvider {
 	static var previews : some View {

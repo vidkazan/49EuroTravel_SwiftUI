@@ -14,10 +14,10 @@ import CoreData
 final class ChewViewModel : ObservableObject, Identifiable {
 	public let coreDataStore : CoreDataStore
 	@ObservedObject var  locationDataManager : LocationDataManager
-	var alertViewModel : AlertViewModel
-	var searchStopsViewModel : SearchStopsViewModel
-	var journeyFollowViewModel : JourneyFollowViewModel
-	var recentSearchesViewModel : RecentSearchesViewModel
+	let alertViewModel : AlertViewModel
+	let searchStopsViewModel : SearchStopsViewModel
+	let journeyFollowViewModel : JourneyFollowViewModel
+	let recentSearchesViewModel : RecentSearchesViewModel
 	@Published private(set) var state : State {
 		didSet { print("📱 >  state:",state.status.description) }
 	}

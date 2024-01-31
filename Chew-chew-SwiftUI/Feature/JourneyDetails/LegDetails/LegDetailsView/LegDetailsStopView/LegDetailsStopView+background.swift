@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension LegStopView {
-	var labelBackground : some View {
+	var timeLabelBackground : some View {
 		LinearGradient(
 			stops: [
 				Gradient.Stop(color: Color.chewFillGreenPrimary, location: 0),

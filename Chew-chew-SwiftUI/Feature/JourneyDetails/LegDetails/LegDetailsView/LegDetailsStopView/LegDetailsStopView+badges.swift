@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 extension LegStopView {
-	var LegStopViewBadges : some View {
+	var legStopViewBadges : some View {
 		Group {
 			if #available(iOS 16.0, *) {
 				FlowLayout(spacing: .init(width: 2, height: 3)) {

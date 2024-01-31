@@ -19,6 +19,17 @@ enum StopOverType : String,Equatable, CaseIterable {
 	case footBottom
 	case transfer
 	
+	func platform(stopOver : StopViewData) -> Prognosed<String?>? {
+		switch self {
+		case .stopover:
+			return stopOver.departurePlatform.actual == nil ? stopOver.arrivalPlatform : stopOver.departurePlatform
+		case .destination,.footBottom:
+			return stopOver.arrivalPlatform
+		case .footTop,.origin,.footMiddle,.transfer:
+			return stopOver.departurePlatform
+		}
+	}
+	
 	func timeLabelViewTime(timeStringContainer : TimeContainer.TimeStringContainer) -> Prognosed<String?> {
 		switch self {
 		case .destination, .footBottom:
