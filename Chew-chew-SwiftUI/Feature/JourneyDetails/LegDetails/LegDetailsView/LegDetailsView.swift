@@ -173,49 +173,49 @@ struct LegDetailsPreview : PreviewProvider {
 		if let mock = mock?.journey {
 			ScrollView {
 				FlowLayout {
-//					ForEach(mock.legs, content: { leg in
-//						if let viewData = constructLegData(
-//							leg: leg,
-//							firstTS: .now,
-//							lastTS: .now,
-//							legs: mock.legs
-//						) {
-//							LegDetailsView(
-//								send: {_ in },
-//								vm: LegDetailsViewModel(leg: viewData)
-//							)
-//							.frame(minWidth: 350)
-//							.padding(.horizontal,10)
-//						}
-//					})
-//					let mock = Mock.trip.cancelledFirstStopRE11DussKassel.decodedData?.trip
-//					if let viewData = constructLegData(
-//						leg: mock!,
-//						firstTS: .now,
-//						lastTS: .now,
-//						legs: [mock!]
-//					) {
-//						LegDetailsView(
-//							send: {_ in },
-//							vm: LegDetailsViewModel(leg: viewData)
-//						)
-//						.frame(minWidth: 350)
-//						.padding(.horizontal,10)
-//					}
-//					let mock2 = Mock.trip.cancelledMiddleStopsRE6NeussMinden.decodedData?.trip
-//					if let viewData = constructLegData(
-//						leg: mock2!,
-//						firstTS: .now,
-//						lastTS: .now,
-//						legs: [mock2!]
-//					) {
-//						LegDetailsView(
-//							send: {_ in },
-//							vm: LegDetailsViewModel(leg: viewData)
-//						)
-//						.frame(minWidth: 350)
-//						.padding(.horizontal,10)
-//					}
+					ForEach(mock.legs, content: { leg in
+						if let viewData = constructLegData(
+							leg: leg,
+							firstTS: .now,
+							lastTS: .now,
+							legs: mock.legs
+						) {
+							LegDetailsView(
+								send: {_ in },
+								vm: LegDetailsViewModel(leg: viewData)
+							)
+							.frame(minWidth: 350)
+							.padding(.horizontal,10)
+						}
+					})
+					let mock = Mock.trip.cancelledFirstStopRE11DussKassel.decodedData?.trip
+					if let viewData = constructLegData(
+						leg: mock!,
+						firstTS: .now,
+						lastTS: .now,
+						legs: [mock!]
+					) {
+						LegDetailsView(
+							send: {_ in },
+							vm: LegDetailsViewModel(leg: viewData)
+						)
+						.frame(minWidth: 350)
+						.padding(.horizontal,10)
+					}
+					let mock2 = Mock.trip.cancelledMiddleStopsRE6NeussMinden.decodedData?.trip
+					if let viewData = constructLegData(
+						leg: mock2!,
+						firstTS: .now,
+						lastTS: .now,
+						legs: [mock2!]
+					) {
+						LegDetailsView(
+							send: {_ in },
+							vm: LegDetailsViewModel(leg: viewData)
+						)
+						.frame(minWidth: 350)
+						.padding(.horizontal,10)
+					}
 					let mock3 = Mock.trip.cancelledLastStopRE11DussKassel.decodedData?.trip
 					if let viewData = constructLegData(
 						leg: mock3!,

@@ -9,8 +9,9 @@ import Foundation
 import SwiftUI
 
 struct LegStopView : View {
-	static let timeLabelColor = Color.chewTimeLabelGray
 	@ObservedObject var vm : LegDetailsViewModel
+	
+	static let timeLabelColor = Color.chewTimeLabelGray
 	let legViewData : LegViewData
 	let stopOver : StopViewData
 	let stopOverType : StopOverType
@@ -19,101 +20,14 @@ struct LegStopView : View {
 	
 	var body : some View {
 		switch stopOverType {
-		// MARK: .transfer,.footMiddle
 		case .transfer,.footMiddle:
-			HStack(alignment:  .center) {
-				VStack(alignment: .leading) {
-					if stopOverType == .transfer {
-						BadgeView(.transfer(duration: legViewData.duration))
-					}
-					if stopOverType == .footMiddle {
-						BadgeView(.walking(duration: legViewData.duration))
-					}
-				}
-				.offset(x: 78)
-				Spacer()
-			}
-			.frame(height: stopOverType.viewHeight)
-		// MARK: .footBottom
+			transfer
 		case .footBottom:
-			HStack(alignment: .bottom) {
-				VStack(alignment: .leading) {
-					Spacer()
-					TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
-					.background { timeLabelBackground }
-					.cornerRadius(stopOverType.timeLabelCornerRadius)
-					.shadow(radius: 2)
-				}
-				.frame(width: 70)
-						// MARK: badges
-				VStack(alignment: .leading, spacing: 2) {
-					BadgeView(.walking(duration: legViewData.duration))
-					Text(stopOver.name)
-						.chewTextSize(.big)
-				}
-				Spacer()
-			}
-			.frame(height: stopOverType.viewHeight)
-					// MARK: default
+			footBottom
 		case .footTop,.origin,.destination,.stopover:
 			HStack(alignment:  .top) {
-				VStack(alignment: .leading) {
-					// MARK: timeLabel
-					switch stopOverType {
-					case .stopover:
-						TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
-						.background { timeLabelBackground }
-						.cornerRadius(stopOverType.timeLabelCornerRadius)
-						.shadow(radius: 2)
-						.offset(x: stopOver.timeContainer.departureStatus.value != nil ? stopOver.timeContainer.departureStatus.value! > 0 ? 8 : 0 : 0)
-					case .origin, .footTop,.destination:
-						TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
-						.background { timeLabelBackground }
-						.cornerRadius(stopOverType.timeLabelCornerRadius)
-						.shadow(radius: 2)
-					case .footMiddle,.transfer,.footBottom:
-						EmptyView()
-					}
-					Spacer()
-				}
-				.frame(width: 70)
-				VStack(alignment: .leading, spacing: 2) {
-					// MARK: stopName sup Badges
-					switch stopOverType {
-					case .origin, .destination,.footTop:
-						Text(stopOver.name)
-							.chewTextSize(.big)
-					case .stopover:
-						Text(stopOver.name)
-							.chewTextSize(.medium)
-							.foregroundColor(.gray)
-					case .transfer,.footBottom,.footMiddle:
-						EmptyView()
-					}
-					// MARK: badges
-					switch stopOverType {
-					case .footBottom,.footMiddle,.footTop:
-						BadgeView(.walking(duration: legViewData.duration))
-					case .origin,.destination:
-						PlatformView(
-							isShowingPlatormWord: true,
-							platform: stopOver.stopOverType.platform(stopOver: stopOver)?.actual,
-							plannedPlatform: stopOver.stopOverType.platform(stopOver: stopOver)?.planned
-						)
-						if showBadges == true, stopOverType == .origin {
-							legStopViewBadges
-						}
-					case .transfer:
-						BadgeView(.transfer(duration: legViewData.duration))
-					case .stopover:
-						EmptyView()
-					}
-					// MARK: stopName sub Badges
-					if case .footBottom = stopOverType{
-						Text(stopOver.name)
-							.chewTextSize(.big)
-					}
-				}
+				timeLabel
+				nameAndBadges
 				Spacer()
 			}
 			.frame(height: stopOverType.viewHeight)
