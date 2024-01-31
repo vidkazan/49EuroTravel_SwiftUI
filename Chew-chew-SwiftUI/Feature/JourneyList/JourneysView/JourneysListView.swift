@@ -102,7 +102,6 @@ struct JourneyListView: View {
 					Text("connections not found")
 						.padding(5)
 						.chewTextSize(.big)
-					let _ = print(error)
 					Button(action: {
 						journeyViewModel.send(event: .onLaterRef)
 					}, label: {

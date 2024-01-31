@@ -39,7 +39,6 @@ struct TimeLabelView: View {
 		stopOver : StopViewData,
 		stopOverType : StopOverType
 	) {
-		print(stopOver.stopOverType.stopOverCancellationType(stopOver: stopOver))
 		self.delay = stopOver.stopOverType.timeLabelViewDelay(timeContainer: stopOver.timeContainer)
 		self.isSmall = stopOverType.smallTimeLabel
 		self.arragement = stopOverType.timeLabelArragament

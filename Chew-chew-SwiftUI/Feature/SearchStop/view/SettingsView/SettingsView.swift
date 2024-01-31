@@ -49,14 +49,12 @@ struct SettingsView: View {
 			.onChange(of: chewViewModel.state, perform: loadSettings)
 			.onDisappear {
 				setSheetType(.none)
-//				chewViewModel.send(event: .didDismissBottomSheet)
 			}
 			.navigationTitle("Settings")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button(action: {
-//						chewViewModel.send(event: .didDismissBottomSheet)
 						setSheetType(.none)
 					}, label: {
 						Text("Cancel")
