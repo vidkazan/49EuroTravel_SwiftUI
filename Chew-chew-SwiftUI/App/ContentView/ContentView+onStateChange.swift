@@ -9,11 +9,11 @@ import SwiftUI
 
 extension FeatureView {
 	func onStateChange(state : ChewViewModel.State) {
-		switch state.status {
-		case .sheet:
-			bottomSheetIsPresented = true
-		default:
-			bottomSheetIsPresented = false
-		}
+//		switch state.status {
+//		case .sheet:
+//			bottomSheetIsPresented = true
+//		default:
+//			bottomSheetIsPresented = false
+//		}
 	}
 }

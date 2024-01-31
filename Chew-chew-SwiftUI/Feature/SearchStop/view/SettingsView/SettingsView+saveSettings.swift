@@ -50,8 +50,6 @@ extension SettingsView {
 			chewViewModel.coreDataStore.updateSettings(
 				newSettings: res
 			)
-		} else {
-			chewViewModel.send(event: .didDismissBottomSheet)
 		}
 	}
 }

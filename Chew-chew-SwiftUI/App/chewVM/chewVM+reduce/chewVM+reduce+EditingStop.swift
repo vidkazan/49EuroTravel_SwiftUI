@@ -15,7 +15,6 @@ extension ChewViewModel {
 		 .didLoadInitialData,
 		 .didReceiveLocationData,
 		 .didFailToLoadLocationData,
-		 .didDismissBottomSheet,
 		 .didUpdateSettings,
 		 .didStartViewAppear,
 		 .onNotEnoughSearchData,
@@ -29,14 +28,6 @@ extension ChewViewModel {
 				settings: state.settings,
 				date: state.date,
 				status: .editingStop(type)
-			)
-		case .didTapSheet(let type):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .sheet(type)
 			)
 		case .onNewDate(let date):
 			return State(

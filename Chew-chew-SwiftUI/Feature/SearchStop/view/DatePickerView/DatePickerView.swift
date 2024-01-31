@@ -11,6 +11,8 @@ struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
 	@State var date : Date
 	@State var time : Date
+	let setSheetType : (FeatureView.SheetType)->Void
+
 	var body: some View {
 		NavigationView {
 			VStack(alignment: .center,spacing: 5) {
@@ -28,16 +30,14 @@ struct DatePickerView: View {
 			}
 			.padding(.horizontal,10)
 			.onDisappear {
-				if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
-					chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
-				}
+				setSheetType(.none)
 			}
 			.navigationTitle("Date Settings")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button(action: {
-						chewVM.send(event: .didDismissBottomSheet)
+						setSheetType(.none)
 					}, label: {
 						Text("Cancel")
 							.foregroundColor(.chewGray30)
@@ -48,6 +48,7 @@ struct DatePickerView: View {
 						if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
 							chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
 						}
+						setSheetType(.none)
 					}, label: {
 						Text("Save")
 							.chewTextSize(.big)

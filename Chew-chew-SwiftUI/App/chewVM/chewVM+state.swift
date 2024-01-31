@@ -82,7 +82,7 @@ extension ChewViewModel {
 		case checkingSearchData
 		case journeys(_ stops : DepartureArrivalPair)
 		case editingStop(LocationDirectionType)
-		case sheet(SheetType)
+//		case sheet(SheetType)
 		case loadingLocation
 		
 		
@@ -90,8 +90,8 @@ extension ChewViewModel {
 			switch self {
 			case .editingStop(let type):
 				return "editingStop \(type)"
-			case .sheet:
-				return "sheet"
+//			case .sheet:
+//				return "sheet"
 			case .idle:
 				return "idle"
 			case .checkingSearchData:
@@ -129,18 +129,12 @@ extension ChewViewModel {
 		case onNotEnoughSearchData
 		case didTapCloseJourneyList
 		
-		
-		
-		
-		
-		
-		
-		case didTapSheet(SheetType)
+//		case didTapSheet(SheetType)
 		
 		case onNewDate(ChewDate)
 		
 		case didUpdateSettings(ChewSettings)
-		case didDismissBottomSheet
+//		case didDismissBottomSheet
 		
 		
 		case didLocationButtonPressed
@@ -171,16 +165,16 @@ extension ChewViewModel {
 				return "didLocationButtonPressed"
 			case .didSetBothLocations:
 				return "didSetBothLocations"
-			case .didDismissBottomSheet:
-				return "didDismissBottomSheet"
+//			case .didDismissBottomSheet:
+//				return "didDismissBottomSheet"
 			case .didUpdateSettings:
 				return "didUpdateSettings"
 			case .didLoadInitialData:
 				return "didLoadInitialData"
 			case .didStartViewAppear:
 				return "didStartViewAppear"
-			case .didTapSheet(let type):
-				return "didTapSheet \(type)"
+//			case .didTapSheet(let type):
+//				return "didTapSheet \(type)"
 			}
 		}
 	}

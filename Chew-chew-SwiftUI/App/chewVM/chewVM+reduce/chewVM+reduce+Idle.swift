@@ -35,14 +35,6 @@ extension ChewViewModel {
 				date: state.date,
 				status: .editingStop(type)
 			)
-		case .didTapSheet(let type):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .sheet(type)
-			)
 		case .onStopsSwitch:
 			return State(
 				depStop: state.arrStop,
@@ -93,14 +85,6 @@ extension ChewViewModel {
 				settings: state.settings,
 				date: state.date,
 				status: .checkingSearchData
-			)
-		case .didDismissBottomSheet:
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .idle
 			)
 		case .didUpdateSettings(let settings):
 			return State(

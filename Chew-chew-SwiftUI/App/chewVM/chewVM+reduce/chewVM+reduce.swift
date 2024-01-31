@@ -21,6 +21,22 @@ extension ChewViewModel {
 			return reduceLoadingLocation(state, event)
 		case .checkingSearchData:
 			switch event {
+			case .didUpdateSettings(let new):
+				return State(
+					depStop: state.depStop,
+					arrStop: state.arrStop,
+					settings: new,
+					date: state.date,
+					status: .checkingSearchData
+				)
+			case .onNewDate(let date):
+				return State(
+					depStop: state.depStop,
+					arrStop: state.arrStop,
+					settings: state.settings,
+					date: date,
+					status: .checkingSearchData
+				)
 			case .onJourneyDataUpdated(let stops):
 				return State(
 					depStop: state.depStop,
@@ -36,44 +52,6 @@ extension ChewViewModel {
 					settings: state.settings,
 					date: state.date,
 					status: .idle
-				)
-			default:
-				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
-				return state
-			}
-		case .sheet:
-			switch event {
-			case .didTapSheet(let type):
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: state.date,
-					status: .sheet(type)
-				)
-			case .didUpdateSettings(let new):
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: new,
-					date: state.date,
-					status: .checkingSearchData
-				)
-			case .didDismissBottomSheet:
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: state.date,
-					status: .idle
-				)
-			case .onNewDate(let date):
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: date,
-					status: .checkingSearchData
 				)
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")

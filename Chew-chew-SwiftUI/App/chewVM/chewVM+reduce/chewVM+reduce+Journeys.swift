@@ -28,6 +28,14 @@ extension ChewViewModel {
 				date: date,
 				status: .checkingSearchData
 			)
+		case .didUpdateSettings(let new):
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				settings: new,
+				date: state.date,
+				status: .checkingSearchData
+			)
 		case .onStopEdit(let type):
 			return State(
 				depStop: state.depStop,
@@ -35,14 +43,6 @@ extension ChewViewModel {
 				settings: state.settings,
 				date: state.date,
 				status: .editingStop(type)
-			)
-		case .didTapSheet(let type):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .sheet(type)
 			)
 		case .didTapCloseJourneyList:
 			print("reduce: didTapCloseJL")
@@ -63,11 +63,9 @@ extension ChewViewModel {
 		case .didReceiveLocationData,
 			 .didFailToLoadLocationData,
 			 .didSetBothLocations,
-			 .didDismissBottomSheet,
 			 .didLoadInitialData,
 			 .onNewStop,
 			 .onJourneyDataUpdated,
-			 .didUpdateSettings,
 			 .onNotEnoughSearchData,
 			 .didStartViewAppear:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
