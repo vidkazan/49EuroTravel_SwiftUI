@@ -11,10 +11,11 @@ import CoreLocation
 import MapKit
 
 struct LegDetailsView: View {
+	@ObservedObject var vm : LegDetailsViewModel
 	@State var currentProgressHeight : Double = 0
+	
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	let followedJourney : Bool
-	@ObservedObject var vm : LegDetailsViewModel
 	let sendToJourneyVM : ((JourneyDetailsViewModel.Event)->Void)?
 		
 	init(
@@ -27,6 +28,7 @@ struct LegDetailsView: View {
 		self.sendToJourneyVM = send
 		self.currentProgressHeight = currentProgressHeight
 	}
+	
 	var body : some View {
 		VStack {
 			VStack(spacing: 0) {
@@ -54,27 +56,19 @@ struct LegDetailsView: View {
 					}
 				// MARK: Stop line
 				case .line:
-					if let stop = vm.state.data.leg.legStopsViewData.first {
-						LegStopView(
-							vm: vm,
-							stopOver: stop,
-							leg: vm.state.data.leg,
-							showBadges : !followedJourney
-						)
-					}
-					if case .stopovers = vm.state.status {
-						ForEach(vm.state.data.leg.legStopsViewData) { stop in
-							if stop != vm.state.data.leg.legStopsViewData.first,stop != vm.state.data.leg.legStopsViewData.last {
-								LegStopView(
-									vm: vm,
-									stopOver: stop,
-									leg: vm.state.data.leg,
-									showBadges : !followedJourney
-								)
-							}
+					let stops : [StopViewData] = {
+						switch vm.state.status {
+						case .stopovers:
+							return vm.state.data.leg.legStopsViewData
+						default:
+							return [
+								vm.state.data.leg.legStopsViewData.first!,
+								vm.state.data.leg.legStopsViewData.last!
+							]
 						}
-					}
-					if let stop = vm.state.data.leg.legStopsViewData.last {
+					}()
+					
+					ForEach(stops) { stop in
 						LegStopView(
 							vm: vm,
 							stopOver: stop,
@@ -84,59 +78,12 @@ struct LegDetailsView: View {
 					}
 				}
 			}
-			.background {
-				ZStack(alignment: .top) {
-					// MARK: BG - progress line
-					VStack{
-						HStack(alignment: .top) {
-							Rectangle()
-								.fill(Color.chewProgressLineGray)
-								.frame(width: 20,height:  vm.state.data.totalProgressHeight)
-								.padding(.leading,24)
-							Spacer()
-						}
-						Spacer(minLength: 0)
-					}
-					VStack {
-						HStack(alignment: .top) {
-							RoundedRectangle(
-								cornerRadius : vm.state.data.totalProgressHeight == currentProgressHeight ? 0 : 6
-							)
-							.fill(Color.chewFillGreenPrimary)
-								.frame(width: 22,height: currentProgressHeight)
-								.padding(.leading,24)
-							Spacer()
-						}
-						Spacer(minLength: 0)
-					}
-					.shadow(radius: 2)
-					// MARK: BG - colors
-					switch vm.state.data.leg.legType {
-					case .transfer,.footMiddle:
-						VStack {
-							Spacer()
-							Color.chewFillAccent.opacity(0.6)
-								.frame(height: vm.state.data.totalProgressHeight - 20)
-								.cornerRadius(10)
-							Spacer()
-						}
-					case .footStart:
-						Color.chewFillAccent.opacity(0.6)
-							.frame(height: vm.state.data.totalProgressHeight)
-							.cornerRadius(10)
-							.offset(y: -10)
-					case .footEnd:
-						Color.chewFillAccent.opacity(0.6)
-							.frame(height: vm.state.data.totalProgressHeight)
-							.cornerRadius(10)
-							.offset(y: 10)
-					case .line:
-						EmptyView()
-					}
-				}
-				.frame(maxHeight: .infinity)
-			}
+			.background { background }
 		}
+		// MARK: 🤢
+		.padding(.top,vm.state.data.leg.legType == LegViewData.LegType.line || vm.state.data.leg.legType.caseDescription == "footStart" ?  10 : 0)
+		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillSecondary : .clear )
+		.cornerRadius(10)
 		.onAppear {
 			self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970 , type: vm.state.status == .stopovers ? .expanded : .collapsed)
 		}
@@ -149,10 +96,6 @@ struct LegDetailsView: View {
 		.onChange(of: vm.state.status, perform: { _ in
 			currentProgressHeight = vm.state.data.currentProgressHeight
 		})
-		// MARK: 🤢
-		.padding(.top,vm.state.data.leg.legType == LegViewData.LegType.line || vm.state.data.leg.legType.caseDescription == "footStart" ?  10 : 0)
-		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillSecondary : .clear )
-		.cornerRadius(10)
 		.onTapGesture {
 			if vm.state.data.leg.legType == .line {
 				vm.send(event: .didTapExpandButton)

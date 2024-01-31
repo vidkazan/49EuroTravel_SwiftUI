@@ -8,8 +8,6 @@
 import Foundation
 import SwiftUI
 
-
-
 struct TimeAndSettingsView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
