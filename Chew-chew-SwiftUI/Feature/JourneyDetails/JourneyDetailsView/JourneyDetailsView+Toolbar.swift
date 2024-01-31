@@ -30,12 +30,12 @@ extension JourneyDetailsView {
 					default:
 						switch viewModel.state.data.isFollowed {
 						case true:
-							Image(.bookmark)
+							Image(.bookmark.fill)
 								.frame(width: 15,height: 15)
 								.tint(viewModel.state.status == .loading(token: viewModel.state.data.viewData.refreshToken) ? .chewGray30 : .blue)
 								.padding(5)
 						case false:
-							Image(.bookmark.fill)
+							Image(.bookmark)
 								.tint(viewModel.state.status == .loading(token: viewModel.state.data.viewData.refreshToken) ? .chewGray30 : .blue)
 								.frame(width: 15,height: 15)
 								.padding(5)
