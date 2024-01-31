@@ -37,7 +37,7 @@ extension CoreDataStore {
 		guard settings != nil else { return ChewSettings() }
 		let transportModes = fetchTransportModes()
 		
-		#warning("hardcode")
+		#warning("hardcode: alternativeSearchPage false")
 		return ChewSettings(
 			onboarding: onboarding,
 			customTransferModes: transportModes,

@@ -56,13 +56,13 @@ extension ChewViewModel {
 					self.coreDataStore.disableOnboarding()
 				}
 				if let stops = self.coreDataStore.fetchLocations() {
-					await self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
+					self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
 				}
 				if let recentSearches = self.coreDataStore.fetchRecentSearches() {
-					await self.recentSearchesViewModel.send(event: .didUpdateData(recentSearches))
+					self.recentSearchesViewModel.send(event: .didUpdateData(recentSearches))
 				}
 				if let chewJourneys = self.coreDataStore.fetchJourneys() {
-					await self.journeyFollowViewModel.send(event: .didUpdateData(chewJourneys.map {$0.journeyViewData()}))
+					self.journeyFollowViewModel.send(event: .didUpdateData(chewJourneys.map {$0.journeyViewData()}))
 				}
 			}
 			return Just(Event.didLoadInitialData(settings))

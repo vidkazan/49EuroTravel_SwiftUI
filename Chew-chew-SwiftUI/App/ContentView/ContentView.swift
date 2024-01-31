@@ -61,28 +61,17 @@ struct ContentView: View {
 	
 	struct ContentViewPreview : PreviewProvider {
 		static var previews: some View {
-			let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData
-			if let mock = mock {
-				let viewData = constructJourneyListViewData(journeysData: mock,depStop: .init(),arrStop: .init())
-				let data = JourneyListViewData(journeysViewData: viewData,data: mock,depStop: .init(),arrStop: .init())
-				let vm = JourneyListViewModel(
-					stops: .init(departure: .init(), arrival: .init()),
-					viewData: data
-				)
-				Group {
-					ContentView()
-						.environmentObject(ChewViewModel(initialState: .init(
-							depStop: .textOnly(""),
-							arrStop: .textOnly(""),
-							settings: .init(),
-							date: .now,
-							status: .journeys(.init(departure: .init(), arrival: .init()))
-						)))
-					ContentView()
-						.environmentObject(ChewViewModel())
-				}
-			} else {
-				Text("error")
+			Group {
+				ContentView()
+					.environmentObject(ChewViewModel(initialState: .init(
+						depStop: .textOnly(""),
+						arrStop: .textOnly(""),
+						settings: .init(),
+						date: .now,
+						status: .journeys(.init(departure: .init(), arrival: .init()))
+					)))
+				ContentView()
+					.environmentObject(ChewViewModel())
 			}
 		}
 	}

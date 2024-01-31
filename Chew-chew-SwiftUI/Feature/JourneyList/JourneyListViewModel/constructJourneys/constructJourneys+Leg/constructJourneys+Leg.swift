@@ -268,8 +268,6 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 	let stops = constructLineStopOverData(leg: leg, type: constructLegType(leg: leg, legs: legs))
 	let segments = constructSegmentsFromStopOverData(stopovers: stops)
 	
-	
-	#warning("fix is reachable")
 	let res = LegViewData(
 		isReachable: true,
 		legType: constructLegType(leg: leg, legs: legs),
