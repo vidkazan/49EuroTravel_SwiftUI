@@ -178,7 +178,7 @@ extension TimeContainer {
 				}
 			}()
 			
-			if cancelled == true && time.actual == nil {
+			if time.actual == nil {
 				return .cancelled
 			}
 			

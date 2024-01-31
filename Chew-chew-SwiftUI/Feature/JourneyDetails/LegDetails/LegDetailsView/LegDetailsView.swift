@@ -32,17 +32,7 @@ struct LegDetailsView: View {
 			VStack(spacing: 0) {
 				// MARK: Stop foot + transfer
 				switch vm.state.data.leg.legType {
-				case .transfer,.footMiddle:
-					if let stop = vm.state.data.leg.legStopsViewData.first {
-						LegStopView(
-							type: stop.stopOverType,
-							vm: vm,
-							stopOver: stop,
-							leg: vm.state.data.leg,
-							showBadges : !followedJourney
-						)
-					}
-				case .footStart:
+				case .transfer,.footMiddle,.footStart:
 					if let stop = vm.state.data.leg.legStopsViewData.first {
 						LegStopView(
 							type: stop.stopOverType,
@@ -55,7 +45,6 @@ struct LegDetailsView: View {
 				case .footEnd:
 					if let stop = vm.state.data.leg.legStopsViewData.last {
 						LegStopView(
-							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
 							leg: vm.state.data.leg,
@@ -67,7 +56,6 @@ struct LegDetailsView: View {
 				case .line:
 					if let stop = vm.state.data.leg.legStopsViewData.first {
 						LegStopView(
-							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
 							leg: vm.state.data.leg,
@@ -78,7 +66,6 @@ struct LegDetailsView: View {
 						ForEach(vm.state.data.leg.legStopsViewData) { stop in
 							if stop != vm.state.data.leg.legStopsViewData.first,stop != vm.state.data.leg.legStopsViewData.last {
 								LegStopView(
-									type: stop.stopOverType,
 									vm: vm,
 									stopOver: stop,
 									leg: vm.state.data.leg,
@@ -89,7 +76,6 @@ struct LegDetailsView: View {
 					}
 					if let stop = vm.state.data.leg.legStopsViewData.last {
 						LegStopView(
-							type: stop.stopOverType,
 							vm: vm,
 							stopOver: stop,
 							leg: vm.state.data.leg,
@@ -168,9 +154,10 @@ struct LegDetailsView: View {
 		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillSecondary : .clear )
 		.cornerRadius(10)
 		.onTapGesture {
-			vm.send(event: .didTapExpandButton)
+			if vm.state.data.leg.legType == .line {
+				vm.send(event: .didTapExpandButton)
+			}
 		}
-		// MARK: longGesture
 		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
 			sendToJourneyVM?(.didLongTapOnLeg(leg: vm.state.data.leg))
 		})
@@ -179,27 +166,74 @@ struct LegDetailsView: View {
 
 
 
+@available(iOS 16.0, *)
 struct LegDetailsPreview : PreviewProvider {
 	static var previews : some View {
 		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData
 		if let mock = mock?.journey {
 			ScrollView {
-				ForEach(mock.legs, content: { leg in
+				FlowLayout {
+//					ForEach(mock.legs, content: { leg in
+//						if let viewData = constructLegData(
+//							leg: leg,
+//							firstTS: .now,
+//							lastTS: .now,
+//							legs: mock.legs
+//						) {
+//							LegDetailsView(
+//								send: {_ in },
+//								vm: LegDetailsViewModel(leg: viewData)
+//							)
+//							.frame(minWidth: 350)
+//							.padding(.horizontal,10)
+//						}
+//					})
+//					let mock = Mock.trip.cancelledFirstStopRE11DussKassel.decodedData?.trip
+//					if let viewData = constructLegData(
+//						leg: mock!,
+//						firstTS: .now,
+//						lastTS: .now,
+//						legs: [mock!]
+//					) {
+//						LegDetailsView(
+//							send: {_ in },
+//							vm: LegDetailsViewModel(leg: viewData)
+//						)
+//						.frame(minWidth: 350)
+//						.padding(.horizontal,10)
+//					}
+//					let mock2 = Mock.trip.cancelledMiddleStopsRE6NeussMinden.decodedData?.trip
+//					if let viewData = constructLegData(
+//						leg: mock2!,
+//						firstTS: .now,
+//						lastTS: .now,
+//						legs: [mock2!]
+//					) {
+//						LegDetailsView(
+//							send: {_ in },
+//							vm: LegDetailsViewModel(leg: viewData)
+//						)
+//						.frame(minWidth: 350)
+//						.padding(.horizontal,10)
+//					}
+					let mock3 = Mock.trip.cancelledLastStopRE11DussKassel.decodedData?.trip
 					if let viewData = constructLegData(
-						leg: leg,
+						leg: mock3!,
 						firstTS: .now,
 						lastTS: .now,
-						legs: mock.legs
+						legs: [mock3!]
 					) {
 						LegDetailsView(
 							send: {_ in },
 							vm: LegDetailsViewModel(leg: viewData)
 						)
+						.frame(minWidth: 350)
 						.padding(.horizontal,10)
 					}
-				})
+				}
 			}
-			.previewDevice(PreviewDevice(stringLiteral: "iPhone SE (3rd generation)"))
+			.previewDevice(PreviewDevice(.iPadMini6gen))
+			.previewInterfaceOrientation(.landscapeLeft)
 		} else {
 			Text("error")
 		}

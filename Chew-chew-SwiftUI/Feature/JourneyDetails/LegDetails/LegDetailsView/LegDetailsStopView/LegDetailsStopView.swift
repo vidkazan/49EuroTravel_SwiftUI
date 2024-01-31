@@ -14,35 +14,9 @@ struct LegStopView : View {
 	let legViewData : LegViewData
 	let stopOver : StopViewData
 	let stopOverType : StopOverType
-	var cancelType : StopOverCancellationType
 	let now = Date.now.timeIntervalSince1970
 	let showBadges : Bool
 	
-	// MARK: Init
-	init(
-		type : StopOverType,
-		vm : LegDetailsViewModel,
-		stopOver : StopViewData,
-		leg : LegViewData,
-		showBadges : Bool = true
-	) {
-		self.showBadges = showBadges
-		self.vm = vm
-		self.stopOver = stopOver
-		self.stopOverType = type
-		self.legViewData = leg
-		switch type {
-		case .origin,.transfer, .footTop,.footMiddle:
-			self.cancelType = stopOver.timeContainer.departureStatus == TimeContainer.DelayStatus.cancelled ? .fullyCancelled : .notCancelled
-		case .stopover:
-			self.cancelType = StopOverCancellationType.getCancelledTypeFromDelayStatus(
-				arrivalStatus: stopOver.timeContainer.arrivalStatus,
-				departureStatus: stopOver.timeContainer.departureStatus
-			)
-		case .destination, .footBottom:
-			self.cancelType = (stopOver.timeContainer.arrivalStatus == TimeContainer.DelayStatus.cancelled) ? .fullyCancelled : .notCancelled
-		}
-	}
 	var body : some View {
 		switch stopOverType {
 		// MARK: .transfer,.footMiddle
@@ -67,12 +41,7 @@ struct LegStopView : View {
 			HStack(alignment: .bottom) {
 				VStack(alignment: .leading) {
 					Spacer()
-					TimeLabelView(
-						stopOverType: stopOverType,
-						time: stopOver.timeContainer.stringTimeValue.arrival,
-						delay: stopOver.timeContainer.arrivalStatus.value,
-						isCancelled: cancelType == .fullyCancelled
-					)
+					TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
 					.background { labelBackground }
 					.cornerRadius(stopOverType.timeLabelCornerRadius)
 					.shadow(radius: 2)
@@ -91,32 +60,22 @@ struct LegStopView : View {
 		case .footTop,.origin,.destination,.stopover:
 			HStack(alignment:  .top) {
 				VStack(alignment: .leading) {
-						// MARK: timeLabel
-					Group {
-						switch stopOverType {
-						case .stopover:
-							TimeLabelView(
-								stopOverType: stopOverType,
-								time: stopOver.timeContainer.stringTimeValue.departure,
-								delay: stopOver.timeContainer.departureStatus.value,
-								isCancelled: cancelType == .fullyCancelled
-							)
-							.offset(x: stopOver.timeContainer.departureStatus.value != nil ? stopOver.timeContainer.departureStatus.value! > 0 ? 8 : 0 : 0)
-						case .origin,.destination,.footTop:
-							TimeLabelView(
-								stopOverType: stopOverType,
-								time: stopOver.timeContainer.stringTimeValue.departure,
-								delay: stopOver.timeContainer.departureStatus.value,
-								isCancelled: cancelType == .fullyCancelled
-							)
-						case .footMiddle,.transfer,.footBottom:
-							EmptyView()
-						}
+					// MARK: timeLabel
+					switch stopOverType {
+					case .stopover:
+						TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
+						.background { labelBackground }
+						.cornerRadius(stopOverType.timeLabelCornerRadius)
+						.shadow(radius: 2)
+						.offset(x: stopOver.timeContainer.departureStatus.value != nil ? stopOver.timeContainer.departureStatus.value! > 0 ? 8 : 0 : 0)
+					case .origin, .footTop,.destination:
+						TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
+						.background { labelBackground }
+						.cornerRadius(stopOverType.timeLabelCornerRadius)
+						.shadow(radius: 2)
+					case .footMiddle,.transfer,.footBottom:
+						EmptyView()
 					}
-					.frame(height: stopOverType.timeLabelHeight)
-					.background { labelBackground }
-					.cornerRadius(stopOverType.timeLabelCornerRadius)
-					.shadow(radius: 2)
 					Spacer()
 				}
 				.frame(width: 70)
@@ -137,19 +96,13 @@ struct LegStopView : View {
 					switch stopOverType {
 					case .footBottom,.footMiddle,.footTop:
 						BadgeView(.walking(duration: legViewData.duration))
-					case .origin:
+					case .origin,.destination:
 						PlatformView(
 							isShowingPlatormWord: true,
 							platform: stopOver.departurePlatform.actual,
 							plannedPlatform: stopOver.departurePlatform.planned
 						)
-						if showBadges == true { LegStopViewBadges }
-					case  .destination:
-						PlatformView(
-							isShowingPlatormWord: true,
-							platform: stopOver.arrivalPlatform.actual,
-							plannedPlatform: stopOver.arrivalPlatform.planned
-						)
+						if showBadges == true, stopOverType == .origin { LegStopViewBadges }
 					case .transfer:
 						BadgeView(.transfer(duration: legViewData.duration))
 					case .stopover:
@@ -168,9 +121,37 @@ struct LegStopView : View {
 	}
 }
 
+extension LegStopView {
+	init(
+		type : StopOverType,
+		vm : LegDetailsViewModel,
+		stopOver : StopViewData,
+		leg : LegViewData,
+		showBadges : Bool
+	) {
+		self.showBadges = showBadges
+		self.vm = vm
+		self.stopOver = stopOver
+		self.stopOverType = type
+		self.legViewData = leg
+	}
+	init(
+		vm : LegDetailsViewModel,
+		stopOver : StopViewData,
+		leg : LegViewData,
+		showBadges : Bool
+	) {
+		self.showBadges = showBadges
+		self.vm = vm
+		self.stopOver = stopOver
+		self.stopOverType = stopOver.stopOverType
+		self.legViewData = leg
+	}
+}
+
 struct LegDetailsStopPreview : PreviewProvider {
 	static var previews : some View {
-		let mock = Mock.trip.RE6NeussMinden.decodedData
+		let mock = Mock.trip.cancelledMiddleStopsRE6NeussMinden.decodedData
 		if let mock = mock?.trip,
 		   let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]) {
 			ScrollView(.horizontal) {
@@ -185,6 +166,8 @@ struct LegDetailsStopPreview : PreviewProvider {
 									leg: viewData,
 									showBadges: true
 								)
+								.background(Color.chewFillPrimary)
+								.cornerRadius(8)
 							})
 						}
 						.frame(minWidth: 350)
@@ -193,7 +176,8 @@ struct LegDetailsStopPreview : PreviewProvider {
 					}
 				}
 			}
-			.previewDevice(PreviewDevice(stringLiteral: iPhoneModel.iPadMini6.rawValue))
+			.previewDevice(PreviewDevice(.iPadMini6gen))
+			.previewInterfaceOrientation(.landscapeLeft)
 		} else {
 			Text("error")
 		}

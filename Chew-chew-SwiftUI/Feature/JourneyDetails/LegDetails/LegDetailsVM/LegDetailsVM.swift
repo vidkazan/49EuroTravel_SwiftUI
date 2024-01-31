@@ -14,6 +14,7 @@ final class LegDetailsViewModel : ObservableObject, ChewViewModelProtocol, Ident
 	private var bag = Set<AnyCancellable>()
 	private  var input = PassthroughSubject<Event,Never>()
 	
+	
 	init(leg : LegViewData, isExpanded : Bool = false) {
 //		print("💾 LDVM \(self.id.uuidString.suffix(4)) init")
 		switch isExpanded {

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import SwiftUI
+
 enum iPhoneModel: String {
 	case iPhone6 = "iPhone 6"
 	case iPhone6Plus = "iPhone 6 Plus"
@@ -31,5 +33,12 @@ enum iPhoneModel: String {
 	case iPhone13 = "iPhone 13"
 	case iPhone13Pro = "iPhone 13 Pro"
 	case iPhone13ProMax = "iPhone 13 Pro Max"
-	case iPadMini6 = "iPad mini (6th generation)"
+	case iPadMini6gen = "iPad mini (6th generation)"
+	case iPadPro12_9inch_6gen = "iPad Pro (12.9-inch) (6th generation)"
+}
+
+extension PreviewDevice {
+	init(_ model : iPhoneModel){
+		self.init(stringLiteral: model.rawValue)
+	}
 }

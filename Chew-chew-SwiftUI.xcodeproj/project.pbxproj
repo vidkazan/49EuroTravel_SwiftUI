@@ -263,6 +263,7 @@
 		7D16384F2B69841D006E9660 /* LegDetailsStopView+background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsStopView+background.swift"; sourceTree = "<group>"; };
 		7D1638512B698457006E9660 /* LegDetailsStopView+badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsStopView+badges.swift"; sourceTree = "<group>"; };
 		7D1638532B698A04006E9660 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
+		7D1638572B69BA05006E9660 /* CancelledMiddleStops-Trip-RE6-Neuss-Minden.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "CancelledMiddleStops-Trip-RE6-Neuss-Minden.json"; sourceTree = "<group>"; };
 		7D181D632AD6D595003AB021 /* RecentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchView.swift; sourceTree = "<group>"; };
 		7D181D662AD6D6BB003AB021 /* TextModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextModifier.swift; sourceTree = "<group>"; };
 		7D181D682AD6F7C6003AB021 /* RecentSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchCell.swift; sourceTree = "<group>"; };
@@ -645,6 +646,7 @@
 			isa = PBXGroup;
 			children = (
 				7D33A95D2B5343320005D723 /* RE6-Neuss-Minden.json */,
+				7D1638572B69BA05006E9660 /* CancelledMiddleStops-Trip-RE6-Neuss-Minden.json */,
 				7D33A95E2B5343320005D723 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json */,
 				7D33A95F2B5343320005D723 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json */,
 			);

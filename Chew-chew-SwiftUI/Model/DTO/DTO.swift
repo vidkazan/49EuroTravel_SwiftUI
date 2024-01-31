@@ -19,6 +19,49 @@ enum StopOverType : String,Equatable, CaseIterable {
 	case footBottom
 	case transfer
 	
+	func timeLabelViewTime(timeStringContainer : TimeContainer.TimeStringContainer) -> Prognosed<String?> {
+		switch self {
+		case .destination, .footBottom:
+			return timeStringContainer.arrival
+		case .stopover:
+			return timeStringContainer.departure.actual == nil ? timeStringContainer.arrival : timeStringContainer.departure
+		default:
+			return timeStringContainer.departure
+		}
+	}
+	
+	func timeLabelViewDelay(timeContainer : TimeContainer) -> Int? {
+		switch self {
+		case .destination, .footBottom:
+			return timeContainer.arrivalStatus.value
+		default:
+			return timeContainer.departureStatus.value
+		}
+	}
+	
+	func stopOverCancellationType(stopOver : StopViewData) -> StopOverCancellationType {
+		switch self {
+		case .stopover:
+			return StopOverCancellationType.getCancelledTypeFromDelayStatus(
+				arrivalStatus: stopOver.timeContainer.arrivalStatus,
+				departureStatus: stopOver.timeContainer.departureStatus
+			)
+		case .destination,.footBottom:
+			return stopOver.timeContainer.arrivalStatus == TimeContainer.DelayStatus.cancelled ? .fullyCancelled : .notCancelled
+		case .footTop,.origin,.footMiddle,.transfer:
+			return stopOver.timeContainer.departureStatus == TimeContainer.DelayStatus.cancelled ? .fullyCancelled : .notCancelled
+		}
+	}
+	
+	var showBadgesOnLegStopView : Bool {
+		switch self {
+		case .origin:
+			return true
+		default:
+			return false
+		}
+	}
+	
 	var timeLabelCornerRadius : CGFloat {
 		switch self {
 		case .stopover:
@@ -49,19 +92,9 @@ enum StopOverType : String,Equatable, CaseIterable {
 	
 	var smallTimeLabel : Bool {
 		switch self {
-		case .origin:
-			return false
 		case .stopover:
 			return true
-		case .destination:
-			return false
-		case .footTop:
-			return false
-		case .footMiddle:
-			return false
-		case .footBottom:
-			return false
-		case .transfer:
+		default:
 			return false
 		}
 	}
@@ -105,13 +138,14 @@ enum StopOverCancellationType : Equatable {
 	) -> Self {
 		if arrivalStatus == .cancelled && departureStatus == .cancelled {
 			return .fullyCancelled
-		} else if arrivalStatus == .cancelled {
-			return .entryOnly
-		} else if departureStatus == .cancelled {
-			return .exitOnly
-		} else {
-			return .notCancelled
 		}
+		if arrivalStatus == .cancelled {
+			return .entryOnly
+		}
+		if departureStatus == .cancelled {
+			return .exitOnly
+		}
+		return .notCancelled
 	}
 }
 

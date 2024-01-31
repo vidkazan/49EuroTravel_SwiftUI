@@ -137,9 +137,9 @@ struct JourneyDetailsPreview : PreviewProvider {
 					arrStop: .init(),
 					followList: [],
 					chewVM: .init()
-				))
-				.environmentObject(ChewViewModel())
-				.previewDevice(PreviewDevice(stringLiteral: iPhoneModel.iPhoneSE2.rawValue))
+			))
+			.environmentObject(ChewViewModel())
+			.previewDevice(PreviewDevice(.iPhone6S))
 		} else {
 			Text("error")
 		}

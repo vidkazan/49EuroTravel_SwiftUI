@@ -36,19 +36,27 @@ struct TimeLabelView: View {
 	}
 	
 	init(
-		stopOverType : StopOverType,
-		time : Prognosed<String?>,
-		delay: Int?,
-		isCancelled : Bool
+		stopOver : StopViewData,
+		stopOverType : StopOverType
 	) {
-		self.delay = delay
+		print(stopOver.stopOverType.stopOverCancellationType(stopOver: stopOver))
+		self.delay = stopOver.stopOverType.timeLabelViewDelay(timeContainer: stopOver.timeContainer)
 		self.isSmall = stopOverType.smallTimeLabel
 		self.arragement = stopOverType.timeLabelArragament
-		self.time = Prognosed(
-			actual: time.actual ?? "",
-			planned: time.planned ?? ""
-		)
-		self.isCancelled = isCancelled
+		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.timeContainer.stringTimeValue)
+		self.time = Prognosed(actual: time.actual ?? "",planned: time.planned ?? "")
+		self.isCancelled = stopOver.stopOverType.stopOverCancellationType(stopOver: stopOver) == .fullyCancelled
+	}
+	
+	init(
+		stopOver : StopViewData
+	) {
+		self.delay = stopOver.stopOverType.timeLabelViewDelay(timeContainer: stopOver.timeContainer)
+		self.isSmall = stopOver.stopOverType.smallTimeLabel
+		self.arragement = stopOver.stopOverType.timeLabelArragament
+		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.timeContainer.stringTimeValue)
+		self.time = Prognosed(actual: time.actual ?? "",planned: time.planned ?? "")
+		self.isCancelled = stopOver.stopOverType.stopOverCancellationType(stopOver: stopOver) == .fullyCancelled
 	}
 	
 	var body: some View {

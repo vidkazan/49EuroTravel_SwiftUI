@@ -8,6 +8,13 @@
 import Foundation
 
 struct TripMockFiles {
+	static let cancelledMiddleStopsRE6NeussMinden = TripMockFile(
+		"CancelledMiddleStops-Trip-RE6-Neuss-Minden.json",
+		expectedData: TripExpectedData(
+			durationString: "",
+			direction: ""
+		)
+	)
 	static let cancelledFirstStopRE11DussKassel = TripMockFile(
 		"CancelledFirstStop-Trip-RE11-Duss-Kassel.json",
 		expectedData: TripExpectedData(
@@ -33,12 +40,9 @@ struct TripMockFiles {
 struct JourneyMockFiles{
 	static let journeyNeussWolfsburg = JourneyMockFile("Journey-Neuss-Wolfsburg.json")
 }
-//
+
+
 struct JourneyListMockFiles {
 	static let journeyNeussWolfsburg = JourneyListMockFile("JourneyList-Neuss-Wolfsburg.json")
 	static let journeyListPlaceholder = JourneyListMockFile("Placeholder.json")
 }
-//
-//struct LocationsMockFiles {
-////	static let mutlipleAuthors = MockFile("", .locations)
-//}
