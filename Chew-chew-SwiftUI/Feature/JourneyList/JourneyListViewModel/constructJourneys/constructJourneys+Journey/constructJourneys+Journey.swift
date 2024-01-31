@@ -23,14 +23,12 @@ func constructJourneyViewDataAsync(
 	)
 }
 
-
 func constructJourneyViewData(
 	journey : JourneyDTO,
 	depStop: Stop?,
 	arrStop : Stop?,
 	realtimeDataUpdatedAt: Double
 ) -> JourneyViewData? {
-	
 	do {
 		return try constructJourneyViewDataThrows(
 			journey: journey,
@@ -67,19 +65,23 @@ func constructJourneyViewDataThrows(
 	for (index,leg) in legs.enumerated() {
 		remarks += leg.remarks ?? []
 		isReachable = leg.reachable ?? true
-		if let res = constructLegData(leg: leg, firstTS: startTS, lastTS: endTS, legs: legs) {
+		if var currentLeg = constructLegData(leg: leg, firstTS: startTS, lastTS: endTS, legs: legs) {
 			if let last = legsData.last {
-				if currentLegIsNotReachable(currentLeg: res, previousLeg: last) == true {
+				if currentLegIsNotReachable(
+					currentLeg: currentLeg,
+					previousLeg: last
+				) == true {
 					legsData[legsData.count-1].delayedAndNextIsNotReachable = true
 					isReachable = false
+					currentLeg.isReachable = false
 				}
-				if case .line = res.legType, case .line = last.legType {
+				if case .line = currentLeg.legType, case .line = last.legType {
 					if let transfer = constructTransferViewData(fromLeg: legs[index-1], toLeg: leg) {
 						legsData.append(transfer)
 					}
 				}
 			}
-			legsData.append(res)
+			legsData.append(currentLeg)
 		}
 	}
 	let sunEventService = SunEventService(

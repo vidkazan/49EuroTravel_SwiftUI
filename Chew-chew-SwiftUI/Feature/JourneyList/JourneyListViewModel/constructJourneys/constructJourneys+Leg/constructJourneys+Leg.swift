@@ -253,14 +253,25 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 	}
 	
 	
-	let actualDeparturePosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS, currentTS: container.date.departure.actual) ?? 0
-	let actualArrivalPosition = getTimeLabelPosition( firstTS: firstTS, lastTS: lastTS,	currentTS: container.date.arrival.actual) ?? 0
+	let actualDeparturePosition = getTimeLabelPosition(
+		firstTS: firstTS,
+		lastTS: lastTS,
+		currentTS: container.date.departure.actual
+	) ?? 0
+	
+	let actualArrivalPosition = getTimeLabelPosition(
+		firstTS: firstTS,
+		lastTS: lastTS,
+		currentTS: container.date.arrival.actual
+	) ?? 0
 	
 	let stops = constructLineStopOverData(leg: leg, type: constructLegType(leg: leg, legs: legs))
 	let segments = constructSegmentsFromStopOverData(stopovers: stops)
 	
+	
+	#warning("fix is reachable")
 	let res = LegViewData(
-		isReachable: leg.reachable ?? true, // TODO: can not work proreply
+		isReachable: true,
 		legType: constructLegType(leg: leg, legs: legs),
 		tripId: tripId,
 		direction: leg.direction ?? "direction",
@@ -292,12 +303,8 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 	return res
 }
 
-//func getActualDirection() -> Stop {
-//
-//}
-
 func currentLegIsNotReachable(currentLeg: LegViewData?, previousLeg: LegViewData?) -> Bool? {
 	guard let currentLeg = currentLeg?.timeContainer.timestamp.departure.actual,
 			let previousLeg = previousLeg?.timeContainer.timestamp.arrival.actual else { return nil }
-	return previousLeg > currentLeg
+	return previousLeg >= currentLeg
 }

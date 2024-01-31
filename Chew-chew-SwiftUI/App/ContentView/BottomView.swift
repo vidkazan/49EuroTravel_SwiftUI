@@ -30,33 +30,33 @@ struct BottomView: View {
 		}
 		.onReceive(chewViewModel.$state, perform: { state = $0 })
 	}
-	
-	struct BottomViewPreview : PreviewProvider {
-		static var previews: some View {
-			let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData
-			if let mock = mock {
-				let viewData = constructJourneyListViewData(
-					journeysData: mock,
-					depStop: .init(),
-					arrStop: .init()
-				)
-				let data = JourneyListViewData(
-					journeysViewData: viewData,
-					data: mock,
-					depStop: .init(),
-					arrStop: .init()
-				)
-				BottomView()
-					.environmentObject(ChewViewModel(initialState: .init(
-						depStop: .textOnly("122"),
-						arrStop: .textOnly("123"),
-						settings: .init(),
-						date: .now,
-						status: .journeys(.init(departure: .init(), arrival: .init()))
-					)))
-			} else {
-				Text("error")
-			}
+}
+
+struct BottomViewPreview : PreviewProvider {
+	static var previews: some View {
+		let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData
+		if let mock = mock {
+			let viewData = constructJourneyListViewData(
+				journeysData: mock,
+				depStop: .init(),
+				arrStop: .init()
+			)
+			let data = JourneyListViewData(
+				journeysViewData: viewData,
+				data: mock,
+				depStop: .init(),
+				arrStop: .init()
+			)
+			BottomView()
+				.environmentObject(ChewViewModel(initialState: .init(
+					depStop: .textOnly("122"),
+					arrStop: .textOnly("123"),
+					settings: .init(),
+					date: .now,
+					status: .journeys(.init(departure: .init(), arrival: .init()))
+				)))
+		} else {
+			Text("error")
 		}
 	}
 }

@@ -144,7 +144,7 @@ struct LegViewBG: View {
 				self.bgColor = Color.chewFillTertiary.opacity(0.9)
 			}
 		case false:
-			self.bgColor =  Color.chewRedScale20
+			self.bgColor =  Color.chewFillRedPrimary.opacity(0.9)
 		}
 	}
 	

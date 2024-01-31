@@ -17,6 +17,7 @@ struct TimeAndSettingsView: View {
 	init(setSheetType: @escaping (FeatureView.SheetType) -> Void) {
 		self.setSheetType = setSheetType
 	}
+	
 	var body: some View {
 		Group {
 			switch state.status {
@@ -25,7 +26,10 @@ struct TimeAndSettingsView: View {
 			default:
 				VStack(spacing: 0) {
 					HStack {
-						TimeChoosingView(searchStopsVM: chewViewModel.searchStopsViewModel,setSheetType: setSheetType)
+						TimeChoosingView(
+							searchStopsVM: chewViewModel.searchStopsViewModel,
+							setSheetType: setSheetType
+						)
 						Button(action: {
 							setSheetType(.settings)
 						}, label: {

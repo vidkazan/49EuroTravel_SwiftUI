@@ -95,7 +95,7 @@ extension JourneyViewData {
 
 struct LegViewData : Equatable,Identifiable {
 	let id = UUID()
-	let isReachable : Bool
+	var isReachable : Bool
 	let legType : LegType
 	
 	let tripId : String
@@ -116,7 +116,7 @@ struct LegViewData : Equatable,Identifiable {
 
 extension LegViewData {
 	init(){
-		self.isReachable = false
+		self.isReachable = true
 		self.legType = .line
 		self.tripId = ""
 		self.duration = ""

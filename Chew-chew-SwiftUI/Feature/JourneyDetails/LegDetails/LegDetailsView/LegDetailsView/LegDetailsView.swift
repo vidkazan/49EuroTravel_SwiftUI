@@ -67,7 +67,6 @@ struct LegDetailsView: View {
 							]
 						}
 					}()
-					
 					ForEach(stops) { stop in
 						LegStopView(
 							vm: vm,

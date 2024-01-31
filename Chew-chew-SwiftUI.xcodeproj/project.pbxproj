@@ -222,6 +222,7 @@
 		7DE8A3512B6AB13800C3A378 /* TimeLabelView+subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8A3502B6AB13800C3A378 /* TimeLabelView+subviews.swift */; };
 		7DE8A3552B6ABB3400C3A378 /* LegDetailsStopView+subviews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8A3542B6ABB3400C3A378 /* LegDetailsStopView+subviews.swift */; };
 		7DE8A3582B6ABCFA00C3A378 /* LegDetailsView+background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8A3572B6ABCFA00C3A378 /* LegDetailsView+background.swift */; };
+		7DE8A35A2B6AC50D00C3A378 /* SunEventsGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8A3592B6AC50D00C3A378 /* SunEventsGradient.swift */; };
 		7DF0D98D2B69557D00861C4F /* Iphones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0D98C2B69557C00861C4F /* Iphones.swift */; };
 		7DF0D98F2B6956DD00861C4F /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */; };
 		7DF5871D2B5EC01100A4F99A /* ApiServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF5871C2B5EC01100A4F99A /* ApiServiceErrors.swift */; };
@@ -433,6 +434,8 @@
 		7DE8A3502B6AB13800C3A378 /* TimeLabelView+subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeLabelView+subviews.swift"; sourceTree = "<group>"; };
 		7DE8A3542B6ABB3400C3A378 /* LegDetailsStopView+subviews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsStopView+subviews.swift"; sourceTree = "<group>"; };
 		7DE8A3572B6ABCFA00C3A378 /* LegDetailsView+background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LegDetailsView+background.swift"; sourceTree = "<group>"; };
+		7DE8A3592B6AC50D00C3A378 /* SunEventsGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunEventsGradient.swift; sourceTree = "<group>"; };
+		7DE8A35B2B6ACA6700C3A378 /* Journey-Neuss-Wolfsburg-missedConnection.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Journey-Neuss-Wolfsburg-missedConnection.json"; sourceTree = "<group>"; };
 		7DF0D98C2B69557C00861C4F /* Iphones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iphones.swift; sourceTree = "<group>"; };
 		7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		7DF5871C2B5EC01100A4F99A /* ApiServiceErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceErrors.swift; sourceTree = "<group>"; };
@@ -646,6 +649,7 @@
 			isa = PBXGroup;
 			children = (
 				7D33A95A2B5343320005D723 /* Journey-Neuss-Wolfsburg.json */,
+				7DE8A35B2B6ACA6700C3A378 /* Journey-Neuss-Wolfsburg-missedConnection.json */,
 				7D33A95B2B5343320005D723 /* Journey-Neuss-Wolfsburg-First-Cancelled.json */,
 			);
 			path = Journey;
@@ -1166,6 +1170,7 @@
 				7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */,
 				7DA8D3492A9A118E005DF550 /* BadgesView.swift */,
 				7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */,
+				7DE8A3592B6AC50D00C3A378 /* SunEventsGradient.swift */,
 				7D23E4492A98F9800037C3E1 /* LegsView.swift */,
 				7D23E44B2A98FD700037C3E1 /* LegView.swift */,
 			);
@@ -1595,6 +1600,7 @@
 				7DF0D98F2B6956DD00861C4F /* FlowLayout.swift in Sources */,
 				7DAF62C02A9E6DED006F1A17 /* D-ticketLogo.swift in Sources */,
 				7D7A553D2AA4B407000256EF /* System.swift in Sources */,
+				7DE8A35A2B6AC50D00C3A378 /* SunEventsGradient.swift in Sources */,
 				7DCB2BFF2AAC8831007C672A /* SearchLocationVM+reduce+Idle.swift in Sources */,
 				7D4B1B992AA950780096F372 /* constructJourneys.swift in Sources */,
 				7D462D492AAC947F00BC0D65 /* JourneyListViewModel+reduce+LoadingJourneys.swift in Sources */,

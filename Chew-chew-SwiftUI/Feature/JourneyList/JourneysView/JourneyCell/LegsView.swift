@@ -14,6 +14,7 @@ struct LegsView: View {
 	var gradientStopsForProgressLine : [Gradient.Stop]
 	var showProgressBar : Bool
 	var progressLineProportion : Double
+	
 	init(journey: JourneyViewData?,progressBar: Bool) {
 		self.journey = journey
 		self.showProgressBar = progressBar
@@ -37,18 +38,18 @@ struct LegsView: View {
 					if let journey = journey {
 						ForEach(journey.legs) { leg in
 							LegViewBG(leg: leg)
-								.frame(
-									width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
-									height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
-								.position(
-									x : geo.size.width * (
-										leg.legTopPosition + (
-											( leg.legBottomPosition - leg.legTopPosition ) / 2
-										)
-									),
-									y: geo.size.height/2
-								)
-								.opacity(0.90)
+							.frame(
+								width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
+								height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
+							.position(
+								x : geo.size.width * (
+									leg.legTopPosition + (
+										( leg.legBottomPosition - leg.legTopPosition ) / 2
+									)
+								),
+								y: geo.size.height/2
+							)
+							.opacity(0.90)
 						}
 					}
 					if showProgressBar {
@@ -94,39 +95,30 @@ extension LegsView {
 	}
 }
 
-struct SunEventsGradient : View {
-	let gradientStops : [Gradient.Stop]
-	let size : CGSize
-	let isProgressLine : Bool
-	let progressLineProportion : Double
-	var body: some View {
-		switch isProgressLine {
-		case true:
-			RoundedRectangle(cornerRadius: 5)
-				.fill(Color.chewFillGreenPrimary.opacity(0.95))
-				.frame(
-					width: size.width * progressLineProportion,
-					height: 26
-				)
-				.position(
-					x : size.width * progressLineProportion / 2,
-					y : size.height/2
-				)
-				.cornerRadius(5)
-		case false:
-			RoundedRectangle(cornerRadius: 5)
-				.fill(.gray)
-				.overlay{
-					LinearGradient(
-						stops: gradientStops,
-						startPoint: UnitPoint(x: 0, y: 0),
-						endPoint: UnitPoint(x: 1, y: 0))
+struct LegsViewPreviews: PreviewProvider {
+	static var previews: some View {
+		let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData
+		if let mock = mock {
+			let viewData = constructJourneyListViewData(
+				journeysData: mock,
+				depStop: .init(),
+				arrStop: .init()
+			)
+			VStack {
+//				ForEach(viewData) { data in
+//					LegsView(journey: data, progressBar: false)
+//				}
+				let mock = Mock.journeys.journeyNeussWolfsburgMissedConnection.decodedData
+				if let mock = mock {
+					let viewData = constructJourneyViewData(
+						journey: mock.journey,
+						depStop: nil,
+						arrStop: nil,
+						realtimeDataUpdatedAt: 0
+					)
+					LegsView(journey: viewData, progressBar: false)
 				}
-				.frame(
-					maxWidth: size.width > 0 ? size.width - 1 : 0 ,
-					maxHeight: 26
-				)
-				.cornerRadius(5)
+			}
 		}
 	}
 }
