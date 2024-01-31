@@ -15,13 +15,14 @@ struct LegsView: View {
 	var showProgressBar : Bool
 	var progressLineProportion : Double
 	
-	init(journey: JourneyViewData?,progressBar: Bool) {
+	init(journey: JourneyViewData?,progressBar: Bool, referenceTimeTS : Double = Date.now.timeIntervalSince1970) {
 		self.journey = journey
 		self.showProgressBar = progressBar
 		self.gradientStops = journey?.sunEventsGradientStops ?? []
 		self.progressLineProportion = Self.getProgressLineProportion(
 			departureTS: journey?.timeContainer.timestamp.departure.actual,
-			arrivalTS: journey?.timeContainer.timestamp.arrival.actual
+			arrivalTS: journey?.timeContainer.timestamp.arrival.actual,
+			referenceTimeTS: referenceTimeTS
 		)
 		self.gradientStopsForProgressLine = gradientStops
 	}
@@ -85,11 +86,15 @@ struct LegsView: View {
 }
 
 extension LegsView {
-	static func getProgressLineProportion(departureTS : Double?, arrivalTS : Double?) -> CGFloat {
+	static func getProgressLineProportion(
+		departureTS : Double?,
+		arrivalTS : Double?,
+		referenceTimeTS : Double = Date.now.timeIntervalSince1970
+	) -> CGFloat {
 		guard let departureTS = departureTS, let arrivalTS = arrivalTS else {
 			return 0
 		}
-		var proportion = (Date.now.timeIntervalSince1970 - departureTS) / (arrivalTS - departureTS)
+		var proportion = (referenceTimeTS - departureTS) / (arrivalTS - departureTS)
 		proportion = proportion > 1 ? 1 : proportion < 0 ? 0 : proportion
 		return proportion
 	}
@@ -116,7 +121,7 @@ struct LegsViewPreviews: PreviewProvider {
 						arrStop: nil,
 						realtimeDataUpdatedAt: 0
 					)
-					LegsView(journey: viewData, progressBar: false)
+					LegsView(journey: viewData, progressBar: true,referenceTimeTS: Date.now.timeIntervalSince1970-9800)
 				}
 			}
 		}
