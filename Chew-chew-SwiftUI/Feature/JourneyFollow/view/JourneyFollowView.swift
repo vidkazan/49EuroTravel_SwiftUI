@@ -27,7 +27,7 @@ struct JourneyFollowView : View {
 					Text("You have no followed journeys")
 						.chewTextSize(.big)
 				default:
-					List(viewModel.state.journeys, id: \.journeyRef, rowContent: { journey in
+					List(viewModel.state.journeys.sorted(by: {$0.journeyViewData.timeContainer.timestamp.departure.planned ?? 0 > $1.journeyViewData.timeContainer.timestamp.departure.planned ?? 0}), id: \.journeyRef, rowContent: { journey in
 						let vm = JourneyDetailsViewModel(
 							refreshToken: journey.journeyRef,
 							data: journey.journeyViewData,
