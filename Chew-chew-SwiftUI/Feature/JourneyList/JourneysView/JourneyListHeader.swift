@@ -19,7 +19,7 @@ struct JourneyListHeaderView: View {
 			}, label: {
 				Label("Reload", systemImage: "arrow.clockwise")
 					.padding(5)
-					.frame(maxHeight: 35)
+					.frame(maxHeight: 43)
 					.chewTextSize(.big)
 					.tint(.chewFillTertiary)
 					.badgeBackgroundStyle(.secondary)
@@ -30,7 +30,7 @@ struct JourneyListHeaderView: View {
 			}, label: {
 				Label("Close", systemImage: "xmark.circle")
 					.padding(5)
-					.frame(maxHeight: 35)
+					.frame(maxHeight: 43)
 					.chewTextSize(.big)
 					.tint(.chewFillTertiary)
 					.badgeBackgroundStyle(.secondary)
