@@ -57,8 +57,8 @@ func constructJourneyViewDataThrows(
 	var isReachable = true
 	var remarks : [Remark] = []
 	var legsData : [LegViewData] = []
-	let startTS = max(timeContainer.date.departure.actual ?? .now, timeContainer.date.departure.planned ?? .now)
-	let endTS = max(timeContainer.date.arrival.planned ?? .now,timeContainer.date.arrival.actual ?? .now)
+	let startTS = max(timeContainer.date.departure.actual ?? .distantPast, timeContainer.date.departure.planned ?? .distantPast)
+	let endTS = max(timeContainer.date.arrival.planned ?? .distantPast,timeContainer.date.arrival.actual ?? .distantPast)
 	let legs = journey.legs
 	remarks = journey.remarks ?? []
 	

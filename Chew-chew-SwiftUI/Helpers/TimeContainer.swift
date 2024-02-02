@@ -48,11 +48,11 @@ extension TimeContainer {
 		)
 	}
 	init() {
-		let departure = Prognosed<String?>(
+		let departure = Prognosed<String>(
 			actual: nil,
 			planned: nil
 		)
-		let arrival = Prognosed<String?>(
+		let arrival = Prognosed<String>(
 			actual: nil,
 			planned: nil
 		)
@@ -95,8 +95,8 @@ extension TimeContainer {
 extension TimeContainer {
 	// MARK: ISO Container
 	struct ISOTimeContainer : Equatable {
-		let departure : Prognosed<String?>
-		let arrival : Prognosed<String?>
+		let departure : Prognosed<String>
+		let arrival : Prognosed<String>
 		
 		func getDateContainer() -> DateTimeContainer {
 			return DateTimeContainer(
@@ -113,8 +113,8 @@ extension TimeContainer {
 	}
 	// MARK: Date Container
 	struct DateTimeContainer : Equatable {
-		let departure : Prognosed<Date?>
-		let arrival : Prognosed<Date?>
+		let departure : Prognosed<Date>
+		let arrival : Prognosed<Date>
 		
 		func getTSContainer() -> TimestampTimeContainer {
 			return TimestampTimeContainer(
@@ -156,20 +156,20 @@ extension TimeContainer {
 	
 	// MARK: TimeString Container
 	struct TimeStringContainer : Equatable {
-		let departure : Prognosed<String?>
-		let arrival : Prognosed<String?>
+		let departure : Prognosed<String>
+		let arrival : Prognosed<String>
 	}
 	struct DateStringContainer : Equatable {
-		let departure : Prognosed<String?>
-		let arrival : Prognosed<String?>
+		let departure : Prognosed<String>
+		let arrival : Prognosed<String>
 	}
 	// MARK: TS Container
 	struct TimestampTimeContainer : Equatable {
-		let departure : Prognosed<Double?>
-		let arrival : Prognosed<Double?>
+		let departure : Prognosed<Double>
+		let arrival : Prognosed<Double>
 		
 		func generateDelayStatus(type: LocationDirectionType, cancelled : Bool?) -> DelayStatus {
-			let time : Prognosed<Double?> = {
+			let time : Prognosed<Double> = {
 				switch type {
 				case .departure:
 					return self.departure

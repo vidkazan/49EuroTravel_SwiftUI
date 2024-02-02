@@ -80,8 +80,8 @@ extension JourneyViewData {
 		self.timeContainer = time
 		self.updatedAt = updatedAt
 		self.sunEventsGradientStops = getGradientStops(
-			startDateTS: timeContainer.timestamp.departure.actual,
-			endDateTS: timeContainer.timestamp.arrival.actual,
+			startDateTS: timeContainer.timestamp.departure.actualOrPlannedIfActualIsNil(),
+			endDateTS: timeContainer.timestamp.arrival.actualOrPlannedIfActualIsNil(),
 			sunEvents: sunEvents
 		)
 	}
@@ -138,8 +138,8 @@ struct StopViewData : Equatable,Identifiable {
 	let id = UUID()
 	let locationCoordinates : CLLocationCoordinate2D
 	let name : String
-	let departurePlatform : Prognosed<String?>
-	let arrivalPlatform : Prognosed<String?>
+	let departurePlatform : Prognosed<String>
+	let arrivalPlatform : Prognosed<String>
 	let timeContainer : TimeContainer
 	let stopOverType : StopOverType
 	

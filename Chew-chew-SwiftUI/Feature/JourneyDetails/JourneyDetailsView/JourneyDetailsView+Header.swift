@@ -20,12 +20,12 @@ extension JourneyDetailsView {
 					Spacer()
 				}
 				HStack {
-					BadgeView(.date(dateString: data.viewData.timeContainer.stringDateValue.departure.actual ?? ""))
+					BadgeView(.date(dateString: data.viewData.timeContainer.stringDateValue.departure.actualOrPlannedIfActualIsNil() ?? ""))
 						.badgeBackgroundStyle(.accent)
 					BadgeView(
 						.timeDepartureTimeArrival(
-							timeDeparture: data.viewData.timeContainer.stringTimeValue.departure.actual ?? "",
-							timeArrival: data.viewData.timeContainer.stringTimeValue.arrival.actual ?? ""
+							timeDeparture: data.viewData.timeContainer.stringTimeValue.departure.actualOrPlannedIfActualIsNil() ?? "",
+							timeArrival: data.viewData.timeContainer.stringTimeValue.arrival.actualOrPlannedIfActualIsNil() ?? ""
 						)
 					)
 						.badgeBackgroundStyle(.accent)

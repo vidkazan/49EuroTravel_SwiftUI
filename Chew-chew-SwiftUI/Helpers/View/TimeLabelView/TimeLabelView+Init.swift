@@ -32,7 +32,7 @@ extension TimeLabelView {
 		self.isSmall = stopOverType.smallTimeLabel
 		self.arragement = stopOverType.timeLabelArragament
 		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.timeContainer.stringTimeValue)
-		self.time = Prognosed(actual: time.actual ?? "",planned: time.planned ?? "")
+		self.time = Prognosed(actual: time.actual,planned: time.planned)
 		self.isCancelled = stopOver.cancellationType() == .fullyCancelled
 	}
 	
@@ -43,7 +43,7 @@ extension TimeLabelView {
 		self.isSmall = stopOver.stopOverType.smallTimeLabel
 		self.arragement = stopOver.stopOverType.timeLabelArragament
 		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.timeContainer.stringTimeValue)
-		self.time = Prognosed(actual: time.actual ?? "",planned: time.planned ?? "")
+		self.time = Prognosed(actual: time.actual,planned: time.planned)
 		self.isCancelled = stopOver.cancellationType() == .fullyCancelled
 	}
 }

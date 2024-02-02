@@ -121,27 +121,7 @@ struct JourneyListView: View {
 
 struct JourneyListPreview : PreviewProvider {
 	static var previews: some View {
-		let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData
-		if let mock = mock {
-			let viewData = constructJourneyListViewData(
-				journeysData: mock,
-				depStop: .init(),
-				arrStop: .init()
-			)
-			let data = JourneyListViewData(
-				journeysViewData: viewData,
-				data: mock,
-				depStop: .init(),
-				arrStop: .init()
-			)
-			let vm = JourneyListViewModel(
-				stops: .init(departure: .init(), arrival: .init()),
-				viewData: data
-			)
-			JourneyListView(stops: .init(departure: .init(), arrival: .init()), date: .now, settings: .init())
-				.environmentObject(ChewViewModel())
-		} else {
-			Text("error")
-		}
+		JourneyListView(stops: .init(departure: .init(), arrival: .init()), date: .now, settings: .init())
+			.environmentObject(ChewViewModel())
 	}
 }

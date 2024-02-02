@@ -44,8 +44,8 @@ extension ChewStop {
 		return StopViewData(
 			locationCoordinates: CLLocationCoordinate2D(latitude: self.lat, longitude: self.long),
 			name: self.name,
-			departurePlatform: Prognosed<String?>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),
-			arrivalPlatform: Prognosed<String?>(actual: self.arrPlatform?.actual, planned: self.arrPlatform?.planned),
+			departurePlatform: Prognosed<String>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),
+			arrivalPlatform: Prognosed<String>(actual: self.arrPlatform?.actual, planned: self.arrPlatform?.planned),
 			timeContainer: time,
 			stopOverType: StopOverType(rawValue: self.stopOverType) ?? .stopover
 		)

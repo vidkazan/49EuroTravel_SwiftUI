@@ -69,3 +69,31 @@ struct PlatformView: View {
 		}
 	}
 }
+
+
+struct JourneyCellPreview: PreviewProvider {
+	static var previews: some View {
+		let mocks = [
+			Mock.journeys.journeyNeussWolfsburgMissedConnection.decodedData,
+			Mock.journeys.userLocationToStation.decodedData,
+			Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData
+		]
+		VStack {
+			ForEach(mocks,id: \.?.realtimeDataUpdatedAt){ mock in
+				if let mock = mock,
+				   let viewData = constructJourneyViewData(
+						journey: mock.journey,
+						depStop: .init(),
+						arrStop: .init(),
+						realtimeDataUpdatedAt: 0
+					) {
+					JourneyCell(journey: viewData)
+						.environmentObject(ChewViewModel())
+				} else {
+					Text("error")
+				}
+			}
+		}
+		.padding()
+	}
+}

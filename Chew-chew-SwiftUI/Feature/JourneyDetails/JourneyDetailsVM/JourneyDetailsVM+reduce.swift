@@ -40,7 +40,7 @@ extension JourneyDetailsViewModel {
 					data: StateData(currentData: state.data, viewData: data),
 					status: .loadedJourneyData
 				)
-			case 	.didFailedToLoadJourneyData(let error):
+			case .didFailedToLoadJourneyData(let error):
 				return State(
 					data: state.data,
 					status: .error(error: error)

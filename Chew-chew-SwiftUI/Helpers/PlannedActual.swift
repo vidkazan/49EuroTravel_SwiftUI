@@ -8,8 +8,12 @@
 import Foundation
 
 struct Prognosed<T : Equatable> : Equatable {
-	var actual : T
-	var planned : T
+	var actual : T?
+	var planned : T?
+	
+	func actualOrPlannedIfActualIsNil() -> T? {
+		return actual == nil ? planned : actual
+	}
 }
 
 struct PrognosedDirection<T : Equatable> : Equatable {

@@ -17,7 +17,7 @@ extension TimeLabelView {
 				.foregroundColor(isSmall ? .gray : .secondary)
 				.chewTextSize(.medium)
 		case false:
-			return Text(delay > 0 ? time.planned : time.actual)
+			return Text(delay > 0 ? (time.planned ?? "") : (time.actual ?? ""))
 				.strikethrough()
 				.foregroundColor(isSmall ? .gray : .secondary)
 				.chewTextSize(.medium)
@@ -27,12 +27,12 @@ extension TimeLabelView {
 		Group {
 			switch cancelled {
 			case true:
-				Text(time.planned)
+				Text(time.planned ?? "")
 					.foregroundColor(Color.chewRedScale80)
 					.strikethrough()
 					.chewTextSize(isSmall == false ? .big : .medium)
 			case false:
-				Text(delay < 1 ? time.planned : time.actual)
+				Text(delay < 1 ? time.planned ?? "" : time.actual ?? "")
 					.foregroundColor(delay < 5 ? isSmall ? .primary : .primary : Color.chewRedScale80)
 					.chewTextSize(isSmall == false ? .big : .medium)
 			}
