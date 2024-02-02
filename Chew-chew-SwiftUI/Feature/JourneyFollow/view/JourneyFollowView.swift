@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-#warning("TODO: when closing view, updated viewData cleared and only previous coredata fetch viewData is available")
+
 struct JourneyFollowView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyFollowViewModel
@@ -24,8 +24,8 @@ struct JourneyFollowView : View {
 			default:
 				switch viewModel.state.journeys.count {
 				case 0:
-					Text("Empty")
-						.chewTextSize(.medium)
+					Text("You have no followed journeys")
+						.chewTextSize(.big)
 				default:
 					List(viewModel.state.journeys, id: \.journeyRef, rowContent: { journey in
 						let vm = JourneyDetailsViewModel(
@@ -47,12 +47,7 @@ struct JourneyFollowView : View {
 							}
 							.swipeActions(edge: .trailing) {
 								Button {
-									chewVM.journeyFollowViewModel.send(event: .didTapEdit(
-										action: .deleting,
-										journeyRef: vm.state.data.viewData.refreshToken,
-										followData: nil,
-										journeyDetailsViewModel: vm
-									))
+									vm.send(event: .didTapSubscribingButton(ref: journey.journeyRef, journeyDetailsViewModel: vm))
 								} label: {
 									Label("Delete", systemImage: "xmark.bin.circle")
 								}
@@ -97,11 +92,11 @@ struct FollowPreviews: PreviewProvider {
 					)],
 					initialStatus: .idle
 				))
-				.environmentObject(ChewViewModel())
+				.environmentObject(ChewViewModel(referenceDate: .now))
 				JourneyFollowView(viewModel: .init(
 					coreDataStore: .init(),
 					journeys: []))
-				.environmentObject(ChewViewModel())
+				.environmentObject(ChewViewModel(referenceDate: .now))
 			}
 		} else {
 			Text("error")

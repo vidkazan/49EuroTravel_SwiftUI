@@ -15,34 +15,28 @@ extension LegDetailsViewModel {
 		switch state.status {
 		case .idle:
 			switch event {
-			case .didTapExpandButton:
+			case .didTapExpandButton(refTimeTS: let ts):
 				return State(
 					data: StateData(
 						leg: state.data.leg,
 						totalProgressHeight: state.data.leg.progressSegments.heightTotalExtended,
-						currentProgressHeight: state.data.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970,type: .expanded)
+						currentProgressHeight: state.data.leg.progressSegments.evaluate(time: ts,type: .expanded)
 					),
 					status: .stopovers
 				)
-			case .didDisappear:
-				return State(data: state.data,status: .disappeared)
 			}
 		case .stopovers:
 			switch event {
-			case .didTapExpandButton:
+			case .didTapExpandButton(refTimeTS: let ts):
 				return State(
 					data: StateData(
 						leg: state.data.leg,
 						totalProgressHeight: state.data.leg.progressSegments.heightTotalCollapsed,
-						currentProgressHeight: state.data.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970,type: .collapsed)
+						currentProgressHeight: state.data.leg.progressSegments.evaluate(time: ts,type: .collapsed)
 					),
 					status: .idle
 				)
-			case .didDisappear:
-				return State( data: state.data, status: .disappeared )
 			}
-		case .disappeared:
-			return state
 		}
 	}
 }

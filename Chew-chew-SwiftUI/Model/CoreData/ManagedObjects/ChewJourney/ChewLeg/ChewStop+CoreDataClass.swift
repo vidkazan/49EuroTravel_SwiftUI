@@ -23,10 +23,15 @@ extension ChewStop {
 		self.long = stopData.locationCoordinates.longitude
 		self.name = stopData.name
 		self.stopOverType = stopData.stopOverType.rawValue
-		self.isCancelled = stopData.isCancelled ?? false
+		self.isCancelled = stopData.cancellationType() == .fullyCancelled
 		self.leg = leg
 		
-		let _ = ChewTime(context: context, container: stopData.timeContainer, cancelled: stopData.isCancelled ?? false, for: self)
+		let _ = ChewTime(
+			context: context,
+			container: stopData.timeContainer,
+			cancelled: stopData.cancellationType() == .fullyCancelled,
+			for: self
+		)
 		
 		let _ = ChewPrognosedPlatform(insertInto: context, with: stopData.departurePlatform, to: self, type: .departure)
 		let _ = ChewPrognosedPlatform(insertInto: context, with: stopData.arrivalPlatform, to: self, type: .arrival)
@@ -42,8 +47,7 @@ extension ChewStop {
 			departurePlatform: Prognosed<String?>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),
 			arrivalPlatform: Prognosed<String?>(actual: self.arrPlatform?.actual, planned: self.arrPlatform?.planned),
 			timeContainer: time,
-			stopOverType: StopOverType(rawValue: self.stopOverType) ?? .stopover,
-			isCancelled: self.isCancelled
+			stopOverType: StopOverType(rawValue: self.stopOverType) ?? .stopover
 		)
 	}
 }

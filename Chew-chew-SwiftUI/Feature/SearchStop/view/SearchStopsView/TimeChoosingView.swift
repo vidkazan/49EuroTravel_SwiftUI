@@ -12,22 +12,18 @@ struct TimeChoosingView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var searchStopsVM : SearchStopsViewModel
 	@State private var selectedOption : TimeSegmentedPickerOptions = .now
-	private var datePickerIsShowing = false
 	private let options : [TimeSegmentedPickerOptions] = [.now,.specificDate]
 	let setSheetType : (FeatureView.SheetType)->Void
 	init(
 		searchStopsVM: SearchStopsViewModel,
 		selectedOption: TimeSegmentedPickerOptions = .now,
-		datePickerIsShowing: Bool = false,
 		setSheetType : @escaping (FeatureView.SheetType)->Void
 	) {
 		self.searchStopsVM = searchStopsVM
 		self.selectedOption = selectedOption
-		self.datePickerIsShowing = datePickerIsShowing
 		self.setSheetType = setSheetType
 	}
 	var body: some View {
-		
 		SegmentedPicker(
 			options,
 			selectedItem: $selectedOption,
@@ -41,7 +37,6 @@ struct TimeChoosingView: View {
 					chewVM.send(event: .onNewDate(.now))
 				case .specificDate:
 					setSheetType(.datePicker)
-//					chewVM.send(event: .didTapSheet(.date))
 				}
 			}
 		)

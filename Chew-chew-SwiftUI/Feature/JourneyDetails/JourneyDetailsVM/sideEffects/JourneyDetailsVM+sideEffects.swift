@@ -160,6 +160,7 @@ extension JourneyDetailsViewModel {
 							return Event.didFailedToLoadJourneyData(
 								error: CoreDataError.failedToUpdateDatabase(type: ChewJourney.self))
 						}
+						state.data.chewVM?.journeyFollowViewModel.send(event: .didUpdateJourney(res))
 					case false:
 						break
 					}

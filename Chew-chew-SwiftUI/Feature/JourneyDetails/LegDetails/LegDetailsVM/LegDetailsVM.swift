@@ -8,8 +8,8 @@
 import Foundation
 import Combine
 
-final class LegDetailsViewModel : ObservableObject, ChewViewModelProtocol, Identifiable {
-	let id = UUID()
+final class LegDetailsViewModel : ObservableObject, ChewViewModelProtocol {
+
 	@Published private(set) var state : State
 	private var bag = Set<AnyCancellable>()
 	private  var input = PassthroughSubject<Event,Never>()

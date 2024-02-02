@@ -17,6 +17,7 @@ struct SettingsView: View {
 	@State var transferTime : Int
 	@State var showWithTransfers : Int
 	@State var alternativeSearchPage : Bool
+//	@State var showSunEvents : Bool
 	let setSheetType : (FeatureView.SheetType)->Void
 	let oldSettings : ChewSettings
 	init(settings : ChewSettings,setSheetType : @escaping (FeatureView.SheetType)->Void) {
@@ -34,6 +35,7 @@ struct SettingsView: View {
 			self.transferTime = minutes
 		}
 		self.alternativeSearchPage = settings.debugSettings.alternativeSearchPage
+//		self.showSunEvents = true
 	}
 	
 	var body: some View {
@@ -90,7 +92,7 @@ struct SettingsView: View {
 struct SettingsPreview: PreviewProvider {
 	static var previews: some View {
 		SettingsView(settings: .init(),setSheetType: { _ in })
-			.environmentObject(ChewViewModel())
+			.environmentObject(ChewViewModel(referenceDate: .now))
 	}
 }
 

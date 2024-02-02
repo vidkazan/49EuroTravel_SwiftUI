@@ -10,20 +10,6 @@ import CoreLocation
 import CoreData
 
 extension ChewViewModel {
-	enum ChewDate : Equatable,Hashable {
-		case now
-		case specificDate(Date)
-		
-		var date : Date {
-			switch self {
-			case .now:
-				return .now
-			case .specificDate(let date):
-				return date
-			}
-		}
-	}
-	
 	enum TextFieldContent : Equatable,Hashable {
 		case textOnly(String)
 		case location(Stop)

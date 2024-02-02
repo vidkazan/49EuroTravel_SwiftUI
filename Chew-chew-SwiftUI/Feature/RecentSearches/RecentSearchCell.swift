@@ -55,6 +55,6 @@ struct RecentSearchesPreviews: PreviewProvider {
 				]
 			)
 		)
-		.environmentObject(ChewViewModel())
+		.environmentObject(ChewViewModel(referenceDate: .now))
 	}
 }

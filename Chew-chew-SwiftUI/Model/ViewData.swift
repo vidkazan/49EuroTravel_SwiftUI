@@ -142,7 +142,34 @@ struct StopViewData : Equatable,Identifiable {
 	let arrivalPlatform : Prognosed<String?>
 	let timeContainer : TimeContainer
 	let stopOverType : StopOverType
-	let isCancelled : Bool?
+	
+	func cancellationType() -> StopOverCancellationType {
+		switch self.stopOverType {
+		case .stopover:
+			if timeContainer.arrivalStatus == .cancelled && timeContainer.departureStatus == .cancelled {
+				return .fullyCancelled
+			}
+			if timeContainer.arrivalStatus == .cancelled {
+				return .entryOnly
+			}
+			if timeContainer.departureStatus == .cancelled {
+				return .exitOnly
+			}
+			return .notCancelled
+		case .origin:
+			if timeContainer.departureStatus == .cancelled {
+				return .fullyCancelled
+			}
+			return .notCancelled
+		case .destination:
+			if timeContainer.arrivalStatus == .cancelled {
+				return .fullyCancelled
+			}
+			return .notCancelled
+		default:
+			return .notCancelled
+		}
+	}
 }
 
 enum LocationDirectionType :Int, Hashable {
@@ -170,8 +197,7 @@ extension StopViewData {
 		name : String,
 		timeContainer : TimeContainer,
 		stop : StopWithTimeDTO,
-		type: StopOverType,
-		isCancelled : Bool?
+		type: StopOverType
 	) {
 		self.timeContainer = timeContainer
 		self.name = name
@@ -182,15 +208,13 @@ extension StopViewData {
 			latitude: stop.stop?.location?.latitude ?? stop.stop?.latitude ?? -1,
 			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
 		)
-		self.isCancelled = isCancelled
 	}
 	
 	init(
 		name : String,
 		timeContainer : TimeContainer,
 		type: StopOverType,
-		coordinates : CLLocationCoordinate2D,
-		isCancelled : Bool?
+		coordinates : CLLocationCoordinate2D
 	) {
 		self.timeContainer = timeContainer
 		self.name = name
@@ -198,7 +222,6 @@ extension StopViewData {
 		self.arrivalPlatform  = Prognosed(actual: nil, planned: nil)
 		self.stopOverType = type
 		self.locationCoordinates = coordinates
-		self.isCancelled = isCancelled
 	}
 }
 

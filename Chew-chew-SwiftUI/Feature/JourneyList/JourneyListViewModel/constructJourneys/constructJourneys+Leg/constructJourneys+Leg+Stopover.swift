@@ -27,24 +27,21 @@ func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [Sto
 					name: stop.stop?.name ?? "stop",
 					timeContainer: c,
 					stop: stop,
-					type: .origin,
-					isCancelled: stop.cancelled
+					type: .origin
 				)
 			} else if stop == stops.last {
 				return StopViewData(
 					name: stop.stop?.name ?? "stop",
 					timeContainer: c,
 					stop: stop,
-					type: .destination,
-					isCancelled: stop.cancelled
+					type: .destination
 				)
 			} else {
 				return StopViewData(
 					name: stop.stop?.name ?? "stop",
 					timeContainer: c,
 					stop: stop,
-					type: .stopover,
-					isCancelled: stop.cancelled
+					type: .stopover
 				)
 			}
 		}
@@ -73,8 +70,7 @@ func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [Sto
 				coordinates: CLLocationCoordinate2D(
 					latitude: leg.origin?.latitude ?? leg.origin?.location?.latitude ?? 0,
 					longitude: leg.origin?.longitude ?? leg.origin?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			),
 			StopViewData(
 				name: leg.destination?.name ?? "name",
@@ -83,8 +79,7 @@ func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [Sto
 				coordinates: CLLocationCoordinate2D(
 					latitude: leg.destination?.latitude ?? leg.destination?.location?.latitude ?? 0,
 					longitude: leg.destination?.longitude ?? leg.destination?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			)
 		]
 	case .footMiddle:
@@ -110,8 +105,7 @@ func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [Sto
 				coordinates: CLLocationCoordinate2D(
 					latitude: leg.origin?.latitude ?? leg.origin?.location?.latitude ?? 0,
 					longitude: leg.origin?.longitude ?? leg.origin?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			),
 			StopViewData(
 				name: leg.destination?.name ?? "name",
@@ -120,8 +114,7 @@ func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [Sto
 				coordinates: CLLocationCoordinate2D(
 					latitude: leg.destination?.latitude ?? leg.destination?.location?.latitude ?? 0,
 					longitude: leg.destination?.longitude ?? leg.destination?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			)
 		]
 	case .footEnd(finishPointName: let endName):
@@ -147,8 +140,7 @@ func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [Sto
 				coordinates: CLLocationCoordinate2D(
 					latitude: leg.origin?.latitude ?? leg.origin?.location?.latitude ?? 0,
 					longitude: leg.origin?.longitude ?? leg.origin?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			),
 			StopViewData(
 				name: endName,
@@ -157,8 +149,7 @@ func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [Sto
 				coordinates: CLLocationCoordinate2D(
 					latitude: leg.destination?.latitude ?? leg.destination?.location?.latitude ?? 0,
 					longitude: leg.destination?.longitude ?? leg.destination?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			)
 		]
 	case .transfer:
@@ -184,8 +175,7 @@ func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [Sto
 				coordinates: CLLocationCoordinate2D(
 					latitude: leg.origin?.latitude ?? leg.origin?.location?.latitude ?? 0,
 					longitude: leg.origin?.longitude ?? leg.origin?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			),
 			StopViewData(
 				name: leg.destination?.name ?? "name",
@@ -194,8 +184,7 @@ func constructLineStopOverData(leg : LegDTO, type : LegViewData.LegType) -> [Sto
 				coordinates: CLLocationCoordinate2D(
 					latitude: leg.destination?.latitude ?? leg.destination?.location?.latitude ?? 0,
 					longitude: leg.destination?.longitude ?? leg.destination?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			)
 		]
 	}

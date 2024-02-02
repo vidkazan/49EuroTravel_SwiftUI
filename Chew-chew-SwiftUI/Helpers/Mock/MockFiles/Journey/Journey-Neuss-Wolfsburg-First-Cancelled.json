@@ -2257,7 +2257,7 @@
 				]
 			}
 		],
-		"refreshToken": "T$A=1@O=Neuss Hbf@L=8000274@a=128@$A=1@O=Düsseldorf Hbf@L=8000085@a=128@$202312171727$202312171739$RE 26427$$3$$$$$$§T$A=1@O=Düsseldorf Hbf@L=8000085@a=128@$A=1@O=Minden(Westf)@L=8000252@a=128@$202312171755$202312172030$RE 89731$$1$$$$$$§T$A=1@O=Minden(Westf)@L=8000252@a=128@$A=1@O=Hannover Hbf@L=8000152@a=128@$202312172035$202312172130$S      1$$1$$$$$$§T$A=1@O=Hannover Hbf@L=8000152@a=128@$A=1@O=Wolfsburg Hbf@L=8006552@a=128@$202312172148$202312172243$ENO83535$$1$$$$$$",
+		"refreshToken": "",
 		"cycle": {
 			"min": 3600
 		},

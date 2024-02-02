@@ -18,6 +18,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	let searchStopsViewModel : SearchStopsViewModel
 	let journeyFollowViewModel : JourneyFollowViewModel
 	let recentSearchesViewModel : RecentSearchesViewModel
+	let referenceDate : ChewDate
 	@Published private(set) var state : State {
 		didSet { print("📱 >  state:",state.status.description) }
 	}
@@ -30,7 +31,9 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		   settings: ChewSettings(),
 		   date: .now,
 		   status: .start
-	   )) {
+	   ),
+		 referenceDate : ChewDate = .now
+	) {
 		let coreDataStore = CoreDataStore()
 		self.state = initialState
 		self.alertViewModel = AlertViewModel()
@@ -39,6 +42,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		self.coreDataStore = coreDataStore
 		self.journeyFollowViewModel = JourneyFollowViewModel(coreDataStore: coreDataStore,journeys: [])
 		self.recentSearchesViewModel = RecentSearchesViewModel(coreDataStore: coreDataStore,searches: [])
+		self.referenceDate = referenceDate
 		   
 	   Publishers.system(
 		   initial: state,
@@ -64,7 +68,8 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		recentSearchesViewModel : RecentSearchesViewModel,
 		coreDataStore : CoreDataStore,
 		alertViewModel : AlertViewModel,
-		initialState : State = State()
+		initialState : State = State(),
+		referenceDate : ChewDate = .now
 	) {
 		self.state = initialState
 		self.alertViewModel = alertViewModel
@@ -73,6 +78,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		self.searchStopsViewModel = searchStopsViewModel
 		self.journeyFollowViewModel = journeyFollowViewModel
 		self.recentSearchesViewModel = recentSearchesViewModel
+		self.referenceDate = referenceDate
 		
 		Publishers.system(
 			initial: state,
@@ -97,4 +103,8 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	func send(event: Event) {
 		input.send(event)
 	}
+}
+
+extension ChewViewModel {
+	
 }

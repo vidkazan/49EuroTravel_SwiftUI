@@ -108,6 +108,7 @@ extension JourneyFollowViewModel {
 		case didFailToEdit(action : Action, error : any ChewError)
 		case didTapUpdate
 		case didUpdateData([JourneyFollowData])
+		case didUpdateJourney(JourneyViewData)
 		
 		case didTapEdit(
 			action : Action,
@@ -119,6 +120,8 @@ extension JourneyFollowViewModel {
 			
 		var description : String {
 			switch self {
+			case .didUpdateJourney(let viewData):
+				return "didUpdateJourney \(viewData.origin) \(viewData.destination)"
 			case .didFailToEdit(action: let action, error: let error):
 				return "didFailToEdit: \(action): \(error)"
 			case .didEdit:

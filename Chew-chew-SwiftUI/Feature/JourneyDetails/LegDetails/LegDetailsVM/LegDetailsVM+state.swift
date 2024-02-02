@@ -38,7 +38,6 @@ extension LegDetailsViewModel {
 		}
 		case idle
 		case stopovers
-		case disappeared
 		
 		var description : String {
 			switch self {
@@ -46,21 +45,25 @@ extension LegDetailsViewModel {
 				return "idle"
 			case .stopovers:
 				return "stopovers"
-			case .disappeared:
-				return "disappeared"
+			}
+		}
+		
+		var evalType : Segments.EvalType {
+			switch self {
+			case .idle:
+				return .collapsed
+			case .stopovers:
+				return .expanded
 			}
 		}
 	}
 	
 	enum Event {
-		case didTapExpandButton
-		case didDisappear
+		case didTapExpandButton(refTimeTS : Double)
 		var description : String {
 			switch self {
 			case .didTapExpandButton:
 				return "didtapExpandButton"
-			case .didDisappear:
-				return "didDisappear"
 			}
 		}
 	}

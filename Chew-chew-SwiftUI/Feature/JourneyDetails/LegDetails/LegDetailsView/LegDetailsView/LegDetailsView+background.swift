@@ -19,7 +19,7 @@ extension LegDetailsView {
 					Rectangle()
 						.fill(Color.chewProgressLineGray)
 						.frame(width: 20,height:  vm.state.data.totalProgressHeight)
-						.padding(.leading,24)
+						.padding(.leading,25)
 					Spacer()
 				}
 				Spacer(minLength: 0)

@@ -45,7 +45,7 @@ final class JourneyListViewModel : ObservableObject, ChewViewModelProtocol {
 	}
 	
 	init(
-		date: ChewViewModel.ChewDate,
+		date: ChewDate,
 		settings : ChewSettings,
 		stops : DepartureArrivalPair
 	) {

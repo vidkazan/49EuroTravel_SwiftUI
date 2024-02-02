@@ -20,10 +20,10 @@ struct TimeAndSettingsView: View {
 	
 	var body: some View {
 		Group {
-			switch state.status {
-			case .editingStop:
-				EmptyView()
-			default:
+//			switch state.status {
+//			case .editingStop:
+//				EmptyView()
+//			default:
 				VStack(spacing: 0) {
 					HStack {
 						TimeChoosingView(
@@ -46,7 +46,7 @@ struct TimeAndSettingsView: View {
 								}
 						})
 					}
-				}
+//				}
 			}
 		}
 		.onReceive(chewViewModel.$state, perform: { newState in
@@ -58,7 +58,7 @@ struct TimeAndSettingsView: View {
 		static var previews: some View {
 			TimeAndSettingsView(setSheetType: { _ in })
 				.padding(10)
-				.environmentObject(ChewViewModel())
+				.environmentObject(ChewViewModel(referenceDate: .now))
 				.background(Color.chewFillPrimary)
 		}
 	}

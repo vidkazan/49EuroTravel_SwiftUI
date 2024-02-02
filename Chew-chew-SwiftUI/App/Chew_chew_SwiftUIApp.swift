@@ -22,7 +22,8 @@ struct Chew_chew_SwiftUIApp: App {
 			journeyFollowViewModel: JourneyFollowViewModel(coreDataStore: coreDataStore, journeys: []),
 			recentSearchesViewModel: RecentSearchesViewModel(coreDataStore: coreDataStore, searches: []),
 			coreDataStore: coreDataStore,
-			alertViewModel: AlertViewModel()
+			alertViewModel: AlertViewModel(),
+			referenceDate: .now
 		)
 		
 	}

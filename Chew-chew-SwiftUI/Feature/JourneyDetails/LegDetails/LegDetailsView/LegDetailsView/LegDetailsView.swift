@@ -11,6 +11,7 @@ import CoreLocation
 import MapKit
 
 struct LegDetailsView: View {
+	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var vm : LegDetailsViewModel
 	@State var currentProgressHeight : Double = 0
 	
@@ -21,12 +22,16 @@ struct LegDetailsView: View {
 	init(
 		followedJourney: Bool = false,
 		send : @escaping (JourneyDetailsViewModel.Event) -> Void,
-		vm : LegDetailsViewModel
+		vm : LegDetailsViewModel,
+		referenceDate : ChewDate
 	) {
 		self.vm = vm
 		self.followedJourney = followedJourney
 		self.sendToJourneyVM = send
-		self.currentProgressHeight = currentProgressHeight
+		self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(
+			time: referenceDate.ts,
+			type: vm.state.status.evalType
+		)
 	}
 	
 	var body : some View {
@@ -84,20 +89,20 @@ struct LegDetailsView: View {
 		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillSecondary : .clear )
 		.cornerRadius(10)
 		.onAppear {
-			self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(time: Date.now.timeIntervalSince1970 , type: vm.state.status == .stopovers ? .expanded : .collapsed)
+			self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(time: chewVM.referenceDate.ts , type: vm.state.status.evalType)
 		}
 		.onReceive(timer, perform: { timer in
 			currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(
-				time: Date.now.timeIntervalSince1970,
-				type: vm.state.status == .stopovers ? .expanded : .collapsed
+				time: chewVM.referenceDate.ts,
+				type: vm.state.status.evalType
 			)
 		})
-		.onChange(of: vm.state.status, perform: { _ in
-			currentProgressHeight = vm.state.data.currentProgressHeight
+		.onReceive(vm.$state, perform: { state in
+			currentProgressHeight = state.data.currentProgressHeight
 		})
 		.onTapGesture {
 			if vm.state.data.leg.legType == .line {
-				vm.send(event: .didTapExpandButton)
+				vm.send(event: .didTapExpandButton(refTimeTS: chewVM.referenceDate.ts))
 			}
 		}
 		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
@@ -124,8 +129,9 @@ struct LegDetailsPreview : PreviewProvider {
 						) {
 							LegDetailsView(
 								send: {_ in },
-								vm: LegDetailsViewModel(leg: viewData)
+								vm: LegDetailsViewModel(leg: viewData), referenceDate: .specificDate((viewData.timeContainer.timestamp.departure.planned ?? 0) + 1000)
 							)
+							.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData.timeContainer.timestamp.departure.planned ?? 0) + 1000)))
 							.frame(minWidth: 350)
 							.padding(.horizontal,10)
 						}
@@ -139,8 +145,9 @@ struct LegDetailsPreview : PreviewProvider {
 					) {
 						LegDetailsView(
 							send: {_ in },
-							vm: LegDetailsViewModel(leg: viewData)
+							vm: LegDetailsViewModel(leg: viewData), referenceDate: .specificDate((viewData.timeContainer.timestamp.departure.planned ?? 0) + 20000)
 						)
+						.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData.timeContainer.timestamp.departure.planned ?? 0) + 20000)))
 						.frame(minWidth: 350)
 						.padding(.horizontal,10)
 					}
@@ -153,25 +160,27 @@ struct LegDetailsPreview : PreviewProvider {
 					) {
 						LegDetailsView(
 							send: {_ in },
-							vm: LegDetailsViewModel(leg: viewData)
+							vm: LegDetailsViewModel(leg: viewData),
+							referenceDate: .specificDate((viewData.timeContainer.timestamp.departure.planned ?? 0) + 20000)
 						)
+						.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData.timeContainer.timestamp.departure.planned ?? 0) + 20000)))
 						.frame(minWidth: 350)
 						.padding(.horizontal,10)
 					}
-					let mock3 = Mock.trip.cancelledLastStopRE11DussKassel.decodedData?.trip
-					if let viewData = constructLegData(
-						leg: mock3!,
-						firstTS: .now,
-						lastTS: .now,
-						legs: [mock3!]
-					) {
-						LegDetailsView(
-							send: {_ in },
-							vm: LegDetailsViewModel(leg: viewData)
-						)
-						.frame(minWidth: 350)
-						.padding(.horizontal,10)
-					}
+//					let mock3 = Mock.trip.cancelledLastStopRE11DussKassel.decodedData?.trip
+//					if let viewData = constructLegData(
+//						leg: mock3!,
+//						firstTS: .now,
+//						lastTS: .now,
+//						legs: [mock3!]
+//					) {
+//						LegDetailsView(
+//							send: {_ in },
+//							vm: LegDetailsViewModel(leg: viewData)
+//						)
+//						.frame(minWidth: 350)
+//						.padding(.horizontal,10)
+//					}
 				}
 			}
 			.previewDevice(PreviewDevice(.iPadMini6gen))

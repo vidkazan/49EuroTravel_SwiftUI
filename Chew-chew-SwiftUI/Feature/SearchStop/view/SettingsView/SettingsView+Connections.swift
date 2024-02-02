@@ -54,6 +54,15 @@ extension SettingsView {
 					Text("Show alternative search page")
 				}
 			)
+//			Toggle(
+//				isOn: Binding(
+//					get: { showSunEvents },
+//					set: { _ in showSunEvents.toggle()}
+//				),
+//				label: {
+//					Text("Show sun events")
+//				}
+//			)
 		}, header: {
 			Text("Debug options")
 		})

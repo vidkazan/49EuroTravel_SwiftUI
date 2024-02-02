@@ -39,7 +39,9 @@ struct TripMockFiles {
 }
 struct JourneyMockFiles{
 	static let journeyNeussWolfsburg = JourneyMockFile("Journey-Neuss-Wolfsburg.json")
+	static let journeyNeussWolfsburgFirstCancelled = JourneyMockFile("Journey-Neuss-Wolfsburg-First-Cancelled.json")
 	static let journeyNeussWolfsburgMissedConnection = JourneyMockFile("Journey-Neuss-Wolfsburg-missedConnection.json")
+	static let userLocationToStation = JourneyMockFile("UserLocationToStation.json")
 }
 
 

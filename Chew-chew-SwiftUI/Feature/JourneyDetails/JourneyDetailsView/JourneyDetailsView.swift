@@ -33,7 +33,7 @@ struct JourneyDetailsView: View {
 							ForEach(viewModel.state.data.viewData.legs) { leg in
 								LegDetailsView(
 									send: viewModel.send,
-									vm: LegDetailsViewModel(leg: leg, isExpanded: false)
+									vm: LegDetailsViewModel(leg: leg, isExpanded: false), referenceDate: chewVM.referenceDate
 								)}
 							}
 						}
@@ -95,15 +95,13 @@ struct JourneyDetailsView: View {
 				// MARK: Modifiers
 				.background(Color.chewFillPrimary)
 				.navigationBarTitle("Journey details", displayMode: .inline)
-				.toolbar {
-					toolbar()
-				}
+				.toolbar { toolbar() }
 				.onAppear {
 					viewModel.send(event: .didRequestReloadIfNeeded(ref: viewModel.state.data.viewData.refreshToken))
 				}
 				// MARK: Modifiers - onChange
-				.onChange(of: viewModel.state.status, perform: { status in
-					switch status {
+				.onReceive(viewModel.$state, perform: {
+					switch $0.status {
 					case .loading, .loadedJourneyData, .error, .changingSubscribingState,.loadingIfNeeded:
 						bottomSheetIsPresented = false
 						actionSheetIsPresented = false
@@ -121,27 +119,42 @@ struct JourneyDetailsView: View {
 
 struct JourneyDetailsPreview : PreviewProvider {
 	static var previews: some View {
-		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
-		if let mock = mock,
 		   let viewData = constructJourneyViewData(
-			   journey: mock,
+			journey: Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData!.journey,
 			   depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
 			   arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
 			   realtimeDataUpdatedAt: 0
-		   ){
+		   )
+		let viewData2 = constructJourneyViewData(
+			journey: Mock.journeys.journeyNeussWolfsburg.decodedData!.journey,
+			depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
+			arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
+			realtimeDataUpdatedAt: 0
+		)
+		HStack {
 			JourneyDetailsView(
 				journeyDetailsViewModel: JourneyDetailsViewModel(
-					refreshToken: viewData.refreshToken,
-					data: viewData,
+					refreshToken: viewData!.refreshToken,
+					data: viewData!,
 					depStop: .init(),
 					arrStop: .init(),
 					followList: [],
 					chewVM: .init()
-			))
-			.environmentObject(ChewViewModel())
-			.previewDevice(PreviewDevice(.iPhone6S))
-		} else {
-			Text("error")
+				))
+			.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData!.timeContainer.timestamp.departure.actual ?? 0) + 1000)))
+			.frame(maxWidth: 350)
+			JourneyDetailsView(
+				journeyDetailsViewModel: JourneyDetailsViewModel(
+					refreshToken: viewData2!.refreshToken,
+					data: viewData2!,
+					depStop: .init(),
+					arrStop: .init(),
+					followList: [],
+					chewVM: .init()
+				))
+			.frame(maxWidth: 350)
+			.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData2!.timeContainer.timestamp.departure.actual ?? 0) + 1000)))
 		}
+		.previewDevice(PreviewDevice(.iPadMini6gen))
 	}
 }

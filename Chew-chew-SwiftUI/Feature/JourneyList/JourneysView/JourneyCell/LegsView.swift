@@ -9,21 +9,17 @@ import SwiftUI
 
 struct LegsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
+	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	var journey : JourneyViewData?
 	var gradientStops : [Gradient.Stop]
 	var gradientStopsForProgressLine : [Gradient.Stop]
 	var showProgressBar : Bool
-	var progressLineProportion : Double
+	@State var progressLineProportion : Double = 0
 	
-	init(journey: JourneyViewData?,progressBar: Bool, referenceTimeTS : Double = Date.now.timeIntervalSince1970) {
+	init(journey: JourneyViewData?,progressBar: Bool) {
 		self.journey = journey
 		self.showProgressBar = progressBar
 		self.gradientStops = journey?.sunEventsGradientStops ?? []
-		self.progressLineProportion = Self.getProgressLineProportion(
-			departureTS: journey?.timeContainer.timestamp.departure.actual,
-			arrivalTS: journey?.timeContainer.timestamp.arrival.actual,
-			referenceTimeTS: referenceTimeTS
-		)
 		self.gradientStopsForProgressLine = gradientStops
 	}
 	var body: some View {
@@ -82,6 +78,18 @@ struct LegsView: View {
 			}
 			.frame(height:40)
 		}
+		.onReceive(timer, perform: { _ in
+			self.progressLineProportion = Self.getProgressLineProportion(
+				departureTS: journey?.timeContainer.timestamp.departure.actual,
+				arrivalTS: journey?.timeContainer.timestamp.arrival.actual,
+				referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
+		})
+		.onAppear {
+			self.progressLineProportion = Self.getProgressLineProportion(
+				departureTS: journey?.timeContainer.timestamp.departure.actual,
+				arrivalTS: journey?.timeContainer.timestamp.arrival.actual,
+				referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
+		}
 	}
 }
 
@@ -102,28 +110,28 @@ extension LegsView {
 
 struct LegsViewPreviews: PreviewProvider {
 	static var previews: some View {
-		let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData
-		if let mock = mock {
-			let viewData = constructJourneyListViewData(
-				journeysData: mock,
-				depStop: .init(),
-				arrStop: .init()
-			)
-			VStack {
-//				ForEach(viewData) { data in
-//					LegsView(journey: data, progressBar: false)
-//				}
-				let mock = Mock.journeys.journeyNeussWolfsburgMissedConnection.decodedData
+		let mocks = [
+			Mock.journeys.journeyNeussWolfsburgMissedConnection.decodedData,
+			Mock.journeys.userLocationToStation.decodedData
+		]
+		VStack {
+			ForEach(mocks,id: \.?.realtimeDataUpdatedAt){ mock in
 				if let mock = mock {
 					let viewData = constructJourneyViewData(
 						journey: mock.journey,
-						depStop: nil,
-						arrStop: nil,
-						realtimeDataUpdatedAt: 0
-					)
-					LegsView(journey: viewData, progressBar: true,referenceTimeTS: Date.now.timeIntervalSince1970-9800)
+					   depStop: nil,
+					   arrStop: nil,
+					   realtimeDataUpdatedAt: 0
+				   )
+					LegsView(journey: viewData, progressBar: true)
+						.environmentObject(ChewViewModel(
+							referenceDate: .specificDate(
+								(viewData?.timeContainer.timestamp.departure.actual ?? 0) + 2000
+							))
+						)
 				}
 			}
 		}
+		.padding()
 	}
 }

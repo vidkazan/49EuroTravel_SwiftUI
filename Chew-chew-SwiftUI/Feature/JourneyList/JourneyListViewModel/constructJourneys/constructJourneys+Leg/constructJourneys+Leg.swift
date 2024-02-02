@@ -146,8 +146,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 				coordinates: CLLocationCoordinate2D(
 					latitude: fromLeg.destination?.latitude ?? fromLeg.destination?.location?.latitude ?? 0,
 					longitude: fromLeg.destination?.longitude ?? fromLeg.destination?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			),
 			StopViewData(
 				name: toLeg.origin?.name ?? "to",
@@ -156,8 +155,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 				coordinates: CLLocationCoordinate2D(
 					latitude: toLeg.origin?.latitude ?? toLeg.origin?.location?.latitude ?? 0,
 					longitude: toLeg.origin?.longitude ?? toLeg.origin?.location?.longitude ?? 0
-				),
-				isCancelled: nil
+				)
 			)
 		],
 		footDistance: 0,
@@ -304,5 +302,5 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 func currentLegIsNotReachable(currentLeg: LegViewData?, previousLeg: LegViewData?) -> Bool? {
 	guard let currentLeg = currentLeg?.timeContainer.timestamp.departure.actual,
 			let previousLeg = previousLeg?.timeContainer.timestamp.arrival.actual else { return nil }
-	return previousLeg >= currentLeg
+	return previousLeg > currentLeg
 }

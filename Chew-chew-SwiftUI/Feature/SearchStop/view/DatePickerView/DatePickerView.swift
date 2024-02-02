@@ -25,7 +25,7 @@ struct DatePickerView: View {
 					.padding(5)
 					.background(Color.chewFillTertiary.opacity(0.15))
 					.cornerRadius(10)
-				DatePickerTimePresetButtons()
+				DatePickerTimePresetButtons(setSheetType: setSheetType)
 				Spacer()
 			}
 			.padding(.horizontal,10)
@@ -47,7 +47,7 @@ struct DatePickerView: View {
 					Button(action: {
 						if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
 							setSheetType(.none)
-							chewVM.send(event: .onNewDate(.specificDate(dateCombined)))
+							chewVM.send(event: .onNewDate(.specificDate(dateCombined.timeIntervalSince1970)))
 						}
 					}, label: {
 						Text("Save")

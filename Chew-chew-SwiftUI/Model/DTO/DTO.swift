@@ -50,20 +50,6 @@ enum StopOverType : String,Equatable, CaseIterable {
 		}
 	}
 	
-	func stopOverCancellationType(stopOver : StopViewData) -> StopOverCancellationType {
-		switch self {
-		case .stopover:
-			return StopOverCancellationType.getCancelledTypeFromDelayStatus(
-				arrivalStatus: stopOver.timeContainer.arrivalStatus,
-				departureStatus: stopOver.timeContainer.departureStatus
-			)
-		case .destination,.footBottom:
-			return stopOver.timeContainer.arrivalStatus == TimeContainer.DelayStatus.cancelled ? .fullyCancelled : .notCancelled
-		case .footTop,.origin,.footMiddle,.transfer:
-			return stopOver.timeContainer.departureStatus == TimeContainer.DelayStatus.cancelled ? .fullyCancelled : .notCancelled
-		}
-	}
-	
 	var showBadgesOnLegStopView : Bool {
 		switch self {
 		case .origin:
@@ -142,22 +128,6 @@ enum StopOverCancellationType : Equatable {
 	case exitOnly
 	case entryOnly
 	case fullyCancelled
-	
-	static func getCancelledTypeFromDelayStatus(
-		arrivalStatus : TimeContainer.DelayStatus,
-		departureStatus: TimeContainer.DelayStatus
-	) -> Self {
-		if arrivalStatus == .cancelled && departureStatus == .cancelled {
-			return .fullyCancelled
-		}
-		if arrivalStatus == .cancelled {
-			return .entryOnly
-		}
-		if departureStatus == .cancelled {
-			return .exitOnly
-		}
-		return .notCancelled
-	}
 }
 
 struct StopWithTimeDTO : Codable,Equatable,Identifiable {

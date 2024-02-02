@@ -58,21 +58,4 @@ struct ContentView: View {
 			state = newState
 		})
 	}
-	
-	struct ContentViewPreview : PreviewProvider {
-		static var previews: some View {
-			Group {
-				ContentView()
-					.environmentObject(ChewViewModel(initialState: .init(
-						depStop: .textOnly(""),
-						arrStop: .textOnly(""),
-						settings: .init(),
-						date: .now,
-						status: .journeys(.init(departure: .init(), arrival: .init()))
-					)))
-				ContentView()
-					.environmentObject(ChewViewModel())
-			}
-		}
-	}
 }

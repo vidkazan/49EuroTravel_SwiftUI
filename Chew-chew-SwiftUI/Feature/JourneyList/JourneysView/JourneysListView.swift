@@ -12,7 +12,7 @@ struct JourneyListView: View {
 	@ObservedObject var journeyViewModel : JourneyListViewModel
 	@State var firstAppear : Bool = true
 	
-	init(stops : DepartureArrivalPair, date: ChewViewModel.ChewDate,settings : ChewSettings) {
+	init(stops : DepartureArrivalPair, date: ChewDate,settings : ChewSettings) {
 		self.journeyViewModel = JourneyListViewModel(
 			date: date,
 			settings: settings,
@@ -87,6 +87,9 @@ struct JourneyListView: View {
 							}
 							.cornerRadius(10)
 						}
+						.refreshable {
+							journeyViewModel.send(event: .onReloadJourneyList)
+						}
 						.onAppear {
 							if firstAppear == true {
 								val.scrollTo(1, anchor: .top)
@@ -99,7 +102,7 @@ struct JourneyListView: View {
 				JourneyListHeaderView(journeyViewModel: journeyViewModel)
 				VStack {
 					Spacer()
-					Text("connections not found")
+					Text(error.description)
 						.padding(5)
 						.chewTextSize(.big)
 					Button(action: {
