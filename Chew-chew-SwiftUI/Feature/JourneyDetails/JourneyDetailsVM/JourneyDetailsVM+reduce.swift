@@ -18,9 +18,9 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .error(error: ApiServiceError.cannotDecodeRawData)
 				)
-			case .didChangedSubscribingState(let isFollowed):
+			case .didChangedSubscribingState:
 				return State(
-					data: StateData(currentData: state.data, isFollowed: isFollowed),
+					data: StateData(currentData: state.data),
 					status: .loadedJourneyData
 				)
 			default:

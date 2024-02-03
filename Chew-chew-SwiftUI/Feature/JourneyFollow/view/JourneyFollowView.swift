@@ -30,14 +30,11 @@ struct JourneyFollowView : View {
 					List(viewModel.state.journeys.sorted(by: {
 						$0.journeyViewData.timeContainer.timestamp.departure.planned ?? 0 < $1.journeyViewData.timeContainer.timestamp.departure.planned ?? 0
 					}), id: \.journeyRef, rowContent: { journey in
-						let vm = JourneyDetailsViewModel(
-							refreshToken: journey.journeyRef,
-							data: journey.journeyViewData,
-							depStop: journey.depStop,
-							arrStop: journey.arrStop,
-							followList: viewModel.state.journeys.map { $0.journeyRef },
-							chewVM : chewVM
-						)
+						let vm = Model.shared.journeyDetailViewModel(
+							for: journey.journeyRef,
+							viewdata: journey.journeyViewData,
+							stops: .init(departure: journey.depStop, arrival: journey.arrStop),
+							chewVM: chewVM)
 						JourneyFollowCellView(journeyDetailsViewModel: vm)
 							.swipeActions(edge: .leading) {
 								Button {

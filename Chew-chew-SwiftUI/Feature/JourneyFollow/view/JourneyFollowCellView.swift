@@ -23,20 +23,22 @@ struct JourneyFollowCellView : View {
 				NavigationLink(destination: {
 					JourneyDetailsView(journeyDetailsViewModel: vm)
 				}, label: {
-					Text((data.legs.first?.legStopsViewData.first?.name ?? "origin") + " to " + (data.legs.last?.legStopsViewData.last?.name ?? "destination"))
-						.chewTextSize(.big)
+					BadgeView(
+						.departureArrivalStops(departure: data.origin, arrival: data.destination),
+						.big
+					)
 				})
 			}
 			HStack {
 				BadgeView(
-					.date(dateString: data.timeContainer.stringDateValue.departure.actual ?? "date"),
+					.date(dateString: data.timeContainer.stringDateValue.departure.actualOrPlannedIfActualIsNil() ?? ""),
 					color: Color.chewFillTertiary.opacity(0.3)
 				)
 				.badgeBackgroundStyle(.secondary)
 				BadgeView(
 					.timeDepartureTimeArrival(
-						timeDeparture: data.timeContainer.stringTimeValue.departure.actual ?? "time",
-						timeArrival: data.timeContainer.stringTimeValue.arrival.actual ?? "time"),
+						timeDeparture: data.timeContainer.stringTimeValue.departure.actualOrPlannedIfActualIsNil() ?? "",
+						timeArrival: data.timeContainer.stringTimeValue.arrival.actualOrPlannedIfActualIsNil() ?? ""),
 					color: Color.chewFillTertiary.opacity(0.3)
 				)
 				.badgeBackgroundStyle(.secondary)
@@ -48,14 +50,21 @@ struct JourneyFollowCellView : View {
 			}
 
 			LegsView(journey : data,progressBar: true)
-			BadgeView(
-				.updatedAtTime(
-					referenceTime: data.updatedAt,
-					isLoading: isLoading
-				),
-				color: Color.chewFillTertiary
-			)
-			.badgeBackgroundStyle(.secondary)
+			HStack(spacing: 2) {
+				Spacer()
+				BadgeView(
+					.updatedAtTime(
+						referenceTime: data.updatedAt,
+						isLoading: isLoading
+					),
+					color: Color.chewFillTertiary
+				)
+				.badgeBackgroundStyle(.secondary)
+				if !data.isReachable || !data.legs.allSatisfy({$0.isReachable == true}) {
+					BadgeView(.connectionNotReachable)
+						.badgeBackgroundStyle(.red)
+				}
+			}
 		}
 		.onReceive(vm.$state, perform: { state in
 			switch state.status {
@@ -88,10 +97,10 @@ struct FollowCellPreviews: PreviewProvider {
 				data: viewData,
 				depStop: .init(),
 				arrStop: .init(),
-				followList: [],
 				chewVM: .init()
 			))
 			.environmentObject(ChewViewModel())
+			.padding()
 		} else {
 			Text("error")
 		}

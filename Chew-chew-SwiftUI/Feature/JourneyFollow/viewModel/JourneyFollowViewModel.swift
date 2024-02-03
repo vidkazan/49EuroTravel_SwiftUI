@@ -27,7 +27,7 @@ final class JourneyFollowViewModel : ObservableObject, Identifiable {
 	init(
 		coreDataStore : CoreDataStore?,
 		journeys : [JourneyFollowData],
-		initialStatus : Status = .idle
+		initialStatus : Status = .updating
 	) {
 		self.coreDataStore = coreDataStore
 		state = State(

@@ -11,14 +11,14 @@ extension JourneyDetailsView {
 	func header() -> some View {
 		VStack(alignment: .leading) {
 			let data = viewModel.state.data
-			VStack {
-				HStack {
-					BadgeView(
-						.departureArrivalStops(departure: data.viewData.origin, arrival: data.viewData.destination),
-						.huge
-					)
-					Spacer()
-				}
+			VStack(alignment: .leading) {
+				BadgeView(
+					.departureArrivalStops(
+						departure: data.viewData.origin,
+						arrival: data.viewData.destination
+					),
+					.huge
+				)
 				HStack {
 					BadgeView(.date(dateString: data.viewData.timeContainer.stringDateValue.departure.actualOrPlannedIfActualIsNil() ?? ""))
 						.badgeBackgroundStyle(.accent)
@@ -38,7 +38,6 @@ extension JourneyDetailsView {
 					Spacer()
 				}
 				LegsView(journey : viewModel.state.data.viewData,progressBar: true)
-//					.padding(EdgeInsets(top: 5, leading: 0, bottom: 5, trailing: 0))
 			}
 			
 		}

@@ -13,7 +13,7 @@ func constructStopFromStopDTO(data : StopDTO?) -> Stop? {
 		  let typeDTO = data.type  else { return nil }
 	let type : LocationType = {
 		switch typeDTO {
-		case "stop":
+		case "stop", "station":
 			return .stop
 		case "location":
 			return .pointOfInterest

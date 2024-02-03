@@ -23,12 +23,10 @@ struct JourneyDetailsView: View {
 			AlertsView(alertVM: chewVM.alertViewModel)
 			ZStack {
 				VStack {
-					// MARK: Header
 					header()
 						.padding(.horizontal,5)
 						.padding(5)
-					// MARK: LegDetails
-					ScrollView() {
+					ScrollView {
 						LazyVStack(spacing: 0){
 							ForEach(viewModel.state.data.viewData.legs) { leg in
 								LegDetailsView(
@@ -138,7 +136,6 @@ struct JourneyDetailsPreview : PreviewProvider {
 					data: viewData!,
 					depStop: .init(),
 					arrStop: .init(),
-					followList: [],
 					chewVM: .init()
 				))
 			.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData!.timeContainer.timestamp.departure.actual ?? 0) + 1000)))
@@ -149,7 +146,6 @@ struct JourneyDetailsPreview : PreviewProvider {
 					data: viewData2!,
 					depStop: .init(),
 					arrStop: .init(),
-					followList: [],
 					chewVM: .init()
 				))
 			.frame(maxWidth: 350)

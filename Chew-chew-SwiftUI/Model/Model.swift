@@ -7,24 +7,31 @@
 
 import Foundation
 
-//final class Model {
-//	static let shared = Model()
+import Foundation
+
+final class Model {
+	static let shared = Model()
 	
-//	var legDetailsViewModels : [String : LegDetailsViewModel] = [:]
-//	var journeyDetailsViewModels : [String : JourneyDetailsViewModel] = [:]
+	private var jdvm : [String: JourneyDetailsViewModel] = [:]
 	
-//	func legDetailsViewModel(tripId : String, isExpanded : Bool?, viewData : LegViewData? = nil) -> LegDetailsViewModel {
-//		if let vm = legDetailsViewModels[tripId] {
-//			return vm
-//		}
-//		print("🏭 \(#function): vm not found: creating new")
-//		if let viewData = viewData, let isExpanded = isExpanded {
-//			let vm = LegDetailsViewModel(leg: viewData,isExpanded: isExpanded)
-//			legDetailsViewModels[tripId] = vm
-//			return vm
-//		}
-//		let vm = LegDetailsViewModel(leg: .init())
-//		legDetailsViewModels[tripId] = vm
-//		return vm
-//	}
-//}
+	func journeyDetailViewModel(
+		for journeyRef: String,
+		viewdata : JourneyViewData,
+		stops : DepartureArrivalPair,
+		chewVM : ChewViewModel?
+	) -> JourneyDetailsViewModel {
+		if let vm = jdvm[journeyRef] {
+			return vm
+		}
+		print("🏭 \(#function): vm not found: creating new")
+		let vm = JourneyDetailsViewModel(
+			refreshToken: journeyRef,
+			data: viewdata,
+			depStop: stops.departure,
+			arrStop: stops.arrival,
+			chewVM: chewVM
+		)
+		jdvm[journeyRef] = vm
+		return vm
+	}
+}

@@ -28,7 +28,8 @@ extension JourneyDetailsView {
 							.frame(width: 15,height: 15)
 							.padding(5)
 					default:
-						switch viewModel.state.data.isFollowed {
+						switch viewModel.state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.journeyRef == viewModel.state.data.viewData.refreshToken}) == true {
+//						switch viewModel.state.data.isFollowed {
 						case true:
 							Image(.bookmark.fill)
 								.frame(width: 15,height: 15)

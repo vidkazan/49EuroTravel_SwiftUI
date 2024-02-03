@@ -23,7 +23,7 @@ extension JourneyDetailsViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			
-			switch state.data.isFollowed {
+			switch state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.journeyRef == ref}) == true {
 			case true:
 				state.data.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
@@ -151,7 +151,7 @@ extension JourneyDetailsViewModel {
 						)
 					}
 					
-					switch state.data.isFollowed {
+					switch state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.journeyRef == token}) == true {
 					case true:
 						guard state.data.chewVM?.coreDataStore.updateJourney(
 								viewData: res,

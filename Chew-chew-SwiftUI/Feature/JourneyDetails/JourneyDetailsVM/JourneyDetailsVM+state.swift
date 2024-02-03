@@ -38,31 +38,27 @@ extension JourneyDetailsViewModel {
 		static func == (lhs: JourneyDetailsViewModel.StateData, rhs: JourneyDetailsViewModel.StateData) -> Bool {
 			lhs.depStop == rhs.depStop &&
 			lhs.arrStop == rhs.arrStop &&
-			lhs.viewData == rhs.viewData &&
-			lhs.isFollowed == rhs.isFollowed
+			lhs.viewData == rhs.viewData
 		}
 		
 		weak var chewVM : ChewViewModel?
 		let depStop : Stop
 		let arrStop : Stop
 		let viewData : JourneyViewData
-		let isFollowed : Bool
 		
 		
-		init(depStop: Stop, arrStop: Stop, viewData: JourneyViewData, isFollowed: Bool, chewVM : ChewViewModel?) {
+		init(depStop: Stop, arrStop: Stop, viewData: JourneyViewData, chewVM : ChewViewModel?) {
 			self.depStop = depStop
 			self.arrStop = arrStop
 			self.viewData = viewData
-			self.isFollowed = isFollowed
 			self.chewVM = chewVM
 		}
 		
-		init(currentData : Self, isFollowed: Bool) {
+		init(currentData : Self) {
 			self.chewVM = currentData.chewVM
 			self.depStop = currentData.depStop
 			self.arrStop = currentData.arrStop
 			self.viewData = currentData.viewData
-			self.isFollowed = isFollowed
 		}
 		
 		init(currentData : Self, viewData : JourneyViewData) {
@@ -70,7 +66,6 @@ extension JourneyDetailsViewModel {
 			self.depStop = currentData.depStop
 			self.arrStop = currentData.arrStop
 			self.viewData = viewData
-			self.isFollowed = currentData.isFollowed
 		}
 		
 	}
@@ -85,22 +80,11 @@ extension JourneyDetailsViewModel {
 			self.status = status
 		}
 		
-		init(chewVM : ChewViewModel?,depStop: Stop, arrStop: Stop,viewData: JourneyViewData, status: Status, followList : [String]) {
+		init(chewVM : ChewViewModel?,depStop: Stop, arrStop: Stop,viewData: JourneyViewData, status: Status) {
 			self.data = StateData(
 				depStop: depStop,
 				arrStop: arrStop,
 				viewData: viewData,
-				isFollowed: followList.contains(where: {$0 == viewData.refreshToken}),
-				chewVM: chewVM
-			)
-			self.status = status
-		}
-		init(chewVM: ChewViewModel?,depStop: Stop, arrStop: Stop,viewData: JourneyViewData, status: Status, isFollowed : Bool) {
-			self.data = StateData(
-				depStop: depStop,
-				arrStop: arrStop,
-				viewData: viewData,
-				isFollowed: isFollowed,
 				chewVM: chewVM
 			)
 			self.status = status
@@ -172,7 +156,7 @@ extension JourneyDetailsViewModel {
 		)
 		
 		case didFailToChangeSubscribingState(error : any ChewError)
-		case didChangedSubscribingState(isFollowed : Bool)
+		case didChangedSubscribingState
 		case didLoadFullLegData(data : LegViewData)
 		case didLongTapOnLeg(leg : LegViewData)
 		case didCloseActionSheet
