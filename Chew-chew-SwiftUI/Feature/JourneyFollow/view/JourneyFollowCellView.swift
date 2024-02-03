@@ -29,24 +29,32 @@ struct JourneyFollowCellView : View {
 					)
 				})
 			}
-			HStack {
+			HStack(spacing: 2) {
 				BadgeView(
 					.date(dateString: data.timeContainer.stringDateValue.departure.actualOrPlannedIfActualIsNil() ?? ""),
-					color: Color.chewFillTertiary.opacity(0.3)
+					.medium
 				)
 				.badgeBackgroundStyle(.secondary)
-				BadgeView(
-					.timeDepartureTimeArrival(
-						timeDeparture: data.timeContainer.stringTimeValue.departure.actualOrPlannedIfActualIsNil() ?? "",
-						timeArrival: data.timeContainer.stringTimeValue.arrival.actualOrPlannedIfActualIsNil() ?? ""),
-					color: Color.chewFillTertiary.opacity(0.3)
-				)
+				HStack(spacing: 2) {
+					TimeLabelView(
+						isSmall: true,
+						arragement: .right,
+						delay: data.timeContainer.departureStatus.value,
+						time: data.timeContainer.stringTimeValue.departure,
+						isCancelled: !data.isReachable
+					)
+					Text("-")
+					TimeLabelView(
+						isSmall: true,
+						arragement: .right,
+						delay: data.timeContainer.arrivalStatus.value,
+						time: data.timeContainer.stringTimeValue.arrival,
+						isCancelled: !data.isReachable
+					)
+				}
 				.badgeBackgroundStyle(.secondary)
-				BadgeView(
-					.legDuration(dur: data.durationLabelText),
-					color: Color.chewFillTertiary.opacity(0.3)
-				)
-				.badgeBackgroundStyle(.secondary)
+				BadgeView(.legDuration(dur: data.durationLabelText))
+					.badgeBackgroundStyle(.secondary)
 			}
 
 			LegsView(journey : data,progressBar: true)
@@ -90,7 +98,7 @@ struct FollowCellPreviews: PreviewProvider {
 			   journey: mock,
 			   depStop:  .init(),
 			   arrStop:  .init(),
-			   realtimeDataUpdatedAt: 0
+			   realtimeDataUpdatedAt: Date.now.timeIntervalSince1970 - 10000
 		   ){
 			JourneyFollowCellView(journeyDetailsViewModel: .init(
 				refreshToken: "",
@@ -101,6 +109,7 @@ struct FollowCellPreviews: PreviewProvider {
 			))
 			.environmentObject(ChewViewModel())
 			.padding()
+			.background(Color.gray.opacity(0.1))
 		} else {
 			Text("error")
 		}

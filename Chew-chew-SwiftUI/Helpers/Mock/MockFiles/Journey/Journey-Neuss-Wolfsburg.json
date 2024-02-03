@@ -11724,7 +11724,7 @@
 				"departure": "2023-11-27T17:48:00+01:00",
 				"plannedDeparture": "2023-11-27T17:48:00+01:00",
 				"departureDelay": null,
-				"arrival": "2023-11-27T18:43:00+01:00",
+				"arrival": "2023-11-27T18:53:00+01:00",
 				"plannedArrival": "2023-11-27T18:43:00+01:00",
 				"arrivalDelay": null,
 				"reachable": true,
@@ -13693,9 +13693,9 @@
 								"taxi": true
 							}
 						},
-						"arrival": "2023-11-27T18:43:00+01:00",
+						"arrival": "2023-11-27T18:53:00+01:00",
 						"plannedArrival": "2023-11-27T18:43:00+01:00",
-						"arrivalDelay": null,
+						"arrivalDelay": 10,
 						"arrivalPlatform": "4",
 						"arrivalPrognosisType": "prognosed",
 						"plannedArrivalPlatform": "4",

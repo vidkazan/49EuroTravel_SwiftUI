@@ -27,10 +27,9 @@ struct LegsView: View {
 			GeometryReader { geo in
 				ZStack {
 					SunEventsGradient(
-						gradientStops: gradientStops,
+						gradientStops:  journey?.legs.allSatisfy({$0.isReachable == true}) == true ? gradientStops : nil,
 						size: geo.size,
-						isProgressLine: false,
-						progressLineProportion: progressLineProportion
+						progressLineProportion: nil
 					)
 					if let journey = journey {
 						ForEach(journey.legs) { leg in
@@ -50,12 +49,22 @@ struct LegsView: View {
 						}
 					}
 					if showProgressBar {
-						SunEventsGradient(
-							gradientStops: gradientStops,
-							size: geo.size,
-							isProgressLine: true,
-							progressLineProportion: progressLineProportion
-						)
+						RoundedRectangle(cornerRadius: 2)
+							.fill(Color.primary)
+							.frame(
+								width: progressLineProportion > 0 ? 3 : 0,
+								height: 35
+							)
+							.position(
+								x : geo.size.width * progressLineProportion,
+								y : geo.size.height/2
+							)
+							.cornerRadius(5)
+//						SunEventsGradient(
+//							gradientStops: gradientStops,
+//							size: geo.size,
+//							progressLineProportion: progressLineProportion
+//						)
 					}
 					if let journey = journey {
 						ForEach(journey.legs) { leg in

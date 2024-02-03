@@ -88,7 +88,7 @@ extension TimeContainer {
 		self.stringDateValue = self.date.getStringDateValueContainer()
 		self.departureStatus = self.timestamp.generateDelayStatus(type: .departure, cancelled: cancelled)
 		self.arrivalStatus = self.timestamp.generateDelayStatus(type: .arrival, cancelled:  cancelled)
-		self.durationInMinutes = DateParcer.getTwoDateIntervalInMinutes(date1: self.date.departure.actual, date2: self.date.arrival.actual) ?? -1
+		self.durationInMinutes = DateParcer.getTwoDateIntervalInMinutes(date1: self.date.departure.actualOrPlannedIfActualIsNil(), date2: self.date.arrival.actualOrPlannedIfActualIsNil()) ?? -1
 	}
 }
 

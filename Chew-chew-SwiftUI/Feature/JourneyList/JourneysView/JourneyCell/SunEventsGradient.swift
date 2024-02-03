@@ -9,13 +9,12 @@ import Foundation
 import SwiftUI
 
 struct SunEventsGradient : View {
-	let gradientStops : [Gradient.Stop]
+	let gradientStops : [Gradient.Stop]?
 	let size : CGSize
-	let isProgressLine : Bool
-	let progressLineProportion : Double
+	let progressLineProportion : Double?
 	var body: some View {
-		switch isProgressLine {
-		case true:
+		switch progressLineProportion {
+		case .some(let progressLineProportion):
 			RoundedRectangle(cornerRadius: 5)
 				.fill(Color.chewFillGreenPrimary.opacity(0.95))
 				.frame(
@@ -27,14 +26,16 @@ struct SunEventsGradient : View {
 					y : size.height/2
 				)
 				.cornerRadius(5)
-		case false:
+		case .none:
 			RoundedRectangle(cornerRadius: 5)
 				.fill(.gray)
 				.overlay{
-					LinearGradient(
-						stops: gradientStops,
-						startPoint: UnitPoint(x: 0, y: 0),
-						endPoint: UnitPoint(x: 1, y: 0))
+					if let gradientStops = gradientStops {
+						LinearGradient(
+							stops: gradientStops,
+							startPoint: UnitPoint(x: 0, y: 0),
+							endPoint: UnitPoint(x: 1, y: 0))
+					}
 				}
 				.frame(
 					maxWidth: size.width > 0 ? size.width - 1 : 0 ,
