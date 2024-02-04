@@ -14,7 +14,7 @@ struct LegDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var vm : LegDetailsViewModel
 	@State var currentProgressHeight : Double = 0
-	
+	let openSheet : (JourneyDetailsView.SheetType, LegViewData) -> Void
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	let followedJourney : Bool
 	let sendToJourneyVM : ((JourneyDetailsViewModel.Event)->Void)?
@@ -23,7 +23,8 @@ struct LegDetailsView: View {
 		followedJourney: Bool = false,
 		send : @escaping (JourneyDetailsViewModel.Event) -> Void,
 		vm : LegDetailsViewModel,
-		referenceDate : ChewDate
+		referenceDate : ChewDate,
+		openSheet : @escaping (JourneyDetailsView.SheetType,LegViewData) -> Void
 	) {
 		self.vm = vm
 		self.followedJourney = followedJourney
@@ -32,6 +33,7 @@ struct LegDetailsView: View {
 			time: referenceDate.ts,
 			type: vm.state.status.evalType
 		)
+		self.openSheet = openSheet
 	}
 	
 	var body : some View {
@@ -88,6 +90,27 @@ struct LegDetailsView: View {
 		// MARK: 🤢
 		.padding(.top,vm.state.data.leg.legType == LegViewData.LegType.line || vm.state.data.leg.legType.caseDescription == "footStart" ?  10 : 0)
 		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
+		.overlay(alignment: .topTrailing) {
+			Menu(content: {
+				Button(action: {
+//					sendToJourneyVM?(.didTapBottomSheetDetails(leg: vm.state.data.leg, type: .locationDetails))
+					openSheet(.map,vm.state.data.leg)
+				}, label: {
+					Label("Show on map", systemImage: "map.circle")
+				})
+				Button(action: {
+//					sendToJourneyVM?(.didTapBottomSheetDetails(leg: vm.state.data.leg, type: .fullLeg))
+					openSheet(.fullLeg,vm.state.data.leg)
+				}, label: {
+					Label("Show full segment", systemImage: ChewSFSymbols.trainSideFrontCar.rawValue)
+				})
+			}, label: {
+				Image(systemName: "ellipsis.circle")
+					.chewTextSize(.big)
+					.frame(minWidth: 43,minHeight: 43)
+					.tint(Color.primary)
+			})
+		}
 		.cornerRadius(10)
 		.onAppear {
 			self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(time: chewVM.referenceDate.ts , type: vm.state.status.evalType)
@@ -106,9 +129,6 @@ struct LegDetailsView: View {
 				vm.send(event: .didTapExpandButton(refTimeTS: chewVM.referenceDate.ts))
 			}
 		}
-		.onLongPressGesture(minimumDuration: 0.3,maximumDistance: 10, perform: {
-			sendToJourneyVM?(.didLongTapOnLeg(leg: vm.state.data.leg))
-		})
 	}
 }
 
@@ -118,8 +138,8 @@ struct LegDetailsView: View {
 struct LegDetailsPreview : PreviewProvider {
 	static var previews : some View {
 		let mocks = [
-			Mock.trip.cancelledFirstStopRE11DussKassel.decodedData?.trip,
-			Mock.trip.cancelledMiddleStopsRE6NeussMinden.decodedData?.trip,
+//			Mock.trip.cancelledFirstStopRE11DussKassel.decodedData?.trip,
+//			Mock.trip.cancelledMiddleStopsRE6NeussMinden.decodedData?.trip,
 			Mock.trip.cancelledLastStopRE11DussKassel.decodedData?.trip
 		]
 		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData
@@ -135,7 +155,9 @@ struct LegDetailsPreview : PreviewProvider {
 						) {
 							LegDetailsView(
 								send: {_ in },
-								vm: LegDetailsViewModel(leg: viewData), referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900)
+								vm: LegDetailsViewModel(leg: viewData),
+								referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900),
+								openSheet: {_,_ in}
 							)
 							.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900)))
 							.frame(minWidth: 350)
@@ -150,7 +172,9 @@ struct LegDetailsPreview : PreviewProvider {
 						) {
 							LegDetailsView(
 								send: {_ in },
-								vm: LegDetailsViewModel(leg: viewData), referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900)
+								vm: LegDetailsViewModel(leg: viewData),
+								referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900),
+								openSheet: {_,_ in}
 							)
 							.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900)))
 							.frame(minWidth: 350)

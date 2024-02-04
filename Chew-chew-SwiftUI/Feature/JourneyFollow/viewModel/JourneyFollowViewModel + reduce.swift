@@ -25,12 +25,12 @@ extension JourneyFollowViewModel {
 					status: .idle
 				)
 			case .didUpdateJourney(let viewData):
-				guard let oldViewData = state.journeys.first(where: {$0.journeyRef == viewData.refreshToken}) else {
+				guard let oldViewData = state.journeys.first(where: {$0.id == Int64(viewData.refreshToken)}) else {
 					#warning("error here is not handling")
 					return state
 				}
-				var followData = state.journeys.filter({$0.journeyRef != viewData.refreshToken})
-				followData.append(JourneyFollowData(journeyRef: oldViewData.journeyRef, journeyViewData: viewData, depStop: oldViewData.depStop, arrStop: oldViewData.arrStop))
+				var followData = state.journeys.filter({$0.id != Int64(viewData.refreshToken)})
+				followData.append(JourneyFollowData(id: oldViewData.id, journeyViewData: viewData, depStop: oldViewData.depStop, arrStop: oldViewData.arrStop))
 				
 				return State(
 					journeys: followData,

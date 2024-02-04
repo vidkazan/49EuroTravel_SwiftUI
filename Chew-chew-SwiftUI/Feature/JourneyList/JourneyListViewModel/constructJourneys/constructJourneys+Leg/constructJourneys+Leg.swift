@@ -60,7 +60,11 @@ struct Segments : Equatable, Hashable {
 		return 0
 	}
 	
-	private func getHeight(time : Double,currentSegment: SegmentPoint, nextSegment : SegmentPoint) -> Double? {
+	private func getHeight(
+		time : Double,
+		currentSegment: SegmentPoint,
+		nextSegment : SegmentPoint
+	) -> Double? {
 		if time >= currentSegment.time && time <= nextSegment.time {
 			let timeFraction = (time - currentSegment.time) / (nextSegment.time - currentSegment.time)
 			return currentSegment.height + (nextSegment.height - currentSegment.height) * timeFraction

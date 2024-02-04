@@ -48,7 +48,7 @@ extension JourneyFollowViewModel {
 						error: Error.inputValIsNil("view data is nil")
 					)).eraseToAnyPublisher()
 				}
-				guard !journeys.contains(where: {$0.journeyRef == ref}) else {
+				guard !journeys.contains(where: {$0.id == Int64(ref.hashValue)}) else {
 					vm?.send(event: .didFailToChangeSubscribingState(
 						error: Error.alreadyContains("journey has been followed already")
 					))
@@ -59,6 +59,7 @@ extension JourneyFollowViewModel {
 				}
 				guard
 					self.coreDataStore?.addJourney(
+						id : viewData.id,
 						viewData: viewData.journeyViewData,
 						depStop: viewData.depStop,
 						arrStop: viewData.arrStop
@@ -77,13 +78,13 @@ extension JourneyFollowViewModel {
 				return Just(Event.didEdit(data: journeys))
 					.eraseToAnyPublisher()
 			case .deleting:
-				guard let index = journeys.firstIndex(where: { $0.journeyRef == ref} ) else {
+				guard let index = journeys.firstIndex(where: { $0.id == Int64(ref.hashValue)} ) else {
 					return Just(Event.didFailToEdit(
 						action: action,
 						error: Error.notFoundInFollowList("not found in follow list to delete")
 					)).eraseToAnyPublisher()
 				}
-				guard self.coreDataStore?.deleteJourneyIfFound(journeyRef: ref) == true else {
+				guard self.coreDataStore?.deleteJourneyIfFound(id: Int64(ref.hashValue)) == true else {
 					return Just(Event.didFailToEdit(
 						action: action,
 						error: CoreDataError.failedToDelete(type: ChewJourney.self)

@@ -15,7 +15,7 @@ func splitArray(array: [JourneyFollowData], referenceTime : ChewDate) -> ([Journ
 	
 	array.forEach { j in
 		switch j.journeyViewData.time.statusOnReferenceTime(referenceTime) {
-		case .ongoing:
+		case .ongoing,.ongoingFar,.ongoingSoon:
 			section1.append(j)
 		case .active:
 			section2.append(j)
@@ -35,7 +35,6 @@ struct JourneyFollowView : View {
 		self.viewModel = viewModel
 	}
 	var body: some View {
-//		LazyVStack {
 		Group {
 			switch viewModel.state.status {
 			case .updating:
@@ -80,7 +79,7 @@ extension JourneyFollowView {
 			data.sorted(by: {
 				$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
 			}),
-			id: \.journeyRef) { journey in
+			id: \.id) { journey in
 				listCell(journey: journey)
 			}
 	}
@@ -89,14 +88,14 @@ extension JourneyFollowView {
 extension JourneyFollowView {
 	func listCell(journey : JourneyFollowData) -> some View {
 		let vm = Model.shared.journeyDetailViewModel(
-			for: journey.journeyRef,
+			for: journey.journeyViewData.refreshToken,
 			viewdata: journey.journeyViewData,
 			stops: .init(departure: journey.depStop, arrival: journey.arrStop),
 			chewVM: chewVM)
 		return JourneyFollowCellView(journeyDetailsViewModel: vm)
 			.swipeActions(edge: .leading) {
 				Button {
-					vm.send(event: .didTapReloadButton(ref: journey.journeyRef))
+					vm.send(event: .didTapReloadButton(id: journey.id, ref: journey.journeyViewData.refreshToken))
 				} label: {
 					Label("Reload", systemImage: "arrow.clockwise")
 				}
@@ -104,7 +103,7 @@ extension JourneyFollowView {
 			}
 			.swipeActions(edge: .trailing) {
 				Button {
-					vm.send(event: .didTapSubscribingButton(ref: journey.journeyRef, journeyDetailsViewModel: vm))
+					vm.send(event: .didTapSubscribingButton(id: journey.id,ref: journey.journeyViewData.refreshToken, journeyDetailsViewModel: vm))
 				} label: {
 					Label("Delete", systemImage: "xmark.bin.circle")
 				}
@@ -124,7 +123,7 @@ struct FollowPreviews: PreviewProvider {
 				JourneyFollowView(viewModel: .init(
 					coreDataStore: .init(),
 					journeys: data.map {
-						JourneyFollowData(journeyRef: $0.refreshToken, journeyViewData: $0, depStop: .init(), arrStop: .init())
+						JourneyFollowData(id: 0, journeyViewData: $0, depStop: .init(), arrStop: .init())
 					},
 					initialStatus: .idle
 				))

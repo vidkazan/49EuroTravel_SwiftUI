@@ -41,6 +41,7 @@ extension JourneyDetailsViewModel {
 			lhs.viewData == rhs.viewData
 		}
 		
+		let id : Int64?
 		weak var chewVM : ChewViewModel?
 		let depStop : Stop
 		let arrStop : Stop
@@ -48,6 +49,7 @@ extension JourneyDetailsViewModel {
 		
 		
 		init(depStop: Stop, arrStop: Stop, viewData: JourneyViewData, chewVM : ChewViewModel?) {
+			self.id = Int64(viewData.refreshToken.hashValue)
 			self.depStop = depStop
 			self.arrStop = arrStop
 			self.viewData = viewData
@@ -55,6 +57,7 @@ extension JourneyDetailsViewModel {
 		}
 		
 		init(currentData : Self) {
+			self.id = currentData.id
 			self.chewVM = currentData.chewVM
 			self.depStop = currentData.depStop
 			self.arrStop = currentData.arrStop
@@ -62,6 +65,7 @@ extension JourneyDetailsViewModel {
 		}
 		
 		init(currentData : Self, viewData : JourneyViewData) {
+			self.id = currentData.id
 			self.chewVM = currentData.chewVM
 			self.depStop = currentData.depStop
 			self.arrStop = currentData.arrStop
@@ -95,8 +99,8 @@ extension JourneyDetailsViewModel {
 		static func == (lhs: JourneyDetailsViewModel.Status, rhs: JourneyDetailsViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
-		case loading(token : String)
-		case loadingIfNeeded(token : String,timeStatus: TimeContainer.Status)
+		case loading(id : Int64?,token : String)
+		case loadingIfNeeded(id : Int64?,token : String,timeStatus: TimeContainer.Status)
 		case loadedJourneyData
 		case error(error : any ChewError)
 		case loadingLocationDetails(leg : LegViewData)
@@ -107,9 +111,8 @@ extension JourneyDetailsViewModel {
 		)
 		case fullLeg(leg : LegViewData)
 		case loadingFullLeg(leg : LegViewData)
-		case actionSheet(leg : LegViewData)
 		
-		case changingSubscribingState(ref : String, journeyDetailsViewModel: JourneyDetailsViewModel?)
+		case changingSubscribingState(id: Int64?, ref : String, journeyDetailsViewModel: JourneyDetailsViewModel?)
 		
 		var description : String {
 			switch self {
@@ -129,8 +132,6 @@ extension JourneyDetailsViewModel {
 				return "loadingLocationDetails"
 			case .fullLeg:
 				return "fullLeg"
-			case .actionSheet:
-				return "actionSheet"
 			case .loadingFullLeg:
 				return "loadingFullLeg"
 			}
@@ -144,11 +145,10 @@ extension JourneyDetailsViewModel {
 		case didFailedToLoadJourneyData(error : any ChewError)
 		
 		
-		case didRequestReloadIfNeeded(ref : String,timeStatus: TimeContainer.Status)
-		case didTapReloadButton(ref : String)
-		case didTapSubscribingButton(ref : String,journeyDetailsViewModel: JourneyDetailsViewModel?)
+		case didRequestReloadIfNeeded(id: Int64?, ref : String,timeStatus: TimeContainer.Status)
+		case didTapReloadButton(id : Int64?, ref : String)
+		case didTapSubscribingButton(id : Int64?, ref : String,journeyDetailsViewModel: JourneyDetailsViewModel?)
 		
-		case didExpandLegDetails
 		case didLoadLocationDetails(
 			coordRegion : MKCoordinateRegion,
 			stops : [StopViewData],
@@ -158,8 +158,6 @@ extension JourneyDetailsViewModel {
 		case didFailToChangeSubscribingState(error : any ChewError)
 		case didChangedSubscribingState
 		case didLoadFullLegData(data : LegViewData)
-		case didLongTapOnLeg(leg : LegViewData)
-		case didCloseActionSheet
 		
 		case didTapBottomSheetDetails(leg : LegViewData, type : BottomSheetType)
 		case didCloseBottomSheet
@@ -182,14 +180,8 @@ extension JourneyDetailsViewModel {
 				return "didFailedToLoadJourneyData \(error)"
 			case .didTapReloadButton:
 				return "didReloadJourneyList"
-			case .didExpandLegDetails:
-				return "didExpandLegDetails"
 			case .didLoadLocationDetails:
 				return "didLoadLocationDetails"
-			case .didLongTapOnLeg:
-				return "didLongTapOnLeg"
-			case .didCloseActionSheet:
-				return "didCloseActionSheet"
 			case .didTapBottomSheetDetails:
 				return "didCloseActionSheet"
 			case .didCloseBottomSheet:

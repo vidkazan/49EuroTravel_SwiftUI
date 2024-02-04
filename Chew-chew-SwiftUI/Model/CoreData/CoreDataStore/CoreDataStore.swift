@@ -20,14 +20,31 @@ final class CoreDataStore : ObservableObject {
 }
 
 
+func differenceBetweenStrings(_ str1: String, _ str2: String) -> String {
+	var difference = ""
+	
+	// Convert strings to arrays of characters for easier comparison
+	let array1 = Array(str1)
+	let array2 = Array(str2)
+	
+	// Find the difference between the two arrays
+	for (char1, char2) in zip(array1, array2) {
+		if char1 != char2 {
+			difference.append(char1)
+		}
+	}
+	
+	return difference
+}
+
 // MARK: remove
 extension CoreDataStore {
-	func deleteJourneyIfFound(journeyRef : String) -> Bool {
+	func deleteJourneyIfFound(id : Int64) -> Bool {
 		var result = false
 		if let objects = self.fetchJourneys() {
 			 asyncContext.performAndWait {
 				if let res = objects.first(where: { obj in
-					obj.journeyRef == journeyRef
+					return obj.id == id
 				}) {
 //					print("> ⚡️ delete journeys thread ",Thread.current)
 					self.asyncContext.delete(res)
@@ -71,7 +88,7 @@ extension CoreDataStore {
 		}
 	}
 	
-	func addJourney(viewData : JourneyViewData,depStop : Stop, arrStop : Stop) -> Bool {
+	func addJourney(id : Int64,viewData : JourneyViewData,depStop : Stop, arrStop : Stop) -> Bool {
 		var res = false
 		guard let user = self.user else {
 			print("📕 > \(#function) : error : ref / user/ journeys")
@@ -83,7 +100,7 @@ extension CoreDataStore {
 				user: user,
 				depStop: depStop,
 				arrStop: arrStop,
-				ref: viewData.refreshToken,
+				id: id,
 				using: self.asyncContext
 			)
 			self.saveAsyncContext()
@@ -127,9 +144,9 @@ extension CoreDataStore {
 			self.saveAsyncContext()
 		}
 	}
-	func updateJourney(viewData : JourneyViewData,depStop : Stop, arrStop : Stop) -> Bool {
-		if deleteJourneyIfFound(journeyRef: viewData.refreshToken) {
-			return addJourney(viewData: viewData, depStop: depStop, arrStop: arrStop)
+	func updateJourney(id: Int64,viewData : JourneyViewData,depStop : Stop, arrStop : Stop) -> Bool {
+		if deleteJourneyIfFound(id: id) {
+			return addJourney(id: id,viewData: viewData, depStop: depStop, arrStop: arrStop)
 		}
 		print("📕 > update Journeys : error : delete fault")
 		return false

@@ -30,11 +30,20 @@ extension JourneyDetailsViewModel {
 		case .loading, .loadingIfNeeded:
 			switch event {
 			case .didCancelToLoadData:
-				return State(data: state.data, status: .loadedJourneyData)
-			case .didTapReloadButton(ref: let ref):
-				return State(data: state.data,status: .loading(token: ref))
-			case let .didRequestReloadIfNeeded(ref, status):
-				return State(data: state.data,status: .loadingIfNeeded(token: ref,timeStatus: status))
+				return State(
+					data: state.data,
+					status: .loadedJourneyData
+				)
+			case let .didTapReloadButton(id,ref):
+				return State(
+					data: state.data,
+					status: .loading(id: id,token: ref)
+				)
+			case let .didRequestReloadIfNeeded(id, ref, status):
+				return State(
+					data: state.data,
+					status: .loadingIfNeeded(id: id,token: ref,timeStatus: status)
+				)
 			case .didLoadJourneyData(let data):
 				return State(
 					data: StateData(currentData: state.data, viewData: data),
@@ -45,33 +54,39 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .error(error: error)
 				)
-			case .didLongTapOnLeg(leg: let leg):
-				return State(
-					data: state.data,
-					status: .actionSheet(leg: leg)
-				)
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			}
 		case .loadedJourneyData:
 			switch event {
-			case let .didTapSubscribingButton(ref, vm):
+			case let .didTapBottomSheetDetails(leg, type):
+				switch type {
+				case .locationDetails:
+					return State(
+						data: state.data,
+						status: .loadingLocationDetails(leg: leg)
+					)
+				case .fullLeg:
+					return State(
+						data: state.data,
+						status: .loadingFullLeg(leg: leg)
+					)
+				}
+			case let .didTapSubscribingButton(id,ref, vm):
 				return State(
 					data: state.data,
-					status: .changingSubscribingState(ref: ref, journeyDetailsViewModel: vm)
+					status: .changingSubscribingState(id: id, ref: ref, journeyDetailsViewModel: vm)
 				)
-			case .didTapReloadButton(ref: let ref):
+			case let .didTapReloadButton(id,ref):
 				return State(
 					data: state.data,
-					status: .loading(token: ref)
+					status: .loading(id:id,token: ref)
 				)
-			case let .didRequestReloadIfNeeded(ref, status):
-				return State(data: state.data,status: .loadingIfNeeded(token: ref,timeStatus: status))
-			case .didLongTapOnLeg(leg: let leg):
+			case let .didRequestReloadIfNeeded(id, ref, status):
 				return State(
 					data: state.data,
-					status: .actionSheet(leg: leg)
+					status: .loadingIfNeeded(id: id,token: ref,timeStatus: status)
 				)
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
@@ -79,28 +94,39 @@ extension JourneyDetailsViewModel {
 			}
 		case .error:
 			switch event {
-			case let .didTapSubscribingButton(ref, vm):
+			case let .didTapSubscribingButton(id,ref, vm):
 				return State(
 					data: state.data,
-					status: .changingSubscribingState(ref: ref, journeyDetailsViewModel: vm)
+					status: .changingSubscribingState(id: id, ref: ref, journeyDetailsViewModel: vm)
 				)
-			case .didExpandLegDetails,
+			case
 				 .didLoadJourneyData,
 				 .didFailedToLoadJourneyData:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
-			case let .didRequestReloadIfNeeded(ref, status):
-				return State(data: state.data,status: .loadingIfNeeded(token: ref,timeStatus: status))
-			case .didTapReloadButton(ref: let ref):
+			case let .didRequestReloadIfNeeded(id, ref, status):
 				return State(
 					data: state.data,
-					status: .loading(token: ref)
+					status: .loadingIfNeeded(id: id,token: ref,timeStatus: status)
 				)
-			case .didLongTapOnLeg(leg: let leg):
+			case let .didTapReloadButton(id,ref):
 				return State(
 					data: state.data,
-					status: .actionSheet(leg: leg)
+					status: .loading(id:id,token: ref)
 				)
+			case let .didTapBottomSheetDetails(leg, type):
+				switch type {
+				case .locationDetails:
+					return State(
+						data: state.data,
+						status: .loadingLocationDetails(leg: leg)
+					)
+				case .fullLeg:
+					return State(
+						data: state.data,
+						status: .loadingFullLeg(leg: leg)
+					)
+				}
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
@@ -172,35 +198,6 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .loadedJourneyData
 				)
-			default:
-				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
-				return state
-			}
-		case .actionSheet:
-			switch event {
-			case .didLoadJourneyData(let data):
-				return State(
-					data: StateData(currentData: state.data, viewData: data),
-					status: state.status
-				)
-			case .didCloseActionSheet:
-				return State(
-					data: state.data,
-					status: .loadedJourneyData
-				)
-			case let .didTapBottomSheetDetails(leg, type):
-				switch type {
-				case .locationDetails:
-					return State(
-						data: state.data,
-						status: .loadingLocationDetails(leg: leg)
-					)
-				case .fullLeg:
-					return State(
-						data: state.data,
-						status: .loadingFullLeg(leg: leg)
-					)
-				}
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state

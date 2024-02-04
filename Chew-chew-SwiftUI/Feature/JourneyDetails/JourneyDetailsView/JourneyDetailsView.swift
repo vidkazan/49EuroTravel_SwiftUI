@@ -10,10 +10,15 @@ import MapKit
 
 struct JourneyDetailsView: View {
 	// MARK: Fields
+	enum SheetType : String {
+		case none
+		case map
+		case fullLeg
+	}
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	@State var bottomSheetIsPresented : Bool = false
-	@State var actionSheetIsPresented : Bool = false
+	@State private var bottomSheetIsPresented : Bool = false
+	@State var sheetType : SheetType = .none
 	// MARK: Init
 	init(journeyDetailsViewModel : JourneyDetailsViewModel) {
 		viewModel = journeyDetailsViewModel
@@ -31,7 +36,11 @@ struct JourneyDetailsView: View {
 							ForEach(viewModel.state.data.viewData.legs) { leg in
 								LegDetailsView(
 									send: viewModel.send,
-									vm: LegDetailsViewModel(leg: leg, isExpanded: false), referenceDate: chewVM.referenceDate
+									vm: LegDetailsViewModel(leg: leg, isExpanded: false),
+									referenceDate: chewVM.referenceDate,
+									openSheet: {type, leg in
+										sheetType = type
+									}
 								)}
 							}
 						}
@@ -41,79 +50,62 @@ struct JourneyDetailsView: View {
 					.sheet(
 						isPresented: $bottomSheetIsPresented,
 						onDismiss: {
-							viewModel.send(event: .didCloseBottomSheet)
+//							viewModel.send(event: .didCloseBottomSheet)
+							sheetType = .none
 						},
 						content: {
-							switch viewModel.state.status {
-							case .loadingLocationDetails,.locationDetails:
-								MapSheet(viewModel: viewModel)
-							case .loadingFullLeg, .fullLeg:
-								FullLegSheet(viewModel: viewModel)
-							default:
-								Text("error \(viewModel.state.status.description)")
+							switch sheetType {
+							case .fullLeg:
+								FullLegSheet(
+									viewModel: viewModel,
+									closeSheet: { sheetType = .none }
+								)
+							case .map:
+								MapSheet(
+									viewModel: viewModel,
+									closeSheet: { sheetType = .none }
+								)
+							case .none:
+								EmptyView()
 							}
+//							switch viewModel.state.status {
+//							case .loadingLocationDetails,.locationDetails:
+//								MapSheet(viewModel: viewModel, closeSheet: {bottomSheetIsPresented = false})
+//							case .loadingFullLeg, .fullLeg:
+//								FullLegSheet(viewModel: viewModel, closeSheet: {bottomSheetIsPresented = false})
+//							default:
+//								Text("error \(viewModel.state.status.description)")
+//							}
 						}
 					)
-					// MARK: LegDetails - action sheet
-					.confirmationDialog("", isPresented: $actionSheetIsPresented) {
-						if case .actionSheet(leg: let leg)=viewModel.state.status,
-						   case .line = leg.legType {
-							Button(action: {
-								switch viewModel.state.status {
-								case .actionSheet(leg: let leg):
-									viewModel.send(event: .didTapBottomSheetDetails(leg: leg, type: .fullLeg))
-								default:
-									return
-								}
-							}, label: {
-								Label("Show full leg", systemImage: "arrow.up.backward.and.arrow.down.forward.circle")
-							})
-							.foregroundColor(Color.primary)
-						}
-						Button(action: {
-							switch viewModel.state.status {
-							case .actionSheet(leg: let leg):
-								viewModel.send(event: .didTapBottomSheetDetails(leg: leg, type: .locationDetails))
-							default:
-								return
-							}
-						}, label: {
-							Label("Show map", systemImage: "map.circle")
-						})
-						
-						.foregroundColor(Color.primary)
-						Button(role: .cancel, action: {
-							viewModel.send(event: .didCloseActionSheet)
-						}, label: {
-							Text("Cancel")
-						})
-						.foregroundColor(Color.primary)
-					}
 				}
 				// MARK: Modifiers
 				.background(Color.chewFillPrimary)
 				.navigationBarTitle("Journey details", displayMode: .inline)
 				.toolbar { toolbar() }
-				.onAppear {
-					viewModel.send(event: .didRequestReloadIfNeeded(
-						ref: viewModel.state.data.viewData.refreshToken,
-						timeStatus: viewModel.state.data.viewData.time.statusOnReferenceTime(chewVM.referenceDate))
-					)
-				}
+//				.onAppear {
+//					viewModel.send(event: .didRequestReloadIfNeeded(
+//						ref: viewModel.state.data.viewData.refreshToken,
+//						timeStatus: viewModel.state.data.viewData.time.statusOnReferenceTime(chewVM.referenceDate))
+//					)
+//				}
 				// MARK: Modifiers - onChange
-				.onReceive(viewModel.$state, perform: {
-					switch $0.status {
-					case .loading, .loadedJourneyData, .error, .changingSubscribingState,.loadingIfNeeded:
+				.onChange(of: sheetType, perform: { type in
+					switch type {
+					case .none:
 						bottomSheetIsPresented = false
-						actionSheetIsPresented = false
-					case .fullLeg,.loadingLocationDetails,.locationDetails,.loadingFullLeg:
+					default:
 						bottomSheetIsPresented = true
-						actionSheetIsPresented = false
-					case .actionSheet:
-						bottomSheetIsPresented = false
-						actionSheetIsPresented = true
 					}
 				})
+//				.onReceive(viewModel.$state, perform: {
+//					switch $0.status {
+//					case .loading, .loadedJourneyData, .error, .changingSubscribingState,.loadingIfNeeded:
+//						bottomSheetIsPresented = false
+//					case .fullLeg,.loadingLocationDetails,.locationDetails,.loadingFullLeg:
+//						bottomSheetIsPresented = true
+//					}
+//				})
 			}
 		}
 	}

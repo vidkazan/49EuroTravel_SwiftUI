@@ -11,6 +11,7 @@ import CoreData
 
 
 extension ChewJourney {
+	@NSManaged public var id: Int64
     @NSManaged public var journeyRef: String
     @NSManaged public var arrivalStop: Location
     @NSManaged public var departureStop: Location
@@ -28,12 +29,13 @@ extension ChewJourney {
 		user : ChewUser,
 		depStop : Stop,
 		arrStop : Stop,
-		ref : String,
+		id : Int64,
 		using managedObjectContext: NSManagedObjectContext) {
 			self.init(context: managedObjectContext)
 //				print("> ⚡️ create \(ChewJourney.self) thread: ",Thread.current, "context:",managedObjectContext)
+			self.id = id
 			self.isActive = false
-			self.journeyRef = ref
+			self.journeyRef = viewData.refreshToken
 			self.updatedAt = Date.now.timeIntervalSince1970
 			self.user = user
 			let _ = ChewTime(

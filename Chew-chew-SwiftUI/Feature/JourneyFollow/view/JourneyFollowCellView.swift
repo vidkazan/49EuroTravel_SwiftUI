@@ -83,6 +83,7 @@ struct JourneyFollowCellView : View {
 		})
 		.onReceive(timer, perform: { _ in
 			vm.send(event: .didRequestReloadIfNeeded(
+				id: vm.state.data.id,
 				ref: vm.state.data.viewData.refreshToken,
 				timeStatus: vm.state.data.viewData.time.statusOnReferenceTime(chewVM.referenceDate)
 			))

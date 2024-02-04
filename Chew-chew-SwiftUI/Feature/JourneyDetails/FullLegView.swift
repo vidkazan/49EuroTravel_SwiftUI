@@ -11,6 +11,7 @@ import SwiftUI
 // MARK: FullLegSheet
 struct FullLegSheet: View {
 	@ObservedObject var viewModel : JourneyDetailsViewModel
+	let closeSheet : ()->Void
 	var body: some View {
 		NavigationView {
 			VStack(alignment: .center,spacing: 0) {
@@ -35,7 +36,8 @@ struct FullLegSheet: View {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button("Close") {
-						viewModel.send(event: .didCloseBottomSheet)
+						closeSheet()
+//						viewModel.send(event: .didCloseBottomSheet)
 					}
 				})
 			}

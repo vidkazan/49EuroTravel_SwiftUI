@@ -75,6 +75,7 @@ struct MapView: View {
 
 struct MapSheet: View {
 	@ObservedObject var viewModel : JourneyDetailsViewModel
+	let closeSheet : ()->Void
 	var body: some View {
 		if #available(iOS 16.0, *) {
 			sheet
@@ -101,7 +102,6 @@ extension MapSheet {
 						.loading,
 						.fullLeg,
 						.loadingFullLeg,
-						.actionSheet,
 						.changingSubscribingState,
 						.loadingIfNeeded:
 					Spacer()
@@ -112,7 +112,8 @@ extension MapSheet {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button("Close") {
-						viewModel.send(event: .didCloseBottomSheet)
+						closeSheet()
+//						viewModel.send(event: .didCloseBottomSheet)
 					}
 				})
 			}

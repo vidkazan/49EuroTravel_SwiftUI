@@ -15,38 +15,54 @@ struct ContentView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@State var state : ChewViewModel.State = .init()
 	var body: some View {
-		NavigationView {
-			switch state.status {
-			case .start:
-				EmptyView()
-			default:
-				VStack(spacing: 5) {
-					AlertsView(alertVM: chewViewModel.alertViewModel)
-					FeatureView()
+		Group {
+			if #available(iOS 16.0, *) {
+				NavigationStack {
+					switch state.status {
+					case .start:
+						EmptyView()
+					default:
+						VStack(spacing: 5) {
+							AlertsView(alertVM: chewViewModel.alertViewModel)
+							FeatureView()
+						}
+					}
 				}
-//				.sheet(
-//					isPresented: $sheetIsPresented,
-//					onDismiss: {
-//						sheetIsPresented = false
-//						chewViewModel.send(event: .didUpdateSettings(
-//							ChewSettings(
-//								settings: chewViewModel.state.settings,
-//								onboarding: false
-//							)
-//						))
-//						chewViewModel.coreDataStore.disableOnboarding()
-//					},
-//					content: {
-//						if chewViewModel.state.settings.onboarding == true {
-//							TabView {
-//								Text("Onboarding Blabla 1")
-//								Text("Onboarding Blabla 2")
-//							}
-//							.tabViewStyle(.page(indexDisplayMode: .always))
-//						}
-//					}
-//				)
+			} else {
+				NavigationView {
+					switch state.status {
+					case .start:
+						EmptyView()
+					default:
+						VStack(spacing: 5) {
+							AlertsView(alertVM: chewViewModel.alertViewModel)
+							FeatureView()
+						}
+					}
+				}
 			}
+//			.sheet(
+//				isPresented: $sheetIsPresented,
+//				onDismiss: {
+//					sheetIsPresented = false
+//					chewViewModel.send(event: .didUpdateSettings(
+//						ChewSettings(
+//							settings: chewViewModel.state.settings,
+//							onboarding: false
+//						)
+//					))
+//					chewViewModel.coreDataStore.disableOnboarding()
+//				},
+//				content: {
+//					if chewViewModel.state.settings.onboarding == true {
+//						TabView {
+//							Text("Onboarding Blabla 1")
+//							Text("Onboarding Blabla 2")
+//						}
+//						.tabViewStyle(.page(indexDisplayMode: .always))
+//					}
+//				}
+//			)
 		}
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)

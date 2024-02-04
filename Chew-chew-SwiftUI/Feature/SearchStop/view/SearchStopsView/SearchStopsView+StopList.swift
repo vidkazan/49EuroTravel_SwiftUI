@@ -86,7 +86,7 @@ extension SearchStopsView {
 						}
 					}
 				}
-				.frame(idealHeight: 300)
+				.frame(maxHeight: 300)
 			case .error(let error):
 				Text(error.description)
 					.foregroundColor(.secondary)

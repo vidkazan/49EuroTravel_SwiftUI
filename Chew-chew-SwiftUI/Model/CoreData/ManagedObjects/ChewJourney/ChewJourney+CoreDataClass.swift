@@ -30,7 +30,7 @@ extension ChewJourney {
 			let time = TimeContainer(chewTime: self.time)
 			#warning("add badges")
 			data = JourneyFollowData(
-				journeyRef: self.journeyRef,
+				id : self.id,
 				journeyViewData: JourneyViewData(
 					journeyRef: journeyRef,
 					badges: [],

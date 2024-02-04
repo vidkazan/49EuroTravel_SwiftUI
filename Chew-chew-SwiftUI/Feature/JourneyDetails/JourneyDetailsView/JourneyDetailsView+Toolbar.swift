@@ -18,7 +18,7 @@ extension JourneyDetailsView {
 						break
 					default:
 						viewModel.send(
-							event: .didTapSubscribingButton(ref: viewModel.state.data.viewData.refreshToken, journeyDetailsViewModel: viewModel))
+							event: .didTapSubscribingButton(id: viewModel.state.data.id ,ref: viewModel.state.data.viewData.refreshToken, journeyDetailsViewModel: viewModel))
 					}
 				},
 				label: {
@@ -28,16 +28,16 @@ extension JourneyDetailsView {
 							.frame(width: 15,height: 15)
 							.padding(5)
 					default:
-						switch viewModel.state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.journeyRef == viewModel.state.data.viewData.refreshToken}) == true {
+						switch viewModel.state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == Int64(viewModel.state.data.viewData.refreshToken.hashValue)}) == true {
 //						switch viewModel.state.data.isFollowed {
 						case true:
 							Image(.bookmark.fill)
 								.frame(width: 15,height: 15)
-								.tint(viewModel.state.status == .loading(token: viewModel.state.data.viewData.refreshToken) ? .chewGray30 : .blue)
+								.tint(viewModel.state.status.description == "loading" ? .chewGray30 : .blue)
 								.padding(5)
 						case false:
 							Image(.bookmark)
-								.tint(viewModel.state.status == .loading(token: viewModel.state.data.viewData.refreshToken) ? .chewGray30 : .blue)
+								.tint(viewModel.state.status.description == "loading" ? .chewGray30 : .blue)
 								.frame(width: 15,height: 15)
 								.padding(5)
 							}
@@ -46,7 +46,7 @@ extension JourneyDetailsView {
 				)
 			Button(
 				action: {
-					viewModel.send(event: .didTapReloadButton(ref: viewModel.state.data.viewData.refreshToken))
+					viewModel.send(event: .didTapReloadButton(id: viewModel.state.data.id,ref: viewModel.state.data.viewData.refreshToken))
 					
 				},
 				label: {
@@ -58,7 +58,6 @@ extension JourneyDetailsView {
 					case .loadedJourneyData,
 							.locationDetails,
 							.loadingLocationDetails,
-							.actionSheet,
 							.fullLeg,
 							.loadingFullLeg,
 							.changingSubscribingState:

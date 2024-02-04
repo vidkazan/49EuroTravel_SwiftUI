@@ -204,7 +204,9 @@ extension TimeContainer {
 
 extension TimeContainer {
 	enum Status {
+		case ongoingFar
 		case ongoing
+		case ongoingSoon
 		case active
 		case past
 		
@@ -212,19 +214,33 @@ extension TimeContainer {
 			switch self{
 			case .active:
 				return 1
+			case .ongoingSoon:
+				return 5
 			case .ongoing:
-				return 10
-			case .past:
+				return 60
+			case .ongoingFar:
 				return 300
+			case .past:
+				return 900
 			}
 		}
 	}
 	
 	func statusOnReferenceTime(_ referenceTime : ChewDate) -> Status {
+		let departureTS = (self.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0)
+		let arrivalTS = (self.timestamp.arrival.actualOrPlannedIfActualIsNil() ?? 0)
+		
+		let day = departureTS - 24 * 60 * 60
+		let hour = departureTS - 1 * 60 * 60
+		let now = departureTS
 		switch referenceTime.ts {
-		case 0...(self.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0):
+		case 0...day:
+			return .ongoingFar
+		case day...hour:
 			return .ongoing
-		case (self.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0)...(self.timestamp.arrival.actualOrPlannedIfActualIsNil() ?? 0):
+		case hour...now:
+			return .ongoingSoon
+		case departureTS...arrivalTS:
 			return .active
 		default:
 			return .past

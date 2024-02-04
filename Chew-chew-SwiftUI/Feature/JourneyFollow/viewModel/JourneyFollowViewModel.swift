@@ -9,13 +9,13 @@ import Foundation
 import Combine
 
 struct JourneyFollowData : Equatable {
-	let journeyRef : String
+	let id : Int64
 	let journeyViewData : JourneyViewData
 	let depStop: Stop
 	let arrStop : Stop
 	
-	init(journeyRef: String, journeyViewData: JourneyViewData, depStop: Stop, arrStop: Stop) {
-		self.journeyRef = journeyRef
+	init(id: Int64, journeyViewData: JourneyViewData, depStop: Stop, arrStop: Stop) {
+		self.id = id
 		self.journeyViewData = journeyViewData
 		self.depStop = depStop
 		self.arrStop = arrStop
