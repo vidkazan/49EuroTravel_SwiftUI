@@ -95,7 +95,10 @@ struct JourneyDetailsView: View {
 				.navigationBarTitle("Journey details", displayMode: .inline)
 				.toolbar { toolbar() }
 				.onAppear {
-					viewModel.send(event: .didRequestReloadIfNeeded(ref: viewModel.state.data.viewData.refreshToken))
+					viewModel.send(event: .didRequestReloadIfNeeded(
+						ref: viewModel.state.data.viewData.refreshToken,
+						timeStatus: viewModel.state.data.viewData.time.statusOnReferenceTime(chewVM.referenceDate))
+					)
 				}
 				// MARK: Modifiers - onChange
 				.onReceive(viewModel.$state, perform: {

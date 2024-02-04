@@ -105,8 +105,8 @@ extension JourneyDetailsViewModel {
 	static func whenLoadingIfNeeded() -> Feedback<State, Event> {
 		Feedback {(state: State) -> AnyPublisher<Event, Never> in
 			switch state.status {
-			case .loadingIfNeeded(token: let token):
-				if Date.now.timeIntervalSince1970 - state.data.viewData.updatedAt < 60 {
+			case let .loadingIfNeeded(token,status):
+				if Date.now.timeIntervalSince1970 - state.data.viewData.updatedAt < status.updateIntervalInMinutes {
 					return Just(Event.didCancelToLoadData).eraseToAnyPublisher()
 				}
 				return Just(Event.didTapReloadButton(ref: token)).eraseToAnyPublisher()

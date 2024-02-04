@@ -33,8 +33,8 @@ extension JourneyDetailsViewModel {
 				return State(data: state.data, status: .loadedJourneyData)
 			case .didTapReloadButton(ref: let ref):
 				return State(data: state.data,status: .loading(token: ref))
-			case .didRequestReloadIfNeeded(ref: let ref):
-				return State(data: state.data,status: .loadingIfNeeded(token: ref))
+			case let .didRequestReloadIfNeeded(ref, status):
+				return State(data: state.data,status: .loadingIfNeeded(token: ref,timeStatus: status))
 			case .didLoadJourneyData(let data):
 				return State(
 					data: StateData(currentData: state.data, viewData: data),
@@ -66,11 +66,8 @@ extension JourneyDetailsViewModel {
 					data: state.data,
 					status: .loading(token: ref)
 				)
-			case .didRequestReloadIfNeeded(ref: let ref):
-				return State(
-					data: state.data,
-					status: .loadingIfNeeded(token: ref)
-				)
+			case let .didRequestReloadIfNeeded(ref, status):
+				return State(data: state.data,status: .loadingIfNeeded(token: ref,timeStatus: status))
 			case .didLongTapOnLeg(leg: let leg):
 				return State(
 					data: state.data,
@@ -92,11 +89,8 @@ extension JourneyDetailsViewModel {
 				 .didFailedToLoadJourneyData:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
-			case .didRequestReloadIfNeeded(ref: let ref):
-				return State(
-					data: state.data,
-					status: .loadingIfNeeded(token: ref)
-				)
+			case let .didRequestReloadIfNeeded(ref, status):
+				return State(data: state.data,status: .loadingIfNeeded(token: ref,timeStatus: status))
 			case .didTapReloadButton(ref: let ref):
 				return State(
 					data: state.data,

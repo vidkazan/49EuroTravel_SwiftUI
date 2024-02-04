@@ -96,7 +96,7 @@ extension JourneyDetailsViewModel {
 			return lhs.description == rhs.description
 		}
 		case loading(token : String)
-		case loadingIfNeeded(token : String)
+		case loadingIfNeeded(token : String,timeStatus: TimeContainer.Status)
 		case loadedJourneyData
 		case error(error : any ChewError)
 		case loadingLocationDetails(leg : LegViewData)
@@ -144,7 +144,7 @@ extension JourneyDetailsViewModel {
 		case didFailedToLoadJourneyData(error : any ChewError)
 		
 		
-		case didRequestReloadIfNeeded(ref : String)
+		case didRequestReloadIfNeeded(ref : String,timeStatus: TimeContainer.Status)
 		case didTapReloadButton(ref : String)
 		case didTapSubscribingButton(ref : String,journeyDetailsViewModel: JourneyDetailsViewModel?)
 		

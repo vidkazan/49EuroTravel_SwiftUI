@@ -29,20 +29,18 @@ private struct UpdatedAtBadgeView : View {
 	init(bgColor : Color, refTime : Double, isLoading : Bool) {
 		self.bgColor = bgColor
 		self.refTime = refTime
-		self.updatedAt = Self.updatedAt(refTime: refTime)
 		self.isLoading = isLoading
+		self.updatedAt = Self.update(refTime)
 	}
 	
 	var body : some View {
 		HStack(spacing: 2) {
-			Text("updated \(updatedAt) ago")
+			Text(updatedAt)
 				.lineLimit(1)
 				.foregroundColor(.primary.opacity(0.6))
-				.onAppear {
-					updatedAt = Self.updatedAt(refTime: self.refTime)
-				}
+				.onAppear { self.updatedAt = Self.update(refTime) }
 				.onReceive(timer, perform: { _ in
-					updatedAt = Self.updatedAt(refTime: self.refTime)
+					self.updatedAt = Self.update(refTime)
 				})
 			if isLoading == true {
 				ProgressView()
@@ -53,12 +51,23 @@ private struct UpdatedAtBadgeView : View {
 		}
 	}
 	
-	static func updatedAt(refTime : Double) -> String {
-		DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: DateParcer.getTwoDateIntervalInMinutes(
+	static func update(_ refTime : Double) -> String {
+		let minutes = DateParcer.getTwoDateIntervalInMinutes(
 			date1: Date(timeIntervalSince1970: .init(floatLiteral: refTime)),
-			date2: .now)) ?? "error"
+			date2: .now)
+		
+		switch minutes {
+		case .none:
+			return "error"
+		case .some(let wrapped):
+			switch wrapped {
+			case 0..<1:
+				return "updated now"
+			default:
+				return "updated \(DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: minutes) ?? "-") ago"
+			}
+		}
 	}
-
 }
 
 struct BadgeView : View {

@@ -207,6 +207,17 @@ extension TimeContainer {
 		case ongoing
 		case active
 		case past
+		
+		var updateIntervalInMinutes : Double {
+			switch self{
+			case .active:
+				return 1
+			case .ongoing:
+				return 10
+			case .past:
+				return 300
+			}
+		}
 	}
 	
 	func statusOnReferenceTime(_ referenceTime : ChewDate) -> Status {
