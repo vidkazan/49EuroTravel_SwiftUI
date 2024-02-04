@@ -9,42 +9,32 @@ import SwiftUI
 
 
 struct JourneyHeaderView: View {
-	let journey : JourneyViewData?
+	let journey : JourneyViewData
 	
 	var body: some View {
-		ZStack {
-			HStack {
-				TimeLabelView(
-					isSmall: false,
-					arragement: .right,
-					time : Prognosed(
-						actual: journey?.timeContainer.stringTimeValue.departure.actual ?? "time",
-						planned:  journey?.timeContainer.stringTimeValue.departure.planned ?? "time"
-					),
-					delay: journey?.timeContainer.departureStatus.value,
-					isCancelled: false
-				)
-				.padding(7)
-				Spacer()
-				Text(journey?.durationLabelText ?? "duraton")
-					.foregroundColor(.primary)
-					.chewTextSize(.medium)
-				Spacer()
-				TimeLabelView(
-					isSmall: false,
-					arragement: .left,
-					time : Prognosed(
-						actual: journey?.timeContainer.stringTimeValue.arrival.actual ?? "time",
-						planned:  journey?.timeContainer.stringTimeValue.arrival.planned ?? "time"
-					),
-					delay: journey?.timeContainer.arrivalStatus.value,
-					isCancelled: false
-				)
-				.padding(7)
-			}
-			.frame(maxWidth: .infinity)
+		HStack {
+			TimeLabelView(
+				size: .big,
+				arragement: .right,
+				time : journey.time.stringTimeValue.departure,
+				delayStatus: journey.time.departureStatus
+			)
+			.padding(7)
+			Spacer()
+			TimeLabelView(
+				size: .big,
+				arragement: .left,
+				time : journey.time.stringTimeValue.arrival,
+				delayStatus: journey.time.arrivalStatus
+			)
+			.padding(7)
 		}
-		.frame(maxHeight: 40)
+		.overlay {
+			Text(journey.durationLabelText)
+				.foregroundColor(.primary)
+				.chewTextSize(.medium)
+		}
+		.frame(maxWidth: .infinity,maxHeight: 40)
 		.cornerRadius(10)
 	}
 }

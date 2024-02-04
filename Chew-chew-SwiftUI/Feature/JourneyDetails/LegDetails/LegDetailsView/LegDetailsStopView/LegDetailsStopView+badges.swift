@@ -18,11 +18,11 @@ extension LegStopView {
 						num: legViewData.lineViewData.name
 					))
 					BadgeView(.legDirection(dir: legViewData.direction))
-						.badgeBackgroundStyle(.primary)
+						.badgeBackgroundStyle(.secondary)
 					BadgeView(.legDuration(dur: legViewData.duration))
-						.badgeBackgroundStyle(.primary)
+						.badgeBackgroundStyle(.secondary)
 					BadgeView(.stopsCount(legViewData.legStopsViewData.count - 1,vm.state.status == .idle ? .showShevronUp: .showShevronDown))
-						.badgeBackgroundStyle(.primary)
+						.badgeBackgroundStyle(.secondary)
 				}
 			} else {
 				HStack(spacing: 2) {
@@ -31,11 +31,11 @@ extension LegStopView {
 						num: legViewData.lineViewData.name
 					))
 					BadgeView(.legDirection(dir: legViewData.direction))
-						.badgeBackgroundStyle(.primary)
+						.badgeBackgroundStyle(.secondary)
 					BadgeView(.legDuration(dur: legViewData.duration))
-						.badgeBackgroundStyle(.primary)
+						.badgeBackgroundStyle(.secondary)
 					BadgeView(.stopsCount(legViewData.legStopsViewData.count - 1,vm.state.status == .idle ? .showShevronUp: .showShevronDown))
-						.badgeBackgroundStyle(.primary)
+						.badgeBackgroundStyle(.secondary)
 				}
 			}
 		}

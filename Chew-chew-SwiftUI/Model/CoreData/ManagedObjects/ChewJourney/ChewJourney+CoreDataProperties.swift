@@ -38,7 +38,7 @@ extension ChewJourney {
 			self.user = user
 			let _ = ChewTime(
 				context: managedObjectContext,
-				container: viewData.timeContainer,
+				container: viewData.time,
 				cancelled: !viewData.isReachable,
 				for: self
 			)

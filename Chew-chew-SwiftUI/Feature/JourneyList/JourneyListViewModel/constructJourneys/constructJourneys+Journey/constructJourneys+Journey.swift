@@ -47,7 +47,7 @@ func constructJourneyViewDataThrows(
 	arrStop : Stop?,
 	realtimeDataUpdatedAt: Double
 ) throws -> JourneyViewData {
-	let timeContainer = TimeContainer(
+	let time = TimeContainer(
 		plannedDeparture: journey.legs.first?.plannedDeparture,
 		plannedArrival: journey.legs.last?.plannedArrival,
 		actualDeparture: journey.legs.first?.departure,
@@ -57,8 +57,8 @@ func constructJourneyViewDataThrows(
 	var isReachable = true
 	var remarks : [Remark] = []
 	var legsData : [LegViewData] = []
-	let startTS = max(timeContainer.date.departure.actual ?? .distantPast, timeContainer.date.departure.planned ?? .distantPast)
-	let endTS = max(timeContainer.date.arrival.planned ?? .distantPast,timeContainer.date.arrival.actual ?? .distantPast)
+	let startTS = max(time.date.departure.actual ?? .distantPast, time.date.departure.planned ?? .distantPast)
+	let endTS = max(time.date.arrival.planned ?? .distantPast,time.date.arrival.actual ?? .distantPast)
 	let legs = journey.legs
 	remarks = journey.remarks ?? []
 	
@@ -107,7 +107,7 @@ func constructJourneyViewDataThrows(
 		legs: legsData,
 		depStopName: journey.legs.first?.origin?.name ?? journey.legs.first?.origin?.address ?? "Origin(journeyViewData)",
 		arrStopName: journey.legs.last?.destination?.name ?? journey.legs.last?.destination?.address ?? "Destination(journeyViewData)",
-		time: timeContainer,
+		time: time,
 		updatedAt: realtimeDataUpdatedAt
 	)
 }

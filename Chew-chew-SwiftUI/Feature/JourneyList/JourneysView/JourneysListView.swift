@@ -45,17 +45,10 @@ struct JourneyListView: View {
 								JourneyListHeaderView(journeyViewModel: journeyViewModel)
 									.id(0)
 								ForEach(journeyViewModel.state.data.journeys,id: \.id) { journey in
-									NavigationLink(destination: {
-										NavigationLazyView(JourneyDetailsView(journeyDetailsViewModel: JourneyDetailsViewModel(
-											refreshToken: journey.refreshToken,
-											data: journey,
-											depStop: journeyViewModel.state.data.stops.departure,
-											arrStop: journeyViewModel.state.data.stops.arrival,
-											chewVM: chewVM
-										)))
-									}, label: {
-										JourneyCell(journey: journey)
-									})
+									JourneyCell(
+										journey: journey,
+										stops: journeyViewModel.state.data.stops
+									)
 								}
 								.id(1)
 								switch journeyViewModel.state.status {

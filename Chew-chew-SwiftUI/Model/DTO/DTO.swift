@@ -41,12 +41,12 @@ enum StopOverType : String,Equatable, CaseIterable {
 		}
 	}
 	
-	func timeLabelViewDelay(timeContainer : TimeContainer) -> Int? {
+	func timeLabelViewDelayStatus(time : TimeContainer) -> TimeContainer.DelayStatus {
 		switch self {
 		case .destination, .footBottom:
-			return timeContainer.arrivalStatus.value
+			return time.arrivalStatus
 		default:
-			return timeContainer.departureStatus.value
+			return time.departureStatus
 		}
 	}
 	
@@ -70,29 +70,19 @@ enum StopOverType : String,Equatable, CaseIterable {
 	
 	var timeLabelArragament : TimeLabelView.Arragement {
 		switch self {
-		case .origin:
+		case .origin,.destination,.footTop,.footBottom:
 			return .bottom
-		case .stopover:
-			return .right
-		case .destination:
-			return .bottom
-		case .footTop:
-			return .bottom
-		case .footMiddle:
-			return .right
-		case .footBottom:
-			return .bottom
-		case .transfer:
+		case .stopover,.footMiddle,.transfer:
 			return .right
 		}
 	}
 	
-	var smallTimeLabel : Bool {
+	var timeLabelSize : ChewTextSize {
 		switch self {
 		case .stopover:
-			return true
+			return .medium
 		default:
-			return false
+			return .big
 		}
 	}
 	
@@ -114,7 +104,7 @@ enum StopOverType : String,Equatable, CaseIterable {
 		case .stopover:
 			return 35
 		case .transfer,.footMiddle:
-			return 70
+			return 60
 		case .footTop:
 			return 70
 		case .footBottom:

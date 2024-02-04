@@ -28,7 +28,7 @@ extension ChewStop {
 		
 		let _ = ChewTime(
 			context: context,
-			container: stopData.timeContainer,
+			container: stopData.time,
 			cancelled: stopData.cancellationType() == .fullyCancelled,
 			for: self
 		)
@@ -46,7 +46,7 @@ extension ChewStop {
 			name: self.name,
 			departurePlatform: Prognosed<String>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),
 			arrivalPlatform: Prognosed<String>(actual: self.arrPlatform?.actual, planned: self.arrPlatform?.planned),
-			timeContainer: time,
+			time: time,
 			stopOverType: StopOverType(rawValue: self.stopOverType) ?? .stopover
 		)
 	}

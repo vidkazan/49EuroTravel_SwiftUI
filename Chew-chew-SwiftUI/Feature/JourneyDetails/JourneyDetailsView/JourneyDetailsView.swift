@@ -117,40 +117,31 @@ struct JourneyDetailsView: View {
 
 struct JourneyDetailsPreview : PreviewProvider {
 	static var previews: some View {
-		   let viewData = constructJourneyViewData(
-			journey: Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData!.journey,
-			   depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
-			   arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
-			   realtimeDataUpdatedAt: 0
-		   )
-		let viewData2 = constructJourneyViewData(
-			journey: Mock.journeys.journeyNeussWolfsburg.decodedData!.journey,
-			depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
-			arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
-			realtimeDataUpdatedAt: 0
-		)
-		HStack {
-			JourneyDetailsView(
-				journeyDetailsViewModel: JourneyDetailsViewModel(
-					refreshToken: viewData!.refreshToken,
-					data: viewData!,
-					depStop: .init(),
-					arrStop: .init(),
-					chewVM: .init()
-				))
-			.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData!.timeContainer.timestamp.departure.actual ?? 0) + 1000)))
-			.frame(maxWidth: 350)
-			JourneyDetailsView(
-				journeyDetailsViewModel: JourneyDetailsViewModel(
-					refreshToken: viewData2!.refreshToken,
-					data: viewData2!,
-					depStop: .init(),
-					arrStop: .init(),
-					chewVM: .init()
-				))
-			.frame(maxWidth: 350)
-			.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData2!.timeContainer.timestamp.departure.actual ?? 0) + 1000)))
+		let mocks = [
+			Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData!.journey,
+			Mock.journeys.journeyNeussWolfsburg.decodedData!.journey
+		]
+		ScrollView(.horizontal) {
+			LazyHStack {
+				ForEach(mocks,id: \.id) { mock in
+					let viewData = constructJourneyViewData(
+						journey: mock,
+						depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
+						arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
+						realtimeDataUpdatedAt: 0
+					)
+					JourneyDetailsView(
+						journeyDetailsViewModel: JourneyDetailsViewModel(
+							refreshToken: viewData!.refreshToken,
+							data: viewData!,
+							depStop: .init(),
+							arrStop: .init(),
+							chewVM: .init()
+						))
+					.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData!.time.timestamp.departure.actual ?? 0) + 1000)))
+				}
+			}
 		}
-		.previewDevice(PreviewDevice(.iPadMini6gen))
+//		.previewDevice(PreviewDevice(.iPadMini6gen))
 	}
 }

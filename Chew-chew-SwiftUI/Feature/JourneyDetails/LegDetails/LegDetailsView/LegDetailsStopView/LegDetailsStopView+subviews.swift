@@ -52,7 +52,7 @@ extension LegStopView {
 				.background { timeLabelBackground }
 				.cornerRadius(stopOverType.timeLabelCornerRadius)
 				.shadow(radius: 2)
-				.offset(x: stopOver.timeContainer.departureStatus.value != nil ? stopOver.timeContainer.departureStatus.value! > 0 ? 8 : 0 : 0)
+				.offset(x: stopOver.time.departureStatus.value != nil ? stopOver.time.departureStatus.value! > 0 ? 8 : 0 : 0)
 			case .origin, .footTop,.destination:
 				TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
 				.background { timeLabelBackground }
@@ -88,19 +88,19 @@ extension LegStopView {
 			case .origin,.destination:
 				PlatformView(
 					isShowingPlatormWord: true,
-					platform: stopOver.stopOverType.platform(stopOver: stopOver)?.actual,
-					plannedPlatform: stopOver.stopOverType.platform(stopOver: stopOver)?.planned
+					platform: stopOver.stopOverType.platform(stopOver: stopOver) ?? .init()
 				)
 				if showBadges == true, stopOverType == .origin {
 					legStopViewBadges
 				}
 			case .transfer:
 				BadgeView(.transfer(duration: legViewData.duration))
+					.badgeBackgroundStyle(.accent)
 			case .stopover:
 				EmptyView()
 			}
 			// MARK: stopName sub Badges
-			if case .footBottom = stopOverType{
+			if case .footBottom = stopOverType {
 				Text(stopOver.name)
 					.chewTextSize(.big)
 			}

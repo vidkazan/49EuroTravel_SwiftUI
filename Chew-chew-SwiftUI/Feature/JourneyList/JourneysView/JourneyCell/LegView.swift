@@ -141,10 +141,10 @@ struct LegViewBG: View {
 			case .footMiddle,.footStart,.footEnd:
 				self.bgColor = Color.chewFillTertiary.opacity(0.5)
 			case .line,.transfer:
-				self.bgColor = Color.chewFillTertiary.opacity(0.9)
+				self.bgColor = Color.chewFillSecondary.opacity(0.9)
 			}
 		case false:
-			self.bgColor =  Color.chewFillRedPrimary.opacity(0.9)
+			self.bgColor =  Color.chewFillRedPrimary.opacity(0.8)
 		}
 	}
 	

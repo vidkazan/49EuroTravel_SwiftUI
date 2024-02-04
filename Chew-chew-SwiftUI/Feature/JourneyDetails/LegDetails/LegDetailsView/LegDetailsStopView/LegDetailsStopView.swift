@@ -91,19 +91,19 @@ struct LegDetailsStopPreview : PreviewProvider {
 								.environmentObject(
 									ChewViewModel(
 										referenceDate: .specificDate((
-											viewData.timeContainer.timestamp.departure.actual ?? 0))))
-								.background(Color.chewFillPrimary)
+											viewData.time.timestamp.departure.actual ?? 0))))
+								.padding(5)
+								.background(Color.chewFillAccent)
 								.cornerRadius(8)
 							})
 						}
 						.frame(minWidth: 350)
-						.padding(5)
-						.border(.gray)
 					}
 				}
 			}
-			.previewDevice(PreviewDevice(.iPadMini6gen))
-			.previewInterfaceOrientation(.landscapeLeft)
+			.background(Color.chewFillPrimary)
+//			.previewDevice(PreviewDevice(.iPadMini6gen))
+//			.previewInterfaceOrientation(.landscapeLeft)
 		} else {
 			Text("error")
 		}

@@ -74,12 +74,12 @@ struct FullLegView: View {
 					Spacer()
 				}
 				HStack {
-					BadgeView(.date(dateString: vm.state.data.leg.timeContainer.stringDateValue.departure.actual ?? ""))
+					BadgeView(.date(dateString: vm.state.data.leg.time.stringDateValue.departure.actual ?? ""))
 						.badgeBackgroundStyle(.secondary)
 					BadgeView(
 						.timeDepartureTimeArrival(
-							timeDeparture: vm.state.data.leg.timeContainer.stringTimeValue.departure.actual ?? "",
-							timeArrival: vm.state.data.leg.timeContainer.stringTimeValue.arrival.actual ?? ""
+							timeDeparture: vm.state.data.leg.time.stringTimeValue.departure.actual ?? "",
+							timeArrival: vm.state.data.leg.time.stringTimeValue.arrival.actual ?? ""
 						)
 					)
 					.badgeBackgroundStyle(.secondary)

@@ -50,10 +50,10 @@ struct LegsView: View {
 					}
 					if showProgressBar {
 						RoundedRectangle(cornerRadius: 2)
-							.fill(Color.primary)
+							.fill(Color.chewFillGreenSecondary)
 							.frame(
-								width: progressLineProportion > 0 ? 3 : 0,
-								height: 35
+								width: progressLineProportion > 0 && progressLineProportion < 1 ? 3 : 0,
+								height: 40
 							)
 							.position(
 								x : geo.size.width * progressLineProportion,
@@ -89,14 +89,14 @@ struct LegsView: View {
 		}
 		.onReceive(timer, perform: { _ in
 			self.progressLineProportion = Self.getProgressLineProportion(
-				departureTS: journey?.timeContainer.timestamp.departure.actual,
-				arrivalTS: journey?.timeContainer.timestamp.arrival.actual,
+				departureTS: journey?.time.timestamp.departure.actual,
+				arrivalTS: journey?.time.timestamp.arrival.actual,
 				referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
 		})
 		.onAppear {
 			self.progressLineProportion = Self.getProgressLineProportion(
-				departureTS: journey?.timeContainer.timestamp.departure.actual,
-				arrivalTS: journey?.timeContainer.timestamp.arrival.actual,
+				departureTS: journey?.time.timestamp.departure.actual,
+				arrivalTS: journey?.time.timestamp.arrival.actual,
 				referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
 		}
 	}
@@ -136,7 +136,7 @@ struct LegsViewPreviews: PreviewProvider {
 					LegsView(journey: viewData, progressBar: true)
 						.environmentObject(ChewViewModel(
 							referenceDate: .specificDate(
-								(viewData?.timeContainer.timestamp.departure.actual ?? 0) + 2000
+								(viewData?.time.timestamp.departure.actual ?? 0) + 2000
 							))
 						)
 				}

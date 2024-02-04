@@ -39,7 +39,7 @@ struct JourneyViewData : Equatable, Identifiable {
 	let isReachable : Bool
 	let badges : [Badges]
 	let refreshToken : String
-	let timeContainer : TimeContainer
+	let time : TimeContainer
 	let updatedAt : Double
 }
 
@@ -54,7 +54,7 @@ extension JourneyViewData {
 		self.isReachable = data.isReachable
 		self.badges = data.badges
 		self.refreshToken = data.refreshToken
-		self.timeContainer = data.timeContainer
+		self.time = data.time
 		self.updatedAt = data.updatedAt
 		self.sunEventsGradientStops = data.sunEventsGradientStops
 	}
@@ -77,11 +77,11 @@ extension JourneyViewData {
 		self.isReachable = true
 		self.badges = badges
 		self.refreshToken = Self.fixRefreshToken(token: journeyRef)
-		self.timeContainer = time
+		self.time = time
 		self.updatedAt = updatedAt
 		self.sunEventsGradientStops = getGradientStops(
-			startDateTS: timeContainer.timestamp.departure.actualOrPlannedIfActualIsNil(),
-			endDateTS: timeContainer.timestamp.arrival.actualOrPlannedIfActualIsNil(),
+			startDateTS: time.timestamp.departure.actualOrPlannedIfActualIsNil(),
+			endDateTS: time.timestamp.arrival.actualOrPlannedIfActualIsNil(),
 			sunEvents: sunEvents
 		)
 	}
@@ -110,7 +110,7 @@ struct LegViewData : Equatable,Identifiable {
 	let footDistance : Int
 	let lineViewData : LineViewData
 	let progressSegments : Segments
-	let timeContainer : TimeContainer
+	let time : TimeContainer
 	let polyline : PolylineDTO?
 }
 
@@ -128,7 +128,7 @@ extension LegViewData {
 		self.footDistance = 0
 		self.lineViewData = .init(type: .bus, name: "", shortName: "")
 		self.progressSegments = .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0)
-		self.timeContainer = .init(plannedDeparture: "", plannedArrival: "", actualDeparture: "", actualArrival: "", cancelled: false)
+		self.time = .init(plannedDeparture: "", plannedArrival: "", actualDeparture: "", actualArrival: "", cancelled: false)
 		self.remarks = []
 		self.polyline = nil
 	}
@@ -140,29 +140,29 @@ struct StopViewData : Equatable,Identifiable {
 	let name : String
 	let departurePlatform : Prognosed<String>
 	let arrivalPlatform : Prognosed<String>
-	let timeContainer : TimeContainer
+	let time : TimeContainer
 	let stopOverType : StopOverType
 	
 	func cancellationType() -> StopOverCancellationType {
 		switch self.stopOverType {
 		case .stopover:
-			if timeContainer.arrivalStatus == .cancelled && timeContainer.departureStatus == .cancelled {
+			if time.arrivalStatus == .cancelled && time.departureStatus == .cancelled {
 				return .fullyCancelled
 			}
-			if timeContainer.arrivalStatus == .cancelled {
+			if time.arrivalStatus == .cancelled {
 				return .entryOnly
 			}
-			if timeContainer.departureStatus == .cancelled {
+			if time.departureStatus == .cancelled {
 				return .exitOnly
 			}
 			return .notCancelled
 		case .origin:
-			if timeContainer.departureStatus == .cancelled {
+			if time.departureStatus == .cancelled {
 				return .fullyCancelled
 			}
 			return .notCancelled
 		case .destination:
-			if timeContainer.arrivalStatus == .cancelled {
+			if time.arrivalStatus == .cancelled {
 				return .fullyCancelled
 			}
 			return .notCancelled
@@ -195,11 +195,11 @@ struct LineViewData : Equatable {
 extension StopViewData {
 	init(
 		name : String,
-		timeContainer : TimeContainer,
+		time : TimeContainer,
 		stop : StopWithTimeDTO,
 		type: StopOverType
 	) {
-		self.timeContainer = timeContainer
+		self.time = time
 		self.name = name
 		self.departurePlatform  = Prognosed(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
 		self.arrivalPlatform  = Prognosed(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
@@ -212,11 +212,11 @@ extension StopViewData {
 	
 	init(
 		name : String,
-		timeContainer : TimeContainer,
+		time : TimeContainer,
 		type: StopOverType,
 		coordinates : CLLocationCoordinate2D
 	) {
-		self.timeContainer = timeContainer
+		self.time = time
 		self.name = name
 		self.departurePlatform  = Prognosed(actual: nil, planned: nil)
 		self.arrivalPlatform  = Prognosed(actual: nil, planned: nil)

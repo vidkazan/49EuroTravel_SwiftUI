@@ -169,7 +169,7 @@
 					"remarks": []
 				}
 			],
-			"refreshToken": "T$A=1@O=Neuss Hbf@L=8000274@a=128@$A=1@O=Minden(Westf)@L=8000252@a=128@$202311271336$202311271630$RE 89723$$1$$$$$$§T$A=1@O=Minden(Westf)@L=8000252@a=128@$A=1@O=Hannover Hbf@L=8000152@a=128@$202311271635$202311271730$S      1$$1$$$$$$§T$A=1@O=Hannover Hbf@L=8000152@a=128@$A=1@O=Wolfsburg Hbf@L=8006552@a=128@$202311271748$202311271843$ENO83527$$1$$$$$$",
+			"refreshToken": null,
 			"cycle": {
 				"min": 3480
 			},

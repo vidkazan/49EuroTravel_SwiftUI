@@ -25,7 +25,7 @@ struct JourneyListViewLoader: View {
 			footDistance: 0,
 			lineViewData: .init(type: .national, name: "", shortName: ""),
 			progressSegments: .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0),
-			timeContainer: .init(),
+			time: .init(),
 			polyline: nil
 		)],
 		depStopName: nil,
@@ -38,7 +38,7 @@ struct JourneyListViewLoader: View {
 	var body: some View {
 		VStack(spacing: 5) {
 			ForEach(0...count,id: \.self) { index in
-				JourneyCell(journey: Self.mockViewData)
+				JourneyCell(journey: Self.mockViewData, stops: .init(departure: .init(), arrival: .init()))
 					.redacted(reason: .placeholder)
 					.transition(.move(edge: .top))
 					.animation(.spring(response: 0.5), value: index)

@@ -31,25 +31,23 @@ struct JourneyFollowCellView : View {
 			}
 			HStack(spacing: 2) {
 				BadgeView(
-					.date(dateString: data.timeContainer.stringDateValue.departure.actualOrPlannedIfActualIsNil() ?? ""),
+					.date(dateString: data.time.stringDateValue.departure.actualOrPlannedIfActualIsNil() ?? ""),
 					.medium
 				)
 				.badgeBackgroundStyle(.secondary)
 				HStack(spacing: 2) {
 					TimeLabelView(
-						isSmall: true,
+						size: .medium,
 						arragement: .right,
-						delay: data.timeContainer.departureStatus.value,
-						time: data.timeContainer.stringTimeValue.departure,
-						isCancelled: !data.isReachable
+						time: data.time.stringTimeValue.departure,
+						delayStatus: data.time.departureStatus
 					)
 					Text("-")
 					TimeLabelView(
-						isSmall: true,
+						size: .medium,
 						arragement: .right,
-						delay: data.timeContainer.arrivalStatus.value,
-						time: data.timeContainer.stringTimeValue.arrival,
-						isCancelled: !data.isReachable
+						time: data.time.stringTimeValue.arrival,
+						delayStatus: data.time.arrivalStatus
 					)
 				}
 				.badgeBackgroundStyle(.secondary)

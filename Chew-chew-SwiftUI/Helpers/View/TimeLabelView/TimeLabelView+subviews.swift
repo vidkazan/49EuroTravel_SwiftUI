@@ -11,32 +11,32 @@ import SwiftUI
 
 extension TimeLabelView {
 	func optionalTime(delay : Int) -> some View {
-		switch isSmall {
-		case true:
-			return Text(delay > 0 ? "+" + String(delay) : "")
-				.foregroundColor(isSmall ? .gray : .secondary)
-				.chewTextSize(.medium)
-		case false:
-			return Text(delay > 0 ? (time.planned ?? "") : (time.actual ?? ""))
-				.strikethrough()
-				.foregroundColor(isSmall ? .gray : .secondary)
-				.chewTextSize(.medium)
-		}
-	}
-	func mainTime(delay : Int, cancelled : Bool) -> some View {
 		Group {
-			switch cancelled {
-			case true:
-				Text(time.planned ?? "")
-					.foregroundColor(Color.chewRedScale80)
+			switch size {
+			case .small,.medium:
+				return Text(delay > 0 ? "+" + String(delay) : "")
+					.chewTextSize(size.chewTextStyle)
+			case .big,.huge:
+				return Text(delay > 0 ? (time.planned ?? "") : (time.actual ?? ""))
 					.strikethrough()
-					.chewTextSize(isSmall == false ? .big : .medium)
-			case false:
-				Text(delay < 1 ? time.planned ?? "" : time.actual ?? "")
-					.foregroundColor(delay < 5 ? isSmall ? .primary : .primary : Color.chewRedScale80)
-					.chewTextSize(isSmall == false ? .big : .medium)
+					.chewTextSize(.medium)
 			}
 		}
+		.foregroundColor(.secondary)
+	}
+	func mainTime(delay : Int) -> some View {
+		Group {
+			switch delayStatus {
+			case .cancelled:
+				Text(time.planned ?? "")
+					.foregroundColor(Color.secondary)
+					.strikethrough()
+			default:
+				Text(time.actual ?? "")
+					.foregroundColor(delay < 5 ? .primary : Color.chewFillRedPrimary)
+			}
+		}
+		.chewTextSize(size.chewTextStyle)
 	}
 }
 

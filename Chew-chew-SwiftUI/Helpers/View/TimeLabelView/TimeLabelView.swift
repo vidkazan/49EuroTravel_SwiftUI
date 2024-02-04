@@ -13,61 +13,41 @@ struct TimeLabelView: View {
 	enum Arragement {
 		case left
 		case right
-		case top
 		case bottom
 	}
-	let isSmall : Bool
+	let size : ChewTextSize
 	let arragement : Arragement
-	var delay : Int?
+	var delayStatus : TimeContainer.DelayStatus
 	var time : Prognosed<String>
-	var isCancelled : Bool
 	
 	
 	var body: some View {
-		switch isCancelled {
-		case true:
-			mainTime(delay: 0, cancelled: true)
-				.padding(2)
-		case false:
-			switch delay {
-			case .none:
-				mainTime(delay: 0, cancelled: false)
-					.padding(2)
-			case .some(let delay):
-				switch delay {
-				case 0:
-					mainTime(delay: 0, cancelled: false)
-						.padding(2)
-				default:
-					switch arragement {
-					case .left,.right:
-						HStack(spacing: 2){
-							switch arragement == .left {
-							case true:
-								optionalTime(delay: delay)
-								mainTime(delay: delay, cancelled: false)
-							case false:
-								mainTime(delay: delay, cancelled: false)
-								optionalTime(delay: delay)
-							}
+		Group {
+			switch delayStatus {
+			case .onTime,.cancelled:
+				mainTime(delay: 0)
+			case .delay(let delay):
+				switch arragement {
+				case .left,.right:
+					HStack(spacing: 2){
+						switch arragement == .left {
+						case true:
+							optionalTime(delay: delay)
+							mainTime(delay: delay)
+						case false:
+							mainTime(delay: delay)
+							optionalTime(delay: delay)
 						}
-						.padding(2)
-					case .bottom,.top:
-						VStack(spacing: 2){
-							switch arragement == .top {
-							case true:
-								optionalTime(delay: delay)
-								mainTime(delay: delay, cancelled: false)
-							case false:
-								mainTime(delay: delay, cancelled: false)
-								optionalTime(delay: delay)
-							}
-						}
-						.padding(2)
+					}
+				case .bottom:
+					VStack(spacing: 2) {
+						mainTime(delay: delay)
+						optionalTime(delay: delay)
 					}
 				}
 			}
 		}
+		.padding(2)
 	}
 }
 
@@ -76,20 +56,18 @@ struct TimeLabelPreviews: PreviewProvider {
 	static var previews: some View {
 		VStack {
 			TimeLabelView(
-				isSmall: false,
+				size: .medium,
 				arragement: .bottom,
 				time: .init(actual: "00:00", planned: "00:00"),
-				delay: 0,
-				isCancelled: false
+				delayStatus: .onTime
 			)
 			.background(Color.chewFillSecondary)
 			.cornerRadius(8)
 			TimeLabelView(
-				isSmall: false,
+				size: .medium,
 				arragement: .bottom,
-				time: .init(actual: "00:00", planned: "00:00"),
-				delay: 61,
-				isCancelled: false
+				time: .init(actual: "00:06", planned: "00:00"),
+				delayStatus: .delay(6)
 			)
 			.background(Color.chewFillSecondary)
 			.cornerRadius(8)

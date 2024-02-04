@@ -13,8 +13,8 @@ extension LegStopView {
 		LinearGradient(
 			stops: [
 				Gradient.Stop(color: Color.chewFillGreenPrimary, location: 0),
-				Gradient.Stop(color: Color.chewFillGreenPrimary, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: chewVM.referenceDate.ts) ?? 0),
-				Gradient.Stop(color: LegStopView.timeLabelColor, location: stopOver.timeContainer.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: chewVM.referenceDate.ts) ?? 0)
+				Gradient.Stop(color: Color.chewFillGreenPrimary, location: stopOver.time.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: chewVM.referenceDate.ts) ?? 0),
+				Gradient.Stop(color: LegStopView.timeLabelColor, location: stopOver.time.getStopCurrentTimePositionAlongActualDepartureAndArrival(currentTS: chewVM.referenceDate.ts) ?? 0)
 			],
 			startPoint: UnitPoint(x: 0, y: 0), endPoint: UnitPoint(x: 0, y: 1)
 		)

@@ -202,3 +202,21 @@ extension TimeContainer {
 	}
 }
 
+extension TimeContainer {
+	enum Status {
+		case ongoing
+		case active
+		case past
+	}
+	
+	func statusOnReferenceTime(_ referenceTime : ChewDate) -> Status {
+		switch referenceTime.ts {
+		case 0...(self.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0):
+			return .ongoing
+		case (self.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0)...(self.timestamp.arrival.actualOrPlannedIfActualIsNil() ?? 0):
+			return .active
+		default:
+			return .past
+		}
+	}
+}

@@ -8,6 +8,26 @@
 import Foundation
 import SwiftUI
 
+enum ChewTextSize : Int, CaseIterable, Equatable {
+	case small
+	case medium
+	case big
+	case huge
+	
+	var chewTextStyle : ChewPrimaryStyle {
+		switch self {
+		case .small:
+			return .small
+		case .medium:
+			return .medium
+		case .big:
+			return .big
+		case .huge:
+			return .huge
+		}
+	}
+}
+
 protocol ChewTextStyle : ViewModifier {}
 
 extension View {

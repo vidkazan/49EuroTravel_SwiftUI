@@ -11,39 +11,35 @@ import SwiftUI
 
 extension TimeLabelView {
 	init(
-		isSmall: Bool,
+		size : ChewTextSize,
 		arragement : Arragement,
 		time : Prognosed<String>,
-		delay: Int?,
-		isCancelled : Bool
+		delayStatus : TimeContainer.DelayStatus
 	) {
-		self.delay = delay
-		self.isSmall = isSmall
+		self.size = size
 		self.arragement = arragement
 		self.time = time
-		self.isCancelled = isCancelled
+		self.delayStatus = delayStatus
 	}
 	
 	init(
 		stopOver : StopViewData,
 		stopOverType : StopOverType
 	) {
-		self.delay = stopOver.stopOverType.timeLabelViewDelay(timeContainer: stopOver.timeContainer)
-		self.isSmall = stopOverType.smallTimeLabel
+		self.delayStatus = stopOver.stopOverType.timeLabelViewDelayStatus(time: stopOver.time)
+		self.size = stopOverType.timeLabelSize
 		self.arragement = stopOverType.timeLabelArragament
-		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.timeContainer.stringTimeValue)
+		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.time.stringTimeValue)
 		self.time = Prognosed(actual: time.actual,planned: time.planned)
-		self.isCancelled = stopOver.cancellationType() == .fullyCancelled
 	}
 	
 	init(
 		stopOver : StopViewData
 	) {
-		self.delay = stopOver.stopOverType.timeLabelViewDelay(timeContainer: stopOver.timeContainer)
-		self.isSmall = stopOver.stopOverType.smallTimeLabel
+		self.delayStatus = stopOver.stopOverType.timeLabelViewDelayStatus(time: stopOver.time)
+		self.size = stopOver.stopOverType.timeLabelSize
 		self.arragement = stopOver.stopOverType.timeLabelArragament
-		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.timeContainer.stringTimeValue)
+		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.time.stringTimeValue)
 		self.time = Prognosed(actual: time.actual,planned: time.planned)
-		self.isCancelled = stopOver.cancellationType() == .fullyCancelled
 	}
 }

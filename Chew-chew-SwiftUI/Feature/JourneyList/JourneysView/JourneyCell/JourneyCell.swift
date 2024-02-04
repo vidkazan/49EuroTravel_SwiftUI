@@ -10,34 +10,48 @@ import SwiftUI
 
 struct JourneyCell: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	let journey : JourneyViewData?
+	let journey : JourneyViewData
+	let stops : DepartureArrivalPair
 	let isPlaceholder : Bool
 	
-	init(journey: JourneyViewData, isPlaceholder : Bool = false) {
+	init(journey: JourneyViewData,stops : DepartureArrivalPair, isPlaceholder : Bool = false) {
 		self.journey = journey
+		self.stops = stops
 		self.isPlaceholder = isPlaceholder
 	}
 	var body: some View {
 		VStack {
-			JourneyHeaderView(journey: journey)
-			LegsView(journey : journey,progressBar: false)
-				.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
+			NavigationLink(destination: {
+				NavigationLazyView(JourneyDetailsView(
+					journeyDetailsViewModel: Model.shared.journeyDetailViewModel(
+						for: journey.refreshToken,
+						viewdata: journey,
+						stops: stops,
+						chewVM: chewVM
+					)))
+			}, label: {
+				VStack {
+					JourneyHeaderView(journey: journey)
+					LegsView(journey : journey,progressBar: false)
+						.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
+				}
+			})
 			HStack(alignment: .center) {
 				PlatformView(
 					isShowingPlatormWord: false,
-					platform: journey?.legs.first?.legStopsViewData.first?.departurePlatform.actual,
-					plannedPlatform: journey?.legs.first?.legStopsViewData.first?.departurePlatform.planned)
-				Text(journey?.legs.first?.legStopsViewData.first?.name ?? "")
+					platform: journey.legs.first?.legStopsViewData.first?.departurePlatform ?? .init()
+				)
+				Text(journey.legs.first?.legStopsViewData.first?.name ?? "")
 					.chewTextSize(.medium)
 					.tint(.primary)
 				Spacer()
-				BadgesView(badges: journey?.badges ?? [])
+				BadgesView(badges: journey.badges)
 			}
 			.padding(7)
 		}
 		.background(Color.chewFillAccent.opacity(0.5))
 		.overlay {
-			if journey?.isReachable == false {
+			if journey.isReachable == false {
 				Color.primary.opacity(0.4)
 			}
 		}
@@ -48,21 +62,20 @@ struct JourneyCell: View {
 
 struct PlatformView: View {
 	let isShowingPlatormWord : Bool
-	let platform : String?
-	let plannedPlatform : String?
+	let platform : Prognosed<String>
 	var body: some View {
-		if let pl = platform {
+		if let pl = platform.actual {
 			HStack(spacing: 2) {
 				if isShowingPlatormWord == true {
 					Text("platform")
-						.foregroundColor(.gray)
-						.font(.system(size: 12,weight: .regular))
+						.chewTextSize(.medium)
+						.foregroundColor(.primary.opacity(0.7))
 				}
 				Text(pl)
 					.padding(3)
 					.frame(minWidth: 20)
 					.background(Color(red: 0.1255, green: 0.156, blue: 0.4))
-					.foregroundColor(pl == plannedPlatform ? .white : .red)
+					.foregroundColor(platform.actual == platform.planned ? .white : .red)
 					.chewTextSize(.medium)
 				
 			}
@@ -87,7 +100,7 @@ struct JourneyCellPreview: PreviewProvider {
 						arrStop: .init(),
 						realtimeDataUpdatedAt: 0
 					) {
-					JourneyCell(journey: viewData)
+					JourneyCell(journey: viewData,stops: .init(departure: .init(), arrival: .init()))
 						.environmentObject(ChewViewModel())
 				} else {
 					Text("error")

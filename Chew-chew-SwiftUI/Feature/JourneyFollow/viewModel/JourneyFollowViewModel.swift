@@ -13,6 +13,13 @@ struct JourneyFollowData : Equatable {
 	let journeyViewData : JourneyViewData
 	let depStop: Stop
 	let arrStop : Stop
+	
+	init(journeyRef: String, journeyViewData: JourneyViewData, depStop: Stop, arrStop: Stop) {
+		self.journeyRef = journeyRef
+		self.journeyViewData = journeyViewData
+		self.depStop = depStop
+		self.arrStop = arrStop
+	}
 }
 
 final class JourneyFollowViewModel : ObservableObject, Identifiable {
