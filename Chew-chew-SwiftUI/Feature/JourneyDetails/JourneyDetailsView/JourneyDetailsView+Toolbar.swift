@@ -17,8 +17,11 @@ extension JourneyDetailsView {
 					case .loading:
 						break
 					default:
-						viewModel.send(
-							event: .didTapSubscribingButton(id: viewModel.state.data.id ,ref: viewModel.state.data.viewData.refreshToken, journeyDetailsViewModel: viewModel))
+						viewModel.send(event: .didTapSubscribingButton(
+							id: viewModel.state.data.id,
+							ref: viewModel.state.data.viewData.refreshToken,
+							journeyDetailsViewModel: viewModel
+						))
 					}
 				},
 				label: {
@@ -28,8 +31,7 @@ extension JourneyDetailsView {
 							.frame(width: 15,height: 15)
 							.padding(5)
 					default:
-						switch viewModel.state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == Int64(viewModel.state.data.viewData.refreshToken.hashValue)}) == true {
-//						switch viewModel.state.data.isFollowed {
+						switch viewModel.state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == viewModel.state.data.id}) == true {
 						case true:
 							Image(.bookmark.fill)
 								.frame(width: 15,height: 15)

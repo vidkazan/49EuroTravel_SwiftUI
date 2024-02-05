@@ -47,9 +47,10 @@ extension JourneyFollowViewModel {
 			return Just(Event.didUpdateData(followData)).eraseToAnyPublisher()
 		}
 	}
+	
 	func whenEditing() -> Feedback<State, Event> {
 		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
-			guard case .editing(let action,let ref, let viewData,let vm) = state.status else {
+			guard case let .editing(action,followId, viewData,send) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
 			guard let self = self else {
@@ -63,14 +64,14 @@ extension JourneyFollowViewModel {
 			switch action {
 			case .adding:
 				guard let viewData = viewData else {
-					vm?.send(event: .didFailToChangeSubscribingState(error: Error.inputValIsNil("viewData")))
+					send(.didFailToChangeSubscribingState(error: Error.inputValIsNil("viewData")))
 					return Just(Event.didFailToEdit(
 						action: action,
 						error: Error.inputValIsNil("view data is nil")
 					)).eraseToAnyPublisher()
 				}
-				guard !journeys.contains(where: {$0.id == Int64(ref.hashValue)}) else {
-					vm?.send(event: .didFailToChangeSubscribingState(
+				guard !journeys.contains(where: {$0.id == followId}) else {
+					send(.didFailToChangeSubscribingState(
 						error: Error.alreadyContains("journey has been followed already")
 					))
 					return Just(Event.didFailToEdit(
@@ -86,7 +87,7 @@ extension JourneyFollowViewModel {
 						arrStop: viewData.arrStop
 					) == true
 				else {
-					vm?.send(event: .didFailToChangeSubscribingState(
+					send(.didFailToChangeSubscribingState(
 						error: CoreDataError.failedToAdd(type: ChewJourney.self)
 					))
 					return Just(Event.didFailToEdit(
@@ -95,24 +96,26 @@ extension JourneyFollowViewModel {
 					)).eraseToAnyPublisher()
 				}
 				journeys.append(viewData)
-				vm?.send(event: .didChangedSubscribingState)
+				send(.didChangedSubscribingState)
 				return Just(Event.didEdit(data: journeys))
 					.eraseToAnyPublisher()
 			case .deleting:
-				guard let index = journeys.firstIndex(where: { $0.id == Int64(ref.hashValue)} ) else {
+				guard let index = journeys.firstIndex(where: { $0.id == followId} ) else {
+					send(.didFailToChangeSubscribingState(error: Error.notFoundInFollowList("not found in follow list to delete")))
 					return Just(Event.didFailToEdit(
 						action: action,
 						error: Error.notFoundInFollowList("not found in follow list to delete")
 					)).eraseToAnyPublisher()
 				}
-				guard self.coreDataStore?.deleteJourneyIfFound(id: Int64(ref.hashValue)) == true else {
+				guard self.coreDataStore?.deleteJourneyIfFound(id: followId) == true else {
+					send(.didFailToChangeSubscribingState(error: CoreDataError.failedToDelete(type: ChewJourney.self)))
 					return Just(Event.didFailToEdit(
 						action: action,
 						error: CoreDataError.failedToDelete(type: ChewJourney.self)
 					)).eraseToAnyPublisher()
 				}
 				journeys.remove(at: index)
-				vm?.send(event: .didChangedSubscribingState)
+				send(.didChangedSubscribingState)
 				return Just(Event.didEdit(data: journeys))
 					.eraseToAnyPublisher()
 			}

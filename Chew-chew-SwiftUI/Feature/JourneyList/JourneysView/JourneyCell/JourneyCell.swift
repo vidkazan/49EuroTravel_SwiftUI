@@ -24,6 +24,7 @@ struct JourneyCell: View {
 			NavigationLink(destination: {
 				NavigationLazyView(JourneyDetailsView(
 					journeyDetailsViewModel: Model.shared.journeyDetailViewModel(
+						followId: nil,
 						for: journey.refreshToken,
 						viewdata: journey,
 						stops: stops,

@@ -15,7 +15,7 @@ public class ChewJourney: NSManagedObject {
 }
 
 extension ChewJourney {
-	func journeyViewData() -> JourneyFollowData {
+	func journeyFollowData() -> JourneyFollowData {
 		var legsViewData = [LegViewData]()
 		var sunEvents = [SunEvent]()
 		var data : JourneyFollowData!

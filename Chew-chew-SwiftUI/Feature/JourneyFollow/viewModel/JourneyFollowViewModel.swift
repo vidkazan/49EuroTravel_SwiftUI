@@ -95,7 +95,7 @@ extension JourneyFollowViewModel {
 		}
 		case error(error : String)
 		case idle
-		case editing(_ action: Action, journeyRef : String, followData : JourneyFollowData?,journeyDetailsViewModel : JourneyDetailsViewModel?)
+		case editing(_ action: Action, followId : Int64, followData : JourneyFollowData?,sendToJourneyDetailsViewModel : (JourneyDetailsViewModel.Event)->Void)
 		case updating
 		case updatingJourney(_ viewData : JourneyViewData,_ followId : Int64)
 		
@@ -124,9 +124,9 @@ extension JourneyFollowViewModel {
 		
 		case didTapEdit(
 			action : Action,
-			journeyRef : String,
+			followId : Int64,
 			followData : JourneyFollowData?,
-			journeyDetailsViewModel : JourneyDetailsViewModel?
+			sendToJourneyDetailsViewModel : (JourneyDetailsViewModel.Event)->Void
 		)
 		case didEdit(data : [JourneyFollowData])
 			

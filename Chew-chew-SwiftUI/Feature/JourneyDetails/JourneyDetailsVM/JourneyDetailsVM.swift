@@ -11,14 +11,14 @@ import Combine
 import CoreData
 
 final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol {
-	let id = UUID()
+	
 	@Published private(set) var state : State {
 		didSet { print("🚂 > state:",state.status.description) }
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	init (
-		refreshToken : String,
+		followId: Int64?,
 		data: JourneyViewData,
 		depStop : Stop,
 		arrStop : Stop,

@@ -74,7 +74,7 @@ struct JourneyFollowCellView : View {
 		}
 		.onReceive(vm.$state, perform: { state in
 			switch state.status {
-			case .loading,.loadingIfNeeded:
+			case .loading:
 				isLoading = true
 			default:
 				isLoading = false
@@ -103,7 +103,7 @@ struct FollowCellPreviews: PreviewProvider {
 			   realtimeDataUpdatedAt: Date.now.timeIntervalSince1970 - 10000
 		   ){
 			JourneyFollowCellView(journeyDetailsViewModel: .init(
-				refreshToken: "",
+				followId: nil,
 				data: viewData,
 				depStop: .init(),
 				arrStop: .init(),

@@ -50,7 +50,6 @@ struct JourneyDetailsView: View {
 					.sheet(
 						isPresented: $bottomSheetIsPresented,
 						onDismiss: {
-//							viewModel.send(event: .didCloseBottomSheet)
 							sheetType = .none
 						},
 						content: {
@@ -68,14 +67,6 @@ struct JourneyDetailsView: View {
 							case .none:
 								EmptyView()
 							}
-//							switch viewModel.state.status {
-//							case .loadingLocationDetails,.locationDetails:
-//								MapSheet(viewModel: viewModel, closeSheet: {bottomSheetIsPresented = false})
-//							case .loadingFullLeg, .fullLeg:
-//								FullLegSheet(viewModel: viewModel, closeSheet: {bottomSheetIsPresented = false})
-//							default:
-//								Text("error \(viewModel.state.status.description)")
-//							}
 						}
 					)
 				}
@@ -83,12 +74,6 @@ struct JourneyDetailsView: View {
 				.background(Color.chewFillPrimary)
 				.navigationBarTitle("Journey details", displayMode: .inline)
 				.toolbar { toolbar() }
-//				.onAppear {
-//					viewModel.send(event: .didRequestReloadIfNeeded(
-//						ref: viewModel.state.data.viewData.refreshToken,
-//						timeStatus: viewModel.state.data.viewData.time.statusOnReferenceTime(chewVM.referenceDate))
-//					)
-//				}
 				// MARK: Modifiers - onChange
 				.onChange(of: sheetType, perform: { type in
 					switch type {
@@ -98,14 +83,6 @@ struct JourneyDetailsView: View {
 						bottomSheetIsPresented = true
 					}
 				})
-//				.onReceive(viewModel.$state, perform: {
-//					switch $0.status {
-//					case .loading, .loadedJourneyData, .error, .changingSubscribingState,.loadingIfNeeded:
-//						bottomSheetIsPresented = false
-//					case .fullLeg,.loadingLocationDetails,.locationDetails,.loadingFullLeg:
-//						bottomSheetIsPresented = true
-//					}
-//				})
 			}
 		}
 	}
@@ -127,7 +104,7 @@ struct JourneyDetailsPreview : PreviewProvider {
 					)
 					JourneyDetailsView(
 						journeyDetailsViewModel: JourneyDetailsViewModel(
-							refreshToken: viewData!.refreshToken,
+							followId: nil,
 							data: viewData!,
 							depStop: .init(),
 							arrStop: .init(),

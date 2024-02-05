@@ -40,13 +40,7 @@ extension LegDetailsView {
 			// MARK: BG - colors
 			switch vm.state.data.leg.legType {
 			case .transfer,.footMiddle:
-				VStack {
-					Spacer()
-//					Color.chewFillAccent.opacity(0.6)
-//						.frame(height: vm.state.data.totalProgressHeight - 20)
-//						.cornerRadius(10)
-					Spacer()
-				}
+				EmptyView()
 			case .footStart:
 				Color.chewFillAccent.opacity(0.6)
 					.frame(height: vm.state.data.totalProgressHeight)

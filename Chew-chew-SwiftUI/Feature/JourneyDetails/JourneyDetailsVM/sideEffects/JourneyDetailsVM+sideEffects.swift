@@ -22,29 +22,36 @@ extension JourneyDetailsViewModel {
 			guard case let .changingSubscribingState(id,ref, vm) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			
 			switch state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == id}) == true {
 			case true:
+				guard let id = id else {
+					return Just(Event.didFailToChangeSubscribingState(error: Error.inputValIsNil("id"))).eraseToAnyPublisher()
+				}
+				print(">>> JDVM: whenChangingSubscribitionType: to delete",id)
 				state.data.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .deleting,
-						journeyRef: ref,
+						followId: id,
 						followData: nil,
-						journeyDetailsViewModel: vm
+						sendToJourneyDetailsViewModel: { event in
+							vm?.send(event: event)
+						}
 					)
 				)
 			case false:
 				state.data.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .adding,
-						journeyRef: ref,
+						followId : Int64(ref.hashValue),
 						followData: JourneyFollowData(
 							id : Int64(ref.hashValue),
 							journeyViewData: state.data.viewData,
 							depStop: state.data.depStop,
 							arrStop: state.data.arrStop
 						),
-						journeyDetailsViewModel: vm
+						sendToJourneyDetailsViewModel: { event in
+							vm?.send(event: event)
+						}
 					)
 				)
 			}

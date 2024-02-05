@@ -15,6 +15,7 @@ final class Model {
 	private var jdvm : [String: JourneyDetailsViewModel] = [:]
 	
 	func journeyDetailViewModel(
+		followId: Int64?,
 		for journeyRef: String,
 		viewdata : JourneyViewData,
 		stops : DepartureArrivalPair,
@@ -25,7 +26,7 @@ final class Model {
 		}
 		print("🏭 \(#function): vm not found: creating new")
 		let vm = JourneyDetailsViewModel(
-			refreshToken: journeyRef,
+			followId: followId,
 			data: viewdata,
 			depStop: stops.departure,
 			arrStop: stops.arrival,

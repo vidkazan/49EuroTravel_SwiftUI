@@ -48,7 +48,6 @@ final class LegDetailsViewModel : ObservableObject, ChewViewModelProtocol {
 	}
 	
 	deinit {
-//		print("💾🗑️ LDVM \(self.id.uuidString.suffix(4)) deinit")
 		bag.removeAll()
 	}
 	

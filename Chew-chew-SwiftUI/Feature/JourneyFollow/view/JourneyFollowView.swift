@@ -88,6 +88,7 @@ extension JourneyFollowView {
 extension JourneyFollowView {
 	func listCell(journey : JourneyFollowData) -> some View {
 		let vm = Model.shared.journeyDetailViewModel(
+			followId: journey.id,
 			for: journey.journeyViewData.refreshToken,
 			viewdata: journey.journeyViewData,
 			stops: .init(departure: journey.depStop, arrival: journey.arrStop),
@@ -103,6 +104,7 @@ extension JourneyFollowView {
 			}
 			.swipeActions(edge: .trailing) {
 				Button {
+					print(">>> start delete",journey.id)
 					vm.send(event: .didTapSubscribingButton(id: journey.id,ref: journey.journeyViewData.refreshToken, journeyDetailsViewModel: vm))
 				} label: {
 					Label("Delete", systemImage: "xmark.bin.circle")
