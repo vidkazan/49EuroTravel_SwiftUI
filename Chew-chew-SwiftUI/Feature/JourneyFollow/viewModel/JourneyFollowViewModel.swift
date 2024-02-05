@@ -96,9 +96,12 @@ extension JourneyFollowViewModel {
 		case idle
 		case editing(_ action: Action, journeyRef : String, followData : JourneyFollowData?,journeyDetailsViewModel : JourneyDetailsViewModel?)
 		case updating
+		case updatingJourney(_ viewData : JourneyViewData,_ followId : Int64)
 		
 		var description : String {
 			switch self {
+			case let .updatingJourney(viewData, _):
+				return "updatingJourney \(viewData.destination)"
 			case .error(let error):
 				return "error \(error.description)"
 			case .idle:
@@ -115,7 +118,8 @@ extension JourneyFollowViewModel {
 		case didFailToEdit(action : Action, error : any ChewError)
 		case didTapUpdate
 		case didUpdateData([JourneyFollowData])
-		case didUpdateJourney(JourneyViewData)
+		case didRequestUpdateJourney(JourneyViewData, Int64)
+		case didFailToUpdateJourney(_ error : any ChewError)
 		
 		case didTapEdit(
 			action : Action,
@@ -127,8 +131,10 @@ extension JourneyFollowViewModel {
 			
 		var description : String {
 			switch self {
-			case .didUpdateJourney(let viewData):
-				return "didUpdateJourney \(viewData.origin) \(viewData.destination)"
+			case let .didRequestUpdateJourney(viewData, _):
+				return "didRequestUpdateJourney \(viewData.origin) \(viewData.destination)"
+			case .didFailToUpdateJourney(let error):
+				return "didFailToUpdateJourney \(error.localizedDescription)"
 			case .didFailToEdit(action: let action, error: let error):
 				return "didFailToEdit: \(action): \(error)"
 			case .didEdit:

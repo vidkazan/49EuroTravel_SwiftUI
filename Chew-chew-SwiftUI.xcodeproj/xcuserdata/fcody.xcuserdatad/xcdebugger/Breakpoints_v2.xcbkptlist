@@ -318,8 +318,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyFollow/viewModel/JourneyFollowViewModel + sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "93"
-            endingLineNumber = "93"
+            startingLineNumber = "113"
+            endingLineNumber = "113"
             landmarkName = "whenEditing()"
             landmarkType = "7">
          </BreakpointContent>
@@ -334,8 +334,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyFollow/viewModel/JourneyFollowViewModel + sideEffects.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "87"
-            endingLineNumber = "87"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "whenEditing()"
             landmarkType = "7">
          </BreakpointContent>

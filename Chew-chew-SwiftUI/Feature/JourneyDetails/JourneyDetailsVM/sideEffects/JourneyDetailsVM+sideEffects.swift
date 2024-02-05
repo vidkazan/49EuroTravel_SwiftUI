@@ -87,8 +87,8 @@ extension JourneyDetailsViewModel {
 		.eraseToAnyPublisher()
 	}
 	
-	static func fetchJourneyByRefreshToken(id : Int64?,ref : String) -> (Int64?,AnyPublisher<JourneyWrapper,ApiServiceError>) {
-		return (id, ApiService().fetch(
+	static func fetchJourneyByRefreshToken(ref : String) -> (AnyPublisher<JourneyWrapper,ApiServiceError>) {
+		return ApiService().fetch(
 			JourneyWrapper.self,
 			query: Query.getQueryItems(
 				methods: [
@@ -98,7 +98,7 @@ extension JourneyDetailsViewModel {
 			),
 			type: ApiService.Requests.journeyByRefreshToken(ref: ref)
 		)
-		.eraseToAnyPublisher())
+		.eraseToAnyPublisher()
 	}
 	
 	static func whenLoadingIfNeeded() -> Feedback<State, Event> {
@@ -118,12 +118,12 @@ extension JourneyDetailsViewModel {
 	static func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			var token : String!
-			var followId : Int64?
+			var followID : Int64?
 			
 			switch state.status {
 			case let .loading(id, ref):
 				token = ref
-				followId = id
+				followID = id
 			default:
 				return Empty().eraseToAnyPublisher()
 			}
@@ -135,8 +135,7 @@ extension JourneyDetailsViewModel {
 				.eraseToAnyPublisher()
 			}
 
-			let res = Self.fetchJourneyByRefreshToken(id: followId, ref: token)
-			return res.1
+			return Self.fetchJourneyByRefreshToken(ref: token)
 				.mapError{ $0 }
 				.asyncFlatMap{ data in
 					let res = await constructJourneyViewDataAsync(
@@ -147,29 +146,10 @@ extension JourneyDetailsViewModel {
 					)
 					
 					guard let res = res else {
-						return Event.didFailedToLoadJourneyData(
-							error: Error.inputValIsNil("viewData")
-						)
+						return Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("viewData"))
 					}
-					#warning("BUG: some journeys from geoLocation doesnt save in DB")
-					switch state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == followId}) == true {
-					case true:
-						guard let id = followId else {
-							return Event.didFailedToLoadJourneyData(
-								error: Error.inputValIsNil("followId")
-							)
-						}
-						guard state.data.chewVM?.coreDataStore.updateJourney(
-							   id: id,
-							   viewData: res,
-							   depStop: state.data.depStop,
-							   arrStop: state.data.arrStop) == true else {
-							return Event.didFailedToLoadJourneyData(
-								error: CoreDataError.failedToUpdateDatabase(type: ChewJourney.self))
-						}
-						state.data.chewVM?.journeyFollowViewModel.send(event: .didUpdateJourney(res))
-					case false:
-						break
+					if let id = followID {
+						state.data.chewVM?.journeyFollowViewModel.send(event: .didRequestUpdateJourney(res, id))
 					}
 					return Event.didLoadJourneyData(data: res)
 				}

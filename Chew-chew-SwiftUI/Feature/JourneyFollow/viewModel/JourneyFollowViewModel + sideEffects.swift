@@ -15,17 +15,37 @@ extension JourneyFollowViewModel {
 		}
 	}
 	
-//	func whenUpdating() -> Feedback<State, Event> {
-//		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
-//			guard let self = self else {
-//				return Just(Event.didUpdateData(state.journeys)).eraseToAnyPublisher()
-//			}
-//			guard case .updating = state.status else {
-//				return Empty().eraseToAnyPublisher()
-//			}
-//			
-//		}
-//	}
+	func whenUpdating() -> Feedback<State, Event> {
+		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
+			guard case let .updatingJourney(viewData, followId) = state.status else {
+				return Empty().eraseToAnyPublisher()
+			}
+			guard let self = self else {
+				return Just(Event.didFailToUpdateJourney(Error.inputValIsNil("self"))).eraseToAnyPublisher()
+			}
+			
+			guard let oldViewData = state.journeys.first(where: {$0.id == followId}) else {
+				return Just(Event.didFailToUpdateJourney(Error.notFoundInFollowList(""))).eraseToAnyPublisher()
+			}
+			
+			guard self.coreDataStore?.updateJourney(
+				   id: followId,
+				   viewData: viewData,
+				   depStop: oldViewData.depStop,
+				   arrStop: oldViewData.arrStop) == true else {
+				return Just(Event.didFailToUpdateJourney(CoreDataError.failedToUpdateDatabase(type: ChewJourney.self))).eraseToAnyPublisher()
+			}
+			
+			var followData = state.journeys.filter({$0.id != followId})
+			followData.append(JourneyFollowData(
+				id: oldViewData.id,
+				journeyViewData: viewData,
+				depStop: oldViewData.depStop,
+				arrStop: oldViewData.arrStop
+			))
+			return Just(Event.didUpdateData(followData)).eraseToAnyPublisher()
+		}
+	}
 	func whenEditing() -> Feedback<State, Event> {
 		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
 			guard case .editing(let action,let ref, let viewData,let vm) = state.status else {

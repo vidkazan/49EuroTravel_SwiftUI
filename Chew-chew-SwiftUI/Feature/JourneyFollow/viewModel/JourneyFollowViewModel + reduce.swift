@@ -12,29 +12,32 @@ extension JourneyFollowViewModel {
 	func reduce(_ state: State, _ event: Event) -> State {
 		print("📌🔥 > :",event.description,"state:",state.status.description)
 		switch state.status {
+		case .updatingJourney:
+			switch event {
+			case .didUpdateData(let data):
+				return State(journeys: data, status: .idle)
+			case .didFailToUpdateJourney:
+				return State(journeys: state.journeys, status: .idle)
+			
+			case .didFailToEdit,
+			 .didTapUpdate,
+			 .didRequestUpdateJourney,
+			 .didTapEdit,
+			 .didEdit:
+				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+				return state
+			}
 		case .idle,.error:
 			switch event {
 			case .didEdit,.didFailToEdit:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
-			case .didTapUpdate:
+			case .didTapUpdate,.didFailToUpdateJourney:
 				return state
 			case .didUpdateData(let data):
 				return State(
 					journeys: data,
 					status: .idle
-				)
-			case .didUpdateJourney(let viewData):
-				guard let oldViewData = state.journeys.first(where: {$0.id == Int64(viewData.refreshToken)}) else {
-					#warning("error here is not handling")
-					return state
-				}
-				var followData = state.journeys.filter({$0.id != Int64(viewData.refreshToken)})
-				followData.append(JourneyFollowData(id: oldViewData.id, journeyViewData: viewData, depStop: oldViewData.depStop, arrStop: oldViewData.arrStop))
-				
-				return State(
-					journeys: followData,
-					status: state.status
 				)
 			case .didTapEdit(action: let action, journeyRef: let ref, let data, let vm):
 				return State(
@@ -46,46 +49,39 @@ extension JourneyFollowViewModel {
 						journeyDetailsViewModel: vm
 					)
 				)
+			case let .didRequestUpdateJourney(viewData, followId):
+				return State(journeys: state.journeys, status: .updatingJourney(viewData, followId))
+				
 			}
 		case .updating:
 			switch event {
-			case .didFailToEdit:
-				return state
 			case .didUpdateData(let data):
 				return State(
 					journeys: data,
 					status: .idle
 				)
-			case .didEdit,.didUpdateJourney:
+			case .didEdit,
+				.didTapUpdate,
+				.didRequestUpdateJourney,
+				.didFailToUpdateJourney,
+				.didFailToEdit,
+				.didTapEdit:
 				return state
-			case .didTapUpdate:
-				return state
-			case .didTapEdit(action: let action, journeyRef: let ref,let data, let vm):
-				return State(
-					journeys: state.journeys,
-					status: .editing(
-						action,
-						journeyRef: ref,
-						followData: data,
-						journeyDetailsViewModel: vm
-					)
-				)
 			}
 		case .editing:
 			switch event {
-			case .didUpdateJourney:
+			case
+				.didRequestUpdateJourney,
+				.didFailToUpdateJourney,
+				.didTapUpdate,
+				.didUpdateData,
+				.didTapEdit:
 				return state
 			case .didFailToEdit:
 				return State(
 					journeys: state.journeys,
 					status: .idle
 				)
-			case .didTapUpdate:
-				return state
-			case .didUpdateData:
-				return state
-			case .didTapEdit:
-				return state
 			case .didEdit(let data):
 				return State(
 					journeys: data,
