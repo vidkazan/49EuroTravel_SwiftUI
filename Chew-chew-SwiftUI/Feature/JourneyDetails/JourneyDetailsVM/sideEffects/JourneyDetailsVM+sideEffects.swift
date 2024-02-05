@@ -24,9 +24,6 @@ extension JourneyDetailsViewModel {
 			}
 			switch state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == id}) == true {
 			case true:
-//				guard let id = id else {
-//					return Just(Event.didFailToChangeSubscribingState(error: Error.inputValIsNil("id"))).eraseToAnyPublisher()
-//				}
 				state.data.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .deleting,
@@ -154,9 +151,10 @@ extension JourneyDetailsViewModel {
 					guard let res = res else {
 						return Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("viewData"))
 					}
-//					if let id = followID {
+					if state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == followID}) == true {
 						state.data.chewVM?.journeyFollowViewModel.send(event: .didRequestUpdateJourney(res, followID))
-//					}
+					}
+					
 					return Event.didLoadJourneyData(data: res)
 				}
 				.catch {

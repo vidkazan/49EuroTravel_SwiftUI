@@ -227,8 +227,8 @@ extension TimeContainer {
 	}
 	
 	func statusOnReferenceTime(_ referenceTime : ChewDate) -> Status {
-		let departureTS = (self.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0)
-		let arrivalTS = (self.timestamp.arrival.actualOrPlannedIfActualIsNil() ?? 0)
+		let departureTS = (self.timestamp.departure.actualOrPlannedIfActualIsNil() ?? .greatestFiniteMagnitude)
+		let arrivalTS = (self.timestamp.arrival.actualOrPlannedIfActualIsNil() ?? .greatestFiniteMagnitude)
 		
 		let day = departureTS - 24 * 60 * 60
 		let hour = departureTS - 1 * 60 * 60
