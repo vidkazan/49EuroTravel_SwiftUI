@@ -103,7 +103,7 @@ struct FollowCellPreviews: PreviewProvider {
 			   realtimeDataUpdatedAt: Date.now.timeIntervalSince1970 - 10000
 		   ){
 			JourneyFollowCellView(journeyDetailsViewModel: .init(
-				followId: nil,
+				followId: 0,
 				data: viewData,
 				depStop: .init(),
 				arrStop: .init(),

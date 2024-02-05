@@ -19,14 +19,14 @@ extension JourneyDetailsViewModel {
 	
 	static 	func whenChangingSubscribitionType() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case let .changingSubscribingState(id,ref, vm) = state.status else {
+			guard case let .changingSubscribingState(id,_, vm) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
 			switch state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == id}) == true {
 			case true:
-				guard let id = id else {
-					return Just(Event.didFailToChangeSubscribingState(error: Error.inputValIsNil("id"))).eraseToAnyPublisher()
-				}
+//				guard let id = id else {
+//					return Just(Event.didFailToChangeSubscribingState(error: Error.inputValIsNil("id"))).eraseToAnyPublisher()
+//				}
 				state.data.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .deleting,
@@ -41,9 +41,9 @@ extension JourneyDetailsViewModel {
 				state.data.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .adding,
-						followId : Int64(ref.hashValue),
+						followId : id,
 						followData: JourneyFollowData(
-							id : Int64(ref.hashValue),
+							id : id,
 							journeyViewData: state.data.viewData,
 							depStop: state.data.depStop,
 							arrStop: state.data.arrStop
@@ -124,7 +124,7 @@ extension JourneyDetailsViewModel {
 	static func whenLoadingJourneyByRefreshToken() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			var token : String!
-			var followID : Int64?
+			var followID : Int64
 			
 			switch state.status {
 			case let .loading(id, ref):
@@ -154,10 +154,9 @@ extension JourneyDetailsViewModel {
 					guard let res = res else {
 						return Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("viewData"))
 					}
-					if let id = followID {
-						print(">>> JDVM: whenLoadingJourneyByRefreshToken: to delete",id)
-						state.data.chewVM?.journeyFollowViewModel.send(event: .didRequestUpdateJourney(res, id))
-					}
+//					if let id = followID {
+						state.data.chewVM?.journeyFollowViewModel.send(event: .didRequestUpdateJourney(res, followID))
+//					}
 					return Event.didLoadJourneyData(data: res)
 				}
 				.catch {

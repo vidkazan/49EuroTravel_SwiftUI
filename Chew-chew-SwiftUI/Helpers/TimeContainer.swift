@@ -232,15 +232,14 @@ extension TimeContainer {
 		
 		let day = departureTS - 24 * 60 * 60
 		let hour = departureTS - 1 * 60 * 60
-		let now = departureTS
 		switch referenceTime.ts {
 		case 0...day:
 			return .ongoingFar
 		case day...hour:
 			return .ongoing
-		case hour...now:
+		case hour...(departureTS-60):
 			return .ongoingSoon
-		case departureTS...arrivalTS:
+		case (departureTS-60)...(arrivalTS+60):
 			return .active
 		default:
 			return .past

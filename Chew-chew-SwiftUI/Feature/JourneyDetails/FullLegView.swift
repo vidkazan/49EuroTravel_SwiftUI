@@ -194,7 +194,7 @@ struct Preview : PreviewProvider {
 		   let viewData = constructLegData(leg: mock, firstTS: .now, lastTS: .now, legs: [mock]) {
 			FullLegSheet(
 				journeyViewModel: .init(
-					followId: nil,
+					followId: 0,
 					data: .init(journeyRef: "", badges: [], sunEvents: [], legs: [], depStopName: nil, arrStopName: nil, time: .init(), updatedAt: 0),
 					depStop: .init(),
 					arrStop: .init(),

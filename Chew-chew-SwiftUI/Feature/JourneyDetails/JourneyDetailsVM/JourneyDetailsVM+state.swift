@@ -21,7 +21,6 @@ extension JourneyDetailsViewModel {
 		}
 		case inputValIsNil(_ msg: String)
 		
-		
 		var description : String  {
 			switch self {
 			case .inputValIsNil(let msg):
@@ -41,15 +40,15 @@ extension JourneyDetailsViewModel {
 			lhs.viewData == rhs.viewData
 		}
 		
-		let id : Int64?
+		let id : Int64
 		weak var chewVM : ChewViewModel?
 		let depStop : Stop
 		let arrStop : Stop
 		let viewData : JourneyViewData
 		
 		
-		init(depStop: Stop, arrStop: Stop, viewData: JourneyViewData, chewVM : ChewViewModel?) {
-			self.id = Int64(viewData.refreshToken.hashValue)
+		init(followId: Int64,depStop: Stop, arrStop: Stop, viewData: JourneyViewData, chewVM : ChewViewModel?) {
+			self.id = followId
 			self.depStop = depStop
 			self.arrStop = arrStop
 			self.viewData = viewData
@@ -84,8 +83,9 @@ extension JourneyDetailsViewModel {
 			self.status = status
 		}
 		
-		init(chewVM : ChewViewModel?,depStop: Stop, arrStop: Stop,viewData: JourneyViewData, status: Status) {
+		init(followId: Int64,chewVM : ChewViewModel?,depStop: Stop, arrStop: Stop,viewData: JourneyViewData, status: Status) {
 			self.data = StateData(
+				followId: followId,
 				depStop: depStop,
 				arrStop: arrStop,
 				viewData: viewData,
@@ -99,8 +99,8 @@ extension JourneyDetailsViewModel {
 		static func == (lhs: JourneyDetailsViewModel.Status, rhs: JourneyDetailsViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
-		case loading(id : Int64?,token : String)
-		case loadingIfNeeded(id : Int64?,token : String,timeStatus: TimeContainer.Status)
+		case loading(id : Int64,token : String)
+		case loadingIfNeeded(id : Int64,token : String,timeStatus: TimeContainer.Status)
 		case loadedJourneyData
 		case error(error : any ChewError)
 		case loadingLocationDetails(leg : LegViewData)
@@ -112,7 +112,7 @@ extension JourneyDetailsViewModel {
 		case fullLeg(leg : LegViewData)
 		case loadingFullLeg(leg : LegViewData)
 		
-		case changingSubscribingState(id: Int64?, ref : String, journeyDetailsViewModel: JourneyDetailsViewModel?)
+		case changingSubscribingState(id: Int64, ref : String, journeyDetailsViewModel: JourneyDetailsViewModel?)
 		
 		var description : String {
 			switch self {
@@ -145,9 +145,9 @@ extension JourneyDetailsViewModel {
 		case didFailedToLoadJourneyData(error : any ChewError)
 		
 		
-		case didRequestReloadIfNeeded(id: Int64?, ref : String,timeStatus: TimeContainer.Status)
-		case didTapReloadButton(id : Int64?, ref : String)
-		case didTapSubscribingButton(id : Int64?, ref : String,journeyDetailsViewModel: JourneyDetailsViewModel?)
+		case didRequestReloadIfNeeded(id: Int64, ref : String,timeStatus: TimeContainer.Status)
+		case didTapReloadButton(id : Int64, ref : String)
+		case didTapSubscribingButton(id : Int64, ref : String,journeyDetailsViewModel: JourneyDetailsViewModel?)
 		
 		case didLoadLocationDetails(
 			coordRegion : MKCoordinateRegion,

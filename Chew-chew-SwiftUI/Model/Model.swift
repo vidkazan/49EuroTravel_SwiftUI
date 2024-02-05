@@ -15,7 +15,7 @@ final class Model {
 	private var jdvm : [String: JourneyDetailsViewModel] = [:]
 	
 	func journeyDetailViewModel(
-		followId: Int64?,
+		followId: Int64,
 		for journeyRef: String,
 		viewdata : JourneyViewData,
 		stops : DepartureArrivalPair,

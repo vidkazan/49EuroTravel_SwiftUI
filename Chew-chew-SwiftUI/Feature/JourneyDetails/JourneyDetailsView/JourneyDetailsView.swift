@@ -105,7 +105,7 @@ struct JourneyDetailsPreview : PreviewProvider {
 					)
 					JourneyDetailsView(
 						journeyDetailsViewModel: JourneyDetailsViewModel(
-							followId: nil,
+							followId: 0,
 							data: viewData!,
 							depStop: .init(),
 							arrStop: .init(),

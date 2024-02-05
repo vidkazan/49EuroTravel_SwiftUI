@@ -24,7 +24,7 @@ struct JourneyCell: View {
 			NavigationLink(destination: {
 				NavigationLazyView(JourneyDetailsView(
 					journeyDetailsViewModel: Model.shared.journeyDetailViewModel(
-						followId: nil,
+						followId: chewVM.journeyFollowViewModel.state.journeys.first(where: {$0.journeyViewData.refreshToken == journey.refreshToken})?.id ?? Int64(journey.refreshToken.hashValue),
 						for: journey.refreshToken,
 						viewdata: journey,
 						stops: stops,

@@ -18,7 +18,7 @@ final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	init (
-		followId: Int64?,
+		followId: Int64,
 		data: JourneyViewData,
 		depStop : Stop,
 		arrStop : Stop,
@@ -27,6 +27,7 @@ final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol {
 	) {
 //		print("💾 JDVM \(self.id.uuidString.suffix(4)) init")
 		state = State(
+			followId: followId,
 			chewVM : chewVM,
 			depStop: depStop,
 			arrStop: arrStop,
