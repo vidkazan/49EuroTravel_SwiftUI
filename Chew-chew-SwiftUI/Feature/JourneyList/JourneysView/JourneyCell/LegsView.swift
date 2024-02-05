@@ -7,7 +7,41 @@
 
 import SwiftUI
 
-struct LegsView: View {
+struct LegsView : View {
+	@EnvironmentObject var chewVM : ChewViewModel
+	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+	var journey : JourneyViewData?
+	var gradientStops : [Gradient.Stop]
+	var gradientStopsForProgressLine : [Gradient.Stop]
+	var showProgressBar : Bool
+
+	@State var legViewDidExpanded = false
+	
+	init(journey: JourneyViewData?,progressBar: Bool) {
+		self.journey = journey
+		self.showProgressBar = progressBar
+		self.gradientStops = journey?.sunEventsGradientStops ?? []
+		self.gradientStopsForProgressLine = gradientStops
+	}
+	var body: some View {
+//		Group {
+//			switch legViewDidExpanded {
+//			case true:
+//				ScrollView(.horizontal) {
+//					LegsViewInner(journey: journey, progressBar: showProgressBar)
+//						.aspectRatio(8,contentMode: .fill)
+//				}
+//			case false:
+				LegsViewInner(journey: journey, progressBar: showProgressBar)
+//			}
+//		}
+//		.onTapGesture {
+//			legViewDidExpanded.toggle()
+//		}
+	}
+}
+
+struct LegsViewInner: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	var journey : JourneyViewData?
@@ -22,70 +56,68 @@ struct LegsView: View {
 		self.gradientStops = journey?.sunEventsGradientStops ?? []
 		self.gradientStopsForProgressLine = gradientStops
 	}
+	
 	var body: some View {
 		VStack {
-			GeometryReader { geo in
-				ZStack {
-					SunEventsGradient(
-						gradientStops:  journey?.legs.allSatisfy({$0.isReachable == true}) == true ? gradientStops : nil,
-						size: geo.size,
-						progressLineProportion: nil
-					)
-					if let journey = journey {
-						ForEach(journey.legs) { leg in
-							LegViewBG(leg: leg)
-							.frame(
-								width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
-								height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
-							.position(
-								x : geo.size.width * (
-									leg.legTopPosition + (
-										( leg.legBottomPosition - leg.legTopPosition ) / 2
+			VStack {
+				GeometryReader { geo in
+					ZStack {
+						SunEventsGradient(
+							gradientStops:  journey?.legs.allSatisfy({$0.isReachable == true}) == true ? gradientStops : nil,
+							size: geo.size,
+							progressLineProportion: nil
+						)
+						if let journey = journey {
+							ForEach(journey.legs) { leg in
+								LegViewBG(leg: leg)
+									.frame(
+										width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
+										height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
+									.position(
+										x : geo.size.width * (
+											leg.legTopPosition + (
+												( leg.legBottomPosition - leg.legTopPosition ) / 2
+											)
+										),
+										y: geo.size.height/2
 									)
-								),
-								y: geo.size.height/2
-							)
-							.opacity(0.90)
+									.opacity(0.90)
+							}
 						}
-					}
-					if showProgressBar {
-						RoundedRectangle(cornerRadius: 2)
-							.fill(Color.chewFillGreenSecondary)
-							.frame(
-								width: progressLineProportion > 0 && progressLineProportion < 1 ? 3 : 0,
-								height: 40
-							)
-							.position(
-								x : geo.size.width * progressLineProportion,
-								y : geo.size.height/2
-							)
-							.cornerRadius(5)
-//						SunEventsGradient(
-//							gradientStops: gradientStops,
-//							size: geo.size,
-//							progressLineProportion: progressLineProportion
-//						)
-					}
-					if let journey = journey {
-						ForEach(journey.legs) { leg in
-							LegViewLabels(leg: leg)
+						if showProgressBar {
+							RoundedRectangle(cornerRadius: 2)
+								.fill(Color.chewFillGreenSecondary)
 								.frame(
-									width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
-									height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
-								.position(
-									x : geo.size.width * (
-										leg.legTopPosition + (
-											( leg.legBottomPosition - leg.legTopPosition ) / 2
-										)
-									),
-									y: geo.size.height/2
+									width: progressLineProportion > 0 && progressLineProportion < 1 ? 3 : 0,
+									height: 40
 								)
-								.opacity(0.90)
+								.position(
+									x : geo.size.width * progressLineProportion,
+									y : geo.size.height/2
+								)
+								.cornerRadius(5)
+						}
+						if let journey = journey {
+							ForEach(journey.legs) { leg in
+								LegViewLabels(leg: leg)
+									.frame(
+										width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
+										height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
+									.position(
+										x : geo.size.width * (
+											leg.legTopPosition + (
+												( leg.legBottomPosition - leg.legTopPosition ) / 2
+											)
+										),
+										y: geo.size.height/2
+									)
+									.opacity(0.90)
+							}
 						}
 					}
-				}	
+				}
+				.frame(height: 40)
 			}
-			.frame(height:40)
 		}
 		.onReceive(timer, perform: { _ in
 			self.progressLineProportion = Self.getProgressLineProportion(
@@ -102,7 +134,7 @@ struct LegsView: View {
 	}
 }
 
-extension LegsView {
+extension LegsViewInner {
 	static func getProgressLineProportion(
 		departureTS : Double?,
 		arrivalTS : Double?,

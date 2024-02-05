@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 struct JourneyFollowCellView : View {
-	let timer = Timer.publish(every: 70, on: .main, in: .common).autoconnect()
+	let timer = Timer.publish(every: 5 , on: .main, in: .common).autoconnect()
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var vm : JourneyDetailsViewModel
 	@State var isLoading : Bool = false

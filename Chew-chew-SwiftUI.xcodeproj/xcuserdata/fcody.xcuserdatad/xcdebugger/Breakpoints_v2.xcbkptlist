@@ -343,54 +343,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D08BC3B6-0738-4D83-BBA3-37A51CCACEB0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneysView/JourneyCell/LegsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
-            landmarkName = "body"
-            landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "D08BC3B6-0738-4D83-BBA3-37A51CCACEB0 - 64eb80be1befb17e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Chew_chew_SwiftUI.LegViewData) -&gt; &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.SunEventsGradient, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;&gt;, Swift.Optional&lt;Chew_chew_SwiftUI.SunEventsGradient&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;&gt;)&gt; in closure #1 (SwiftUI.GeometryProxy) -&gt; SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.SunEventsGradient, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;&gt;, Swift.Optional&lt;Chew_chew_SwiftUI.SunEventsGradient&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;&gt;)&gt;&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0 in Chew_chew_SwiftUI.LegsView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyList/JourneysView/JourneyCell/LegsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "732">
-               </Location>
-               <Location
-                  uuid = "D08BC3B6-0738-4D83-BBA3-37A51CCACEB0 - 64eb80be1befb17e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Chew_chew_SwiftUI.LegViewData) -&gt; &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.SunEventsGradient, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;&gt;, Swift.Optional&lt;Chew_chew_SwiftUI.SunEventsGradient&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;&gt;)&gt; in closure #1 (SwiftUI.GeometryProxy) -&gt; SwiftUI.ZStack&lt;SwiftUI.TupleView&lt;(Chew_chew_SwiftUI.SunEventsGradient, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;&gt;, Swift.Optional&lt;Chew_chew_SwiftUI.SunEventsGradient&gt;, Swift.Optional&lt;SwiftUI.ForEach&lt;Swift.Array&lt;Chew_chew_SwiftUI.LegViewData&gt;, Foundation.UUID, &lt;&lt;opaque return type of SwiftUI.View.opacity(Swift.Double) -&gt; some&gt;&gt;.0&gt;&gt;)&gt;&gt; in closure #1 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0 in Chew_chew_SwiftUI.LegsView.body.getter : some"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneyList/JourneysView/JourneyCell/LegsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "39"
-                  endingLineNumber = "39"
-                  offsetFromSymbolStart = "508">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "CC6C024B-2D08-43FB-B8AC-446B04AB12A1"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -398,8 +350,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneysView/JourneyCell/LegsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -418,6 +370,22 @@
             endingLineNumber = "259"
             landmarkName = "constructLegDataThrows(leg:firstTS:lastTS:legs:)"
             landmarkType = "9">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2C3EBB47-8C83-41B5-A4F7-79863EA348A3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneyList/JourneysView/JourneyCell/LegsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "98"
+            endingLineNumber = "98"
+            landmarkName = "body"
+            landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
