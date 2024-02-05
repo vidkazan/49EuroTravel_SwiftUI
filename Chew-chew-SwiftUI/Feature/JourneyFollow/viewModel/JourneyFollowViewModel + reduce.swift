@@ -60,12 +60,21 @@ extension JourneyFollowViewModel {
 					journeys: data,
 					status: .idle
 				)
+			case .didTapEdit(action: let action, journeyRef: let ref, let data, let vm):
+				return State(
+					journeys: state.journeys,
+					status: .editing(
+						action,
+						journeyRef: ref,
+						followData: data,
+						journeyDetailsViewModel: vm
+					)
+				)
 			case .didEdit,
 				.didTapUpdate,
 				.didRequestUpdateJourney,
 				.didFailToUpdateJourney,
-				.didFailToEdit,
-				.didTapEdit:
+				.didFailToEdit:
 				return state
 			}
 		case .editing:

@@ -47,7 +47,8 @@ final class JourneyFollowViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenEditing()
+				self.whenEditing(),
+				self.whenUpdatingJourney()
 			],
 			name: "JFVM"
 		)

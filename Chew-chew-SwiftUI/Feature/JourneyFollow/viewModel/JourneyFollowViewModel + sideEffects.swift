@@ -15,7 +15,7 @@ extension JourneyFollowViewModel {
 		}
 	}
 	
-	func whenUpdating() -> Feedback<State, Event> {
+	func whenUpdatingJourney() -> Feedback<State, Event> {
 		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
 			guard case let .updatingJourney(viewData, followId) = state.status else {
 				return Empty().eraseToAnyPublisher()
@@ -37,6 +37,7 @@ extension JourneyFollowViewModel {
 			}
 			
 			var followData = state.journeys.filter({$0.id != followId})
+			
 			followData.append(JourneyFollowData(
 				id: oldViewData.id,
 				journeyViewData: viewData,
