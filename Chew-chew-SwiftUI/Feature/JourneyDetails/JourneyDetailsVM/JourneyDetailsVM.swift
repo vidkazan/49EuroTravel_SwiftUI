@@ -22,7 +22,8 @@ final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol {
 		data: JourneyViewData,
 		depStop : Stop,
 		arrStop : Stop,
-		chewVM : ChewViewModel?
+		chewVM : ChewViewModel?,
+		initialStatus : Status = .loadedJourneyData
 	) {
 //		print("💾 JDVM \(self.id.uuidString.suffix(4)) init")
 		state = State(
@@ -30,7 +31,7 @@ final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol {
 			depStop: depStop,
 			arrStop: arrStop,
 			viewData: data,
-			status: .loadedJourneyData
+			status: initialStatus
 		)
 		
 		Publishers.system(

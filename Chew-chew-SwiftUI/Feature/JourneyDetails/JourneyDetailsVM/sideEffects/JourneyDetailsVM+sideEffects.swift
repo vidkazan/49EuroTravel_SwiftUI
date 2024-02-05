@@ -27,7 +27,6 @@ extension JourneyDetailsViewModel {
 				guard let id = id else {
 					return Just(Event.didFailToChangeSubscribingState(error: Error.inputValIsNil("id"))).eraseToAnyPublisher()
 				}
-				print(">>> JDVM: whenChangingSubscribitionType: to delete",id)
 				state.data.chewVM?.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .deleting,
@@ -156,6 +155,7 @@ extension JourneyDetailsViewModel {
 						return Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("viewData"))
 					}
 					if let id = followID {
+						print(">>> JDVM: whenLoadingJourneyByRefreshToken: to delete",id)
 						state.data.chewVM?.journeyFollowViewModel.send(event: .didRequestUpdateJourney(res, id))
 					}
 					return Event.didLoadJourneyData(data: res)

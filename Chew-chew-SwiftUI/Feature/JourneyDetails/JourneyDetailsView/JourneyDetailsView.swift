@@ -57,7 +57,7 @@ struct JourneyDetailsView: View {
 							switch sheetType {
 							case .fullLeg:
 								FullLegSheet(
-									viewModel: viewModel,
+									journeyViewModel: viewModel,
 									closeSheet: { sheetType = .none }
 								)
 							case .map:

@@ -33,11 +33,6 @@ struct LegDetailsView: View {
 		self.leg = leg
 		self.followedJourney = followedJourney
 		self.sendToJourneyVM = send
-		self.currentProgressHeight = leg.progressSegments.evaluate(
-			time: Date.now.timeIntervalSince1970,
-			type: isExpanded
-		)
-		self.totalProgressHeight = leg.progressSegments.heightTotal(isExpanded)
 		self.isExpanded = isExpanded
 	}
 	
