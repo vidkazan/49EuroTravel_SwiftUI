@@ -18,7 +18,7 @@ extension LegDetailsView {
 				HStack(alignment: .top) {
 					Rectangle()
 						.fill(Color.chewProgressLineGray)
-						.frame(width: 20,height:  vm.state.data.totalProgressHeight)
+						.frame(width: 20,height:  totalProgressHeight)
 						.padding(.leading,25)
 					Spacer()
 				}
@@ -27,7 +27,7 @@ extension LegDetailsView {
 			VStack {
 				HStack(alignment: .top) {
 					RoundedRectangle(
-						cornerRadius : vm.state.data.totalProgressHeight == currentProgressHeight ? 0 : 6
+						cornerRadius : totalProgressHeight == currentProgressHeight ? 0 : 6
 					)
 					.fill(Color.chewFillGreenPrimary)
 						.frame(width: 22,height: currentProgressHeight)
@@ -38,17 +38,17 @@ extension LegDetailsView {
 			}
 			.shadow(radius: 2)
 			// MARK: BG - colors
-			switch vm.state.data.leg.legType {
+			switch leg.legType {
 			case .transfer,.footMiddle:
 				EmptyView()
 			case .footStart:
 				Color.chewFillAccent.opacity(0.6)
-					.frame(height: vm.state.data.totalProgressHeight)
+					.frame(height: totalProgressHeight)
 					.cornerRadius(10)
 					.offset(y: -10)
 			case .footEnd:
 				Color.chewFillAccent.opacity(0.6)
-					.frame(height: vm.state.data.totalProgressHeight)
+					.frame(height: totalProgressHeight)
 					.cornerRadius(10)
 					.offset(y: 10)
 			case .line:

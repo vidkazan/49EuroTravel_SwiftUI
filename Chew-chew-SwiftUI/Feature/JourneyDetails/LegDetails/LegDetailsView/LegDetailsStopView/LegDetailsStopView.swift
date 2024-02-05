@@ -10,8 +10,7 @@ import SwiftUI
 
 struct LegStopView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var vm : LegDetailsViewModel
-	
+	@State var shevronIsExpanded : Segments.EvalType = .collapsed
 	static let timeLabelColor = Color.chewTimeLabelGray
 	let legViewData : LegViewData
 	let stopOver : StopViewData
@@ -40,28 +39,30 @@ struct LegStopView : View {
 extension LegStopView {
 	init(
 		type : StopOverType,
-		vm : LegDetailsViewModel,
+//		vm : LegDetailsViewModel,
 		stopOver : StopViewData,
 		leg : LegViewData,
-		showBadges : Bool
+		showBadges : Bool,
+		shevronIsExpanded : Segments.EvalType
 	) {
 		self.showBadges = showBadges
 		self.stopOver = stopOver
 		self.stopOverType = type
 		self.legViewData = leg
-		self.vm = vm
+		self.shevronIsExpanded = shevronIsExpanded
 	}
 	init(
-		vm : LegDetailsViewModel,
+//		vm : LegDetailsViewModel,
 		stopOver : StopViewData,
 		leg : LegViewData,
-		showBadges : Bool
+		showBadges : Bool,
+		shevronIsExpanded : Segments.EvalType
 	) {
 		self.showBadges = showBadges
-		self.vm = vm
 		self.stopOver = stopOver
 		self.stopOverType = stopOver.stopOverType
 		self.legViewData = leg
+		self.shevronIsExpanded = shevronIsExpanded
 	}
 }
 
@@ -83,10 +84,10 @@ struct LegDetailsStopPreview : PreviewProvider {
 							ForEach(StopOverType.allCases, id: \.rawValue, content: { type in
 								LegStopView(
 									type: type,
-									vm: .init(leg: viewData),
 									stopOver: leg,
 									leg: viewData,
-									showBadges: true
+									showBadges: true,
+									shevronIsExpanded: .collapsed
 								)
 								.environmentObject(
 									ChewViewModel(

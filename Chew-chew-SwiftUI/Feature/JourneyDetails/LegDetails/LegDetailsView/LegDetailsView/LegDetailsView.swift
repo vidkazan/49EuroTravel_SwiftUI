@@ -12,8 +12,10 @@ import MapKit
 
 struct LegDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var vm : LegDetailsViewModel
+	@State var isExpanded : Segments.EvalType = .collapsed
+	@State var totalProgressHeight : Double = 0
 	@State var currentProgressHeight : Double = 0
+	let leg : LegViewData
 	let openSheet : (JourneyDetailsView.SheetType, LegViewData) -> Void
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	let followedJourney : Bool
@@ -22,65 +24,68 @@ struct LegDetailsView: View {
 	init(
 		followedJourney: Bool = false,
 		send : @escaping (JourneyDetailsViewModel.Event) -> Void,
-		vm : LegDetailsViewModel,
 		referenceDate : ChewDate,
-		openSheet : @escaping (JourneyDetailsView.SheetType,LegViewData) -> Void
+		openSheet : @escaping (JourneyDetailsView.SheetType,LegViewData) -> Void,
+		isExpanded : Segments.EvalType,
+		leg : LegViewData
 	) {
-		self.vm = vm
+		self.openSheet = openSheet
+		self.leg = leg
 		self.followedJourney = followedJourney
 		self.sendToJourneyVM = send
-		self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(
-			time: referenceDate.ts,
-			type: vm.state.status.evalType
+		self.currentProgressHeight = leg.progressSegments.evaluate(
+			time: Date.now.timeIntervalSince1970,
+			type: isExpanded
 		)
-		self.openSheet = openSheet
+		self.totalProgressHeight = leg.progressSegments.heightTotal(isExpanded)
+		self.isExpanded = isExpanded
 	}
 	
 	var body : some View {
 		VStack {
 			VStack(spacing: 0) {
 				// MARK: Stop foot + transfer
-				switch vm.state.data.leg.legType {
+				switch leg.legType {
 				case .transfer,.footMiddle,.footStart:
-					if let stop = vm.state.data.leg.legStopsViewData.first {
+					if let stop = leg.legStopsViewData.first {
 						LegStopView(
 							type: stop.stopOverType,
-							vm: vm,
 							stopOver: stop,
-							leg: vm.state.data.leg,
-							showBadges : !followedJourney
+							leg: leg,
+							showBadges : !followedJourney,
+							shevronIsExpanded: isExpanded
 						)
 					}
 				case .footEnd:
-					if let stop = vm.state.data.leg.legStopsViewData.last {
+					if let stop = leg.legStopsViewData.last {
 						LegStopView(
-							vm: vm,
 							stopOver: stop,
-							leg: vm.state.data.leg,
-							showBadges : !followedJourney
+							leg: leg,
+							showBadges : !followedJourney,
+							shevronIsExpanded: isExpanded
 						)
 						.padding(.bottom,10)
 					}
 				// MARK: Stop line
 				case .line:
 					let stops : [StopViewData] = {
-						switch vm.state.status {
-						case .stopovers:
-							return vm.state.data.leg.legStopsViewData
-						default:
-							if let first = vm.state.data.leg.legStopsViewData.first,
-							   let last = vm.state.data.leg.legStopsViewData.last {
-								return [first,last]
-							}
+						switch isExpanded {
+						case .expanded:
+							return leg.legStopsViewData
+						case .collapsed:
+							if let first = leg.legStopsViewData.first,
+								let last = leg.legStopsViewData.last {
+									return [first,last]
+								}
 							return []
 						}
 					}()
 					ForEach(stops) { stop in
 						LegStopView(
-							vm: vm,
 							stopOver: stop,
-							leg: vm.state.data.leg,
-							showBadges : !followedJourney
+							leg: leg,
+							showBadges : !followedJourney,
+							shevronIsExpanded: isExpanded
 						)
 					}
 				}
@@ -88,19 +93,17 @@ struct LegDetailsView: View {
 			.background { background }
 		}
 		// MARK: 🤢
-		.padding(.top,vm.state.data.leg.legType == LegViewData.LegType.line || vm.state.data.leg.legType.caseDescription == "footStart" ?  10 : 0)
-		.background(vm.state.data.leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
+		.padding(.top,leg.legType == LegViewData.LegType.line || leg.legType.caseDescription == "footStart" ?  10 : 0)
+		.background(leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
 		.overlay(alignment: .topTrailing) {
 			Menu(content: {
 				Button(action: {
-//					sendToJourneyVM?(.didTapBottomSheetDetails(leg: vm.state.data.leg, type: .locationDetails))
-					openSheet(.map,vm.state.data.leg)
+					openSheet(.map,leg)
 				}, label: {
 					Label("Show on map", systemImage: "map.circle")
 				})
 				Button(action: {
-//					sendToJourneyVM?(.didTapBottomSheetDetails(leg: vm.state.data.leg, type: .fullLeg))
-					openSheet(.fullLeg,vm.state.data.leg)
+					openSheet(.fullLeg,leg)
 				}, label: {
 					Label("Show full segment", systemImage: ChewSFSymbols.trainSideFrontCar.rawValue)
 				})
@@ -113,26 +116,36 @@ struct LegDetailsView: View {
 		}
 		.cornerRadius(10)
 		.onAppear {
-			self.currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(time: chewVM.referenceDate.ts , type: vm.state.status.evalType)
+			updateProgressHeight()
 		}
-		.onReceive(timer, perform: { timer in
-			currentProgressHeight = vm.state.data.leg.progressSegments.evaluate(
-				time: chewVM.referenceDate.ts,
-				type: vm.state.status.evalType
-			)
+		.onReceive(timer, perform: { _ in
+			updateProgressHeight()
 		})
-		.onReceive(vm.$state, perform: { state in
-			currentProgressHeight = state.data.currentProgressHeight
+		.onChange(of: isExpanded, perform: { _ in
+			updateProgressHeight()
 		})
 		.onTapGesture {
-			if vm.state.data.leg.legType == .line {
-				vm.send(event: .didTapExpandButton(refTimeTS: chewVM.referenceDate.ts))
-			}
+			isExpanded = {
+				switch isExpanded {
+				case .collapsed:
+					return .expanded
+				case .expanded:
+					return .collapsed
+				}
+			}()
 		}
 	}
 }
 
-
+extension LegDetailsView {
+	func updateProgressHeight(){
+		self.currentProgressHeight = leg.progressSegments.evaluate(
+			time: chewVM.referenceDate.ts ,
+			type: isExpanded
+		)
+		self.totalProgressHeight = leg.progressSegments.heightTotal(isExpanded)
+	}
+}
 
 @available(iOS 16.0, *)
 struct LegDetailsPreview : PreviewProvider {
@@ -155,9 +168,10 @@ struct LegDetailsPreview : PreviewProvider {
 						) {
 							LegDetailsView(
 								send: {_ in },
-								vm: LegDetailsViewModel(leg: viewData),
 								referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900),
-								openSheet: {_,_ in}
+								openSheet: {_,_ in},
+								isExpanded: .collapsed,
+								leg: viewData
 							)
 							.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900)))
 							.frame(minWidth: 350)
@@ -172,9 +186,9 @@ struct LegDetailsPreview : PreviewProvider {
 						) {
 							LegDetailsView(
 								send: {_ in },
-								vm: LegDetailsViewModel(leg: viewData),
 								referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900),
-								openSheet: {_,_ in}
+								openSheet: {_,_ in}, isExpanded: .collapsed,
+								leg: viewData
 							)
 							.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900)))
 							.frame(minWidth: 350)

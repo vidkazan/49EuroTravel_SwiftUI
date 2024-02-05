@@ -36,11 +36,12 @@ struct JourneyDetailsView: View {
 							ForEach(viewModel.state.data.viewData.legs) { leg in
 								LegDetailsView(
 									send: viewModel.send,
-									vm: LegDetailsViewModel(leg: leg, isExpanded: false),
 									referenceDate: chewVM.referenceDate,
 									openSheet: {type, leg in
 										sheetType = type
-									}
+									},
+									isExpanded: .collapsed,
+									leg: leg
 								)}
 							}
 						}

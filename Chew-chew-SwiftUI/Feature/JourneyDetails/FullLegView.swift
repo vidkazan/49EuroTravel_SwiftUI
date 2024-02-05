@@ -101,10 +101,10 @@ struct FullLegView: View {
 						if let stop = vm.state.data.leg.legStopsViewData.first {
 							LegStopView(
 								type: stop.stopOverType,
-								vm: vm,
 								stopOver: stop,
 								leg: vm.state.data.leg,
-								showBadges: false
+								showBadges: false,
+								shevronIsExpanded: .expanded
 							)
 						}
 						// MARK: Leg midlle stops
@@ -113,10 +113,10 @@ struct FullLegView: View {
 								if stop != vm.state.data.leg.legStopsViewData.first,stop != vm.state.data.leg.legStopsViewData.last {
 									LegStopView(
 										type: stop.stopOverType,
-										vm: vm,
 										stopOver: stop,
 										leg: vm.state.data.leg,
-										showBadges: false
+										showBadges: false,
+										shevronIsExpanded: .expanded
 									)
 								}
 							}
@@ -125,10 +125,10 @@ struct FullLegView: View {
 						if let stop = vm.state.data.leg.legStopsViewData.last {
 							LegStopView(
 								type: stop.stopOverType,
-								vm: vm,
 								stopOver: stop,
 								leg: vm.state.data.leg,
-								showBadges: false
+								showBadges: false,
+								shevronIsExpanded: .expanded
 							)
 						}
 					default:

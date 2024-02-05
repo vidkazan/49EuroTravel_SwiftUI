@@ -11,7 +11,7 @@ import SwiftUI
 import CoreLocation
 
 struct Segments : Equatable, Hashable {
-	enum EvalType : Int,Equatable, Hashable {
+	enum EvalType : Int, Equatable, Hashable, CaseIterable {
 		case collapsed
 		case expanded
 	}
@@ -24,6 +24,15 @@ struct Segments : Equatable, Hashable {
 	var segments: [SegmentPoint]
 	let heightTotalCollapsed : Double
 	let heightTotalExtended : Double
+	
+	func heightTotal(_ type : EvalType) -> Double {
+		switch type {
+		case .collapsed:
+			return heightTotalCollapsed
+		case .expanded:
+			return heightTotalExtended
+		}
+	}
 	
 	init(segments: [SegmentPoint], heightTotalCollapsed: Double, heightTotalExtended: Double) {
 		self.segments = segments
