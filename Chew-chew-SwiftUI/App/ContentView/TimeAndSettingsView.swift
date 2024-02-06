@@ -20,28 +20,28 @@ struct TimeAndSettingsView: View {
 	
 	var body: some View {
 		Group {
-				VStack(spacing: 0) {
-					HStack {
-						TimeChoosingView(
-							searchStopsVM: chewViewModel.searchStopsViewModel,
-							setSheetType: setSheetType
-						)
-						Button(action: {
-							setSheetType(.settings)
-						}, label: {
-							Image(.gearshape)
-								.tint(.primary)
-								.frame(maxWidth: 43,maxHeight: 43)
-								.background(Color.chewFillAccent)
-								.cornerRadius(8)
-								.overlay(alignment: .topTrailing) {
-									Circle()
-										.fill(Color.chewFillRedPrimary)
-										.frame(width: 10,height: 10)
-										.padding(5)
-								}
-						})
-					}
+			VStack(spacing: 0) {
+				HStack {
+					TimeChoosingView(
+						searchStopsVM: chewViewModel.searchStopsViewModel,
+						setSheetType: setSheetType
+					)
+					Button(action: {
+						setSheetType(.settings)
+					}, label: {
+						Image(.gearshape)
+							.tint(.primary)
+							.frame(maxWidth: 43,maxHeight: 43)
+							.background(Color.chewFillAccent)
+							.cornerRadius(8)
+							.overlay(alignment: .topTrailing) {
+								Circle()
+									.fill(Color.chewFillRedPrimary)
+									.frame(width: 10,height: 10)
+									.padding(5)
+							}
+					})
+				}
 			}
 		}
 		.onReceive(chewViewModel.$state, perform: { newState in

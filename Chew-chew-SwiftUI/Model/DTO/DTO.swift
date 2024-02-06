@@ -7,8 +7,7 @@
 
 import Foundation
 import SwiftUI
-
-// /journeys
+import CoreLocation
 
 enum StopOverType : String,Equatable, CaseIterable {
 	case origin
@@ -308,6 +307,31 @@ struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 		case latitude
 		case longitude
 		case poi
+	}
+}
+
+extension StopDTO {
+	func stop() -> Stop? {
+		guard let typeDTO = type  else { return nil }
+		
+		let type : LocationType = {
+			switch typeDTO {
+			case "stop", "station":
+				return .stop
+			case "location":
+				return .pointOfInterest
+			default:
+				return .location
+			}
+		}()
+		return Stop(
+			coordinates: CLLocationCoordinate2D(
+				latitude: latitude ?? location?.latitude ?? 0 ,
+				longitude: longitude ?? location?.longitude ?? 0
+			),
+			type: type,
+			stopDTO: self
+		)
 	}
 }
 

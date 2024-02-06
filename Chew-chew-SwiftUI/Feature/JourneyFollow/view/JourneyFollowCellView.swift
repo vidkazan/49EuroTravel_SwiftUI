@@ -87,8 +87,7 @@ struct FollowCellPreviews: PreviewProvider {
 	static var previews: some View {
 		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
 		if let mock = mock,
-		   let viewData = constructJourneyViewData(
-			   journey: mock,
+		   let viewData = mock.journeyViewData(
 			   depStop:  .init(),
 			   arrStop:  .init(),
 			   realtimeDataUpdatedAt: Date.now.timeIntervalSince1970 - 10000

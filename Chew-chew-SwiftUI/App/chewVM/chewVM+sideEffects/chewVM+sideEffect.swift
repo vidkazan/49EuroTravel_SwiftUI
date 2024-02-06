@@ -31,48 +31,7 @@ extension ChewViewModel {
 			return Just(Event.onJourneyDataUpdated(DepartureArrivalPair(departure: dep, arrival: arr)))
 				.eraseToAnyPublisher()
 		}
-	}
-	
-	func whenLoadingInitialData() -> Feedback<State, Event> {
-		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
-			guard case .loadingInitialData = state.status else {
-				return Empty().eraseToAnyPublisher()
-			}
-			guard let self = self else {
-				return Just(Event.didLoadInitialData(ChewSettings()))
-					.eraseToAnyPublisher()
-			}
-			guard self.coreDataStore.fetchUser() != nil else {
-				print("whenLoadingInitialData: user is nil: loading default data")
-				return Just(Event.didLoadInitialData(ChewSettings()))
-					.eraseToAnyPublisher()
-			}
-			
-			let settings = self.coreDataStore.fetchSettings()
-
-			
-			Task.detached {
-				if settings.onboarding == true {
-					self.coreDataStore.disableOnboarding()
-				}
-				if let stops = self.coreDataStore.fetchLocations() {
-					self.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
-				}
-				if let recentSearches = self.coreDataStore.fetchRecentSearches() {
-					self.recentSearchesViewModel.send(event: .didUpdateData(recentSearches))
-				}
-				if let chewJourneys = self.coreDataStore.fetchJourneys() {
-					print(">>>")
-					let data = chewJourneys.map {$0.journeyFollowData()}
-					print(">>>>")
-					self.journeyFollowViewModel.send(event: .didUpdateData(data))
-					print(">>>>>")
-				}
-			}
-			return Just(Event.didLoadInitialData(settings))
-				.eraseToAnyPublisher()
-		}
-	}
+	}	
 	
 	func whenEditingStops() -> Feedback<State, Event> {
 		Feedback {[weak self] (state: State) -> AnyPublisher<Event, Never> in
