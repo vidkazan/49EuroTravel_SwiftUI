@@ -12,11 +12,12 @@ import MapKit
 
 struct LegDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@State var isExpanded : Segments.EvalType = .collapsed
+	@State var isExpandedState : Segments.EvalType = .collapsed
+	let isExpanded : Segments.EvalType
 	@State var totalProgressHeight : Double = 0
 	@State var currentProgressHeight : Double = 0
 	let leg : LegViewData
-	let openSheet : (JourneyDetailsView.SheetType, LegViewData) -> Void
+	let openSheet : (JourneyDetailsView.SheetType) -> Void
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	let followedJourney : Bool
 	let sendToJourneyVM : ((JourneyDetailsViewModel.Event)->Void)?
@@ -25,7 +26,7 @@ struct LegDetailsView: View {
 		followedJourney: Bool = false,
 		send : @escaping (JourneyDetailsViewModel.Event) -> Void,
 		referenceDate : ChewDate,
-		openSheet : @escaping (JourneyDetailsView.SheetType,LegViewData) -> Void,
+		openSheet : @escaping (JourneyDetailsView.SheetType) -> Void,
 		isExpanded : Segments.EvalType,
 		leg : LegViewData
 	) {
@@ -48,7 +49,7 @@ struct LegDetailsView: View {
 							stopOver: stop,
 							leg: leg,
 							showBadges : !followedJourney,
-							shevronIsExpanded: isExpanded
+							shevronIsExpanded: isExpandedState
 						)
 					}
 				case .footEnd:
@@ -57,14 +58,14 @@ struct LegDetailsView: View {
 							stopOver: stop,
 							leg: leg,
 							showBadges : !followedJourney,
-							shevronIsExpanded: isExpanded
+							shevronIsExpanded: isExpandedState
 						)
 						.padding(.bottom,10)
 					}
 				// MARK: Stop line
 				case .line:
 					let stops : [StopViewData] = {
-						switch isExpanded {
+						switch isExpandedState {
 						case .expanded:
 							return leg.legStopsViewData
 						case .collapsed:
@@ -80,7 +81,7 @@ struct LegDetailsView: View {
 							stopOver: stop,
 							leg: leg,
 							showBadges : !followedJourney,
-							shevronIsExpanded: isExpanded
+							shevronIsExpanded: isExpandedState
 						)
 					}
 				}
@@ -90,38 +91,9 @@ struct LegDetailsView: View {
 		// MARK: 🤢
 		.padding(.top,leg.legType == LegViewData.LegType.line || leg.legType.caseDescription == "footStart" ?  10 : 0)
 		.background(leg.legType == LegViewData.LegType.line ? Color.chewFillAccent : .clear )
-		.overlay(alignment: .topTrailing) {
-			Menu(content: {
-				Button(action: {
-					openSheet(.map,leg)
-				}, label: {
-					Label("Show on map", systemImage: "map.circle")
-				})
-				Button(action: {
-					openSheet(.fullLeg,leg)
-				}, label: {
-					Label("Show full segment", systemImage: ChewSFSymbols.trainSideFrontCar.rawValue)
-				})
-			}, label: {
-				Image(systemName: "ellipsis.circle")
-					.chewTextSize(.big)
-					.frame(minWidth: 43,minHeight: 43)
-					.tint(Color.primary)
-			})
-		}
-		.cornerRadius(10)
-		.onAppear {
-			updateProgressHeight()
-		}
-		.onReceive(timer, perform: { _ in
-			updateProgressHeight()
-		})
-		.onChange(of: isExpanded, perform: { _ in
-			updateProgressHeight()
-		})
 		.onTapGesture {
-			isExpanded = {
-				switch isExpanded {
+			isExpandedState = {
+				switch isExpandedState {
 				case .collapsed:
 					return .expanded
 				case .expanded:
@@ -129,16 +101,55 @@ struct LegDetailsView: View {
 				}
 			}()
 		}
+		.overlay(alignment: .topTrailing) {
+			menu
+		}
+		.cornerRadius(10)
+		.onAppear {
+			isExpandedState = isExpanded
+			updateProgressHeight()
+		}
+		.onReceive(timer, perform: { _ in
+			updateProgressHeight()
+		})
+		.onChange(of: isExpandedState, perform: { _ in
+			updateProgressHeight()
+		})
+		.contextMenu {
+			menu
+		}
 	}
+}
+
+extension LegDetailsView {
+	var menu : some View {
+			Menu(content: {
+				Button(action: {
+					openSheet(.map(leg: leg))
+				}, label: {
+					Label("Show on map", systemImage: "map.circle")
+				})
+				Button(action: {
+					openSheet(.fullLeg(leg: leg))
+				}, label: {
+					Label("Show full segment", systemImage: ChewSFSymbols.trainSideFrontCar.rawValue)
+				})
+			}, label: {
+				Image(systemName: "ellipsis")
+					.chewTextSize(.big)
+					.frame(minWidth: 43,minHeight: 43)
+					.tint(Color.gray)
+			})
+		}
 }
 
 extension LegDetailsView {
 	func updateProgressHeight(){
 		self.currentProgressHeight = leg.progressSegments.evaluate(
 			time: chewVM.referenceDate.ts ,
-			type: isExpanded
+			type: isExpandedState
 		)
-		self.totalProgressHeight = leg.progressSegments.heightTotal(isExpanded)
+		self.totalProgressHeight = leg.progressSegments.heightTotal(isExpandedState)
 	}
 }
 
@@ -164,7 +175,7 @@ struct LegDetailsPreview : PreviewProvider {
 							LegDetailsView(
 								send: {_ in },
 								referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900),
-								openSheet: {_,_ in},
+								openSheet: {_ in},
 								isExpanded: .collapsed,
 								leg: viewData
 							)
@@ -182,7 +193,7 @@ struct LegDetailsPreview : PreviewProvider {
 							LegDetailsView(
 								send: {_ in },
 								referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900),
-								openSheet: {_,_ in}, isExpanded: .collapsed,
+								openSheet: {_ in}, isExpanded: .collapsed,
 								leg: viewData
 							)
 							.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900)))

@@ -66,6 +66,16 @@ extension AlertViewModel {
 				return "arrow.clockwise"
 			}
 		}
+		func alertViewModelEvent(alertType : AlertType) -> AlertViewModel.Event? {
+			switch self {
+			case .dismiss:
+				return .didRequestDismiss(alertType)
+			case .none:
+				return nil
+			case .reload:
+				return nil
+			}
+		}
 	}
 	enum AlertType : Equatable, Hashable, Comparable {
 		static func < (lhs: AlertViewModel.AlertType, rhs: AlertViewModel.AlertType) -> Bool {

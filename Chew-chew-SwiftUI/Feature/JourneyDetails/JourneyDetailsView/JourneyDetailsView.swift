@@ -10,15 +10,35 @@ import MapKit
 
 struct JourneyDetailsView: View {
 	// MARK: Fields
-	enum SheetType : String {
+	enum SheetType : Equatable {
 		case none
-		case map
-		case fullLeg
+		case map(leg : LegViewData)
+		case fullLeg(leg : LegViewData)
+		
+		var sheetIsPresented : Binding<Bool> {
+			switch self {
+			case .none:
+				return .init(
+					get: {
+						return false
+					},
+					set: { bool in }
+				)
+			default:
+				return .init(
+					get: {
+						return true
+					},
+					set: { bool in }
+				)
+			}
+		}
 	}
 	@EnvironmentObject var chewVM : ChewViewModel
+	
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	@State private var bottomSheetIsPresented : Bool = false
 	@State var sheetType : SheetType = .none
+	
 	// MARK: Init
 	init(journeyDetailsViewModel : JourneyDetailsViewModel) {
 		viewModel = journeyDetailsViewModel
@@ -37,7 +57,7 @@ struct JourneyDetailsView: View {
 								LegDetailsView(
 									send: viewModel.send,
 									referenceDate: chewVM.referenceDate,
-									openSheet: {type, leg in
+									openSheet: {type in
 										sheetType = type
 									},
 									isExpanded: .collapsed,
@@ -49,7 +69,7 @@ struct JourneyDetailsView: View {
 					}
 					// MARK: LegDetails - sheet
 					.sheet(
-						isPresented: $bottomSheetIsPresented,
+						isPresented: sheetType.sheetIsPresented,
 						onDismiss: {
 							sheetType = .none
 						},
@@ -79,9 +99,16 @@ struct JourneyDetailsView: View {
 				.onChange(of: sheetType, perform: { type in
 					switch type {
 					case .none:
-						bottomSheetIsPresented = false
-					default:
-						bottomSheetIsPresented = true
+						viewModel.send(event: .didCloseBottomSheet)
+					case .map(let leg):
+						viewModel.send(event: .didTapBottomSheetDetails(leg: leg, type: .locationDetails))
+					case .fullLeg(let leg):
+						viewModel.send(event: .didTapBottomSheetDetails(leg: leg, type: .fullLeg))
+					}
+				})
+				.onReceive(viewModel.$state, perform: {state in
+					if state.status == .loadedJourneyData {
+						sheetType = .none
 					}
 				})
 			}

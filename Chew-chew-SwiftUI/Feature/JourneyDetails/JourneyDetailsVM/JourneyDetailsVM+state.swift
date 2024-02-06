@@ -179,11 +179,11 @@ extension JourneyDetailsViewModel {
 			case .didFailedToLoadJourneyData(let error):
 				return "didFailedToLoadJourneyData \(error)"
 			case .didTapReloadButton:
-				return "didReloadJourneyList"
+				return "didTapReloadButton"
 			case .didLoadLocationDetails:
 				return "didLoadLocationDetails"
 			case .didTapBottomSheetDetails:
-				return "didCloseActionSheet"
+				return "didTapBottomSheetDetails"
 			case .didCloseBottomSheet:
 				return "didCloseBottomSheet"
 			case .didLoadFullLegData:
@@ -194,4 +194,3 @@ extension JourneyDetailsViewModel {
 		}
 	}
 }
-

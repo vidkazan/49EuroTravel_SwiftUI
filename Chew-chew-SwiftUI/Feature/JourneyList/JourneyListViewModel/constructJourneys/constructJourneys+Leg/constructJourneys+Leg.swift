@@ -280,7 +280,8 @@ func constructLegDataThrows(leg : LegDTO,firstTS: Date?, lastTS: Date?, legs : [
 	let segments = constructSegmentsFromStopOverData(stopovers: stops)
 	
 	let res = LegViewData(
-		isReachable: stops.allSatisfy({$0.cancellationType() != .fullyCancelled}) &&  stops.first?.cancellationType() != .fullyCancelled && stops.last?.cancellationType() != .fullyCancelled,
+//		isReachable: stops.allSatisfy({$0.cancellationType() != .fullyCancelled}) &&  stops.first?.cancellationType() != .fullyCancelled && stops.last?.cancellationType() != .fullyCancelled,
+		isReachable: stops.first?.cancellationType() != .fullyCancelled && stops.last?.cancellationType() != .fullyCancelled,
 		legType: constructLegType(leg: leg, legs: legs),
 		tripId: tripId,
 		direction: leg.direction ?? "direction",

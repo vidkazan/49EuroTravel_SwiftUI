@@ -70,21 +70,36 @@ struct AlertView: View {
 struct AlertsView: View {
 	@EnvironmentObject var chewJourneyViewModel : ChewViewModel
 	@ObservedObject var alertVM : AlertViewModel
-	
+	let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
 	var body: some View {
-		switch alertVM.state.status {
-		case .start:
-			EmptyView()
-		case .showing,.adding,.deleting :
-			if !alertVM.state.alerts.isEmpty {
+		Group {
+			switch alertVM.state.status {
+			case .start:
+				EmptyView()
+			case .showing,.adding,.deleting :
+				if !alertVM.state.alerts.isEmpty {
 					VStack(spacing: 2) {
 						ForEach(alertVM.state.alerts.sorted(by: <), id: \.hashValue, content: { alert in
 							AlertView(alertVM: alertVM, alert: alert)
 						})
 					}
-				.padding(.horizontal,10)
+					.padding(.horizontal,10)
+				}
 			}
 		}
+		.onReceive(timer, perform: { _ in
+			var types = alertVM.state.alerts.filter({ type in
+				switch type.action {
+				case .none:
+					return false
+				default:
+					return true
+				}
+			})
+			if let last = types.popFirst(), let event = last.action.alertViewModelEvent(alertType: last) {
+				alertVM.send(event: event)
+			}
+		})
 	}
 }
 
