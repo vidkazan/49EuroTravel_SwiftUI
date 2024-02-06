@@ -49,7 +49,7 @@ final class JourneyFollowViewModel : ObservableObject, Identifiable {
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenEditing(),
 				self.whenUpdatingJourney(),
-				self.whenUpdating()
+//				self.whenUpdating()
 			],
 			name: "JFVM"
 		)

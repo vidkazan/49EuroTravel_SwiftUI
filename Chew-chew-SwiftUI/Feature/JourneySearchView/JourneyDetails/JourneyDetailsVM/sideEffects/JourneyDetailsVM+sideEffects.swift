@@ -80,29 +80,7 @@ extension JourneyDetailsViewModel {
 	}
 	
 	
-	static func fetchTrip(tripId : String) -> AnyPublisher<LegDTO,ApiServiceError> {
-		return ApiService().fetch(
-			TripDTO.self,
-			query: [],
-			type: ApiService.Requests.trips(tripId: tripId)
-		)
-		.map { $0.trip }
-		.eraseToAnyPublisher()
-	}
-	
-	static func fetchJourneyByRefreshToken(ref : String) -> (AnyPublisher<JourneyWrapper,ApiServiceError>) {
-		return ApiService().fetch(
-			JourneyWrapper.self,
-			query: Query.getQueryItems(
-				methods: [
-					Query.stopovers(isShowing: true),
-					Query.polylines(true),
-				]
-			),
-			type: ApiService.Requests.journeyByRefreshToken(ref: ref)
-		)
-		.eraseToAnyPublisher()
-	}
+
 	
 	static func whenLoadingIfNeeded() -> Feedback<State, Event> {
 		Feedback {(state: State) -> AnyPublisher<Event, Never> in
@@ -132,13 +110,10 @@ extension JourneyDetailsViewModel {
 			}
 			
 			guard let token = token else {
-				return Just(Event.didFailedToLoadJourneyData(
-					error: Error.inputValIsNil("journeyRef"))
-				)
-				.eraseToAnyPublisher()
+				return Just(Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("journeyRef"))).eraseToAnyPublisher()
 			}
 
-			return Self.fetchJourneyByRefreshToken(ref: token)
+			return Self.fetchJourneyByRefreshToken(ref: token, mode: .withoutPolylines)
 				.mapError{ $0 }
 				.asyncFlatMap{ data in
 					let res = await constructJourneyViewDataAsync(
@@ -162,6 +137,47 @@ extension JourneyDetailsViewModel {
 				}
 				.eraseToAnyPublisher()
 		}
+	}
+}
+
+extension JourneyDetailsViewModel {
+	enum FetchJourneyByRefreshTokenMode {
+		case full
+		case withoutPolylines
+	}
+	
+	static func fetchJourneyByRefreshToken(ref : String, mode : FetchJourneyByRefreshTokenMode = .full) -> (AnyPublisher<JourneyWrapper,ApiServiceError>) {
+		let queryMethods = {
+			switch mode {
+			case .full:
+				return [
+					Query.stopovers(isShowing: true),
+					Query.polylines(true),
+				]
+			case .withoutPolylines:
+				return [
+					Query.stopovers(isShowing: true)
+				]
+			}
+		}()
+		return ApiService().fetch(
+			JourneyWrapper.self,
+			query: Query.getQueryItems(
+				methods: queryMethods
+			),
+			type: ApiService.Requests.journeyByRefreshToken(ref: ref)
+		)
+		.eraseToAnyPublisher()
+	}
+	
+	static func fetchTrip(tripId : String) -> AnyPublisher<LegDTO,ApiServiceError> {
+		return ApiService().fetch(
+			TripDTO.self,
+			query: [],
+			type: ApiService.Requests.trips(tripId: tripId)
+		)
+		.map { $0.trip }
+		.eraseToAnyPublisher()
 	}
 }
 
