@@ -21,6 +21,7 @@ struct LegView: View {
 			case .line,.transfer:
 				self.bgColor = Color.chewFillTertiary.opacity(0.8)
 			}
+			
 		case false:
 			self.bgColor =  Color.chewRedScale20
 		}

@@ -20,6 +20,15 @@ struct MapUIView: UIViewRepresentable {
 	let region: MKCoordinateRegion
 	let route : MKPolyline?
 	
+	class Coordinator: NSObject, MKMapViewDelegate {
+		func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+			let renderer = MKPolylineRenderer(overlay: overlay)
+			renderer.strokeColor = UIColor.white
+			renderer.lineWidth = 5
+			return renderer
+		}
+	}
+	
 	func makeUIView(context: Context) -> MKMapView {
 		let annotations : [MKPointAnnotation] = stops.map {
 			let annotation = MKPointAnnotation()
@@ -49,19 +58,9 @@ struct MapUIView: UIViewRepresentable {
 	func makeCoordinator() -> Coordinator {
 		Coordinator()
 	}
-
 }
 
-class Coordinator: NSObject, MKMapViewDelegate {
-	func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-		let renderer = MKPolylineRenderer(overlay: overlay)
-		renderer.strokeColor = UIColor.white
-		renderer.lineWidth = 5
-		return renderer
-	}
-}
-
-struct MapView: View {
+struct MapDetailsView: View {
 	@State var mapRect : MKCoordinateRegion
 	let stops : [StopViewData]
 	let route : MKPolyline?
@@ -95,7 +94,7 @@ extension MapSheet {
 					ProgressView()
 					Spacer()
 				case .locationDetails(coordRegion: let reg, stops: let stops, let route):
-					MapView(mapRect: reg, stops: stops,route: route)
+					MapDetailsView(mapRect: reg, stops: stops,route: route)
 				case .error,
 						.loadedJourneyData,
 						.loading,
