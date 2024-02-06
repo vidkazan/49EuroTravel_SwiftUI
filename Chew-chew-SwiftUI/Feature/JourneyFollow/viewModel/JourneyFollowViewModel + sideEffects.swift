@@ -15,6 +15,32 @@ extension JourneyFollowViewModel {
 		}
 	}
 	
+	func whenUpdating() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			guard case .updating = state.status else {
+				return Empty().eraseToAnyPublisher()
+			}
+				let elems = state.journeys.filter({
+					$0.journeyViewData.time.statusOnReferenceTime(.now) == .active
+				})
+				elems.forEach({ elem in
+					Model.shared.journeyDetailViewModel(
+						followId: elem.id,
+						for: elem.journeyViewData.refreshToken,
+						viewdata: elem.journeyViewData,
+						stops: .init(departure: elem.depStop, arrival: elem.arrStop),
+						chewVM: nil
+					)
+					.send(event: .didRequestReloadIfNeeded(
+						id: elem.id,
+						ref: elem.journeyViewData.refreshToken,
+						timeStatus: elem.journeyViewData.time.statusOnReferenceTime(.now)
+					))
+				})
+			return Just(Event.didUpdateData(state.journeys)).eraseToAnyPublisher()
+		}
+	}
+	
 	func whenUpdatingJourney() -> Feedback<State, Event> {
 		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
 			guard case let .updatingJourney(viewData, followId) = state.status else {
@@ -24,26 +50,28 @@ extension JourneyFollowViewModel {
 				return Just(Event.didFailToUpdateJourney(Error.inputValIsNil("self"))).eraseToAnyPublisher()
 			}
 			
-			guard let oldViewData = state.journeys.first(where: {$0.id == followId}) else {
+			var followData = state.journeys
+			
+			guard let index = followData.firstIndex(where: {$0.id == followId}) else {
 				return Just(Event.didFailToUpdateJourney(Error.notFoundInFollowList(""))).eraseToAnyPublisher()
 			}
 			
+			let oldViewData = followData[index]
 			guard self.coreDataStore?.updateJourney(
-				   id: followId,
-				   viewData: viewData,
-				   depStop: oldViewData.depStop,
-				   arrStop: oldViewData.arrStop) == true else {
+				id: followId,
+				viewData: viewData,
+				depStop: oldViewData.depStop,
+				arrStop: oldViewData.arrStop) == true else {
 				return Just(Event.didFailToUpdateJourney(CoreDataError.failedToUpdateDatabase(type: ChewJourney.self))).eraseToAnyPublisher()
 			}
 			
-			var followData = state.journeys.filter({$0.id != followId})
-			
-			followData.append(JourneyFollowData(
+			followData[index] = JourneyFollowData(
 				id: oldViewData.id,
 				journeyViewData: viewData,
 				depStop: oldViewData.depStop,
 				arrStop: oldViewData.arrStop
-			))
+			)
+			
 			return Just(Event.didUpdateData(followData)).eraseToAnyPublisher()
 		}
 	}

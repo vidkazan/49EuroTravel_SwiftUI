@@ -48,7 +48,8 @@ final class JourneyFollowViewModel : ObservableObject, Identifiable {
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				self.whenEditing(),
-				self.whenUpdatingJourney()
+				self.whenUpdatingJourney(),
+				self.whenUpdating()
 			],
 			name: "JFVM"
 		)

@@ -12,18 +12,14 @@ struct TimeAndSettingsView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@State var state : ChewViewModel.State = .init()
-	let setSheetType : (FeatureView.SheetType)->Void
+	let setSheetType : (JourneySearchView.SheetType)->Void
 
-	init(setSheetType: @escaping (FeatureView.SheetType) -> Void) {
+	init(setSheetType: @escaping (JourneySearchView.SheetType) -> Void) {
 		self.setSheetType = setSheetType
 	}
 	
 	var body: some View {
 		Group {
-//			switch state.status {
-//			case .editingStop:
-//				EmptyView()
-//			default:
 				VStack(spacing: 0) {
 					HStack {
 						TimeChoosingView(
@@ -46,7 +42,6 @@ struct TimeAndSettingsView: View {
 								}
 						})
 					}
-//				}
 			}
 		}
 		.onReceive(chewViewModel.$state, perform: { newState in

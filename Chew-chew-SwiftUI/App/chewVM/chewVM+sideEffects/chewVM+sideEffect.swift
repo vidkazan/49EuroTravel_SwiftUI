@@ -62,7 +62,11 @@ extension ChewViewModel {
 					self.recentSearchesViewModel.send(event: .didUpdateData(recentSearches))
 				}
 				if let chewJourneys = self.coreDataStore.fetchJourneys() {
-					self.journeyFollowViewModel.send(event: .didUpdateData(chewJourneys.map {$0.journeyFollowData()}))
+					print(">>>")
+					let data = chewJourneys.map {$0.journeyFollowData()}
+					print(">>>>")
+					self.journeyFollowViewModel.send(event: .didUpdateData(data))
+					print(">>>>>")
 				}
 			}
 			return Just(Event.didLoadInitialData(settings))

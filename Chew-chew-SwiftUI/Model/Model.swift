@@ -12,7 +12,11 @@ import Foundation
 final class Model {
 	static let shared = Model()
 	
-	private var jdvm : [String: JourneyDetailsViewModel] = [:]
+	private var _journeyDetailsViewModels : [String: JourneyDetailsViewModel] = [:]
+	
+	func allJourneyDetailViewModels() -> [JourneyDetailsViewModel]{
+		return _journeyDetailsViewModels.map({$0.1})
+	}
 	
 	func journeyDetailViewModel(
 		followId: Int64,
@@ -21,7 +25,7 @@ final class Model {
 		stops : DepartureArrivalPair,
 		chewVM : ChewViewModel?
 	) -> JourneyDetailsViewModel {
-		if let vm = jdvm[journeyRef] {
+		if let vm = _journeyDetailsViewModels[journeyRef] {
 			return vm
 		}
 		print("🏭 \(#function): vm not found: creating new")
@@ -32,7 +36,7 @@ final class Model {
 			arrStop: stops.arrival,
 			chewVM: chewVM
 		)
-		jdvm[journeyRef] = vm
+		_journeyDetailsViewModels[journeyRef] = vm
 		return vm
 	}
 }

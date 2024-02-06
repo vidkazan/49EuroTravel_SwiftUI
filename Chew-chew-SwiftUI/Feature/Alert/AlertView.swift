@@ -70,7 +70,7 @@ struct AlertView: View {
 struct AlertsView: View {
 	@EnvironmentObject var chewJourneyViewModel : ChewViewModel
 	@ObservedObject var alertVM : AlertViewModel
-	let timer = Timer.publish(every: 10, on: .main, in: .common).autoconnect()
+	let timer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
 	var body: some View {
 		Group {
 			switch alertVM.state.status {

@@ -8,29 +8,10 @@
 import Foundation
 import SwiftUI
 
-func splitArray(array: [JourneyFollowData], referenceTime : ChewDate) -> ([JourneyFollowData], [JourneyFollowData], [JourneyFollowData]) {
-	var section1 = [JourneyFollowData]()
-	var section2 = [JourneyFollowData]()
-	var section3 = [JourneyFollowData]()
-	
-	array.forEach { j in
-		switch j.journeyViewData.time.statusOnReferenceTime(referenceTime) {
-		case .ongoing,.ongoingFar,.ongoingSoon:
-			section1.append(j)
-		case .active:
-			section2.append(j)
-		case .past:
-			section3.append(j)
-		}
-	}
-	
-	return (section1, section2, section3)
-}
-
-
 struct JourneyFollowView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyFollowViewModel
+	
 	init(viewModel: JourneyFollowViewModel) {
 		self.viewModel = viewModel
 	}
@@ -38,38 +19,82 @@ struct JourneyFollowView : View {
 		Group {
 			switch viewModel.state.status {
 			case .updating:
-				ProgressView()
-					.frame(maxWidth: .infinity,maxHeight: .infinity)
+				switch viewModel.state.journeys.count {
+				case 0:
+					ProgressView()
+						.frame(maxWidth: .infinity,maxHeight: .infinity)
+				default:
+					followViewInner
+				}
 			default:
 				switch viewModel.state.journeys.count {
 				case 0:
 					Text("You have no followed journeys")
 						.chewTextSize(.big)
 				default:
-					let splittedData = splitArray(array: viewModel.state.journeys, referenceTime: chewVM.referenceDate)
-					List {
-						Section("Active", content: {
-							list(data: splittedData.1)
-						})
-						.chewTextSize(.big)
-						Section("Ongoing", content: {
-							list(data: splittedData.0)
-						})
-						.chewTextSize(.big)
-						Section("Past", content: {
-							list(data: splittedData.2)
-						})
-					}
-					.chewTextSize(.big)
-					.listRowSeparator(.hidden)
-					.listSectionSeparator(.hidden)
-					.listItemTint(Color.clear)
-					.listStyle(.insetGrouped)
+					followViewInner
+					
 				}
 			}
 		}
 		.navigationBarTitle("Journey follow")
 		.navigationBarTitleDisplayMode(.inline)
+	}
+}
+
+extension JourneyFollowView {
+	var followViewInner : some View {
+		List {
+			Section("Active", content: {
+				ForEach(
+					viewModel.state.journeys
+						.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .active})
+						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
+					}),
+					id: \.id) { journey in
+						listCell(journey: journey)
+					}
+					
+			})
+			.chewTextSize(.big)
+			Section("Ongoing", content: {
+				ForEach(
+					viewModel.state.journeys
+						.filter({
+							switch $0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate){
+							case .ongoing,.ongoingFar,.ongoingSoon:
+								return true
+							default:
+								return false
+							}
+						})
+						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
+					}),
+					id: \.id) { journey in
+						listCell(journey: journey)
+					}
+			})
+			.chewTextSize(.big)
+			Section("Past", content: {
+				ForEach(
+					viewModel.state.journeys
+						.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .past})
+						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
+					}),
+					id: \.id) { journey in
+						listCell(journey: journey)
+					}
+			})
+		}
+		.onAppear {
+			UITableView.appearance().separatorStyle = .none
+			UITableView.appearance().separatorColor = .gray
+		}
+		.chewTextSize(.big)
+		.listRowSeparator(.hidden)
+		.listSectionSeparator(.hidden)
+		.listStyle(.insetGrouped)
+		
 	}
 }
 
@@ -122,14 +147,14 @@ struct FollowPreviews: PreviewProvider {
 				depStop:  .init(),
 				arrStop:  .init()
 			)
-				JourneyFollowView(viewModel: .init(
-					coreDataStore: .init(),
-					journeys: data.map {
-						JourneyFollowData(id: 0, journeyViewData: $0, depStop: .init(), arrStop: .init())
-					},
-					initialStatus: .idle
-				))
-				.environmentObject(ChewViewModel(referenceDate: .specificDate(data.last?.time.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0)))
+			JourneyFollowView(viewModel: .init(
+				coreDataStore: .init(),
+				journeys: data.map {
+					JourneyFollowData(id: 0, journeyViewData: $0, depStop: .init(), arrStop: .init())
+				},
+				initialStatus: .idle
+			))
+			.environmentObject(ChewViewModel(referenceDate: .specificDate(data.last?.time.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0)))
 		}
 	}
 }

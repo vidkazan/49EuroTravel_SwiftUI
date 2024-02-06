@@ -16,29 +16,13 @@ struct ContentView: View {
 	@State var state : ChewViewModel.State = .init()
 	var body: some View {
 		Group {
-			if #available(iOS 16.0, *) {
-				NavigationStack {
-					switch state.status {
-					case .start:
-						EmptyView()
-					default:
-						VStack(spacing: 5) {
-							AlertsView(alertVM: chewViewModel.alertViewModel)
-							FeatureView()
-						}
-					}
-				}
-			} else {
-				NavigationView {
-					switch state.status {
-					case .start:
-						EmptyView()
-					default:
-						VStack(spacing: 5) {
-							AlertsView(alertVM: chewViewModel.alertViewModel)
-							FeatureView()
-						}
-					}
+			switch state.status {
+			case .start:
+				EmptyView()
+			default:
+				VStack(spacing: 5) {
+					AlertsView(alertVM: chewViewModel.alertViewModel)
+					FeatureView()
 				}
 			}
 //			.sheet(

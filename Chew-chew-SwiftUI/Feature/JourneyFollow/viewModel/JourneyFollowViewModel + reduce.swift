@@ -24,17 +24,22 @@ extension JourneyFollowViewModel {
 			 .didRequestUpdateJourney,
 			 .didTapEdit,
 			 .didEdit:
-				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+				print("⚠️ \(Self.self): reduce error: \(state.status.description) \(event.description)")
 				return state
 			}
 			
 		case .idle,.error:
 			switch event {
 			case .didEdit,.didFailToEdit:
-				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
+				print("⚠️ \(Self.self): reduce error: \(state.status.description) \(event.description)")
 				return state
-			case .didTapUpdate,.didFailToUpdateJourney:
+			case .didFailToUpdateJourney:
 				return state
+			case .didTapUpdate:
+				return State(
+					journeys: state.journeys,
+					status: .updating
+				)
 			case .didUpdateData(let data):
 				return State(
 					journeys: data,
@@ -58,7 +63,6 @@ extension JourneyFollowViewModel {
 		case .updating:
 			switch event {
 			case .didUpdateData(let data):
-				print(">>> initial",data.map({$0.id}))
 				return State(
 					journeys: data,
 					status: .idle

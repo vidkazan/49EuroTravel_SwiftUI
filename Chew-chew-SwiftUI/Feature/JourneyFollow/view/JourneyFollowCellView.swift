@@ -9,10 +9,8 @@ import Foundation
 import SwiftUI
 
 struct JourneyFollowCellView : View {
-	let timer = Timer.publish(every: 5 , on: .main, in: .common).autoconnect()
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var vm : JourneyDetailsViewModel
-	@State var isLoading : Bool = false
 	init(journeyDetailsViewModel: JourneyDetailsViewModel) {
 		self.vm = journeyDetailsViewModel
 	}
@@ -50,6 +48,7 @@ struct JourneyFollowCellView : View {
 						delayStatus: data.time.arrivalStatus
 					)
 				}
+				.padding(2)
 				.badgeBackgroundStyle(.secondary)
 				BadgeView(.legDuration(dur: data.durationLabelText))
 					.badgeBackgroundStyle(.secondary)
@@ -61,36 +60,28 @@ struct JourneyFollowCellView : View {
 				BadgeView(
 					.updatedAtTime(
 						referenceTime: data.updatedAt,
-						isLoading: isLoading
+						isLoading: isLoading(status: vm.state.status)
 					),
-					color: Color.chewFillTertiary
+					color: Color.clear
 				)
-				.badgeBackgroundStyle(.secondary)
+//				.badgeBackgroundStyle(.secondary)
 				if !data.isReachable || !data.legs.allSatisfy({$0.isReachable == true}) {
 					BadgeView(.connectionNotReachable)
 						.badgeBackgroundStyle(.red)
 				}
 			}
 		}
-		.onReceive(vm.$state, perform: { state in
-			switch state.status {
-			case .loading:
-				isLoading = true
-			default:
-				isLoading = false
-			}
-			
-		})
-		.onReceive(timer, perform: { _ in
-			vm.send(event: .didRequestReloadIfNeeded(
-				id: vm.state.data.id,
-				ref: vm.state.data.viewData.refreshToken,
-				timeStatus: vm.state.data.viewData.time.statusOnReferenceTime(chewVM.referenceDate)
-			))
-		})
 	}
 }
 
+extension JourneyFollowCellView {
+	func isLoading(status : JourneyDetailsViewModel.Status) -> Bool {
+		if case .loading = status {
+			return true
+		}
+		return false
+	}
+}
 
 struct FollowCellPreviews: PreviewProvider {
 	static var previews: some View {
