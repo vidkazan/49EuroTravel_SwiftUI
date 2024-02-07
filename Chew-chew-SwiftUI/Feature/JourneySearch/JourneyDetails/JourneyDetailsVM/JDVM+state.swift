@@ -108,14 +108,7 @@ extension JourneyDetailsViewModel {
 		case loadingIfNeeded(id : Int64,token : String,timeStatus: TimeContainer.Status)
 		case loadedJourneyData
 		case error(error : any ChewError)
-		case loadingLocationDetails(leg : LegViewData)
-		case locationDetails(
-			coordRegion : MKCoordinateRegion,
-			stops : [StopViewData],
-			route : MKPolyline?
-		)
-		case fullLeg(leg : LegViewData)
-		case loadingFullLeg(leg : LegViewData)
+		
 		
 		case changingSubscribingState(id: Int64, ref : String, journeyDetailsViewModel: JourneyDetailsViewModel?)
 		
@@ -131,14 +124,6 @@ extension JourneyDetailsViewModel {
 				return "loadedJourneyData"
 			case .error(let error):
 				return "error: \(error)"
-			case .locationDetails:
-				return "locationDetails"
-			case .loadingLocationDetails:
-				return "loadingLocationDetails"
-			case .fullLeg:
-				return "fullLeg"
-			case .loadingFullLeg:
-				return "loadingFullLeg"
 			}
 		}
 	}
@@ -147,33 +132,19 @@ extension JourneyDetailsViewModel {
 extension JourneyDetailsViewModel {
 	
 	enum Event {
-		case didFailToLoadTripData(error : any ChewError)
+		
 		case didCancelToLoadData
 		case didLoadJourneyData(data : JourneyViewData)
 		case didFailedToLoadJourneyData(error : any ChewError)
-		
-		
 		case didRequestReloadIfNeeded(id: Int64, ref : String,timeStatus: TimeContainer.Status)
 		case didTapReloadButton(id : Int64, ref : String)
 		case didTapSubscribingButton(id : Int64, ref : String,journeyDetailsViewModel: JourneyDetailsViewModel?)
-		
-		case didLoadLocationDetails(
-			coordRegion : MKCoordinateRegion,
-			stops : [StopViewData],
-			route : MKPolyline?
-		)
-		
 		case didFailToChangeSubscribingState(error : any ChewError)
 		case didChangedSubscribingState
-		case didLoadFullLegData(data : LegViewData)
-		
-		case didTapBottomSheetDetails(leg : LegViewData, type : BottomSheetType)
-		case didCloseBottomSheet
+	
 		
 		var description : String {
 			switch self {
-			case .didFailToLoadTripData(let error):
-				return "didFailToLoadTripData \(error)"
 			case .didFailToChangeSubscribingState(let error):
 				return "didFailToChangeSubscribingState \(error)"
 			case .didRequestReloadIfNeeded:
@@ -188,14 +159,6 @@ extension JourneyDetailsViewModel {
 				return "didFailedToLoadJourneyData \(error)"
 			case .didTapReloadButton:
 				return "didTapReloadButton"
-			case .didLoadLocationDetails:
-				return "didLoadLocationDetails"
-			case .didTapBottomSheetDetails:
-				return "didTapBottomSheetDetails"
-			case .didCloseBottomSheet:
-				return "didCloseBottomSheet"
-			case .didLoadFullLegData:
-				return "didLoadFullLegData"
 			case .didCancelToLoadData:
 				return "didCancelToLoadData"
 			}

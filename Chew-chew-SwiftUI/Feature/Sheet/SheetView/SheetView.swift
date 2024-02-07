@@ -8,19 +8,14 @@
 import Foundation
 import SwiftUI
 
-protocol ChewSheetView {
-	var closeSheet : ()->Void { get }
-}
-
-#warning("make error view")
-
-struct SheetView : View, ChewSheetView {
+struct SheetView : View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var sheetVM : SheetViewModel
 	let closeSheet : ()->Void
 	var body: some View {
 		switch sheetVM.state.status {
 		case .error(let error):
+			#warning("make error view")
 			Text(error.localizedDescription)
 		case .loading:
 			ProgressView()
@@ -48,11 +43,11 @@ struct SheetView : View, ChewSheetView {
 				}
 			case .fullLeg:
 				if let data = data as? FullLegViewDataSource {
-					FullLegSheetNew(leg: data.leg,closeSheet: closeSheet)
+					FullLegSheet(leg: data.leg,closeSheet: closeSheet)
 				}
 			case .map:
 				if let data = data as? MapDetailsViewDataSource {
-					MapSheetNew(
+					MapSheet(
 						mapRect: data.coordRegion,
 						stops: data.stops,
 						route: data.route,

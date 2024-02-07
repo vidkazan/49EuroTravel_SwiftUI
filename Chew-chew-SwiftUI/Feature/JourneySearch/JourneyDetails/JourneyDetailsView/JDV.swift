@@ -13,7 +13,6 @@ struct JourneyDetailsView: View {
 	
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	@State var sheetType : SheetType = .none
 	
 	// MARK: Init
 	init(journeyDetailsViewModel : JourneyDetailsViewModel) {
@@ -32,9 +31,7 @@ struct JourneyDetailsView: View {
 								LegDetailsView(
 									send: viewModel.send,
 									referenceDate: chewVM.referenceDate,
-									openSheet: {type in
-										sheetType = type
-									},
+									openSheet: { _ in },
 									isExpanded: .collapsed,
 									leg: leg
 								)}
@@ -42,45 +39,12 @@ struct JourneyDetailsView: View {
 						}
 						.padding(10)
 					}
-					// MARK: LegDetails - sheet
-					.sheet(
-						isPresented: sheetType.sheetIsPresented,
-						onDismiss: {
-							viewModel.send(event: .didCloseBottomSheet)
-							sheetType = .none
-						},
-						content: {
-							switch sheetType {
-							case .fullLeg:
-								FullLegSheet(journeyViewModel: viewModel)
-							case .map:
-								MapSheet(viewModel: viewModel)
-							case .none:
-								EmptyView()
-							}
-						}
-					)
 				}
 				// MARK: Modifiers
 				.background(Color.chewFillPrimary)
 				.navigationBarTitle("Journey details", displayMode: .inline)
 				.toolbar { toolbar() }
 				// MARK: Modifiers - onChange
-				.onChange(of: sheetType, perform: { type in
-					switch type {
-					case .none:
-						break
-					case .map(let leg):
-						viewModel.send(event: .didTapBottomSheetDetails(leg: leg, type: .locationDetails))
-					case .fullLeg(let leg):
-						viewModel.send(event: .didTapBottomSheetDetails(leg: leg, type: .fullLeg))
-					}
-				})
-				.onReceive(viewModel.$state, perform: {state in
-					if state.status == .loadedJourneyData {
-						sheetType = .none
-					}
-				})
 				.onAppear {
 					viewModel.send(event: .didRequestReloadIfNeeded(
 						id: viewModel.state.data.id,

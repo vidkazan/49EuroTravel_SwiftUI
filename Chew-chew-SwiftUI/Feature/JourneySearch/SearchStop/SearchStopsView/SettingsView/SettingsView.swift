@@ -54,7 +54,6 @@ struct SettingsView: View {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button(action: {
-//						setSheetType(.none)
 						closeSheet()
 					}, label: {
 						Text("Cancel")

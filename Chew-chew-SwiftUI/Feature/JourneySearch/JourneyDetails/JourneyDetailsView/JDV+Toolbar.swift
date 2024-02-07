@@ -58,10 +58,6 @@ extension JourneyDetailsView {
 							.frame(width: 15,height: 15)
 							.padding(5)
 					case .loadedJourneyData,
-							.locationDetails,
-							.loadingLocationDetails,
-							.fullLeg,
-							.loadingFullLeg,
 							.changingSubscribingState:
 						Image(.arrowClockwise)
 							.frame(width: 15,height: 15)

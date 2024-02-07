@@ -209,8 +209,6 @@
 		7DD5BAE12B72AD6000CFE768 /* chewVM+loadingInitialData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5BAE02B72AD5F00CFE768 /* chewVM+loadingInitialData.swift */; };
 		7DD5BAE32B72ADDA00CFE768 /* JDV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5BAE22B72ADD900CFE768 /* JDV.swift */; };
 		7DD5BAE52B72AE9500CFE768 /* JDVM+sideEffects+fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5BAE42B72AE9500CFE768 /* JDVM+sideEffects+fetch.swift */; };
-		7DD5BAE72B72AEBB00CFE768 /* JDVM+sideEffects+location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5BAE62B72AEBB00CFE768 /* JDVM+sideEffects+location.swift */; };
-		7DD5BAE92B72AF6700CFE768 /* JDVM+sideEffects+fullLeg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5BAE82B72AF6700CFE768 /* JDVM+sideEffects+fullLeg.swift */; };
 		7DD5BAEB2B72AF9400CFE768 /* JDVM+sideEffects+loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5BAEA2B72AF9400CFE768 /* JDVM+sideEffects+loading.swift */; };
 		7DD5BAED2B72B24F00CFE768 /* Segments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5BAEC2B72B24F00CFE768 /* Segments.swift */; };
 		7DD5BAEF2B72B28C00CFE768 /* constructJourneys+Leg+Transfer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DD5BAEE2B72B28C00CFE768 /* constructJourneys+Leg+Transfer.swift */; };
@@ -435,8 +433,6 @@
 		7DD5BAE02B72AD5F00CFE768 /* chewVM+loadingInitialData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "chewVM+loadingInitialData.swift"; sourceTree = "<group>"; };
 		7DD5BAE22B72ADD900CFE768 /* JDV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JDV.swift; sourceTree = "<group>"; };
 		7DD5BAE42B72AE9500CFE768 /* JDVM+sideEffects+fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDVM+sideEffects+fetch.swift"; sourceTree = "<group>"; };
-		7DD5BAE62B72AEBB00CFE768 /* JDVM+sideEffects+location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDVM+sideEffects+location.swift"; sourceTree = "<group>"; };
-		7DD5BAE82B72AF6700CFE768 /* JDVM+sideEffects+fullLeg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDVM+sideEffects+fullLeg.swift"; sourceTree = "<group>"; };
 		7DD5BAEA2B72AF9400CFE768 /* JDVM+sideEffects+loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDVM+sideEffects+loading.swift"; sourceTree = "<group>"; };
 		7DD5BAEC2B72B24F00CFE768 /* Segments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Segments.swift; sourceTree = "<group>"; };
 		7DD5BAEE2B72B28C00CFE768 /* constructJourneys+Leg+Transfer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Transfer.swift"; sourceTree = "<group>"; };
@@ -603,8 +599,6 @@
 			isa = PBXGroup;
 			children = (
 				7DD5BAE42B72AE9500CFE768 /* JDVM+sideEffects+fetch.swift */,
-				7DD5BAE62B72AEBB00CFE768 /* JDVM+sideEffects+location.swift */,
-				7DD5BAE82B72AF6700CFE768 /* JDVM+sideEffects+fullLeg.swift */,
 				7DD5BAEA2B72AF9400CFE768 /* JDVM+sideEffects+loading.swift */,
 				7D6C5C2C2AAF791400DEFC57 /* JDVM+sideEffects.swift */,
 			);
@@ -1576,7 +1570,6 @@
 				7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */,
 				7D6C5C142AAF482D00DEFC57 /* chewVM.swift in Sources */,
 				7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */,
-				7DD5BAE72B72AEBB00CFE768 /* JDVM+sideEffects+location.swift in Sources */,
 				7DE8A3512B6AB13800C3A378 /* TimeLabelView+subviews.swift in Sources */,
 				7DABB02D2B2E18F1002BBA97 /* JFCV.swift in Sources */,
 				7D9BB10F2B0CBF54008A3616 /* ChewJourney+CoreDataProperties.swift in Sources */,
@@ -1640,7 +1633,6 @@
 				7D9E10872AA6752B00820B92 /* SSV.swift in Sources */,
 				7D15EEE82AD494D400833170 /* MapPickerView.swift in Sources */,
 				7DAF62B12A9E54E3006F1A17 /* JourneyScrollViewFooter.swift in Sources */,
-				7DD5BAE92B72AF6700CFE768 /* JDVM+sideEffects+fullLeg.swift in Sources */,
 				7D33A9492B5192940005D723 /* JFVM + reduce.swift in Sources */,
 				7D6C5C2D2AAF791400DEFC57 /* JDVM+sideEffects.swift in Sources */,
 				7D9BB10E2B0CBF54008A3616 /* ChewJourney+CoreDataClass.swift in Sources */,

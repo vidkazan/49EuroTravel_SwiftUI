@@ -72,54 +72,8 @@ struct MapDetailsView: View {
 	}
 }
 
+
 struct MapSheet: View {
-	@ObservedObject var viewModel : JourneyDetailsViewModel
-	var body: some View {
-		if #available(iOS 16.0, *) {
-			sheet
-				.presentationDetents([.medium])
-		} else {
-			sheet
-		}
-	}
-}
-
-extension MapSheet {
-	var sheet : some View {
-		NavigationView {
-			VStack(alignment: .center,spacing: 0) {
-				switch viewModel.state.status {
-				case .loadingLocationDetails:
-					Spacer()
-					ProgressView()
-					Spacer()
-				case .locationDetails(coordRegion: let reg, stops: let stops, let route):
-					MapDetailsView(mapRect: reg, stops: stops,route: route)
-				case .error,
-						.loadedJourneyData,
-						.loading,
-						.fullLeg,
-						.loadingFullLeg,
-						.changingSubscribingState,
-						.loadingIfNeeded:
-					Spacer()
-				}
-			}
-			.navigationTitle("Map")
-			.navigationBarTitleDisplayMode(.inline)
-			.toolbar {
-				ToolbarItem(placement: .navigationBarLeading, content: {
-					Button("Close") {
-						viewModel.send(event: .didCloseBottomSheet)
-					}
-				})
-			}
-		}
-	}
-}
-
-
-struct MapSheetNew: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	var mapRect : MKCoordinateRegion
 	let stops : [StopViewData]
@@ -136,7 +90,7 @@ struct MapSheetNew: View {
 	}
 }
 
-extension MapSheetNew {
+extension MapSheet {
 	var sheet : some View {
 		NavigationView {
 			MapDetailsView(mapRect: mapRect, stops: stops,route: route)

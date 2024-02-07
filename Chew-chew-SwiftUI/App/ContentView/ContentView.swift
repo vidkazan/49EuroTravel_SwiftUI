@@ -36,9 +36,12 @@ struct ContentView: View {
 				sheetIsPresented = false
 			},
 			content: {
-				SheetView(sheetVM: chewViewModel.sheetViewModel,closeSheet: {
-					sheetIsPresented = false
-				})
+				SheetView(
+					sheetVM: chewViewModel.sheetViewModel,
+					closeSheet: {
+						sheetIsPresented = false
+					}
+				)
 			}
 		)
 		.background(Color.chewFillPrimary)

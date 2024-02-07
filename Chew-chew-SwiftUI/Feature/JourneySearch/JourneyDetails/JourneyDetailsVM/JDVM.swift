@@ -42,10 +42,8 @@ final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol {
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
 				Self.whenLoadingJourneyByRefreshToken(),
-				Self.whenLoadingFullLeg(),
 				Self.whenChangingSubscribitionType(),
 				Self.whenLoadingIfNeeded(),
-				Self.whenLoadingLocationDetails()
 			],
 			name: data.legs.reduce("", {$0+$1.lineViewData.name+"-"})
 		)
