@@ -18,10 +18,4 @@ struct Constants {
 		static let urlPathJourneyList = "/journeys"
 		static let urlPathTrip = "/trips"
 	}
-	
-//	struct CornerRadius {
-//		static let standart = UIScreen.main.bounds.width/35
-//		static let small = UIScreen.main.bounds.width/40
-//		static let tiny = UIScreen.main.bounds.width/50
-//	}
 }

@@ -12,23 +12,15 @@ struct TimeAndSettingsView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@State var state : ChewViewModel.State = .init()
-	let setSheetType : (JourneySearchView.SheetType)->Void
 
-	init(setSheetType: @escaping (JourneySearchView.SheetType) -> Void) {
-		self.setSheetType = setSheetType
-	}
 	
 	var body: some View {
 		Group {
 			VStack(spacing: 0) {
 				HStack {
-					TimeChoosingView(
-						searchStopsVM: chewViewModel.searchStopsViewModel,
-						setSheetType: setSheetType
-					)
+					TimeChoosingView()
 					Button(action: {
-//						setSheetType(.settings)
-						chewViewModel.sheetViewModel.send(event: .didRequestShow(.settings))
+						Model.shared.sheetViewModel.send(event: .didRequestShow(.settings))
 					}, label: {
 						Image(.gearshape)
 							.tint(.primary)
@@ -52,7 +44,7 @@ struct TimeAndSettingsView: View {
 	
 	struct TimeAndSettingsPreview : PreviewProvider {
 		static var previews: some View {
-			TimeAndSettingsView(setSheetType: { _ in })
+			TimeAndSettingsView()
 				.padding(10)
 				.environmentObject(ChewViewModel(referenceDate: .now))
 				.background(Color.chewFillPrimary)

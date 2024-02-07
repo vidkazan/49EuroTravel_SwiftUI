@@ -12,42 +12,34 @@ struct FeatureView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 
 	var body: some View {
-		if #available(iOS 16.0, *) {
-			TabView {
+		TabView {
+			if #available(iOS 16.0, *) {
 				NavigationStack {
 					JourneySearchView()
-						.background(Color.chewFillPrimary)
 				}
 				.tabItem {
 					Label("Search", systemImage: "magnifyingglass")
 				}
 				NavigationStack {
-					JourneyFollowView(viewModel: chewViewModel.journeyFollowViewModel)
-						.background(Color.chewFillPrimary)
+					JourneyFollowView()
 				}
 				.tabItem {
 					Label("Follow", systemImage: "train.side.front.car")
 				}
-			}
-			.background(Color.chewFillPrimary)
-		} else {
-			TabView {
+			} else {
 				NavigationView {
 					JourneySearchView()
-						.background(Color.chewFillPrimary)
 				}
 				.tabItem {
 					Label("Search", systemImage: "magnifyingglass")
 				}
 				NavigationView {
-					JourneyFollowView(viewModel: chewViewModel.journeyFollowViewModel)
-						.background(Color.chewFillPrimary)
+					JourneyFollowView()
 				}
 				.tabItem {
 					Label("Follow", systemImage: "train.side.front.car")
 				}
 			}
-			.background(Color.chewFillPrimary)
 		}
 	}
 }

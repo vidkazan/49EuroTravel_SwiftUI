@@ -22,7 +22,7 @@ struct BottomView: View {
 					settings: state.settings
 				)
 			case .idle:
-				RecentSearchesView(recentSearchesVM: chewViewModel.recentSearchesViewModel)
+				RecentSearchesView()
 				Spacer()
 			default:
 				Spacer()

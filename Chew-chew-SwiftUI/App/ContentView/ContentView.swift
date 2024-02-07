@@ -14,7 +14,7 @@ import SwiftUI
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
-	@ObservedObject var sheetVM : SheetViewModel
+	@ObservedObject var sheetVM : SheetViewModel = Model.shared.sheetViewModel
 	@State var state : ChewViewModel.State = .init()
 	@State var sheetState : SheetViewModel.State = .init(status: .showing(.none, result: EmptyDataSource()))
 	@State var sheetIsPresented = false
@@ -25,7 +25,7 @@ struct ContentView: View {
 				EmptyView()
 			default:
 				VStack(spacing: 5) {
-					AlertsView(alertVM: chewViewModel.alertViewModel)
+					AlertsView()
 					FeatureView()
 				}
 			}
@@ -36,12 +36,9 @@ struct ContentView: View {
 				sheetIsPresented = false
 			},
 			content: {
-				SheetView(
-					sheetVM: chewViewModel.sheetViewModel,
-					closeSheet: {
-						sheetIsPresented = false
-					}
-				)
+				SheetView(closeSheet: {
+					sheetIsPresented = false
+				})
 			}
 		)
 		.background(Color.chewFillPrimary)

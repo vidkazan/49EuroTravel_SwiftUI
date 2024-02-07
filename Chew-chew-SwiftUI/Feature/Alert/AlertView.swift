@@ -10,7 +10,7 @@ import SwiftUI
 
 struct AlertView: View {
 	@EnvironmentObject var chewJourneyViewModel : ChewViewModel
-	@ObservedObject var alertVM : AlertViewModel
+	@ObservedObject var alertVM : AlertViewModel = Model.shared.alertViewModel
 	
 	let alert : AlertViewModel.AlertType
 	
@@ -69,7 +69,7 @@ struct AlertView: View {
 
 struct AlertsView: View {
 	@EnvironmentObject var chewJourneyViewModel : ChewViewModel
-	@ObservedObject var alertVM : AlertViewModel
+	@ObservedObject var alertVM : AlertViewModel = Model.shared.alertViewModel
 	let timer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
 	var body: some View {
 		Group {
@@ -105,10 +105,7 @@ struct AlertsView: View {
 
 struct AlertViewPreview : PreviewProvider {
 	static var previews: some View {
-		AlertsView(alertVM: .init(
-			.showing,
-			alerts: .init(arrayLiteral: .offlineMode,.userLocationError)
-		))
+		AlertsView()
 	}
 }
 

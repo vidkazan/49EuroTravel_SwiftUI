@@ -19,7 +19,6 @@ struct JourneyScrollViewHeader: View {
 			.frame(maxWidth: 80)
 			.padding(5)
 			.font(.system(size: 17, weight: .medium))
-			//				.background(.ultraThinMaterial)
 			.background(Color.chewGray10)
 			.cornerRadius(10)
 			Spacer()
@@ -31,7 +30,6 @@ struct JourneyScrollViewHeader: View {
 			.frame(maxWidth: 80)
 			.padding(5)
 			.font(.system(size: 17, weight: .medium))
-			//				.background(.ultraThinMaterial)
 			.background(Color.chewGray10)
 			.cornerRadius(10)
 		}

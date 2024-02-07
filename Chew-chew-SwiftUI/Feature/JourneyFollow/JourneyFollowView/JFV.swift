@@ -9,13 +9,10 @@ import Foundation
 import SwiftUI
 
 struct JourneyFollowView : View {
-	let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var viewModel : JourneyFollowViewModel
+	@ObservedObject var viewModel : JourneyFollowViewModel = Model.shared.journeyFollowViewModel
+	let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
 	
-	init(viewModel: JourneyFollowViewModel) {
-		self.viewModel = viewModel
-	}
 	var body: some View {
 		VStack {
 			switch viewModel.state.status {
@@ -118,8 +115,7 @@ extension JourneyFollowView {
 		}
 		.onAppear{
 			UITableView.appearance().separatorStyle = .singleLine
-			UITableView.appearance().separatorColor = .orange
-			UITableView.appearance().backgroundColor = .green
+			UITableView.appearance().backgroundColor = UIColor(Color.chewFillPrimary)
 		}
 		.chewTextSize(.big)
 		.listStyle(.insetGrouped)
@@ -180,7 +176,6 @@ struct FollowPreviews: PreviewProvider {
 				arrStop:  .init()
 			)
 			JourneyFollowView(viewModel: .init(
-				coreDataStore: .init(),
 				journeys: data.map {
 					JourneyFollowData(id: 0, journeyViewData: $0, depStop: .init(), arrStop: .init())
 				},

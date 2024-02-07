@@ -17,20 +17,23 @@ final class AlertViewModel : ObservableObject, Identifiable {
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
-	var networkMonitor : NetworkMonitor? = nil
+	var networkMonitor : NetworkMonitor?
 	
 	init(_ initaialStatus : Status = .start, alerts : Set<AlertType> = Set<AlertType>() ) {
 		self.state = State(
 			alerts: alerts,
 			status: initaialStatus
 		)
+		self.networkMonitor = .init(send: { [weak self] in
+			self?.send(event: $0)
+		})
 		Publishers.system(
 			initial: state,
 			reduce: Self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenLoadinginitialData(),
+				Self.whenLoadinginitialData(),
 				Self.whenEditing()
 			],
 			name: "AVM"
@@ -292,12 +295,11 @@ extension AlertViewModel {
 		}
 	}
 	
-	func whenLoadinginitialData() -> Feedback<State, Event> {
-		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
+	static func whenLoadinginitialData() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .start = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			self?.networkMonitor = NetworkMonitor(alertVM: self)
 			return Just(Event.didLoadInitialData).eraseToAnyPublisher()
 		}
 	}

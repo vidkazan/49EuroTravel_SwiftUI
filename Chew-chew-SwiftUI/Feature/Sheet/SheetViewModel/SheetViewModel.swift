@@ -15,6 +15,7 @@ class SheetViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
 		didSet { print(">> state:",state.status.description) }
 	}
+	
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
@@ -246,8 +247,7 @@ extension SheetViewModel {
 				return Event.didLoadDataForShowing(.fullLeg(leg: leg),FullLegViewDataSource(leg: leg))
 			}
 			.catch { error in
-				#warning("bring alertVM here")
-//				state.data.chewVM?.alertViewModel.send(event: .didRequestShow(.fullLegError))
+				Model.shared.alertViewModel.send(event: .didRequestShow(.fullLegError))
 				return Just(Event.didFailToLoadData(error as! (any ChewError))).eraseToAnyPublisher()
 			}
 			.eraseToAnyPublisher()

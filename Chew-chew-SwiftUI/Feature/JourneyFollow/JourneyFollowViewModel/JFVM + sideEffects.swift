@@ -15,13 +15,10 @@ extension JourneyFollowViewModel {
 		}
 	}
 	
-	func whenUpdatingJourney() -> Feedback<State, Event> {
-		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
+	static func whenUpdatingJourney() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case let .updatingJourney(viewData, followId) = state.status else {
 				return Empty().eraseToAnyPublisher()
-			}
-			guard let self = self else {
-				return Just(Event.didFailToUpdateJourney(Error.inputValIsNil("self"))).eraseToAnyPublisher()
 			}
 			
 			var followData = state.journeys
@@ -31,7 +28,7 @@ extension JourneyFollowViewModel {
 			}
 			
 			let oldViewData = followData[index]
-			guard self.coreDataStore?.updateJourney(
+			guard Model.shared.coreDataStore.updateJourney(
 				id: followId,
 				viewData: viewData,
 				depStop: oldViewData.depStop,
@@ -50,16 +47,10 @@ extension JourneyFollowViewModel {
 		}
 	}
 	
-	func whenEditing() -> Feedback<State, Event> {
-		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
+	static func whenEditing() -> Feedback<State, Event> {
+		Feedback {  (state: State) -> AnyPublisher<Event, Never> in
 			guard case let .editing(action,followId, viewData,send) = state.status else {
 				return Empty().eraseToAnyPublisher()
-			}
-			guard let self = self else {
-				return Just(Event.didFailToEdit(
-					action: .adding,
-					error: Error.inputValIsNil("self")
-				)).eraseToAnyPublisher()
 			}
 
 			var journeys = state.journeys
@@ -82,7 +73,7 @@ extension JourneyFollowViewModel {
 					)).eraseToAnyPublisher()
 				}
 				guard
-					self.coreDataStore?.addJourney(
+					Model.shared.coreDataStore.addJourney(
 						id : viewData.id,
 						viewData: viewData.journeyViewData,
 						depStop: viewData.depStop,
@@ -109,7 +100,7 @@ extension JourneyFollowViewModel {
 						error: Error.notFoundInFollowList("not found in follow list to delete")
 					)).eraseToAnyPublisher()
 				}
-				guard self.coreDataStore?.deleteJourneyIfFound(id: followId) == true else {
+				guard Model.shared.coreDataStore.deleteJourneyIfFound(id: followId) == true else {
 					send(.didFailToChangeSubscribingState(error: CoreDataError.failedToDelete(type: ChewJourney.self)))
 					return Just(Event.didFailToEdit(
 						action: action,

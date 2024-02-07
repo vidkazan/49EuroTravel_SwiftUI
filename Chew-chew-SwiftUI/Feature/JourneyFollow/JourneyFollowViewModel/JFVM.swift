@@ -30,26 +30,22 @@ final class JourneyFollowViewModel : ObservableObject, Identifiable {
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
-	weak var coreDataStore : CoreDataStore?
 	init(
-		coreDataStore : CoreDataStore?,
 		journeys : [JourneyFollowData],
 		initialStatus : Status = .updating
 	) {
-		self.coreDataStore = coreDataStore
 		state = State(
 			journeys: journeys,
 			status: initialStatus
 		)
 		Publishers.system(
 			initial: state,
-			reduce: self.reduce,
+			reduce: Self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenEditing(),
-				self.whenUpdatingJourney(),
-//				self.whenUpdating()
+				Self.whenEditing(),
+				Self.whenUpdatingJourney()
 			],
 			name: "JFVM"
 		)

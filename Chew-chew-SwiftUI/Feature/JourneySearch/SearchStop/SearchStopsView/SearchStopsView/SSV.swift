@@ -10,16 +10,15 @@ import CoreLocation
 
 struct SearchStopsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
-	@ObservedObject var searchStopViewModel : SearchStopsViewModel
+	@ObservedObject var searchStopViewModel : SearchStopsViewModel = Model.shared.searchStopsViewModel
 	@FocusState 	var focusedField : LocationDirectionType?
 	@State var previuosStatus : ChewViewModel.Status?
 	@State var topText : String
 	@State var bottomText : String
 	@State var fieldRedBorder : (top: Bool,bottom: Bool) = (false,false)
-	init(vm : SearchStopsViewModel) {
+	init() {
 		self.topText = ""
 		self.bottomText = ""
-		self.searchStopViewModel = vm
 	}
 	
 	var body: some View {

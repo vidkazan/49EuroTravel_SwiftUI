@@ -22,16 +22,16 @@ struct JourneyCell: View {
 	var body: some View {
 		VStack {
 			NavigationLink(destination: {
-				NavigationLazyView(JourneyDetailsView(
-					journeyDetailsViewModel: Model.shared.journeyDetailViewModel(
-						followId: chewVM.journeyFollowViewModel.state.journeys.first(where: {
-							$0.journeyViewData.refreshToken == journey.refreshToken
-						})?.id ?? Int64(journey.refreshToken.hashValue),
-						for: journey.refreshToken,
-						viewdata: journey,
-						stops: stops,
-						chewVM: chewVM
-					)))
+				let vm = Model.shared.journeyDetailViewModel(
+					followId: Self.followID(journey: journey),
+					 for: journey.refreshToken,
+					 viewdata: journey,
+					 stops: stops,
+					 chewVM: chewVM
+				)
+				NavigationLazyView(
+					JourneyDetailsView(journeyDetailsViewModel: vm)
+				)
 			}, label: {
 				VStack {
 					JourneyHeaderView(journey: journey)
@@ -60,6 +60,17 @@ struct JourneyCell: View {
 		}
 		.redacted(reason: isPlaceholder ? .placeholder : [])
 		.cornerRadius(10)
+	}
+	
+	static func followID(journey : JourneyViewData) -> Int64 {
+		let journeys = Model.shared.journeyFollowViewModel.state.journeys
+		guard let followID = journeys.first(where: {
+			$0.journeyViewData.refreshToken == journey.refreshToken
+		})?.id else {
+			return Int64(journey.refreshToken.hashValue)
+		}
+		return followID
+		
 	}
 }
 

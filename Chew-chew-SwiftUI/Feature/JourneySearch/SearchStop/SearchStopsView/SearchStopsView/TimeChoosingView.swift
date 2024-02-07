@@ -10,18 +10,13 @@ import SwiftUI
 struct TimeChoosingView: View {
 	
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var searchStopsVM : SearchStopsViewModel
+	@ObservedObject var searchStopsVM : SearchStopsViewModel = Model.shared.searchStopsViewModel
 	@State private var selectedOption : TimeSegmentedPickerOptions = .now
 	private let options : [TimeSegmentedPickerOptions] = [.now,.specificDate]
-	let setSheetType : (JourneySearchView.SheetType)->Void
 	init(
-		searchStopsVM: SearchStopsViewModel,
-		selectedOption: TimeSegmentedPickerOptions = .now,
-		setSheetType : @escaping (JourneySearchView.SheetType)->Void
+		selectedOption: TimeSegmentedPickerOptions = .now
 	) {
-		self.searchStopsVM = searchStopsVM
 		self.selectedOption = selectedOption
-		self.setSheetType = setSheetType
 	}
 	var body: some View {
 		SegmentedPicker(
@@ -36,8 +31,7 @@ struct TimeChoosingView: View {
 				case .now:
 					chewVM.send(event: .onNewDate(.now))
 				case .specificDate:
-					chewVM.sheetViewModel.send(event: .didRequestShow(.date))
-//					setSheetType(.datePicker)
+					Model.shared.sheetViewModel.send(event: .didRequestShow(.date))
 				}
 			}
 		)

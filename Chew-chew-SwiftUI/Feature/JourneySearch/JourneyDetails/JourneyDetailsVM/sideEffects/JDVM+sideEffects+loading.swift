@@ -57,8 +57,8 @@ extension JourneyDetailsViewModel {
 						return Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("viewData"))
 					}
 					
-					if state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == followID}) == true {
-						state.data.chewVM?.journeyFollowViewModel.send(event: .didRequestUpdateJourney(res, followID))
+					if Model.shared.journeyFollowViewModel.state.journeys.contains(where: {$0.id == followID}) == true {
+						Model.shared.journeyFollowViewModel.send(event: .didRequestUpdateJourney(res, followID))
 					}
 					return Event.didLoadJourneyData(data: res)
 				}

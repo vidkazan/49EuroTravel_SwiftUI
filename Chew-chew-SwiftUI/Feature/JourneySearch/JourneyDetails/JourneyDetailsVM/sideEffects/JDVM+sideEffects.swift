@@ -22,9 +22,9 @@ extension JourneyDetailsViewModel {
 			guard case let .changingSubscribingState(id,_, vm) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			switch state.data.chewVM?.journeyFollowViewModel.state.journeys.contains(where: {$0.id == id}) == true {
+			switch Model.shared.journeyFollowViewModel.state.journeys.contains(where: {$0.id == id}) == true {
 			case true:
-				state.data.chewVM?.journeyFollowViewModel.send(
+				Model.shared.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .deleting,
 						followId: id,
@@ -35,7 +35,7 @@ extension JourneyDetailsViewModel {
 					)
 				)
 			case false:
-				state.data.chewVM?.journeyFollowViewModel.send(
+				Model.shared.journeyFollowViewModel.send(
 					event: .didTapEdit(
 						action: .adding,
 						followId : id,

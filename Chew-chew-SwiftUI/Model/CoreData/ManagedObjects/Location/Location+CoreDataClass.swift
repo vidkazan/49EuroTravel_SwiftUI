@@ -22,7 +22,6 @@ extension Location {
 		case recentSearchArrStop(_ recentSearch : ChewRecentSearch)
 	}
 
-	// recent Locations
 	convenience init(context : NSManagedObjectContext,stop : Stop, parent : ParentEntity){
 		
 		self.init(context: context)

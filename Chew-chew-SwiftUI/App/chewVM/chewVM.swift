@@ -12,13 +12,6 @@ import CoreLocation
 import CoreData
 
 final class ChewViewModel : ObservableObject, Identifiable {
-	public let coreDataStore : CoreDataStore
-	@ObservedObject var  locationDataManager : LocationDataManager
-	let alertViewModel : AlertViewModel
-	let searchStopsViewModel : SearchStopsViewModel
-	let journeyFollowViewModel : JourneyFollowViewModel
-	let recentSearchesViewModel : RecentSearchesViewModel
-	let sheetViewModel : SheetViewModel
 	let referenceDate : ChewDate
 	@Published private(set) var state : State {
 		didSet { print("📱 >  state:",state.status.description) }
@@ -26,63 +19,12 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
-	init(initialState : State = State(
-		depStop: .textOnly(""),
-		   arrStop: .textOnly(""),
-		   settings: ChewSettings(),
-		   date: .now,
-		   status: .start
-	   ),
-		 referenceDate : ChewDate = .now
-	) {
-		let coreDataStore = CoreDataStore()
-		self.state = initialState
-		self.alertViewModel = AlertViewModel()
-		self.locationDataManager = LocationDataManager()
-		self.searchStopsViewModel = SearchStopsViewModel()
-		self.coreDataStore = coreDataStore
-		self.journeyFollowViewModel = JourneyFollowViewModel(coreDataStore: coreDataStore,journeys: [])
-		self.recentSearchesViewModel = RecentSearchesViewModel(coreDataStore: coreDataStore,searches: [])
-		self.referenceDate = referenceDate
-		self.sheetViewModel = SheetViewModel()
-		   
-	   Publishers.system(
-		   initial: state,
-		   reduce: Self.reduce,
-		   scheduler: RunLoop.main,
-		   feedbacks: [
-			   Self.userInput(input: input.eraseToAnyPublisher()),
-			   self.whenIdleCheckForSufficientDataForJourneyRequest(),
-			   self.whenLoadingUserLocation(),
-			   self.whenLoadingInitialData(),
-			   self.whenEditingStops()
-		   ],
-		   name: "ChewVM"
-	   )
-	   .assign(to: \.state, on: self)
-	   .store(in: &bag)
-	}
-	
 	init (
-		sheetViewModel : SheetViewModel,
-		locationDataManager : LocationDataManager,
-		searchStopsViewModel : SearchStopsViewModel,
-		journeyFollowViewModel : JourneyFollowViewModel,
-		recentSearchesViewModel : RecentSearchesViewModel,
-		coreDataStore : CoreDataStore,
-		alertViewModel : AlertViewModel,
 		initialState : State = State(),
 		referenceDate : ChewDate = .now
 	) {
 		self.state = initialState
-		self.alertViewModel = alertViewModel
-		self.coreDataStore = coreDataStore
-		self.locationDataManager = locationDataManager
-		self.searchStopsViewModel = searchStopsViewModel
-		self.journeyFollowViewModel = journeyFollowViewModel
-		self.recentSearchesViewModel = recentSearchesViewModel
 		self.referenceDate = referenceDate
-		self.sheetViewModel = sheetViewModel
 		
 		Publishers.system(
 			initial: state,
@@ -90,10 +32,10 @@ final class ChewViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenIdleCheckForSufficientDataForJourneyRequest(),
-				self.whenLoadingUserLocation(),
-				self.whenLoadingInitialData(),
-				self.whenEditingStops()
+				Self.whenIdleCheckForSufficientDataForJourneyRequest(),
+				Self.whenLoadingUserLocation(),
+				Self.whenLoadingInitialData(),
+				Self.whenEditingStops()
 			],
 			name: "ChewVM"
 		)

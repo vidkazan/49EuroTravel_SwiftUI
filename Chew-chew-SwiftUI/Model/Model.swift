@@ -10,9 +10,38 @@ import Foundation
 import Foundation
 
 final class Model {
-	static let shared = Model()
+	static let shared = Model(referenceDate: .now)
+	static let preview = Model(referenceDate: .now)
 	
 	private var _journeyDetailsViewModels : [String: JourneyDetailsViewModel] = [:]
+	let referenceDate : ChewDate
+	let locationDataManager = LocationDataManager()
+	let sheetViewModel : SheetViewModel
+	let alertViewModel : AlertViewModel
+	let coreDataStore = CoreDataStore()
+	let searchStopsViewModel : SearchStopsViewModel
+	let journeyFollowViewModel : JourneyFollowViewModel
+	let recentSearchesViewModel : RecentSearchesViewModel
+	
+	init(
+		sheetVM : SheetViewModel = .init(),
+		alertVM : AlertViewModel = .init(),
+		searchStopsVM : SearchStopsViewModel = .init(),
+		journeyFollowViewModel : JourneyFollowViewModel = .init(journeys: []),
+		recentSearchesViewModel : RecentSearchesViewModel = .init(searches: []),
+		referenceDate : ChewDate
+	) {
+		self.searchStopsViewModel = searchStopsVM
+		self.alertViewModel = alertVM
+		self.sheetViewModel = sheetVM
+		self.journeyFollowViewModel = journeyFollowViewModel
+		self.recentSearchesViewModel = recentSearchesViewModel
+		self.referenceDate = referenceDate
+	}
+	
+}
+
+extension Model {
 	
 	func allJourneyDetailViewModels() -> [JourneyDetailsViewModel]{
 		return _journeyDetailsViewModels.map({$0.1})

@@ -15,7 +15,6 @@ struct LegStopView : View {
 	let legViewData : LegViewData
 	let stopOver : StopViewData
 	let stopOverType : StopOverType
-//	let now = Date.now.timeIntervalSince1970
 	let showBadges : Bool
 	
 	

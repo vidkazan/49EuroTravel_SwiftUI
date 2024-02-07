@@ -29,12 +29,9 @@ final class RecentSearchesViewModel : ObservableObject, Identifiable {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
-	weak var coreDataStore : CoreDataStore?
 	init(
-		coreDataStore : CoreDataStore?,
 		searches : [RecentSearch]
 	) {
-		self.coreDataStore = coreDataStore
 		state = State(
 			searches: searches,
 			status: .updating
@@ -45,7 +42,7 @@ final class RecentSearchesViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				self.whenEditing()
+				Self.whenEditing()
 			],
 			name: "RSVM"
 		)
@@ -137,8 +134,8 @@ extension RecentSearchesViewModel {
 			return input
 		}
 	}
-	func whenEditing() -> Feedback<State, Event> {
-		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
+	static func whenEditing() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			switch state.status {
 			case .editing(let action, let data):
 				var searches = state.searches
@@ -157,7 +154,7 @@ extension RecentSearchesViewModel {
 						)).eraseToAnyPublisher()
 					}
 					guard
-						self?.coreDataStore?.addRecentSearch(search: data) == true
+						Model.shared.coreDataStore.addRecentSearch(search: data) == true
 					else {
 						return Just(Event.didFailToEdit(
 							action: action,
@@ -179,7 +176,7 @@ extension RecentSearchesViewModel {
 						return Just(Event.didFailToEdit(action: action,msg: "not found in list to delete")).eraseToAnyPublisher()
 					}
 					guard
-						self?.coreDataStore?.deleteRecentSearchIfFound(id: id) == true
+						Model.shared.coreDataStore.deleteRecentSearchIfFound(id: id) == true
 					else {
 						return Just(Event.didFailToEdit(action: action,msg: "not found in db to delete")).eraseToAnyPublisher()
 					}

@@ -11,36 +11,33 @@ import CoreLocation
 
 extension ChewViewModel {
 	#warning(" TODO: feature: reverse geocoding https://medium.com/aeturnuminc/geocoding-in-swift-611bda45efe1 or https://nominatim.openstreetmap.org/reverse?lon=10.78008628451338&lat=52.4212646484375&format=json&pretty=true")
-	func whenLoadingUserLocation() -> Feedback<State, Event> {
-		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
+	static func whenLoadingUserLocation() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
 			guard case .loadingLocation = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			guard let self = self else {
-				return Just(Event.didFailToLoadLocationData).eraseToAnyPublisher()
-			}
-			return Self.requestUserLocation(locationDataManager: self.locationDataManager)
+			return Self.requestUserLocation()
 				.map { res in
 					switch res {
 					case .success(let coord):
-						self.alertViewModel.send(event: .didRequestDismiss(.userLocationError))
+						Model.shared.alertViewModel.send(event: .didRequestDismiss(.userLocationError))
 						return Event.didReceiveLocationData(coord)
 					case .failure:
-						self.alertViewModel.send(event: .didRequestShow(.userLocationError))
+						Model.shared.alertViewModel.send(event: .didRequestShow(.userLocationError))
 						return Event.didFailToLoadLocationData
 					}
 				}
 				.eraseToAnyPublisher()
 		}
 	}
-	static func requestUserLocation(locationDataManager : LocationDataManager) -> AnyPublisher<Result<CLLocationCoordinate2D,ApiServiceError>,Never> {
-		switch locationDataManager.authorizationStatus {
+	static func requestUserLocation() -> AnyPublisher<Result<CLLocationCoordinate2D,ApiServiceError>,Never> {
+		switch Model.shared.locationDataManager.authorizationStatus {
 		case .notDetermined,.restricted,.denied,.none:
 			return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
 				.eraseToAnyPublisher()
 		case .authorizedAlways,.authorizedWhenInUse:
-			guard let lat = locationDataManager.locationManager.location?.coordinate.latitude,
-					let long = locationDataManager.locationManager.location?.coordinate.longitude else {
+			guard let lat = Model.shared.locationDataManager.locationManager.location?.coordinate.latitude,
+				  let long = Model.shared.locationDataManager.locationManager.location?.coordinate.longitude else {
 				return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
 					.eraseToAnyPublisher()
 			}

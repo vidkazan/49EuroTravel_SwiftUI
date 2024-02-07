@@ -9,7 +9,7 @@ import Foundation
 import Combine
 
 extension JourneyFollowViewModel {
-	func reduce(_ state: State, _ event: Event) -> State {
+	static func reduce(_ state: State, _ event: Event) -> State {
 		print("📌🔥 > :",event.description,"state:",state.status.description)
 		switch state.status {
 		case .updatingJourney:

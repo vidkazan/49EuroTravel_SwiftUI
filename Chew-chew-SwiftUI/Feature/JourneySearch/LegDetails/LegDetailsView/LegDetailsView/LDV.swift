@@ -18,10 +18,8 @@ struct LegDetailsView: View {
 	@State var currentProgressHeight : Double = 0
 	
 	let leg : LegViewData
-	let openSheet : (JourneyDetailsView.SheetType) -> Void
 	let isExpanded : Segments.EvalType
 	let followedJourney : Bool
-	let sendToJourneyVM : ((JourneyDetailsViewModel.Event)->Void)?
 		
 	init(
 		followedJourney: Bool = false,
@@ -31,10 +29,8 @@ struct LegDetailsView: View {
 		isExpanded : Segments.EvalType,
 		leg : LegViewData
 	) {
-		self.openSheet = openSheet
 		self.leg = leg
 		self.followedJourney = followedJourney
-		self.sendToJourneyVM = send
 		self.isExpanded = isExpanded
 	}
 	
@@ -121,14 +117,12 @@ extension LegDetailsView {
 	var menu : some View {
 			Menu(content: {
 				Button(action: {
-//					openSheet(.map(leg: leg))
-					chewVM.sheetViewModel.send(event: .didRequestShow(.map(leg: leg)))
+					Model.shared.sheetViewModel.send(event: .didRequestShow(.map(leg: leg)))
 				}, label: {
 					Label("Show on map", systemImage: "map.circle")
 				})
 				Button(action: {
-//					openSheet(.fullLeg(leg: leg))
-					chewVM.sheetViewModel.send(event: .didRequestShow(.fullLeg(leg: leg)))
+					Model.shared.sheetViewModel.send(event: .didRequestShow(.fullLeg(leg: leg)))
 				}, label: {
 					Label("Show full segment", systemImage: ChewSFSymbols.trainSideFrontCar.rawValue)
 				})

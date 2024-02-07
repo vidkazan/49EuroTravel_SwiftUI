@@ -53,9 +53,6 @@ class SunEventService {
 		self.duration = DateParcer.getTwoDateInterval(date1: dateStart, date2: dateFinal)
 	}
 	
-//	func getSunEventsAsync() async ->  [SunEvent] {
-//		return getSunEvents()
-//	}
 	func getSunEvents() -> [SunEvent] {
 		var sunEvents : [SunEvent] = []
 		

@@ -47,7 +47,7 @@ extension SettingsView {
 		)
 		if res != oldSettings {
 			chewViewModel.send(event: .didUpdateSettings(res))
-			chewViewModel.coreDataStore.updateSettings(
+			Model.shared.coreDataStore.updateSettings(
 				newSettings: res
 			)
 		}

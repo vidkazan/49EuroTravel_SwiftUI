@@ -7,7 +7,6 @@
 
 import Foundation
 
-//extension ChewError {
 	enum ApiServiceError : ChewError {
 		static func == (lhs: ApiServiceError, rhs: ApiServiceError) -> Bool {
 			return lhs.description == rhs.description
@@ -78,6 +77,3 @@ import Foundation
 			}
 		}
 	}
-//}
-
-

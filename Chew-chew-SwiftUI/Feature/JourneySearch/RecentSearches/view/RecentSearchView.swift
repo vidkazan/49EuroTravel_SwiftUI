@@ -22,10 +22,7 @@ struct DepartureArrivalPair : Equatable, Hashable {
 
 struct RecentSearchesView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var recentSearchesVM : RecentSearchesViewModel
-	init(recentSearchesVM : RecentSearchesViewModel) {
-		self.recentSearchesVM = recentSearchesVM
-	}
+	@ObservedObject var recentSearchesVM : RecentSearchesViewModel = Model.shared.recentSearchesViewModel
 	var body: some View {
 		if !recentSearchesVM.state.searches.isEmpty {
 			VStack(alignment: .leading,spacing: 2) {

@@ -62,7 +62,7 @@ extension SearchStopsView {
 												elem.name == stop.name
 											}) == nil
 										) {
-											chewViewModel.coreDataStore.addRecentLocation(stop: stop)
+											Model.shared.coreDataStore.addRecentLocation(stop: stop)
 										}
 										chewViewModel.send(event: .onNewStop(.location(stop), type))
 										searchStopViewModel.send(event: .onStopDidTap(.location(stop), type))

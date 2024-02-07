@@ -23,7 +23,6 @@ extension ChewSunEvent {
 			location: CLLocationCoordinate2D(latitude: self.latitude, longitude: self.longtitude),
 			timeStart: self.timeStart,
 			timeFinal: self.timeFinal
-			
 		)
 	}
 }
@@ -36,8 +35,6 @@ extension ChewSunEvent {
 		self.timeFinal = sun.timeFinal
 		self.timeStart = sun.timeStart
 		self.type = sun.type.rawValue
-//		journey.managedObjectContext?.performAndWait {
-			self.journey = journey
-//		}
+		self.journey = journey
 	}
 }

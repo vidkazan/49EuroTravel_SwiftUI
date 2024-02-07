@@ -13,16 +13,15 @@ class NetworkMonitor {
 	private let workerQueue = DispatchQueue(label: "Monitor")
 	private weak var alertVM : AlertViewModel?
 
-	init(alertVM:  AlertViewModel?) {
-		self.alertVM = alertVM
+	init(send : @escaping (AlertViewModel.Event)->Void) {
 		networkMonitor.pathUpdateHandler = { path in
 			switch path.status {
 			case .requiresConnection:
-				alertVM?.send(event: .didRequestShow(.offlineMode))
+				send(.didRequestShow(.offlineMode))
 			case .satisfied:
-				alertVM?.send(event: .didRequestDismiss(.offlineMode))
+				send(.didRequestDismiss(.offlineMode))
 			case .unsatisfied:
-				alertVM?.send(event: .didRequestShow(.offlineMode))
+				send(.didRequestShow(.offlineMode))
 			@unknown default:
 				fatalError("\(Self.self): unknown networkMonitor status")
 			}
