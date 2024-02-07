@@ -49,15 +49,13 @@ struct SettingsView: View {
 				debug
 			}
 			.onChange(of: chewViewModel.state, perform: loadSettings)
-			.onDisappear {
-				setSheetType(.none)
-			}
 			.navigationTitle("Settings")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button(action: {
-						setSheetType(.none)
+//						setSheetType(.none)
+						chewViewModel.sheetViewModel.send(event: .didRequestHide)
 					}, label: {
 						Text("Cancel")
 							.foregroundColor(.chewGray30)
@@ -66,7 +64,8 @@ struct SettingsView: View {
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
 						saveSettings()
-						setSheetType(.none)
+//						setSheetType(.none)
+						chewViewModel.sheetViewModel.send(event: .didRequestHide)
 					}, label: {
 						Text("Save")
 						.chewTextSize(.big)

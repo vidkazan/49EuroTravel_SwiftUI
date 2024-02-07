@@ -42,7 +42,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 			minutes: DateParcer.getTwoDateIntervalInMinutes(
 				date1: container.date.departure.actual,
 				date2: container.date.arrival.actual
-			)) ?? "duration",
+			)) ?? "",
 		legTopPosition: 0,
 		legBottomPosition: 0,
 		delayedAndNextIsNotReachable: toLeg.reachable ?? false,

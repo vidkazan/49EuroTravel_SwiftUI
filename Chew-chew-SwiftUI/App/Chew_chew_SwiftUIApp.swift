@@ -10,13 +10,14 @@ import CoreData
 
 @main
 struct Chew_chew_SwiftUIApp: App {
-	var chewJourneyViewModel : ChewViewModel
+	var chewViewModel : ChewViewModel
 	let coreDataStore : CoreDataStore
 	
 	init() {
 		coreDataStore = CoreDataStore()
 		
-		chewJourneyViewModel = ChewViewModel(
+		chewViewModel = ChewViewModel(
+			sheetViewModel: SheetViewModel(),
 			locationDataManager: LocationDataManager(),
 			searchStopsViewModel: SearchStopsViewModel(),
 			journeyFollowViewModel: JourneyFollowViewModel(coreDataStore: coreDataStore, journeys: []),
@@ -30,15 +31,17 @@ struct Chew_chew_SwiftUIApp: App {
 	
 	var body: some Scene {
 		WindowGroup {
-			ContentView()
-				.environmentObject(chewJourneyViewModel)
+			ContentView(sheetVM: chewViewModel.sheetViewModel)
+				.background(Color.chewFillPrimary)
+				.environmentObject(chewViewModel)
 		}
 	}
 }
 
 struct AppViewPreview : PreviewProvider {
 	static var previews: some View {
-		ContentView()
-			.environmentObject(ChewViewModel())
+		let chewVM = ChewViewModel()
+		ContentView(sheetVM: chewVM.sheetViewModel)
+			.environmentObject(chewVM)
 	}
 }

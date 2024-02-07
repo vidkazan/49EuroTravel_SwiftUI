@@ -8,6 +8,41 @@
 import Foundation
 import SwiftUI
 
+struct FullLegSheetNew: View {
+	@EnvironmentObject var chewVM : ChewViewModel
+	let leg : LegViewData
+	var body: some View {
+		NavigationView {
+			ScrollView {
+				VStack(alignment: .center,spacing: 0) {
+					LegDetailsView(
+						send: { _ in},
+						referenceDate: chewVM.referenceDate,
+						openSheet: { _  in },
+						isExpanded: .expanded,
+						leg: leg
+						)
+				}
+			}
+			.chewTextSize(.big)
+			.frame(maxWidth: .infinity)
+			.background(Color.chewFillAccent)
+			.navigationTitle("Full leg")
+			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItem(placement: .navigationBarLeading, content: {
+					Button("Close") {
+						chewVM.sheetViewModel.send(event: .didRequestHide)
+					}
+				})
+			}
+		}
+	}
+}
+
+
+
+
 // MARK: FullLegSheet
 struct FullLegSheet: View {
 	@EnvironmentObject var chewVM : ChewViewModel

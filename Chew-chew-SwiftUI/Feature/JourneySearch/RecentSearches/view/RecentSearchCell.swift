@@ -27,7 +27,7 @@ struct RecentSearchCell: View {
 						.padding(5)
 				}
 				Button(action: {
-					send(.didTapEdit(action: .deleting, search: locations))
+					send(.didTapEdit(action: .deleting, search: RecentSearchesViewModel.RecentSearch(stops: locations, searchTS: Date.now.timeIntervalSince1970)))
 				}, label: {
 					Image(.xmarkCircle)
 						.chewTextSize(.big)
@@ -48,10 +48,7 @@ struct RecentSearchesPreviews: PreviewProvider {
 			recentSearchesVM: .init(
 				coreDataStore: .init(),
 				searches: [
-					.init(
-						departure: .init(),
-						arrival: .init()
-					)
+					.init(stops: .init(departure: .init(), arrival: .init()), searchTS: 0)
 				]
 			)
 		)

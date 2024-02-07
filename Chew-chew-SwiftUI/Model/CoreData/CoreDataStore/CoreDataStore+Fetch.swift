@@ -84,13 +84,17 @@ extension CoreDataStore {
 		return nil
 	}
 	
-	func fetchRecentSearches() -> [DepartureArrivalPair]? {
+	func fetchRecentSearches() -> [RecentSearchesViewModel.RecentSearch]? {
 		if let res = fetch(ChewRecentSearch.self)  {
-			var stops : [DepartureArrivalPair] = []
+			var stops = [RecentSearchesViewModel.RecentSearch]()
 			asyncContext.performAndWait {
 				res.forEach {
-					if let dep = $0.depStop?.stop(), let arr = $0.arrStop?.stop() {
-						stops.append(DepartureArrivalPair(departure: dep, arrival: arr))
+					if let dep = $0.depStop?.stop(), let arr = $0.arrStop?.stop(), let ts = $0.searchDate?.timeIntervalSince1970 {
+						stops.append(RecentSearchesViewModel.RecentSearch(
+							depStop: dep,
+							arrStop: arr,
+							searchTS: ts
+						))
 					}
 				}
 			}
@@ -132,10 +136,11 @@ extension CoreDataStore {
 					object = res
 					return
 				}
+				object = []
+				print("📙 > basicFetchRequest \(T.self): result is empty")
 			} catch {
 				print("📕 > basicFetchRequest \(T.self): error")
 			}
-			print("📙 > basicFetchRequest \(T.self): result is empty")
 		}
 		return object
 	}

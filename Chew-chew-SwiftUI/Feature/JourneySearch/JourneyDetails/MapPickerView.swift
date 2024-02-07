@@ -117,3 +117,36 @@ extension MapSheet {
 		}
 	}
 }
+
+
+struct MapSheetNew: View {
+	@EnvironmentObject var chewVM : ChewViewModel
+	var mapRect : MKCoordinateRegion
+	let stops : [StopViewData]
+	let route : MKPolyline?
+	var body: some View {
+		if #available(iOS 16.0, *) {
+			sheet
+				.presentationDetents([.medium])
+		} else {
+			sheet
+		}
+	}
+}
+
+extension MapSheetNew {
+	var sheet : some View {
+		NavigationView {
+			MapDetailsView(mapRect: mapRect, stops: stops,route: route)
+			.navigationTitle("Map")
+			.navigationBarTitleDisplayMode(.inline)
+			.toolbar {
+				ToolbarItem(placement: .navigationBarLeading, content: {
+					Button("Close") {
+						chewVM.sheetViewModel.send(event: .didRequestHide)
+					}
+				})
+			}
+		}
+	}
+}

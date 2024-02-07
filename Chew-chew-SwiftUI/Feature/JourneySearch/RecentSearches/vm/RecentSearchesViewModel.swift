@@ -9,6 +9,20 @@ import Foundation
 import Combine
 
 final class RecentSearchesViewModel : ObservableObject, Identifiable {
+	struct RecentSearch : Equatable {
+		let stops : DepartureArrivalPair
+		let searchTS : Double
+		
+		init(stops: DepartureArrivalPair, searchTS: Double) {
+			self.stops = stops
+			self.searchTS = searchTS
+		}
+		init(depStop : Stop,arrStop : Stop, searchTS: Double) {
+			self.stops = .init(departure: depStop, arrival: arrStop)
+			self.searchTS = searchTS
+		}
+	}
+	
 	@Published private(set) var state : State {
 		didSet { print("⏳🚂 >  state:",state.status.description) }
 	}
@@ -18,7 +32,7 @@ final class RecentSearchesViewModel : ObservableObject, Identifiable {
 	weak var coreDataStore : CoreDataStore?
 	init(
 		coreDataStore : CoreDataStore?,
-		searches : [DepartureArrivalPair]
+		searches : [RecentSearch]
 	) {
 		self.coreDataStore = coreDataStore
 		state = State(
@@ -50,10 +64,11 @@ final class RecentSearchesViewModel : ObservableObject, Identifiable {
 
 extension RecentSearchesViewModel {
 	struct State : Equatable {
-		var searches : [DepartureArrivalPair]
+		
+		var searches : [RecentSearch]
 		var status : Status
 		
-		init(searches: [DepartureArrivalPair], status: Status) {
+		init(searches: [RecentSearch], status: Status) {
 			self.searches = searches
 			self.status = status
 		}
@@ -70,7 +85,7 @@ extension RecentSearchesViewModel {
 		}
 		case error(error : String)
 		case idle
-		case editing(_ action: Action, search : DepartureArrivalPair?)
+		case editing(_ action: Action, search : RecentSearch?)
 		case updating
 		
 		var description : String {
@@ -90,13 +105,13 @@ extension RecentSearchesViewModel {
 	enum Event {
 		case didFailToEdit(action : Action, msg: String)
 		case didTapUpdate
-		case didUpdateData([DepartureArrivalPair])
+		case didUpdateData([RecentSearch])
 		
 		case didTapEdit(
 			action : Action,
-			search : DepartureArrivalPair?
+			search : RecentSearch?
 		)
-		case didEdit(data : [DepartureArrivalPair])
+		case didEdit(data : [RecentSearch])
 		
 		var description : String {
 			switch self {
@@ -135,14 +150,14 @@ extension RecentSearchesViewModel {
 						msg: "data is nil"
 						)).eraseToAnyPublisher()
 					}
-					guard !searches.contains(where: {$0.hashValue == data.hashValue}) else {
+					guard !searches.contains(where: {$0.stops.hashValue == data.stops.hashValue}) else {
 						return Just(Event.didFailToEdit(
 							action: action,
 						msg: "searches been added already"
 						)).eraseToAnyPublisher()
 					}
 					guard
-						self?.coreDataStore?.addRecentSearch(stops: data) == true
+						self?.coreDataStore?.addRecentSearch(search: data) == true
 					else {
 						return Just(Event.didFailToEdit(
 							action: action,
@@ -153,12 +168,12 @@ extension RecentSearchesViewModel {
 					return Just(Event.didEdit(data: searches))
 						.eraseToAnyPublisher()
 				case .deleting:
-					guard let id = data?.id else {
+					guard let id = data?.stops.id else {
 						return Just(Event.didFailToEdit(action: action,msg: "id is nil")).eraseToAnyPublisher()
 					}
 					guard
 						let index = searches.firstIndex(where: {
-							$0.id == id
+							$0.stops.id == id
 						} )
 					else {
 						return Just(Event.didFailToEdit(action: action,msg: "not found in list to delete")).eraseToAnyPublisher()

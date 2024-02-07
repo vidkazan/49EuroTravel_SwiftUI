@@ -14,7 +14,8 @@ struct DatePickerTimePresetButtons: View {
 		HStack {
 			Button(action: {
 				chewVM.send(event: .onNewDate(.now))
-				setSheetType(.none)
+				chewVM.sheetViewModel.send(event: .didRequestHide)
+//				setSheetType(.none)
 			}, label: {
 				Text("now")
 					.padding(.horizontal,15)
@@ -26,7 +27,8 @@ struct DatePickerTimePresetButtons: View {
 			Button(action: {
 				let date = Date.now + (15 * 60)
 				chewVM.send(event: .onNewDate(.specificDate(date.timeIntervalSince1970)))
-				setSheetType(.none)
+				chewVM.sheetViewModel.send(event: .didRequestHide)
+//				setSheetType(.none)
 			}, label: {
 				Text("in 15 min")
 					.padding(.horizontal,15)
@@ -38,7 +40,8 @@ struct DatePickerTimePresetButtons: View {
 			Button(action: {
 				let date = Date.now + (60 * 60)
 				chewVM.send(event: .onNewDate(.specificDate(date.timeIntervalSince1970)))
-				setSheetType(.none)
+				chewVM.sheetViewModel.send(event: .didRequestHide)
+//				setSheetType(.none)
 			}, label: {
 				Text("in 1 hour")
 					.padding(.horizontal,15)

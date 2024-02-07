@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct JourneyFollowView : View {
+	let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyFollowViewModel
 	
@@ -16,13 +17,12 @@ struct JourneyFollowView : View {
 		self.viewModel = viewModel
 	}
 	var body: some View {
-		Group {
+		VStack {
 			switch viewModel.state.status {
 			case .updating:
 				switch viewModel.state.journeys.count {
 				case 0:
 					ProgressView()
-						.frame(maxWidth: .infinity,maxHeight: .infinity)
 				default:
 					followViewInner
 				}
@@ -31,14 +31,44 @@ struct JourneyFollowView : View {
 				case 0:
 					Text("You have no followed journeys")
 						.chewTextSize(.big)
+						.frame(idealWidth: .infinity,idealHeight: .infinity)
 				default:
 					followViewInner
 					
 				}
 			}
 		}
+		.onReceive(timer, perform: { _ in
+			chooseJourneyToUpdate()
+		})
+		.frame(maxWidth: .infinity,maxHeight: .infinity)
 		.navigationBarTitle("Journey follow")
 		.navigationBarTitleDisplayMode(.inline)
+	}
+}
+
+extension JourneyFollowView {
+	func performCalculation(elem : JourneyFollowData) -> Double {
+		let now = Date.now.timeIntervalSince1970
+		let basicInterval = elem.journeyViewData.time.statusOnReferenceTime(.now).updateIntervalInMinutes
+		let updatedAt = elem.journeyViewData.updatedAt
+		return  (basicInterval - (now - updatedAt)/60	 ) / basicInterval
+	}
+	func chooseJourneyToUpdate()  {
+		let elems = viewModel.state.journeys.filter({$0.journeyViewData.time.statusOnReferenceTime(.now) != .past})
+		if let elem = elems.min(by: {
+			performCalculation(elem: $0) < performCalculation(elem: $1)
+		}) {
+			if performCalculation(elem: elem) < 0.2 {
+				Model.shared.allJourneyDetailViewModels().first(where: {
+					$0.state.data.id == elem.id
+				})?.send(event: .didRequestReloadIfNeeded(
+					id: elem.id,
+					ref: elem.journeyViewData.refreshToken,
+					timeStatus: elem.journeyViewData.time.statusOnReferenceTime(.now)
+				))
+			}
+		}
 	}
 }
 
@@ -86,13 +116,12 @@ extension JourneyFollowView {
 					}
 			})
 		}
-		.onAppear {
-			UITableView.appearance().separatorStyle = .none
-			UITableView.appearance().separatorColor = .gray
+		.onAppear{
+			UITableView.appearance().separatorStyle = .singleLine
+			UITableView.appearance().separatorColor = .orange
+			UITableView.appearance().backgroundColor = .green
 		}
 		.chewTextSize(.big)
-		.listRowSeparator(.hidden)
-		.listSectionSeparator(.hidden)
 		.listStyle(.insetGrouped)
 		
 	}
@@ -129,8 +158,11 @@ extension JourneyFollowView {
 			}
 			.swipeActions(edge: .trailing) {
 				Button {
-					print(">>> start delete",journey.id)
-					vm.send(event: .didTapSubscribingButton(id: journey.id,ref: journey.journeyViewData.refreshToken, journeyDetailsViewModel: vm))
+					vm.send(event: .didTapSubscribingButton(
+						id: journey.id,
+						ref: journey.journeyViewData.refreshToken,
+						journeyDetailsViewModel: vm
+					))
 				} label: {
 					Label("Delete", systemImage: "xmark.bin.circle")
 				}

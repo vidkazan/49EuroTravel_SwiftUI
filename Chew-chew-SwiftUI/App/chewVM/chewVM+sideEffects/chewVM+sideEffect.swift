@@ -26,7 +26,7 @@ extension ChewViewModel {
 			self?.recentSearchesViewModel.send(
 				event: .didTapEdit(
 					action: .adding,
-					search: DepartureArrivalPair(departure: dep, arrival: arr)
+					search: RecentSearchesViewModel.RecentSearch(depStop: dep, arrStop: arr,searchTS: Date.now.timeIntervalSince1970)
 				))
 			return Just(Event.onJourneyDataUpdated(DepartureArrivalPair(departure: dep, arrival: arr)))
 				.eraseToAnyPublisher()

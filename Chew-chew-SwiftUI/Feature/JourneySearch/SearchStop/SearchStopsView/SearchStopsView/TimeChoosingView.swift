@@ -36,7 +36,8 @@ struct TimeChoosingView: View {
 				case .now:
 					chewVM.send(event: .onNewDate(.now))
 				case .specificDate:
-					setSheetType(.datePicker)
+					chewVM.sheetViewModel.send(event: .didRequestShow(.date))
+//					setSheetType(.datePicker)
 				}
 			}
 		)

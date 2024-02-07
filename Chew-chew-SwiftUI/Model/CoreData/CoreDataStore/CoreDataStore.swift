@@ -109,7 +109,7 @@ extension CoreDataStore {
 		return res
 	}
 	
-	func addRecentSearch(stops : DepartureArrivalPair) -> Bool {
+	func addRecentSearch(search : RecentSearchesViewModel.RecentSearch) -> Bool {
 		var res = false
 		guard let user = self.user else {
 			print("📕 > \(#function) : error : user")
@@ -118,7 +118,7 @@ extension CoreDataStore {
 		 asyncContext.performAndWait {
 			let _ = ChewRecentSearch(
 				user: user,
-				stops: stops,
+				search: search,
 				using: self.asyncContext
 			)
 			self.saveAsyncContext()

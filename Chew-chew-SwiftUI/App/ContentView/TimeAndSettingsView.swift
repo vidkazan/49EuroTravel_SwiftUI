@@ -27,7 +27,8 @@ struct TimeAndSettingsView: View {
 						setSheetType: setSheetType
 					)
 					Button(action: {
-						setSheetType(.settings)
+//						setSheetType(.settings)
+						chewViewModel.sheetViewModel.send(event: .didRequestShow(.settings))
 					}, label: {
 						Image(.gearshape)
 							.tint(.primary)

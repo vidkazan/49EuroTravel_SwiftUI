@@ -20,12 +20,12 @@ extension ChewRecentSearch {
 }
 
 extension ChewRecentSearch : Identifiable {
-	convenience init(user : ChewUser,stops : DepartureArrivalPair,using managedObjectContext: NSManagedObjectContext) {
+	convenience init(user : ChewUser,search : RecentSearchesViewModel.RecentSearch,using managedObjectContext: NSManagedObjectContext) {
 			self.init(context: managedObjectContext)
-			self.id = stops.id
+			self.id = search.stops.id
 			self.user = user
-			self.searchDate = .now
-			let _ = Location(context: managedObjectContext, stop: stops.departure, parent: .recentSearchDepStop(self))
-			let _ = Location(context: managedObjectContext, stop: stops.arrival,parent: .recentSearchArrStop(self))
+		self.searchDate = Date(timeIntervalSince1970: search.searchTS)
+		let _ = Location(context: managedObjectContext, stop: search.stops.departure, parent: .recentSearchDepStop(self))
+			let _ = Location(context: managedObjectContext, stop: search.stops.arrival,parent: .recentSearchArrStop(self))
 		}
 }

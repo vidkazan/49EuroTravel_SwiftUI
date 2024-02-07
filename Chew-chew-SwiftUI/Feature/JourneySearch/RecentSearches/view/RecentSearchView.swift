@@ -35,10 +35,12 @@ struct RecentSearchesView : View {
 					.foregroundColor(.secondary)
 				ScrollView(.horizontal,showsIndicators: false) {
 					LazyHStack {
-						ForEach(recentSearchesVM.state.searches, id: \.hashValue) { locations in
-							RecentSearchCell(send: recentSearchesVM.send, locations:locations)
+						ForEach(recentSearchesVM.state.searches.sorted(by: {
+							$0.searchTS < $1.searchTS
+						}),id: \.searchTS) { locations in
+							RecentSearchCell(send: recentSearchesVM.send, locations:locations.stops)
 								.onTapGesture {
-									chewVM.send(event: .didSetBothLocations(locations))
+									chewVM.send(event: .didSetBothLocations(locations.stops))
 								}
 						}
 						.background(Color.chewFillAccent)

@@ -76,7 +76,7 @@ extension LegDTO {
 					minutes: DateParcer.getTwoDateIntervalInMinutes(
 						date1: container.date.departure.planned,
 						date2: container.date.arrival.planned
-					)) ?? "duration",
+					)) ?? "",
 			legTopPosition: max(plannedDeparturePosition,actualDeparturePosition),
 			legBottomPosition: max(plannedArrivalPosition,actualArrivalPosition),
 			delayedAndNextIsNotReachable: nil,

@@ -15,32 +15,6 @@ extension JourneyFollowViewModel {
 		}
 	}
 	
-//	func whenUpdating() -> Feedback<State, Event> {
-//		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-//			guard case .updating = state.status else {
-//				return Empty().eraseToAnyPublisher()
-//			}
-//				let elems = state.journeys.filter({
-//					$0.journeyViewData.time.statusOnReferenceTime(.now) == .active
-//				})
-//				elems.forEach({ elem in
-//					Model.shared.journeyDetailViewModel(
-//						followId: elem.id,
-//						for: elem.journeyViewData.refreshToken,
-//						viewdata: elem.journeyViewData,
-//						stops: .init(departure: elem.depStop, arrival: elem.arrStop),
-//						chewVM: nil
-//					)
-//					.send(event: .didRequestReloadIfNeeded(
-//						id: elem.id,
-//						ref: elem.journeyViewData.refreshToken,
-//						timeStatus: elem.journeyViewData.time.statusOnReferenceTime(.now)
-//					))
-//				})
-//			return Just(Event.didUpdateData(state.journeys)).eraseToAnyPublisher()
-//		}
-//	}
-	
 	func whenUpdatingJourney() -> Feedback<State, Event> {
 		Feedback { [weak self] (state: State) -> AnyPublisher<Event, Never> in
 			guard case let .updatingJourney(viewData, followId) = state.status else {

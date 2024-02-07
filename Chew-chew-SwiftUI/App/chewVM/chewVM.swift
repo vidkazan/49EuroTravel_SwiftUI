@@ -18,6 +18,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	let searchStopsViewModel : SearchStopsViewModel
 	let journeyFollowViewModel : JourneyFollowViewModel
 	let recentSearchesViewModel : RecentSearchesViewModel
+	let sheetViewModel : SheetViewModel
 	let referenceDate : ChewDate
 	@Published private(set) var state : State {
 		didSet { print("📱 >  state:",state.status.description) }
@@ -43,6 +44,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		self.journeyFollowViewModel = JourneyFollowViewModel(coreDataStore: coreDataStore,journeys: [])
 		self.recentSearchesViewModel = RecentSearchesViewModel(coreDataStore: coreDataStore,searches: [])
 		self.referenceDate = referenceDate
+		self.sheetViewModel = SheetViewModel()
 		   
 	   Publishers.system(
 		   initial: state,
@@ -62,6 +64,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 	}
 	
 	init (
+		sheetViewModel : SheetViewModel,
 		locationDataManager : LocationDataManager,
 		searchStopsViewModel : SearchStopsViewModel,
 		journeyFollowViewModel : JourneyFollowViewModel,
@@ -79,6 +82,7 @@ final class ChewViewModel : ObservableObject, Identifiable {
 		self.journeyFollowViewModel = journeyFollowViewModel
 		self.recentSearchesViewModel = recentSearchesViewModel
 		self.referenceDate = referenceDate
+		self.sheetViewModel = sheetViewModel
 		
 		Publishers.system(
 			initial: state,

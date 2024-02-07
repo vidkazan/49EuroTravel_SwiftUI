@@ -70,7 +70,7 @@ extension JourneyViewData {
 	){
 		self.origin = depStopName ?? "origin"
 		self.destination = arrStopName ?? "destination"
-		self.durationLabelText  = DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: time.durationInMinutes) ?? "duration"
+		self.durationLabelText  = DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: time.durationInMinutes) ?? ""
 		self.legs = legs
 		self.transferCount = constructTransferCount(legs: legs)
 		self.sunEvents = sunEvents

@@ -16,32 +16,38 @@ struct FeatureView: View {
 			TabView {
 				NavigationStack {
 					JourneySearchView()
+						.background(Color.chewFillPrimary)
 				}
 				.tabItem {
 					Label("Search", systemImage: "magnifyingglass")
 				}
 				NavigationStack {
 					JourneyFollowView(viewModel: chewViewModel.journeyFollowViewModel)
+						.background(Color.chewFillPrimary)
 				}
 				.tabItem {
 					Label("Follow", systemImage: "train.side.front.car")
 				}
 			}
+			.background(Color.chewFillPrimary)
 		} else {
 			TabView {
 				NavigationView {
 					JourneySearchView()
+						.background(Color.chewFillPrimary)
 				}
 				.tabItem {
 					Label("Search", systemImage: "magnifyingglass")
 				}
 				NavigationView {
 					JourneyFollowView(viewModel: chewViewModel.journeyFollowViewModel)
+						.background(Color.chewFillPrimary)
 				}
 				.tabItem {
 					Label("Follow", systemImage: "train.side.front.car")
 				}
 			}
+			.background(Color.chewFillPrimary)
 		}
 	}
 }

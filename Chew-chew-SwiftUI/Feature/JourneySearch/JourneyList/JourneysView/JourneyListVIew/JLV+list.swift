@@ -9,8 +9,7 @@ import SwiftUI
 
 extension JourneyListView {
 	func list() -> some View {
-		return
-		ScrollViewReader { val in
+		return ScrollViewReader { val in
 			ScrollView {
 				LazyVStack(spacing: 5) {
 					JourneyListHeaderView(journeyViewModel: journeyViewModel)

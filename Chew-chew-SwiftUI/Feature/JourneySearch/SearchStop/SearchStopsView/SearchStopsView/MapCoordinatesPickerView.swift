@@ -6,7 +6,9 @@ struct MapWithCoordinatePickerView: View {
 
 	var body: some View {
 		VStack {
-			MapWithCoordinatePickerUIView(selectedCoordinate: $selectedCoordinate)
+			MapWithCoordinatePickerUIView(
+				selectedCoordinate: $selectedCoordinate
+			)
 				.edgesIgnoringSafeArea(.all)
 			Text("Selected Coordinates: \(selectedCoordinate?.latitude ?? 0), \(selectedCoordinate?.longitude ?? 0)")
 				.padding()

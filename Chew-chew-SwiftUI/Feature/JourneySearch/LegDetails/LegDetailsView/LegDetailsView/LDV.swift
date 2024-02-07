@@ -91,7 +91,7 @@ struct LegDetailsView: View {
 		}
 		// MARK: 🤢
 		.padding(.top,leg.legType == LegViewData.LegType.line || leg.legType.caseDescription == "footStart" ?  10 : 0)
-		.background(leg.legType == LegViewData.LegType.line ? Color.chewFillSecondary : .clear )
+		.background(leg.legType == LegViewData.LegType.line ? Color.chewLegDetailsCellGray : .clear )
 		.onTapGesture {
 			switch isExpandedState {
 			case .collapsed:
@@ -121,12 +121,14 @@ extension LegDetailsView {
 	var menu : some View {
 			Menu(content: {
 				Button(action: {
-					openSheet(.map(leg: leg))
+//					openSheet(.map(leg: leg))
+					chewVM.sheetViewModel.send(event: .didRequestShow(.map(leg: leg)))
 				}, label: {
 					Label("Show on map", systemImage: "map.circle")
 				})
 				Button(action: {
-					openSheet(.fullLeg(leg: leg))
+//					openSheet(.fullLeg(leg: leg))
+					chewVM.sheetViewModel.send(event: .didRequestShow(.fullLeg(leg: leg)))
 				}, label: {
 					Label("Show full segment", systemImage: ChewSFSymbols.trainSideFrontCar.rawValue)
 				})

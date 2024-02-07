@@ -10,7 +10,7 @@ import Combine
 
 class ViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
-		didSet { print(">>>  state:",state.status.description) }
+		didSet { print(">> state:",state.status.description) }
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
@@ -80,7 +80,7 @@ extension ViewModel : ChewViewModelProtocol {
 
 extension ViewModel {
 	static func reduce(_ state: State, _ event: Event) -> State {
-		print(">>> ",event.description,"state:",state.status.description)
+		print(">> ",event.description,"state:",state.status.description)
 		switch state.status {
 		case .start:
 			switch event {

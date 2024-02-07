@@ -6,13 +6,15 @@
 //
 
 import SwiftUI
+#warning("TODO: localization")
 #warning("TODO: legView: place transport icons")
 #warning("TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce")
-#warning("TODO: error and alerts")
+#warning("TODO: confirmation of destructive actions")
 
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
+	@ObservedObject var sheetVM : SheetViewModel
 	@State var state : ChewViewModel.State = .init()
 	var body: some View {
 		Group {
@@ -25,29 +27,17 @@ struct ContentView: View {
 					FeatureView()
 				}
 			}
-//			.sheet(
-//				isPresented: $sheetIsPresented,
-//				onDismiss: {
-//					sheetIsPresented = false
-//					chewViewModel.send(event: .didUpdateSettings(
-//						ChewSettings(
-//							settings: chewViewModel.state.settings,
-//							onboarding: false
-//						)
-//					))
-//					chewViewModel.coreDataStore.disableOnboarding()
-//				},
-//				content: {
-//					if chewViewModel.state.settings.onboarding == true {
-//						TabView {
-//							Text("Onboarding Blabla 1")
-//							Text("Onboarding Blabla 2")
-//						}
-//						.tabViewStyle(.page(indexDisplayMode: .always))
-//					}
-//				}
-//			)
 		}
+		.sheet(
+			isPresented: sheetVM.state.status.sheetIsPresented,
+			onDismiss: {
+				sheetVM.send(event: .didRequestHide)
+			},
+			content: {
+				SheetView(sheetVM: chewViewModel.sheetViewModel)
+			}
+		)
+		.background(Color.chewFillPrimary)
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)
 			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)

@@ -52,9 +52,7 @@ struct JourneyDetailsView: View {
 						content: {
 							switch sheetType {
 							case .fullLeg:
-								FullLegSheet(
-									journeyViewModel: viewModel
-								)
+								FullLegSheet(journeyViewModel: viewModel)
 							case .map:
 								MapSheet(viewModel: viewModel)
 							case .none:

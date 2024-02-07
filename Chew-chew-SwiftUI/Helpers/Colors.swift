@@ -9,6 +9,9 @@ import Foundation
 import SwiftUI
 
 extension Color {
+	static var chewLegDetailsCellGray: Color {
+		Color("ChewLegDetailsCellGray")
+	}
 	static var chewLegsViewGray: Color {
 		Color("ChewLegsViewGray")
 	}
