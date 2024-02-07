@@ -16,6 +16,8 @@ struct ContentView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var sheetVM : SheetViewModel
 	@State var state : ChewViewModel.State = .init()
+	@State var sheetState : SheetViewModel.State = .init(status: .showing(.none, result: EmptyDataSource()))
+	@State var sheetIsPresented = false
 	var body: some View {
 		Group {
 			switch state.status {
@@ -29,12 +31,14 @@ struct ContentView: View {
 			}
 		}
 		.sheet(
-			isPresented: sheetVM.state.status.sheetIsPresented,
+			isPresented: $sheetIsPresented,
 			onDismiss: {
-				sheetVM.send(event: .didRequestHide)
+				sheetIsPresented = false
 			},
 			content: {
-				SheetView(sheetVM: chewViewModel.sheetViewModel)
+				SheetView(sheetVM: chewViewModel.sheetViewModel,closeSheet: {
+					sheetIsPresented = false
+				})
 			}
 		)
 		.background(Color.chewFillPrimary)
@@ -44,6 +48,20 @@ struct ContentView: View {
 		}
 		.onReceive(chewViewModel.$state, perform: { newState in
 			state = newState
+		})
+		.onReceive(sheetVM.$state, perform: { newState in
+			sheetState = newState
+			switch newState.status {
+			case .loading(let type),.showing(let type, _):
+				switch type {
+				case .none:
+					sheetIsPresented = false
+				default:
+					sheetIsPresented = true
+				}
+			default:
+				break
+			}
 		})
 	}
 }

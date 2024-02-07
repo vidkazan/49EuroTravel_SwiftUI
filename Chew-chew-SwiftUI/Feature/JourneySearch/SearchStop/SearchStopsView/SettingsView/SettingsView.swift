@@ -18,13 +18,13 @@ struct SettingsView: View {
 	@State var showWithTransfers : Int
 	@State var alternativeSearchPage : Bool
 //	@State var showSunEvents : Bool
-	let setSheetType : (JourneySearchView.SheetType)->Void
+	let closeSheet : ()->Void
 	let oldSettings : ChewSettings
-	init(settings : ChewSettings,setSheetType : @escaping (JourneySearchView.SheetType)->Void) {
+	init(settings : ChewSettings,closeSheet : @escaping ()->Void) {
 		self.oldSettings = settings
 		self.transportModeSegment = settings.transportMode.id
 		self.selectedTypes = settings.customTransferModes
-		self.setSheetType = setSheetType
+		self.closeSheet = closeSheet
 		
 		switch settings.transferTime {
 		case .direct:
@@ -55,7 +55,7 @@ struct SettingsView: View {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button(action: {
 //						setSheetType(.none)
-						chewViewModel.sheetViewModel.send(event: .didRequestHide)
+						closeSheet()
 					}, label: {
 						Text("Cancel")
 							.foregroundColor(.chewGray30)
@@ -64,8 +64,7 @@ struct SettingsView: View {
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
 						saveSettings()
-//						setSheetType(.none)
-						chewViewModel.sheetViewModel.send(event: .didRequestHide)
+						closeSheet()
 					}, label: {
 						Text("Save")
 						.chewTextSize(.big)
@@ -90,7 +89,7 @@ struct SettingsView: View {
 
 struct SettingsPreview: PreviewProvider {
 	static var previews: some View {
-		SettingsView(settings: .init(),setSheetType: { _ in })
+		SettingsView(settings: .init(),closeSheet: {})
 			.environmentObject(ChewViewModel(referenceDate: .now))
 	}
 }

@@ -124,8 +124,10 @@ struct MapSheetNew: View {
 	var mapRect : MKCoordinateRegion
 	let stops : [StopViewData]
 	let route : MKPolyline?
+	let closeSheet : ()->Void
 	var body: some View {
 		if #available(iOS 16.0, *) {
+			let _ = print(">>> here")
 			sheet
 				.presentationDetents([.medium])
 		} else {
@@ -143,7 +145,7 @@ extension MapSheetNew {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button("Close") {
-						chewVM.sheetViewModel.send(event: .didRequestHide)
+						closeSheet()
 					}
 				})
 			}

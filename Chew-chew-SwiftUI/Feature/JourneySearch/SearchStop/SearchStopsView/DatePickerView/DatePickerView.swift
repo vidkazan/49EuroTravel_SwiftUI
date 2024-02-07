@@ -11,7 +11,7 @@ struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
 	@State var date : Date
 	@State var time : Date
-	let setSheetType : (JourneySearchView.SheetType)->Void
+	let closeSheet : ()->Void
 
 	var body: some View {
 		NavigationView {
@@ -25,7 +25,7 @@ struct DatePickerView: View {
 					.padding(5)
 					.background(Color.chewFillTertiary.opacity(0.15))
 					.cornerRadius(10)
-				DatePickerTimePresetButtons(setSheetType: setSheetType)
+				DatePickerTimePresetButtons(closeSheet: closeSheet)
 				Spacer()
 			}
 			.padding(.horizontal,10)
@@ -34,8 +34,7 @@ struct DatePickerView: View {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button(action: {
-//						setSheetType(.none)
-						chewVM.sheetViewModel.send(event: .didRequestHide)
+						closeSheet()
 					}, label: {
 						Text("Cancel")
 							.foregroundColor(.chewGray30)
@@ -44,9 +43,8 @@ struct DatePickerView: View {
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
 						if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
-//							setSheetType(.none)
-							chewVM.sheetViewModel.send(event: .didRequestHide)
 							chewVM.send(event: .onNewDate(.specificDate(dateCombined.timeIntervalSince1970)))
+							closeSheet()
 						}
 					}, label: {
 						Text("Save")

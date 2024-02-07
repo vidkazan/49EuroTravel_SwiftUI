@@ -19,7 +19,7 @@ class SheetViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	
 	
-	init(_ initaialStatus : Status = .hidden) {
+	init(_ initaialStatus : Status = .loading(.none)) {
 		self.state = State(
 			status: initaialStatus
 		)
@@ -62,6 +62,11 @@ struct FullLegViewDataSource : SheetViewDataSource {
 struct DatePickerViewDataSource : SheetViewDataSource {
 	
 }
+
+struct EmptyDataSource : SheetViewDataSource {
+	
+}
+
 struct SettingsViewDataSource : SheetViewDataSource {
 
 }
@@ -82,37 +87,18 @@ extension SheetViewModel : ChewViewModelProtocol {
 		static func == (lhs: SheetViewModel.Status, rhs: SheetViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}
-		case hidden
 		case loading(_ type : SheetType)
+		case error(_ error : any ChewError)
 		case showing(_ type : SheetType, result: any SheetViewDataSource)
 		
 		var description : String {
 			switch self {
-			case .hidden:
-				return "hidden"
+			case .error(let error):
+				return "error: \(error.localizedDescription)"
 			case .showing(let type,_):
 				return "showing \(type.description)"
 			case .loading(let type):
 				return "loading \(type.description)"
-			}
-		}
-		
-		var sheetIsPresented : Binding<Bool> {
-			switch self {
-			case .hidden:
-				return .init(
-					get: {
-						return false
-					},
-					set: { bool in }
-				)
-			case .showing,.loading:
-				return .init(
-					get: {
-						return true
-					},
-					set: { bool in }
-				)
 			}
 		}
 	}
@@ -121,7 +107,6 @@ extension SheetViewModel : ChewViewModelProtocol {
 		case didRequestShow(_ type : SheetType)
 		case didLoadDataForShowing(_ type : SheetType,_ result : SheetViewDataSource)
 		case didFailToLoadData(_ error : any ChewError)
-		case didRequestHide
 		
 		var description : String {
 			switch self {
@@ -129,8 +114,6 @@ extension SheetViewModel : ChewViewModelProtocol {
 				return "didFailToLoadData \(error.localizedDescription)"
 			case .didLoadDataForShowing:
 				return "didLoadDataForShowing"
-			case .didRequestHide:
-				return "didRequestHide"
 			case .didRequestShow(let type):
 				return "didRequestShow \(type.description)"
 			}
@@ -141,6 +124,7 @@ extension SheetViewModel : ChewViewModelProtocol {
 			lhs.description == rhs.description
 		}
 		
+		case none
 		case date
 		case settings
 		case fullLeg(leg : LegViewData)
@@ -150,6 +134,8 @@ extension SheetViewModel : ChewViewModelProtocol {
 		
 		var description : String {
 			switch self {
+			case .none:
+				return "none"
 			case .date:
 				return "date"
 			case .settings:
@@ -167,6 +153,8 @@ extension SheetViewModel : ChewViewModelProtocol {
 		
 		var dataSourceType : any SheetViewDataSource.Type {
 			switch self {
+			case .none:
+				return EmptyDataSource.self
 			case .date:
 				return DatePickerViewDataSource.self
 			case .settings:
@@ -191,31 +179,21 @@ extension SheetViewModel {
 		switch state.status {
 		case .loading:
 			switch event {
-			case .didRequestHide:
-				return State(status: .hidden)
-			case .didRequestShow:
-				return state
-			case .didFailToLoadData:
-				return State(status: .hidden)
+			case .didRequestShow(let type):
+				return State(status: .loading(type))
+			case .didFailToLoadData(let error):
+				return State(status: .error(error))
 			case let .didLoadDataForShowing(type,data):
 				return State(status: .showing(type,result: data))
 			}
-		case .hidden:
+		case .showing,.error:
 			switch event {
-			case .didFailToLoadData,.didLoadDataForShowing:
-				return state
 			case .didRequestShow(let type):
 				return State(status: .loading(type))
-			case .didRequestHide:
+			case .didFailToLoadData:
 				return state
-			}
-		case .showing:
-			switch event {
-			case .didRequestHide:
-				return State(
-					status: .hidden
-				)
-			case .didRequestShow,.didFailToLoadData,.didLoadDataForShowing:
+//				return State(status: .error(error))
+			case .didLoadDataForShowing:
 				return state
 			}
 		}
@@ -235,6 +213,8 @@ extension SheetViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			switch type {
+			case .none:
+				return Just(Event.didLoadDataForShowing(type,EmptyDataSource())).eraseToAnyPublisher()
 			case .date:
 				return Just(Event.didLoadDataForShowing(type,DatePickerViewDataSource())).eraseToAnyPublisher()
 			case .settings:

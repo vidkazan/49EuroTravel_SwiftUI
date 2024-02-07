@@ -9,12 +9,13 @@ import SwiftUI
 
 struct DatePickerTimePresetButtons: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	let setSheetType : (JourneySearchView.SheetType)->Void
+	let closeSheet : ()->Void
 	var body: some View {
 		HStack {
 			Button(action: {
 				chewVM.send(event: .onNewDate(.now))
-				chewVM.sheetViewModel.send(event: .didRequestHide)
+				closeSheet()
+//				chewVM.sheetViewModel.send(event: .didRequestHide)
 //				setSheetType(.none)
 			}, label: {
 				Text("now")
@@ -27,7 +28,8 @@ struct DatePickerTimePresetButtons: View {
 			Button(action: {
 				let date = Date.now + (15 * 60)
 				chewVM.send(event: .onNewDate(.specificDate(date.timeIntervalSince1970)))
-				chewVM.sheetViewModel.send(event: .didRequestHide)
+				closeSheet()
+//				chewVM.sheetViewModel.send(event: .didRequestHide)
 //				setSheetType(.none)
 			}, label: {
 				Text("in 15 min")
@@ -40,7 +42,8 @@ struct DatePickerTimePresetButtons: View {
 			Button(action: {
 				let date = Date.now + (60 * 60)
 				chewVM.send(event: .onNewDate(.specificDate(date.timeIntervalSince1970)))
-				chewVM.sheetViewModel.send(event: .didRequestHide)
+				closeSheet()
+//				chewVM.sheetViewModel.send(event: .didRequestHide)
 //				setSheetType(.none)
 			}, label: {
 				Text("in 1 hour")

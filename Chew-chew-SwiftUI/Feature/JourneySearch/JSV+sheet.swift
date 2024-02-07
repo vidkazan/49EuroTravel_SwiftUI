@@ -16,18 +16,21 @@ extension JourneySearchView {
 					DatePickerView(
 						date: chewViewModel.state.date.date,
 						time: chewViewModel.state.date.date,
-						setSheetType: {sheetType = $0}
+						closeSheet: {}
 					)
 					.presentationDetents([.height(300),.large])
 				} else {
 					DatePickerView(
 						date: chewViewModel.state.date.date,
 						time: chewViewModel.state.date.date,
-						setSheetType: {sheetType = $0}
+						closeSheet: {}
 					)
 				}
 			case .settings:
-				SettingsView(settings: chewViewModel.state.settings,setSheetType: {sheetType = $0})
+				SettingsView(
+					settings: chewViewModel.state.settings,
+					closeSheet: {}
+				)
 			case .none:
 				EmptyView()
 			}

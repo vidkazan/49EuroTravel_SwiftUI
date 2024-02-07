@@ -11,6 +11,7 @@ import SwiftUI
 struct FullLegSheetNew: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	let leg : LegViewData
+	let closeSheet : ()->Void
 	var body: some View {
 		NavigationView {
 			ScrollView {
@@ -32,7 +33,7 @@ struct FullLegSheetNew: View {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
 					Button("Close") {
-						chewVM.sheetViewModel.send(event: .didRequestHide)
+						closeSheet()
 					}
 				})
 			}
