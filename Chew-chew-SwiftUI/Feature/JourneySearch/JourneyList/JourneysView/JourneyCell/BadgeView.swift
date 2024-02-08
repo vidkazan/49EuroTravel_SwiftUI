@@ -109,7 +109,7 @@ struct BadgeView : View {
 				UpdatedAtBadgeView(bgColor: self.color,refTime: refTime, isLoading: isLoading)
 					.chewTextSize(size)
 					.padding(4)
-			case .alertFromRemark:
+			case .remarkImportant:
 				OneLineText(badge.badgeData.name)
 					.chewTextSize(size)
 					.padding(.horizontal,4)
@@ -209,7 +209,7 @@ struct BadgeViewPreview : PreviewProvider {
 					.badgeBackgroundStyle(.primary)
 			}
 			HStack {
-				BadgeView(.alertFromRemark)
+				BadgeView(.remarkImportant(remarks: []))
 					.badgeBackgroundStyle(.red)
 				BadgeView(.cancelled)
 					.badgeBackgroundStyle(.red)

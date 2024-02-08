@@ -37,6 +37,7 @@ struct JourneyViewData : Equatable, Identifiable {
 	let sunEvents : [SunEvent]
 	let sunEventsGradientStops : [Gradient.Stop]
 	let isReachable : Bool
+	let remarks : [Remark]
 	let badges : [Badges]
 	let refreshToken : String
 	let time : TimeContainer
@@ -57,6 +58,7 @@ extension JourneyViewData {
 		self.time = data.time
 		self.updatedAt = data.updatedAt
 		self.sunEventsGradientStops = data.sunEventsGradientStops
+		self.remarks = data.remarks
 	}
 	init(
 		journeyRef : String,
@@ -66,7 +68,8 @@ extension JourneyViewData {
 		depStopName : String?,
 		arrStopName : String?,
 		time : TimeContainer,
-		updatedAt : Double
+		updatedAt : Double,
+		remarks : [Remark]
 	){
 		self.origin = depStopName ?? "origin"
 		self.destination = arrStopName ?? "destination"
@@ -84,6 +87,7 @@ extension JourneyViewData {
 			endDateTS: time.timestamp.arrival.actualOrPlannedIfActualIsNil(),
 			sunEvents: sunEvents
 		)
+		self.remarks = remarks
 	}
 	
 	static func fixRefreshToken(token : String) -> String {

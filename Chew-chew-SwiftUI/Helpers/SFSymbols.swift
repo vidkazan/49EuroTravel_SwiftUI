@@ -27,9 +27,17 @@ enum ChewSFSymbols : String {
 	case trainSideFrontCar = "train.side.front.car"
 	case building2CropCircle = "building.2.crop.circle"
 	case building2CropCircleFill = "building.2.crop.circle.fill"
+	case infoCircle = "info.circle"
+	case infoCircleFill = "info.circle.fill"
+	case boltFill = "bolt.fill"
+	case bolt = "bolt"
 	
 	var fill : Self {
 		switch self {
+		case .bolt:
+			return Self.boltFill
+		case .infoCircle:
+			return Self.infoCircleFill
 		case .gearshape:
 			return self
 		case .bookmark:

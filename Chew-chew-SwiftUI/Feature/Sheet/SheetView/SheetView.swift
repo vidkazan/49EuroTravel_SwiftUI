@@ -43,7 +43,10 @@ struct SheetView : View {
 				}
 			case .fullLeg:
 				if let data = data as? FullLegViewDataSource {
-					FullLegSheet(leg: data.leg,closeSheet: closeSheet)
+					FullLegSheet(
+						leg: data.leg,
+						closeSheet: closeSheet
+					)
 				}
 			case .map:
 				if let data = data as? MapDetailsViewDataSource {
@@ -55,11 +58,95 @@ struct SheetView : View {
 					)
 				}
 			case .none:
-				Text("haha")
+				EmptyView()
 			case .onboarding:
 				Text("onboarding")
 			case .remark:
-				Text("remark")
+				if let data = data as? RemarksViewDataSource {
+					if #available(iOS 16.0, *) {
+						RemarkSheet(remarks: data.remarks, closeSheet: closeSheet)
+							.presentationDetents([.height(300),.large])
+					} else {
+						RemarkSheet(remarks: data.remarks, closeSheet: closeSheet)
+					}
+				}
+			}
+		}
+	}
+}
+
+enum RemarkType : String {
+	case status
+	case hint
+	
+	var priority : Int {
+		switch self {
+		case .status:
+			return 0
+		case .hint:
+			return 1
+		}
+	}
+	
+	var symbol : ChewSFSymbols {
+		switch self {
+		case .status:
+			return .boltFill
+		case .hint:
+			return .infoCircle
+		}
+	}
+	
+	var color : Color {
+		switch self {
+		case .status:
+			return .chewFillRedPrimary
+		case .hint:
+			return .primary.opacity(0.8)
+		}
+	}
+	
+}
+
+struct RemarkSheet : View {
+	let remarks : [Remark]
+	let closeSheet : ()->Void
+	var body: some View {
+		NavigationView {
+			VStack(alignment: .leading) {
+				ScrollView {
+					ForEach(remarks,id:\.text?.hashValue) { remark in
+						HStack {
+							VStack(alignment: .leading) {
+								let type : RemarkType = RemarkType(rawValue: remark.type ?? "info")!
+								HStack(alignment: .top) {
+									Image(type.symbol)
+										.foregroundColor(type.color)
+									VStack(alignment: .leading) {
+										Text(remark.summary ?? "")
+											.chewTextSize(.big)
+										Text(remark.text ?? "text")
+											.textContentType(.dateTime)
+											.chewTextSize(.medium)
+									}
+								}
+							}
+							Spacer()
+						}
+						
+					}
+				}
+			}
+			.padding(10)
+			.toolbar {
+				ToolbarItem(placement: .navigationBarLeading, content: {
+					Button(action: {
+						closeSheet()
+					}, label: {
+						Text("Close")
+							.foregroundColor(.chewGray30)
+					})
+				})
 			}
 		}
 	}
@@ -68,16 +155,19 @@ struct SheetView : View {
 @available(iOS 16.0, *)
 struct SheetPreviews: PreviewProvider {
 	static var previews: some View {
-		let mock = Mock.trip.RE6NeussMinden.decodedData
-		if let mock = mock?.trip,
-		   let viewData = mock.legViewData(firstTS: .now, lastTS: .now, legs: [mock]) {
+		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData
+//		let mock = Mock.trip.RE6NeussMinden.decodedData
+		if let mock = mock?.journey,
+//		if let mock = mock?.trip,
+		   let viewData = mock.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0) {
+//		   let viewData = mock.legViewData(firstTS: .now, lastTS: .now, legs: [mock]) {
 			let sheets : [SheetViewModel.SheetType] = [
-				.date,
-				.onboarding,
-				.remark,
-				.settings,
-				.fullLeg(leg: viewData),
-				.map(leg: viewData)
+//				.date,
+//				.onboarding,
+				.remark(remarks: viewData.remarks),
+//				.settings,
+//				.fullLeg(leg: viewData),
+//				.map(leg: viewData)
 			]
 			ScrollView(.horizontal) {
 				HStack {
@@ -86,10 +176,10 @@ struct SheetPreviews: PreviewProvider {
 							sheetVM: .init(.loading(sheet)),
 							closeSheet: {}
 						)
-						.frame(maxWidth: 350,maxHeight: 1000)
+						.frame(maxWidth: 350,maxHeight: 1000,alignment: .leading)
 						.environmentObject(ChewViewModel())
-						.border(.black)
 					}
+					.padding()
 				}
 			}
 //			.previewDevice(.init(iPhoneModel.iPadMini6gen))

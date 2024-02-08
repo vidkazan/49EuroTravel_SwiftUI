@@ -77,8 +77,7 @@ struct JourneyCell: View {
 struct JourneyCellPreview: PreviewProvider {
 	static var previews: some View {
 		let mocks = [
-			Mock.journeys.journeyNeussWolfsburgMissedConnection.decodedData,
-			Mock.journeys.userLocationToStation.decodedData,
+			Mock.journeys.journeyNeussWolfsburg.decodedData,
 			Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData
 		]
 		VStack {

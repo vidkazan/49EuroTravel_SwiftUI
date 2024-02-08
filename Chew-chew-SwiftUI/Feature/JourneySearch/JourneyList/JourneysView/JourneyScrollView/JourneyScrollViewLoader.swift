@@ -20,7 +20,7 @@ struct JourneyListViewLoader: View {
 			duration: "11111",
 			legTopPosition: 0,
 			legBottomPosition: 1,
-			remarks: nil,
+			remarks: [],
 			legStopsViewData: [],
 			footDistance: 0,
 			lineViewData: .init(type: .national, name: "", shortName: ""),
@@ -31,7 +31,8 @@ struct JourneyListViewLoader: View {
 		depStopName: nil,
 		arrStopName: nil,
 		time: .init(),
-		updatedAt: 0
+		updatedAt: 0,
+		remarks: []
 	)
 	@State var count = 0
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()

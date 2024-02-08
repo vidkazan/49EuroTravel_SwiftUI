@@ -399,6 +399,7 @@ struct Remark : Codable,Equatable,Hashable {
 	let type	: String?
 	let code	: String?
 	let text	: String?
+	let summary : String?
 }
 
 struct Station : Codable,Equatable {

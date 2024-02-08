@@ -47,14 +47,14 @@ extension JourneyDTO {
 			cancelled: nil
 		)
 		var isReachable = true
-		var remarks : [Remark] = []
+		var legRemarks : [Remark] = (remarks ?? [])
 		var legsData : [LegViewData] = []
 		let startTS = max(time.date.departure.actual ?? .distantPast, time.date.departure.planned ?? .distantPast)
 		let endTS = max(time.date.arrival.planned ?? .distantPast,time.date.arrival.actual ?? .distantPast)
 		let legs = legs
 		
 		for (index,leg) in legs.enumerated() {
-			remarks += leg.remarks ?? []
+			legRemarks += leg.remarks ?? []
 			isReachable = leg.reachable ?? true
 			if var currentLeg = leg.legViewData(firstTS: startTS, lastTS: endTS, legs: legs) {
 				if let last = legsData.last {
@@ -98,13 +98,14 @@ extension JourneyDTO {
 		
 		return JourneyViewData(
 			journeyRef: journeyRef,
-			badges: constructBadges(remarks: remarks,isReachable: isReachable),
+			badges: constructBadges(remarks: legRemarks,isReachable: isReachable),
 			sunEvents: sunEventService.getSunEvents(),
 			legs: legsData,
 			depStopName: legs.first?.origin?.name ?? first.address,
 			arrStopName: legs.last?.destination?.name ?? last.address,
 			time: time,
-			updatedAt: realtimeDataUpdatedAt
+			updatedAt: realtimeDataUpdatedAt,
+			remarks: remarks ?? []
 		)
 	}
 }

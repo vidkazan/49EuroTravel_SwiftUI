@@ -62,7 +62,7 @@ enum Badges : Hashable {
 	case dticket
 	case cancelled
 	case connectionNotReachable
-	case alertFromRemark
+	case remarkImportant(remarks : [Remark])
 	
 	case lineNumber(lineType:LineType,num : String)
 	case stopsCount(_ count : Int,_ mode : StopsCountBadgeMode)
@@ -72,6 +72,17 @@ enum Badges : Hashable {
 	case transfer(duration : String)
 	
 	case updatedAtTime(referenceTime : Double, isLoading : Bool = false)
+	
+	var badgeAction : ()->Void {
+		switch self{
+		case .remarkImportant(remarks: let remark):
+			return {
+				Model.shared.sheetViewModel.send(event: .didRequestShow(.remark(remarks: remark)))
+			}
+		default:
+			return {}
+		}
+	}
 	
 	var badgeDefaultStyle : BadgeBackgroundBaseStyle {
 		switch self {
@@ -99,7 +110,7 @@ enum Badges : Hashable {
 			return .red
 		case .connectionNotReachable:
 			return .red
-		case .alertFromRemark:
+		case .remarkImportant:
 			return .red	
 		case .lineNumber:
 			return .primary
@@ -148,7 +159,7 @@ enum Badges : Hashable {
 			return BadgeData(
 				style: Color.chewFillRedPrimary,
 				name: "not reachable")
-		case .alertFromRemark:
+		case .remarkImportant:
 			return BadgeData(
 				style: Color.chewFillRedPrimary,
 				name: "!")

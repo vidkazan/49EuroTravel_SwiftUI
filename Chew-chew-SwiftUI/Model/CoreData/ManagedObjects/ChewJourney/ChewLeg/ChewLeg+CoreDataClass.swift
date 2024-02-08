@@ -53,7 +53,7 @@ extension ChewLeg {
 			duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: time.durationInMinutes) ?? "",
 			legTopPosition: self.legTopPosition,
 			legBottomPosition: self.legBottomPosition,
-			remarks: nil,
+			remarks: [],
 			legStopsViewData: stopsViewData,
 			footDistance: -1,
 			lineViewData: LineViewData(

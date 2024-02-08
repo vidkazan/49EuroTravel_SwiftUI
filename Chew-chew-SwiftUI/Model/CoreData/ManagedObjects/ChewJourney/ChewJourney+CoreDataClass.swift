@@ -39,7 +39,8 @@ extension ChewJourney {
 					depStopName: departureStop.name,
 					arrStopName: arrivalStop.name,
 					time: time,
-					updatedAt: self.updatedAt
+					updatedAt: self.updatedAt,
+					remarks: []
 				),
 				depStop: self.departureStop.stop(),
 				arrStop: self.arrivalStop.stop()

@@ -21,7 +21,7 @@ struct LegViewData : Equatable,Identifiable {
 	let legTopPosition : Double
 	let legBottomPosition : Double
 	var delayedAndNextIsNotReachable : Bool?
-	let remarks : [Remark]?
+	let remarks : [Remark]
 	let legStopsViewData : [StopViewData]
 	let footDistance : Int
 	let lineViewData : LineViewData

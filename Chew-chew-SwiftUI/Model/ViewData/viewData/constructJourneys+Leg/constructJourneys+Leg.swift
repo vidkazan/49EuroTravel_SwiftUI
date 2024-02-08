@@ -62,7 +62,7 @@ extension LegDTO {
 		
 		let stops = stopViewData(type: constructLegType(leg: self, legs: legs))
 		let segments = constructSegmentsFromStopOverData(stopovers: stops)
-		
+		let remarksUnwrapped = remarks ?? []
 		let res = LegViewData(
 			isReachable: stops.first?.cancellationType() != .fullyCancelled && stops.last?.cancellationType() != .fullyCancelled,
 			legType: constructLegType(leg: self, legs: legs),
@@ -80,7 +80,7 @@ extension LegDTO {
 			legTopPosition: max(plannedDeparturePosition,actualDeparturePosition),
 			legBottomPosition: max(plannedArrivalPosition,actualArrivalPosition),
 			delayedAndNextIsNotReachable: nil,
-			remarks: remarks,
+			remarks: remarksUnwrapped,
 			legStopsViewData: stops,
 			footDistance: distance ?? 0,
 			lineViewData: constructLineViewData(

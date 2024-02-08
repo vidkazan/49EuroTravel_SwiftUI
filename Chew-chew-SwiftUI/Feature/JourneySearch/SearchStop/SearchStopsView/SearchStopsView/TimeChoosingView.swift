@@ -36,7 +36,7 @@ struct TimeChoosingView: View {
 			}
 		)
 		.padding(5)
-		.background(Color.chewFillSecondary)
+		.background(Color.chewFillSecondary.opacity(0.4))
 		.cornerRadius(10)
 	}
 	
@@ -53,7 +53,6 @@ struct TimeChoosingView: View {
 }
 
 extension TimeChoosingView {
-	
 	enum TimeSegmentedPickerOptions : Int {
 		case now
 		case specificDate

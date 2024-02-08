@@ -11,7 +11,7 @@ func constructBadges(remarks : [Remark],isReachable : Bool ) -> [Badges] {
 	var res : [Badges] = []
 	let rems = remarks.filter({$0.type == "status"})
 	if !rems.isEmpty {
-		res.append(Badges.alertFromRemark)
+		res.append(Badges.remarkImportant(remarks: remarks.filter({$0.type == "status"})))
 	}
 	if isReachable == false {
 		res.append(.connectionNotReachable)

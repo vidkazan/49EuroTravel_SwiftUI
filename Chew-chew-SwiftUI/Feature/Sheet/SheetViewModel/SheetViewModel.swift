@@ -75,7 +75,7 @@ struct OnboardingViewDataSource : SheetViewDataSource {
 	
 }
 struct RemarksViewDataSource : SheetViewDataSource {
-	
+	let remarks : [Remark]
 }
 
 extension SheetViewModel : ChewViewModelProtocol {
@@ -131,7 +131,7 @@ extension SheetViewModel : ChewViewModelProtocol {
 		case fullLeg(leg : LegViewData)
 		case map(leg : LegViewData)
 		case onboarding
-		case remark
+		case remark(remarks : [Remark])
 		
 		var description : String {
 			switch self {
@@ -193,7 +193,6 @@ extension SheetViewModel {
 				return State(status: .loading(type))
 			case .didFailToLoadData:
 				return state
-//				return State(status: .error(error))
 			case .didLoadDataForShowing:
 				return state
 			}
@@ -226,8 +225,8 @@ extension SheetViewModel {
 				return loadingLocationDetails(state: state, leg: leg)
 			case .onboarding:
 				return Just(Event.didLoadDataForShowing(type,OnboardingViewDataSource())).eraseToAnyPublisher()
-			case .remark:
-				return Just(Event.didLoadDataForShowing(type,RemarksViewDataSource())).eraseToAnyPublisher()
+			case .remark(let remarks):
+				return Just(Event.didLoadDataForShowing(type,RemarksViewDataSource(remarks: remarks))).eraseToAnyPublisher()
 			}
 		}
 	}
@@ -248,7 +247,7 @@ extension SheetViewModel {
 			}
 			.catch { error in
 				Model.shared.alertViewModel.send(event: .didRequestShow(.fullLegError))
-				return Just(Event.didFailToLoadData(error as! (any ChewError))).eraseToAnyPublisher()
+				return Just(Event.didRequestShow(.none)).eraseToAnyPublisher()
 			}
 			.eraseToAnyPublisher()
 	}
