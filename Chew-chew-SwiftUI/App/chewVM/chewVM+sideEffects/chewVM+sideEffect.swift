@@ -23,6 +23,7 @@ extension ChewViewModel {
 				return Just(Event.onNotEnoughSearchData)
 					.eraseToAnyPublisher()
 			}
+			
 			Model.shared.recentSearchesViewModel.send(
 				event: .didTapEdit(
 					action: .adding,

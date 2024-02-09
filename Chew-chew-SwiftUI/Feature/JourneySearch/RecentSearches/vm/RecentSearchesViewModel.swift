@@ -142,25 +142,20 @@ extension RecentSearchesViewModel {
 				switch action {
 				case .adding:
 					guard let data = data else {
-						return Just(Event.didFailToEdit(
-							action: action,
-						msg: "data is nil"
-						)).eraseToAnyPublisher()
+						return Just(Event.didFailToEdit(action: action,msg: "data is nil")).eraseToAnyPublisher()
 					}
-					guard !searches.contains(where: {$0.stops.hashValue == data.stops.hashValue}) else {
-						return Just(Event.didFailToEdit(
-							action: action,
-						msg: "searches been added already"
-						)).eraseToAnyPublisher()
+					guard !searches.contains(where: {
+						#warning("check this solution")
+//						return $0.stops.hashValue == data.stops.hashValue
+						return $0.stops.id == data.stops.id
+					}) else {
+						return Just(Event.didFailToEdit(action: action,msg: "search been added already")).eraseToAnyPublisher()
 					}
-					guard
-						Model.shared.coreDataStore.addRecentSearch(search: data) == true
-					else {
-						return Just(Event.didFailToEdit(
-							action: action,
-						msg: "coredata: failed to add"
-						)).eraseToAnyPublisher()
+					
+					guard Model.shared.coreDataStore.addRecentSearch(search: data) == true else {
+						return Just(Event.didFailToEdit(action: action,msg: "coredata: failed to add")).eraseToAnyPublisher()
 					}
+					
 					searches.append(data)
 					return Just(Event.didEdit(data: searches))
 						.eraseToAnyPublisher()
