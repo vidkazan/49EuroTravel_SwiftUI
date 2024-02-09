@@ -7,16 +7,16 @@
 
 import Foundation
 
-func constructBadges(remarks : [Remark],isReachable : Bool ) -> [Badges] {
-	var res : [Badges] = []
-	let rems = remarks.filter({$0.type == "status"})
+func constructBadges(remarks : [RemarkViewData],isReachable : Bool ) -> [Badges] {
+	var badges : [Badges] = []
+	let rems = remarks.filter({$0.type == .status})
 	if !rems.isEmpty {
-		res.append(Badges.remarkImportant(remarks: remarks.filter({$0.type == "status"})))
+		badges.append(Badges.remarkImportant(remarks: rems))
 	}
 	if isReachable == false {
-		res.append(.connectionNotReachable)
+		badges.append(.connectionNotReachable)
 	}
-	res.append(Badges.dticket)
+	badges.append(Badges.dticket)
 	
-	return res
+	return badges
 }

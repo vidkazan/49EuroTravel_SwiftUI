@@ -6,10 +6,18 @@
 //
 
 import SwiftUI
+
+#warning("TODO: make error view")
 #warning("TODO: localization")
 #warning("TODO: legView: place transport icons")
 #warning("TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce")
 #warning("TODO: confirmation of destructive actions")
+#warning("TODO: feature: reverse geocoding https://medium.com/aeturnuminc/geocoding-in-swift-611bda45efe1 or https://nominatim.openstreetmap.org/reverse?lon=10.78008628451338&lat=52.4212646484375&format=json&pretty=true")
+#warning("feature: reverse geocoding: https://medium.com/@calmone/ios-mapkit-in-swift-4-reverse-geocoding-7fb9e41e8acd")
+#warning("location request doesnt usually give actual location")
+
+
+// TODO: feature: check when train arrives at starting point
 
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme

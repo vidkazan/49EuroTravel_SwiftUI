@@ -62,7 +62,7 @@ enum Badges : Hashable {
 	case dticket
 	case cancelled
 	case connectionNotReachable
-	case remarkImportant(remarks : [Remark])
+	case remarkImportant(remarks : [RemarkViewData])
 	
 	case lineNumber(lineType:LineType,num : String)
 	case stopsCount(_ count : Int,_ mode : StopsCountBadgeMode)

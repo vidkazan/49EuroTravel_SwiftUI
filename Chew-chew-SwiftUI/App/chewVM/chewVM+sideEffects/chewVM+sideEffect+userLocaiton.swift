@@ -10,41 +10,50 @@ import Foundation
 import CoreLocation
 
 extension ChewViewModel {
-	#warning(" TODO: feature: reverse geocoding https://medium.com/aeturnuminc/geocoding-in-swift-611bda45efe1 or https://nominatim.openstreetmap.org/reverse?lon=10.78008628451338&lat=52.4212646484375&format=json&pretty=true")
 	static func whenLoadingUserLocation() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .loadingLocation = state.status else {
+			guard case .loadingLocation(let send) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			return Self.requestUserLocation()
-				.map { res in
-					switch res {
-					case .success(let coord):
-						Model.shared.alertViewModel.send(event: .didRequestDismiss(.userLocationError))
-						return Event.didReceiveLocationData(coord)
-					case .failure:
-						Model.shared.alertViewModel.send(event: .didRequestShow(.userLocationError))
-						return Event.didFailToLoadLocationData
-					}
+			
+			switch Model.shared.locationDataManager.authorizationStatus {
+			case .notDetermined,.restricted,.denied,.none:
+				Model.shared.alertViewModel.send(event: .didRequestShow(.userLocationError))
+				return Just(Event.didFailToLoadLocationData).eraseToAnyPublisher()
+			case .authorizedAlways,.authorizedWhenInUse:
+				guard let coords = Model.shared.locationDataManager.locationManager.location?.coordinate else {
+					Model.shared.alertViewModel.send(event: .didRequestShow(.userLocationError))
+					return Just(Event.didFailToLoadLocationData).eraseToAnyPublisher()
 				}
-				.eraseToAnyPublisher()
+				Task {
+					await Self.reverseGeocoding(coords : coords ,send:send)
+				}
+				return Empty().eraseToAnyPublisher()
+			@unknown default:
+				Model.shared.alertViewModel.send(event: .didRequestShow(.userLocationError))
+				return Just(Event.didFailToLoadLocationData).eraseToAnyPublisher()
+			}
 		}
 	}
-	static func requestUserLocation() -> AnyPublisher<Result<CLLocationCoordinate2D,ApiServiceError>,Never> {
-		switch Model.shared.locationDataManager.authorizationStatus {
-		case .notDetermined,.restricted,.denied,.none:
-			return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
-				.eraseToAnyPublisher()
-		case .authorizedAlways,.authorizedWhenInUse:
-			guard let lat = Model.shared.locationDataManager.locationManager.location?.coordinate.latitude,
-				  let long = Model.shared.locationDataManager.locationManager.location?.coordinate.longitude else {
-				return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
-					.eraseToAnyPublisher()
-			}
-			return Just(Result.success(CLLocationCoordinate2D(latitude: lat,longitude: long))).eraseToAnyPublisher()
-		@unknown default:
-			return Just(Result.failure(ApiServiceError.failedToGetUserLocation))
-				.eraseToAnyPublisher()
+	
+	private static func reverseGeocoding(coords : CLLocationCoordinate2D,send : (ChewViewModel.Event)->Void) async {
+		Model.shared.alertViewModel.send(event: .didRequestDismiss(.userLocationError))
+		
+		if let res = try? await CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coords.latitude, longitude: coords.longitude)).first,
+		   let name = res.name, let city = res.locality {
+			let stop = Stop(
+				coordinates: coords,
+				type: .location,
+				stopDTO: StopDTO(name: String(name + ", " + city))
+			)
+			send(Event.didReceiveLocationData(stop))
+		} else {
+			let stop = Stop(
+				coordinates: coords,
+				type: .location,
+				stopDTO: StopDTO(name: String(coords.latitude).prefix(6) + " " + String(coords.longitude).prefix(6))
+			)
+			send(Event.didReceiveLocationData(stop))
 		}
 	}
 }

@@ -21,7 +21,7 @@ struct LegViewData : Equatable,Identifiable {
 	let legTopPosition : Double
 	let legBottomPosition : Double
 	var delayedAndNextIsNotReachable : Bool?
-	let remarks : [Remark]
+	let remarks : [RemarkViewData]
 	let legStopsViewData : [StopViewData]
 	let footDistance : Int
 	let lineViewData : LineViewData
@@ -60,6 +60,24 @@ enum LocationDirectionType :Int, Hashable {
 			return "from"
 		case .arrival:
 			return "to"
+		}
+	}
+	
+	func sendEvent(send : @escaping (ChewViewModel.Event)->Void)  {
+		switch self {
+		case .departure:
+			send(.didLocationButtonPressed(send: send))
+		case .arrival:
+			send(.onStopsSwitch)
+		}
+	}
+	
+	var baseImage : Image {
+		switch self {
+		case .departure:
+			return Image(.location)
+		case .arrival:
+			return Image(.arrowUpArrowDown)
 		}
 	}
 }

@@ -13,6 +13,7 @@ struct SearchStopsView: View {
 	@ObservedObject var searchStopViewModel : SearchStopsViewModel = Model.shared.searchStopsViewModel
 	@FocusState 	var focusedField : LocationDirectionType?
 	@State var previuosStatus : ChewViewModel.Status?
+	@State var status : ChewViewModel.Status = .idle
 	@State var topText : String
 	@State var bottomText : String
 	@State var fieldRedBorder : (top: Bool,bottom: Bool) = (false,false)
@@ -36,13 +37,12 @@ struct SearchStopsView: View {
 						rightButton(type: .departure)
 					}
 					.background(Color.chewFillAccent)
-					.animation(.spring(), value: chewViewModel.state.status)
 					.cornerRadius(10)
 					.overlay(
 						RoundedRectangle(cornerRadius: 10)
 							.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
 					)
-					if case .editingStop(.departure) = chewViewModel.state.status {
+					if case .editingStop(.departure) = status {
 						stopList(type: .departure)
 					}
 				}
@@ -66,14 +66,15 @@ struct SearchStopsView: View {
 					RoundedRectangle(cornerRadius: 10)
 						.stroke(fieldRedBorder.bottom == true ? .red : .clear, lineWidth: 1.5)
 				)
-				if case .editingStop(.arrival) = chewViewModel.state.status {
+				if case .editingStop(.arrival) = status {
 					stopList(type: .arrival)
 				}
 			}
 			.background(Color.chewFillSecondary)
 			.cornerRadius(10)
 		}
-		.onChange(of: chewViewModel.state, perform: { state in
+		.onReceive(chewViewModel.$state, perform: { state in
+			self.status = state.status
 			topText = state.depStop.text
 			bottomText = state.arrStop.text
 			
@@ -95,5 +96,27 @@ struct SearchStopsView: View {
 			
 			previuosStatus = chewViewModel.state.status
 		})
+//		.onChange(of: chewViewModel.state, perform: { state in
+//			topText = state.depStop.text
+//			bottomText = state.arrStop.text
+//
+//			fieldRedBorder.bottom = state.arrStop.stop == nil && !state.arrStop.text.isEmpty && state.status != .editingStop(.arrival)
+//			fieldRedBorder.top = state.depStop.stop == nil && !state.depStop.text.isEmpty && state.status != .editingStop(.departure)
+//
+//			switch state.status {
+//			case .editingStop(let type):
+//				focusedField = type
+//				switch type {
+//				case .arrival:
+//					bottomText = ""
+//				case .departure:
+//					topText = ""
+//				}
+//			default:
+//				focusedField = nil
+//			}
+//
+//			previuosStatus = chewViewModel.state.status
+//		})
 	}
 }

@@ -10,33 +10,29 @@ import SwiftUI
 
 extension SearchStopsView {
 	func rightButton(type : LocationDirectionType) -> some View {
-		let image : Image = {
-			switch type {
-			case .departure:
-				return Image(.location)
-			case .arrival:
-				return Image(.arrowUpArrowDown)
-			}
-		}()
 		return Button(
 			action: {
+				type.sendEvent(send: chewViewModel.send)
+			}, label: {
 				switch type {
 				case .departure:
-					chewViewModel.send(event: .didLocationButtonPressed)
-					break
-				case .arrival:
-					chewViewModel.send(event: .onStopsSwitch)
-				}
-			}, label: {
-				switch searchStopViewModel.state.status {
-				case .loading:
-					if type == searchStopViewModel.state.type {
+					switch status {
+					case .loadingLocation:
 						ProgressView()
-					} else {
-						image
+					default:
+						switch searchStopViewModel.state.status {
+						case .loading,.updatingRecentStops:
+							if type == searchStopViewModel.state.type {
+								ProgressView()
+							} else {
+								type.baseImage
+							}
+						case .idle,.loaded,.error:
+							type.baseImage
+						}
 					}
-				case .idle,.loaded,.error,.updatingRecentStops:
-					image
+				case .arrival:
+					type.baseImage
 				}
 			}
 		)

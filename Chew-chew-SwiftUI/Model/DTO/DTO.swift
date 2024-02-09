@@ -311,6 +311,20 @@ struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 }
 
 extension StopDTO {
+	init(name : String) {
+		self.name = name
+		self.type	= nil
+		self.id		= nil
+		self.address		= nil
+		self.location	= nil
+		self.latitude	= nil
+		self.longitude	= nil
+		self.poi			= nil
+		self.products	= nil
+	}
+}
+
+extension StopDTO {
 	func stop() -> Stop? {
 		guard let typeDTO = type  else { return nil }
 		
@@ -400,6 +414,21 @@ struct Remark : Codable,Equatable,Hashable {
 	let code	: String?
 	let text	: String?
 	let summary : String?
+}
+
+extension Remark {
+	func viewData() -> RemarkViewData? {
+		if let type = RemarkViewData.RemarkType(rawValue: type ?? ""),
+		   let text = text,
+		let summary = summary {
+			return RemarkViewData(
+				type: type,
+				summary: summary,
+				text: text
+			)
+		}
+		return nil
+	}
 }
 
 struct Station : Codable,Equatable {

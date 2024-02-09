@@ -62,7 +62,12 @@ extension LegDTO {
 		
 		let stops = stopViewData(type: constructLegType(leg: self, legs: legs))
 		let segments = constructSegmentsFromStopOverData(stopovers: stops)
-		let remarksUnwrapped = remarks ?? []
+		var remarksUnwrapped = [RemarkViewData]()
+		if let remarks = remarks {
+			remarksUnwrapped = remarks.compactMap({$0.viewData()})
+		}
+		
+		
 		let res = LegViewData(
 			isReachable: stops.first?.cancellationType() != .fullyCancelled && stops.last?.cancellationType() != .fullyCancelled,
 			legType: constructLegType(leg: self, legs: legs),

@@ -37,7 +37,7 @@ struct JourneyViewData : Equatable, Identifiable {
 	let sunEvents : [SunEvent]
 	let sunEventsGradientStops : [Gradient.Stop]
 	let isReachable : Bool
-	let remarks : [Remark]
+	let remarks : [RemarkViewData]
 	let badges : [Badges]
 	let refreshToken : String
 	let time : TimeContainer
@@ -69,7 +69,7 @@ extension JourneyViewData {
 		arrStopName : String?,
 		time : TimeContainer,
 		updatedAt : Double,
-		remarks : [Remark]
+		remarks : [RemarkViewData]
 	){
 		self.origin = depStopName ?? "origin"
 		self.destination = arrStopName ?? "destination"

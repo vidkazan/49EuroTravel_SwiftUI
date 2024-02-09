@@ -75,7 +75,7 @@ struct OnboardingViewDataSource : SheetViewDataSource {
 	
 }
 struct RemarksViewDataSource : SheetViewDataSource {
-	let remarks : [Remark]
+	let remarks : [RemarkViewData]
 }
 
 extension SheetViewModel : ChewViewModelProtocol {
@@ -131,7 +131,7 @@ extension SheetViewModel : ChewViewModelProtocol {
 		case fullLeg(leg : LegViewData)
 		case map(leg : LegViewData)
 		case onboarding
-		case remark(remarks : [Remark])
+		case remark(remarks : [RemarkViewData])
 		
 		var description : String {
 			switch self {

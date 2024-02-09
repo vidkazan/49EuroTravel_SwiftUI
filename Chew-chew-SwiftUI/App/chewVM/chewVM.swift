@@ -11,6 +11,9 @@ import Combine
 import CoreLocation
 import CoreData
 
+#warning("TODO: sort stops by closest location")
+#warning("TODO: delete recent stops")
+#warning("TODO: recent stops duplication")
 final class ChewViewModel : ObservableObject, Identifiable {
 	let referenceDate : ChewDate
 	@Published private(set) var state : State {

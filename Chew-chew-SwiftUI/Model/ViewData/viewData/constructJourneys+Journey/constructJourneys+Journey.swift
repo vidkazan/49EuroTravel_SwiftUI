@@ -47,14 +47,15 @@ extension JourneyDTO {
 			cancelled: nil
 		)
 		var isReachable = true
-		var legRemarks : [Remark] = (remarks ?? [])
 		var legsData : [LegViewData] = []
 		let startTS = max(time.date.departure.actual ?? .distantPast, time.date.departure.planned ?? .distantPast)
 		let endTS = max(time.date.arrival.planned ?? .distantPast,time.date.arrival.actual ?? .distantPast)
 		let legs = legs
+		let journeyRemarks = remarks?.compactMap({$0.viewData()}) ?? []
+		var legRemarks = [RemarkViewData]()
 		
 		for (index,leg) in legs.enumerated() {
-			legRemarks += leg.remarks ?? []
+			legRemarks += leg.remarks?.compactMap({$0.viewData()}) ?? []
 			isReachable = leg.reachable ?? true
 			if var currentLeg = leg.legViewData(firstTS: startTS, lastTS: endTS, legs: legs) {
 				if let last = legsData.last {
@@ -105,7 +106,7 @@ extension JourneyDTO {
 			arrStopName: legs.last?.destination?.name ?? last.address,
 			time: time,
 			updatedAt: realtimeDataUpdatedAt,
-			remarks: remarks ?? []
+			remarks: journeyRemarks
 		)
 	}
 }

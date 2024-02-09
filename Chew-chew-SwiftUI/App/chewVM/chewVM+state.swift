@@ -68,7 +68,7 @@ extension ChewViewModel {
 		case checkingSearchData
 		case journeys(_ stops : DepartureArrivalPair)
 		case editingStop(LocationDirectionType)
-		case loadingLocation
+		case loadingLocation(send : (ChewViewModel.Event)->Void)
 		
 		
 		var description : String {
@@ -102,8 +102,8 @@ extension ChewViewModel {
 		case didTapCloseJourneyList
 		case onNewDate(ChewDate)
 		case didUpdateSettings(ChewSettings)
-		case didLocationButtonPressed
-		case didReceiveLocationData(CLLocationCoordinate2D)
+		case didLocationButtonPressed(send : (ChewViewModel.Event)->Void)
+		case didReceiveLocationData(Stop)
 		case didFailToLoadLocationData
 		
 		var description : String {

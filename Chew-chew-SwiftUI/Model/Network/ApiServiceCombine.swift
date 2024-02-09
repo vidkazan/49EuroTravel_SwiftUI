@@ -44,9 +44,7 @@ class ApiClient : HTTPClient {
 					throw ApiServiceError.cannotDecodeRawData
 				}
 				switch response.statusCode {
-				case 500...599:
-					throw ApiServiceError.badServerResponse(code: response.statusCode)
-				case 400...499:
+				case 400...599:
 					throw ApiServiceError.badServerResponse(code: response.statusCode)
 				default:
 					break
