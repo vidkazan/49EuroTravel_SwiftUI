@@ -18,11 +18,11 @@ extension ChewViewModel {
 			
 			switch Model.shared.locationDataManager.authorizationStatus {
 			case .notDetermined,.restricted,.denied,.none:
-				Model.shared.alertViewModel.send(event: .didRequestShow(.userLocationError))
+				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.userLocationError))
 				return Just(Event.didFailToLoadLocationData).eraseToAnyPublisher()
 			case .authorizedAlways,.authorizedWhenInUse:
 				guard let coords = Model.shared.locationDataManager.locationManager.location?.coordinate else {
-					Model.shared.alertViewModel.send(event: .didRequestShow(.userLocationError))
+					Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.userLocationError))
 					return Just(Event.didFailToLoadLocationData).eraseToAnyPublisher()
 				}
 				Task {
@@ -30,14 +30,14 @@ extension ChewViewModel {
 				}
 				return Empty().eraseToAnyPublisher()
 			@unknown default:
-				Model.shared.alertViewModel.send(event: .didRequestShow(.userLocationError))
+				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.userLocationError))
 				return Just(Event.didFailToLoadLocationData).eraseToAnyPublisher()
 			}
 		}
 	}
 	
 	private static func reverseGeocoding(coords : CLLocationCoordinate2D,send : (ChewViewModel.Event)->Void) async {
-		Model.shared.alertViewModel.send(event: .didRequestDismiss(.userLocationError))
+		Model.shared.topBarAlertViewModel.send(event: .didRequestDismiss(.userLocationError))
 		
 		if let res = try? await CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coords.latitude, longitude: coords.longitude)).first,
 		   let name = res.name, let city = res.locality {

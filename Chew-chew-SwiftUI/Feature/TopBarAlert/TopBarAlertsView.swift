@@ -8,11 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct AlertView: View {
+struct TopBarAlertView: View {
 	@EnvironmentObject var chewJourneyViewModel : ChewViewModel
-	@ObservedObject var alertVM : AlertViewModel = Model.shared.alertViewModel
+	@ObservedObject var alertVM : TopBarAlertViewModel = Model.shared.topBarAlertViewModel
 	
-	let alert : AlertViewModel.AlertType
+	let alert : TopBarAlertViewModel.AlertType
 	
 	var body: some View {
 		ZStack {
@@ -67,9 +67,9 @@ struct AlertView: View {
 }
 
 
-struct AlertsView: View {
+struct TopBarAlertsView: View {
 	@EnvironmentObject var chewJourneyViewModel : ChewViewModel
-	@ObservedObject var alertVM : AlertViewModel = Model.shared.alertViewModel
+	@ObservedObject var alertVM : TopBarAlertViewModel = Model.shared.topBarAlertViewModel
 	let timer = Timer.publish(every: 15, on: .main, in: .common).autoconnect()
 	var body: some View {
 		Group {
@@ -80,7 +80,7 @@ struct AlertsView: View {
 				if !alertVM.state.alerts.isEmpty {
 					VStack(spacing: 2) {
 						ForEach(alertVM.state.alerts.sorted(by: <), id: \.hashValue, content: { alert in
-							AlertView(alertVM: alertVM, alert: alert)
+							TopBarAlertView(alertVM: alertVM, alert: alert)
 						})
 					}
 					.padding(.horizontal,10)
@@ -105,7 +105,7 @@ struct AlertsView: View {
 
 struct AlertViewPreview : PreviewProvider {
 	static var previews: some View {
-		AlertsView()
+		TopBarAlertsView()
 	}
 }
 

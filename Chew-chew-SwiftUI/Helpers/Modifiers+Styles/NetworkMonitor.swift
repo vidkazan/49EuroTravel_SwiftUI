@@ -11,9 +11,9 @@ import Network
 class NetworkMonitor {
 	private let networkMonitor = NWPathMonitor()
 	private let workerQueue = DispatchQueue(label: "Monitor")
-	private weak var alertVM : AlertViewModel?
+	private weak var alertVM : TopBarAlertViewModel?
 
-	init(send : @escaping (AlertViewModel.Event)->Void) {
+	init(send : @escaping (TopBarAlertViewModel.Event)->Void) {
 		networkMonitor.pathUpdateHandler = { path in
 			switch path.status {
 			case .requiresConnection:

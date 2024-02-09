@@ -17,22 +17,24 @@ final class Model {
 	let referenceDate : ChewDate
 	let locationDataManager = LocationDataManager()
 	let sheetViewModel : SheetViewModel
-	let alertViewModel : AlertViewModel
+	let topBarAlertViewModel : TopBarAlertViewModel
 	let coreDataStore = CoreDataStore()
 	let searchStopsViewModel : SearchStopsViewModel
 	let journeyFollowViewModel : JourneyFollowViewModel
 	let recentSearchesViewModel : RecentSearchesViewModel
+	let alertViewModel = AlertViewModel()
+	
 	
 	init(
 		sheetVM : SheetViewModel = .init(),
-		alertVM : AlertViewModel = .init(),
+		alertVM : TopBarAlertViewModel = .init(),
 		searchStopsVM : SearchStopsViewModel = .init(),
 		journeyFollowViewModel : JourneyFollowViewModel = .init(journeys: []),
 		recentSearchesViewModel : RecentSearchesViewModel = .init(searches: []),
 		referenceDate : ChewDate
 	) {
 		self.searchStopsViewModel = searchStopsVM
-		self.alertViewModel = alertVM
+		self.topBarAlertViewModel = alertVM
 		self.sheetViewModel = sheetVM
 		self.journeyFollowViewModel = journeyFollowViewModel
 		self.recentSearchesViewModel = recentSearchesViewModel

@@ -246,7 +246,7 @@ extension SheetViewModel {
 				return Event.didLoadDataForShowing(.fullLeg(leg: leg),FullLegViewDataSource(leg: leg))
 			}
 			.catch { error in
-				Model.shared.alertViewModel.send(event: .didRequestShow(.fullLegError))
+				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.fullLegError))
 				return Just(Event.didRequestShow(.none)).eraseToAnyPublisher()
 			}
 			.eraseToAnyPublisher()

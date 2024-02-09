@@ -154,11 +154,17 @@ extension JourneyFollowView {
 			}
 			.swipeActions(edge: .trailing) {
 				Button {
-					vm.send(event: .didTapSubscribingButton(
-						id: journey.id,
-						ref: journey.journeyViewData.refreshToken,
-						journeyDetailsViewModel: vm
-					))
+					Model.shared.alertViewModel.send(event: .didRequestShow(.destructive(
+						destructiveAction: {
+							vm.send(event: .didTapSubscribingButton(
+								id: journey.id,
+								ref: journey.journeyViewData.refreshToken,
+								journeyDetailsViewModel: vm
+							))
+						},
+						description: "Unfollow journey?",
+						actionDescription: "Unfollow"
+					)))
 				} label: {
 					Label("Delete", systemImage: "xmark.bin.circle")
 				}

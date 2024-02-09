@@ -12,20 +12,22 @@ import SwiftUI
 #warning("TODO: legView: place transport icons")
 #warning("TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce")
 #warning("TODO: confirmation of destructive actions")
-#warning("TODO: feature: reverse geocoding https://medium.com/aeturnuminc/geocoding-in-swift-611bda45efe1 or https://nominatim.openstreetmap.org/reverse?lon=10.78008628451338&lat=52.4212646484375&format=json&pretty=true")
-#warning("feature: reverse geocoding: https://medium.com/@calmone/ios-mapkit-in-swift-4-reverse-geocoding-7fb9e41e8acd")
 #warning("location request doesnt usually give actual location")
 
 
 // TODO: feature: check when train arrives at starting point
+// TODO: feature: pick location on map + show stops on map
 
 struct ContentView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
-	@ObservedObject var sheetVM : SheetViewModel = Model.shared.sheetViewModel
+	@ObservedObject var alertVM = Model.shared.alertViewModel
+	@ObservedObject var sheetVM = Model.shared.sheetViewModel
 	@State var state : ChewViewModel.State = .init()
-	@State var sheetState : SheetViewModel.State = .init(status: .showing(.none, result: EmptyDataSource()))
+	@State var sheetState = SheetViewModel.State(status: .showing(.none, result: EmptyDataSource()))
+	@State var alertState = AlertViewModel.State(alert: .none)
 	@State var sheetIsPresented = false
+	@State var alertIsPresented = false
 	var body: some View {
 		Group {
 			switch state.status {
@@ -33,7 +35,7 @@ struct ContentView: View {
 				EmptyView()
 			default:
 				VStack(spacing: 5) {
-					AlertsView()
+					TopBarAlertsView()
 					FeatureView()
 				}
 			}
@@ -49,6 +51,7 @@ struct ContentView: View {
 				})
 			}
 		)
+		.alert(isPresented: $alertIsPresented, content: alert)
 		.background(Color.chewFillPrimary)
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)
@@ -71,5 +74,30 @@ struct ContentView: View {
 				break
 			}
 		})
+		.onReceive(alertVM.$state, perform: { newState in
+			alertState = newState
+			switch alertState.alert {
+				case .none:
+					alertIsPresented = false
+				default:
+					alertIsPresented = true
+				}
+		})
+	}
+	
+	func alert() -> Alert {
+		switch alertState.alert {
+		case let .destructive(destructiveAction, description, actionDescripton):
+			return Alert(
+				title: Text(description),
+				primaryButton: .cancel(),
+				secondaryButton: .destructive(
+					Text(actionDescripton),
+					action: destructiveAction
+				)
+			)
+		case .none:
+			return Alert(title: Text("Test alert"))
+		}
 	}
 }
