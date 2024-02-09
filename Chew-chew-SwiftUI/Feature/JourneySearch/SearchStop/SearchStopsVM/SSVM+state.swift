@@ -48,11 +48,14 @@ extension SearchStopsViewModel {
 		case onReset(LocationDirectionType)
 		case onStopDidTap(ChewViewModel.TextFieldContent, LocationDirectionType)
 		case didRecentStopsUpdated(recentStops : [Stop])
+		case didRequestDeleteRecentStop(stop : Stop)
 		case didChangeFieldFocus(type : LocationDirectionType?)
 		
 		
 		var description : String {
 			switch self {
+			case .didRequestDeleteRecentStop:
+				return "didRequestDeleteRecentStop"
 			case .onSearchFieldDidChanged:
 				return "onSearchFieldDidChanged"
 			case .onDataLoaded:

@@ -59,6 +59,24 @@ extension CoreDataStore {
 		}
 		return result
 	}
+	func deleteRecentLocationIfFound(name : String) -> Bool {
+		var result = false
+		
+		if let objects = self.fetch(Location.self) {
+			 asyncContext.performAndWait {
+				 let res = objects.filter({$0.chewJourneyArr == nil && $0.chewJourneyDep == nil && $0.chewRecentSearchDepStop == nil && $0.chewRecentSearchArrStop == nil})
+				if let res = res.first(where: { obj in
+					return obj.name == name
+				}) {
+//					print("> ⚡️ delete journeys thread ",Thread.current)
+					self.asyncContext.delete(res)
+					self.saveAsyncContext()
+					result = true
+				}
+			}
+		}
+		return result
+	}
 	func deleteRecentSearchIfFound(id : String) -> Bool {
 		var result = false
 		if let objects = self.fetch(ChewRecentSearch.self) {

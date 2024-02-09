@@ -46,7 +46,7 @@ struct SearchStopsView: View {
 						stopList(type: .departure)
 					}
 				}
-			.background(Color.chewFillSecondary)
+				.background(Color.chewFillSecondary.opacity(0.7))
 			.cornerRadius(10)
 			// MARK: BottomField
 			VStack {
@@ -70,7 +70,7 @@ struct SearchStopsView: View {
 					stopList(type: .arrival)
 				}
 			}
-			.background(Color.chewFillSecondary)
+			.background(Color.chewFillSecondary.opacity(0.7))
 			.cornerRadius(10)
 		}
 		.onReceive(chewViewModel.$state, perform: { state in

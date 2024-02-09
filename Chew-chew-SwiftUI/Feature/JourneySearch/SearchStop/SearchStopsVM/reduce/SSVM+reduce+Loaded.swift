@@ -35,12 +35,20 @@ extension SearchStopsViewModel {
 				status: .updatingRecentStops(content.stop),
 				type: nil
 			)
-		case .onReset(let type):
+		case .onReset:
 			return State(
 				previousStops: state.previousStops,
 				stops: [],
 				status: .idle,
-				type: type
+				type: state.type
+			)
+		case .didRequestDeleteRecentStop(stop: let stop):
+			let	 stops = state.previousStops.filter({$0.name != stop.name})
+			return State(
+				previousStops: stops,
+				stops: state.stops,
+				status: state.status,
+				type: state.type
 			)
 		}
 	}

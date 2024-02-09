@@ -3,4 +3,86 @@
    uuid = "81760A19-15B1-4DF8-BED5-501BB40E00A0"
    type = "1"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "03A60665-095C-4F84-B6B3-68FC80110F2B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneySearch/SearchStop/SearchStopsVM/reduce/SSVM+reduce+Idle.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "14"
+            endingLineNumber = "14"
+            landmarkName = "reduceIdle(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CB7F32DD-DF1A-45F9-812F-E28200BDA795"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneySearch/SearchStop/SearchStopsVM/reduce/SSVM+reduce+Idle.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
+            landmarkName = "reduceIdle(_:_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CB7F32DD-DF1A-45F9-812F-E28200BDA795 - d6e5da8d622bcf71"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Chew_chew_SwiftUI.SearchStopsViewModel.reduceIdle(Chew_chew_SwiftUI.SearchStopsViewModel.State, Chew_chew_SwiftUI.SearchStopsViewModel.Event) -&gt; Chew_chew_SwiftUI.SearchStopsViewModel.State"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneySearch/SearchStop/SearchStopsVM/reduce/SSVM+reduce+Idle.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "17"
+                  endingLineNumber = "17"
+                  offsetFromSymbolStart = "2852">
+               </Location>
+               <Location
+                  uuid = "CB7F32DD-DF1A-45F9-812F-E28200BDA795 - d6e5da8d622bcf10"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "static Chew_chew_SwiftUI.SearchStopsViewModel.reduceIdle(Chew_chew_SwiftUI.SearchStopsViewModel.State, Chew_chew_SwiftUI.SearchStopsViewModel.Event) -&gt; Chew_chew_SwiftUI.SearchStopsViewModel.State"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneySearch/SearchStop/SearchStopsVM/reduce/SSVM+reduce+Idle.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "18"
+                  endingLineNumber = "18"
+                  offsetFromSymbolStart = "2880">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BBA171CB-19A6-4AED-A841-47CD2DD912B0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/JourneySearch/SearchStop/SearchStopsVM/reduce/SSVM+reduce+Idle.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "reduceIdle(_:_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

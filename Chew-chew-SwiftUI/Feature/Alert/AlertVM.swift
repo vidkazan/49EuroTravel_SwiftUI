@@ -48,8 +48,7 @@ extension AlertViewModel {
 	enum AlertType {
 		case none
 		case destructive(destructiveAction : ()->Void, description : String, actionDescription : String)
-		
-		
+
 		var description : String {
 			switch self {
 			case .none:

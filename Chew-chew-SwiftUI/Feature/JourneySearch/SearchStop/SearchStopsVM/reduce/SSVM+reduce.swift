@@ -17,13 +17,14 @@ extension SearchStopsViewModel {
 				 .onDataLoadError,
 				 .onReset,
 				 .onStopDidTap,
+				 .didRequestDeleteRecentStop,
 				 .onSearchFieldDidChanged:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
 			case .didRecentStopsUpdated(let recentStops):
 				return State(
 					previousStops: recentStops,
-					stops: [],
+					stops: state.stops,
 					status: .idle
 				)
 			case .didChangeFieldFocus(type: let type):

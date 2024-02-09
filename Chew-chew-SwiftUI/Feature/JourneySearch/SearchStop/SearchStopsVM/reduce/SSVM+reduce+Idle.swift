@@ -11,6 +11,14 @@ extension SearchStopsViewModel {
 	static func reduceIdle(_ state:  State, _ event: Event) -> State {
 		guard case .idle = state.status else { return state }
 		switch event {
+		case .didRequestDeleteRecentStop(stop: let stop):
+			let	 stops = state.previousStops.filter({$0.name != stop.name})
+			return State(
+				previousStops: stops,
+				stops: state.stops,
+				status: state.status,
+				type: state.type
+			)
 		case .didChangeFieldFocus(type: let type):
 			return State(
 				previousStops: state.previousStops,
@@ -25,12 +33,12 @@ extension SearchStopsViewModel {
 				status: .loading(string),
 				type: type
 			)
-		case .onReset(let type):
+		case .onReset:
 			return State(
 				previousStops: state.previousStops,
-				stops: state.stops,
+				stops: [],
 				status: .idle,
-				type: type
+				type: state.type
 			)
 		case .didRecentStopsUpdated(recentStops: let stops):
 			return State(

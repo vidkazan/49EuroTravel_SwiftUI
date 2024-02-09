@@ -32,15 +32,15 @@ extension SearchStopsViewModel {
 				status: .idle,
 				type: nil
 			)
-		case .onDataLoaded, .onDataLoadError,.didRecentStopsUpdated:
+		case .onDataLoaded, .onDataLoadError,.didRecentStopsUpdated, .didRequestDeleteRecentStop:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
-		case .onReset(let type):
+		case .onReset:
 			return State(
 				previousStops: state.previousStops,
 				stops: [],
 				status: .idle,
-				type: type
+				type: state.type
 			)
 		}
 	}

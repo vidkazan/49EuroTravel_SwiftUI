@@ -8,6 +8,16 @@
 import Foundation
 import SwiftUI
 
+func formatDistance(_ distanceInMeters: Int) -> String {
+	if distanceInMeters < 500 {
+		return "\(distanceInMeters)m"
+	} else {
+		let distanceInKilometers = Double(distanceInMeters) / Double(1000)
+		return String(format: "%.1fkm", distanceInKilometers)
+	}
+}
+
+
 struct BadgeData : Equatable {
 	static func == (lhs: BadgeData, rhs: BadgeData) -> Bool {
 		lhs.name == rhs.name
@@ -70,6 +80,7 @@ enum Badges : Hashable {
 	case legDirection(dir : String)
 	case walking(duration : String)
 	case transfer(duration : String)
+	case distanceInMeters(dist : Int)
 	
 	case updatedAtTime(referenceTime : Double, isLoading : Bool = false)
 	
@@ -86,6 +97,8 @@ enum Badges : Hashable {
 	
 	var badgeDefaultStyle : BadgeBackgroundBaseStyle {
 		switch self {
+		case .distanceInMeters:
+			return .primary
 		case .fullLegError:
 			return .primary
 		case .followError:
@@ -131,6 +144,8 @@ enum Badges : Hashable {
 	
 	var badgeData : BadgeData {
 		switch self {
+		case .distanceInMeters(let dist):
+			return BadgeData(name: formatDistance(dist))
 		case .fullLegError:
 			return BadgeData(name: "Failed to load full leg")
 		case .followError(let action):

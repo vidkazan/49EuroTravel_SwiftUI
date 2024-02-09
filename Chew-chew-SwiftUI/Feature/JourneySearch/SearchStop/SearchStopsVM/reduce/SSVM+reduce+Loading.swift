@@ -40,12 +40,12 @@ extension SearchStopsViewModel {
 				status: .loading(string),
 				type: type
 			)
-		case .onReset(let type):
+		case .onReset:
 			return State(
 				previousStops: state.previousStops,
 				stops: [],
 				status: .idle,
-				type: type
+				type: state.type
 			)
 		case .onStopDidTap:
 			return State(
@@ -54,7 +54,7 @@ extension SearchStopsViewModel {
 				status: .idle,
 				type: nil
 			)
-		case .didRecentStopsUpdated:
+		case .didRecentStopsUpdated,.didRequestDeleteRecentStop:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		}

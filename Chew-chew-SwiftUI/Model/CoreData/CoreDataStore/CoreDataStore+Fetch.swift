@@ -112,7 +112,7 @@ extension CoreDataStore {
 		_ t : T.Type
 	) -> [T]? {
 
-		if let res = fetch(t) {
+		if let res = fetch(t), !res.isEmpty {
 			return res
 		}
 		 asyncContext.performAndWait {
