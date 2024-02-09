@@ -45,25 +45,22 @@ final class AlertViewModel : ObservableObject, Identifiable {
 
 
 extension AlertViewModel {
-	enum AlertType : Equatable {
-		static func == (lhs: AlertViewModel.AlertType, rhs: AlertViewModel.AlertType) -> Bool {
-			lhs.description == rhs.description
-		}
-		
+	enum AlertType {
 		case none
 		case destructive(destructiveAction : ()->Void, description : String, actionDescription : String)
+		
 		
 		var description : String {
 			switch self {
 			case .none:
-			return "none"
-			case let .destructive(_, name,_):
+				return "none"
+			case let .destructive(_,name,_):
 				return "destructive \(name)"
 			}
 		}
 	}
 	
-	struct State : Equatable {
+	struct State {
 		let alert : AlertType
 	}
 	
@@ -84,7 +81,7 @@ extension AlertViewModel {
 
 extension AlertViewModel {
 	static func reduce(_ state: State, _ event: Event) -> State {
-		print("‼️🔥 > ",event.description,"state:",state.alert)
+		print("‼️🔥 > ",event.description,"state:",state.alert.description)
 		switch event {
 		case .didRequestShow(let type):
 			return State(alert: type)

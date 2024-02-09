@@ -67,7 +67,8 @@ extension JourneyListView {
 		return Group {
 			VStack {
 				Spacer()
-				JourneyListViewLoader()
+				ProgressView()
+//				JourneyListViewLoader()
 				Spacer()
 			}
 		}

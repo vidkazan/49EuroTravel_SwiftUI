@@ -54,13 +54,13 @@ extension ChewViewModel {
 					status: .checkingSearchData
 				)
 			}
-		case .didLocationButtonPressed(send: let send):
+		case .didLocationButtonPressed:
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,
 				settings: state.settings,
 				date: state.date,
-				status: .loadingLocation(send: send)
+				status: .idle
 			)
 		case .onNewDate(let date):
 			return State(

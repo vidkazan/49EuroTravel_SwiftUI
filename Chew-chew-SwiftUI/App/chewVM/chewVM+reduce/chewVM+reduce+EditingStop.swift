@@ -73,13 +73,24 @@ extension ChewViewModel {
 				)
 			}
 		case .didLocationButtonPressed(send: let send):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .loadingLocation(send: send)
-			)
+			switch Model.shared.searchStopsViewModel.state.status {
+			case .loading:
+				return State(
+					depStop: state.depStop,
+					arrStop: state.arrStop,
+					settings: state.settings,
+					date: state.date,
+					status: .idle
+				)
+			default:
+				return State(
+					depStop: state.depStop,
+					arrStop: state.arrStop,
+					settings: state.settings,
+					date: state.date,
+					status: .loadingLocation(send: send)
+				)
+			}
 		case .didSetBothLocations(let stops):
 			return State(
 				depStop: .location(stops.departure),

@@ -41,8 +41,6 @@ struct JourneyListViewLoader: View {
 			ForEach(0...count,id: \.self) { index in
 				JourneyCell(journey: Self.mockViewData, stops: .init(departure: .init(), arrival: .init()))
 					.redacted(reason: .placeholder)
-					.transition(.move(edge: .top))
-					.animation(.spring(response: 0.5), value: index)
 			}
 			Spacer()
 		}
