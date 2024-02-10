@@ -34,7 +34,7 @@ struct RecentSearchesView : View {
 					LazyHStack {
 						ForEach(recentSearchesVM.state.searches.sorted(by: {
 							$0.searchTS > $1.searchTS
-						}),id: \.searchTS) { locations in
+						}).prefix(10),id: \.searchTS) { locations in
 							RecentSearchCell(send: recentSearchesVM.send, locations:locations.stops)
 								.onTapGesture {
 									chewVM.send(event: .didSetBothLocations(locations.stops))

@@ -43,7 +43,17 @@ extension SearchStopsView {
 		}
 		let recentStops = Array(sortStopByLocation(stops: recentStopsAll).prefix(2))
 		let stops = sortStopByLocation(stops: searchStopViewModel.state.stops)
-		return VStack(spacing: 0) {
+		return VStack(alignment: .leading,spacing: 0) {
+			Button(action: {
+				chewViewModel.send(event: .didCancelEditStop)
+				Model.shared.sheetViewModel.send(event: .didRequestShow(.mapPicker(type: type)))
+			}, label: {
+				Label("find on map", systemImage: "map.circle")
+			})
+			.foregroundColor(.primary)
+			.padding(.leading,5)
+			.frame(height: 40,alignment: .leading)
+			Divider()
 			ForEach(recentStops,id: \.1) { stop in
 				HStack(alignment: .center) {
 					Button(action: {
@@ -61,7 +71,6 @@ extension SearchStopsView {
 							}
 						}
 						.foregroundColor(.primary)
-						.chewTextSize(.big)
 					})
 					.padding(.leading,5)
 					Spacer()

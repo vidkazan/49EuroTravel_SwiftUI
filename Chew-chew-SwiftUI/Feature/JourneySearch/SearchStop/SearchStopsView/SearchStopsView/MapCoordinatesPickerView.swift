@@ -2,23 +2,68 @@ import SwiftUI
 import MapKit
 
 struct MapWithCoordinatePickerView: View {
-	@State private var selectedCoordinate: CLLocationCoordinate2D?
-
+	let type : LocationDirectionType
+	@EnvironmentObject var chewVM : ChewViewModel
+	let closeSheet : ()->Void
+	@State private var selectedCoordinate: CLLocationCoordinate2D? = nil
+	@State private var mapCenterCoords: CLLocationCoordinate2D
+	init(initialCoords: CLLocationCoordinate2D, type : LocationDirectionType, close : @escaping ()->Void) {
+		self.mapCenterCoords = initialCoords
+		self.type = type
+		self.closeSheet = close
+	}
 	var body: some View {
-		VStack {
+		NavigationView {
 			MapWithCoordinatePickerUIView(
-				selectedCoordinate: $selectedCoordinate
+				selectedCoordinate: $selectedCoordinate,
+				mapCenterCoords: $mapCenterCoords
 			)
-				.edgesIgnoringSafeArea(.all)
-			Text("Selected Coordinates: \(selectedCoordinate?.latitude ?? 0), \(selectedCoordinate?.longitude ?? 0)")
-				.padding()
+			.overlay(alignment: .bottomLeading) {
+				if let selectedCoordinate = selectedCoordinate {
+					HStack {
+						Text("\(selectedCoordinate.latitude) \(selectedCoordinate.longitude)")
+							.padding(5)
+							.chewTextSize(.big)
+							.frame(maxWidth: .infinity,alignment: .leading)
+						Button(action: {
+							let stop = Stop(
+								coordinates: selectedCoordinate,
+								type: .location,
+								stopDTO: nil
+							)
+							chewVM.send(event: .onNewStop(.location(stop), type))
+							Model.shared.sheetViewModel.send(event: .didRequestShow(.none))
+						}, label: {
+							Text("Submit")
+								.padding(5)
+								.badgeBackgroundStyle(.blue)
+								.chewTextSize(.big)
+								.foregroundColor(.white)
+						})
+					}
+					.padding(5)
+					.badgeBackgroundStyle(.accent)
+					.padding(5)
+				}
+			}
+			.padding(5)
+			.toolbar {
+				ToolbarItem(placement: .navigationBarLeading, content: {
+					Button(action: {
+						closeSheet()
+					}, label: {
+						Text("Close")
+							.foregroundColor(.chewGray30)
+					})
+				})
+			}
 		}
 	}
 }
 
 struct MapWithCoordinatePickerUIView: UIViewRepresentable {
 	@Binding var selectedCoordinate: CLLocationCoordinate2D?
-
+	@Binding var mapCenterCoords: CLLocationCoordinate2D
 	func makeCoordinator() -> Coordinator {
 		Coordinator(parent: self)
 	}
@@ -26,10 +71,8 @@ struct MapWithCoordinatePickerUIView: UIViewRepresentable {
 	func makeUIView(context: Context) -> MKMapView {
 		let mapView = MKMapView()
 		mapView.delegate = context.coordinator
-		let initialLocation = CLLocationCoordinate2D(
-			latitude: 52.4,
-			longitude: 10.8
-		)
+		let initialLocation = mapCenterCoords
+		
 		let span = MKCoordinateSpan(
 			latitudeDelta: 0.1,
 			longitudeDelta: 0.1
@@ -67,20 +110,15 @@ extension MapWithCoordinatePickerUIView {
 		init(parent: MapWithCoordinatePickerUIView) {
 			self.parent = parent
 		}
-
+		
+		func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
+			parent.mapCenterCoords = mapView.centerCoordinate
+		}
+		
 		func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 			if let annotation = view.annotation as? MKPointAnnotation {
 				parent.selectedCoordinate = annotation.coordinate
 			}
-		}
-		
-		
-		@objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-			let mapView = gestureRecognizer.view as? MKMapView
-			
-			let location = gestureRecognizer.location(in: mapView)
-			let coordinate = mapView?.convert(location, toCoordinateFrom: mapView)
-			parent.selectedCoordinate = coordinate
 		}
 		
 		func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -97,12 +135,23 @@ extension MapWithCoordinatePickerUIView {
 			return annotationView
 		}
 		
+		@objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
+			let mapView = gestureRecognizer.view as? MKMapView
+
+			let location = gestureRecognizer.location(in: mapView)
+			let coordinate = mapView?.convert(location, toCoordinateFrom: mapView)
+			parent.selectedCoordinate = coordinate
+		}
 	}
 
 }
 
 struct MapWithCoordinatePickerView_Previews: PreviewProvider {
 	static var previews: some View {
-		MapWithCoordinatePickerView()
+		MapWithCoordinatePickerView(
+			initialCoords: .init(latitude: 51.2, longitude: 6.6),
+			type: .departure,
+			close: {}
+		)
 	}
 }

@@ -28,7 +28,7 @@ extension ChewJourney {
 				$0.sunEvent()
 			}
 			let time = TimeContainer(chewTime: self.time)
-			#warning("add badges")
+			#warning("add remarks")
 			data = JourneyFollowData(
 				id : self.id,
 				journeyViewData: JourneyViewData(

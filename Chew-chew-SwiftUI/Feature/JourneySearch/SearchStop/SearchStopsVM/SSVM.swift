@@ -13,8 +13,6 @@ class SearchStopsViewModel : ObservableObject {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
-	@FocusState	 var textTopFieldIsFocused : Bool
-	@FocusState	 var textBottomFieldIsFocused: Bool
 	@Published private(set) var state : State {
 		didSet {
 			print("🔎 >> ",state.type ?? "nil","state:",state.status.description)

@@ -40,6 +40,13 @@ extension SearchStopsViewModel {
 				status: .idle,
 				type: state.type
 			)
+		case .onStopDidTap(let content,_):
+			return State(
+				previousStops: state.previousStops,
+				stops: [],
+				status: .updatingRecentStops(content.stop),
+				type: nil
+			)
 		case .didRecentStopsUpdated(recentStops: let stops):
 			return State(
 				previousStops: stops,

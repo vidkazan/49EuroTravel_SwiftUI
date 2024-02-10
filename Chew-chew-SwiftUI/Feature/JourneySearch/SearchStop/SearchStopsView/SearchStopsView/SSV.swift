@@ -14,13 +14,9 @@ struct SearchStopsView: View {
 	@FocusState 	var focusedField : LocationDirectionType?
 	@State var previuosStatus : ChewViewModel.Status?
 	@State var status : ChewViewModel.Status = .idle
-	@State var topText : String
-	@State var bottomText : String
+	@State var topText : String = ""
+	@State var bottomText : String = ""
 	@State var fieldRedBorder : (top: Bool,bottom: Bool) = (false,false)
-	init() {
-		self.topText = ""
-		self.bottomText = ""
-	}
 	
 	var body: some View {
 		VStack(spacing: 5) {
@@ -29,10 +25,7 @@ struct SearchStopsView: View {
 					HStack {
 						textField(
 							type: .departure,
-							text: topText,
-							textBinding: $topText,
-							focusedField: focusedField,
-							focusedFieldBinding: $focusedField
+							text: $topText
 						)
 						rightButton(type: .departure)
 					}
@@ -42,7 +35,7 @@ struct SearchStopsView: View {
 						RoundedRectangle(cornerRadius: 10)
 							.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
 					)
-					if case .editingStop(.departure) = status {
+					if focusedField == .departure {
 						stopList(type: .departure)
 					}
 				}
@@ -53,10 +46,7 @@ struct SearchStopsView: View {
 				HStack {
 					textField(
 						type: .arrival,
-						text: bottomText,
-						textBinding: $bottomText,
-						focusedField: focusedField,
-						focusedFieldBinding: $focusedField
+						text: $bottomText
 					)
 					rightButton(type: .arrival)
 				}
@@ -66,7 +56,7 @@ struct SearchStopsView: View {
 					RoundedRectangle(cornerRadius: 10)
 						.stroke(fieldRedBorder.bottom == true ? .red : .clear, lineWidth: 1.5)
 				)
-				if case .editingStop(.arrival) = status {
+				if focusedField == .arrival {
 					stopList(type: .arrival)
 				}
 			}
@@ -80,7 +70,7 @@ struct SearchStopsView: View {
 			
 			fieldRedBorder.bottom = state.arrStop.stop == nil && !state.arrStop.text.isEmpty && state.status != .editingStop(.arrival)
 			fieldRedBorder.top = state.depStop.stop == nil && !state.depStop.text.isEmpty && state.status != .editingStop(.departure)
-			
+			let _ = print(">>>",state.status)
 			switch state.status {
 			case .editingStop(let type):
 				focusedField = type
@@ -94,29 +84,7 @@ struct SearchStopsView: View {
 				focusedField = nil
 			}
 			
-			previuosStatus = chewViewModel.state.status
+			previuosStatus = state.status
 		})
-//		.onChange(of: chewViewModel.state, perform: { state in
-//			topText = state.depStop.text
-//			bottomText = state.arrStop.text
-//
-//			fieldRedBorder.bottom = state.arrStop.stop == nil && !state.arrStop.text.isEmpty && state.status != .editingStop(.arrival)
-//			fieldRedBorder.top = state.depStop.stop == nil && !state.depStop.text.isEmpty && state.status != .editingStop(.departure)
-//
-//			switch state.status {
-//			case .editingStop(let type):
-//				focusedField = type
-//				switch type {
-//				case .arrival:
-//					bottomText = ""
-//				case .departure:
-//					topText = ""
-//				}
-//			default:
-//				focusedField = nil
-//			}
-//
-//			previuosStatus = chewViewModel.state.status
-//		})
 	}
 }

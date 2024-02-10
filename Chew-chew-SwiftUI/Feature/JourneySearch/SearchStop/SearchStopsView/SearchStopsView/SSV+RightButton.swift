@@ -16,7 +16,7 @@ extension SearchStopsView {
 			}, label: {
 				switch type {
 				case .departure:
-					switch status {
+					switch chewViewModel.state.status {
 					case .loadingLocation:
 						ProgressView()
 					default:

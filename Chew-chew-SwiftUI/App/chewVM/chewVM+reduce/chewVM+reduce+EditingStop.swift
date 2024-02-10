@@ -21,6 +21,14 @@ extension ChewViewModel {
 		 .didTapCloseJourneyList:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
+		case .didCancelEditStop:
+			return State(
+				depStop: state.depStop,
+				arrStop: state.arrStop,
+				settings: state.settings,
+				date: state.date,
+				status: .idle
+			)
 		case .onStopEdit(let type):
 			return State(
 				depStop: state.depStop,

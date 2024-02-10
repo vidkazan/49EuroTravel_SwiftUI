@@ -14,6 +14,7 @@ extension ChewViewModel {
 		case .didTapCloseJourneyList,
 				.onJourneyDataUpdated,
 				.didLoadInitialData,
+				.didCancelEditStop,
 				.didStartViewAppear,
 				.onNotEnoughSearchData,
 				.didUpdateSettings:

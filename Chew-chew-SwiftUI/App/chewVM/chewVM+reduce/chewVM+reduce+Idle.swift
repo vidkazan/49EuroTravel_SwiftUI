@@ -14,6 +14,7 @@ extension ChewViewModel {
 		case .didLoadInitialData,
 				.didStartViewAppear,
 				.didReceiveLocationData,
+				.didCancelEditStop,
 				.didFailToLoadLocationData,
 				.didTapCloseJourneyList,
 				.onNotEnoughSearchData:

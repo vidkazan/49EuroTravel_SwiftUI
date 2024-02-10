@@ -63,6 +63,9 @@ extension SettingsView {
 //					Text("Show sun events")
 //				}
 //			)
+			Button("Map picker view", action: {
+				Model.shared.sheetViewModel.send(event: .didRequestShow(.mapPicker(type: .departure)))
+			})
 		}, header: {
 			Text("Debug options")
 		})

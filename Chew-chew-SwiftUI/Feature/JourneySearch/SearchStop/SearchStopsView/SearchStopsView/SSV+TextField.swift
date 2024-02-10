@@ -9,25 +9,24 @@ import SwiftUI
 extension SearchStopsView {
 	func textField(
 		type : LocationDirectionType,
-		text: String,
-		textBinding: Binding<String>,
-		focusedField : LocationDirectionType?,
-		focusedFieldBinding : FocusState<LocationDirectionType?>.Binding
+		text : Binding<String>
 	) -> some View {
 		return HStack(spacing: 0){
-			TextField(type.placeholder, text: textBinding)
+			let _ = print(focusedField, type,chewViewModel.state.status,  separator: "|", terminator: "\n")
+			TextField(type.placeholder, text: text.projectedValue)
 				.submitLabel(.done)
 				.keyboardType(.alphabet)
 				.autocorrectionDisabled(true)
 				.padding(10)
 				.chewTextSize(.big)
 				.frame(maxWidth: .infinity,alignment: .leading)
-				.focused(focusedFieldBinding, equals: type)
-				.onChange(of: text, perform: { text in
-					guard chewViewModel.state.status == .editingStop(.arrival) &&
-							searchStopViewModel.state.type == .arrival ||
-							chewViewModel.state.status == .editingStop(.departure) &&
-							searchStopViewModel.state.type == .departure else { return }
+				.focused($focusedField, equals: type)
+				.onChange(of: text.wrappedValue, perform: { text in
+					guard
+						case .editingStop(let type) = chewViewModel.state.status,
+						searchStopViewModel.state.type == type else {
+						return
+					}
 					if focusedField == searchStopViewModel.state.type && text.count > 2 {
 						searchStopViewModel.send(event: .onSearchFieldDidChanged(text,type))
 					}
@@ -39,12 +38,12 @@ extension SearchStopsView {
 					chewViewModel.send(event: .onStopEdit(type))
 				}
 				.onSubmit {
-					chewViewModel.send(event: .onNewStop(.textOnly(text), type))
+					chewViewModel.send(event: .onNewStop(.textOnly(text.wrappedValue), type))
 				}
 			VStack {
-				if focusedField == type && text.count > 0 {
+				if focusedField == type && text.wrappedValue.count > 0 {
 					Button(action: {
-						textBinding.wrappedValue = ""
+						text.wrappedValue = ""
 					}, label: {
 						Image(.xmarkCircle)
 							.chewTextSize(.big)

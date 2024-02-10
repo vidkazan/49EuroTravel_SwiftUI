@@ -99,6 +99,7 @@ extension ChewViewModel {
 		case didSetBothLocations(_ stops : DepartureArrivalPair)
 		case onJourneyDataUpdated(_ stops : DepartureArrivalPair)
 		case onNotEnoughSearchData
+		case didCancelEditStop
 		case didTapCloseJourneyList
 		case onNewDate(ChewDate)
 		case didUpdateSettings(ChewSettings)
@@ -108,6 +109,8 @@ extension ChewViewModel {
 		
 		var description : String {
 			switch self {
+			case .didCancelEditStop:
+				return "didCancelEditStop"
 			case .onStopEdit(let type):
 				return "onStopEdit \(type)"
 			case .onNotEnoughSearchData:

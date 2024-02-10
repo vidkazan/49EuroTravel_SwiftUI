@@ -56,6 +56,22 @@ struct SheetView : View {
 						closeSheet: closeSheet
 					)
 				}
+			case .mapPicker(type: let type):
+				if #available(iOS 16.0, *) {
+					MapWithCoordinatePickerView(
+						initialCoords: Model.shared.locationDataManager.locationManager.location?.coordinate ?? .init(latitude: 52, longitude: 7),
+						type: type,
+						close: closeSheet
+					)
+					.presentationDetents([.medium,.large])
+				} else {
+					MapWithCoordinatePickerView(
+						initialCoords: Model.shared.locationDataManager.locationManager.location?.coordinate ?? .init(latitude: 52, longitude: 7),
+						type : type,
+						close: closeSheet
+					)
+				}
+
 			case .none:
 				EmptyView()
 			case .onboarding:

@@ -12,9 +12,10 @@ import MapKit
 import CoreLocation
 
 class SheetViewModel : ObservableObject, Identifiable {
-	@Published private(set) var state : State {
-		didSet { print(">> state:",state.status.description) }
-	}
+	@Published private(set) var state : State
+//	{
+//		didSet { print(">> state:",state.status.description) }
+//	}
 	
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
@@ -54,6 +55,9 @@ struct MapDetailsViewDataSource : SheetViewDataSource {
 	let coordRegion : MKCoordinateRegion
 	let stops : [StopViewData]
 	let route : MKPolyline?
+}
+
+struct MapPickerViewDataSource : SheetViewDataSource {
 }
 
 struct FullLegViewDataSource : SheetViewDataSource {
@@ -130,11 +134,14 @@ extension SheetViewModel : ChewViewModelProtocol {
 		case settings
 		case fullLeg(leg : LegViewData)
 		case map(leg : LegViewData)
+		case mapPicker(type : LocationDirectionType)
 		case onboarding
 		case remark(remarks : [RemarkViewData])
 		
 		var description : String {
 			switch self {
+			case .mapPicker:
+				return "mapPicker"
 			case .none:
 				return "none"
 			case .date:
@@ -156,6 +163,8 @@ extension SheetViewModel : ChewViewModelProtocol {
 			switch self {
 			case .none:
 				return EmptyDataSource.self
+			case .mapPicker:
+				return MapPickerViewDataSource.self
 			case .date:
 				return DatePickerViewDataSource.self
 			case .settings:
@@ -176,7 +185,7 @@ extension SheetViewModel : ChewViewModelProtocol {
 
 extension SheetViewModel {
 	static func reduce(_ state: State, _ event: Event) -> State {
-		print(">> ",event.description,"state:",state.status.description)
+//		print(">> ",event.description,"state:",state.status.description)
 		switch state.status {
 		case .loading:
 			switch event {
@@ -213,6 +222,8 @@ extension SheetViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			switch type {
+			case .mapPicker:
+				return Just(Event.didLoadDataForShowing(type,MapPickerViewDataSource())).eraseToAnyPublisher()
 			case .none:
 				return Just(Event.didLoadDataForShowing(type,EmptyDataSource())).eraseToAnyPublisher()
 			case .date:

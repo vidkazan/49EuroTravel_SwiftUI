@@ -8,10 +8,9 @@
 import SwiftUI
 
 #warning("TODO: make error view")
-#warning("TODO: localisation")
+#warning("TODO: localization")
 #warning("TODO: legView: place transport icons")
 #warning("TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce")
-#warning("location request doesnt usually give actual location")
 
 
 // TODO: feature: check when train arrives at starting point
