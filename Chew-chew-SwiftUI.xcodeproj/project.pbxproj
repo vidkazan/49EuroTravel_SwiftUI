@@ -1204,7 +1204,6 @@
 			children = (
 				7DAC40902B7A5A74006B3E55 /* MapDetails */,
 				7DAC408F2B7A5A68006B3E55 /* MapPicker */,
-				7DAC40832B7A16C4006B3E55 /* MapViewModel.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
@@ -1212,6 +1211,7 @@
 		7DAC408F2B7A5A68006B3E55 /* MapPicker */ = {
 			isa = PBXGroup;
 			children = (
+				7DAC40832B7A16C4006B3E55 /* MapViewModel.swift */,
 				7DAC40952B7A5C02006B3E55 /* MapPickerView.swift */,
 			);
 			path = MapPicker;

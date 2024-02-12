@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class MapViewModel : ObservableObject, Identifiable {
+class MapPickerViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
 		didSet { print(">> state:",state.status.description) }
 	}
@@ -42,7 +42,7 @@ class MapViewModel : ObservableObject, Identifiable {
 	}
 }
 
-extension MapViewModel {
+extension MapPickerViewModel {
 	struct State  {
 		let status : Status
 
@@ -73,7 +73,7 @@ extension MapViewModel {
 }
 
 
-extension MapViewModel {
+extension MapPickerViewModel {
 	static func reduce(_ state: State, _ event: Event) -> State {
 		print(">> ",event.description,"state:",state.status.description)
 		switch state.status {
@@ -83,7 +83,7 @@ extension MapViewModel {
 	}
 }
 
-extension MapViewModel {
+extension MapPickerViewModel {
 	static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
 		Feedback { _ in
 			return input
