@@ -1,14 +1,14 @@
 //
-//  VMTemplate.swift
+//  MapView.swift
 //  Chew-chew-SwiftUI
 //
-//  Created by Dmitrii Grigorev on 23.01.24.
+//  Created by Dmitrii Grigorev on 12.02.24.
 //
 
 import Foundation
 import Combine
 
-class ViewModel : ObservableObject, Identifiable {
+class MapViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
 		didSet { print(">> state:",state.status.description) }
 	}
@@ -16,7 +16,7 @@ class ViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	
 	
-	init(_ initaialStatus : Status = .start) {
+	init(_ initaialStatus : Status) {
 		self.state = State(
 			status: initaialStatus
 		)
@@ -42,56 +42,48 @@ class ViewModel : ObservableObject, Identifiable {
 	}
 }
 
-extension ViewModel  {
+extension MapViewModel {
 	struct State  {
 		let status : Status
 
 		init(status: Status) {
 			self.status = status
 		}
+
 	}
 	
-	enum Status {
-		static func == (lhs: ViewModel.Status, rhs: ViewModel.Status) -> Bool {
-			return lhs.description == rhs.description
-		}
-		case start
-		
+	enum Status : String {
+		case journeyDetails
+		case stopPicker
 		var description : String {
 			switch self {
-			case .start:
-				return "start"
+			case .journeyDetails:
+				return "journeyDetails"
+			case .stopPicker:
+				return "stopPicker"
 			}
 		}
 	}
 	
 	enum Event {
-		case didLoadInitialData
-		
 		var description : String {
-			switch self {
-			case .didLoadInitialData:
-				return "didLoadInitialData"
-			}
+			return ""
 		}
 	}
 }
 
 
-extension ViewModel {
+extension MapViewModel {
 	static func reduce(_ state: State, _ event: Event) -> State {
 		print(">> ",event.description,"state:",state.status.description)
 		switch state.status {
-		case .start:
-			switch event {
-			case .didLoadInitialData:
-				return state
-			}
+		case .journeyDetails,.stopPicker:
+			return state
 		}
 	}
 }
 
-extension ViewModel {
+extension MapViewModel {
 	static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
 		Feedback { _ in
 			return input

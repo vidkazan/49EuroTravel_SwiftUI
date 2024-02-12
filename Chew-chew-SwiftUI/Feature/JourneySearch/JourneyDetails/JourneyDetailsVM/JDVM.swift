@@ -10,7 +10,7 @@ import Foundation
 import Combine
 import CoreData
 
-final class JourneyDetailsViewModel : ObservableObject, ChewViewModelProtocol {
+final class JourneyDetailsViewModel : ObservableObject {
 	
 	@Published private(set) var state : State {
 		didSet { print("🚂 > state:",state.status.description) }

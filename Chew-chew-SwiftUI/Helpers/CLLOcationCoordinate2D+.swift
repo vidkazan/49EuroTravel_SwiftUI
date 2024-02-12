@@ -18,3 +18,10 @@ extension CLLocationCoordinate2D: Hashable,Equatable{
 		hasher.combine(longitude)
 	}
 }
+
+
+extension CLLocationCoordinate2D: Identifiable {
+	public var id: String {
+		"\(latitude)-\(longitude)"
+	}
+}

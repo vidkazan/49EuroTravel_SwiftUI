@@ -7,18 +7,6 @@
 
 import Foundation
 
-protocol ChewViewModelProtocol : Identifiable {
-	associatedtype ChewState
-	var state : ChewState { get }
-}
-
-protocol ChewState : Equatable {
-	associatedtype StateData : Equatable
-	associatedtype Status : Equatable
-	var data : StateData { get }
-	var status : Status { get }
-}
-
 extension JourneyListViewModel {
 	enum Error : ChewError {
 		static func == (lhs: Error, rhs: Error) -> Bool {

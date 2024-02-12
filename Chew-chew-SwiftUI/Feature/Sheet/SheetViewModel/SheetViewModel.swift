@@ -82,7 +82,7 @@ struct RemarksViewDataSource : SheetViewDataSource {
 	let remarks : [RemarkViewData]
 }
 
-extension SheetViewModel : ChewViewModelProtocol {
+extension SheetViewModel{
 	struct State  {
 		let status : Status
 	}
