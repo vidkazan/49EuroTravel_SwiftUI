@@ -296,6 +296,7 @@ struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 	let longitude	: Double?
 	let poi			: Bool?
 	let products	: Products?
+	let distance  	: Int?
 	
 	private enum CodingKeys : String, CodingKey {
 		case type
@@ -307,6 +308,7 @@ struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 		case latitude
 		case longitude
 		case poi
+		case distance
 	}
 }
 
@@ -321,6 +323,7 @@ extension StopDTO {
 		self.longitude	= nil
 		self.poi			= nil
 		self.products	= nil
+		self.distance = nil
 	}
 }
 

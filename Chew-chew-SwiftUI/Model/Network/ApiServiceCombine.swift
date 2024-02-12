@@ -83,5 +83,5 @@ extension ApiService {
 		
 		let request = type.getRequest(urlEndPoint: url)
 		return self.client.execute(t.self, request: request, type: type)
-	}	
+	}
 }

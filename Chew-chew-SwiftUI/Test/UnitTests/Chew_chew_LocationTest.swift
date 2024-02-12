@@ -17,7 +17,7 @@ final class Chew_chew_LocationTest: XCTestCase {
 
 		let _ = service.fetch(
 			StopDTO.self,
-			query: [Query.location(location: "Pop").getQueryMethod()],
+			query: [Query.location(location: "Pop").queryItem()],
 			type: .locations
 		)
 

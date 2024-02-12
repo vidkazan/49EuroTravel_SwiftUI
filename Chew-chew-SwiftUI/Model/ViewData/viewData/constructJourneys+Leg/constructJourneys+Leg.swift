@@ -39,12 +39,12 @@ extension LegDTO {
 				lastTS: lastTS,
 				currentTS: container.date.arrival.planned
 			) else {
-			throw ConstructDataError.nilValue(type: "plannedArrivalPosition or plannedDeparturePosition")
+			throw DataError.nilValue(type: "plannedArrivalPosition or plannedDeparturePosition")
 		}
 		
 		
 		guard let tripId = walking == true ? UUID().uuidString : tripId else  {
-			throw ConstructDataError.nilValue(type: "tripId")
+			throw DataError.nilValue(type: "tripId")
 		}
 		
 		

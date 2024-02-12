@@ -86,7 +86,7 @@ extension JourneyListViewModel {
 	
 	static func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiServiceError> {
 		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
-		query += Query.getQueryItems(methods: [
+		query += Query.queryItems(methods: [
 			type == .earlierRef ? Query.earlierThan(earlierRef: ref) : Query.laterThan(laterRef: ref),
 			Query.remarks(showRemarks: true),
 			Query.results(max: 3),

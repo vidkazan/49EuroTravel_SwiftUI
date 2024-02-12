@@ -57,7 +57,7 @@ extension SearchStopsViewModel {
 extension SearchStopsViewModel {
 	static func fetchLocations(text : String, type : LocationDirectionType) -> AnyPublisher<[StopDTO],ApiServiceError> {
 		var query : [URLQueryItem] = []
-		query = Query.getQueryItems(methods: [
+		query = Query.queryItems(methods: [
 			Query.location(location: text),
 			Query.results(max: 10)
 		])

@@ -32,7 +32,7 @@ extension JourneyDetailsViewModel {
 		}()
 		return ApiService().fetch(
 			JourneyWrapper.self,
-			query: Query.getQueryItems(
+			query: Query.queryItems(
 				methods: queryMethods
 			),
 			type: ApiService.Requests.journeyByRefreshToken(ref: ref)

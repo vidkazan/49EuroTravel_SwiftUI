@@ -145,7 +145,6 @@ extension RecentSearchesViewModel {
 						return Just(Event.didFailToEdit(action: action,msg: "data is nil")).eraseToAnyPublisher()
 					}
 					guard !searches.contains(where: {
-						#warning("check this solution")
 						return $0.stops.id == data.stops.id
 					}) else {
 						return Just(Event.didFailToEdit(action: action,msg: "search been added already")).eraseToAnyPublisher()

@@ -8,6 +8,7 @@
 import Foundation
 import DequeModule
 import Combine
+import CoreLocation
 
 class ApiService  {
 	let client : HTTPClient
@@ -21,10 +22,13 @@ class ApiService  {
 		case journeyByRefreshToken(ref : String)
 		case locations
 		case trips(tripId : String)
+		case locationsNearby(coords : CLLocationCoordinate2D)
 		case generic(path : String)
 		
 		var description : String {
 			switch self {
+			case .locationsNearby:
+				return "locationsNearby"
 			case .locations:
 				return "locations"
 			case .generic:
@@ -40,20 +44,22 @@ class ApiService  {
 		
 		var method : String {
 			switch self {
-			case .locations, .generic, .journeys,.journeyByRefreshToken,.trips:
+			case .locations, .generic, .journeys,.journeyByRefreshToken,.trips,.locationsNearby:
 				return "GET"
 			}
 		}
 		
 		var headers : [(value : String, key : String)] {
 			switch self {
-			case .generic, .locations, .journeys,.journeyByRefreshToken,.trips:
+			case .generic, .locations, .journeys,.journeyByRefreshToken,.trips,.locationsNearby:
 				return []
 			}
 		}
 		
 		var urlString : String {
 			switch self {
+			case .locationsNearby:
+				return Constants.apiData.urlPathLocationsNearby
 			case .journeys:
 				return Constants.apiData.urlPathJourneyList
 			case .locations:
@@ -69,7 +75,7 @@ class ApiService  {
 		
 		func getRequest(urlEndPoint : URL) -> URLRequest {
 			switch self {
-			case .generic, .locations,.journeys,.journeyByRefreshToken,.trips:
+			case .generic, .locations,.journeys,.journeyByRefreshToken,.trips, .locationsNearby:
 				var req = URLRequest(url : urlEndPoint)
 				req.httpMethod = self.method
 				for header in self.headers {
@@ -83,7 +89,7 @@ class ApiService  {
 	static func generateUrl(query : [URLQueryItem], type : Requests) -> URL? {
 		let url : URL? = {
 			switch type {
-			case .locations,.journeys,.journeyByRefreshToken,.trips:
+			case .locations,.journeys,.journeyByRefreshToken,.trips, .locationsNearby:
 				var components = URLComponents()
 				components.path = type.urlString
 				components.host = Constants.apiData.urlBase

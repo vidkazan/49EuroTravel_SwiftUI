@@ -7,17 +7,12 @@
 
 import Foundation
 
-struct CustomErrors : Error {
-	let apiServiceErrors : any ChewError
-	let source : ApiService.Requests
-}
-
 protocol ChewError : Error, Equatable, Hashable {
 	var description : String { get }
 }
 
-enum ConstructDataError : ChewError {
-	static func == (lhs: ConstructDataError, rhs: ConstructDataError) -> Bool {
+enum DataError : ChewError {
+	static func == (lhs: DataError, rhs: DataError) -> Bool {
 		return lhs.description == rhs.description
 	}
 	

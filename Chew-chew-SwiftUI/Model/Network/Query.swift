@@ -7,7 +7,21 @@
 
 import Foundation
 
-enum Query{
+
+extension URLQueryItem {
+	func departure() -> Self {
+		var item  = self
+		item.name = "from." + item.name
+		return item
+	}
+	func arrival() -> Self {
+		var item  = self
+		item.name = "to." + item.name
+		return item
+	}
+}
+
+enum Query {
 	case transferTime(transferTime: Int)
 	case location(location : String?)
 	case when(time : Date?)
@@ -32,20 +46,14 @@ enum Query{
 	case tram(tram: Bool)
 	case taxi(taxi : Bool)
 	
+	case latitude(latitude : String)
+	case longitude(longitude : String)
+	case address(addr: String)
+	case poiId(poiId: String)
+	case poiName(poiName: String)
+	
 	case departureStopId(departureStopId : String)
-	case departureLatitude(departureLatitude : String)
-	case departureLongitude(departureLongitude : String)
-	case departureAddress(addr: String)
-	case departurePoiId(poiId: String)
-	case departurePoiName(poiName: String)
-	
 	case arrivalStopId(arrivalStopId : String)
-	case arrivalLatitude(arrivalLatitude : String)
-	case arrivalLongitude(arrivalLongitude : String)
-	case arrivalAddress(addr: String)
-	case arrivalPoiId(poiId: String)
-	case arrivalPoiName(poiName: String)
-	
 	case departureTime(departureTime : Date)
 	case arrivalTime(arrivalTime : Date)
 	case earlierThan(earlierRef : String)
@@ -55,7 +63,7 @@ enum Query{
 	case showPointsOfInterests(showPointsOfInterests : Bool)
 	case stopovers(isShowing: Bool)
 	
-	func getQueryMethod() -> URLQueryItem {
+	func queryItem() -> URLQueryItem {
 		switch self {
 		case .location(let location):
 			return URLQueryItem(
@@ -171,38 +179,25 @@ enum Query{
 			return URLQueryItem(
 				name: "poi",
 				value: String(showPointsOfInterests))
-		case .departureLatitude(departureLatitude: let departureLatitude):
+			
+		case .latitude(latitude: let latitude):
 			return URLQueryItem(
-				name: "from.latitude",
-				value: String(departureLatitude))
-		case .departureLongitude(departureLongitude: let departureLongitude):
+				name: "latitude",
+				value: String(latitude))
+		case .longitude(longitude: let longitude):
 			return URLQueryItem(
-				name: "from.longitude",
-				value: String(departureLongitude))
-		case .arrivalLatitude(arrivalLatitude: let arrivalLatitude):
+				name: "longitude",
+				value: String(longitude))
+		case .address(addr: let addr):
 			return URLQueryItem(
-				name: "to.latitude",
-				value: String(arrivalLatitude))
-		case .arrivalLongitude(arrivalLongitude: let arrivalLongitude):
-			return URLQueryItem(
-				name: "to.longitude",
-				value: String(arrivalLongitude))
-		case .departureAddress(addr: let addr):
-			return URLQueryItem(
-				name: "from.address",
+				name: "address",
 				value: String(addr))
-		case .arrivalAddress(addr: let addr):
+			
+		case .poiId(poiId: let poiId):
 			return URLQueryItem(
-				name: "to.address",
-				value: String(addr))
-		case .departurePoiId(poiId: let poiId):
-			return URLQueryItem(
-				name: "from.id",
+				name: "id",
 				value: String(poiId))
-		case .arrivalPoiId(poiId: let poiId):
-			return URLQueryItem(
-				name: "to.id",
-				value: String(poiId))
+		
 		case .stopovers(isShowing: let isShowing):
 			return URLQueryItem(
 				name: "stopovers",
@@ -215,19 +210,16 @@ enum Query{
 			return URLQueryItem(
 				name: "transfers",
 				value: String(count))
-		case .departurePoiName(poiName: let poiName):
+		case .poiName(poiName: let poiName):
 			return URLQueryItem(
-				name: "from.name",
-				value: poiName)
-		case .arrivalPoiName(poiName: let poiName):
-			return URLQueryItem(
-				name: "to.name",
+				name: "name",
 				value: poiName)
 		}
 	}
-	static func getQueryItems(methods : [Query]) -> [URLQueryItem] {
+	static func queryItems(methods : [Query]) -> [URLQueryItem] {
 		return methods.map {
-			$0.getQueryMethod()
+			$0.queryItem()
 		}
 	}
 }
+

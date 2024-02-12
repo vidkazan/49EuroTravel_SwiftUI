@@ -13,18 +13,19 @@ import MapKit
 struct MapPickerView: View {
 	let type : LocationDirectionType
 	@EnvironmentObject var chewVM : ChewViewModel
+	@ObservedObject var vm : MapPickerViewModel
 	let closeSheet : ()->Void
-	@State private var selectedCoordinate: CLLocationCoordinate2D? = nil
 	@State private var mapCenterCoords: CLLocationCoordinate2D
-	init(initialCoords: CLLocationCoordinate2D, type : LocationDirectionType, close : @escaping ()->Void) {
+	init(vm : MapPickerViewModel,initialCoords: CLLocationCoordinate2D, type : LocationDirectionType, close : @escaping ()->Void) {
 		self.mapCenterCoords = initialCoords
 		self.type = type
 		self.closeSheet = close
+		self.vm = vm
 	}
 	var body: some View {
 		NavigationView {
 			MapWithCoordinatePickerUIView(
-				selectedCoordinate: $selectedCoordinate,
+				vm: vm,
 				mapCenterCoords: $mapCenterCoords
 			)
 			.overlay(alignment: .bottomLeading) { overlay }
@@ -46,18 +47,13 @@ struct MapPickerView: View {
 extension MapPickerView {
 	var overlay : some View {
 		Group {
-			if let selectedCoordinate = selectedCoordinate {
+			if let stop  = vm.state.data.selectedStop {
 				HStack {
-					Text("\(selectedCoordinate.latitude) \(selectedCoordinate.longitude)")
+					Text("\(stop.name)")
 						.padding(5)
 						.chewTextSize(.big)
 						.frame(maxWidth: .infinity,alignment: .leading)
 					Button(action: {
-						let stop = Stop(
-							coordinates: selectedCoordinate,
-							type: .location,
-							stopDTO: nil
-						)
 						chewVM.send(event: .onNewStop(.location(stop), type))
 						Model.shared.sheetViewModel.send(event: .didRequestShow(.none))
 					}, label: {
@@ -77,8 +73,9 @@ extension MapPickerView {
 }
 
 struct MapWithCoordinatePickerUIView: UIViewRepresentable {
-	@Binding var selectedCoordinate: CLLocationCoordinate2D?
+	@ObservedObject var vm : MapPickerViewModel
 	@Binding var mapCenterCoords: CLLocationCoordinate2D
+	
 	func makeCoordinator() -> Coordinator {
 		Coordinator(parent: self)
 	}
@@ -89,8 +86,8 @@ struct MapWithCoordinatePickerUIView: UIViewRepresentable {
 		let initialLocation = mapCenterCoords
 		
 		let span = MKCoordinateSpan(
-			latitudeDelta: 0.1,
-			longitudeDelta: 0.1
+			latitudeDelta: 0.01,
+			longitudeDelta: 0.01
 		)
 		let region = MKCoordinateRegion(center: initialLocation, span: span)
 		mapView.setRegion(region, animated: true)
@@ -100,21 +97,35 @@ struct MapWithCoordinatePickerUIView: UIViewRepresentable {
 			action: #selector(Coordinator.handleTap(_:))
 		)
 		mapView.addGestureRecognizer(gestureRecognizer)
-
 		return mapView
 	}
 
 	func updateUIView(_ uiView: MKMapView, context: Context) {
-		// Update the view when the selected coordinate changes
-		if let selectedCoordinate = selectedCoordinate {
+		let selectedAnnotationIdentifier = "selectedStop"
+		let nearbyStopAnnotationIdentifier = "nearbyStop"
+		
+		if let selectedCoordinate = vm.state.data.selectedStop?.coordinates {
+			if let annotation = uiView.annotations.first(where: { $0.title == selectedAnnotationIdentifier }) {
+				uiView.removeAnnotation(annotation)
+			}
 			let annotation = MKPointAnnotation()
+			annotation.title = selectedAnnotationIdentifier
 			annotation.coordinate = selectedCoordinate
-			uiView.removeAnnotations(uiView.annotations)
 			uiView.addAnnotation(annotation)
-
-			// Center the map on the selected coordinate
-			uiView.setCenter(selectedCoordinate, animated: true)
 		}
+		
+		vm.state.data.stops.forEach({ stop in
+			if let anno = uiView.annotations.first(where: {
+				$0.coordinate == stop.coordinates
+			}) {
+				return
+			}
+			
+			let annotation = MKPointAnnotation()
+			annotation.coordinate = stop.coordinates
+			annotation.title = nearbyStopAnnotationIdentifier
+			uiView.addAnnotation(annotation)
+		})
 	}
 }
 
@@ -128,12 +139,8 @@ extension MapWithCoordinatePickerUIView {
 		
 		func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
 			parent.mapCenterCoords = mapView.centerCoordinate
-		}
-		
-		func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
-			if let annotation = view.annotation as? MKPointAnnotation {
-				parent.selectedCoordinate = annotation.coordinate
-			}
+			
+			parent.vm.send(event: .didDragMap(mapView.centerCoordinate))
 		}
 		
 		func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
@@ -155,7 +162,13 @@ extension MapWithCoordinatePickerUIView {
 
 			let location = gestureRecognizer.location(in: mapView)
 			let coordinate = mapView?.convert(location, toCoordinateFrom: mapView)
-			parent.selectedCoordinate = coordinate
+			if let coordinate = coordinate {
+				parent.vm.send(event: .didTapStopOnMap(Stop(
+					coordinates: coordinate,
+					type: .location,
+					stopDTO: nil
+				)))
+			}
 		}
 	}
 

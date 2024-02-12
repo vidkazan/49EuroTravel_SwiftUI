@@ -90,11 +90,11 @@ extension JourneyDTO {
 		)
 		
 		guard let journeyRef = refreshToken else  {
-			throw ConstructDataError.nilValue(type: "journeyRef")
+			throw DataError.nilValue(type: "journeyRef")
 		}
 		guard let first = legs.first?.origin,
 			  let last = legs.last?.destination else  {
-			throw ConstructDataError.nilValue(type: "first or last stop")
+			throw DataError.nilValue(type: "first or last stop")
 		}
 		
 		return JourneyViewData(
