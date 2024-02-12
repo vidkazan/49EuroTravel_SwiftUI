@@ -47,9 +47,9 @@ struct SheetView : View {
 						closeSheet: closeSheet
 					)
 				}
-			case .map:
+			case .mapDetails:
 				if let data = data as? MapDetailsViewDataSource {
-					MapSheet(
+					MapDetailsView(
 						mapRect: data.coordRegion,
 						stops: data.stops,
 						route: data.route,
@@ -58,14 +58,14 @@ struct SheetView : View {
 				}
 			case .mapPicker(type: let type):
 				if #available(iOS 16.0, *) {
-					MapWithCoordinatePickerView(
+					MapPickerView(
 						initialCoords: Model.shared.locationDataManager.locationManager.location?.coordinate ?? .init(latitude: 52, longitude: 7),
 						type: type,
 						close: closeSheet
 					)
 					.presentationDetents([.medium,.large])
 				} else {
-					MapWithCoordinatePickerView(
+					MapPickerView(
 						initialCoords: Model.shared.locationDataManager.locationManager.location?.coordinate ?? .init(latitude: 52, longitude: 7),
 						type : type,
 						close: closeSheet

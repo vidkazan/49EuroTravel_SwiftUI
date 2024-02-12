@@ -133,7 +133,7 @@ extension SheetViewModel{
 		case date
 		case settings
 		case fullLeg(leg : LegViewData)
-		case map(leg : LegViewData)
+		case mapDetails(leg : LegViewData)
 		case mapPicker(type : LocationDirectionType)
 		case onboarding
 		case remark(remarks : [RemarkViewData])
@@ -150,7 +150,7 @@ extension SheetViewModel{
 				return "settings"
 			case .fullLeg:
 				return "fullLeg"
-			case .map:
+			case .mapDetails:
 				return "map"
 			case .onboarding:
 				return "onboarding"
@@ -171,7 +171,7 @@ extension SheetViewModel{
 				return SettingsViewDataSource.self
 			case .fullLeg:
 				return FullLegViewDataSource.self
-			case .map:
+			case .mapDetails:
 				return MapDetailsViewDataSource.self
 			case .onboarding:
 				return OnboardingViewDataSource.self
@@ -232,7 +232,7 @@ extension SheetViewModel {
 				return Just(Event.didLoadDataForShowing(type,SettingsViewDataSource())).eraseToAnyPublisher()
 			case .fullLeg(leg: let leg):
 				return loadingFullLeg(state: state, tripId: leg.tripId)
-			case .map(leg: let leg):
+			case .mapDetails(leg: let leg):
 				return loadingLocationDetails(state: state, leg: leg)
 			case .onboarding:
 				return Just(Event.didLoadDataForShowing(type,OnboardingViewDataSource())).eraseToAnyPublisher()
@@ -296,7 +296,7 @@ extension SheetViewModel {
 	}
 	
 	
-	static func makeDirecitonsRequest(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D
+	static func makeDirectionsRequest(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D
 	) -> AnyPublisher<MKDirections.Response, ApiServiceError> {
 		let request = MKDirections.Request()
 		request.source = MKMapItem(
@@ -336,10 +336,10 @@ extension SheetViewModel {
 			   let locLast = leg.legStopsViewData.last {
 				switch leg.legType {
 				case .footEnd,.footMiddle,.footStart:
-					return makeDirecitonsRequest(from: locFirst.locationCoordinates, to: locLast.locationCoordinates)
+					return makeDirectionsRequest(from: locFirst.locationCoordinates, to: locLast.locationCoordinates)
 						.map { res in
 							return Event.didLoadDataForShowing(
-								.map(leg: leg),
+								.mapDetails(leg: leg),
 								MapDetailsViewDataSource(
 									coordRegion: constructMapRegion(
 										locFirst: locFirst.locationCoordinates,
@@ -353,7 +353,7 @@ extension SheetViewModel {
 						.catch { error in
 							print("❌ whenLoadingLocationDetails: makeDirecitonsRequest: error:",error)
 							return Just(Event.didLoadDataForShowing(
-								.map(leg: leg),
+								.mapDetails(leg: leg),
 								MapDetailsViewDataSource(
 									coordRegion: constructMapRegion(
 										locFirst: locFirst.locationCoordinates,
@@ -382,7 +382,7 @@ extension SheetViewModel {
 						polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
 					}
 					return Just(Event.didLoadDataForShowing(
-						.map(leg: leg),
+						.mapDetails(leg: leg),
 						MapDetailsViewDataSource(
 							coordRegion: constructMapRegion(
 								locFirst: locFirst.locationCoordinates,
@@ -394,7 +394,7 @@ extension SheetViewModel {
 					)).eraseToAnyPublisher()
 				case .transfer:
 					return Just(Event.didLoadDataForShowing(
-						.map(leg: leg),
+						.mapDetails(leg: leg),
 						MapDetailsViewDataSource(
 							coordRegion: constructMapRegion(
 								locFirst: locFirst.locationCoordinates,

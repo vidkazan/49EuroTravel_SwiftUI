@@ -25,7 +25,6 @@
 		7D02CE302A97E96E0048ADE6 /* BadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */; };
 		7D02CE342A98E8130048ADE6 /* JLV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE332A98E8130048ADE6 /* JLV.swift */; };
 		7D0685ED2B50304500CCBE6B /* CoreDataStore+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0685EC2B50304500CCBE6B /* CoreDataStore+Fetch.swift */; };
-		7D0697392B72BF9600784C8E /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0697382B72BF9600784C8E /* MapView.swift */; };
 		7D08885E2B4A3F1B00283A34 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */; };
 		7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */; };
 		7D1638502B69841D006E9660 /* LDSV+background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D16384F2B69841D006E9660 /* LDSV+background.swift */; };
@@ -183,6 +182,8 @@
 		7DABB02D2B2E18F1002BBA97 /* JFCV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DABB02C2B2E18F1002BBA97 /* JFCV.swift */; };
 		7DAC0C932B2780C0001FC6EA /* JFVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC0C922B2780C0001FC6EA /* JFVM.swift */; };
 		7DAC40842B7A16C4006B3E55 /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC40832B7A16C4006B3E55 /* MapViewModel.swift */; };
+		7DAC408E2B7A5920006B3E55 /* MapDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC408D2B7A5920006B3E55 /* MapDetailsView.swift */; };
+		7DAC40962B7A5C02006B3E55 /* MapPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC40952B7A5C02006B3E55 /* MapPickerView.swift */; };
 		7DAE1F6A2B0D26CF0097AAD8 /* ChewTime+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F662B0D26CF0097AAD8 /* ChewTime+CoreDataClass.swift */; };
 		7DAE1F6B2B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */; };
 		7DAE1F6C2B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */; };
@@ -274,7 +275,6 @@
 		7D02CE2F2A97E96E0048ADE6 /* BadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeView.swift; sourceTree = "<group>"; };
 		7D02CE332A98E8130048ADE6 /* JLV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLV.swift; sourceTree = "<group>"; };
 		7D0685EC2B50304500CCBE6B /* CoreDataStore+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataStore+Fetch.swift"; sourceTree = "<group>"; };
-		7D0697382B72BF9600784C8E /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeContainer.swift; sourceTree = "<group>"; };
 		7D16384F2B69841D006E9660 /* LDSV+background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LDSV+background.swift"; sourceTree = "<group>"; };
@@ -411,6 +411,8 @@
 		7DABB02C2B2E18F1002BBA97 /* JFCV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JFCV.swift; sourceTree = "<group>"; };
 		7DAC0C922B2780C0001FC6EA /* JFVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JFVM.swift; sourceTree = "<group>"; };
 		7DAC40832B7A16C4006B3E55 /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		7DAC408D2B7A5920006B3E55 /* MapDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailsView.swift; sourceTree = "<group>"; };
+		7DAC40952B7A5C02006B3E55 /* MapPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickerView.swift; sourceTree = "<group>"; };
 		7DAE1F662B0D26CF0097AAD8 /* ChewTime+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewTime+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransportMode+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -1200,18 +1202,27 @@
 		7DAC40822B7A1698006B3E55 /* Map */ = {
 			isa = PBXGroup;
 			children = (
-				7DAC40852B7A2593006B3E55 /* view */,
+				7DAC40902B7A5A74006B3E55 /* MapDetails */,
+				7DAC408F2B7A5A68006B3E55 /* MapPicker */,
 				7DAC40832B7A16C4006B3E55 /* MapViewModel.swift */,
 			);
 			path = Map;
 			sourceTree = "<group>";
 		};
-		7DAC40852B7A2593006B3E55 /* view */ = {
+		7DAC408F2B7A5A68006B3E55 /* MapPicker */ = {
 			isa = PBXGroup;
 			children = (
-				7D0697382B72BF9600784C8E /* MapView.swift */,
+				7DAC40952B7A5C02006B3E55 /* MapPickerView.swift */,
 			);
-			path = view;
+			path = MapPicker;
+			sourceTree = "<group>";
+		};
+		7DAC40902B7A5A74006B3E55 /* MapDetails */ = {
+			isa = PBXGroup;
+			children = (
+				7DAC408D2B7A5920006B3E55 /* MapDetailsView.swift */,
+			);
+			path = MapDetails;
 			sourceTree = "<group>";
 		};
 		7DAF62B42A9E5833006F1A17 /* DatePickerView */ = {
@@ -1554,7 +1565,6 @@
 				7DE8A3582B6ABCFA00C3A378 /* LDV+background.swift in Sources */,
 				7D000CF92AB8768400566120 /* JDV+Header.swift in Sources */,
 				7DCD20102AC470AD00788B38 /* Colors.swift in Sources */,
-				7D0697392B72BF9600784C8E /* MapView.swift in Sources */,
 				7DD5BAE12B72AD6000CFE768 /* chewVM+loadingInitialData.swift in Sources */,
 				7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */,
 				7DD4A8DA2AAC90C9001AA30C /* SSVM+reduce+Error.swift in Sources */,
@@ -1639,6 +1649,7 @@
 				7D9BB10D2B0CBF54008A3616 /* Location+CoreDataProperties.swift in Sources */,
 				7D181D692AD6F7C6003AB021 /* RecentSearchCell.swift in Sources */,
 				7D6C5C1F2AAF4ADC00DEFC57 /* chewVM+reduce+EditingStop.swift in Sources */,
+				7DAC40962B7A5C02006B3E55 /* MapPickerView.swift in Sources */,
 				7D3957202B54911F00024736 /* JDV+Toolbar.swift in Sources */,
 				7D1638542B698A04006E9660 /* SFSymbols.swift in Sources */,
 				7DD5BAFD2B72BBDB00CFE768 /* PlatformView.swift in Sources */,
@@ -1730,6 +1741,7 @@
 				7DE8A35A2B6AC50D00C3A378 /* SunEventsGradient.swift in Sources */,
 				7DCB2BFF2AAC8831007C672A /* SSVM+reduce+Idle.swift in Sources */,
 				7DAC40842B7A16C4006B3E55 /* MapViewModel.swift in Sources */,
+				7DAC408E2B7A5920006B3E55 /* MapDetailsView.swift in Sources */,
 				7D4B1B992AA950780096F372 /* constructJourneyList.swift in Sources */,
 				7D462D492AAC947F00BC0D65 /* JLVM+reduce+LoadingJourneys.swift in Sources */,
 				7D7547B82B616FD3002BE434 /* FeatureView.swift in Sources */,

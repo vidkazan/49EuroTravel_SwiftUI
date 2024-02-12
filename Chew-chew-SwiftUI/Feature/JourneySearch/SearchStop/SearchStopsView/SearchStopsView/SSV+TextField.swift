@@ -12,7 +12,6 @@ extension SearchStopsView {
 		text : Binding<String>
 	) -> some View {
 		return HStack(spacing: 0){
-			let _ = print(focusedField, type,chewViewModel.state.status,  separator: "|", terminator: "\n")
 			TextField(type.placeholder, text: text.projectedValue)
 				.submitLabel(.done)
 				.keyboardType(.alphabet)
