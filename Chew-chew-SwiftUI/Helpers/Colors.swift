@@ -15,6 +15,9 @@ extension Color {
 	static var chewLegsViewGray: Color {
 		Color("ChewLegsViewGray")
 	}
+	static var chewFillMagenta: Color {
+		Color("ChewFillMagenta")
+	}
 	static var chewFillPrimary: Color {
 		Color("ChewFillPrimary")
 	}
