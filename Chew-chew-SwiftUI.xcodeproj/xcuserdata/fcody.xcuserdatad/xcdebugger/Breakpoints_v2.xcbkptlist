@@ -126,8 +126,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "282"
-            endingLineNumber = "282"
+            startingLineNumber = "298"
+            endingLineNumber = "298"
             landmarkName = "whenLoadingNearbyStops()"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "269"
-            endingLineNumber = "269"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
             landmarkName = "whenLoadingNearbyStops()"
             landmarkType = "7">
             <Locations>
@@ -190,8 +190,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "270"
-            endingLineNumber = "270"
+            startingLineNumber = "286"
+            endingLineNumber = "286"
             landmarkName = "whenLoadingNearbyStops()"
             landmarkType = "7">
          </BreakpointContent>
@@ -206,8 +206,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
+            startingLineNumber = "337"
+            endingLineNumber = "337"
             landmarkName = "fetchLocatonsNearby(coords:)"
             landmarkType = "7">
          </BreakpointContent>

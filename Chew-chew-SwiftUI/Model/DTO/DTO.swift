@@ -247,6 +247,46 @@ struct LegDTO : Codable,Equatable, Identifiable {
 	}
 }
 
+struct StopTripsDTO : Codable,Equatable {
+	let departures : [StopTripDTO]?
+	let arrivals : [StopTripDTO]?
+}
+
+struct StopTripDTO : Codable,Equatable, Identifiable {
+	let id = UUID()
+	let stop : StopDTO?
+	let origin : StopDTO?
+	let destination : StopDTO?
+	let line : Line?
+	let remarks : [Remark]?
+	let when: String?
+	let plannedWhen: String?
+	let delay : Int?
+	let tripId : String?
+	let direction: String?
+	let currentLocation: LocationCoordinatesDTO?
+	let platform,
+		plannedPlatform: String?
+	
+	private enum CodingKeys : String, CodingKey {
+		case stop
+		case origin
+		case destination
+		case line
+		case remarks
+		case when
+		case plannedWhen
+		case delay
+		case tripId
+		case direction
+		case currentLocation
+		case platform
+		case plannedPlatform
+	}
+}
+
+
+
 struct PriceDTO : Codable,Equatable {
 	let amount		: Double?
 	let currency	: String?
@@ -284,6 +324,20 @@ enum LocationType : Int16, Equatable, Hashable {
 	case pointOfInterest
 	case location
 	case stop
+	case station
+	
+	var SFSIcon : String {
+		switch self {
+		case .station:
+			return "tram.fill.tunnel"
+		case .stop:
+			return "bus.fill"
+		case .pointOfInterest:
+			return ChewSFSymbols.building2CropCircle.rawValue
+		case .location:
+			return ChewSFSymbols.building2CropCircle.fill.rawValue
+		}
+	}
 }
 
 struct StationDTO : Codable, Identifiable, Equatable,Hashable {
@@ -356,13 +410,32 @@ extension StopDTO {
 		
 		let type : LocationType = {
 			switch typeDTO {
-			case "stop", "station":
+			case "stop":
 				return .stop
+			case "station":
+				return .station
 			case "location":
 				return .pointOfInterest
 			default:
 				return .location
 			}
+		}()
+		let productsModified : Products? = {
+			if let station = station {
+				return Products(
+					nationalExpress: false,
+					national: false,
+					regionalExpress: false,
+					regional: false,
+					suburban: false,
+					bus: self.products?.bus,
+					ferry: self.products?.ferry,
+					subway: self.products?.subway,
+					tram: self.products?.tram,
+					taxi: self.products?.taxi
+				)
+			}
+			return self.products
 		}()
 		return Stop(
 			coordinates: CLLocationCoordinate2D(
@@ -370,7 +443,19 @@ extension StopDTO {
 				longitude: longitude ?? location?.longitude ?? 0
 			),
 			type: type,
-			stopDTO: self
+			stopDTO: StopDTO(
+				type: self.type,
+				id: self.id,
+				name: self.name,
+				address: self.address,
+				location: self.location,
+				latitude: self.latitude,
+				longitude: self.longitude,
+				poi: self.poi,
+				products: productsModified,
+				distance: self.distance,
+				station: self.station
+			)
 		)
 	}
 }

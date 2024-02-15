@@ -61,14 +61,7 @@ extension SearchStopsView {
 						searchStopViewModel.send(event: .onStopDidTap(.location(stop.0), type))
 					}, label: {
 						Group {
-							switch stop.0.type {
-							case .stop:
-								Label(stop.0.name, systemImage: ChewSFSymbols.trainSideFrontCar.rawValue)
-							case .pointOfInterest:
-								Label(stop.0.name, systemImage: ChewSFSymbols.building2CropCircle.rawValue)
-							case .location:
-								Label(stop.0.name, systemImage: ChewSFSymbols.building2CropCircle.fill.rawValue)
-							}
+							Label(stop.0.name, systemImage: stop.0.type.SFSIcon)
 						}
 						.foregroundColor(.primary)
 					})
@@ -110,14 +103,7 @@ extension SearchStopsView {
 										chewViewModel.send(event: .onNewStop(.location(stop.0), type))
 										searchStopViewModel.send(event: .onStopDidTap(.location(stop.0), type))
 									}, label: {
-										switch stop.0.type {
-										case .stop:
-											Label(stop.0.name, systemImage: "train.side.front.car")
-										case .pointOfInterest:
-											Label(stop.0.name, systemImage: "building.2.crop.circle")
-										case .location:
-											Label(stop.0.name, systemImage: "building.2.crop.circle.fill")
-										}
+										Label(stop.0.name, systemImage: stop.0.type.SFSIcon)
 										Spacer()
 									})
 									.frame(height: 40)

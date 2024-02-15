@@ -27,7 +27,7 @@ extension MapPickerUIView {
 		func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 			if let anno = view.annotation as? StopAnnotation {
 				if let stop = parent.vm.state.data.stops.first(where: { $0.id == anno.stopId}) {
-					parent.vm.send(event: .didTapStopOnMap(stop))
+					parent.vm.send(event: .didTapStopOnMap(stop, send: parent.vm.send))
 				}
 			}
 			switch view {
@@ -104,7 +104,7 @@ extension MapPickerUIView {
 					coordinates: coordinate,
 					type: .location,
 					stopDTO: nil
-				)))
+				), send: parent.vm.send))
 			}
 		}
 	}

@@ -64,9 +64,8 @@ struct MapPickerUIView: UIViewRepresentable {
 	
 	func updateUIView(_ uiView: MKMapView, context: Context) {
 		let selectedAnnotationIdentifier = "selectedStop"
-		let nearbyStopAnnotationIdentifier = "nearbyStop"
-		
-		
+
+
 		// select annotation
 		if let selectedCoordinate = vm.state.data.selectedStop?.coordinates {
 			if let annotation = uiView.annotations.first(where: { $0.title == selectedAnnotationIdentifier }) {
@@ -82,20 +81,21 @@ struct MapPickerUIView: UIViewRepresentable {
 		// stops annotation
 		if uiView.region.span.longitudeDelta > 0.02 {
 			uiView.removeAnnotations(uiView.annotations.filter({
-				$0.title == nearbyStopAnnotationIdentifier
+				$0 is StopAnnotation
 			}))
-			return
+		} else {
+			vm.state.data.stops.forEach({ stop in
+				if let anno = uiView.annotations.first(where: {
+					$0.coordinate == stop.coordinates
+				}) {
+					return
+				}
+				
+				if let annotation = stop.stopAnnotation() {
+					uiView.addAnnotation(annotation)
+				}
+			})
 		}
-		
-		vm.state.data.stops.forEach({ stop in
-			if let anno = uiView.annotations.first(where: {
-				$0.coordinate == stop.coordinates
-			}) { return }
-			
-			if let annotation = stop.stopAnnotation() {
-				uiView.addAnnotation(annotation)
-			}
-		})
 	}
 }
 

@@ -21,8 +21,10 @@ class ApiService  {
 		case journeys
 		case journeyByRefreshToken(ref : String)
 		case locations
-		case trips(tripId : String)
 		case locationsNearby(coords : CLLocationCoordinate2D)
+		case stopDepartures(stopId : String)
+		case stopArrivals(stopId : String)
+		case trips(tripId : String)
 		case generic(path : String)
 		
 		var description : String {
@@ -39,19 +41,23 @@ class ApiService  {
 				return "journeyByRefreshToken"
 			case .trips:
 				return "trips"
+			case .stopDepartures:
+				return "stopDepartures"
+			case .stopArrivals:
+				return "stopArrivals"
 			}
 		}
 		
 		var method : String {
 			switch self {
-			case .locations, .generic, .journeys,.journeyByRefreshToken,.trips,.locationsNearby:
+			default:
 				return "GET"
 			}
 		}
 		
 		var headers : [(value : String, key : String)] {
 			switch self {
-			case .generic, .locations, .journeys,.journeyByRefreshToken,.trips,.locationsNearby:
+			default:
 				return []
 			}
 		}
@@ -70,12 +76,16 @@ class ApiService  {
 				return Constants.apiData.urlPathJourneyList + "/" + ref
 			case .trips(tripId: let tripId):
 				return Constants.apiData.urlPathTrip + "/" + tripId
+			case .stopDepartures(let stopId):
+				return Constants.apiData.urlPathStops + stopId + "/departures"
+			case .stopArrivals(let stopId):
+				return Constants.apiData.urlPathStops + stopId + "/arrivals"
 			}
 		}
 		
 		func getRequest(urlEndPoint : URL) -> URLRequest {
 			switch self {
-			case .generic, .locations,.journeys,.journeyByRefreshToken,.trips, .locationsNearby:
+			default:
 				var req = URLRequest(url : urlEndPoint)
 				req.httpMethod = self.method
 				for header in self.headers {
@@ -89,15 +99,15 @@ class ApiService  {
 	static func generateUrl(query : [URLQueryItem], type : Requests) -> URL? {
 		let url : URL? = {
 			switch type {
-			case .locations,.journeys,.journeyByRefreshToken,.trips, .locationsNearby:
+			case .generic(let path):
+				return URL(string: path)
+			default:
 				var components = URLComponents()
 				components.path = type.urlString
 				components.host = Constants.apiData.urlBase
 				components.scheme = "https"
 				components.queryItems = query
 				return components.url
-			case .generic(let path):
-				return URL(string: path)
 			}
 		}()
 		return url

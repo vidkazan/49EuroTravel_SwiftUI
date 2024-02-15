@@ -32,7 +32,8 @@ class MapPickerViewModel : ObservableObject, Identifiable {
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
-				Self.whenLoadingNearbyStops()
+				Self.whenLoadingNearbyStops(),
+				Self.whenLoadingStopDetails()
 			],
 			name: ""
 		)
@@ -58,13 +59,25 @@ extension MapPickerViewModel {
 	struct StateData {
 		let stops : [Stop]
 		let selectedStop : Stop?
+		let selectedStopTrips : [LegViewData]?
+		
+		init(stops: [Stop], selectedStop: Stop?) {
+			self.stops = stops
+			self.selectedStop = selectedStop
+			self.selectedStopTrips = nil
+		}
+		init(stops: [Stop], selectedStop: Stop?,trips : [LegViewData]) {
+			self.stops = stops
+			self.selectedStop = selectedStop
+			self.selectedStopTrips = trips
+		}
 	}
 	
 	enum Status{
 		case idle
 		case error(any ChewError)
 		case submitting(Stop)
-		case loadingAddress(Stop)
+		case loadingStopDetails(Stop,_ send : (MapPickerViewModel.Event)->Void)
 		case loadingNearbyStops(_ region : MKCoordinateRegion)
 		var description : String {
 			switch self {
@@ -74,7 +87,7 @@ extension MapPickerViewModel {
 				return "submitting"
 			case .idle:
 				return "idle"
-			case .loadingAddress(_):
+			case .loadingStopDetails(_,_):
 				return "loadingAddress"
 			case .loadingNearbyStops(_):
 				return "loadingStops"
@@ -84,12 +97,12 @@ extension MapPickerViewModel {
 	
 	enum Event {
 		case didSubmitStop(Stop)
-		case didTapStopOnMap(Stop)
+		case didTapStopOnMap(Stop,send : (MapPickerViewModel.Event)->Void)
 		case didDragMap(_ region : MKCoordinateRegion)
 		
-		case onNewAddress(Stop)
+		case didLoadStopDetails(Stop,_ stopTrips : [LegViewData])
 		
-		case onNewNearbyStops([Stop])
+		case didLoadNearbyStops([Stop])
 		
 		case didCancelLoading
 		case didFailToLoad(any ChewError)
@@ -101,13 +114,13 @@ extension MapPickerViewModel {
 				return "didCancelLoading"
 			case .didSubmitStop(let stop):
 				return "didSelectStop \(stop.name)"
-			case .didTapStopOnMap(let stop):
+			case .didTapStopOnMap(let stop,_):
 				return "didSelectStop \(stop.name)"
 			case .didDragMap:
 				return "didDragMap"
-			case .onNewAddress(_):
+			case .didLoadStopDetails(_,_):
 				return "onNewAddress"
-			case .onNewNearbyStops(_):
+			case .didLoadNearbyStops(_):
 				return "onNewNearbyStops"
 			}
 		}
@@ -133,28 +146,29 @@ extension MapPickerViewModel {
 					),
 					status: .submitting(stop)
 				)
-			case .didTapStopOnMap(let stop):
+			case let .didTapStopOnMap(stop,send):
 				return State(
 					data: StateData(
 						stops: state.data.stops,
 						selectedStop: stop
 					),
-					status: .loadingAddress(stop)
+					status: .loadingStopDetails(stop,send)
 				)
 			case .didDragMap(let coords):
 				return State(
 					data: state.data,
 					status: .loadingNearbyStops(coords)
 				)
-			case .onNewAddress(let stop):
+			case let .didLoadStopDetails(stop, trips):
 				return State(
 					data: StateData(
 						stops: state.data.stops,
-						selectedStop: stop.coordinates == state.data.selectedStop?.coordinates ? stop : state.data.selectedStop
+						selectedStop: stop.coordinates == state.data.selectedStop?.coordinates ? stop : state.data.selectedStop,
+						trips: trips
 					),
 					status: .idle
 				)
-			case .onNewNearbyStops(let stops):
+			case .didLoadNearbyStops(let stops):
 				return State(
 					data: StateData(
 						stops: stops,
@@ -163,7 +177,7 @@ extension MapPickerViewModel {
 					status: .idle
 				)
 			}
-		case .loadingAddress:
+		case .loadingStopDetails:
 			switch event {
 			case .didFailToLoad(let err):
 				return State(data: state.data, status: .error(err))
@@ -177,28 +191,29 @@ extension MapPickerViewModel {
 					),
 					status: .submitting(stop)
 				)
-			case .didTapStopOnMap(let stop):
+			case let .didTapStopOnMap(stop,send):
 				return State(
 					data: StateData(
 						stops: state.data.stops,
 						selectedStop: stop
 					),
-					status: .loadingAddress(stop)
+					status: .loadingStopDetails(stop,send)
 				)
 			case .didDragMap(let coords):
 				return State(
 					data: state.data,
 					status: .loadingNearbyStops(coords)
 				)
-			case .onNewAddress(let stop):
+			case let .didLoadStopDetails(stop, trips):
 				return State(
 					data: StateData(
 						stops: state.data.stops,
-						selectedStop: stop.coordinates == state.data.selectedStop?.coordinates ? stop : state.data.selectedStop
+						selectedStop: stop.coordinates == state.data.selectedStop?.coordinates ? stop : state.data.selectedStop,
+						trips: trips
 					),
 					status: .idle
 				)
-			case .onNewNearbyStops(let stops):
+			case .didLoadNearbyStops(let stops):
 				return State(
 					data: StateData(
 						stops: stops,
@@ -221,28 +236,29 @@ extension MapPickerViewModel {
 					),
 					status: .submitting(stop)
 				)
-			case .didTapStopOnMap(let stop):
+			case let .didTapStopOnMap(stop,send):
 				return State(
 					data: StateData(
 						stops: state.data.stops,
 						selectedStop: stop
 					),
-					status: .loadingAddress(stop)
+					status: .loadingStopDetails(stop,send)
 				)
 			case .didDragMap(let coords):
 				return State(
 					data: state.data,
 					status: .loadingNearbyStops(coords)
 				)
-			case .onNewAddress(let stop):
+			case let .didLoadStopDetails(stop, trips):
 				return State(
 					data: StateData(
 						stops: state.data.stops,
-						selectedStop: stop.coordinates == state.data.selectedStop?.coordinates ? stop : state.data.selectedStop
+						selectedStop: stop.coordinates == state.data.selectedStop?.coordinates ? stop : state.data.selectedStop,
+						trips: trips
 					),
 					status: .idle
 				)
-			case .onNewNearbyStops(let stops):
+			case .didLoadNearbyStops(let stops):
 				return State(
 					data: StateData(
 						stops: stops,
@@ -276,12 +292,44 @@ extension MapPickerViewModel {
 				.mapError{ $0 }
 				.asyncFlatMap { res in
 					let stops = res.compactMap({$0.stop()})
-					return Event.onNewNearbyStops(stops)
+					return Event.didLoadNearbyStops(stops)
 				}
 				.catch { error in
 					return Just(Event.didFailToLoad(error as? ApiServiceError ?? .badRequest)).eraseToAnyPublisher()
 				}
 				.eraseToAnyPublisher()
+		}
+	}
+	
+	static func whenLoadingStopDetails() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			guard case let .loadingStopDetails(stop,send) = state.status else {
+				return Empty().eraseToAnyPublisher()
+			}
+			switch stop.type {
+			case .location:
+				Task {
+					await Self.reverseGeocoding(coords : stop.coordinates,send: send)
+				}
+				return Empty().eraseToAnyPublisher()
+			case .pointOfInterest:
+				return Just(Event.didCancelLoading).eraseToAnyPublisher()
+			case .station,.stop:
+				return Self.fetchStopDepartures(stop:stop)
+					.map { tripDTOs in
+						if let departures = tripDTOs.departures {
+							return Event.didLoadStopDetails(stop, departures.compactMap({$0.legViewData(type: .departure)}))
+						}
+						if let arrivals = tripDTOs.arrivals {
+							return Event.didLoadStopDetails(stop, arrivals.compactMap({$0.legViewData(type: .arrival)}))
+						}
+						return Event.didCancelLoading
+					}
+					.catch { _ in
+						return Just(Event.didCancelLoading).eraseToAnyPublisher()
+					}
+					.eraseToAnyPublisher()
+			}
 		}
 	}
 	
@@ -295,6 +343,35 @@ extension MapPickerViewModel {
 			type: ApiService.Requests.locationsNearby(coords: coords)
 		)
 		.eraseToAnyPublisher()
+	}
+	
+	static func fetchStopDepartures(stop : Stop) -> AnyPublisher<StopTripsDTO,ApiServiceError> {
+		return ApiService().fetch(
+			StopTripsDTO.self,
+			query: [
+				Query.results(max: 10).queryItem()
+			],
+			type: ApiService.Requests.stopDepartures(stopId: stop.id)
+		)
+		.eraseToAnyPublisher()
+	}
+	
+	private static func reverseGeocoding(coords : CLLocationCoordinate2D,send : (MapPickerViewModel.Event)->Void) async {
+		if let res = await Model.shared.locationDataManager.reverseGeocoding(coords: coords) {
+			let stop = Stop(
+				coordinates: coords,
+				type: .location,
+				stopDTO: StopDTO(name: res)
+			)
+			send(Event.didLoadStopDetails(stop,[]))
+		} else {
+			let stop = Stop(
+				coordinates: coords,
+				type: .location,
+				stopDTO: StopDTO(name: String(coords.latitude) + " " + String(coords.longitude))
+			)
+			send(Event.didLoadStopDetails(stop,[]))
+		}
 	}
 }
 

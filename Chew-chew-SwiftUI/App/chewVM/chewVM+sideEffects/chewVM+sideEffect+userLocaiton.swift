@@ -37,21 +37,18 @@ extension ChewViewModel {
 	}
 	
 	private static func reverseGeocoding(coords : CLLocationCoordinate2D,send : (ChewViewModel.Event)->Void) async {
-		Model.shared.topBarAlertViewModel.send(event: .didRequestDismiss(.userLocationError))
-		
-		if let res = try? await CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coords.latitude, longitude: coords.longitude)).first,
-		   let name = res.name, let city = res.locality {
+		if let res = await Model.shared.locationDataManager.reverseGeocoding(coords: coords) {
 			let stop = Stop(
 				coordinates: coords,
 				type: .location,
-				stopDTO: StopDTO(name: String(name + ", " + city))
+				stopDTO: StopDTO(name: res)
 			)
 			send(Event.didReceiveLocationData(stop))
 		} else {
 			let stop = Stop(
 				coordinates: coords,
 				type: .location,
-				stopDTO: StopDTO(name: String(coords.latitude).prefix(6) + " " + String(coords.longitude).prefix(6))
+				stopDTO: StopDTO(name: String(coords.latitude) + " " + String(coords.longitude))
 			)
 			send(Event.didReceiveLocationData(stop))
 		}

@@ -17,6 +17,16 @@ class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegat
 		locationManager.delegate = self
 	}
 	
+	func reverseGeocoding(coords : CLLocationCoordinate2D) async -> String? {
+		if let location = self.locationManager.location,
+		   let res = try? await CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coords.latitude, longitude: coords.longitude)).first,
+			let name = res.name, let city = res.locality {
+				return  String(name + ", " + city)
+		}
+		return nil
+	}
+	
+	
 	func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
 		switch manager.authorizationStatus {
 		case .authorizedWhenInUse:  // Location services are available.
@@ -45,6 +55,7 @@ class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegat
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+		#warning("locatons updates are not handling?")
 		//		 Insert code to handle location updates
 	}
 	

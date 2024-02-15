@@ -61,7 +61,7 @@ extension JourneyListViewModel {
 				Query.longitude(longitude: (String(dep.coordinates.longitude))).queryItem().departure(),
 				Query.poiName(poiName: "name").queryItem().departure()
 			]
-		case .stop:
+		case .stop,.station:
 			guard let depStop = dep.stopDTO?.id else {
 				print("fetchJourneyList","departure stop id is NIL")
 				return query
@@ -89,7 +89,7 @@ extension JourneyListViewModel {
 				Query.longitude(longitude: (String(arr.coordinates.longitude))).queryItem().arrival(),
 				Query.poiName(poiName: "name").queryItem().arrival()
 			]
-		case .stop:
+		case .stop,.station:
 			guard let depStop = arr.stopDTO?.id else {
 				print("fetchJourneyList","arr stop id is NIL")
 				return query
@@ -125,6 +125,7 @@ extension JourneyListViewModel {
 					Query.national(icTrains: false),
 					Query.nationalExpress(iceTrains: false),
 					Query.regionalExpress(reTrains: false),
+					Query.taxi(taxi: false)
 				]
 			)
 		case .custom:

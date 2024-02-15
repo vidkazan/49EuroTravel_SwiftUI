@@ -10,6 +10,161 @@ import UIKit
 import SwiftUI
 import CoreLocation
 
+extension StopTripDTO {
+	func legViewData(type : LocationDirectionType) -> LegViewData? {
+		do {
+			return try legViewDataThrows(type: type)
+		} catch  {
+			return nil
+		}
+	}
+	func legViewDataThrows(type : LocationDirectionType) throws -> LegViewData {
+		let container = {
+			switch type {
+			case .departure:
+				return TimeContainer(
+					plannedDeparture: plannedWhen,
+					plannedArrival: nil,
+					actualDeparture: when,
+					actualArrival: nil,
+					cancelled: nil
+				)
+			case .arrival:
+				return TimeContainer(
+					plannedDeparture: nil,
+					plannedArrival: plannedWhen,
+					actualDeparture: nil,
+					actualArrival: when,
+					cancelled: nil
+				)
+			}
+		}()
+		
+//		guard
+//			let plannedDeparturePosition = getTimeLabelPosition(
+//				firstTS: firstTS,
+//				lastTS: lastTS,
+//				currentTS: container.date.departure.planned
+//			),
+//			let plannedArrivalPosition = getTimeLabelPosition(
+//				firstTS: firstTS,
+//				lastTS: lastTS,
+//				currentTS: container.date.arrival.planned
+//			) else {
+//			throw DataError.nilValue(type: "plannedArrivalPosition or plannedDeparturePosition")
+//		}
+		
+		guard let tripId = tripId else  {
+			throw DataError.nilValue(type: "tripId")
+		}
+		
+		
+//		let actualDeparturePosition = getTimeLabelPosition(
+//			firstTS: firstTS,
+//			lastTS: lastTS,
+//			currentTS: container.date.departure.actual
+//		) ?? 0
+//
+//		let actualArrivalPosition = getTimeLabelPosition(
+//			firstTS: firstTS,
+//			lastTS: lastTS,
+//			currentTS: container.date.arrival.actual
+//		) ?? 0
+		
+		
+		let stops : [StopViewData] = {
+			// arrival type
+			if let origin = origin {
+				return [
+					StopViewData(
+						locationCoordinates: CLLocationCoordinate2D(latitude: origin.latitude ?? 0, longitude: origin.longitude ?? 0),
+						name: origin.name ?? "",
+						departurePlatform: .init(),
+						arrivalPlatform: .init(),
+						time: .init(
+							plannedDeparture: nil,
+							plannedArrival: nil,
+							actualDeparture: nil,
+							actualArrival: nil,
+							cancelled: nil
+						),
+						stopOverType: .origin
+					),
+					StopViewData(
+						locationCoordinates: CLLocationCoordinate2D(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
+						name: stop?.name ?? "",
+						departurePlatform: .init(),
+						arrivalPlatform: .init(actual: platform,planned: plannedPlatform),
+						time: container,
+						stopOverType: .destination
+					)
+				]
+			}
+			// departure type
+			if let destination = destination {
+				return [
+					StopViewData(
+						locationCoordinates: CLLocationCoordinate2D(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
+						name: stop?.name ?? "",
+						departurePlatform: .init(actual: platform,planned: plannedPlatform),
+						arrivalPlatform: .init(),
+						time: container,
+						stopOverType: .origin
+					),
+					StopViewData(
+						locationCoordinates: CLLocationCoordinate2D(latitude: destination.latitude ?? 0, longitude: destination.longitude ?? 0),
+						name: destination.name ?? "",
+						departurePlatform: .init(),
+						arrivalPlatform: .init(),
+						time: .init(
+							plannedDeparture: nil,
+							plannedArrival: nil,
+							actualDeparture: nil,
+							actualArrival: nil,
+							cancelled: nil
+						),
+						stopOverType: .destination
+					)
+				]
+			}
+			return []
+		}()
+		
+	
+//		let segments = constructSegmentsFromStopOverData(stopovers: stops)
+		var remarksUnwrapped = [RemarkViewData]()
+		if let remarks = remarks {
+			remarksUnwrapped = remarks.compactMap({$0.viewData()})
+		}
+		
+		
+		#warning("check isReachable for cancelled trips")
+		let res = LegViewData(
+			isReachable: true,
+			legType: .line,
+			tripId: tripId,
+			direction: direction ?? "direction",
+			duration: "",
+			legTopPosition: 0,
+			legBottomPosition: 0,
+			delayedAndNextIsNotReachable: nil,
+			remarks: remarksUnwrapped,
+			legStopsViewData: stops,
+			footDistance: 0,
+			lineViewData: constructLineViewData(
+				mode: line?.mode ?? "mode",
+				product: line?.product ?? "product",
+				name: line?.name ?? "lineName",
+				productName: line?.productName ?? "productName"
+			),
+			progressSegments: .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0),
+			time: container,
+			polyline: nil
+		)
+		return res
+	}
+}
+
 extension LegDTO {
 	
 	func legViewData(firstTS: Date?, lastTS: Date?, legs : [LegDTO]?) -> LegViewData? {
