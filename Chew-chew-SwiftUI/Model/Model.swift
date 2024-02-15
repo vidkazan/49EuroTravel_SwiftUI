@@ -11,7 +11,6 @@ import Foundation
 
 final class Model {
 	static let shared = Model(referenceDate: .now)
-	static let preview = Model(referenceDate: .now)
 	
 	private var _journeyDetailsViewModels : [String: JourneyDetailsViewModel] = [:]
 	let referenceDate : ChewDate

@@ -139,7 +139,8 @@ extension JourneyListViewModel {
 					Query.ferry(ferry: products.contains(.ferry)),
 					Query.tram(tram: products.contains(.tram)),
 					Query.taxi(taxi: products.contains(.taxi)),
-					Query.subway(uBahn: products.contains(.subway))
+					Query.subway(uBahn: products.contains(.subway)),
+					Query.bus(bus: products.contains(.bus))
 				]
 			)
 		}

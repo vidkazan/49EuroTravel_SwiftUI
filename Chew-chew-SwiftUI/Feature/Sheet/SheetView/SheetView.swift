@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import MapKit
 
 struct SheetView : View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
@@ -60,7 +61,10 @@ struct SheetView : View {
 				let initialCoords = Model.shared.locationDataManager.locationManager.location?.coordinate ?? .init(latitude: 52, longitude: 7)
 				if #available(iOS 16.0, *) {
 					MapPickerView(
-						vm : MapPickerViewModel(.loadingNearbyStops(initialCoords)),
+						vm : MapPickerViewModel(.loadingNearbyStops(MKCoordinateRegion(
+							center: initialCoords,
+							latitudinalMeters: 0.01,
+							longitudinalMeters: 0.01))),
 						initialCoords: initialCoords,
 						type: type,
 						close: closeSheet
@@ -68,9 +72,12 @@ struct SheetView : View {
 					.presentationDetents([.medium,.large])
 				} else {
 					MapPickerView(
-						vm : MapPickerViewModel(.loadingNearbyStops(initialCoords)),
+						vm : MapPickerViewModel(.loadingNearbyStops(MKCoordinateRegion(
+							center: initialCoords,
+							latitudinalMeters: 0.01,
+							longitudinalMeters: 0.01))),
 						initialCoords: initialCoords,
-						type : type,
+						type: type,
 						close: closeSheet
 					)
 				}

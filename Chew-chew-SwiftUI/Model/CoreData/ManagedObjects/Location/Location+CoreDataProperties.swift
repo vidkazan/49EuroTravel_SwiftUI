@@ -48,7 +48,8 @@ extension Location {
 				 longitude: self.longitude,
 				 poi: LocationType.pointOfInterest == type,
 				 products: nil,
-				 distance: nil
+				 distance: nil,
+				 station: nil
 			 )
 			)
 		}

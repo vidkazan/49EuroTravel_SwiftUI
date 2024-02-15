@@ -286,6 +286,26 @@ enum LocationType : Int16, Equatable, Hashable {
 	case stop
 }
 
+struct StationDTO : Codable, Identifiable, Equatable,Hashable {
+	let type	: String?
+	let id		: String?
+	let name	: String?
+	let location	: LocationCoordinatesDTO?
+	let latitude	: Double?
+	let longitude	: Double?
+	let products	: Products?
+	
+	private enum CodingKeys : String, CodingKey {
+		case type
+		case id
+		case name
+		case location
+		case products
+		case latitude
+		case longitude
+	}
+}
+
 struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 	let type	: String?
 	let id		: String?
@@ -297,6 +317,7 @@ struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 	let poi			: Bool?
 	let products	: Products?
 	let distance  	: Int?
+	let station		: StationDTO?
 	
 	private enum CodingKeys : String, CodingKey {
 		case type
@@ -309,6 +330,7 @@ struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 		case longitude
 		case poi
 		case distance
+		case station
 	}
 }
 
@@ -324,6 +346,7 @@ extension StopDTO {
 		self.poi			= nil
 		self.products	= nil
 		self.distance = nil
+		self.station = nil
 	}
 }
 

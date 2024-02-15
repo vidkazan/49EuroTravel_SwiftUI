@@ -8,6 +8,7 @@
 import Foundation
 import Combine
 import CoreLocation
+import MapKit
 
 class MapPickerViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
@@ -64,7 +65,7 @@ extension MapPickerViewModel {
 		case error(any ChewError)
 		case submitting(Stop)
 		case loadingAddress(Stop)
-		case loadingNearbyStops(_ coords : CLLocationCoordinate2D)
+		case loadingNearbyStops(_ region : MKCoordinateRegion)
 		var description : String {
 			switch self {
 			case .error(let err):
@@ -84,7 +85,7 @@ extension MapPickerViewModel {
 	enum Event {
 		case didSubmitStop(Stop)
 		case didTapStopOnMap(Stop)
-		case didDragMap(_ coords : CLLocationCoordinate2D)
+		case didDragMap(_ region : MKCoordinateRegion)
 		
 		case onNewAddress(Stop)
 		
@@ -265,10 +266,13 @@ extension MapPickerViewModel {
 	
 	static func whenLoadingNearbyStops() -> Feedback<State, Event> {
 		Feedback { (state: State) -> AnyPublisher<Event, Never> in
-			guard case .loadingNearbyStops(let coords) = state.status else {
+			guard case .loadingNearbyStops(let region) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
-			return Self.fetchLocatonsNearby(coords: coords)
+			if region.span.longitudeDelta > 0.02 {
+				return Just(Event.didCancelLoading).eraseToAnyPublisher()
+			}
+			return Self.fetchLocatonsNearby(coords: region.center)
 				.mapError{ $0 }
 				.asyncFlatMap { res in
 					let stops = res.compactMap({$0.stop()})
