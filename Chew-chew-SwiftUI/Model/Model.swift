@@ -7,13 +7,10 @@
 
 import Foundation
 
-import Foundation
-
 final class Model {
-	static let shared = Model(referenceDate: .now)
+	static let shared = Model()
 	
 	private var _journeyDetailsViewModels : [String: JourneyDetailsViewModel] = [:]
-	let referenceDate : ChewDate
 	let locationDataManager = LocationDataManager()
 	let sheetViewModel : SheetViewModel
 	let topBarAlertViewModel : TopBarAlertViewModel
@@ -29,15 +26,13 @@ final class Model {
 		alertVM : TopBarAlertViewModel = .init(),
 		searchStopsVM : SearchStopsViewModel = .init(),
 		journeyFollowViewModel : JourneyFollowViewModel = .init(journeys: []),
-		recentSearchesViewModel : RecentSearchesViewModel = .init(searches: []),
-		referenceDate : ChewDate
+		recentSearchesViewModel : RecentSearchesViewModel = .init(searches: [])
 	) {
 		self.searchStopsViewModel = searchStopsVM
 		self.topBarAlertViewModel = alertVM
 		self.sheetViewModel = sheetVM
 		self.journeyFollowViewModel = journeyFollowViewModel
 		self.recentSearchesViewModel = recentSearchesViewModel
-		self.referenceDate = referenceDate
 	}
 	
 }

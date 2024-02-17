@@ -31,7 +31,6 @@ struct JourneyViewData : Equatable, Identifiable {
 	let id = UUID()
 	let origin : String
 	let destination : String
-	let durationLabelText : String
 	let legs : [LegViewData]
 	let transferCount : Int
 	let sunEvents : [SunEvent]
@@ -48,7 +47,6 @@ extension JourneyViewData {
 	init(from data: JourneyViewData) {
 		self.origin = data.origin
 		self.destination = data.destination
-		self.durationLabelText = data.durationLabelText
 		self.legs = data.legs
 		self.transferCount = data.transferCount
 		self.sunEvents = data.sunEvents
@@ -73,7 +71,6 @@ extension JourneyViewData {
 	){
 		self.origin = depStopName ?? "origin"
 		self.destination = arrStopName ?? "destination"
-		self.durationLabelText  = DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: time.durationInMinutes) ?? ""
 		self.legs = legs
 		self.transferCount = constructTransferCount(legs: legs)
 		self.sunEvents = sunEvents

@@ -17,7 +17,7 @@ struct LegViewData : Equatable,Identifiable {
 	let tripId : String
 //	PrognosedDirection<String>
 	let direction : String
-	let duration : String
+//	let duration : String
 	let legTopPosition : Double
 	let legBottomPosition : Double
 	var delayedAndNextIsNotReachable : Bool?
@@ -35,7 +35,7 @@ extension LegViewData {
 		self.isReachable = true
 		self.legType = .line
 		self.tripId = ""
-		self.duration = ""
+//		self.duration = ""
 		self.direction = ""
 		self.legTopPosition = 0
 		self.legBottomPosition = 0

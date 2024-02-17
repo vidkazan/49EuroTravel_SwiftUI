@@ -13,7 +13,7 @@ extension TimeLabelView {
 	init(
 		size : ChewTextSize,
 		arragement : Arragement,
-		time : Prognosed<String>,
+		time : Prognosed<Date>,
 		delayStatus : TimeContainer.DelayStatus
 	) {
 		self.size = size
@@ -29,7 +29,7 @@ extension TimeLabelView {
 		self.delayStatus = stopOver.stopOverType.timeLabelViewDelayStatus(time: stopOver.time)
 		self.size = stopOverType.timeLabelSize
 		self.arragement = stopOverType.timeLabelArragament
-		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.time.stringTimeValue)
+		let time = stopOver.stopOverType.timeLabelViewTime(tsContainer: stopOver.time.date)
 		self.time = Prognosed(actual: time.actual,planned: time.planned)
 	}
 	
@@ -39,7 +39,7 @@ extension TimeLabelView {
 		self.delayStatus = stopOver.stopOverType.timeLabelViewDelayStatus(time: stopOver.time)
 		self.size = stopOver.stopOverType.timeLabelSize
 		self.arragement = stopOver.stopOverType.timeLabelArragament
-		let time = stopOver.stopOverType.timeLabelViewTime(timeStringContainer: stopOver.time.stringTimeValue)
+		let time = stopOver.stopOverType.timeLabelViewTime(tsContainer: stopOver.time.date)
 		self.time = Prognosed(actual: time.actual,planned: time.planned)
 	}
 }

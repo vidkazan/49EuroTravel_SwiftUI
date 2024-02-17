@@ -9,6 +9,13 @@ import Foundation
 
 // TODO: tests
 class DateParcer {
+	private static let durationFormatter : DateComponentsFormatter = {
+		let formatter = DateComponentsFormatter()
+		formatter.unitsStyle = .short
+		formatter.allowedUnits = [.day, .hour, .minute]
+	 return formatter
+	}()
+	
 	static private let formatDateAndTime = "yyyyMMdd'T'HHmmssZ"
 	
 	static private let dateFormatter : DateFormatter = {
@@ -29,18 +36,11 @@ class DateParcer {
 		return date
 	}
 	
-	static func getTwoDateIntervalInMinutes(date1String : String?,date2String : String?) -> Int? {
-		guard let date1 = parseDate(from: date1String),
-			  let date2 = parseDate(from: date2String) else { return nil }
-		let interval = date2.timeIntervalSinceReferenceDate - date1.timeIntervalSinceReferenceDate
-		return Int((interval / 60))
-	}
-	
-	static func getTwoDateIntervalInMinutes(date1 : Date?,date2 : Date?) -> Int? {
+	static func getTwoDateIntervalInMinutes(date1 : Date?,date2 : Date?) -> Double? {
 		guard let date1 = date1,
 			  let date2 = date2 else { return nil }
 		let interval = date2.timeIntervalSinceReferenceDate - date1.timeIntervalSinceReferenceDate
-		return Int((interval / 60))
+		return Double((interval / 60))
 	}
 	
 	static func getTwoDateInterval(date1 : Date?,date2 : Date?) -> Double? {
@@ -95,39 +95,34 @@ class DateParcer {
 		return timeString
 	}
 	
-	static func getTimeStringWithHoursAndMinutesFormat(minutes: Int?) -> String? {
-		guard let minutes = minutes else { return nil }
-		if minutes < 1 {
-			return "0min"
+	static func timeDuration(_ minutes : Double?) -> String? {
+		if let minutes = minutes {
+			return DateParcer.durationFormatter.string(from: (minutes * 60))?.replacingOccurrences(of: " ", with: "")
 		}
-		let hours = minutes / 60
-		let remainingMinutes = minutes % 60
-		
-		var formattedTime = ""
-		
-		if hours > 0 {
-			formattedTime = "\(hours)h"
-		}
-		
-		if remainingMinutes > 0 {
-			if !formattedTime.isEmpty {
-				formattedTime += " "
-			}
-			formattedTime += "\(remainingMinutes)min"
-		}
-		return formattedTime
+		return nil
 	}
-	
 	
 	static func getCombinedDate(date: Date, time: Date) -> Date? {
 		let timeComponents: DateComponents = Calendar.current.dateComponents([.hour,.minute,.second,.timeZone], from: time)
 		let dateComponents: DateComponents = Calendar.current.dateComponents([.year,.month,.day], from: date)
-		let combined = DateComponents(calendar: .current, timeZone: timeComponents.timeZone, year: dateComponents.year, month: dateComponents.month, day: dateComponents.day, hour: timeComponents.hour, minute: timeComponents.minute, second: timeComponents.second)
+		let combined = DateComponents(
+			calendar: .current,
+			timeZone: timeComponents.timeZone,
+			year: dateComponents.year,
+			month: dateComponents.month,
+			day: dateComponents.day,
+			hour: timeComponents.hour,
+			minute: timeComponents.minute,
+			second: timeComponents.second
+		)
 		
 		return Calendar.current.date(from: combined)
 	}
 	
-	static func getDaysIncludedInRange(startDateUnnormalised: Date, endDateUnnormalised: Date) -> [Date] {
+	static func getDaysIncludedInRange(
+		startDateUnnormalised: Date,
+		endDateUnnormalised: Date
+	) -> [Date] {
 		guard let startDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: startDateUnnormalised),
 			  let endDate = Calendar.current.date(bySettingHour: 12, minute: 0, second: 0, of: endDateUnnormalised) else { return [] }
 		

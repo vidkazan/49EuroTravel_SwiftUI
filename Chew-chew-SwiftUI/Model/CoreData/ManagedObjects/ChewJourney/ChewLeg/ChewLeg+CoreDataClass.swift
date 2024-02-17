@@ -50,7 +50,6 @@ extension ChewLeg {
 			legType: self.chewLegType.legType ?? .line,
 			tripId: self.tripId,
 			direction: self.stops.last?.name ?? "direction",
-			duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(minutes: time.durationInMinutes) ?? "",
 			legTopPosition: self.legTopPosition,
 			legBottomPosition: self.legBottomPosition,
 			remarks: [],

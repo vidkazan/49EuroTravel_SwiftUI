@@ -16,7 +16,7 @@ struct JourneyHeaderView: View {
 			TimeLabelView(
 				size: .big,
 				arragement: .right,
-				time : journey.time.stringTimeValue.departure,
+				time : journey.time.date.departure,
 				delayStatus: journey.time.departureStatus
 			)
 			.padding(7)
@@ -24,13 +24,13 @@ struct JourneyHeaderView: View {
 			TimeLabelView(
 				size: .big,
 				arragement: .left,
-				time : journey.time.stringTimeValue.arrival,
+				time : journey.time.date.arrival,
 				delayStatus: journey.time.arrivalStatus
 			)
 			.padding(7)
 		}
 		.overlay {
-			Text(journey.durationLabelText)
+			BadgeView(.legDuration(journey.time))
 				.foregroundColor(.primary)
 				.chewTextSize(.medium)
 		}

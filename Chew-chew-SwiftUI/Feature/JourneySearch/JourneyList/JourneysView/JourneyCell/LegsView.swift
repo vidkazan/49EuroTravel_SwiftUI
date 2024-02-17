@@ -24,20 +24,7 @@ struct LegsView : View {
 		self.gradientStopsForProgressLine = gradientStops
 	}
 	var body: some View {
-//		Group {
-//			switch legViewDidExpanded {
-//			case true:
-//				ScrollView(.horizontal) {
-//					LegsViewInner(journey: journey, progressBar: showProgressBar)
-//						.aspectRatio(8,contentMode: .fill)
-//				}
-//			case false:
-				LegsViewInner(journey: journey, progressBar: showProgressBar)
-//			}
-//		}
-//		.onTapGesture {
-//			legViewDidExpanded.toggle()
-//		}
+		LegsViewInner(journey: journey, progressBar: showProgressBar)
 	}
 }
 

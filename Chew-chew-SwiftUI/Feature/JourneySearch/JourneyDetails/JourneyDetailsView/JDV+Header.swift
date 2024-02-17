@@ -20,16 +20,13 @@ extension JourneyDetailsView {
 					.huge
 				)
 				HStack {
-					BadgeView(.date(dateString: data.viewData.time.stringDateValue.departure.actualOrPlannedIfActualIsNil() ?? ""))
+					if let date = data.viewData.time.date.departure.actualOrPlannedIfActualIsNil() {
+						BadgeView(.date(date: date))
+							.badgeBackgroundStyle(.accent)
+					}
+					BadgeView(.timeDepartureTimeArrival(timeContainer: data.viewData.time))
 						.badgeBackgroundStyle(.accent)
-					BadgeView(
-						.timeDepartureTimeArrival(
-							timeDeparture: data.viewData.time.stringTimeValue.departure.actualOrPlannedIfActualIsNil() ?? "",
-							timeArrival: data.viewData.time.stringTimeValue.arrival.actualOrPlannedIfActualIsNil() ?? ""
-						)
-					)
-						.badgeBackgroundStyle(.accent)
-					BadgeView(.legDuration(dur: data.viewData.durationLabelText))
+					BadgeView(.legDuration(data.viewData.time))
 						.badgeBackgroundStyle(.accent)
 					if viewModel.state.data.viewData.transferCount > 0 {
 						BadgeView(.changesCount(data.viewData.transferCount))

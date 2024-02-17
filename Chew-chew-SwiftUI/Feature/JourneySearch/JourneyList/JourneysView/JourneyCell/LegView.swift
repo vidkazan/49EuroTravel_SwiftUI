@@ -36,16 +36,18 @@ struct LegView: View {
 						switch leg.legType {
 						case .footStart,.footMiddle,.footEnd:
 							HStack(spacing: 1) {
-								let duration = "\(leg.duration)"
 								if (geo.size.width > 15) {
 									Image(.figureWalkCircle)
 										.font(.system(size: 12))
 										.foregroundColor(.primary)
 								}
-								if (Int(geo.size.width / 4) - 15 > duration.count) {
-									Text(duration)
-										.foregroundColor(.primary)
-										.chewTextSize(.medium)
+								if let dur = DateParcer.timeDuration(leg.time.durationInMinutes) {
+									let duration = "\(dur)"
+									if (Int(geo.size.width / 4) - 15 > duration.count) {
+										Text(duration)
+											.foregroundColor(.primary)
+											.chewTextSize(.medium)
+									}
 								}
 							}
 						case .line:
@@ -96,17 +98,18 @@ struct LegViewLabels: View {
 					.overlay {
 						switch leg.legType {
 						case .footStart,.footMiddle,.footEnd:
-							HStack(spacing: 1) {
-								let duration = "\(leg.duration)"
+							HStack(spacing: 2) {
 								if (geo.size.width > 15) {
 									Image(.figureWalkCircle)
 										.font(.system(size: 12))
 										.foregroundColor(.primary)
 								}
-								if (Int(geo.size.width / 4) - 15 > duration.count) {
-									Text(duration)
-										.foregroundColor(.primary)
-										.chewTextSize(.medium)
+								if let duration = DateParcer.timeDuration(leg.time.durationInMinutes) {
+									if (Int(geo.size.width / 4) - 15 > duration.count) {
+										Text(duration)
+											.foregroundColor(.primary)
+											.chewTextSize(.medium)
+									}
 								}
 							}
 						case .line:

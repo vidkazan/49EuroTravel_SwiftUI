@@ -28,9 +28,9 @@ extension LegStopView {
 				lineType:legViewData.lineViewData.type ,
 				num: legViewData.lineViewData.name
 			))
-			BadgeView(.legDirection(dir: legViewData.direction))
+			BadgeView(.legDirection(dir: legViewData.direction, strikethrough: false))
 				.badgeBackgroundStyle(.secondary)
-			BadgeView(.legDuration(dur: legViewData.duration))
+			BadgeView(.legDuration(legViewData.time))
 				.badgeBackgroundStyle(.secondary)
 			BadgeView(.stopsCount(legViewData.legStopsViewData.count - 1,shevronIsExpanded == .collapsed ? .showShevronUp: .showShevronDown))
 				.badgeBackgroundStyle(.secondary)

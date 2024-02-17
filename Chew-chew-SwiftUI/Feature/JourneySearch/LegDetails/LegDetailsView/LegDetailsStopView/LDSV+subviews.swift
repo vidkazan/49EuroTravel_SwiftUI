@@ -13,10 +13,10 @@ extension LegStopView {
 	var transfer : some View {
 		VStack(alignment: .leading) {
 			if stopOverType == .transfer {
-				BadgeView(.transfer(duration: legViewData.duration))
+				BadgeView(.transfer(legViewData.time))
 			}
 			if stopOverType == .footMiddle {
-				BadgeView(.walking(duration: legViewData.duration))
+				BadgeView(.walking(legViewData.time))
 			}
 		}
 		.offset(x: 78)
@@ -35,7 +35,7 @@ extension LegStopView {
 			}
 			.frame(width: 70)
 			VStack(alignment: .leading, spacing: 2) {
-				BadgeView(.walking(duration: legViewData.duration))
+				BadgeView(.walking(legViewData.time))
 				Text(stopOver.name)
 					.chewTextSize(.big)
 			}
@@ -86,7 +86,7 @@ extension LegStopView {
 			// MARK: badges
 			switch stopOverType {
 			case .footBottom,.footMiddle,.footTop:
-				BadgeView(.walking(duration: legViewData.duration))
+				BadgeView(.walking(legViewData.time))
 			case .origin,.destination:
 				PlatformView(
 					isShowingPlatormWord: true,
@@ -96,7 +96,7 @@ extension LegStopView {
 					legStopViewBadges
 				}
 			case .transfer:
-				BadgeView(.transfer(duration: legViewData.duration))
+				BadgeView(.transfer(legViewData.time))
 					.badgeBackgroundStyle(.accent)
 			case .stopover:
 				EmptyView()

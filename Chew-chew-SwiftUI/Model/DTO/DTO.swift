@@ -29,14 +29,14 @@ enum StopOverType : String,Equatable, CaseIterable {
 		}
 	}
 	
-	func timeLabelViewTime(timeStringContainer : TimeContainer.TimeStringContainer) -> Prognosed<String> {
+	func timeLabelViewTime(tsContainer : TimeContainer.DateTimeContainer) -> Prognosed<Date> {
 		switch self {
 		case .destination, .footBottom:
-			return timeStringContainer.arrival
+			return tsContainer.arrival
 		case .stopover:
-			return timeStringContainer.departure.actual == nil ? timeStringContainer.arrival : timeStringContainer.departure
+			return tsContainer.departure.actual == nil ? tsContainer.arrival : tsContainer.departure
 		default:
-			return timeStringContainer.departure
+			return tsContainer.departure
 		}
 	}
 	

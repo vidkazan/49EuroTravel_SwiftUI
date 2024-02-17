@@ -17,7 +17,6 @@ struct JourneyListViewLoader: View {
 			legType: .line,
 			tripId: "",
 			direction: "",
-			duration: "11111",
 			legTopPosition: 0,
 			legBottomPosition: 1,
 			remarks: [],

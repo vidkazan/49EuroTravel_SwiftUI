@@ -16,13 +16,13 @@ extension CLLocation {
 }
 
 extension SearchStopsView {
-	func sortStopByLocation(stops : [Stop]) -> ([(Stop, Int?)]) {
-		var res = [(Stop, Int)]()
-		var resOptional = [(Stop, Int?)]()
+	func sortStopByLocation(stops : [Stop]) -> ([(Stop, Double?)]) {
+		var res = [(Stop, Double)]()
+		var resOptional = [(Stop, Double?)]()
 		let tmp = stops
 		if let location = Model.shared.locationDataManager.locationManager.location {
 			res = tmp.map({stop in
-				return (stop, Int(location.distance(stop.coordinates)))
+				return (stop, location.distance(stop.coordinates))
 			})
 			res.sort(by: { $0.1 < $1.1 })
 			resOptional = res

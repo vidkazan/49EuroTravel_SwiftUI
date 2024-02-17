@@ -144,7 +144,6 @@ extension StopTripDTO {
 			legType: .line,
 			tripId: tripId,
 			direction: direction ?? "direction",
-			duration: "",
 			legTopPosition: 0,
 			legBottomPosition: 0,
 			delayedAndNextIsNotReachable: nil,
@@ -228,15 +227,6 @@ extension LegDTO {
 			legType: constructLegType(leg: self, legs: legs),
 			tripId: tripId,
 			direction: direction ?? "direction",
-			duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
-				minutes: DateParcer.getTwoDateIntervalInMinutes(
-					date1: container.date.departure.actual,
-					date2: container.date.arrival.actual
-				)) ?? DateParcer.getTimeStringWithHoursAndMinutesFormat(
-					minutes: DateParcer.getTwoDateIntervalInMinutes(
-						date1: container.date.departure.planned,
-						date2: container.date.arrival.planned
-					)) ?? "",
 			legTopPosition: max(plannedDeparturePosition,actualDeparturePosition),
 			legBottomPosition: max(plannedArrivalPosition,actualArrivalPosition),
 			delayedAndNextIsNotReachable: nil,

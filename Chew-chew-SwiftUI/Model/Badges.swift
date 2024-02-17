@@ -8,16 +8,6 @@
 import Foundation
 import SwiftUI
 
-func formatDistance(_ distanceInMeters: Int) -> String {
-	if distanceInMeters < 500 {
-		return "\(distanceInMeters)m"
-	} else {
-		let distanceInKilometers = Double(distanceInMeters) / Double(1000)
-		return String(format: "%.1fkm", distanceInKilometers)
-	}
-}
-
-
 struct BadgeData : Equatable {
 	static func == (lhs: BadgeData, rhs: BadgeData) -> Bool {
 		lhs.name == rhs.name
@@ -38,7 +28,7 @@ struct BadgeData : Equatable {
 		self.name = name
 	}
 	init(){
-		self.name = "BadgeName"
+		self.name = ""
 	}
 }
 
@@ -59,15 +49,15 @@ enum StopsCountBadgeMode {
 	}
 }
 
-enum Badges : Hashable {
+enum Badges : Equatable {
 	case fullLegError
 	case followError(_ action : JourneyFollowViewModel.Action)
 	case locationError
 	case offlineMode
 	case departureArrivalStops(departure: String,arrival: String)
 	case changesCount(_ count : Int)
-	case timeDepartureTimeArrival(timeDeparture: String,timeArrival: String)
-	case date(dateString : String)
+	case timeDepartureTimeArrival(timeContainer : TimeContainer)
+	case date(date : Date)
 	case price(_ price: String)
 	case dticket
 	case cancelled
@@ -76,11 +66,13 @@ enum Badges : Hashable {
 	
 	case lineNumber(lineType:LineType,num : String)
 	case stopsCount(_ count : Int,_ mode : StopsCountBadgeMode)
-	case legDuration(dur : String)
-	case legDirection(dir : String)
-	case walking(duration : String)
-	case transfer(duration : String)
-	case distanceInMeters(dist : Int)
+	case legDirection(dir : String, strikethrough : Bool)
+	
+	case legDuration(_ timeContainer : TimeContainer)
+	case walking(_ timeContainer : TimeContainer)
+	case transfer(_ timeContainer : TimeContainer)
+	
+	case distanceInMeters(dist : Double)
 	
 	case updatedAtTime(referenceTime : Double, isLoading : Bool = false)
 	
@@ -97,55 +89,17 @@ enum Badges : Hashable {
 	
 	var badgeDefaultStyle : BadgeBackgroundBaseStyle {
 		switch self {
-		case .distanceInMeters:
-			return .primary
-		case .fullLegError:
-			return .primary
-		case .followError:
-			return .primary
-		case .locationError:
-			return .primary
-		case .offlineMode:
-			return .primary
-		case .departureArrivalStops:
-			return .primary
-		case .changesCount:
-			return .primary
-		case .timeDepartureTimeArrival:
-			return .primary
-		case .date:
-			return .primary
-		case .price:
-			return .primary
-		case .dticket:
-			return .primary
-		case .cancelled:
+		case .cancelled,
+			 .connectionNotReachable,
+			 .remarkImportant:
 			return .red
-		case .connectionNotReachable:
-			return .red
-		case .remarkImportant:
-			return .red	
-		case .lineNumber:
-			return .primary
-		case .stopsCount:
-			return .primary
-		case .legDuration:
-			return .primary
-		case .legDirection:
-			return .primary
-		case .walking:
-			return .primary
-		case .transfer:
-			return .primary
-		case .updatedAtTime:
+		default:
 			return .primary
 		}
 	}
 	
 	var badgeData : BadgeData {
 		switch self {
-		case .distanceInMeters(let dist):
-			return BadgeData(name: formatDistance(dist))
 		case .fullLegError:
 			return BadgeData(name: "Failed to load full leg")
 		case .followError(let action):
@@ -154,14 +108,8 @@ enum Badges : Hashable {
 			return BadgeData(name: "Failed to get Location")
 		case .offlineMode:
 			return BadgeData(name: "Offline Mode")
-		case .timeDepartureTimeArrival:
-			return BadgeData(style: Color.chewFillSecondary)
-		case .date:
-			return BadgeData(style: Color.chewFillSecondary)
-		case .updatedAtTime:
-			return BadgeData(style: Color.chewFillSecondary)
-		case .price(let price):
-			return BadgeData(name: price)
+		case .price:
+			return BadgeData()
 		case .dticket:
 			return BadgeData(
 				style: Color.chewGray10,
@@ -180,24 +128,32 @@ enum Badges : Hashable {
 				name: "!")
 		case .lineNumber(_, num: let num):
 			return BadgeData(style: .chewGrayScale10, name: num.replacingOccurrences(of: " ", with: ""))
-		case .legDuration(let dur):
-			return BadgeData(name: dur)
-		case .legDirection(let dir):
+		case let .legDirection(dir,_):
 			return BadgeData(name: dir)
-		case .walking(let duration):
-			return BadgeData(
-				name: String(duration))
-		case .transfer(duration: let dur):
-			return BadgeData(
-				name: String(dur))
 		case .stopsCount(let num, _):
 			let tail = num == 1 ? " stop" : " stops"
 			return BadgeData(
 				name: String(num) + tail)
+			
+			
+		case .distanceInMeters:
+			return BadgeData()
+		case .walking:
+			return BadgeData(name: "walk ")
+		case .legDuration:
+			return BadgeData()
+		case .transfer:
+			return BadgeData(name: "transfer ")
 		case .departureArrivalStops:
-			return BadgeData(name: "")
+			return BadgeData()
 		case .changesCount:
-			return BadgeData(name: "")
+			return BadgeData()
+		case .timeDepartureTimeArrival:
+			return BadgeData(style: Color.chewFillSecondary)
+		case .date:
+			return BadgeData(style: Color.chewFillSecondary)
+		case .updatedAtTime:
+			return BadgeData(style: Color.chewFillSecondary)
 		}
 	}
 }

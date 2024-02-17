@@ -73,18 +73,17 @@ extension MapPickerView {
 									HStack {
 										BadgeView(.lineNumber(lineType: trip.lineViewData.type, num: trip.lineViewData.name))
 											.frame(minWidth: 80,alignment: .leading)
-										#warning("prognosed dorection")
-										BadgeView(.legDirection(dir: trip.direction))
+										#warning("prognosed direction")
+										BadgeView(.legDirection(dir: trip.direction,strikethrough: false))
 										Spacer()
 										TimeLabelView(
 											size: .big,
 											arragement: .left,
 											delayStatus: trip.time.departureStatus,
-											time: trip.time.stringTimeValue.departure
+											time: trip.time.date.departure
 										)
 										.frame(minWidth: 50)
-										let platform : Prognosed<String>? = trip.legStopsViewData.first?.departurePlatform ?? trip.legStopsViewData.last?.arrivalPlatform
-//										let plannedPlatform = trip.legStopsViewData.first?.plannedDeparturePlatform ?? trip.legStopsViewData.last?.plannedArrivalPlatform
+										let platform = trip.legStopsViewData.first?.departurePlatform ?? trip.legStopsViewData.last?.arrivalPlatform
 										HStack {
 											if let platform = platform  {
 												PlatformView(isShowingPlatormWord: false, platform: platform)

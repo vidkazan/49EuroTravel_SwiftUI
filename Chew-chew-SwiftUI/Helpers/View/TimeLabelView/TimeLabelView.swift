@@ -18,7 +18,7 @@ struct TimeLabelView: View {
 	let size : ChewTextSize
 	let arragement : Arragement
 	var delayStatus : TimeContainer.DelayStatus
-	var time : Prognosed<String>
+	var time : Prognosed<Date>
 	
 	
 	var body: some View {
@@ -58,16 +58,16 @@ struct TimeLabelPreviews: PreviewProvider {
 			TimeLabelView(
 				size: .medium,
 				arragement: .bottom,
-				time: .init(actual: "00:00", planned: "00:00"),
+				time: .init(actual: .now, planned: .now),
 				delayStatus: .onTime
 			)
 			.background(Color.chewFillSecondary)
 			.cornerRadius(8)
 			TimeLabelView(
 				size: .medium,
-				arragement: .bottom,
-				time: .init(actual: "00:06", planned: "00:00"),
-				delayStatus: .delay(6)
+				arragement: .right,
+				time: .init(actual: .now + 600, planned: .now),
+				delayStatus: .delay(10)
 			)
 			.background(Color.chewFillSecondary)
 			.cornerRadius(8)

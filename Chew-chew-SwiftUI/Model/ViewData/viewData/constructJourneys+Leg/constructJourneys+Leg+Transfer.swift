@@ -38,11 +38,6 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 		legType: .transfer,
 		tripId: UUID().uuidString,
 		direction: toLeg.origin?.name ?? "transfer direction",
-		duration: DateParcer.getTimeStringWithHoursAndMinutesFormat(
-			minutes: DateParcer.getTwoDateIntervalInMinutes(
-				date1: container.date.departure.actual,
-				date2: container.date.arrival.actual
-			)) ?? "",
 		legTopPosition: 0,
 		legBottomPosition: 0,
 		delayedAndNextIsNotReachable: toLeg.reachable ?? false,
