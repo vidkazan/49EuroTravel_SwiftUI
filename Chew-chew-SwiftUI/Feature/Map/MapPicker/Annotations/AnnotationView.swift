@@ -61,7 +61,7 @@ extension UIView {
 final class TrainStopAnnotationView: StopAnnotationView {
 	static let reuseIdentifier = "TrainStopAnnotationViewReuseIdentifier"
 	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-		   super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
+		super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
 		setupUI("ice")
 	}
 
@@ -111,15 +111,16 @@ final class SBahnStopAnnotationView: StopAnnotationView {
 
 final class BusStopAnnotationView: StopAnnotationView {
 	static let reuseIdentifier = "BusStopAnnotationViewReuseIdentifier"
+	
 	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
 		   super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
 		   setupUI("bus")
 	}
-
+	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 		setupUI("bus")
-	}
+	}	
 }
 
 

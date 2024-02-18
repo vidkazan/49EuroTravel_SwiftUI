@@ -24,22 +24,19 @@ struct MapPickerView: View {
 	}
 	var body: some View {
 		NavigationView {
-			MapPickerUIView(
-				vm: vm,
-				mapCenterCoords: mapCenterCoords
-			)
-			.overlay(alignment: .bottomLeading) { overlay }
-			.padding(5)
-			.toolbar {
-				ToolbarItem(placement: .navigationBarLeading, content: {
-					Button(action: {
-						closeSheet()
-					}, label: {
-						Text("Close")
-							.foregroundColor(.chewGray30)
+			MapPickerUIView(vm: vm,mapCenterCoords: mapCenterCoords)
+				.overlay(alignment: .bottomLeading) { overlay }
+				.toolbar {
+					ToolbarItem(placement: .navigationBarLeading, content: {
+						Button(action: {
+							closeSheet()
+						}, label: {
+							Text("Close")
+								.foregroundColor(.chewGray30)
+						})
 					})
-				})
-			}
+				}
+				.animation(.spring(), value: vm.state.status)
 		}
 	}
 }
@@ -65,8 +62,8 @@ extension MapPickerView {
 								.foregroundColor(.white)
 						})
 					}
-					.padding(5)
 					if let trips = vm.state.data.selectedStopTrips, !trips.isEmpty {
+						// TODO: next version: feature:
 							ScrollView() {
 								LazyVStack {
 								ForEach(trips, id: \.id) { trip in
@@ -94,12 +91,13 @@ extension MapPickerView {
 								}
 							}
 						}
-						.frame(maxWidth: .infinity,maxHeight: 200)
+						.frame(maxWidth: .infinity,maxHeight: 150)
 					}
 				}
 				.padding(5)
 				.badgeBackgroundStyle(.accent)
 			}
 		}
+		.padding(5)
 	}
 }

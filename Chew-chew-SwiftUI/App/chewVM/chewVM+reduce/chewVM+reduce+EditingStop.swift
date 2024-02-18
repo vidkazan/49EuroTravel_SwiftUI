@@ -37,7 +37,7 @@ extension ChewViewModel {
 				date: state.date,
 				status: .editingStop(type)
 			)
-		case .onNewDate(let date):
+		case let .onNewDate(date):
 			return State(
 				depStop: state.depStop,
 				arrStop: state.arrStop,

@@ -11,11 +11,17 @@ struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
 	@State var date : Date
 	@State var time : Date
+//	@State private var type : LocationDirectionType = .departure
 	let closeSheet : ()->Void
 
 	var body: some View {
 		NavigationView {
 			VStack(alignment: .center,spacing: 5) {
+//				Picker("", selection: $type) {
+//					Text("departure").tag(0)
+//					Text("arrial").tag(1)
+//				}
+//				.pickerStyle(.segmented)
 				ChewDatePicker(date: $time,mode: .time, style: .wheels)
 					.frame(maxWidth: .infinity,maxHeight: 170)
 					.padding(5)

@@ -30,11 +30,13 @@ struct MapPickerUIView: UIViewRepresentable {
 		let region = MKCoordinateRegion(center: initialLocation, span: span)
 		mapView.setRegion(region, animated: true)
 
-		let gestureRecognizer = UITapGestureRecognizer(
+		let gestureRecognizer = UILongPressGestureRecognizer(
 			target: context.coordinator,
 			action: #selector(Coordinator.handleTap(_:))
 		)
+		gestureRecognizer.delegate = context.coordinator
 		mapView.addGestureRecognizer(gestureRecognizer)
+		
 		register(mapView)
 		return mapView
 	}
@@ -63,16 +65,13 @@ struct MapPickerUIView: UIViewRepresentable {
 	}
 	
 	func updateUIView(_ uiView: MKMapView, context: Context) {
-		let selectedAnnotationIdentifier = "selectedStop"
-
-
 		// select annotation
 		if let selectedCoordinate = vm.state.data.selectedStop?.coordinates {
-			if let annotation = uiView.annotations.first(where: { $0.title == selectedAnnotationIdentifier }) {
+			if let annotation = uiView.annotations.first(where: { $0 is LocationAnnotation }) {
 				uiView.removeAnnotation(annotation)
 			}
-			let annotation = MKPointAnnotation()
-			annotation.title = selectedAnnotationIdentifier
+			let annotation = LocationAnnotation()
+			annotation.title = vm.state.data.selectedStop?.name
 			annotation.coordinate = selectedCoordinate
 			uiView.addAnnotation(annotation)
 		}

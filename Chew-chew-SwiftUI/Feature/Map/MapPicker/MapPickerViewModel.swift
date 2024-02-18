@@ -73,7 +73,11 @@ extension MapPickerViewModel {
 		}
 	}
 	
-	enum Status{
+	enum Status : Equatable {
+		static func == (lhs: MapPickerViewModel.Status, rhs: MapPickerViewModel.Status) -> Bool {
+			lhs.description == rhs.description
+		}
+		
 		case idle
 		case error(any ChewError)
 		case submitting(Stop)
@@ -87,9 +91,9 @@ extension MapPickerViewModel {
 				return "submitting"
 			case .idle:
 				return "idle"
-			case .loadingStopDetails(_,_):
-				return "loadingAddress"
-			case .loadingNearbyStops(_):
+			case .loadingStopDetails:
+				return "loadingStopDetails"
+			case .loadingNearbyStops:
 				return "loadingStops"
 			}
 		}
@@ -119,7 +123,7 @@ extension MapPickerViewModel {
 			case .didDragMap:
 				return "didDragMap"
 			case .didLoadStopDetails(_,_):
-				return "onNewAddress"
+				return "didLoadStopDetails"
 			case .didLoadNearbyStops(_):
 				return "onNewNearbyStops"
 			}
@@ -262,7 +266,7 @@ extension MapPickerViewModel {
 				return State(
 					data: StateData(
 						stops: stops,
-						selectedStop: state.data.selectedStop
+						selectedStop: nil
 					),
 					status: .idle
 				)
@@ -306,6 +310,7 @@ extension MapPickerViewModel {
 			guard case let .loadingStopDetails(stop,send) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
+			print(stop.type)
 			switch stop.type {
 			case .location:
 				Task {

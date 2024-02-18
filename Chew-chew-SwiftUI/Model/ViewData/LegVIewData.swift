@@ -50,7 +50,7 @@ extension LegViewData {
 	}
 }
 
-enum LocationDirectionType :String, Hashable {
+enum LocationDirectionType : Int, Hashable {
 	case departure
 	case arrival
 	

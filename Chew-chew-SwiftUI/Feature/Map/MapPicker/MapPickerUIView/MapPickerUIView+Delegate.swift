@@ -12,17 +12,23 @@ import SwiftUI
 
 
 extension MapPickerUIView {
-	class Coordinator: NSObject, MKMapViewDelegate {
+	class Coordinator: NSObject, MKMapViewDelegate, UIGestureRecognizerDelegate {
+		
 		var parent: MapPickerUIView
-
+		
 		init(parent: MapPickerUIView) {
 			self.parent = parent
+		}
+		
+		public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+			return true
 		}
 		
 		func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
 			parent.mapCenterCoords = mapView.centerCoordinate
 			parent.vm.send(event: .didDragMap(mapView.region))
 		}
+		
 		
 		func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 			if let anno = view.annotation as? StopAnnotation {
@@ -31,25 +37,14 @@ extension MapPickerUIView {
 				}
 			}
 			switch view {
-			case is BusStopAnnotationView:
-				view.layer.cornerRadius = 7
-				view.layer.borderWidth = 4
-				view.layer.borderColor = UIColor(Color.chewFillAccent).cgColor
-			case is UBahnStopAnnotationView:
-				view.layer.cornerRadius = 7
-				view.layer.borderWidth = 4
-				view.layer.borderColor = UIColor(Color.chewFillAccent).cgColor
-			case is TrainStopAnnotationView:
-				view.layer.cornerRadius = 7
-				view.layer.borderWidth = 4
-				view.layer.borderColor = UIColor(Color.chewFillAccent).cgColor
-			case is TramStopAnnotationView:
-				view.layer.cornerRadius = 7
-				view.layer.borderWidth = 4
-				view.layer.borderColor = UIColor(Color.chewFillAccent).cgColor
-			case is SBahnStopAnnotationView:
-				view.layer.cornerRadius = 7
-				view.layer.borderWidth = 4
+			case
+				is BusStopAnnotationView,
+				is UBahnStopAnnotationView,
+				is TrainStopAnnotationView,
+				is TramStopAnnotationView,
+				is SBahnStopAnnotationView:
+				view.layer.cornerRadius = 3
+				view.layer.borderWidth = 3
 				view.layer.borderColor = UIColor(Color.chewFillAccent).cgColor
 			default:
 				break
@@ -58,15 +53,12 @@ extension MapPickerUIView {
 		
 		func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {
 			switch view {
-			case is UBahnStopAnnotationView:
-				view.layer.borderWidth = 0
-			case is BusStopAnnotationView:
-				view.layer.borderWidth = 0
-			case is TrainStopAnnotationView:
-				view.layer.borderWidth = 0
-			case is TramStopAnnotationView:
-				view.layer.borderWidth = 0
-			case is SBahnStopAnnotationView:
+			case
+				is BusStopAnnotationView,
+				is UBahnStopAnnotationView,
+				is TrainStopAnnotationView,
+				is TramStopAnnotationView,
+				is SBahnStopAnnotationView:
 				view.layer.borderWidth = 0
 			default:
 				break
@@ -92,22 +84,23 @@ extension MapPickerUIView {
 			}
 			return nil
 		}
-
 		
-		@objc func handleTap(_ gestureRecognizer: UITapGestureRecognizer) {
-			let mapView = gestureRecognizer.view as? MKMapView
-
-			let location = gestureRecognizer.location(in: mapView)
-			let coordinate = mapView?.convert(location, toCoordinateFrom: mapView)
-			if let coordinate = coordinate {
-				parent.vm.send(event: .didTapStopOnMap(Stop(
-					coordinates: coordinate,
-					type: .location,
-					stopDTO: nil
-				), send: parent.vm.send))
+		@objc func handleTap(_ gestureRecognizer: UIGestureRecognizer) {
+			if let mapView = gestureRecognizer.view as? MKMapView {
+				switch gestureRecognizer.state {
+				case .began:
+					// disabling zoom, so the didSelect triggers immediately
+					let location = gestureRecognizer.location(in: mapView)
+					let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
+					parent.vm.send(event: .didTapStopOnMap(Stop(
+						coordinates: coordinate,
+						type: .location,
+						stopDTO: nil
+					), send: parent.vm.send))
+				default:
+					break
+				}
 			}
 		}
 	}
 }
-
-

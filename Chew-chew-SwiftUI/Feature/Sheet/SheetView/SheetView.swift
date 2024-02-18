@@ -59,7 +59,6 @@ struct SheetView : View {
 				}
 			case .mapPicker(type: let type):
 				let initialCoords = Model.shared.locationDataManager.locationManager.location?.coordinate ?? .init(latitude: 52, longitude: 7)
-				if #available(iOS 16.0, *) {
 					MapPickerView(
 						vm : MapPickerViewModel(.loadingNearbyStops(MKCoordinateRegion(
 							center: initialCoords,
@@ -69,19 +68,6 @@ struct SheetView : View {
 						type: type,
 						close: closeSheet
 					)
-					.presentationDetents([.medium,.large])
-				} else {
-					MapPickerView(
-						vm : MapPickerViewModel(.loadingNearbyStops(MKCoordinateRegion(
-							center: initialCoords,
-							latitudinalMeters: 0.01,
-							longitudinalMeters: 0.01))),
-						initialCoords: initialCoords,
-						type: type,
-						close: closeSheet
-					)
-				}
-
 			case .none:
 				EmptyView()
 			case .onboarding:

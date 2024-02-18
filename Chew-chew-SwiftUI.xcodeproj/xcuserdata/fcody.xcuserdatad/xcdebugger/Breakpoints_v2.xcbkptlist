@@ -126,8 +126,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "298"
-            endingLineNumber = "298"
+            startingLineNumber = "302"
+            endingLineNumber = "302"
             landmarkName = "whenLoadingNearbyStops()"
             landmarkType = "7">
          </BreakpointContent>
@@ -142,8 +142,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "285"
-            endingLineNumber = "285"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
             landmarkName = "whenLoadingNearbyStops()"
             landmarkType = "7">
             <Locations>
@@ -190,8 +190,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "286"
-            endingLineNumber = "286"
+            startingLineNumber = "290"
+            endingLineNumber = "290"
             landmarkName = "whenLoadingNearbyStops()"
             landmarkType = "7">
          </BreakpointContent>
@@ -206,8 +206,8 @@
             filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "337"
-            endingLineNumber = "337"
+            startingLineNumber = "342"
+            endingLineNumber = "342"
             landmarkName = "fetchLocatonsNearby(coords:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -290,6 +290,86 @@
             endingLineNumber = "101"
             landmarkName = "body"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E51778A7-A8DB-4BAF-8DFC-6558FFD42CEE"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "323"
+            endingLineNumber = "323"
+            landmarkName = "whenLoadingStopDetails()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9A23C6DA-5204-4FAD-BB86-C9BAA83A0CB0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "325"
+            endingLineNumber = "325"
+            landmarkName = "whenLoadingStopDetails()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "9A23C6DA-5204-4FAD-BB86-C9BAA83A0CB0 - 529e08540c76dbf2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Chew_chew_SwiftUI.StopTripsDTO) -&gt; Chew_chew_SwiftUI.MapPickerViewModel.Event in closure #1 (Chew_chew_SwiftUI.MapPickerViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.MapPickerViewModel.Event, Swift.Never&gt; in static Chew_chew_SwiftUI.MapPickerViewModel.whenLoadingStopDetails() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.MapPickerViewModel.State, Chew_chew_SwiftUI.MapPickerViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "325"
+                  endingLineNumber = "325"
+                  offsetFromSymbolStart = "876">
+               </Location>
+               <Location
+                  uuid = "9A23C6DA-5204-4FAD-BB86-C9BAA83A0CB0 - 529e08540c76dbf2"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Chew_chew_SwiftUI.StopTripsDTO) -&gt; Chew_chew_SwiftUI.MapPickerViewModel.Event in closure #1 (Chew_chew_SwiftUI.MapPickerViewModel.State) -&gt; Combine.AnyPublisher&lt;Chew_chew_SwiftUI.MapPickerViewModel.Event, Swift.Never&gt; in static Chew_chew_SwiftUI.MapPickerViewModel.whenLoadingStopDetails() -&gt; Chew_chew_SwiftUI.Feedback&lt;Chew_chew_SwiftUI.MapPickerViewModel.State, Chew_chew_SwiftUI.MapPickerViewModel.Event&gt;"
+                  moduleName = "Chew-chew-SwiftUI"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "325"
+                  endingLineNumber = "325"
+                  offsetFromSymbolStart = "976">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "14C985BA-7D77-4F0A-B5AD-1929DB5BC4E9"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/MapPickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
+            landmarkName = "fetchStopDepartures(stop:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

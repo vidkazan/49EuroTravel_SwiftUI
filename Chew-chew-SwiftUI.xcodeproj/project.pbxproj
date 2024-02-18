@@ -181,6 +181,7 @@
 		7DA13A412B28D5F10045061F /* Settings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA13A402B28D5F10045061F /* Settings+CoreDataClass.swift */; };
 		7DA13A432B28D66D0045061F /* ChewTime+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA13A422B28D66D0045061F /* ChewTime+CoreDataProperties.swift */; };
 		7DA13A452B28F01F0045061F /* LineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA13A442B28F01F0045061F /* LineType.swift */; };
+		7DA5FEAB2B8106BB002182F8 /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA5FEAA2B8106BB002182F8 /* Sheet.swift */; };
 		7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */; };
 		7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3492A9A118E005DF550 /* BadgesView.swift */; };
 		7DAA726F2B7CF0A600290548 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DAA726E2B7CF0A600290548 /* Icons.xcassets */; };
@@ -417,6 +418,7 @@
 		7DA13A402B28D5F10045061F /* Settings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7DA13A422B28D66D0045061F /* ChewTime+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewTime+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7DA13A442B28F01F0045061F /* LineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineType.swift; sourceTree = "<group>"; };
+		7DA5FEAA2B8106BB002182F8 /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		7DA8D3492A9A118E005DF550 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
 		7DAA726E2B7CF0A600290548 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -1007,6 +1009,7 @@
 				7D462D552AACD1E000BC0D65 /* Feature */,
 				7D02CE0C2A97E38B0048ADE6 /* Model */,
 				7D6734B82A96334C00CBE9C1 /* Preview Content */,
+				7DA5FEAA2B8106BB002182F8 /* Sheet.swift */,
 			);
 			path = "Chew-chew-SwiftUI";
 			sourceTree = "<group>";
@@ -1729,6 +1732,7 @@
 				7D6C5C2F2AAF792200DEFC57 /* JDVM+state.swift in Sources */,
 				7DFC46AB2B7F859F00118608 /* AttibutedContainers.swift in Sources */,
 				7D345E4A2AE95E7C003CA948 /* Settings.swift in Sources */,
+				7DA5FEAB2B8106BB002182F8 /* Sheet.swift in Sources */,
 				7D4B1B8A2AA8CB460096F372 /* JLVM+reduce.swift in Sources */,
 				7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift in Sources */,
 				7DE8A34F2B6AB0AF00C3A378 /* TimeLabelView+Init.swift in Sources */,

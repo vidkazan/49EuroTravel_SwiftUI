@@ -40,13 +40,17 @@ struct JourneyCell: View {
 				}
 			})
 			HStack(alignment: .center) {
-				PlatformView(
-					isShowingPlatormWord: false,
-					platform: journey.legs.first?.legStopsViewData.first?.departurePlatform ?? .init()
-				)
-				Text(journey.legs.first?.legStopsViewData.first?.name ?? "")
-					.chewTextSize(.medium)
-					.tint(.primary)
+				if let pl = journey.legs.first?.legStopsViewData.first?.departurePlatform {
+					PlatformView(
+						isShowingPlatormWord: false,
+						platform: pl
+					)
+				}
+				if let name = journey.legs.first?.legStopsViewData.first?.name {
+					Text(name)
+						.chewTextSize(.medium)
+						.tint(.primary)
+				}
 				Spacer()
 				BadgesView(badges: journey.badges)
 			}

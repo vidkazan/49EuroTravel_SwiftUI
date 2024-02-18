@@ -97,7 +97,7 @@ class DateParcer {
 	
 	static func timeDuration(_ minutes : Double?) -> String? {
 		if let minutes = minutes {
-			return DateParcer.durationFormatter.string(from: (minutes * 60))?.replacingOccurrences(of: " ", with: "")
+			return DateParcer.durationFormatter.string(from: (minutes * 60))?.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: " ")
 		}
 		return nil
 	}

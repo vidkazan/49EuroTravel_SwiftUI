@@ -101,6 +101,8 @@ extension ChewViewModel {
 		case onNotEnoughSearchData
 		case didCancelEditStop
 		case didTapCloseJourneyList
+		// TODO: add type to date
+//		case onNewDate(ChewDate, type: LocationDirectionType)
 		case onNewDate(ChewDate)
 		case didUpdateSettings(ChewSettings)
 		case didLocationButtonPressed(send : (ChewViewModel.Event)->Void)

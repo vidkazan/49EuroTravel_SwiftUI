@@ -9,6 +9,10 @@ import Foundation
 import CoreLocation
 import MapKit
 
+class LocationAnnotation : MKPointAnnotation {
+	
+}
+
 class StopAnnotation: NSObject, Identifiable {
 	enum AnnotationType {
 		case bus
