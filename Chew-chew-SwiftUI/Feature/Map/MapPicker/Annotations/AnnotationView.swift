@@ -16,6 +16,10 @@ class StopAnnotationView : MKAnnotationView {
 	   super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
 	   frame = CGRect(x: 0, y: 0, width: 25, height: 25)
 	   centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
+		self.canShowCallout = true
+		self.calloutOffset = CGPoint(x: -5, y: 5)
+		
+		self.rightCalloutAccessoryView = UIImageView(image: UIImage(named: "ice.big"))
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -62,24 +66,24 @@ final class TrainStopAnnotationView: StopAnnotationView {
 	static let reuseIdentifier = "TrainStopAnnotationViewReuseIdentifier"
 	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
 		super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		setupUI("ice")
+		setupUI("ice.big")
 	}
 
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		setupUI("ice")
+		setupUI("ice.big")
 	}
 }
 final class TramStopAnnotationView: StopAnnotationView {
 	static let reuseIdentifier = "TramStopAnnotationViewReuseIdentifier"
 	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
 		   super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		setupUI("tram")
+		setupUI("tram.big")
 	}
 
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		setupUI("tram")
+		setupUI("tram.big")
 	}
 }
 
@@ -87,12 +91,12 @@ final class UBahnStopAnnotationView: StopAnnotationView {
 	static let reuseIdentifier = "UBahnStopAnnotationViewReuseIdentifier"
 	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
 		   super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		setupUI("u")
+		setupUI("u.big")
 	}
 
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		setupUI("u")
+		setupUI("u.big")
 	}
 }
 
@@ -100,12 +104,12 @@ final class SBahnStopAnnotationView: StopAnnotationView {
 	static let reuseIdentifier = "SBahnStopAnnotationViewReuseIdentifier"
 	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
 		   super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		setupUI("s")
+		setupUI("s.big")
 	}
 
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		setupUI("s")
+		setupUI("s.big")
 	}
 }
 
@@ -114,12 +118,12 @@ final class BusStopAnnotationView: StopAnnotationView {
 	
 	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
 		   super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		   setupUI("bus")
+		   setupUI("bus.big")
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
-		setupUI("bus")
+		setupUI("bus.big")
 	}	
 }
 

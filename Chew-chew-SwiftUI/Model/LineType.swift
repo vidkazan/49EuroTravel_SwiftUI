@@ -54,28 +54,57 @@ enum LineType : String,Equatable,Hashable, CaseIterable {
 		}
 	}
 	
+	var icon : String? {
+		switch self {
+		case .nationalExpress:
+			return "ice"
+		case .national:
+			return "ice"
+		case .regionalExpress:
+			return "re"
+		case .regional:
+			return "re"
+		case .suburban:
+			return "s"
+		case .bus:
+			return "bus"
+		case .ferry:
+			return "ship"
+		case .subway:
+			return "u"
+		case .tram:
+			return "tram"
+		case .taxi:
+			return "taxi"
+		case .transfer:
+			return nil
+		case .foot:
+			return nil
+		}
+	}
+	
 	var color : Color {
 		switch self {
 		case .nationalExpress:
-			return Color(red:0.94118, green:0.95294, blue:0.96078)
+			return Color.transport.iceGray
 		case .national:
-			return Color(red:0.84314, green:0.86275, blue:0.88235)
+			return Color.transport.iceGray
 		case .regionalExpress:
-			return Color(red:0.68627, green:0.70588, blue:0.73333)
+			return Color.transport.reGray
 		case .regional:
-			return Color(red:0.39216, green:0.41176, blue:0.45098)
+			return Color.transport.reGray
 		case .suburban:
-			return Color(red:0.25098, green:0.51373, blue:0.20784)
+			return Color.transport.sGreen
 		case .bus:
-			return Color(red: 129/255, green: 73/255, blue: 151/255)
+			return Color.transport.busMagenta
 		case .ferry:
-			return Color(red: 48/255, green: 159/255, blue: 209/255)
+			return Color.transport.shipCyan
 		case .subway:
-			return Color(red: 20/255, green: 85/255, blue: 192/255)
+			return Color.transport.uBlue
 		case .tram:
-			return Color(red: 197/255, green: 0/255, blue: 20/255)
+			return Color.transport.tramRed
 		case .taxi:
-			return Color(red: 255/255, green: 216/255, blue: 0/255)
+			return Color.transport.taxiYellow
 		case .transfer:
 			return .clear
 		case .foot:

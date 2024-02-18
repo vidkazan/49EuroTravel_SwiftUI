@@ -139,19 +139,22 @@ struct BadgeView : View {
 					.cornerRadius(8)
 					.padding(4)
 			case let .lineNumber(type, _):
-				HStack(spacing: 0) {
-					Image(.trainSideFrontCar)
-						.chewTextSize(size)
-						.padding(.leading,2)
-					OneLineText(badge.badgeData.name)
-						.chewTextSize(size)
-				}
-				.padding(4)
-				.badgeBackgroundStyle(
-					BadgeBackgroundGradientStyle(
-						colors: (.chewFillTertiary.opacity(0.5),type.color)
+				if let image = type.icon {
+					HStack(spacing:0) {
+						Image(image)
+							.foregroundColor(Color.primary)
+							.chewTextSize(size)
+						OneLineText(badge.badgeData.name)
+							.foregroundColor(Color.primary)
+							.chewTextSize(size)
+					}
+					.padding(4)
+					.badgeBackgroundStyle(
+						BadgeBackgroundGradientStyle(
+							colors: (type.color,type.color.opacity(0.7))
+						)
 					)
-				)
+				}
 			case .stopsCount(let count,let mode):
 				HStack(spacing: 2) {
 					OneLineText(badge.badgeData.name)
@@ -215,11 +218,21 @@ struct BadgeView : View {
 
 
 
+@available(iOS 16.0, *)
 struct BadgeViewPreview : PreviewProvider {
 	static var previews: some View {
 		if let viewData = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0) {
 			VStack {
-				VStack {
+				FlowLayout {
+						BadgeView(.lineNumber(lineType: .national, num: "ICE666"))
+						BadgeView(.lineNumber(lineType: .regional, num: "RE666"))
+						BadgeView(.lineNumber(lineType: .bus, num: "Bus666"))
+						BadgeView(.lineNumber(lineType: .tram, num: "Tram 700"))
+						BadgeView(.lineNumber(lineType: .ferry, num: "Schiff"))
+						BadgeView(.lineNumber(lineType: .suburban, num: "S6"))
+						BadgeView(.lineNumber(lineType: .subway, num: "U6"))
+				}
+				FlowLayout {
 					BadgeView(.fullLegError)
 						.badgeBackgroundStyle(.red)
 					BadgeView(.followError(.deleting))
@@ -228,17 +241,16 @@ struct BadgeViewPreview : PreviewProvider {
 						.badgeBackgroundStyle(.red)
 					BadgeView(.offlineMode)
 						.badgeBackgroundStyle(.blue)
+				}
+				FlowLayout {
 					BadgeView(.timeDepartureTimeArrival(timeContainer: viewData.time))
 						.badgeBackgroundStyle(.primary)
-				}
-				VStack(spacing: 5) {
 					BadgeView(.changesCount(3))
 						.badgeBackgroundStyle(.primary)
 					BadgeView(.departureArrivalStops(
 						departure: "Blablablablabla Hbf",
 						arrival: "Plaplaplaplapla Hbf"),
-							  .big
-					)
+							  .big)
 					.badgeBackgroundStyle(.primary)
 					BadgeView(.remarkImportant(remarks: []))
 						.badgeBackgroundStyle(.red)
@@ -252,13 +264,12 @@ struct BadgeViewPreview : PreviewProvider {
 						.badgeBackgroundStyle(.primary)
 					BadgeView(.dticket)
 						.badgeBackgroundStyle(.primary)
+				}
+				FlowLayout {
 					BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf",strikethrough: false))
 						.badgeBackgroundStyle(.primary)
 					BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf",strikethrough: false),.big)
-						.badgeBackgroundStyle(.primary)
-				}
-				VStack {
-					BadgeView(.lineNumber(lineType: .regionalExpress, num: "RE 666"))
+					.badgeBackgroundStyle(.primary)
 					BadgeView(.price("50EUR"))
 						.badgeBackgroundStyle(.primary)
 					BadgeView(.stopsCount(10,.showShevronDown),.medium)

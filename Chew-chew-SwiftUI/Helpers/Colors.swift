@@ -8,7 +8,36 @@
 import Foundation
 import SwiftUI
 
+struct TransportColors {
+	var busMagenta: Color {
+		Color("busMagenta")
+	}
+	var iceGray: Color {
+		Color("iceGray")
+	}
+	var reGray: Color {
+		Color("reGray")
+	}
+	var shipCyan: Color {
+		Color("shipCyan")
+	}
+	var sGreen: Color {
+		Color("sGreen")
+	}
+	var uBlue: Color {
+		Color("uBlue")
+	}
+	var taxiYellow: Color {
+		Color("taxiYellow")
+	}
+	var tramRed: Color {
+		Color("tramRed")
+	}
+}
+
 extension Color {
+	static var transport = TransportColors()
+	
 	static var chewLegDetailsCellGray: Color {
 		Color("ChewLegDetailsCellGray")
 	}
@@ -37,7 +66,6 @@ extension Color {
 	static var chewFillGreenPrimary: Color {
 		Color("ChewFillGreenPrimary")
 	}
-	
 	
 	static var chewFillBluePrimary: Color {
 		Color("ChewFillBluePrimary")

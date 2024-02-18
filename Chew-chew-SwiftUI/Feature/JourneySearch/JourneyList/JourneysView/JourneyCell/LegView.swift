@@ -73,7 +73,6 @@ struct LegView: View {
 
 struct LegViewLabels: View {
 	var leg : LegViewData
-	let screenWidth = UIScreen.main.bounds.width
 	let bgColor : Color
 	init(leg: LegViewData) {
 		self.leg = leg
@@ -113,14 +112,34 @@ struct LegViewLabels: View {
 								}
 							}
 						case .line:
-							if (Int(geo.size.width / 7) > leg.lineViewData.name.count) {
-								Text(leg.lineViewData.name.replacingOccurrences(of: " ", with: ""))
-									.foregroundColor(.primary)
-									.chewTextSize(.medium)
-							} else if (Int(geo.size.width / 7) > leg.lineViewData.shortName.count) {
-								Text(leg.lineViewData.shortName)
-									.foregroundColor(.primary)
-									.chewTextSize(.medium)
+							Group {
+								if (Int((geo.size.width - 15) / 7 ) > leg.lineViewData.name.count) {
+									HStack(spacing: 0) {
+										if let icon = leg.lineViewData.type.icon {
+											Image(icon)
+												.foregroundColor(.primary)
+												.chewTextSize(.medium)
+										}
+										Text(leg.lineViewData.name.replacingOccurrences(of: " ", with: ""))
+											.foregroundColor(.primary)
+											.chewTextSize(.medium)
+									}
+								} else if (Int((geo.size.width - 15) / 7) > leg.lineViewData.shortName.count),
+											let icon = leg.lineViewData.type.icon {
+									HStack(spacing: 0) {
+										Image(icon)
+											.foregroundColor(.primary)
+											.chewTextSize(.medium)
+										Text(leg.lineViewData.shortName)
+											.foregroundColor(.primary)
+											.chewTextSize(.medium)
+									}
+								} else if (Int(geo.size.width) > 12),
+											let icon = leg.lineViewData.type.icon {
+									Image(icon)
+										.foregroundColor(.primary)
+										.chewTextSize(.medium)
+								}
 							}
 						case .transfer:
 							EmptyView()

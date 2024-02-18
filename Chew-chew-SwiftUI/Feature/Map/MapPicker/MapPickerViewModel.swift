@@ -66,7 +66,7 @@ extension MapPickerViewModel {
 			self.selectedStop = selectedStop
 			self.selectedStopTrips = nil
 		}
-		init(stops: [Stop], selectedStop: Stop?,trips : [LegViewData]) {
+		init(stops: [Stop], selectedStop: Stop?,trips : [LegViewData]?) {
 			self.stops = stops
 			self.selectedStop = selectedStop
 			self.selectedStopTrips = trips
@@ -94,12 +94,13 @@ extension MapPickerViewModel {
 			case .loadingStopDetails:
 				return "loadingStopDetails"
 			case .loadingNearbyStops:
-				return "loadingStops"
+				return "loadingNearbyStops"
 			}
 		}
 	}
 	
 	enum Event {
+		case didDeselectStop
 		case didSubmitStop(Stop)
 		case didTapStopOnMap(Stop,send : (MapPickerViewModel.Event)->Void)
 		case didDragMap(_ region : MKCoordinateRegion)
@@ -112,6 +113,8 @@ extension MapPickerViewModel {
 		case didFailToLoad(any ChewError)
 		var description : String {
 			switch self {
+			case .didDeselectStop:
+				return "didDeselectStop"
 			case .didFailToLoad(let err):
 				return "didFailToLoad \(err.localizedDescription)"
 			case .didCancelLoading:
@@ -119,13 +122,13 @@ extension MapPickerViewModel {
 			case .didSubmitStop(let stop):
 				return "didSelectStop \(stop.name)"
 			case .didTapStopOnMap(let stop,_):
-				return "didSelectStop \(stop.name)"
+				return "didTapStopOnMaps \(stop.name)"
 			case .didDragMap:
 				return "didDragMap"
 			case .didLoadStopDetails(_,_):
 				return "didLoadStopDetails"
 			case .didLoadNearbyStops(_):
-				return "onNewNearbyStops"
+				return "didLoadNearbyStops"
 			}
 		}
 	}
@@ -142,6 +145,14 @@ extension MapPickerViewModel {
 				return State(data: state.data, status: .error(err))
 			case .didCancelLoading:
 				return state
+			case .didDeselectStop:
+				return State(
+					data: .init(
+						stops: state.data.stops,
+						selectedStop: nil
+					),
+					status: .idle
+				)
 			case .didSubmitStop(let stop):
 				return State(
 					data: StateData(
@@ -176,13 +187,22 @@ extension MapPickerViewModel {
 				return State(
 					data: StateData(
 						stops: stops,
-						selectedStop: state.data.selectedStop
+						selectedStop: state.data.selectedStop,
+						trips: state.data.selectedStopTrips
 					),
 					status: .idle
 				)
 			}
 		case .loadingStopDetails:
 			switch event {
+			case .didDeselectStop:
+				return State(
+					data: .init(
+						stops: state.data.stops,
+						selectedStop: nil
+					),
+					status: .idle
+				)
 			case .didFailToLoad(let err):
 				return State(data: state.data, status: .error(err))
 			case .didCancelLoading:
@@ -221,13 +241,22 @@ extension MapPickerViewModel {
 				return State(
 					data: StateData(
 						stops: stops,
-						selectedStop: state.data.selectedStop
+						selectedStop: state.data.selectedStop,
+						trips: state.data.selectedStopTrips
 					),
 					status: .idle
 				)
 			}
 		case .loadingNearbyStops:
 			switch event {
+			case .didDeselectStop:
+				return State(
+					data: .init(
+						stops: state.data.stops,
+						selectedStop: nil
+					),
+					status: .idle
+				)
 			case .didFailToLoad(let err):
 				return State(data: state.data, status: .error(err))
 			case .didCancelLoading:
@@ -266,7 +295,8 @@ extension MapPickerViewModel {
 				return State(
 					data: StateData(
 						stops: stops,
-						selectedStop: nil
+						selectedStop: state.data.selectedStop,
+						trips: state.data.selectedStopTrips
 					),
 					status: .idle
 				)

@@ -31,24 +31,21 @@ extension JourneyDetailsView {
 							.frame(width: 15,height: 15)
 							.padding(5)
 					default:
-						switch Model.shared.journeyFollowViewModel.state.journeys.contains(where: {$0.id == viewModel.state.data.id}) == true {
-						case true:
-							Image(.bookmark.fill)
-								.frame(width: 15,height: 15)
-								.tint(viewModel.state.status.description == "loading" ? .chewGray30 : .blue)
-								.padding(5)
-						case false:
+						let contains = Model.shared.journeyFollowViewModel.state.journeys.contains(where: {$0.id == viewModel.state.data.id})
 							Image(.bookmark)
-								.tint(viewModel.state.status.description == "loading" ? .chewGray30 : .blue)
+								.symbolVariant(contains ? .fill : .none )
 								.frame(width: 15,height: 15)
+								.tint(viewModel.state.status.description == "loading" ? .chewGray30 : .blue)
 								.padding(5)
-							}
 						}
 					}
 				)
 			Button(
 				action: {
-					viewModel.send(event: .didTapReloadButton(id: viewModel.state.data.id,ref: viewModel.state.data.viewData.refreshToken))
+					viewModel.send(event: .didTapReloadButton(
+						id: viewModel.state.data.id,
+						ref: viewModel.state.data.viewData.refreshToken
+					))
 					
 				},
 				label: {

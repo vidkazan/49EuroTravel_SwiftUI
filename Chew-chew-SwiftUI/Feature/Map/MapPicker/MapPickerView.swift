@@ -36,7 +36,11 @@ struct MapPickerView: View {
 						})
 					})
 				}
+				.cornerRadius(10)
+				.padding(5)
 				.animation(.spring(), value: vm.state.status)
+				.navigationTitle("Map picker")
+				.navigationBarTitleDisplayMode(.inline)
 		}
 	}
 }
@@ -57,6 +61,7 @@ extension MapPickerView {
 						}, label: {
 							Text("Submit")
 								.padding(5)
+								.frame(height: 40)
 								.badgeBackgroundStyle(.blue)
 								.chewTextSize(.big)
 								.foregroundColor(.white)
@@ -64,40 +69,55 @@ extension MapPickerView {
 					}
 					if let trips = vm.state.data.selectedStopTrips, !trips.isEmpty {
 						// TODO: next version: feature:
-							ScrollView() {
+						VStack {
+							ScrollView {
 								LazyVStack {
-								ForEach(trips, id: \.id) { trip in
-									HStack {
-										BadgeView(.lineNumber(lineType: trip.lineViewData.type, num: trip.lineViewData.name))
-											.frame(minWidth: 80,alignment: .leading)
-										#warning("prognosed direction")
-										BadgeView(.legDirection(dir: trip.direction,strikethrough: false))
-										Spacer()
-										TimeLabelView(
-											size: .big,
-											arragement: .left,
-											delayStatus: trip.time.departureStatus,
-											time: trip.time.date.departure
-										)
-										.frame(minWidth: 50)
-										let platform = trip.legStopsViewData.first?.departurePlatform ?? trip.legStopsViewData.last?.arrivalPlatform
+									ForEach(trips, id: \.id) { trip in
 										HStack {
-											if let platform = platform  {
-												PlatformView(isShowingPlatormWord: false, platform: platform)
+											BadgeView(.lineNumber(lineType: trip.lineViewData.type, num: trip.lineViewData.name))
+												.frame(minWidth: 80,alignment: .leading)
+											#warning("prognosed direction")
+											BadgeView(.legDirection(dir: trip.direction,strikethrough: false))
+											Spacer()
+											TimeLabelView(
+												size: .big,
+												arragement: .left,
+												delayStatus: trip.time.departureStatus,
+												time: trip.time.date.departure
+											)
+											.frame(minWidth: 50)
+											let platform = trip.legStopsViewData.first?.departurePlatform ?? trip.legStopsViewData.last?.arrivalPlatform
+											HStack {
+												if let platform = platform  {
+													PlatformView(isShowingPlatormWord: false, platform: platform)
+												}
 											}
+											.frame(width: 20)
 										}
-										.frame(width: 20)
 									}
 								}
 							}
 						}
-						.frame(maxWidth: .infinity,maxHeight: 150)
+						.frame(maxWidth: .infinity,minHeight: 0,maxHeight: 120)
 					}
 				}
 				.padding(5)
 				.badgeBackgroundStyle(.accent)
+
 			}
 		}
 		.padding(5)
+	}
+}
+
+
+struct MapPicker_Previews: PreviewProvider {
+	static var previews: some View {
+		MapPickerView(
+			vm: .init(.idle),
+			initialCoords: .init(latitude: 51.2, longitude: 6.68),
+			type: .departure,
+			close: {}
+		)
 	}
 }
