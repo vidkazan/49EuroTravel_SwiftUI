@@ -30,7 +30,6 @@ struct JourneyListView: View {
 					notFound()
 				case false:
 					list()
-					
 				}
 			case .failedToLoadJourneyList(let error):
 				errorView(error)

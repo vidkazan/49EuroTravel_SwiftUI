@@ -49,7 +49,6 @@ class SunEventService {
 		self.locationFinal = locationFinal
 		self.dateStart = dateStart
 		self.dateFinal = dateFinal
-		
 		self.duration = DateParcer.getTwoDateInterval(date1: dateStart, date2: dateFinal)
 	}
 	
