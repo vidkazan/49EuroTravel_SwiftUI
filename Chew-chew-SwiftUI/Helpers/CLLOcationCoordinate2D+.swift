@@ -25,3 +25,9 @@ extension CLLocationCoordinate2D: Identifiable {
 		"\(latitude)-\(longitude)"
 	}
 }
+
+extension CLLocation {
+	func distance(_ from : CLLocationCoordinate2D) -> CLLocationDistance {
+		return self.distance(from: CLLocation(latitude: from.latitude, longitude: from.longitude))
+	}
+}

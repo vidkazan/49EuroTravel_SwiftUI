@@ -74,9 +74,14 @@ extension CoreDataStore {
 	}
 	
 	func fetchLocations() -> [Stop]? {
-		if let res = fetch(Location.self)  {
-			let stops = res.map {
-				$0.stop()
+		var stops = [Stop]()
+		if let chewStops = fetch(Location.self) {
+			asyncContext.performAndWait {
+				chewStops.forEach {
+					if $0.user != nil {
+						stops.append($0.stop())
+					}
+				}
 			}
 			return stops
 		}
@@ -88,7 +93,9 @@ extension CoreDataStore {
 			var stops = [RecentSearchesViewModel.RecentSearch]()
 			asyncContext.performAndWait {
 				res.forEach {
-					if let dep = $0.depStop?.stop(), let arr = $0.arrStop?.stop(), let ts = $0.searchDate?.timeIntervalSince1970 {
+					if let dep = $0.depStop?.stop(),
+						let arr = $0.arrStop?.stop(),
+					   let ts = $0.searchDate?.timeIntervalSince1970 {
 						stops.append(RecentSearchesViewModel.RecentSearch(
 							depStop: dep,
 							arrStop: arr,
