@@ -9,29 +9,11 @@ import Foundation
 import DequeModule
 import Combine
 
-protocol HTTPClient {
+protocol ChewClient {
 	func execute<T:Decodable>(_ t : T.Type,request: URLRequest, type : ApiService.Requests) -> AnyPublisher<T,ApiError>
 }
 
-class MockClient : HTTPClient {
-	
-	var inputRequest: URLRequest?
-	var executeCalled = false
-	var requestType : ApiService.Requests?
-	
-	func execute<T: Decodable>(
-		_ t : T.Type,
-		request : URLRequest,
-		type : ApiService.Requests
-	) -> AnyPublisher<T, ApiError> {
-		executeCalled = true
-		inputRequest = request
-		requestType = type
-		return Empty().eraseToAnyPublisher()
-	}
-}
-
-class ApiClient : HTTPClient {
+class ApiClient : ChewClient {
 	func execute<T: Decodable>(
 		_ t : T.Type,
 		request : URLRequest,
@@ -45,6 +27,9 @@ class ApiClient : HTTPClient {
 				}
 				switch response.statusCode {
 				case 400...599:
+					if let data = try? JSONDecoder().decode(HafasErrorDTO.self, from: data) {
+						throw ApiError.hafasError(data)
+					}
 					throw ApiError.badServerResponse(code: response.statusCode)
 				default:
 					break
@@ -83,5 +68,23 @@ extension ApiService {
 		
 		let request = type.getRequest(urlEndPoint: url)
 		return self.client.execute(t.self, request: request, type: type)
+	}
+}
+
+class MockClient : ChewClient {
+	
+	var inputRequest: URLRequest?
+	var executeCalled = false
+	var requestType : ApiService.Requests?
+	
+	func execute<T: Decodable>(
+		_ t : T.Type,
+		request : URLRequest,
+		type : ApiService.Requests
+	) -> AnyPublisher<T, ApiError> {
+		executeCalled = true
+		inputRequest = request
+		requestType = type
+		return Empty().eraseToAnyPublisher()
 	}
 }

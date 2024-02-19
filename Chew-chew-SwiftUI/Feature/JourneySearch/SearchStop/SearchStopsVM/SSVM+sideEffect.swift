@@ -31,7 +31,12 @@ extension SearchStopsViewModel {
 					}
 					return Event.onDataLoaded(stops,type)
 				}
-				.catch { error in Just(.onDataLoadError(error)) }
+				.catch { error in
+					if let error = error as? ApiError {
+						return Just(Event.onDataLoadError(error))
+					}
+					return Just(Event.onDataLoadError(ApiError.badRequest))
+				}
 				.eraseToAnyPublisher()
 		}
 	}

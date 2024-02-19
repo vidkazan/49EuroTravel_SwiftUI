@@ -11,9 +11,9 @@ import Combine
 import CoreLocation
 
 class ApiService  {
-	let client : HTTPClient
+	let client : ChewClient
 	
-	init(client : HTTPClient = ApiClient()) {
+	init(client : ChewClient = ApiClient()) {
 		self.client = client
 	}
 	

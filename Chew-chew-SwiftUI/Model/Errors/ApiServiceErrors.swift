@@ -14,6 +14,8 @@ import Foundation
 		
 		func hash(into hasher: inout Hasher) {
 			switch self {
+			case .hafasError(let error):
+				hasher.combine(error.hafasCode)
 			case .badUrl:
 				break
 			case .cannotConnectToHost(let string):
@@ -38,6 +40,7 @@ import Foundation
 				break
 			}
 		}
+		case hafasError(_ hafasError : HafasErrorDTO)
 		case badUrl
 		case cannotConnectToHost(String)
 		case badServerResponse(code : Int)
@@ -52,6 +55,8 @@ import Foundation
 		
 		var description : String  {
 			switch self {
+			case .hafasError(let error):
+				return error.hafasDescription ?? error.hafasMessage ?? error.message ?? "hafas error"
 			case .badUrl:
 				return "Bad url"
 			case .cannotConnectToHost(let string):

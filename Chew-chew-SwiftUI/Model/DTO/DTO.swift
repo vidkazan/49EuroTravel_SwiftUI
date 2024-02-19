@@ -555,7 +555,7 @@ struct Station : Codable,Equatable {
 }
 
 
-struct HafasError : Codable, Equatable {
+struct HafasErrorDTO : Codable, Equatable {
 	let message : String? 				// "H9220: journeys search: no stations found close to the address"
 	let isHafasError: Bool?
 	let code : String? 				// "NOT_FOUND"
