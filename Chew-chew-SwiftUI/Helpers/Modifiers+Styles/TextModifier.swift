@@ -38,26 +38,45 @@ extension View {
 
 extension ViewModifier where Self == ChewPrimaryStyle {
 	static var huge: ChewPrimaryStyle {
-		ChewPrimaryStyle(20)
+		ChewPrimaryStyle(20,.title2)
 	}
 	static var big: ChewPrimaryStyle {
-		ChewPrimaryStyle(17)
+		ChewPrimaryStyle(17,.body)
 	}
 	static var small: ChewPrimaryStyle {
-		ChewPrimaryStyle(9)
+		ChewPrimaryStyle(9,.caption2)
 	}
 	static var medium: ChewPrimaryStyle {
-		ChewPrimaryStyle(12)
+		ChewPrimaryStyle(12,.caption)
 	}
 }
 
 struct ChewPrimaryStyle: ChewTextStyle {
 	let size : CGFloat!
-	init(_ size : CGFloat){
+	let font : Font.TextStyle!
+	init(_ size : CGFloat, _ font : Font.TextStyle){
 		self.size = size
+		self.font = font
 	}
 	func body(content: Content) -> some View {
-		content
-			.font(.system(size: size,weight: .semibold))
+		if #available(iOS 16.0, *) {
+			content
+//				.font(.system(font,weight: .semibold))
+				.font(.system(size: size,weight: .semibold))
+		} else {
+			content
+				.font(.system(size: size,weight: .semibold))
+		}
+	}
+}
+
+struct Font_Previews: PreviewProvider {
+	static var previews: some View {
+		VStack {
+			ForEach(Font.TextStyle.allCases, id: \.hashValue, content: {
+				Text("popopopo")
+					.font(.system($0))
+			})
+		}
 	}
 }

@@ -24,15 +24,16 @@ struct TimeAndSettingsView: View {
 					}, label: {
 						Image(.gearshape)
 							.tint(.primary)
+							.chewTextSize(.big)
 							.frame(maxWidth: 43,maxHeight: 43)
 							.background(Color.chewFillAccent)
 							.cornerRadius(8)
-							.overlay(alignment: .topTrailing) {
-								Circle()
-									.fill(Color.chewFillRedPrimary)
-									.frame(width: 10,height: 10)
-									.padding(5)
-							}
+//							.overlay(alignment: .topTrailing) {
+//								Circle()
+//									.fill(Color.chewFillRedPrimary)
+//									.frame(width: 10,height: 10)
+//									.padding(5)
+//							}
 					})
 				}
 			}

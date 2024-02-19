@@ -10,7 +10,7 @@ import UIKit
 import SwiftUI
 import CoreLocation
 
-func constructLineViewData(mode : String,product : String, name : String, productName : String) -> LineViewData {
+func constructLineViewData(product : String, name : String, productName : String) -> LineViewData {
 	let mode : LineType = {
 		switch product {
 		case "nationalExpress":

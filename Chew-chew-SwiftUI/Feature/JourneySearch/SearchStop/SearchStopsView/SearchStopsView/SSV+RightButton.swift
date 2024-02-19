@@ -26,13 +26,16 @@ extension SearchStopsView {
 								ProgressView()
 							} else {
 								type.baseImage
+									.chewTextSize(.big)
 							}
 						case .idle,.loaded,.error:
 							type.baseImage
+								.chewTextSize(.big)
 						}
 					}
 				case .arrival:
 					type.baseImage
+						.chewTextSize(.big)
 				}
 			}
 		)

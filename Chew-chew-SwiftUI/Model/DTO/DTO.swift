@@ -506,6 +506,42 @@ struct Products : Codable, Equatable,Hashable {
 	let taxi				: Bool?
 }
 
+extension Products {
+	var lineType : LineType? {
+		if national == true {
+			return .national
+		}
+		if nationalExpress == true {
+			return .nationalExpress
+		}
+		if regional == true {
+			return .regional
+		}
+		if regionalExpress == true {
+			return .regionalExpress
+		}
+		if suburban == true {
+			return .suburban
+		}
+		if subway == true {
+			return .subway
+		}
+		if tram == true {
+			return .tram
+		}
+		if bus == true {
+			return .bus
+		}
+		if ferry == true {
+			return .ferry
+		}
+		if taxi == true {
+			return .taxi
+		}
+		return nil
+	}
+}
+
 // MARK: - Line
 struct Line : Codable,Equatable {
 	let type			: String?

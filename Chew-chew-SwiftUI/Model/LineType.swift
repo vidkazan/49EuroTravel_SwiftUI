@@ -111,32 +111,4 @@ enum LineType : String,Equatable,Hashable, CaseIterable {
 			return Color.chewGrayScale10
 		}
 	}
-	var id: Int {
-		switch self {
-		case .bus:
-			return 0
-		case .ferry:
-			return 1
-		case .national:
-			return 2
-		case .nationalExpress:
-			return 3
-		case .regional:
-			return 4
-		case .regionalExpress:
-			return 5
-		case .suburban:
-			return 6
-		case .subway:
-			return 7
-		case .taxi:
-			return 8
-		case .tram:
-			return 9
-		case .transfer:
-			return 10
-		case .foot:
-			return 11
-		}
-	}
 }

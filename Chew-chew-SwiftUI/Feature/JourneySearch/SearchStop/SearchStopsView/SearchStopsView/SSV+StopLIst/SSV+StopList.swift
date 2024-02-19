@@ -38,6 +38,7 @@ extension SearchStopsView {
 			Model.shared.sheetViewModel.send(event: .didRequestShow(.mapPicker(type: type)))
 		}, label: {
 			Label("find on map", systemImage: "map.circle")
+				.chewTextSize(.big)
 		})
 		.foregroundColor(.primary)
 		.padding(.leading,5)

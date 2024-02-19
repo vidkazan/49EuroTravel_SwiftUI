@@ -107,7 +107,6 @@ extension StopTripDTO {
 			legStopsViewData: stops,
 			footDistance: 0,
 			lineViewData: constructLineViewData(
-				mode: line?.mode ?? "mode",
 				product: line?.product ?? "product",
 				name: line?.name ?? "lineName",
 				productName: line?.productName ?? "productName"
@@ -190,7 +189,6 @@ extension LegDTO {
 			legStopsViewData: stops,
 			footDistance: distance ?? 0,
 			lineViewData: constructLineViewData(
-				mode: line?.mode ?? "mode",
 				product: line?.product ?? "product",
 				name: line?.name ?? "lineName",
 				productName: line?.productName ?? "productName"

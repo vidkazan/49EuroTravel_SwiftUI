@@ -20,11 +20,9 @@ extension SearchStopsView {
 						chewViewModel.send(event: .onNewStop(.location(stop.0), type))
 						searchStopViewModel.send(event: .onStopDidTap(.location(stop.0), type))
 					}, label: {
-						Group {
-							Label(stop.0.name, systemImage: stop.0.type.SFSIcon)
-						}
-						.foregroundColor(.primary)
+						stopListCell(stop: stop)
 					})
+					.foregroundColor(.primary)
 					.padding(.leading,5)
 					Spacer()
 					Button(action: {
@@ -39,6 +37,7 @@ extension SearchStopsView {
 					})
 					.frame(height: 40)
 					Image(.clockArrowCirclepath)
+						.chewTextSize(.big)
 						.foregroundColor(.chewGrayScale30)
 						.padding(.horizontal,7)
 						.frame(height: 40)
@@ -61,7 +60,7 @@ extension SearchStopsView {
 						if !searchStopViewModel.state.stops.isEmpty {
 							VStack(spacing: 0) {
 								ForEach(stops,id:\.0) { stop in
-									HStack(alignment: .center) {
+									HStack(alignment: .center, spacing: 1) {
 										Button(action: {
 											if (searchStopViewModel.state.previousStops.first(where: {$0.id == stop.0.id}) == nil) {
 												Model.shared.coreDataStore.addRecentLocation(stop: stop.0)
@@ -69,12 +68,10 @@ extension SearchStopsView {
 											chewViewModel.send(event: .onNewStop(.location(stop.0), type))
 											searchStopViewModel.send(event: .onStopDidTap(.location(stop.0), type))
 										}, label: {
-											Label(stop.0.name, systemImage: stop.0.type.SFSIcon)
+											stopListCell(stop: stop)
 											Spacer()
 										})
 										.frame(height: 40)
-										.padding(.horizontal,5)
-										.foregroundColor(.primary)
 										Spacer()
 										if let dist = stop.1 {
 											BadgeView(.distanceInMeters(dist: dist))
@@ -89,6 +86,7 @@ extension SearchStopsView {
 				.frame(maxHeight: 300)
 			case .error(let error):
 				Text(error.description)
+					.chewTextSize(.big)
 					.foregroundColor(.secondary)
 					.padding(5)
 					.frame(maxWidth: .infinity,alignment: .center)
@@ -96,6 +94,30 @@ extension SearchStopsView {
 				EmptyView()
 			}
 		}
+	}
+}
+
+extension SearchStopsView {
+	func stopListCell(stop : (Stop, Double?)) -> some View {
+		Group {
+			if let lineType = stop.0.stopDTO?.products?.lineType, let icon = lineType.icon {
+				Label {
+					Text(stop.0.name)
+						.foregroundColor(.primary)
+				} icon: {
+					Image(icon)
+						.padding(5)
+						.aspectRatio(1, contentMode: .fill)
+						.badgeBackgroundStyle(BadgeBackgroundBaseStyle(lineType.color))
+				}
+				.chewTextSize(.big)
+			} else {
+				Label(stop.0.name, systemImage: stop.0.type.SFSIcon)
+					.chewTextSize(.big)
+					.foregroundColor(.primary)
+			}
+		}
+		.foregroundColor(.primary)
 	}
 }
 

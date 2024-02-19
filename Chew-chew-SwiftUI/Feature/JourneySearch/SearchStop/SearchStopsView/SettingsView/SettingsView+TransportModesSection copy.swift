@@ -12,7 +12,7 @@ extension SettingsView {
 	var segments : some View {
 		Section(
 			content: {
-				ForEach(allTypes, id: \.id) { type in
+				ForEach(allTypes, id: \.rawValue) { type in
 					Toggle(
 						isOn: Binding(
 							get: { selectedTypes.contains(type) },
