@@ -52,8 +52,7 @@ struct SheetView : View {
 				if let data = data as? MapDetailsViewDataSource {
 					MapDetailsView(
 						mapRect: data.coordRegion,
-						stops: data.stops,
-						route: data.route,
+						legs: data.mapLegDataList,
 						closeSheet: closeSheet
 					)
 				}

@@ -117,7 +117,12 @@ extension LegDetailsView {
 	var menu : some View {
 			Menu(content: {
 				Button(action: {
-					Model.shared.sheetViewModel.send(event: .didRequestShow(.mapDetails(leg: leg)))
+					switch leg.legType {
+					case .line,.transfer:
+						Model.shared.sheetViewModel.send(event: .didRequestShow(.mapDetails(.lineLeg(leg))))
+					default:
+						Model.shared.sheetViewModel.send(event: .didRequestShow(.mapDetails(.footDirection(leg))))
+					}
 				}, label: {
 					Label("Show on map", systemImage: "map.circle")
 				})

@@ -51,10 +51,22 @@ class SheetViewModel : ObservableObject, Identifiable {
 protocol SheetViewDataSource {
 }
 
-struct MapDetailsViewDataSource : SheetViewDataSource {
-	let coordRegion : MKCoordinateRegion
+
+struct MapLegData {
+	let type : LegViewData.LegType
 	let stops : [StopViewData]
 	let route : MKPolyline?
+}
+
+enum MapDetailsRequest {
+	case footDirection(_ leg : LegViewData)
+	case lineLeg(_ leg : LegViewData)
+	case journey(_ legs : [LegViewData])
+}
+
+struct MapDetailsViewDataSource : SheetViewDataSource {
+	let coordRegion : MKCoordinateRegion
+	let mapLegDataList : [MapLegData]
 }
 
 struct MapPickerViewDataSource : SheetViewDataSource {
@@ -133,7 +145,7 @@ extension SheetViewModel{
 		case date
 		case settings
 		case fullLeg(leg : LegViewData)
-		case mapDetails(leg : LegViewData)
+		case mapDetails(_ request : MapDetailsRequest)
 		case mapPicker(type : LocationDirectionType)
 		case onboarding
 		case remark(remarks : [RemarkViewData])
@@ -232,8 +244,8 @@ extension SheetViewModel {
 				return Just(Event.didLoadDataForShowing(type,SettingsViewDataSource())).eraseToAnyPublisher()
 			case .fullLeg(leg: let leg):
 				return loadingFullLeg(state: state, tripId: leg.tripId)
-			case .mapDetails(leg: let leg):
-				return loadingLocationDetails(state: state, leg: leg)
+			case .mapDetails(let request):
+				return loadingLocationDetails(state: state, request: request)
 			case .onboarding:
 				return Just(Event.didLoadDataForShowing(type,OnboardingViewDataSource())).eraseToAnyPublisher()
 			case .remark(let remarks):
@@ -331,81 +343,141 @@ extension SheetViewModel {
 	}
 	
 	
-	static 	func loadingLocationDetails(state : State, leg : LegViewData) -> AnyPublisher<Event, Never> {
+	static 	func loadingLocationDetails(state : State, request : MapDetailsRequest) -> AnyPublisher<Event, Never> {
+		switch request {
+		case .footDirection(let leg):
+			return footDirectionPath(leg: leg)
+		case .lineLeg(let leg):
 			if let locFirst = leg.legStopsViewData.first,
 			   let locLast = leg.legStopsViewData.last {
-				switch leg.legType {
-				case .footEnd,.footMiddle,.footStart:
-					return makeDirectionsRequest(from: locFirst.locationCoordinates, to: locLast.locationCoordinates)
-						.map { res in
-							return Event.didLoadDataForShowing(
-								.mapDetails(leg: leg),
-								MapDetailsViewDataSource(
-									coordRegion: constructMapRegion(
-										locFirst: locFirst.locationCoordinates,
-										locLast: locLast.locationCoordinates
-									),
-									stops: [locFirst,locLast],
-									route: res.routes.first?.polyline
-								)
-							)
-						}
-						.catch { error in
-							print("❌ whenLoadingLocationDetails: makeDirecitonsRequest: error:",error)
-							return Just(Event.didLoadDataForShowing(
-								.mapDetails(leg: leg),
-								MapDetailsViewDataSource(
-									coordRegion: constructMapRegion(
-										locFirst: locFirst.locationCoordinates,
-										locLast: locLast.locationCoordinates
-									),
-									stops: [locFirst,locLast],
-									route: nil
-								))
-							)
-						}
-						.eraseToAnyPublisher()
-				case .line:
-					var polyline : MKPolyline? = nil
-					if let features = leg.polyline?.features {
-						let polylinePoints = features.compactMap {
-							if let lat = $0.geometry?.coordinates[1],let long = $0.geometry?.coordinates[0] {
-								return CLLocationCoordinate2DMake(lat, long)
-							}
-							return nil
-						}
-						polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
-					} else {
-						let polylinePoints = leg.legStopsViewData.compactMap {
-							return $0.locationCoordinates
-						}
-						polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
-					}
-					return Just(Event.didLoadDataForShowing(
-						.mapDetails(leg: leg),
-						MapDetailsViewDataSource(
-							coordRegion: constructMapRegion(
-								locFirst: locFirst.locationCoordinates,
-								locLast: locLast.locationCoordinates
-							),
-							stops: [locFirst,locLast],
-							route: polyline
-						)
-					)).eraseToAnyPublisher()
-				case .transfer:
-					return Just(Event.didLoadDataForShowing(
-						.mapDetails(leg: leg),
-						MapDetailsViewDataSource(
-							coordRegion: constructMapRegion(
-								locFirst: locFirst.locationCoordinates,
-								locLast: locLast.locationCoordinates
-							),
-							stops: [locFirst,locLast],
-							route: nil
-						)
-					)).eraseToAnyPublisher()
+				guard let mapLegData = mapLegData(leg: leg) else {
+					return Just(Event.didFailToLoadData(DataError.nilValue(type: "mapLegData"))).eraseToAnyPublisher()
 				}
+				return Just(Event.didLoadDataForShowing(
+					.mapDetails(request),
+					MapDetailsViewDataSource(
+						coordRegion: constructMapRegion(
+							locFirst: locFirst.locationCoordinates,
+							locLast: locLast.locationCoordinates
+						),
+						mapLegDataList: [mapLegData]
+					)
+				)).eraseToAnyPublisher()
 			}
-			return Empty().eraseToAnyPublisher()
+		case .journey(let legs):
+			if let locFirst = legs.first?.legStopsViewData.first,
+			   let locLast = legs.last?.legStopsViewData.last {
+				let mapLegDataList = legs.compactMap({mapLegData(leg: $0)})
+				return Just(Event.didLoadDataForShowing(
+					.mapDetails(request),
+					MapDetailsViewDataSource(
+						coordRegion: constructMapRegion(
+							locFirst: locFirst.locationCoordinates,
+							locLast: locLast.locationCoordinates
+						),
+						mapLegDataList: mapLegDataList
+					)
+				)).eraseToAnyPublisher()
+			}
+		}
+		
+		
+		return Empty().eraseToAnyPublisher()
+	}
+	
+	private static func mapLegData(leg : LegViewData) -> MapLegData? {
+		if let locFirst = leg.legStopsViewData.first,
+		   let locLast = leg.legStopsViewData.last {
+			switch leg.legType {
+			case .footEnd,.footMiddle,.footStart:
+				var polyline : MKPolyline? = nil
+				let polylinePoints = leg.legStopsViewData.compactMap {
+					return $0.locationCoordinates
+				}
+				polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
+				return MapLegData(
+					type: leg.legType,
+					stops: leg.legStopsViewData,
+					route: polyline
+				)
+			case .line:
+				var polyline : MKPolyline? = nil
+				if let features = leg.polyline?.features {
+					let polylinePoints = features.compactMap {
+						if let lat = $0.geometry?.coordinates[1],let long = $0.geometry?.coordinates[0] {
+							return CLLocationCoordinate2DMake(lat, long)
+						}
+						return nil
+					}
+					polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
+				} else {
+					let polylinePoints = leg.legStopsViewData.compactMap {
+						return $0.locationCoordinates
+					}
+					polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
+				}
+				return MapLegData(
+					type: leg.legType,
+					stops: leg.legStopsViewData,
+					route: polyline
+				)
+			case .transfer:
+				return MapLegData(
+					type: leg.legType,
+					stops: [locFirst,locLast],
+					route: nil
+				)
+			}
+		}
+		return nil
+	}
+	
+	private static func footDirectionPath(leg : LegViewData) -> AnyPublisher<Event, Never> {
+		guard let locFirst = leg.legStopsViewData.first,
+			  let locLast = leg.legStopsViewData.last else {
+			return Just(Event.didFailToLoadData(DataError.nilValue(type: "start/end stop"))).eraseToAnyPublisher()
+		}
+			switch leg.legType {
+			case .line,.transfer:
+				return Just(Event.didFailToLoadData(DataError.generic(msg: "\(#function): wrong type"))).eraseToAnyPublisher()
+			case .footEnd,.footMiddle,.footStart:
+				let mapRegion = constructMapRegion(
+					locFirst: locFirst.locationCoordinates,
+					locLast: locLast.locationCoordinates
+				)
+				return makeDirectionsRequest(from: locFirst.locationCoordinates, to: locLast.locationCoordinates)
+					.map { res in
+						return Event.didLoadDataForShowing(
+							.mapDetails(.footDirection(leg)),
+							MapDetailsViewDataSource(
+								coordRegion: mapRegion,
+								mapLegDataList: [
+									MapLegData(
+										type: leg.legType,
+										stops: [locFirst,locLast],
+										route: res.routes.first?.polyline
+									)
+								]
+							)
+						)
+					}
+					.catch { error in
+						print("❌ whenLoadingLocationDetails: makeDirecitonsRequest: error:",error)
+						return Just(Event.didLoadDataForShowing(
+							.mapDetails(.footDirection(leg)),
+							MapDetailsViewDataSource(
+								coordRegion: mapRegion,
+								mapLegDataList: [
+									MapLegData(
+										type: leg.legType,
+										stops: [locFirst,locLast],
+										route: nil
+									)
+								]
+							)
+						))
+					}
+					.eraseToAnyPublisher()
+			}
 	}
 }

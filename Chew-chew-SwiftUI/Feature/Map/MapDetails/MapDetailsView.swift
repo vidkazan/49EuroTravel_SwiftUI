@@ -2,9 +2,8 @@ import SwiftUI
 import MapKit
 
 struct MapDetailsUIView: UIViewRepresentable {
-	let stops : [StopViewData]
+	let legs : [MapLegData]
 	let region: MKCoordinateRegion
-	let route : MKPolyline?
 	
 	class Coordinator: NSObject, MKMapViewDelegate {
 		func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
@@ -16,17 +15,20 @@ struct MapDetailsUIView: UIViewRepresentable {
 	}
 	
 	func makeUIView(context: Context) -> MKMapView {
-		let annotations : [MKPointAnnotation] = stops.map {
-			let annotation = MKPointAnnotation()
-			annotation.coordinate = $0.locationCoordinates
-			annotation.title = $0.name
-			return annotation
-		}
 		let mapView = MKMapView()
-		mapView.addAnnotations(annotations)
-		if let route = route {
-			mapView.addOverlay(route)
-		}
+		legs.forEach({ leg in
+			let annotations : [MKPointAnnotation] = leg.stops.map {
+				let annotation = MKPointAnnotation()
+				annotation.coordinate = $0.locationCoordinates
+				annotation.title = $0.name
+				return annotation
+			}
+			
+			mapView.addAnnotations(annotations)
+			if let route = leg.route {
+				mapView.addOverlay(route)
+			}
+		})
 
 		mapView.delegate = context.coordinator
 		mapView.region = region
@@ -46,11 +48,12 @@ struct MapDetailsUIView: UIViewRepresentable {
 
 struct MapDetailsView: View {
 	@State var mapRect : MKCoordinateRegion
-	let stops : [StopViewData]
-	let route : MKPolyline?
+	let legs : [MapLegData]
+//	let stops : [StopViewData]
+//	let route : MKPolyline?
 	let closeSheet : ()->Void
 	var body: some View {
-		NavigationView {
+		Group {
 			if #available(iOS 16.0, *) {
 				sheet
 					.presentationDetents([.medium])
@@ -67,7 +70,7 @@ struct MapDetailsView: View {
 extension MapDetailsView {
 	var sheet : some View {
 		NavigationView {
-			MapDetailsUIView(stops: stops, region: mapRect, route: route)
+			MapDetailsUIView(legs: legs, region: mapRect)
 			.navigationTitle("Map")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {

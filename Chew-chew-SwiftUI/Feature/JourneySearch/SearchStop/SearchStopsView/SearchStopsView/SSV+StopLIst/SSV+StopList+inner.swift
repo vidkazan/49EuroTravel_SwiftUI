@@ -61,15 +61,17 @@ extension SearchStopsView {
 							VStack(spacing: 0) {
 								ForEach(stops,id:\.0) { stop in
 									HStack(alignment: .center, spacing: 1) {
-										Button(action: {
-											if (searchStopViewModel.state.previousStops.first(where: {$0.id == stop.0.id}) == nil) {
-												Model.shared.coreDataStore.addRecentLocation(stop: stop.0)
-											}
-											chewViewModel.send(event: .onNewStop(.location(stop.0), type))
-											searchStopViewModel.send(event: .onStopDidTap(.location(stop.0), type))
-										}, label: {
-											stopListCell(stop: stop)
-											Spacer()
+										Button(
+											action: {
+												if (searchStopViewModel.state.previousStops.first(where: {$0.id == stop.0.id}) == nil) {
+													Model.shared.coreDataStore.addRecentLocation(stop: stop.0)
+												}
+												chewViewModel.send(event: .onNewStop(.location(stop.0), type))
+												searchStopViewModel.send(event: .onStopDidTap(.location(stop.0), type))
+											},
+											label: {
+												stopListCell(stop: stop)
+												Spacer()
 										})
 										.frame(height: 40)
 										Spacer()
@@ -100,7 +102,8 @@ extension SearchStopsView {
 extension SearchStopsView {
 	func stopListCell(stop : (Stop, Double?)) -> some View {
 		Group {
-			if let lineType = stop.0.stopDTO?.products?.lineType, let icon = lineType.icon {
+			if let lineType = stop.0.stopDTO?.products?.lineType,
+				let icon = lineType.icon {
 				Label {
 					Text(stop.0.name)
 						.foregroundColor(.primary)

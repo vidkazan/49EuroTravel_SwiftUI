@@ -19,6 +19,7 @@ struct BadgesView: View {
 				Button(action: badge.badgeAction, label: {
 					BadgeView(badge)
 						.badgeBackgroundStyle(badge.badgeDefaultStyle)
+						.foregroundColor(.primary)
 				})
 			}
 		}

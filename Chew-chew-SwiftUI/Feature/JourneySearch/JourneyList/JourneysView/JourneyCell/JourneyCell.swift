@@ -64,6 +64,7 @@ struct JourneyCell: View {
 		}
 		.redacted(reason: isPlaceholder ? .placeholder : [])
 		.cornerRadius(10)
+		.contextMenu { menu }
 	}
 	
 	static func followID(journey : JourneyViewData) -> Int64 {
@@ -77,6 +78,19 @@ struct JourneyCell: View {
 		
 	}
 }
+
+extension JourneyCell {
+	var menu : some View {
+		Button(action: {
+			Model.shared.sheetViewModel.send(
+				event: .didRequestShow(.mapDetails(.journey(journey.legs)))
+			)
+		}, label: {
+			Label("Show on map", systemImage: "map.circle")
+		})
+	}
+}
+
 
 struct JourneyCellPreview: PreviewProvider {
 	static var previews: some View {

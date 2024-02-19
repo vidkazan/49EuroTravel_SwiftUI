@@ -128,6 +128,7 @@ struct BadgeView : View {
 					.padding(4)
 			case .remarkImportant:
 				OneLineText(badge.badgeData.name)
+					.foregroundColor(.white)
 					.chewTextSize(size)
 					.padding(.horizontal,4)
 					.padding(4)
