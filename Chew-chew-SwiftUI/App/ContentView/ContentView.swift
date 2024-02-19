@@ -9,7 +9,6 @@ import SwiftUI
 
 #warning("TODO: make error view")
 #warning("TODO: localization")
-#warning("TODO: legView: place transport icons")
 #warning("TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce")
 
 

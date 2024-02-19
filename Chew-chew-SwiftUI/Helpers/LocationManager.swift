@@ -18,7 +18,7 @@ class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegat
 	}
 	
 	func reverseGeocoding(coords : CLLocationCoordinate2D) async -> String? {
-		if let location = self.locationManager.location,
+		if self.locationManager.location != nil,
 		   let res = try? await CLGeocoder().reverseGeocodeLocation(CLLocation(latitude: coords.latitude, longitude: coords.longitude)).first,
 			let name = res.name, let city = res.locality {
 				return  String(name + ", " + city)

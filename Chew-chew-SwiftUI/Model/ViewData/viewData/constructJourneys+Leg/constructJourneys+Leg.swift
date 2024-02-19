@@ -39,38 +39,9 @@ extension StopTripDTO {
 				)
 			}
 		}()
-		
-//		guard
-//			let plannedDeparturePosition = getTimeLabelPosition(
-//				firstTS: firstTS,
-//				lastTS: lastTS,
-//				currentTS: container.date.departure.planned
-//			),
-//			let plannedArrivalPosition = getTimeLabelPosition(
-//				firstTS: firstTS,
-//				lastTS: lastTS,
-//				currentTS: container.date.arrival.planned
-//			) else {
-//			throw DataError.nilValue(type: "plannedArrivalPosition or plannedDeparturePosition")
-//		}
-		
 		guard let tripId = tripId else  {
 			throw DataError.nilValue(type: "tripId")
 		}
-		
-		
-//		let actualDeparturePosition = getTimeLabelPosition(
-//			firstTS: firstTS,
-//			lastTS: lastTS,
-//			currentTS: container.date.departure.actual
-//		) ?? 0
-//
-//		let actualArrivalPosition = getTimeLabelPosition(
-//			firstTS: firstTS,
-//			lastTS: lastTS,
-//			currentTS: container.date.arrival.actual
-//		) ?? 0
-		
 		
 		let stops : [StopViewData] = {
 			// arrival type
@@ -81,13 +52,7 @@ extension StopTripDTO {
 						name: origin.name ?? "",
 						departurePlatform: .init(),
 						arrivalPlatform: .init(),
-						time: .init(
-							plannedDeparture: nil,
-							plannedArrival: nil,
-							actualDeparture: nil,
-							actualArrival: nil,
-							cancelled: nil
-						),
+						time: .init(),
 						stopOverType: .origin
 					),
 					StopViewData(
@@ -116,13 +81,7 @@ extension StopTripDTO {
 						name: destination.name ?? "",
 						departurePlatform: .init(),
 						arrivalPlatform: .init(),
-						time: .init(
-							plannedDeparture: nil,
-							plannedArrival: nil,
-							actualDeparture: nil,
-							actualArrival: nil,
-							cancelled: nil
-						),
+						time: .init(),
 						stopOverType: .destination
 					)
 				]
@@ -131,14 +90,11 @@ extension StopTripDTO {
 		}()
 		
 	
-//		let segments = constructSegmentsFromStopOverData(stopovers: stops)
 		var remarksUnwrapped = [RemarkViewData]()
 		if let remarks = remarks {
 			remarksUnwrapped = remarks.compactMap({$0.viewData()})
 		}
 		
-		
-		#warning("check isReachable for cancelled trips")
 		let res = LegViewData(
 			isReachable: true,
 			legType: .line,

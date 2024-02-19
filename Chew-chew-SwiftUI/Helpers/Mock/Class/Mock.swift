@@ -17,26 +17,46 @@ enum Mock {
 struct TripMockFiles {
 	static let type = MockFile<TripDTO>.self
 	
-	static let cancelledMiddleStopsRE6NeussMinden = type.init("cancelledMiddleStops-Trip-RE6-Neuss-Minden")
-	static let cancelledFirstStopRE11DussKassel = type.init("cancelledFirstStop-Trip-RE11-Duss-Kassel")
-	static let cancelledLastStopRE11DussKassel = type.init("cancelledLastStop-Trip-RE11-Duss-Kassel")
-	static let RE6NeussMinden = type.init("re6-Neuss-Minden")
+	static let cancelledMiddleStopsRE6NeussMinden = type.init(
+		"cancelledMiddleStops-Trip-RE6-Neuss-Minden"
+	)
+	static let cancelledFirstStopRE11DussKassel = type.init(
+		"cancelledFirstStop-Trip-RE11-Duss-Kassel"
+	)
+	static let cancelledLastStopRE11DussKassel = type.init(
+		"cancelledLastStop-Trip-RE11-Duss-Kassel"
+	)
+	static let RE6NeussMinden = type.init(
+		"re6-Neuss-Minden"
+	)
 }
 
 struct JourneyMockFiles{
 	static let type = MockFile<JourneyWrapper>.self
 	
-	static let journeyNeussWolfsburg = type.init("journey-Neuss-Wolfsburg")
-	static let journeyNeussWolfsburgFirstCancelled = type.init("journey-Neuss-Wolfsburg-First-Cancelled")
-	static let journeyNeussWolfsburgMissedConnection = type.init("journey-Neuss-Wolfsburg-missedConnection")
-	static let userLocationToStation = type.init("userLocationToStation")
+	static let journeyNeussWolfsburg = type.init(
+		"journey-Neuss-Wolfsburg"
+	)
+	static let journeyNeussWolfsburgFirstCancelled = type.init(
+		"journey-Neuss-Wolfsburg-First-Cancelled"
+	)
+	static let journeyNeussWolfsburgMissedConnection = type.init(
+		"journey-Neuss-Wolfsburg-missedConnection"
+	)
+	static let userLocationToStation = type.init(
+		"userLocationToStation"
+	)
 }
 
 struct JourneyListMockFiles {
 	static let type = MockFile<JourneyListDTO>.self
 	
-	static let journeyNeussWolfsburg = type.init("neussWolfsburg")
-	static let journeyListPlaceholder = type.init("placeholder")
+	static let journeyNeussWolfsburg = type.init(
+		"neussWolfsburg"
+	)
+	static let journeyListPlaceholder = type.init(
+		"placeholder"
+	)
 }
  
 

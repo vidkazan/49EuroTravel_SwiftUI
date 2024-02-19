@@ -421,7 +421,7 @@ extension StopDTO {
 			}
 		}()
 		let productsModified : Products? = {
-			if let station = station {
+			if station != nil {
 				return Products(
 					nationalExpress: false,
 					national: false,
