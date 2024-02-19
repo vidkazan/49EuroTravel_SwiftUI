@@ -329,7 +329,7 @@ extension MapPickerViewModel {
 					return Event.didLoadNearbyStops(stops)
 				}
 				.catch { error in
-					return Just(Event.didFailToLoad(error as? ApiServiceError ?? .badRequest)).eraseToAnyPublisher()
+					return Just(Event.didFailToLoad(error as? ApiError ?? .badRequest)).eraseToAnyPublisher()
 				}
 				.eraseToAnyPublisher()
 		}
@@ -368,7 +368,7 @@ extension MapPickerViewModel {
 		}
 	}
 	
-	static func fetchLocatonsNearby(coords : CLLocationCoordinate2D) -> AnyPublisher<[StopDTO],ApiServiceError> {
+	static func fetchLocatonsNearby(coords : CLLocationCoordinate2D) -> AnyPublisher<[StopDTO],ApiError> {
 		return ApiService().fetch(
 			[StopDTO].self,
 			query: [
@@ -380,7 +380,7 @@ extension MapPickerViewModel {
 		.eraseToAnyPublisher()
 	}
 	
-	static func fetchStopDepartures(stop : Stop) -> AnyPublisher<StopTripsDTO,ApiServiceError> {
+	static func fetchStopDepartures(stop : Stop) -> AnyPublisher<StopTripsDTO,ApiError> {
 		return ApiService().fetch(
 			StopTripsDTO.self,
 			query: [

@@ -45,7 +45,7 @@ extension JourneyListViewModel {
 						)
 					}
 					.catch { error in
-						Just(Event.didFailToLoadEarlierRef(error as? any ChewError ?? ApiServiceError.generic(error)))
+						Just(Event.didFailToLoadEarlierRef(error as? any ChewError ?? ApiError.generic(error)))
 					}
 					.eraseToAnyPublisher()
 				
@@ -77,14 +77,14 @@ extension JourneyListViewModel {
 						)
 					}
 					.catch { error in
-						Just(Event.didFailToLoadLaterRef(error as? any ChewError ?? ApiServiceError.generic(error)))
+						Just(Event.didFailToLoadLaterRef(error as? any ChewError ?? ApiError.generic(error)))
 					}
 					.eraseToAnyPublisher()
 			}
 		}
 	}
 	
-	static func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiServiceError> {
+	static func fetchEarlierOrLaterRef(dep : Stop,arr : Stop,ref : String, type : JourneyUpdateType,settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiError> {
 		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
 		query += Query.queryItems(methods: [
 			type == .earlierRef ? Query.earlierThan(earlierRef: ref) : Query.laterThan(laterRef: ref),

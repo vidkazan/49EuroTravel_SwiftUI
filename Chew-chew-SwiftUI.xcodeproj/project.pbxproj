@@ -152,6 +152,7 @@
 		7D7B3DA22AB9CC7E0070E44D /* LDSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7B3DA12AB9CC7E0070E44D /* LDSV.swift */; };
 		7D81AB262A978CDC0055AEAF /* DatePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D81AB252A978CDC0055AEAF /* DatePickerView.swift */; };
 		7D8A3E3A2B83A68F005B61CC /* SSV+StopList+inner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A3E392B83A68F005B61CC /* SSV+StopList+inner.swift */; };
+		7D8A3E3C2B83A8AC005B61CC /* JLVM+sideEffects+fetchJourneyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A3E3B2B83A8AC005B61CC /* JLVM+sideEffects+fetchJourneyList.swift */; };
 		7D942A092AD9578800301666 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942A082AD9578800301666 /* Stop.swift */; };
 		7D991E882B7AE42E000E26AD /* MapPickerUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D991E872B7AE42E000E26AD /* MapPickerUIView.swift */; };
 		7D991E8A2B7B8C93000E26AD /* MapAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D991E892B7B8C93000E26AD /* MapAnnotations.swift */; };
@@ -384,6 +385,7 @@
 		7D7B3DA12AB9CC7E0070E44D /* LDSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LDSV.swift; sourceTree = "<group>"; };
 		7D81AB252A978CDC0055AEAF /* DatePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerView.swift; sourceTree = "<group>"; };
 		7D8A3E392B83A68F005B61CC /* SSV+StopList+inner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SSV+StopList+inner.swift"; sourceTree = "<group>"; };
+		7D8A3E3B2B83A8AC005B61CC /* JLVM+sideEffects+fetchJourneyList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLVM+sideEffects+fetchJourneyList.swift"; sourceTree = "<group>"; };
 		7D932B9D2B14E46A00A1A390 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D942A082AD9578800301666 /* Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		7D991E872B7AE42E000E26AD /* MapPickerUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickerUIView.swift; sourceTree = "<group>"; };
@@ -515,6 +517,7 @@
 			children = (
 				7D000CF62AB86BA500566120 /* JLVM+sideEffects+loadingJourneysRef.swift */,
 				7D000CF22AB86AD700566120 /* JLVM+sideEffects+loadingJourneys.swift */,
+				7D8A3E3B2B83A8AC005B61CC /* JLVM+sideEffects+fetchJourneyList.swift */,
 				7D4B1B8B2AA8CB970096F372 /* JLVM+sideEffects.swift */,
 			);
 			path = "JourneyListViewModel+sideEffects";
@@ -1769,6 +1772,7 @@
 				7D4B1B8C2AA8CB970096F372 /* JLVM+sideEffects.swift in Sources */,
 				7D6CCAF12B5FFB9200BCF62E /* SettingsView+saveSettings.swift in Sources */,
 				7D991E882B7AE42E000E26AD /* MapPickerUIView.swift in Sources */,
+				7D8A3E3C2B83A8AC005B61CC /* JLVM+sideEffects+fetchJourneyList.swift in Sources */,
 				7D4B1B932AA8FD9D0096F372 /* SSVM+reduce.swift in Sources */,
 				7DD4A8D82AAC90C3001AA30C /* SSVM+reduce+Loaded.swift in Sources */,
 				7D6C5C2A2AAF77CF00DEFC57 /* JDVM.swift in Sources */,

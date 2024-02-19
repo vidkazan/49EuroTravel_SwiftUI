@@ -16,7 +16,7 @@ extension JourneyDetailsViewModel {
 		case withoutPolylines
 	}
 	
-	static func fetchJourneyByRefreshToken(ref : String, mode : FetchJourneyByRefreshTokenMode = .full) -> (AnyPublisher<JourneyWrapper,ApiServiceError>) {
+	static func fetchJourneyByRefreshToken(ref : String, mode : FetchJourneyByRefreshTokenMode = .full) -> (AnyPublisher<JourneyWrapper,ApiError>) {
 		let queryMethods = {
 			switch mode {
 			case .full:
@@ -40,7 +40,7 @@ extension JourneyDetailsViewModel {
 		.eraseToAnyPublisher()
 	}
 	
-	static func fetchTrip(tripId : String) -> AnyPublisher<LegDTO,ApiServiceError> {
+	static func fetchTrip(tripId : String) -> AnyPublisher<LegDTO,ApiError> {
 		return ApiService().fetch(
 			TripDTO.self,
 			query: [],

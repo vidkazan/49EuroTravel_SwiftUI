@@ -9,6 +9,22 @@ import Foundation
 import Combine
 
 extension JourneyListViewModel {
+	static func fetchJourneyList(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiError> {
+		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
+		query += addJourneyListTransfersQuery(settings: settings)
+		query += addJourneyListTransportModes(settings: settings)
+		query += Query.queryItems(
+			methods: [
+				Query.departureTime(departureTime: time),
+				Query.remarks(showRemarks: true),
+				Query.results(max: 5),
+				Query.stopovers(isShowing: true),
+				Query.pretty(pretyIntend: settings.debugSettings.prettyJSON),
+			]
+		)
+		return ApiService().fetch(JourneyListDTO.self,query: query, type: ApiService.Requests.journeys)
+	}
+	
 	static func addJourneyListStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
 		var query : [URLQueryItem] = []
 		switch dep.type {
@@ -114,22 +130,6 @@ extension JourneyListViewModel {
 				]
 			)
 		}
-	}
-	
-	static func fetchJourneyList(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiServiceError> {
-		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
-		query += addJourneyListTransfersQuery(settings: settings)
-		query += addJourneyListTransportModes(settings: settings)
-		query += Query.queryItems(
-			methods: [
-				Query.departureTime(departureTime: time),
-				Query.remarks(showRemarks: true),
-				Query.results(max: 5),
-				Query.stopovers(isShowing: true),
-				Query.pretty(pretyIntend: settings.debugSettings.prettyJSON),
-			]
-		)
-		return ApiService().fetch(JourneyListDTO.self,query: query, type: ApiService.Requests.journeys)
 	}
 }
 

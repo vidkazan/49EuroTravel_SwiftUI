@@ -23,7 +23,7 @@ extension SearchStopsViewModel {
 		case loading(String)
 		case loaded
 		case updatingRecentStops(Stop?)
-		case error(ApiServiceError)
+		case error(ApiError)
 		
 		var description : String {
 			switch self {
@@ -44,7 +44,7 @@ extension SearchStopsViewModel {
 	enum Event {
 		case onSearchFieldDidChanged(String,LocationDirectionType)
 		case onDataLoaded([Stop],LocationDirectionType)
-		case onDataLoadError(ApiServiceError)
+		case onDataLoadError(ApiError)
 		case onReset(LocationDirectionType)
 		case onStopDidTap(ChewViewModel.TextFieldContent, LocationDirectionType)
 		case didRecentStopsUpdated(recentStops : [Stop])

@@ -553,3 +553,14 @@ struct Station : Codable,Equatable {
 	let Betreiber_Nr	: Int?
 	let Status			: String?
 }
+
+
+struct HafasError : Codable, Equatable {
+	let message : String? 				// "H9220: journeys search: no stations found close to the address"
+	let isHafasError: Bool?
+	let code : String? 				// "NOT_FOUND"
+	let isCausedByServer : Bool?
+	let hafasCode : String? 			// "H9220"
+	let hafasMessage : String? 		// "HAFAS Kernel: Nearby to the given address stations could not be found."
+	let hafasDescription : String? 	// "No suitable stops found near the address entered"
+}

@@ -15,7 +15,7 @@ extension JourneyDetailsViewModel {
 			case .didFailToChangeSubscribingState:
 				return State(
 					data: state.data,
-					status: .error(error: ApiServiceError.cannotDecodeRawData)
+					status: .error(error: ApiError.cannotDecodeRawData)
 				)
 			case .didChangedSubscribingState:
 				return State(

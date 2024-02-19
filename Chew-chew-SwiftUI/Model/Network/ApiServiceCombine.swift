@@ -10,7 +10,7 @@ import DequeModule
 import Combine
 
 protocol HTTPClient {
-	func execute<T:Decodable>(_ t : T.Type,request: URLRequest, type : ApiService.Requests) -> AnyPublisher<T,ApiServiceError>
+	func execute<T:Decodable>(_ t : T.Type,request: URLRequest, type : ApiService.Requests) -> AnyPublisher<T,ApiError>
 }
 
 class MockClient : HTTPClient {
@@ -23,7 +23,7 @@ class MockClient : HTTPClient {
 		_ t : T.Type,
 		request : URLRequest,
 		type : ApiService.Requests
-	) -> AnyPublisher<T, ApiServiceError> {
+	) -> AnyPublisher<T, ApiError> {
 		executeCalled = true
 		inputRequest = request
 		requestType = type
@@ -36,16 +36,16 @@ class ApiClient : HTTPClient {
 		_ t : T.Type,
 		request : URLRequest,
 		type : ApiService.Requests
-	) -> AnyPublisher<T, ApiServiceError> {
+	) -> AnyPublisher<T, ApiError> {
 		return URLSession.shared
 			.dataTaskPublisher(for: request)
 			.tryMap { data, response -> T in
 				guard let response = response as? HTTPURLResponse else {
-					throw ApiServiceError.cannotDecodeRawData
+					throw ApiError.cannotDecodeRawData
 				}
 				switch response.statusCode {
 				case 400...599:
-					throw ApiServiceError.badServerResponse(code: response.statusCode)
+					throw ApiError.badServerResponse(code: response.statusCode)
 				default:
 					break
 				}
@@ -54,9 +54,9 @@ class ApiClient : HTTPClient {
 				return value
 			}
 			.receive(on: DispatchQueue.main)
-			.mapError{ error -> ApiServiceError in
+			.mapError{ error -> ApiError in
 				switch error {
-				case let error as ApiServiceError:
+				case let error as ApiError:
 					print("🔴> api: error:",type,request.url ?? "url",error)
 					return error
 				default:
@@ -73,10 +73,10 @@ extension ApiService {
 		_ t : T.Type,
 		query : [URLQueryItem],
 		type : Requests
-	) -> AnyPublisher<T, ApiServiceError> {
+	) -> AnyPublisher<T, ApiError> {
 		
 		guard let url = ApiService.generateUrl(query: query, type: type) else {
-			return Future<T,ApiServiceError> {
+			return Future<T,ApiError> {
 				return $0(.failure(.badUrl))
 			}.eraseToAnyPublisher()
 		}

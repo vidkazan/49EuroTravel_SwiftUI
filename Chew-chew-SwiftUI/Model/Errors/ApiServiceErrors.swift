@@ -7,8 +7,8 @@
 
 import Foundation
 
-	enum ApiServiceError : ChewError {
-		static func == (lhs: ApiServiceError, rhs: ApiServiceError) -> Bool {
+	enum ApiError : ChewError {
+		static func == (lhs: ApiError, rhs: ApiError) -> Bool {
 			return lhs.description == rhs.description
 		}
 		

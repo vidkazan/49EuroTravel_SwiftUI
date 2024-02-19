@@ -263,7 +263,7 @@ extension SheetViewModel {
 			.eraseToAnyPublisher()
 	}
 
-	static func fetchTrip(tripId : String) -> AnyPublisher<LegDTO,ApiServiceError> {
+	static func fetchTrip(tripId : String) -> AnyPublisher<LegDTO,ApiError> {
 		return ApiService().fetch(
 			TripDTO.self,
 			query: [],
@@ -297,7 +297,7 @@ extension SheetViewModel {
 	
 	
 	static func makeDirectionsRequest(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D
-	) -> AnyPublisher<MKDirections.Response, ApiServiceError> {
+	) -> AnyPublisher<MKDirections.Response, ApiError> {
 		let request = MKDirections.Request()
 		request.source = MKMapItem(
 			placemark: MKPlacemark(
@@ -316,13 +316,13 @@ extension SheetViewModel {
 		let directions = MKDirections(request: request)
 		
 		
-		let subject = Future<MKDirections.Response,ApiServiceError> { promise in
+		let subject = Future<MKDirections.Response,ApiError> { promise in
 			directions.calculate { resp, error in
 				if let error=error {
 					return promise(.failure(.cannotConnectToHost(error.localizedDescription)))
 				}
 				guard let resp = resp else {
-					return promise(.failure(ApiServiceError.cannotDecodeRawData))
+					return promise(.failure(ApiError.cannotDecodeRawData))
 				}
 				return promise(.success(resp))
 			}

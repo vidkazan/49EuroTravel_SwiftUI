@@ -24,7 +24,7 @@ extension SearchStopsViewModel {
 			return SearchStopsViewModel.fetchLocations(text: string, type: type)
 				.map { stops in
 					if stops.isEmpty {
-						return Event.onDataLoadError(ApiServiceError.stopNotFound)
+						return Event.onDataLoadError(ApiError.stopNotFound)
 					}
 					let stops = stops.compactMap { stop -> Stop? in
 						return stop.stop()
@@ -55,7 +55,7 @@ extension SearchStopsViewModel {
 
 
 extension SearchStopsViewModel {
-	static func fetchLocations(text : String, type : LocationDirectionType) -> AnyPublisher<[StopDTO],ApiServiceError> {
+	static func fetchLocations(text : String, type : LocationDirectionType) -> AnyPublisher<[StopDTO],ApiError> {
 		var query : [URLQueryItem] = []
 		query = Query.queryItems(methods: [
 			Query.location(location: text),
