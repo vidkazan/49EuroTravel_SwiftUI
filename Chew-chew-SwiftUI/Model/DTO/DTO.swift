@@ -504,7 +504,31 @@ struct Products : Codable, Equatable,Hashable {
 	let subway				: Bool?
 	let tram				: Bool?
 	let taxi				: Bool?
+	init(
+		nationalExpress: Bool? = false,
+		national: Bool? = false,
+		regionalExpress: Bool? = false,
+		regional: Bool? = false,
+		suburban: Bool? = false,
+		bus: Bool? = false,
+		ferry: Bool? = false,
+		subway: Bool? = false,
+		tram: Bool? = false,
+		taxi: Bool? = false
+	) {
+		self.nationalExpress = nationalExpress
+		self.national = national
+		self.regionalExpress = regionalExpress
+		self.regional = regional
+		self.suburban = suburban
+		self.bus = bus
+		self.ferry = ferry
+		self.subway = subway
+		self.tram = tram
+		self.taxi = taxi
+	}
 }
+
 
 extension Products {
 	var lineType : LineType? {

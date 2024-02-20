@@ -17,9 +17,9 @@ extension ChewJourney {
     @NSManaged public var departureStop: Location
 	@NSManaged public var user: ChewUser?
 	@NSManaged public var isActive: Bool
-	@NSManaged public var legs: [ChewLeg]
+	@NSManaged public var legs: Set<ChewLeg>
 	@NSManaged public var time: ChewTime
-	@NSManaged public var sunEvents: [ChewSunEvent]
+	@NSManaged public var sunEvents: Set<ChewSunEvent>
 	@NSManaged public var updatedAt: Double
 }
 
@@ -31,13 +31,12 @@ extension ChewJourney {
 		arrStop : Stop,
 		id : Int64,
 		using managedObjectContext: NSManagedObjectContext) {
-			self.init(context: managedObjectContext)
+			self.init(entity: ChewJourney.entity(), insertInto: managedObjectContext)
 //				print("> ⚡️ create \(ChewJourney.self) thread: ",Thread.current, "context:",managedObjectContext)
 			self.id = id
 			self.isActive = false
 			self.journeyRef = viewData.refreshToken
 			self.updatedAt = Date.now.timeIntervalSince1970
-			self.user = user
 			let _ = ChewTime(
 				context: managedObjectContext,
 				container: viewData.time,
@@ -52,5 +51,6 @@ extension ChewJourney {
 			}
 			let _ = Location(context: managedObjectContext,stop: depStop,parent: .followedJourneyDepStop(self))
 			let _ = Location(context: managedObjectContext,stop: arrStop,parent: .followedJourneyArrStop(self))
+			user.addToChewJourneys(self)
 		}
 }

@@ -101,8 +101,15 @@ extension CoreDataStore {
 		guard let user = self.user else { return }
 		 asyncContext.performAndWait {
 //			print("> ⚡️ create locations thread ",Thread.current)
-			let _ = Location(context: self.asyncContext, stop: stop, parent: .recentLocation(user))
-			self.saveAsyncContext()
+			 if let prod = stop.stopDTO?.products {
+				 let _ = Location(
+					context: self.asyncContext,
+					stop: stop,
+					parent: .recentLocation(user),
+					products: prod
+				 )
+				 self.saveAsyncContext()
+			 }
 		}
 	}
 	
@@ -192,23 +199,41 @@ extension CoreDataStore {
 			
 			settings.transportModeSegment = Int16(newSettings.transportMode.rawValue)
 			
-			
-			let modes = newSettings.customTransferModes
-			let item = settings.transportModes
-			item.bus = modes.contains(.bus)
-			item.ferry = modes.contains(.ferry)
-			item.national = modes.contains(.national)
-			item.nationalExpress = modes.contains(.nationalExpress)
-			item.regional = modes.contains(.regional)
-			item.regionalExpress = modes.contains(.regionalExpress)
-			item.suburban = modes.contains(.suburban)
-			item.subway = modes.contains(.subway)
-			item.taxi = modes.contains(.taxi)
-			item.tram = modes.contains(.tram)
-			item.settings = settings
+			 let modes = Self.transportModes(
+				modes: newSettings.customTransferModes,
+				from: settings.transportModes,
+				context: settings.managedObjectContext ?? asyncContext
+			 )
+			 
+			modes.settings = settings
 			
 			self.saveAsyncContext()
 		}
+	}
+	
+	static func transportModes(
+		modes : Set<LineType>,
+		from obj : TransportModes? = nil,
+		context : NSManagedObjectContext
+	) -> TransportModes {
+		let item : TransportModes = {
+			if let obj = obj {
+				return obj
+			}
+			return TransportModes(entity: TransportModes.entity(), insertInto: context)
+		}()
+		item.bus = modes.contains(.bus)
+		item.ferry = modes.contains(.ferry)
+		item.national = modes.contains(.national)
+		item.nationalExpress = modes.contains(.nationalExpress)
+		item.regional = modes.contains(.regional)
+		item.regionalExpress = modes.contains(.regionalExpress)
+		item.suburban = modes.contains(.suburban)
+		item.subway = modes.contains(.subway)
+		item.taxi = modes.contains(.taxi)
+		item.tram = modes.contains(.tram)
+
+		return item
 	}
 	
 	func saveAsyncContext(){

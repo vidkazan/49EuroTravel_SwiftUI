@@ -33,7 +33,6 @@ extension MapPickerUIView {
 		}
 		
 		func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-			print(">>> here")
 		}
 		
 		func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {

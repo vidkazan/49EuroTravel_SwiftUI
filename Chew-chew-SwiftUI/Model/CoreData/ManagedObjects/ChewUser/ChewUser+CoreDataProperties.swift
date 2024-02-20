@@ -10,21 +10,20 @@ import Foundation
 import CoreData
 
 extension ChewUser {
-	@NSManaged public var recentLocations: [Location]?
+	@NSManaged public var recentLocations: Set<Location>?
 	@NSManaged public var settings: Settings?
-	@NSManaged public var chewJourneys : [ChewJourney]?
-	@NSManaged public var chewRecentSearches : [ChewRecentSearch]?
+	@NSManaged public var chewJourneys : Set<ChewJourney>?
+	@NSManaged public var chewRecentSearches : Set<ChewRecentSearch>?
 }
 
 extension ChewUser {
 	static func createWith(date : Date,using managedObjectContext: NSManagedObjectContext) -> ChewUser? {
 		managedObjectContext.performAndWait {
 //			print("> ⚡️ create \(Self.self) thread ",Thread.current)
-			let user = ChewUser(context: managedObjectContext)
+			let user = ChewUser(entity: ChewUser.entity(), insertInto: managedObjectContext)
 
-			let settings = Settings(context: managedObjectContext)
-			let modes = TransportModes(context: managedObjectContext)
-
+			let settings = Settings(entity: Settings.entity(), insertInto: managedObjectContext)
+			let modes = TransportModes(entity: TransportModes.entity(), insertInto: managedObjectContext)
 			settings.user = user
 			modes.settings = settings
 
@@ -39,3 +38,60 @@ extension ChewUser {
 		}
 	}
 }
+
+
+
+// MARK: Generated accessors for chewJourneys
+extension ChewUser {
+	@objc(addChewJourneysObject:)
+	@NSManaged public func addToChewJourneys(_ value: ChewJourney)
+
+	@objc(removeChewJourneysObject:)
+	@NSManaged public func removeFromChewJourneys(_ value: ChewJourney)
+
+	@objc(addChewJourneys:)
+	@NSManaged public func addToChewJourneys(_ values: NSSet)
+
+	@objc(removeChewJourneys:)
+	@NSManaged public func removeFromChewJourneys(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for recentLocations
+extension ChewUser {
+
+	@objc(addRecentLocationsObject:)
+	@NSManaged public func addToRecentLocations(_ value: Location)
+
+	@objc(removeRecentLocationsObject:)
+	@NSManaged public func removeFromRecentLocations(_ value: Location)
+
+	@objc(addRecentLocations:)
+	@NSManaged public func addToRecentLocations(_ values: NSSet)
+
+	@objc(removeRecentLocations:)
+	@NSManaged public func removeFromRecentLocations(_ values: NSSet)
+
+}
+
+// MARK: Generated accessors for recentSearches
+extension ChewUser {
+
+	@objc(addRecentSearchesObject:)
+	@NSManaged public func addToRecentSearches(_ value: ChewRecentSearch)
+
+	@objc(removeRecentSearchesObject:)
+	@NSManaged public func removeFromRecentSearches(_ value: ChewRecentSearch)
+
+	@objc(addRecentSearches:)
+	@NSManaged public func addToRecentSearches(_ values: NSSet)
+
+	@objc(removeRecentSearches:)
+	@NSManaged public func removeFromRecentSearches(_ values: NSSet)
+
+}
+
+extension ChewUser : Identifiable {
+
+}
+

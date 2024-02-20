@@ -22,3 +22,20 @@ extension TransportModes {
 	@NSManaged public var taxi: Bool
     @NSManaged public var settings: Settings?
 }
+
+extension TransportModes {
+	func products() -> Products {
+		return Products(
+			nationalExpress: self.nationalExpress,
+			national: self.national,
+			regionalExpress: self.regionalExpress,
+			regional: self.regional,
+			suburban: self.suburban,
+			bus: self.bus,
+			ferry: self.ferry,
+			subway: self.subway,
+			tram: self.tram,
+			taxi: self.taxi
+		)
+	}
+}

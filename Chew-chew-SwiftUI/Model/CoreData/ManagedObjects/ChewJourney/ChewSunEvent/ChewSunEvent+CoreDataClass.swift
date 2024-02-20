@@ -29,7 +29,7 @@ extension ChewSunEvent {
 
 extension ChewSunEvent {
 	convenience init(context : NSManagedObjectContext,sun : SunEvent,for journey : ChewJourney){
-		self.init(context: context)
+		self.init(entity: ChewSunEvent.entity(), insertInto: context)
 		self.latitude = sun.location.latitude
 		self.longtitude = sun.location.longitude
 		self.timeFinal = sun.timeFinal

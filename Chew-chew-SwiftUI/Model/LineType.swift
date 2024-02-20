@@ -112,3 +112,34 @@ enum LineType : String,Equatable,Hashable, CaseIterable {
 		}
 	}
 }
+
+extension LineType {
+	func products() -> Products {
+		switch self {
+		case .nationalExpress:
+			return .init(nationalExpress: true)
+		case .national:
+			return .init(national: true)
+		case .regionalExpress:
+			return .init(regionalExpress: true)
+		case .regional:
+			return .init(regional: true)
+		case .suburban:
+			return .init(suburban: true)
+		case .bus:
+			return .init(bus : true)
+		case .ferry:
+			return .init(ferry: true)
+		case .subway:
+			return .init(suburban: true)
+		case .tram:
+			return .init(tram: true)
+		case .taxi:
+			return .init(taxi: true)
+		case .transfer:
+			return .init()
+		case .foot:
+			return .init()
+		}
+	}
+}

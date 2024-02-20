@@ -35,7 +35,7 @@ extension CoreDataStore {
 			 onboarding = settings?.onboarding
 		}
 		guard settings != nil else { return ChewSettings() }
-		let transportModes = fetchTransportModes()
+		let transportModes = fetchSettingsTransportModes()
 		
 		return ChewSettings(
 			onboarding: onboarding,
@@ -51,7 +51,7 @@ extension CoreDataStore {
 		)
 	}
 	
-	func fetchTransportModes() -> Set<LineType> {
+	func fetchSettingsTransportModes() -> Set<LineType> {
 		var modes : TransportModes!
 		var transportModes = Set<LineType>()
 		asyncContext.performAndWait {
@@ -72,6 +72,8 @@ extension CoreDataStore {
 		}
 		return transportModes
 	}
+	
+	
 	
 	func fetchLocations() -> [Stop]? {
 		var stops = [Stop]()

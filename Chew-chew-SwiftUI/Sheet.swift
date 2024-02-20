@@ -33,8 +33,6 @@ extension View {
 					let sheet = controller.presentationController as? UISheetPresentationController {
 					sheet.largestUndimmedDetentIdentifier = largestUndimmedIdentifier
 					sheet.preferredCornerRadius = cornerRadius
-				} else {
-					print(">>>haha")
 				}
 			}
 		})

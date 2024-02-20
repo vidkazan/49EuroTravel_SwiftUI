@@ -69,7 +69,7 @@ public class ChewLegType: NSManagedObject {
 
 extension ChewLegType {
 	convenience init(insertIntoManagedObjectContext context: NSManagedObjectContext, type : LegViewData.LegType, for leg : ChewLeg) {
-		self.init(context: context)
+		self.init(entity: ChewLegType.entity(), insertInto: context)
 		self.legType = type
 		self.leg = leg
 	}

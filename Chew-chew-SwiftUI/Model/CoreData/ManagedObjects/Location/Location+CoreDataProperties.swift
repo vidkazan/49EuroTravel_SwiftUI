@@ -17,6 +17,7 @@ extension Location {
 	@NSManaged public var longitude: Double
 	@NSManaged public var name: String
 	@NSManaged public var type: Int16
+	@NSManaged public var transportType: String?
 	
 	@NSManaged public var chewJourneyDep: ChewJourney?
 	@NSManaged public var chewJourneyArr: ChewJourney?
@@ -47,7 +48,7 @@ extension Location {
 				 latitude: self.latitude,
 				 longitude: self.longitude,
 				 poi: LocationType.pointOfInterest == type,
-				 products: nil,
+				 products: LineType(rawValue: self.transportType ?? "")?.products(),
 				 distance: nil,
 				 station: nil
 			 )

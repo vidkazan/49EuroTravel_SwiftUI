@@ -16,7 +16,7 @@ public class ChewTime: NSManagedObject {
 
 extension ChewTime {
 	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for journey : ChewJourney){
-		self.init(context: context)
+		self.init(entity: ChewTime.entity(), insertInto: context)
 		
 		self.chewJourney = journey
 		self.cancelled =  cancelled
@@ -26,7 +26,7 @@ extension ChewTime {
 		self.actualDeparture = container.iso.departure.actual
 	}
 	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for leg : ChewLeg){
-		self.init(context: context)
+		self.init(entity: ChewTime.entity(), insertInto: context)
 		
 		self.leg = leg
 		
@@ -38,7 +38,7 @@ extension ChewTime {
 	}
 	
 	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for stop : ChewStop){
-		self.init(context: context)
+		self.init(entity: ChewTime.entity(), insertInto: context)
 		
 		self.stop = stop
 		

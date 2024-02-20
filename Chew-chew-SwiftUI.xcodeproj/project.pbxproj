@@ -988,13 +988,13 @@
 				7D02CE0E2A97E3C00048ADE6 /* App */,
 				7D462D552AACD1E000BC0D65 /* Feature */,
 				7D02CE0C2A97E38B0048ADE6 /* Model */,
-				7D6734B82A96334C00CBE9C1 /* Preview Content */,
+				7D6734B82A96334C00CBE9C1 /* Assets */,
 				7DA5FEAA2B8106BB002182F8 /* Sheet.swift */,
 			);
 			path = "Chew-chew-SwiftUI";
 			sourceTree = "<group>";
 		};
-		7D6734B82A96334C00CBE9C1 /* Preview Content */ = {
+		7D6734B82A96334C00CBE9C1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
 				7D46ABE72B220B1600A4145E /* Assets.xcassets */,
@@ -1003,7 +1003,7 @@
 				7DAA726E2B7CF0A600290548 /* Icons.xcassets */,
 				7D28BAD12B82C533008B9979 /* Mock.xcassets */,
 			);
-			path = "Preview Content";
+			path = Assets;
 			sourceTree = "<group>";
 		};
 		7D68D9F62ABDB39A00579711 /* constructJourneys+Journey */ = {
@@ -1959,6 +1959,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Chew-chew-SwiftUI/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "49 Euro Travel";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -1974,7 +1975,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew";
+				PRODUCT_BUNDLE_IDENTIFIER = fcody.49EuroTravel.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -1998,6 +1999,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Chew-chew-SwiftUI/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "49 Euro Travel";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -2013,7 +2015,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 0.0.1;
-				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew";
+				PRODUCT_BUNDLE_IDENTIFIER = fcody.49EuroTravel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -2033,7 +2035,7 @@
 				DEVELOPMENT_TEAM = M82325R967;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-SwiftUIUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = fcody.49EuroTravel.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -2054,7 +2056,7 @@
 				DEVELOPMENT_TEAM = M82325R967;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Chew-chew-SwiftUIUITests";
+				PRODUCT_BUNDLE_IDENTIFIER = fcody.49EuroTravel.tests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;

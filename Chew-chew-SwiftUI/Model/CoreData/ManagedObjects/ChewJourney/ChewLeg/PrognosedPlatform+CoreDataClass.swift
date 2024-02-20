@@ -16,7 +16,7 @@ public class ChewPrognosedPlatform: NSManagedObject {
 
 extension ChewPrognosedPlatform {
 	convenience init(insertInto context: NSManagedObjectContext,with prognosedPlatform : Prognosed<String>, to stop :  ChewStop, type : LocationDirectionType) {
-		self.init(context: context)
+		self.init(entity: ChewPrognosedPlatform.entity(), insertInto: context)
 		
 		self.planned = prognosedPlatform.planned
 		self.actual = prognosedPlatform.actual

@@ -70,7 +70,6 @@ struct SearchStopsView: View {
 			
 			fieldRedBorder.bottom = state.arrStop.stop == nil && !state.arrStop.text.isEmpty && state.status != .editingStop(.arrival)
 			fieldRedBorder.top = state.depStop.stop == nil && !state.depStop.text.isEmpty && state.status != .editingStop(.departure)
-			let _ = print(">>>",state.status)
 			switch state.status {
 			case .editingStop(let type):
 				focusedField = type
