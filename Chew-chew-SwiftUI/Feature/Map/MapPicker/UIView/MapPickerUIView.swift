@@ -41,31 +41,17 @@ struct MapPickerUIView: UIViewRepresentable {
 		return mapView
 	}
 
-	func register(_ mapView : MKMapView){
-		mapView.register(
-			BusStopAnnotationView.self,
-			forAnnotationViewWithReuseIdentifier: BusStopAnnotationView.reuseIdentifier
-		)
-		mapView.register(
-			TrainStopAnnotationView.self,
-			forAnnotationViewWithReuseIdentifier: TrainStopAnnotationView.reuseIdentifier
-		)
-		mapView.register(
-			SBahnStopAnnotationView.self,
-			forAnnotationViewWithReuseIdentifier: SBahnStopAnnotationView.reuseIdentifier
-		)
-		mapView.register(
-			TramStopAnnotationView.self,
-			forAnnotationViewWithReuseIdentifier: TramStopAnnotationView.reuseIdentifier
-		)
-		mapView.register(
-			UBahnStopAnnotationView.self,
-			forAnnotationViewWithReuseIdentifier: UBahnStopAnnotationView.reuseIdentifier
-		)
+	private func register(_ mapView : MKMapView){
+		StopAnnotation.AnnotationType.allCases.forEach {
+			mapView.register(
+				StopAnnotationView.self,
+				forAnnotationViewWithReuseIdentifier: $0.iconImageName
+			)
+		}
 	}
 	
 	func updateUIView(_ uiView: MKMapView, context: Context) {
-		// select annotation
+		
 		if let selectedCoordinate = vm.state.data.selectedStop?.coordinates {
 			if let annotation = uiView.annotations.first(where: { $0 is LocationAnnotation }) {
 				uiView.removeAnnotation(annotation)
@@ -76,8 +62,6 @@ struct MapPickerUIView: UIViewRepresentable {
 			uiView.addAnnotation(annotation)
 		}
 		
-		
-		// stops annotation
 		if uiView.region.span.longitudeDelta > 0.02 {
 			uiView.removeAnnotations(uiView.annotations.filter({
 				$0 is StopAnnotation

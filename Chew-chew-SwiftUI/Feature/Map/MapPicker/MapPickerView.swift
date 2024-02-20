@@ -16,7 +16,12 @@ struct MapPickerView: View {
 	@ObservedObject var vm : MapPickerViewModel
 	let closeSheet : ()->Void
 	@State private var mapCenterCoords: CLLocationCoordinate2D
-	init(vm : MapPickerViewModel,initialCoords: CLLocationCoordinate2D, type : LocationDirectionType, close : @escaping ()->Void) {
+	init(
+		vm : MapPickerViewModel,
+		initialCoords: CLLocationCoordinate2D,
+		type : LocationDirectionType,
+		close : @escaping ()->Void
+	) {
 		self.mapCenterCoords = initialCoords
 		self.type = type
 		self.closeSheet = close

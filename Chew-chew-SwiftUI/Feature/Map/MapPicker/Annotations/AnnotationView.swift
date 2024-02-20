@@ -8,15 +8,11 @@
 import Foundation
 import MapKit
 import SwiftUI
-import SceneKit
-
 
 class StopAnnotationView : MKAnnotationView {
+	var imageView: UIImageView?
 	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-	   super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-	   frame = CGRect(x: 0, y: 0, width: 25, height: 25)
-	   centerOffset = CGPoint(x: 0, y: -frame.size.height / 2)
-		self.canShowCallout = true
+		super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
@@ -27,79 +23,100 @@ class StopAnnotationView : MKAnnotationView {
 		let image = UIImageView(image: UIImage(imageLiteralResourceName: iconAssetName))
 		image.contentMode = .scaleAspectFit
 		addSubview(image)
-		image.baseConstraints(self)
+		image.chewConstraint(.fillParent, to: self)
+		imageView = image
 	}
 }
 
-final class TrainStopAnnotationView: StopAnnotationView {
-	static let reuseIdentifier = "TrainStopAnnotationViewReuseIdentifier"
-	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-		super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		setupUI("ice.big")
+class LabelStopAnnotationView : StopAnnotationView {
+	var titleLabel: UILabel?
+	
+	override func setupUI(_ iconAssetName: String) {
+		super.setupUI(iconAssetName)
+		if let imageView = self.imageView {
+			titleLabel = UILabel()
+			titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .semibold)
+			titleLabel?.textAlignment = .center
+			self.addSubview(titleLabel!)
+			titleLabel?.chewConstraint(.bottom(height: 12, width: 120), to: imageView)
+		}
 	}
-
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-}
-final class TramStopAnnotationView: StopAnnotationView {
-	static let reuseIdentifier = "TramStopAnnotationViewReuseIdentifier"
-	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-		super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		setupUI("tram.big")
-	}
-
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-}
-
-final class UBahnStopAnnotationView: StopAnnotationView {
-	static let reuseIdentifier = "UBahnStopAnnotationViewReuseIdentifier"
-	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-		super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		setupUI("u.big")
-	}
-
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-}
-
-final class SBahnStopAnnotationView: StopAnnotationView {
-	static let reuseIdentifier = "SBahnStopAnnotationViewReuseIdentifier"
-	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-		super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		setupUI("s.big")
-	}
-
-	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}
-}
-
-final class BusStopAnnotationView: StopAnnotationView {
-	static let reuseIdentifier = "BusStopAnnotationViewReuseIdentifier"
 	
 	override init(annotation: MKAnnotation?, reuseIdentifier: String?) {
-		   super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
-		   setupUI("bus.big")
+		super.init(annotation: annotation, reuseIdentifier: reuseIdentifier)
 	}
 	
 	required init?(coder aDecoder: NSCoder) {
-		super.init(coder: aDecoder)
-	}	
+		fatalError("init(coder:) has not been implemented")
+	}
+	
 }
 
 extension UIView {
-	func baseConstraints(
+	enum ChewConstraintType {
+		case fillParent
+		case bottom(height: CGFloat, width : CGFloat)
+		case top
+		case right
+		case left
+	}
+}
+
+extension UIView {
+	func chewConstraint(
+		_ type : ChewConstraintType,
+		 to : UIView,
+		_ top : CGFloat = 0,
+		_ bottom : CGFloat = 0,
+		_ leading : CGFloat = 0,
+		 _ trailing : CGFloat = 0,
+		 _ width : CGFloat = 0,
+		 _ height : CGFloat = 0
+	){
+		self.translatesAutoresizingMaskIntoConstraints = false
+		switch type {
+		case .fillParent:
+			parentViewFillConstraint(to,top,bottom,leading,trailing)
+		case let .bottom(height, width):
+			self.topAnchor.constraint(
+				equalTo: to.bottomAnchor,
+				constant: top
+			).isActive = true
+			self.heightAnchor.constraint(
+				equalToConstant: height
+			).isActive = true
+			self.widthAnchor.constraint(
+				equalToConstant: width
+			).isActive = true
+			self.centerXAnchor.constraint(
+				equalTo: to.centerXAnchor
+			).isActive = true
+		default:
+			break
+		}
+	}
+	private func horizontalConstraint(
+		_ parent : UIView,
+		_ leading : CGFloat,
+		_ trailing : CGFloat
+	){
+		
+		self.leadingAnchor.constraint(
+			equalTo: parent.safeAreaLayoutGuide.leadingAnchor,
+			constant: leading
+		).isActive = true
+		self.trailingAnchor.constraint(
+			equalTo: parent.safeAreaLayoutGuide.trailingAnchor,
+			constant: trailing
+		).isActive = true
+	}
+	private func parentViewFillConstraint(
 		_ parent : UIView,
 		_ top : CGFloat = 0,
 		_ bottom : CGFloat = 0,
 		_ leading : CGFloat = 0,
 		_ trailing : CGFloat = 0
 	){
-		self.translatesAutoresizingMaskIntoConstraints = false
 		self.topAnchor.constraint(
 			equalTo: parent.safeAreaLayoutGuide.topAnchor,
 			constant: top

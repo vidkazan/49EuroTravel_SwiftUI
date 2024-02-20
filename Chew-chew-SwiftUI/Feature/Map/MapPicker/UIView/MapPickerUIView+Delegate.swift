@@ -53,37 +53,26 @@ extension MapPickerUIView {
 		
 		func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 			if let annotation = annotation as? StopAnnotation {
-				switch annotation.type {
-				case .bus:
-					return mapView.dequeueReusableAnnotationView(
-						withIdentifier: BusStopAnnotationView.reuseIdentifier,
-						for: annotation
-					) as? BusStopAnnotationView
-				case .train:
-					return mapView.dequeueReusableAnnotationView(
-						withIdentifier: TrainStopAnnotationView.reuseIdentifier,
-						for: annotation
-					) as? TrainStopAnnotationView
-				case .tram:
-					return mapView.dequeueReusableAnnotationView(
-						withIdentifier: TramStopAnnotationView.reuseIdentifier,
-						for: annotation
-					) as? TramStopAnnotationView
-				case .ubahn:
-					return mapView.dequeueReusableAnnotationView(
-						withIdentifier: UBahnStopAnnotationView.reuseIdentifier,
-						for: annotation
-					) as? UBahnStopAnnotationView
-				case .sbahn:
-					return mapView.dequeueReusableAnnotationView(
-						withIdentifier: SBahnStopAnnotationView.reuseIdentifier,
-						for: annotation
-					) as? SBahnStopAnnotationView
-				default:
-					return nil
-				}
+				var annotationView: MKAnnotationView?
+				annotationView = setupStopAnnotationView(
+					for: annotation,
+					mapView: mapView
+				)
+				return annotationView
 			}
 			return nil
+		}
+		
+		private func setupStopAnnotationView(for annotation : StopAnnotation, mapView: MKMapView) -> MKAnnotationView? {
+			let stopAnnotationView = mapView.dequeueReusableAnnotationView(
+				withIdentifier: annotation.type.iconImageName,
+				for: annotation
+			)
+			stopAnnotationView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
+			stopAnnotationView.centerOffset = CGPoint(x: 0, y: -stopAnnotationView.frame.size.height / 2)
+			stopAnnotationView.canShowCallout = true
+			stopAnnotationView.image = UIImage(named: annotation.type.iconImageName)
+			return stopAnnotationView
 		}
 		
 		@objc func handleTap(_ gestureRecognizer: UIGestureRecognizer) {

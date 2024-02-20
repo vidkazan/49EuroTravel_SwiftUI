@@ -37,10 +37,12 @@ extension Stop {
 		if let products = stopDTO?.products {
 			let type : StopAnnotation.AnnotationType? = {
 				if products.national == true ||
-					products.nationalExpress == true ||
-					products.regional == true ||
+					products.nationalExpress == true {
+					return .national
+				}
+				if products.regional == true ||
 					products.regionalExpress == true {
-					return .train
+					return .regional
 				}
 				if products.suburban == true {
 					return .sbahn
