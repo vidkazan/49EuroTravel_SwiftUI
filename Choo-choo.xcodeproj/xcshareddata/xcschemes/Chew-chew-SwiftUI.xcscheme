@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7D6734AE2A96334B00CBE9C1"
-               BuildableName = "Chew-chew-SwiftUI.app"
-               BlueprintName = "Chew-chew-SwiftUI"
-               ReferencedContainer = "container:Choo-choo-SwiftUI.xcodeproj">
+               BuildableName = "Choo-choo.app"
+               BlueprintName = "Choo-choo"
+               ReferencedContainer = "container:Choo-choo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -35,36 +35,14 @@
       </TestPlans>
       <Testables>
          <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7D6734BE2A96334C00CBE9C1"
-               BuildableName = "Chew-chew-SwiftUITests.xctest"
-               BlueprintName = "Chew-chew-SwiftUITests"
-               ReferencedContainer = "container:Choo-choo-SwiftUI.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
             skipped = "YES"
             parallelizable = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7D6734C82A96334D00CBE9C1"
-               BuildableName = "Chew-chew-SwiftUIUITests.xctest"
-               BlueprintName = "Chew-chew-SwiftUIUITests"
-               ReferencedContainer = "container:Choo-choo-SwiftUI.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
-         <TestableReference
-            skipped = "NO"
-            parallelizable = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7DFC91D52B13BE5000990A2F"
-               BuildableName = "Chew-chew-UnitTests.xctest"
-               BlueprintName = "Chew-chew-UnitTests"
-               ReferencedContainer = "container:Choo-choo-SwiftUI.xcodeproj">
+               BuildableName = "Choo-choo-UITests.xctest"
+               BlueprintName = "Choo-choo-UITests"
+               ReferencedContainer = "container:Choo-choo.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -75,7 +53,7 @@
                BlueprintIdentifier = "7D932B9C2B14E46A00A1A390"
                BuildableName = "UnitTests.xctest"
                BlueprintName = "UnitTests"
-               ReferencedContainer = "container:Choo-choo-SwiftUI.xcodeproj">
+               ReferencedContainer = "container:Choo-choo.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -86,7 +64,7 @@
                BlueprintIdentifier = "7D3964FC2B188FB2008CD5FF"
                BuildableName = "UnitTesting.xctest"
                BlueprintName = "UnitTesting"
-               ReferencedContainer = "container:Choo-choo-SwiftUI.xcodeproj">
+               ReferencedContainer = "container:Choo-choo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -108,9 +86,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7D6734AE2A96334B00CBE9C1"
-            BuildableName = "Chew-chew-SwiftUI.app"
-            BlueprintName = "Chew-chew-SwiftUI"
-            ReferencedContainer = "container:Choo-choo-SwiftUI.xcodeproj">
+            BuildableName = "Choo-choo.app"
+            BlueprintName = "Choo-choo"
+            ReferencedContainer = "container:Choo-choo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -135,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7D6734AE2A96334B00CBE9C1"
-            BuildableName = "Chew-chew-SwiftUI.app"
-            BlueprintName = "Chew-chew-SwiftUI"
-            ReferencedContainer = "container:Choo-choo-SwiftUI.xcodeproj">
+            BuildableName = "Choo-choo.app"
+            BlueprintName = "Choo-choo"
+            ReferencedContainer = "container:Choo-choo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
