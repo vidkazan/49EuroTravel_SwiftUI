@@ -172,7 +172,6 @@ extension JourneyFollowView {
 			}
 	}
 }
-
 struct FollowPreviews: PreviewProvider {
 	static var previews: some View {
 		if let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData {

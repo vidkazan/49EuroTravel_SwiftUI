@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "foot.pdf",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

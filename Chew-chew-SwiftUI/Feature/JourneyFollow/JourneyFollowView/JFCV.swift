@@ -15,8 +15,8 @@ struct JourneyFollowCellView : View {
 		self.vm = journeyDetailsViewModel
 	}
 	var body: some View {
+		let data = vm.state.data.viewData
 		VStack(alignment: .leading) {
-			let data = vm.state.data.viewData
 			HStack {
 				NavigationLink(destination: {
 					JourneyDetailsView(journeyDetailsViewModel: vm)
@@ -70,8 +70,18 @@ struct JourneyFollowCellView : View {
 				}
 			}
 		}
+		.contextMenu {
+			Button(action: {
+				Model.shared.sheetViewModel.send(
+					event: .didRequestShow(.mapDetails(.journey(data.legs)))
+				)
+			}, label: {
+				Label("Show on map", systemImage: "map.circle")
+			})
+		}
 	}
 }
+
 
 extension JourneyFollowCellView {
 	func isLoading(status : JourneyDetailsViewModel.Status) -> Bool {
