@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7D6734AE2A96334B00CBE9C1"
-               BuildableName = "Choo-choo.app"
-               BlueprintName = "Choo-choo"
-               ReferencedContainer = "container:Choo-choo.xcodeproj">
+               BuildableName = "ChooChoo.app"
+               BlueprintName = "ChooChoo"
+               ReferencedContainer = "container:ChooChoo.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -40,9 +40,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7D6734C82A96334D00CBE9C1"
-               BuildableName = "Choo-choo-UITests.xctest"
-               BlueprintName = "Choo-choo-UITests"
-               ReferencedContainer = "container:Choo-choo.xcodeproj">
+               BuildableName = "ChooChooUITests.xctest"
+               BlueprintName = "ChooChooUITests"
+               ReferencedContainer = "container:ChooChoo.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -53,7 +53,7 @@
                BlueprintIdentifier = "7D932B9C2B14E46A00A1A390"
                BuildableName = "UnitTests.xctest"
                BlueprintName = "UnitTests"
-               ReferencedContainer = "container:Choo-choo.xcodeproj">
+               ReferencedContainer = "container:ChooChoo.xcodeproj">
             </BuildableReference>
          </TestableReference>
          <TestableReference
@@ -64,7 +64,7 @@
                BlueprintIdentifier = "7D3964FC2B188FB2008CD5FF"
                BuildableName = "UnitTesting.xctest"
                BlueprintName = "UnitTesting"
-               ReferencedContainer = "container:Choo-choo.xcodeproj">
+               ReferencedContainer = "container:ChooChoo.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -86,9 +86,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7D6734AE2A96334B00CBE9C1"
-            BuildableName = "Choo-choo.app"
-            BlueprintName = "Choo-choo"
-            ReferencedContainer = "container:Choo-choo.xcodeproj">
+            BuildableName = "ChooChoo.app"
+            BlueprintName = "ChooChoo"
+            ReferencedContainer = "container:ChooChoo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <CommandLineArguments>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7D6734AE2A96334B00CBE9C1"
-            BuildableName = "Choo-choo.app"
-            BlueprintName = "Choo-choo"
-            ReferencedContainer = "container:Choo-choo.xcodeproj">
+            BuildableName = "ChooChoo.app"
+            BlueprintName = "ChooChoo"
+            ReferencedContainer = "container:ChooChoo.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

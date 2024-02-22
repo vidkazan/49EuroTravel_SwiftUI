@@ -9,7 +9,7 @@ import SwiftUI
 import CoreData
 
 @main
-struct Chew_chew_SwiftUIApp: App {
+struct ChooChooApp: App {
 	var chewViewModel = ChewViewModel(referenceDate: .now)
 	
 	var body: some Scene {

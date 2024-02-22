@@ -47,7 +47,6 @@
 		7D33A94B2B5192960005D723 /* JFVM + sideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A94A2B5192960005D723 /* JFVM + sideEffects.swift */; };
 		7D33A94D2B51A7E60005D723 /* Styles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A94C2B51A7E60005D723 /* Styles.swift */; };
 		7D33A96D2B5343320005D723 /* Chew-chew-SwiftUI.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 7D33A9552B5343320005D723 /* Chew-chew-SwiftUI.xctestplan */; };
-		7D33A96E2B5343320005D723 /* Chew-chew-SwiftUI.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 7D33A9552B5343320005D723 /* Chew-chew-SwiftUI.xctestplan */; };
 		7D33A96F2B5343320005D723 /* Chew-chew-SwiftUI.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 7D33A9552B5343320005D723 /* Chew-chew-SwiftUI.xctestplan */; };
 		7D33A9702B5343320005D723 /* Tests.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 7D33A9562B5343320005D723 /* Tests.xctestplan */; };
 		7D33A9712B5343320005D723 /* Tests.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = 7D33A9562B5343320005D723 /* Tests.xctestplan */; };
@@ -112,7 +111,7 @@
 		7D65DF1D2B2A2BFE00692601 /* ChewStop+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65DF192B2A2BFE00692601 /* ChewStop+CoreDataProperties.swift */; };
 		7D65DF1E2B2A2BFE00692601 /* PrognosedPlatform+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65DF1A2B2A2BFE00692601 /* PrognosedPlatform+CoreDataClass.swift */; };
 		7D65DF1F2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65DF1B2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift */; };
-		7D6734B32A96334B00CBE9C1 /* Choo_choo_SwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B22A96334B00CBE9C1 /* Choo_choo_SwiftUIApp.swift */; };
+		7D6734B32A96334B00CBE9C1 /* ChooChooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B22A96334B00CBE9C1 /* ChooChooApp.swift */; };
 		7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B42A96334B00CBE9C1 /* ContentView.swift */; };
 		7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */; };
 		7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */; };
@@ -346,10 +345,10 @@
 		7D65DF192B2A2BFE00692601 /* ChewStop+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewStop+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D65DF1A2B2A2BFE00692601 /* PrognosedPlatform+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrognosedPlatform+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D65DF1B2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PrognosedPlatform+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7D6734AF2A96334B00CBE9C1 /* Choo-choo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Choo-choo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		7D6734B22A96334B00CBE9C1 /* Choo_choo_SwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Choo_choo_SwiftUIApp.swift; sourceTree = "<group>"; };
+		7D6734AF2A96334B00CBE9C1 /* ChooChoo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChooChoo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D6734B22A96334B00CBE9C1 /* ChooChooApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooChooApp.swift; sourceTree = "<group>"; };
 		7D6734B42A96334B00CBE9C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; wrapsLines = 0; };
-		7D6734C92A96334D00CBE9C1 /* Choo-choo-UITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Choo-choo-UITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		7D6734C92A96334D00CBE9C1 /* ChooChooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChooChooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChoosingView.swift; sourceTree = "<group>"; };
 		7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Type.swift"; sourceTree = "<group>"; };
 		7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Stop.swift"; sourceTree = "<group>"; };
@@ -549,7 +548,7 @@
 			isa = PBXGroup;
 			children = (
 				7D7547B22B616E2A002BE434 /* ContentView */,
-				7D6734B22A96334B00CBE9C1 /* Choo_choo_SwiftUIApp.swift */,
+				7D6734B22A96334B00CBE9C1 /* ChooChooApp.swift */,
 				7D6C5C122AAF482400DEFC57 /* chewVM */,
 				7D7A55382AA4B3DD000256EF /* feedback */,
 			);
@@ -971,7 +970,7 @@
 		7D6734A62A96334B00CBE9C1 = {
 			isa = PBXGroup;
 			children = (
-				7D6734B12A96334B00CBE9C1 /* Choo-choo-SwiftUI */,
+				7D6734B12A96334B00CBE9C1 /* ChooChoo */,
 				7D6734B02A96334B00CBE9C1 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -979,14 +978,14 @@
 		7D6734B02A96334B00CBE9C1 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7D6734AF2A96334B00CBE9C1 /* Choo-choo.app */,
-				7D6734C92A96334D00CBE9C1 /* Choo-choo-UITests.xctest */,
+				7D6734AF2A96334B00CBE9C1 /* ChooChoo.app */,
+				7D6734C92A96334D00CBE9C1 /* ChooChooUITests.xctest */,
 				7D932B9D2B14E46A00A1A390 /* UnitTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		7D6734B12A96334B00CBE9C1 /* Choo-choo-SwiftUI */ = {
+		7D6734B12A96334B00CBE9C1 /* ChooChoo */ = {
 			isa = PBXGroup;
 			children = (
 				7D33A9522B5343320005D723 /* Test */,
@@ -997,7 +996,7 @@
 				7D6734B82A96334C00CBE9C1 /* Assets */,
 				7DA5FEAA2B8106BB002182F8 /* Sheet.swift */,
 			);
-			path = "Choo-choo-SwiftUI";
+			path = ChooChoo;
 			sourceTree = "<group>";
 		};
 		7D6734B82A96334C00CBE9C1 /* Assets */ = {
@@ -1455,9 +1454,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		7D6734AE2A96334B00CBE9C1 /* Choo-choo */ = {
+		7D6734AE2A96334B00CBE9C1 /* ChooChoo */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D6734D32A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "Choo-choo" */;
+			buildConfigurationList = 7D6734D32A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "ChooChoo" */;
 			buildPhases = (
 				7D6734AB2A96334B00CBE9C1 /* Sources */,
 				7D6734AC2A96334B00CBE9C1 /* Frameworks */,
@@ -1467,7 +1466,7 @@
 			);
 			dependencies = (
 			);
-			name = "Choo-choo";
+			name = ChooChoo;
 			packageProductDependencies = (
 				7D02CE292A97E80D0048ADE6 /* Collections */,
 				7D02CE2B2A97E80D0048ADE6 /* DequeModule */,
@@ -1475,12 +1474,12 @@
 				7D78876F2B6309B600CDEFF9 /* TimelaneCombine */,
 			);
 			productName = "Chew-chew-SwiftUI";
-			productReference = 7D6734AF2A96334B00CBE9C1 /* Choo-choo.app */;
+			productReference = 7D6734AF2A96334B00CBE9C1 /* ChooChoo.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7D6734C82A96334D00CBE9C1 /* Choo-choo-UITests */ = {
+		7D6734C82A96334D00CBE9C1 /* ChooChooUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 7D6734D92A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "Choo-choo-UITests" */;
+			buildConfigurationList = 7D6734D92A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "ChooChooUITests" */;
 			buildPhases = (
 				7D6734C52A96334D00CBE9C1 /* Sources */,
 				7D6734C62A96334D00CBE9C1 /* Frameworks */,
@@ -1491,9 +1490,9 @@
 			dependencies = (
 				7D6734CB2A96334D00CBE9C1 /* PBXTargetDependency */,
 			);
-			name = "Choo-choo-UITests";
+			name = ChooChooUITests;
 			productName = "Chew-chew-SwiftUIUITests";
-			productReference = 7D6734C92A96334D00CBE9C1 /* Choo-choo-UITests.xctest */;
+			productReference = 7D6734C92A96334D00CBE9C1 /* ChooChooUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 		7D932B9C2B14E46A00A1A390 /* UnitTests */ = {
@@ -1537,13 +1536,12 @@
 					};
 				};
 			};
-			buildConfigurationList = 7D6734AA2A96334B00CBE9C1 /* Build configuration list for PBXProject "Choo-choo" */;
+			buildConfigurationList = 7D6734AA2A96334B00CBE9C1 /* Build configuration list for PBXProject "ChooChoo" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				de,
 				Base,
 			);
 			mainGroup = 7D6734A62A96334B00CBE9C1;
@@ -1555,8 +1553,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7D6734AE2A96334B00CBE9C1 /* Choo-choo */,
-				7D6734C82A96334D00CBE9C1 /* Choo-choo-UITests */,
+				7D6734AE2A96334B00CBE9C1 /* ChooChoo */,
+				7D6734C82A96334D00CBE9C1 /* ChooChooUITests */,
 				7D932B9C2B14E46A00A1A390 /* UnitTests */,
 			);
 		};
@@ -1589,7 +1587,6 @@
 			files = (
 				7D33A9802B5343320005D723 /* CancelledFirstStop-Trip-RE11-Duss-Kassel.json in Resources */,
 				7D33A97A2B5343320005D723 /* RE6-Neuss-Minden.json in Resources */,
-				7D33A96E2B5343320005D723 /* Chew-chew-SwiftUI.xctestplan in Resources */,
 				7D28BAD32B82C689008B9979 /* Mock.xcassets in Resources */,
 				7D33A97D2B5343320005D723 /* CancelledLastStop-Trip-RE11-Duss-Kassel.json in Resources */,
 				7D33A9742B5343320005D723 /* Journey-Neuss-Wolfsburg.json in Resources */,
@@ -1716,7 +1713,7 @@
 				7D65DF1F2B2A2BFE00692601 /* PrognosedPlatform+CoreDataProperties.swift in Sources */,
 				7DA13A412B28D5F10045061F /* Settings+CoreDataClass.swift in Sources */,
 				7D33A9A42B5433AA0005D723 /* BadgeStyle.swift in Sources */,
-				7D6734B32A96334B00CBE9C1 /* Choo_choo_SwiftUIApp.swift in Sources */,
+				7D6734B32A96334B00CBE9C1 /* ChooChooApp.swift in Sources */,
 				7D6C5C182AAF486700DEFC57 /* chewVM+state.swift in Sources */,
 				7D7A553A2AA4B3E5000256EF /* Feedback.swift in Sources */,
 				7D6C5C272AAF4BD300DEFC57 /* chewVM+reduce+Journeys.swift in Sources */,
@@ -1841,12 +1838,12 @@
 /* Begin PBXTargetDependency section */
 		7D6734CB2A96334D00CBE9C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7D6734AE2A96334B00CBE9C1 /* Choo-choo */;
+			target = 7D6734AE2A96334B00CBE9C1 /* ChooChoo */;
 			targetProxy = 7D6734CA2A96334D00CBE9C1 /* PBXContainerItemProxy */;
 		};
 		7D932BA22B14E46A00A1A390 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 7D6734AE2A96334B00CBE9C1 /* Choo-choo */;
+			target = 7D6734AE2A96334B00CBE9C1 /* ChooChoo */;
 			targetProxy = 7D932BA12B14E46A00A1A390 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -1978,7 +1975,7 @@
 				DEVELOPMENT_TEAM = M82325R967;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Choo-choo-SwiftUI/Info.plist";
+				INFOPLIST_FILE = ChooChoo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Choo Choo";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location";
@@ -2018,7 +2015,7 @@
 				DEVELOPMENT_TEAM = M82325R967;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = "Choo-choo-SwiftUI/Info.plist";
+				INFOPLIST_FILE = ChooChoo/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Choo Choo";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location";
@@ -2055,7 +2052,7 @@
 				DEVELOPMENT_TEAM = M82325R967;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = fcody.49EuroTravel.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Choo-choo.tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -2063,7 +2060,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = "Chew-chew-SwiftUI";
+				TEST_TARGET_NAME = "Choo-choo";
 			};
 			name = Debug;
 		};
@@ -2076,7 +2073,7 @@
 				DEVELOPMENT_TEAM = M82325R967;
 				GENERATE_INFOPLIST_FILE = YES;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = fcody.49EuroTravel.tests;
+				PRODUCT_BUNDLE_IDENTIFIER = "fcody.Choo-choo.tests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -2084,7 +2081,7 @@
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
-				TEST_TARGET_NAME = "Chew-chew-SwiftUI";
+				TEST_TARGET_NAME = "Choo-choo";
 			};
 			name = Release;
 		};
@@ -2129,7 +2126,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		7D6734AA2A96334B00CBE9C1 /* Build configuration list for PBXProject "Choo-choo" */ = {
+		7D6734AA2A96334B00CBE9C1 /* Build configuration list for PBXProject "ChooChoo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D6734D12A96334D00CBE9C1 /* Debug */,
@@ -2138,7 +2135,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D6734D32A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "Choo-choo" */ = {
+		7D6734D32A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "ChooChoo" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D6734D42A96334D00CBE9C1 /* Debug */,
@@ -2147,7 +2144,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7D6734D92A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "Choo-choo-UITests" */ = {
+		7D6734D92A96334D00CBE9C1 /* Build configuration list for PBXNativeTarget "ChooChooUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				7D6734DA2A96334D00CBE9C1 /* Debug */,
