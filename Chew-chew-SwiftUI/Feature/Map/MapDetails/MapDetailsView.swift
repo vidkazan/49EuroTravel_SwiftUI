@@ -1,56 +1,10 @@
 import SwiftUI
+import OrderedCollections
 import MapKit
-
-struct MapDetailsUIView: UIViewRepresentable {
-	let legs : [MapLegData]
-	let region: MKCoordinateRegion
-	
-	class Coordinator: NSObject, MKMapViewDelegate {
-		func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-			let renderer = MKPolylineRenderer(overlay: overlay)
-			renderer.strokeColor = UIColor.white
-			renderer.lineWidth = 5
-			return renderer
-		}
-	}
-	
-	func makeUIView(context: Context) -> MKMapView {
-		let mapView = MKMapView()
-		legs.forEach({ leg in
-			let annotations : [MKPointAnnotation] = leg.stops.map {
-				let annotation = MKPointAnnotation()
-				annotation.coordinate = $0.locationCoordinates
-				annotation.title = $0.name
-				return annotation
-			}
-			
-			mapView.addAnnotations(annotations)
-			if let route = leg.route {
-				mapView.addOverlay(route)
-			}
-		})
-
-		mapView.delegate = context.coordinator
-		mapView.region = region
-		mapView.showsUserLocation = true
-		
-		mapView.isZoomEnabled = true
-		mapView.isUserInteractionEnabled = true
-		return mapView
-	}
-
-	func updateUIView(_ view: MKMapView, context: Context) {}
-
-	func makeCoordinator() -> Coordinator {
-		Coordinator()
-	}
-}
 
 struct MapDetailsView: View {
 	@State var mapRect : MKCoordinateRegion
-	let legs : [MapLegData]
-//	let stops : [StopViewData]
-//	let route : MKPolyline?
+	let legs :  OrderedSet<MapLegData>
 	let closeSheet : ()->Void
 	var body: some View {
 		Group {
@@ -80,6 +34,36 @@ extension MapDetailsView {
 					}
 				})
 			}
+		}
+	}
+}
+
+
+struct MapDetails_Previews: PreviewProvider {
+	static var previews: some View {
+		if let mock = Mock
+			.journeys
+			.journeyNeussWolfsburg
+			.decodedData?
+			.journey
+			.journeyViewData(
+				depStop: .init(),
+				arrStop: .init(),
+				realtimeDataUpdatedAt: 0
+			) {
+			MapDetailsView(
+				mapRect: SheetViewModel.constructMapRegion(
+					locFirst: mock.legs.first?.legStopsViewData.first?.locationCoordinates ?? .init(),
+					locLast: mock.legs.last?.legStopsViewData.last?.locationCoordinates ?? .init()
+				),
+				legs: .init( mock.legs.compactMap({MapLegData(
+					type: $0.legType,
+					lineType: $0.lineViewData.type,
+					stops: $0.legStopsViewData,
+					route: nil
+				)})),
+				closeSheet: {}
+			)
 		}
 	}
 }

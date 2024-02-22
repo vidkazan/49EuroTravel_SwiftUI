@@ -27,9 +27,10 @@ struct MapPickerUIView: UIViewRepresentable {
 			latitudeDelta: 0.01,
 			longitudeDelta: 0.01
 		)
+		
 		let region = MKCoordinateRegion(center: initialLocation, span: span)
 		mapView.setRegion(region, animated: true)
-
+		
 		let gestureRecognizer = UILongPressGestureRecognizer(
 			target: context.coordinator,
 			action: #selector(Coordinator.handleTap(_:))
@@ -37,17 +38,8 @@ struct MapPickerUIView: UIViewRepresentable {
 		gestureRecognizer.delegate = context.coordinator
 		mapView.addGestureRecognizer(gestureRecognizer)
 		
-		register(mapView)
+		StopAnnotation.registerStopViews(mapView)
 		return mapView
-	}
-
-	private func register(_ mapView : MKMapView){
-		StopAnnotation.AnnotationType.allCases.forEach {
-			mapView.register(
-				StopAnnotationView.self,
-				forAnnotationViewWithReuseIdentifier: $0.iconImageName
-			)
-		}
 	}
 	
 	func updateUIView(_ uiView: MKMapView, context: Context) {
@@ -63,14 +55,23 @@ struct MapPickerUIView: UIViewRepresentable {
 		}
 		
 		if uiView.region.span.longitudeDelta > 0.02 {
-			uiView.removeAnnotations(uiView.annotations.filter({
-				$0 is StopAnnotation
-			}))
+			uiView.removeAnnotations(uiView.annotations.filter {
+				$0.isKind(of: StopAnnotation.self)
+			})
 		} else {
 			vm.state.data.stops.forEach({ stop in
-				if uiView.annotations.first(where: {$0.coordinate == stop.coordinates}) == nil,
-				   let annotation = stop.stopAnnotation() {
-					uiView.addAnnotation(annotation)
+				if uiView.annotations.first(
+					where: {$0.coordinate == stop.coordinates}) == nil,
+				   let lineType = stop.stopDTO?.products?.lineType
+				{
+					MapPickerViewModel.addStopAnnotation(
+						id: stop.id,
+						lineType: lineType,
+						stopName: stop.name,
+						coords: stop.coordinates,
+						mapView: uiView,
+						stopOverType: nil
+					)
 				}
 			})
 		}

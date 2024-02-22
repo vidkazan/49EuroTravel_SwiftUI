@@ -33,44 +33,16 @@ struct Stop : Equatable,Identifiable, Hashable {
 }
 
 extension Stop {
-	func stopAnnotation() -> StopAnnotation? {
+	func stopAnnotation(stopOverType : StopOverType?) -> StopAnnotation? {
 		if let products = stopDTO?.products {
-			let type : StopAnnotation.AnnotationType? = {
-				if products.national == true ||
-					products.nationalExpress == true {
-					return .national
-				}
-				if products.regional == true ||
-					products.regionalExpress == true {
-					return .regional
-				}
-				if products.suburban == true {
-					return .sbahn
-				}
-				if products.subway == true {
-					return .ubahn
-				}
-				if products.tram == true {
-					return .tram
-				}
-				if products.bus == true {
-					return .bus
-				}
-				if products.ferry == true {
-					return .ferry
-				}
-				if products.taxi == true {
-					return .taxi
-				}
-				return nil
-			}()
-			
+			let type = products.lineType
 			if let type = type {
 				return StopAnnotation(
 					stopId: id,
 					name: name,
 					location: coordinates,
-					type: type
+					type: type,
+					stopOverType: stopOverType
 				)
 			}
 		}

@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import CoreLocation
 
 enum LineType : String,Equatable,Hashable, CaseIterable {
 	static func < (lhs: LineType, rhs: LineType) -> Bool {
@@ -24,7 +25,9 @@ enum LineType : String,Equatable,Hashable, CaseIterable {
 	case taxi
 	case transfer
 	case foot
-	
+}
+
+extension LineType {
 	var shortValue : String {
 		switch self {
 		case .nationalExpress:
@@ -80,6 +83,35 @@ enum LineType : String,Equatable,Hashable, CaseIterable {
 			return nil
 		case .foot:
 			return nil
+		}
+	}
+	
+	var iconBig : String {
+		switch self {
+		case .nationalExpress:
+			return "ice.big"
+		case .national:
+			return "ice.big"
+		case .regionalExpress:
+			return "re.big"
+		case .regional:
+			return "re.big"
+		case .suburban:
+			return "s.big"
+		case .bus:
+			return "bus.big"
+		case .ferry:
+			return "ship.big"
+		case .subway:
+			return "u.big"
+		case .tram:
+			return "tram.big"
+		case .taxi:
+			return "taxi.big"
+		case .transfer:
+			return "transfer.big"
+		case .foot:
+			return "foot.big"
 		}
 	}
 	
@@ -143,3 +175,15 @@ extension LineType {
 		}
 	}
 }
+extension LineType {
+	func stopAnnotation<T : ChewStopAnnotaion>(id: String?,name : String, coords: CLLocationCoordinate2D, stopOverType : StopOverType?) -> T {
+		T (
+			stopId: id,
+			name: name,
+			location: coords,
+			type: self,
+			stopOverType: stopOverType
+		)
+	}
+}
+

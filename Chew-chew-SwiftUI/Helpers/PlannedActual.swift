@@ -7,16 +7,11 @@
 
 import Foundation
 
-struct Prognosed<T : Equatable> : Equatable {
+struct Prognosed<T : Hashable> : Hashable {
 	var actual : T?
 	var planned : T?
 	
 	func actualOrPlannedIfActualIsNil() -> T? {
 		return actual == nil ? planned : actual
 	}
-}
-
-struct PrognosedDirection<T : Equatable> : Equatable {
-	let actual : T
-	let planned : T
 }

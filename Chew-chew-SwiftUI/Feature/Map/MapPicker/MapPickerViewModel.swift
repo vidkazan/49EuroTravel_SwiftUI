@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import CoreLocation
 import MapKit
+import SwiftUI
 
 class MapPickerViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
@@ -410,3 +411,149 @@ extension MapPickerViewModel {
 	}
 }
 
+extension MapPickerViewModel {
+	static func addStopAnnotation(id: String?,lineType : LineType, stopName : String,coords : CLLocationCoordinate2D, mapView : MKMapView,stopOverType : StopOverType?){
+		switch lineType {
+		case .nationalExpress,.national,.regionalExpress:
+			let anno : IceStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		case .regional:
+			let anno : ReStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		case .suburban:
+			let anno : SStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		case .bus:
+			let anno : BusStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		case .ferry:
+			let anno : ShipStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		case .subway:
+			let anno : UStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		case .tram:
+			let anno : TramStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		case .taxi:
+			let anno : TaxiStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		case .transfer:
+			let anno : TransferStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		case .foot:
+			let anno : FootStopAnnotation = lineType.stopAnnotation(
+				id: id,
+				name: stopName,
+				coords: coords, stopOverType: stopOverType
+			)
+			mapView.addAnnotation(anno)
+		}
+	}
+}
+
+extension MapPickerViewModel {
+	static func mapView(
+		_ mapView: MKMapView,
+		viewFor annotation: MKAnnotation
+	) -> MKAnnotationView? {
+		if annotation.isKind(of: StopAnnotation.self) {
+			if let annotation = annotation as? BusStopAnnotation {
+				let res : BusStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation, mapView: mapView)
+				return res
+			} else if let annotation = annotation as? IceStopAnnotation {
+				let res : IceStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation,mapView: mapView)
+				return res
+			} else if let annotation = annotation as? ReStopAnnotation {
+				let res : ReStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation,mapView: mapView)
+				return res
+			} else if let annotation = annotation as? SStopAnnotation {
+				let res : SStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation,mapView: mapView)
+				return res
+			} else if let annotation = annotation as? UStopAnnotation {
+				let res : UStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation,mapView: mapView)
+				return res
+			} else if let annotation = annotation as? TramStopAnnotation {
+				let res : TramStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation,mapView: mapView)
+				return res
+			} else if let annotation = annotation as? ShipStopAnnotation {
+				let res : ShipStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation,mapView: mapView)
+				return res
+			} else if let annotation = annotation as? TaxiStopAnnotation {
+				let res : TaxiStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation,mapView: mapView)
+				return res
+			} else if let annotation = annotation as? FootStopAnnotation {
+				let res : FootStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation,mapView: mapView)
+				return res
+			} else if let annotation = annotation as? TransferStopAnnotation {
+				let res : TransferStopAnnotationView? = Self.setupStopAnnotationViewGeneric(for: annotation,mapView: mapView)
+				return res
+			}
+		}
+		return nil
+	}
+	
+	static func setupStopAnnotationViewGeneric<T: MKAnnotation, U: ChewAnnotationView>(
+		for annotation: T,
+		mapView: MKMapView
+	) -> U? {
+		if let annotationView = mapView.dequeueReusableAnnotationView(
+			withIdentifier: NSStringFromClass(T.self),
+			for: annotation
+		) as? U,
+		let anno = annotation as? StopAnnotation {
+			Self.setupAnnotationView(
+				view: annotationView,
+				annotation: anno
+			)
+			return annotationView
+		}
+		return nil
+	}
+	
+	static func setupAnnotationView(view: ChewAnnotationView, annotation : StopAnnotation){
+		view.setupUI(annotation.type.iconBig)
+		let strokeTextAttributes: [NSAttributedString.Key : Any] = [
+			.strokeColor : UIColor.systemBackground,
+			.strokeWidth : -2.0,
+			.font : UIFont.boldSystemFont(ofSize: 12)
+		]
+		view.titleLabel?.attributedText = NSAttributedString(string: annotation.name, attributes: strokeTextAttributes)
+	}
+}

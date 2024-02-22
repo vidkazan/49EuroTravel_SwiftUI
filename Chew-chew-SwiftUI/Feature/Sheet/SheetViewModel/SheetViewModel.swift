@@ -10,6 +10,7 @@ import Combine
 import SwiftUI
 import MapKit
 import CoreLocation
+import OrderedCollections
 
 class SheetViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State
@@ -52,8 +53,9 @@ protocol SheetViewDataSource {
 }
 
 
-struct MapLegData {
+struct MapLegData : Hashable {
 	let type : LegViewData.LegType
+	let lineType : LineType
 	let stops : [StopViewData]
 	let route : MKPolyline?
 }
@@ -66,7 +68,7 @@ enum MapDetailsRequest {
 
 struct MapDetailsViewDataSource : SheetViewDataSource {
 	let coordRegion : MKCoordinateRegion
-	let mapLegDataList : [MapLegData]
+	let mapLegDataList : OrderedSet<MapLegData>
 }
 
 struct MapPickerViewDataSource : SheetViewDataSource {
@@ -287,7 +289,7 @@ extension SheetViewModel {
 }
 
 extension SheetViewModel {
-	private static func constructMapRegion(locFirst : CLLocationCoordinate2D, locLast : CLLocationCoordinate2D) -> MKCoordinateRegion {
+	static func constructMapRegion(locFirst : CLLocationCoordinate2D, locLast : CLLocationCoordinate2D) -> MKCoordinateRegion {
 		let centerCoordinate = CLLocationCoordinate2D(
 			latitude: (locFirst.latitude + locLast.latitude) / 2,
 			longitude: (locFirst.longitude + locLast.longitude) / 2
@@ -375,7 +377,7 @@ extension SheetViewModel {
 							locFirst: locFirst.locationCoordinates,
 							locLast: locLast.locationCoordinates
 						),
-						mapLegDataList: mapLegDataList
+						mapLegDataList: .init(mapLegDataList)  
 					)
 				)).eraseToAnyPublisher()
 			}
@@ -397,6 +399,7 @@ extension SheetViewModel {
 				polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
 				return MapLegData(
 					type: leg.legType,
+					lineType: leg.lineViewData.type,
 					stops: leg.legStopsViewData,
 					route: polyline
 				)
@@ -418,12 +421,14 @@ extension SheetViewModel {
 				}
 				return MapLegData(
 					type: leg.legType,
+					lineType: leg.lineViewData.type,
 					stops: leg.legStopsViewData,
 					route: polyline
 				)
 			case .transfer:
 				return MapLegData(
 					type: leg.legType,
+					lineType: leg.lineViewData.type,
 					stops: [locFirst,locLast],
 					route: nil
 				)
@@ -454,6 +459,7 @@ extension SheetViewModel {
 								mapLegDataList: [
 									MapLegData(
 										type: leg.legType,
+										lineType: leg.lineViewData.type,
 										stops: [locFirst,locLast],
 										route: res.routes.first?.polyline
 									)
@@ -470,6 +476,7 @@ extension SheetViewModel {
 								mapLegDataList: [
 									MapLegData(
 										type: leg.legType,
+										lineType: leg.lineViewData.type,
 										stops: [locFirst,locLast],
 										route: nil
 									)

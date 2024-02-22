@@ -35,7 +35,6 @@ struct UpdatedAtBadgeView : View {
 				ProgressView()
 					.scaleEffect(0.65)
 					.frame(width: 15, height: 15)
-					.transition(.slide)
 			}
 		}
 	}

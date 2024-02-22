@@ -73,7 +73,7 @@ struct LegDetailsView: View {
 							return []
 						}
 					}()
-					ForEach(stops) { stop in
+					ForEach(stops,id:\.name) { stop in
 						LegStopView(
 							stopOver: stop,
 							leg: leg,

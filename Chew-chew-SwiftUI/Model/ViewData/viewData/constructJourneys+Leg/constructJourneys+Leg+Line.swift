@@ -10,8 +10,21 @@ import UIKit
 import SwiftUI
 import CoreLocation
 
-func constructLineViewData(product : String, name : String, productName : String) -> LineViewData {
+func constructLineViewData(
+	product : String,
+	name : String,
+	productName : String,
+	legType : LegViewData.LegType
+) -> LineViewData {
 	let mode : LineType = {
+		switch legType {
+		case .transfer:
+			return .transfer
+		case .line:
+			break
+		default:
+			return .foot
+		}
 		switch product {
 		case "nationalExpress":
 			return .nationalExpress
@@ -34,7 +47,7 @@ func constructLineViewData(product : String, name : String, productName : String
 		case "taxi":
 			return .taxi
 		default:
-			return .taxi
+			return .ferry
 		}
 	}()
 	return LineViewData(

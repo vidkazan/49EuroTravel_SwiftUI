@@ -44,6 +44,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 		remarks: [],
 		legStopsViewData: [
 			StopViewData(
+				stopId: fromLeg.destination?.id,
 				name: fromLeg.destination?.name ?? "from",
 				time: first,
 				type: .transfer,
@@ -53,6 +54,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 				)
 			),
 			StopViewData(
+				stopId: toLeg.origin?.id,
 				name: toLeg.origin?.name ?? "to",
 				time: last,
 				type: .transfer,

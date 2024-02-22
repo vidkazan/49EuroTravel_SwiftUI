@@ -12,6 +12,7 @@ import CoreData
 
 extension ChewStop {
     @NSManaged public var lat: Double
+	@NSManaged public var stopId: String?
     @NSManaged public var long: Double
     @NSManaged public var name: String
     @NSManaged public var stopOverType: String

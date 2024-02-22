@@ -136,6 +136,7 @@
 		7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift */; };
 		7D6CCAF12B5FFB9200BCF62E /* SettingsView+saveSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */; };
 		7D6CCAF32B6004A200BCF62E /* VMTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */; };
+		7D704F442B8558C200F8334F /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D704F432B8558C200F8334F /* UIView+Constraints.swift */; };
 		7D740CC72AEA796B00E9FFD4 /* SettingsView+Connections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC62AEA796B00E9FFD4 /* SettingsView+Connections.swift */; };
 		7D740CC92AEA79C800E9FFD4 /* Set+Toogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */; };
 		7D740CCB2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CCA2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift */; };
@@ -155,7 +156,7 @@
 		7D8A3E3C2B83A8AC005B61CC /* JLVM+sideEffects+fetchJourneyList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D8A3E3B2B83A8AC005B61CC /* JLVM+sideEffects+fetchJourneyList.swift */; };
 		7D942A092AD9578800301666 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D942A082AD9578800301666 /* Stop.swift */; };
 		7D991E882B7AE42E000E26AD /* MapPickerUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D991E872B7AE42E000E26AD /* MapPickerUIView.swift */; };
-		7D991E8A2B7B8C93000E26AD /* MapAnnotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D991E892B7B8C93000E26AD /* MapAnnotations.swift */; };
+		7D991E8A2B7B8C93000E26AD /* Annotations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D991E892B7B8C93000E26AD /* Annotations.swift */; };
 		7D991E8D2B7B8D4A000E26AD /* MapPickerUIView+Delegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D991E8C2B7B8D4A000E26AD /* MapPickerUIView+Delegate.swift */; };
 		7D9BB10C2B0CBF54008A3616 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BB1062B0CBF53008A3616 /* Location+CoreDataClass.swift */; };
 		7D9BB10D2B0CBF54008A3616 /* Location+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D9BB1072B0CBF53008A3616 /* Location+CoreDataProperties.swift */; };
@@ -189,6 +190,8 @@
 		7DAF62C02A9E6DED006F1A17 /* D-ticketLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */; };
 		7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C12A9E8C2B006F1A17 /* Solar.swift */; };
 		7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */; };
+		7DBABFF92B879FA400C990FD /* ChildAnnotationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBABFF82B879FA400C990FD /* ChildAnnotationViews.swift */; };
+		7DBABFFC2B87A99B00C990FD /* MapDetailsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBABFFB2B87A99B00C990FD /* MapDetailsUIView.swift */; };
 		7DBF1E572ABB8084009B85EF /* TimeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */; };
 		7DBF1E592ABC522E009B85EF /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF1E582ABC522E009B85EF /* Badges.swift */; };
 		7DC0D2A12B2221D200B1FB5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D46ABE72B220B1600A4145E /* Assets.xcassets */; };
@@ -369,6 +372,7 @@
 		7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportModesSection copy.swift"; sourceTree = "<group>"; };
 		7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+saveSettings.swift"; sourceTree = "<group>"; };
 		7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMTemplate.swift; sourceTree = "<group>"; };
+		7D704F432B8558C200F8334F /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
 		7D740CC62AEA796B00E9FFD4 /* SettingsView+Connections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+Connections.swift"; sourceTree = "<group>"; };
 		7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Toogle.swift"; sourceTree = "<group>"; };
 		7D740CCA2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportTypes.swift"; sourceTree = "<group>"; };
@@ -389,7 +393,7 @@
 		7D932B9D2B14E46A00A1A390 /* UnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D942A082AD9578800301666 /* Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		7D991E872B7AE42E000E26AD /* MapPickerUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickerUIView.swift; sourceTree = "<group>"; };
-		7D991E892B7B8C93000E26AD /* MapAnnotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapAnnotations.swift; sourceTree = "<group>"; };
+		7D991E892B7B8C93000E26AD /* Annotations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Annotations.swift; sourceTree = "<group>"; };
 		7D991E8C2B7B8D4A000E26AD /* MapPickerUIView+Delegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MapPickerUIView+Delegate.swift"; sourceTree = "<group>"; };
 		7D9BB1062B0CBF53008A3616 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D9BB1072B0CBF53008A3616 /* Location+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -423,6 +427,8 @@
 		7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "D-ticketLogo.swift"; sourceTree = "<group>"; };
 		7DAF62C12A9E8C2B006F1A17 /* Solar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solar.swift; sourceTree = "<group>"; };
 		7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunEvent.swift; sourceTree = "<group>"; };
+		7DBABFF82B879FA400C990FD /* ChildAnnotationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildAnnotationViews.swift; sourceTree = "<group>"; };
+		7DBABFFB2B87A99B00C990FD /* MapDetailsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailsUIView.swift; sourceTree = "<group>"; };
 		7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabelView.swift; sourceTree = "<group>"; };
 		7DBF1E582ABC522E009B85EF /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		7DC0D2A22B2221D800B1FB5A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -578,6 +584,7 @@
 				7DE8A35C2B6AF4FC00C3A378 /* ChewDate.swift */,
 				7D47C3C62B703F24005BB23B /* CustomEnvironments.swift */,
 				7DFC46AA2B7F859F00118608 /* AttibutedContainers.swift */,
+				7D704F432B8558C200F8334F /* UIView+Constraints.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -614,13 +621,12 @@
 			path = sideEffects;
 			sourceTree = "<group>";
 		};
-		7D14D98D2B7AD83A00FB67AC /* Annotations */ = {
+		7D14D98D2B7AD83A00FB67AC /* Annotation */ = {
 			isa = PBXGroup;
 			children = (
-				7D14D98E2B7AD85400FB67AC /* AnnotationView.swift */,
-				7D991E892B7B8C93000E26AD /* MapAnnotations.swift */,
+				7D991E892B7B8C93000E26AD /* Annotations.swift */,
 			);
-			path = Annotations;
+			path = Annotation;
 			sourceTree = "<group>";
 		};
 		7D16384E2B6983F7006E9660 /* LegDetailsStopView */ = {
@@ -1229,6 +1235,7 @@
 		7DAC40822B7A1698006B3E55 /* Map */ = {
 			isa = PBXGroup;
 			children = (
+				7DBABFFA2B879FB200C990FD /* AnnotationView */,
 				7DAC40902B7A5A74006B3E55 /* MapDetails */,
 				7DAC408F2B7A5A68006B3E55 /* MapPicker */,
 			);
@@ -1239,7 +1246,7 @@
 			isa = PBXGroup;
 			children = (
 				7D991E8B2B7B8D27000E26AD /* UIView */,
-				7D14D98D2B7AD83A00FB67AC /* Annotations */,
+				7D14D98D2B7AD83A00FB67AC /* Annotation */,
 				7DAC40832B7A16C4006B3E55 /* MapPickerViewModel.swift */,
 				7DAC40952B7A5C02006B3E55 /* MapPickerView.swift */,
 			);
@@ -1250,6 +1257,7 @@
 			isa = PBXGroup;
 			children = (
 				7DAC408D2B7A5920006B3E55 /* MapDetailsView.swift */,
+				7DBABFFB2B87A99B00C990FD /* MapDetailsUIView.swift */,
 			);
 			path = MapDetails;
 			sourceTree = "<group>";
@@ -1285,6 +1293,15 @@
 				7DAF62AE2A9E5494006F1A17 /* JourneyScrollViewLoader.swift */,
 			);
 			path = JourneyScrollView;
+			sourceTree = "<group>";
+		};
+		7DBABFFA2B879FB200C990FD /* AnnotationView */ = {
+			isa = PBXGroup;
+			children = (
+				7D14D98E2B7AD85400FB67AC /* AnnotationView.swift */,
+				7DBABFF82B879FA400C990FD /* ChildAnnotationViews.swift */,
+			);
+			path = AnnotationView;
 			sourceTree = "<group>";
 		};
 		7DBEFB7F2ABDB18100C8D5DE /* constructJourneys+Leg */ = {
@@ -1656,6 +1673,7 @@
 				7DE8A3552B6ABB3400C3A378 /* LDSV+subviews.swift in Sources */,
 				7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */,
 				7D6C5C142AAF482D00DEFC57 /* chewVM.swift in Sources */,
+				7DBABFFC2B87A99B00C990FD /* MapDetailsUIView.swift in Sources */,
 				7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */,
 				7DE8A3512B6AB13800C3A378 /* TimeLabelView+subviews.swift in Sources */,
 				7DABB02D2B2E18F1002BBA97 /* JFCV.swift in Sources */,
@@ -1683,7 +1701,7 @@
 				7DD5BAF62B72B39D00CFE768 /* JourneyViewData.swift in Sources */,
 				7DD4A8D62AAC90B9001AA30C /* SSVM+reduce+Loading.swift in Sources */,
 				7DE640F02AB079710087FC64 /* JLVM+reduce+LoadingUpdate.swift in Sources */,
-				7D991E8A2B7B8C93000E26AD /* MapAnnotations.swift in Sources */,
+				7D991E8A2B7B8C93000E26AD /* Annotations.swift in Sources */,
 				7DA13A452B28F01F0045061F /* LineType.swift in Sources */,
 				7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */,
 				7D9BB10D2B0CBF54008A3616 /* Location+CoreDataProperties.swift in Sources */,
@@ -1711,6 +1729,7 @@
 				7D7A55322AA4A27C000256EF /* JLVM.swift in Sources */,
 				7D4208CB2AE122FF003D9BFB /* FullLegView.swift in Sources */,
 				7D1638522B698457006E9660 /* LDSV+badges.swift in Sources */,
+				7D704F442B8558C200F8334F /* UIView+Constraints.swift in Sources */,
 				7D2CAF642B0BEA0200577FD4 /* Model.xcdatamodeld in Sources */,
 				7D65DF1C2B2A2BFE00692601 /* ChewStop+CoreDataClass.swift in Sources */,
 				7D000CFB2AB87ACD00566120 /* NavigationLazyView.swift in Sources */,
@@ -1785,6 +1804,7 @@
 				7DCB2BFF2AAC8831007C672A /* SSVM+reduce+Idle.swift in Sources */,
 				7DAC40842B7A16C4006B3E55 /* MapPickerViewModel.swift in Sources */,
 				7DAC408E2B7A5920006B3E55 /* MapDetailsView.swift in Sources */,
+				7DBABFF92B879FA400C990FD /* ChildAnnotationViews.swift in Sources */,
 				7D4B1B992AA950780096F372 /* constructJourneyList.swift in Sources */,
 				7D462D492AAC947F00BC0D65 /* JLVM+reduce+LoadingJourneys.swift in Sources */,
 				7D7547B82B616FD3002BE434 /* FeatureView.swift in Sources */,

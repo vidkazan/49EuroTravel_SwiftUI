@@ -66,6 +66,7 @@ extension LegDTO {
 			)
 			return [
 				StopViewData(
+					stopId: origin?.id,
 					name: startName,
 					time: first,
 					type: .footTop,
@@ -75,6 +76,7 @@ extension LegDTO {
 					)
 				),
 				StopViewData(
+					stopId: destination?.id,
 					name: destination?.name ?? "name",
 					time: last,
 					type: .footTop,
@@ -101,6 +103,7 @@ extension LegDTO {
 			)
 			return [
 				StopViewData(
+					stopId: origin?.id,
 					name: origin?.name ?? "name",
 					time: first,
 					type: .footMiddle,
@@ -110,6 +113,7 @@ extension LegDTO {
 					)
 				),
 				StopViewData(
+					stopId: destination?.id,
 					name: destination?.name ?? "name",
 					time: last,
 					type: .footMiddle,
@@ -136,6 +140,7 @@ extension LegDTO {
 			)
 			return [
 				StopViewData(
+					stopId: origin?.id,
 					name: origin?.name ?? endName,
 					time: first,
 					type: .footBottom,
@@ -145,6 +150,7 @@ extension LegDTO {
 					)
 				),
 				StopViewData(
+					stopId: destination?.id,
 					name: endName,
 					time: last,
 					type: .footBottom,
@@ -171,6 +177,7 @@ extension LegDTO {
 			)
 			return [
 				StopViewData(
+					stopId: origin?.id,
 					name: origin?.name ?? "name",
 					time: first,
 					type: .transfer,
@@ -180,6 +187,7 @@ extension LegDTO {
 					)
 				),
 				StopViewData(
+					stopId: destination?.id,
 					name: destination?.name ?? "name",
 					time: last,
 					type: .transfer,

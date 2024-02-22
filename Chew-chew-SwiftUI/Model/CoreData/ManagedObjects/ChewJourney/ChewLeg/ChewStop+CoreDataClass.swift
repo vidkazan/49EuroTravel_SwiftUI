@@ -42,6 +42,7 @@ extension ChewStop {
 	func stopViewData() -> StopViewData {
 		let time = TimeContainer(chewTime: self.time)
 		return StopViewData(
+			id: self.stopId,
 			locationCoordinates: CLLocationCoordinate2D(latitude: self.lat, longitude: self.long),
 			name: self.name,
 			departurePlatform: Prognosed<String>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),

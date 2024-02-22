@@ -529,7 +529,6 @@ struct Products : Codable, Equatable,Hashable {
 	}
 }
 
-
 extension Products {
 	var lineType : LineType? {
 		if national == true {

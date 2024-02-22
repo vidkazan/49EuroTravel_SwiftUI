@@ -17,7 +17,7 @@ struct ChewDatePicker: UIViewRepresentable {
 		let picker = UIDatePicker()
 		picker.datePickerMode = mode
 		picker.minuteInterval = 5
-		picker.setDate(date, animated: false)
+		picker.setDate(date, animated: true)
 		picker.addTarget(context.coordinator, action: #selector(Coordinator.changed(_:)), for: .valueChanged)
 		picker.locale = .init(identifier: "en_GB")
 		picker.isHidden = true

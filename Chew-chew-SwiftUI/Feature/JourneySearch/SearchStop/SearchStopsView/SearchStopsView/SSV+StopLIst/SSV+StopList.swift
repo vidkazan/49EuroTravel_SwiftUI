@@ -12,12 +12,7 @@ import SwiftUI
 extension SearchStopsView {
 	func stopList(type : LocationDirectionType) -> some View {
 		let recentStopsAll = searchStopViewModel.state.previousStops.filter { stop in
-			switch type {
-			   case .departure:
-				   return stop.name.hasPrefix(topText)
-			   case .arrival:
-				   return stop.name.hasPrefix(bottomText)
-			   }
+			return type == .departure ? stop.name.hasPrefix(topText) : stop.name.hasPrefix(bottomText)
 		}
 		let recentStopsData = Array(sortStopByLocation(stops: recentStopsAll).prefix(2))
 		let stops = sortStopByLocation(stops: searchStopViewModel.state.stops)

@@ -43,7 +43,6 @@ struct MapPickerView: View {
 				}
 				.cornerRadius(10)
 				.padding(5)
-				.animation(.spring(), value: vm.state.status)
 				.navigationTitle("Map picker")
 				.navigationBarTitleDisplayMode(.inline)
 		}

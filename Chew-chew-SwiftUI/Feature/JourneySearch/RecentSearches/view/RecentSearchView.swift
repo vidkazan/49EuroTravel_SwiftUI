@@ -50,7 +50,6 @@ struct RecentSearchesView : View {
 				.cornerRadius(10)
 			}
 			.padding(.top,5)
-			.transition(.opacity)
 		}
 	}
 }

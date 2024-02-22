@@ -60,6 +60,7 @@
         <attribute name="locationType" optional="YES" attributeType="String"/>
         <attribute name="long" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="stopId" optional="YES" attributeType="String"/>
         <attribute name="stopOverType" attributeType="String"/>
         <relationship name="arrPlatform" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChewPrognosedPlatform" inverseName="arrivalStop" inverseEntity="ChewPrognosedPlatform"/>
         <relationship name="depPlatform" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChewPrognosedPlatform" inverseName="departureStop" inverseEntity="ChewPrognosedPlatform"/>

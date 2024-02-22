@@ -13,18 +13,10 @@ import SwiftUI
 
 extension MapPickerUIView {
 	class Coordinator: NSObject, MKMapViewDelegate, UIGestureRecognizerDelegate {
-		
 		var parent: MapPickerUIView
 		
 		init(parent: MapPickerUIView) {
 			self.parent = parent
-		}
-		
-		public func gestureRecognizer(
-			_ gestureRecognizer: UIGestureRecognizer,
-			shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
-		) -> Bool {
-			return true
 		}
 		
 		func mapView(_ mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -32,12 +24,17 @@ extension MapPickerUIView {
 			parent.vm.send(event: .didDragMap(mapView.region))
 		}
 		
-		func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
-		}
+		func mapView(
+			_ mapView: MKMapView,
+			annotationView view: MKAnnotationView,
+			calloutAccessoryControlTapped control: UIControl
+		) {}
 		
 		func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
 			if let anno = view.annotation as? StopAnnotation {
-				if let stop = parent.vm.state.data.stops.first(where: { $0.id == anno.stopId}) {
+				if let stop = parent.vm.state.data.stops.first(where: {
+					$0.id == anno.stopId
+				}) {
 					parent.vm.send(event: .didTapStopOnMap(stop, send: parent.vm.send))
 				}
 			}
@@ -51,28 +48,27 @@ extension MapPickerUIView {
 			}
 		}
 		
-		func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-			if let annotation = annotation as? StopAnnotation {
-				var annotationView: MKAnnotationView?
-				annotationView = setupStopAnnotationView(
-					for: annotation,
-					mapView: mapView
-				)
-				return annotationView
+		func mapView(_ mapView: MKMapView,viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+			let view = MapPickerViewModel.mapView(mapView, viewFor: annotation)
+			if let anno = annotation as? StopAnnotation {
+				switch anno.type {
+				case .national,.nationalExpress:
+					view?.zPriority = MKAnnotationViewZPriority(1)
+				case .regional,.regionalExpress,.suburban:
+					view?.zPriority = MKAnnotationViewZPriority(2)
+				case .subway,.tram:
+					view?.zPriority = MKAnnotationViewZPriority(3)
+				default:
+					view?.zPriority = MKAnnotationViewZPriority(4)
+				}
 			}
-			return nil
+			return view
 		}
-		
-		private func setupStopAnnotationView(for annotation : StopAnnotation, mapView: MKMapView) -> MKAnnotationView? {
-			let stopAnnotationView = mapView.dequeueReusableAnnotationView(
-				withIdentifier: annotation.type.iconImageName,
-				for: annotation
-			)
-			stopAnnotationView.frame = CGRect(x: 0, y: 0, width: 20, height: 20)
-			stopAnnotationView.centerOffset = CGPoint(x: 0, y: -stopAnnotationView.frame.size.height / 2)
-			stopAnnotationView.canShowCallout = true
-			stopAnnotationView.image = UIImage(named: annotation.type.iconImageName)
-			return stopAnnotationView
+		public func gestureRecognizer(
+			_ gestureRecognizer: UIGestureRecognizer,
+			shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer
+		) -> Bool {
+			return true
 		}
 		
 		@objc func handleTap(_ gestureRecognizer: UIGestureRecognizer) {

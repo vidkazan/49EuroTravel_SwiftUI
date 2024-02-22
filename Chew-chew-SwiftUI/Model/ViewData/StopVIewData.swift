@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct StopViewData : Equatable,Identifiable {
-	let id = UUID()
+struct StopViewData : Equatable, Identifiable, Hashable {
+	let id : String?
 	let locationCoordinates : CLLocationCoordinate2D
 	let name : String
 	let departurePlatform : Prognosed<String>
@@ -64,9 +64,11 @@ extension StopViewData {
 			latitude: stop.stop?.location?.latitude ?? stop.stop?.latitude ?? -1,
 			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
 		)
+		self.id = stop.stop?.id
 	}
 	
 	init(
+		stopId : String?,
 		name : String,
 		time : TimeContainer,
 		type: StopOverType,
@@ -78,5 +80,6 @@ extension StopViewData {
 		self.arrivalPlatform  = Prognosed(actual: nil, planned: nil)
 		self.stopOverType = type
 		self.locationCoordinates = coordinates
+		self.id = stopId
 	}
 }

@@ -87,12 +87,12 @@ struct LineViewData : Equatable {
 }
 
 extension LegViewData {
-	enum LineNameLabelType {
-		case full
-		case short
-		case symbol
-		case empty
-	}
+//	enum LineNameLabelType {
+//		case full
+//		case short
+//		case symbol
+//		case empty
+//	}
 	
 	enum LegType : Equatable,Hashable {
 		case footStart(startPointName : String)

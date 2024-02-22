@@ -71,7 +71,7 @@ struct LegDetailsStopPreview : PreviewProvider {
 		   let viewData = mock.legViewData(firstTS: .now, lastTS: .now, legs: [mock]) {
 			ScrollView(.horizontal) {
 				LazyHStack {
-					ForEach(viewData.legStopsViewData.prefix(2)) { leg in
+					ForEach(viewData.legStopsViewData.prefix(2),id:\.name) { leg in
 						VStack {
 							ForEach(StopOverType.allCases, id: \.rawValue, content: { type in
 								LegStopView(

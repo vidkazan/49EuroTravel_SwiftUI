@@ -24,7 +24,6 @@ extension SearchStopsView {
 					})
 					.foregroundColor(.primary)
 					.padding(.leading,5)
-					Spacer()
 					Button(action: {
 						if (searchStopViewModel.state.previousStops.first(where: {$0.name == stop.0.name}) != nil),
 						   Model.shared.coreDataStore.deleteRecentLocationIfFound(name: stop.0.name) != false {
@@ -71,7 +70,6 @@ extension SearchStopsView {
 											},
 											label: {
 												stopListCell(stop: stop)
-												Spacer()
 										})
 										.frame(height: 40)
 										Spacer()
@@ -120,6 +118,7 @@ extension SearchStopsView {
 					.foregroundColor(.primary)
 			}
 		}
+		.frame(maxWidth: .infinity,alignment: .leading)
 		.foregroundColor(.primary)
 	}
 }

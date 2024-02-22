@@ -48,6 +48,7 @@ extension StopTripDTO {
 			if let origin = origin {
 				return [
 					StopViewData(
+						id: origin.id,
 						locationCoordinates: CLLocationCoordinate2D(latitude: origin.latitude ?? 0, longitude: origin.longitude ?? 0),
 						name: origin.name ?? "",
 						departurePlatform: .init(),
@@ -56,6 +57,7 @@ extension StopTripDTO {
 						stopOverType: .origin
 					),
 					StopViewData(
+						id: stop?.id,
 						locationCoordinates: CLLocationCoordinate2D(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
 						name: stop?.name ?? "",
 						departurePlatform: .init(),
@@ -69,6 +71,7 @@ extension StopTripDTO {
 			if let destination = destination {
 				return [
 					StopViewData(
+						id: stop?.id,
 						locationCoordinates: CLLocationCoordinate2D(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
 						name: stop?.name ?? "",
 						departurePlatform: .init(actual: platform,planned: plannedPlatform),
@@ -77,6 +80,7 @@ extension StopTripDTO {
 						stopOverType: .origin
 					),
 					StopViewData(
+						id: destination.id,
 						locationCoordinates: CLLocationCoordinate2D(latitude: destination.latitude ?? 0, longitude: destination.longitude ?? 0),
 						name: destination.name ?? "",
 						departurePlatform: .init(),
@@ -109,7 +113,8 @@ extension StopTripDTO {
 			lineViewData: constructLineViewData(
 				product: line?.product ?? "product",
 				name: line?.name ?? "lineName",
-				productName: line?.productName ?? "productName"
+				productName: line?.productName ?? "productName",
+				legType: .line
 			),
 			progressSegments: .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0),
 			time: container,
@@ -120,7 +125,6 @@ extension StopTripDTO {
 }
 
 extension LegDTO {
-	
 	func legViewData(firstTS: Date?, lastTS: Date?, legs : [LegDTO]?) -> LegViewData? {
 		do {
 			return try legViewDataThrows(firstTS: firstTS, lastTS: lastTS, legs: legs)
@@ -176,10 +180,11 @@ extension LegDTO {
 			remarksUnwrapped = remarks.compactMap({$0.viewData()})
 		}
 		
+		let legType = constructLegType(leg: self, legs: legs)
 		
 		let res = LegViewData(
 			isReachable: stops.first?.cancellationType() != .fullyCancelled && stops.last?.cancellationType() != .fullyCancelled,
-			legType: constructLegType(leg: self, legs: legs),
+			legType: legType,
 			tripId: tripId,
 			direction: direction ?? "direction",
 			legTopPosition: max(plannedDeparturePosition,actualDeparturePosition),
@@ -191,7 +196,8 @@ extension LegDTO {
 			lineViewData: constructLineViewData(
 				product: line?.product ?? "product",
 				name: line?.name ?? "lineName",
-				productName: line?.productName ?? "productName"
+				productName: line?.productName ?? "productName",
+				legType: legType
 			),
 			progressSegments: segments,
 			time: container,
