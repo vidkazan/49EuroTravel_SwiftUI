@@ -17,9 +17,11 @@ struct JourneySearchView : View {
 			TimeAndSettingsView()
 			BottomView()
 		}
+		.contentShape(Rectangle())
+		.onTapGesture { hideKeyboard() }
 		.padding(.horizontal,10)
 		.background(Color.chewFillPrimary)
-		.navigationTitle("ChewChew")
+		.navigationTitle("Choo-Choo")
 		.navigationBarTitleDisplayMode(.inline)
 	}
 }

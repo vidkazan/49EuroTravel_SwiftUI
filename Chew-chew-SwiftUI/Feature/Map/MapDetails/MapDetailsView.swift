@@ -10,7 +10,7 @@ struct MapDetailsView: View {
 		Group {
 			if #available(iOS 16.0, *) {
 				sheet
-					.presentationDetents([.medium])
+					.presentationDetents([.medium,.large])
 			} else {
 				sheet
 			}

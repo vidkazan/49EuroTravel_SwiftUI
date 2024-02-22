@@ -45,7 +45,11 @@ final class AlertViewModel : ObservableObject, Identifiable {
 
 
 extension AlertViewModel {
-	enum AlertType {
+	enum AlertType : Equatable {
+		static func == (lhs: AlertViewModel.AlertType, rhs: AlertViewModel.AlertType) -> Bool {
+			lhs.description == rhs.description
+		}
+		
 		case none
 		case destructive(destructiveAction : ()->Void, description : String, actionDescription : String)
 
@@ -59,7 +63,7 @@ extension AlertViewModel {
 		}
 	}
 	
-	struct State {
+	struct State : Equatable {
 		let alert : AlertType
 	}
 	
