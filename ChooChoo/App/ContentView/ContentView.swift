@@ -20,11 +20,13 @@ struct ContentView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var alertVM = Model.shared.alertViewModel
 	@ObservedObject var sheetVM = Model.shared.sheetViewModel
+	@ObservedObject var topAlertVM = Model.shared.topBarAlertViewModel
 	@State var state : ChewViewModel.State = .init()
 	@State var sheetState = SheetViewModel.State(status: .showing(.none, result: EmptyDataSource()))
 	@State var alertState = AlertViewModel.State(alert: .none)
 	@State var sheetIsPresented = false
 	@State var alertIsPresented = false
+	
 	var body: some View {
 		Group {
 			switch state.status {
@@ -34,6 +36,7 @@ struct ContentView: View {
 				VStack(spacing: 5) {
 					TopBarAlertsView()
 					FeatureView()
+						.animation(.smooth, value: topAlertVM.state)
 				}
 			}
 		}
@@ -81,7 +84,9 @@ struct ContentView: View {
 				}
 		})
 	}
-	
+}
+
+extension ContentView {
 	func alert() -> Alert {
 		switch alertState.alert {
 		case let .destructive(destructiveAction, description, actionDescripton):
@@ -99,9 +104,13 @@ struct ContentView: View {
 	}
 }
 
-extension View {
-	func hideKeyboard() {
-		let resign = #selector(UIResponder.resignFirstResponder)
-		UIApplication.shared.sendAction(resign, to: nil, from: nil, for: nil)
-	}
+#Preview {
+	ContentView()
+		.environmentObject(ChewViewModel(initialState: .init(
+			depStop: .textOnly(""),
+			arrStop: .textOnly(""),
+			settings: .init(),
+			date: .now,
+			status: .idle
+		)))
 }

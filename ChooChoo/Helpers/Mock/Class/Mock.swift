@@ -69,13 +69,13 @@ class MockFile<T : Decodable> {
 		self.decodedData = Self.decodedData(rawData: rawData)
 	}
 	
-	static func decodedData<T : Decodable>(rawData : Data?) -> T? {
+	static func decodedData<DTO : Decodable>(rawData : Data?) -> DTO? {
 		guard let data = rawData else {
 			print(">> mockFile: decodeData: data is nil")
 			return nil
 		}
 		do {
-			let res = try JSONDecoder().decode(T.self, from: data)
+			let res = try JSONDecoder().decode(DTO.self, from: data)
 			return res
 		}
 		catch {

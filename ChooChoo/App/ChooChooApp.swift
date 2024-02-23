@@ -17,9 +17,6 @@ struct ChooChooApp: App {
 			ContentView()
 				.background(Color.chewFillPrimary)
 				.environmentObject(chewViewModel)
-				.animation(.easeInOut, value: chewViewModel.state.status)
-				.animation(.easeInOut, value: Model.shared.alertViewModel.state)
-				.animation(.easeInOut, value: Model.shared.searchStopsViewModel.state.status)
 		}
 	}
 }

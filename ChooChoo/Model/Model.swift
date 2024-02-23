@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class Model {
 	static let shared = Model()
@@ -20,7 +21,9 @@ final class Model {
 	let recentSearchesViewModel : RecentSearchesViewModel
 	let alertViewModel = AlertViewModel()
 	
-	
+	@Namespace var alertAnimation
+	@Namespace var alertAnimationAlert
+	@Namespace var alertAnimationBottom
 	init(
 		sheetVM : SheetViewModel = .init(),
 		alertVM : TopBarAlertViewModel = .init(),

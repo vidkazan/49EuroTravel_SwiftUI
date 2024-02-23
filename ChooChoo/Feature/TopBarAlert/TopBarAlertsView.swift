@@ -8,64 +8,11 @@
 import Foundation
 import SwiftUI
 
-struct TopBarAlertView: View {
-	@EnvironmentObject var chewJourneyViewModel : ChewViewModel
-	@ObservedObject var alertVM : TopBarAlertViewModel = Model.shared.topBarAlertViewModel
-	
-	let alert : TopBarAlertViewModel.AlertType
-	
-	var body: some View {
-		ZStack {
-			RoundedRectangle(cornerRadius: 10)
-				.fill(alert.bgColor)
-				.frame(height: 35)
-				.cornerRadius(10)
-			HStack {
-				if let infoAction = alert.infoAction {
-					Button(
-						action: infoAction, label: {
-							Label("", systemImage: "info.circle")
-								.labelStyle(.iconOnly)
-								.foregroundColor(.white.opacity(0.7))
-								.chewTextSize(.big)
-								.lineLimit(1)
-						})
-					.padding(.leading,15)
-				}
-				Spacer()
-				if case .none = alert.action {
-					EmptyView()
-				} else {
-					Button(action: {
-						switch alert.action {
-						case .dismiss:
-							alertVM.send(event: .didRequestDismiss(alert))
-						case .reload(let action):
-							action()
-						case .none:
-							break
-						}
-					}, label: {
-						Label("", systemImage: alert.action.iconName)
-							.labelStyle(.iconOnly)
-							.foregroundColor(.white.opacity(0.7))
-							.chewTextSize(.big)
-							.lineLimit(1)
-					})
-					.padding(.trailing,15)
-				}
-			}
-			.frame(maxWidth: .infinity,maxHeight: 35)
-			BadgeView(alert.badgeType)
-				.foregroundColor(.white)
-				.chewTextSize(.medium)
-				.cornerRadius(10)
-				.frame(maxWidth: .infinity,maxHeight: 35)
-		}
-		.frame(maxWidth: .infinity,maxHeight: 35)
+extension AnyTransition {
+	static var moveAndOpacity: AnyTransition {
+		AnyTransition.move(edge: .top).combined(with: .opacity)
 	}
 }
-
 
 struct TopBarAlertsView: View {
 	@EnvironmentObject var chewJourneyViewModel : ChewViewModel
@@ -81,20 +28,17 @@ struct TopBarAlertsView: View {
 					VStack(spacing: 2) {
 						ForEach(alertVM.state.alerts.sorted(by: <), id: \.hashValue, content: { alert in
 							TopBarAlertView(alertVM: alertVM, alert: alert)
+								.transition(.moveAndOpacity)
 						})
 					}
 					.padding(.horizontal,10)
+					.animation(.smooth, value: alertVM.state.alerts)
 				}
 			}
 		}
 		.onReceive(timer, perform: { _ in
-			var types = alertVM.state.alerts.filter({ type in
-				switch type.action {
-				case .none:
-					return false
-				default:
-					return true
-				}
+			var types = alertVM.state.alerts.filter({
+				$0.action != TopBarAlertViewModel.Action.none
 			})
 			if let last = types.popFirst(), let event = last.action.alertViewModelEvent(alertType: last) {
 				alertVM.send(event: event)
@@ -103,9 +47,37 @@ struct TopBarAlertsView: View {
 	}
 }
 
+struct Bla : View {
+	@ObservedObject var vm : TopBarAlertViewModel
+	var body: some View {
+		ForEach(0..<3) { index in
+			Color.random
+				.frame(maxWidth: .infinity,maxHeight: 300)
+				.cornerRadius(10)
+				.padding(.horizontal,10)
+		}
+		.animation(.smooth, value: vm.state)
+	}
+}
+
 struct AlertViewPreview : PreviewProvider {
+	@ObservedObject var vm : TopBarAlertViewModel = .init(.start,alerts: [.fullLegError,.offlineMode,.userLocationError])
 	static var previews: some View {
-		TopBarAlertsView()
+		
+		let vm = TopBarAlertViewModel(
+			.showing,
+			alerts: [
+				.fullLegError,
+				.journeyFollowError(type:.adding),
+				.offlineMode,
+				.userLocationError
+			]
+		)
+		VStack {
+			TopBarAlertsView(alertVM: vm)
+			Bla(vm: vm)
+		}
+		.environmentObject(ChewViewModel())
 	}
 }
 

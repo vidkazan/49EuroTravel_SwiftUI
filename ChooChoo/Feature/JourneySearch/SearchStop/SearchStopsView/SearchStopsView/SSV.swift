@@ -21,25 +21,26 @@ struct SearchStopsView: View {
 	var body: some View {
 		VStack(spacing: 5) {
 			// MARK: TopField
-				VStack {
-					HStack {
-						textField(
-							type: .departure,
-							text: $topText
-						)
-						rightButton(type: .departure)
-					}
-					.background(Color.chewFillAccent)
-					.cornerRadius(10)
-					.overlay(
-						RoundedRectangle(cornerRadius: 10)
-							.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
+			VStack {
+				HStack {
+					textField(
+						type: .departure,
+						text: $topText
 					)
-					if focusedField == .departure {
-						stopList(type: .departure)
-					}
+					rightButton(type: .departure)
 				}
-				.background(Color.chewFillSecondary.opacity(0.7))
+				.background(Color.chewFillAccent)
+				.cornerRadius(10)
+				.overlay(
+					RoundedRectangle(cornerRadius: 10)
+						.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
+				)
+				if focusedField == .departure {
+					stopList(type: .departure)
+						.transition(.moveAndOpacity)
+				}
+			}
+			.background(Color.chewFillSecondary.opacity(0.7))
 			.cornerRadius(10)
 			// MARK: BottomField
 			VStack {
@@ -58,6 +59,7 @@ struct SearchStopsView: View {
 				)
 				if focusedField == .arrival {
 					stopList(type: .arrival)
+						.transition(.moveAndOpacity)
 				}
 			}
 			.background(Color.chewFillSecondary.opacity(0.7))

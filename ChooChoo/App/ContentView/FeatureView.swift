@@ -15,7 +15,6 @@ enum Tabs : Int,CaseIterable {
 }
 
 struct FeatureView: View {
-//	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
 
 	@State var selectedTab = Tabs.search
@@ -36,18 +35,6 @@ struct FeatureView: View {
 						Label("Follow", systemImage: "train.side.front.car")
 					}
 					.tag(Tabs.follow)
-//				NavigationStack {
-//					MapPickerView(
-//						vm: .init(.idle),
-//						initialCoords: .init(latitude: 51.2, longitude: 6.6),
-//						type: .departure,
-//						close: {}
-//					)
-//				}
-//					.tabItem {
-//						Label("Map", systemImage: "map")
-//					}
-//					.tag(Tabs.map)
 			} else {
 				NavigationView {
 					JourneySearchView()
@@ -63,18 +50,6 @@ struct FeatureView: View {
 						Label("Follow", systemImage: "train.side.front.car")
 					}
 					.tag(Tabs.follow)
-//				NavigationView {
-//					MapPickerView(
-//						vm: .init(.idle),
-//						initialCoords: .init(latitude: 51.2, longitude: 6.6),
-//						type: .departure,
-//						close: {}
-//					)
-//				}
-//					.tabItem {
-//						Label("Map", systemImage: "map")
-//					}
-//					.tag(Tabs.map)
 			}
 		}
 	}

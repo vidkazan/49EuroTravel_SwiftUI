@@ -54,7 +54,11 @@ final class TopBarAlertViewModel : ObservableObject, Identifiable {
 
 
 extension TopBarAlertViewModel {
-	enum Action {
+	enum Action : Equatable {
+		static func == (lhs: TopBarAlertViewModel.Action, rhs: TopBarAlertViewModel.Action) -> Bool {
+			lhs.iconName == rhs.iconName
+		}
+		
 		case none
 		case dismiss
 		case reload(_ perform: () -> Void)
