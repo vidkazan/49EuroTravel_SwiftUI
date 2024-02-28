@@ -28,11 +28,20 @@ extension LegStopView {
 				lineType:legViewData.lineViewData.type ,
 				num: legViewData.lineViewData.name
 			))
-			BadgeView(.legDirection(dir: legViewData.direction, strikethrough: false))
+			BadgeView(.legDirection(
+				dir: legViewData.direction,
+				strikethrough: false
+			))
 				.badgeBackgroundStyle(.secondary)
-			BadgeView(.legDuration(legViewData.time))
+			BadgeView(
+				.legDuration(legViewData.time)
+			)
 				.badgeBackgroundStyle(.secondary)
-			BadgeView(.stopsCount(legViewData.legStopsViewData.count - 1,shevronIsExpanded == .collapsed ? .showShevronUp: .showShevronDown))
+			BadgeView(
+				.stopsCount(
+					legViewData.legStopsViewData.count - 1,
+					shevronIsExpanded == .collapsed ? .showShevronUp: .showShevronDown
+				))
 				.badgeBackgroundStyle(.secondary)
 		}
 	}

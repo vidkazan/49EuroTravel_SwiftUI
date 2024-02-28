@@ -1,8 +1,7 @@
 {
   "images" : [
     {
-      "compression-type" : "lossless",
-      "filename" : "light 1.pdf",
+      "filename" : "light-6 1.pdf",
       "idiom" : "universal"
     },
     {
@@ -12,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "light.pdf",
+      "filename" : "light-6.pdf",
       "idiom" : "universal"
     },
     {
@@ -22,7 +21,7 @@
           "value" : "dark"
         }
       ],
-      "filename" : "dark.pdf",
+      "filename" : "dark-6.pdf",
       "idiom" : "universal"
     }
   ],

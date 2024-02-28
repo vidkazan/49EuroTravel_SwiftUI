@@ -11,16 +11,41 @@ import SwiftUI
 #warning("TODO: localization")
 #warning("TODO: grouped animations with @namespaces https://gist.github.com/michael94ellis/5a46a5c2983da0cc99692b6659876fce")
 
+// Lida ChooChoo to fix:
+
+
+// MARK: JDV
+// leg cell: stops number badge: let user know that cell is tappable and it will show all leg stops
+
+// MARK: JFV
+// emptyState: specify how to follow journey
+// cell: swipe actions: let user repeat (past) followed journey
+
+
+// MARK: Settings
+// let user know that some settings are filtrating search results
+// remove debug options
+
+
+
+// all text revision
+// RSV: leave only last 5 items
+// SSV: stopList: swap right icons
+// revise icons, espesially transfer icon
+
+//  revise contrast
+//  revise text white color ( too contrast with black BG )
+//  DESIGGGGN: add some gradient?
+
 
 // TODO: feature: check when train arrives at starting point
 
 struct ContentView: View {
-	@Environment(\.colorScheme) var colorScheme
-	
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var alertVM = Model.shared.alertViewModel
 	@ObservedObject var sheetVM = Model.shared.sheetViewModel
 	@ObservedObject var topAlertVM = Model.shared.topBarAlertViewModel
+	
 	@State var state : ChewViewModel.State = .init()
 	@State var sheetState = SheetViewModel.State(status: .showing(.none, result: EmptyDataSource()))
 	@State var alertState = AlertViewModel.State(alert: .none)
@@ -52,7 +77,6 @@ struct ContentView: View {
 			}
 		)
 		.alert(isPresented: $alertIsPresented, content: alert)
-		.background(Color.chewFillPrimary)
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)
 			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)

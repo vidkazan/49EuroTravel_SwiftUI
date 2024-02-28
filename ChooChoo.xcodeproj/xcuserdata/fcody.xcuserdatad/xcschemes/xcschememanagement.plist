@@ -4,7 +4,7 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Chew-chew-SwiftUI.xcscheme_^#shared#^_</key>
+		<key>Choo Choo.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
 			<integer>0</integer>
@@ -23,6 +23,11 @@
 			<true/>
 		</dict>
 		<key>7D6734C82A96334D00CBE9C1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7D932B9C2B14E46A00A1A390</key>
 		<dict>
 			<key>primary</key>
 			<true/>

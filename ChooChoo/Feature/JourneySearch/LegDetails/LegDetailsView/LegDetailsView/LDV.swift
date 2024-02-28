@@ -11,6 +11,8 @@ import CoreLocation
 import MapKit
 
 struct LegDetailsView: View {
+	static let progressLineBaseWidth : CGFloat = 15
+	static let progressLineCompletedBaseWidthOffset : CGFloat = 2
 	@EnvironmentObject var chewVM : ChewViewModel
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	@State var isExpandedState : Segments.EvalType = .collapsed

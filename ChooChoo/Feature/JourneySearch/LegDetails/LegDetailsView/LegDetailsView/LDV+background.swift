@@ -18,8 +18,11 @@ extension LegDetailsView {
 				HStack(alignment: .top) {
 					Rectangle()
 						.fill(Color.chewProgressLineGray)
-						.frame(width: 20,height:  totalProgressHeight)
-						.padding(.leading,25)
+						.frame(
+							width: Self.progressLineBaseWidth,
+							height: totalProgressHeight
+						)
+						.padding(.leading, 27)
 					Spacer()
 				}
 				Spacer(minLength: 0)
@@ -30,8 +33,11 @@ extension LegDetailsView {
 						cornerRadius : totalProgressHeight == currentProgressHeight ? 0 : 6
 					)
 					.fill(Color.chewFillGreenPrimary)
-						.frame(width: 22,height: currentProgressHeight)
-						.padding(.leading,24)
+					.frame(
+						width: Self.progressLineBaseWidth + Self.progressLineCompletedBaseWidthOffset,
+						height: currentProgressHeight
+					)
+						.padding(.leading,26)
 					Spacer()
 				}
 				Spacer(minLength: 0)
