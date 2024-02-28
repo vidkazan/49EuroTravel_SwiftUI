@@ -16,7 +16,7 @@ func constructBadges(remarks : [RemarkViewData],isReachable : Bool ) -> [Badges]
 	if isReachable == false {
 		badges.append(.connectionNotReachable)
 	}
-	badges.append(Badges.dticket)
+//	badges.append(Badges.dticket)
 	
 	return badges
 }

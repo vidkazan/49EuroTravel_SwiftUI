@@ -59,7 +59,7 @@ enum Badges : Equatable {
 	case timeDepartureTimeArrival(timeContainer : TimeContainer)
 	case date(date : Date)
 	case price(_ price: String)
-	case dticket
+//	case dticket
 	case cancelled
 	case connectionNotReachable
 	case remarkImportant(remarks : [RemarkViewData])
@@ -110,10 +110,10 @@ enum Badges : Equatable {
 			return BadgeData(name: "Offline Mode")
 		case .price:
 			return BadgeData()
-		case .dticket:
-			return BadgeData(
-				style: Color.chewGray10,
-				name: "DeutschlandTicket")
+//		case .dticket:
+//			return BadgeData(
+//				style: Color.chewGray10,
+//				name: "DeutschlandTicket")
 		case .cancelled:
 			return BadgeData(
 				style: Color.chewFillRedPrimary,

@@ -9,7 +9,7 @@ import Foundation
 
 struct ChewSettings : Equatable,Hashable {
 	enum TransportMode : Int, Equatable, Hashable {
-		case deutschlandTicket
+		case regional
 		case all
 		case custom
 		
@@ -17,7 +17,7 @@ struct ChewSettings : Equatable,Hashable {
 			switch self {
 			case .all:
 				return 0
-			case .deutschlandTicket:
+			case .regional:
 				return 1
 			case .custom:
 				return 2
@@ -67,7 +67,7 @@ extension ChewSettings {
 		self.language = .english
 		self.startWithWalking = true
 		self.transferTime = .time(minutes: 0)
-		self.transportMode = .deutschlandTicket
+		self.transportMode = .regional
 		self.walkingSpeed = .fast
 		self.withBicycle = false
 		self.onboarding = true

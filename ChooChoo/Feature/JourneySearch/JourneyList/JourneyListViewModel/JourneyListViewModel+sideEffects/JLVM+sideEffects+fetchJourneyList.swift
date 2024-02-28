@@ -104,7 +104,7 @@ extension JourneyListViewModel {
 		switch settings.transportMode {
 		case .all:
 			return []
-		case .deutschlandTicket:
+		case .regional:
 			return Query.queryItems(
 				methods: [
 					Query.national(icTrains: false),

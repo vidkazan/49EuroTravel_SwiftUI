@@ -73,17 +73,17 @@ struct SettingsView: View {
 			)}
 		}
 	}
-	struct DTicketLabel: View {
-		var body: some View {
-			HStack {
-				DTicketLogo(fontSize: 20)
-					.padding(5)
-					.background(Color.gray)
-					.cornerRadius(8)
-				Text("Deutschland ticket")
-			}
-		}
-	}
+//	struct DTicketLabel: View {
+//		var body: some View {
+//			HStack {
+//				DTicketLogo(fontSize: 20)
+//					.padding(5)
+//					.background(Color.gray)
+//					.cornerRadius(8)
+//				Text("Deutschland ticket")
+//			}
+//		}
+//	}
 }
 
 struct SettingsPreview: PreviewProvider {

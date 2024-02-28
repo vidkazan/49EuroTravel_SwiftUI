@@ -65,12 +65,10 @@ struct BadgeView : View {
 		Group {
 			switch badge {
 			case let .legDirection(dir,strikethrough):
-				OneLineText(
-					(
+				OneLineText((
 						AttributedString("to ",attributes: secondaryAttribute)
 						+
-						AttributedString(dir)
-					),
+						AttributedString(dir)),
 					strikethrough
 				)
 				.chewTextSize(size)
@@ -132,13 +130,13 @@ struct BadgeView : View {
 					.chewTextSize(size)
 					.padding(.horizontal,4)
 					.padding(4)
-			case .dticket:
-				DTicketLogo(fontSize: 17)
-					.font(.system(size: 12))
-					.padding(2)
-					.background(self.color)
-					.cornerRadius(8)
-					.padding(4)
+//			case .dticket:
+//				DTicketLogo(fontSize: 17)
+//					.font(.system(size: 12))
+//					.padding(2)
+//					.background(self.color)
+//					.cornerRadius(8)
+//					.padding(4)
 			case let .lineNumber(type, _):
 				if let image = type.icon {
 					HStack(spacing:0) {
@@ -263,8 +261,8 @@ struct BadgeViewPreview : PreviewProvider {
 						.badgeBackgroundStyle(.primary)
 					BadgeView(.legDuration(viewData.time))
 						.badgeBackgroundStyle(.primary)
-					BadgeView(.dticket)
-						.badgeBackgroundStyle(.primary)
+//					BadgeView(.dticket)
+//						.badgeBackgroundStyle(.primary)
 				}
 				FlowLayout {
 					BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf",strikethrough: false))

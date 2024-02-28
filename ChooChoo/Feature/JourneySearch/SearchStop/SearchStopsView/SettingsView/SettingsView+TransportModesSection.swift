@@ -13,15 +13,17 @@ extension SettingsView {
 		Section(
 			content: {
 				ForEach(allTypes, id: \.rawValue) { type in
-					Toggle(
-						isOn: Binding(
-							get: { selectedTypes.contains(type) },
-							set: { _ in selectedTypes.toogle(val: type)}
-						),
-						label: {
-							Text(type.shortValue)
-						}
-					)
+					if type != .foot, type != .transfer {
+						Toggle(
+							isOn: Binding(
+								get: { selectedTypes.contains(type) },
+								set: { _ in selectedTypes.toogle(val: type)}
+							),
+							label: {
+								Text(type.shortValue)
+							}
+						)
+					}
 				}
 			},
 			header: {

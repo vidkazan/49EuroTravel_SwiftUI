@@ -53,7 +53,7 @@ extension LineType {
 		case .transfer:
 			return "Transfer"
 		case .foot:
-			return "Boot"
+			return "Foot"
 		}
 	}
 	

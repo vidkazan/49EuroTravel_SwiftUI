@@ -14,9 +14,9 @@ extension SettingsView {
 			Picker(
 				selection: $transportModeSegment,
 				content: {
-					DTicketLabel()
-						.tag(ChewSettings.TransportMode.deutschlandTicket.id)
-					Label("All", systemImage: "train.side.front.car")
+					Label("Regional", image: "re")
+						.tag(ChewSettings.TransportMode.regional.id)
+					Label("All", image: "ice")
 						.tag(ChewSettings.TransportMode.all.id)
 					Label("Specific", systemImage: "pencil")
 						.tag(ChewSettings.TransportMode.custom.id)

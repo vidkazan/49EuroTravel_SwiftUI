@@ -13,7 +13,7 @@ extension SettingsView {
 		let transportMode = {
 			switch self.transportModeSegment {
 			case 1:
-				return ChewSettings.TransportMode.deutschlandTicket
+				return ChewSettings.TransportMode.regional
 			case 0:
 				return ChewSettings.TransportMode.all
 			case 2:

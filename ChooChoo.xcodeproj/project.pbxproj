@@ -131,7 +131,7 @@
 		7D6C5C2F2AAF792200DEFC57 /* JDVM+state.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C2E2AAF792200DEFC57 /* JDVM+state.swift */; };
 		7D6C5C312AAF792F00DEFC57 /* JDVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C302AAF792F00DEFC57 /* JDVM+reduce.swift */; };
 		7D6C5C362AAF7C4500DEFC57 /* JDV+sheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C352AAF7C4500DEFC57 /* JDV+sheetType.swift */; };
-		7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift */; };
+		7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift */; };
 		7D6CCAF12B5FFB9200BCF62E /* SettingsView+saveSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */; };
 		7D6CCAF32B6004A200BCF62E /* VMTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */; };
 		7D704F442B8558C200F8334F /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D704F432B8558C200F8334F /* UIView+Constraints.swift */; };
@@ -368,7 +368,7 @@
 		7D6C5C2E2AAF792200DEFC57 /* JDVM+state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDVM+state.swift"; sourceTree = "<group>"; };
 		7D6C5C302AAF792F00DEFC57 /* JDVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDVM+reduce.swift"; sourceTree = "<group>"; };
 		7D6C5C352AAF7C4500DEFC57 /* JDV+sheetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDV+sheetType.swift"; sourceTree = "<group>"; };
-		7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportModesSection copy.swift"; sourceTree = "<group>"; };
+		7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportModesSection.swift"; sourceTree = "<group>"; };
 		7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+saveSettings.swift"; sourceTree = "<group>"; };
 		7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMTemplate.swift; sourceTree = "<group>"; };
 		7D704F432B8558C200F8334F /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
@@ -1090,7 +1090,7 @@
 			children = (
 				7D740CC62AEA796B00E9FFD4 /* SettingsView+Connections.swift */,
 				7D740CCA2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift */,
-				7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift */,
+				7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift */,
 				7D345E4B2AE97FC8003CA948 /* SettingsView.swift */,
 				7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */,
 			);
@@ -1737,7 +1737,7 @@
 				7D345E4A2AE95E7C003CA948 /* Settings.swift in Sources */,
 				7DA5FEAB2B8106BB002182F8 /* Sheet.swift in Sources */,
 				7D4B1B8A2AA8CB460096F372 /* JLVM+reduce.swift in Sources */,
-				7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection copy.swift in Sources */,
+				7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift in Sources */,
 				7DE8A34F2B6AB0AF00C3A378 /* TimeLabelView+Init.swift in Sources */,
 				7D2BF7A82B67D30800E1CED7 /* Color+random.swift in Sources */,
 				7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */,
