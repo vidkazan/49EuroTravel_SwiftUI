@@ -24,7 +24,7 @@ import SwiftUI
 
 // MARK: Settings
 // let user know that some settings are filtrating search results
-// remove debug options
+
 
 
 
@@ -33,7 +33,7 @@ import SwiftUI
 // SSV: stopList: swap right icons
 // revise icons, espesially transfer icon
 
-//  revise contrast
+//  revise contrastz
 //  revise text white color ( too contrast with black BG )
 //  DESIGGGGN: add some gradient?
 
@@ -45,7 +45,6 @@ struct ContentView: View {
 	@ObservedObject var alertVM = Model.shared.alertViewModel
 	@ObservedObject var sheetVM = Model.shared.sheetViewModel
 	@ObservedObject var topAlertVM = Model.shared.topBarAlertViewModel
-	
 	@State var state : ChewViewModel.State = .init()
 	@State var sheetState = SheetViewModel.State(status: .showing(.none, result: EmptyDataSource()))
 	@State var alertState = AlertViewModel.State(alert: .none)

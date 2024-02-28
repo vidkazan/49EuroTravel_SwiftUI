@@ -46,7 +46,7 @@ struct SettingsView: View {
 					segments
 				}
 				connections
-				debug
+//				debug
 			}
 			.onChange(of: chewViewModel.state, perform: loadSettings)
 			.navigationTitle("Settings")
