@@ -26,8 +26,6 @@ import SwiftUI
 // let user know that some settings are filtrating search results
 
 
-
-
 // all text revision
 // RSV: leave only last 5 items
 // SSV: stopList: swap right icons
@@ -37,6 +35,8 @@ import SwiftUI
 //  revise text white color ( too contrast with black BG )
 //  DESIGGGGN: add some gradient?
 
+// MARK: MAP details:
+// punkured line for foot path
 
 // TODO: feature: check when train arrives at starting point
 

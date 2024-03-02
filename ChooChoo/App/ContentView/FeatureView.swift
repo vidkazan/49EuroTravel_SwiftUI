@@ -52,5 +52,15 @@ struct FeatureView: View {
 					.tag(Tabs.follow)
 			}
 		}
+		.onReceive(chewViewModel.$state, perform: { state in
+			switch state.status {
+			case .checkingSearchData:
+				selectedTab = .search
+			case .journeys:
+				selectedTab = .search
+			default:
+				return
+			}
+		})
 	}
 }

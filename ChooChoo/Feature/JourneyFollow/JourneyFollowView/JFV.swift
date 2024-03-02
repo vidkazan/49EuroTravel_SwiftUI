@@ -152,15 +152,27 @@ extension JourneyFollowView {
 				}
 				.tint(.chewFillGreenPrimary)
 			}
+			.swipeActions(edge: .leading) {
+				Button {
+					chewVM.send(event: .didSetBothLocations(.init(
+						departure: journey.depStop,
+						arrival: journey.arrStop
+					)))
+				} label: {
+					Label("Search now", systemImage: "magnifyingglass")
+				}
+				.tint(.chewFillYellowPrimary)
+			}
 			.swipeActions(edge: .trailing) {
 				Button {
-					Model.shared.alertViewModel.send(event: .didRequestShow(.destructive(
-						destructiveAction: {
-							vm.send(event: .didTapSubscribingButton(
-								id: journey.id,
-								ref: journey.journeyViewData.refreshToken,
-								journeyDetailsViewModel: vm
-							))
+					Model.shared.alertViewModel.send(event: .didRequestShow(
+						.destructive(
+							destructiveAction: {
+								vm.send(event: .didTapSubscribingButton(
+									id: journey.id,
+									ref: journey.journeyViewData.refreshToken,
+									journeyDetailsViewModel: vm
+								))
 						},
 						description: "Unfollow journey?",
 						actionDescription: "Unfollow"
