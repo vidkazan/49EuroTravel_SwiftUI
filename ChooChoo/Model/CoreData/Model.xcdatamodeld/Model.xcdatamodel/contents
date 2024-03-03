@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21754" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="ChewJourney" representedClassName="ChewJourney" syncable="YES">
         <attribute name="id" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
@@ -108,6 +108,7 @@
     <entity name="Settings" representedClassName="Settings" syncable="YES">
         <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="onboarding" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="transferCount" attributeType="String"/>
         <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TransportModes" inverseName="settings" inverseEntity="TransportModes"/>

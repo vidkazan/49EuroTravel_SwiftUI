@@ -8,13 +8,15 @@
 import Foundation
 import SwiftUI
 
+
+
 struct SettingsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
-	let arr = [0,5,7,10,15,20,30,45,60,90,120]
-	@State var transportModeSegment : Int
+	@State var transferTime = ChewSettings.TransferDurationCases.zero
+	@State var transferCount = ChewSettings.TransferCountCases.unlimited
+	@State var transportModeSegment = ChewSettings.TransportMode.all
 	let allTypes : [LineType] = LineType.allCases
 	@State var selectedTypes = Set<LineType>()
-	@State var transferTime : Int
 	@State var showWithTransfers : Int
 	@State var alternativeSearchPage : Bool
 //	@State var showSunEvents : Bool
@@ -22,33 +24,41 @@ struct SettingsView: View {
 	let oldSettings : ChewSettings
 	init(settings : ChewSettings,closeSheet : @escaping ()->Void) {
 		self.oldSettings = settings
-		self.transportModeSegment = settings.transportMode.id
+		self.transportModeSegment = settings.transportMode
 		self.selectedTypes = settings.customTransferModes
 		self.closeSheet = closeSheet
 		
 		switch settings.transferTime {
 		case .direct:
 			self.showWithTransfers = 0
-			self.transferTime = 0
+			self.transferTime = .zero
 		case .time(minutes: let minutes):
 			self.showWithTransfers = 1
 			self.transferTime = minutes
 		}
 		self.alternativeSearchPage = settings.debugSettings.alternativeSearchPage
+		self.transferCount = settings.transferCount
 //		self.showSunEvents = true
 	}
 	
 	var body: some View {
 		NavigationView {
 			Form {
+				let _ = print(transferCount.rawValue)
 				transportTypes
-				if transportModeSegment == 2 {
+				if transportModeSegment == .custom {
 					segments
 				}
 				connections
+				if showWithTransfers == 1 {
+					transferSegment
+				}
 //				debug
 			}
-			.onChange(of: chewViewModel.state, perform: loadSettings)
+			.onAppear {
+				loadSettings(state: chewViewModel.state)
+			}
+//			.onChange(of: chewViewModel.state, perform: loadSettings)
 			.navigationTitle("Settings")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
@@ -96,16 +106,17 @@ struct SettingsPreview: PreviewProvider {
 extension SettingsView {
 	func loadSettings(state : ChewViewModel.State) {
 		let settings = state.settings
-		self.transportModeSegment = settings.transportMode.id
+		self.transportModeSegment = settings.transportMode
 		self.selectedTypes = settings.customTransferModes
-		
 		switch settings.transferTime {
 		case .direct:
 			self.showWithTransfers = 0
-			self.transferTime = 0
+			self.transferTime = .zero
+			self.transferCount = .unlimited
 		case .time(minutes: let minutes):
 			self.showWithTransfers = 1
 			self.transferTime = minutes
+			self.transferCount = settings.transferCount
 		}
 	}
 }

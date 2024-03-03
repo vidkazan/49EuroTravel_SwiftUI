@@ -94,8 +94,14 @@ extension JourneyListViewModel {
 				Query.transfersCount(0)
 			])
 		case .time(minutes: let minutes):
+			if let count = settings.transferCount.queryValue {
+				return Query.queryItems(methods: [
+					Query.transferTime(transferTime: minutes.rawValue),
+					Query.transfersCount(count)
+				])
+			}
 			return Query.queryItems(methods: [
-				Query.transferTime(transferTime: minutes)
+				Query.transferTime(transferTime: minutes.rawValue)
 			])
 		}
 	}

@@ -15,11 +15,11 @@ extension SettingsView {
 				selection: $transportModeSegment,
 				content: {
 					Label("Regional", image: "re")
-						.tag(ChewSettings.TransportMode.regional.id)
+						.tag(ChewSettings.TransportMode.regional)
 					Label("All", image: "ice")
-						.tag(ChewSettings.TransportMode.all.id)
-					Label("Specific", systemImage: "pencil")
-						.tag(ChewSettings.TransportMode.custom.id)
+						.tag(ChewSettings.TransportMode.all)
+					Label("Custom", systemImage: "ellipsis")
+						.tag(ChewSettings.TransportMode.custom)
 				},
 				label: {}
 			)

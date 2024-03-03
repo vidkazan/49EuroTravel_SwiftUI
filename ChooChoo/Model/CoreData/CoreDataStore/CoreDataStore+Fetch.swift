@@ -22,17 +22,23 @@ extension CoreDataStore {
 		var settings : Settings?
 		var transferTypes : ChewSettings.TransferTime!
 		var transportMode : ChewSettings.TransportMode!
+		var transferCount : ChewSettings.TransferCountCases!
 		var onboarding : Bool!
-		 asyncContext.performAndWait {
+		
+		asyncContext.performAndWait {
 			settings = user?.settings
-			 transferTypes = {
+			transferTypes = {
 				 if settings?.isWithTransfers == false {
 					 return .direct
 				 }
-				 return .time(minutes: Int(settings?.transferTime ?? 0))
+				return .time(
+					minutes: ChewSettings.transferDurationCases(count: settings?.transferTime)
+				)
 			 }()
 			 transportMode = ChewSettings.TransportMode(rawValue: Int(settings?.transportModeSegment ?? 0))
 			 onboarding = settings?.onboarding
+			 transferCount = ChewSettings.TransferCountCases(
+				rawValue: settings?.transferCount ?? "")
 		}
 		guard settings != nil else { return ChewSettings() }
 		let transportModes = fetchSettingsTransportModes()
@@ -42,6 +48,7 @@ extension CoreDataStore {
 			customTransferModes: transportModes,
 			transportMode: transportMode,
 			transferTime: transferTypes,
+			transferCount: transferCount,
 			accessiblity: .partial,
 			walkingSpeed: .fast,
 			language: .english,
@@ -120,7 +127,6 @@ extension CoreDataStore {
 		entity : CoreDataStore.Entities,
 		_ t : T.Type
 	) -> [T]? {
-
 		if let res = fetch(t), !res.isEmpty {
 			return res
 		}

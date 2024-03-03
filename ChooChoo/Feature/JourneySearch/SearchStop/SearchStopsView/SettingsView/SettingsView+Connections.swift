@@ -21,23 +21,41 @@ extension SettingsView {
 				}, label: {
 				})
 			.pickerStyle(.inline)
-			if showWithTransfers == 1 {
+		}, header: {
+			Text("Connections")
+		})
+	}
+}
+
+extension SettingsView {
+	var transferSegment : some View {
+		Section(content: {
 				Picker(
 					selection: $transferTime,
 					content: {
-						ForEach(arr.indices,id: \.self) { index in
-							Text("\(String(arr[index])) min ")
-								.tag(index)
+						ForEach(ChewSettings.TransferDurationCases.allCases,id: \.rawValue) { val in
+							Text("\(String(val.rawValue)) min ")
+								.tag(val)
 						}
 					}, label: {
-						
+						Text("Minimum time")
 					}
 				)
-				.pickerStyle(.wheel)
-				.frame(idealHeight: 100)
-			}
+				.pickerStyle(.menu)
+				Picker(
+					selection: $transferCount,
+					content: {
+						ForEach(ChewSettings.TransferCountCases.allCases,id: \.rawValue) { val in
+							Text(val.rawValue)
+								.tag(val)
+						}
+					}, label: {
+						Text("Maximum count")
+					}
+				)
+				.pickerStyle(.menu)
 		}, header: {
-			Text("Connections")
+			Text("Transfer")
 		})
 	}
 }

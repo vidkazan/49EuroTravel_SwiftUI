@@ -194,16 +194,16 @@ extension CoreDataStore {
 				settings.transferTime = 0
 			case .time(minutes: let minutes):
 				settings.isWithTransfers = true
-				settings.transferTime = Int16(minutes)
+				settings.transferTime = Int16(minutes.rawValue)
 			}
 			
 			settings.transportModeSegment = Int16(newSettings.transportMode.rawValue)
-			
-			 let modes = Self.transportModes(
+			 settings.transferCount = newSettings.transferCount.rawValue
+			let modes = Self.transportModes(
 				modes: newSettings.customTransferModes,
 				from: settings.transportModes,
 				context: settings.managedObjectContext ?? asyncContext
-			 )
+			)
 			 
 			modes.settings = settings
 			

@@ -10,34 +10,22 @@ import SwiftUI
 
 extension SettingsView {
 	func saveSettings(){
-		let transportMode = {
-			switch self.transportModeSegment {
-			case 1:
-				return ChewSettings.TransportMode.regional
-			case 0:
-				return ChewSettings.TransportMode.all
-			case 2:
-				return ChewSettings.TransportMode.custom
-			default:
-				return ChewSettings.TransportMode.all
-			}
-		}()
 		let transfer : ChewSettings.TransferTime =  {
 			switch self.showWithTransfers {
 			case 0:
 				return ChewSettings.TransferTime.direct
-			case 1:
-				return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
 			default:
-				return ChewSettings.TransferTime.time(minutes: Int(self.transferTime))
+				return ChewSettings.TransferTime.time(
+					minutes: self.transferTime
+				)
 			}
 		}()
-		
 		let res = ChewSettings(
 			onboarding: false,
 			customTransferModes: selectedTypes,
-			transportMode: transportMode,
+			transportMode: transportModeSegment,
 			transferTime: transfer,
+			transferCount: transferCount,
 			accessiblity: .partial,
 			walkingSpeed: .fast,
 			language: .english,

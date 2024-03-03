@@ -7,47 +7,107 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7F3FC692-8FFC-440F-BD33-596D983B8AB3"
+            uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Feature/JourneySearch/SearchStop/SearchStopsView/SearchStopsView/SSV+StopLIst/SSV+StopList+inner.swift"
+            filePath = "ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30"
-            landmarkName = "recentStops(type:recentStops:)"
-            landmarkType = "7">
+            startingLineNumber = "16"
+            endingLineNumber = "16"
+            landmarkName = "SettingsView"
+            landmarkType = "14">
             <Locations>
                <Location
-                  uuid = "7F3FC692-8FFC-440F-BD33-596D983B8AB3 - 4bb109765573a005"
+                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 5ce95ccd2a718624"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #2 () -&gt; &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 ((Chew_chew_SwiftUI.Stop, Swift.Optional&lt;Swift.Double&gt;)) -&gt; SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; Swift.Optional&lt;SwiftUI.TupleView&lt;(SwiftUI.Divider, SwiftUI.ForEach&lt;Swift.Array&lt;(Chew_chew_SwiftUI.Stop, Swift.Optional&lt;Swift.Double&gt;)&gt;, Swift.Optional&lt;Swift.Double&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;)&gt;&gt; in Chew_chew_SwiftUI.SearchStopsView.recentStops(type: Chew_chew_SwiftUI.LocationDirectionType, recentStops: Swift.Array&lt;(Chew_chew_SwiftUI.Stop, Swift.Optional&lt;Swift.Double&gt;)&gt;) -&gt; some"
-                  moduleName = "Chew-chew-SwiftUI"
+                  symbolName = "property wrapper backing initializer of ChooChoo.SettingsView.transferCount : ChooChoo.ChewSettings.TransferCountCases"
+                  moduleName = "ChooChoo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneySearch/SearchStop/SearchStopsView/SearchStopsView/SSV+StopLIst/SSV+StopList+inner.swift"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "2268">
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
                </Location>
                <Location
-                  uuid = "7F3FC692-8FFC-440F-BD33-596D983B8AB3 - fa0ab5602215915f"
+                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 38496ab5cda868c3"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #3 () -&gt; () in closure #1 () -&gt; SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt; in closure #1 ((Chew_chew_SwiftUI.Stop, Swift.Optional&lt;Swift.Double&gt;)) -&gt; SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt;&gt; in closure #1 () -&gt; Swift.Optional&lt;SwiftUI.TupleView&lt;(SwiftUI.Divider, SwiftUI.ForEach&lt;Swift.Array&lt;(Chew_chew_SwiftUI.Stop, Swift.Optional&lt;Swift.Double&gt;)&gt;, Swift.Optional&lt;Swift.Double&gt;, SwiftUI.HStack&lt;SwiftUI.TupleView&lt;(&lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0, SwiftUI.Spacer, &lt;&lt;opaque return type of SwiftUI.View.frame(width: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, height: Swift.Optional&lt;CoreGraphics.CGFloat&gt;, alignment: SwiftUI.Alignment) -&gt; some&gt;&gt;.0, &lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;&gt;)&gt;&gt; in Chew_chew_SwiftUI.SearchStopsView.recentStops(type: Chew_chew_SwiftUI.LocationDirectionType, recentStops: Swift.Array&lt;(Chew_chew_SwiftUI.Stop, Swift.Optional&lt;Swift.Double&gt;)&gt;) -&gt; some"
-                  moduleName = "Chew-chew-SwiftUI"
+                  symbolName = "ChooChoo.SettingsView.transferCount.getter : ChooChoo.ChewSettings.TransferCountCases"
+                  moduleName = "ChooChoo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/JourneySearch/SearchStop/SearchStopsView/SearchStopsView/SSV+StopLIst/SSV+StopList+inner.swift"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "4336">
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "20">
+               </Location>
+               <Location
+                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - a81d5a56da0a36df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.SettingsView.transferCount.setter : ChooChoo.ChewSettings.TransferCountCases"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 6ef611d05c1bf6d0"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.SettingsView.transferCount.modify : ChooChoo.ChewSettings.TransferCountCases"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "0">
+               </Location>
+               <Location
+                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 2e9e93d28cd1dc5d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.SettingsView.transferCount.modify : ChooChoo.ChewSettings.TransferCountCases with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/%3Ccompiler-generated%3E"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 80f2016f40042ed1"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.SettingsView.$transferCount.getter : SwiftUI.Binding&lt;ChooChoo.ChewSettings.TransferCountCases&gt;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "16"
+                  endingLineNumber = "16"
+                  offsetFromSymbolStart = "0">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -55,79 +115,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "6ED9F9D2-8C46-470B-8333-6097276799BE"
+            uuid = "6FC31BAE-FD15-4976-9F91-EBD991AC4317"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Feature/Sheet/SheetViewModel/SheetViewModel.swift"
+            filePath = "ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView+saveSettings.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "347"
-            endingLineNumber = "347"
-            landmarkName = "SheetViewModel"
-            landmarkType = "21">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "279DC492-879F-40C7-B4C7-84DBFC123074"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "125"
-            endingLineNumber = "125"
-            landmarkName = "fetchOrCreate(entity:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "83FD34E2-FEC3-4765-AA80-C3EEA3AC3EA9"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
-            landmarkName = "fetchLocations()"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "saveSettings()"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "83FD34E2-FEC3-4765-AA80-C3EEA3AC3EA9 - 3b973a71c0ef1ab9"
+                  uuid = "6FC31BAE-FD15-4976-9F91-EBD991AC4317 - dafd0054a238d406"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Chew_chew_SwiftUI.CoreDataStore.fetchLocations() -&gt; Swift.Optional&lt;Swift.Array&lt;Chew_chew_SwiftUI.Stop&gt;&gt;"
-                  moduleName = "Chew-chew-SwiftUI"
+                  symbolName = "ChooChoo.SettingsView.saveSettings() -&gt; ()"
+                  moduleName = "ChooChoo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView+saveSettings.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "108">
+                  startingLineNumber = "29"
+                  endingLineNumber = "29"
+                  offsetFromSymbolStart = "92">
                </Location>
                <Location
-                  uuid = "83FD34E2-FEC3-4765-AA80-C3EEA3AC3EA9 - c4520f96c4e984f8"
+                  uuid = "6FC31BAE-FD15-4976-9F91-EBD991AC4317 - dafd0054a238d467"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 () -&gt; () in Chew_chew_SwiftUI.CoreDataStore.fetchLocations() -&gt; Swift.Optional&lt;Swift.Array&lt;Chew_chew_SwiftUI.Stop&gt;&gt;"
-                  moduleName = "Chew-chew-SwiftUI"
+                  symbolName = "ChooChoo.SettingsView.saveSettings() -&gt; ()"
+                  moduleName = "ChooChoo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView+saveSettings.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "88"
-                  endingLineNumber = "88"
-                  offsetFromSymbolStart = "4">
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "92">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -135,80 +163,49 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B3BAB830-7B76-48B2-9860-4C94E9F49870"
+            uuid = "A727EFFA-01C1-400D-BF70-60926D0D0619"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/Feature/Map/MapPicker/UIView/MapPickerUIView+Delegate.swift"
+            filePath = "ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "mapView(_:didSelect:)"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
+            landmarkName = "loadSettings(state:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "B3BAB830-7B76-48B2-9860-4C94E9F49870 - 1ef5c42c115d8fa6"
+                  uuid = "A727EFFA-01C1-400D-BF70-60926D0D0619 - 7691ab70671aa72d"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Chew_chew_SwiftUI.MapPickerUIView.Coordinator.mapView(_: __C.MKMapView, didSelect: __C.MKAnnotationView) -&gt; ()"
-                  moduleName = "Chew-chew-SwiftUI"
+                  symbolName = "ChooChoo.SettingsView.loadSettings(state: ChooChoo.ChewViewModel.State) -&gt; ()"
+                  moduleName = "ChooChoo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/Map/MapPicker/UIView/MapPickerUIView+Delegate.swift"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "392">
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "92">
                </Location>
                <Location
-                  uuid = "B3BAB830-7B76-48B2-9860-4C94E9F49870 - 1ef5c42c115d8fa6"
+                  uuid = "A727EFFA-01C1-400D-BF70-60926D0D0619 - 7691ab70671aa70e"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Chew_chew_SwiftUI.MapPickerUIView.Coordinator.mapView(_: __C.MKMapView, didSelect: __C.MKAnnotationView) -&gt; ()"
-                  moduleName = "Chew-chew-SwiftUI"
+                  symbolName = "ChooChoo.SettingsView.loadSettings(state: ChooChoo.ChewViewModel.State) -&gt; ()"
+                  moduleName = "ChooChoo"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/Map/MapPicker/UIView/MapPickerUIView+Delegate.swift"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "1444">
-               </Location>
-               <Location
-                  uuid = "B3BAB830-7B76-48B2-9860-4C94E9F49870 - 56868ce20b8d0528"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Chew_chew_SwiftUI.Stop) -&gt; Swift.Bool in Chew_chew_SwiftUI.MapPickerUIView.Coordinator.mapView(_: __C.MKMapView, didSelect: __C.MKAnnotationView) -&gt; ()"
-                  moduleName = "Chew-chew-SwiftUI"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/Chew-chew-SwiftUI/Chew-chew-SwiftUI/Feature/Map/MapPicker/UIView/MapPickerUIView+Delegate.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
+                  startingLineNumber = "108"
+                  endingLineNumber = "108"
                   offsetFromSymbolStart = "48">
                </Location>
             </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "5A67A997-F88C-478C-9E9B-DDEE7F388D94"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chew-chew-SwiftUI/App/ContentView/ContentView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "hideKeyboard()"
-            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

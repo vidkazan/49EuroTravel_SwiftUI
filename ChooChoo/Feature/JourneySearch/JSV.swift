@@ -22,9 +22,9 @@ struct JourneySearchView : View {
 		.animation(.smooth, value: chewViewModel
 			.state)
 		.contentShape(Rectangle())
-		.onTapGesture {
-			chewViewModel.send(event: .didCancelEditStop)
-		}
+//		.onTapGesture {
+//			chewViewModel.send(event: .didCancelEditStop)
+//		}
 		.padding(.horizontal,10)
 //		.background( .linearGradient(
 //			colors: [
