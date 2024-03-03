@@ -30,30 +30,28 @@ extension SettingsView {
 extension SettingsView {
 	var transferSegment : some View {
 		Section(content: {
-				Picker(
-					selection: $transferTime,
-					content: {
-						ForEach(ChewSettings.TransferDurationCases.allCases,id: \.rawValue) { val in
-							Text("\(String(val.rawValue)) min ")
-								.tag(val)
-						}
-					}, label: {
-						Text("Minimum time")
+			Picker(
+				selection: $transferTime,
+				content: {
+					ForEach(ChewSettings.TransferDurationCases.allCases,id: \.rawValue) { val in
+						Text("\(String(val.rawValue)) min ")
+							.tag(val)
 					}
-				)
-				.pickerStyle(.menu)
-				Picker(
-					selection: $transferCount,
-					content: {
-						ForEach(ChewSettings.TransferCountCases.allCases,id: \.rawValue) { val in
-							Text(val.rawValue)
-								.tag(val)
-						}
-					}, label: {
-						Text("Maximum count")
+				}, label: {
+					Label("Minimum time", systemImage: "clock.arrow.circlepath")
+				}
+			)
+			Picker(
+				selection: $transferCount,
+				content: {
+					ForEach(ChewSettings.TransferCountCases.allCases,id: \.rawValue) { val in
+						Text(val.rawValue)
+							.tag(val)
 					}
-				)
-				.pickerStyle(.menu)
+				}, label: {
+					Label("Maximum count", systemImage: "arrow.2.squarepath")
+				}
+			)
 		}, header: {
 			Text("Transfer")
 		})

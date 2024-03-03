@@ -44,7 +44,6 @@ struct SettingsView: View {
 	var body: some View {
 		NavigationView {
 			Form {
-				let _ = print(transferCount.rawValue)
 				transportTypes
 				if transportModeSegment == .custom {
 					segments
@@ -58,7 +57,6 @@ struct SettingsView: View {
 			.onAppear {
 				loadSettings(state: chewViewModel.state)
 			}
-//			.onChange(of: chewViewModel.state, perform: loadSettings)
 			.navigationTitle("Settings")
 			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
