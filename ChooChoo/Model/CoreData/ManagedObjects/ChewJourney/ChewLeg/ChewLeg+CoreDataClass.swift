@@ -24,6 +24,9 @@ extension ChewLeg {
 		self.lineName = leg.lineViewData.name
 		self.lineShortName = leg.lineViewData.shortName
 		self.lineType = leg.lineViewData.type.rawValue
+		if let legDTO = try? JSONEncoder().encode(leg.legDTO), let string = String(data: legDTO, encoding: .utf8) {
+			self.legDTO = string
+		}
 				
 		self.journey = journey
 
@@ -45,6 +48,10 @@ extension ChewLeg {
 		
 		let time = TimeContainer(chewTime: self.time)
 		let segments = constructSegmentsFromStopOverData(stopovers: stopsViewData)
+		var legDTOobj : LegDTO? = nil
+		if let legDTOdata = legDTO?.data(using: .utf8) {
+			legDTOobj = try? JSONDecoder().decode(LegDTO.self, from: legDTOdata)
+		}
 		return LegViewData(
 			isReachable: self.isReachable,
 			legType: self.chewLegType.legType ?? .line,
@@ -63,7 +70,7 @@ extension ChewLeg {
 			progressSegments: segments,
 			time: time,
 			polyline: nil,
-			legDTO : nil
+			legDTO : legDTOobj
 		)
 	}
 }

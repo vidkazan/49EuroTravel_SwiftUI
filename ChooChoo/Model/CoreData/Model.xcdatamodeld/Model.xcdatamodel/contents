@@ -20,6 +20,7 @@
     <entity name="ChewLeg" representedClassName="ChewLeg" syncable="YES">
         <attribute name="isReachable" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="legBottomPosition" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="legDTO" optional="YES" attributeType="String"/>
         <attribute name="legTopPosition" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="lineName" attributeType="String"/>
         <attribute name="lineShortName" attributeType="String"/>
