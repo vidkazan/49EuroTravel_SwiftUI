@@ -78,6 +78,13 @@ struct JourneyFollowCellView : View {
 			}, label: {
 				Label("Show on map", systemImage: "map.circle")
 			})
+			Button(action: {
+				Model.shared.sheetViewModel.send(
+					event: .didRequestShow(.journeyDebug(legs: data.legs.compactMap {$0.legDTO}))
+				)
+			}, label: {
+				Label("Journey debug", systemImage: "ant")
+			})
 		}
 	}
 }

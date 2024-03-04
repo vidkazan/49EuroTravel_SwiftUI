@@ -24,6 +24,17 @@ struct TimeContainer : Equatable, Hashable {
 				return 0
 			}
 		}
+		
+		var description : String {
+			switch self {
+			case .cancelled:
+				return "cancelled"
+			case .delay(let time):
+				return "delay \(time.description)"
+			case .onTime:
+				return "onTime"
+			}
+		}
 	}
 	
 	let iso : ISOTimeContainer
@@ -186,7 +197,7 @@ extension TimeContainer {
 			case .ongoingFar:
 				return 120
 			case .past:
-				return 900
+				return 10000000
 			}
 		}
 	}

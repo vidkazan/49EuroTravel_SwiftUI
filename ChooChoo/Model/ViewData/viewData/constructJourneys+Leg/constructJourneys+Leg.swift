@@ -118,7 +118,8 @@ extension StopTripDTO {
 			),
 			progressSegments: .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0),
 			time: container,
-			polyline: nil
+			polyline: nil,
+			legDTO : nil
 		)
 		return res
 	}
@@ -201,7 +202,8 @@ extension LegDTO {
 			),
 			progressSegments: segments,
 			time: container,
-			polyline: polyline
+			polyline: polyline,
+			legDTO : self
 		)
 		return res
 	}

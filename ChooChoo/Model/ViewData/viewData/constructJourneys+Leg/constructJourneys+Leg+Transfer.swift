@@ -81,7 +81,8 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 			heightTotalExtended: StopOverType.transfer.viewHeight
 		),
 		time: container,
-		polyline: nil
+		polyline: nil,
+		legDTO : nil
 	)
 	return res
 }

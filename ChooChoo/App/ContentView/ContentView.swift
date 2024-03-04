@@ -19,7 +19,7 @@ import SwiftUI
 
 // MARK: JFV
 // emptyState: specify how to follow journey
-// cell: swipe actions: let user repeat (past) followed journey
+// in some cases journey isnt unfollowing ( try with coordinates instad of name )
 
 
 // MARK: Settings

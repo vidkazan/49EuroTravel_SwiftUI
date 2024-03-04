@@ -12,6 +12,7 @@ enum Tabs : Int,CaseIterable {
 	case follow
 //	case map
 //	case settings
+//	case debug
 }
 
 struct FeatureView: View {
@@ -32,9 +33,16 @@ struct FeatureView: View {
 					JourneyFollowView()
 				}
 					.tabItem {
-						Label("Follow", systemImage: "train.side.front.car")
+						Label("Follow", systemImage: ChewSFSymbols.bookmark.rawValue)
 					}
 					.tag(Tabs.follow)
+//				NavigationStack {
+//					
+//				}
+//					.tabItem {
+//						Label("Debug", systemImage: "ant")
+//					}
+//					.tag(Tabs.debug)
 			} else {
 				NavigationView {
 					JourneySearchView()
@@ -47,9 +55,16 @@ struct FeatureView: View {
 					JourneyFollowView()
 				}
 					.tabItem {
-						Label("Follow", systemImage: "train.side.front.car")
+						Label("Follow", systemImage: ChewSFSymbols.bookmark.rawValue)
 					}
 					.tag(Tabs.follow)
+//				NavigationView {
+//					
+//				}
+//					.tabItem {
+//						Label("Debug", systemImage: "ant")
+//					}
+//					.tag(Tabs.debug)
 			}
 		}
 		.onReceive(chewViewModel.$state, perform: { state in
@@ -64,3 +79,4 @@ struct FeatureView: View {
 		})
 	}
 }
+

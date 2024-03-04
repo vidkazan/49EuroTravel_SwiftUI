@@ -80,6 +80,12 @@ struct SheetView : View {
 						RemarkSheet(remarks: data.remarks, closeSheet: closeSheet)
 					}
 				}
+			case .journeyDebug:
+				if let data = data as? JourneyDebugViewDataSource {
+					JourneyDebugView(legsDTO: data.legDTOs)
+				} else {
+					Text("JourneyDebugViewDataSource is nil")
+				}
 			}
 		}
 	}

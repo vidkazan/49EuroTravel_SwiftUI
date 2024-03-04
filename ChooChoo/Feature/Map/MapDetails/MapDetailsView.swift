@@ -38,32 +38,3 @@ extension MapDetailsView {
 	}
 }
 
-
-struct MapDetails_Previews: PreviewProvider {
-	static var previews: some View {
-		if let mock = Mock
-			.journeys
-			.journeyNeussWolfsburg
-			.decodedData?
-			.journey
-			.journeyViewData(
-				depStop: .init(),
-				arrStop: .init(),
-				realtimeDataUpdatedAt: 0
-			) {
-			MapDetailsView(
-				mapRect: SheetViewModel.constructMapRegion(
-					locFirst: mock.legs.first?.legStopsViewData.first?.locationCoordinates ?? .init(),
-					locLast: mock.legs.last?.legStopsViewData.last?.locationCoordinates ?? .init()
-				),
-				legs: .init( mock.legs.compactMap({MapLegData(
-					type: $0.legType,
-					lineType: $0.lineViewData.type,
-					stops: $0.legStopsViewData,
-					route: nil
-				)})),
-				closeSheet: {}
-			)
-		}
-	}
-}

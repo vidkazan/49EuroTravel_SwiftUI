@@ -26,6 +26,12 @@ extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 	static var red: BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillRedPrimary)
 	}
+	static var green: BadgeBackgroundBaseStyle {
+		BadgeBackgroundBaseStyle(Color.chewFillGreenPrimary)
+	}
+	static var yellow: BadgeBackgroundBaseStyle {
+		BadgeBackgroundBaseStyle(Color.chewFillYellowPrimary)
+	}
 	static var blue: BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillBluePrimary)
 	}

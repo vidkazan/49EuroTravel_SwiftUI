@@ -167,7 +167,7 @@ struct LegDTO : Codable,Equatable, Identifiable {
 	let id = UUID()
 	let origin : StopDTO?
 	let destination : StopDTO?
-	let line : Line?
+	let line : LineDTO?
 	let remarks : [Remark]?
 	let departure: String?
 	let plannedDeparture: String?
@@ -219,7 +219,7 @@ struct LegDTO : Codable,Equatable, Identifiable {
 		let container = try decoder.container(keyedBy: CodingKeys.self)
 		self.origin = try container.decodeIfPresent(StopDTO.self, forKey: .origin)
 		self.destination = try container.decodeIfPresent(StopDTO.self, forKey: .destination)
-		self.line = try container.decodeIfPresent(Line.self, forKey: .line)
+		self.line = try container.decodeIfPresent(LineDTO.self, forKey: .line)
 		self.remarks = try container.decodeIfPresent([Remark].self, forKey: .remarks)
 		self.departure = try container.decodeIfPresent(String.self, forKey: .departure)
 		self.plannedDeparture = try container.decodeIfPresent(String.self, forKey: .plannedDeparture)
@@ -257,7 +257,7 @@ struct StopTripDTO : Codable,Equatable, Identifiable {
 	let stop : StopDTO?
 	let origin : StopDTO?
 	let destination : StopDTO?
-	let line : Line?
+	let line : LineDTO?
 	let remarks : [Remark]?
 	let when: String?
 	let plannedWhen: String?
@@ -476,7 +476,7 @@ struct Departure : Codable,Equatable {
 	let prognosisType		: String?
 	let direction			: String?
 	let provenance			: String?
-	let line				: Line?
+	let line				: LineDTO?
 	let remarks				: [Remark]?
 	let origin				: String?
 	let destination			: StopDTO?
@@ -566,7 +566,7 @@ extension Products {
 }
 
 // MARK: - Line
-struct Line : Codable,Equatable {
+struct LineDTO : Codable,Equatable {
 	let type			: String?
 	let id				: String?
 	let fahrtNr			: String?

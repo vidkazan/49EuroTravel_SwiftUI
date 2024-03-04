@@ -80,9 +80,9 @@ extension LineType {
 		case .taxi:
 			return "taxi"
 		case .transfer:
-			return nil
+			return "transfer.big"
 		case .foot:
-			return nil
+			return "foot.big"
 		}
 	}
 	

@@ -62,7 +62,8 @@ extension ChewLeg {
 			),
 			progressSegments: segments,
 			time: time,
-			polyline: nil
+			polyline: nil,
+			legDTO : nil
 		)
 	}
 }

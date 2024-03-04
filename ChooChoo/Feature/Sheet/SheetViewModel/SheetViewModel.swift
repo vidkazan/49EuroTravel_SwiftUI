@@ -71,27 +71,19 @@ struct MapDetailsViewDataSource : SheetViewDataSource {
 	let mapLegDataList : OrderedSet<MapLegData>
 }
 
-struct MapPickerViewDataSource : SheetViewDataSource {
+struct MapPickerViewDataSource : SheetViewDataSource {}
+
+struct JourneyDebugViewDataSource : SheetViewDataSource {
+	let legDTOs : [LegDTO]
 }
 
 struct FullLegViewDataSource : SheetViewDataSource {
 	let leg : LegViewData
 }
-
-struct DatePickerViewDataSource : SheetViewDataSource {
-	
-}
-
-struct EmptyDataSource : SheetViewDataSource {
-	
-}
-
-struct SettingsViewDataSource : SheetViewDataSource {
-
-}
-struct OnboardingViewDataSource : SheetViewDataSource {
-	
-}
+struct DatePickerViewDataSource : SheetViewDataSource {}
+struct EmptyDataSource : SheetViewDataSource {}
+struct SettingsViewDataSource : SheetViewDataSource {}
+struct OnboardingViewDataSource : SheetViewDataSource {}
 struct RemarksViewDataSource : SheetViewDataSource {
 	let remarks : [RemarkViewData]
 }
@@ -151,6 +143,7 @@ extension SheetViewModel{
 		case mapPicker(type : LocationDirectionType)
 		case onboarding
 		case remark(remarks : [RemarkViewData])
+		case journeyDebug(legs : [LegDTO])
 		
 		var description : String {
 			switch self {
@@ -170,6 +163,8 @@ extension SheetViewModel{
 				return "onboarding"
 			case .remark:
 				return "remark"
+			case .journeyDebug:
+				return "journeyDebug"
 			}
 		}
 		
@@ -191,6 +186,8 @@ extension SheetViewModel{
 				return OnboardingViewDataSource.self
 			case .remark:
 				return RemarksViewDataSource.self
+			case .journeyDebug:
+				return JourneyDebugViewDataSource.self
 			}
 		}
 	}
@@ -252,6 +249,8 @@ extension SheetViewModel {
 				return Just(Event.didLoadDataForShowing(type,OnboardingViewDataSource())).eraseToAnyPublisher()
 			case .remark(let remarks):
 				return Just(Event.didLoadDataForShowing(type,RemarksViewDataSource(remarks: remarks))).eraseToAnyPublisher()
+			case .journeyDebug(let legs):
+				return Just(Event.didLoadDataForShowing(type,JourneyDebugViewDataSource(legDTOs: legs))).eraseToAnyPublisher()
 			}
 		}
 	}

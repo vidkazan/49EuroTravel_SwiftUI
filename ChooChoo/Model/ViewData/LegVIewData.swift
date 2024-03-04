@@ -27,6 +27,7 @@ struct LegViewData : Equatable,Identifiable {
 	let progressSegments : Segments
 	let time : TimeContainer
 	let polyline : PolylineDTO?
+	let legDTO : LegDTO?
 }
 
 extension LegViewData {
@@ -45,6 +46,7 @@ extension LegViewData {
 		self.time = .init(plannedDeparture: "", plannedArrival: "", actualDeparture: "", actualArrival: "", cancelled: false)
 		self.remarks = []
 		self.polyline = nil
+		self.legDTO = nil
 	}
 }
 

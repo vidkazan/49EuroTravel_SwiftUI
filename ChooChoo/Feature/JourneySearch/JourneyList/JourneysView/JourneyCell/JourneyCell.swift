@@ -81,13 +81,22 @@ struct JourneyCell: View {
 
 extension JourneyCell {
 	var menu : some View {
-		Button(action: {
-			Model.shared.sheetViewModel.send(
-				event: .didRequestShow(.mapDetails(.journey(journey.legs)))
-			)
-		}, label: {
-			Label("Show on map", systemImage: "map.circle")
-		})
+		VStack {
+			Button(action: {
+				Model.shared.sheetViewModel.send(
+					event: .didRequestShow(.journeyDebug(legs: journey.legs.compactMap {$0.legDTO}))
+				)
+			}, label: {
+				Label("Journey debug", systemImage: "ant")
+			})
+			Button(action: {
+				Model.shared.sheetViewModel.send(
+					event: .didRequestShow(.mapDetails(.journey(journey.legs)))
+				)
+			}, label: {
+				Label("Show on map", systemImage: "map.circle")
+			})
+		}
 	}
 }
 
