@@ -35,6 +35,19 @@ struct JourneyListView: View {
 				errorView(error)
 			}
 		}
+		.overlay(alignment: .bottom, content: {
+			Button("Clear", systemImage: "xmark.circle", action: {
+				chewVM.send(event: .didTapCloseJourneyList)
+			})
+			.padding(5)
+			.foregroundStyle(.secondary)
+			.chewTextSize(.big)
+			.background(.thinMaterial)
+			.cornerRadius(10)
+			.frame(maxHeight: 43)
+			.shadow(radius: 5)
+			.padding(.bottom,20)
+		})
 	}
 }
 
@@ -70,6 +83,7 @@ extension JourneyListView {
 //				JourneyListViewLoader()
 				Spacer()
 			}
+			.frame(maxWidth: .infinity, maxHeight: .infinity)
 		}
 	}
 }

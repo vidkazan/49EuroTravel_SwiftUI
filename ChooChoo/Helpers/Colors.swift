@@ -35,6 +35,55 @@ struct TransportColors {
 	}
 }
 
+extension ShapeStyle where Self == Color {
+	
+	static var chewLegDetailsCellGray: Color {
+		Color("ChewLegDetailsCellGray")
+	}
+	static var chewLegsViewGray: Color {
+		Color("ChewLegsViewGray")
+	}
+	static var chewFillMagenta: Color {
+		Color("ChewFillMagenta")
+	}
+	static var chewFillPrimary: Color {
+		Color("ChewFillPrimary")
+	}
+	static var chewFillSecondary: Color {
+		Color("ChewFillSecondary")
+	}
+	static var chewFillAccent: Color {
+		Color("ChewFillAccent")
+	}
+	static var chewFillTertiary: Color {
+		Color("ChewFillTertiary")
+	}
+	
+	static var chewFillGreenSecondary: Color {
+		Color("ChewFillGreenSecondary")
+	}
+	static var chewFillGreenPrimary: Color {
+		Color("ChewFillGreenPrimary")
+	}
+	
+	static var chewFillBluePrimary: Color {
+		Color("ChewFillBluePrimary")
+	}
+	static var chewFillYellowPrimary: Color {
+		Color("ChewFillYellowPrimary")
+	}
+	static var chewFillRedPrimary: Color {
+		Color("ChewFillRedPrimary")
+	}
+	
+	
+	static var chewProgressLineGray: Color {
+		Color("ChewProgressLineGray")
+	}
+	static var chewTimeLabelGray: Color {
+		Color("ChewTimeLabelGray")
+	}
+}
 extension Color {
 	static var transport = TransportColors()
 	
