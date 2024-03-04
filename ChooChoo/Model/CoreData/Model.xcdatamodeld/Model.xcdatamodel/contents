@@ -108,7 +108,7 @@
     <entity name="Settings" representedClassName="Settings" syncable="YES">
         <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="onboarding" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="transferCount" attributeType="String"/>
+        <attribute name="transferCount" optional="YES" attributeType="String"/>
         <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TransportModes" inverseName="settings" inverseEntity="TransportModes"/>

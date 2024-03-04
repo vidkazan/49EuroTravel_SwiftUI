@@ -71,6 +71,7 @@ struct ContentView: View {
 			},
 			content: {
 				SheetView(closeSheet: {
+					
 					sheetIsPresented = false
 				})
 			}

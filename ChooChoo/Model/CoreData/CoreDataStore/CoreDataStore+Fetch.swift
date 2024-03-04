@@ -20,27 +20,39 @@ extension CoreDataStore {
 	
 	func fetchSettings() -> ChewSettings {
 		var settings : Settings?
-		var transferTypes : ChewSettings.TransferTime!
-		var transportMode : ChewSettings.TransportMode!
-		var transferCount : ChewSettings.TransferCountCases!
-		var onboarding : Bool!
+		var transferTypes = ChewSettings.TransferTime.time(minutes: .zero)
+		var transportMode = ChewSettings.TransportMode.all
+		var transferCount = ChewSettings.TransferCountCases.unlimited
+		var onboarding : Bool = true
 		
 		asyncContext.performAndWait {
 			settings = user?.settings
+			guard let settings = settings else {
+				return
+			}
 			transferTypes = {
-				 if settings?.isWithTransfers == false {
+				 if settings.isWithTransfers == false {
 					 return .direct
 				 }
 				return .time(
-					minutes: ChewSettings.transferDurationCases(count: settings?.transferTime)
+					minutes: ChewSettings.transferDurationCases(count: settings.transferTime)
 				)
 			 }()
-			 transportMode = ChewSettings.TransportMode(rawValue: Int(settings?.transportModeSegment ?? 0))
-			 onboarding = settings?.onboarding
-			 transferCount = ChewSettings.TransferCountCases(
-				rawValue: settings?.transferCount ?? "")
+			if let mode = ChewSettings.TransportMode(rawValue: Int(settings.transportModeSegment)) {
+				transportMode = mode
+			}
+			onboarding = settings.onboarding
+			if let a = settings.transferCount,
+			   let b = ChewSettings.TransferCountCases(
+				rawValue: a) {
+				transferCount = b
+			}
 		}
-		guard settings != nil else { return ChewSettings() }
+		
+		guard settings != nil else {
+			return ChewSettings()
+		}
+		
 		let transportModes = fetchSettingsTransportModes()
 		
 		return ChewSettings(
