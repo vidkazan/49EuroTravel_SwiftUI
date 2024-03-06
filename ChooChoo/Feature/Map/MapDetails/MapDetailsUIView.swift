@@ -16,21 +16,15 @@ struct MapDetailsUIView: UIViewRepresentable {
 	let region: MKCoordinateRegion
 	
 	class Coordinator: NSObject, MKMapViewDelegate {
-		func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-			let renderer = MKPolylineRenderer(overlay: overlay)
-			renderer.strokeColor = UIColor(Color.chewFillYellowPrimary)
-			renderer.lineWidth = 7
-			renderer.miterLimit = 1
-			renderer.lineJoin = .round
-			renderer.lineCap = .round
-			switch overlay {
-			case is ChooFootOverlay:
-				renderer.lineDashPattern = [2,3]
-			default:
-				break
+		func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay
+		) -> MKOverlayRenderer {
+			if overlay is MKPolyline {
+				if overlay.title == "foot" {
+					return ChooFootPolylineRenderer(overlay: overlay)
+				}
+				return ChooPolylineRenderer(overlay: overlay)
 			}
-			
-			return renderer
+			return MKOverlayRenderer()
 		}
 		
 		
@@ -78,11 +72,10 @@ struct MapDetailsUIView: UIViewRepresentable {
 				)
 			}
 			if let route = leg.route {
-				if leg.type == .line {
-					mapView.addOverlay(route, level: .aboveRoads)
-				} else {
-					mapView.addOverlay(route as? ChooFootOverlay ?? route, level: .aboveRoads)
+				if leg.type != .line {
+					route.title = "foot"
 				}
+				mapView.addOverlay(route, level: .aboveRoads)
 			}
 		})
 		StopAnnotation.registerStopViews(mapView)
@@ -97,7 +90,20 @@ struct MapDetailsUIView: UIViewRepresentable {
 	}
 }
 
+class ChooPolylineRenderer : MKPolylineRenderer {
+	override init(overlay: MKOverlay) {
+		super.init(overlay: overlay)
+		self.lineWidth = 7
+		self.miterLimit = 1
+		self.lineJoin = .round
+		self.lineCap = .round
+		self.strokeColor = UIColor(Color.chewFillYellowPrimary)
+	}
+}
 
-class ChooFootOverlay : MKPolyline {
-
+class ChooFootPolylineRenderer : ChooPolylineRenderer {
+	override init(overlay: MKOverlay) {
+		super.init(overlay: overlay)
+		self.lineDashPattern = [7,14]
+	}
 }
