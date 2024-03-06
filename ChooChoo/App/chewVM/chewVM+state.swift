@@ -36,18 +36,18 @@ extension ChewViewModel {
 	struct State : Equatable {
 		var depStop : TextFieldContent
 		var arrStop : TextFieldContent
-		var settings : ChewSettings
+		var settings : Settings
 		var date : ChewDate
 		var status : Status
 		
 		init(){
 			self.depStop =  .textOnly("")
 			self.arrStop = .textOnly("")
-			self.settings = ChewSettings()
+			self.settings = Settings()
 			self.date = .now
 			self.status = .start
 		}
-		init(depStop: TextFieldContent, arrStop: TextFieldContent, settings: ChewSettings, date: ChewDate, status: Status) {
+		init(depStop: TextFieldContent, arrStop: TextFieldContent, settings: Settings, date: ChewDate, status: Status) {
 			self.depStop = depStop
 			self.arrStop = arrStop
 			self.settings = settings
@@ -92,7 +92,7 @@ extension ChewViewModel {
 	}
 	enum Event {
 		case didStartViewAppear
-		case didLoadInitialData(ChewSettings)
+		case didLoadInitialData(Settings)
 		case onStopEdit(LocationDirectionType)
 		case onNewStop(TextFieldContent,LocationDirectionType)
 		case onStopsSwitch
@@ -104,7 +104,7 @@ extension ChewViewModel {
 		// TODO: add type to date
 //		case onNewDate(ChewDate, type: LocationDirectionType)
 		case onNewDate(ChewDate)
-		case didUpdateSettings(ChewSettings)
+		case didUpdateSettings(Settings)
 		case didLocationButtonPressed(send : (ChewViewModel.Event)->Void)
 		case didReceiveLocationData(Stop)
 		case didFailToLoadLocationData

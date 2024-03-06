@@ -47,6 +47,32 @@ struct StopViewData : Equatable, Identifiable, Hashable {
 	}
 }
 
+extension StopViewData {
+#warning("too many nils")
+	func stop() -> Stop? {
+		if let id = id {
+			return Stop(
+				coordinates: self.locationCoordinates,
+				type: .stop,
+				stopDTO: StopDTO(
+					type: nil,
+					id: id,
+					name: nil,
+					address: nil,
+					location: nil,
+					latitude: nil,
+					longitude: nil,
+					poi: nil,
+					products: nil,
+					distance: nil,
+					station: nil
+				)
+			)
+		}
+		return nil
+	}
+}
+
 
 extension StopViewData {
 	init(

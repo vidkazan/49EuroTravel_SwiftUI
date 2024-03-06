@@ -88,9 +88,18 @@
     </entity>
     <entity name="ChewUser" representedClassName="ChewUser" syncable="YES">
         <relationship name="chewJourneys" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChewJourney" inverseName="user" inverseEntity="ChewJourney"/>
+        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChooSettings" inverseName="user" inverseEntity="ChooSettings"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Location" inverseName="user" inverseEntity="Location"/>
         <relationship name="recentSearches" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChewRecentSearch" inverseName="user" inverseEntity="ChewRecentSearch"/>
-        <relationship name="settings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Settings" inverseName="user" inverseEntity="Settings"/>
+    </entity>
+    <entity name="ChooSettings" representedClassName="ChooSettings" syncable="YES">
+        <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="onboarding" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="transferCount" optional="YES" attributeType="String"/>
+        <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TransportModes" inverseName="chooSettings" inverseEntity="TransportModes"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="chooSettings" inverseEntity="ChewUser"/>
     </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>
@@ -106,15 +115,6 @@
         <relationship name="chewRecentSearchDepStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewRecentSearch" inverseName="depStop" inverseEntity="ChewRecentSearch"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="recentLocations" inverseEntity="ChewUser"/>
     </entity>
-    <entity name="Settings" representedClassName="Settings" syncable="YES">
-        <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="onboarding" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="transferCount" optional="YES" attributeType="String"/>
-        <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TransportModes" inverseName="settings" inverseEntity="TransportModes"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewUser" inverseName="settings" inverseEntity="ChewUser"/>
-    </entity>
     <entity name="TransportModes" representedClassName="TransportModes" syncable="YES">
         <attribute name="bus" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="ferry" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
@@ -126,6 +126,6 @@
         <attribute name="subway" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="taxi" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="tram" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <relationship name="settings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Settings" inverseName="transportModes" inverseEntity="Settings"/>
+        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChooSettings" inverseName="transportModes" inverseEntity="ChooSettings"/>
     </entity>
 </model>

@@ -132,7 +132,6 @@ extension JourneyDetailsViewModel {
 extension JourneyDetailsViewModel {
 	
 	enum Event {
-		
 		case didCancelToLoadData
 		case didLoadJourneyData(data : JourneyViewData)
 		case didFailedToLoadJourneyData(error : any ChewError)

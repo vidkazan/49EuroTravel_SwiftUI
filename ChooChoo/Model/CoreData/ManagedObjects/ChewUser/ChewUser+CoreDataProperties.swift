@@ -11,7 +11,7 @@ import CoreData
 
 extension ChewUser {
 	@NSManaged public var recentLocations: Set<Location>?
-	@NSManaged public var settings: Settings?
+	@NSManaged public var chooSettings: ChooSettings?
 	@NSManaged public var chewJourneys : Set<ChewJourney>?
 	@NSManaged public var chewRecentSearches : Set<ChewRecentSearch>?
 }
@@ -22,10 +22,10 @@ extension ChewUser {
 //			print("> ⚡️ create \(Self.self) thread ",Thread.current)
 			let user = ChewUser(entity: ChewUser.entity(), insertInto: managedObjectContext)
 
-			let settings = Settings(entity: Settings.entity(), insertInto: managedObjectContext)
+			let settings = ChooSettings(entity: ChooSettings.entity(), insertInto: managedObjectContext)
 			let modes = TransportModes(entity: TransportModes.entity(), insertInto: managedObjectContext)
 			settings.user = user
-			modes.settings = settings
+			modes.chooSettings = settings
 
 			do {
 				try managedObjectContext.save()

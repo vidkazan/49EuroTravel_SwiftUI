@@ -9,7 +9,12 @@ import Foundation
 import Combine
 
 extension JourneyListViewModel {
-	static func fetchJourneyList(dep : Stop,arr : Stop,time: Date, settings : ChewSettings) -> AnyPublisher<JourneyListDTO,ApiError> {
+	static func fetchJourneyList(
+		dep : Stop,
+		arr : Stop,
+		time: Date,
+		settings : Settings
+	) -> AnyPublisher<JourneyListDTO,ApiError> {
 		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
 		query += addJourneyListTransfersQuery(settings: settings)
 		query += addJourneyListTransportModes(settings: settings)
@@ -87,7 +92,7 @@ extension JourneyListViewModel {
 	}
 	
 	
-	static func addJourneyListTransfersQuery(settings : ChewSettings) -> [URLQueryItem] {
+	static func addJourneyListTransfersQuery(settings : Settings) -> [URLQueryItem] {
 		switch settings.transferTime {
 		case .direct:
 			return Query.queryItems(methods: [
@@ -106,7 +111,7 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	static func addJourneyListTransportModes(settings : ChewSettings) -> [URLQueryItem] {
+	static func addJourneyListTransportModes(settings : Settings) -> [URLQueryItem] {
 		switch settings.transportMode {
 		case .all:
 			return []

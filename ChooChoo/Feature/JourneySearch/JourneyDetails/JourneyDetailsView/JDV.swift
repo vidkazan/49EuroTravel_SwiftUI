@@ -62,9 +62,9 @@ struct JourneyDetailsPreview : PreviewProvider {
 			Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData!.journey,
 			Mock.journeys.journeyNeussWolfsburg.decodedData!.journey
 		]
-		ScrollView(.horizontal) {
-			LazyHStack {
-				ForEach(mocks,id: \.id) { mock in
+//		ScrollView(.horizontal) {
+//			LazyHStack {
+				ForEach(mocks.prefix(1),id: \.id) { mock in
 					let viewData = mock.journeyViewData(
 						depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
 						arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
@@ -80,8 +80,8 @@ struct JourneyDetailsPreview : PreviewProvider {
 						))
 					.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData!.time.timestamp.departure.actual ?? 0) + 1000)))
 				}
-			}
-		}
+//			}
+//		}
 //		.previewDevice(PreviewDevice(.iPadMini6gen))
 	}
 }

@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-extension Settings {
+extension ChooSettings {
 	@NSManaged public var onboarding: Bool
     @NSManaged public var isWithTransfers: Bool
     @NSManaged public var transferTime: Int16

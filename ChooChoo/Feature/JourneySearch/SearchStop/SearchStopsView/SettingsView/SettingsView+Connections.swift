@@ -33,7 +33,7 @@ extension SettingsView {
 			Picker(
 				selection: $transferTime,
 				content: {
-					ForEach(ChewSettings.TransferDurationCases.allCases,id: \.rawValue) { val in
+					ForEach(Settings.TransferDurationCases.allCases,id: \.rawValue) { val in
 						Text("\(String(val.rawValue)) min ")
 							.tag(val)
 					}
@@ -44,7 +44,7 @@ extension SettingsView {
 			Picker(
 				selection: $transferCount,
 				content: {
-					ForEach(ChewSettings.TransferCountCases.allCases,id: \.rawValue) { val in
+					ForEach(Settings.TransferCountCases.allCases,id: \.rawValue) { val in
 						Text(val.rawValue)
 							.tag(val)
 					}

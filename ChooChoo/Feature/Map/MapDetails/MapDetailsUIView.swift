@@ -23,6 +23,13 @@ struct MapDetailsUIView: UIViewRepresentable {
 			renderer.miterLimit = 1
 			renderer.lineJoin = .round
 			renderer.lineCap = .round
+			switch overlay {
+			case is ChooFootOverlay:
+				renderer.lineDashPattern = [2,3]
+			default:
+				break
+			}
+			
 			return renderer
 		}
 		
@@ -71,7 +78,11 @@ struct MapDetailsUIView: UIViewRepresentable {
 				)
 			}
 			if let route = leg.route {
-				mapView.addOverlay(route)
+				if leg.type == .line {
+					mapView.addOverlay(route, level: .aboveRoads)
+				} else {
+					mapView.addOverlay(route as? ChooFootOverlay ?? route, level: .aboveRoads)
+				}
 			}
 		})
 		StopAnnotation.registerStopViews(mapView)
@@ -84,4 +95,9 @@ struct MapDetailsUIView: UIViewRepresentable {
 	func makeCoordinator() -> Coordinator {
 		Coordinator()
 	}
+}
+
+
+class ChooFootOverlay : MKPolyline {
+
 }

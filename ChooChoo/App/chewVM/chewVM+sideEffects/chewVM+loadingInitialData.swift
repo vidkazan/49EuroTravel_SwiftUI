@@ -17,7 +17,7 @@ extension ChewViewModel {
 			}
 			guard Model.shared.coreDataStore.fetchUser() != nil else {
 				print("whenLoadingInitialData: user is nil: loading default data")
-				return Just(Event.didLoadInitialData(ChewSettings()))
+				return Just(Event.didLoadInitialData(Settings()))
 					.eraseToAnyPublisher()
 			}
 			

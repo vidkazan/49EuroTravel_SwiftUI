@@ -14,6 +14,7 @@ struct JourneyFollowView : View {
 	let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
 	
 	var body: some View {
+		let _ = print(">>> view: ",viewModel.state.journeys.map({$0.id}))
 		VStack {
 			switch viewModel.state.status {
 			case .updating:
@@ -165,6 +166,7 @@ extension JourneyFollowView {
 			}
 			.swipeActions(edge: .trailing) {
 				Button {
+					let _=print(">>>",journey.id)
 					Model.shared.alertViewModel.send(event: .didRequestShow(
 						.destructive(
 							destructiveAction: {
@@ -175,7 +177,8 @@ extension JourneyFollowView {
 								))
 						},
 						description: "Unfollow journey?",
-						actionDescription: "Unfollow"
+						actionDescription: "Unfollow",
+							id: UUID()
 					)))
 				} label: {
 					Label("Delete", systemImage: "xmark.bin.circle")

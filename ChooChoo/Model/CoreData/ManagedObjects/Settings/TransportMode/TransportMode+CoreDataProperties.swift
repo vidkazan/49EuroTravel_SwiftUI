@@ -20,7 +20,7 @@ extension TransportModes {
 	@NSManaged public var subway: Bool
 	@NSManaged public var tram: Bool
 	@NSManaged public var taxi: Bool
-    @NSManaged public var settings: Settings?
+    @NSManaged public var chooSettings: ChooSettings?
 }
 
 extension TransportModes {

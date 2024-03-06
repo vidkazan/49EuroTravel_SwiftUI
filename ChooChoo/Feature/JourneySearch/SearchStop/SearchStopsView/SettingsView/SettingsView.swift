@@ -12,17 +12,17 @@ import SwiftUI
 
 struct SettingsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
-	@State var transferTime = ChewSettings.TransferDurationCases.zero
-	@State var transferCount = ChewSettings.TransferCountCases.unlimited
-	@State var transportModeSegment = ChewSettings.TransportMode.all
+	@State var transferTime = Settings.TransferDurationCases.zero
+	@State var transferCount = Settings.TransferCountCases.unlimited
+	@State var transportModeSegment = Settings.TransportMode.all
 	let allTypes : [LineType] = LineType.allCases
 	@State var selectedTypes = Set<LineType>()
 	@State var showWithTransfers : Int
 	@State var alternativeSearchPage : Bool
 //	@State var showSunEvents : Bool
 	let closeSheet : ()->Void
-	let oldSettings : ChewSettings
-	init(settings : ChewSettings,closeSheet : @escaping ()->Void) {
+	let oldSettings : Settings
+	init(settings : Settings,closeSheet : @escaping ()->Void) {
 		self.oldSettings = settings
 		self.transportModeSegment = settings.transportMode
 		self.selectedTypes = settings.customTransferModes

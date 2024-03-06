@@ -25,7 +25,7 @@ final class JourneyListViewModel : ObservableObject {
 			date: .now,
 			earlierRef: nil,
 			laterRef: nil,
-			settings: ChewSettings(),
+			settings: Settings(),
 			stops: stops,
 			status: .journeysLoaded
 		)
@@ -46,7 +46,7 @@ final class JourneyListViewModel : ObservableObject {
 	
 	init(
 		date: ChewDate,
-		settings : ChewSettings,
+		settings : Settings,
 		stops : DepartureArrivalPair
 	) {
 //		print("💾 JLVM \(self.id.uuidString.suffix(4)) init")

@@ -161,7 +161,7 @@ extension CoreDataStore {
 				print("📕 > update Settings : error : user entity is null")
 				return
 			}
-			guard let settings = user.settings else {
+			guard let settings = user.chooSettings else {
 				print("📕 > update Settings : error : settings entity is null")
 				return
 			}
@@ -176,14 +176,14 @@ extension CoreDataStore {
 		print("📕 > update Journeys : error : delete fault")
 		return false
 	}
-	func updateSettings(newSettings : ChewSettings){
+	func updateSettings(newSettings : Settings){
 		 asyncContext.performAndWait {
 //			print("> ⚡️ update Settings thread ",Thread.current)
 			guard let user = self.user else {
 				print("📕 > update Settings : error : user entity is null")
 				return
 			}
-			guard let settings = user.settings else {
+			guard let settings = user.chooSettings else {
 				print("📕 > update Settings : error : settings entity is null")
 				return
 			}
@@ -205,7 +205,7 @@ extension CoreDataStore {
 				context: settings.managedObjectContext ?? asyncContext
 			)
 			 
-			modes.settings = settings
+			modes.chooSettings = settings
 			
 			self.saveAsyncContext()
 		}

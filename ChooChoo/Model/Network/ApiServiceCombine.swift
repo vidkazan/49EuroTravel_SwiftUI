@@ -58,15 +58,21 @@ extension ApiService {
 		query : [URLQueryItem],
 		type : Requests
 	) -> AnyPublisher<T, ApiError> {
-		
-		guard let url = ApiService.generateUrl(query: query, type: type) else {
+		guard let url = ApiService.generateUrl(
+			query: query,
+			type: type
+		) else {
 			return Future<T,ApiError> {
 				return $0(.failure(.badUrl))
 			}.eraseToAnyPublisher()
 		}
 		
 		let request = type.getRequest(urlEndPoint: url)
-		return self.client.execute(t.self, request: request, type: type)
+		return self.client.execute(
+			t.self,
+			request: request,
+			type: type
+		)
 	}
 }
 

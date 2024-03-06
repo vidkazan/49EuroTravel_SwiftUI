@@ -10,17 +10,17 @@ import SwiftUI
 
 extension SettingsView {
 	func saveSettings(){
-		let transfer : ChewSettings.TransferTime =  {
+		let transfer : Settings.TransferTime =  {
 			switch self.showWithTransfers {
 			case 0:
-				return ChewSettings.TransferTime.direct
+				return Settings.TransferTime.direct
 			default:
-				return ChewSettings.TransferTime.time(
+				return Settings.TransferTime.time(
 					minutes: self.transferTime
 				)
 			}
 		}()
-		let res = ChewSettings(
+		let res = Settings(
 			onboarding: false,
 			customTransferModes: selectedTypes,
 			transportMode: transportModeSegment,
@@ -29,7 +29,7 @@ extension SettingsView {
 			accessiblity: .partial,
 			walkingSpeed: .fast,
 			language: .english,
-			debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false,alternativeSearchPage: alternativeSearchPage),
+			debugSettings: Settings.ChewDebugSettings(prettyJSON: false,alternativeSearchPage: alternativeSearchPage),
 			startWithWalking: true,
 			withBicycle: false
 		)

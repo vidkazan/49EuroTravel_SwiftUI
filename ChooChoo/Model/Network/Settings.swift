@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ChewSettings : Equatable,Hashable {
+struct Settings : Equatable,Hashable {
 	let onboarding : Bool
 	let customTransferModes : Set<LineType>
 	let transportMode : TransportMode
@@ -21,8 +21,8 @@ struct ChewSettings : Equatable,Hashable {
 	let withBicycle : Bool
 }
 
-extension ChewSettings {
-	static func transferDurationCases(count : Int16?) -> ChewSettings.TransferDurationCases {
+extension Settings {
+	static func transferDurationCases(count : Int16?) -> Settings.TransferDurationCases {
 			switch count {
 			case 5:
 				return .five
@@ -113,7 +113,7 @@ extension ChewSettings {
 	}
 }
 
-extension ChewSettings {
+extension Settings {
 	init() {
 		self.customTransferModes = []
 		self.accessiblity = .partial
@@ -127,7 +127,7 @@ extension ChewSettings {
 		self.onboarding = true
 		self.transferCount = .unlimited
 	}
-	init(settings : ChewSettings, onboarding : Bool) {
+	init(settings : Settings, onboarding : Bool) {
 		self.customTransferModes = settings.customTransferModes
 		self.accessiblity = settings.accessiblity
 		self.debugSettings = settings.debugSettings

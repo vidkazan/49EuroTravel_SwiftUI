@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(Settings)
-public class Settings: NSManagedObject {
+@objc(ChooSettings)
+public class ChooSettings: NSManagedObject {
 	
 }

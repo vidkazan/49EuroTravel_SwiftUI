@@ -18,15 +18,15 @@ extension CoreDataStore {
 		return user
 	}
 	
-	func fetchSettings() -> ChewSettings {
-		var settings : Settings?
-		var transferTypes = ChewSettings.TransferTime.time(minutes: .zero)
-		var transportMode = ChewSettings.TransportMode.all
-		var transferCount = ChewSettings.TransferCountCases.unlimited
+	func fetchSettings() -> Settings {
+		var settings : ChooSettings?
+		var transferTypes = Settings.TransferTime.time(minutes: .zero)
+		var transportMode = Settings.TransportMode.all
+		var transferCount = Settings.TransferCountCases.unlimited
 		var onboarding : Bool = true
 		
 		asyncContext.performAndWait {
-			settings = user?.settings
+			settings = user?.chooSettings
 			guard let settings = settings else {
 				return
 			}
@@ -35,27 +35,27 @@ extension CoreDataStore {
 					 return .direct
 				 }
 				return .time(
-					minutes: ChewSettings.transferDurationCases(count: settings.transferTime)
+					minutes: Settings.transferDurationCases(count: settings.transferTime)
 				)
 			 }()
-			if let mode = ChewSettings.TransportMode(rawValue: Int(settings.transportModeSegment)) {
+			if let mode = Settings.TransportMode(rawValue: Int(settings.transportModeSegment)) {
 				transportMode = mode
 			}
 			onboarding = settings.onboarding
 			if let a = settings.transferCount,
-			   let b = ChewSettings.TransferCountCases(
+			   let b = Settings.TransferCountCases(
 				rawValue: a) {
 				transferCount = b
 			}
 		}
 		
 		guard settings != nil else {
-			return ChewSettings()
+			return Settings()
 		}
 		
 		let transportModes = fetchSettingsTransportModes()
 		
-		return ChewSettings(
+		return Settings(
 			onboarding: onboarding,
 			customTransferModes: transportModes,
 			transportMode: transportMode,
@@ -64,7 +64,7 @@ extension CoreDataStore {
 			accessiblity: .partial,
 			walkingSpeed: .fast,
 			language: .english,
-			debugSettings: ChewSettings.ChewDebugSettings(prettyJSON: false,alternativeSearchPage: false),
+			debugSettings: Settings.ChewDebugSettings(prettyJSON: false,alternativeSearchPage: false),
 			startWithWalking: true,
 			withBicycle: false
 		)
@@ -74,7 +74,7 @@ extension CoreDataStore {
 		var modes : TransportModes!
 		var transportModes = Set<LineType>()
 		asyncContext.performAndWait {
-			modes = user?.settings?.transportModes
+			modes = user?.chooSettings?.transportModes
 		
 		
 		// buuueeeeeeee

@@ -48,18 +48,34 @@ extension LegStopView {
 		VStack(alignment: .leading) {
 			switch stopOverType {
 			case .stopover:
-				TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
-					.frame(minWidth: 30)
+				TimeLabelView(
+					stopOver : stopOver,
+					stopOverType: stopOverType
+				)
+				.frame(minWidth: 30)
 				.background { timeLabelBackground }
 				.cornerRadius(stopOverType.timeLabelCornerRadius)
 				.shadow(radius: 2)
 				.offset(x: stopOver.time.departureStatus.value != nil ? stopOver.time.departureStatus.value! > 0 ? 8 : 0 : 0)
 			case .origin, .footTop,.destination:
-				TimeLabelView(stopOver : stopOver,stopOverType: stopOverType)
+				VStack(spacing: 0) {
+					if case .origin = stopOverType {
+						TimeLabelView(
+							size: .medium,
+							arragement: .bottom,
+							delayStatus: .onTime,
+							time: stopOver.time.date.arrival
+						)
+					}
+					TimeLabelView(
+						stopOver : stopOver,
+						stopOverType: stopOverType
+					)
 					.frame(minWidth: 50)
-				.background { timeLabelBackground }
-				.cornerRadius(stopOverType.timeLabelCornerRadius)
-				.shadow(radius: 2)
+					.background { timeLabelBackground }
+					.cornerRadius(stopOverType.timeLabelCornerRadius)
+					.shadow(radius: 2)
+				}
 			case .footMiddle,.transfer,.footBottom:
 				EmptyView()
 			}
@@ -88,10 +104,12 @@ extension LegStopView {
 			case .footBottom,.footMiddle,.footTop:
 				BadgeView(.walking(legViewData.time))
 			case .origin,.destination:
-				PlatformView(
-					isShowingPlatormWord: true,
-					platform: stopOver.stopOverType.platform(stopOver: stopOver) ?? .init()
-				)
+				HStack {
+					PlatformView(
+						isShowingPlatormWord: true,
+						platform: stopOver.stopOverType.platform(stopOver: stopOver) ?? .init()
+					)
+				}
 				if showBadges == true, stopOverType == .origin {
 					legStopViewBadges
 				}

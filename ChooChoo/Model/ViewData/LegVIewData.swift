@@ -28,6 +28,7 @@ struct LegViewData : Equatable,Identifiable {
 	let time : TimeContainer
 	let polyline : PolylineDTO?
 	let legDTO : LegDTO?
+	var previousTripId : String?
 }
 
 extension LegViewData {

@@ -31,12 +31,12 @@ import SwiftUI
 // SSV: stopList: swap right icons
 // revise icons, espesially transfer icon
 
-//  revise contrastz
+//  revise contrast
 //  revise text white color ( too contrast with black BG )
 //  DESIGGGGN: add some gradient?
 
 // MARK: MAP details:
-// punkured line for foot path
+// punktured line for foot path
 
 // TODO: feature: check when train arrives at starting point
 
@@ -113,7 +113,7 @@ struct ContentView: View {
 extension ContentView {
 	func alert() -> Alert {
 		switch alertState.alert {
-		case let .destructive(destructiveAction, description, actionDescripton):
+		case let .destructive(destructiveAction, description, actionDescripton,_):
 			return Alert(
 				title: Text(description),
 				primaryButton: .cancel(),

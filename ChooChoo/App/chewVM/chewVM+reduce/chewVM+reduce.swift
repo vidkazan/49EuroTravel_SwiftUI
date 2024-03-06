@@ -78,7 +78,7 @@ extension ChewViewModel {
 				return State(
 					depStop: .textOnly(""),
 					arrStop: .textOnly(""),
-					settings: ChewSettings(),
+					settings: Settings(),
 					date: state.date,
 					status: .loadingInitialData
 				)

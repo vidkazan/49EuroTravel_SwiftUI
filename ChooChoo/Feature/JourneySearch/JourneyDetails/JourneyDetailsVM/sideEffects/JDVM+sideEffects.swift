@@ -22,6 +22,8 @@ extension JourneyDetailsViewModel {
 			guard case let .changingSubscribingState(id,_, vm) = state.status else {
 				return Empty().eraseToAnyPublisher()
 			}
+			print(">>>",Model.shared.journeyFollowViewModel.state.journeys.map({$0.id}))
+			print(">>>",id)
 			switch Model.shared.journeyFollowViewModel.state.journeys.contains(where: {$0.id == id}) == true {
 			case true:
 				Model.shared.journeyFollowViewModel.send(
