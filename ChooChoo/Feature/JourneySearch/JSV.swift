@@ -26,15 +26,37 @@ struct JourneySearchView : View {
 //			chewViewModel.send(event: .didCancelEditStop)
 //		}
 		.padding(.horizontal,10)
-//		.background( .linearGradient(
-//			colors: [
-//				.transport.tramRed.opacity(0.1),
-//				.transport.busMagenta.opacity(0.05),
-//				.chewFillPrimary
-//			],
-//			startPoint: UnitPoint(x: 0.2, y: 0),
-//			endPoint: UnitPoint(x: 0.2, y: 0.4))
-//		)
+		.background(alignment: .top, content: {
+			ZStack {
+				Rectangle().ignoresSafeArea(.all)
+					.foregroundStyle(.clear)
+					.background (
+						.linearGradient(
+							colors: [
+								.transport.busMagenta.opacity(0.1),
+								.transport.tramRed.opacity(0.05)
+							],
+							startPoint: UnitPoint(x: 0.2, y: 0),
+							endPoint: UnitPoint(x: 0.2, y: 0.4)
+						)
+					)
+					.frame(maxWidth: .infinity, maxHeight: 170)
+					.blur(radius: 50)
+				Rectangle()
+					.foregroundStyle(.clear)
+					.background (
+						.linearGradient(
+							colors: [
+								.transport.busMagenta.opacity(0.2),
+								.transport.tramRed.opacity(0.1),
+							],
+							startPoint: UnitPoint(x: 0, y: 0),
+							endPoint: UnitPoint(x: 1, y: 0))
+					)
+					.frame(maxWidth: .infinity, maxHeight: 170)
+					.blur(radius: 50)
+			}
+		})
 		.background(Color.chewFillPrimary)
 		.navigationTitle("Choo Choo")
 		.navigationBarTitleDisplayMode(.inline)

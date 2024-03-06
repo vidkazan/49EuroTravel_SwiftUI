@@ -35,9 +35,6 @@ import SwiftUI
 //  revise text white color ( too contrast with black BG )
 //  DESIGGGGN: add some gradient?
 
-// MARK: MAP details:
-// punktured line for foot path
-
 // TODO: feature: check when train arrives at starting point
 
 struct ContentView: View {
