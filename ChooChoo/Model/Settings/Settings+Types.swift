@@ -7,42 +7,6 @@
 
 import Foundation
 
-struct Settings : Equatable,Hashable {
-	let onboarding : Bool
-	let customTransferModes : Set<LineType>
-	let transportMode : TransportMode
-	let transferTime : TransferTime
-	let transferCount : TransferCountCases
-	let accessiblity : Accessiblity
-	let walkingSpeed : WalkingSpeed
-	let language : Language
-	let debugSettings : ChewDebugSettings
-	let startWithWalking : Bool
-	let withBicycle : Bool
-	
-	func isDefault() -> Bool {
-		guard transportMode == transportMode.defaultValue else {
-			return false
-		}
-		guard transferTime == transferTime.defaultValue else {
-			return false
-		}
-		guard transferCount == transferCount.defaultValue else {
-			return false
-		}
-		guard accessiblity == accessiblity.defaultValue else {
-			return false
-		}
-		guard startWithWalking == true else {
-			return false
-		}
-		guard withBicycle == false else {
-			return false
-		}
-		return true
-	}
-}
-
 extension Settings {
 	static func transferDurationCases(count : Int16?) -> Settings.TransferDurationCases {
 			switch count {
@@ -128,7 +92,6 @@ extension Settings {
 		}
 	}
 	
-	// TODO: test: transfer time -Xmin -> Xmin
 	enum TransferTime : Equatable, Hashable {
 		case direct
 		case time(minutes : TransferDurationCases)
@@ -161,34 +124,5 @@ extension Settings {
 	struct ChewDebugSettings: Equatable, Hashable {
 		let prettyJSON : Bool
 		let alternativeSearchPage : Bool
-	}
-}
-
-extension Settings {
-	init() {
-		self.customTransferModes = []
-		self.accessiblity = .partial
-		self.debugSettings = Self.ChewDebugSettings(prettyJSON: false, alternativeSearchPage: false)
-		self.language = .english
-		self.startWithWalking = true
-		self.transferTime = .time(minutes: .zero)
-		self.transportMode = .all
-		self.walkingSpeed = .fast
-		self.withBicycle = false
-		self.onboarding = true
-		self.transferCount = .unlimited
-	}
-	init(settings : Settings, onboarding : Bool) {
-		self.customTransferModes = settings.customTransferModes
-		self.accessiblity = settings.accessiblity
-		self.debugSettings = settings.debugSettings
-		self.language = settings.language
-		self.startWithWalking = settings.startWithWalking
-		self.transferTime = settings.transferTime
-		self.transportMode = settings.transportMode
-		self.walkingSpeed = settings.walkingSpeed
-		self.withBicycle = settings.withBicycle
-		self.onboarding = onboarding
-		self.transferCount = settings.transferCount
 	}
 }

@@ -190,6 +190,8 @@
 		7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */; };
 		7DBABFF92B879FA400C990FD /* ChildAnnotationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBABFF82B879FA400C990FD /* ChildAnnotationViews.swift */; };
 		7DBABFFC2B87A99B00C990FD /* MapDetailsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBABFFB2B87A99B00C990FD /* MapDetailsUIView.swift */; };
+		7DBD26BE2B99F10600612A3B /* Settings+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD26BD2B99F10600612A3B /* Settings+init.swift */; };
+		7DBD26C02B99F13700612A3B /* Settings+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD26BF2B99F13700612A3B /* Settings+Types.swift */; };
 		7DBF1E572ABB8084009B85EF /* TimeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */; };
 		7DBF1E592ABC522E009B85EF /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF1E582ABC522E009B85EF /* Badges.swift */; };
 		7DC0D2A12B2221D200B1FB5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D46ABE72B220B1600A4145E /* Assets.xcassets */; };
@@ -429,6 +431,8 @@
 		7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunEvent.swift; sourceTree = "<group>"; };
 		7DBABFF82B879FA400C990FD /* ChildAnnotationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildAnnotationViews.swift; sourceTree = "<group>"; };
 		7DBABFFB2B87A99B00C990FD /* MapDetailsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailsUIView.swift; sourceTree = "<group>"; };
+		7DBD26BD2B99F10600612A3B /* Settings+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+init.swift"; sourceTree = "<group>"; };
+		7DBD26BF2B99F13700612A3B /* Settings+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Types.swift"; sourceTree = "<group>"; };
 		7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabelView.swift; sourceTree = "<group>"; };
 		7DBF1E582ABC522E009B85EF /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		7DC0D2A22B2221D800B1FB5A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -533,6 +537,7 @@
 		7D02CE0C2A97E38B0048ADE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7DBD26BC2B99F0D900612A3B /* Settings */,
 				7DF5871B2B5EBFFA00A4F99A /* Errors */,
 				7D65DF172B2A27E500692601 /* DTO */,
 				7D9BB1052B0CBF3B008A3616 /* CoreData */,
@@ -1173,7 +1178,6 @@
 				7D02CE222A97E64E0048ADE6 /* Query.swift */,
 				7DE727C82AD93955002FF033 /* ApiServiceCombine.swift */,
 				7D02CE262A97E6790048ADE6 /* ApiService.swift */,
-				7D345E492AE95E7C003CA948 /* Settings.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -1305,6 +1309,16 @@
 				7DBABFF82B879FA400C990FD /* ChildAnnotationViews.swift */,
 			);
 			path = AnnotationView;
+			sourceTree = "<group>";
+		};
+		7DBD26BC2B99F0D900612A3B /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				7DBD26BD2B99F10600612A3B /* Settings+init.swift */,
+				7DBD26BF2B99F13700612A3B /* Settings+Types.swift */,
+				7D345E492AE95E7C003CA948 /* Settings.swift */,
+			);
+			path = Settings;
 			sourceTree = "<group>";
 		};
 		7DBEFB7F2ABDB18100C8D5DE /* constructJourneys+Leg */ = {
@@ -1744,6 +1758,7 @@
 				7D2CAF642B0BEA0200577FD4 /* Model.xcdatamodeld in Sources */,
 				7D65DF1C2B2A2BFE00692601 /* ChewStop+CoreDataClass.swift in Sources */,
 				7D000CFB2AB87ACD00566120 /* NavigationLazyView.swift in Sources */,
+				7DBD26C02B99F13700612A3B /* Settings+Types.swift in Sources */,
 				7D000CF32AB86AD700566120 /* JLVM+sideEffects+loadingJourneys.swift in Sources */,
 				7D6C5C2F2AAF792200DEFC57 /* JDVM+state.swift in Sources */,
 				7DFC46AB2B7F859F00118608 /* AttibutedContainers.swift in Sources */,
@@ -1768,6 +1783,7 @@
 				7DA13A432B28D66D0045061F /* ChewTime+CoreDataProperties.swift in Sources */,
 				7D462D5C2AACE5D100BC0D65 /* JourneyCell.swift in Sources */,
 				7DF0D98D2B69557D00861C4F /* Iphones.swift in Sources */,
+				7DBD26BE2B99F10600612A3B /* Settings+init.swift in Sources */,
 				7DE3599F2AB9E9430028CA59 /* chewVM+reduce+LoadingLocaiton.swift in Sources */,
 				7D181D642AD6D595003AB021 /* RecentSearchView.swift in Sources */,
 				7DD5BAE52B72AE9500CFE768 /* JDVM+sideEffects+fetch.swift in Sources */,
