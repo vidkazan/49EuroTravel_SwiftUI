@@ -16,6 +16,7 @@ struct JourneyFollowView : View {
 	var body: some View {
 		let _ = print(">>> view: ",viewModel.state.journeys.map({$0.id}))
 		VStack {
+			TopBarAlertsView()
 			switch viewModel.state.status {
 			case .updating:
 				switch viewModel.state.journeys.count {

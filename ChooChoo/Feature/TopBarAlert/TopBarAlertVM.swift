@@ -113,7 +113,7 @@ extension TopBarAlertViewModel {
 			case .journeyFollowError:
 				return Color.chewFillRedPrimary.opacity(0.5)
 			case .offlineMode:
-				return Color.chewFillBluePrimary
+				return Color.transport.uBlue
 			case .userLocationError:
 				return Color.chewFillRedPrimary.opacity(0.5)
 			}

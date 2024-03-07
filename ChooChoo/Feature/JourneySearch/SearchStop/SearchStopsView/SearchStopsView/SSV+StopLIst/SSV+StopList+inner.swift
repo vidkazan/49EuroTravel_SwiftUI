@@ -122,21 +122,3 @@ extension SearchStopsView {
 		.foregroundColor(.primary)
 	}
 }
-
-extension SearchStopsView {
-	func sortStopByLocation(stops : [Stop]) -> ([(Stop, Double?)]) {
-		var res = [(Stop, Double)]()
-		var resOptional = [(Stop, Double?)]()
-		let tmp = stops
-		if let location = Model.shared.locationDataManager.locationManager.location {
-			res = tmp.map({stop in
-				return (stop, location.distance(stop.coordinates))
-			})
-			res.sort(by: { $0.1 < $1.1 })
-			resOptional = res
-		} else {
-			resOptional = tmp.map({ return ($0, nil)})
-		}
-		return resOptional
-	}
-}

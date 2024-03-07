@@ -26,10 +26,14 @@ struct TopBarAlertsView: View {
 			case .showing,.adding,.deleting :
 				if !alertVM.state.alerts.isEmpty {
 					VStack(spacing: 2) {
-						ForEach(alertVM.state.alerts.sorted(by: <), id: \.hashValue, content: { alert in
-							TopBarAlertView(alertVM: alertVM, alert: alert)
-								.transition(.moveAndOpacity)
-						})
+						ForEach(
+							alertVM.state.alerts.sorted(by: <),
+							id: \.hashValue,
+							content: { alert in
+								TopBarAlertView(alertVM: alertVM, alert: alert)
+									.transition(.moveAndOpacity)
+							}
+						)
 					}
 					.padding(.horizontal,10)
 					.animation(.smooth, value: alertVM.state.alerts)

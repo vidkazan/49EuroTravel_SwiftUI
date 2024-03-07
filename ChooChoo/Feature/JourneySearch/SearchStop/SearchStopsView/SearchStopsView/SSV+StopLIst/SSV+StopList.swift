@@ -10,12 +10,17 @@ import Foundation
 import SwiftUI
 
 extension SearchStopsView {
+	
 	func stopList(type : LocationDirectionType) -> some View {
 		let recentStopsAll = searchStopViewModel.state.previousStops.filter { stop in
 			return type == .departure ? stop.name.hasPrefix(topText) : stop.name.hasPrefix(bottomText)
 		}
-		let recentStopsData = Array(sortStopByLocation(stops: recentStopsAll).prefix(2))
-		let stops = sortStopByLocation(stops: searchStopViewModel.state.stops)
+		let recentStopsData = Array(
+			SearchStopsViewModel
+				.sortedStopsByLocationWithDistance(stops: recentStopsAll).prefix(2)
+		)
+		let stops = SearchStopsViewModel
+			.sortedStopsByLocationWithDistance(stops: searchStopViewModel.state.stops)
 		return VStack(alignment: .leading,spacing: 1) {
 			findOnMap(type: type)
 			recentStops(type: type,recentStops: recentStopsData)

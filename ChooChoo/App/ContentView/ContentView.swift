@@ -19,21 +19,21 @@ import SwiftUI
 
 // MARK: JFV
 // emptyState: specify how to follow journey
-// in some cases journey isnt unfollowing ( try with coordinates instad of name )
 
 
 // MARK: Settings
 // let user know that some settings are filtrating search results
 
+// MARK: RSV
+// leave only last 5 items
 
+
+
+// MARK: revise
 // all text revision
-// RSV: leave only last 5 items
-// SSV: stopList: swap right icons
 // revise icons, espesially transfer icon
-
 //  revise contrast
 //  revise text white color ( too contrast with black BG )
-//  DESIGGGGN: add some gradient?
 
 // TODO: feature: check when train arrives at starting point
 
@@ -52,13 +52,11 @@ struct ContentView: View {
 		Group {
 			switch state.status {
 			case .start:
-				EmptyView()
+				Text("ChooChoo")
+					.chewTextSize(.huge)
 			default:
-				VStack(spacing: 5) {
-					TopBarAlertsView()
-					FeatureView()
-						.animation(.smooth, value: topAlertVM.state)
-				}
+				FeatureView()
+					.animation(.smooth, value: topAlertVM.state)
 			}
 		}
 		.sheet(

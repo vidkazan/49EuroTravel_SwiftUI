@@ -14,6 +14,7 @@ struct JourneySearchView : View {
 	@ObservedObject var searchStopsVM = Model.shared.searchStopsViewModel
 	var body: some View {
 		VStack(spacing: 5) {
+			TopBarAlertsView()
 			SearchStopsView()
 			TimeAndSettingsView()
 			BottomView()
@@ -27,39 +28,45 @@ struct JourneySearchView : View {
 //		}
 		.padding(.horizontal,10)
 		.background(alignment: .top, content: {
-			ZStack {
-				Rectangle().ignoresSafeArea(.all)
-					.foregroundStyle(.clear)
-					.background (
-						.linearGradient(
-							colors: [
-								.transport.busMagenta.opacity(0.1),
-								.transport.tramRed.opacity(0.05)
-							],
-							startPoint: UnitPoint(x: 0.2, y: 0),
-							endPoint: UnitPoint(x: 0.2, y: 0.4)
-						)
-					)
-					.frame(maxWidth: .infinity, maxHeight: 170)
-					.blur(radius: 50)
-				Rectangle()
-					.foregroundStyle(.clear)
-					.background (
-						.linearGradient(
-							colors: [
-								.transport.busMagenta.opacity(0.2),
-								.transport.tramRed.opacity(0.1),
-							],
-							startPoint: UnitPoint(x: 0, y: 0),
-							endPoint: UnitPoint(x: 1, y: 0))
-					)
-					.frame(maxWidth: .infinity, maxHeight: 170)
-					.blur(radius: 50)
-			}
+			gradient()
 		})
 		.background(Color.chewFillPrimary)
 		.navigationTitle("Choo Choo")
 		.navigationBarTitleDisplayMode(.inline)
+	}
+}
+
+extension JourneySearchView {
+	@ViewBuilder func gradient() -> some View {
+		ZStack {
+			Rectangle().ignoresSafeArea(.all)
+				.foregroundStyle(.clear)
+				.background (
+					.linearGradient(
+						colors: [
+							.transport.busMagenta.opacity(0.1),
+							.transport.tramRed.opacity(0.05)
+						],
+						startPoint: UnitPoint(x: 0.2, y: 0),
+						endPoint: UnitPoint(x: 0.2, y: 0.4)
+					)
+				)
+				.frame(maxWidth: .infinity, maxHeight: 170)
+				.blur(radius: 50)
+			Rectangle()
+				.foregroundStyle(.clear)
+				.background (
+					.linearGradient(
+						colors: [
+							.transport.busMagenta.opacity(0.2),
+							.transport.tramRed.opacity(0.1),
+						],
+						startPoint: UnitPoint(x: 0, y: 0),
+						endPoint: UnitPoint(x: 1, y: 0))
+				)
+				.frame(maxWidth: .infinity, maxHeight: 170)
+				.blur(radius: 50)
+		}
 	}
 }
 

@@ -17,7 +17,7 @@ struct TopBarAlertView: View {
 	var body: some View {
 		ZStack {
 			RoundedRectangle(cornerRadius: 10)
-				.fill(alert.bgColor)
+				.fill(alert.bgColor.blendMode(.darken))
 				.frame(height: 35)
 				.cornerRadius(10)
 			HStack {

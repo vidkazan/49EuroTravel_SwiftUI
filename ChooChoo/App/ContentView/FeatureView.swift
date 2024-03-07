@@ -36,13 +36,6 @@ struct FeatureView: View {
 						Label("Follow", systemImage: ChewSFSymbols.bookmark.rawValue)
 					}
 					.tag(Tabs.follow)
-//				NavigationStack {
-//					
-//				}
-//					.tabItem {
-//						Label("Debug", systemImage: "ant")
-//					}
-//					.tag(Tabs.debug)
 			} else {
 				NavigationView {
 					JourneySearchView()
@@ -58,13 +51,7 @@ struct FeatureView: View {
 						Label("Follow", systemImage: ChewSFSymbols.bookmark.rawValue)
 					}
 					.tag(Tabs.follow)
-//				NavigationView {
-//					
-//				}
-//					.tabItem {
-//						Label("Debug", systemImage: "ant")
-//					}
-//					.tag(Tabs.debug)
+
 			}
 		}
 		.onReceive(chewViewModel.$state, perform: { state in
