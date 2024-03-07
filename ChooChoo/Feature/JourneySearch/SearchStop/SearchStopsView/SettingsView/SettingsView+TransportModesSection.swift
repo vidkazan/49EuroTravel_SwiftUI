@@ -12,7 +12,7 @@ extension SettingsView {
 	var segments : some View {
 		Section(
 			content: {
-				ForEach(allTypes, id: \.rawValue) { type in
+				ForEach(LineType.allCases, id: \.rawValue) { type in
 					if type != .foot, type != .transfer {
 						Toggle(
 							isOn: Binding(
@@ -20,7 +20,11 @@ extension SettingsView {
 								set: { _ in selectedTypes.toogle(val: type)}
 							),
 							label: {
-								Text(type.shortValue)
+								BadgeView(.lineNumber(
+									lineType: type,
+									num: type.shortValue
+								))
+								
 							}
 						)
 					}

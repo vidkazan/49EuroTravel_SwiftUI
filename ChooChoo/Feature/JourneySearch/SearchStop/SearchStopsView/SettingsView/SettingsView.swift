@@ -8,14 +8,11 @@
 import Foundation
 import SwiftUI
 
-
-
 struct SettingsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
 	@State var transferTime = Settings.TransferDurationCases.zero
 	@State var transferCount = Settings.TransferCountCases.unlimited
 	@State var transportModeSegment = Settings.TransportMode.all
-	let allTypes : [LineType] = LineType.allCases
 	@State var selectedTypes = Set<LineType>()
 	@State var showWithTransfers : Int
 	@State var alternativeSearchPage : Bool
@@ -51,6 +48,21 @@ struct SettingsView: View {
 				connections
 				if showWithTransfers == 1 {
 					transferSegment
+				}
+				Section {
+					Button("Reset settings", role: .destructive, action: {
+						Model.shared.alertViewModel.send(
+							event: .didRequestShow(.destructive(
+								destructiveAction: {
+									chewViewModel.send(event: .didUpdateSettings(Settings()))
+									closeSheet()
+								},
+								description: "Reset settings?",
+								actionDescription: "Reset",
+								id: .init()
+							))
+						)
+					})
 				}
 //				debug
 			}

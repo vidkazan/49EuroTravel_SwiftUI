@@ -21,9 +21,6 @@ import SwiftUI
 // emptyState: specify how to follow journey
 
 
-// MARK: Settings
-// let user know that some settings are filtrating search results
-
 // MARK: RSV
 // leave only last 5 items
 
@@ -57,6 +54,7 @@ struct ContentView: View {
 					.animation(.smooth, value: topAlertVM.state)
 			}
 		}
+		.alert(isPresented: $alertIsPresented, content: alert)
 		.sheet(
 			isPresented: $sheetIsPresented,
 			onDismiss: {
@@ -64,12 +62,11 @@ struct ContentView: View {
 			},
 			content: {
 				SheetView(closeSheet: {
-					
 					sheetIsPresented = false
 				})
+				.alert(isPresented: $alertIsPresented, content: alert)
 			}
 		)
-		.alert(isPresented: $alertIsPresented, content: alert)
 		.onAppear {
 			chewViewModel.send(event: .didStartViewAppear)
 			UITabBar.appearance().backgroundColor = UIColor(Color.chewFillPrimary)

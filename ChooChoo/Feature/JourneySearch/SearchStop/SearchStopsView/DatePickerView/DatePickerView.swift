@@ -22,8 +22,6 @@ struct DatePickerView: View {
 						Text($0.description)
 							.tag($0)
 					}
-//					Text("departure").tag(LocationDirectionType.departure)
-//					Text("arrial").tag(LocationDirectionType.arrival)
 				}
 				.scaleEffect(0.85)
 				.frame(maxWidth: .infinity,maxHeight: 70)
