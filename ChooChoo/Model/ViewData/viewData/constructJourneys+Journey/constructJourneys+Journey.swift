@@ -113,7 +113,7 @@ extension JourneyDTO {
 
 
 func getGradientStops(startDateTS : Double?, endDateTS : Double?,sunEvents : [SunEvent] ) -> [Gradient.Stop] {
-	let nightColor = Color.chewFillBluePrimary
+	let nightColor = Color.chewSunEventBlue
 	let dayColor = Color.chewFillYellowPrimary
 	var stops : [Gradient.Stop] = []
 	for event in sunEvents {

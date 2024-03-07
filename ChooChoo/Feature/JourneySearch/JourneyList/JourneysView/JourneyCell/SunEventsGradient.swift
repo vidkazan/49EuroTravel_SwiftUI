@@ -11,6 +11,7 @@ import SwiftUI
 struct SunEventsGradient : View {
 	let gradientStops : [Gradient.Stop]?
 	let size : CGSize
+	let mode : Settings.LegViewMode
 	let progressLineProportion : Double?
 	var body: some View {
 		switch progressLineProportion {
@@ -28,9 +29,9 @@ struct SunEventsGradient : View {
 				.cornerRadius(5)
 		case .none:
 			RoundedRectangle(cornerRadius: 5)
-				.fill(.gray)
+				.fill(.chewFillTertiary.opacity(0.5))
 				.overlay{
-					if let gradientStops = gradientStops {
+					if let gradientStops = gradientStops, mode.showSunEvents {
 						LinearGradient(
 							stops: gradientStops,
 							startPoint: UnitPoint(x: 0, y: 0),

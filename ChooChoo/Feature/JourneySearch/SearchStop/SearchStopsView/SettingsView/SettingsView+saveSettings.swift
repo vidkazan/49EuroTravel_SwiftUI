@@ -21,7 +21,6 @@ extension SettingsView {
 			}
 		}()
 		let res = Settings(
-			onboarding: false,
 			customTransferModes: selectedTypes,
 			transportMode: transportModeSegment,
 			transferTime: transfer,
@@ -29,9 +28,14 @@ extension SettingsView {
 			accessiblity: .partial,
 			walkingSpeed: .fast,
 			language: .english,
-			debugSettings: Settings.ChewDebugSettings(prettyJSON: false,alternativeSearchPage: alternativeSearchPage),
 			startWithWalking: true,
-			withBicycle: false
+			withBicycle: false,
+			onboarding: false,
+			debugSettings: Settings.ChewDebugSettings(
+				prettyJSON: false,
+				alternativeSearchPage: alternativeSearchPage
+			),
+			legViewMode: legViewMode
 		)
 		if res != oldSettings {
 			chewViewModel.send(event: .didUpdateSettings(res))

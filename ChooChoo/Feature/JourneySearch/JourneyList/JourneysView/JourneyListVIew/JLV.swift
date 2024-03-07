@@ -32,7 +32,7 @@ struct JourneyListView: View {
 					list()
 				}
 			case .failedToLoadJourneyList(let error):
-				errorView(error)
+				ErrorView(msg: error.localizedDescription, action: nil)
 			}
 		}
 		.overlay(alignment: .bottom, content: {
@@ -48,29 +48,6 @@ struct JourneyListView: View {
 			.shadow(radius: 5)
 			.padding(.bottom,20)
 		})
-	}
-}
-
-
-extension JourneyListView {
-	func errorView(_ error : any ChewError) -> some View {
-		return Group {
-			JourneyListHeaderView(journeyViewModel: journeyViewModel)
-			VStack {
-				Spacer()
-				Text(error.description)
-					.padding(5)
-					.chewTextSize(.big)
-				Button(action: {
-					journeyViewModel.send(event: .onLaterRef)
-				}, label: {
-					Image(.exclamationmarkCircle)
-						.chewTextSize(.medium)
-						.foregroundColor(.secondary)
-				})
-				Spacer()
-			}
-		}
 	}
 }
 
@@ -91,7 +68,7 @@ extension JourneyListView {
 extension JourneyListView {
 	func notFound() -> some View {
 		return Group {
-			JourneyListHeaderView(journeyViewModel: journeyViewModel)
+//			JourneyListHeaderView(journeyViewModel: journeyViewModel)
 			Spacer()
 			Text("Connections not found")
 				.padding(5)
@@ -111,5 +88,29 @@ struct JourneyListPreview : PreviewProvider {
 			settings: .init()
 		)
 			.environmentObject(ChewViewModel())
+	}
+}
+
+struct ErrorView : View {
+	let msg : String
+	let action : (() -> Void)?
+	var body: some View {
+		Group {
+			VStack {
+				Spacer()
+				Text(msg)
+					.frame(alignment: .center)
+					.padding(5)
+					.chewTextSize(.big)
+				if let action = action {
+					Button(action: action, label: {
+						Image(.exclamationmarkCircle)
+							.chewTextSize(.big)
+							.foregroundStyle(.secondary)
+					})
+				}
+				Spacer()
+			}
+		}
 	}
 }

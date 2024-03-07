@@ -55,7 +55,6 @@ class LocationDataManager : NSObject, ObservableObject, CLLocationManagerDelegat
 	}
 	
 	func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-		#warning("locatons updates are not handling?")
 		//		 Insert code to handle location updates
 	}
 	

@@ -16,7 +16,7 @@ struct SettingsView: View {
 	@State var selectedTypes = Set<LineType>()
 	@State var showWithTransfers : Int
 	@State var alternativeSearchPage : Bool
-//	@State var showSunEvents : Bool
+	@State var legViewMode : Settings.LegViewMode
 	let closeSheet : ()->Void
 	let oldSettings : Settings
 	init(settings : Settings,closeSheet : @escaping ()->Void) {
@@ -35,7 +35,7 @@ struct SettingsView: View {
 		}
 		self.alternativeSearchPage = settings.debugSettings.alternativeSearchPage
 		self.transferCount = settings.transferCount
-//		self.showSunEvents = true
+		self.legViewMode = settings.legViewMode
 	}
 	
 	var body: some View {
@@ -49,6 +49,13 @@ struct SettingsView: View {
 				if showWithTransfers == 1 {
 					transferSegment
 				}
+				Section("Leg appearance", content: {
+					Button(action: {
+						self.legViewMode = self.legViewMode.next()
+					}, label: {
+						LegViewSettingsView(mode: self.legViewMode)
+					})
+				})
 				Section {
 					Button("Reset settings", role: .destructive, action: {
 						Model.shared.alertViewModel.send(

@@ -8,11 +8,9 @@
 import SwiftUI
 
 struct TimeChoosingView: View {
-	
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var searchStopsVM : SearchStopsViewModel = Model.shared.searchStopsViewModel
 	@State private var selectedOption : TimeSegmentedPickerOptions = .now
-	private let options : [TimeSegmentedPickerOptions] = [.now,.specificDate]
 	init(
 		selectedOption: TimeSegmentedPickerOptions = .now
 	) {
@@ -20,7 +18,7 @@ struct TimeChoosingView: View {
 	}
 	var body: some View {
 		SegmentedPicker(
-			options,
+			TimeChoosingView.TimeSegmentedPickerOptions.allCases,
 			selectedItem: $selectedOption,
 			content: { elem in
 				Text(getText(elem:elem))
@@ -38,8 +36,16 @@ struct TimeChoosingView: View {
 				}
 			}
 		)
+		.onReceive(chewVM.$state, perform: { state in
+			switch state.date.date {
+			case .now:
+				selectedOption = .now
+			case .specificDate(let ts):
+				selectedOption = .specificDate
+			}
+		})
 		.padding(5)
-		.background(Color.chewFillSecondary.opacity(0.4))
+		.background(Color.chewFillSecondary.opacity(0.5))
 		.cornerRadius(10)
 	}
 	
@@ -56,7 +62,7 @@ struct TimeChoosingView: View {
 }
 
 extension TimeChoosingView {
-	enum TimeSegmentedPickerOptions : Int {
+	enum TimeSegmentedPickerOptions : Int, Hashable,CaseIterable {
 		case now
 		case specificDate
 	}

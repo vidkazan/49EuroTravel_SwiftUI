@@ -12,13 +12,13 @@ extension ChewViewModel {
 		guard case .editingStop(let type) = state.status else { return state }
 		switch event {
 		case .onJourneyDataUpdated,
-		 .didLoadInitialData,
-		 .didReceiveLocationData,
-		 .didFailToLoadLocationData,
-		 .didUpdateSettings,
-		 .didStartViewAppear,
-		 .onNotEnoughSearchData,
-		 .didTapCloseJourneyList:
+				.didLoadInitialData,
+				.didReceiveLocationData,
+				.didFailToLoadLocationData,
+				.didUpdateSettings,
+				.didStartViewAppear,
+				.onNotEnoughSearchData,
+				.didTapCloseJourneyList:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		case .didCancelEditStop:
@@ -99,12 +99,12 @@ extension ChewViewModel {
 					status: .loadingLocation(send: send)
 				)
 			}
-		case .didSetBothLocations(let stops):
+		case .didSetBothLocations(let stops,let date):
 			return State(
 				depStop: .location(stops.departure),
 				arrStop: .location(stops.arrival),
 				settings: state.settings,
-				date: state.date,
+				date: date ?? state.date,
 				status: .checkingSearchData
 			)
 		}

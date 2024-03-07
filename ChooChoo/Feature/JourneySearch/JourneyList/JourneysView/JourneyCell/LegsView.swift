@@ -7,38 +7,21 @@
 
 import SwiftUI
 
-struct LegsView : View {
+struct LegsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+	let mode : Settings.LegViewMode
 	var journey : JourneyViewData?
 	var gradientStops : [Gradient.Stop]
 	var gradientStopsForProgressLine : [Gradient.Stop]
 	var showProgressBar : Bool
-
-	@State var legViewDidExpanded = false
-	
-	init(journey: JourneyViewData?,progressBar: Bool) {
-		self.journey = journey
-		self.showProgressBar = progressBar
-		self.gradientStops = journey?.sunEventsGradientStops ?? []
-		self.gradientStopsForProgressLine = gradientStops
-	}
-	var body: some View {
-		LegsViewInner(journey: journey, progressBar: showProgressBar)
-	}
-}
-
-struct LegsViewInner: View {
-	@EnvironmentObject var chewVM : ChewViewModel
-	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-	var journey : JourneyViewData?
-	var gradientStops : [Gradient.Stop]
-	var gradientStopsForProgressLine : [Gradient.Stop]
-	var showProgressBar : Bool
+	var showLabels : Bool
 	@State var progressLineProportion : Double = 0
 	
-	init(journey: JourneyViewData?,progressBar: Bool) {
+	init(journey: JourneyViewData?,progressBar: Bool, mode : Settings.LegViewMode,showLabels : Bool = true) {
 		self.journey = journey
+		self.showLabels = showLabels
+		self.mode = mode
 		self.showProgressBar = progressBar
 		self.gradientStops = journey?.sunEventsGradientStops ?? []
 		self.gradientStopsForProgressLine = gradientStops
@@ -52,11 +35,12 @@ struct LegsViewInner: View {
 						SunEventsGradient(
 							gradientStops:  journey?.legs.allSatisfy({$0.isReachable == true}) == true ? gradientStops : nil,
 							size: geo.size,
+							mode : mode, 
 							progressLineProportion: nil
 						)
 						if let journey = journey {
 							ForEach(journey.legs) { leg in
-								LegViewBG(leg: leg)
+								LegViewBG(leg: leg, mode: mode)
 									.frame(
 										width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
 										height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
@@ -84,7 +68,7 @@ struct LegsViewInner: View {
 								)
 								.cornerRadius(5)
 						}
-						if let journey = journey {
+						if let journey = journey, showLabels == true {
 							ForEach(journey.legs) { leg in
 								LegViewLabels(leg: leg)
 									.frame(
@@ -121,7 +105,22 @@ struct LegsViewInner: View {
 	}
 }
 
-extension LegsViewInner {
+struct LegViewSettingsView : View {
+	let mode : Settings.LegViewMode
+	let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0)
+	var body: some View {
+		if let mock = mock {
+			LegsView(
+				journey: mock,
+				progressBar: false,
+				mode: mode,
+				showLabels: false
+			)
+		}
+	}
+}
+
+extension LegsView {
 	static func getProgressLineProportion(
 		departureTS : Double?,
 		arrivalTS : Double?,
@@ -135,6 +134,7 @@ extension LegsViewInner {
 		return proportion
 	}
 }
+
 
 struct LegsViewPreviews: PreviewProvider {
 	static var previews: some View {
@@ -150,7 +150,7 @@ struct LegsViewPreviews: PreviewProvider {
 					   arrStop: nil,
 					   realtimeDataUpdatedAt: 0
 				   )
-					LegsView(journey: viewData, progressBar: true)
+					LegsView(journey: viewData, progressBar: true,mode : .sunEvents)
 						.environmentObject(ChewViewModel(
 							referenceDate: .specificDate(
 								(viewData?.time.timestamp.departure.actual ?? 0) + 2000

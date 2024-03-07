@@ -156,7 +156,7 @@ struct LegViewBG: View {
 	var leg : LegViewData
 	let screenWidth = UIScreen.main.bounds.width
 	let bgColor : Color
-	init(leg: LegViewData) {
+	init(leg: LegViewData, mode : Settings.LegViewMode) {
 		self.leg = leg
 		switch leg.isReachable {
 		case true:
@@ -164,7 +164,11 @@ struct LegViewBG: View {
 			case .footMiddle,.footStart,.footEnd:
 				self.bgColor = Color.chewFillTertiary.opacity(0.5)
 			case .line,.transfer:
-				self.bgColor = Color.chewLegsViewGray.opacity(0.85)
+				if mode.showColorfulLegs == true {
+					self.bgColor = leg.lineViewData.type.color.opacity(0.5)
+				} else {
+					self.bgColor = Color.chewLegsViewGray.opacity(0.85)
+				}
 			}
 		case false:
 			self.bgColor =  Color.chewFillRedPrimary.opacity(0.8)

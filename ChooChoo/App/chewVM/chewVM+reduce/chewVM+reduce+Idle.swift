@@ -79,12 +79,12 @@ extension ChewViewModel {
 				date: date,
 				status: .checkingSearchData
 			)
-		case .didSetBothLocations(let stops):
+		case .didSetBothLocations(let stops,let date):
 			return State(
 				depStop: .location(stops.departure),
 				arrStop: .location(stops.arrival),
 				settings: state.settings,
-				date: state.date,
+				date: date ?? state.date,
 				status: .checkingSearchData
 			)
 		case .didUpdateSettings(let settings):

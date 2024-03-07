@@ -37,6 +37,9 @@ struct TransportColors {
 
 extension ShapeStyle where Self == Color {
 	
+	static var chewSunEventBlue: Color {
+		Color("ChewSunEventBlue")
+	}
 	static var chewLegDetailsCellGray: Color {
 		Color("ChewLegDetailsCellGray")
 	}
@@ -76,7 +79,6 @@ extension ShapeStyle where Self == Color {
 		Color("ChewFillRedPrimary")
 	}
 	
-	
 	static var chewProgressLineGray: Color {
 		Color("ChewProgressLineGray")
 	}
@@ -87,6 +89,9 @@ extension ShapeStyle where Self == Color {
 extension Color {
 	static var transport = TransportColors()
 	
+	static var chewSunEventBlue: Color {
+		Color("ChewSunEventBlue")
+	}
 	static var chewLegDetailsCellGray: Color {
 		Color("ChewLegDetailsCellGray")
 	}

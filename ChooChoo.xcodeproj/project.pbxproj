@@ -192,6 +192,8 @@
 		7DBABFFC2B87A99B00C990FD /* MapDetailsUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBABFFB2B87A99B00C990FD /* MapDetailsUIView.swift */; };
 		7DBD26BE2B99F10600612A3B /* Settings+init.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD26BD2B99F10600612A3B /* Settings+init.swift */; };
 		7DBD26C02B99F13700612A3B /* Settings+Types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD26BF2B99F13700612A3B /* Settings+Types.swift */; };
+		7DBD26C22B99FB1800612A3B /* EnumTraversal.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD26C12B99FB1800612A3B /* EnumTraversal.swift */; };
+		7DBD26C52B9A202F00612A3B /* SheetViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBD26C42B9A202F00612A3B /* SheetViewDataSource.swift */; };
 		7DBF1E572ABB8084009B85EF /* TimeLabelView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */; };
 		7DBF1E592ABC522E009B85EF /* Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBF1E582ABC522E009B85EF /* Badges.swift */; };
 		7DC0D2A12B2221D200B1FB5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D46ABE72B220B1600A4145E /* Assets.xcassets */; };
@@ -433,6 +435,8 @@
 		7DBABFFB2B87A99B00C990FD /* MapDetailsUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapDetailsUIView.swift; sourceTree = "<group>"; };
 		7DBD26BD2B99F10600612A3B /* Settings+init.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+init.swift"; sourceTree = "<group>"; };
 		7DBD26BF2B99F13700612A3B /* Settings+Types.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+Types.swift"; sourceTree = "<group>"; };
+		7DBD26C12B99FB1800612A3B /* EnumTraversal.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumTraversal.swift; sourceTree = "<group>"; };
+		7DBD26C42B9A202F00612A3B /* SheetViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewDataSource.swift; sourceTree = "<group>"; };
 		7DBF1E562ABB8084009B85EF /* TimeLabelView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLabelView.swift; sourceTree = "<group>"; };
 		7DBF1E582ABC522E009B85EF /* Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Badges.swift; sourceTree = "<group>"; };
 		7DC0D2A22B2221D800B1FB5A /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -591,6 +595,7 @@
 				7D47C3C62B703F24005BB23B /* CustomEnvironments.swift */,
 				7DFC46AA2B7F859F00118608 /* AttibutedContainers.swift */,
 				7D704F432B8558C200F8334F /* UIView+Constraints.swift */,
+				7DBD26C12B99FB1800612A3B /* EnumTraversal.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -857,6 +862,7 @@
 				7DA5FEAA2B8106BB002182F8 /* Sheet.swift */,
 				7D63DB0D2B738F1D008297DD /* SheetView */,
 				7D63DB0C2B738F10008297DD /* SheetViewModel */,
+				7DBD26C42B9A202F00612A3B /* SheetViewDataSource.swift */,
 			);
 			path = Sheet;
 			sourceTree = "<group>";
@@ -1756,6 +1762,7 @@
 				7D1638522B698457006E9660 /* LDSV+badges.swift in Sources */,
 				7D704F442B8558C200F8334F /* UIView+Constraints.swift in Sources */,
 				7D2CAF642B0BEA0200577FD4 /* Model.xcdatamodeld in Sources */,
+				7DBD26C52B9A202F00612A3B /* SheetViewDataSource.swift in Sources */,
 				7D65DF1C2B2A2BFE00692601 /* ChewStop+CoreDataClass.swift in Sources */,
 				7D000CFB2AB87ACD00566120 /* NavigationLazyView.swift in Sources */,
 				7DBD26C02B99F13700612A3B /* Settings+Types.swift in Sources */,
@@ -1837,6 +1844,7 @@
 				7D9BB10C2B0CBF54008A3616 /* Location+CoreDataClass.swift in Sources */,
 				7D0685ED2B50304500CCBE6B /* CoreDataStore+Fetch.swift in Sources */,
 				7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */,
+				7DBD26C22B99FB1800612A3B /* EnumTraversal.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

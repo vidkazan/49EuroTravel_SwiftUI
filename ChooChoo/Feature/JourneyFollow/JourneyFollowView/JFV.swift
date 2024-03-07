@@ -28,9 +28,12 @@ struct JourneyFollowView : View {
 			default:
 				switch viewModel.state.journeys.count {
 				case 0:
-					Text("You have no followed journeys")
-						.chewTextSize(.big)
-						.frame(idealWidth: .infinity,idealHeight: .infinity)
+					ErrorView(
+						msg: "You have no followed journeys", 
+						action: {
+						}
+					)
+					.frame(idealWidth: .infinity,idealHeight: .infinity)
 				default:
 					followViewInner
 					
@@ -159,7 +162,7 @@ extension JourneyFollowView {
 					chewVM.send(event: .didSetBothLocations(.init(
 						departure: journey.depStop,
 						arrival: journey.arrStop
-					)))
+					),date: SearchStopsDate(date: .now, mode: .departure)))
 				} label: {
 					Label("Search now", systemImage: "magnifyingglass")
 				}

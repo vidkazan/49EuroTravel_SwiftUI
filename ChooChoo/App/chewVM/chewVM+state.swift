@@ -102,7 +102,7 @@ extension ChewViewModel {
 		case onStopEdit(LocationDirectionType)
 		case onNewStop(TextFieldContent,LocationDirectionType)
 		case onStopsSwitch
-		case didSetBothLocations(_ stops : DepartureArrivalPair)
+		case didSetBothLocations(_ stops : DepartureArrivalPair, date : SearchStopsDate?)
 		case onJourneyDataUpdated(_ stops : DepartureArrivalPair)
 		case onNotEnoughSearchData
 		case didCancelEditStop

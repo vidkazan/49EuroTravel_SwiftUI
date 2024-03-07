@@ -60,9 +60,16 @@ extension ChewViewModel {
 				settings: state.settings,
 				date: state.date,
 				status: .loadingLocation(send: send))
+		case .didSetBothLocations(let stops,let date):
+			return State(
+				depStop: .location(stops.departure),
+				arrStop: .location(stops.arrival),
+				settings: state.settings,
+				date: date ?? state.date,
+				status: .checkingSearchData
+			)
 		case .didReceiveLocationData,
 			 .didFailToLoadLocationData,
-			 .didSetBothLocations,
 			 .didLoadInitialData,
 			 .onNewStop,
 			 .onJourneyDataUpdated,

@@ -55,8 +55,9 @@ extension CoreDataStore {
 		
 		let transportModes = fetchSettingsTransportModes()
 		
+		
+		#warning("legViewMode hardcode")
 		return Settings(
-			onboarding: onboarding,
 			customTransferModes: transportModes,
 			transportMode: transportMode,
 			transferTime: transferTypes,
@@ -64,9 +65,14 @@ extension CoreDataStore {
 			accessiblity: .partial,
 			walkingSpeed: .fast,
 			language: .english,
-			debugSettings: Settings.ChewDebugSettings(prettyJSON: false,alternativeSearchPage: false),
 			startWithWalking: true,
-			withBicycle: false
+			withBicycle: false,
+			onboarding: onboarding,
+			debugSettings: Settings.ChewDebugSettings(
+				prettyJSON: false,
+				alternativeSearchPage: false
+			),
+			legViewMode: .sunEvents
 		)
 	}
 	

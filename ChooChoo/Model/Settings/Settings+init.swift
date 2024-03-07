@@ -20,6 +20,7 @@ extension Settings {
 		self.withBicycle = false
 		self.onboarding = true
 		self.transferCount = .unlimited
+		self.legViewMode = .sunEvents
 	}
 	init(settings : Settings, onboarding : Bool) {
 		self.customTransferModes = settings.customTransferModes
@@ -33,5 +34,6 @@ extension Settings {
 		self.withBicycle = settings.withBicycle
 		self.onboarding = onboarding
 		self.transferCount = settings.transferCount
+		self.legViewMode = settings.legViewMode
 	}
 }

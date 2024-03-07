@@ -49,45 +49,6 @@ class SheetViewModel : ObservableObject, Identifiable {
 	}
 }
 
-protocol SheetViewDataSource {
-}
-
-
-struct MapLegData : Hashable {
-	let type : LegViewData.LegType
-	let lineType : LineType
-	let stops : [StopViewData]
-	let route : MKPolyline?
-}
-
-enum MapDetailsRequest {
-	case footDirection(_ leg : LegViewData)
-	case lineLeg(_ leg : LegViewData)
-	case journey(_ legs : [LegViewData])
-}
-
-struct MapDetailsViewDataSource : SheetViewDataSource {
-	let coordRegion : MKCoordinateRegion
-	let mapLegDataList : OrderedSet<MapLegData>
-}
-
-struct MapPickerViewDataSource : SheetViewDataSource {}
-
-struct JourneyDebugViewDataSource : SheetViewDataSource {
-	let legDTOs : [LegDTO]
-}
-
-struct FullLegViewDataSource : SheetViewDataSource {
-	let leg : LegViewData
-}
-struct DatePickerViewDataSource : SheetViewDataSource {}
-struct EmptyDataSource : SheetViewDataSource {}
-struct SettingsViewDataSource : SheetViewDataSource {}
-struct OnboardingViewDataSource : SheetViewDataSource {}
-struct RemarksViewDataSource : SheetViewDataSource {
-	let remarks : [RemarkViewData]
-}
-
 extension SheetViewModel{
 	struct State  {
 		let status : Status
@@ -130,6 +91,7 @@ extension SheetViewModel{
 			}
 		}
 	}
+	#warning("info")
 	enum SheetType : Equatable {
 		static func == (lhs: SheetViewModel.SheetType, rhs: SheetViewModel.SheetType) -> Bool {
 			lhs.description == rhs.description

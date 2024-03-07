@@ -51,7 +51,7 @@ extension JourneyDetailsView {
 						Spacer()
 					}
 				}
-				LegsView(journey : viewModel.state.data.viewData,progressBar: true)
+				LegsView(journey : viewModel.state.data.viewData,progressBar: true,mode : chewVM.state.settings.legViewMode)
 			}
 			
 		}

@@ -35,7 +35,7 @@ struct JourneyCell: View {
 			}, label: {
 				VStack {
 					JourneyHeaderView(journey: journey)
-					LegsView(journey : journey,progressBar: false)
+					LegsView(journey : journey,progressBar: false,mode : chewVM.state.settings.legViewMode)
 						.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
 				}
 			})

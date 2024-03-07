@@ -19,10 +19,6 @@ import SwiftUI
 // MARK: JFV
 // emptyState: specify how to follow journey
 
-
-// MARK: RSV
-// leave only last 5 items?
-
 // MARK: revise
 // all text revision
 // revise icons, espesially transfer icon

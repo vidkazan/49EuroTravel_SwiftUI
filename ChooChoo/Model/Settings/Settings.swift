@@ -8,7 +8,7 @@
 import Foundation
 
 struct Settings : Equatable,Hashable {
-	let onboarding : Bool
+	// api settings
 	let customTransferModes : Set<LineType>
 	let transportMode : TransportMode
 	let transferTime : TransferTime
@@ -16,10 +16,15 @@ struct Settings : Equatable,Hashable {
 	let accessiblity : Accessiblity
 	let walkingSpeed : WalkingSpeed
 	let language : Language
-	let debugSettings : ChewDebugSettings
 	let startWithWalking : Bool
 	let withBicycle : Bool
-	
+	// app settings
+	let onboarding : Bool
+	let debugSettings : ChewDebugSettings
+	let legViewMode : LegViewMode
+}
+
+extension Settings {
 	func isDefault() -> Bool {
 		guard transportMode == transportMode.defaultValue else {
 			return false

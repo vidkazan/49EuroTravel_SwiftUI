@@ -31,10 +31,29 @@ extension Settings {
 			}
 	}
 	
-	enum SettingsState : Int, Equatable,CaseIterable {
-		case normal
-		case filtrative
+	enum LegViewMode : Int, Equatable,CaseIterable {
+		case sunEvents
+		case colorfulLegs
+		case all
+		
+		var showSunEvents : Bool {
+			switch self {
+			case .colorfulLegs:
+				return false
+			default:
+				return true
+			}
+		}
+		var showColorfulLegs : Bool {
+			switch self {
+			case .sunEvents:
+				return false
+			default:
+				return true
+			}
+		}
 	}
+
 	enum TransferDurationCases : Int, Equatable, Hashable, CaseIterable {
 		case zero = 0
 		case five = 5
