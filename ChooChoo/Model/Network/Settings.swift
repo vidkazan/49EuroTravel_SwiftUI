@@ -19,6 +19,28 @@ struct Settings : Equatable,Hashable {
 	let debugSettings : ChewDebugSettings
 	let startWithWalking : Bool
 	let withBicycle : Bool
+	
+	func isDefault() -> Bool {
+		guard transportMode == transportMode.defaultValue else {
+			return false
+		}
+		guard transferTime == transferTime.defaultValue else {
+			return false
+		}
+		guard transferCount == transferCount.defaultValue else {
+			return false
+		}
+		guard accessiblity == accessiblity.defaultValue else {
+			return false
+		}
+		guard startWithWalking == true else {
+			return false
+		}
+		guard withBicycle == false else {
+			return false
+		}
+		return true
+	}
 }
 
 extension Settings {
@@ -44,6 +66,11 @@ extension Settings {
 				return .zero
 			}
 	}
+	
+	enum SettingsState : Int, Equatable,CaseIterable {
+		case normal
+		case filtrative
+	}
 	enum TransferDurationCases : Int, Equatable, Hashable, CaseIterable {
 		case zero = 0
 		case five = 5
@@ -56,6 +83,10 @@ extension Settings {
 		case sixty = 60
 		case ninety = 90
 		case hundredtwenty = 120
+		
+		var defaultValue : Self {
+			.zero
+		}
 	}
 	
 	enum TransferCountCases : String, Equatable, Hashable, CaseIterable {
@@ -82,26 +113,46 @@ extension Settings {
 				return 5
 			}
 		}
+		
+		var defaultValue : Self {
+			.unlimited
+		}
 	}
 	enum TransportMode : Int, Equatable, Hashable {
 		case regional = 1
 		case all = 0
 		case custom = 2
+		
+		var defaultValue : Self {
+			.all
+		}
 	}
 	
 	// TODO: test: transfer time -Xmin -> Xmin
 	enum TransferTime : Equatable, Hashable {
 		case direct
 		case time(minutes : TransferDurationCases)
+		
+		var defaultValue : Self {
+			.time(minutes: .zero)
+		}
 	}
 	enum Accessiblity: Equatable, Hashable {
 		case partial
 		case complete
+		
+		var defaultValue : Self {
+			.partial
+		}
 	}
 	enum WalkingSpeed : Equatable, Hashable{
 		case fast
 		case moderate
 		case slow
+		
+		var defaultValue : Self {
+			.fast
+		}
 	}
 	enum Language : Equatable, Hashable {
 		case english

@@ -51,7 +51,7 @@ extension LegViewData {
 	}
 }
 
-enum LocationDirectionType : Int, Hashable {
+enum LocationDirectionType : Int, Hashable, CaseIterable {
 	case departure
 	case arrival
 	
@@ -61,6 +61,15 @@ enum LocationDirectionType : Int, Hashable {
 			return "from"
 		case .arrival:
 			return "to"
+		}
+	}
+	
+	var description : String {
+		switch self {
+		case .departure:
+			return "departure"
+		case .arrival:
+			return "arrival"
 		}
 	}
 	
