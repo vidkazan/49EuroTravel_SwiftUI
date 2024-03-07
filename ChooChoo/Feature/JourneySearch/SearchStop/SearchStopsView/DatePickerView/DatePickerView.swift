@@ -11,27 +11,31 @@ struct DatePickerView: View {
 	@EnvironmentObject private var chewVM : ChewViewModel
 	@State var date : Date
 	@State var time : Date
-//	@State private var type : LocationDirectionType = .departure
+	@State private var type : LocationDirectionType = .departure
 	let closeSheet : ()->Void
 
 	var body: some View {
 		NavigationView {
 			VStack(alignment: .center,spacing: 5) {
-//				Picker("", selection: $type) {
-//					Text("departure").tag(0)
-//					Text("arrial").tag(1)
-//				}
-//				.pickerStyle(.segmented)
+				Picker("", selection: $type) {
+					Text("departure").tag(LocationDirectionType.departure)
+					Text("arrial").tag(LocationDirectionType.arrival)
+				}
+				.scaleEffect(0.85)
+				.frame(maxWidth: .infinity,maxHeight: 70)
+				.padding(5)
+				.pickerStyle(.wheel)
 				ChewDatePicker(date: $time,mode: .time, style: .wheels)
-					.frame(maxWidth: .infinity,maxHeight: 170)
+					.scaleEffect(0.85)
+					.frame(maxWidth: .infinity,maxHeight: 140)
 					.padding(5)
 				ChewDatePicker(date: $date,mode: .date, style: .inline)
-					.scaleEffect(0.9)
-					.frame(maxWidth: .infinity,maxHeight: 350)
+					.scaleEffect(0.85)
+					.frame(maxWidth: .infinity,maxHeight: 280)
 					.padding(5)
 					.background(Color.chewFillTertiary.opacity(0.15))
 					.cornerRadius(10)
-				DatePickerTimePresetButtons(closeSheet: closeSheet)
+				DatePickerTimePresetButtons(closeSheet: closeSheet, mode: type)
 				Spacer()
 			}
 			.padding(.horizontal,10)
@@ -48,8 +52,14 @@ struct DatePickerView: View {
 				})
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
-						if let dateCombined =  DateParcer.getCombinedDate(date: date, time: time) {
-							chewVM.send(event: .onNewDate(.specificDate(dateCombined.timeIntervalSince1970)))
+						if let dateCombined = DateParcer.getCombinedDate(
+							date: date,
+							time: time
+						) {
+							chewVM.send(event: .onNewDate(SearchStopsDate(
+								date: .specificDate(dateCombined.timeIntervalSince1970),
+								mode: type
+							)))
 							closeSheet()
 						}
 					}, label: {

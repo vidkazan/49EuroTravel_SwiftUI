@@ -12,7 +12,7 @@ struct JourneyListView: View {
 	@ObservedObject var journeyViewModel : JourneyListViewModel
 	@State var firstAppear : Bool = true
 	
-	init(stops : DepartureArrivalPair, date: ChewDate,settings : Settings) {
+	init(stops : DepartureArrivalPair, date: SearchStopsDate,settings : Settings) {
 		self.journeyViewModel = JourneyListViewModel(
 			date: date,
 			settings: settings,
@@ -105,7 +105,11 @@ extension JourneyListView {
 
 struct JourneyListPreview : PreviewProvider {
 	static var previews: some View {
-		JourneyListView(stops: .init(departure: .init(), arrival: .init()), date: .now, settings: .init())
+		JourneyListView(
+			stops: .init(departure: .init(), arrival: .init()), 
+			date: .init(date: .now, mode: .departure),
+			settings: .init()
+		)
 			.environmentObject(ChewViewModel())
 	}
 }

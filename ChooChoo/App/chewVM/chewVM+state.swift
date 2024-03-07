@@ -37,17 +37,23 @@ extension ChewViewModel {
 		var depStop : TextFieldContent
 		var arrStop : TextFieldContent
 		var settings : Settings
-		var date : ChewDate
+		var date : SearchStopsDate
 		var status : Status
 		
 		init(){
 			self.depStop =  .textOnly("")
 			self.arrStop = .textOnly("")
 			self.settings = Settings()
-			self.date = .now
+			self.date = SearchStopsDate(date: .now, mode: .departure)
 			self.status = .start
 		}
-		init(depStop: TextFieldContent, arrStop: TextFieldContent, settings: Settings, date: ChewDate, status: Status) {
+		init(
+			depStop: TextFieldContent,
+			arrStop: TextFieldContent,
+			settings: Settings,
+			date: SearchStopsDate,
+			status: Status
+		) {
 			self.depStop = depStop
 			self.arrStop = arrStop
 			self.settings = settings
@@ -101,9 +107,7 @@ extension ChewViewModel {
 		case onNotEnoughSearchData
 		case didCancelEditStop
 		case didTapCloseJourneyList
-		// TODO: add type to date
-//		case onNewDate(ChewDate, type: LocationDirectionType)
-		case onNewDate(ChewDate)
+		case onNewDate(SearchStopsDate)
 		case didUpdateSettings(Settings)
 		case didLocationButtonPressed(send : (ChewViewModel.Event)->Void)
 		case didReceiveLocationData(Stop)

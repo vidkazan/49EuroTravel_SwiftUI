@@ -7,6 +7,10 @@
 
 import Foundation
 
+struct SearchStopsDate : Equatable {
+	let date : ChewDate
+	let mode : LocationDirectionType
+}
 
 enum ChewDate : Equatable,Hashable {
 	case now

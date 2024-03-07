@@ -15,7 +15,8 @@ extension JourneyListViewModel {
 			return Self.fetchJourneyList(
 				dep: state.data.stops.departure,
 				arr: state.data.stops.arrival,
-				time: state.data.date.date,
+				time: state.data.date.date.date,
+				mode: state.data.date.mode,
 				settings: state.data.settings
 			)
 				.mapError{ $0 }

@@ -81,24 +81,6 @@ struct SettingsView: View {
 			)}
 		}
 	}
-//	struct DTicketLabel: View {
-//		var body: some View {
-//			HStack {
-//				DTicketLogo(fontSize: 20)
-//					.padding(5)
-//					.background(Color.gray)
-//					.cornerRadius(8)
-//				Text("Deutschland ticket")
-//			}
-//		}
-//	}
-}
-
-struct SettingsPreview: PreviewProvider {
-	static var previews: some View {
-		SettingsView(settings: .init(),closeSheet: {})
-			.environmentObject(ChewViewModel(referenceDate: .now))
-	}
 }
 
 extension SettingsView {
@@ -116,5 +98,13 @@ extension SettingsView {
 			self.transferTime = minutes
 			self.transferCount = settings.transferCount
 		}
+	}
+}
+
+
+struct SettingsPreview: PreviewProvider {
+	static var previews: some View {
+		SettingsView(settings: .init(),closeSheet: {})
+			.environmentObject(ChewViewModel(referenceDate: .now))
 	}
 }

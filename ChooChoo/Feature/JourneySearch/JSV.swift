@@ -76,7 +76,7 @@ extension JourneySearchView {
 			depStop: .textOnly(""),
 		 arrStop: .textOnly(""),
 		 settings: .init(),
-		 date: .now,
+			date: .init(date: .now, mode: .departure),
 		 status: .idle
 	 )))
 }

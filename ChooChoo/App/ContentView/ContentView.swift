@@ -27,13 +27,11 @@ import SwiftUI
 // MARK: RSV
 // leave only last 5 items
 
-
-
 // MARK: revise
 // all text revision
 // revise icons, espesially transfer icon
-//  revise contrast
-//  revise text white color ( too contrast with black BG )
+// revise contrast
+// revise text white color ( too contrast with black BG )
 
 // TODO: feature: check when train arrives at starting point
 
@@ -129,7 +127,7 @@ extension ContentView {
 			depStop: .textOnly(""),
 			arrStop: .textOnly(""),
 			settings: .init(),
-			date: .now,
+			date: .init(date: .now, mode: .departure),
 			status: .idle
 		)))
 }

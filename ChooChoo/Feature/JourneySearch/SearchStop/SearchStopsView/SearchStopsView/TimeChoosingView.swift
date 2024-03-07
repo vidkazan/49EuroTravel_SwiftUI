@@ -29,7 +29,10 @@ struct TimeChoosingView: View {
 			externalAction: { (selected : TimeSegmentedPickerOptions)  in
 				switch selected {
 				case .now:
-					chewVM.send(event: .onNewDate(.now))
+					chewVM.send(event: .onNewDate(SearchStopsDate(
+						date: .now,
+						mode: .departure
+					)))
 				case .specificDate:
 					Model.shared.sheetViewModel.send(event: .didRequestShow(.date))
 				}
@@ -46,7 +49,7 @@ struct TimeChoosingView: View {
 				return "now"
 			case .specificDate:
 				return  DateParcer.getTimeAndDateStringFromDate(
-					date: chewVM.state.date.date
+					date: chewVM.state.date.date.date
 				)
 			}
 	}

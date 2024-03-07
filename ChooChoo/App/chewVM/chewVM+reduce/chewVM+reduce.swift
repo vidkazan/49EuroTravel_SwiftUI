@@ -65,7 +65,7 @@ extension ChewViewModel {
 					arrStop: .textOnly(""),
 					settings: settings,
 					// MARK: set timePicker default date here
-					date: .now,
+					date: .init(date: .now, mode: .departure),
 					status: .idle
 				)
 			default:

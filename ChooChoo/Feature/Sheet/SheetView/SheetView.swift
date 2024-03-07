@@ -29,15 +29,15 @@ struct SheetView : View {
 			case .date:
 				if #available(iOS 16.0, *) {
 					DatePickerView(
-						date: chewViewModel.state.date.date,
-						time: chewViewModel.state.date.date,
+						date: chewViewModel.state.date.date.date,
+						time: chewViewModel.state.date.date.date,
 						closeSheet: closeSheet
 					)
 					.presentationDetents([.height(300),.large])
 				} else {
 					DatePickerView(
-						date: chewViewModel.state.date.date,
-						time: chewViewModel.state.date.date,
+						date: chewViewModel.state.date.date.date,
+						time: chewViewModel.state.date.date.date,
 						closeSheet: closeSheet
 					)
 				}

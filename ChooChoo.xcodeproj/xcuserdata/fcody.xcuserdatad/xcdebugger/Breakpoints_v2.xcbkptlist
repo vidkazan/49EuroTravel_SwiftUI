@@ -163,54 +163,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A727EFFA-01C1-400D-BF70-60926D0D0619"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "105"
-            endingLineNumber = "105"
-            landmarkName = "loadSettings(state:)"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A727EFFA-01C1-400D-BF70-60926D0D0619 - 7691ab70671aa72d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ChooChoo.SettingsView.loadSettings(state: ChooChoo.ChewViewModel.State) -&gt; ()"
-                  moduleName = "ChooChoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "107"
-                  endingLineNumber = "107"
-                  offsetFromSymbolStart = "92">
-               </Location>
-               <Location
-                  uuid = "A727EFFA-01C1-400D-BF70-60926D0D0619 - 7691ab70671aa70e"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ChooChoo.SettingsView.loadSettings(state: ChooChoo.ChewViewModel.State) -&gt; ()"
-                  moduleName = "ChooChoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "108"
-                  endingLineNumber = "108"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "B587D59D-F1D6-4CB3-972E-D83DC98FF0A1"
             shouldBeEnabled = "No"
             ignoreCount = "0"

@@ -13,14 +13,15 @@ extension JourneyListViewModel {
 		dep : Stop,
 		arr : Stop,
 		time: Date,
+		mode: LocationDirectionType,
 		settings : Settings
 	) -> AnyPublisher<JourneyListDTO,ApiError> {
 		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
 		query += addJourneyListTransfersQuery(settings: settings)
 		query += addJourneyListTransportModes(settings: settings)
+		query += addJourneyListTimeQuery(time: time, mode: mode)
 		query += Query.queryItems(
 			methods: [
-				Query.departureTime(departureTime: time),
 				Query.remarks(showRemarks: true),
 				Query.results(max: 5),
 				Query.stopovers(isShowing: true),
@@ -107,6 +108,19 @@ extension JourneyListViewModel {
 			}
 			return Query.queryItems(methods: [
 				Query.transferTime(transferTime: minutes.rawValue)
+			])
+		}
+	}
+	
+	static func addJourneyListTimeQuery(time : Date, mode : LocationDirectionType) -> [URLQueryItem] {
+		switch mode {
+		case .departure:
+			return Query.queryItems(methods: [
+				Query.departureTime(departureTime: time)
+			])
+		case .arrival:
+			return Query.queryItems(methods: [
+				Query.arrivalTime(arrivalTime: time)
 			])
 		}
 	}
