@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import TipKit
 
 struct JourneyFollowView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
@@ -14,7 +15,6 @@ struct JourneyFollowView : View {
 	let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
 	
 	var body: some View {
-		let _ = print(">>> view: ",viewModel.state.journeys.map({$0.id}))
 		VStack {
 			TopBarAlertsView()
 			switch viewModel.state.status {
@@ -29,10 +29,8 @@ struct JourneyFollowView : View {
 				switch viewModel.state.journeys.count {
 				case 0:
 					ErrorView(
-						msg: "You have no followed journeys", 
-						action: {
-							Model.shared.sheetViewModel.send(event: .didRequestShow(.info))
-						}
+						msg: "You have no followed journeys",
+						action: nil
 					)
 					.frame(idealWidth: .infinity,idealHeight: .infinity)
 				default:

@@ -97,7 +97,7 @@ extension SheetViewModel{
 		}
 		
 		case none
-		case info
+		case tip(tipType : InfoType)
 		case date
 		case settings
 		case fullLeg(leg : LegViewData)
@@ -109,7 +109,7 @@ extension SheetViewModel{
 		
 		var detents : [ChewPresentationDetent] {
 			switch self {
-			case .info:
+			case .tip:
 				return [.height(200)]
 			case .mapPicker:
 				return [.large]
@@ -134,8 +134,8 @@ extension SheetViewModel{
 		
 		var description : String {
 			switch self {
-			case .info:
-				return "Info"
+			case .tip:
+				return "Tip"
 			case .mapPicker:
 				return "MapPicker"
 			case .none:
@@ -159,7 +159,7 @@ extension SheetViewModel{
 		
 		var dataSourceType : any SheetViewDataSource.Type {
 			switch self {
-			case .info:
+			case .tip:
 				return InfoDataSource.self
 			case .none:
 				return EmptyDataSource.self
@@ -224,7 +224,7 @@ extension SheetViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			switch type {
-			case .info:
+			case .tip:
 				return Just(Event.didLoadDataForShowing(type,InfoDataSource())).eraseToAnyPublisher()
 			case .mapPicker:
 				return Just(Event.didLoadDataForShowing(type,MapPickerViewDataSource())).eraseToAnyPublisher()

@@ -11,10 +11,12 @@ import CoreLocation
 import MapKit
 
 struct LegDetailsView: View {
+	@EnvironmentObject var chewVM : ChewViewModel
+	
+	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	static let progressLineBaseWidth : CGFloat = 15
 	static let progressLineCompletedBaseWidthOffset : CGFloat = 2
-	@EnvironmentObject var chewVM : ChewViewModel
-	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
+	
 	@State var isExpandedState : Segments.EvalType = .collapsed
 	@State var totalProgressHeight : Double = 0
 	@State var currentProgressHeight : Double = 0
@@ -27,7 +29,6 @@ struct LegDetailsView: View {
 		followedJourney: Bool = false,
 		send : @escaping (JourneyDetailsViewModel.Event) -> Void,
 		referenceDate : ChewDate,
-		openSheet : @escaping (JourneyDetailsView.SheetType) -> Void,
 		isExpanded : Segments.EvalType,
 		leg : LegViewData
 	) {
@@ -173,7 +174,6 @@ struct LegDetailsPreview : PreviewProvider {
 							LegDetailsView(
 								send: {_ in },
 								referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900),
-								openSheet: {_ in},
 								isExpanded: .collapsed,
 								leg: viewData
 							)
@@ -190,7 +190,7 @@ struct LegDetailsPreview : PreviewProvider {
 							LegDetailsView(
 								send: {_ in },
 								referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900),
-								openSheet: {_ in}, isExpanded: .collapsed,
+								isExpanded: .collapsed,
 								leg: viewData
 							)
 							.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData.time.timestamp.departure.planned ?? 0) + 900)))

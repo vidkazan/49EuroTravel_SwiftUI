@@ -9,9 +9,7 @@ import Foundation
 import MapKit
 import OrderedCollections
 
-protocol SheetViewDataSource {
-}
-
+protocol SheetViewDataSource {}
 
 struct MapLegData : Hashable {
 	let type : LegViewData.LegType
@@ -30,22 +28,18 @@ struct MapDetailsViewDataSource : SheetViewDataSource {
 	let coordRegion : MKCoordinateRegion
 	let mapLegDataList : OrderedSet<MapLegData>
 }
-
-struct MapPickerViewDataSource : SheetViewDataSource {}
-
 struct JourneyDebugViewDataSource : SheetViewDataSource {
 	let legDTOs : [LegDTO]
 }
-
 struct FullLegViewDataSource : SheetViewDataSource {
 	let leg : LegViewData
 }
-struct DatePickerViewDataSource : SheetViewDataSource {}
-struct EmptyDataSource : SheetViewDataSource {}
-struct SettingsViewDataSource : SheetViewDataSource {}
-struct OnboardingViewDataSource : SheetViewDataSource {}
-struct InfoDataSource : SheetViewDataSource {}
-
 struct RemarksViewDataSource : SheetViewDataSource {
 	let remarks : [RemarkViewData]
 }
+struct DatePickerViewDataSource	: SheetViewDataSource {}
+struct EmptyDataSource				: SheetViewDataSource {}
+struct SettingsViewDataSource		: SheetViewDataSource {}
+struct OnboardingViewDataSource	: SheetViewDataSource {}
+struct InfoDataSource				: SheetViewDataSource {}
+struct MapPickerViewDataSource	: SheetViewDataSource {}

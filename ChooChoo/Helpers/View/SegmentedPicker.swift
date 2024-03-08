@@ -37,7 +37,6 @@ public struct SegmentedPicker<T: Equatable, Content: View>: View {
 		if item == selectedItem {
 			RoundedRectangle(cornerRadius: 10)
 				.fill(Color.chewFillAccent)
-			// This is the magic for the animation effect when the selection changes
 				.matchedGeometryEffect(id: "selectedSegmentHighlight", in: self.selectionAnimation)
 		}
 	}

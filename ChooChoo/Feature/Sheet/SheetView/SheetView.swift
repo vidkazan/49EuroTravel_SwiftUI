@@ -16,16 +16,29 @@ struct SheetView : View {
 	var body: some View {
 		switch sheetVM.state.status {
 		case .error(let error):
-			Text(error.localizedDescription)
-		case .loading:
-			ProgressView()
+			EmptyView()
+				.onAppear {
+					Model.shared.topBarAlertViewModel.send(
+						event: .didAdd([.generic(msg: error.localizedDescription)])
+					)
+				}
+		case .loading(let type):
+			if #available(iOS 16.0, *) {
+				NavigationStack {
+					ProgressView()
+				}
+				.presentationDetents(Set(makePresentationDetent(chewDetents: type.detents)))
+			} else {
+				NavigationView {
+					ProgressView()
+				}
+			}
 		case let .showing(type, data):
 			if #available(iOS 16.0, *) {
 				NavigationStack {
 					sheet(data: data, type: type)
 				}
-				.presentationDetents(Set(makePresentationDetent(chewDetents: type.detents))
-				)
+				.presentationDetents(Set(makePresentationDetent(chewDetents: type.detents)))
 			} else {
 				NavigationView {
 					sheet(data: data, type: type)
@@ -33,8 +46,13 @@ struct SheetView : View {
 			}
 		}
 	}
-	
-	@ViewBuilder func sheet(data : any SheetViewDataSource, type : SheetViewModel.SheetType) -> some View {
+}
+
+private extension SheetView {
+	@ViewBuilder func sheet(
+		data : any SheetViewDataSource,
+		type : SheetViewModel.SheetType
+	) -> some View {
 		SheetViewInner(
 			data: data,
 			type: type,
@@ -54,94 +72,57 @@ struct SheetView : View {
 
 struct SheetViewInner : View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
-//	@ObservedObject var sheetVM : SheetViewModel = Model.shared.sheetViewModel
 	let data : any SheetViewDataSource
 	let type : SheetViewModel.SheetType
 	let closeSheet : ()->Void
 	var body: some View {
-		Group {
-				switch type {
-				case .info:
-					Text("info")
-				case .settings:
-					SettingsView(
-						settings: chewViewModel.state.settings,
-						closeSheet: closeSheet
-					)
-				case .date:
-					if #available(iOS 16.0, *) {
-						DatePickerView(
-							date: chewViewModel.state.date.date.date,
-							time: chewViewModel.state.date.date.date,
-							closeSheet: closeSheet
-						)
-						.presentationDetents([.height(300),.large])
-					} else {
-						DatePickerView(
-							date: chewViewModel.state.date.date.date,
-							time: chewViewModel.state.date.date.date,
-							closeSheet: closeSheet
-						)
-					}
-				case .fullLeg:
-					if let data = data as? FullLegViewDataSource {
-						FullLegSheet(leg: data.leg)
-					}
-				case .mapDetails:
-					if let data = data as? MapDetailsViewDataSource {
-						MapDetailsView(
-							mapRect: data.coordRegion,
-							legs: data.mapLegDataList
-						)
-					}
-				case .mapPicker(type: let type):
-					let initialCoords = Model.shared.locationDataManager.locationManager.location?.coordinate ?? .init(latitude: 52, longitude: 7)
-					MapPickerView(
-						vm : MapPickerViewModel(.loadingNearbyStops(MKCoordinateRegion(
-							center: initialCoords,
-							latitudinalMeters: 0.01,
-							longitudinalMeters: 0.01))),
-						initialCoords: initialCoords,
-						type: type
-					)
-				case .none:
-					EmptyView()
-				case .onboarding:
-					Text("onboarding")
-				case .remark:
-					if let data = data as? RemarksViewDataSource {
-						if #available(iOS 16.0, *) {
-							RemarkSheet(remarks: data.remarks)
-								.presentationDetents([.height(300),.large])
-						} else {
-							RemarkSheet(remarks: data.remarks)
-						}
-					}
-				case .journeyDebug:
-					if let data = data as? JourneyDebugViewDataSource {
-						JourneyDebugView(legsDTO: data.legDTOs)
-					}
-				}
+		switch type {
+		case .tip(let tipType):
+			InfoSheet(infoType: tipType)
+		case .settings:
+			SettingsView(
+				settings: chewViewModel.state.settings,
+				closeSheet: closeSheet
+			)
+		case .date:
+			DatePickerView(
+				date: chewViewModel.state.date.date.date,
+				time: chewViewModel.state.date.date.date,
+				closeSheet: closeSheet
+			)
+		case .fullLeg:
+			if let data = data as? FullLegViewDataSource {
+				FullLegSheet(leg: data.leg)
 			}
-	}
-}
-
-enum ChewPresentationDetent : Hashable {
-	case large
-	case medium
-	case height(CGFloat)
-}
-
-@available(iOS 16.0, *)
-func makePresentationDetent(chewDetents : [ChewPresentationDetent]) -> [PresentationDetent] {
-	return chewDetents.map { chewDetent -> PresentationDetent in
-		switch chewDetent {
-		case .large:
-			return .large
-		case .medium:
-			return .medium
-		case .height(let cGFloat):
-			return .height(cGFloat)
+		case .mapDetails:
+			if let data = data as? MapDetailsViewDataSource {
+				MapDetailsView(
+					mapRect: data.coordRegion,
+					legs: data.mapLegDataList
+				)
+			}
+		case .mapPicker(type: let type):
+			let initialCoords = Model.shared.locationDataManager.locationManager.location?.coordinate ?? .init(latitude: 52, longitude: 7)
+			MapPickerView(
+				vm : MapPickerViewModel(.loadingNearbyStops(MKCoordinateRegion(
+					center: initialCoords,
+					latitudinalMeters: 0.01,
+					longitudinalMeters: 0.01))),
+				initialCoords: initialCoords,
+				type: type
+			)
+		case .none:
+			EmptyView()
+		case .onboarding:
+			Text("onboarding")
+		case .remark:
+			if let data = data as? RemarksViewDataSource {
+				RemarkSheet(remarks: data.remarks)
+			}
+		case .journeyDebug:
+			if let data = data as? JourneyDebugViewDataSource {
+				JourneyDebugView(legsDTO: data.legDTOs)
+			}
 		}
 	}
 }

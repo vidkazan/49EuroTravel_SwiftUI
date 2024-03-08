@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 extension Set {
 	mutating func toogle(val : Element) {
 		if self.contains(val) {

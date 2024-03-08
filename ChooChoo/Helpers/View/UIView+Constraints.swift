@@ -8,7 +8,6 @@
 import Foundation
 import UIKit
 
-
 extension UIView {
 	enum ChewConstraintType {
 		case fillParent

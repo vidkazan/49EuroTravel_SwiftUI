@@ -93,9 +93,12 @@ extension TopBarAlertViewModel {
 		case fullLegError
 		case userLocationError
 		case journeyFollowError(type : JourneyFollowViewModel.Action)
+		case generic(msg : String)
 		
 		var id : Int {
 			switch self {
+			case .generic:
+				return 4
 			case .fullLegError:
 				return 3
 			case .journeyFollowError:
@@ -116,11 +119,15 @@ extension TopBarAlertViewModel {
 				return Color.chewSunEventBlue
 			case .userLocationError:
 				return Color.chewFillRedPrimary.opacity(0.5)
+			case .generic:
+				return Color.chewFillRedPrimary.opacity(0.5)
 			}
 		}
 		
 		var action : Action {
 			switch self {
+			case .generic:
+				return .dismiss
 			case .fullLegError:
 				return .dismiss
 			case .journeyFollowError:
@@ -134,11 +141,7 @@ extension TopBarAlertViewModel {
 		
 		var infoAction : (() -> Void)? {
 			switch self {
-			case .fullLegError:
-				return nil
-			case .journeyFollowError:
-				return nil
-			case .offlineMode:
+			case .fullLegError,.journeyFollowError,.offlineMode,.generic:
 				return nil
 			case .userLocationError:
 				return {
@@ -149,6 +152,8 @@ extension TopBarAlertViewModel {
 		
 		var badgeType : Badges {
 			switch self {
+			case .generic(let msg):
+				return .generic(msg: msg)
 			case .fullLegError:
 				return .fullLegError
 			case .journeyFollowError(type: let action):

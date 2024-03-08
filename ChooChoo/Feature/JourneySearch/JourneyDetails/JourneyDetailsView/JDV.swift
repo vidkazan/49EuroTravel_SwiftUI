@@ -7,6 +7,8 @@
 
 import SwiftUI
 import MapKit
+import TipKit
+
 struct JourneyDetailsView: View {
 	
 	// MARK: Fields
@@ -31,7 +33,6 @@ struct JourneyDetailsView: View {
 								LegDetailsView(
 									send: viewModel.send,
 									referenceDate: chewVM.referenceDate,
-									openSheet: { _ in },
 									isExpanded: .collapsed,
 									leg: leg
 								)}

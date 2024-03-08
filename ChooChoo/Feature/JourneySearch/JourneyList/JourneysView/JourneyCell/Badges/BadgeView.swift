@@ -89,6 +89,7 @@ struct BadgeView : View {
 					.padding(4)
 			case
 				 .cancelled,
+				 .generic,
 				 .connectionNotReachable,
 				 .fullLegError,
 				 .followError,

@@ -50,6 +50,7 @@ enum StopsCountBadgeMode {
 }
 
 enum Badges : Equatable {
+	case generic(msg : String)
 	case fullLegError
 	case followError(_ action : JourneyFollowViewModel.Action)
 	case locationError
@@ -100,6 +101,8 @@ enum Badges : Equatable {
 	
 	var badgeData : BadgeData {
 		switch self {
+		case .generic(let msg):
+			return BadgeData(name: msg)
 		case .fullLegError:
 			return BadgeData(name: "Failed to load full leg")
 		case .followError(let action):

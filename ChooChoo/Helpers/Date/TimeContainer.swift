@@ -195,7 +195,7 @@ extension TimeContainer {
 			case .ongoing:
 				return 30
 			case .ongoingFar:
-				return 120
+				return 240
 			case .past:
 				return 10000000
 			}

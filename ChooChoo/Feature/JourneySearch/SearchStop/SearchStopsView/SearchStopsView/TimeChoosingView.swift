@@ -21,8 +21,16 @@ struct TimeChoosingView: View {
 			TimeChoosingView.TimeSegmentedPickerOptions.allCases,
 			selectedItem: $selectedOption,
 			content: { elem in
-				Text(getText(elem:elem))
-					.frame(maxWidth: .infinity,minHeight: 35)
+				let text = elem.text(chewVM: chewVM)
+				Group {
+					if #available(iOS 17.0, *), text == "now" {
+						Text(text)
+							.popoverTip(ChooTips.searchNowButtonTip, arrowEdge: .bottom)
+					} else {
+						Text(text)
+					}
+				}
+				.frame(maxWidth: .infinity,minHeight: 35)
 			},
 			externalAction: { (selected : TimeSegmentedPickerOptions)  in
 				switch selected {
@@ -48,9 +56,16 @@ struct TimeChoosingView: View {
 		.background(Color.chewFillSecondary.opacity(0.5))
 		.cornerRadius(10)
 	}
-	
-	func getText(elem : TimeSegmentedPickerOptions) -> String {
-			switch elem {
+}
+
+extension TimeChoosingView {
+	enum TimeSegmentedPickerOptions : Int, Hashable,CaseIterable {
+		case now
+		case specificDate
+		
+		
+		func text(chewVM : ChewViewModel) -> String {
+			switch self {
 			case .now:
 				return "now"
 			case .specificDate:
@@ -58,12 +73,6 @@ struct TimeChoosingView: View {
 					date: chewVM.state.date.date.date
 				)
 			}
-	}
-}
-
-extension TimeChoosingView {
-	enum TimeSegmentedPickerOptions : Int, Hashable,CaseIterable {
-		case now
-		case specificDate
+		}
 	}
 }

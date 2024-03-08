@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import TipKit
 
 struct JourneySearchView : View {
 	
@@ -14,6 +15,9 @@ struct JourneySearchView : View {
 	@ObservedObject var searchStopsVM = Model.shared.searchStopsViewModel
 	var body: some View {
 		VStack(spacing: 5) {
+			if #available(iOS 17.0, *) {
+				TipView(ChooTips.searchTip)
+			}
 			TopBarAlertsView()
 			SearchStopsView()
 			TimeAndSettingsView()

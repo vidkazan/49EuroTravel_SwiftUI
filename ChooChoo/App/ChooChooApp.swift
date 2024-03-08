@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreData
+import TipKit
 
 @main
 struct ChooChooApp: App {
@@ -19,3 +20,4 @@ struct ChooChooApp: App {
 		}
 	}
 }
+

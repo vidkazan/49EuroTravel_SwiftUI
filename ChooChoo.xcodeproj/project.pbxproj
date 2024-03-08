@@ -15,7 +15,7 @@
 		7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE082A97E32D0048ADE6 /* DTO.swift */; };
 		7D02CE102A97E4100048ADE6 /* LegVIewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE0F2A97E4100048ADE6 /* LegVIewData.swift */; };
 		7D02CE132A97E4700048ADE6 /* DateParcer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE122A97E4700048ADE6 /* DateParcer.swift */; };
-		7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE142A97E4940048ADE6 /* Constants.swift */; };
+		7D02CE152A97E4940048ADE6 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE142A97E4940048ADE6 /* Endpoint.swift */; };
 		7D02CE232A97E64E0048ADE6 /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE222A97E64E0048ADE6 /* Query.swift */; };
 		7D02CE252A97E6620048ADE6 /* Errors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE242A97E6620048ADE6 /* Errors.swift */; };
 		7D02CE272A97E6790048ADE6 /* ApiService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D02CE262A97E6790048ADE6 /* ApiService.swift */; };
@@ -103,7 +103,6 @@
 		7D5D78522B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78502B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift */; };
 		7D5D78532B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78512B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift */; };
 		7D5D78552B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78542B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift */; };
-		7D62AF5D2AAA7BB800D3827D /* res.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 7D62AF5C2AAA7BB800D3827D /* res.geojson */; };
 		7D63DB0F2B739048008297DD /* SheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63DB0E2B739048008297DD /* SheetViewModel.swift */; };
 		7D63DB112B739213008297DD /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63DB102B739213008297DD /* SheetView.swift */; };
 		7D65DF1C2B2A2BFE00692601 /* ChewStop+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65DF182B2A2BFE00692601 /* ChewStop+CoreDataClass.swift */; };
@@ -234,6 +233,9 @@
 		7DE8A35A2B6AC50D00C3A378 /* SunEventsGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8A3592B6AC50D00C3A378 /* SunEventsGradient.swift */; };
 		7DE8A35D2B6AF4FC00C3A378 /* ChewDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8A35C2B6AF4FC00C3A378 /* ChewDate.swift */; };
 		7DEA645C2B95F794005BEE8A /* JourneyDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA645B2B95F794005BEE8A /* JourneyDebugView.swift */; };
+		7DEE69CD2B9BCDF200A063B4 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE69CC2B9BCDF200A063B4 /* Tips.swift */; };
+		7DEE69CF2B9BCE6A00A063B4 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE69CE2B9BCE6A00A063B4 /* Info.swift */; };
+		7DEE69D12B9BCE8B00A063B4 /* PresentationDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE69D02B9BCE8B00A063B4 /* PresentationDetent.swift */; };
 		7DF0D98D2B69557D00861C4F /* Iphones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0D98C2B69557C00861C4F /* Iphones.swift */; };
 		7DF0D98F2B6956DD00861C4F /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */; };
 		7DF5871D2B5EC01100A4F99A /* ApiServiceErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF5871C2B5EC01100A4F99A /* ApiServiceErrors.swift */; };
@@ -271,7 +273,7 @@
 		7D02CE082A97E32D0048ADE6 /* DTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DTO.swift; sourceTree = "<group>"; };
 		7D02CE0F2A97E4100048ADE6 /* LegVIewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LegVIewData.swift; sourceTree = "<group>"; };
 		7D02CE122A97E4700048ADE6 /* DateParcer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateParcer.swift; sourceTree = "<group>"; };
-		7D02CE142A97E4940048ADE6 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		7D02CE142A97E4940048ADE6 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
 		7D02CE222A97E64E0048ADE6 /* Query.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
 		7D02CE242A97E6620048ADE6 /* Errors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Errors.swift; sourceTree = "<group>"; };
 		7D02CE262A97E6790048ADE6 /* ApiService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiService.swift; sourceTree = "<group>"; };
@@ -342,8 +344,6 @@
 		7D5D78502B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewLeg+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D5D78512B29C00600E17CC7 /* ChewLeg+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewLeg+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D5D78542B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewLegType+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7D62AF5C2AAA7BB800D3827D /* res.geojson */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = res.geojson; sourceTree = "<group>"; };
-		7D63285C2AB75B0900E1EF2B /* tmp.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = tmp.geojson; sourceTree = "<group>"; };
 		7D63DB0E2B739048008297DD /* SheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewModel.swift; sourceTree = "<group>"; };
 		7D63DB102B739213008297DD /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		7D65DF182B2A2BFE00692601 /* ChewStop+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewStop+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -478,6 +478,9 @@
 		7DE8A35E2B6B041F00C3A378 /* Journey-Neuss-Wolfsburg-First-Cancelled.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = "Journey-Neuss-Wolfsburg-First-Cancelled.json"; sourceTree = "<group>"; };
 		7DE8A35F2B6B085400C3A378 /* UserLocationToStation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserLocationToStation.json; sourceTree = "<group>"; };
 		7DEA645B2B95F794005BEE8A /* JourneyDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDebugView.swift; sourceTree = "<group>"; };
+		7DEE69CC2B9BCDF200A063B4 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
+		7DEE69CE2B9BCE6A00A063B4 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		7DEE69D02B9BCE8B00A063B4 /* PresentationDetent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationDetent.swift; sourceTree = "<group>"; };
 		7DF0D98C2B69557C00861C4F /* Iphones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iphones.swift; sourceTree = "<group>"; };
 		7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
 		7DF5871C2B5EC01100A4F99A /* ApiServiceErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiServiceErrors.swift; sourceTree = "<group>"; };
@@ -541,6 +544,7 @@
 		7D02CE0C2A97E38B0048ADE6 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				7DEE69CA2B9BCD2100A063B4 /* Constants */,
 				7DBD26BC2B99F0D900612A3B /* Settings */,
 				7DF5871B2B5EBFFA00A4F99A /* Errors */,
 				7D65DF172B2A27E500692601 /* DTO */,
@@ -569,33 +573,23 @@
 		7D02CE112A97E4650048ADE6 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				7DEE69CB2B9BCD7300A063B4 /* Date */,
+				7DEE69C92B9BCCED00A063B4 /* Location */,
+				7DEE69C82B9BCC7D00A063B4 /* Combine */,
 				7D33A9572B5343320005D723 /* Mock */,
 				7D33A9A22B54335E0005D723 /* View */,
 				7D33A9A12B54332C0005D723 /* Modifiers+Styles */,
-				7D62AF5C2AAA7BB800D3827D /* res.geojson */,
-				7D63285C2AB75B0900E1EF2B /* tmp.geojson */,
 				7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */,
-				7D02CE122A97E4700048ADE6 /* DateParcer.swift */,
-				7D02CE142A97E4940048ADE6 /* Constants.swift */,
 				7DAF62C12A9E8C2B006F1A17 /* Solar.swift */,
-				7DE640FA2AB08EF80087FC64 /* CLLOcationCoordinate2D+.swift */,
-				7D3E5F002AB321580064213A /* LocationManager.swift */,
-				7DCD200F2AC470AD00788B38 /* Colors.swift */,
-				7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */,
 				7D53705B2ACED7300009BA20 /* PlannedActual.swift */,
-				7D69BE7E2AD7ECF1007855B3 /* Publisher+AsyncMap.swift */,
 				7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */,
 				7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */,
-				7D7887712B632B0500CDEFF9 /* CombineWeakAssign.swift */,
-				7D2BF7A72B67D30800E1CED7 /* Color+random.swift */,
-				7DF0D98C2B69557C00861C4F /* Iphones.swift */,
-				7D1638532B698A04006E9660 /* SFSymbols.swift */,
-				7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */,
-				7DE8A35C2B6AF4FC00C3A378 /* ChewDate.swift */,
 				7D47C3C62B703F24005BB23B /* CustomEnvironments.swift */,
 				7DFC46AA2B7F859F00118608 /* AttibutedContainers.swift */,
-				7D704F432B8558C200F8334F /* UIView+Constraints.swift */,
 				7DBD26C12B99FB1800612A3B /* EnumTraversal.swift */,
+				7DEE69CC2B9BCDF200A063B4 /* Tips.swift */,
+				7DEE69CE2B9BCE6A00A063B4 /* Info.swift */,
+				7DEE69D02B9BCE8B00A063B4 /* PresentationDetent.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -775,6 +769,9 @@
 		7D33A9A22B54335E0005D723 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				7D2BF7A72B67D30800E1CED7 /* Color+random.swift */,
+				7D704F432B8558C200F8334F /* UIView+Constraints.swift */,
+				7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */,
 				7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */,
 				7D000CFA2AB87ACD00566120 /* NavigationLazyView.swift */,
 				7DE8A34D2B6AB09D00C3A378 /* TimeLabelView */,
@@ -1448,6 +1445,45 @@
 			path = Debug;
 			sourceTree = "<group>";
 		};
+		7DEE69C82B9BCC7D00A063B4 /* Combine */ = {
+			isa = PBXGroup;
+			children = (
+				7D69BE7E2AD7ECF1007855B3 /* Publisher+AsyncMap.swift */,
+				7D7887712B632B0500CDEFF9 /* CombineWeakAssign.swift */,
+			);
+			path = Combine;
+			sourceTree = "<group>";
+		};
+		7DEE69C92B9BCCED00A063B4 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				7D3E5F002AB321580064213A /* LocationManager.swift */,
+				7DE640FA2AB08EF80087FC64 /* CLLOcationCoordinate2D+.swift */,
+			);
+			path = Location;
+			sourceTree = "<group>";
+		};
+		7DEE69CA2B9BCD2100A063B4 /* Constants */ = {
+			isa = PBXGroup;
+			children = (
+				7D02CE142A97E4940048ADE6 /* Endpoint.swift */,
+				7DF0D98C2B69557C00861C4F /* Iphones.swift */,
+				7DCD200F2AC470AD00788B38 /* Colors.swift */,
+				7D1638532B698A04006E9660 /* SFSymbols.swift */,
+			);
+			path = Constants;
+			sourceTree = "<group>";
+		};
+		7DEE69CB2B9BCD7300A063B4 /* Date */ = {
+			isa = PBXGroup;
+			children = (
+				7D02CE122A97E4700048ADE6 /* DateParcer.swift */,
+				7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */,
+				7DE8A35C2B6AF4FC00C3A378 /* ChewDate.swift */,
+			);
+			path = Date;
+			sourceTree = "<group>";
+		};
 		7DF5871B2B5EBFFA00A4F99A /* Errors */ = {
 			isa = PBXGroup;
 			children = (
@@ -1606,7 +1642,6 @@
 				7D28BAD22B82C533008B9979 /* Mock.xcassets in Resources */,
 				7DAA726F2B7CF0A600290548 /* Icons.xcassets in Resources */,
 				7D33A9702B5343320005D723 /* Tests.xctestplan in Resources */,
-				7D62AF5D2AAA7BB800D3827D /* res.geojson in Resources */,
 				7D33A96D2B5343320005D723 /* Chew-chew-SwiftUI.xctestplan in Resources */,
 				7D33A9732B5343320005D723 /* Journey-Neuss-Wolfsburg.json in Resources */,
 				7DC7F9D52B61C07500DAF6CB /* Placeholder.json in Resources */,
@@ -1654,7 +1689,7 @@
 				7DD4A8DA2AAC90C9001AA30C /* SSVM+reduce+Error.swift in Sources */,
 				7D02CE092A97E32D0048ADE6 /* DTO.swift in Sources */,
 				7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */,
-				7D02CE152A97E4940048ADE6 /* Constants.swift in Sources */,
+				7D02CE152A97E4940048ADE6 /* Endpoint.swift in Sources */,
 				7DE640FB2AB08EF80087FC64 /* CLLOcationCoordinate2D+.swift in Sources */,
 				7DD5BAF82B72B3C500CFE768 /* StopVIewData.swift in Sources */,
 				7D2CAF662B0BEAC000577FD4 /* Persistence.swift in Sources */,
@@ -1787,11 +1822,13 @@
 				7D02CE272A97E6790048ADE6 /* ApiService.swift in Sources */,
 				7D68D9F82ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift in Sources */,
 				7DE6FD9E2B5AD00F00AC8DE3 /* ChewRecentSearch+CoreDataProperties.swift in Sources */,
+				7DEE69CD2B9BCDF200A063B4 /* Tips.swift in Sources */,
 				7DA13A432B28D66D0045061F /* ChewTime+CoreDataProperties.swift in Sources */,
 				7D462D5C2AACE5D100BC0D65 /* JourneyCell.swift in Sources */,
 				7DF0D98D2B69557D00861C4F /* Iphones.swift in Sources */,
 				7DBD26BE2B99F10600612A3B /* Settings+init.swift in Sources */,
 				7DE3599F2AB9E9430028CA59 /* chewVM+reduce+LoadingLocaiton.swift in Sources */,
+				7DEE69D12B9BCE8B00A063B4 /* PresentationDetent.swift in Sources */,
 				7D181D642AD6D595003AB021 /* RecentSearchView.swift in Sources */,
 				7DD5BAE52B72AE9500CFE768 /* JDVM+sideEffects+fetch.swift in Sources */,
 				7DE8A35D2B6AF4FC00C3A378 /* ChewDate.swift in Sources */,
@@ -1840,6 +1877,7 @@
 				7DBABFF92B879FA400C990FD /* ChildAnnotationViews.swift in Sources */,
 				7D4B1B992AA950780096F372 /* constructJourneyList.swift in Sources */,
 				7D462D492AAC947F00BC0D65 /* JLVM+reduce+LoadingJourneys.swift in Sources */,
+				7DEE69CF2B9BCE6A00A063B4 /* Info.swift in Sources */,
 				7D7547B82B616FD3002BE434 /* FeatureView.swift in Sources */,
 				7D9BB10C2B0CBF54008A3616 /* Location+CoreDataClass.swift in Sources */,
 				7D0685ED2B50304500CCBE6B /* CoreDataStore+Fetch.swift in Sources */,

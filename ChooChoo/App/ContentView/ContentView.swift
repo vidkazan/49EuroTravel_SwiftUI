@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import TipKit
 
 #warning("TODO: localization")
 #warning("FIX: iOS 16+ mapDetails: starting region fault")
@@ -46,6 +47,14 @@ struct ContentView: View {
 			default:
 				FeatureView()
 					.animation(.smooth, value: topAlertVM.state)
+			}
+		}
+		.task {
+			if #available(iOS 17.0, *) {
+				try? Tips.configure([
+					.displayFrequency(.immediate),
+					.datastoreLocation(.applicationDefault)
+				])
 			}
 		}
 		.alert(isPresented: $alertIsPresented, content: alert)

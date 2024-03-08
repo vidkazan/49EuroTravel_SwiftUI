@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct JourneyListView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var journeyViewModel : JourneyListViewModel

@@ -35,7 +35,10 @@ struct JourneyCell: View {
 			}, label: {
 				VStack {
 					JourneyHeaderView(journey: journey)
-					LegsView(journey : journey,progressBar: false,mode : chewVM.state.settings.legViewMode)
+					LegsView(
+						journey : journey,progressBar: false,
+						mode : chewVM.state.settings.legViewMode
+					)
 						.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
 				}
 			})
@@ -96,6 +99,26 @@ extension JourneyCell {
 			}, label: {
 				Label("Show on map", systemImage: "map.circle")
 			})
+//			Button(action: {
+//				let viewModel = Model.shared.journeyDetailViewModel(
+//					followId: Self.followID(journey: journey),
+//					 for: journey.refreshToken,
+//					 viewdata: journey,
+//					 stops: stops,
+//					 chewVM: chewVM
+//				)
+//				viewModel.send(event: .didTapSubscribingButton(
+//					id: viewModel.state.data.id,
+//					ref: viewModel.state.data.viewData.refreshToken,
+//					journeyDetailsViewModel: viewModel
+//				))
+//			}, label: {
+//				if Model.shared.journeyFollowViewModel.state.journeys.contains(where: {$0.id == Self.followID(journey: journey)}) == true {
+//					Label("Unfollow journey", systemImage: "bookmark.fill")
+//				} else {
+//					Label("Follow journey", systemImage: "bookmark")
+//				}
+//			})
 		}
 	}
 }

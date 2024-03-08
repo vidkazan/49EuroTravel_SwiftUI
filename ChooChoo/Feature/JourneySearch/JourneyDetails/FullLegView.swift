@@ -17,7 +17,6 @@ struct FullLegSheet: View {
 				LegDetailsView(
 					send: { _ in},
 					referenceDate: chewVM.referenceDate,
-					openSheet: { _  in },
 					isExpanded: .expanded,
 					leg: leg
 				)
