@@ -24,6 +24,8 @@ struct SheetView : View {
 				NavigationStack {
 					sheet(data: data, type: type)
 				}
+				.presentationDetents(Set(makePresentationDetent(chewDetents: type.detents))
+				)
 			} else {
 				NavigationView {
 					sheet(data: data, type: type)
@@ -124,11 +126,22 @@ struct SheetViewInner : View {
 	}
 }
 
+enum ChewPresentationDetent : Hashable {
+	case large
+	case medium
+	case height(CGFloat)
+}
 
-struct InfoSheet : View {
-	var body: some View {
-		NavigationView {
-			
+@available(iOS 16.0, *)
+func makePresentationDetent(chewDetents : [ChewPresentationDetent]) -> [PresentationDetent] {
+	return chewDetents.map { chewDetent -> PresentationDetent in
+		switch chewDetent {
+		case .large:
+			return .large
+		case .medium:
+			return .medium
+		case .height(let cGFloat):
+			return .height(cGFloat)
 		}
 	}
 }

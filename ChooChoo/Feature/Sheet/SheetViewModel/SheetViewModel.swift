@@ -107,6 +107,31 @@ extension SheetViewModel{
 		case remark(remarks : [RemarkViewData])
 		case journeyDebug(legs : [LegDTO])
 		
+		var detents : [ChewPresentationDetent] {
+			switch self {
+			case .info:
+				return [.height(200)]
+			case .mapPicker:
+				return [.large]
+			case .none:
+				return []
+			case .date:
+				return [.medium,.large]
+			case .settings:
+				return [.medium,.large]
+			case .fullLeg:
+				return [.medium,.large]
+			case .mapDetails:
+				return [.large]
+			case .onboarding:
+				return [.large]
+			case .remark:
+				return [.medium,.large]
+			case .journeyDebug:
+				return [.medium,.large]
+			}
+		}
+		
 		var description : String {
 			switch self {
 			case .info:
