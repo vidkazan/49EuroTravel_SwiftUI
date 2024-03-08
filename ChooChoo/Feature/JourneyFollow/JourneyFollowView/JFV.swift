@@ -31,6 +31,7 @@ struct JourneyFollowView : View {
 					ErrorView(
 						msg: "You have no followed journeys", 
 						action: {
+							Model.shared.sheetViewModel.send(event: .didRequestShow(.info))
 						}
 					)
 					.frame(idealWidth: .infinity,idealHeight: .infinity)
@@ -147,7 +148,8 @@ extension JourneyFollowView {
 			for: journey.journeyViewData.refreshToken,
 			viewdata: journey.journeyViewData,
 			stops: .init(departure: journey.depStop, arrival: journey.arrStop),
-			chewVM: chewVM)
+			chewVM: chewVM
+		)
 		return JourneyFollowCellView(journeyDetailsViewModel: vm)
 			.swipeActions(edge: .leading) {
 				Button {
@@ -170,7 +172,6 @@ extension JourneyFollowView {
 			}
 			.swipeActions(edge: .trailing) {
 				Button {
-					let _=print(">>>",journey.id)
 					Model.shared.alertViewModel.send(event: .didRequestShow(
 						.destructive(
 							destructiveAction: {

@@ -7,11 +7,10 @@
 
 import SwiftUI
 
-#warning("TODO: make error view")
 #warning("TODO: localization")
+#warning("FIX: iOS 16+ mapDetails: starting region fault")
 
 // Lida ChooChoo to fix:
-
 
 // MARK: JDV
 // leg cell: stops number badge: let user know that cell is tappable and it will show all leg stops
@@ -107,6 +106,8 @@ extension ContentView {
 					action: destructiveAction
 				)
 			)
+		case let .info(title, msg):
+			return Alert(title: Text(title), message: Text(msg))
 		case .none:
 			return Alert(title: Text("Test alert"))
 		}

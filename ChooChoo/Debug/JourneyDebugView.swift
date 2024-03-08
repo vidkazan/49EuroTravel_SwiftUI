@@ -190,39 +190,35 @@ struct LegDebugView : View {
 struct JourneyDebugView : View {
 	let legsDTO : [LegDTO]
 	var body: some View {
-		NavigationView {
-			ScrollView {
-				LazyVStack(alignment: .leading) {
-					ForEach(legsDTO, content: { leg in
-						DisclosureGroup(
-							content: {
-								VStack {
-									LegDebugView(legDTO: leg)
-								}
-									.padding(10)
-							},
-							label: {
-									if let distance = leg.distance {
-										BadgeView(.lineNumber(
-											lineType: .foot,
-											num: String(distance)
-										))
-									} else {
-										BadgeView(.lineNumber(
-											lineType: LineType(rawValue: leg.line?.product ?? "") ?? .taxi,
-											num: leg.line?.name ?? ""
-										))
-									}
+		ScrollView {
+			LazyVStack(alignment: .leading) {
+				ForEach(legsDTO, content: { leg in
+					DisclosureGroup(
+						content: {
+							VStack {
+								LegDebugView(legDTO: leg)
 							}
-						)
-						.padding(10)
-						.badgeBackgroundStyle(.secondary)
-						.padding(.horizontal,10)
-					})
-				}
+								.padding(10)
+						},
+						label: {
+								if let distance = leg.distance {
+									BadgeView(.lineNumber(
+										lineType: .foot,
+										num: String(distance)
+									))
+								} else {
+									BadgeView(.lineNumber(
+										lineType: LineType(rawValue: leg.line?.product ?? "") ?? .taxi,
+										num: leg.line?.name ?? ""
+									))
+								}
+						}
+					)
+					.padding(10)
+					.badgeBackgroundStyle(.secondary)
+					.padding(.horizontal,10)
+				})
 			}
-			.navigationTitle("Journey debug")
-			.navigationBarTitleDisplayMode(.inline)
 		}
 	}
 }

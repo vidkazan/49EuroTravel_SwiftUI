@@ -96,8 +96,7 @@ struct MyPreviewProvider_Previews: PreviewProvider {
 				latitude: 51.2,
 				longitude: 6.685
 			),
-			type: .departure,
-			close: {}
+			type: .departure
 		)
 	}
 }

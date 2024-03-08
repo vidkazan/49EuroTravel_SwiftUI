@@ -40,7 +40,7 @@ struct TimeChoosingView: View {
 			switch state.date.date {
 			case .now:
 				selectedOption = .now
-			case .specificDate(let ts):
+			case .specificDate:
 				selectedOption = .specificDate
 			}
 		})

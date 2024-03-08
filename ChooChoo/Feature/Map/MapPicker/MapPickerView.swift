@@ -14,38 +14,21 @@ struct MapPickerView: View {
 	let type : LocationDirectionType
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var vm : MapPickerViewModel
-	let closeSheet : ()->Void
 	@State private var mapCenterCoords: CLLocationCoordinate2D
 	init(
 		vm : MapPickerViewModel,
 		initialCoords: CLLocationCoordinate2D,
-		type : LocationDirectionType,
-		close : @escaping ()->Void
+		type : LocationDirectionType
 	) {
 		self.mapCenterCoords = initialCoords
 		self.type = type
-		self.closeSheet = close
 		self.vm = vm
 	}
 	var body: some View {
-		NavigationView {
-			MapPickerUIView(vm: vm,mapCenterCoords: mapCenterCoords)
-				.overlay(alignment: .bottomLeading) { overlay }
-				.toolbar {
-					ToolbarItem(placement: .navigationBarLeading, content: {
-						Button(action: {
-							closeSheet()
-						}, label: {
-							Text("Close")
-								.foregroundColor(.chewGray30)
-						})
-					})
-				}
-				.cornerRadius(10)
-				.padding(5)
-				.navigationTitle("Map picker")
-				.navigationBarTitleDisplayMode(.inline)
-		}
+		MapPickerUIView(vm: vm,mapCenterCoords: mapCenterCoords)
+			.overlay(alignment: .bottomLeading) { overlay }
+			.cornerRadius(10)
+			.padding(5)
 	}
 }
 
@@ -120,8 +103,7 @@ struct MapPicker_Previews: PreviewProvider {
 		MapPickerView(
 			vm: .init(.idle),
 			initialCoords: .init(latitude: 51.2, longitude: 6.68),
-			type: .departure,
-			close: {}
+			type: .departure
 		)
 	}
 }

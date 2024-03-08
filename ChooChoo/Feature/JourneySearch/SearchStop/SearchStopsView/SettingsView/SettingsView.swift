@@ -39,7 +39,6 @@ struct SettingsView: View {
 	}
 	
 	var body: some View {
-		NavigationView {
 			Form {
 				transportTypes
 				if transportModeSegment == .custom {
@@ -76,17 +75,7 @@ struct SettingsView: View {
 			.onAppear {
 				loadSettings(state: chewViewModel.state)
 			}
-			.navigationTitle("Settings")
-			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
-				ToolbarItem(placement: .navigationBarLeading, content: {
-					Button(action: {
-						closeSheet()
-					}, label: {
-						Text("Cancel")
-							.foregroundColor(.chewGray30)
-					})
-				})	
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
 						saveSettings()
@@ -98,7 +87,6 @@ struct SettingsView: View {
 					})
 				}
 			)}
-		}
 	}
 }
 

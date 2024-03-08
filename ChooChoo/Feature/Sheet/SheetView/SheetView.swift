@@ -14,14 +14,53 @@ struct SheetView : View {
 	@ObservedObject var sheetVM : SheetViewModel = Model.shared.sheetViewModel
 	let closeSheet : ()->Void
 	var body: some View {
+		switch sheetVM.state.status {
+		case .error(let error):
+			Text(error.localizedDescription)
+		case .loading:
+			ProgressView()
+		case let .showing(type, data):
+			if #available(iOS 16.0, *) {
+				NavigationStack {
+					sheet(data: data, type: type)
+				}
+			} else {
+				NavigationView {
+					sheet(data: data, type: type)
+				}
+			}
+		}
+	}
+	
+	@ViewBuilder func sheet(data : any SheetViewDataSource, type : SheetViewModel.SheetType) -> some View {
+		SheetViewInner(
+			data: data,
+			type: type,
+			closeSheet: closeSheet
+		)
+			.navigationBarTitleDisplayMode(.inline)
+			.navigationTitle(type.description)
+			.toolbar {
+				ToolbarItem(placement: .navigationBarLeading, content: {
+					Button("Close") {
+						closeSheet()
+					}
+				})
+			}
+	}
+}
+
+struct SheetViewInner : View {
+	@EnvironmentObject var chewViewModel : ChewViewModel
+//	@ObservedObject var sheetVM : SheetViewModel = Model.shared.sheetViewModel
+	let data : any SheetViewDataSource
+	let type : SheetViewModel.SheetType
+	let closeSheet : ()->Void
+	var body: some View {
 		Group {
-			switch sheetVM.state.status {
-			case .error(let error):
-				Text(error.localizedDescription)
-			case .loading:
-				ProgressView()
-			case let .showing(type, data):
 				switch type {
+				case .info:
+					Text("info")
 				case .settings:
 					SettingsView(
 						settings: chewViewModel.state.settings,
@@ -44,17 +83,13 @@ struct SheetView : View {
 					}
 				case .fullLeg:
 					if let data = data as? FullLegViewDataSource {
-						FullLegSheet(
-							leg: data.leg,
-							closeSheet: closeSheet
-						)
+						FullLegSheet(leg: data.leg)
 					}
 				case .mapDetails:
 					if let data = data as? MapDetailsViewDataSource {
 						MapDetailsView(
 							mapRect: data.coordRegion,
-							legs: data.mapLegDataList,
-							closeSheet: closeSheet
+							legs: data.mapLegDataList
 						)
 					}
 				case .mapPicker(type: let type):
@@ -65,8 +100,7 @@ struct SheetView : View {
 							latitudinalMeters: 0.01,
 							longitudinalMeters: 0.01))),
 						initialCoords: initialCoords,
-						type: type,
-						close: closeSheet
+						type: type
 					)
 				case .none:
 					EmptyView()
@@ -75,20 +109,26 @@ struct SheetView : View {
 				case .remark:
 					if let data = data as? RemarksViewDataSource {
 						if #available(iOS 16.0, *) {
-							RemarkSheet(remarks: data.remarks, closeSheet: closeSheet)
+							RemarkSheet(remarks: data.remarks)
 								.presentationDetents([.height(300),.large])
 						} else {
-							RemarkSheet(remarks: data.remarks, closeSheet: closeSheet)
+							RemarkSheet(remarks: data.remarks)
 						}
 					}
 				case .journeyDebug:
 					if let data = data as? JourneyDebugViewDataSource {
 						JourneyDebugView(legsDTO: data.legDTOs)
-					} else {
-						Text("JourneyDebugViewDataSource is nil")
 					}
 				}
 			}
+	}
+}
+
+
+struct InfoSheet : View {
+	var body: some View {
+		NavigationView {
+			
 		}
 	}
 }

@@ -15,7 +15,6 @@ struct DatePickerView: View {
 	let closeSheet : ()->Void
 
 	var body: some View {
-		NavigationView {
 			VStack(alignment: .center,spacing: 5) {
 				Picker("", selection: $type) {
 					ForEach(LocationDirectionType.allCases, id: \.rawValue) {
@@ -41,17 +40,7 @@ struct DatePickerView: View {
 				Spacer()
 			}
 			.padding(.horizontal,10)
-			.navigationTitle("Date Settings")
-			.navigationBarTitleDisplayMode(.inline)
 			.toolbar {
-				ToolbarItem(placement: .navigationBarLeading, content: {
-					Button(action: {
-						closeSheet()
-					}, label: {
-						Text("Cancel")
-							.foregroundColor(.chewGray30)
-					})
-				})
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
 						if let dateCombined = DateParcer.getCombinedDate(
@@ -71,6 +60,5 @@ struct DatePickerView: View {
 					})
 				}
 			)}
-		}
 	}
 }

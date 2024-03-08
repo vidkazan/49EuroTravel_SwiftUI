@@ -91,13 +91,13 @@ extension SheetViewModel{
 			}
 		}
 	}
-	#warning("info")
 	enum SheetType : Equatable {
 		static func == (lhs: SheetViewModel.SheetType, rhs: SheetViewModel.SheetType) -> Bool {
 			lhs.description == rhs.description
 		}
 		
 		case none
+		case info
 		case date
 		case settings
 		case fullLeg(leg : LegViewData)
@@ -109,29 +109,33 @@ extension SheetViewModel{
 		
 		var description : String {
 			switch self {
+			case .info:
+				return "Info"
 			case .mapPicker:
-				return "mapPicker"
+				return "MapPicker"
 			case .none:
 				return "none"
 			case .date:
-				return "date"
+				return "Date"
 			case .settings:
-				return "settings"
+				return "Settings"
 			case .fullLeg:
-				return "fullLeg"
+				return "FullLeg"
 			case .mapDetails:
-				return "map"
+				return "MapDetails"
 			case .onboarding:
-				return "onboarding"
+				return "Onboarding"
 			case .remark:
-				return "remark"
+				return "Remarks"
 			case .journeyDebug:
-				return "journeyDebug"
+				return "JourneyDebug"
 			}
 		}
 		
 		var dataSourceType : any SheetViewDataSource.Type {
 			switch self {
+			case .info:
+				return InfoDataSource.self
 			case .none:
 				return EmptyDataSource.self
 			case .mapPicker:
@@ -195,6 +199,8 @@ extension SheetViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			switch type {
+			case .info:
+				return Just(Event.didLoadDataForShowing(type,InfoDataSource())).eraseToAnyPublisher()
 			case .mapPicker:
 				return Just(Event.didLoadDataForShowing(type,MapPickerViewDataSource())).eraseToAnyPublisher()
 			case .none:
@@ -330,7 +336,9 @@ extension SheetViewModel {
 		case .journey(let legs):
 			if let locFirst = legs.first?.legStopsViewData.first,
 			   let locLast = legs.last?.legStopsViewData.last {
-				let mapLegDataList = legs.compactMap({mapLegData(leg: $0)})
+				let mapLegDataList = legs.compactMap({
+					mapLegData(leg: $0)
+				})
 				return Just(Event.didLoadDataForShowing(
 					.mapDetails(request),
 					MapDetailsViewDataSource(

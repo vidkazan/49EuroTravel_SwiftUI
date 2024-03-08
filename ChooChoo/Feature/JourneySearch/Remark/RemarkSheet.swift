@@ -10,43 +10,29 @@ import SwiftUI
 
 struct RemarkSheet : View {
 	let remarks : [RemarkViewData]
-	let closeSheet : ()->Void
 	var body: some View {
-		NavigationView {
-				ScrollView {
-					ForEach(remarks,id:\.text.hashValue) { remark in
-						HStack {
+		ScrollView {
+			ForEach(remarks,id:\.text.hashValue) { remark in
+				HStack {
+					VStack(alignment: .leading) {
+						HStack(alignment: .top) {
+							Image(remark.type.symbol)
+								.foregroundColor(remark.type.color)
 							VStack(alignment: .leading) {
-								HStack(alignment: .top) {
-									Image(remark.type.symbol)
-										.foregroundColor(remark.type.color)
-									VStack(alignment: .leading) {
-										Text(remark.summary)
-											.chewTextSize(.big)
-										Text(remark.text)
-											.textContentType(.dateTime)
-											.chewTextSize(.medium)
-									}
-								}
+								Text(remark.summary)
+									.chewTextSize(.big)
+								Text(remark.text)
+									.textContentType(.dateTime)
+									.chewTextSize(.medium)
 							}
-							Spacer()
 						}
-						.padding(5)
-						
 					}
+					Spacer()
 				}
 			.padding(5)
-			.toolbar {
-				ToolbarItem(placement: .navigationBarLeading, content: {
-					Button(action: {
-						closeSheet()
-					}, label: {
-						Text("Close")
-							.foregroundColor(.chewGray30)
-					})
-				})
 			}
 		}
+		.padding(5)
 	}
 }
 

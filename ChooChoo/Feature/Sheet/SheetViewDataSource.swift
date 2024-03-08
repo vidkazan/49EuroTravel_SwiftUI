@@ -44,6 +44,8 @@ struct DatePickerViewDataSource : SheetViewDataSource {}
 struct EmptyDataSource : SheetViewDataSource {}
 struct SettingsViewDataSource : SheetViewDataSource {}
 struct OnboardingViewDataSource : SheetViewDataSource {}
+struct InfoDataSource : SheetViewDataSource {}
+
 struct RemarksViewDataSource : SheetViewDataSource {
 	let remarks : [RemarkViewData]
 }
