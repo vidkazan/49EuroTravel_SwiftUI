@@ -95,11 +95,8 @@ class DateParcer {
 		return timeString
 	}
 	
-	static func timeDuration(_ minutes : Double?) -> String? {
-		if let minutes = minutes {
-			return DateParcer.durationFormatter.string(from: (minutes * 60))?.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: " ")
-		}
-		return nil
+	static func timeDuration(_ minutes : Double) -> String? {
+		return DateParcer.durationFormatter.string(from: (minutes * 60))?.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: " ")
 	}
 	
 	static func getCombinedDate(date: Date, time: Date) -> Date? {

@@ -98,7 +98,7 @@ struct LegDetailsStopPreview : PreviewProvider {
 //			.previewDevice(PreviewDevice(.iPadMini6gen))
 //			.previewInterfaceOrientation(.landscapeLeft)
 		} else {
-			Text("error")
+			Text(verbatim: "error")
 		}
 	}
 }

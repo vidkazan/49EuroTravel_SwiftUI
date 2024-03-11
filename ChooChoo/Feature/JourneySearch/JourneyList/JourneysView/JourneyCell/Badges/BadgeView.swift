@@ -8,48 +8,36 @@
 import Foundation
 import SwiftUI
 
-struct ChewLabel<T> : View {
-	let text : T
+struct ChewLabel : View {
+	let text : Text
 	let image : String
-	init(_ text : T,_ image : String) {
+	init(_ text : Text,_ image : String) {
 		self.text = text
 		self.image = image
 	}
-	init(_ text : T,_ image : ChewSFSymbols) {
+	init(_ text : Text,_ image : ChewSFSymbols) {
 		self.text = text
 		self.image = image.rawValue
 	}
 	var body : some View {
 		HStack(spacing: 2) {
 			Image(systemName: image)
-			if let text = text as? String {
-				Text(text)
-			}
-			if let text = text as? AttributedString {
-				Text(text)
-			}
+			text
 		}
 	}
 }
 
-struct OneLineText<T> : View {
-	let text : T
+struct OneLineText : View {
+	let text : Text
 	let strikethrough : Bool
-	init(_ text : T,_ strikethrough : Bool = false) {
+	init(_ text : Text,_ strikethrough : Bool = false) {
 		self.text = text
 		self.strikethrough = strikethrough
 	}
 	var body : some View {
-		if let text = text as? String {
-			Text(text)
-				.strikethrough(strikethrough)
-				.lineLimit(1)
-		}
-		if let text = text as? AttributedString {
-			Text(text)
-				.strikethrough(strikethrough)
-				.lineLimit(1)
-		}
+		text
+			.strikethrough(strikethrough)
+			.lineLimit(1)
 	}
 }
 
@@ -65,26 +53,30 @@ struct BadgeView : View {
 		Group {
 			switch badge {
 			case let .legDirection(dir,strikethrough):
-				OneLineText((
-						AttributedString("to ",attributes: secondaryAttribute)
+				OneLineText(
+					(
+						Text("to ", comment: "BadgeView: legDirection")
 						+
-						AttributedString(dir)),
+						Text(verbatim: dir)
+					),
 					strikethrough
 				)
 				.chewTextSize(size)
 				.padding(4)
 			case .distanceInMeters(let dist):
 				OneLineText(
-					Measurement(
+					Text(Measurement(
 						value: dist,
 						unit: UnitLength.meters
 					)
-					.formatted(.measurement(width: .abbreviated).attributed)
+					.formatted(.measurement(width: .abbreviated).attributed))
 				)
 				.chewTextSize(size)
 				.padding(4)
 			case .price(let price):
-				OneLineText(price)
+				OneLineText(
+					Text(price, format: .currency(code: "EUR"))
+				)
 					.chewTextSize(size)
 					.padding(4)
 			case
@@ -95,7 +87,7 @@ struct BadgeView : View {
 				 .followError,
 				 .locationError,
 				 .offlineMode:
-				OneLineText(badge.badgeData.name)
+				OneLineText(badge.badgeData.text)
 					.chewTextSize(size)
 					.padding(4)
 			case let .timeDepartureTimeArrival(time):
@@ -104,7 +96,7 @@ struct BadgeView : View {
 					HStack(spacing: 0) {
 						Text(dep, style: .time)
 						+
-						Text("-")
+						Text(verbatim: "-")
 						+
 						Text(arr, style: .time)
 					}
@@ -126,25 +118,18 @@ struct BadgeView : View {
 					.chewTextSize(size)
 					.padding(4)
 			case .remarkImportant:
-				OneLineText(badge.badgeData.name)
+				OneLineText(badge.badgeData.text)
 					.foregroundColor(.white)
 					.chewTextSize(size)
 					.padding(.horizontal,4)
 					.padding(4)
-//			case .dticket:
-//				DTicketLogo(fontSize: 17)
-//					.font(.system(size: 12))
-//					.padding(2)
-//					.background(self.color)
-//					.cornerRadius(8)
-//					.padding(4)
 			case let .lineNumber(type, _):
 				if let image = type.icon {
 					HStack(spacing:0) {
 						Image(image)
 							.foregroundColor(Color.primary)
 							.chewTextSize(size)
-						OneLineText(badge.badgeData.name)
+						OneLineText(badge.badgeData.text)
 							.foregroundColor(Color.primary)
 							.chewTextSize(size)
 					}
@@ -157,7 +142,7 @@ struct BadgeView : View {
 				}
 			case .stopsCount(let count,let mode):
 				HStack(spacing: 2) {
-					OneLineText(badge.badgeData.name)
+					OneLineText(badge.badgeData.text)
 						.chewTextSize(size)
 					if count > 1, mode != .hideShevron {
 						Image(.chevronDownCircle)
@@ -167,50 +152,40 @@ struct BadgeView : View {
 					}
 				}
 				.padding(4)
-				
-				
 			case .legDuration(let time):
 				if let dur = DateParcer.timeDuration(time.durationInMinutes) {
-					OneLineText(dur)
+					OneLineText(Text(verbatim: "\(dur)"))
 					.chewTextSize(size)
 					.padding(4)
 				}
-			case .walking(let time):
-				if let dur = DateParcer.timeDuration(time.durationInMinutes) {
+			case .walking:
 					ChewLabel(
-						AttributedString(badge.badgeData.name,attributes: secondaryAttribute) +
-						AttributedString(dur),
+						badge.badgeData.text,
 						.figureWalkCircle
 					)
 					.chewTextSize(size)
 					.padding(4)
-				}
-			case .transfer(let time):
-				if let dur = DateParcer.timeDuration(time.durationInMinutes) {
+			case .transfer:
 					ChewLabel(
-						AttributedString(badge.badgeData.name,attributes: secondaryAttribute) +
-						AttributedString(dur),
+						badge.badgeData.text,
 						.arrowTriangle2Circlepath
 					)
 					.chewTextSize(size)
 					.padding(4)
-				}
-				
-				
 			case .changesCount(let count):
-				ChewLabel(String(count),.arrowTriangle2Circlepath)
+				ChewLabel(Text(verbatim: "\(count)"),.arrowTriangle2Circlepath)
 					.chewTextSize(size)
 					.padding(4)
 			case let .departureArrivalStops(departure,arrival):
-				Text(
-					AttributedString(departure)
+				(
+					Text(verbatim: departure)
 					+
-					AttributedString(" to ",attributes: secondaryAttribute)
+					Text(" to ", comment: "badge: departureArrivalStops")
 					+
-					AttributedString(arrival)
+					Text(verbatim: arrival)
 				)
-					.chewTextSize(size)
-					.padding(4)
+				.chewTextSize(size)
+				.padding(4)
 			}
 		}
 	}
@@ -270,7 +245,7 @@ struct BadgeViewPreview : PreviewProvider {
 						.badgeBackgroundStyle(.primary)
 					BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf",strikethrough: false),.big)
 					.badgeBackgroundStyle(.primary)
-					BadgeView(.price("50EUR"))
+					BadgeView(.price(50))
 						.badgeBackgroundStyle(.primary)
 					BadgeView(.stopsCount(10,.showShevronDown),.medium)
 						.badgeBackgroundStyle(.primary)

@@ -15,11 +15,11 @@ struct PlatformView: View {
 		if let pl = platform.actual {
 			HStack(spacing: 2) {
 				if isShowingPlatormWord == true {
-					Text("platform")
+					Text("platform",comment: "platformView")
 						.chewTextSize(.medium)
 						.foregroundColor(.primary.opacity(0.7))
 				}
-				Text(pl)
+				Text(verbatim: pl)
 					.padding(3)
 					.frame(minWidth: 20)
 					.background(Color(red: 0.1255, green: 0.156, blue: 0.4))

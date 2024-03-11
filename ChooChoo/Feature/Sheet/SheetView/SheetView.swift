@@ -19,7 +19,9 @@ struct SheetView : View {
 			EmptyView()
 				.onAppear {
 					Model.shared.topBarAlertViewModel.send(
-						event: .didAdd([.generic(msg: error.localizedDescription)])
+						event: .didAdd([
+							.generic(msg: Text(error.localizedDescription))
+						])
 					)
 				}
 		case .loading(let type):
@@ -62,9 +64,14 @@ private extension SheetView {
 			.navigationTitle(type.description)
 			.toolbar {
 				ToolbarItem(placement: .navigationBarLeading, content: {
-					Button("Close") {
+					Button(action: {
 						closeSheet()
-					}
+					}, label: {
+						Text(
+							"Close",
+							 comment: "SheetView: toolbar: button name"
+						)
+					})
 				})
 			}
 	}
@@ -114,7 +121,7 @@ struct SheetViewInner : View {
 		case .none:
 			EmptyView()
 		case .onboarding:
-			Text("onboarding")
+			EmptyView()
 		case .remark:
 			if let data = data as? RemarksViewDataSource {
 				RemarkSheet(remarks: data.remarks)

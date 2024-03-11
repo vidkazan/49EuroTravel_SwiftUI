@@ -7,6 +7,7 @@
 
 import Foundation
 import Combine
+import SwiftUI
 
 struct JourneyFollowData : Equatable {
 	let id : Int64
@@ -75,13 +76,13 @@ extension JourneyFollowViewModel {
 	enum Action : String {
 		case adding
 		case deleting
-		
-		var description : String {
+
+		var text : Text {
 			switch self {
 			case .adding:
-				return "follow"
+				return Text("follow",comment: "JourneyFollowViewModel.Action")
 			case .deleting:
-				return "unfollow"
+				return Text("unfollow",comment: "JourneyFollowViewModel.Action")
 			}
 		}
 	}
@@ -154,21 +155,18 @@ extension JourneyFollowViewModel {
 		
 		func hash(into hasher: inout Hasher) {
 			switch self {
-			case .inputValIsNil,
+			case 
 				.alreadyContains,
 				.notFoundInFollowList:
 				break
 			}
 		}
-		case inputValIsNil(_ msg: String)
 		case alreadyContains(_ msg: String)
 		case notFoundInFollowList(_ msg: String)
 		
 		
 		var description : String  {
 			switch self {
-			case .inputValIsNil(let msg):
-				return "Input value is nil: \(msg)"
 			case.alreadyContains(let msg):
 				return "Already contains: \(msg)"
 			case .notFoundInFollowList(let msg):

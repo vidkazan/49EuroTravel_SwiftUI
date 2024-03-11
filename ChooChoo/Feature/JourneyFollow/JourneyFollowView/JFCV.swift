@@ -39,7 +39,7 @@ struct JourneyFollowCellView : View {
 						time: data.time.date.departure,
 						delayStatus: data.time.departureStatus
 					)
-					Text("-")
+					Text(verbatim: "-")
 					TimeLabelView(
 						size: .medium,
 						arragement: .right,
@@ -76,14 +76,28 @@ struct JourneyFollowCellView : View {
 					event: .didRequestShow(.mapDetails(.journey(data.legs)))
 				)
 			}, label: {
-				Label("Show on map", systemImage: "map.circle")
+				Label(
+					title: {
+						Text("Show on map", comment: "JourneyFollowCellView: menu item")
+					},
+					icon: {
+						Image(systemName: "map.circle")
+					}
+				)
 			})
 			Button(action: {
 				Model.shared.sheetViewModel.send(
 					event: .didRequestShow(.journeyDebug(legs: data.legs.compactMap {$0.legDTO}))
 				)
 			}, label: {
-				Label("Journey debug", systemImage: "ant")
+				Label(
+					title: {
+						Text("Journey debug", comment: "JourneyFollowCellView: menu item")
+					},
+					icon: {
+						Image(systemName: "ant")
+					}
+				)
 			})
 		}
 	}
@@ -119,7 +133,7 @@ struct FollowCellPreviews: PreviewProvider {
 			.padding()
 			.background(Color.gray.opacity(0.1))
 		} else {
-			Text("error")
+			Text(verbatim: "error")
 		}
 	}
 }

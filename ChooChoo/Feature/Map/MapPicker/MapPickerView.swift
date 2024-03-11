@@ -38,7 +38,7 @@ extension MapPickerView {
 			if let stop  = vm.state.data.selectedStop {
 				VStack {
 					HStack {
-						Text("\(stop.name)")
+						Text(verbatim: stop.name)
 							.padding(5)
 							.chewTextSize(.big)
 							.frame(maxWidth: .infinity,alignment: .leading)
@@ -46,7 +46,9 @@ extension MapPickerView {
 							chewVM.send(event: .onNewStop(.location(stop), type))
 							Model.shared.sheetViewModel.send(event: .didRequestShow(.none))
 						}, label: {
-							Text("Submit")
+							Text("Choose",
+								 comment: "mapPickerView: button to choose stop"
+							)
 								.padding(5)
 								.frame(height: 40)
 								.badgeBackgroundStyle(.blue)

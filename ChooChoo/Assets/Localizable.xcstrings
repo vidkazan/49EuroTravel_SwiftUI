@@ -1,0 +1,213 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    " to " : {
+      "comment" : "badge: departureArrivalStops"
+    },
+    "%lld min " : {
+      "comment" : "SettingsView: transferSegment: transfer duration"
+    },
+    "%lld stop" : {
+      "comment" : "badge: stopsCount"
+    },
+    "Active" : {
+      "comment" : "JourneyFollowView: section name"
+    },
+    "All" : {
+      "comment" : "SettingsView: transportTypes: picker option"
+    },
+    "cancelled" : {
+      "comment" : "badge"
+    },
+    "change the time of your search to find later connections" : {
+      "comment" : "JourneyListView: error: laterRef is nil"
+    },
+    "Choo Choo" : {
+      "comment" : "app name"
+    },
+    "Choose" : {
+      "comment" : "mapPickerView: button to choose stop"
+    },
+    "Chosen transport types" : {
+      "comment" : "SettingsView: segments: section header"
+    },
+    "Clear" : {
+      "comment" : "JourneyListView: overlay button name"
+    },
+    "Close" : {
+      "comment" : "SheetView: toolbar: button name"
+    },
+    "Connections" : {
+      "comment" : "SettingsView: connections: section header"
+    },
+    "Connections not found" : {
+      "comment" : "JourneyListView: empty state"
+    },
+    "Custom" : {
+      "comment" : "SettingsView: transportTypes: picker option"
+    },
+    "Debug options" : {
+      "comment" : "SettingsView: debug: section header"
+    },
+    "Delete" : {
+      "comment" : "JourneyFollowView: listCell: swipe action item"
+    },
+    "Direct" : {
+      "comment" : "SettingsView: connections: picker option"
+    },
+    "error: try reload" : {
+      "comment" : "JourneyListView: error: failed to load laterRef rides"
+    },
+    "Failed to %@ this journey" : {
+      "comment" : "badge: followError"
+    },
+    "Failed to get Location" : {
+      "comment" : "badge"
+    },
+    "Failed to load full leg" : {
+      "comment" : "badge"
+    },
+    "find on map" : {
+      "comment" : "SearchStopsView: button"
+    },
+    "follow" : {
+      "comment" : "JourneyFollowViewModel.Action"
+    },
+    "Follow" : {
+      "comment" : "TabItem"
+    },
+    "Follow journey" : {
+      "comment" : "tip: follow journey: title"
+    },
+    "If you want to update your search, simply press here" : {
+      "comment" : "tip: now button: text"
+    },
+    "in 1 hour" : {
+      "comment" : "DatePickerTimePresetButtons"
+    },
+    "in 15 min" : {
+      "comment" : "DatePickerTimePresetButtons"
+    },
+    "Journey debug" : {
+      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
+    },
+    "Journey details" : {
+      "comment" : "navigationBarTitle"
+    },
+    "Journey Details" : {
+      "comment" : "info sheet: follow journey button: view name"
+    },
+    "Journey follow" : {
+      "comment" : "navigationBarTitle"
+    },
+    "Leg appearance" : {
+      "comment" : "settingsView: section name"
+    },
+    "Maximum count" : {
+      "comment" : "SettingsView: transferSegment: picker name"
+    },
+    "Minimum time" : {
+      "comment" : "SettingsView: transferSegment: picker name"
+    },
+    "not reachable" : {
+      "comment" : "badge"
+    },
+    "now" : {
+      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons"
+    },
+    "Offline Mode" : {
+      "comment" : "badge"
+    },
+    "Ongoing" : {
+      "comment" : "JourneyFollowView: section name"
+    },
+    "Past" : {
+      "comment" : "JourneyFollowView: section name"
+    },
+    "platform" : {
+      "comment" : "platformView"
+    },
+    "Recent searches" : {
+      "comment" : "RecentSearchesView: view name"
+    },
+    "Regional" : {
+      "comment" : "SettingsView: transportTypes: picker option"
+    },
+    "Reload" : {
+      "comment" : "JourneyListHeaderView: \nJourneyFollowView: listCell: swipe action item"
+    },
+    "Reset" : {
+      "comment" : "alert: actionDescription"
+    },
+    "Reset settings" : {
+      "comment" : "settingsView: button name"
+    },
+    "Reset settings?" : {
+      "comment" : "alert: description"
+    },
+    "Save" : {
+      "comment" : "settingsView: save button\ndatePickerView: save button"
+    },
+    "Search" : {
+      "comment" : "search tip title\nTabItem"
+    },
+    "Search now" : {
+      "comment" : "JourneyFollowView: listCell: swipe action item"
+    },
+    "Search update" : {
+      "comment" : "tip: now button: title"
+    },
+    "Show alternative search page" : {
+      "comment" : "SettingsView: debug: toggle"
+    },
+    "Show full segment" : {
+      "comment" : "LegDetailsView: menu item"
+    },
+    "Show on map" : {
+      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item\nLegDetailsView: menu item"
+    },
+    "This app doent have search button. Search starts when you set both departure and arrival stops." : {
+      "comment" : "search tip text"
+    },
+    "to " : {
+      "comment" : "BadgeView: legDirection"
+    },
+    "Transfer" : {
+      "comment" : "SettingsView: transferSegment: section header"
+    },
+    "transfer %lf min" : {
+      "comment" : "badge"
+    },
+    "Transport types" : {
+      "comment" : "SettingsView: transportTypes: section header"
+    },
+    "unfollow" : {
+      "comment" : "JourneyFollowViewModel.Action"
+    },
+    "Unfollow" : {
+      "comment" : "alert: actionDescription"
+    },
+    "Unfollow journey?" : {
+      "comment" : "alert: description"
+    },
+    "updated %@ ago" : {
+
+    },
+    "updated now" : {
+      "comment" : "badge: updated at"
+    },
+    "walk %lf min" : {
+      "comment" : "badge: walking"
+    },
+    "With transfers" : {
+      "comment" : "SettingsView: connections: picker option"
+    },
+    "You have no followed journeys" : {
+      "comment" : "JourneyFollowView: empty view: msg"
+    },
+    "Your followed journeys always appear on follow page." : {
+      "comment" : "tip: follow journey: title"
+    }
+  },
+  "version" : "1.0"
+}

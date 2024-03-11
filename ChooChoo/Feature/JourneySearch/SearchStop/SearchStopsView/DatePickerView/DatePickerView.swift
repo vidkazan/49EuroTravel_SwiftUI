@@ -16,12 +16,16 @@ struct DatePickerView: View {
 
 	var body: some View {
 			VStack(alignment: .center,spacing: 5) {
-				Picker("", selection: $type) {
-					ForEach(LocationDirectionType.allCases, id: \.rawValue) {
-						Text($0.description)
-							.tag($0)
-					}
-				}
+				Picker(
+					selection: $type,
+					content: {
+						ForEach(LocationDirectionType.allCases, id: \.rawValue) {
+							Text($0.description)
+								.tag($0)
+						}
+					},
+					label: {}
+				)
 				.scaleEffect(0.85)
 				.frame(maxWidth: .infinity,maxHeight: 70)
 				.padding(5)
@@ -54,7 +58,7 @@ struct DatePickerView: View {
 							closeSheet()
 						}
 					}, label: {
-						Text("Save")
+						Text("Save", comment: "datePickerView: save button")
 							.chewTextSize(.big)
 							.frame(maxWidth: 100,maxHeight: 43)
 					})

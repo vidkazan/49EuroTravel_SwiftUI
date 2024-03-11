@@ -36,7 +36,7 @@ struct Preview : PreviewProvider {
 			FullLegSheet(leg: viewData)
 			.environmentObject(ChewViewModel())
 		} else {
-			Text("error")
+			Text(verbatim: "error")
 		}
 	}
 }

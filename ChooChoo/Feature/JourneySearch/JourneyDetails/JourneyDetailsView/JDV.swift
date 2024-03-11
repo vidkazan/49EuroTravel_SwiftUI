@@ -43,7 +43,13 @@ struct JourneyDetailsView: View {
 				}
 				// MARK: Modifiers
 				.background(Color.chewFillPrimary)
-				.navigationBarTitle("Journey details", displayMode: .inline)
+				.navigationBarTitle(
+					Text(
+						"Journey details",
+						 comment: "navigationBarTitle"
+					),
+					displayMode: .inline
+				)
 				.toolbar { toolbar() }
 				// MARK: Modifiers - onChange
 				.onAppear {

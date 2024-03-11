@@ -29,7 +29,7 @@ struct JourneyFollowView : View {
 				switch viewModel.state.journeys.count {
 				case 0:
 					ErrorView(
-						msg: "You have no followed journeys",
+						msg: Text("You have no followed journeys", comment: "JourneyFollowView: empty view: msg"),
 						action: nil
 					)
 					.frame(idealWidth: .infinity,idealHeight: .infinity)
@@ -43,7 +43,9 @@ struct JourneyFollowView : View {
 			chooseJourneyToUpdate()
 		})
 		.frame(maxWidth: .infinity,maxHeight: .infinity)
-		.navigationBarTitle("Journey follow")
+		.navigationBarTitle(
+			Text("Journey follow", comment: "navigationBarTitle")
+		)
 		.navigationBarTitleDisplayMode(.inline)
 	}
 }
@@ -76,7 +78,7 @@ extension JourneyFollowView {
 extension JourneyFollowView {
 	var followViewInner : some View {
 		List {
-			Section("Active", content: {
+			Section(content: {
 				ForEach(
 					viewModel.state.journeys
 						.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .active})
@@ -85,10 +87,11 @@ extension JourneyFollowView {
 					id: \.id) { journey in
 						listCell(journey: journey)
 					}
-					
+			}, header: {
+				Text("Active", comment: "JourneyFollowView: section name")
 			})
 			.chewTextSize(.big)
-			Section("Ongoing", content: {
+			Section(content: {
 				ForEach(
 					viewModel.state.journeys
 						.filter({
@@ -104,9 +107,11 @@ extension JourneyFollowView {
 					id: \.id) { journey in
 						listCell(journey: journey)
 					}
+			}, header: {
+				Text("Ongoing", comment: "JourneyFollowView: section name")
 			})
 			.chewTextSize(.big)
-			Section("Past", content: {
+			Section(content: {
 				ForEach(
 					viewModel.state.journeys
 						.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .past})
@@ -115,6 +120,8 @@ extension JourneyFollowView {
 					id: \.id) { journey in
 						listCell(journey: journey)
 					}
+			}, header: {
+				Text("Past", comment: "JourneyFollowView: section name")
 			})
 		}
 		.onAppear{
@@ -153,7 +160,14 @@ extension JourneyFollowView {
 				Button {
 					vm.send(event: .didTapReloadButton(id: journey.id, ref: journey.journeyViewData.refreshToken))
 				} label: {
-					Label("Reload", systemImage: "arrow.clockwise")
+					Label(
+						title: {
+							Text("Reload", comment: "JourneyFollowView: listCell: swipe action item")
+						},
+						icon: {
+							Image(systemName: "arrow.clockwise")
+						}
+					)
 				}
 				.tint(.chewFillGreenPrimary)
 			}
@@ -164,7 +178,14 @@ extension JourneyFollowView {
 						arrival: journey.arrStop
 					),date: SearchStopsDate(date: .now, mode: .departure)))
 				} label: {
-					Label("Search now", systemImage: "magnifyingglass")
+					Label(
+						title: {
+							Text("Search now", comment: "JourneyFollowView: listCell: swipe action item")
+						},
+						icon: {
+							Image(systemName: "magnifyingglass")
+						}
+					)
 				}
 				.tint(.chewFillYellowPrimary)
 			}
@@ -179,12 +200,19 @@ extension JourneyFollowView {
 									journeyDetailsViewModel: vm
 								))
 						},
-						description: "Unfollow journey?",
-						actionDescription: "Unfollow",
+							description: Text("Unfollow journey?", comment: "alert: description"),
+							actionDescription: Text("Unfollow", comment: "alert: actionDescription"),
 							id: UUID()
 					)))
 				} label: {
-					Label("Delete", systemImage: "xmark.bin.circle")
+					Label(
+						title: {
+							Text("Delete", comment: "JourneyFollowView: listCell: swipe action item")
+						},
+						icon: {
+							Image(systemName: "xmark.bin.circle")
+						}
+					)
 				}
 				.tint(.chewFillRedPrimary)
 			}

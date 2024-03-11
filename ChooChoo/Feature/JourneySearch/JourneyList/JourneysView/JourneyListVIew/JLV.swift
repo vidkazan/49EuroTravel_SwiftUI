@@ -33,12 +33,21 @@ struct JourneyListView: View {
 					list()
 				}
 			case .failedToLoadJourneyList(let error):
-				ErrorView(msg: error.localizedDescription, action: nil)
+				ErrorView(
+					msg: Text(error.localizedDescription),
+					action: nil
+				)
 			}
 		}
 		.overlay(alignment: .bottom, content: {
-			Button("Clear", systemImage: "xmark.circle", action: {
+			Button(action: {
 				chewVM.send(event: .didTapCloseJourneyList)
+			}, label: {
+				Label(title: {
+					Text("Clear", comment: "JourneyListView: overlay button name")
+				}, icon: {
+					Image(systemName: "xmark.circle")
+				})
 			})
 			.padding(5)
 			.foregroundStyle(.secondary)
@@ -71,7 +80,7 @@ extension JourneyListView {
 		return Group {
 //			JourneyListHeaderView(journeyViewModel: journeyViewModel)
 			Spacer()
-			Text("Connections not found")
+			Text("Connections not found",comment: "JourneyListView: empty state")
 				.padding(5)
 				.chewTextSize(.big)
 				.frame(maxWidth: .infinity,alignment: .center)
@@ -93,13 +102,13 @@ struct JourneyListPreview : PreviewProvider {
 }
 
 struct ErrorView : View {
-	let msg : String
+	let msg : Text
 	let action : (() -> Void)?
 	var body: some View {
 		Group {
 			VStack {
 				Spacer()
-				Text(msg)
+				msg
 					.frame(alignment: .center)
 					.padding(5)
 					.chewTextSize(.big)

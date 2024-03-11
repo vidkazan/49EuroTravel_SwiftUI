@@ -44,7 +44,7 @@ struct LegView: View {
 								if let dur = DateParcer.timeDuration(leg.time.durationInMinutes) {
 									let duration = "\(dur)"
 									if (Int(geo.size.width / 4) - 15 > duration.count) {
-										Text(duration)
+										Text(verbatim:  duration)
 											.foregroundColor(.primary)
 											.chewTextSize(.medium)
 									}
@@ -52,11 +52,11 @@ struct LegView: View {
 							}
 						case .line:
 							if (Int(geo.size.width / 7) > leg.lineViewData.name.count) {
-								Text(leg.lineViewData.name.replacingOccurrences(of: " ", with: ""))
+								Text(verbatim:  leg.lineViewData.name.replacingOccurrences(of: " ", with: ""))
 									.foregroundColor(.primary)
 									.chewTextSize(.medium)
 							} else if (Int(geo.size.width / 7) > leg.lineViewData.shortName.count) {
-								Text(leg.lineViewData.shortName)
+								Text(verbatim: leg.lineViewData.shortName)
 									.foregroundColor(.primary)
 									.chewTextSize(.medium)
 							}
@@ -105,7 +105,7 @@ struct LegViewLabels: View {
 								}
 								if let duration = DateParcer.timeDuration(leg.time.durationInMinutes) {
 									if (Int(geo.size.width / 4) - 15 > duration.count) {
-										Text(duration)
+										Text(verbatim: duration)
 											.foregroundColor(.primary)
 											.chewTextSize(.medium)
 									}
@@ -120,7 +120,7 @@ struct LegViewLabels: View {
 												.foregroundColor(.primary)
 												.chewTextSize(.medium)
 										}
-										Text(leg.lineViewData.name.replacingOccurrences(of: " ", with: ""))
+										Text(verbatim: leg.lineViewData.name.replacingOccurrences(of: " ", with: ""))
 											.foregroundColor(.primary)
 											.chewTextSize(.medium)
 									}
@@ -130,7 +130,7 @@ struct LegViewLabels: View {
 										Image(icon)
 											.foregroundColor(.primary)
 											.chewTextSize(.medium)
-										Text(leg.lineViewData.shortName)
+										Text(verbatim: leg.lineViewData.shortName)
 											.foregroundColor(.primary)
 											.chewTextSize(.medium)
 									}

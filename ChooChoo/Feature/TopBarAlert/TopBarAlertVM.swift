@@ -84,16 +84,20 @@ extension TopBarAlertViewModel {
 			}
 		}
 	}
-	enum AlertType : Equatable, Hashable, Comparable {
+	enum AlertType : Hashable, Comparable {
 		static func < (lhs: TopBarAlertViewModel.AlertType, rhs: TopBarAlertViewModel.AlertType) -> Bool {
 			return lhs.id < rhs.id
 		}
 
+		func hash(into hasher: inout Hasher) {
+			   hasher.combine(id)
+		}
+		
 		case offlineMode
 		case fullLegError
 		case userLocationError
 		case journeyFollowError(type : JourneyFollowViewModel.Action)
-		case generic(msg : String)
+		case generic(msg : Text)
 		
 		var id : Int {
 			switch self {

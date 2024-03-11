@@ -53,11 +53,11 @@ extension AlertViewModel {
 		case none
 		case destructive(
 			destructiveAction : ()->Void,
-			description : String,
-			actionDescription : String,
+			description : Text,
+			actionDescription : Text,
 			id : UUID
 		)
-		case info(title : String, msg : String)
+		case info(title : Text, msg : Text)
 
 		var description : String {
 			switch self {
@@ -95,7 +95,6 @@ extension AlertViewModel {
 		print("‼️🔥 > ",event.description,"state:",state.alert.description)
 		switch event {
 		case .didRequestShow(let type):
-			let _=print(">>>",type.description)
 			return State(alert: type)
 		case .didRequestDismiss:
 			return State(alert: .none)

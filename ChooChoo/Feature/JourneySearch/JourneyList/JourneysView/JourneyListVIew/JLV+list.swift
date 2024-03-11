@@ -12,8 +12,8 @@ extension JourneyListView {
 		return ScrollViewReader { val in
 			ScrollView {
 				LazyVStack(spacing: 5) {
-					JourneyListHeaderView(journeyViewModel: journeyViewModel)
-						.id(0)
+//					JourneyListHeaderView(journeyViewModel: journeyViewModel)
+//						.id(0)
 					ForEach(journeyViewModel.state.data.journeys,id: \.id) { journey in
 						JourneyCell(
 							journey: journey,
@@ -30,7 +30,14 @@ extension JourneyListView {
 								}
 								.frame(maxHeight: 100)
 						} else {
-							Label("change the time of your search to find later connections", systemImage: "exclamationmark.circle")
+							Label(
+								title: {
+									Text("change the time of your search to find later connections", comment: "JourneyListView: error: laterRef is nil")
+								},
+								icon: {
+									Image(systemName: "exclamationmark.circle")
+								}
+							)
 								.chewTextSize(.medium)
 						}
 					case .loadingRef(let type):
@@ -39,12 +46,19 @@ extension JourneyListView {
 								.frame(maxHeight: 100)
 						}
 					case .failedToLoadLaterRef:
-						Label("error: try reload", systemImage: "exclamationmark.circle")
+						Label(
+							title: {
+								Text("error: try reload", comment: "JourneyListView: error: failed to load laterRef rides")
+							},
+							icon: {
+								Image(systemName: "exclamationmark.circle")
+							}
+						)
 							.onTapGesture {
 								journeyViewModel.send(event: .onLaterRef)
 							}
 					case .loadingJourneyList, .failedToLoadJourneyList:
-						Label("", systemImage: "exclamationmark.circle.fill")
+						Image(systemName: "exclamationmark.circle.fill")
 					}
 				}
 				.cornerRadius(10)

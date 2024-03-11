@@ -18,11 +18,11 @@ struct RecentSearchCell: View {
 					.cornerRadius(4)
 					.padding(5)
 				VStack(alignment: .leading) {
-					Text(locations.departure.name)
+					Text(verbatim: locations.departure.name)
 						.chewTextSize(.big)
 						.padding(5)
 					Spacer()
-					Text(locations.arrival.name)
+					Text(verbatim:  locations.arrival.name)
 						.chewTextSize(.big)
 						.padding(5)
 				}

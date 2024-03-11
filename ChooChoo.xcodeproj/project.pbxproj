@@ -112,6 +112,8 @@
 		7D6734B32A96334B00CBE9C1 /* ChooChooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B22A96334B00CBE9C1 /* ChooChooApp.swift */; };
 		7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B42A96334B00CBE9C1 /* ContentView.swift */; };
 		7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */; };
+		7D6848F02B9F2EAB00EE789F /* Measurment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6848EF2B9F2EAB00EE789F /* Measurment.swift */; };
+		7D6848F22B9F302F00EE789F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7D6848F12B9F302F00EE789F /* Localizable.xcstrings */; };
 		7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */; };
 		7D68D9F52ABDB36D00579711 /* constructJourneys+Leg+Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stop.swift */; };
 		7D68D9F82ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F72ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift */; };
@@ -181,8 +183,6 @@
 		7DAE1F6B2B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */; };
 		7DAE1F6C2B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */; };
 		7DAE1F6D2B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F692B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift */; };
-		7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */; };
-		7DAF62B12A9E54E3006F1A17 /* JourneyScrollViewFooter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */; };
 		7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */; };
 		7DAF62C02A9E6DED006F1A17 /* D-ticketLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */; };
 		7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C12A9E8C2B006F1A17 /* Solar.swift */; };
@@ -355,6 +355,8 @@
 		7D6734B42A96334B00CBE9C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		7D6734C92A96334D00CBE9C1 /* ChooChooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChooChooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChoosingView.swift; sourceTree = "<group>"; };
+		7D6848EF2B9F2EAB00EE789F /* Measurment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurment.swift; sourceTree = "<group>"; };
+		7D6848F12B9F302F00EE789F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Type.swift"; sourceTree = "<group>"; };
 		7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Stop.swift"; sourceTree = "<group>"; };
 		7D68D9F72ABDB3A800579711 /* constructJourneys+Journey+TransferCount.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Journey+TransferCount.swift"; sourceTree = "<group>"; };
@@ -425,8 +427,6 @@
 		7DAE1F672B0D26CF0097AAD8 /* Settings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Settings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransportMode+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7DAE1F692B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransportMode+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewHeader.swift; sourceTree = "<group>"; };
-		7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyScrollViewFooter.swift; sourceTree = "<group>"; };
 		7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTimePresetButtons.swift; sourceTree = "<group>"; };
 		7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "D-ticketLogo.swift"; sourceTree = "<group>"; };
 		7DAF62C12A9E8C2B006F1A17 /* Solar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solar.swift; sourceTree = "<group>"; };
@@ -590,6 +590,7 @@
 				7DEE69CC2B9BCDF200A063B4 /* Tips.swift */,
 				7DEE69CE2B9BCE6A00A063B4 /* Info.swift */,
 				7DEE69D02B9BCE8B00A063B4 /* PresentationDetent.swift */,
+				7D6848EF2B9F2EAB00EE789F /* Measurment.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1013,6 +1014,7 @@
 		7D6734B82A96334C00CBE9C1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				7D6848F12B9F302F00EE789F /* Localizable.xcstrings */,
 				7D46ABE72B220B1600A4145E /* Assets.xcassets */,
 				7DDA96342B82AB3900E831B3 /* Symbols.xcassets */,
 				7DC0D2A22B2221D800B1FB5A /* Colors.xcassets */,
@@ -1209,7 +1211,6 @@
 			isa = PBXGroup;
 			children = (
 				7DD5BAF92B72BADF00CFE768 /* JourneyListVIew */,
-				7DAF62BA2A9E5DEF006F1A17 /* JourneyScrollView */,
 				7DAF62B92A9E5DA6006F1A17 /* JourneyCell */,
 			);
 			path = JourneysView;
@@ -1294,15 +1295,6 @@
 				7D23E44B2A98FD700037C3E1 /* LegView.swift */,
 			);
 			path = JourneyCell;
-			sourceTree = "<group>";
-		};
-		7DAF62BA2A9E5DEF006F1A17 /* JourneyScrollView */ = {
-			isa = PBXGroup;
-			children = (
-				7DAF62AC2A9E5417006F1A17 /* JourneyScrollViewHeader.swift */,
-				7DAF62B02A9E54E3006F1A17 /* JourneyScrollViewFooter.swift */,
-			);
-			path = JourneyScrollView;
 			sourceTree = "<group>";
 		};
 		7DBABFFA2B879FB200C990FD /* AnnotationView */ = {
@@ -1610,6 +1602,7 @@
 			knownRegions = (
 				en,
 				Base,
+				de,
 			);
 			mainGroup = 7D6734A62A96334B00CBE9C1;
 			packageReferences = (
@@ -1644,6 +1637,7 @@
 				7D33A9702B5343320005D723 /* Tests.xctestplan in Resources */,
 				7D33A96D2B5343320005D723 /* Chew-chew-SwiftUI.xctestplan in Resources */,
 				7D33A9732B5343320005D723 /* Journey-Neuss-Wolfsburg.json in Resources */,
+				7D6848F22B9F302F00EE789F /* Localizable.xcstrings in Resources */,
 				7DC7F9D52B61C07500DAF6CB /* Placeholder.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1736,6 +1730,7 @@
 				7DA001FD2B0F88B6009BB79D /* SegmentedPicker.swift in Sources */,
 				7DBF1E572ABB8084009B85EF /* TimeLabelView.swift in Sources */,
 				7DE8A3552B6ABB3400C3A378 /* LDSV+subviews.swift in Sources */,
+				7D6848F02B9F2EAB00EE789F /* Measurment.swift in Sources */,
 				7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */,
 				7D6C5C142AAF482D00DEFC57 /* chewVM.swift in Sources */,
 				7DBABFFC2B87A99B00C990FD /* MapDetailsUIView.swift in Sources */,
@@ -1768,7 +1763,6 @@
 				7DE640F02AB079710087FC64 /* JLVM+reduce+LoadingUpdate.swift in Sources */,
 				7D991E8A2B7B8C93000E26AD /* Annotations.swift in Sources */,
 				7DA13A452B28F01F0045061F /* LineType.swift in Sources */,
-				7DAF62AD2A9E5417006F1A17 /* JourneyScrollViewHeader.swift in Sources */,
 				7D9BB10D2B0CBF54008A3616 /* Location+CoreDataProperties.swift in Sources */,
 				7D181D692AD6F7C6003AB021 /* RecentSearchCell.swift in Sources */,
 				7DFC46AE2B7F86A900118608 /* UpdatedAtBadgeView.swift in Sources */,
@@ -1812,7 +1806,6 @@
 				7D2BF7A82B67D30800E1CED7 /* Color+random.swift in Sources */,
 				7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */,
 				7D9E10872AA6752B00820B92 /* SSV.swift in Sources */,
-				7DAF62B12A9E54E3006F1A17 /* JourneyScrollViewFooter.swift in Sources */,
 				7D33A9492B5192940005D723 /* JFVM + reduce.swift in Sources */,
 				7D6C5C2D2AAF791400DEFC57 /* JDVM+sideEffects.swift in Sources */,
 				7D9BB10E2B0CBF54008A3616 /* ChewJourney+CoreDataClass.swift in Sources */,

@@ -19,9 +19,9 @@ struct RemarkSheet : View {
 							Image(remark.type.symbol)
 								.foregroundColor(remark.type.color)
 							VStack(alignment: .leading) {
-								Text(remark.summary)
+								Text(verbatim: remark.summary)
 									.chewTextSize(.big)
-								Text(remark.text)
+								Text(verbatim: remark.text)
 									.textContentType(.dateTime)
 									.chewTextSize(.medium)
 							}

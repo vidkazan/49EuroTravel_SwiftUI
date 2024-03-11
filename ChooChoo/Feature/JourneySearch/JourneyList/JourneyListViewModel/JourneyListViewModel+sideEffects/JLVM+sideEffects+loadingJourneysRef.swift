@@ -19,7 +19,7 @@ extension JourneyListViewModel {
 			case .earlierRef:
 				guard let ref = state.data.earlierRef else {
 					print("🟤❌ >> earlierRef is nil")
-					return Just(Event.didFailToLoadEarlierRef(Error.inputValIsNil("earlierRef"))).eraseToAnyPublisher()
+					return Just(Event.didFailToLoadEarlierRef(DataError.nilValue(type: "earlierRef"))).eraseToAnyPublisher()
 				}
 				return Self.fetchEarlierOrLaterRef(
 					dep: state.data.stops.departure,
@@ -53,7 +53,7 @@ extension JourneyListViewModel {
 			case .laterRef:
 				guard let ref = state.data.laterRef else {
 					print("🟤❌ >> laterRef is nil")
-					return Just(Event.didFailToLoadEarlierRef(Error.inputValIsNil("laterRef"))).eraseToAnyPublisher()
+					return Just(Event.didFailToLoadEarlierRef(DataError.nilValue(type: "laterRef"))).eraseToAnyPublisher()
 				}
 				return Self.fetchEarlierOrLaterRef(
 					dep: state.data.stops.departure,

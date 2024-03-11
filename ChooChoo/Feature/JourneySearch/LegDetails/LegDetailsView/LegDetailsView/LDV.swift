@@ -127,12 +127,29 @@ extension LegDetailsView {
 						Model.shared.sheetViewModel.send(event: .didRequestShow(.mapDetails(.footDirection(leg))))
 					}
 				}, label: {
-					Label("Show on map", systemImage: "map.circle")
+					Label(
+						title: {
+							Text("Show on map", comment: "LegDetailsView: menu item")
+						},
+						icon: {
+							Image(systemName: "map.circle")
+						}
+					)
 				})
 				Button(action: {
 					Model.shared.sheetViewModel.send(event: .didRequestShow(.fullLeg(leg: leg)))
 				}, label: {
-					Label("Show full segment", systemImage: ChewSFSymbols.trainSideFrontCar.rawValue)
+					Label(
+						title: {
+							Text(
+								"Show full segment",
+								comment: "LegDetailsView: menu item"
+							)
+						},
+						icon: {
+							Image(ChewSFSymbols.trainSideFrontCar)
+						}
+					)
 				})
 			}, label: {
 				Image(systemName: "ellipsis")
@@ -204,7 +221,7 @@ struct LegDetailsPreview : PreviewProvider {
 			.background(Color.chewFillPrimary)
 //			.previewInterfaceOrientation(.landscapeLeft)
 		} else {
-			Text("error")
+			Text(verbatim: "error")
 		}
 	}
 }

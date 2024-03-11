@@ -8,6 +8,8 @@
 import Foundation
 import SwiftUI
 
+protocol ChewTextStyle : ViewModifier {}
+
 enum ChewTextSize : Int, CaseIterable, Equatable {
 	case small
 	case medium
@@ -27,8 +29,6 @@ enum ChewTextSize : Int, CaseIterable, Equatable {
 		}
 	}
 }
-
-protocol ChewTextStyle : ViewModifier {}
 
 extension View {
 	func chewTextSize<Style: ChewTextStyle>(_ style: Style) -> some View {
@@ -59,24 +59,18 @@ struct ChewPrimaryStyle: ChewTextStyle {
 		self.font = font
 	}
 	func body(content: Content) -> some View {
-		if #available(iOS 16.0, *) {
-			content
-//				.font(.system(font,weight: .semibold))
-				.font(.system(size: size,weight: .semibold))
-		} else {
-			content
-				.font(.system(size: size,weight: .semibold))
-		}
+		content
+			.font(.system(size: size,weight: .semibold))
 	}
 }
 
-struct Font_Previews: PreviewProvider {
-	static var previews: some View {
-		VStack {
-			ForEach(Font.TextStyle.allCases, id: \.hashValue, content: {
-				Text("popopopo")
-					.font(.system($0))
-			})
-		}
-	}
-}
+//struct Font_Previews: PreviewProvider {
+//	static var previews: some View {
+//		VStack {
+//			ForEach(Font.TextStyle.allCases, id: \.hashValue, content: {
+//				Text("popopopo")
+//					.font(.system($0))
+//			})
+//		}
+//	}
+//}

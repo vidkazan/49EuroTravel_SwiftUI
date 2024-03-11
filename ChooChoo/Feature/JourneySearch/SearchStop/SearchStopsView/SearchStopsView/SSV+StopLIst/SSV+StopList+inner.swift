@@ -85,7 +85,7 @@ extension SearchStopsView {
 				}
 				.frame(maxHeight: 300)
 			case .error(let error):
-				Text(error.description)
+				Text(error.localizedDescription)
 					.chewTextSize(.big)
 					.foregroundColor(.secondary)
 					.padding(5)
@@ -103,7 +103,7 @@ extension SearchStopsView {
 			if let lineType = stop.0.stopDTO?.products?.lineType,
 				let icon = lineType.icon {
 				Label {
-					Text(stop.0.name)
+					Text(verbatim: stop.0.name)
 						.foregroundColor(.primary)
 				} icon: {
 					Image(icon)

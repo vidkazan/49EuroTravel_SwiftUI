@@ -13,7 +13,7 @@ struct UpdatedAtBadgeView : View {
 	let refTime : Double
 	let bgColor : Color
 	let isLoading : Bool
-	@State var updatedAt : String
+	@State var updatedAt : Text?
 	
 	init(bgColor : Color, refTime : Double, isLoading : Bool) {
 		self.bgColor = bgColor
@@ -24,35 +24,41 @@ struct UpdatedAtBadgeView : View {
 	
 	var body : some View {
 		HStack(spacing: 2) {
-			Text(updatedAt)
-				.lineLimit(1)
-				.foregroundColor(.primary.opacity(0.6))
-				.onAppear { self.updatedAt = Self.update(refTime) }
-				.onReceive(timer, perform: { _ in
-					self.updatedAt = Self.update(refTime)
-				})
-			if isLoading == true {
-				ProgressView()
-					.scaleEffect(0.65)
-					.frame(width: 15, height: 15)
+			if let updatedAt = updatedAt {
+				OneLineText(updatedAt)
+					.foregroundColor(.primary.opacity(0.6))
+					.onAppear {
+						self.updatedAt = Self.update(refTime)
+					}
+					.onReceive(timer, perform: { _ in
+						self.updatedAt = Self.update(refTime)
+					})
+				if isLoading == true {
+					ProgressView()
+						.scaleEffect(0.65)
+						.frame(width: 15, height: 15)
+				}
 			}
 		}
 	}
 	
-	static func update(_ refTime : Double) -> String {
+	static func update(_ refTime : Double) -> Text? {
 		let minutes = DateParcer.getTwoDateIntervalInMinutes(
 			date1: Date(timeIntervalSince1970: .init(floatLiteral: refTime)),
 			date2: .now)
 		
 		switch minutes {
 		case .none:
-			return "error"
+			return nil
 		case .some(let wrapped):
 			switch wrapped {
 			case 0..<1:
-				return "updated now"
+				return Text("updated now", comment: "badge: updated at")
 			default:
-				return "updated \(DateParcer.timeDuration(minutes) ?? "-") ago"
+				if let dur = DateParcer.timeDuration(wrapped) {
+					return Text("updated \(dur) ago", comment: "badge")
+				}
+				return nil
 			}
 		}
 	}

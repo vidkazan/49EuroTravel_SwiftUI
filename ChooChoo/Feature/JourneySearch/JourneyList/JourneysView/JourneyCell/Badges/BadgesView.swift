@@ -15,7 +15,7 @@ struct BadgesView: View {
 	
 	var body: some View {
 		HStack {
-			ForEach(badges,id: \.badgeData.name) { badge in
+			ForEach(badges) { badge in
 				Button(action: badge.badgeAction, label: {
 					BadgeView(badge)
 						.badgeBackgroundStyle(badge.badgeDefaultStyle)

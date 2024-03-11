@@ -35,7 +35,9 @@ struct JourneySearchView : View {
 			gradient()
 		})
 		.background(Color.chewFillPrimary)
-		.navigationTitle("Choo Choo")
+		.navigationTitle(
+			Text("Choo Choo", comment: "app name")
+		)
 		.navigationBarTitleDisplayMode(.inline)
 	}
 }

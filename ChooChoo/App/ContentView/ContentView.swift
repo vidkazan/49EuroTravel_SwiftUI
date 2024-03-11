@@ -8,16 +8,12 @@
 import SwiftUI
 import TipKit
 
-#warning("TODO: localization")
-#warning("FIX: iOS 16+ mapDetails: starting region fault")
+#warning("FIX: iOS 17+ mapDetails: starting region fault")
 
 // Lida ChooChoo to fix:
 
 // MARK: JDV
 // leg cell: stops number badge: let user know that cell is tappable and it will show all leg stops
-
-// MARK: JFV
-// emptyState: specify how to follow journey
 
 // MARK: revise
 // all text revision
@@ -26,6 +22,15 @@ import TipKit
 // revise text white color ( too contrast with black BG )
 
 // TODO: feature: check when train arrives at starting point
+
+
+#warning("Anna")
+// tip: for maps
+// tip: for sunEvents ( first cell of journeyList )
+// mapDetails: stop departures: loading / empty state
+// ldv: menu: remove fulleg from foot/tranfer
+// ssv: stopList: change bg color
+// jfv: tip for swipe actions
 
 struct ContentView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
@@ -42,7 +47,7 @@ struct ContentView: View {
 		Group {
 			switch state.status {
 			case .start:
-				Text("ChooChoo")
+				Text(verbatim: "ChooChoo")
 					.chewTextSize(.huge)
 			default:
 				FeatureView()
@@ -108,17 +113,17 @@ extension ContentView {
 		switch alertState.alert {
 		case let .destructive(destructiveAction, description, actionDescripton,_):
 			return Alert(
-				title: Text(description),
+				title: description,
 				primaryButton: .cancel(),
 				secondaryButton: .destructive(
-					Text(actionDescripton),
+					actionDescripton,
 					action: destructiveAction
 				)
 			)
 		case let .info(title, msg):
-			return Alert(title: Text(title), message: Text(msg))
+			return Alert(title: title, message: msg)
 		case .none:
-			return Alert(title: Text("Test alert"))
+			return Alert(title: Text(verbatim: ""))
 		}
 	}
 }

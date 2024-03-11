@@ -26,7 +26,10 @@ struct RecentSearchesView : View {
 	var body: some View {
 		if !recentSearchesVM.state.searches.isEmpty {
 			VStack(alignment: .leading,spacing: 2) {
-				Text("Recent searches")
+				Text(
+					"Recent searches",
+					comment: "RecentSearchesView: view name"
+				)
 					.chewTextSize(.big)
 					.offset(x: 10)
 					.foregroundColor(.secondary)

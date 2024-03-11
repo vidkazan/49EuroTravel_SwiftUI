@@ -19,11 +19,12 @@ struct ChooTips {
 @available(iOS 17, *)
 struct ChooTipSearch : Tip {
 	var title: Text {
-		Text("Search")
+		Text("Search", comment: "search tip title")
 	}
 	var message: Text? {
 		Text(
-			"This app doent have search button. Search starts when you set both departure and arrival stops."
+			"This app doent have search button. Search starts when you set both departure and arrival stops.",
+			comment: "search tip text"
 		)
 	}
 	var image: Image? {
@@ -34,10 +35,11 @@ struct ChooTipSearch : Tip {
 @available(iOS 17, *)
 struct ChooTipNowButton : Tip {
 	var title: Text {
-		Text("Search update")
+		Text("Search update", comment: "tip: now button: title")
 	}
 	var message: Text? {
-		Text("If you want to update your search, simply press here")
+		Text("If you want to update your search, simply press here",
+			 comment: "tip: now button: text")
 	}
 	var image: Image? {
 		Image(systemName: "hand.tap")
@@ -47,10 +49,11 @@ struct ChooTipNowButton : Tip {
 @available(iOS 17, *)
 struct ChooTipFollowJourney : Tip {
 	var title: Text {
-		Text("Follow journey")
+		Text("Follow journey",comment: "tip: follow journey: title")
 	}
 	var message: Text? {
-		Text("Your followed journeys always appear on follow page.")
+		Text("Your followed journeys always appear on follow page.",
+			 comment: "tip: follow journey: title")
 	}
 	var image: Image? {
 		Image(systemName: ChewSFSymbols.bookmark.rawValue)
@@ -63,7 +66,9 @@ struct HowToFollowJourneyView : View {
 	var body: some View {
 		HStack {
 			Spacer()
-			Text("Journey Details")
+			Text("Journey Details",
+				 comment: "info sheet: follow journey button: view name"
+			)
 				.chewTextSize(.big)
 			Spacer()
 			Group {

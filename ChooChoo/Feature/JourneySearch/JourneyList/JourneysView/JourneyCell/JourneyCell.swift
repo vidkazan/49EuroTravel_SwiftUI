@@ -50,7 +50,7 @@ struct JourneyCell: View {
 					)
 				}
 				if let name = journey.legs.first?.legStopsViewData.first?.name {
-					Text(name)
+					Text(verbatim: name)
 						.chewTextSize(.medium)
 						.tint(.primary)
 				}
@@ -90,14 +90,28 @@ extension JourneyCell {
 					event: .didRequestShow(.journeyDebug(legs: journey.legs.compactMap {$0.legDTO}))
 				)
 			}, label: {
-				Label("Journey debug", systemImage: "ant")
+				Label(
+					title: {
+						Text("Journey debug", comment: "JourneyCell: menu item")
+					},
+					icon: {
+						Image(systemName: "ant")
+					}
+				)
 			})
 			Button(action: {
 				Model.shared.sheetViewModel.send(
 					event: .didRequestShow(.mapDetails(.journey(journey.legs)))
 				)
 			}, label: {
-				Label("Show on map", systemImage: "map.circle")
+				Label(
+					title: {
+						Text("Show on map", comment: "JourneyCell: menu item")
+					},
+					icon: {
+						Image(systemName: "map.circle")
+					}
+				)
 			})
 //			Button(action: {
 //				let viewModel = Model.shared.journeyDetailViewModel(
@@ -141,7 +155,7 @@ struct JourneyCellPreview: PreviewProvider {
 					JourneyCell(journey: viewData,stops: .init(departure: .init(), arrival: .init()))
 						.environmentObject(ChewViewModel())
 				} else {
-					Text("error")
+					Text(verbatim: "error")
 				}
 			}
 		}

@@ -29,11 +29,11 @@ struct StopDebugView : View {
 	let stopDTO : StopDTO?
 	var body: some View {
 		VStack(alignment: .leading, content: {
-			Text(stopDTO?.name ?? "name")
+			Text(verbatim: stopDTO?.name ?? "")
 				.chewTextSize(.big)
-			Text(stopDTO?.type ?? "type")
+			Text(verbatim: stopDTO?.type ?? "")
 				.chewTextSize(.medium)
-			Text(stopDTO?.id ?? "id")
+			Text(verbatim: stopDTO?.id ?? "")
 				.chewTextSize(.medium)
 		})
 		.padding(5)
@@ -46,7 +46,7 @@ struct PrognosedDateDebugView : View {
 		if let planned = date.planned, let actual = date.actual {
 			HStack {
 				VStack(alignment: .leading, content: {
-					Text("planned")
+					Text(verbatim: "planned")
 						.foregroundStyle(.secondary)
 						.chewTextSize(.medium)
 					Text(planned, style: .date)
@@ -57,7 +57,7 @@ struct PrognosedDateDebugView : View {
 				.padding(5)
 				.badgeBackgroundStyle(.secondary)
 				VStack(alignment: .leading, content: {
-					Text("actual")
+					Text(verbatim: "actual")
 						.foregroundStyle(.secondary)
 						.chewTextSize(.medium)
 					Text(actual, style: .date)
@@ -76,7 +76,7 @@ struct DelayStatusDebugView : View {
 	let delay : TimeContainer.DelayStatus
 	var body: some View {
 		VStack(alignment: .leading, content: {
-			Text(delay.description)
+			Text(verbatim: delay.description)
 				.chewTextSize(.medium)
 		})
 	}
@@ -86,13 +86,13 @@ struct LineDebugView : View {
 	let line : LineDTO?
 	var body: some View {
 		HStack {
-			Text(line?.name ?? "name")
+			Text(verbatim: line?.name ?? "")
 				.chewTextSize(.big)
-			Text(line?.type ?? "type")
+			Text(verbatim: line?.type ?? "")
 				.chewTextSize(.medium)
-			Text(line?.product ?? "product")
+			Text(verbatim: line?.product ?? "")
 				.chewTextSize(.medium)
-			Text(line?.mode ?? "mode")
+			Text(verbatim: line?.mode ?? "")
 				.chewTextSize(.medium)
 		}
 	}
@@ -104,7 +104,7 @@ struct TimeContainerDebugView : View {
 	var body: some View {
 		VStack(alignment: .leading) {
 			VStack(alignment: .leading, content: {
-				Text("departure")
+				Text(verbatim: "departure")
 					.padding(5)
 					.foregroundStyle(.green)
 					.chewTextSize(.medium)
@@ -116,7 +116,7 @@ struct TimeContainerDebugView : View {
 			.padding(5)
 			.badgeBackgroundStyle(.secondary)
 			VStack(alignment: .leading, content: {
-				Text("arrival")
+				Text(verbatim: "arrival")
 					.padding(5)
 					.foregroundStyle(.orange)
 					.chewTextSize(.medium)
@@ -141,12 +141,12 @@ struct LegDebugView : View {
 			}
 			.padding(5)
 			.badgeBackgroundStyle(.secondary)
-			Section("", content: {
+			Section{
 				HStack {
 					StopDebugView(stopDTO: legDTO.origin)
 					StopDebugView(stopDTO: legDTO.destination)
 				}
-			})
+			}
 			.badgeBackgroundStyle(.secondary)
 			Section {
 				TimeContainerDebugView(time: TimeContainer(
@@ -167,7 +167,7 @@ struct LegDebugView : View {
 										StopWithTimeDebugView(stopDTO: stop)
 									},
 									label: {
-										Text(stop.stop?.name ?? "")
+										Text(verbatim: stop.stop?.name ?? "")
 											.foregroundStyle(.primary)
 											.foregroundColor(.primary)
 											.chewTextSize(.medium)

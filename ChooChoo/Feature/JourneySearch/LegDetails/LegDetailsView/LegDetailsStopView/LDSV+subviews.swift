@@ -36,7 +36,7 @@ extension LegStopView {
 			.frame(width: 70)
 			VStack(alignment: .leading, spacing: 2) {
 				BadgeView(.walking(legViewData.time))
-				Text(stopOver.name)
+				Text(verbatim: stopOver.name)
 					.chewTextSize(.big)
 			}
 			Spacer()
@@ -89,11 +89,11 @@ extension LegStopView {
 			// MARK: stopName sup Badges
 			switch stopOverType {
 			case .origin, .destination,.footTop:
-				Text(stopOver.name)
+				Text(verbatim: stopOver.name)
 					.strikethrough(stopOver.cancellationType() == .fullyCancelled ? true : false)
 					.chewTextSize(.big)
 			case .stopover:
-				Text(stopOver.name)
+				Text(verbatim: stopOver.name)
 					.strikethrough(stopOver.cancellationType() == .fullyCancelled ? true : false)
 					.chewTextSize(.medium)
 			case .transfer,.footBottom,.footMiddle:
@@ -121,7 +121,7 @@ extension LegStopView {
 			}
 			// MARK: stopName sub Badges
 			if case .footBottom = stopOverType {
-				Text(stopOver.name)
+				Text(verbatim: stopOver.name)
 					.chewTextSize(.big)
 			}
 		}

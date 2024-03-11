@@ -17,6 +17,7 @@ struct SettingsView: View {
 	@State var showWithTransfers : Int
 	@State var alternativeSearchPage : Bool
 	@State var legViewMode : Settings.LegViewMode
+	
 	let closeSheet : ()->Void
 	let oldSettings : Settings
 	init(settings : Settings,closeSheet : @escaping ()->Void) {
@@ -48,29 +49,32 @@ struct SettingsView: View {
 				if showWithTransfers == 1 {
 					transferSegment
 				}
-				Section("Leg appearance", content: {
+				Section(content: {
 					Button(action: {
 						self.legViewMode = self.legViewMode.next()
 					}, label: {
 						LegViewSettingsView(mode: self.legViewMode)
 					})
+				}, header: {
+					Text("Leg appearance", comment: "settingsView: section name")
 				})
 				Section {
-					Button("Reset settings", role: .destructive, action: {
+					Button(role: .destructive, action: {
 						Model.shared.alertViewModel.send(
 							event: .didRequestShow(.destructive(
 								destructiveAction: {
 									chewViewModel.send(event: .didUpdateSettings(Settings()))
 									closeSheet()
 								},
-								description: "Reset settings?",
-								actionDescription: "Reset",
+								description: Text("Reset settings?", comment: "alert: description"),
+								actionDescription: Text("Reset", comment: "alert: actionDescription"),
 								id: .init()
 							))
 						)
+					}, label: {
+						Text("Reset settings",comment: "settingsView: button name")
 					})
 				}
-//				debug
 			}
 			.onAppear {
 				loadSettings(state: chewViewModel.state)
@@ -81,7 +85,7 @@ struct SettingsView: View {
 						saveSettings()
 						closeSheet()
 					}, label: {
-						Text("Save")
+						Text("Save", comment: "settingsView: save button")
 						.chewTextSize(.big)
 						.frame(maxWidth: .infinity,minHeight: 35,maxHeight: 43)
 					})

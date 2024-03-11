@@ -20,7 +20,7 @@ struct DatePickerTimePresetButtons: View {
 				)))
 				closeSheet()
 			}, label: {
-				Text("now")
+				Text("now",comment: "DatePickerTimePresetButtons")
 					.padding(.horizontal,15)
 					.frame(minHeight: 50)
 					.chewTextSize(.big)
@@ -35,7 +35,7 @@ struct DatePickerTimePresetButtons: View {
 				)))
 				closeSheet()
 			}, label: {
-				Text("in 15 min")
+				Text("in 15 min",comment: "DatePickerTimePresetButtons")
 					.padding(.horizontal,15)
 					.frame(minHeight: 50)
 					.chewTextSize(.big)
@@ -50,7 +50,7 @@ struct DatePickerTimePresetButtons: View {
 				)))
 				closeSheet()
 			}, label: {
-				Text("in 1 hour")
+				Text("in 1 hour",comment: "DatePickerTimePresetButtons")
 					.padding(.horizontal,15)
 					.frame(minHeight: 50)
 					.chewTextSize(.big)

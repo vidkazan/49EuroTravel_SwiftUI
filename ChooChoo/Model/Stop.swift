@@ -49,3 +49,7 @@ extension Stop {
 		return nil
 	}
 }
+
+extension Stop {
+	
+}

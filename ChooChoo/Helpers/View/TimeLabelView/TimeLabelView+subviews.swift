@@ -14,7 +14,7 @@ extension TimeLabelView {
 		Group {
 			switch size {
 			case .small,.medium:
-				Text(delay > 0 ? "+" + String(delay) : "")
+				Text(verbatim:  delay > 0 ? "+" + String(delay) : "")
 					.chewTextSize(size.chewTextStyle)
 					.lineLimit(1)
 			case .big,.huge:

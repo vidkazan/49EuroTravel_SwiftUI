@@ -14,18 +14,55 @@ extension SettingsView {
 			Picker(
 				selection: $transportModeSegment,
 				content: {
-					Label("Regional", image: "re")
+					Label(
+						title: {
+							Text(
+								"Regional",
+								comment: "SettingsView: transportTypes: picker option"
+							)
+						},
+						icon: {
+							Image("re")
+						}
+					)
 						.tag(Settings.TransportMode.regional)
-					Label("All", image: "ice")
+					Label(
+						title: {
+							Text(
+								"All",
+								comment: "SettingsView: transportTypes: picker option"
+							)
+						},
+						icon: {
+							Image("ice")
+						}
+					)
 						.tag(Settings.TransportMode.all)
-					Label("Custom", systemImage: "ellipsis")
+					Label(
+						title: {
+							Text(
+								"Custom",
+								comment: "SettingsView: transportTypes: picker option"
+							)
+						},
+						icon: {
+							Image(systemName: "ellipsis")
+						}
+					)
 						.tag(Settings.TransportMode.custom)
 				},
 				label: {}
 			)
 			.pickerStyle(.inline)
 		}, header: {
-			Text("Transport types")
+			Text(
+				"Transport types",
+				comment: "SettingsView: transportTypes: section header"
+			)
 		})
 	}
 }
+
+#warning("localization:")
+#warning("Errors()")
+#warning("descriptions")

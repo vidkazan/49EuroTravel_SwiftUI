@@ -26,29 +26,57 @@ struct FeatureView: View {
 					JourneySearchView()
 				}
 					.tabItem {
-						Label("Search", systemImage: "magnifyingglass")
+						Label(
+							title: {
+								Text("Search",comment : "TabItem")
+							},
+							icon: {
+								Image(systemName: "magnifyingglass")
+							}
+						)
 					}
 					.tag(Tabs.search)
 				NavigationStack {
 					JourneyFollowView()
 				}
 					.tabItem {
-						Label("Follow", systemImage: ChewSFSymbols.bookmark.rawValue)
+						Label(
+							title: {
+								Text("Follow", comment : "TabItem")
+							},
+							icon: {
+								Image(ChewSFSymbols.bookmark)
+							}
+						)
 					}
 					.tag(Tabs.follow)
 			} else {
 				NavigationView {
 					JourneySearchView()
 				}
-					.tabItem {
-						Label("Search", systemImage: "magnifyingglass")
-					}
-					.tag(Tabs.search)
+				.tabItem {
+					Label(
+						title: {
+							Text("Search",comment : "TabItem")
+						},
+						icon: {
+							Image(systemName: "magnifyingglass")
+						}
+					)
+				}
+				.tag(Tabs.search)
 				NavigationView {
 					JourneyFollowView()
 				}
 					.tabItem {
-						Label("Follow", systemImage: ChewSFSymbols.bookmark.rawValue)
+						Label(
+							title: {
+								Text("Follow", comment : "TabItem")
+							},
+							icon: {
+								Image(ChewSFSymbols.bookmark)
+							}
+						)
 					}
 					.tag(Tabs.follow)
 

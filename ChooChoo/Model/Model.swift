@@ -7,37 +7,48 @@
 
 import Foundation
 import SwiftUI
+import OSLog
 
 final class Model {
 	static let shared = Model()
-	
+	let modelLogger = Logger(subsystem: "ChooChoo", category: "Model")
 	private var _journeyDetailsViewModels : [String: JourneyDetailsViewModel] = [:]
-	let locationDataManager = LocationDataManager()
+	let locationDataManager : LocationDataManager
 	let sheetViewModel : SheetViewModel
 	let topBarAlertViewModel : TopBarAlertViewModel
-	let coreDataStore = CoreDataStore()
+	let coreDataStore : CoreDataStore
 	let searchStopsViewModel : SearchStopsViewModel
 	let journeyFollowViewModel : JourneyFollowViewModel
 	let recentSearchesViewModel : RecentSearchesViewModel
-	let alertViewModel = AlertViewModel()
+	let alertViewModel : AlertViewModel
 	
-	@Namespace var alertAnimation
-	@Namespace var alertAnimationAlert
-	@Namespace var alertAnimationBottom
 	init(
-		sheetVM : SheetViewModel = .init(),
-		alertVM : TopBarAlertViewModel = .init(),
-		searchStopsVM : SearchStopsViewModel = .init(),
-		journeyFollowViewModel : JourneyFollowViewModel = .init(journeys: []),
-		recentSearchesViewModel : RecentSearchesViewModel = .init(searches: [])
+		sheetVM : SheetViewModel,
+		alertVM : TopBarAlertViewModel,
+		searchStopsVM : SearchStopsViewModel,
+		journeyFollowViewModel : JourneyFollowViewModel,
+		recentSearchesViewModel : RecentSearchesViewModel
 	) {
 		self.searchStopsViewModel = searchStopsVM
 		self.topBarAlertViewModel = alertVM
 		self.sheetViewModel = sheetVM
 		self.journeyFollowViewModel = journeyFollowViewModel
 		self.recentSearchesViewModel = recentSearchesViewModel
+		self.alertViewModel = .init()
+		self.coreDataStore = .init()
+		self.locationDataManager = .init()
 	}
 	
+	init() {
+		self.searchStopsViewModel = .init()
+		self.topBarAlertViewModel = .init()
+		self.sheetViewModel = .init()
+		self.journeyFollowViewModel = .init(journeys: [])
+		self.recentSearchesViewModel = .init(searches: [])
+		self.alertViewModel = .init()
+		self.coreDataStore = .init()
+		self.locationDataManager = .init()
+	}
 }
 
 extension Model {

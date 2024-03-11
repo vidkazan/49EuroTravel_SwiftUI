@@ -14,15 +14,29 @@ extension SettingsView {
 			Picker(
 				selection: $showWithTransfers,
 				content: {
-					Label("Direct", systemImage: "arrow.up.right")
-						.tag(0)
-					Label("With transfers", systemImage: "arrow.2.circlepath")
-						.tag(1)
+					Label(
+						title: {
+							Text("Direct", comment : "SettingsView: connections: picker option")
+						},
+						icon: {
+							Image(systemName: "arrow.up.right")
+						}
+					)
+					.tag(0)
+					Label(
+						title: {
+							Text("With transfers", comment : "SettingsView: connections: picker option")
+						},
+						icon: {
+							Image(systemName: "arrow.2.circlepath")
+						}
+					)
+					.tag(1)
 				}, label: {
 				})
 			.pickerStyle(.inline)
 		}, header: {
-			Text("Connections")
+			Text("Connections",comment: "SettingsView: connections: section header")
 		})
 	}
 }
@@ -34,26 +48,43 @@ extension SettingsView {
 				selection: $transferTime,
 				content: {
 					ForEach(Settings.TransferDurationCases.allCases,id: \.rawValue) { val in
-						Text("\(String(val.rawValue)) min ")
-							.tag(val)
+						Text(
+							"\(val.rawValue) min ",
+							comment: "SettingsView: transferSegment: transfer duration"
+						)
+						.tag(val)
 					}
 				}, label: {
-					Label("Minimum time", systemImage: "clock.arrow.circlepath")
+					Label(
+						title: {
+							Text("Minimum time", comment : "SettingsView: transferSegment: picker name")
+						},
+						icon: {
+							Image(systemName: "clock.arrow.circlepath")
+						}
+					)
 				}
 			)
 			Picker(
 				selection: $transferCount,
 				content: {
 					ForEach(Settings.TransferCountCases.allCases,id: \.rawValue) { val in
-						Text(val.rawValue)
+						Text(verbatim: val.rawValue)
 							.tag(val)
 					}
 				}, label: {
-					Label("Maximum count", systemImage: "arrow.2.squarepath")
+					Label(
+						title: {
+							Text("Maximum count", comment : "SettingsView: transferSegment: picker name")
+						},
+						icon: {
+							Image(systemName: "arrow.2.squarepath")
+						}
+					)
 				}
 			)
 		}, header: {
-			Text("Transfer")
+			Text("Transfer",comment: "SettingsView: transferSegment: section header")
 		})
 	}
 }
@@ -67,23 +98,11 @@ extension SettingsView {
 					set: { _ in alternativeSearchPage.toggle()}
 				),
 				label: {
-					Text("Show alternative search page")
+					Text("Show alternative search page",comment: "SettingsView: debug: toggle")
 				}
 			)
-//			Toggle(
-//				isOn: Binding(
-//					get: { showSunEvents },
-//					set: { _ in showSunEvents.toggle()}
-//				),
-//				label: {
-//					Text("Show sun events")
-//				}
-//			)
-			Button("Map picker view", action: {
-				Model.shared.sheetViewModel.send(event: .didRequestShow(.mapPicker(type: .departure)))
-			})
 		}, header: {
-			Text("Debug options")
+			Text("Debug options",comment: "SettingsView: debug: section header")
 		})
 	}
 }

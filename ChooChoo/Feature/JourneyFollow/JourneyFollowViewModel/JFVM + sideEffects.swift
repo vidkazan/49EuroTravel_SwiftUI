@@ -57,10 +57,10 @@ extension JourneyFollowViewModel {
 			switch action {
 			case .adding:
 				guard let viewData = viewData else {
-					send(.didFailToChangeSubscribingState(error: Error.inputValIsNil("viewData")))
+					send(.didFailToChangeSubscribingState(error: DataError.nilValue(type: "viewData")))
 					return Just(Event.didFailToEdit(
 						action: action,
-						error: Error.inputValIsNil("view data is nil")
+						error: DataError.nilValue(type: "view data is nil")
 					)).eraseToAnyPublisher()
 				}
 				guard !journeys.contains(where: {$0.id == followId}) else {

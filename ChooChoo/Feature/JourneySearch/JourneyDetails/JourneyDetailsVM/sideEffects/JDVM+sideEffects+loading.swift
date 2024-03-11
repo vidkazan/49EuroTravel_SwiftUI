@@ -171,7 +171,7 @@ extension JourneyDetailsViewModel {
 			}
 			
 			guard let token = token else {
-				return Just(Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("journeyRef"))).eraseToAnyPublisher()
+				return Just(Event.didFailedToLoadJourneyData(error: DataError.nilValue(type: "journeyRef"))).eraseToAnyPublisher()
 			}
 
 			return Self.fetchJourneyByRefreshToken(
@@ -188,7 +188,7 @@ extension JourneyDetailsViewModel {
 					)
 					
 					guard let res = res else {
-						return Event.didFailedToLoadJourneyData(error: Error.inputValIsNil("viewData"))
+						return Event.didFailedToLoadJourneyData(error: DataError.nilValue(type: "viewData"))
 					}
 					
 					if Model.shared.journeyFollowViewModel.state.journeys.contains(where: {$0.id == followID}) == true {

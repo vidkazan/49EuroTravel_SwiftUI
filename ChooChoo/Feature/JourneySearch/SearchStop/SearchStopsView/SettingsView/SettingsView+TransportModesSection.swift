@@ -31,7 +31,7 @@ extension SettingsView {
 				}
 			},
 			header: {
-				Text("Chosen transport types")
+				Text("Chosen transport types",comment: "SettingsView: segments: section header")
 			})
 	}
 }

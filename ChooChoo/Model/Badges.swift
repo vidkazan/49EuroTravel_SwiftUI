@@ -10,25 +10,25 @@ import SwiftUI
 
 struct BadgeData : Equatable {
 	static func == (lhs: BadgeData, rhs: BadgeData) -> Bool {
-		lhs.name == rhs.name
+		lhs.text == rhs.text
 	}
 	
 	var style : Color = Color.chewFillTertiary
-	let name : String
+	let text : Text
 	
-	init(style : Color, name : String){
-		self.init(name: name)
+	init(style : Color, text : Text){
+		self.init(text)
 		self.style = style
 	}
 	init(style : Color){
 		self.init()
 		self.style = style
 	}
-	init(name : String){
-		self.name = name
+	init(_ text : Text){
+		self.text = text
 	}
 	init(){
-		self.name = ""
+		self.text = Text(verbatim: "")
 	}
 }
 
@@ -49,8 +49,55 @@ enum StopsCountBadgeMode {
 	}
 }
 
-enum Badges : Equatable {
-	case generic(msg : String)
+enum Badges : Equatable, Identifiable {
+	var id: Int {
+		switch self {
+		case .generic:
+			return 0
+		case .fullLegError:
+			return 1
+		case .followError:
+			return 2
+		case .locationError:
+			return 3
+		case .offlineMode:
+			return 4
+		case .departureArrivalStops:
+			return 5
+		case .changesCount:
+			return 6
+		case .timeDepartureTimeArrival:
+			return 7
+		case .date:
+			return 8
+		case .price:
+			return 9
+		case .cancelled:
+			return 10
+		case .connectionNotReachable:
+			return 11
+		case .remarkImportant:
+			return 12
+		case .lineNumber:
+			return 13
+		case .stopsCount:
+			return 14
+		case .legDirection:
+			return 15
+		case .legDuration:
+			return 16
+		case .walking:
+			return 17
+		case .transfer:
+			return 18
+		case .distanceInMeters:
+			return 19
+		case .updatedAtTime:
+			return 20
+		}
+	}
+	
+	case generic(msg : Text)
 	case fullLegError
 	case followError(_ action : JourneyFollowViewModel.Action)
 	case locationError
@@ -59,22 +106,17 @@ enum Badges : Equatable {
 	case changesCount(_ count : Int)
 	case timeDepartureTimeArrival(timeContainer : TimeContainer)
 	case date(date : Date)
-	case price(_ price: String)
-//	case dticket
+	case price(_ price: Float)
 	case cancelled
 	case connectionNotReachable
 	case remarkImportant(remarks : [RemarkViewData])
-	
 	case lineNumber(lineType:LineType,num : String)
 	case stopsCount(_ count : Int,_ mode : StopsCountBadgeMode)
 	case legDirection(dir : String, strikethrough : Bool)
-	
 	case legDuration(_ timeContainer : TimeContainer)
 	case walking(_ timeContainer : TimeContainer)
 	case transfer(_ timeContainer : TimeContainer)
-	
 	case distanceInMeters(dist : Double)
-	
 	case updatedAtTime(referenceTime : Double, isLoading : Bool = false)
 	
 	var badgeAction : ()->Void {
@@ -102,51 +144,92 @@ enum Badges : Equatable {
 	var badgeData : BadgeData {
 		switch self {
 		case .generic(let msg):
-			return BadgeData(name: msg)
+			return BadgeData(msg)
 		case .fullLegError:
-			return BadgeData(name: "Failed to load full leg")
+			return BadgeData(
+				Text(
+					"Failed to load full leg",
+					comment: "badge"
+				)
+			)
 		case .followError(let action):
-			return BadgeData(name: "Failed to \(action.description) this journey")
+			return BadgeData(
+				Text(
+					"Failed to \(action.text) this journey",
+					comment: "badge: followError"
+				)
+			)
 		case .locationError:
-			return BadgeData(name: "Failed to get Location")
+			return BadgeData(
+				Text(
+					"Failed to get Location",
+					comment: "badge"
+				)
+			)
 		case .offlineMode:
-			return BadgeData(name: "Offline Mode")
+			return BadgeData(
+				Text(
+					"Offline Mode", 
+					comment: "badge"
+				)
+			)
 		case .price:
 			return BadgeData()
-//		case .dticket:
-//			return BadgeData(
-//				style: Color.chewGray10,
-//				name: "DeutschlandTicket")
 		case .cancelled:
 			return BadgeData(
 				style: Color.chewFillRedPrimary,
-				name: "cancelled")
+				text: Text(
+					"cancelled",
+					comment: "badge"
+				)
+			)
 		case .connectionNotReachable:
 			return BadgeData(
 				style: Color.chewFillRedPrimary,
-				name: "not reachable")
+				text: Text(
+					"not reachable",
+					comment: "badge"
+				)
+			)
 		case .remarkImportant:
 			return BadgeData(
 				style: Color.chewFillRedPrimary,
-				name: "!")
+				text: Text(verbatim: "!")
+			)
 		case .lineNumber(_, num: let num):
-			return BadgeData(style: .chewGrayScale10, name: num.replacingOccurrences(of: " ", with: ""))
-		case let .legDirection(dir,_):
-			return BadgeData(name: dir)
-		case .stopsCount(let num, _):
-			let tail = num == 1 ? " stop" : " stops"
 			return BadgeData(
-				name: String(num) + tail)
-			
-			
+				style: .chewGrayScale10,
+				text: Text(verbatim: "\(num.replacingOccurrences(of: " ", with: ""))")
+			)
+		case let .legDirection(dir,_):
+			return BadgeData(
+				Text(verbatim: dir)
+			)
+		case .stopsCount(let num, _):
+			return BadgeData(
+				Text(
+					"\(num) stop",
+					comment: "badge: stopsCount"
+				)
+			)
 		case .distanceInMeters:
 			return BadgeData()
-		case .walking:
-			return BadgeData(name: "walk ")
+		case .walking(let time):
+			return BadgeData(
+				Text(
+					"walk \(time.durationInMinutes) min",
+					comment: "badge: walking"
+				)
+			)
 		case .legDuration:
 			return BadgeData()
-		case .transfer:
-			return BadgeData(name: "transfer ")
+		case .transfer(let time):
+			return BadgeData(
+				Text(
+					"transfer \(time.durationInMinutes) min",
+					comment: "badge"
+				)
+			)
 		case .departureArrivalStops:
 			return BadgeData()
 		case .changesCount:

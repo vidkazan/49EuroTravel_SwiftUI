@@ -37,7 +37,17 @@ extension SearchStopsView {
 			chewViewModel.send(event: .didCancelEditStop)
 			Model.shared.sheetViewModel.send(event: .didRequestShow(.mapPicker(type: type)))
 		}, label: {
-			Label("find on map", systemImage: "map.circle")
+			Label(
+				title: {
+					Text(
+						"find on map", 
+						 comment : "SearchStopsView: button"
+					)
+				},
+				icon: {
+					Image(systemName: "map.circle")
+				}
+			)
 				.chewTextSize(.big)
 		})
 		.foregroundColor(.primary)
