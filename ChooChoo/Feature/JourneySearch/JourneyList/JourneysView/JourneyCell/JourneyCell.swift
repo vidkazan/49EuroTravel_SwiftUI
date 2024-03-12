@@ -36,10 +36,10 @@ struct JourneyCell: View {
 				VStack {
 					JourneyHeaderView(journey: journey)
 					LegsView(
-						journey : journey,progressBar: false,
+						journey : journey,progressBar: true,
 						mode : chewVM.state.settings.legViewMode
 					)
-						.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
+					.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
 				}
 			})
 			HStack(alignment: .center) {

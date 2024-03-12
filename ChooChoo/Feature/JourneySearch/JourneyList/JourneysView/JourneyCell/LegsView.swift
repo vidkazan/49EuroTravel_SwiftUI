@@ -91,16 +91,22 @@ struct LegsView: View {
 			}
 		}
 		.onReceive(timer, perform: { _ in
-			self.progressLineProportion = Self.getProgressLineProportion(
-				departureTS: journey?.time.timestamp.departure.actual,
-				arrivalTS: journey?.time.timestamp.arrival.actual,
-				referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
+			Task {
+				withAnimation(.smooth, {
+					self.progressLineProportion = Self.getProgressLineProportion(
+						departureTS: journey?.time.timestamp.departure.actual,
+						arrivalTS: journey?.time.timestamp.arrival.actual,
+						referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
+				})
+			}
 		})
 		.onAppear {
-			self.progressLineProportion = Self.getProgressLineProportion(
-				departureTS: journey?.time.timestamp.departure.actual,
-				arrivalTS: journey?.time.timestamp.arrival.actual,
-				referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
+			Task {
+				self.progressLineProportion = Self.getProgressLineProportion(
+					departureTS: journey?.time.timestamp.departure.actual,
+					arrivalTS: journey?.time.timestamp.arrival.actual,
+					referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
+			}
 		}
 	}
 }
