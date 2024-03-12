@@ -18,9 +18,26 @@ enum Tabs : Int,CaseIterable {
 struct FeatureView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 
+	
 	@State var selectedTab = Tabs.search
+		
+	var handler: Binding<Tabs> { Binding(
+		get: { self.selectedTab },
+		set: {
+			if $0 == self.selectedTab {
+				switch selectedTab {
+				case .search:
+					chewViewModel.send(event: .didTapCloseJourneyList)
+				case .follow:
+					break
+				}
+				print("Reset here!!")
+			}
+			self.selectedTab = $0
+		}
+	)}
 	var body: some View {
-		TabView(selection: $selectedTab) {
+		TabView(selection: handler) {
 			if #available(iOS 16.0, *) {
 				NavigationStack {
 					JourneySearchView()

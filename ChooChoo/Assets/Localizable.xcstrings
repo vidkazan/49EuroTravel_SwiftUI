@@ -165,6 +165,7 @@
     },
     "Clear" : {
       "comment" : "JourneyListView: overlay button name",
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -639,7 +640,7 @@
       }
     },
     "Show on map" : {
-      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item\nLegDetailsView: menu item",
+      "comment" : "JourneyFollowCellView: menu item\nLegDetailsView: menu item\nJourneyCell: menu item",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

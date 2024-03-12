@@ -40,25 +40,6 @@ struct JourneyListView: View {
 				)
 			}
 		}
-		.overlay(alignment: .bottom, content: {
-			Button(action: {
-				chewVM.send(event: .didTapCloseJourneyList)
-			}, label: {
-				Label(title: {
-					Text("Clear", comment: "JourneyListView: overlay button name")
-				}, icon: {
-					Image(systemName: "xmark.circle")
-				})
-			})
-			.padding(5)
-			.foregroundStyle(.secondary)
-			.chewTextSize(.big)
-			.background(.thinMaterial)
-			.cornerRadius(10)
-			.frame(maxHeight: 43)
-			.shadow(radius: 5)
-			.padding(.bottom,20)
-		})
 	}
 }
 
