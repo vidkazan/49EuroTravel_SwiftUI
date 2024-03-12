@@ -10,12 +10,9 @@ import MapKit
 import TipKit
 
 struct JourneyDetailsView: View {
-	
-	// MARK: Fields
-	
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	// MARK: Init
+	
 	init(journeyDetailsViewModel : JourneyDetailsViewModel) {
 		viewModel = journeyDetailsViewModel
 	}
@@ -24,6 +21,7 @@ struct JourneyDetailsView: View {
 			ZStack {
 				VStack {
 					header()
+						.animation(.smooth, value: viewModel.state.status)
 						.padding(.horizontal,5)
 						.padding(5)
 					ScrollView {

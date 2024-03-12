@@ -52,7 +52,6 @@ struct ContentView: View {
 					.chewTextSize(.huge)
 			default:
 				FeatureView()
-					.animation(.smooth, value: topAlertVM.state)
 			}
 		}
 		.task {

@@ -37,7 +37,6 @@ struct SearchStopsView: View {
 				)
 				if focusedField == .departure {
 					stopList(type: .departure)
-						.transition(.moveAndOpacity)
 				}
 			}
 			.background(Color.chewFillSecondary.opacity(0.7))
@@ -59,7 +58,6 @@ struct SearchStopsView: View {
 				)
 				if focusedField == .arrival {
 					stopList(type: .arrival)
-						.transition(.moveAndOpacity)
 				}
 			}
 			.background(Color.chewFillSecondary.opacity(0.7))

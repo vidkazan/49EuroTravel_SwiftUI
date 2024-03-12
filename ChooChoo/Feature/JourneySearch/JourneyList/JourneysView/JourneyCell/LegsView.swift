@@ -8,15 +8,17 @@
 import SwiftUI
 
 struct LegsView: View {
+	@Namespace var legsViewNamespace
 	@EnvironmentObject var chewVM : ChewViewModel
+	@State var progressLineProportion : Double = 0
+	
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	let mode : Settings.LegViewMode
-	var journey : JourneyViewData?
+	let journey : JourneyViewData?
 	var gradientStops : [Gradient.Stop]
 	var gradientStopsForProgressLine : [Gradient.Stop]
 	var showProgressBar : Bool
 	var showLabels : Bool
-	@State var progressLineProportion : Double = 0
 	
 	init(journey: JourneyViewData?,progressBar: Bool, mode : Settings.LegViewMode,showLabels : Bool = true) {
 		self.journey = journey
@@ -38,9 +40,17 @@ struct LegsView: View {
 							mode : mode, 
 							progressLineProportion: nil
 						)
+						.matchedGeometryEffect(
+							id: "sun",
+							in: legsViewNamespace
+						)
 						if let journey = journey {
 							ForEach(journey.legs) { leg in
 								LegViewBG(leg: leg, mode: mode)
+									.matchedGeometryEffect(
+										id: "\(leg.tripId) bg",
+										in: legsViewNamespace
+									)
 									.frame(
 										width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
 										height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
@@ -67,10 +77,18 @@ struct LegsView: View {
 									y : geo.size.height/2
 								)
 								.cornerRadius(5)
+								.matchedGeometryEffect(
+									id: "progressBar",
+									in: legsViewNamespace
+								)
 						}
 						if let journey = journey, showLabels == true {
 							ForEach(journey.legs) { leg in
 								LegViewLabels(leg: leg)
+									.matchedGeometryEffect(
+										id: "\(leg.tripId) labels",
+										in: legsViewNamespace
+									)
 									.frame(
 										width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
 										height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)

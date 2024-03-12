@@ -10,9 +10,9 @@ import SwiftUI
 import TipKit
 
 struct JourneySearchView : View {
-	
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var searchStopsVM = Model.shared.searchStopsViewModel
+	@ObservedObject var topAlertVM = Model.shared.topBarAlertViewModel
 	var body: some View {
 		VStack(spacing: 5) {
 			if #available(iOS 17.0, *) {
@@ -23,9 +23,7 @@ struct JourneySearchView : View {
 			TimeAndSettingsView()
 			BottomView()
 		}
-		.animation(.smooth, value: searchStopsVM.state)
-		.animation(.smooth, value: chewViewModel
-			.state)
+		.animation(.easeInOut, value: topAlertVM.state.alerts)
 		.contentShape(Rectangle())
 //		.onTapGesture {
 //			chewViewModel.send(event: .didCancelEditStop)
@@ -38,6 +36,16 @@ struct JourneySearchView : View {
 		.navigationTitle(
 			Text(verbatim: "Choo Choo")
 		)
+		.toolbar {
+			ToolbarItem(placement: .topBarTrailing, content: {
+				#warning("navigation bar view height cahnges for some reason here")
+				if topAlertVM.state.alerts.contains(.offlineMode) {
+					BadgeView(.offlineMode)
+						.badgeBackgroundStyle(.blue)
+						.animation(.easeInOut, value: topAlertVM.state.alerts)
+				}
+			})
+		}
 		.navigationBarTitleDisplayMode(.inline)
 	}
 }

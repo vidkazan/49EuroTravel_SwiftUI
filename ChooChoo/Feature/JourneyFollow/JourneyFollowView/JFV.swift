@@ -12,6 +12,7 @@ import TipKit
 struct JourneyFollowView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyFollowViewModel = Model.shared.journeyFollowViewModel
+	@ObservedObject var alertVM : TopBarAlertViewModel = Model.shared.topBarAlertViewModel
 	let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
 	
 	var body: some View {
@@ -50,6 +51,16 @@ struct JourneyFollowView : View {
 		.navigationBarTitle(
 			Text("Journey follow", comment: "navigationBarTitle")
 		)
+		.toolbar {
+			ToolbarItem(placement: .topBarTrailing, content: {
+				if alertVM.state.alerts.contains(.offlineMode) {
+					BadgeView(.offlineMode)
+						.frame(maxHeight: 40)
+						.badgeBackgroundStyle(.blue)
+						.animation(.easeInOut, value: alertVM.state.alerts)
+				}
+			})
+		}
 		.navigationBarTitleDisplayMode(.inline)
 	}
 }

@@ -40,18 +40,32 @@ extension JourneyDetailsView {
 							BadgeView(.date(date: date))
 								.badgeBackgroundStyle(.accent)
 						}
-						BadgeView(.timeDepartureTimeArrival(timeContainer: data.viewData.time))
-							.badgeBackgroundStyle(.accent)
-						BadgeView(.legDuration(data.viewData.time))
-							.badgeBackgroundStyle(.accent)
+						BadgeView(
+							.timeDepartureTimeArrival(
+								timeContainer: data.viewData.time
+							)
+						)
+						.badgeBackgroundStyle(.accent)
+						BadgeView(
+							.legDuration(data.viewData.time)
+						)
+						.badgeBackgroundStyle(.accent)
 						if viewModel.state.data.viewData.transferCount > 0 {
-							BadgeView(.changesCount(data.viewData.transferCount))
-								.badgeBackgroundStyle(.accent)
+							BadgeView(
+								.changesCount(
+									data.viewData.transferCount
+								)
+							)
+							.badgeBackgroundStyle(.accent)
 						}
 						Spacer()
 					}
 				}
-				LegsView(journey : viewModel.state.data.viewData,progressBar: true,mode : chewVM.state.settings.legViewMode)
+				LegsView(
+					journey : viewModel.state.data.viewData,
+					progressBar: true,
+					mode : chewVM.state.settings.legViewMode
+				)
 			}
 			
 		}

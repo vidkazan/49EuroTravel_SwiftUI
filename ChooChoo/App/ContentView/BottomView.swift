@@ -9,13 +9,14 @@ import Foundation
 import SwiftUI
 
 struct BottomView: View {
+	@Namespace private var bottomView
 	@ObservedObject var searchStopsVM = Model.shared.searchStopsViewModel
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@State var state : ChewViewModel.State = .init()
 	var body: some View {
 		Group {
-			switch state.status {
+			switch chewViewModel.state.status {
 			case let .journeys(stops):
 				JourneyListView(
 					stops: stops,
@@ -29,6 +30,8 @@ struct BottomView: View {
 				Spacer()
 			}
 		}
-		.onReceive(chewViewModel.$state, perform: { state = $0 })
+		.onReceive(chewViewModel.$state, perform: { new in
+			state = new
+		})
 	}
 }

@@ -31,7 +31,6 @@ struct FeatureView: View {
 				case .follow:
 					break
 				}
-				print("Reset here!!")
 			}
 			self.selectedTab = $0
 		}
@@ -42,31 +41,31 @@ struct FeatureView: View {
 				NavigationStack {
 					JourneySearchView()
 				}
-					.tabItem {
-						Label(
-							title: {
-								Text("Search",comment : "TabItem")
-							},
-							icon: {
-								Image(systemName: "magnifyingglass")
-							}
-						)
-					}
-					.tag(Tabs.search)
+				.tabItem {
+					Label(
+						title: {
+							Text("Search",comment : "TabItem")
+						},
+						icon: {
+							Image(systemName: "magnifyingglass")
+						}
+					)
+				}
+				.tag(Tabs.search)
 				NavigationStack {
 					JourneyFollowView()
 				}
-					.tabItem {
-						Label(
-							title: {
-								Text("Follow", comment : "TabItem")
-							},
-							icon: {
-								Image(ChewSFSymbols.bookmark)
-							}
-						)
-					}
-					.tag(Tabs.follow)
+				.tabItem {
+					Label(
+						title: {
+							Text("Follow", comment : "TabItem")
+						},
+						icon: {
+							Image(ChewSFSymbols.bookmark)
+						}
+					)
+				}
+				.tag(Tabs.follow)
 			} else {
 				NavigationView {
 					JourneySearchView()
