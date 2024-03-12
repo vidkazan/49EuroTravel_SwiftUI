@@ -330,7 +330,7 @@ extension MapPickerViewModel {
 					return Event.didLoadNearbyStops(stops)
 				}
 				.catch { error in
-					return Just(Event.didFailToLoad(error as? ApiError ?? .badRequest)).eraseToAnyPublisher()
+					return Just(Event.didFailToLoad(error as? ApiError ?? .generic(description: error.localizedDescription))).eraseToAnyPublisher()
 				}
 				.eraseToAnyPublisher()
 		}

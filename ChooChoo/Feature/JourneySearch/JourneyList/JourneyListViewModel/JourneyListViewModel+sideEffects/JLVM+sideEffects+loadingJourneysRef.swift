@@ -45,7 +45,7 @@ extension JourneyListViewModel {
 						)
 					}
 					.catch { error in
-						Just(Event.didFailToLoadEarlierRef(error as? any ChewError ?? ApiError.generic(error)))
+						Just(Event.didFailToLoadEarlierRef(error as? ApiError ?? .generic(description: error.localizedDescription)))
 					}
 					.eraseToAnyPublisher()
 				
@@ -77,7 +77,7 @@ extension JourneyListViewModel {
 						)
 					}
 					.catch { error in
-						Just(Event.didFailToLoadLaterRef(error as? any ChewError ?? ApiError.generic(error)))
+						Just(Event.didFailToLoadLaterRef(error as? ApiError ?? .generic(description: error.localizedDescription)))
 					}
 					.eraseToAnyPublisher()
 			}

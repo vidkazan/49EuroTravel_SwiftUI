@@ -27,12 +27,6 @@ struct UpdatedAtBadgeView : View {
 			if let updatedAt = updatedAt {
 				OneLineText(updatedAt)
 					.foregroundColor(.primary.opacity(0.6))
-					.onAppear {
-						self.updatedAt = Self.update(refTime)
-					}
-					.onReceive(timer, perform: { _ in
-						self.updatedAt = Self.update(refTime)
-					})
 				if isLoading == true {
 					ProgressView()
 						.scaleEffect(0.65)
@@ -40,6 +34,12 @@ struct UpdatedAtBadgeView : View {
 				}
 			}
 		}
+		.onAppear {
+			self.updatedAt = Self.update(refTime)
+		}
+		.onReceive(timer, perform: { _ in
+			self.updatedAt = Self.update(refTime)
+		})
 	}
 	
 	static func update(_ refTime : Double) -> Text? {

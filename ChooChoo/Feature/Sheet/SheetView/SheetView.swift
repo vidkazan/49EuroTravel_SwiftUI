@@ -20,7 +20,7 @@ struct SheetView : View {
 				.onAppear {
 					Model.shared.topBarAlertViewModel.send(
 						event: .didAdd([
-							.generic(msg: Text(error.localizedDescription))
+							.generic(msg: Text(error.description))
 						])
 					)
 				}

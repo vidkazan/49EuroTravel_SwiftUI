@@ -36,7 +36,7 @@ extension JourneyListViewModel {
 						JourneyUpdateType.initial
 					)
 				}
-				.catch { error in Just(Event.onFailedToLoadJourneyListData(error as? ApiError ?? .badRequest))}
+				.catch { error in Just(Event.onFailedToLoadJourneyListData(error as? ApiError ?? .generic(description: error.localizedDescription)))}
 				.eraseToAnyPublisher()
 		}
 	}

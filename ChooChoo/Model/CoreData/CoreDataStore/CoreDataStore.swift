@@ -242,7 +242,7 @@ extension CoreDataStore {
 				print("📗 > saved asyncContext")
 			} catch {
 				let nserror = error as NSError
-				print("📕 > save asyncContext: ", nserror.localizedDescription, nserror.userInfo)
+				print("📕 > save asyncContext: ", nserror.description, nserror.userInfo)
 			}
 	}
 }

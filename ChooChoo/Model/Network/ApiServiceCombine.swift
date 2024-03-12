@@ -45,7 +45,7 @@ class ApiClient : ChewClient {
 					return error
 				default:
 					print("🔴> api: error:",type,request.url ?? "url",error)
-					return .generic(error)
+					return .generic(description: error.localizedDescription)
 				}
 			}
 			.eraseToAnyPublisher()

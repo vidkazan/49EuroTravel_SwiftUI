@@ -29,7 +29,11 @@ struct JourneyFollowView : View {
 				switch viewModel.state.journeys.count {
 				case 0:
 					ErrorView(
-						msg: Text("You have no followed journeys", comment: "JourneyFollowView: empty view: msg"),
+						viewType: .empty,
+						msg: Text(
+							"You have no followed journeys",
+							comment: "JourneyFollowView: empty view: msg"
+						),
 						action: nil
 					)
 					.frame(idealWidth: .infinity,idealHeight: .infinity)

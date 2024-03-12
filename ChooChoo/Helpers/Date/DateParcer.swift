@@ -36,11 +36,11 @@ class DateParcer {
 		return date
 	}
 	
-	static func getTwoDateIntervalInMinutes(date1 : Date?,date2 : Date?) -> Double? {
+	static func getTwoDateIntervalInMinutes(date1 : Date?,date2 : Date?) -> Int? {
 		guard let date1 = date1,
 			  let date2 = date2 else { return nil }
 		let interval = date2.timeIntervalSinceReferenceDate - date1.timeIntervalSinceReferenceDate
-		return Double((interval / 60))
+		return Int(interval / 60)
 	}
 	
 	static func getTwoDateInterval(date1 : Date?,date2 : Date?) -> Double? {
@@ -95,8 +95,10 @@ class DateParcer {
 		return timeString
 	}
 	
-	static func timeDuration(_ minutes : Double) -> String? {
-		return DateParcer.durationFormatter.string(from: (minutes * 60))?.replacingOccurrences(of: " ", with: "").replacingOccurrences(of: ",", with: " ")
+	static func timeDuration(_ minutes : Int) -> String? {
+		return DateParcer.durationFormatter.string(from: Double(minutes * 60))?
+			.replacingOccurrences(of: " ", with: "")
+			.replacingOccurrences(of: ",", with: " ")
 	}
 	
 	static func getCombinedDate(date: Date, time: Date) -> Date? {

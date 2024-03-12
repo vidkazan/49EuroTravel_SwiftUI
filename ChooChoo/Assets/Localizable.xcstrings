@@ -2,211 +2,781 @@
   "sourceLanguage" : "en",
   "strings" : {
     " to " : {
-      "comment" : "badge: departureArrivalStops"
+      "comment" : "badge: departureArrivalStops",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "в "
+          }
+        }
+      }
     },
     "%lld min " : {
-      "comment" : "SettingsView: transferSegment: transfer duration"
+      "comment" : "SettingsView: transferSegment: transfer duration",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld мин"
+          }
+        }
+      }
     },
     "%lld stop" : {
-      "comment" : "badge: stopsCount"
+      "comment" : "badge: stopsCount",
+      "localizations" : {
+        "en" : {
+          "variations" : {
+            "plural" : {
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld stop"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld stops"
+                }
+              }
+            }
+          }
+        },
+        "ru" : {
+          "variations" : {
+            "plural" : {
+              "few" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld остановки"
+                }
+              },
+              "many" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld остановок"
+                }
+              },
+              "one" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld остановка"
+                }
+              },
+              "other" : {
+                "stringUnit" : {
+                  "state" : "translated",
+                  "value" : "%lld остановок"
+                }
+              }
+            }
+          }
+        }
+      }
     },
     "Active" : {
-      "comment" : "JourneyFollowView: section name"
+      "comment" : "JourneyFollowView: section name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Активные"
+          }
+        }
+      }
     },
     "All" : {
-      "comment" : "SettingsView: transportTypes: picker option"
+      "comment" : "SettingsView: transportTypes: picker option",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Все"
+          }
+        }
+      }
     },
     "cancelled" : {
-      "comment" : "badge"
+      "comment" : "badge",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "отменен"
+          }
+        }
+      }
     },
     "change the time of your search to find later connections" : {
-      "comment" : "JourneyListView: error: laterRef is nil"
+      "comment" : "JourneyListView: error: laterRef is nil",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Измените время в вашем поиске чтобы найти более поздние поездки"
+          }
+        }
+      }
     },
     "Choo Choo" : {
-      "comment" : "app name"
+      "comment" : "app name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Чуууу Чууууу"
+          }
+        }
+      }
     },
     "Choose" : {
-      "comment" : "mapPickerView: button to choose stop"
+      "comment" : "mapPickerView: button to choose stop",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбрать"
+          }
+        }
+      }
     },
     "Chosen transport types" : {
-      "comment" : "SettingsView: segments: section header"
+      "comment" : "SettingsView: segments: section header",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Выбранные виды транспорта"
+          }
+        }
+      }
     },
     "Clear" : {
-      "comment" : "JourneyListView: overlay button name"
+      "comment" : "JourneyListView: overlay button name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Очистить"
+          }
+        }
+      }
     },
     "Close" : {
-      "comment" : "SheetView: toolbar: button name"
+      "comment" : "SheetView: toolbar: button name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Закрыть"
+          }
+        }
+      }
     },
     "Connections" : {
-      "comment" : "SettingsView: connections: section header"
+      "comment" : "SettingsView: connections: section header",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пересадки"
+          }
+        }
+      }
     },
     "Connections not found" : {
-      "comment" : "JourneyListView: empty state"
+      "comment" : "JourneyListView: empty state",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поездки не найдены"
+          }
+        }
+      }
     },
     "Custom" : {
-      "comment" : "SettingsView: transportTypes: picker option"
+      "comment" : "SettingsView: transportTypes: picker option",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Конкретные"
+          }
+        }
+      }
     },
     "Debug options" : {
       "comment" : "SettingsView: debug: section header"
     },
     "Delete" : {
-      "comment" : "JourneyFollowView: listCell: swipe action item"
+      "comment" : "JourneyFollowView: listCell: swipe action item",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
+          }
+        }
+      }
     },
     "Direct" : {
-      "comment" : "SettingsView: connections: picker option"
+      "comment" : "SettingsView: connections: picker option",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прямые"
+          }
+        }
+      }
     },
     "error: try reload" : {
-      "comment" : "JourneyListView: error: failed to load laterRef rides"
+      "comment" : "JourneyListView: error: failed to load laterRef rides",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ошибка: попробуйте обновить "
+          }
+        }
+      }
     },
     "Failed to %@ this journey" : {
-      "comment" : "badge: followError"
+      "comment" : "badge: followError",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось %@ поездку"
+          }
+        }
+      }
     },
     "Failed to get Location" : {
-      "comment" : "badge"
+      "comment" : "badge",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось получить местоположение"
+          }
+        }
+      }
     },
     "Failed to load full leg" : {
-      "comment" : "badge"
+      "comment" : "badge",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Не удалось загрузить поездку"
+          }
+        }
+      }
     },
     "find on map" : {
-      "comment" : "SearchStopsView: button"
+      "comment" : "SearchStopsView: button",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Найти на карте"
+          }
+        }
+      }
     },
     "follow" : {
-      "comment" : "JourneyFollowViewModel.Action"
+      "comment" : "JourneyFollowViewModel.Action",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "сохранить"
+          }
+        }
+      }
     },
     "Follow" : {
-      "comment" : "TabItem"
+      "comment" : "TabItem",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохраненные"
+          }
+        }
+      }
     },
     "Follow journey" : {
-      "comment" : "tip: follow journey: title"
+      "comment" : "tip: follow journey: title",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохраненные поездки"
+          }
+        }
+      }
     },
     "If you want to update your search, simply press here" : {
-      "comment" : "tip: now button: text"
+      "comment" : "tip: now button: text",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Если хотите обновить поиск, просто нажмите здесь"
+          }
+        }
+      }
     },
     "in 1 hour" : {
-      "comment" : "DatePickerTimePresetButtons"
+      "comment" : "DatePickerTimePresetButtons",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "через 1 час"
+          }
+        }
+      }
     },
     "in 15 min" : {
-      "comment" : "DatePickerTimePresetButtons"
+      "comment" : "DatePickerTimePresetButtons",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "через 15 минут"
+          }
+        }
+      }
     },
     "Journey debug" : {
-      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
+      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item"
     },
     "Journey details" : {
-      "comment" : "navigationBarTitle"
+      "comment" : "navigationBarTitle",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Детали поездки"
+          }
+        }
+      }
     },
     "Journey Details" : {
-      "comment" : "info sheet: follow journey button: view name"
+      "comment" : "info sheet: follow journey button: view name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Детали поездки"
+          }
+        }
+      }
     },
     "Journey follow" : {
-      "comment" : "navigationBarTitle"
+      "comment" : "navigationBarTitle",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохраненные поездки"
+          }
+        }
+      }
     },
     "Leg appearance" : {
-      "comment" : "settingsView: section name"
+      "comment" : "settingsView: section name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Как выглядят поездки"
+          }
+        }
+      }
     },
     "Maximum count" : {
-      "comment" : "SettingsView: transferSegment: picker name"
+      "comment" : "SettingsView: transferSegment: picker name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Максимальное количество"
+          }
+        }
+      }
     },
     "Minimum time" : {
-      "comment" : "SettingsView: transferSegment: picker name"
+      "comment" : "SettingsView: transferSegment: picker name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Минимальная длительность"
+          }
+        }
+      }
     },
     "not reachable" : {
-      "comment" : "badge"
+      "comment" : "badge",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "а как это то назвать"
+          }
+        }
+      }
     },
     "now" : {
-      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons"
+      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сейчас"
+          }
+        }
+      }
     },
     "Offline Mode" : {
-      "comment" : "badge"
+      "comment" : "badge",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Режим оффлайн"
+          }
+        }
+      }
     },
     "Ongoing" : {
-      "comment" : "JourneyFollowView: section name"
+      "comment" : "JourneyFollowView: section name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Предстоящие"
+          }
+        }
+      }
     },
     "Past" : {
-      "comment" : "JourneyFollowView: section name"
+      "comment" : "JourneyFollowView: section name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Прошедшие"
+          }
+        }
+      }
     },
     "platform" : {
-      "comment" : "platformView"
+      "comment" : "platformView",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "платформа"
+          }
+        }
+      }
     },
     "Recent searches" : {
-      "comment" : "RecentSearchesView: view name"
+      "comment" : "RecentSearchesView: view name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Недавнее"
+          }
+        }
+      }
     },
     "Regional" : {
-      "comment" : "SettingsView: transportTypes: picker option"
+      "comment" : "SettingsView: transportTypes: picker option",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Региональные"
+          }
+        }
+      }
     },
     "Reload" : {
-      "comment" : "JourneyListHeaderView: \nJourneyFollowView: listCell: swipe action item"
+      "comment" : "JourneyFollowView: listCell: swipe action item",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновить"
+          }
+        }
+      }
     },
     "Reset" : {
-      "comment" : "alert: actionDescription"
+      "comment" : "alert: actionDescription",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбросить"
+          }
+        }
+      }
     },
     "Reset settings" : {
-      "comment" : "settingsView: button name"
+      "comment" : "settingsView: button name",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбросить настройки"
+          }
+        }
+      }
     },
     "Reset settings?" : {
-      "comment" : "alert: description"
+      "comment" : "alert: description",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сбросить настройки?"
+          }
+        }
+      }
     },
     "Save" : {
-      "comment" : "settingsView: save button\ndatePickerView: save button"
+      "comment" : "datePickerView: save button\nsettingsView: save button",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Сохранить"
+          }
+        }
+      }
     },
     "Search" : {
-      "comment" : "search tip title\nTabItem"
+      "comment" : "search tip title\nTabItem",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Поиск"
+          }
+        }
+      }
     },
     "Search now" : {
-      "comment" : "JourneyFollowView: listCell: swipe action item"
+      "comment" : "JourneyFollowView: listCell: swipe action item",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Найти сейчас"
+          }
+        }
+      }
     },
     "Search update" : {
-      "comment" : "tip: now button: title"
+      "comment" : "tip: now button: title",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Обновление поиска"
+          }
+        }
+      }
     },
     "Show alternative search page" : {
       "comment" : "SettingsView: debug: toggle"
     },
     "Show full segment" : {
-      "comment" : "LegDetailsView: menu item"
+      "comment" : "LegDetailsView: menu item",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать всю поездку"
+          }
+        }
+      }
     },
     "Show on map" : {
-      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item\nLegDetailsView: menu item"
+      "comment" : "LegDetailsView: menu item\nJourneyFollowCellView: menu item\nJourneyCell: menu item",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Показать на карте"
+          }
+        }
+      }
     },
     "This app doent have search button. Search starts when you set both departure and arrival stops." : {
       "comment" : "search tip text"
     },
     "to " : {
-      "comment" : "BadgeView: legDirection"
+      "comment" : "BadgeView: legDirection",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "в "
+          }
+        }
+      }
     },
     "Transfer" : {
-      "comment" : "SettingsView: transferSegment: section header"
+      "comment" : "SettingsView: transferSegment: section header",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Пересадки"
+          }
+        }
+      }
     },
     "transfer %lf min" : {
+      "comment" : "badge",
+      "extractionState" : "stale",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "пересадка %lfмин"
+          }
+        }
+      }
+    },
+    "transfer %lld min" : {
       "comment" : "badge"
     },
     "Transport types" : {
-      "comment" : "SettingsView: transportTypes: section header"
+      "comment" : "SettingsView: transportTypes: section header",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Виды транспорта"
+          }
+        }
+      }
     },
     "unfollow" : {
-      "comment" : "JourneyFollowViewModel.Action"
+      "comment" : "JourneyFollowViewModel.Action",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "удалить"
+          }
+        }
+      }
     },
     "Unfollow" : {
-      "comment" : "alert: actionDescription"
+      "comment" : "alert: actionDescription",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить"
+          }
+        }
+      }
     },
     "Unfollow journey?" : {
-      "comment" : "alert: description"
+      "comment" : "alert: description",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Удалить поездку?"
+          }
+        }
+      }
     },
     "updated %@ ago" : {
-
+      "comment" : "badge",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "обновлено %@ назад"
+          }
+        }
+      }
     },
     "updated now" : {
-      "comment" : "badge: updated at"
+      "comment" : "badge: updated at",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "цфдл "
+          }
+        }
+      }
     },
     "walk %lf min" : {
+      "comment" : "badge: walking",
+      "extractionState" : "stale",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "пешком %lf мин"
+          }
+        }
+      }
+    },
+    "walk %lld min" : {
       "comment" : "badge: walking"
     },
     "With transfers" : {
-      "comment" : "SettingsView: connections: picker option"
+      "comment" : "SettingsView: connections: picker option",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "С пересадками"
+          }
+        }
+      }
     },
     "You have no followed journeys" : {
-      "comment" : "JourneyFollowView: empty view: msg"
+      "comment" : "JourneyFollowView: empty view: msg",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "У вас нет сохраненных поездок"
+          }
+        }
+      }
     },
     "Your followed journeys always appear on follow page." : {
-      "comment" : "tip: follow journey: title"
+      "comment" : "tip: follow journey: title",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ваши сохраненные поездки можно найти на странице с сохраненными поездками"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

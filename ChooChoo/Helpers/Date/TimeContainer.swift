@@ -42,7 +42,7 @@ struct TimeContainer : Equatable, Hashable {
 	let timestamp : TimestampTimeContainer
 	let departureStatus : DelayStatus
 	let arrivalStatus : DelayStatus
-	let durationInMinutes : Double
+	let durationInMinutes : Int
 }
 
 extension TimeContainer {

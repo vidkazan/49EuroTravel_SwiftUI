@@ -32,7 +32,7 @@ extension ChewUser {
 				return user
 			} catch {
 				let nserror = error as NSError
-				print("📕 > save User: failed to save new User", nserror.localizedDescription, nserror.userInfo)
+				print("📕 > save User: failed to save new User", nserror.description, nserror.userInfo)
 				return nil
 			}
 		}

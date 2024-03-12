@@ -34,7 +34,8 @@ struct JourneyListView: View {
 				}
 			case .failedToLoadJourneyList(let error):
 				ErrorView(
-					msg: Text(error.localizedDescription),
+					viewType: .error,
+					msg: Text(error.description),
 					action: nil
 				)
 			}
@@ -102,16 +103,30 @@ struct JourneyListPreview : PreviewProvider {
 }
 
 struct ErrorView : View {
+	enum ViewType : String,Hashable, CaseIterable {
+		case error
+		case empty
+	}
+	let viewType : ViewType
 	let msg : Text
 	let action : (() -> Void)?
 	var body: some View {
 		Group {
 			VStack {
 				Spacer()
-				msg
-					.frame(alignment: .center)
-					.padding(5)
-					.chewTextSize(.big)
+				Label(
+					title: {
+						msg
+							.padding(5)
+							.foregroundStyle(.secondary)
+							.chewTextSize(.big)
+					},
+					icon: {
+						Image(viewType == .error ? ChewSFSymbols.exclamationmarkCircle : ChewSFSymbols.infoCircle)
+							.foregroundStyle(.secondary)
+					}
+				)
+				.frame(maxWidth: 300,alignment: .center)
 				if let action = action {
 					Button(action: action, label: {
 						Image(.exclamationmarkCircle)

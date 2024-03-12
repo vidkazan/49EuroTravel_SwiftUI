@@ -14,6 +14,8 @@ import Foundation
 		
 		func hash(into hasher: inout Hasher) {
 			switch self {
+			case .generic:
+				break
 			case .hafasError(let error):
 				hasher.combine(error.hafasCode)
 			case .badUrl:
@@ -30,8 +32,6 @@ import Foundation
 				break
 			case .requestRateExceeded:
 				break
-			case .generic(let error):
-				hasher.combine(error.localizedDescription)
 			case .stopNotFound:
 				break
 			case .connectionNotFound:
@@ -48,15 +48,17 @@ import Foundation
 		case cannotDecodeContentData
 		case badRequest
 		case requestRateExceeded
-		case generic(Error)
 		case stopNotFound
 		case connectionNotFound
 		case failedToGetUserLocation
+		case generic(description : String)
 		
 		var description : String  {
 			switch self {
+			case .generic(let description):
+				return description
 			case .hafasError(let error):
-				return error.hafasDescription ?? error.hafasMessage ?? error.message ?? "hafas error"
+				return error.hafasDescription ?? error.hafasMessage ?? error.message ?? "Unknown hafas error"
 			case .badUrl:
 				return "Bad url"
 			case .cannotConnectToHost(let string):
@@ -71,8 +73,6 @@ import Foundation
 				return "Bad search request"
 			case .requestRateExceeded:
 				return "Request rate exceeded"
-			case .generic(let error):
-				return error.localizedDescription
 			case .stopNotFound:
 				return "Stop not found"
 			case .connectionNotFound:

@@ -324,7 +324,7 @@ extension SheetViewModel {
 		
 		let subject = Future<MKDirections.Response,ApiError> { promise in
 			directions.calculate { resp, error in
-				if let error=error {
+				if let error = error {
 					return promise(.failure(.cannotConnectToHost(error.localizedDescription)))
 				}
 				guard let resp = resp else {
