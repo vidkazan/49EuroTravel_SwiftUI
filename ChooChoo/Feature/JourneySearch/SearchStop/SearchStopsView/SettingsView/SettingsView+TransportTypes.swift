@@ -62,7 +62,3 @@ extension SettingsView {
 		})
 	}
 }
-
-#warning("localization:")
-#warning("Errors()")
-#warning("descriptions")

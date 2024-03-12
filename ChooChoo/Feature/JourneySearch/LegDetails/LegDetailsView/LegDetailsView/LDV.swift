@@ -92,12 +92,14 @@ struct LegDetailsView: View {
 		.padding(.top,leg.legType == LegViewData.LegType.line || leg.legType.caseDescription == "footStart" ?  10 : 0)
 		.background(leg.legType == LegViewData.LegType.line ? Color.chewLegDetailsCellGray : .clear )
 		.onTapGesture {
-			switch isExpandedState {
-			case .collapsed:
-				isExpandedState = .expanded
-			case .expanded:
-				isExpandedState = .collapsed
-			}
+			withAnimation(.smooth, {
+				switch isExpandedState {
+				case .collapsed:
+					isExpandedState = .expanded
+				case .expanded:
+					isExpandedState = .collapsed
+				}
+			})
 		}
 		.overlay(alignment: .topTrailing) {
 			menu
@@ -108,10 +110,14 @@ struct LegDetailsView: View {
 			updateProgressHeight()
 		}
 		.onReceive(timer, perform: { _ in
-			updateProgressHeight()
+			withAnimation(.smooth, {
+				updateProgressHeight()
+			})
 		})
 		.onChange(of: isExpandedState, perform: { _ in
-			updateProgressHeight()
+			withAnimation(.smooth, {
+				updateProgressHeight()
+			})
 		})
 	}
 }

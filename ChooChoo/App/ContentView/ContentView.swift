@@ -26,6 +26,7 @@ import TipKit
 
 #warning("Anna")
 // tip: for maps
+// recentSearchesCell: revise
 // tip: for sunEvents ( first cell of journeyList )
 // mapDetails: stop departures: loading / empty state
 // ldv: menu: remove fulleg from foot/tranfer

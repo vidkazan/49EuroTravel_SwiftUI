@@ -15,7 +15,6 @@ struct JourneyDetailsView: View {
 	
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	
 	// MARK: Init
 	init(journeyDetailsViewModel : JourneyDetailsViewModel) {
 		viewModel = journeyDetailsViewModel
@@ -35,33 +34,34 @@ struct JourneyDetailsView: View {
 									referenceDate: chewVM.referenceDate,
 									isExpanded: .collapsed,
 									leg: leg
-								)}
+								)
 							}
 						}
-						.padding(10)
 					}
+					.padding(10)
 				}
-				// MARK: Modifiers
-				.background(Color.chewFillPrimary)
-				.navigationBarTitle(
-					Text(
-						"Journey details",
-						 comment: "navigationBarTitle"
-					),
-					displayMode: .inline
-				)
-				.toolbar { toolbar() }
-				// MARK: Modifiers - onChange
-				.onAppear {
-					viewModel.send(event: .didRequestReloadIfNeeded(
-						id: viewModel.state.data.id,
-						ref: viewModel.state.data.viewData.refreshToken,
-						timeStatus: .active
-					))
-				}
+			}
+			// MARK: Modifiers
+			.background(Color.chewFillPrimary)
+			.navigationBarTitle(
+				Text(
+					"Journey details",
+					 comment: "navigationBarTitle"
+				),
+				displayMode: .inline
+			)
+			.toolbar { toolbar() }
+			// MARK: Modifiers - onChange
+			.onAppear {
+				viewModel.send(event: .didRequestReloadIfNeeded(
+					id: viewModel.state.data.id,
+					ref: viewModel.state.data.viewData.refreshToken,
+					timeStatus: .active
+				))
 			}
 		}
 	}
+}
 
 struct JourneyDetailsPreview : PreviewProvider {
 	static var previews: some View {

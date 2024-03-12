@@ -48,7 +48,6 @@ struct StopViewData : Equatable, Identifiable, Hashable {
 }
 
 extension StopViewData {
-#warning("too many nils")
 	func stop() -> Stop? {
 		if let id = id {
 			return Stop(
@@ -57,11 +56,11 @@ extension StopViewData {
 				stopDTO: StopDTO(
 					type: nil,
 					id: id,
-					name: nil,
+					name: self.name,
 					address: nil,
 					location: nil,
-					latitude: nil,
-					longitude: nil,
+					latitude: self.locationCoordinates.latitude,
+					longitude: self.locationCoordinates.longitude,
 					poi: nil,
 					products: nil,
 					distance: nil,
