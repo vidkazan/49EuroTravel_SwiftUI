@@ -24,6 +24,7 @@ struct JourneySearchView : View {
 			BottomView()
 		}
 		.animation(.easeInOut, value: topAlertVM.state.alerts)
+		.animation(.easeInOut, value: chewViewModel.state.status)
 		.contentShape(Rectangle())
 //		.onTapGesture {
 //			chewViewModel.send(event: .didCancelEditStop)
@@ -58,8 +59,8 @@ extension JourneySearchView {
 				.background (
 					.linearGradient(
 						colors: [
-							.transport.busMagenta.opacity(0.1),
-							.transport.tramRed.opacity(0.05)
+							.transport.uBlue.opacity(0.1),
+							.transport.shipCyan.opacity(0.05)
 						],
 						startPoint: UnitPoint(x: 0.2, y: 0),
 						endPoint: UnitPoint(x: 0.2, y: 0.4)
@@ -72,8 +73,8 @@ extension JourneySearchView {
 				.background (
 					.linearGradient(
 						colors: [
-							.transport.busMagenta.opacity(0.2),
-							.transport.tramRed.opacity(0.1),
+							.transport.shipCyan.opacity(0.2),
+							.transport.uBlue.opacity(0.1),
 						],
 						startPoint: UnitPoint(x: 0, y: 0),
 						endPoint: UnitPoint(x: 1, y: 0))
