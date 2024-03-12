@@ -24,11 +24,15 @@ extension CoreDataStore {
 		var transportMode = Settings.TransportMode.all
 		var transferCount = Settings.TransferCountCases.unlimited
 		var onboarding : Bool = true
+		var legViewMode : Settings.LegViewMode = .sunEvents
 		
 		asyncContext.performAndWait {
 			settings = user?.chooSettings
 			guard let settings = settings else {
 				return
+			}
+			if let mode = Settings.LegViewMode(rawValue: settings.legViewMode) {
+				legViewMode = mode
 			}
 			transferTypes = {
 				 if settings.isWithTransfers == false {
@@ -54,9 +58,7 @@ extension CoreDataStore {
 		}
 		
 		let transportModes = fetchSettingsTransportModes()
-		
-		
-		#warning("legViewMode hardcode")
+	
 		return Settings(
 			customTransferModes: transportModes,
 			transportMode: transportMode,
@@ -72,7 +74,7 @@ extension CoreDataStore {
 				prettyJSON: false,
 				alternativeSearchPage: false
 			),
-			legViewMode: .sunEvents
+			legViewMode: legViewMode
 		)
 	}
 	

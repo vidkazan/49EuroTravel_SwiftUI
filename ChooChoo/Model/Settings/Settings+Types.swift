@@ -31,7 +31,7 @@ extension Settings {
 			}
 	}
 	
-	enum LegViewMode : Int, Equatable,CaseIterable {
+	enum LegViewMode : Int16, Equatable,CaseIterable {
 		case sunEvents
 		case colorfulLegs
 		case all

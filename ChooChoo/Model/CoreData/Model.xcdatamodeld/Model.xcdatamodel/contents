@@ -94,6 +94,7 @@
     </entity>
     <entity name="ChooSettings" representedClassName="ChooSettings" syncable="YES">
         <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="legViewMode" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="onboarding" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="transferCount" optional="YES" attributeType="String"/>
         <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>

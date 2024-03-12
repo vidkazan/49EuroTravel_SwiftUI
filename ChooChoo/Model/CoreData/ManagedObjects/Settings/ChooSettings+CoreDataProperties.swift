@@ -15,6 +15,7 @@ extension ChooSettings {
     @NSManaged public var isWithTransfers: Bool
     @NSManaged public var transferTime: Int16
     @NSManaged public var transportModeSegment: Int16
+	@NSManaged public var legViewMode: Int16
     @NSManaged public var transportModes: TransportModes
 	@NSManaged public var transferCount: String?
     @NSManaged public var user: ChewUser?

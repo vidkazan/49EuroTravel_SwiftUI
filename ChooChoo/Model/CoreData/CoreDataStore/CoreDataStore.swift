@@ -19,24 +19,6 @@ final class CoreDataStore : ObservableObject {
 		}
 }
 
-
-func differenceBetweenStrings(_ str1: String, _ str2: String) -> String {
-	var difference = ""
-	
-	// Convert strings to arrays of characters for easier comparison
-	let array1 = Array(str1)
-	let array2 = Array(str2)
-	
-	// Find the difference between the two arrays
-	for (char1, char2) in zip(array1, array2) {
-		if char1 != char2 {
-			difference.append(char1)
-		}
-	}
-	
-	return difference
-}
-
 // MARK: remove
 extension CoreDataStore {
 	func deleteJourneyIfFound(id : Int64) -> Bool {
@@ -197,8 +179,9 @@ extension CoreDataStore {
 				settings.transferTime = Int16(minutes.rawValue)
 			}
 			
+			 settings.legViewMode = newSettings.legViewMode.rawValue
 			settings.transportModeSegment = Int16(newSettings.transportMode.rawValue)
-			 settings.transferCount = newSettings.transferCount.rawValue
+			settings.transferCount = newSettings.transferCount.rawValue
 			let modes = Self.transportModes(
 				modes: newSettings.customTransferModes,
 				from: settings.transportModes,

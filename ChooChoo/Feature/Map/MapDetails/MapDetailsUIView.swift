@@ -27,7 +27,6 @@ struct MapDetailsUIView: UIViewRepresentable {
 			return MKOverlayRenderer()
 		}
 		
-		
 		func mapView(_ mapView: MKMapView,viewFor annotation: MKAnnotation) -> MKAnnotationView? {
 			let view = MapPickerViewModel.mapView(mapView, viewFor: annotation)
 			if let anno = annotation as? StopAnnotation {
@@ -104,6 +103,6 @@ class ChooPolylineRenderer : MKPolylineRenderer {
 class ChooFootPolylineRenderer : ChooPolylineRenderer {
 	override init(overlay: MKOverlay) {
 		super.init(overlay: overlay)
-		self.lineDashPattern = [7,14]
+		self.lineDashPattern = [5,10]
 	}
 }

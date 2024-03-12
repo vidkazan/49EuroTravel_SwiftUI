@@ -58,27 +58,54 @@ import Foundation
 			case .generic(let description):
 				return description
 			case .hafasError(let error):
-				return error.hafasDescription ?? error.hafasMessage ?? error.message ?? "Unknown hafas error"
+				return error.hafasDescription ?? error.hafasMessage ?? error.message ?? NSLocalizedString("Unknown hafas error", comment: "ApiError")
 			case .badUrl:
-				return "Bad url"
+				return NSLocalizedString(
+					"Bad url",
+					comment: "ApiError"
+				)
 			case .cannotConnectToHost(let string):
 				return string
 			case .badServerResponse(let code):
-				return "Bad server response \(code)"
+				return NSLocalizedString(
+					"Bad server response \(code)",
+					comment: "ApiError"
+				)
 			case .cannotDecodeRawData:
-				return "Server response data nil"
+				return NSLocalizedString(
+					"Server response data nil",
+					comment: "ApiError"
+				)
 			case .cannotDecodeContentData:
-				return "Server response data decoding"
+				return NSLocalizedString(
+					"Server response data decoding",
+					comment: "ApiError"
+				)
 			case .badRequest:
-				return "Bad search request"
+				return NSLocalizedString(
+					"Bad search request",
+					comment: "ApiError"
+				)
 			case .requestRateExceeded:
-				return "Request rate exceeded"
+				return NSLocalizedString(
+					"Request rate exceeded",
+					comment: "ApiError"
+				)
 			case .stopNotFound:
-				return "Stop not found"
+				return NSLocalizedString(
+					"Stop not found",
+					comment: "ApiError"
+				)
 			case .connectionNotFound:
-				return "Connection not found"
+				return NSLocalizedString(
+					"Connection not found",
+					comment: "ApiError"
+				)
 			case .failedToGetUserLocation:
-				return "Failed to get user location"
+				return NSLocalizedString(
+					"Failed to get user location",
+					comment: "ApiError"
+				)
 			}
 		}
 	}

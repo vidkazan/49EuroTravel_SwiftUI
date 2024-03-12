@@ -98,6 +98,15 @@
         }
       }
     },
+    "Bad search request" : {
+      "comment" : "ApiError"
+    },
+    "Bad server response (code)" : {
+      "comment" : "ApiError"
+    },
+    "Bad url" : {
+      "comment" : "ApiError"
+    },
     "cancelled" : {
       "comment" : "badge",
       "localizations" : {
@@ -122,6 +131,7 @@
     },
     "Choo Choo" : {
       "comment" : "app name",
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -174,6 +184,9 @@
           }
         }
       }
+    },
+    "Connection not found" : {
+      "comment" : "ApiError"
     },
     "Connections" : {
       "comment" : "SettingsView: connections: section header",
@@ -265,6 +278,9 @@
           }
         }
       }
+    },
+    "Failed to get user location" : {
+      "comment" : "ApiError"
     },
     "Failed to load full leg" : {
       "comment" : "badge",
@@ -435,7 +451,7 @@
       }
     },
     "now" : {
-      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
+      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -522,6 +538,9 @@
         }
       }
     },
+    "Request rate exceeded" : {
+      "comment" : "ApiError"
+    },
     "Reset" : {
       "comment" : "alert: actionDescription",
       "localizations" : {
@@ -599,6 +618,12 @@
         }
       }
     },
+    "Server response data decoding" : {
+      "comment" : "ApiError"
+    },
+    "Server response data nil" : {
+      "comment" : "ApiError"
+    },
     "Show alternative search page" : {
       "comment" : "SettingsView: debug: toggle"
     },
@@ -614,7 +639,7 @@
       }
     },
     "Show on map" : {
-      "comment" : "LegDetailsView: menu item\nJourneyFollowCellView: menu item\nJourneyCell: menu item",
+      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item\nLegDetailsView: menu item",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -623,6 +648,9 @@
           }
         }
       }
+    },
+    "Stop not found" : {
+      "comment" : "ApiError"
     },
     "This app doent have search button. Search starts when you set both departure and arrival stops." : {
       "comment" : "search tip text"
@@ -662,7 +690,15 @@
       }
     },
     "transfer %lld min" : {
-      "comment" : "badge"
+      "comment" : "badge",
+      "localizations" : {
+        "ru" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "пересадка %lld мин"
+          }
+        }
+      }
     },
     "Transport types" : {
       "comment" : "SettingsView: transportTypes: section header",
@@ -707,6 +743,9 @@
           }
         }
       }
+    },
+    "Unknown hafas error" : {
+      "comment" : "ApiError"
     },
     "updated %@ ago" : {
       "comment" : "badge",

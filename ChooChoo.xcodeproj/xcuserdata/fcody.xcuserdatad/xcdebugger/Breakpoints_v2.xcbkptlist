@@ -138,8 +138,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
             <Locations>
@@ -186,8 +186,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "51"
-            endingLineNumber = "51"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
          </BreakpointContent>

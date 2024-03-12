@@ -36,7 +36,7 @@ struct JourneySearchView : View {
 		})
 		.background(Color.chewFillPrimary)
 		.navigationTitle(
-			Text("Choo Choo", comment: "app name")
+			Text(verbatim: "Choo Choo")
 		)
 		.navigationBarTitleDisplayMode(.inline)
 	}
