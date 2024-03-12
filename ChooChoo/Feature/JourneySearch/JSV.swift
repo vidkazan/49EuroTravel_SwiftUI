@@ -10,6 +10,7 @@ import SwiftUI
 import TipKit
 
 struct JourneySearchView : View {
+	@Namespace var journeySearchViewNamespace
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var searchStopsVM = Model.shared.searchStopsViewModel
 	@ObservedObject var topAlertVM = Model.shared.topBarAlertViewModel
@@ -20,11 +21,13 @@ struct JourneySearchView : View {
 			}
 			TopBarAlertsView()
 			SearchStopsView()
+				.matchedGeometryEffect(id: "SearchStopsView", in: journeySearchViewNamespace)
 			TimeAndSettingsView()
 			BottomView()
 		}
 		.animation(.easeInOut, value: topAlertVM.state.alerts)
 		.animation(.easeInOut, value: chewViewModel.state.status)
+		.animation(.easeInOut, value: searchStopsVM.state.status)
 		.contentShape(Rectangle())
 //		.onTapGesture {
 //			chewViewModel.send(event: .didCancelEditStop)

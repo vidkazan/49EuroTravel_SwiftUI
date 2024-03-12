@@ -83,9 +83,7 @@ struct FeatureView: View {
 		}
 		.onReceive(chewViewModel.$state, perform: { state in
 			switch state.status {
-			case .checkingSearchData:
-				selectedTab = .search
-			case .journeys:
+			case .checkingSearchData, .journeys:
 				selectedTab = .search
 			default:
 				return

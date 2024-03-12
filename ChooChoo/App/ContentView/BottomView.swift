@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct BottomView: View {
-	@Namespace private var bottomView
 	@ObservedObject var searchStopsVM = Model.shared.searchStopsViewModel
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel

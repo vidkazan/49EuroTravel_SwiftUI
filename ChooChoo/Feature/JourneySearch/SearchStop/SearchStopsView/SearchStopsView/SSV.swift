@@ -36,7 +36,7 @@ struct SearchStopsView: View {
 						.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
 				)
 				if focusedField == .departure {
-					stopList(type: .departure)
+					StopList(fieldText: topText, type: .departure)
 				}
 			}
 			.background(Color.chewFillSecondary.opacity(0.7))
@@ -57,33 +57,35 @@ struct SearchStopsView: View {
 						.stroke(fieldRedBorder.bottom == true ? .red : .clear, lineWidth: 1.5)
 				)
 				if focusedField == .arrival {
-					stopList(type: .arrival)
+					StopList(fieldText: bottomText, type: .arrival)
 				}
 			}
 			.background(Color.chewFillSecondary.opacity(0.7))
 			.cornerRadius(10)
 		}
 		.onReceive(chewViewModel.$state, perform: { state in
-			self.status = state.status
-			topText = state.depStop.text
-			bottomText = state.arrStop.text
-			
-			fieldRedBorder.bottom = state.arrStop.stop == nil && !state.arrStop.text.isEmpty && state.status != .editingStop(.arrival)
-			fieldRedBorder.top = state.depStop.stop == nil && !state.depStop.text.isEmpty && state.status != .editingStop(.departure)
-			switch state.status {
-			case .editingStop(let type):
-				focusedField = type
-				switch type {
-				case .arrival:
-					bottomText = ""
-				case .departure:
-					topText = ""
+			Task {
+				self.status = state.status
+				topText = state.depStop.text
+				bottomText = state.arrStop.text
+				
+				fieldRedBorder.bottom = state.arrStop.stop == nil && !state.arrStop.text.isEmpty && state.status != .editingStop(.arrival)
+				fieldRedBorder.top = state.depStop.stop == nil && !state.depStop.text.isEmpty && state.status != .editingStop(.departure)
+				switch state.status {
+				case .editingStop(let type):
+					focusedField = type
+					switch type {
+					case .arrival:
+						bottomText = ""
+					case .departure:
+						topText = ""
+					}
+				default:
+					focusedField = nil
 				}
-			default:
-				focusedField = nil
+				
+				previuosStatus = state.status
 			}
-			
-			previuosStatus = state.status
 		})
 	}
 }

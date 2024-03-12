@@ -9,29 +9,38 @@ import CoreLocation
 import Foundation
 import SwiftUI
 
-extension SearchStopsView {
+struct StopList : View {
+	@Namespace var stopListNamespace
+	@EnvironmentObject  var chewViewModel : ChewViewModel
+	@ObservedObject var searchStopViewModel : SearchStopsViewModel = Model.shared.searchStopsViewModel
+	@State var recentStopsData = [StopWithDistance]()
+	@State var stops = [StopWithDistance]()
 	
-	func stopList(type : LocationDirectionType) -> some View {
-		let recentStopsAll = searchStopViewModel.state.previousStops.filter { stop in
-			return type == .departure ? stop.name.hasPrefix(topText) : stop.name.hasPrefix(bottomText)
-		}
-		let recentStopsData = Array(
-			SearchStopsViewModel
-				.sortedStopsByLocationWithDistance(stops: recentStopsAll).prefix(2)
-		)
-		let stops = SearchStopsViewModel
-			.sortedStopsByLocationWithDistance(stops: searchStopViewModel.state.stops)
-		return VStack(alignment: .leading,spacing: 1) {
+	var fieldText : String
+	let type : LocationDirectionType
+	var body: some View {
+		VStack(alignment: .leading,spacing: 1) {
 			findOnMap(type: type)
 			recentStops(type: type,recentStops: recentStopsData)
 			foundStop(type: type, stops: stops)
 		}
+		.onReceive(searchStopViewModel.$state, perform: { state in
+			Task {
+				stops = SearchStopsViewModel.sortedStopsByLocationWithDistance(stops: searchStopViewModel.state.stops)
+				let recentStopsAll = searchStopViewModel.state.previousStops.filter { stop in
+					return stop.name.hasPrefix(fieldText)
+				}
+				recentStopsData = Array(
+					SearchStopsViewModel.sortedStopsByLocationWithDistance(stops: recentStopsAll).prefix(2)
+				)
+			}
+		})
 		.padding(EdgeInsets(top: 0, leading: 5, bottom: 0, trailing: 5))
 		.frame(maxWidth: .infinity,alignment: .leading)
 	}
 }
 
-extension SearchStopsView {
+extension StopList {
 	func findOnMap(type : LocationDirectionType) -> some View {
 		return Button(action: {
 			chewViewModel.send(event: .didCancelEditStop)

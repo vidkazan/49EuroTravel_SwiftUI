@@ -51,18 +51,20 @@ class SearchStopsViewModel : ObservableObject {
 }
 
 extension SearchStopsViewModel {
-	static func sortedStopsByLocationWithDistance(stops : [Stop]) -> ([(Stop, Double?)]) {
+	static func sortedStopsByLocationWithDistance(stops : [Stop]) -> [StopWithDistance] {
 		var res = [(Stop, Double)]()
-		var resOptional = [(Stop, Double?)]()
+		var resOptional = [StopWithDistance]()
 		let tmp = stops
 		if let location = Model.shared.locationDataManager.locationManager.location {
 			res = tmp.map({stop in
 				return (stop, location.distance(stop.coordinates))
 			})
 			res.sort(by: { $0.1 < $1.1 })
-			resOptional = res
+			resOptional = res.map({
+				StopWithDistance(stop: $0.0, distance: $0.1)
+			})
 		} else {
-			resOptional = tmp.map({ return ($0, nil)})
+			resOptional = tmp.map({ StopWithDistance(stop: $0, distance: nil)})
 		}
 		return resOptional
 	}

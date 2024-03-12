@@ -50,6 +50,7 @@ extension Stop {
 	}
 }
 
-extension Stop {
-	
+struct StopWithDistance : Equatable, Hashable {
+	let stop : Stop
+	let distance : Double?
 }
