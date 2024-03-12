@@ -61,7 +61,7 @@ struct BadgeBackgroundGradientStyle: BadgeStyle {
 }
 
 struct BadgeBackgroundBaseStyle: BadgeStyle {
-	let color : Color!
+	let color : Color
 	init(_ color: Color){
 		self.color = color
 	}

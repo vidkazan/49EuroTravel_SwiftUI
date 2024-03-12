@@ -17,10 +17,29 @@ enum Tabs : Int,CaseIterable {
 
 struct FeatureView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
-
-	
 	@State var selectedTab = Tabs.search
 		
+	
+	let tabSearchLabel : some View = {
+		Label(
+			title: {
+				Text("Search",comment : "TabItem")
+			},
+			icon: {
+				Image(systemName: "magnifyingglass")
+			}
+		)
+	}()
+	let tabFollowLabel : some View = {
+		Label(
+			title: {
+				Text("Follow", comment : "TabItem")
+			},
+			icon: {
+				Image(ChewSFSymbols.bookmark)
+			}
+		)
+	}()
 	var handler: Binding<Tabs> { Binding(
 		get: { self.selectedTab },
 		set: {
@@ -41,59 +60,23 @@ struct FeatureView: View {
 				NavigationStack {
 					JourneySearchView()
 				}
-				.tabItem {
-					Label(
-						title: {
-							Text("Search",comment : "TabItem")
-						},
-						icon: {
-							Image(systemName: "magnifyingglass")
-						}
-					)
-				}
-				.tag(Tabs.search)
+					.tabItem { tabSearchLabel }
+					.tag(Tabs.search)
 				NavigationStack {
 					JourneyFollowView()
 				}
-				.tabItem {
-					Label(
-						title: {
-							Text("Follow", comment : "TabItem")
-						},
-						icon: {
-							Image(ChewSFSymbols.bookmark)
-						}
-					)
-				}
-				.tag(Tabs.follow)
+					.tabItem { tabFollowLabel }
+					.tag(Tabs.follow)
 			} else {
 				NavigationView {
 					JourneySearchView()
 				}
-				.tabItem {
-					Label(
-						title: {
-							Text("Search",comment : "TabItem")
-						},
-						icon: {
-							Image(systemName: "magnifyingglass")
-						}
-					)
-				}
-				.tag(Tabs.search)
+					.tabItem { tabSearchLabel }
+					.tag(Tabs.search)
 				NavigationView {
 					JourneyFollowView()
 				}
-					.tabItem {
-						Label(
-							title: {
-								Text("Follow", comment : "TabItem")
-							},
-							icon: {
-								Image(ChewSFSymbols.bookmark)
-							}
-						)
-					}
+					.tabItem { tabFollowLabel }
 					.tag(Tabs.follow)
 
 			}

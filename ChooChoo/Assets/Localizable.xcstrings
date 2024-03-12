@@ -576,7 +576,7 @@
       }
     },
     "Save" : {
-      "comment" : "datePickerView: save button\nsettingsView: save button",
+      "comment" : "settingsView: save button\ndatePickerView: save button",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -587,7 +587,7 @@
       }
     },
     "Search" : {
-      "comment" : "TabItem\nsearch tip title",
+      "comment" : "search tip title\nTabItem",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
