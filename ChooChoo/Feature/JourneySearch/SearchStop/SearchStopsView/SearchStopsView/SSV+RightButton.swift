@@ -10,45 +10,44 @@ import SwiftUI
 
 extension SearchStopsView {
 	func rightButton(type : LocationDirectionType) -> some View {
-		return Button(
-			action: {
-				type.sendEvent(send: chewViewModel.send)
-			}, label: {
-				switch type {
-				case .departure:
-					switch chewViewModel.state.status {
-					case .loadingLocation:
-						ProgressView()
-					default:
+		Group {
+			Button(
+				action: {
+					type.sendEvent(send: chewViewModel.send)
+				}, label: {
+					switch type {
+					case .departure:
+						switch chewViewModel.state.status {
+						case .loadingLocation:
+							ProgressView()
+						default:
+							switch searchStopViewModel.state.status {
+							case .loading,.updatingRecentStops:
+								if type == searchStopViewModel.state.type {
+									ProgressView()
+								} else {
+									type.baseImage
+								}
+							case .idle,.loaded,.error:
+								type.baseImage
+							}
+						}
+					case .arrival:
 						switch searchStopViewModel.state.status {
 						case .loading,.updatingRecentStops:
 							if type == searchStopViewModel.state.type {
 								ProgressView()
 							} else {
 								type.baseImage
-									.chewTextSize(.big)
 							}
 						case .idle,.loaded,.error:
 							type.baseImage
-								.chewTextSize(.big)
 						}
-					}
-				case .arrival:
-					switch searchStopViewModel.state.status {
-					case .loading,.updatingRecentStops:
-						if type == searchStopViewModel.state.type {
-							ProgressView()
-						} else {
-							type.baseImage
-								.chewTextSize(.big)
-						}
-					case .idle,.loaded,.error:
-						type.baseImage
-							.chewTextSize(.big)
 					}
 				}
-			}
-		)
+			)
+		}
+		.chewTextSize(.big)
 		.frame(width: 20)
 		.padding(EdgeInsets(top: 12, leading: 0, bottom: 12, trailing: 12))
 		.foregroundColor(.primary)

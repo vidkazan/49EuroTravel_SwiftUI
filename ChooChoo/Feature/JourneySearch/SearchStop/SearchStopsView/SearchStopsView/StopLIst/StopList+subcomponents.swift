@@ -9,36 +9,6 @@ import CoreLocation
 import Foundation
 import SwiftUI
 
-
-extension SearchStopsView {
-	func findOnMap(type : LocationDirectionType) -> some View {
-		return Button(action: {
-			chewViewModel.send(event: .didCancelEditStop)
-			Model.shared.sheetViewModel.send(event: .didRequestShow(.mapPicker(type: type)))
-		}, label: {
-			Label(
-				title: {
-					Text(
-						"find on map",
-						 comment : "SearchStopsView: button"
-					)
-				},
-				icon: {
-					Image(systemName: "map.circle")
-						.frame(width: 30)
-				}
-			)
-			.padding(5)
-			.chewTextSize(.big)
-			.foregroundStyle(.primary)
-			.frame(alignment: .leading)
-		})
-		.foregroundColor(.secondary)
-		.frame(maxWidth: .infinity,minHeight: 40,alignment: .leading)
-	}
-}
-
-
 extension SearchStopsView {
 	func recentStops(
 		type : LocationDirectionType,

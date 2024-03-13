@@ -10,7 +10,7 @@ extension SearchStopsView {
 	func textField(type : LocationDirectionType, text : Binding<String>) -> some View {
 		return HStack(spacing: 0){
 			TextField(type.placeholder, text: text.projectedValue)
-				.submitLabel(.done)
+				.submitLabel(.return)
 				.keyboardType(.alphabet)
 				.autocorrectionDisabled(true)
 				.padding(10)
@@ -22,7 +22,9 @@ extension SearchStopsView {
 					chewViewModel.send(event: .onStopEdit(type))
 				}
 				.onSubmit {
-					chewViewModel.send(event: .onNewStop(.textOnly(text.wrappedValue), type))
+					searchStopViewModel.send(event: .didChangeFieldFocus(type: .none))
+					chewViewModel.send(event: .didCancelEditStop)
+//					chewViewModel.send(event: .onNewStop(.textOnly(text.wrappedValue), type))
 				}
 			HStack(spacing: 0) {
 				if focusedField == type && text.wrappedValue.count > 0 {
