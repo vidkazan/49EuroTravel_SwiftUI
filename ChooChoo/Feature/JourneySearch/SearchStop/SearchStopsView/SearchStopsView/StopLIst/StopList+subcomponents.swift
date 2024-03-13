@@ -9,7 +9,34 @@ import CoreLocation
 import Foundation
 import SwiftUI
 
-extension StopList {
+
+extension SearchStopsView {
+	func findOnMap(type : LocationDirectionType) -> some View {
+		return Button(action: {
+			chewViewModel.send(event: .didCancelEditStop)
+			Model.shared.sheetViewModel.send(event: .didRequestShow(.mapPicker(type: type)))
+		}, label: {
+			Label(
+				title: {
+					Text(
+						"find on map",
+						 comment : "SearchStopsView: button"
+					)
+				},
+				icon: {
+					Image(systemName: "map.circle")
+				}
+			)
+				.chewTextSize(.big)
+		})
+		.foregroundColor(.primary)
+		.padding(.leading,5)
+		.frame(maxWidth: .infinity,minHeight: 40,alignment: .leading)
+	}
+}
+
+
+extension SearchStopsView {
 	func recentStops(
 		type : LocationDirectionType,
 		recentStops : [StopWithDistance]
@@ -51,7 +78,7 @@ extension StopList {
 	}
 }
 
-extension StopList {
+extension SearchStopsView {
 	func foundStop(type : LocationDirectionType,stops : [StopWithDistance]) -> some View {
 		return Group {
 			switch searchStopViewModel.state.status {
@@ -102,7 +129,7 @@ extension StopList {
 	}
 }
 
-extension StopList {
+extension SearchStopsView {
 	func stopListCell(stop : StopWithDistance) -> some View {
 		Group {
 			if let lineType = stop.stop.stopDTO?.products?.lineType,

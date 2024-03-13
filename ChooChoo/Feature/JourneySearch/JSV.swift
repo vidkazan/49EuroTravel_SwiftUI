@@ -23,15 +23,11 @@ struct JourneySearchView : View {
 			SearchStopsView()
 				.matchedGeometryEffect(id: "SearchStopsView", in: journeySearchViewNamespace)
 			TimeAndSettingsView()
+				.matchedGeometryEffect(id: "TimeAndSettingsView", in: journeySearchViewNamespace)
 			BottomView()
 		}
 		.animation(.easeInOut, value: topAlertVM.state.alerts)
-		.animation(.easeInOut, value: chewViewModel.state.status)
-		.animation(.easeInOut, value: searchStopsVM.state.status)
 		.contentShape(Rectangle())
-//		.onTapGesture {
-//			chewViewModel.send(event: .didCancelEditStop)
-//		}
 		.padding(.horizontal,10)
 		.background(alignment: .top, content: {
 			gradient()
@@ -40,17 +36,19 @@ struct JourneySearchView : View {
 		.navigationTitle(
 			Text(verbatim: "Choo Choo")
 		)
-		.toolbar {
-			ToolbarItem(placement: .topBarTrailing, content: {
-				#warning("navigation bar view height cahnges for some reason here")
-				if topAlertVM.state.alerts.contains(.offlineMode) {
-					BadgeView(.offlineMode)
-						.badgeBackgroundStyle(.blue)
-						.animation(.easeInOut, value: topAlertVM.state.alerts)
-				}
-			})
-		}
 		.navigationBarTitleDisplayMode(.inline)
+		.toolbar {
+			ToolbarItem(
+				placement: .topBarTrailing,
+				content: {
+					if topAlertVM.state.alerts.contains(.offlineMode) {
+						BadgeView(.offlineMode)
+							.badgeBackgroundStyle(.blue)
+							.animation(.easeInOut, value: topAlertVM.state.alerts)
+					}
+				}
+			)
+		}
 	}
 }
 

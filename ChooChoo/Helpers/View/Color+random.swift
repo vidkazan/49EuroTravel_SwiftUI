@@ -23,4 +23,11 @@ extension Color {
 			blue: .random(in: 0.4...1)
 		)
 	}
+	static var randomRed: Color {
+		return Color(
+			red: .random(in: 0.2...0.5),
+			green: 0.2,
+			blue: 0.2
+		)
+	}
 }

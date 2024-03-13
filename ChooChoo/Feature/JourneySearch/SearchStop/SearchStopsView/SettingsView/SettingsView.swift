@@ -77,12 +77,16 @@ struct SettingsView: View {
 				}
 			}
 			.onAppear {
-				loadSettings(state: chewViewModel.state)
+				Task {
+					loadSettings(state: chewViewModel.state)
+				}
 			}
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
-						saveSettings()
+						Task {
+							saveSettings()
+						}
 						closeSheet()
 					}, label: {
 						Text("Save", comment: "settingsView: save button")

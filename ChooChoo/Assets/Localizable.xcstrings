@@ -452,7 +452,7 @@
       }
     },
     "now" : {
-      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
+      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -587,7 +587,7 @@
       }
     },
     "Search" : {
-      "comment" : "TabItem\nsearch tip title",
+      "comment" : "search tip title\nTabItem",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -640,7 +640,7 @@
       }
     },
     "Show on map" : {
-      "comment" : "JourneyCell: menu item\nLegDetailsView: menu item\nJourneyFollowCellView: menu item",
+      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item\nLegDetailsView: menu item",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

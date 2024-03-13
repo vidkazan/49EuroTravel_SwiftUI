@@ -24,7 +24,6 @@ struct TopBarAlertsView: View {
 			case .start:
 				EmptyView()
 			case .showing,.adding,.deleting :
-				if !alertVM.state.alerts.isEmpty {
 					VStack(spacing: 2) {
 						ForEach(
 							alertVM.state.alerts.sorted(by: <),
@@ -39,7 +38,6 @@ struct TopBarAlertsView: View {
 					}
 					.padding(.horizontal,10)
 					.animation(.smooth, value: alertVM.state.alerts)
-				}
 			}
 		}
 		.onReceive(timer, perform: { _ in
