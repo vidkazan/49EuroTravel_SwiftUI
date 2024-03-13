@@ -38,7 +38,10 @@ struct RecentSearchesView : View {
 					ScrollView(.horizontal,showsIndicators: false) {
 						HStack {
 							ForEach(searches,id: \.searchTS) { locations in
-								RecentSearchCell(send: recentSearchesVM.send, locations:locations.stops)
+								RecentSearchCell(
+									send: recentSearchesVM.send,
+									locations:locations.stops
+								)
 							}
 						}
 					}

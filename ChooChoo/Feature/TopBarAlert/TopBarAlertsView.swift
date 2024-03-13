@@ -37,7 +37,7 @@ struct TopBarAlertsView: View {
 						)
 					}
 					.padding(.horizontal,10)
-					.animation(.smooth, value: alertVM.state.alerts)
+//					.animation(.smooth, value: alertVM.state.alerts)
 			}
 		}
 		.onReceive(timer, perform: { _ in

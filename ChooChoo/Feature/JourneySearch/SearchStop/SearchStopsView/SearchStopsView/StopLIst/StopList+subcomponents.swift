@@ -46,7 +46,6 @@ extension SearchStopsView {
 	) -> some View {
 		Group {
 			if !recentStops.isEmpty {
-				Divider()
 				ForEach(recentStops,id: \.distance) { stop in
 					HStack(alignment: .center) {
 						Button(action: {
@@ -56,7 +55,6 @@ extension SearchStopsView {
 							StopListCell(stop: stop)
 						})
 						.foregroundColor(.primary)
-//						.padding(.leading,5)
 						Spacer()
 						Button(action: {
 							deleteStop(stop: stop, type: type)
@@ -80,45 +78,45 @@ extension SearchStopsView {
 }
 
 extension SearchStopsView {
-	func foundStop(type : LocationDirectionType,stops : [StopWithDistance]) -> some View {
-		return Group {
+	func foundStop(
+		type : LocationDirectionType,
+		stops : [StopWithDistance]
+	) -> some View {
+		Group {
 			switch searchStopViewModel.state.status {
-			case .loaded,.updatingRecentStops:
-				VStack {
-					Divider()
+			case .loaded,.updatingRecentStops,.loading:
+				if !searchStopViewModel.state.stops.isEmpty {
 					ScrollView {
-						if !searchStopViewModel.state.stops.isEmpty {
-							VStack(spacing: 0) {
-								ForEach(stops,id:\.distance) { stop in
-									HStack(alignment: .center, spacing: 1) {
-										Button(
-											action: {
-												Task { tapStop(stop: stop, type: type) }
-											},
-											label: {
-												StopListCell(stop: stop)
-											}
-										)
-										.foregroundColor(.primary)
-										Spacer()
-										if let dist = stop.distance {
-											BadgeView(.distanceInMeters(dist: dist))
-												.badgeBackgroundStyle(.primary)
+						VStack(spacing: 0) {
+							ForEach(stops,id:\.distance) { stop in
+								HStack(alignment: .center, spacing: 1) {
+									Button(
+										action: {
+											Task { tapStop(stop: stop, type: type) }
+										},
+										label: {
+											StopListCell(stop: stop)
 										}
+									)
+									.foregroundColor(.primary)
+									Spacer()
+									if let dist = stop.distance {
+										BadgeView(.distanceInMeters(dist: dist))
+											.badgeBackgroundStyle(.primary)
 									}
 								}
 							}
 						}
 					}
+					.frame(maxHeight: 300)
 				}
-				.frame(maxHeight: 300)
 			case .error(let error):
 				Text(error.description)
 					.chewTextSize(.big)
 					.foregroundColor(.secondary)
 					.padding(5)
 					.frame(maxWidth: .infinity,alignment: .center)
-			case .idle, .loading:
+			case .idle:
 				EmptyView()
 			}
 		}

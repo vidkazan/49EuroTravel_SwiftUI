@@ -14,10 +14,6 @@ struct RecentSearchCell: View {
 	let locations : DepartureArrivalPair
 	var body: some View {
 			HStack(alignment: .top,spacing: 0) {
-//				Color.chewFillGreenPrimary
-//					.frame(width: 10)
-//					.cornerRadius(4)
-//					.padding(5)
 				VStack(alignment: .leading,spacing: 0) {
 					StopListCell(stop: locations.departure)
 					StopListCell(stop: locations.arrival)
@@ -42,8 +38,8 @@ struct RecentSearchCell: View {
 			.onTapGesture {
 				chewVM.send(event: .didSetBothLocations(locations,date: nil))
 			}
-			.frame(maxWidth: 250, maxHeight: 55)
-			.padding(10)
+			.padding(5)
+			.frame(maxWidth: 300,maxHeight: 100)
 			.background(Color.chewFillAccent.opacity(0.5))
 			.clipShape(.rect(cornerRadius: 8))
 	}
@@ -58,9 +54,13 @@ struct RecentSearchesPreviews: PreviewProvider {
 						stops: .init(
 							departure: .init(coordinates: .init(), type: .location, stopDTO: .init(
 								name: "blafdvefvvfvdcvgvfdcvfdfvdcdccdcd dcdc dcdc",
-								products: .init(bus: true)
+								products: .init(tram : true)
 							)),
-							arrival: .init()),
+							arrival: .init(coordinates: .init(), type: .location, stopDTO: .init(
+								name: "blafdvefvvfvdcvgvfdcvfdfvdcdccdcd dcdc dcdc",
+								products: .init(bus: true)
+							))
+						),
 						searchTS: 0
 					)
 				]

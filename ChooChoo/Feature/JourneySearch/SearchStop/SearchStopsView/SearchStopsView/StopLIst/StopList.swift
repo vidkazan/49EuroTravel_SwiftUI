@@ -12,7 +12,6 @@ import SwiftUI
 extension SearchStopsView {
 	func stopList(type : LocationDirectionType) -> some View {
 		VStack(alignment: .leading,spacing: 1) {
-//			findOnMap(type: type)
 			recentStops(type: type,recentStops: recentStopsData)
 			foundStop(type: type, stops: stops)
 		}

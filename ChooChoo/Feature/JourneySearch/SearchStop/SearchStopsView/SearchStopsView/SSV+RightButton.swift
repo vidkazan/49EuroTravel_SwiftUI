@@ -34,8 +34,18 @@ extension SearchStopsView {
 						}
 					}
 				case .arrival:
-					type.baseImage
-						.chewTextSize(.big)
+					switch searchStopViewModel.state.status {
+					case .loading,.updatingRecentStops:
+						if type == searchStopViewModel.state.type {
+							ProgressView()
+						} else {
+							type.baseImage
+								.chewTextSize(.big)
+						}
+					case .idle,.loaded,.error:
+						type.baseImage
+							.chewTextSize(.big)
+					}
 				}
 			}
 		)

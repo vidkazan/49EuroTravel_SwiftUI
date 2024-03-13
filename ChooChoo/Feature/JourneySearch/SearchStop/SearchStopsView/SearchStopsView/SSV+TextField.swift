@@ -24,7 +24,7 @@ extension SearchStopsView {
 				.onSubmit {
 					chewViewModel.send(event: .onNewStop(.textOnly(text.wrappedValue), type))
 				}
-			VStack {
+			HStack(spacing: 0) {
 				if focusedField == type && text.wrappedValue.count > 0 {
 					Button(action: {
 						text.wrappedValue = ""
@@ -50,6 +50,7 @@ extension SearchStopsView {
 			}
 			Spacer()
 		}
+		.frame(maxHeight: 40)
 	}
 }
 

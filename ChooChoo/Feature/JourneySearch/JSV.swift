@@ -21,12 +21,12 @@ struct JourneySearchView : View {
 			}
 			TopBarAlertsView()
 			SearchStopsView()
-				.matchedGeometryEffect(id: "SearchStopsView", in: journeySearchViewNamespace)
+//				.matchedGeometryEffect(id: "SearchStopsView", in: journeySearchViewNamespace)
 			TimeAndSettingsView()
-				.matchedGeometryEffect(id: "TimeAndSettingsView", in: journeySearchViewNamespace)
+//				.matchedGeometryEffect(id: "TimeAndSettingsView", in: journeySearchViewNamespace)
 			BottomView()
 		}
-		.animation(.easeInOut, value: topAlertVM.state.alerts)
+//		.animation(.easeInOut, value: topAlertVM.state.alerts)
 		.contentShape(Rectangle())
 		.padding(.horizontal,10)
 		.background(alignment: .top, content: {
@@ -44,7 +44,7 @@ struct JourneySearchView : View {
 					if topAlertVM.state.alerts.contains(.offlineMode) {
 						BadgeView(.offlineMode)
 							.badgeBackgroundStyle(.blue)
-							.animation(.easeInOut, value: topAlertVM.state.alerts)
+//							.animation(.easeInOut, value: topAlertVM.state.alerts)
 					}
 				}
 			)
