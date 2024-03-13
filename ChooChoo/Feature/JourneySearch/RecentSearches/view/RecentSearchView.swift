@@ -36,31 +36,19 @@ struct RecentSearchesView : View {
 					.offset(x: 10)
 					.foregroundColor(.secondary)
 					ScrollView(.horizontal,showsIndicators: false) {
-						LazyHStack {
+						HStack {
 							ForEach(searches,id: \.searchTS) { locations in
 								RecentSearchCell(send: recentSearchesVM.send, locations:locations.stops)
-									.onTapGesture {
-										chewVM.send(event: .didSetBothLocations(locations.stops,date: nil))
-									}
 							}
-							.background(Color.chewFillAccent.opacity(0.5))
-							.cornerRadius(8)
-							.padding(5)
 						}
-						.animation(.easeInOut, value: searches)
 					}
-					.padding(5)
-					.frame(maxWidth: .infinity,maxHeight: 100)
-					.cornerRadius(10)
 				}
-				.padding(.top,5)
 			}
 		}
 		.onReceive(recentSearchesVM.$state, perform: { state in
 			Task {
 				self.searches = Array(state.searches
 					.sorted(by: {$0.searchTS > $1.searchTS}).prefix(5))
-					
 			}
 		})
 	}

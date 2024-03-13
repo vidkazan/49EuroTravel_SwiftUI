@@ -415,7 +415,12 @@ extension StopDTO {
 			case "station":
 				return .station
 			case "location":
-				return .pointOfInterest
+				switch poi {
+				case true :
+					return .pointOfInterest
+				default:
+					return .location
+				}
 			default:
 				return .location
 			}

@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 struct RecentSearchCell: View {
+	@EnvironmentObject var chewVM : ChewViewModel
 	let send : (RecentSearchesViewModel.Event) -> Void
 	let locations : DepartureArrivalPair
 	var body: some View {
@@ -17,7 +18,7 @@ struct RecentSearchCell: View {
 					.frame(width: 10)
 					.cornerRadius(4)
 					.padding(5)
-				VStack(alignment: .leading) {
+				VStack(alignment: .leading,spacing: 0) {
 					Text(verbatim: locations.departure.name)
 						.chewTextSize(.big)
 						.padding(5)
@@ -43,8 +44,13 @@ struct RecentSearchCell: View {
 				.background(Color.chewFillAccent.opacity(0.3))
 				.cornerRadius(20)
 			}
-//			.background(.ultraThinMaterial)
+			.onTapGesture {
+				chewVM.send(event: .didSetBothLocations(locations,date: nil))
+			}
 			.padding(10)
+			.background(Color.chewFillAccent.opacity(0.5))
+			.frame(maxWidth: 250, maxHeight: 80)
+			.clipShape(.rect(cornerRadius: 8))
 	}
 }
 

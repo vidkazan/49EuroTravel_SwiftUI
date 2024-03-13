@@ -640,7 +640,7 @@
       }
     },
     "Show on map" : {
-      "comment" : "LegDetailsView: menu item\nJourneyCell: menu item\nJourneyFollowCellView: menu item",
+      "comment" : "JourneyCell: menu item\nLegDetailsView: menu item\nJourneyFollowCellView: menu item",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
