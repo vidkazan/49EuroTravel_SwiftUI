@@ -16,6 +16,10 @@ struct DatePickerView: View {
 
 	var body: some View {
 			VStack(alignment: .center,spacing: 5) {
+				ChewDatePicker(date: $time,mode: .time, style: .wheels)
+					.scaleEffect(0.85)
+					.frame(maxWidth: .infinity,maxHeight: 140)
+					.padding(5)
 				Picker(
 					selection: $type,
 					content: {
@@ -26,16 +30,9 @@ struct DatePickerView: View {
 					},
 					label: {}
 				)
-				.scaleEffect(0.85)
-				.frame(maxWidth: .infinity,maxHeight: 70)
-				.padding(5)
-				.pickerStyle(.wheel)
-				ChewDatePicker(date: $time,mode: .time, style: .wheels)
-					.scaleEffect(0.85)
-					.frame(maxWidth: .infinity,maxHeight: 140)
-					.padding(5)
+				.pickerStyle(.segmented)
 				ChewDatePicker(date: $date,mode: .date, style: .inline)
-					.scaleEffect(0.85)
+					.scaleEffect(0.9)
 					.frame(maxWidth: .infinity,maxHeight: 280)
 					.padding(5)
 					.background(Color.chewFillTertiary.opacity(0.15))
