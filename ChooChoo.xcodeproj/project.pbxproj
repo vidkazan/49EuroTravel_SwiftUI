@@ -89,7 +89,6 @@
 		7D462D5E2AACEC5600BC0D65 /* constructJourneys+TimeLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D462D5D2AACEC5600BC0D65 /* constructJourneys+TimeLabel.swift */; };
 		7D462D602AACED6D00BC0D65 /* constructJourneys+Journey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D462D5F2AACED6D00BC0D65 /* constructJourneys+Journey.swift */; };
 		7D462D622AACEE2500BC0D65 /* constructJourneys+Leg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D462D612AACEE2500BC0D65 /* constructJourneys+Leg.swift */; };
-		7D47C3C72B703F24005BB23B /* CustomEnvironments.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D47C3C62B703F24005BB23B /* CustomEnvironments.swift */; };
 		7D4B1B8A2AA8CB460096F372 /* JLVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B1B892AA8CB460096F372 /* JLVM+reduce.swift */; };
 		7D4B1B8C2AA8CB970096F372 /* JLVM+sideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B1B8B2AA8CB970096F372 /* JLVM+sideEffects.swift */; };
 		7D4B1B8E2AA8CBB00096F372 /* JLVM+state.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4B1B8D2AA8CBB00096F372 /* JLVM+state.swift */; };
@@ -330,7 +329,6 @@
 		7D462D5F2AACED6D00BC0D65 /* constructJourneys+Journey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Journey.swift"; sourceTree = "<group>"; };
 		7D462D612AACEE2500BC0D65 /* constructJourneys+Leg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg.swift"; sourceTree = "<group>"; };
 		7D46ABE72B220B1600A4145E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		7D47C3C62B703F24005BB23B /* CustomEnvironments.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomEnvironments.swift; sourceTree = "<group>"; };
 		7D4B1B892AA8CB460096F372 /* JLVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLVM+reduce.swift"; sourceTree = "<group>"; };
 		7D4B1B8B2AA8CB970096F372 /* JLVM+sideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLVM+sideEffects.swift"; sourceTree = "<group>"; };
 		7D4B1B8D2AA8CBB00096F372 /* JLVM+state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLVM+state.swift"; sourceTree = "<group>"; };
@@ -584,7 +582,6 @@
 				7D53705B2ACED7300009BA20 /* PlannedActual.swift */,
 				7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */,
 				7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */,
-				7D47C3C62B703F24005BB23B /* CustomEnvironments.swift */,
 				7DFC46AA2B7F859F00118608 /* AttibutedContainers.swift */,
 				7DBD26C12B99FB1800612A3B /* EnumTraversal.swift */,
 				7DEE69CC2B9BCDF200A063B4 /* Tips.swift */,
@@ -1708,7 +1705,6 @@
 				7D462D542AAC972200BC0D65 /* StopList.swift in Sources */,
 				7D1AD8EC2AE94A7500868056 /* GeoDTO.swift in Sources */,
 				7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */,
-				7D47C3C72B703F24005BB23B /* CustomEnvironments.swift in Sources */,
 				7D3D88EC2B2A166E00B269E7 /* ChewSunEvent+CoreDataClass.swift in Sources */,
 				7D33A94D2B51A7E60005D723 /* Styles.swift in Sources */,
 				7D462D4F2AAC956B00BC0D65 /* JLVM+reduce+FailedToLoadJourneys.swift in Sources */,
