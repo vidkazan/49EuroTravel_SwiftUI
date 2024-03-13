@@ -29,7 +29,6 @@ struct TimeChoosingView: View {
 								"now",
 								 comment: "timeChoosingView: button on segmented picker"
 							)
-							.popoverTip(ChooTips.searchNowButtonTip, arrowEdge: .bottom)
 							EmptyView()
 						case .specificDate:
 							Text(chewVM.state.date.date.date, format: .dateTime)

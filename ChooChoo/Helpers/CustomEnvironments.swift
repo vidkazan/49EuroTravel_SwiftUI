@@ -8,17 +8,17 @@
 import Foundation
 import SwiftUI
 
-enum LegsViewHeightMultiplierKey: EnvironmentKey {
-	static var defaultValue: Double = 1
-}
-
-extension EnvironmentValues {
-	var legsViewMultiplierKey: Double {
-		get {
-			self[LegsViewHeightMultiplierKey.self]
-		}
-		set {
-			self[LegsViewHeightMultiplierKey.self] = newValue
-		}
-	}
-}
+//enum LegsViewHeightMultiplierKey: EnvironmentKey {
+//	static var defaultValue: Double = 1
+//}
+//
+//extension EnvironmentValues {
+//	var legsViewMultiplierKey: Double {
+//		get {
+//			self[LegsViewHeightMultiplierKey.self]
+//		}
+//		set {
+//			self[LegsViewHeightMultiplierKey.self] = newValue
+//		}
+//	}
+//}
