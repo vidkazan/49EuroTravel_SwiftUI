@@ -21,9 +21,6 @@ import TipKit
 // revise contrast
 // revise text white color ( too contrast with black BG )
 
-// TODO: feature: check when train arrives at starting point
-
-
 #warning("Anna")
 // tip: for maps
 // recentSearchesCell: revise
@@ -33,6 +30,8 @@ import TipKit
 // ssv: stopList: change bg color
 // jfv: tip for swipe actions
 
+
+// TODO: feature: check when train arrives at starting point
 struct ContentView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var alertVM = Model.shared.alertViewModel

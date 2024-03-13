@@ -105,11 +105,11 @@
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="api_id" optional="YES" attributeType="String"/>
+        <attribute name="functionType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="default_stop_name"/>
         <attribute name="transportType" optional="YES" attributeType="String"/>
-        <attribute name="type" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <relationship name="chewJourneyArr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="arrivalStop" inverseEntity="ChewJourney"/>
         <relationship name="chewJourneyDep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="departureStop" inverseEntity="ChewJourney"/>
         <relationship name="chewRecentSearchArrStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewRecentSearch" inverseName="arrStop" inverseEntity="ChewRecentSearch"/>

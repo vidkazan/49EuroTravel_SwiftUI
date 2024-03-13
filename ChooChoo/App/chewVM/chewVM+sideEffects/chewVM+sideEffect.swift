@@ -24,13 +24,22 @@ extension ChewViewModel {
 				return Just(Event.onNotEnoughSearchData)
 					.eraseToAnyPublisher()
 			}
-			Model.shared.recentSearchesViewModel.send(
-				event: .didTapEdit(
+			
+			Model.shared.recentSearchesViewModel.send(event: .didTapEdit(
 					action: .adding,
-					search: RecentSearchesViewModel.RecentSearch(depStop: dep, arrStop: arr,searchTS: Date.now.timeIntervalSince1970)
+					search: RecentSearchesViewModel.RecentSearch(
+						depStop: dep,
+						arrStop: arr,
+						searchTS: Date.now.timeIntervalSince1970
+					)
 				))
-			return Just(Event.onJourneyDataUpdated(DepartureArrivalPair(departure: dep, arrival: arr)))
-				.eraseToAnyPublisher()
+			return Just(Event.onJourneyDataUpdated(
+				DepartureArrivalPair(
+					departure: dep,
+					arrival: arr
+				)
+			))
+			.eraseToAnyPublisher()
 		}
 	}
 	

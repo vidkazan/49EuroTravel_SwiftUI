@@ -22,7 +22,11 @@ extension Location {
 		case recentSearchArrStop(_ recentSearch : ChewRecentSearch)
 	}
 
-	convenience init(context : NSManagedObjectContext,stop : Stop, parent : ParentEntity, products : Products? = nil){
+	convenience init(
+		context : NSManagedObjectContext,
+		stop : Stop,
+		parent : ParentEntity
+	){
 		
 		self.init(entity: Location.entity(), insertInto: context)
 
@@ -45,7 +49,7 @@ extension Location {
 		self.latitude = stop.coordinates.latitude
 		self.longitude = stop.coordinates.longitude
 		self.name = stop.name
-		self.type = stop.type.rawValue
-		self.transportType = products?.lineType?.rawValue
+		self.functionType = stop.type.rawValue
+		self.transportType = stop.stopDTO?.products?.lineType?.rawValue
 	}
 }

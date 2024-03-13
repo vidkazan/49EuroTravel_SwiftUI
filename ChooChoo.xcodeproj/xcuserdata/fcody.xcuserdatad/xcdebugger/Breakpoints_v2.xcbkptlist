@@ -464,5 +464,196 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C59E74C5-4141-44F3-B31A-4709B05834FC"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Model/CoreData/ManagedObjects/ChewJourney/ChewJourney+CoreDataProperties.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
+            landmarkName = "init(viewData:user:depStop:arrStop:id:using:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "C59E74C5-4141-44F3-B31A-4709B05834FC - 26fe0050dd50926c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.ChewJourney.__allocating_init(viewData: ChooChoo.JourneyViewData, user: ChooChoo.ChewUser, depStop: ChooChoo.Stop, arrStop: ChooChoo.Stop, id: Swift.Int64, using: __C.NSManagedObjectContext) -&gt; ChooChoo.ChewJourney"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/ManagedObjects/ChewJourney/ChewJourney+CoreDataProperties.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "976">
+               </Location>
+               <Location
+                  uuid = "C59E74C5-4141-44F3-B31A-4709B05834FC - 26fe0050dd50926c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.ChewJourney.__allocating_init(viewData: ChooChoo.JourneyViewData, user: ChooChoo.ChewUser, depStop: ChooChoo.Stop, arrStop: ChooChoo.Stop, id: Swift.Int64, using: __C.NSManagedObjectContext) -&gt; ChooChoo.ChewJourney"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/ManagedObjects/ChewJourney/ChewJourney+CoreDataProperties.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "892">
+               </Location>
+               <Location
+                  uuid = "C59E74C5-4141-44F3-B31A-4709B05834FC - 26fe0050dd50926c"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.ChewJourney.__allocating_init(viewData: ChooChoo.JourneyViewData, user: ChooChoo.ChewUser, depStop: ChooChoo.Stop, arrStop: ChooChoo.Stop, id: Swift.Int64, using: __C.NSManagedObjectContext) -&gt; ChooChoo.ChewJourney"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/ManagedObjects/ChewJourney/ChewJourney+CoreDataProperties.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "41"
+                  endingLineNumber = "41"
+                  offsetFromSymbolStart = "992">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2F3C28E0-9221-4B47-A998-5EAC1D1C8ADC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
+            landmarkName = "whenIdleCheckForSufficientDataForJourneyRequest()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "27926CE7-3CDE-47C5-A1B0-DBCD6E6E2C47"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "whenIdleCheckForSufficientDataForJourneyRequest()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "27926CE7-3CDE-47C5-A1B0-DBCD6E6E2C47 - d57e9950226bf02a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ChooChoo.ChewViewModel.State) -&gt; Combine.AnyPublisher&lt;ChooChoo.ChewViewModel.Event, Swift.Never&gt; in static ChooChoo.ChewViewModel.whenIdleCheckForSufficientDataForJourneyRequest() -&gt; ChooChoo.Feedback&lt;ChooChoo.ChewViewModel.State, ChooChoo.ChewViewModel.Event&gt;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "6132">
+               </Location>
+               <Location
+                  uuid = "27926CE7-3CDE-47C5-A1B0-DBCD6E6E2C47 - d57e9950226bf02a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ChooChoo.ChewViewModel.State) -&gt; Combine.AnyPublisher&lt;ChooChoo.ChewViewModel.Event, Swift.Never&gt; in static ChooChoo.ChewViewModel.whenIdleCheckForSufficientDataForJourneyRequest() -&gt; ChooChoo.Feedback&lt;ChooChoo.ChewViewModel.State, ChooChoo.ChewViewModel.Event&gt;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "5092">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "77DFA318-A2E8-4713-90DD-D2C56C82FE61"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
+            landmarkName = "fetchRecentSearches()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "77DFA318-A2E8-4713-90DD-D2C56C82FE61 - 2c2a2412ef693159"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ChooChoo.ChewRecentSearch) -&gt; () in closure #1 () -&gt; () in ChooChoo.CoreDataStore.fetchRecentSearches() -&gt; Swift.Optional&lt;Swift.Array&lt;ChooChoo.RecentSearchesViewModel.RecentSearch&gt;&gt;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "3144">
+               </Location>
+               <Location
+                  uuid = "77DFA318-A2E8-4713-90DD-D2C56C82FE61 - 2c2a2412ef693159"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (ChooChoo.ChewRecentSearch) -&gt; () in closure #1 () -&gt; () in ChooChoo.CoreDataStore.fetchRecentSearches() -&gt; Swift.Optional&lt;Swift.Array&lt;ChooChoo.RecentSearchesViewModel.RecentSearch&gt;&gt;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "126"
+                  endingLineNumber = "126"
+                  offsetFromSymbolStart = "348">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "DDBA18DD-AC39-4FA3-A03D-71D922BD3E6B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "129"
+            endingLineNumber = "129"
+            landmarkName = "fetchRecentSearches()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

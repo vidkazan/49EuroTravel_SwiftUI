@@ -14,18 +14,13 @@ struct RecentSearchCell: View {
 	let locations : DepartureArrivalPair
 	var body: some View {
 			HStack(alignment: .top,spacing: 0) {
-				Color.chewFillGreenPrimary
-					.frame(width: 10)
-					.cornerRadius(4)
-					.padding(5)
+//				Color.chewFillGreenPrimary
+//					.frame(width: 10)
+//					.cornerRadius(4)
+//					.padding(5)
 				VStack(alignment: .leading,spacing: 0) {
-					Text(verbatim: locations.departure.name)
-						.chewTextSize(.big)
-						.padding(5)
-					Spacer()
-					Text(verbatim:  locations.arrival.name)
-						.chewTextSize(.big)
-						.padding(5)
+					StopListCell(stop: locations.departure)
+					StopListCell(stop: locations.arrival)
 				}
 				Button(action: {
 					send(.didTapEdit(
@@ -47,9 +42,9 @@ struct RecentSearchCell: View {
 			.onTapGesture {
 				chewVM.send(event: .didSetBothLocations(locations,date: nil))
 			}
+			.frame(maxWidth: 250, maxHeight: 55)
 			.padding(10)
 			.background(Color.chewFillAccent.opacity(0.5))
-			.frame(maxWidth: 250, maxHeight: 80)
 			.clipShape(.rect(cornerRadius: 8))
 	}
 }
@@ -59,10 +54,20 @@ struct RecentSearchesPreviews: PreviewProvider {
 		RecentSearchesView(
 			recentSearchesVM: .init(
 				searches: [
-					.init(stops: .init(departure: .init(), arrival: .init()), searchTS: 0)
+					.init(
+						stops: .init(
+							departure: .init(coordinates: .init(), type: .location, stopDTO: .init(
+								name: "blafdvefvvfvdcvgvfdcvfdfvdcdccdcd dcdc dcdc",
+								products: .init(bus: true)
+							)),
+							arrival: .init()),
+						searchTS: 0
+					)
 				]
 			)
 		)
+		.padding()
+		.background(.chewFillTertiary)
 		.environmentObject(ChewViewModel(referenceDate: .now))
 	}
 }

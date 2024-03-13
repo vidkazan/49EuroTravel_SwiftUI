@@ -16,7 +16,7 @@ extension Location {
 	@NSManaged public var latitude: Double
 	@NSManaged public var longitude: Double
 	@NSManaged public var name: String
-	@NSManaged public var type: Int16
+	@NSManaged public var functionType: Int16
 	@NSManaged public var transportType: String?
 	
 	@NSManaged public var chewJourneyDep: ChewJourney?
@@ -27,12 +27,11 @@ extension Location {
 }
 
 extension Location {
-	// TODO: rearrange locations by calling time
 	func stop() -> Stop {
 		var type : LocationType?
 		var stop : Stop!
 		self.managedObjectContext?.performAndWait {
-			type = LocationType(rawValue: self.type)
+			type = LocationType(rawValue: self.functionType)
 			stop = Stop(
 				coordinates: CLLocationCoordinate2D(
 				 latitude: self.latitude,

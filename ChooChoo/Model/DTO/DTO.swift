@@ -389,7 +389,7 @@ struct StopDTO : Codable, Identifiable, Equatable,Hashable {
 }
 
 extension StopDTO {
-	init(name : String) {
+	init(name : String, products : Products?) {
 		self.name = name
 		self.type	= nil
 		self.id		= nil
@@ -398,7 +398,7 @@ extension StopDTO {
 		self.latitude	= nil
 		self.longitude	= nil
 		self.poi			= nil
-		self.products	= nil
+		self.products	= products
 		self.distance = nil
 		self.station = nil
 	}

@@ -32,7 +32,6 @@ extension ChewJourney {
 		id : Int64,
 		using managedObjectContext: NSManagedObjectContext) {
 			self.init(entity: ChewJourney.entity(), insertInto: managedObjectContext)
-//				print("> ⚡️ create \(ChewJourney.self) thread: ",Thread.current, "context:",managedObjectContext)
 			self.id = id
 			self.isActive = false
 			self.journeyRef = viewData.refreshToken
@@ -49,8 +48,16 @@ extension ChewJourney {
 			viewData.sunEvents.forEach {
 				let _ = ChewSunEvent(context: managedObjectContext,sun: $0,for: self)
 			}
-			let _ = Location(context: managedObjectContext,stop: depStop,parent: .followedJourneyDepStop(self))
-			let _ = Location(context: managedObjectContext,stop: arrStop,parent: .followedJourneyArrStop(self))
+			let _ = Location(
+				context: managedObjectContext,
+				stop: depStop,
+				parent: .followedJourneyDepStop(self)
+			)
+			let _ = Location(
+				context: managedObjectContext,
+				stop: arrStop,
+				parent: .followedJourneyArrStop(self)
+			)
 			user.addToChewJourneys(self)
 		}
 }

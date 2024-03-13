@@ -111,9 +111,9 @@ extension StopTripDTO {
 			legStopsViewData: stops,
 			footDistance: 0,
 			lineViewData: constructLineViewData(
-				product: line?.product ?? "product",
-				name: line?.name ?? "lineName",
-				productName: line?.productName ?? "productName",
+				product: line?.product ?? "",
+				name: line?.name ?? "",
+				productName: line?.productName ?? "",
 				legType: .line
 			),
 			progressSegments: .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0),
@@ -195,9 +195,9 @@ extension LegDTO {
 			legStopsViewData: stops,
 			footDistance: distance ?? 0,
 			lineViewData: constructLineViewData(
-				product: line?.product ?? "product",
-				name: line?.name ?? "lineName",
-				productName: line?.productName ?? "productName",
+				product: line?.product ?? "",
+				name: line?.name ?? "",
+				productName: line?.productName ?? "",
 				legType: legType
 			),
 			progressSegments: segments,

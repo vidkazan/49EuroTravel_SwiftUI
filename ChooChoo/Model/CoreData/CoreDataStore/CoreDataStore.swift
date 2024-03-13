@@ -83,12 +83,11 @@ extension CoreDataStore {
 		guard let user = self.user else { return }
 		 asyncContext.performAndWait {
 //			print("> ⚡️ create locations thread ",Thread.current)
-			 if let prod = stop.stopDTO?.products {
+			 if stop.stopDTO?.products != nil {
 				 let _ = Location(
 					context: self.asyncContext,
 					stop: stop,
-					parent: .recentLocation(user),
-					products: prod
+					parent: .recentLocation(user)
 				 )
 				 self.saveAsyncContext()
 			 }

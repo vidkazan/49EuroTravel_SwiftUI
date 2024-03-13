@@ -122,14 +122,15 @@ extension CoreDataStore {
 			var stops = [RecentSearchesViewModel.RecentSearch]()
 			asyncContext.performAndWait {
 				res.forEach {
-					if let dep = $0.depStop?.stop(),
+					if
+						let dep = $0.depStop?.stop(),
 						let arr = $0.arrStop?.stop(),
-					   let ts = $0.searchDate?.timeIntervalSince1970 {
-						stops.append(RecentSearchesViewModel.RecentSearch(
-							depStop: dep,
-							arrStop: arr,
-							searchTS: ts
-						))
+						let ts = $0.searchDate?.timeIntervalSince1970 {
+							stops.append(RecentSearchesViewModel.RecentSearch(
+								depStop: dep,
+								arrStop: arr,
+								searchTS: ts
+							))
 					}
 				}
 			}

@@ -25,12 +25,15 @@ extension SearchStopsView {
 				},
 				icon: {
 					Image(systemName: "map.circle")
+						.frame(width: 30)
 				}
 			)
-				.chewTextSize(.big)
+			.padding(5)
+			.chewTextSize(.big)
+			.foregroundStyle(.primary)
+			.frame(alignment: .leading)
 		})
-		.foregroundColor(.primary)
-		.padding(.leading,5)
+		.foregroundColor(.secondary)
 		.frame(maxWidth: .infinity,minHeight: 40,alignment: .leading)
 	}
 }
@@ -50,15 +53,13 @@ extension SearchStopsView {
 							chewViewModel.send(event: .onNewStop(.location(stop.stop), type))
 							searchStopViewModel.send(event: .onStopDidTap(.location(stop.stop), type))
 						}, label: {
-							stopListCell(stop: stop)
+							StopListCell(stop: stop)
 						})
 						.foregroundColor(.primary)
-						.padding(.leading,5)
+//						.padding(.leading,5)
+						Spacer()
 						Button(action: {
-							if (searchStopViewModel.state.previousStops.first(where: {$0.name == stop.stop.name}) != nil),
-							   Model.shared.coreDataStore.deleteRecentLocationIfFound(name: stop.stop.name) != false {
-								searchStopViewModel.send(event: .didRequestDeleteRecentStop(stop: stop.stop))
-							}
+							deleteStop(stop: stop, type: type)
 						}, label: {
 							Image(.xmarkCircle)
 								.foregroundColor(.primary)
@@ -92,18 +93,13 @@ extension SearchStopsView {
 									HStack(alignment: .center, spacing: 1) {
 										Button(
 											action: {
-												Task {
-													if (searchStopViewModel.state.previousStops.first(where: {$0.id == stop.stop.id}) == nil) {
-														Model.shared.coreDataStore.addRecentLocation(stop: stop.stop)
-													}
-													chewViewModel.send(event: .onNewStop(.location(stop.stop), type))
-													searchStopViewModel.send(event: .onStopDidTap(.location(stop.stop), type))
-												}
+												Task { tapStop(stop: stop, type: type) }
 											},
 											label: {
-												stopListCell(stop: stop)
-										})
-										.frame(height: 40)
+												StopListCell(stop: stop)
+											}
+										)
+										.foregroundColor(.primary)
 										Spacer()
 										if let dist = stop.distance {
 											BadgeView(.distanceInMeters(dist: dist))
@@ -130,27 +126,34 @@ extension SearchStopsView {
 }
 
 extension SearchStopsView {
-	func stopListCell(stop : StopWithDistance) -> some View {
-		Group {
-			if let lineType = stop.stop.stopDTO?.products?.lineType,
-				let icon = lineType.icon {
-				Label {
-					Text(verbatim: stop.stop.name)
-						.foregroundColor(.primary)
-				} icon: {
-					Image(icon)
-						.padding(5)
-						.aspectRatio(1, contentMode: .fill)
-						.badgeBackgroundStyle(BadgeBackgroundBaseStyle(lineType.color))
-				}
-				.chewTextSize(.big)
-			} else {
-				Label(stop.stop.name, systemImage: stop.stop.type.SFSIcon)
-					.chewTextSize(.big)
-					.foregroundColor(.primary)
-			}
+	func tapStop(stop : StopWithDistance, type : LocationDirectionType) {
+		if !searchStopViewModel
+			.state
+			.previousStops
+			.contains(where: {$0.id == stop.stop.id}) {
+			Model
+				.shared
+				.coreDataStore
+				.addRecentLocation(stop: stop.stop)
 		}
-		.frame(maxWidth: .infinity,alignment: .leading)
-		.foregroundColor(.primary)
+		chewViewModel
+			.send(event: .onNewStop(.location(stop.stop), type))
+		searchStopViewModel
+			.send(event: .onStopDidTap(.location(stop.stop), type))
+	}
+	
+	func deleteStop(stop : StopWithDistance, type : LocationDirectionType) {
+		if searchStopViewModel
+			.state
+			.previousStops
+			.contains(where: {$0.name == stop.stop.name}),
+			Model
+				.shared
+				.coreDataStore
+				.deleteRecentLocationIfFound(name: stop.stop.name) == true {
+					searchStopViewModel.send(
+						event: .didRequestDeleteRecentStop(stop: stop.stop)
+					)
+		}
 	}
 }

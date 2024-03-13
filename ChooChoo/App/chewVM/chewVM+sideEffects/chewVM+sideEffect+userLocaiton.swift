@@ -41,14 +41,14 @@ extension ChewViewModel {
 			let stop = Stop(
 				coordinates: coords,
 				type: .location,
-				stopDTO: StopDTO(name: res)
+				stopDTO: StopDTO(name: res, products: nil)
 			)
 			send(Event.didReceiveLocationData(stop))
 		} else {
 			let stop = Stop(
 				coordinates: coords,
 				type: .location,
-				stopDTO: StopDTO(name: String(coords.latitude) + " " + String(coords.longitude))
+				stopDTO: StopDTO(name: String(coords.latitude) + " " + String(coords.longitude),products: nil)
 			)
 			send(Event.didReceiveLocationData(stop))
 		}
