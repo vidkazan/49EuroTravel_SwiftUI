@@ -41,7 +41,6 @@ struct JourneyFollowView : View {
 					.frame(idealWidth: .infinity,idealHeight: .infinity)
 				default:
 					followViewInner
-					
 				}
 			}
 		}
@@ -49,7 +48,8 @@ struct JourneyFollowView : View {
 			chooseJourneyToUpdate()
 		})
 		.frame(maxWidth: .infinity,maxHeight: .infinity)
-		.navigationBarTitle(
+		.navigationBarTitleDisplayMode(.inline)
+		.navigationTitle(
 			Text("Journey follow", comment: "navigationBarTitle")
 		)
 		.toolbar {
@@ -62,7 +62,6 @@ struct JourneyFollowView : View {
 				}
 			})
 		}
-		.navigationBarTitleDisplayMode(.inline)
 	}
 }
 

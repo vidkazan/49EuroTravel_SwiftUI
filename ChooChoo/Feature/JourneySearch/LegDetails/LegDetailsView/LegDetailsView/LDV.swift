@@ -72,7 +72,7 @@ struct LegDetailsView: View {
 							if let first = leg.legStopsViewData.first,
 								let last = leg.legStopsViewData.last {
 									return [first,last]
-								}
+							}
 							return []
 						}
 					}()
@@ -101,9 +101,7 @@ struct LegDetailsView: View {
 				}
 			})
 		}
-		.overlay(alignment: .topTrailing) {
-			menu
-		}
+		.overlay(alignment: .topTrailing) { options }
 		.cornerRadius(10)
 		.onAppear {
 			isExpandedState = isExpanded
@@ -123,47 +121,44 @@ struct LegDetailsView: View {
 }
 
 extension LegDetailsView {
-	var menu : some View {
-			Menu(content: {
-				Button(action: {
-					switch leg.legType {
-					case .line,.transfer:
-						Model.shared.sheetViewModel.send(event: .didRequestShow(.mapDetails(.lineLeg(leg))))
-					default:
-						Model.shared.sheetViewModel.send(event: .didRequestShow(.mapDetails(.footDirection(leg))))
-					}
-				}, label: {
-					Label(
-						title: {
-							Text("Show on map", comment: "LegDetailsView: menu item")
-						},
-						icon: {
-							Image(systemName: "map.circle")
+	var options : some View {
+		Group {
+			if !leg.options.isEmpty {
+				if leg.options.count == 1, let option = leg.options.first {
+					Button(action: {
+						option.action(leg)
+					}, label: {
+						Label(title: {
+						}, icon: {
+							Image(systemName: option.icon)
+								.chewTextSize(.big)
+								.frame(minWidth: 43,minHeight: 43)
+								.tint(Color.gray)
+						})
+					})
+				} else {
+					Menu(content: {
+						ForEach(leg.options, id:\.text) { option in
+							Button(action: {
+								option.action(leg)
+							}, label: {
+								Label(title: {
+									Text(verbatim: option.text)
+								}, icon: {
+									Image(systemName: option.icon)
+								})
+							})
 						}
-					)
-				})
-				Button(action: {
-					Model.shared.sheetViewModel.send(event: .didRequestShow(.fullLeg(leg: leg)))
-				}, label: {
-					Label(
-						title: {
-							Text(
-								"Show full segment",
-								comment: "LegDetailsView: menu item"
-							)
-						},
-						icon: {
-							Image(ChooSFSymbols.trainSideFrontCar)
-						}
-					)
-				})
-			}, label: {
-				Image(systemName: "ellipsis")
-					.chewTextSize(.big)
-					.frame(minWidth: 43,minHeight: 43)
-					.tint(Color.gray)
-			})
+					}, label: {
+						Image(systemName: "ellipsis")
+							.chewTextSize(.big)
+							.frame(minWidth: 43,minHeight: 43)
+							.tint(Color.gray)
+					})
+				}
+			}
 		}
+	}
 }
 
 extension LegDetailsView {

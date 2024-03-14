@@ -99,13 +99,6 @@ struct LineViewData : Equatable {
 }
 
 extension LegViewData {
-//	enum LineNameLabelType {
-//		case full
-//		case short
-//		case symbol
-//		case empty
-//	}
-	
 	enum LegType : Equatable,Hashable {
 		case footStart(startPointName : String)
 		case footMiddle
@@ -128,4 +121,54 @@ extension LegViewData {
 			}
 		}
 	}
+}
+extension LegViewData {
+	var options : [Option] {
+		switch legType {
+		case .line: [
+			Self.showOnMapOption,
+			Self.fullLegOption
+		]
+		default:
+			[
+				Self.showOnMapOption
+			]
+		}
+	}
+}
+
+extension LegViewData {
+	struct Option {
+		let action : (LegViewData)->()
+		let icon : String
+		let text : String
+	}
+	
+	static let showOnMapOption = Option(
+		action: { leg in
+			switch leg.legType {
+			case .line,.transfer:
+				Model.shared.sheetViewModel.send(event: .didRequestShow(.mapDetails(.lineLeg(leg))))
+			default:
+				Model.shared.sheetViewModel.send(event: .didRequestShow(.mapDetails(.footDirection(leg))))
+			}
+		},
+		icon: "map.circle",
+		text : NSLocalizedString(
+			"Show on map",
+			comment: "LegDetailsView: menu item"
+		)
+	)
+	static let fullLegOption = Option(
+		action: { leg in
+			Model.shared.sheetViewModel.send(
+				event: .didRequestShow(.fullLeg(leg: leg))
+			)
+		},
+		icon: ChooSFSymbols.trainSideFrontCar.rawValue,
+		text: NSLocalizedString(
+			"Show full segment",
+			comment: "LegDetailsView: menu item"
+		)
+	)
 }

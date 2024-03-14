@@ -10,7 +10,6 @@ import TipKit
 
 #warning("FIX: iOS 17+ mapDetails: starting region fault")
 #warning("prognosed direction")
-// Lida ChooChoo to fix:
 
 // MARK: JDV
 // leg cell: stops number badge: let user know that cell is tappable and it will show all leg stops
@@ -25,7 +24,6 @@ import TipKit
 // tip: for maps
 // tip: for sunEvents ( first cell of journeyList )
 // ldv: menu: remove fulleg from foot/tranfer
-// ssv: stopList: change bg color
 // jfv: tip for swipe actions
 
 
