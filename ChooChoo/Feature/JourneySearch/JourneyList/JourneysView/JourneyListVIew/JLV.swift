@@ -103,7 +103,7 @@ struct ErrorView : View {
 							.chewTextSize(.big)
 					},
 					icon: {
-						Image(viewType == .error ? ChewSFSymbols.exclamationmarkCircle : ChewSFSymbols.infoCircle)
+						Image(viewType == .error ? ChooSFSymbols.exclamationmarkCircle : ChooSFSymbols.infoCircle)
 							.foregroundStyle(.secondary)
 					}
 				)

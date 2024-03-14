@@ -39,6 +39,20 @@ extension ChewUser {
 }
 
 
+extension ChewUser {
+	@objc(addSavedLocationsObject:)
+	@NSManaged public func addToSavedLocations(_ value: Location)
+
+	@objc(removeSavedLocationsObject:)
+	@NSManaged public func removeFromSavedLocations(_ value: Location)
+
+	@objc(addSavedLocations:)
+	@NSManaged public func addToSavedLocations(_ values: NSSet)
+
+	@objc(removeSavedLocations:)
+	@NSManaged public func removeFromSavedLocations(_ values: NSSet)
+
+}
 
 // MARK: Generated accessors for chewJourneys
 extension ChewUser {

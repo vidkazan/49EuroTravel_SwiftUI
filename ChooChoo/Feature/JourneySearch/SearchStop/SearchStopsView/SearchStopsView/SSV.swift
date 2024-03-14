@@ -25,10 +25,6 @@ struct SearchStopsView: View {
 			field(type: .departure, text: $topText)
 			field(type: .arrival, text: $bottomText)
 		}
-//		.animation(.easeInOut, value: chewViewModel.state.status)
-//		.animation(.easeInOut, value: searchStopViewModel.state.status)
-//		.animation(.easeInOut, value: topText)
-//		.animation(.easeInOut, value: bottomText)
 		.onReceive(chewViewModel.$state, perform: onStateChange)
 	}
 }

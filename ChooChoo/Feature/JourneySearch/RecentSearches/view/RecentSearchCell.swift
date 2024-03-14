@@ -39,7 +39,7 @@ struct RecentSearchCell: View {
 				chewVM.send(event: .didSetBothLocations(locations,date: nil))
 			}
 			.padding(5)
-			.frame(maxWidth: 300,maxHeight: 100)
+			.frame(maxHeight: 100)
 			.background(Color.chewFillAccent.opacity(0.5))
 			.clipShape(.rect(cornerRadius: 8))
 	}
@@ -47,20 +47,13 @@ struct RecentSearchCell: View {
 
 struct RecentSearchesPreviews: PreviewProvider {
 	static var previews: some View {
+		let mock = Mock.trip.RE6NeussMinden.decodedData?.trip
 		RecentSearchesView(
 			recentSearchesVM: .init(
 				searches: [
 					.init(
-						stops: .init(
-							departure: .init(coordinates: .init(), type: .location, stopDTO: .init(
-								name: "blafdvefvvfvdcvgvfdcvfdfvdcdccdcd dcdc dcdc",
-								products: .init(tram : true)
-							)),
-							arrival: .init(coordinates: .init(), type: .location, stopDTO: .init(
-								name: "blafdvefvvfvdcvgvfdcvfdfvdcdccdcd dcdc dcdc",
-								products: .init(bus: true)
-							))
-						),
+						depStop: mock?.stopovers?[23].stop?.stop() ?? .init(),
+						arrStop: mock?.destination?.stop() ?? .init(),
 						searchTS: 0
 					)
 				]

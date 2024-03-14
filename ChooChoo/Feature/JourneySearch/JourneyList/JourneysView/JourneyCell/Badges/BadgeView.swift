@@ -15,7 +15,7 @@ struct ChewLabel : View {
 		self.text = text
 		self.image = image
 	}
-	init(_ text : Text,_ image : ChewSFSymbols) {
+	init(_ text : Text,_ image : ChooSFSymbols) {
 		self.text = text
 		self.image = image.rawValue
 	}
@@ -168,12 +168,12 @@ struct BadgeView : View {
 			case .transfer:
 					ChewLabel(
 						badge.badgeData.text,
-						.arrowTriangle2Circlepath
+						.arrowLeftArrowRight
 					)
 					.chewTextSize(size)
 					.padding(4)
 			case .changesCount(let count):
-				ChewLabel(Text(verbatim: "\(count)"),.arrowTriangle2Circlepath)
+				ChewLabel(Text(verbatim: "\(count)"),.arrowLeftArrowRight)
 					.chewTextSize(size)
 					.padding(4)
 			case let .departureArrivalStops(departure,arrival):

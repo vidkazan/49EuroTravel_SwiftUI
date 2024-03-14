@@ -29,7 +29,7 @@ struct RecentSearchesView : View {
 			if !recentSearchesVM.state.searches.isEmpty {
 				VStack(alignment: .leading,spacing: 2) {
 					Text(
-						"Recent searches",
+						"Recents",
 						comment: "RecentSearchesView: view name"
 					)
 					.chewTextSize(.big)

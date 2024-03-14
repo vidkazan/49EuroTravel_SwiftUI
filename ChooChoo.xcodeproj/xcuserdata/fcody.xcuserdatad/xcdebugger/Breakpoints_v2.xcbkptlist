@@ -468,7 +468,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "C59E74C5-4141-44F3-B31A-4709B05834FC"
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChooChoo/Model/CoreData/ManagedObjects/ChewJourney/ChewJourney+CoreDataProperties.swift"

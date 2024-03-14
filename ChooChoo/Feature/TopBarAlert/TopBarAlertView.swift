@@ -24,7 +24,7 @@ struct TopBarAlertView: View {
 				if let infoAction = alert.infoAction {
 					Button(
 						action: infoAction, label: {
-							Image(ChewSFSymbols.infoCircle)
+							Image(ChooSFSymbols.infoCircle)
 								.labelStyle(.iconOnly)
 								.foregroundColor(.white.opacity(0.7))
 								.chewTextSize(.big)

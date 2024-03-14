@@ -16,6 +16,7 @@ public class Location: NSManagedObject {
 extension Location {
 	enum ParentEntity {
 		case recentLocation(_ user : ChewUser)
+		case savedLocation(_ user : ChewUser)
 		case followedJourneyDepStop(_ followedJourney : ChewJourney)
 		case followedJourneyArrStop(_ followedJourney : ChewJourney)
 		case recentSearchDepStop(_ recentSearch : ChewRecentSearch)
@@ -31,6 +32,8 @@ extension Location {
 		self.init(entity: Location.entity(), insertInto: context)
 
 		switch parent {
+		case .savedLocation(let user):
+			user.addToSavedLocations(self)
 		case .recentLocation(let user):
 			user.addToRecentLocations(self)
 		case .followedJourneyDepStop(let journeyDep):

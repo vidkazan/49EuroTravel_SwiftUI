@@ -28,7 +28,7 @@ extension RemarkViewData {
 			}
 		}
 		
-		var symbol : ChewSFSymbols {
+		var symbol : ChooSFSymbols {
 			switch self {
 			case .status:
 				return .boltFill

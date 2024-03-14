@@ -153,7 +153,7 @@ extension LegDetailsView {
 							)
 						},
 						icon: {
-							Image(ChewSFSymbols.trainSideFrontCar)
+							Image(ChooSFSymbols.trainSideFrontCar)
 						}
 					)
 				})

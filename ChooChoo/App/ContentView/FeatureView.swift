@@ -36,7 +36,7 @@ struct FeatureView: View {
 				Text("Follow", comment : "TabItem")
 			},
 			icon: {
-				Image(ChewSFSymbols.bookmark)
+				Image(ChooSFSymbols.bookmark)
 			}
 		)
 	}()

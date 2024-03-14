@@ -333,9 +333,9 @@ enum LocationType : Int16, Equatable, Hashable {
 		case .stop:
 			return "bus.fill"
 		case .pointOfInterest:
-			return ChewSFSymbols.building2CropCircle.rawValue
+			return ChooSFSymbols.building2CropCircle.rawValue
 		case .location:
-			return ChewSFSymbols.building2CropCircle.fill.rawValue
+			return ChooSFSymbols.building2CropCircle.fill.rawValue
 		}
 	}
 }

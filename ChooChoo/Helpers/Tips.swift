@@ -28,7 +28,7 @@ struct ChooTipSearch : Tip {
 		)
 	}
 	var image: Image? {
-		Image(systemName: ChewSFSymbols.trainSideFrontCar.rawValue)
+		Image(systemName: ChooSFSymbols.trainSideFrontCar.rawValue)
 	}
 }
 
@@ -56,7 +56,7 @@ struct ChooTipFollowJourney : Tip {
 			 comment: "tip: follow journey: title")
 	}
 	var image: Image? {
-		Image(systemName: ChewSFSymbols.bookmark.rawValue)
+		Image(systemName: ChooSFSymbols.bookmark.rawValue)
 	}
 }
 

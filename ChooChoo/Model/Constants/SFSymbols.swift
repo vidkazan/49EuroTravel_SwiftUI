@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-enum ChewSFSymbols : String {
+enum ChooSFSymbols : String {
 	case gearshape = "gearshape"
 	case bookmark = "bookmark"
 	case bookmarkFill = "bookmark.fill"
@@ -18,6 +18,7 @@ enum ChewSFSymbols : String {
 	case location = "location"
 	case locationFill = "location.fill"
 	case arrowUpArrowDown = "arrow.up.arrow.down"
+	case arrowLeftArrowRight = "arrow.left.arrow.right"
 	case clockArrowCirclepath = "clock.arrow.circlepath"
 	case chevronDownCircle = "chevron.down.circle"
 	case figureWalkCircle = "figure.walk.circle"
@@ -55,7 +56,7 @@ enum ChewSFSymbols : String {
 }
 
 extension Image {
-	init(_ chewSFSymbol : ChewSFSymbols) {
+	init(_ chewSFSymbol : ChooSFSymbols) {
 		self.init(systemName: chewSFSymbol.rawValue)
 	}
 }

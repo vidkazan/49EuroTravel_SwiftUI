@@ -28,7 +28,7 @@ extension SettingsView {
 							Text("With transfers", comment : "SettingsView: connections: picker option")
 						},
 						icon: {
-							Image(systemName: "arrow.2.circlepath")
+							Image(.arrowLeftArrowRight)
 						}
 					)
 					.tag(1)
@@ -78,7 +78,7 @@ extension SettingsView {
 							Text("Maximum count", comment : "SettingsView: transferSegment: picker name")
 						},
 						icon: {
-							Image(systemName: "arrow.2.squarepath")
+							Image(.arrowLeftArrowRight)
 						}
 					)
 				}
