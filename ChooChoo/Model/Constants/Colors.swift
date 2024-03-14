@@ -95,6 +95,12 @@ extension Color {
 	static var chewLegDetailsCellGray: Color {
 		Color("ChewLegDetailsCellGray")
 	}
+	static var chewStopListBG: Color {
+		Color("ChewStopListBG")
+	}
+	static var chewTimeChoosingViewBG: Color {
+		Color("ChewTimeChoosingViewBG")
+	}
 	static var chewLegsViewGray: Color {
 		Color("ChewLegsViewGray")
 	}

@@ -373,7 +373,7 @@
       }
     },
     "Journey debug" : {
-      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
+      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item"
     },
     "Journey details" : {
       "comment" : "navigationBarTitle",
@@ -453,7 +453,7 @@
       }
     },
     "now" : {
-      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
+      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -645,7 +645,7 @@
       }
     },
     "Show on map" : {
-      "comment" : "LegDetailsView: menu item\nJourneyCell: menu item\nJourneyFollowCellView: menu item",
+      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item\nLegDetailsView: menu item",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

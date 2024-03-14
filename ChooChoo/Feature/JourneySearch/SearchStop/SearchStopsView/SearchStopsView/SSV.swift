@@ -10,15 +10,16 @@ import CoreLocation
 
 struct SearchStopsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
-	@ObservedObject var searchStopViewModel : SearchStopsViewModel = Model.shared.searchStopsViewModel
+	@ObservedObject var searchStopViewModel : SearchStopsViewModel
 	@FocusState 	var focusedField : LocationDirectionType?
 	@State var previuosStatus : ChewViewModel.Status?
 	@State var status : ChewViewModel.Status = .idle
-	@State var topText : String = ""
-	@State var bottomText : String = ""
+	@State var topText : String
+	@State var bottomText : String
 	@State var recentStopsData = [StopWithDistance]()
 	@State var stops = [StopWithDistance]()
 	@State var fieldRedBorder : (top: Bool,bottom: Bool) = (false,false)
+	
 	
 	var body: some View {
 		VStack(spacing: 5) {
@@ -26,6 +27,26 @@ struct SearchStopsView: View {
 			field(type: .arrival, text: $bottomText)
 		}
 		.onReceive(chewViewModel.$state, perform: onStateChange)
+	}
+}
+
+extension SearchStopsView {
+	init(
+		searchStopViewModel: SearchStopsViewModel = Model.shared.searchStopsViewModel,
+		focusedField: LocationDirectionType? = nil,
+		previuosStatus: ChewViewModel.Status? = nil,
+		topText: String = "",
+		bottomText: String = "",
+		recentStopsData: [StopWithDistance] = [],
+		stops: [StopWithDistance] = []
+	) {
+		self.topText = topText
+		self.bottomText = bottomText
+		self.searchStopViewModel = searchStopViewModel
+		self.focusedField = focusedField
+		self.previuosStatus = previuosStatus
+		self.recentStopsData = recentStopsData
+		self.stops = stops
 	}
 }
 
@@ -48,7 +69,7 @@ extension SearchStopsView {
 				stopList(type: type)
 			}
 		}
-		.background(Color.chewFillSecondary.opacity(0.7))
+		 .background(Color.chewStopListBG.opacity(0.8))
 		.clipShape(.rect(cornerRadius: 10))
 	}
 	

@@ -9,12 +9,14 @@ import SwiftUI
 
 struct TimeChoosingView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var searchStopsVM : SearchStopsViewModel = Model.shared.searchStopsViewModel
+	@ObservedObject var searchStopsVM : SearchStopsViewModel
 	@State private var selectedOption : TimeSegmentedPickerOptions = .now
 	init(
-		selectedOption: TimeSegmentedPickerOptions = .now
+		selectedOption: TimeSegmentedPickerOptions = .now,
+		searchStopsVM : SearchStopsViewModel = Model.shared.searchStopsViewModel
 	) {
 		self.selectedOption = selectedOption
+		self.searchStopsVM = searchStopsVM
 	}
 	var body: some View {
 		SegmentedPicker(
@@ -68,7 +70,7 @@ struct TimeChoosingView: View {
 			}
 		})
 		.padding(5)
-		.background(Color.chewFillSecondary.opacity(0.5))
+		.background(Color.chewTimeChoosingViewBG.opacity(0.3))
 		.cornerRadius(10)
 	}
 }
@@ -79,3 +81,17 @@ extension TimeChoosingView {
 		case specificDate
 	}
 }
+
+#Preview(body: {
+	SegmentedPicker(
+		["00000","11111"],
+		selectedItem: .constant("0"),
+		content: {
+			Text($0)
+		},
+		externalAction: {_ in}
+	)
+	.padding(5)
+	.background(Color.chewTimeChoosingViewBG.opacity(0.5))
+	.cornerRadius(10)
+})

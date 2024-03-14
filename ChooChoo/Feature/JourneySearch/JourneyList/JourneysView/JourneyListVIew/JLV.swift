@@ -39,6 +39,7 @@ struct JourneyListView: View {
 					size: .big,
 					action: nil
 				)
+				.frame(maxWidth: .infinity, maxHeight: .infinity)
 			}
 		}
 	}

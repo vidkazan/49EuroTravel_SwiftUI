@@ -21,9 +21,7 @@ struct JourneySearchView : View {
 			}
 			TopBarAlertsView()
 			SearchStopsView()
-//				.matchedGeometryEffect(id: "SearchStopsView", in: journeySearchViewNamespace)
 			TimeAndSettingsView()
-//				.matchedGeometryEffect(id: "TimeAndSettingsView", in: journeySearchViewNamespace)
 			BottomView()
 		}
 //		.animation(.easeInOut, value: topAlertVM.state.alerts)
@@ -89,10 +87,10 @@ extension JourneySearchView {
 #Preview {
 	JourneySearchView()
 		.environmentObject(ChewViewModel(initialState: .init(
-			depStop: .textOnly(""),
+			depStop: .textOnly("pop"),
 		 arrStop: .textOnly(""),
 		 settings: .init(),
-			date: .init(date: .now, mode: .departure),
-		 status: .idle
+		date: .init(date: .now, mode: .departure),
+			status: .editingStop(.departure)
 	 )))
 }

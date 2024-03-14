@@ -19,13 +19,14 @@ class SearchStopsViewModel : ObservableObject {
 		}
 	}
 	
-	init() {
-		state = State(
+	init(
+		_ initialState : State = State(
 			previousStops: [],
 			stops: [],
-			status: .idle,
-			type: nil
+			status: .idle
 		)
+	) {
+		state = initialState
 		Publishers.system(
 			initial: state,
 			reduce: Self.reduce,
