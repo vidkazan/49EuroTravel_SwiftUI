@@ -81,7 +81,7 @@ extension SearchStopsView {
 					.frame(maxHeight: 300)
 				}
 			case .error(let error):
-				Text(error.description)
+				Text(verbatim: error.localizedDescription)
 					.chewTextSize(.big)
 					.foregroundColor(.secondary)
 					.padding(5)

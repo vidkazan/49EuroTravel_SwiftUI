@@ -133,7 +133,7 @@ extension JourneyFollowViewModel {
 			case let .didRequestUpdateJourney(viewData, _):
 				return "didRequestUpdateJourney \(viewData.origin) \(viewData.destination)"
 			case .didFailToUpdateJourney(let error):
-				return "didFailToUpdateJourney \(error.description)"
+				return "didFailToUpdateJourney \(error.localizedDescription)"
 			case .didFailToEdit(action: let action, error: let error):
 				return "didFailToEdit: \(action): \(error)"
 			case .didEdit:

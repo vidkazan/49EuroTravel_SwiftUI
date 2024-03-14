@@ -35,6 +35,7 @@ struct JourneyFollowView : View {
 							"You have no followed journeys",
 							comment: "JourneyFollowView: empty view: msg"
 						),
+						size: .big,
 						action: nil
 					)
 					.frame(idealWidth: .infinity,idealHeight: .infinity)

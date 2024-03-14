@@ -15,40 +15,6 @@ struct MapDetailsUIView: UIViewRepresentable {
 	let legs : OrderedSet<MapLegData>
 	let region: MKCoordinateRegion
 	
-	class Coordinator: NSObject, MKMapViewDelegate {
-		func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay
-		) -> MKOverlayRenderer {
-			if overlay is MKPolyline {
-				if overlay.title == "foot" {
-					return ChooFootPolylineRenderer(overlay: overlay)
-				}
-				return ChooPolylineRenderer(overlay: overlay)
-			}
-			return MKOverlayRenderer()
-		}
-		
-		func mapView(_ mapView: MKMapView,viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-			let view = MapPickerViewModel.mapView(mapView, viewFor: annotation)
-			if let anno = annotation as? StopAnnotation {
-				switch anno.stopOverType {
-				case .origin,.destination:
-					view?.displayPriority = .required
-					view?.zPriority = .defaultUnselected
-				case .transfer:
-					view?.displayPriority = .required
-					view?.zPriority = .max
-				case .stopover:
-					view?.displayPriority = MKFeatureDisplayPriority(0)
-					view?.zPriority = .min
-				default:
-					view?.displayPriority = MKFeatureDisplayPriority(1)
-					view?.zPriority = .min
-				}
-			}
-			return view
-		}
-	}
-	
 	func makeUIView(context: Context) -> MKMapView {
 		let mapView = MKMapView()
 		mapView.delegate = context.coordinator
@@ -81,11 +47,46 @@ struct MapDetailsUIView: UIViewRepresentable {
 		return mapView
 	}
 	
-	
 	func updateUIView(_ view: MKMapView, context: Context) {}
 
 	func makeCoordinator() -> Coordinator {
 		Coordinator()
+	}
+}
+
+extension MapDetailsUIView {
+	class Coordinator: NSObject, MKMapViewDelegate {
+		func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay
+		) -> MKOverlayRenderer {
+			if overlay is MKPolyline {
+				if overlay.title == "foot" {
+					return ChooFootPolylineRenderer(overlay: overlay)
+				}
+				return ChooPolylineRenderer(overlay: overlay)
+			}
+			return MKOverlayRenderer()
+		}
+		
+		func mapView(_ mapView: MKMapView,viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+			let view = MapPickerViewModel.mapView(mapView, viewFor: annotation)
+			if let anno = annotation as? StopAnnotation {
+				switch anno.stopOverType {
+				case .origin,.destination:
+					view?.displayPriority = .required
+					view?.zPriority = .defaultUnselected
+				case .transfer:
+					view?.displayPriority = .required
+					view?.zPriority = .max
+				case .stopover:
+					view?.displayPriority = MKFeatureDisplayPriority(0)
+					view?.zPriority = .min
+				default:
+					view?.displayPriority = MKFeatureDisplayPriority(1)
+					view?.zPriority = .min
+				}
+			}
+			return view
+		}
 	}
 }
 

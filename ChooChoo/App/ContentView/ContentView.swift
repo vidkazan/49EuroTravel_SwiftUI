@@ -9,7 +9,7 @@ import SwiftUI
 import TipKit
 
 #warning("FIX: iOS 17+ mapDetails: starting region fault")
-
+#warning("prognosed direction")
 // Lida ChooChoo to fix:
 
 // MARK: JDV

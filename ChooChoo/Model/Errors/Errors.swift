@@ -8,8 +8,8 @@
 import Foundation
 
 protocol ChewError : Error, Equatable, Hashable {
-	var description : String { get }
-//	var localizedDescription : String { get }
+//	var description : String { get }
+	var localizedDescription : String { get }
 }
 
 enum DataError : ChewError {

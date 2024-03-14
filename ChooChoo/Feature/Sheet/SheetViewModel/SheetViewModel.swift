@@ -76,12 +76,15 @@ extension SheetViewModel{
 	}
 	
 	enum Event {
+		case didRequestHide
 		case didRequestShow(_ type : SheetType)
 		case didLoadDataForShowing(_ type : SheetType,_ result : SheetViewDataSource)
 		case didFailToLoadData(_ error : any ChewError)
 		
 		var description : String {
 			switch self {
+			case .didRequestHide:
+				return "didRequestHide"
 			case .didFailToLoadData(let error):
 				return "didFailToLoadData \(error.localizedDescription)"
 			case .didLoadDataForShowing:
@@ -116,7 +119,7 @@ extension SheetViewModel{
 			case .none:
 				return []
 			case .date:
-				return [.medium,.large]
+				return [.large, .medium]
 			case .settings:
 				return [.medium,.large]
 			case .fullLeg:
@@ -191,6 +194,8 @@ extension SheetViewModel {
 		switch state.status {
 		case .loading:
 			switch event {
+			case .didRequestHide:
+				return State(status: .loading(.none))
 			case .didRequestShow(let type):
 				return State(status: .loading(type))
 			case .didFailToLoadData(let error):
@@ -200,6 +205,8 @@ extension SheetViewModel {
 			}
 		case .showing,.error:
 			switch event {
+			case .didRequestHide:
+				return State(status: .loading(.none))
 			case .didRequestShow(let type):
 				return State(status: .loading(type))
 			case .didFailToLoadData:
@@ -264,7 +271,7 @@ extension SheetViewModel {
 			}
 			.catch { error in
 				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.fullLegError))
-				return Just(Event.didRequestShow(.none)).eraseToAnyPublisher()
+				return Just(Event.didRequestHide).eraseToAnyPublisher()
 			}
 			.eraseToAnyPublisher()
 	}

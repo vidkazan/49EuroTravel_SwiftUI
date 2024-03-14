@@ -35,7 +35,8 @@ struct JourneyListView: View {
 			case .failedToLoadJourneyList(let error):
 				ErrorView(
 					viewType: .error,
-					msg: Text(error.description),
+					msg: Text(verbatim: error.localizedDescription),
+					size: .big,
 					action: nil
 				)
 			}
@@ -90,33 +91,25 @@ struct ErrorView : View {
 	}
 	let viewType : ViewType
 	let msg : Text
+	let size : ChewPrimaryStyle
 	let action : (() -> Void)?
 	var body: some View {
-		Group {
-			VStack {
-				Spacer()
-				Label(
-					title: {
-						msg
-							.padding(5)
-							.foregroundStyle(.secondary)
-							.chewTextSize(.big)
-					},
-					icon: {
-						Image(viewType == .error ? ChooSFSymbols.exclamationmarkCircle : ChooSFSymbols.infoCircle)
-							.foregroundStyle(.secondary)
-					}
-				)
-				.frame(maxWidth: 300,alignment: .center)
-				if let action = action {
-					Button(action: action, label: {
-						Image(.exclamationmarkCircle)
-							.chewTextSize(.big)
-							.foregroundStyle(.secondary)
-					})
-				}
-				Spacer()
+		HStack(spacing: 2) {
+			if let action = action {
+				Button(action: action, label: {
+					Image(.exclamationmarkCircle)
+				})
 			}
+			Label(
+				title: {
+					msg
+						.padding(5)
+				},
+				icon: {
+					Image(viewType == .error ? ChooSFSymbols.exclamationmarkCircle : ChooSFSymbols.infoCircle)
+				}
+			)
 		}
+		.chewTextSize(size)
 	}
 }

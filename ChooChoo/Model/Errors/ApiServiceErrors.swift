@@ -9,7 +9,7 @@ import Foundation
 
 	enum ApiError : ChewError {
 		static func == (lhs: ApiError, rhs: ApiError) -> Bool {
-			return lhs.description == rhs.description
+			return lhs.localizedDescription == rhs.localizedDescription
 		}
 		
 		func hash(into hasher: inout Hasher) {
@@ -53,7 +53,7 @@ import Foundation
 		case failedToGetUserLocation
 		case generic(description : String)
 		
-		var description : String  {
+		var localizedDescription : String  {
 			switch self {
 			case .generic(let description):
 				return description
