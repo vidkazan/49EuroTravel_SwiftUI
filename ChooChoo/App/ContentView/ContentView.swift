@@ -16,15 +16,14 @@ import TipKit
 
 // MARK: revise
 // all text revision
-// revise icons, espesially transfer icon
+// revise icons
 // revise contrast
 // revise text white color ( too contrast with black BG )
 
 #warning("Anna")
 // tip: for maps
 // tip: for sunEvents ( first cell of journeyList )
-// ldv: menu: remove fulleg from foot/tranfer
-// jfv: tip for swipe actions
+// tip: jfv: for swipe actions
 
 
 // TODO: feature: check when train arrives at starting point

@@ -92,6 +92,9 @@ extension Color {
 	static var chewSunEventBlue: Color {
 		Color("ChewSunEventBlue")
 	}
+	static var chewSunEventYellow: Color {
+		Color("ChewSunEventYellow")
+	}
 	static var chewLegDetailsCellGray: Color {
 		Color("ChewLegDetailsCellGray")
 	}

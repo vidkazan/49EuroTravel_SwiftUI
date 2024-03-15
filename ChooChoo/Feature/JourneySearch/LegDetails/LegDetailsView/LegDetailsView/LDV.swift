@@ -131,7 +131,7 @@ extension LegDetailsView {
 						Label(title: {
 						}, icon: {
 							Image(systemName: option.icon)
-								.chewTextSize(.big)
+								.chewTextSize(.huge)
 								.frame(minWidth: 43,minHeight: 43)
 								.tint(Color.gray)
 						})
