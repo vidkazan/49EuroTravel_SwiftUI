@@ -53,7 +53,7 @@ struct JourneyFollowCellView : View {
 					.badgeBackgroundStyle(.secondary)
 			}
 
-			LegsView(journey : data,progressBar: true,mode : chewVM.state.settings.legViewMode)
+			LegsView(journey : data,mode : chewVM.state.settings.legViewMode)
 			HStack(spacing: 2) {
 				Spacer()
 				BadgeView(

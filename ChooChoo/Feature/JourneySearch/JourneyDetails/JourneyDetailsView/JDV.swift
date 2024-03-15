@@ -12,7 +12,7 @@ import TipKit
 struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
-	
+	@State var scrollToLegId : UUID?
 	init(journeyDetailsViewModel : JourneyDetailsViewModel) {
 		viewModel = journeyDetailsViewModel
 	}
@@ -24,17 +24,25 @@ struct JourneyDetailsView: View {
 						.animation(.smooth, value: viewModel.state.status)
 						.padding(.horizontal,5)
 						.padding(5)
-					ScrollView {
-						LazyVStack(spacing: 0){
-							ForEach(viewModel.state.data.viewData.legs) { leg in
-								LegDetailsView(
-									send: viewModel.send,
-									referenceDate: chewVM.referenceDate,
-									isExpanded: .collapsed,
-									leg: leg
-								)
+					ScrollViewReader { proxy in
+						ScrollView {
+							LazyVStack(spacing: 0){
+								ForEach(viewModel.state.data.viewData.legs) { leg in
+									LegDetailsView(
+										send: viewModel.send,
+										referenceDate: chewVM.referenceDate,
+										isExpanded: .collapsed,
+										leg: leg
+									)
+									.id(leg.id)
+								}
 							}
 						}
+						.onChange(of: scrollToLegId, perform: { id in
+							withAnimation(.easeInOut, {
+								proxy.scrollTo(id, anchor: .bottom)
+							})
+						})
 					}
 					.padding(10)
 				}

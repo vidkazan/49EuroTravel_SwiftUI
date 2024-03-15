@@ -40,7 +40,6 @@ struct LegDetailsView: View {
 	var body : some View {
 		VStack {
 			VStack(spacing: 0) {
-				// MARK: Stop foot + transfer
 				switch leg.legType {
 				case .transfer,.footMiddle,.footStart:
 					if let stop = leg.legStopsViewData.first {
@@ -62,7 +61,6 @@ struct LegDetailsView: View {
 						)
 						.padding(.bottom,10)
 					}
-				// MARK: Stop line
 				case .line:
 					let stops : [StopViewData] = {
 						switch isExpandedState {

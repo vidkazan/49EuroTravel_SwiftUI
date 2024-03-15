@@ -116,6 +116,21 @@ extension SettingsView {
 	}
 }
 
+struct LegViewSettingsView : View {
+	let mode : Settings.LegViewMode
+	let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0)
+	var body: some View {
+		if let mock = mock {
+			LegsView(
+				journey: mock,
+				mode: mode,
+				showLabels: false
+			)
+		}
+	}
+}
+
+
 
 struct SettingsPreview: PreviewProvider {
 	static var previews: some View {

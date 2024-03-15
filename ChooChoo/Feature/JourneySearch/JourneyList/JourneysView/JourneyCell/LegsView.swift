@@ -16,133 +16,137 @@ struct LegsView: View {
 	let mode : Settings.LegViewMode
 	let journey : JourneyViewData?
 	var gradientStops : [Gradient.Stop]
-	var gradientStopsForProgressLine : [Gradient.Stop]
-	var showProgressBar : Bool
 	var showLabels : Bool
+	let legTapAction : ((UUID)->())?
 	
-	init(journey: JourneyViewData?,progressBar: Bool, mode : Settings.LegViewMode,showLabels : Bool = true) {
+	init(
+		journey: JourneyViewData?,
+		mode : Settings.LegViewMode,
+		showLabels : Bool = true,
+		legTapAction : ((UUID)->())? = nil
+	) {
 		self.journey = journey
 		self.showLabels = showLabels
 		self.mode = mode
-		self.showProgressBar = progressBar
 		self.gradientStops = journey?.sunEventsGradientStops ?? []
-		self.gradientStopsForProgressLine = gradientStops
+		self.legTapAction = legTapAction
 	}
 	
 	var body: some View {
 		VStack {
-			VStack {
-				GeometryReader { geo in
-					ZStack {
-						SunEventsGradient(
-							gradientStops:  journey?.legs.allSatisfy({$0.isReachable == true}) == true ? gradientStops : nil,
-							size: geo.size,
-							mode : mode, 
-							progressLineProportion: nil
-						)
-						.matchedGeometryEffect(
-							id: "sun",
-							in: legsViewNamespace
-						)
-						if let journey = journey {
-							ForEach(journey.legs) { leg in
-								LegViewBG(leg: leg, mode: mode)
-									.matchedGeometryEffect(
-										id: "\(leg.tripId) bg",
-										in: legsViewNamespace
-									)
-									.frame(
-										width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
-										height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
-									.position(
-										x : geo.size.width * (
-											leg.legTopPosition + (
-												( leg.legBottomPosition - leg.legTopPosition ) / 2
-											)
-										),
-										y: geo.size.height/2
-									)
-									.opacity(0.90)
-							}
-						}
-						if showProgressBar {
-							RoundedRectangle(cornerRadius: 2)
-								.fill(Color.chewFillGreenSecondary)
-								.frame(
-									width: progressLineProportion > 0 && progressLineProportion < 1 ? 3 : 0,
-									height: 40
-								)
-								.position(
-									x : geo.size.width * progressLineProportion,
-									y : geo.size.height/2
-								)
-								.cornerRadius(5)
-								.matchedGeometryEffect(
-									id: "progressBar",
-									in: legsViewNamespace
-								)
-						}
-						if let journey = journey, showLabels == true {
-							ForEach(journey.legs) { leg in
-								LegViewLabels(leg: leg)
-									.matchedGeometryEffect(
-										id: "\(leg.tripId) labels",
-										in: legsViewNamespace
-									)
-									.frame(
-										width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
-										height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
-									.position(
-										x : geo.size.width * (
-											leg.legTopPosition + (
-												( leg.legBottomPosition - leg.legTopPosition ) / 2
-											)
-										),
-										y: geo.size.height/2
-									)
-									.opacity(0.90)
+			GeometryReader { geo in
+				ZStack {
+					SunEventsGradient(
+						gradientStops:  journey?.legs.allSatisfy({$0.isReachable == true}) == true ? gradientStops : nil,
+						size: geo.size,
+						mode : mode,
+						progressLineProportion: nil
+					)
+					.matchedGeometryEffect(
+						id: "sun",
+						in: legsViewNamespace
+					)
+					if let journey = journey {
+						ForEach(journey.legs) { leg in
+							if let legTapAction = legTapAction {
+								legViewBG(leg:leg,geo:geo)
+								.onTapGesture {
+									legTapAction(leg.id)
+								}
+							} else {
+								legViewBG(leg:leg,geo:geo)
 							}
 						}
 					}
+//					if showProgressBar {
+						RoundedRectangle(cornerRadius: 2)
+							.fill(Color.chewFillGreenSecondary)
+							.frame(
+								width: progressLineProportion > 0 && progressLineProportion < 1 ? 3 : 0,
+								height: 40
+							)
+							.position(
+								x : geo.size.width * progressLineProportion,
+								y : geo.size.height/2
+							)
+							.cornerRadius(5)
+							.matchedGeometryEffect(
+								id: "progressBar",
+								in: legsViewNamespace
+							)
+//					}
+					if let journey = journey, showLabels == true {
+						ForEach(journey.legs) { leg in
+							LegViewLabels(leg: leg)
+								.matchedGeometryEffect(
+									id: "\(leg.tripId) labels",
+									in: legsViewNamespace
+								)
+								.frame(
+									width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
+									height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
+								.position(
+									x : geo.size.width * (
+										leg.legTopPosition + (
+											( leg.legBottomPosition - leg.legTopPosition ) / 2
+										)
+									),
+									y: geo.size.height/2
+								)
+								.opacity(0.90)
+						}
+					}
 				}
-				.frame(height: 40)
 			}
+			.frame(height: 40)
 		}
 		.onReceive(timer, perform: { _ in
 			Task {
 				withAnimation(.smooth, {
-					self.progressLineProportion = Self.getProgressLineProportion(
-						departureTS: journey?.time.timestamp.departure.actual,
-						arrivalTS: journey?.time.timestamp.arrival.actual,
-						referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
+					updateProgressLine()
 				})
 			}
 		})
 		.onAppear {
 			Task {
-				self.progressLineProportion = Self.getProgressLineProportion(
-					departureTS: journey?.time.timestamp.departure.actual,
-					arrivalTS: journey?.time.timestamp.arrival.actual,
-					referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970)
+				updateProgressLine()
 			}
 		}
 	}
 }
 
-struct LegViewSettingsView : View {
-	let mode : Settings.LegViewMode
-	let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0)
-	var body: some View {
-		if let mock = mock {
-			LegsView(
-				journey: mock,
-				progressBar: false,
-				mode: mode,
-				showLabels: false
+extension LegsView {
+	func legViewBG(leg : LegViewData, geo : GeometryProxy) -> some View {
+		LegViewBG(leg: leg, mode: mode)
+			.matchedGeometryEffect(
+				id: "\(leg.tripId) bg",
+				in: legsViewNamespace
 			)
-		}
+			.frame(
+				width: geo.size.width * (leg.legBottomPosition - leg.legTopPosition),
+				height:leg.delayedAndNextIsNotReachable == true ? 40 : 35)
+			.position(
+				x : geo.size.width * (
+					leg.legTopPosition + (
+						( leg.legBottomPosition - leg.legTopPosition ) / 2
+					)
+				),
+				y: geo.size.height/2
+			)
+			.opacity(0.90)
 	}
 }
+
+extension LegsView {
+	func updateProgressLine() {
+		self.progressLineProportion = Self.getProgressLineProportion(
+			departureTS: journey?.time.timestamp.departure.actual,
+			arrivalTS: journey?.time.timestamp.arrival.actual,
+			referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970
+		)
+	}
+}
+
 
 extension LegsView {
 	static func getProgressLineProportion(
@@ -174,7 +178,7 @@ struct LegsViewPreviews: PreviewProvider {
 					   arrStop: nil,
 					   realtimeDataUpdatedAt: 0
 				   )
-					LegsView(journey: viewData, progressBar: true,mode : .sunEvents)
+					LegsView(journey: viewData,mode : .sunEvents)
 						.environmentObject(ChewViewModel(
 							referenceDate: .specificDate(
 								(viewData?.time.timestamp.departure.actual ?? 0) + 2000

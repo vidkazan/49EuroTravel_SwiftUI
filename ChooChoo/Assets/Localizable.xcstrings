@@ -373,7 +373,7 @@
       }
     },
     "Journey debug" : {
-      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
+      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item"
     },
     "Journey details" : {
       "comment" : "navigationBarTitle",
@@ -453,7 +453,7 @@
       }
     },
     "now" : {
-      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
+      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -592,7 +592,7 @@
       }
     },
     "Search" : {
-      "comment" : "TabItem\nsearch tip title",
+      "comment" : "search tip title\nTabItem",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -645,7 +645,7 @@
       }
     },
     "Show on map" : {
-      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item\nLegDetailsView: menu item",
+      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item\nLegDetailsView: menu item",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

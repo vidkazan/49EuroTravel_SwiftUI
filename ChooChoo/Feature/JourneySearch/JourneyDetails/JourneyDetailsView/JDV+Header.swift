@@ -21,53 +21,48 @@ extension JourneyDetailsView {
 				)
 				if #available(iOS 16.0, *) {
 					FlowLayout(spacing: CGSize(width: 5, height: 2)) {
-						if let date = data.viewData.time.date.departure.actualOrPlannedIfActualIsNil() {
-							BadgeView(.date(date: date))
-								.badgeBackgroundStyle(.accent)
-						}
-						BadgeView(.timeDepartureTimeArrival(timeContainer: data.viewData.time))
-							.badgeBackgroundStyle(.accent)
-						BadgeView(.legDuration(data.viewData.time))
-							.badgeBackgroundStyle(.accent)
-						if viewModel.state.data.viewData.transferCount > 0 {
-							BadgeView(.changesCount(data.viewData.transferCount))
-								.badgeBackgroundStyle(.accent)
-						}
+						time(data: data)
 					}
 				} else {
 					HStack {
-						if let date = data.viewData.time.date.departure.actualOrPlannedIfActualIsNil() {
-							BadgeView(.date(date: date))
-								.badgeBackgroundStyle(.accent)
-						}
-						BadgeView(
-							.timeDepartureTimeArrival(
-								timeContainer: data.viewData.time
-							)
-						)
-						.badgeBackgroundStyle(.accent)
-						BadgeView(
-							.legDuration(data.viewData.time)
-						)
-						.badgeBackgroundStyle(.accent)
-						if viewModel.state.data.viewData.transferCount > 0 {
-							BadgeView(
-								.changesCount(
-									data.viewData.transferCount
-								)
-							)
-							.badgeBackgroundStyle(.accent)
-						}
+						time(data: data)
 						Spacer()
 					}
 				}
 				LegsView(
 					journey : viewModel.state.data.viewData,
-					progressBar: true,
-					mode : chewVM.state.settings.legViewMode
+					mode : chewVM.state.settings.legViewMode,
+					legTapAction: { id in
+						scrollToLegId = id
+					}
 				)
 			}
 			
+		}
+	}
+	
+	private func time(data : JourneyDetailsViewModel.StateData) -> some View {
+		Group {
+			if let date = data.viewData.time.date.departure.actualOrPlannedIfActualIsNil() {
+				BadgeView(.date(date: date))
+					.badgeBackgroundStyle(.accent)
+			}
+			BadgeView(
+				.timeDepartureTimeArrival(
+					timeContainer: data.viewData.time
+				)
+			)
+				.badgeBackgroundStyle(.accent)
+			BadgeView(
+				.legDuration(
+					data.viewData.time
+				)
+			)
+				.badgeBackgroundStyle(.accent)
+			if viewModel.state.data.viewData.transferCount > 0 {
+				BadgeView(.changesCount(data.viewData.transferCount))
+					.badgeBackgroundStyle(.accent)
+			}
 		}
 	}
 }
