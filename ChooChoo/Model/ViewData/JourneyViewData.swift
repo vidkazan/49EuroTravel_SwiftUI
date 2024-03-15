@@ -93,3 +93,23 @@ extension JourneyViewData {
 		return res
 	}
 }
+
+extension JourneyViewData {
+	struct Option {
+		let action : (JourneyViewData)->()
+		let icon : String
+		let text : String
+	}
+	
+	static let showOnMapOption = Option(
+		action: { data in
+			Model.shared.sheetViewModel.send(
+				event: .didRequestShow(.mapDetails(.journey(data.legs)))
+			)
+		},
+		icon: "map.circle",
+		text : NSLocalizedString(
+			"Show on map", comment: "JourneyCell: menu item"
+		)
+	)
+}
