@@ -8,7 +8,7 @@
 import Foundation
 
 struct Segments : Equatable, Hashable {
-	enum EvalType : Int, Equatable, Hashable, CaseIterable {
+	enum ShowType : Int, Equatable, Hashable, CaseIterable {
 		case collapsed
 		case expanded
 	}
@@ -22,7 +22,7 @@ struct Segments : Equatable, Hashable {
 	let heightTotalCollapsed : Double
 	let heightTotalExtended : Double
 	
-	func heightTotal(_ type : EvalType) -> Double {
+	func heightTotal(_ type : ShowType) -> Double {
 		switch type {
 		case .collapsed:
 			return heightTotalCollapsed
@@ -37,7 +37,7 @@ struct Segments : Equatable, Hashable {
 		self.heightTotalExtended = heightTotalExtended
 	}
 	
-	func evaluate(time: Double, type: EvalType) -> Double {
+	func update(time: Double, type: ShowType) -> Double {
 		guard
 			let first = segments.first,
 			var last = segments.last,
@@ -46,7 +46,9 @@ struct Segments : Equatable, Hashable {
 		if case .collapsed = type {
 			last = SegmentPoint(time: last.time, height: self.heightTotalCollapsed)
 		}
-		if time > last.time { return last.height }
+		if time > last.time {
+			return last.height
+		}
 		
 		switch type {
 		case .collapsed:
@@ -79,7 +81,8 @@ struct Segments : Equatable, Hashable {
 	}
 }
 
-func constructSegmentsFromStopOverData(stopovers : [StopViewData]) -> Segments {
+func segments(from stopovers : [StopViewData]) -> Segments {
+	var heightTotalCollapsed : Double?
 	var currentHeight : CGFloat = 0
 	var segs = [Segments.SegmentPoint]()
 	
@@ -102,11 +105,15 @@ func constructSegmentsFromStopOverData(stopovers : [StopViewData]) -> Segments {
 			)
 		}
 		currentHeight += (stop.stopOverType.viewHeight - stop.stopOverType.timeLabelHeight)
+		
+		if stopovers.first?.cancellationType() != .fullyCancelled, stopovers.last?.cancellationType() != .fullyCancelled {
+			heightTotalCollapsed = stopovers.first?.stopOverType.viewHeight
+		}
 	}
 	
 	return Segments(
 		segments: segs,
-		heightTotalCollapsed: stopovers.first?.stopOverType.viewHeight ?? 0,
+		heightTotalCollapsed: heightTotalCollapsed ?? 0,
 		heightTotalExtended: segs.last?.height ?? 0
 	)
 }

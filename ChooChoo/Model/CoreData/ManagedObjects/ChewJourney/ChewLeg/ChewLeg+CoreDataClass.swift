@@ -47,7 +47,7 @@ extension ChewLeg {
 		stopsViewData = stops.map { $0.stopViewData() }
 		
 		let time = TimeContainer(chewTime: self.time)
-		let segments = constructSegmentsFromStopOverData(stopovers: stopsViewData)
+		let segments = segments(from : stopsViewData)
 		var legDTOobj : LegDTO? = nil
 		if let legDTOdata = legDTO?.data(using: .utf8) {
 			legDTOobj = try? JSONDecoder().decode(LegDTO.self, from: legDTOdata)

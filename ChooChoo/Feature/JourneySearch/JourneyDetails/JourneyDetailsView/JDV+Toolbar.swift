@@ -13,8 +13,8 @@ extension JourneyDetailsView {
 		Button(
 			action: {
 				switch viewModel.state.status {
-				case .loading:
-					break
+//				case .loading:
+//					break
 				default:
 					viewModel.send(event: .didTapSubscribingButton(
 						id: viewModel.state.data.id,
@@ -34,7 +34,7 @@ extension JourneyDetailsView {
 					Image(.bookmark)
 						.symbolVariant(contains ? .fill : .none )
 						.frame(width: 15,height: 15)
-						.tint(viewModel.state.status.description == "loading" ? .chewGray30 : .blue)
+//						.tint(viewModel.state.status.description == "loading" ? .chewGray30 : .blue)
 						.padding(5)
 				}
 			}

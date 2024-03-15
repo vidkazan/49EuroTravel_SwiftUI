@@ -116,7 +116,11 @@ extension StopTripDTO {
 				productName: line?.productName ?? "",
 				legType: .line
 			),
-			progressSegments: .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0),
+			progressSegments: .init(
+				segments: [],
+				heightTotalCollapsed: 0,
+				heightTotalExtended: 0
+			),
 			time: container,
 			polyline: nil,
 			legDTO : nil
@@ -175,7 +179,7 @@ extension LegDTO {
 		) ?? 0
 		
 		let stops = stopViewData(type: constructLegType(leg: self, legs: legs))
-		let segments = constructSegmentsFromStopOverData(stopovers: stops)
+		let segments = segments(from: stops)
 		var remarksUnwrapped = [RemarkViewData]()
 		if let remarks = remarks {
 			remarksUnwrapped = remarks.compactMap({$0.viewData()})

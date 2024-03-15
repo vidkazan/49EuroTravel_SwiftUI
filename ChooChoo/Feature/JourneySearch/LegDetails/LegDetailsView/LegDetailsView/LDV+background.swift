@@ -22,7 +22,7 @@ extension LegDetailsView {
 							width: Self.progressLineBaseWidth,
 							height: totalProgressHeight
 						)
-						.padding(.leading, 27)
+						.padding(.leading, Self.progressLineBaseWidth + Self.progressLineCompletedBaseWidthOffset + 3)
 					Spacer()
 				}
 				Spacer(minLength: 0)
@@ -37,7 +37,7 @@ extension LegDetailsView {
 						width: Self.progressLineBaseWidth + Self.progressLineCompletedBaseWidthOffset,
 						height: currentProgressHeight
 					)
-						.padding(.leading,26)
+					.padding(.leading,Self.progressLineBaseWidth + Self.progressLineCompletedBaseWidthOffset + 2)
 					Spacer()
 				}
 				Spacer(minLength: 0)

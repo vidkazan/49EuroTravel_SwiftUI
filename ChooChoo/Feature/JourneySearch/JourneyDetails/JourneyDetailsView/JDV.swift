@@ -43,11 +43,15 @@ struct JourneyDetailsView: View {
 								proxy.scrollTo(id, anchor: .bottom)
 							})
 						})
+						.onAppear {
+							withAnimation(.easeInOut, {
+								proxy.scrollTo(0, anchor: .center)
+							})
+						}
 					}
 					.padding(10)
 				}
 			}
-			// MARK: Modifiers
 			.background(Color.chewFillPrimary)
 			.navigationBarTitle(
 				Text(
@@ -57,7 +61,6 @@ struct JourneyDetailsView: View {
 				displayMode: .inline
 			)
 			.toolbar { toolbar() }
-			// MARK: Modifiers - onChange
 			.onAppear {
 				viewModel.send(event: .didRequestReloadIfNeeded(
 					id: viewModel.state.data.id,
@@ -73,7 +76,7 @@ struct JourneyDetailsPreview : PreviewProvider {
 	static var previews: some View {
 		let mocks = [
 			Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData!.journey,
-			Mock.journeys.journeyNeussWolfsburg.decodedData!.journey
+//			Mock.journeys.journeyNeussWolfsburgMissedConnection.decodedData!.journey
 		]
 //		ScrollView(.horizontal) {
 //			LazyHStack {

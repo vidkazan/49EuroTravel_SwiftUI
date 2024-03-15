@@ -13,7 +13,6 @@ struct LegViewData : Equatable,Identifiable {
 	let id = UUID()
 	var isReachable : Bool
 	let legType : LegType
-	
 	let tripId : String
 //	Prognosed<Stop>
 	let direction : String
@@ -28,7 +27,6 @@ struct LegViewData : Equatable,Identifiable {
 	let time : TimeContainer
 	let polyline : PolylineDTO?
 	let legDTO : LegDTO?
-	var previousTripId : String?
 }
 
 extension LegViewData {
@@ -42,7 +40,7 @@ extension LegViewData {
 		self.delayedAndNextIsNotReachable = false
 		self.legStopsViewData = []
 		self.footDistance = 0
-		self.lineViewData = .init(type: .bus, name: "", shortName: "")
+		self.lineViewData = .init(type: .taxi, name: "", shortName: "")
 		self.progressSegments = .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0)
 		self.time = .init(plannedDeparture: "", plannedArrival: "", actualDeparture: "", actualArrival: "", cancelled: false)
 		self.remarks = []

@@ -10,7 +10,7 @@ import SwiftUI
 
 struct LegStopView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	var shevronIsExpanded : Segments.EvalType
+	var shevronIsExpanded : Segments.ShowType
 	static let timeLabelColor = Color.chewTimeLabelGray
 	let legViewData : LegViewData
 	let stopOver : StopViewData
@@ -41,7 +41,7 @@ extension LegStopView {
 		stopOver : StopViewData,
 		leg : LegViewData,
 		showBadges : Bool,
-		shevronIsExpanded : Segments.EvalType
+		shevronIsExpanded : Segments.ShowType
 	) {
 		self.showBadges = showBadges
 		self.stopOver = stopOver
@@ -53,7 +53,7 @@ extension LegStopView {
 		stopOver : StopViewData,
 		leg : LegViewData,
 		showBadges : Bool,
-		shevronIsExpanded : Segments.EvalType
+		shevronIsExpanded : Segments.ShowType
 	) {
 		self.showBadges = showBadges
 		self.stopOver = stopOver

@@ -14,22 +14,22 @@ struct LegDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-	static let progressLineBaseWidth : CGFloat = 15
+	static let progressLineBaseWidth : CGFloat = 20
 	static let progressLineCompletedBaseWidthOffset : CGFloat = 2
 	
-	@State var isExpandedState : Segments.EvalType = .collapsed
+	@State var isExpandedState : Segments.ShowType = .collapsed
 	@State var totalProgressHeight : Double = 0
 	@State var currentProgressHeight : Double = 0
 	
 	let leg : LegViewData
-	let isExpanded : Segments.EvalType
+	let isExpanded : Segments.ShowType
 	let followedJourney : Bool
 		
 	init(
 		followedJourney: Bool = false,
 		send : @escaping (JourneyDetailsViewModel.Event) -> Void,
 		referenceDate : ChewDate,
-		isExpanded : Segments.EvalType,
+		isExpanded : Segments.ShowType,
 		leg : LegViewData
 	) {
 		self.leg = leg
@@ -88,6 +88,12 @@ struct LegDetailsView: View {
 		}
 		// MARK: 🤢
 		.padding(.top,leg.legType == LegViewData.LegType.line || leg.legType.caseDescription == "footStart" ?  10 : 0)
+//		.background {
+//			if leg.isReachable == false {
+//				#warning("tmp solution?")
+//				Color.chewFillRedPrimary.opacity(0.2)
+//			}
+//		}
 		.background(leg.legType == LegViewData.LegType.line ? Color.chewLegDetailsCellGray : .clear )
 		.onTapGesture {
 			withAnimation(.smooth, {
@@ -161,8 +167,8 @@ extension LegDetailsView {
 
 extension LegDetailsView {
 	func updateProgressHeight(){
-		self.currentProgressHeight = leg.progressSegments.evaluate(
-			time: chewVM.referenceDate.ts ,
+		self.currentProgressHeight = leg.progressSegments.update(
+			time: chewVM.referenceDate.ts,
 			type: isExpandedState
 		)
 		self.totalProgressHeight = leg.progressSegments.heightTotal(isExpandedState)
