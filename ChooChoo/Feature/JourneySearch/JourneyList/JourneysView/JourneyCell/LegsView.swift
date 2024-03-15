@@ -102,7 +102,7 @@ struct LegsView: View {
 		}
 		.onReceive(timer, perform: { _ in
 			Task {
-				withAnimation(.smooth, {
+				withAnimation(.linear(duration: 1), {
 					updateProgressLine()
 				})
 			}

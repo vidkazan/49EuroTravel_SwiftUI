@@ -20,7 +20,7 @@ struct JourneyCell: View {
 		self.isPlaceholder = isPlaceholder
 	}
 	var body: some View {
-		VStack {
+		VStack(spacing: 0) {
 			NavigationLink(destination: {
 				let vm = Model.shared.journeyDetailViewModel(
 					followId: Self.followID(journey: journey),
@@ -33,13 +33,13 @@ struct JourneyCell: View {
 					JourneyDetailsView(journeyDetailsViewModel: vm)
 				)
 			}, label: {
-				VStack {
+				VStack(spacing: 0) {
 					JourneyHeaderView(journey: journey)
 					LegsView(
 						journey : journey,
 						mode : chewVM.state.settings.legViewMode
 					)
-					.padding(EdgeInsets(top: 0, leading: 7, bottom: 0, trailing: 7))
+					.padding(.horizontal,7)
 				}
 			})
 			HStack(alignment: .center) {
@@ -99,39 +99,19 @@ extension JourneyCell {
 					}
 				)
 			})
-			Button(action: {
-				Model.shared.sheetViewModel.send(
-					event: .didRequestShow(.mapDetails(.journey(journey.legs)))
-				)
-			}, label: {
-				Label(
-					title: {
-						Text("Show on map", comment: "JourneyCell: menu item")
-					},
-					icon: {
-						Image(systemName: "map.circle")
-					}
-				)
-			})
 //			Button(action: {
-//				let viewModel = Model.shared.journeyDetailViewModel(
-//					followId: Self.followID(journey: journey),
-//					 for: journey.refreshToken,
-//					 viewdata: journey,
-//					 stops: stops,
-//					 chewVM: chewVM
+//				Model.shared.sheetViewModel.send(
+//					event: .didRequestShow(.mapDetails(.journey(vm.state.data.viewData.legs)))
 //				)
-//				viewModel.send(event: .didTapSubscribingButton(
-//					id: viewModel.state.data.id,
-//					ref: viewModel.state.data.viewData.refreshToken,
-//					journeyDetailsViewModel: viewModel
-//				))
 //			}, label: {
-//				if Model.shared.journeyFollowViewModel.state.journeys.contains(where: {$0.id == Self.followID(journey: journey)}) == true {
-//					Label("Unfollow journey", systemImage: "bookmark.fill")
-//				} else {
-//					Label("Follow journey", systemImage: "bookmark")
-//				}
+//				Label(
+//					title: {
+//						Text("Show on map", comment: "JourneyCell: menu item")
+//					},
+//					icon: {
+//						Image(systemName: "map.circle")
+//					}
+//				)
 //			})
 		}
 	}

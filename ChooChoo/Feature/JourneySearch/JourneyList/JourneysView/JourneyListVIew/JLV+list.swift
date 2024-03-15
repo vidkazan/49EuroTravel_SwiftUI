@@ -64,12 +64,12 @@ extension JourneyListView {
 			.refreshable {
 				journeyViewModel.send(event: .onReloadJourneyList)
 			}
-			.onAppear {
-				if firstAppear == true {
-					val.scrollTo(1, anchor: .top)
-					firstAppear.toggle()
-				}
-			}
+//			.onAppear {
+//				if firstAppear == true {
+//					val.scrollTo(1, anchor: .top)
+//					firstAppear.toggle()
+//				}
+//			}
 		}
 	}
 }

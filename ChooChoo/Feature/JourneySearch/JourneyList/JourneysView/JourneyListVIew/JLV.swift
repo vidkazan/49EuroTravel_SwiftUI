@@ -51,7 +51,6 @@ extension JourneyListView {
 			VStack {
 				Spacer()
 				ProgressView()
-//				JourneyListViewLoader()
 				Spacer()
 			}
 			.frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -62,11 +61,13 @@ extension JourneyListView {
 extension JourneyListView {
 	func notFound() -> some View {
 		return Group {
-//			JourneyListHeaderView(journeyViewModel: journeyViewModel)
-			Spacer()
-			Text("Connections not found",comment: "JourneyListView: empty state")
+			ErrorView(
+				viewType: .empty,
+				msg: Text("Connections not found",comment: "JourneyListView: empty state"),
+				size: .big,
+				action: nil
+			)
 				.padding(5)
-				.chewTextSize(.big)
 				.frame(maxWidth: .infinity,alignment: .center)
 			Spacer()
 		}
@@ -82,35 +83,5 @@ struct JourneyListPreview : PreviewProvider {
 			settings: .init()
 		)
 			.environmentObject(ChewViewModel())
-	}
-}
-
-struct ErrorView : View {
-	enum ViewType : String,Hashable, CaseIterable {
-		case error
-		case empty
-	}
-	let viewType : ViewType
-	let msg : Text
-	let size : ChewPrimaryStyle
-	let action : (() -> Void)?
-	var body: some View {
-		HStack(spacing: 2) {
-			if let action = action {
-				Button(action: action, label: {
-					Image(.exclamationmarkCircle)
-				})
-			}
-			Label(
-				title: {
-					msg
-						.padding(5)
-				},
-				icon: {
-					Image(viewType == .error ? ChooSFSymbols.exclamationmarkCircle : ChooSFSymbols.infoCircle)
-				}
-			)
-		}
-		.chewTextSize(size)
 	}
 }
