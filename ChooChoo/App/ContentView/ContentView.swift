@@ -21,7 +21,6 @@ import TipKit
 // revise text white color ( too contrast with black BG )
 
 #warning("Anna")
-// tip: for maps
 // tip: for sunEvents ( first cell of journeyList )
 // tip: jfv: for swipe actions
 

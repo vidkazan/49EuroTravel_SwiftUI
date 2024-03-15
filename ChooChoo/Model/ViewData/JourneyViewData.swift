@@ -107,7 +107,7 @@ extension JourneyViewData {
 				event: .didRequestShow(.mapDetails(.journey(data.legs)))
 			)
 		},
-		icon: "map.circle",
+		icon: "map",
 		text : NSLocalizedString(
 			"Show on map", comment: "JourneyCell: menu item"
 		)

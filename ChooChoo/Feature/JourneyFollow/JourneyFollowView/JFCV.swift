@@ -81,7 +81,7 @@ struct JourneyFollowCellView : View {
 						Text("Show on map", comment: "JourneyFollowCellView: menu item")
 					},
 					icon: {
-						Image(systemName: "map.circle")
+						Image(systemName: "map")
 					}
 				)
 			})

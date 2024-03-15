@@ -19,17 +19,18 @@ enum DataError : ChewError {
 	
 	func hash(into hasher: inout Hasher) {
 		switch self {
-		case.generic:
-			break
-		case .nilValue:
+		case .generic,.nilValue,.validationError:
 			break
 		}
 	}
+	case validationError(msg: String)
 	case nilValue(type : String)
 	case generic(msg: String)
 	
 	var description : String  {
 		switch self {
+		case .validationError(let msg):
+			return "validation error: \(msg)"
 		case .nilValue(type: let type):
 			return "value is nil: \(type)"
 		case .generic(let msg):

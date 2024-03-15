@@ -151,7 +151,7 @@ extension LegViewData {
 				Model.shared.sheetViewModel.send(event: .didRequestShow(.mapDetails(.footDirection(leg))))
 			}
 		},
-		icon: "map.circle",
+		icon: "map",
 		text : NSLocalizedString(
 			"Show on map",
 			comment: "LegDetailsView: menu item"

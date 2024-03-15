@@ -96,6 +96,11 @@ extension JourneyDTO {
 			  let last = legs.last?.destination else  {
 			throw DataError.nilValue(type: "first or last stop")
 		}
+		guard let dep = time.timestamp.departure.actualOrPlannedIfActualIsNil(),
+			  let arr = time.timestamp.arrival.actualOrPlannedIfActualIsNil(),
+			  arr > dep else {
+			throw DataError.validationError(msg: "arrivalTime < departureTime")
+		}
 		
 		return JourneyViewData(
 			journeyRef: journeyRef,

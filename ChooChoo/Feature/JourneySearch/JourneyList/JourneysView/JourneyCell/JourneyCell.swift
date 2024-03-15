@@ -58,7 +58,8 @@ struct JourneyCell: View {
 				BadgesView(badges: journey.badges)
 				Button(action:{ JourneyViewData.showOnMapOption.action(journey)}, label: {
 					Image(systemName: JourneyViewData.showOnMapOption.icon)
-						.padding(2)
+						.chewTextSize(.medium)
+						.padding(5)
 						.badgeBackgroundStyle(.primary)
 						.foregroundColor(.primary)
 				})
@@ -105,20 +106,6 @@ extension JourneyCell {
 					}
 				)
 			})
-//			Button(action: {
-//				Model.shared.sheetViewModel.send(
-//					event: .didRequestShow(.mapDetails(.journey(vm.state.data.viewData.legs)))
-//				)
-//			}, label: {
-//				Label(
-//					title: {
-//						Text("Show on map", comment: "JourneyCell: menu item")
-//					},
-//					icon: {
-//						Image(systemName: "map.circle")
-//					}
-//				)
-//			})
 		}
 	}
 }
