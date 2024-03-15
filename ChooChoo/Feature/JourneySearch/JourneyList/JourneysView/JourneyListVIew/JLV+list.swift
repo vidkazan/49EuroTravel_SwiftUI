@@ -52,9 +52,9 @@ extension JourneyListView {
 								Image(systemName: "exclamationmark.circle")
 							}
 						)
-							.onTapGesture {
-								journeyViewModel.send(event: .onLaterRef)
-							}
+						.onTapGesture {
+							journeyViewModel.send(event: .onLaterRef)
+						}
 					case .loadingJourneyList, .failedToLoadJourneyList:
 						Image(systemName: "exclamationmark.circle.fill")
 					}

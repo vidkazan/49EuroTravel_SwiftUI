@@ -13,6 +13,9 @@ struct RecentSearchCell: View {
 	let send : (RecentSearchesViewModel.Event) -> Void
 	let locations : DepartureArrivalPair
 	var body: some View {
+		Button(action: {
+			chewVM.send(event: .didSetBothLocations(locations,date: nil))
+		}, label: {
 			HStack(alignment: .top,spacing: 0) {
 				VStack(alignment: .leading,spacing: 0) {
 					StopListCell(stop: locations.departure)
@@ -35,13 +38,12 @@ struct RecentSearchCell: View {
 				.background(Color.chewFillAccent.opacity(0.3))
 				.cornerRadius(20)
 			}
-			.onTapGesture {
-				chewVM.send(event: .didSetBothLocations(locations,date: nil))
-			}
-			.padding(5)
-			.frame(maxHeight: 100)
-			.background(Color.chewFillAccent.opacity(0.5))
-			.clipShape(.rect(cornerRadius: 8))
+		})
+		.foregroundStyle(.primary)
+		.padding(5)
+		.frame(maxHeight: 100)
+		.background(Color.chewFillAccent.opacity(0.5))
+		.clipShape(.rect(cornerRadius: 8))
 	}
 }
 
