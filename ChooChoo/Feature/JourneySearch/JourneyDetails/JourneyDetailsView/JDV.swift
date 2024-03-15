@@ -44,9 +44,16 @@ struct JourneyDetailsView: View {
 							})
 						})
 						.onAppear {
-							withAnimation(.easeInOut, {
-								proxy.scrollTo(0, anchor: .center)
-							})
+							Task {
+								let activeLeg : UUID?  = {
+									viewModel.state.data.viewData.legs.filter({
+										chewVM.referenceDate.ts > $0.time.timestamp.departure.actual ?? 0 && chewVM.referenceDate.ts < $0.time.timestamp.arrival.actual ?? 0
+									}).first?.id
+								}()
+								withAnimation(.easeInOut, {
+									proxy.scrollTo(activeLeg, anchor: .center)
+								})
+							}
 						}
 					}
 					.padding(10)
