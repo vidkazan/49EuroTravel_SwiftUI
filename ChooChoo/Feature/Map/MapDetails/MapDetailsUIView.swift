@@ -104,6 +104,6 @@ class ChooPolylineRenderer : MKPolylineRenderer {
 class ChooFootPolylineRenderer : ChooPolylineRenderer {
 	override init(overlay: MKOverlay) {
 		super.init(overlay: overlay)
-		self.lineDashPattern = [5,10]
+		self.lineDashPattern = [1,10]
 	}
 }

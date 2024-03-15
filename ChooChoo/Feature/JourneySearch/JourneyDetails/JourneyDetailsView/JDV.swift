@@ -34,6 +34,8 @@ struct JourneyDetailsView: View {
 										isExpanded: .collapsed,
 										leg: leg
 									)
+									.background(leg.legType == LegViewData.LegType.line ? Color.chewLegDetailsCellGray : .clear )
+									.cornerRadius(10)
 									.id(leg.id)
 								}
 							}

@@ -88,13 +88,12 @@ struct LegDetailsView: View {
 		}
 		// MARK: 🤢
 		.padding(.top,leg.legType == LegViewData.LegType.line || leg.legType.caseDescription == "footStart" ?  10 : 0)
-//		.background {
-//			if leg.isReachable == false {
-//				#warning("tmp solution?")
-//				Color.chewFillRedPrimary.opacity(0.2)
-//			}
-//		}
-		.background(leg.legType == LegViewData.LegType.line ? Color.chewLegDetailsCellGray : .clear )
+
+		.background {
+			if !leg.isReachable {
+				Color.chewFillSecondary.opacity(0.5)
+			}
+		}
 		.onTapGesture {
 			withAnimation(.smooth, {
 				switch isExpandedState {
@@ -106,7 +105,6 @@ struct LegDetailsView: View {
 			})
 		}
 		.overlay(alignment: .topTrailing) { options }
-		.cornerRadius(10)
 		.onAppear {
 			isExpandedState = isExpanded
 			updateProgressHeight()
