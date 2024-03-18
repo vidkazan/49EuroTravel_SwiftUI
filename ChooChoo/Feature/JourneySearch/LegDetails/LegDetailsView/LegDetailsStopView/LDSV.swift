@@ -64,7 +64,7 @@ extension LegStopView {
 }
 
 
-struct LegDetailsStopPreview : PreviewProvider {
+struct LegStopPreview : PreviewProvider {
 	static var previews : some View {
 		let mock = Mock.trip.cancelledMiddleStopsRE6NeussMinden.decodedData
 		if let mock = mock?.trip,

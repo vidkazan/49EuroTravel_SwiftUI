@@ -9,35 +9,71 @@ import Foundation
 import SwiftUI
 
 struct ChewLabel : View {
-	let text : Text
+	let text : Text?
+	let string : String?
 	let image : String
-	init(_ text : Text,_ image : String) {
+	
+	init(_ text : Text?, _ image : String) {
 		self.text = text
+		self.string = nil
 		self.image = image
 	}
-	init(_ text : Text,_ image : ChooSFSymbols) {
+	init(_ text : Text?, _ image : ChooSFSymbols) {
 		self.text = text
+		self.string = nil
+		self.image = image.rawValue
+	}
+	init(_ string : String?,_ image : String) {
+		self.string = string
+		self.text = nil
+		self.image = image
+	}
+	init(_ string : String?,_ image : ChooSFSymbols) {
+		self.string = string
+		self.text = nil
 		self.image = image.rawValue
 	}
 	var body : some View {
 		HStack(spacing: 2) {
 			Image(systemName: image)
-			text
+			if let text = text {
+				text
+			}
+			if let string = string {
+				Text(verbatim: string)
+			}
 		}
 	}
 }
 
 struct OneLineText : View {
-	let text : Text
+	let text : Text?
+	let string : String?
 	let strikethrough : Bool
+	
 	init(_ text : Text,_ strikethrough : Bool = false) {
 		self.text = text
+		self.string = nil
+		self.strikethrough = strikethrough
+	}
+	init(_ string : String,_ strikethrough : Bool = false) {
+		self.string = string
+		self.text = nil
 		self.strikethrough = strikethrough
 	}
 	var body : some View {
-		text
-			.strikethrough(strikethrough)
-			.lineLimit(1)
+		Group {
+			if let text = text {
+				text
+					.strikethrough(strikethrough)
+					.lineLimit(1)
+			}
+			if let string = string {
+				Text(verbatim: string)
+					.strikethrough(strikethrough)
+					.lineLimit(1)
+			}
+		}
 	}
 }
 
@@ -45,7 +81,11 @@ struct BadgeView : View {
 	var badge : Badges
 	let size : ChewPrimaryStyle
 	let color : Color = .chewFillTertiary
-	init(_ badge : Badges,_ size : ChewPrimaryStyle = .medium, color : Color? = nil) {
+	init(
+		_ badge : Badges,
+		_ size : ChewPrimaryStyle = .medium,
+		color : Color? = nil
+	) {
 		self.badge = badge
 		self.size = size
 	}
@@ -54,11 +94,9 @@ struct BadgeView : View {
 			switch badge {
 			case let .legDirection(dir,strikethrough):
 				OneLineText(
-					(
-						Text("to ", comment: "BadgeView: legDirection")
-						+
-						Text(verbatim: dir)
-					),
+					Text("to ", comment: "BadgeView: legDirection")
+					+
+					Text(verbatim: dir),
 					strikethrough
 				)
 				.chewTextSize(size)
@@ -93,20 +131,18 @@ struct BadgeView : View {
 			case let .timeDepartureTimeArrival(time):
 				if let dep = time.date.departure.actualOrPlannedIfActualIsNil(),
 				   let arr = time.date.arrival.actualOrPlannedIfActualIsNil() {
-					HStack(spacing: 0) {
+					OneLineText(
 						Text(dep, style: .time)
 						+
 						Text(verbatim: "-")
 						+
 						Text(arr, style: .time)
-					}
-					.lineLimit(1)
+					)
 					.chewTextSize(size)
 					.padding(4)
 				}
 			case .date(let date):
-				Text(date, style: .date)
-					.lineLimit(1)
+				OneLineText(Text(date, style: .date))
 					.chewTextSize(size)
 					.padding(4)
 			case let .updatedAtTime(refTime, isLoading):
@@ -145,9 +181,10 @@ struct BadgeView : View {
 					OneLineText(badge.badgeData.text)
 						.chewTextSize(size)
 					if count > 1, mode != .hideShevron {
-						Image(.chevronDownCircle)
+						Image(.chevronDown)
 							.chewTextSize(size)
 							.rotationEffect(.degrees(mode.angle))
+							.transition(.opacity)
 							.animation(.spring(), value: mode)
 					}
 				}
@@ -173,7 +210,7 @@ struct BadgeView : View {
 					.chewTextSize(size)
 					.padding(4)
 			case .changesCount(let count):
-				ChewLabel(Text(verbatim: "\(count)"),.arrowLeftArrowRight)
+				ChewLabel(String("\(count)"),.arrowLeftArrowRight)
 					.chewTextSize(size)
 					.padding(4)
 			case let .departureArrivalStops(departure,arrival):
@@ -237,8 +274,6 @@ struct BadgeViewPreview : PreviewProvider {
 						.badgeBackgroundStyle(.primary)
 					BadgeView(.legDuration(viewData.time))
 						.badgeBackgroundStyle(.primary)
-//					BadgeView(.dticket)
-//						.badgeBackgroundStyle(.primary)
 				}
 				FlowLayout {
 					BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf",strikethrough: false))

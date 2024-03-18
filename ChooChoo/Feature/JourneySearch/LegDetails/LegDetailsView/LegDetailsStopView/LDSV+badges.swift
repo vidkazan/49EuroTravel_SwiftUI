@@ -16,8 +16,16 @@ extension LegStopView {
 					badges
 				}
 			} else {
-				HStack(spacing: 2) {
-					badges
+				VStack(alignment: .leading,spacing: 3) {
+					HStack(spacing: 2) {
+						badges
+					}
+					BadgeView(
+						.stopsCount(
+							legViewData.legStopsViewData.count - 1,
+							shevronIsExpanded == .collapsed ? .showShevronUp: .showShevronDown
+						))
+						.badgeBackgroundStyle(.secondary)
 				}
 			}
 		}
@@ -36,12 +44,6 @@ extension LegStopView {
 			BadgeView(
 				.legDuration(legViewData.time)
 			)
-				.badgeBackgroundStyle(.secondary)
-			BadgeView(
-				.stopsCount(
-					legViewData.legStopsViewData.count - 1,
-					shevronIsExpanded == .collapsed ? .showShevronUp: .showShevronDown
-				))
 				.badgeBackgroundStyle(.secondary)
 		}
 	}

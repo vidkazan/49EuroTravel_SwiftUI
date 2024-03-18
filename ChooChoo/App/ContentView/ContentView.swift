@@ -8,17 +8,12 @@
 import SwiftUI
 import TipKit
 
-#warning("FIX: iOS 17+ mapDetails: starting region fault")
-#warning("prognosed direction")
-
 // MARK: JDV
 // leg cell: stops number badge: let user know that cell is tappable and it will show all leg stops
 
 // MARK: revise
 // all text revision
 // revise icons
-// revise contrast
-// revise text white color ( too contrast with black BG )
 
 #warning("Anna")
 // tip: for sunEvents ( first cell of journeyList )
@@ -26,6 +21,7 @@ import TipKit
 
 
 // TODO: feature: check when train arrives at starting point
+// TODO: feature: ldsv: make stop tappable and show stop details and all leg stopover info
 struct ContentView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var alertVM = Model.shared.alertViewModel
