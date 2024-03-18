@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 extension LegStopView {
-
 	var transfer : some View {
 		VStack(alignment: .leading) {
 			if stopOverType == .transfer {

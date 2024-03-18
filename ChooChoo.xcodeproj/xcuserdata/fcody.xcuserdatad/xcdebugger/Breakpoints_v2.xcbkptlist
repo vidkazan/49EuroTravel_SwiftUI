@@ -202,8 +202,8 @@
             filePath = "ChooChoo/Feature/JourneySearch/JourneyDetails/JourneyDetailsVM/sideEffects/JDVM+sideEffects+loading.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "whenLoadingJourneyByRefreshToken()"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,8 +218,8 @@
             filePath = "ChooChoo/Feature/JourneySearch/JourneyDetails/JourneyDetailsVM/sideEffects/JDVM+sideEffects+loading.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "JourneyDetailsViewModel"
             landmarkType = "21">
          </BreakpointContent>
@@ -234,8 +234,8 @@
             filePath = "ChooChoo/Feature/JourneySearch/JourneyDetails/JourneyDetailsVM/sideEffects/JDVM+sideEffects+loading.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "JourneyDetailsViewModel"
             landmarkType = "21">
          </BreakpointContent>
@@ -282,8 +282,8 @@
             filePath = "ChooChoo/Feature/JourneySearch/JourneyDetails/JourneyDetailsVM/sideEffects/JDVM+sideEffects+loading.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "JourneyDetailsViewModel"
             landmarkType = "21">
             <Locations>
@@ -394,8 +394,8 @@
             filePath = "ChooChoo/Feature/JourneySearch/JourneyDetails/JourneyDetailsVM/sideEffects/JDVM+sideEffects+loading.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "JourneyDetailsViewModel"
             landmarkType = "21">
          </BreakpointContent>
@@ -410,8 +410,8 @@
             filePath = "ChooChoo/Feature/JourneySearch/JourneyDetails/JourneyDetailsVM/sideEffects/JDVM+sideEffects+loading.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "JourneyDetailsViewModel"
             landmarkType = "21">
             <Locations>
@@ -521,8 +521,8 @@
             filePath = "ChooChoo/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "whenIdleCheckForSufficientDataForJourneyRequest()"
             landmarkType = "7">
          </BreakpointContent>
@@ -537,8 +537,8 @@
             filePath = "ChooChoo/App/chewVM/chewVM+sideEffects/chewVM+sideEffect.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "27"
+            endingLineNumber = "27"
             landmarkName = "whenIdleCheckForSufficientDataForJourneyRequest()"
             landmarkType = "7">
             <Locations>
@@ -814,22 +814,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A34B6E07-B0D6-4AEB-BA6D-2D41DDCD82EC"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChooChoo/Feature/JourneySearch/JourneyList/JourneysView/JourneyCell/JourneyCell.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "F78E237D-C4C2-424E-9DF4-B47B27D02ED9"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -841,6 +825,70 @@
             endingLineNumber = "146"
             landmarkName = "badgeData"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F03DB443-ABCE-4523-9B96-21E69B63E396"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Feature/JourneySearch/JourneyList/JourneysView/JourneyCell/JourneyCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "0FC8B508-8FA4-47E3-B66F-87E1EFBF0C60"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Feature/JourneySearch/JourneyList/JourneysView/JourneyCell/JourneyCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "0FC8B508-8FA4-47E3-B66F-87E1EFBF0C60 - 29c191367e116800"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;ChooChoo.PlatformView&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.tint(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer, ChooChoo.BadgesView, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.NavigationLink&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(ChooChoo.JourneyHeaderView, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, ChooChoo.NavigationLazyView&lt;ChooChoo.JourneyDetailsView&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0)&gt; in ChooChoo.JourneyCell.body.getter : some"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/JourneyList/JourneysView/JourneyCell/JourneyCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "1872">
+               </Location>
+               <Location
+                  uuid = "0FC8B508-8FA4-47E3-B66F-87E1EFBF0C60 - 29c191367e116800"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #3 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;ChooChoo.PlatformView&gt;, Swift.Optional&lt;&lt;&lt;opaque return type of SwiftUI.View.tint(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0&gt;, SwiftUI.Spacer, ChooChoo.BadgesView, SwiftUI.Button&lt;&lt;&lt;opaque return type of SwiftUI.View.foregroundColor(Swift.Optional&lt;SwiftUI.Color&gt;) -&gt; some&gt;&gt;.0&gt;)&gt; in closure #1 () -&gt; SwiftUI.TupleView&lt;(SwiftUI.NavigationLink&lt;SwiftUI.VStack&lt;SwiftUI.TupleView&lt;(ChooChoo.JourneyHeaderView, &lt;&lt;opaque return type of SwiftUI.View.padding(SwiftUI.Edge.Set, Swift.Optional&lt;CoreGraphics.CGFloat&gt;) -&gt; some&gt;&gt;.0)&gt;&gt;, ChooChoo.NavigationLazyView&lt;ChooChoo.JourneyDetailsView&gt;&gt;, &lt;&lt;opaque return type of SwiftUI.View.padding(CoreGraphics.CGFloat) -&gt; some&gt;&gt;.0)&gt; in ChooChoo.JourneyCell.body.getter : some"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/JourneyList/JourneysView/JourneyCell/JourneyCell.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "58"
+                  endingLineNumber = "58"
+                  offsetFromSymbolStart = "3488">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

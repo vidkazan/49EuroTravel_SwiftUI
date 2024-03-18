@@ -50,14 +50,16 @@ struct TimeChoosingView: View {
 				.frame(maxWidth: .infinity,minHeight: 35)
 			},
 			externalAction: { (selected : TimeSegmentedPickerOptions)  in
-				switch selected {
-				case .now:
-					chewVM.send(event: .onNewDate(SearchStopsDate(
-						date: .now,
-						mode: .departure
-					)))
-				case .specificDate:
-					Model.shared.sheetViewModel.send(event: .didRequestShow(.date))
+				Task {
+					switch selected {
+					case .now:
+						chewVM.send(event: .onNewDate(SearchStopsDate(
+							date: .now,
+							mode: .departure
+						)))
+					case .specificDate:
+						Model.shared.sheetViewModel.send(event: .didRequestShow(.date))
+					}
 				}
 			}
 		)

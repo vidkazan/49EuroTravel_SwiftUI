@@ -24,7 +24,7 @@ extension ChewViewModel {
 			let settings = Model.shared.coreDataStore.fetchSettings()
 
 			
-			Task.detached {
+			Task {
 				if settings.onboarding == true {
 					Model.shared.coreDataStore.disableOnboarding()
 				}

@@ -77,16 +77,12 @@ struct SettingsView: View {
 				}
 			}
 			.onAppear {
-				Task {
-					loadSettings(state: chewViewModel.state)
-				}
+				loadSettings(state: chewViewModel.state)
 			}
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
-						Task {
-							saveSettings()
-						}
+						saveSettings()
 						closeSheet()
 					}, label: {
 						Text("Save", comment: "settingsView: save button")
@@ -100,18 +96,20 @@ struct SettingsView: View {
 
 extension SettingsView {
 	func loadSettings(state : ChewViewModel.State) {
-		let settings = state.settings
-		self.transportModeSegment = settings.transportMode
-		self.selectedTypes = settings.customTransferModes
-		switch settings.transferTime {
-		case .direct:
-			self.showWithTransfers = 0
-			self.transferTime = .zero
-			self.transferCount = .unlimited
-		case .time(minutes: let minutes):
-			self.showWithTransfers = 1
-			self.transferTime = minutes
-			self.transferCount = settings.transferCount
+		Task {
+			let settings = state.settings
+			self.transportModeSegment = settings.transportMode
+			self.selectedTypes = settings.customTransferModes
+			switch settings.transferTime {
+			case .direct:
+				self.showWithTransfers = 0
+				self.transferTime = .zero
+				self.transferCount = .unlimited
+			case .time(minutes: let minutes):
+				self.showWithTransfers = 1
+				self.transferTime = minutes
+				self.transferCount = settings.transferCount
+			}
 		}
 	}
 }

@@ -46,20 +46,12 @@ extension ChewViewModel {
 				status: .checkingSearchData
 			)
 		case .onStopsSwitch:
-			let newType : LocationDirectionType = {
-				switch type {
-				case .departure:
-					return .arrival
-				case .arrival:
-					return .departure
-				}
-			}()
 			return State(
 				depStop: state.arrStop,
 				arrStop: state.depStop,
 				settings: state.settings,
 				date: state.date,
-				status: .editingStop(newType)
+				status: .editingStop(type.next())
 			)
 		case .onNewStop(let stop, let type):
 			switch type {

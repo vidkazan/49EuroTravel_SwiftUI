@@ -79,7 +79,6 @@ extension JourneyDetailsViewModel {
 }
 
 extension JourneyDetailsViewModel {
-	
 	enum Status : Equatable {
 		static func == (lhs: JourneyDetailsViewModel.Status, rhs: JourneyDetailsViewModel.Status) -> Bool {
 			return lhs.description == rhs.description

@@ -111,7 +111,6 @@
 		7D6734B32A96334B00CBE9C1 /* ChooChooApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B22A96334B00CBE9C1 /* ChooChooApp.swift */; };
 		7D6734B52A96334B00CBE9C1 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734B42A96334B00CBE9C1 /* ContentView.swift */; };
 		7D6734DF2A96394E00CBE9C1 /* TimeChoosingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */; };
-		7D6848F02B9F2EAB00EE789F /* Measurment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6848EF2B9F2EAB00EE789F /* Measurment.swift */; };
 		7D6848F22B9F302F00EE789F /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = 7D6848F12B9F302F00EE789F /* Localizable.xcstrings */; };
 		7D68D9F32ABDB33E00579711 /* constructJourneys+Leg+Type.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */; };
 		7D68D9F52ABDB36D00579711 /* constructJourneys+Leg+Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stop.swift */; };
@@ -130,7 +129,6 @@
 		7D6C5C2D2AAF791400DEFC57 /* JDVM+sideEffects.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C2C2AAF791400DEFC57 /* JDVM+sideEffects.swift */; };
 		7D6C5C2F2AAF792200DEFC57 /* JDVM+state.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C2E2AAF792200DEFC57 /* JDVM+state.swift */; };
 		7D6C5C312AAF792F00DEFC57 /* JDVM+reduce.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C302AAF792F00DEFC57 /* JDVM+reduce.swift */; };
-		7D6C5C362AAF7C4500DEFC57 /* JDV+sheetType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6C5C352AAF7C4500DEFC57 /* JDV+sheetType.swift */; };
 		7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift */; };
 		7D6CCAF12B5FFB9200BCF62E /* SettingsView+saveSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */; };
 		7D6CCAF32B6004A200BCF62E /* VMTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */; };
@@ -141,7 +139,6 @@
 		7D7547B82B616FD3002BE434 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7547B72B616FD3002BE434 /* FeatureView.swift */; };
 		7D787DD42B5D9E7D007D2A3A /* TimeAndSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D787DD32B5D9E7D007D2A3A /* TimeAndSettingsView.swift */; };
 		7D787DD62B5DA113007D2A3A /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D787DD52B5DA113007D2A3A /* BottomView.swift */; };
-		7D787DD82B5DBF35007D2A3A /* JLV+header.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D787DD72B5DBF35007D2A3A /* JLV+header.swift */; };
 		7D7887702B6309B600CDEFF9 /* TimelaneCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 7D78876F2B6309B600CDEFF9 /* TimelaneCombine */; };
 		7D7887722B632B0500CDEFF9 /* CombineWeakAssign.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7887712B632B0500CDEFF9 /* CombineWeakAssign.swift */; };
 		7D7A55322AA4A27C000256EF /* JLVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7A55312AA4A27C000256EF /* JLVM.swift */; };
@@ -171,7 +168,6 @@
 		7DA13A412B28D5F10045061F /* ChooSettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA13A402B28D5F10045061F /* ChooSettings+CoreDataClass.swift */; };
 		7DA13A432B28D66D0045061F /* ChewTime+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA13A422B28D66D0045061F /* ChewTime+CoreDataProperties.swift */; };
 		7DA13A452B28F01F0045061F /* LineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA13A442B28F01F0045061F /* LineType.swift */; };
-		7DA5FEAB2B8106BB002182F8 /* Sheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA5FEAA2B8106BB002182F8 /* Sheet.swift */; };
 		7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */; };
 		7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3492A9A118E005DF550 /* BadgesView.swift */; };
 		7DAA726F2B7CF0A600290548 /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7DAA726E2B7CF0A600290548 /* Icons.xcassets */; };
@@ -185,7 +181,6 @@
 		7DAE1F6C2B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */; };
 		7DAE1F6D2B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F692B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift */; };
 		7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */; };
-		7DAF62C02A9E6DED006F1A17 /* D-ticketLogo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */; };
 		7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C12A9E8C2B006F1A17 /* Solar.swift */; };
 		7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */; };
 		7DBABFF92B879FA400C990FD /* ChildAnnotationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DBABFF82B879FA400C990FD /* ChildAnnotationViews.swift */; };
@@ -245,7 +240,6 @@
 		7DF845622B764B7D00D76B14 /* RemarkViewData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF845612B764B7D00D76B14 /* RemarkViewData.swift */; };
 		7DF845692B767E6C00D76B14 /* AlertVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF845682B767E6C00D76B14 /* AlertVM.swift */; };
 		7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */; };
-		7DFC46AB2B7F859F00118608 /* AttibutedContainers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC46AA2B7F859F00118608 /* AttibutedContainers.swift */; };
 		7DFC46AE2B7F86A900118608 /* UpdatedAtBadgeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DFC46AD2B7F86A900118608 /* UpdatedAtBadgeView.swift */; };
 /* End PBXBuildFile section */
 
@@ -356,7 +350,6 @@
 		7D6734B42A96334B00CBE9C1 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; wrapsLines = 0; };
 		7D6734C92A96334D00CBE9C1 /* ChooChooUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ChooChooUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7D6734DE2A96394E00CBE9C1 /* TimeChoosingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeChoosingView.swift; sourceTree = "<group>"; };
-		7D6848EF2B9F2EAB00EE789F /* Measurment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Measurment.swift; sourceTree = "<group>"; };
 		7D6848F12B9F302F00EE789F /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		7D68D9F22ABDB33E00579711 /* constructJourneys+Leg+Type.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Type.swift"; sourceTree = "<group>"; };
 		7D68D9F42ABDB36D00579711 /* constructJourneys+Leg+Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Leg+Stop.swift"; sourceTree = "<group>"; };
@@ -375,7 +368,6 @@
 		7D6C5C2C2AAF791400DEFC57 /* JDVM+sideEffects.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDVM+sideEffects.swift"; sourceTree = "<group>"; };
 		7D6C5C2E2AAF792200DEFC57 /* JDVM+state.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDVM+state.swift"; sourceTree = "<group>"; };
 		7D6C5C302AAF792F00DEFC57 /* JDVM+reduce.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDVM+reduce.swift"; sourceTree = "<group>"; };
-		7D6C5C352AAF7C4500DEFC57 /* JDV+sheetType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDV+sheetType.swift"; sourceTree = "<group>"; };
 		7D6CCAEE2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportModesSection.swift"; sourceTree = "<group>"; };
 		7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+saveSettings.swift"; sourceTree = "<group>"; };
 		7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMTemplate.swift; sourceTree = "<group>"; };
@@ -387,7 +379,6 @@
 		7D7547BA2B61935A002BE434 /* Placeholder.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Placeholder.json; sourceTree = "<group>"; };
 		7D787DD32B5D9E7D007D2A3A /* TimeAndSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndSettingsView.swift; sourceTree = "<group>"; };
 		7D787DD52B5DA113007D2A3A /* BottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BottomView.swift; sourceTree = "<group>"; };
-		7D787DD72B5DBF35007D2A3A /* JLV+header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLV+header.swift"; sourceTree = "<group>"; };
 		7D7887712B632B0500CDEFF9 /* CombineWeakAssign.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CombineWeakAssign.swift; sourceTree = "<group>"; };
 		7D7A55312AA4A27C000256EF /* JLVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JLVM.swift; sourceTree = "<group>"; };
 		7D7A55392AA4B3E5000256EF /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
@@ -417,7 +408,6 @@
 		7DA13A402B28D5F10045061F /* ChooSettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChooSettings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7DA13A422B28D66D0045061F /* ChewTime+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChewTime+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7DA13A442B28F01F0045061F /* LineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineType.swift; sourceTree = "<group>"; };
-		7DA5FEAA2B8106BB002182F8 /* Sheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sheet.swift; sourceTree = "<group>"; };
 		7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		7DA8D3492A9A118E005DF550 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
 		7DAA726E2B7CF0A600290548 /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
@@ -431,7 +421,6 @@
 		7DAE1F682B0D26CF0097AAD8 /* TransportMode+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransportMode+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7DAE1F692B0D26CF0097AAD8 /* TransportMode+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TransportMode+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTimePresetButtons.swift; sourceTree = "<group>"; };
-		7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "D-ticketLogo.swift"; sourceTree = "<group>"; };
 		7DAF62C12A9E8C2B006F1A17 /* Solar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solar.swift; sourceTree = "<group>"; };
 		7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunEvent.swift; sourceTree = "<group>"; };
 		7DBABFF82B879FA400C990FD /* ChildAnnotationViews.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChildAnnotationViews.swift; sourceTree = "<group>"; };
@@ -492,7 +481,6 @@
 		7DF845612B764B7D00D76B14 /* RemarkViewData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemarkViewData.swift; sourceTree = "<group>"; };
 		7DF845682B767E6C00D76B14 /* AlertVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertVM.swift; sourceTree = "<group>"; };
 		7DFA4A822AB10531005ECAEB /* constructJourneys+Badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "constructJourneys+Badges.swift"; sourceTree = "<group>"; };
-		7DFC46AA2B7F859F00118608 /* AttibutedContainers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttibutedContainers.swift; sourceTree = "<group>"; };
 		7DFC46AD2B7F86A900118608 /* UpdatedAtBadgeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdatedAtBadgeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -588,12 +576,10 @@
 				7D53705B2ACED7300009BA20 /* PlannedActual.swift */,
 				7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */,
 				7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */,
-				7DFC46AA2B7F859F00118608 /* AttibutedContainers.swift */,
 				7DBD26C12B99FB1800612A3B /* EnumTraversal.swift */,
 				7DEE69CC2B9BCDF200A063B4 /* Tips.swift */,
 				7DEE69CE2B9BCE6A00A063B4 /* Info.swift */,
 				7DEE69D02B9BCE8B00A063B4 /* PresentationDetent.swift */,
-				7D6848EF2B9F2EAB00EE789F /* Measurment.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -776,7 +762,6 @@
 				7D2BF7A72B67D30800E1CED7 /* Color+random.swift */,
 				7D704F432B8558C200F8334F /* UIView+Constraints.swift */,
 				7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */,
-				7DAF62BF2A9E6DED006F1A17 /* D-ticketLogo.swift */,
 				7D000CFA2AB87ACD00566120 /* NavigationLazyView.swift */,
 				7DE8A34D2B6AB09D00C3A378 /* TimeLabelView */,
 				7DA001FC2B0F88B6009BB79D /* SegmentedPicker.swift */,
@@ -861,7 +846,6 @@
 		7D63DB0B2B738F05008297DD /* Sheet */ = {
 			isa = PBXGroup;
 			children = (
-				7DA5FEAA2B8106BB002182F8 /* Sheet.swift */,
 				7D63DB0D2B738F1D008297DD /* SheetView */,
 				7D63DB0C2B738F10008297DD /* SheetViewModel */,
 				7DBD26C42B9A202F00612A3B /* SheetViewDataSource.swift */,
@@ -1095,7 +1079,6 @@
 		7D6C5C342AAF7C3B00DEFC57 /* JourneyDetailsView */ = {
 			isa = PBXGroup;
 			children = (
-				7D6C5C352AAF7C4500DEFC57 /* JDV+sheetType.swift */,
 				7DD5BAE22B72ADD900CFE768 /* JDV.swift */,
 				7D39571F2B54911F00024736 /* JDV+Toolbar.swift */,
 				7D000CF82AB8768400566120 /* JDV+Header.swift */,
@@ -1376,7 +1359,6 @@
 				7D02CE332A98E8130048ADE6 /* JLV.swift */,
 				7DD5BAFA2B72BAE900CFE768 /* JLV+list.swift */,
 				7DA085322BA492AB005E72B2 /* JLV+footer.swift */,
-				7D787DD72B5DBF35007D2A3A /* JLV+header.swift */,
 			);
 			path = JourneyListVIew;
 			sourceTree = "<group>";
@@ -1727,7 +1709,6 @@
 				7DD5BADF2B728CA700CFE768 /* JSV.swift in Sources */,
 				7D462D522AAC96C000BC0D65 /* SSV+RightButton.swift in Sources */,
 				7D7B3DA22AB9CC7E0070E44D /* LDSV.swift in Sources */,
-				7D6C5C362AAF7C4500DEFC57 /* JDV+sheetType.swift in Sources */,
 				7D000CF02AB86A4700566120 /* chewVM+sideEffect+userLocaiton.swift in Sources */,
 				7DF845602B764AEA00D76B14 /* RemarkSheet.swift in Sources */,
 				7D3C52012B29F0DC00AA887A /* ChewLegType+CoreDataProperties.swift in Sources */,
@@ -1737,7 +1718,6 @@
 				7DA001FD2B0F88B6009BB79D /* SegmentedPicker.swift in Sources */,
 				7DBF1E572ABB8084009B85EF /* TimeLabelView.swift in Sources */,
 				7DE8A3552B6ABB3400C3A378 /* LDSV+subviews.swift in Sources */,
-				7D6848F02B9F2EAB00EE789F /* Measurment.swift in Sources */,
 				7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */,
 				7D6C5C142AAF482D00DEFC57 /* chewVM.swift in Sources */,
 				7DBABFFC2B87A99B00C990FD /* MapDetailsUIView.swift in Sources */,
@@ -1804,9 +1784,7 @@
 				7DBD26C02B99F13700612A3B /* Settings+Types.swift in Sources */,
 				7D000CF32AB86AD700566120 /* JLVM+sideEffects+loadingJourneys.swift in Sources */,
 				7D6C5C2F2AAF792200DEFC57 /* JDVM+state.swift in Sources */,
-				7DFC46AB2B7F859F00118608 /* AttibutedContainers.swift in Sources */,
 				7D345E4A2AE95E7C003CA948 /* Settings.swift in Sources */,
-				7DA5FEAB2B8106BB002182F8 /* Sheet.swift in Sources */,
 				7D4B1B8A2AA8CB460096F372 /* JLVM+reduce.swift in Sources */,
 				7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift in Sources */,
 				7DE8A34F2B6AB0AF00C3A378 /* TimeLabelView+Init.swift in Sources */,
@@ -1857,7 +1835,6 @@
 				7D000CF72AB86BA500566120 /* JLVM+sideEffects+loadingJourneysRef.swift in Sources */,
 				7D5D78552B29C4AE00E17CC7 /* ChewLegType+CoreDataClass.swift in Sources */,
 				7DE727C62AD93869002FF033 /* JFV.swift in Sources */,
-				7D787DD82B5DBF35007D2A3A /* JLV+header.swift in Sources */,
 				7D4B1B8C2AA8CB970096F372 /* JLVM+sideEffects.swift in Sources */,
 				7D6CCAF12B5FFB9200BCF62E /* SettingsView+saveSettings.swift in Sources */,
 				7DA085332BA492AB005E72B2 /* JLV+footer.swift in Sources */,
@@ -1870,7 +1847,6 @@
 				7D5D78522B29C00600E17CC7 /* ChewLeg+CoreDataClass.swift in Sources */,
 				7D462D5E2AACEC5600BC0D65 /* constructJourneys+TimeLabel.swift in Sources */,
 				7DF0D98F2B6956DD00861C4F /* FlowLayout.swift in Sources */,
-				7DAF62C02A9E6DED006F1A17 /* D-ticketLogo.swift in Sources */,
 				7D7A553D2AA4B407000256EF /* System.swift in Sources */,
 				7DE8A35A2B6AC50D00C3A378 /* SunEventsGradient.swift in Sources */,
 				7DCB2BFF2AAC8831007C672A /* SSVM+reduce+Idle.swift in Sources */,

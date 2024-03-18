@@ -24,7 +24,6 @@ struct JourneySearchView : View {
 			TimeAndSettingsView()
 			BottomView()
 		}
-//		.animation(.easeInOut, value: topAlertVM.state.alerts)
 		.contentShape(Rectangle())
 		.padding(.horizontal,10)
 		.background(alignment: .top, content: {
@@ -42,7 +41,6 @@ struct JourneySearchView : View {
 					if topAlertVM.state.alerts.contains(.offlineMode) {
 						BadgeView(.offlineMode)
 							.badgeBackgroundStyle(.blue)
-//							.animation(.easeInOut, value: topAlertVM.state.alerts)
 					}
 				}
 			)

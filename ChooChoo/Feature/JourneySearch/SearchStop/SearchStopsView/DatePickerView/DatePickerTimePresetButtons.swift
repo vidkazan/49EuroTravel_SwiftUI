@@ -14,11 +14,13 @@ struct DatePickerTimePresetButtons: View {
 	var body: some View {
 		HStack {
 			Button(action: {
-				chewVM.send(event: .onNewDate(SearchStopsDate(
-					date: .now,
-					mode: mode
-				)))
-				closeSheet()
+				Task {
+					chewVM.send(event: .onNewDate(SearchStopsDate(
+						date: .now,
+						mode: mode
+					)))
+					closeSheet()
+				}
 			}, label: {
 				Text("now",comment: "DatePickerTimePresetButtons")
 					.padding(.horizontal,15)
@@ -28,12 +30,14 @@ struct DatePickerTimePresetButtons: View {
 			.foregroundColor(.primary)
 			.cornerRadius(10)
 			Button(action: {
-				let date = Date.now + (15 * 60)
-				chewVM.send(event: .onNewDate(SearchStopsDate(
-					date: .specificDate(date.timeIntervalSince1970),
-					mode: mode
-				)))
-				closeSheet()
+				Task {
+					let date = Date.now + (15 * 60)
+					chewVM.send(event: .onNewDate(SearchStopsDate(
+						date: .specificDate(date.timeIntervalSince1970),
+						mode: mode
+					)))
+					closeSheet()
+				}
 			}, label: {
 				Text("in 15 min",comment: "DatePickerTimePresetButtons")
 					.padding(.horizontal,15)
@@ -43,12 +47,14 @@ struct DatePickerTimePresetButtons: View {
 			.foregroundColor(.primary)
 			.cornerRadius(10)
 			Button(action: {
-				let date = Date.now + (60 * 60)
-				chewVM.send(event: .onNewDate(SearchStopsDate(
-					date: .specificDate(date.timeIntervalSince1970),
-					mode: mode
-				)))
-				closeSheet()
+				Task {
+					let date = Date.now + (60 * 60)
+					chewVM.send(event: .onNewDate(SearchStopsDate(
+						date: .specificDate(date.timeIntervalSince1970),
+						mode: mode
+					)))
+					closeSheet()
+				}
 			}, label: {
 				Text("in 1 hour",comment: "DatePickerTimePresetButtons")
 					.padding(.horizontal,15)

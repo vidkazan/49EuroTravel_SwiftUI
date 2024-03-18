@@ -22,7 +22,8 @@ extension SearchStopsViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			return SearchStopsViewModel.fetchLocations(text: string, type: type)
-				.map { stops in
+				.mapError { $0 }
+				.asyncFlatMap { stops in
 					if stops.isEmpty {
 						return Event.onDataLoadError(ApiError.stopNotFound)
 					}
@@ -32,7 +33,7 @@ extension SearchStopsViewModel {
 					return Event.onDataLoaded(stops,type)
 				}
 				.catch { error in
-					return Just(Event.onDataLoadError(error))
+					return Just(Event.onDataLoadError(error as? ApiError ?? .generic(description: error.localizedDescription))).eraseToAnyPublisher()
 				}
 				.eraseToAnyPublisher()
 		}

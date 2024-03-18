@@ -110,12 +110,12 @@ struct LegDetailsView: View {
 			updateProgressHeight()
 		}
 		.onReceive(timer, perform: { _ in
-			withAnimation(.smooth, {
+			withAnimation(.smooth(duration: 1), {
 				updateProgressHeight()
 			})
 		})
 		.onChange(of: isExpandedState, perform: { _ in
-			withAnimation(.smooth, {
+			withAnimation(.smooth(duration: 1), {
 				updateProgressHeight()
 			})
 		})
@@ -133,7 +133,7 @@ extension LegDetailsView {
 						Label(title: {
 						}, icon: {
 							Image(systemName: option.icon)
-								.chewTextSize(.huge)
+								.chewTextSize(.big)
 								.frame(minWidth: 43,minHeight: 43)
 								.tint(Color.gray)
 						})
@@ -165,11 +165,13 @@ extension LegDetailsView {
 
 extension LegDetailsView {
 	func updateProgressHeight(){
-		self.currentProgressHeight = leg.progressSegments.update(
-			time: chewVM.referenceDate.ts,
-			type: isExpandedState
-		)
-		self.totalProgressHeight = leg.progressSegments.heightTotal(isExpandedState)
+		Task {
+			self.currentProgressHeight = leg.progressSegments.update(
+				time: chewVM.referenceDate.ts,
+				type: isExpandedState
+			)
+			self.totalProgressHeight = leg.progressSegments.heightTotal(isExpandedState)
+		}
 	}
 }
 

@@ -16,10 +16,10 @@ extension SearchStopsView {
 			foundStop(type: type, stops: stops)
 		}
 		.onReceive(searchStopViewModel.$state, perform: { _ in
-			Task { update(type : type) }
+			update(type : type)
 		})
 		.onChange(of: type == .departure ? topText : bottomText, perform: { value in
-			Task { update(type : type) }
+			update(type : type)
 		})
 		.padding(.horizontal,5)
 		.frame(maxWidth: .infinity,alignment: .leading)
@@ -28,12 +28,14 @@ extension SearchStopsView {
 
 extension SearchStopsView {
 	func update(type : LocationDirectionType) {
-		stops = SearchStopsViewModel.sortedStopsByLocationWithDistance(stops: searchStopViewModel.state.stops)
-		let recentStopsAll = searchStopViewModel.state.previousStops.filter { stop in
-			return stop.name.hasPrefix(type == .departure ? topText : bottomText )
+		Task {
+			stops = SearchStopsViewModel.sortedStopsByLocationWithDistance(stops: searchStopViewModel.state.stops)
+			let recentStopsAll = searchStopViewModel.state.previousStops.filter { stop in
+				return stop.name.hasPrefix(type == .departure ? topText : bottomText )
+			}
+			recentStopsData = Array(
+				SearchStopsViewModel.sortedStopsByLocationWithDistance(stops: recentStopsAll).prefix(2)
+			)
 		}
-		recentStopsData = Array(
-			SearchStopsViewModel.sortedStopsByLocationWithDistance(stops: recentStopsAll).prefix(2)
-		)
 	}
 }

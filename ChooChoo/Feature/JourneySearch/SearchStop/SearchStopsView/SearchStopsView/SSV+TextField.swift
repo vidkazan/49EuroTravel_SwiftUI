@@ -22,7 +22,7 @@ extension SearchStopsView {
 					chewViewModel.send(event: .onStopEdit(type))
 				}
 				.onSubmit {
-					searchStopViewModel.send(event: .didChangeFieldFocus(type: .none))
+					searchStopViewModel.send(event: .onReset(type))
 					chewViewModel.send(event: .didCancelEditStop)
 //					chewViewModel.send(event: .onNewStop(.textOnly(text.wrappedValue), type))
 				}
@@ -58,16 +58,18 @@ extension SearchStopsView {
 
 extension SearchStopsView {
 	func onTextChange(text : String) {
-		guard
-			case .editingStop(let type) = chewViewModel.state.status,
-			searchStopViewModel.state.type == type else {
-			return
-		}
-		if focusedField == searchStopViewModel.state.type && text.count > 2 {
-			searchStopViewModel.send(event: .onSearchFieldDidChanged(text,type))
-		}
-		if focusedField == nil || text.isEmpty {
-			searchStopViewModel.send(event: .onReset(type))
+		Task {
+			guard
+				case .editingStop(let type) = chewViewModel.state.status,
+				searchStopViewModel.state.type == type else {
+				return
+			}
+			if focusedField == searchStopViewModel.state.type && text.count > 2 {
+				searchStopViewModel.send(event: .onSearchFieldDidChanged(text,type))
+			}
+			if focusedField == nil || text.isEmpty {
+				searchStopViewModel.send(event: .onReset(type))
+			}
 		}
 	}
 }

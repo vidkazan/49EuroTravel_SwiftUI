@@ -95,33 +95,37 @@ extension SearchStopsView {
 
 extension SearchStopsView {
 	func tapStop(stop : StopWithDistance, type : LocationDirectionType) {
-		if !searchStopViewModel
-			.state
-			.previousStops
-			.contains(where: {$0.id == stop.stop.id}) {
-			Model
-				.shared
-				.coreDataStore
-				.addRecentLocation(stop: stop.stop)
+		Task {
+			if !searchStopViewModel
+				.state
+				.previousStops
+				.contains(where: {$0.id == stop.stop.id}) {
+				Model
+					.shared
+					.coreDataStore
+					.addRecentLocation(stop: stop.stop)
+			}
+			chewViewModel
+				.send(event: .onNewStop(.location(stop.stop), type))
+			searchStopViewModel
+				.send(event: .onStopDidTap(.location(stop.stop), type))
 		}
-		chewViewModel
-			.send(event: .onNewStop(.location(stop.stop), type))
-		searchStopViewModel
-			.send(event: .onStopDidTap(.location(stop.stop), type))
 	}
 	
 	func deleteStop(stop : StopWithDistance, type : LocationDirectionType) {
-		if searchStopViewModel
-			.state
-			.previousStops
-			.contains(where: {$0.name == stop.stop.name}),
-			Model
+		Task {
+			if searchStopViewModel
+				.state
+				.previousStops
+				.contains(where: {$0.name == stop.stop.name}),
+			   Model
 				.shared
 				.coreDataStore
 				.deleteRecentLocationIfFound(name: stop.stop.name) == true {
-					searchStopViewModel.send(
-						event: .didRequestDeleteRecentStop(stop: stop.stop)
-					)
+				searchStopViewModel.send(
+					event: .didRequestDeleteRecentStop(stop: stop.stop)
+				)
+			}
 		}
 	}
 }

@@ -31,6 +31,7 @@ struct ContentView: View {
 	@ObservedObject var alertVM = Model.shared.alertViewModel
 	@ObservedObject var sheetVM = Model.shared.sheetViewModel
 	@ObservedObject var topAlertVM = Model.shared.topBarAlertViewModel
+	
 	@State var state : ChewViewModel.State = .init()
 	@State var sheetState = SheetViewModel.State(status: .showing(.none, result: EmptyDataSource()))
 	@State var alertState = AlertViewModel.State(alert: .none)

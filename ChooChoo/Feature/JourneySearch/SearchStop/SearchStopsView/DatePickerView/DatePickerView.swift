@@ -44,15 +44,17 @@ struct DatePickerView: View {
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing, content: {
 					Button(action: {
-						if let dateCombined = DateParcer.getCombinedDate(
-							date: date,
-							time: time
-						) {
-							chewVM.send(event: .onNewDate(SearchStopsDate(
-								date: .specificDate(dateCombined.timeIntervalSince1970),
-								mode: type
-							)))
-							closeSheet()
+						Task {
+							if let dateCombined = DateParcer.getCombinedDate(
+								date: date,
+								time: time
+							) {
+								chewVM.send(event: .onNewDate(SearchStopsDate(
+									date: .specificDate(dateCombined.timeIntervalSince1970),
+									mode: type
+								)))
+								closeSheet()
+							}
 						}
 					}, label: {
 						Text("Save", comment: "datePickerView: save button")

@@ -10,6 +10,7 @@ import SwiftUI
 struct LegsView: View {
 	@Namespace var legsViewNamespace
 	@EnvironmentObject var chewVM : ChewViewModel
+	@State var showGradients : Bool = true
 	@State var progressLineProportion : Double = 0
 	
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
@@ -18,6 +19,7 @@ struct LegsView: View {
 	var gradientStops : [Gradient.Stop]
 	var showLabels : Bool
 	let legTapAction : ((UUID)->())?
+	
 	
 	init(
 		journey: JourneyViewData?,
@@ -101,16 +103,12 @@ struct LegsView: View {
 			.frame(height: 40)
 		}
 		.onReceive(timer, perform: { _ in
-			Task {
 				withAnimation(.linear(duration: 1), {
 					updateProgressLine()
 				})
-			}
 		})
 		.onAppear {
-			Task {
 				updateProgressLine()
-			}
 		}
 	}
 }
@@ -139,11 +137,13 @@ extension LegsView {
 
 extension LegsView {
 	func updateProgressLine() {
-		self.progressLineProportion = Self.getProgressLineProportion(
-			departureTS: journey?.time.timestamp.departure.actual,
-			arrivalTS: journey?.time.timestamp.arrival.actual,
-			referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970
-		)
+		Task {
+			self.progressLineProportion = Self.getProgressLineProportion(
+				departureTS: journey?.time.timestamp.departure.actual,
+				arrivalTS: journey?.time.timestamp.arrival.actual,
+				referenceTimeTS: chewVM.referenceDate.date.timeIntervalSince1970
+			)
+		}
 	}
 }
 

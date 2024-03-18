@@ -20,7 +20,6 @@ extension ChewViewModel {
 		Feedback {  (state: State) -> AnyPublisher<Event, Never> in
 			guard case .checkingSearchData = state.status else { return Empty().eraseToAnyPublisher() }
 			guard let dep = state.depStop.stop, let arr = state.arrStop.stop else {
-				
 				return Just(Event.onNotEnoughSearchData)
 					.eraseToAnyPublisher()
 			}
@@ -32,7 +31,8 @@ extension ChewViewModel {
 						arrStop: arr,
 						searchTS: Date.now.timeIntervalSince1970
 					)
-				))
+				)
+			)
 			return Just(Event.onJourneyDataUpdated(
 				DepartureArrivalPair(
 					departure: dep,

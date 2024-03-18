@@ -129,18 +129,6 @@
         }
       }
     },
-    "Choo Choo" : {
-      "comment" : "app name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Чуууу Чууууу"
-          }
-        }
-      }
-    },
     "Choose" : {
       "comment" : "mapPickerView: button to choose stop",
       "localizations" : {
@@ -159,18 +147,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Выбранные виды транспорта"
-          }
-        }
-      }
-    },
-    "Clear" : {
-      "comment" : "JourneyListView: overlay button name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Очистить"
           }
         }
       }
@@ -221,6 +197,12 @@
           }
         }
       }
+    },
+    "Debug error : legDTO is nil" : {
+
+    },
+    "Debug leg" : {
+      "comment" : "Debug"
     },
     "Debug options" : {
       "comment" : "SettingsView: debug: section header"
@@ -290,18 +272,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Не удалось загрузить поездку"
-          }
-        }
-      }
-    },
-    "find on map" : {
-      "comment" : "SearchStopsView: button",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Найти на карте"
           }
         }
       }
@@ -453,7 +423,7 @@
       }
     },
     "now" : {
-      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
+      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -503,18 +473,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "платформа"
-          }
-        }
-      }
-    },
-    "Recent searches" : {
-      "comment" : "RecentSearchesView: view name",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Недавнее"
           }
         }
       }
@@ -592,7 +550,7 @@
       }
     },
     "Search" : {
-      "comment" : "TabItem\nsearch tip title",
+      "comment" : "search tip title\nTabItem",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -683,18 +641,6 @@
         }
       }
     },
-    "transfer %lf min" : {
-      "comment" : "badge",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "пересадка %lfмин"
-          }
-        }
-      }
-    },
     "transfer %lld min" : {
       "comment" : "badge",
       "localizations" : {
@@ -771,18 +717,6 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "цфдл "
-          }
-        }
-      }
-    },
-    "walk %lf min" : {
-      "comment" : "badge: walking",
-      "extractionState" : "stale",
-      "localizations" : {
-        "ru" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "пешком %lf мин"
           }
         }
       }

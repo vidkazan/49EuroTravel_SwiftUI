@@ -125,9 +125,10 @@ extension LegViewData {
 		switch legType {
 		case .line: [
 			Self.showOnMapOption,
-			Self.fullLegOption
+			Self.fullLegOption,
+			Self.debug
 		]
-		default:
+		default: 
 			[
 				Self.showOnMapOption
 			]
@@ -155,6 +156,21 @@ extension LegViewData {
 		text : NSLocalizedString(
 			"Show on map",
 			comment: "LegDetailsView: menu item"
+		)
+	)
+	
+	static let debug = Option(
+		action: { leg in
+			if let dto = leg.legDTO {
+				Model.shared.sheetViewModel.send(event: .didRequestShow(.journeyDebug(legs: [dto])))
+			} else {
+				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.generic(msg: Text("Debug error : legDTO is nil"))))
+			}
+		},
+		icon: "bug",
+		text : NSLocalizedString(
+			"Debug leg",
+			comment: "Debug"
 		)
 	)
 	static let fullLegOption = Option(

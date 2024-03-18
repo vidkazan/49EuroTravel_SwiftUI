@@ -7,7 +7,6 @@
 //
 
 import Combine
-import TimelaneCombine
 
 extension Publishers {
 	static func system<State, Event, Scheduler: Combine.Scheduler>(
@@ -29,7 +28,6 @@ extension Publishers {
 				.handleEvents(receiveOutput: state.send)
 				.receive(on: scheduler)
 				.prepend(initial)
-				.lane(name)
 				.eraseToAnyPublisher()
 		}
 		.eraseToAnyPublisher()
