@@ -58,22 +58,31 @@ extension LegStopView {
 				.offset(x: stopOver.time.departureStatus.value != nil ? stopOver.time.departureStatus.value! > 0 ? 8 : 0 : 0)
 			case .origin, .footTop,.destination:
 				VStack(spacing: 0) {
-					if case .origin = stopOverType {
-						TimeLabelView(
-							size: .medium,
-							arragement: .bottom,
-							delayStatus: .onTime,
-							time: stopOver.time.date.arrival
-						)
-					}
-					TimeLabelView(
-						stopOver : stopOver,
-						stopOverType: stopOverType
-					)
+					Button(action: {
+						if case .origin = stopOverType {
+							withAnimation(.easeInOut, {
+								showingTimeDetails.toggle()
+							})
+						}
+					}, label: {
+						VStack(spacing: 0) {
+							if showingTimeDetails == true {
+								stopTimeDetails
+									.padding(.top, 2)
+									.transition(.slide)
+							}
+							TimeLabelView(
+								stopOver : stopOver,
+								stopOverType: stopOverType
+							)
+						}
+					})
+					.disabled(stopOverType == .origin ? false : true)
 					.frame(minWidth: 50)
 					.background { timeLabelBackground }
 					.cornerRadius(stopOverType.timeLabelCornerRadius)
 					.shadow(radius: 2)
+					.animation(.easeInOut, value: showingTimeDetails)
 				}
 			case .footMiddle,.transfer,.footBottom:
 				EmptyView()

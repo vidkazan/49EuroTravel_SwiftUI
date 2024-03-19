@@ -10,12 +10,14 @@ import SwiftUI
 
 struct LegStopView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
+	@ObservedObject var arrivingTrainVM : ArrivingTrainTimeViewModel
 	var shevronIsExpanded : Segments.ShowType
 	static let timeLabelColor = Color.chewTimeLabelGray
 	let legViewData : LegViewData
 	let stopOver : StopViewData
 	let stopOverType : StopOverType
 	let showBadges : Bool
+	@State var showingTimeDetails : Bool = false
 	
 	
 	var body : some View {
@@ -41,27 +43,66 @@ extension LegStopView {
 		stopOver : StopViewData,
 		leg : LegViewData,
 		showBadges : Bool,
-		shevronIsExpanded : Segments.ShowType
+		shevronIsExpanded : Segments.ShowType,
+		arrivingTrainVM : ArrivingTrainTimeViewModel = ArrivingTrainTimeViewModel()
 	) {
 		self.showBadges = showBadges
 		self.stopOver = stopOver
 		self.stopOverType = type
 		self.legViewData = leg
 		self.shevronIsExpanded = shevronIsExpanded
+		self.arrivingTrainVM = arrivingTrainVM
 	}
 	init(
 		stopOver : StopViewData,
 		leg : LegViewData,
 		showBadges : Bool,
-		shevronIsExpanded : Segments.ShowType
+		shevronIsExpanded : Segments.ShowType,
+		arrivingTrainVM : ArrivingTrainTimeViewModel = ArrivingTrainTimeViewModel()
 	) {
 		self.showBadges = showBadges
 		self.stopOver = stopOver
 		self.stopOverType = stopOver.stopOverType
 		self.legViewData = leg
 		self.shevronIsExpanded = shevronIsExpanded
+		self.arrivingTrainVM = arrivingTrainVM
 	}
 }
+
+extension LegStopView {
+	@ViewBuilder var stopTimeDetails : some View {
+		Button(action: {
+			switch arrivingTrainVM.state.status {
+			case .idle,.error:
+				arrivingTrainVM.send(event: .didRequestTime(leg: legViewData))
+			case .loading:
+				arrivingTrainVM.send(event: .didCancelRequestTime)
+			}
+		}, label: {
+			switch arrivingTrainVM.state.status {
+			case .idle:
+				if let time = arrivingTrainVM.state.time {
+					TimeLabelView(
+						size: .medium,
+						arragement: .bottom,
+						delayStatus: .onTime,
+						time: time
+					)
+					.badgeBackgroundStyle(.primary)
+				}
+			case .loading:
+				ProgressView()
+					.chewTextSize(.medium)
+			case .error(let chewError):
+				EmptyView()
+			}
+		})
+		.onAppear {
+			arrivingTrainVM.send(event: .didRequestTime(leg: legViewData))
+		}
+	}
+}
+
 
 
 struct LegStopPreview : PreviewProvider {
@@ -102,3 +143,4 @@ struct LegStopPreview : PreviewProvider {
 		}
 	}
 }
+

@@ -96,6 +96,8 @@ struct LineDebugView : View {
 				.chewTextSize(.medium)
 			Text(verbatim: line?.mode ?? "")
 				.chewTextSize(.medium)
+			Text(verbatim: line?.adminCode ?? "")
+				.chewTextSize(.small)
 		}
 	}
 }

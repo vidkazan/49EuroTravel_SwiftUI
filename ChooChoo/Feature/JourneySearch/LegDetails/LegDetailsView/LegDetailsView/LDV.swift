@@ -12,7 +12,6 @@ import MapKit
 
 struct LegDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
-	@ObservedObject var arrivingTrainVM : ArrivingTrainTimeViewModel
 	
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	static let progressLineBaseWidth : CGFloat = 20
@@ -31,13 +30,11 @@ struct LegDetailsView: View {
 		send : @escaping (JourneyDetailsViewModel.Event) -> Void,
 		referenceDate : ChewDate,
 		isExpanded : Segments.ShowType,
-		leg : LegViewData,
-		arrivingTrainVM : ArrivingTrainTimeViewModel = ArrivingTrainTimeViewModel()
+		leg : LegViewData
 	) {
 		self.leg = leg
 		self.followedJourney = followedJourney
 		self.isExpanded = isExpanded
-		self.arrivingTrainVM = arrivingTrainVM
 	}
 	
 	var body : some View {
@@ -78,9 +75,9 @@ struct LegDetailsView: View {
 						}
 					}()
 					ForEach(stops,id:\.name) { stop in
-						if stop == leg.legStopsViewData.first {
-							arrivalTrainTimeView
-						}
+//						if stop == leg.legStopsViewData.first {
+//							arrivalTrainTimeView
+//						}
 						LegStopView(
 							stopOver: stop,
 							leg: leg,
@@ -166,45 +163,6 @@ extension LegDetailsView {
 				}
 			}
 		}
-	}
-}
-
-extension LegDetailsView {
-	@ViewBuilder var arrivalTrainTimeView : some View {
-		Button(action: {
-			switch arrivingTrainVM.state.status {
-			case .idle,.error:
-				arrivingTrainVM.send(event: .didRequestTime(leg: leg))
-			case .loading:
-				arrivingTrainVM.send(event: .didCancelRequestTime)
-			}
-		}, label: {
-			switch arrivingTrainVM.state.status {
-			case .idle:
-				if let time = arrivingTrainVM.state.time {
-					TimeLabelView(
-						size: .big,
-						arragement: .right,
-						delayStatus: .onTime,
-						time: time
-					)
-					.badgeBackgroundStyle(.primary)
-				} else {
-					BadgeView(.generic(msg: Text("find arrival time")))
-						.badgeBackgroundStyle(.primary)
-				}
-			case .loading:
-				ProgressView()
-					.badgeBackgroundStyle(.primary)
-			case .error(let chewError):
-				ErrorView(
-					viewType: .error,
-					msg: Text(verbatim: chewError.localizedDescription),
-					size: .medium,
-					action: nil
-				)
-			}
-		})
 	}
 }
 

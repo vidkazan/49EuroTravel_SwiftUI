@@ -19,8 +19,12 @@ struct RecentSearchCell: View {
 			HStack(alignment: .top,spacing: 0) {
 				VStack(alignment: .leading,spacing: 0) {
 					StopListCell(stop: locations.departure)
+						.frame(maxWidth: 250, alignment: .leading)
+					Spacer()
 					StopListCell(stop: locations.arrival)
+						.frame(maxWidth: 250,alignment: .leading)
 				}
+				.frame(height: 100)
 				Button(action: {
 					send(.didTapEdit(
 						action: .deleting,
@@ -41,7 +45,6 @@ struct RecentSearchCell: View {
 		})
 		.foregroundStyle(.primary)
 		.padding(5)
-		.frame(maxWidth: 250,maxHeight: 100)
 		.background(Color.chewFillAccent.opacity(0.5))
 		.clipShape(.rect(cornerRadius: 8))
 	}
