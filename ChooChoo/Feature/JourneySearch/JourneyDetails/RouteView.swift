@@ -1,5 +1,5 @@
 //
-//  FullLegView.swift
+//  RouteSheet.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 19.10.23.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct FullLegSheet: View {
+struct RouteSheet: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	let leg : LegViewData
 	var body: some View {
@@ -33,7 +33,7 @@ struct Preview : PreviewProvider {
 		let mock = Mock.trip.RE6NeussMinden.decodedData
 		if let mock = mock?.trip,
 		   let viewData = mock.legViewData(firstTS: .now, lastTS: .now, legs: [mock]) {
-			FullLegSheet(leg: viewData)
+			RouteSheet(leg: viewData)
 			.environmentObject(ChewViewModel())
 		} else {
 			Text(verbatim: "error")

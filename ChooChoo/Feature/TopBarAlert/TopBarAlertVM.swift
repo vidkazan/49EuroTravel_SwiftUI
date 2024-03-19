@@ -94,7 +94,7 @@ extension TopBarAlertViewModel {
 		}
 		
 		case offlineMode
-		case fullLegError
+		case routeError
 		case userLocationError
 		case journeyFollowError(type : JourneyFollowViewModel.Action)
 		case generic(msg : Text)
@@ -103,7 +103,7 @@ extension TopBarAlertViewModel {
 			switch self {
 			case .generic:
 				return 4
-			case .fullLegError:
+			case .routeError:
 				return 3
 			case .journeyFollowError:
 				return 2
@@ -115,7 +115,7 @@ extension TopBarAlertViewModel {
 		}
 		var bgColor : Color {
 			switch self {
-			case .fullLegError:
+			case .routeError:
 				return Color.chewFillRedPrimary.opacity(0.5)
 			case .journeyFollowError:
 				return Color.chewFillRedPrimary.opacity(0.5)
@@ -132,7 +132,7 @@ extension TopBarAlertViewModel {
 			switch self {
 			case .generic:
 				return .dismiss
-			case .fullLegError:
+			case .routeError:
 				return .dismiss
 			case .journeyFollowError:
 				return .dismiss
@@ -145,7 +145,7 @@ extension TopBarAlertViewModel {
 		
 		var infoAction : (() -> Void)? {
 			switch self {
-			case .fullLegError,.journeyFollowError,.offlineMode,.generic:
+			case .routeError,.journeyFollowError,.offlineMode,.generic:
 				return nil
 			case .userLocationError:
 				return {
@@ -158,8 +158,8 @@ extension TopBarAlertViewModel {
 			switch self {
 			case .generic(let msg):
 				return .generic(msg: msg)
-			case .fullLegError:
-				return .fullLegError
+			case .routeError:
+				return .routeError
 			case .journeyFollowError(type: let action):
 				return .followError(action)
 			case .offlineMode:

@@ -65,13 +65,13 @@ struct Bla : View {
 }
 
 struct AlertViewPreview : PreviewProvider {
-	@ObservedObject var vm : TopBarAlertViewModel = .init(.start,alerts: [.fullLegError,.offlineMode,.userLocationError])
+	@ObservedObject var vm : TopBarAlertViewModel = .init(.start,alerts: [.routeError,.offlineMode,.userLocationError])
 	static var previews: some View {
 		
 		let vm = TopBarAlertViewModel(
 			.showing,
 			alerts: [
-				.fullLegError,
+				.routeError,
 				.journeyFollowError(type:.adding),
 				.offlineMode,
 				.userLocationError

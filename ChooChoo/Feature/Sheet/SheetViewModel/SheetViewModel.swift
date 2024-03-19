@@ -103,7 +103,7 @@ extension SheetViewModel{
 		case tip(tipType : InfoType)
 		case date
 		case settings
-		case fullLeg(leg : LegViewData)
+		case route(leg : LegViewData)
 		case mapDetails(_ request : MapDetailsRequest)
 		case mapPicker(type : LocationDirectionType)
 		case onboarding
@@ -122,7 +122,7 @@ extension SheetViewModel{
 				return [.large, .medium]
 			case .settings:
 				return [.medium,.large]
-			case .fullLeg:
+			case .route:
 				return [.medium,.large]
 			case .mapDetails:
 				return [.large]
@@ -147,8 +147,8 @@ extension SheetViewModel{
 				return "Date"
 			case .settings:
 				return "Settings"
-			case .fullLeg:
-				return "FullLeg"
+			case .route:
+				return "Route"
 			case .mapDetails:
 				return "MapDetails"
 			case .onboarding:
@@ -172,8 +172,8 @@ extension SheetViewModel{
 				return DatePickerViewDataSource.self
 			case .settings:
 				return SettingsViewDataSource.self
-			case .fullLeg:
-				return FullLegViewDataSource.self
+			case .route:
+				return RouteViewDataSource.self
 			case .mapDetails:
 				return MapDetailsViewDataSource.self
 			case .onboarding:
@@ -241,8 +241,8 @@ extension SheetViewModel {
 				return Just(Event.didLoadDataForShowing(type,DatePickerViewDataSource())).eraseToAnyPublisher()
 			case .settings:
 				return Just(Event.didLoadDataForShowing(type,SettingsViewDataSource())).eraseToAnyPublisher()
-			case .fullLeg(leg: let leg):
-				return loadingFullLeg(state: state, tripId: leg.tripId)
+			case .route(leg: let leg):
+				return route(state: state, tripId: leg.tripId)
 			case .mapDetails(let request):
 				return loadingLocationDetails(state: state, request: request)
 			case .onboarding:
@@ -258,7 +258,7 @@ extension SheetViewModel {
 
 
 extension SheetViewModel {
-	static 	func loadingFullLeg(state : State, tripId : String) -> AnyPublisher<Event, Never> {
+	static 	func route(state : State, tripId : String) -> AnyPublisher<Event, Never> {
 		return Self.fetchTrip(tripId: tripId)
 			.mapError{ $0 }
 			.asyncFlatMap {  res in
@@ -267,10 +267,10 @@ extension SheetViewModel {
 					lastTS: DateParcer.getDateFromDateString(dateString: res.plannedArrival),
 					legs: nil
 				)
-				return Event.didLoadDataForShowing(.fullLeg(leg: leg),FullLegViewDataSource(leg: leg))
+				return Event.didLoadDataForShowing(.route(leg: leg),RouteViewDataSource(leg: leg))
 			}
 			.catch { error in
-				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.fullLegError))
+				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.routeError))
 				return Just(Event.didRequestHide).eraseToAnyPublisher()
 			}
 			.eraseToAnyPublisher()

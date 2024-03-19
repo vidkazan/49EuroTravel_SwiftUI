@@ -50,7 +50,6 @@ struct SheetPreviews: PreviewProvider {
 //				.onboarding,
 				.remark(remarks: viewData.remarks),
 //				.settings,
-//				.fullLeg(leg: viewData),
 //				.map(leg: viewData)
 			]
 			ScrollView(.horizontal) {

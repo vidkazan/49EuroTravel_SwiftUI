@@ -121,7 +121,7 @@ struct BadgeView : View {
 				 .cancelled,
 				 .generic,
 				 .connectionNotReachable,
-				 .fullLegError,
+				 .routeError,
 				 .followError,
 				 .locationError,
 				 .offlineMode:
@@ -245,7 +245,7 @@ struct BadgeViewPreview : PreviewProvider {
 						BadgeView(.lineNumber(lineType: .subway, num: "U6"))
 				}
 				FlowLayout {
-					BadgeView(.fullLegError)
+					BadgeView(.routeError)
 						.badgeBackgroundStyle(.red)
 					BadgeView(.followError(.deleting))
 						.badgeBackgroundStyle(.red)

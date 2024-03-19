@@ -10,7 +10,7 @@ import MapKit
 extension JourneyDetailsViewModel {
 	enum BottomSheetType : Equatable,Hashable {
 		case locationDetails
-		case fullLeg
+		case route
 	}
 	
 	struct State : Equatable {

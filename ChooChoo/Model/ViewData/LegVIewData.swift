@@ -125,7 +125,7 @@ extension LegViewData {
 		switch legType {
 		case .line: [
 			Self.showOnMapOption,
-			Self.fullLegOption,
+			Self.routeOption,
 			Self.debug
 		]
 		default: 
@@ -173,10 +173,10 @@ extension LegViewData {
 			comment: "Debug"
 		)
 	)
-	static let fullLegOption = Option(
+	static let routeOption = Option(
 		action: { leg in
 			Model.shared.sheetViewModel.send(
-				event: .didRequestShow(.fullLeg(leg: leg))
+				event: .didRequestShow(.route(leg: leg))
 			)
 		},
 		icon: ChooSFSymbols.trainSideFrontCar.rawValue,

@@ -54,7 +54,7 @@ enum Badges : Equatable, Identifiable {
 		switch self {
 		case .generic:
 			return 0
-		case .fullLegError:
+		case .routeError:
 			return 1
 		case .followError:
 			return 2
@@ -98,7 +98,7 @@ enum Badges : Equatable, Identifiable {
 	}
 	
 	case generic(msg : Text)
-	case fullLegError
+	case routeError
 	case followError(_ action : JourneyFollowViewModel.Action)
 	case locationError
 	case offlineMode
@@ -145,7 +145,7 @@ enum Badges : Equatable, Identifiable {
 		switch self {
 		case .generic(let msg):
 			return BadgeData(msg)
-		case .fullLegError:
+		case .routeError:
 			return BadgeData(
 				Text(
 					"Failed to load full leg",

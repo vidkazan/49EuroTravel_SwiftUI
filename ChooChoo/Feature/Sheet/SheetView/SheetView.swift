@@ -97,9 +97,9 @@ struct SheetViewInner : View {
 				time: chewViewModel.state.date.date.date,
 				closeSheet: closeSheet
 			)
-		case .fullLeg:
-			if let data = data as? FullLegViewDataSource {
-				FullLegSheet(leg: data.leg)
+		case .route:
+			if let data = data as? RouteViewDataSource {
+				RouteSheet(leg: data.leg)
 			}
 		case .mapDetails:
 			if let data = data as? MapDetailsViewDataSource {
