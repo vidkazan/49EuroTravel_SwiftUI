@@ -88,6 +88,8 @@ struct LineDebugView : View {
 		HStack {
 			Text(verbatim: line?.name ?? "")
 				.chewTextSize(.big)
+			Text(verbatim: line?.fahrtNr ?? "")
+				.chewTextSize(.medium)
 			Text(verbatim: line?.type ?? "")
 				.chewTextSize(.medium)
 			Text(verbatim: line?.product ?? "")

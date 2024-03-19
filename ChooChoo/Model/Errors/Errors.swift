@@ -14,7 +14,7 @@ protocol ChewError : Error, Equatable, Hashable {
 
 enum DataError : ChewError {
 	static func == (lhs: DataError, rhs: DataError) -> Bool {
-		return lhs.description == rhs.description
+		return lhs.localizedDescription == rhs.localizedDescription
 	}
 	
 	func hash(into hasher: inout Hasher) {
@@ -27,14 +27,14 @@ enum DataError : ChewError {
 	case nilValue(type : String)
 	case generic(msg: String)
 	
-	var description : String  {
+	var localizedDescription : String  {
 		switch self {
 		case .validationError(let msg):
-			return "validation error: \(msg)"
+			return NSLocalizedString("validation error: \(msg)", comment: "DataError")
 		case .nilValue(type: let type):
-			return "value is nil: \(type)"
+			return NSLocalizedString("nil error: \(type)", comment: "DataError")
 		case .generic(let msg):
-			return "error: \(msg)"
+			return NSLocalizedString("error: \(msg)", comment: "DataError")
 		}
 	}
 }

@@ -8,8 +8,6 @@
 import SwiftUI
 import TipKit
 
-// MARK: JDV
-// leg cell: stops number badge: let user know that cell is tappable and it will show all leg stops
 
 // MARK: revise
 // all text revision
@@ -20,8 +18,8 @@ import TipKit
 // tip: jfv: for swipe actions
 
 
-// TODO: feature: check when train arrives at starting point
 // TODO: feature: ldsv: make stop tappable and show stop details and all leg stopover info
+
 struct ContentView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var alertVM = Model.shared.alertViewModel

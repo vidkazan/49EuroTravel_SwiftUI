@@ -133,6 +133,7 @@
 		7D6CCAF12B5FFB9200BCF62E /* SettingsView+saveSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */; };
 		7D6CCAF32B6004A200BCF62E /* VMTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */; };
 		7D704F442B8558C200F8334F /* UIView+Constraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D704F432B8558C200F8334F /* UIView+Constraints.swift */; };
+		7D72C9142BA88A2000D924A7 /* ArrivingTrainTimeVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D72C9132BA88A2000D924A7 /* ArrivingTrainTimeVM.swift */; };
 		7D740CC72AEA796B00E9FFD4 /* SettingsView+Connections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC62AEA796B00E9FFD4 /* SettingsView+Connections.swift */; };
 		7D740CC92AEA79C800E9FFD4 /* Set+Toogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */; };
 		7D740CCB2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CCA2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift */; };
@@ -372,6 +373,7 @@
 		7D6CCAF02B5FFB9200BCF62E /* SettingsView+saveSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+saveSettings.swift"; sourceTree = "<group>"; };
 		7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VMTemplate.swift; sourceTree = "<group>"; };
 		7D704F432B8558C200F8334F /* UIView+Constraints.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Constraints.swift"; sourceTree = "<group>"; };
+		7D72C9132BA88A2000D924A7 /* ArrivingTrainTimeVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrivingTrainTimeVM.swift; sourceTree = "<group>"; };
 		7D740CC62AEA796B00E9FFD4 /* SettingsView+Connections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+Connections.swift"; sourceTree = "<group>"; };
 		7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Toogle.swift"; sourceTree = "<group>"; };
 		7D740CCA2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportTypes.swift"; sourceTree = "<group>"; };
@@ -1086,6 +1088,14 @@
 			path = JourneyDetailsView;
 			sourceTree = "<group>";
 		};
+		7D72C9122BA889EF00D924A7 /* ArrivingTrainTime */ = {
+			isa = PBXGroup;
+			children = (
+				7D72C9132BA88A2000D924A7 /* ArrivingTrainTimeVM.swift */,
+			);
+			path = ArrivingTrainTime;
+			sourceTree = "<group>";
+		};
 		7D740CC52AEA795E00E9FFD4 /* SettingsView */ = {
 			isa = PBXGroup;
 			children = (
@@ -1332,6 +1342,7 @@
 			isa = PBXGroup;
 			children = (
 				7DD5BADE2B728CA700CFE768 /* JSV.swift */,
+				7D72C9122BA889EF00D924A7 /* ArrivingTrainTime */,
 				7DF8455E2B764ADE00D76B14 /* Remark */,
 				7D6C5C282AAF77A700DEFC57 /* JourneyDetails */,
 				7DA8D3462A9A0DDC005DF550 /* SearchStop */,
@@ -1742,6 +1753,7 @@
 				7D69BE7F2AD7ECF1007855B3 /* Publisher+AsyncMap.swift in Sources */,
 				7D462D602AACED6D00BC0D65 /* constructJourneys+Journey.swift in Sources */,
 				7D6955212B58208300271F56 /* TopBarAlertsView.swift in Sources */,
+				7D72C9142BA88A2000D924A7 /* ArrivingTrainTimeVM.swift in Sources */,
 				7DD5BAFB2B72BAE900CFE768 /* JLV+list.swift in Sources */,
 				7D68D9F52ABDB36D00579711 /* constructJourneys+Leg+Stop.swift in Sources */,
 				7D345E4C2AE97FC8003CA948 /* SettingsView.swift in Sources */,

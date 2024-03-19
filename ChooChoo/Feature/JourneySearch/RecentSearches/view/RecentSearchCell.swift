@@ -41,7 +41,7 @@ struct RecentSearchCell: View {
 		})
 		.foregroundStyle(.primary)
 		.padding(5)
-		.frame(maxHeight: 100)
+		.frame(maxWidth: 250,maxHeight: 100)
 		.background(Color.chewFillAccent.opacity(0.5))
 		.clipShape(.rect(cornerRadius: 8))
 	}

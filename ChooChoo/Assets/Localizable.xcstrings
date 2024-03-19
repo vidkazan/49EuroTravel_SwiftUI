@@ -229,6 +229,9 @@
         }
       }
     },
+    "error: (msg)" : {
+      "comment" : "DataError"
+    },
     "error: try reload" : {
       "comment" : "JourneyListView: error: failed to load laterRef rides",
       "localizations" : {
@@ -275,6 +278,9 @@
           }
         }
       }
+    },
+    "find arrival time" : {
+
     },
     "follow" : {
       "comment" : "JourneyFollowViewModel.Action",
@@ -411,6 +417,9 @@
         }
       }
     },
+    "nil error: (type)" : {
+      "comment" : "DataError"
+    },
     "not reachable" : {
       "comment" : "badge",
       "localizations" : {
@@ -423,7 +432,7 @@
       }
     },
     "now" : {
-      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
+      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -539,7 +548,7 @@
       }
     },
     "Save" : {
-      "comment" : "datePickerView: save button\nsettingsView: save button",
+      "comment" : "settingsView: save button\ndatePickerView: save button",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -550,7 +559,7 @@
       }
     },
     "Search" : {
-      "comment" : "TabItem\nsearch tip title",
+      "comment" : "search tip title\nTabItem",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -720,6 +729,9 @@
           }
         }
       }
+    },
+    "validation error: (msg)" : {
+      "comment" : "DataError"
     },
     "walk %lld min" : {
       "comment" : "badge: walking"

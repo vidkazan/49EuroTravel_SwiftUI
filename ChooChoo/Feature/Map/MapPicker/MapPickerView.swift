@@ -104,12 +104,7 @@ extension MapPickerView {
 							.frame(maxWidth: .infinity,minHeight: 0,maxHeight: 120)
 						}
 					case .error(let chewError):
-						ErrorView(
-							viewType: .error,
-							msg: Text(verbatim: chewError.localizedDescription),
-							size: .big,
-							action: nil
-						)
+						Text(chewError.localizedDescription)
 					case .submitting:
 						EmptyView()
 					case .loadingStopDetails:
