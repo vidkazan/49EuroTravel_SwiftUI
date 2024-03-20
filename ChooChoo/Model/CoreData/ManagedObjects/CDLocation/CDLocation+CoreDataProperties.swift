@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 import CoreLocation
 
-extension Location {
+extension CDLocation {
 	@NSManaged public var address: String?
 	@NSManaged public var api_id: String?
 	@NSManaged public var latitude: Double
@@ -26,7 +26,7 @@ extension Location {
 	@NSManaged public var user: CDUser?
 }
 
-extension Location {
+extension CDLocation {
 	func stop() -> Stop {
 		var type : LocationType?
 		var stop : Stop!
@@ -56,7 +56,7 @@ extension Location {
 		return stop
 	}
 	
-	static func delete(object: Location?,in context : NSManagedObjectContext) {
+	static func delete(object: CDLocation?,in context : NSManagedObjectContext) {
 		guard let object = object else {
 			print("📕 > delete \(Self.self): object is nil")
 			return

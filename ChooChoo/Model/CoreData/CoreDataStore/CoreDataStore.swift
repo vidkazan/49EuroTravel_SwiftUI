@@ -44,7 +44,7 @@ extension CoreDataStore {
 	func deleteRecentLocationIfFound(name : String) -> Bool {
 		var result = false
 		
-		if let objects = self.fetch(Location.self) {
+		if let objects = self.fetch(CDLocation.self) {
 			 asyncContext.performAndWait {
 				 let res = objects.filter({$0.chewJourneyArr == nil && $0.chewJourneyDep == nil && $0.chewRecentSearchDepStop == nil && $0.chewRecentSearchArrStop == nil})
 				if let res = res.first(where: { obj in
@@ -84,7 +84,7 @@ extension CoreDataStore {
 		 asyncContext.performAndWait {
 //			print("> ⚡️ create locations thread ",Thread.current)
 			 if stop.stopDTO?.products != nil {
-				 let _ = Location(
+				 let _ = CDLocation(
 					context: self.asyncContext,
 					stop: stop,
 					parent: .recentLocation(user)
@@ -245,7 +245,7 @@ extension CoreDataStore {
 			case .user:
 				return CDUser.self
 			case .locations:
-				return Location.self
+				return CDLocation.self
 			case .journeys:
 				return ChewJourney.self
 			}

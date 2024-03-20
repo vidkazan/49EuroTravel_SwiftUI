@@ -104,7 +104,7 @@ extension CoreDataStore {
 	
 	func fetchLocations() -> [Stop]? {
 		var stops = [Stop]()
-		if let chewStops = fetch(Location.self) {
+		if let chewStops = fetch(CDLocation.self) {
 			asyncContext.performAndWait {
 				chewStops.forEach {
 					if $0.user != nil {

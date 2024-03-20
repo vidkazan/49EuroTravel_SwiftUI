@@ -13,8 +13,8 @@ import CoreData
 extension ChewJourney {
 	@NSManaged public var id: Int64
     @NSManaged public var journeyRef: String
-    @NSManaged public var arrivalStop: Location
-    @NSManaged public var departureStop: Location
+    @NSManaged public var arrivalStop: CDLocation
+    @NSManaged public var departureStop: CDLocation
 	@NSManaged public var user: CDUser?
 	@NSManaged public var isActive: Bool
 	@NSManaged public var legs: Set<ChewLeg>
@@ -48,12 +48,12 @@ extension ChewJourney {
 			viewData.sunEvents.forEach {
 				let _ = ChewSunEvent(context: managedObjectContext,sun: $0,for: self)
 			}
-			let _ = Location(
+			let _ = CDLocation(
 				context: managedObjectContext,
 				stop: depStop,
 				parent: .followedJourneyDepStop(self)
 			)
-			let _ = Location(
+			let _ = CDLocation(
 				context: managedObjectContext,
 				stop: arrStop,
 				parent: .followedJourneyArrStop(self)

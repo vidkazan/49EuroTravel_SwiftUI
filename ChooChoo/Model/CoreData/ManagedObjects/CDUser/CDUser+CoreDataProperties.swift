@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 extension CDUser {
-	@NSManaged public var recentLocations: Set<Location>?
+	@NSManaged public var recentLocations: Set<CDLocation>?
 	@NSManaged public var chooSettings: CDSettings?
 	@NSManaged public var chewJourneys : Set<ChewJourney>?
 	@NSManaged public var chewRecentSearches : Set<ChewRecentSearch>?
@@ -41,10 +41,10 @@ extension CDUser {
 
 extension CDUser {
 	@objc(addSavedLocationsObject:)
-	@NSManaged public func addToSavedLocations(_ value: Location)
+	@NSManaged public func addToSavedLocations(_ value: CDLocation)
 
 	@objc(removeSavedLocationsObject:)
-	@NSManaged public func removeFromSavedLocations(_ value: Location)
+	@NSManaged public func removeFromSavedLocations(_ value: CDLocation)
 
 	@objc(addSavedLocations:)
 	@NSManaged public func addToSavedLocations(_ values: NSSet)
@@ -74,10 +74,10 @@ extension CDUser {
 extension CDUser {
 
 	@objc(addRecentLocationsObject:)
-	@NSManaged public func addToRecentLocations(_ value: Location)
+	@NSManaged public func addToRecentLocations(_ value: CDLocation)
 
 	@objc(removeRecentLocationsObject:)
-	@NSManaged public func removeFromRecentLocations(_ value: Location)
+	@NSManaged public func removeFromRecentLocations(_ value: CDLocation)
 
 	@objc(addRecentLocations:)
 	@NSManaged public func addToRecentLocations(_ values: NSSet)

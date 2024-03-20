@@ -9,11 +9,11 @@
 import Foundation
 import CoreData
 
-@objc(Location)
-public class Location: NSManagedObject {
+@objc(CDLocation)
+public class CDLocation: NSManagedObject {
 }
 
-extension Location {
+extension CDLocation {
 	enum ParentEntity {
 		case recentLocation(_ user : CDUser)
 		case savedLocation(_ user : CDUser)
@@ -29,7 +29,7 @@ extension Location {
 		parent : ParentEntity
 	){
 		
-		self.init(entity: Location.entity(), insertInto: context)
+		self.init(entity: CDLocation.entity(), insertInto: context)
 
 		switch parent {
 		case .savedLocation(let user):
