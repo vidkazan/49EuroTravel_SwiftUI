@@ -89,11 +89,13 @@ extension LegStopView {
 						time: time
 					)
 					.badgeBackgroundStyle(.primary)
+					.padding(.top,2)
 				}
 			case .loading:
 				ProgressView()
 					.chewTextSize(.medium)
-			case .error(let chewError):
+					.padding(2)
+			case .error:
 				EmptyView()
 			}
 		})

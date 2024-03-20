@@ -207,50 +207,6 @@ extension ArrivingTrainTimeViewModel {
 				guard resultTimeContainer.date.arrival.actual != nil else {
 					throw DataError.validationError(msg: "journey time is nil")
 				}
-//				let newStop = StopViewData(
-//					stopId: stop.id,
-//					name: stop.name,
-//					time: resultTimeContainer,
-//					type: stop.stopOverType,
-//					coordinates: stop.locationCoordinates
-//				)
-//				var newStops = leg.legStopsViewData
-//				newStops.remove(at: 0)
-//				newStops.insert(newStop, at: 0)
-//				#warning("legDTO doesnt updated")
-//				let newLeg = LegViewData(
-//					isReachable: leg.isReachable,
-//					legType: leg.legType,
-//					tripId: leg.tripId,
-//					direction: leg.direction,
-//					legTopPosition: leg.legTopPosition,
-//					legBottomPosition: leg.legBottomPosition,
-//					remarks: leg.remarks,
-//					legStopsViewData: newStops,
-//					footDistance: leg.footDistance,
-//					lineViewData: leg.lineViewData,
-//					progressSegments: leg.progressSegments,
-//					time: leg.time,
-//					polyline: leg.polyline,
-//					legDTO: leg.legDTO
-//				)
-//				var newLegs = jounrey.legs
-//				newLegs.remove(at: 0)
-//				newLegs.insert(newLeg, at: 0)
-//
-//				newJourney = JourneyViewData(
-//					journeyRef: jounrey.refreshToken,
-//					badges: jounrey.badges,
-//					sunEvents: jounrey.sunEvents,
-//					legs: newLegs,
-//					depStopName: jounrey.origin,
-//					arrStopName: jounrey.destination,
-//					time: jounrey.time,
-//					updatedAt: jounrey.updatedAt,
-//					remarks: jounrey.remarks
-//				)
-				
-				
 				return Event.didLoad(time: resultTimeContainer.date.arrival)
 			}
 			.catch { error in

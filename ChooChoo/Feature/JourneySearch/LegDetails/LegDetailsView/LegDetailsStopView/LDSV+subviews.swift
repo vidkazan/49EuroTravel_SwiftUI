@@ -68,7 +68,6 @@ extension LegStopView {
 						VStack(spacing: 0) {
 							if showingTimeDetails == true {
 								stopTimeDetails
-									.padding(.top, 2)
 									.transition(.slide)
 							}
 							TimeLabelView(
