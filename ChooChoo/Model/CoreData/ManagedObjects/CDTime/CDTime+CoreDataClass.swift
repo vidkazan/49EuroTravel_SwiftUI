@@ -1,5 +1,5 @@
 //
-//  ChewTime+CoreDataClass.swift
+//  CDTime+CoreDataClass.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 21.11.23.
@@ -9,14 +9,14 @@
 import Foundation
 import CoreData
 
-@objc(ChewTime)
-public class ChewTime: NSManagedObject {
+@objc(CDTime)
+public class CDTime: NSManagedObject {
 
 }
 
-extension ChewTime {
+extension CDTime {
 	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for journey : ChewJourney){
-		self.init(entity: ChewTime.entity(), insertInto: context)
+		self.init(entity: CDTime.entity(), insertInto: context)
 		
 		self.chewJourney = journey
 		self.cancelled =  cancelled
@@ -26,7 +26,7 @@ extension ChewTime {
 		self.actualDeparture = container.iso.departure.actual
 	}
 	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for leg : ChewLeg){
-		self.init(entity: ChewTime.entity(), insertInto: context)
+		self.init(entity: CDTime.entity(), insertInto: context)
 		
 		self.leg = leg
 		
@@ -38,7 +38,7 @@ extension ChewTime {
 	}
 	
 	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for stop : ChewStop){
-		self.init(entity: ChewTime.entity(), insertInto: context)
+		self.init(entity: CDTime.entity(), insertInto: context)
 		
 		self.stop = stop
 		

@@ -32,7 +32,7 @@ extension ChewLeg {
 
 		let _ = ChewLegType(insertIntoManagedObjectContext: context, type: leg.legType, for: self)
 		
-		let _ = ChewTime(context: context, container: leg.time, cancelled: !leg.isReachable,for: self)
+		let _ = CDTime(context: context, container: leg.time, cancelled: !leg.isReachable,for: self)
 		
 		for stop in leg.legStopsViewData {
 			let _ = ChewStop(insertInto: context, with: stop, to: self)

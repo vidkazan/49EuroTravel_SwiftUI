@@ -26,7 +26,7 @@ extension ChewStop {
 		self.isCancelled = stopData.cancellationType() == .fullyCancelled
 		self.leg = leg
 		
-		let _ = ChewTime(
+		let _ = CDTime(
 			context: context,
 			container: stopData.time,
 			cancelled: stopData.cancellationType() == .fullyCancelled,

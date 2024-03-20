@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension ChewTime {
+extension CDTime {
 	@NSManaged public var actualArrival : String?
 	@NSManaged public var actualDeparture : String?
 	@NSManaged public var plannedArrival : String?

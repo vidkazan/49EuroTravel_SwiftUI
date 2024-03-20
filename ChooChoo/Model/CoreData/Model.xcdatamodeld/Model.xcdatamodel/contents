@@ -24,6 +24,16 @@
         <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDTransportModes" inverseName="chooSettings" inverseEntity="CDTransportModes"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="chooSettings" inverseEntity="CDUser"/>
     </entity>
+    <entity name="CDTime" representedClassName="CDTime" syncable="YES">
+        <attribute name="actualArrival" optional="YES" attributeType="String"/>
+        <attribute name="actualDeparture" optional="YES" attributeType="String"/>
+        <attribute name="cancelled" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
+        <attribute name="plannedArrival" optional="YES" attributeType="String"/>
+        <attribute name="plannedDeparture" optional="YES" attributeType="String"/>
+        <relationship name="chewJourney" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="time" inverseEntity="ChewJourney"/>
+        <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLeg" inverseName="time" inverseEntity="ChewLeg"/>
+        <relationship name="stop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewStop" inverseName="time" inverseEntity="ChewStop"/>
+    </entity>
     <entity name="CDTransportModes" representedClassName="CDTransportModes" syncable="YES">
         <attribute name="bus" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="ferry" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
@@ -52,7 +62,7 @@
         <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDLocation" inverseName="chewJourneyDep" inverseEntity="CDLocation"/>
         <relationship name="legs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ChewLeg" inverseName="journey" inverseEntity="ChewLeg"/>
         <relationship name="sunEvents" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ChewSunEvent" inverseName="journey" inverseEntity="ChewSunEvent"/>
-        <relationship name="time" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChewTime" inverseName="chewJourney" inverseEntity="ChewTime"/>
+        <relationship name="time" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDTime" inverseName="chewJourney" inverseEntity="CDTime"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="chewJourneys" inverseEntity="CDUser"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -72,7 +82,7 @@
         <relationship name="chewLegType" maxCount="1" deletionRule="Cascade" destinationEntity="ChewLegType" inverseName="leg" inverseEntity="ChewLegType"/>
         <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="legs" inverseEntity="ChewJourney"/>
         <relationship name="stops" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="ChewStop" inverseName="leg" inverseEntity="ChewStop"/>
-        <relationship name="time" maxCount="1" deletionRule="Cascade" destinationEntity="ChewTime" inverseName="leg" inverseEntity="ChewTime"/>
+        <relationship name="time" maxCount="1" deletionRule="Cascade" destinationEntity="CDTime" inverseName="leg" inverseEntity="CDTime"/>
     </entity>
     <entity name="ChewLegType" representedClassName="ChewLegType" syncable="YES">
         <attribute name="caseType" attributeType="String"/>
@@ -109,7 +119,7 @@
         <relationship name="arrPlatform" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChewPrognosedPlatform" inverseName="arrivalStop" inverseEntity="ChewPrognosedPlatform"/>
         <relationship name="depPlatform" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChewPrognosedPlatform" inverseName="departureStop" inverseEntity="ChewPrognosedPlatform"/>
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLeg" inverseName="stops" inverseEntity="ChewLeg"/>
-        <relationship name="time" maxCount="1" deletionRule="Cascade" destinationEntity="ChewTime" inverseName="stop" inverseEntity="ChewTime"/>
+        <relationship name="time" maxCount="1" deletionRule="Cascade" destinationEntity="CDTime" inverseName="stop" inverseEntity="CDTime"/>
     </entity>
     <entity name="ChewSunEvent" representedClassName="ChewSunEvent" syncable="YES">
         <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -118,15 +128,5 @@
         <attribute name="timeStart" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="type" attributeType="String"/>
         <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="sunEvents" inverseEntity="ChewJourney"/>
-    </entity>
-    <entity name="ChewTime" representedClassName="ChewTime" syncable="YES">
-        <attribute name="actualArrival" optional="YES" attributeType="String"/>
-        <attribute name="actualDeparture" optional="YES" attributeType="String"/>
-        <attribute name="cancelled" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
-        <attribute name="plannedArrival" optional="YES" attributeType="String"/>
-        <attribute name="plannedDeparture" optional="YES" attributeType="String"/>
-        <relationship name="chewJourney" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewJourney" inverseName="time" inverseEntity="ChewJourney"/>
-        <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLeg" inverseName="time" inverseEntity="ChewLeg"/>
-        <relationship name="stop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewStop" inverseName="time" inverseEntity="ChewStop"/>
     </entity>
 </model>

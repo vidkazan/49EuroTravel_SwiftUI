@@ -47,7 +47,7 @@ struct TimeContainer : Equatable, Hashable {
 
 extension TimeContainer {
 	// MARK: Init
-	init(chewTime : ChewTime?) {
+	init(chewTime : CDTime?) {
 		self.init(
 			plannedDeparture: chewTime?.plannedDeparture,
 			plannedArrival: chewTime?.plannedArrival,

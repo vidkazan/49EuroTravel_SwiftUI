@@ -18,7 +18,7 @@ extension ChewJourney {
 	@NSManaged public var user: CDUser?
 	@NSManaged public var isActive: Bool
 	@NSManaged public var legs: Set<ChewLeg>
-	@NSManaged public var time: ChewTime
+	@NSManaged public var time: CDTime
 	@NSManaged public var sunEvents: Set<ChewSunEvent>
 	@NSManaged public var updatedAt: Double
 }
@@ -36,7 +36,7 @@ extension ChewJourney {
 			self.isActive = false
 			self.journeyRef = viewData.refreshToken
 			self.updatedAt = Date.now.timeIntervalSince1970
-			let _ = ChewTime(
+			let _ = CDTime(
 				context: managedObjectContext,
 				container: viewData.time,
 				cancelled: !viewData.isReachable,
