@@ -164,7 +164,7 @@ extension LegViewData {
 			if let dto = leg.legDTO {
 				Model.shared.sheetViewModel.send(event: .didRequestShow(.journeyDebug(legs: [dto])))
 			} else {
-				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.generic(msg: Text("Debug error : legDTO is nil"))))
+				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.generic(msg: "Debug error : legDTO is nil")))
 			}
 		},
 		icon: "bug",

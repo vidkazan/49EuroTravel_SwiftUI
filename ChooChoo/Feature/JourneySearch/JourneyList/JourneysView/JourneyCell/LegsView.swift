@@ -176,7 +176,8 @@ struct LegsViewPreviews: PreviewProvider {
 					let viewData = mock.journey.journeyViewData(
 					   depStop: nil,
 					   arrStop: nil,
-					   realtimeDataUpdatedAt: 0
+					   realtimeDataUpdatedAt: 0,
+					   settings: .init()
 				   )
 					LegsView(journey: viewData,mode : .sunEvents)
 						.environmentObject(ChewViewModel(

@@ -8,6 +8,8 @@
 import SwiftUI
 import TipKit
 
+// remane coredata entites
+// fetch cdsettings
 
 // MARK: revise
 // all text revision

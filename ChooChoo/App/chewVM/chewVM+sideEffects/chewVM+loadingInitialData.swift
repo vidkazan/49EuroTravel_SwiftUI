@@ -25,9 +25,6 @@ extension ChewViewModel {
 
 			
 			Task {
-				if settings.onboarding == true {
-					Model.shared.coreDataStore.disableOnboarding()
-				}
 				if let stops = Model.shared.coreDataStore.fetchLocations() {
 					Model.shared.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
 				}
@@ -39,7 +36,7 @@ extension ChewViewModel {
 					Model.shared.journeyFollowViewModel.send(event: .didUpdateData(data))
 				}
 			}
-			return Just(Event.didLoadInitialData(settings))
+			return Just(Event.didLoadInitialData(settings ?? Settings()))
 				.eraseToAnyPublisher()
 		}
 	}

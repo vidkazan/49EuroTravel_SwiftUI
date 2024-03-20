@@ -93,7 +93,8 @@ struct JourneyDetailsPreview : PreviewProvider {
 					let viewData = mock.journeyViewData(
 						depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
 						arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
-						realtimeDataUpdatedAt: 0
+						realtimeDataUpdatedAt: 0,
+						settings: .init()
 					)
 					JourneyDetailsView(
 						journeyDetailsViewModel: JourneyDetailsViewModel(

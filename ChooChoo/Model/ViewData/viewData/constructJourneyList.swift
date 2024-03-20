@@ -11,19 +11,22 @@ import CoreLocation
 func constructJourneyListViewDataAsync(
 	journeysData : JourneyListDTO,
 	depStop : Stop,
-	arrStop : Stop
+	arrStop : Stop,
+	settings: Settings
 ) async -> [JourneyViewData] {
 	return constructJourneyListViewData(
 		journeysData: journeysData,
 		depStop: depStop,
-		arrStop: arrStop
+		arrStop: arrStop,
+		settings: settings
 	)
 }
 
 func constructJourneyListViewData(
 	journeysData : JourneyListDTO,
 	depStop : Stop,
-	arrStop : Stop
+	arrStop : Stop,
+	settings: Settings
 )  -> [JourneyViewData] {
 	guard let journeys = journeysData.journeys else { return [] }
 	var res = [JourneyViewData]()
@@ -32,7 +35,8 @@ func constructJourneyListViewData(
 		if let data = j.journeyViewData(
 			depStop: depStop,
 			arrStop: arrStop,
-			realtimeDataUpdatedAt: Double(journeysData.realtimeDataUpdatedAt ?? 0)
+			realtimeDataUpdatedAt: Double(journeysData.realtimeDataUpdatedAt ?? 0),
+			settings: settings
 		) {
 			res.append(data)
 		}

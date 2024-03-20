@@ -198,9 +198,6 @@
         }
       }
     },
-    "Debug error : legDTO is nil" : {
-
-    },
     "Debug leg" : {
       "comment" : "Debug"
     },
@@ -228,6 +225,12 @@
           }
         }
       }
+    },
+    "earlier route arrival time is later than later route departure" : {
+      "comment" : "DataError: validationError"
+    },
+    "earlier route destination stop and later origin stop sre not the same" : {
+      "comment" : "DataError: validationError"
     },
     "error: (msg)" : {
       "comment" : "DataError"
@@ -439,8 +442,12 @@
         }
       }
     },
+    "Offline" : {
+      "comment" : "badge"
+    },
     "Offline Mode" : {
       "comment" : "badge",
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -556,7 +563,7 @@
       }
     },
     "Search" : {
-      "comment" : "search tip title\nTabItem",
+      "comment" : "TabItem\nsearch tip title",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

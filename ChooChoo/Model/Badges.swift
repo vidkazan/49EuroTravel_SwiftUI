@@ -97,7 +97,7 @@ enum Badges : Equatable, Identifiable {
 		}
 	}
 	
-	case generic(msg : Text)
+	case generic(msg : String)
 	case routeError
 	case followError(_ action : JourneyFollowViewModel.Action)
 	case locationError
@@ -144,7 +144,7 @@ enum Badges : Equatable, Identifiable {
 	var badgeData : BadgeData {
 		switch self {
 		case .generic(let msg):
-			return BadgeData(msg)
+			return BadgeData(Text(verbatim: msg))
 		case .routeError:
 			return BadgeData(
 				Text(
@@ -169,7 +169,7 @@ enum Badges : Equatable, Identifiable {
 		case .offlineMode:
 			return BadgeData(
 				Text(
-					"Offline Mode", 
+					"Offline",
 					comment: "badge"
 				)
 			)

@@ -116,7 +116,7 @@ extension SettingsView {
 
 struct LegViewSettingsView : View {
 	let mode : Settings.LegViewMode
-	let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0)
+	let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0,settings: .init())
 	var body: some View {
 		if let mock = mock {
 			LegsView(

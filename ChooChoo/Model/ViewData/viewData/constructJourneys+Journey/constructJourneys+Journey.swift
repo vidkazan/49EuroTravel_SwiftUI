@@ -12,21 +12,29 @@ extension JourneyDTO {
 	func journeyViewDataAsync(
 		depStop: Stop?,
 		arrStop : Stop?,
-		realtimeDataUpdatedAt: Double
+		realtimeDataUpdatedAt: Double,
+		settings : Settings
 	) async -> JourneyViewData? {
 		return journeyViewData(
 			depStop: depStop,
 			arrStop: arrStop,
-			realtimeDataUpdatedAt: realtimeDataUpdatedAt
+			realtimeDataUpdatedAt: realtimeDataUpdatedAt,
+			settings: settings
 		)
 	}
 
-	func journeyViewData(depStop: Stop?,arrStop : Stop?,realtimeDataUpdatedAt: Double) -> JourneyViewData? {
+	func journeyViewData(
+		depStop: Stop?,
+		arrStop : Stop?,
+		realtimeDataUpdatedAt: Double,
+		settings : Settings
+	) -> JourneyViewData? {
 		do {
 			return try journeyViewDataThrows(
 				depStop: depStop,
 				arrStop: arrStop,
-				realtimeDataUpdatedAt: realtimeDataUpdatedAt
+				realtimeDataUpdatedAt: realtimeDataUpdatedAt,
+				settings: settings
 			)
 		} catch  {
 			return nil
@@ -37,7 +45,8 @@ extension JourneyDTO {
 	func journeyViewDataThrows(
 		depStop: Stop?,
 		arrStop : Stop?,
-		realtimeDataUpdatedAt: Double
+		realtimeDataUpdatedAt: Double,
+		settings : Settings
 	) throws -> JourneyViewData {
 		let time = TimeContainer(
 			plannedDeparture: legs.first?.plannedDeparture,
@@ -111,7 +120,8 @@ extension JourneyDTO {
 			arrStopName: legs.last?.destination?.name ?? last.address,
 			time: time,
 			updatedAt: realtimeDataUpdatedAt,
-			remarks: journeyRemarks
+			remarks: journeyRemarks,
+			settings: settings
 		)
 	}
 }

@@ -68,6 +68,7 @@ struct JourneyFollowCellView : View {
 					BadgeView(.connectionNotReachable)
 						.badgeBackgroundStyle(.red)
 				}
+				BadgeView(.generic(msg: "\(data.settings.transportMode.tmp)"))
 			}
 		}
 		.contextMenu {
@@ -120,7 +121,8 @@ struct FollowCellPreviews: PreviewProvider {
 		   let viewData = mock.journeyViewData(
 			   depStop:  .init(),
 			   arrStop:  .init(),
-			   realtimeDataUpdatedAt: Date.now.timeIntervalSince1970 - 10000
+			   realtimeDataUpdatedAt: Date.now.timeIntervalSince1970 - 10000,
+			   settings: .init()
 		   ){
 			JourneyFollowCellView(journeyDetailsViewModel: .init(
 				followId: 0,

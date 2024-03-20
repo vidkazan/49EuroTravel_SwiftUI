@@ -40,7 +40,8 @@ extension ChewJourney {
 					arrStopName: arrivalStop.name,
 					time: time,
 					updatedAt: self.updatedAt,
-					remarks: []
+					remarks: [],
+					settings: Settings()
 				),
 				depStop: self.departureStop.stop(),
 				arrStop: self.arrivalStop.stop()

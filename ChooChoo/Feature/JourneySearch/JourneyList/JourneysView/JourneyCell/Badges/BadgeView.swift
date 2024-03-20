@@ -233,7 +233,7 @@ struct BadgeView : View {
 @available(iOS 16.0, *)
 struct BadgeViewPreview : PreviewProvider {
 	static var previews: some View {
-		if let viewData = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0) {
+		if let viewData = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0,settings: .init()) {
 			VStack {
 				FlowLayout {
 						BadgeView(.lineNumber(lineType: .national, num: "ICE666"))

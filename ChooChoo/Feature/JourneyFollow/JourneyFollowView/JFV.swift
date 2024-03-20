@@ -239,7 +239,8 @@ struct FollowPreviews: PreviewProvider {
 			let data = constructJourneyListViewData(
 				journeysData: mock,
 				depStop:  .init(),
-				arrStop:  .init()
+				arrStop:  .init(),
+				settings: .init()
 			)
 			JourneyFollowView(viewModel: .init(
 				journeys: data.map {

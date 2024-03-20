@@ -24,7 +24,8 @@ extension JourneyListViewModel {
 					let res = await constructJourneyListViewDataAsync(
 						journeysData: data,
 						depStop: state.data.stops.departure,
-						arrStop: state.data.stops.arrival
+						arrStop: state.data.stops.arrival,
+						settings: state.data.settings
 					)
 					return Event.onNewJourneyListData(
 						JourneyListViewData(

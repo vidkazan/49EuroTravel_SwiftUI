@@ -123,7 +123,8 @@ struct JourneyCellPreview: PreviewProvider {
 				   let viewData = mock.journey.journeyViewData(
 						depStop: .init(),
 						arrStop: .init(),
-						realtimeDataUpdatedAt: 0
+						realtimeDataUpdatedAt: 0,
+						settings: .init()
 					) {
 					JourneyCell(journey: viewData,stops: .init(departure: .init(), arrival: .init()))
 						.environmentObject(ChewViewModel())

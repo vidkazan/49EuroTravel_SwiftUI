@@ -109,6 +109,16 @@ extension Settings {
 		var defaultValue : Self {
 			.all
 		}
+		var tmp : String {
+			switch self {
+			case .regional:
+				return "regional"
+			case .all:
+				return "all"
+			case .custom:
+				return "custom"
+			}
+		}
 	}
 	
 	enum TransferTime : Equatable, Hashable {

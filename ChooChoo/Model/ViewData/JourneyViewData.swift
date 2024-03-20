@@ -8,7 +8,6 @@
 import Foundation
 import SwiftUI
 import CoreLocation
-
 struct JourneyListViewData : Equatable {
 	let journeys : [JourneyViewData]
 	let laterRef : String?
@@ -27,6 +26,108 @@ struct JourneyListViewData : Equatable {
 	}
 }
 
+struct MultiJourneyViewData : Equatable,Identifiable{
+	let id = UUID()
+	let journeys : [JourneyViewData]
+	var origin: String {
+		self.journeys.first?.origin ?? "departure stop"
+	}
+	
+	var destination: String {
+		self.journeys.last?.destination ?? "arrival stop"
+	}
+	
+	var transferCount: Int {
+		get {
+			self.journeys.reduce(0, { $0 + $1.transferCount }) + 1
+		}
+	}
+	
+	var sunEvents: [SunEvent] {
+		get {
+			self.journeys.reduce([], { $0 + $1.sunEvents })
+		}
+	}
+	
+	var sunEventsGradientStops: [Gradient.Stop] {
+		get {
+			self.journeys.reduce([], { $0 + $1.sunEventsGradientStops })
+		}
+	}
+	
+	var isReachable: Bool {
+		get {
+			self.journeys.reduce(true, { $0 && $1.isReachable })
+		}
+	}
+	
+	var remarks: [RemarkViewData] {
+		get {
+			self.journeys.reduce([], { $0 + $1.remarks })
+		}
+	}
+	
+	var badges: [Badges] {
+		get {
+			self.journeys.reduce([], { $0 + $1.badges })
+		}
+	}
+	
+	var refreshToken: String {
+		""
+	}
+	
+	var time: TimeContainer {
+		get {
+			TimeContainer(
+				plannedDeparture: journeys.first?.time.iso.departure.planned,
+				plannedArrival: journeys.last?.time.iso.arrival.planned,
+				actualDeparture: journeys.first?.time.iso.departure.actual,
+				actualArrival: journeys.last?.time.iso.arrival.actual,
+				cancelled: nil
+			)
+		}
+	}
+	
+	var updatedAt: Double  {
+		get {
+			self.journeys.reduce(0, { $0 > $1.updatedAt ? $0 : $1.updatedAt })
+		}
+	}
+	
+	var legs : [LegViewData] {
+		get {
+			self.journeys.reduce([LegViewData](), { $0 + $1.legs })
+		}
+	}
+	
+}
+
+extension MultiJourneyViewData {
+	init(lhs : JourneyViewData, rhs : JourneyViewData) {
+		self.journeys = [lhs, rhs]
+	}
+	
+	private func validate(rhs: JourneyViewData) throws {
+		guard destination == rhs.origin else {
+			throw DataError.validationError(msg: NSLocalizedString(
+				"earlier route destination stop and later origin stop sre not the same",
+				comment: "DataError: validationError"
+			))
+		}
+		guard time.timestamp.arrival.actual == rhs.time.timestamp.departure.actual else {
+			throw DataError.validationError(msg: NSLocalizedString(
+				"earlier route arrival time is later than later route departure",
+				comment: "DataError: validationError"
+			))
+		}
+	}
+	
+	func mergeLegs(lhs: [LegViewData], rhs : [LegViewData]) throws -> [LegViewData] {
+		 throw DataError.generic(msg: "not implemented")
+	}
+}
+
 struct JourneyViewData : Equatable, Identifiable {
 	let id = UUID()
 	let origin : String
@@ -41,6 +142,7 @@ struct JourneyViewData : Equatable, Identifiable {
 	let refreshToken : String
 	let time : TimeContainer
 	let updatedAt : Double
+	let settings : Settings
 }
 
 extension JourneyViewData {
@@ -57,6 +159,7 @@ extension JourneyViewData {
 		self.updatedAt = data.updatedAt
 		self.sunEventsGradientStops = data.sunEventsGradientStops
 		self.remarks = data.remarks
+		self.settings = data.settings
 	}
 	init(
 		journeyRef : String,
@@ -67,7 +170,8 @@ extension JourneyViewData {
 		arrStopName : String?,
 		time : TimeContainer,
 		updatedAt : Double,
-		remarks : [RemarkViewData]
+		remarks : [RemarkViewData],
+		settings : Settings
 	){
 		self.origin = depStopName ?? "origin"
 		self.destination = arrStopName ?? "destination"
@@ -85,9 +189,10 @@ extension JourneyViewData {
 			sunEvents: sunEvents
 		)
 		self.remarks = remarks
+		self.settings = settings
 	}
 	
-	static func fixRefreshToken(token : String) -> String {
+	private static func fixRefreshToken(token : String) -> String {
 		let pattern = "\\$\\$\\d+\\$\\$\\$\\$\\$\\$"
 		let res = token.replacingOccurrences(of: pattern, with: "",options: .regularExpression).replacingOccurrences(of: "/", with: "%2F")
 		return res

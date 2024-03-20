@@ -97,7 +97,7 @@ extension TopBarAlertViewModel {
 		case routeError
 		case userLocationError
 		case journeyFollowError(type : JourneyFollowViewModel.Action)
-		case generic(msg : Text)
+		case generic(msg : String)
 		
 		var id : Int {
 			switch self {

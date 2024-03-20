@@ -55,7 +55,8 @@ extension JourneyDetailsViewModel {
 					let res = await data.journey.journeyViewDataAsync(
 						depStop: state.data.depStop,
 						arrStop: state.data.arrStop,
-						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970
+						realtimeDataUpdatedAt: Date.now.timeIntervalSince1970,
+						settings: state.data.viewData.settings
 					)
 					
 					guard let res = res else {
