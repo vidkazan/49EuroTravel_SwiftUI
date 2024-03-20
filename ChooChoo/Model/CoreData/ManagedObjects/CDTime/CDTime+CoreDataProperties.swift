@@ -17,6 +17,6 @@ extension CDTime {
 	@NSManaged public var cancelled : Bool
 	
 	@NSManaged public var chewJourney : CDJourney?
-	@NSManaged public var leg: ChewLeg?
+	@NSManaged public var leg: CDLeg?
 	@NSManaged public var stop: ChewStop?
 }

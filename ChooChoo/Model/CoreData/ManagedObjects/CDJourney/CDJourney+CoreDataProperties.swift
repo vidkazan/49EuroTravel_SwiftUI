@@ -17,7 +17,7 @@ extension CDJourney {
     @NSManaged public var departureStop: CDLocation
 	@NSManaged public var user: CDUser?
 	@NSManaged public var isActive: Bool
-	@NSManaged public var legs: Set<ChewLeg>
+	@NSManaged public var legs: Set<CDLeg>
 	@NSManaged public var time: CDTime
 	@NSManaged public var sunEvents: Set<CDSunEvent>
 	@NSManaged public var updatedAt: Double
@@ -43,7 +43,7 @@ extension CDJourney {
 				for: self
 			)
 			viewData.legs.forEach {
-				let _ = ChewLeg(context: managedObjectContext,leg: $0,for: self)
+				let _ = CDLeg(context: managedObjectContext,leg: $0,for: self)
 			}
 			viewData.sunEvents.forEach {
 				let _ = CDSunEvent(context: managedObjectContext,sun: $0,for: self)

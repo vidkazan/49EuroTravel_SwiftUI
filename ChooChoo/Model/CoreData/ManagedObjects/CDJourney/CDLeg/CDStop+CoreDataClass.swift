@@ -16,7 +16,7 @@ public class ChewStop: NSManagedObject {
 }
 
 extension ChewStop {
-	convenience init(insertInto context: NSManagedObjectContext,with stopData : StopViewData, to leg :  ChewLeg) {
+	convenience init(insertInto context: NSManagedObjectContext,with stopData : StopViewData, to leg :  CDLeg) {
 		self.init(entity: ChewStop.entity(), insertInto: context)
 		self.stopId = stopData.id
 		self.lat = stopData.locationCoordinates.latitude

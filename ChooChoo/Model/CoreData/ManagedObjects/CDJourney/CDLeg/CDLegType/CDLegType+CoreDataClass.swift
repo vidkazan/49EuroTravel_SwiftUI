@@ -1,5 +1,5 @@
 //
-//  ChewLegType.swift
+//  CDLegType.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 13.12.23.
@@ -8,8 +8,8 @@
 import Foundation
 import CoreData
 
-@objc(ChewLegType)
-public class ChewLegType: NSManagedObject {
+@objc(CDLegType)
+public class CDLegType: NSManagedObject {
 
 	enum CaseType: String {
 		case footStart
@@ -67,9 +67,9 @@ public class ChewLegType: NSManagedObject {
 	}
 }
 
-extension ChewLegType {
-	convenience init(insertIntoManagedObjectContext context: NSManagedObjectContext, type : LegViewData.LegType, for leg : ChewLeg) {
-		self.init(entity: ChewLegType.entity(), insertInto: context)
+extension CDLegType {
+	convenience init(insertIntoManagedObjectContext context: NSManagedObjectContext, type : LegViewData.LegType, for leg : CDLeg) {
+		self.init(entity: CDLegType.entity(), insertInto: context)
 		self.legType = type
 		self.leg = leg
 	}

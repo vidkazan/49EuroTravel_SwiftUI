@@ -1,5 +1,5 @@
 //
-//  ChewLeg+CoreDataClass.swift
+//  CDLeg+CoreDataClass.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 13.12.23.
@@ -9,14 +9,14 @@
 import Foundation
 import CoreData
 
-@objc(ChewLeg)
-public class ChewLeg: NSManagedObject {
+@objc(CDLeg)
+public class CDLeg: NSManagedObject {
 
 }
 
-extension ChewLeg {
+extension CDLeg {
 	convenience init(context : NSManagedObjectContext,leg : LegViewData,for journey : CDJourney){
-		self.init(entity: ChewLeg.entity(), insertInto: context)
+		self.init(entity: CDLeg.entity(), insertInto: context)
 		self.tripId = leg.tripId
 		self.isReachable = leg.isReachable
 		self.legBottomPosition = leg.legBottomPosition
@@ -30,7 +30,7 @@ extension ChewLeg {
 				
 		self.journey = journey
 
-		let _ = ChewLegType(insertIntoManagedObjectContext: context, type: leg.legType, for: self)
+		let _ = CDLegType(insertIntoManagedObjectContext: context, type: leg.legType, for: self)
 		
 		let _ = CDTime(context: context, container: leg.time, cancelled: !leg.isReachable,for: self)
 		
@@ -40,7 +40,7 @@ extension ChewLeg {
 	}
 }
 
-extension ChewLeg {
+extension CDLeg {
 	func legViewData() -> LegViewData {
 		var stopsViewData = [StopViewData]()
 		

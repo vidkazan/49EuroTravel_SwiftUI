@@ -1,5 +1,5 @@
 //
-//  ChewLeg+CoreDataProperties.swift
+//  CDLeg+CoreDataProperties.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 13.12.23.
@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-extension ChewLeg {
+extension CDLeg {
 	@NSManaged public var tripId: String
 	@NSManaged public var legDTO: String?
     @NSManaged public var isReachable: Bool
@@ -21,6 +21,6 @@ extension ChewLeg {
     @NSManaged public var lineType: String
     @NSManaged public var time: CDTime
 	@NSManaged public var journey: CDJourney?
-	@NSManaged public var chewLegType: ChewLegType
+	@NSManaged public var chewLegType: CDLegType
 	@NSManaged public var stops: [ChewStop]
 }

@@ -25,7 +25,7 @@ extension CDTime {
 		self.plannedDeparture = container.iso.departure.planned
 		self.actualDeparture = container.iso.departure.actual
 	}
-	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for leg : ChewLeg){
+	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for leg : CDLeg){
 		self.init(entity: CDTime.entity(), insertInto: context)
 		
 		self.leg = leg

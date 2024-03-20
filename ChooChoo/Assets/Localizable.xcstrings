@@ -349,7 +349,7 @@
       }
     },
     "Journey debug" : {
-      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item"
+      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
     },
     "Journey details" : {
       "comment" : "navigationBarTitle",
@@ -552,7 +552,7 @@
       }
     },
     "Save" : {
-      "comment" : "settingsView: save button\ndatePickerView: save button",
+      "comment" : "datePickerView: save button\nsettingsView: save button",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

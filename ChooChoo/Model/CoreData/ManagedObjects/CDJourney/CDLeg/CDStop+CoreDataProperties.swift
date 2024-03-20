@@ -20,7 +20,7 @@ extension ChewStop {
     @NSManaged public var time: CDTime
     @NSManaged public var depPlatform: ChewPrognosedPlatform?
     @NSManaged public var arrPlatform: ChewPrognosedPlatform?
-	@NSManaged public var leg: ChewLeg?
+	@NSManaged public var leg: CDLeg?
 	@NSManaged public var isCancelled: Bool
 
 }
