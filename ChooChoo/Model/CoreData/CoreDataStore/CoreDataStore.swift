@@ -195,14 +195,14 @@ extension CoreDataStore {
 	
 	static func transportModes(
 		modes : Set<LineType>,
-		from obj : TransportModes? = nil,
+		from obj : CDTransportModes? = nil,
 		context : NSManagedObjectContext
-	) -> TransportModes {
-		let item : TransportModes = {
+	) -> CDTransportModes {
+		let item : CDTransportModes = {
 			if let obj = obj {
 				return obj
 			}
-			return TransportModes(entity: TransportModes.entity(), insertInto: context)
+			return CDTransportModes(entity: CDTransportModes.entity(), insertInto: context)
 		}()
 		item.bus = modes.contains(.bus)
 		item.ferry = modes.contains(.ferry)

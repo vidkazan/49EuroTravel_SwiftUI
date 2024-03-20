@@ -79,7 +79,7 @@ extension CoreDataStore {
 	}
 	
 	func fetchSettingsTransportModes() -> Set<LineType> {
-		var modes : TransportModes!
+		var modes : CDTransportModes!
 		var transportModes = Set<LineType>()
 		asyncContext.performAndWait {
 			modes = user?.chooSettings?.transportModes

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-extension TransportModes {
+extension CDTransportModes {
 	@NSManaged public var national: Bool
 	@NSManaged public var nationalExpress: Bool
 	@NSManaged public var regionalExpress: Bool
@@ -23,7 +23,7 @@ extension TransportModes {
     @NSManaged public var chooSettings: CDSettings?
 }
 
-extension TransportModes {
+extension CDTransportModes {
 	func products() -> Products {
 		return Products(
 			nationalExpress: self.nationalExpress,

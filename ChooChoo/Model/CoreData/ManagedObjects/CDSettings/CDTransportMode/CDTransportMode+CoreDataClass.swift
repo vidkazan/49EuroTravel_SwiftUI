@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(TransportModes)
-public class TransportModes: NSManagedObject {
+@objc(CDTransportModes)
+public class CDTransportModes: NSManagedObject {
 
 }

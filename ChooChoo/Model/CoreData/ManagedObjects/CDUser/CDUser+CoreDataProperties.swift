@@ -22,7 +22,7 @@ extension CDUser {
 			let user = CDUser(entity: CDUser.entity(), insertInto: managedObjectContext)
 
 			let settings = CDSettings(entity: CDSettings.entity(), insertInto: managedObjectContext)
-			let modes = TransportModes(entity: TransportModes.entity(), insertInto: managedObjectContext)
+			let modes = CDTransportModes(entity: CDTransportModes.entity(), insertInto: managedObjectContext)
 			settings.user = user
 			modes.chooSettings = settings
 
