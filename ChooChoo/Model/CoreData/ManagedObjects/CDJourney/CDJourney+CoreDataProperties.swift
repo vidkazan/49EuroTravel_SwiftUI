@@ -15,7 +15,7 @@ extension ChewJourney {
     @NSManaged public var journeyRef: String
     @NSManaged public var arrivalStop: Location
     @NSManaged public var departureStop: Location
-	@NSManaged public var user: ChewUser?
+	@NSManaged public var user: CDUser?
 	@NSManaged public var isActive: Bool
 	@NSManaged public var legs: Set<ChewLeg>
 	@NSManaged public var time: ChewTime
@@ -26,7 +26,7 @@ extension ChewJourney {
 extension ChewJourney {
 	convenience init(
 		viewData : JourneyViewData,
-		user : ChewUser,
+		user : CDUser,
 		depStop : Stop,
 		arrStop : Stop,
 		id : Int64,

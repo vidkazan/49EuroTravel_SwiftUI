@@ -11,7 +11,7 @@ import CoreLocation
 
 final class CoreDataStore : ObservableObject {
 	var asyncContext: NSManagedObjectContext!
-	var user : ChewUser? = nil
+	var user : CDUser? = nil
 
 	init() {
 			self.asyncContext = PersistenceController.shared.container.newBackgroundContext()
@@ -234,7 +234,7 @@ extension CoreDataStore {
 extension CoreDataStore {
 	enum Entities {
 		case user
-		case locations(stop : Stop, user : ChewUser)
+		case locations(stop : Stop, user : CDUser)
 		case journeys
 		case recentSearches
 		
@@ -243,7 +243,7 @@ extension CoreDataStore {
 			case .recentSearches:
 				return ChewRecentSearch.self
 			case .user:
-				return ChewUser.self
+				return CDUser.self
 			case .locations:
 				return Location.self
 			case .journeys:

@@ -12,7 +12,7 @@ import CoreData
 
 extension ChewRecentSearch {
 	@NSManaged public var id: String
-	@NSManaged public var user: ChewUser?
+	@NSManaged public var user: CDUser?
     @NSManaged public var searchDate: Date?
     @NSManaged public var depStop: Location?
     @NSManaged public var arrStop: Location?
@@ -21,7 +21,7 @@ extension ChewRecentSearch {
 
 extension ChewRecentSearch : Identifiable {
 	convenience init(
-		user : ChewUser,
+		user : CDUser,
 		search : RecentSearchesViewModel.RecentSearch,
 		using managedObjectContext: NSManagedObjectContext
 	) {

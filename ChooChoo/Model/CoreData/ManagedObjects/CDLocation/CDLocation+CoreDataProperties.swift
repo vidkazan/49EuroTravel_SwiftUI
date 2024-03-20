@@ -23,7 +23,7 @@ extension Location {
 	@NSManaged public var chewJourneyArr: ChewJourney?
 	@NSManaged public var chewRecentSearchArrStop: ChewRecentSearch?
 	@NSManaged public var chewRecentSearchDepStop: ChewRecentSearch?
-	@NSManaged public var user: ChewUser?
+	@NSManaged public var user: CDUser?
 }
 
 extension Location {

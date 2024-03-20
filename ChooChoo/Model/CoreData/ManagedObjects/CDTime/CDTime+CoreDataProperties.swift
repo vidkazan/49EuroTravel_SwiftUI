@@ -1,5 +1,5 @@
 //
-//  ChewUser+CoreDataProperties.swift
+//  CDUser+CoreDataProperties.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 21.11.23.

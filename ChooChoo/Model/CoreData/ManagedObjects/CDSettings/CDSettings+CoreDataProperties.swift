@@ -18,5 +18,5 @@ extension ChooSettings {
 	@NSManaged public var legViewMode: Int16
     @NSManaged public var transportModes: TransportModes
 	@NSManaged public var transferCount: String?
-    @NSManaged public var user: ChewUser?
+    @NSManaged public var user: CDUser?
 }

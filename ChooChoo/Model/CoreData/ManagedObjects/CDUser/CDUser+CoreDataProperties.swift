@@ -1,5 +1,5 @@
 //
-//  ChewUser+CoreDataProperties.swift
+//  CDUser+CoreDataProperties.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 21.11.23.
@@ -9,17 +9,17 @@
 import Foundation
 import CoreData
 
-extension ChewUser {
+extension CDUser {
 	@NSManaged public var recentLocations: Set<Location>?
 	@NSManaged public var chooSettings: ChooSettings?
 	@NSManaged public var chewJourneys : Set<ChewJourney>?
 	@NSManaged public var chewRecentSearches : Set<ChewRecentSearch>?
 }
 
-extension ChewUser {
-	static func createWith(date : Date,using managedObjectContext: NSManagedObjectContext) -> ChewUser? {
+extension CDUser {
+	static func createWith(date : Date,using managedObjectContext: NSManagedObjectContext) -> CDUser? {
 		managedObjectContext.performAndWait {
-			let user = ChewUser(entity: ChewUser.entity(), insertInto: managedObjectContext)
+			let user = CDUser(entity: CDUser.entity(), insertInto: managedObjectContext)
 
 			let settings = ChooSettings(entity: ChooSettings.entity(), insertInto: managedObjectContext)
 			let modes = TransportModes(entity: TransportModes.entity(), insertInto: managedObjectContext)
@@ -39,7 +39,7 @@ extension ChewUser {
 }
 
 
-extension ChewUser {
+extension CDUser {
 	@objc(addSavedLocationsObject:)
 	@NSManaged public func addToSavedLocations(_ value: Location)
 
@@ -55,7 +55,7 @@ extension ChewUser {
 }
 
 // MARK: Generated accessors for chewJourneys
-extension ChewUser {
+extension CDUser {
 	@objc(addChewJourneysObject:)
 	@NSManaged public func addToChewJourneys(_ value: ChewJourney)
 
@@ -71,7 +71,7 @@ extension ChewUser {
 }
 
 // MARK: Generated accessors for recentLocations
-extension ChewUser {
+extension CDUser {
 
 	@objc(addRecentLocationsObject:)
 	@NSManaged public func addToRecentLocations(_ value: Location)
@@ -88,7 +88,7 @@ extension ChewUser {
 }
 
 // MARK: Generated accessors for recentSearches
-extension ChewUser {
+extension CDUser {
 
 	@objc(addRecentSearchesObject:)
 	@NSManaged public func addToRecentSearches(_ value: ChewRecentSearch)
@@ -104,7 +104,7 @@ extension ChewUser {
 
 }
 
-extension ChewUser : Identifiable {
+extension CDUser : Identifiable {
 
 }
 

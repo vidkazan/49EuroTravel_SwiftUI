@@ -12,8 +12,8 @@ import CoreLocation
 
 // MARK: Fetch
 extension CoreDataStore {
-	func fetchUser() -> ChewUser? {
-		let user = self.fetchOrCreate(entity: .user, ChewUser.self)?.first
+	func fetchUser() -> CDUser? {
+		let user = self.fetchOrCreate(entity: .user, CDUser.self)?.first
 		self.user = user
 		return user
 	}
@@ -152,7 +152,7 @@ extension CoreDataStore {
 			return res
 		}
 		 asyncContext.performAndWait {
-			self.user = ChewUser.createWith(date: .now, using: self.asyncContext)
+			self.user = CDUser.createWith(date: .now, using: self.asyncContext)
 		}
 		return fetch(t)
 	}

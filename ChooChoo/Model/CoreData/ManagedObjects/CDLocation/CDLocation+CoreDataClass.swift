@@ -15,8 +15,8 @@ public class Location: NSManagedObject {
 
 extension Location {
 	enum ParentEntity {
-		case recentLocation(_ user : ChewUser)
-		case savedLocation(_ user : ChewUser)
+		case recentLocation(_ user : CDUser)
+		case savedLocation(_ user : CDUser)
 		case followedJourneyDepStop(_ followedJourney : ChewJourney)
 		case followedJourneyArrStop(_ followedJourney : ChewJourney)
 		case recentSearchDepStop(_ recentSearch : ChewRecentSearch)
