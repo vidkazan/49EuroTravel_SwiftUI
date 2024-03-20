@@ -1,8 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CDSettings" representedClassName="CDSettings" syncable="YES">
+        <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="legViewMode" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="onboarding" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="transferCount" optional="YES" attributeType="String"/>
+        <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TransportModes" inverseName="chooSettings" inverseEntity="TransportModes"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="chooSettings" inverseEntity="CDUser"/>
+    </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
         <relationship name="chewJourneys" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChewJourney" inverseName="user" inverseEntity="ChewJourney"/>
-        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="ChooSettings" inverseName="user" inverseEntity="ChooSettings"/>
+        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDSettings" inverseName="user" inverseEntity="CDSettings"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="Location" inverseName="user" inverseEntity="Location"/>
         <relationship name="recentSearches" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="ChewRecentSearch" inverseName="user" inverseEntity="ChewRecentSearch"/>
     </entity>
@@ -92,16 +102,6 @@
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewLeg" inverseName="time" inverseEntity="ChewLeg"/>
         <relationship name="stop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChewStop" inverseName="time" inverseEntity="ChewStop"/>
     </entity>
-    <entity name="ChooSettings" representedClassName="ChooSettings" syncable="YES">
-        <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="legViewMode" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="onboarding" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="transferCount" optional="YES" attributeType="String"/>
-        <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="TransportModes" inverseName="chooSettings" inverseEntity="TransportModes"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="chooSettings" inverseEntity="CDUser"/>
-    </entity>
     <entity name="Location" representedClassName="Location" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>
         <attribute name="api_id" optional="YES" attributeType="String"/>
@@ -127,6 +127,6 @@
         <attribute name="subway" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="taxi" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="tram" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="ChooSettings" inverseName="transportModes" inverseEntity="ChooSettings"/>
+        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSettings" inverseName="transportModes" inverseEntity="CDSettings"/>
     </entity>
 </model>

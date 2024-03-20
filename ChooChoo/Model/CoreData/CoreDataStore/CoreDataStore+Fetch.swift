@@ -19,7 +19,7 @@ extension CoreDataStore {
 	}
 	
 	func fetchSettings() -> Settings {
-		var settings : ChooSettings?
+		var settings : CDSettings?
 		var transferTypes = Settings.TransferTime.time(minutes: .zero)
 		var transportMode = Settings.TransportMode.all
 		var transferCount = Settings.TransferCountCases.unlimited
