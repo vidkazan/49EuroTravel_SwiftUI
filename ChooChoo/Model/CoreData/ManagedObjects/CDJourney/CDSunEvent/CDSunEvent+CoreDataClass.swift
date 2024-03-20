@@ -11,12 +11,12 @@ import CoreData
 import CoreLocation
 import SwiftUI
 
-@objc(ChewSunEvent)
-public class ChewSunEvent: NSManagedObject {
+@objc(CDSunEvent)
+public class CDSunEvent: NSManagedObject {
 
 }
 
-extension ChewSunEvent {
+extension CDSunEvent {
 	func sunEvent() -> SunEvent {
 		SunEvent(
 			type: SunEventType(rawValue: self.type) ?? .day,
@@ -27,9 +27,9 @@ extension ChewSunEvent {
 	}
 }
 
-extension ChewSunEvent {
-	convenience init(context : NSManagedObjectContext,sun : SunEvent,for journey : ChewJourney){
-		self.init(entity: ChewSunEvent.entity(), insertInto: context)
+extension CDSunEvent {
+	convenience init(context : NSManagedObjectContext,sun : SunEvent,for journey : CDJourney){
+		self.init(entity: CDSunEvent.entity(), insertInto: context)
 		self.latitude = sun.location.latitude
 		self.longtitude = sun.location.longitude
 		self.timeFinal = sun.timeFinal

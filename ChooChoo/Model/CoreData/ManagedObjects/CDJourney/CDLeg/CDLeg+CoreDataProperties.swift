@@ -20,7 +20,7 @@ extension ChewLeg {
     @NSManaged public var lineShortName: String
     @NSManaged public var lineType: String
     @NSManaged public var time: CDTime
-	@NSManaged public var journey: ChewJourney?
+	@NSManaged public var journey: CDJourney?
 	@NSManaged public var chewLegType: ChewLegType
 	@NSManaged public var stops: [ChewStop]
 }

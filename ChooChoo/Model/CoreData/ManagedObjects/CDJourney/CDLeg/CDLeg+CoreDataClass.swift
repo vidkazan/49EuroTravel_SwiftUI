@@ -15,7 +15,7 @@ public class ChewLeg: NSManagedObject {
 }
 
 extension ChewLeg {
-	convenience init(context : NSManagedObjectContext,leg : LegViewData,for journey : ChewJourney){
+	convenience init(context : NSManagedObjectContext,leg : LegViewData,for journey : CDJourney){
 		self.init(entity: ChewLeg.entity(), insertInto: context)
 		self.tripId = leg.tripId
 		self.isReachable = leg.isReachable

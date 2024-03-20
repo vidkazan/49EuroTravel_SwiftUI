@@ -139,8 +139,8 @@ extension CoreDataStore {
 		return nil
 	}
 	
-	func fetchJourneys() -> [ChewJourney]? {
-		fetch(ChewJourney.self)
+	func fetchJourneys() -> [CDJourney]? {
+		fetch(CDJourney.self)
 	}
 	
 	

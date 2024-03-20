@@ -19,8 +19,8 @@ extension CDLocation {
 	@NSManaged public var functionType: Int16
 	@NSManaged public var transportType: String?
 	
-	@NSManaged public var chewJourneyDep: ChewJourney?
-	@NSManaged public var chewJourneyArr: ChewJourney?
+	@NSManaged public var chewJourneyDep: CDJourney?
+	@NSManaged public var chewJourneyArr: CDJourney?
 	@NSManaged public var chewRecentSearchArrStop: ChewRecentSearch?
 	@NSManaged public var chewRecentSearchDepStop: ChewRecentSearch?
 	@NSManaged public var user: CDUser?

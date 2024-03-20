@@ -10,11 +10,11 @@ import Foundation
 import CoreData
 
 
-extension ChewSunEvent {
+extension CDSunEvent {
     @NSManaged public var type: String
     @NSManaged public var latitude: Double
     @NSManaged public var longtitude: Double
     @NSManaged public var timeStart: Date
     @NSManaged public var timeFinal: Date?
-    @NSManaged public var journey: ChewJourney?
+    @NSManaged public var journey: CDJourney?
 }

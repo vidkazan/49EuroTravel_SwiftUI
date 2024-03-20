@@ -101,7 +101,7 @@ extension CoreDataStore {
 			return false
 		}
 		asyncContext.performAndWait {
-			let _ = ChewJourney(
+			let _ = CDJourney(
 				viewData: viewData,
 				user: user,
 				depStop: depStop,
@@ -247,7 +247,7 @@ extension CoreDataStore {
 			case .locations:
 				return CDLocation.self
 			case .journeys:
-				return ChewJourney.self
+				return CDJourney.self
 			}
 		}
 	}

@@ -1,5 +1,5 @@
 //
-//  ChewJourney+CoreDataClass.swift
+//  CDJourney+CoreDataClass.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 21.11.23.
@@ -9,12 +9,12 @@
 import Foundation
 import CoreData
 
-@objc(ChewJourney)
-public class ChewJourney: NSManagedObject {
+@objc(CDJourney)
+public class CDJourney: NSManagedObject {
 
 }
 
-extension ChewJourney {
+extension CDJourney {
 	func journeyFollowData() -> JourneyFollowData {
 		var legsViewData = [LegViewData]()
 		var sunEvents = [SunEvent]()

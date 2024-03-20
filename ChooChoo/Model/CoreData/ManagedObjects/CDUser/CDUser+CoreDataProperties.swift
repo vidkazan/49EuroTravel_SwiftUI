@@ -12,7 +12,7 @@ import CoreData
 extension CDUser {
 	@NSManaged public var recentLocations: Set<CDLocation>?
 	@NSManaged public var chooSettings: CDSettings?
-	@NSManaged public var chewJourneys : Set<ChewJourney>?
+	@NSManaged public var chewJourneys : Set<CDJourney>?
 	@NSManaged public var chewRecentSearches : Set<ChewRecentSearch>?
 }
 
@@ -56,17 +56,17 @@ extension CDUser {
 
 // MARK: Generated accessors for chewJourneys
 extension CDUser {
-	@objc(addChewJourneysObject:)
-	@NSManaged public func addToChewJourneys(_ value: ChewJourney)
+	@objc(addCDJourneysObject:)
+	@NSManaged public func addToCDJourneys(_ value: CDJourney)
 
-	@objc(removeChewJourneysObject:)
-	@NSManaged public func removeFromChewJourneys(_ value: ChewJourney)
+	@objc(removeCDJourneysObject:)
+	@NSManaged public func removeFromCDJourneys(_ value: CDJourney)
 
-	@objc(addChewJourneys:)
-	@NSManaged public func addToChewJourneys(_ values: NSSet)
+	@objc(addCDJourneys:)
+	@NSManaged public func addToCDJourneys(_ values: NSSet)
 
-	@objc(removeChewJourneys:)
-	@NSManaged public func removeFromChewJourneys(_ values: NSSet)
+	@objc(removeCDJourneys:)
+	@NSManaged public func removeFromCDJourneys(_ values: NSSet)
 
 }
 

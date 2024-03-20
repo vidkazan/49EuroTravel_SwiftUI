@@ -1,5 +1,5 @@
 //
-//  ChewJourney+CoreDataProperties.swift
+//  CDJourney+CoreDataProperties.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 21.11.23.
@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-extension ChewJourney {
+extension CDJourney {
 	@NSManaged public var id: Int64
     @NSManaged public var journeyRef: String
     @NSManaged public var arrivalStop: CDLocation
@@ -19,11 +19,11 @@ extension ChewJourney {
 	@NSManaged public var isActive: Bool
 	@NSManaged public var legs: Set<ChewLeg>
 	@NSManaged public var time: CDTime
-	@NSManaged public var sunEvents: Set<ChewSunEvent>
+	@NSManaged public var sunEvents: Set<CDSunEvent>
 	@NSManaged public var updatedAt: Double
 }
 
-extension ChewJourney {
+extension CDJourney {
 	convenience init(
 		viewData : JourneyViewData,
 		user : CDUser,
@@ -31,7 +31,7 @@ extension ChewJourney {
 		arrStop : Stop,
 		id : Int64,
 		using managedObjectContext: NSManagedObjectContext) {
-			self.init(entity: ChewJourney.entity(), insertInto: managedObjectContext)
+			self.init(entity: CDJourney.entity(), insertInto: managedObjectContext)
 			self.id = id
 			self.isActive = false
 			self.journeyRef = viewData.refreshToken
@@ -46,7 +46,7 @@ extension ChewJourney {
 				let _ = ChewLeg(context: managedObjectContext,leg: $0,for: self)
 			}
 			viewData.sunEvents.forEach {
-				let _ = ChewSunEvent(context: managedObjectContext,sun: $0,for: self)
+				let _ = CDSunEvent(context: managedObjectContext,sun: $0,for: self)
 			}
 			let _ = CDLocation(
 				context: managedObjectContext,
@@ -58,6 +58,6 @@ extension ChewJourney {
 				stop: arrStop,
 				parent: .followedJourneyArrStop(self)
 			)
-			user.addToChewJourneys(self)
+			user.addToCDJourneys(self)
 		}
 }

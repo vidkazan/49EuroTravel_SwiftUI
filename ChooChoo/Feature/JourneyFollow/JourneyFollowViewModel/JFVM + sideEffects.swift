@@ -33,7 +33,7 @@ extension JourneyFollowViewModel {
 				viewData: viewData,
 				depStop: oldViewData.depStop,
 				arrStop: oldViewData.arrStop) == true else {
-				return Just(Event.didFailToUpdateJourney(CoreDataError.failedToUpdateDatabase(type: ChewJourney.self))).eraseToAnyPublisher()
+				return Just(Event.didFailToUpdateJourney(CoreDataError.failedToUpdateDatabase(type: CDJourney.self))).eraseToAnyPublisher()
 			}
 			
 			followData[index] = JourneyFollowData(
@@ -81,11 +81,11 @@ extension JourneyFollowViewModel {
 					) == true
 				else {
 					send(.didFailToChangeSubscribingState(
-						error: CoreDataError.failedToAdd(type: ChewJourney.self)
+						error: CoreDataError.failedToAdd(type: CDJourney.self)
 					))
 					return Just(Event.didFailToEdit(
 						action: action,
-						error: CoreDataError.failedToAdd(type: ChewJourney.self)
+						error: CoreDataError.failedToAdd(type: CDJourney.self)
 					)).eraseToAnyPublisher()
 				}
 				journeys.append(viewData)
@@ -101,10 +101,10 @@ extension JourneyFollowViewModel {
 					)).eraseToAnyPublisher()
 				}
 				guard Model.shared.coreDataStore.deleteJourneyIfFound(id: followId) == true else {
-					send(.didFailToChangeSubscribingState(error: CoreDataError.failedToDelete(type: ChewJourney.self)))
+					send(.didFailToChangeSubscribingState(error: CoreDataError.failedToDelete(type: CDJourney.self)))
 					return Just(Event.didFailToEdit(
 						action: action,
-						error: CoreDataError.failedToDelete(type: ChewJourney.self)
+						error: CoreDataError.failedToDelete(type: CDJourney.self)
 					)).eraseToAnyPublisher()
 				}
 				journeys.remove(at: index)

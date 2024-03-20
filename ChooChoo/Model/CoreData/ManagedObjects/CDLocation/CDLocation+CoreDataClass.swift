@@ -17,8 +17,8 @@ extension CDLocation {
 	enum ParentEntity {
 		case recentLocation(_ user : CDUser)
 		case savedLocation(_ user : CDUser)
-		case followedJourneyDepStop(_ followedJourney : ChewJourney)
-		case followedJourneyArrStop(_ followedJourney : ChewJourney)
+		case followedJourneyDepStop(_ followedJourney : CDJourney)
+		case followedJourneyArrStop(_ followedJourney : CDJourney)
 		case recentSearchDepStop(_ recentSearch : ChewRecentSearch)
 		case recentSearchArrStop(_ recentSearch : ChewRecentSearch)
 	}

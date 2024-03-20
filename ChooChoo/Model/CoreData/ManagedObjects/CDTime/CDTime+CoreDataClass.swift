@@ -15,7 +15,7 @@ public class CDTime: NSManagedObject {
 }
 
 extension CDTime {
-	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for journey : ChewJourney){
+	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for journey : CDJourney){
 		self.init(entity: CDTime.entity(), insertInto: context)
 		
 		self.chewJourney = journey
