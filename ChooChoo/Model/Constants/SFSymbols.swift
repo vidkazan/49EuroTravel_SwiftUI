@@ -54,6 +54,9 @@ enum ChooSFSymbols : String {
 			return self
 		}
 	}
+	@ViewBuilder var view : some View {
+		Image(systemName: self.rawValue)
+	}
 }
 
 extension Image {

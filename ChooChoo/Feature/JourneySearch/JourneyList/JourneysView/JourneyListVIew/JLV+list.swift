@@ -12,6 +12,15 @@ extension JourneyListView {
 		return ScrollViewReader { val in
 			ScrollView {
 				LazyVStack(spacing: 10) {
+					if firstAppear == true {
+						ChooTip.sunEvents(
+							onClose: {
+								firstAppear.toggle()
+							},
+							journey: journeyViewModel.state.data.journeys.first
+						)
+						.tipLabel
+					}
 					ForEach(journeyViewModel.state.data.journeys,id: \.id) { journey in
 						JourneyCell(
 							journey: journey,

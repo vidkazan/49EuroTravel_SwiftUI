@@ -100,7 +100,7 @@ extension SheetViewModel{
 		}
 		
 		case none
-		case tip(tipType : InfoType)
+		case tip(tipType : ChooTip)
 		case date
 		case settings
 		case route(leg : LegViewData)
@@ -113,7 +113,7 @@ extension SheetViewModel{
 		var detents : [ChewPresentationDetent] {
 			switch self {
 			case .tip:
-				return [.height(200)]
+				return [.height(200),.medium]
 			case .mapPicker:
 				return [.large]
 			case .none:

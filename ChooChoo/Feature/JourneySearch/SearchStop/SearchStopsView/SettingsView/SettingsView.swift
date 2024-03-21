@@ -47,10 +47,16 @@ struct SettingsView: View {
 					if !oldSettings.isDefault() {
 						Section {
 							HStack(alignment: .top) {
-								oldSettings.iconBadge.view
-								Text("some settings can significantly reduce your search result ", comment: "settingsView: warning")
-									.chewTextSize(.medium)
-									.foregroundStyle(.secondary)
+								Label(
+									title: {
+										Text("Current settings can reduce your search result", comment: "settingsView: warning")
+											.foregroundStyle(.secondary)
+											.font(.system(.footnote))
+									},
+									icon: {
+										oldSettings.iconBadge.view
+									}
+								)
 								Spacer()
 								Button(action: {
 									showRedDotWarning = false
@@ -60,7 +66,6 @@ struct SettingsView: View {
 										.tint(.gray)
 								})
 							}
-							.padding(5)
 						}
 					}
 				}

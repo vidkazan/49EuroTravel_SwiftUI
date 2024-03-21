@@ -85,7 +85,7 @@ struct SheetViewInner : View {
 	var body: some View {
 		switch type {
 		case .tip(let tipType):
-			InfoSheet(infoType: tipType)
+			tipType.tipView
 		case .settings:
 			SettingsView(
 				settings: chewViewModel.state.settings,

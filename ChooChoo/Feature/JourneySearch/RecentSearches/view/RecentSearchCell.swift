@@ -20,11 +20,10 @@ struct RecentSearchCell: View {
 				VStack(alignment: .leading,spacing: 0) {
 					StopListCell(stop: locations.departure)
 						.frame(maxWidth: 250, alignment: .leading)
-					Spacer()
 					StopListCell(stop: locations.arrival)
 						.frame(maxWidth: 250,alignment: .leading)
 				}
-				.frame(height: 100)
+//				.frame(height: 100)
 				Button(action: {
 					send(.didTapEdit(
 						action: .deleting,

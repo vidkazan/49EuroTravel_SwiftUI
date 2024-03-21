@@ -8,7 +8,7 @@
 import SwiftUI
 import TipKit
 
-
+// searchView: cell with nearest stop departures
 // change alerts to confirmation dialog
 // fetch cdsettings
 // offline badge light theme

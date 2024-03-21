@@ -187,6 +187,9 @@
         }
       }
     },
+    "Current settings can reduce your search result" : {
+      "comment" : "settingsView: warning"
+    },
     "Custom" : {
       "comment" : "SettingsView: transportTypes: picker option",
       "localizations" : {
@@ -349,7 +352,7 @@
       }
     },
     "Journey debug" : {
-      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item"
+      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
     },
     "Journey details" : {
       "comment" : "navigationBarTitle",
@@ -563,7 +566,7 @@
       }
     },
     "Search" : {
-      "comment" : "TabItem\nsearch tip title",
+      "comment" : "search tip title\nTabItem",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -625,9 +628,6 @@
           }
         }
       }
-    },
-    "some settings can significantly reduce your search result " : {
-      "comment" : "settingsView: warning"
     },
     "Stop not found" : {
       "comment" : "ApiError"
@@ -742,6 +742,9 @@
     },
     "walk %lld min" : {
       "comment" : "badge: walking"
+    },
+    "What does this colorful line mean?" : {
+      "comment" : "jlv: header info: sunevents"
     },
     "With transfers" : {
       "comment" : "SettingsView: connections: picker option",

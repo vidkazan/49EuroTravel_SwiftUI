@@ -27,7 +27,7 @@ struct StopListCell : View {
 				let icon = lineType.icon {
 				Label {
 					Text(verbatim: stop.stop.name)
-						.lineLimit(2)
+						.lineLimit(1)
 				} icon: {
 					Image(icon)
 						.padding(5)
@@ -39,7 +39,7 @@ struct StopListCell : View {
 				Label(
 					title: {
 						Text(verbatim: stop.stop.name)
-							.lineLimit(2)
+							.lineLimit(1)
 					},
 					icon: {
 						Image(systemName: stop.stop.type.SFSIcon)
