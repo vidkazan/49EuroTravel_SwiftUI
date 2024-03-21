@@ -8,8 +8,10 @@
 import SwiftUI
 import TipKit
 
-// remane coredata entites
+
+// change alerts to confirmation dialog
 // fetch cdsettings
+// offline badge light theme
 
 // MARK: revise
 // all text revision

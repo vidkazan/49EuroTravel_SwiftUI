@@ -167,7 +167,7 @@ extension LegViewData {
 				Model.shared.topBarAlertViewModel.send(event: .didRequestShow(.generic(msg: "Debug error : legDTO is nil")))
 			}
 		},
-		icon: "bug",
+		icon: "ant",
 		text : NSLocalizedString(
 			"Debug leg",
 			comment: "Debug"

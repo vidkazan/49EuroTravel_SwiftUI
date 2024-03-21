@@ -349,7 +349,7 @@
       }
     },
     "Journey debug" : {
-      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
+      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item"
     },
     "Journey details" : {
       "comment" : "navigationBarTitle",
@@ -432,7 +432,7 @@
       }
     },
     "now" : {
-      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
+      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -552,7 +552,7 @@
       }
     },
     "Save" : {
-      "comment" : "datePickerView: save button\nsettingsView: save button",
+      "comment" : "settingsView: save button\ndatePickerView: save button",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -625,6 +625,9 @@
           }
         }
       }
+    },
+    "some settings can significantly reduce your search result " : {
+      "comment" : "settingsView: warning"
     },
     "Stop not found" : {
       "comment" : "ApiError"

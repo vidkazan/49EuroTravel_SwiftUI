@@ -61,7 +61,7 @@ extension CoreDataStore {
 	}
 	func deleteRecentSearchIfFound(id : String) -> Bool {
 		var result = false
-		if let objects = self.fetch(ChewRecentSearch.self) {
+		if let objects = self.fetch(CDRecentSearch.self) {
 			 asyncContext.performAndWait {
 				if let res = objects.first(where: { obj in
 					return obj.id == id
@@ -122,7 +122,7 @@ extension CoreDataStore {
 			return false
 		}
 		 asyncContext.performAndWait {
-			let _ = ChewRecentSearch(
+			let _ = CDRecentSearch(
 				user: user,
 				search: search,
 				using: self.asyncContext
@@ -241,7 +241,7 @@ extension CoreDataStore {
 		var type : NSManagedObject.Type {
 			switch self {
 			case .recentSearches:
-				return ChewRecentSearch.self
+				return CDRecentSearch.self
 			case .user:
 				return CDUser.self
 			case .locations:

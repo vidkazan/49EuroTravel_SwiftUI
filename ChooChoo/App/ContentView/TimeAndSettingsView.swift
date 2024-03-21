@@ -19,24 +19,7 @@ struct TimeAndSettingsView: View {
 			VStack(spacing: 0) {
 				HStack {
 					TimeChoosingView()
-					Button(action: {
-						Model.shared.sheetViewModel.send(event: .didRequestShow(.settings))
-					}, label: {
-						Image(.gearshape)
-							.tint(.primary)
-							.chewTextSize(.big)
-							.frame(maxWidth: 43,maxHeight: 43)
-							.background(Color.chewFillAccent)
-							.cornerRadius(8)
-							.overlay(alignment: .topTrailing) {
-								if !chewViewModel.state.settings.isDefault() {
-									Circle()
-										.fill(Color.chewFillRedPrimary)
-										.frame(width: 10,height: 10)
-										.padding(5)
-								}
-							}
-					})
+					settingsBtn()
 				}
 			}
 		}
@@ -52,5 +35,31 @@ struct TimeAndSettingsView: View {
 				.environmentObject(ChewViewModel(referenceDate: .now))
 				.background(Color.chewFillPrimary)
 		}
+	}
+}
+
+extension TimeAndSettingsView {
+	@ViewBuilder func settingsBtn() -> some View {
+		Button(action: {
+			Model.shared.sheetViewModel.send(event: .didRequestShow(.settings))
+		}, label: {
+			Image(.gearshape)
+				.tint(.primary)
+				.chewTextSize(.big)
+				.frame(maxWidth: 43,maxHeight: 43)
+				.background(Color.chewFillAccent)
+				.cornerRadius(8)
+				.overlay(alignment: .topTrailing) {
+					chewViewModel.state.settings.iconBadge.view
+						.padding(5)
+				}
+		})
+	}
+}
+
+#Preview {
+	HStack {
+		Settings.IconBadge.redDot.view
+		Settings.IconBadge.regional.view
 	}
 }

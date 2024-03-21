@@ -35,7 +35,7 @@ extension CDLeg {
 		let _ = CDTime(context: context, container: leg.time, cancelled: !leg.isReachable,for: self)
 		
 		for stop in leg.legStopsViewData {
-			let _ = ChewStop(insertInto: context, with: stop, to: self)
+			let _ = CDStop(insertInto: context, with: stop, to: self)
 		}
 	}
 }

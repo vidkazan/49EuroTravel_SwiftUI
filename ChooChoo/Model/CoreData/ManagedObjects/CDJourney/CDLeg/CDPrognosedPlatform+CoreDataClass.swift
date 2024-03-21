@@ -9,14 +9,14 @@
 import Foundation
 import CoreData
 
-@objc(ChewPrognosedPlatform)
-public class ChewPrognosedPlatform: NSManagedObject {
+@objc(CDPrognosedPlatform)
+public class CDPrognosedPlatform: NSManagedObject {
 
 }
 
-extension ChewPrognosedPlatform {
-	convenience init(insertInto context: NSManagedObjectContext,with prognosedPlatform : Prognosed<String>, to stop :  ChewStop, type : LocationDirectionType) {
-		self.init(entity: ChewPrognosedPlatform.entity(), insertInto: context)
+extension CDPrognosedPlatform {
+	convenience init(insertInto context: NSManagedObjectContext,with prognosedPlatform : Prognosed<String>, to stop :  CDStop, type : LocationDirectionType) {
+		self.init(entity: CDPrognosedPlatform.entity(), insertInto: context)
 		
 		self.planned = prognosedPlatform.planned
 		self.actual = prognosedPlatform.actual

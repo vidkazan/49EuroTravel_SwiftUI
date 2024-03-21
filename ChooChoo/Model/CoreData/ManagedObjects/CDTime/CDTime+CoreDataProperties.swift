@@ -18,5 +18,5 @@ extension CDTime {
 	
 	@NSManaged public var chewJourney : CDJourney?
 	@NSManaged public var leg: CDLeg?
-	@NSManaged public var stop: ChewStop?
+	@NSManaged public var stop: CDStop?
 }

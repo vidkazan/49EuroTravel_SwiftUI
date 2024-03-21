@@ -1,5 +1,5 @@
 //
-//  ChewStop+CoreDataClass.swift
+//  CDStop+CoreDataClass.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 13.12.23.
@@ -10,14 +10,14 @@ import Foundation
 import CoreData
 import CoreLocation
 
-@objc(ChewStop)
-public class ChewStop: NSManagedObject {
+@objc(CDStop)
+public class CDStop: NSManagedObject {
 
 }
 
-extension ChewStop {
+extension CDStop {
 	convenience init(insertInto context: NSManagedObjectContext,with stopData : StopViewData, to leg :  CDLeg) {
-		self.init(entity: ChewStop.entity(), insertInto: context)
+		self.init(entity: CDStop.entity(), insertInto: context)
 		self.stopId = stopData.id
 		self.lat = stopData.locationCoordinates.latitude
 		self.long = stopData.locationCoordinates.longitude
@@ -33,12 +33,12 @@ extension ChewStop {
 			for: self
 		)
 		
-		let _ = ChewPrognosedPlatform(insertInto: context, with: stopData.departurePlatform, to: self, type: .departure)
-		let _ = ChewPrognosedPlatform(insertInto: context, with: stopData.arrivalPlatform, to: self, type: .arrival)
+		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.departurePlatform, to: self, type: .departure)
+		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.arrivalPlatform, to: self, type: .arrival)
 	}
 }
 
-extension ChewStop {
+extension CDStop {
 	func stopViewData() -> StopViewData {
 		let time = TimeContainer(chewTime: self.time)
 		return StopViewData(

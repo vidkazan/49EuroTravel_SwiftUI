@@ -19,8 +19,8 @@ extension CDLocation {
 		case savedLocation(_ user : CDUser)
 		case followedJourneyDepStop(_ followedJourney : CDJourney)
 		case followedJourneyArrStop(_ followedJourney : CDJourney)
-		case recentSearchDepStop(_ recentSearch : ChewRecentSearch)
-		case recentSearchArrStop(_ recentSearch : ChewRecentSearch)
+		case recentSearchDepStop(_ recentSearch : CDRecentSearch)
+		case recentSearchArrStop(_ recentSearch : CDRecentSearch)
 	}
 
 	convenience init(
@@ -33,7 +33,7 @@ extension CDLocation {
 
 		switch parent {
 		case .savedLocation(let user):
-			user.addToSavedLocations(self)
+			user.addToRecentLocations(self)
 		case .recentLocation(let user):
 			user.addToRecentLocations(self)
 		case .followedJourneyDepStop(let journeyDep):

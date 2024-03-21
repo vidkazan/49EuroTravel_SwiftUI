@@ -58,6 +58,6 @@ extension CDJourney {
 				stop: arrStop,
 				parent: .followedJourneyArrStop(self)
 			)
-			user.addToCDJourneys(self)
+			user.addToChewJourneys(self)
 		}
 }

@@ -22,5 +22,5 @@ extension CDLeg {
     @NSManaged public var time: CDTime
 	@NSManaged public var journey: CDJourney?
 	@NSManaged public var chewLegType: CDLegType
-	@NSManaged public var stops: [ChewStop]
+	@NSManaged public var stops: [CDStop]
 }

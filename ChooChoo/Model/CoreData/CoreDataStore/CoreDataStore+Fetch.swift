@@ -118,7 +118,7 @@ extension CoreDataStore {
 	}
 	
 	func fetchRecentSearches() -> [RecentSearchesViewModel.RecentSearch]? {
-		if let res = fetch(ChewRecentSearch.self)  {
+		if let res = fetch(CDRecentSearch.self)  {
 			var stops = [RecentSearchesViewModel.RecentSearch]()
 			asyncContext.performAndWait {
 				res.forEach {

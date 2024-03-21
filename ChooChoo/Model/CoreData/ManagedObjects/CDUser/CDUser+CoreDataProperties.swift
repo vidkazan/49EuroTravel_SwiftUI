@@ -13,7 +13,7 @@ extension CDUser {
 	@NSManaged public var recentLocations: Set<CDLocation>?
 	@NSManaged public var chooSettings: CDSettings?
 	@NSManaged public var chewJourneys : Set<CDJourney>?
-	@NSManaged public var chewRecentSearches : Set<ChewRecentSearch>?
+	@NSManaged public var chewRecentSearches : Set<CDRecentSearch>?
 }
 
 extension CDUser {
@@ -38,35 +38,19 @@ extension CDUser {
 	}
 }
 
-
 extension CDUser {
-	@objc(addSavedLocationsObject:)
-	@NSManaged public func addToSavedLocations(_ value: CDLocation)
 
-	@objc(removeSavedLocationsObject:)
-	@NSManaged public func removeFromSavedLocations(_ value: CDLocation)
+	@objc(addChewJourneysObject:)
+	@NSManaged public func addToChewJourneys(_ value: CDJourney)
 
-	@objc(addSavedLocations:)
-	@NSManaged public func addToSavedLocations(_ values: NSSet)
+	@objc(removeChewJourneysObject:)
+	@NSManaged public func removeFromChewJourneys(_ value: CDJourney)
 
-	@objc(removeSavedLocations:)
-	@NSManaged public func removeFromSavedLocations(_ values: NSSet)
+	@objc(addChewJourneys:)
+	@NSManaged public func addToChewJourneys(_ values: NSSet)
 
-}
-
-// MARK: Generated accessors for chewJourneys
-extension CDUser {
-	@objc(addCDJourneysObject:)
-	@NSManaged public func addToCDJourneys(_ value: CDJourney)
-
-	@objc(removeCDJourneysObject:)
-	@NSManaged public func removeFromCDJourneys(_ value: CDJourney)
-
-	@objc(addCDJourneys:)
-	@NSManaged public func addToCDJourneys(_ values: NSSet)
-
-	@objc(removeCDJourneys:)
-	@NSManaged public func removeFromCDJourneys(_ values: NSSet)
+	@objc(removeChewJourneys:)
+	@NSManaged public func removeFromChewJourneys(_ values: NSSet)
 
 }
 
@@ -91,20 +75,16 @@ extension CDUser {
 extension CDUser {
 
 	@objc(addRecentSearchesObject:)
-	@NSManaged public func addToRecentSearches(_ value: ChewRecentSearch)
+	@NSManaged public func addToRecentSearches(_ value: CDRecentSearch)
 
 	@objc(removeRecentSearchesObject:)
-	@NSManaged public func removeFromRecentSearches(_ value: ChewRecentSearch)
+	@NSManaged public func removeFromRecentSearches(_ value: CDRecentSearch)
 
 	@objc(addRecentSearches:)
 	@NSManaged public func addToRecentSearches(_ values: NSSet)
 
 	@objc(removeRecentSearches:)
 	@NSManaged public func removeFromRecentSearches(_ values: NSSet)
-
-}
-
-extension CDUser : Identifiable {
 
 }
 

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 struct Settings : Equatable,Hashable {
 	// api settings
@@ -22,13 +23,24 @@ struct Settings : Equatable,Hashable {
 	let onboarding : Bool
 	let debugSettings : ChewDebugSettings
 	let legViewMode : LegViewMode
+	var iconBadge : IconBadge {
+		get {
+			if !isDefault() {
+				return .redDot
+			}
+			if transportMode == .regional {
+				return .regional
+			}
+			if transportMode == .custom, customTransferModes.count < 7 {
+				return .redDot
+			}
+			return .empty
+		}
+	}
 }
 
 extension Settings {
 	func isDefault() -> Bool {
-		guard transportMode == transportMode.defaultValue else {
-			return false
-		}
 		guard transferTime == transferTime.defaultValue else {
 			return false
 		}
@@ -46,4 +58,35 @@ extension Settings {
 		}
 		return true
 	}
+}
+
+extension Settings {
+	enum IconBadge {
+		case empty
+		case regional
+		case redDot
+		
+		@ViewBuilder var view : some View {
+			Group {
+				switch self {
+				case .empty:
+					EmptyView()
+				case .regional:
+					Circle()
+						.fill(Color.chewFillTertiary)
+						.frame(width: 14,height: 14)
+						.overlay {
+							Image("re")
+								.chewTextSize(.small)
+								.tint(.primary)
+						}
+				case .redDot:
+					Circle()
+						.fill(Color.chewFillRedPrimary)
+						.frame(width: 14,height: 14)
+				}
+			}
+		}
+	}
+
 }

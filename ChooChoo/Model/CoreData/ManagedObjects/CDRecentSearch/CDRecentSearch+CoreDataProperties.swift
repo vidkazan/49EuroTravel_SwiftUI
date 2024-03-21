@@ -1,5 +1,5 @@
 //
-//  ChewRecentSearch+CoreDataProperties.swift
+//  CDRecentSearch+CoreDataProperties.swift
 //  Chew-chew-SwiftUI
 //
 //  Created by Dmitrii Grigorev on 19.01.24.
@@ -10,7 +10,7 @@ import Foundation
 import CoreData
 
 
-extension ChewRecentSearch {
+extension CDRecentSearch {
 	@NSManaged public var id: String
 	@NSManaged public var user: CDUser?
     @NSManaged public var searchDate: Date?
@@ -19,13 +19,13 @@ extension ChewRecentSearch {
 
 }
 
-extension ChewRecentSearch : Identifiable {
+extension CDRecentSearch : Identifiable {
 	convenience init(
 		user : CDUser,
 		search : RecentSearchesViewModel.RecentSearch,
 		using managedObjectContext: NSManagedObjectContext
 	) {
-		self.init(entity: ChewRecentSearch.entity(), insertInto: managedObjectContext)
+		self.init(entity: CDRecentSearch.entity(), insertInto: managedObjectContext)
 		self.id = search.stops.id
 		self.searchDate = Date(timeIntervalSince1970: search.searchTS)
 		let _ = CDLocation(

@@ -17,9 +17,11 @@ struct SettingsView: View {
 	@State var showWithTransfers : Int
 	@State var alternativeSearchPage : Bool
 	@State var legViewMode : Settings.LegViewMode
+	@State var showRedDotWarning : Bool = true
 	
 	let closeSheet : ()->Void
 	let oldSettings : Settings
+	
 	init(settings : Settings,closeSheet : @escaping ()->Void) {
 		self.oldSettings = settings
 		self.transportModeSegment = settings.transportMode
@@ -41,6 +43,27 @@ struct SettingsView: View {
 	
 	var body: some View {
 			Form {
+				if showRedDotWarning == true  {
+					if !oldSettings.isDefault() {
+						Section {
+							HStack(alignment: .top) {
+								oldSettings.iconBadge.view
+								Text("some settings can significantly reduce your search result ", comment: "settingsView: warning")
+									.chewTextSize(.medium)
+									.foregroundStyle(.secondary)
+								Spacer()
+								Button(action: {
+									showRedDotWarning = false
+								}, label: {
+									Image(.xmarkCircle)
+										.chewTextSize(.big)
+										.tint(.gray)
+								})
+							}
+							.padding(5)
+						}
+					}
+				}
 				transportTypes
 				if transportModeSegment == .custom {
 					segments
@@ -76,6 +99,7 @@ struct SettingsView: View {
 					})
 				}
 			}
+			.animation(.easeInOut, value: showRedDotWarning)
 			.onAppear {
 				loadSettings(state: chewViewModel.state)
 			}

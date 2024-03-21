@@ -37,7 +37,7 @@ extension CDTime {
 		self.actualDeparture = container.iso.departure.actual
 	}
 	
-	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for stop : ChewStop){
+	convenience init(context : NSManagedObjectContext,container : TimeContainer,cancelled : Bool, for stop : CDStop){
 		self.init(entity: CDTime.entity(), insertInto: context)
 		
 		self.stop = stop

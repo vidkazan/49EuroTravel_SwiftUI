@@ -21,8 +21,8 @@ extension CDLocation {
 	
 	@NSManaged public var chewJourneyDep: CDJourney?
 	@NSManaged public var chewJourneyArr: CDJourney?
-	@NSManaged public var chewRecentSearchArrStop: ChewRecentSearch?
-	@NSManaged public var chewRecentSearchDepStop: ChewRecentSearch?
+	@NSManaged public var chewRecentSearchArrStop: CDRecentSearch?
+	@NSManaged public var chewRecentSearchDepStop: CDRecentSearch?
 	@NSManaged public var user: CDUser?
 }
 

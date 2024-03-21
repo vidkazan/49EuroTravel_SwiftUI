@@ -10,9 +10,9 @@ import Foundation
 import CoreData
 
 
-extension ChewPrognosedPlatform {
+extension CDPrognosedPlatform {
     @NSManaged public var planned: String?
     @NSManaged public var actual: String?
-    @NSManaged public var departureStop: ChewStop?
-    @NSManaged public var arrivalStop: ChewStop?
+    @NSManaged public var departureStop: CDStop?
+    @NSManaged public var arrivalStop: CDStop?
 }
