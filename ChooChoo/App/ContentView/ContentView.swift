@@ -98,12 +98,7 @@ struct ContentView: View {
 			sheetState = newState
 			switch newState.status {
 			case .loading(let type),.showing(let type, _):
-				switch type {
-				case .none:
-					sheetIsPresented = false
-				default:
-					sheetIsPresented = true
-				}
+				sheetIsPresented = type != .none
 			default:
 				break
 			}

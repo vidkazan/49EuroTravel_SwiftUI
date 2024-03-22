@@ -229,7 +229,7 @@ extension JourneyFollowView {
 				} label: {
 					Label(
 						title: {
-							Text("Delete", comment: "JourneyFollowView: listCell: swipe action item")
+							Text("Unfollow", comment: "JourneyFollowView: listCell: swipe action item")
 						},
 						icon: {
 							Image(systemName: "xmark.bin.circle")
