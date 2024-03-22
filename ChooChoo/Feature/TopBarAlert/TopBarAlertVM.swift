@@ -116,15 +116,15 @@ extension TopBarAlertViewModel {
 		var bgColor : Color {
 			switch self {
 			case .routeError:
-				return Color.chewFillRedPrimary.opacity(0.5)
+				return Color.chewFillRedPrimary.opacity(0.8)
 			case .journeyFollowError:
-				return Color.chewFillRedPrimary.opacity(0.5)
+				return Color.chewFillRedPrimary.opacity(0.8)
 			case .offline:
 				return Color.chewSunEventBlue.opacity(0.3)
 			case .userLocationError:
-				return Color.chewFillRedPrimary.opacity(0.5)
+				return Color.chewFillRedPrimary.opacity(0.8)
 			case .generic:
-				return Color.chewFillRedPrimary.opacity(0.5)
+				return Color.chewFillRedPrimary.opacity(0.8)
 			}
 		}
 		

@@ -19,7 +19,6 @@ struct JourneySearchView : View {
 			if #available(iOS 17.0, *) {
 				TipView(ChooTips.searchTip)
 			}
-			TopBarAlertsView()
 			SearchStopsView()
 			TimeAndSettingsView()
 			BottomView()

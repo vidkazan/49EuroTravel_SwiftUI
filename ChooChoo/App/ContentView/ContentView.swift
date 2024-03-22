@@ -8,14 +8,10 @@
 import SwiftUI
 import TipKit
 
-
+// learn content shape
 // jfv: much logic in view
-// jfv: mapCell: map without interaction, icons
-// topBarAlertView: locationError wtf??
-// searchView: cell with nearest stop departures
 // change alerts to confirmation dialog
 // fetch cdsettings
-// offline badge light theme
 
 // MARK: revise
 // all text revision
@@ -25,7 +21,8 @@ import TipKit
 
 
 // TODO: feature: ldsv: make stop tappable and show stop details and all leg stopover info
-
+// TODO: jfv: mapCell: map without interaction, icons
+// searchView: cell with nearest stop departures
 struct ContentView: View {
 	@EnvironmentObject var chewViewModel : ChewViewModel
 	@ObservedObject var alertVM = Model.shared.alertViewModel
@@ -45,7 +42,10 @@ struct ContentView: View {
 				Text(verbatim: "ChooChoo")
 					.chewTextSize(.huge)
 			default:
-				FeatureView()
+				ZStack(alignment: .top) {
+					FeatureView()
+					TopBarAlertsView()
+				}
 			}
 		}
 		.task {
@@ -56,6 +56,15 @@ struct ContentView: View {
 				])
 			}
 		}
+		.confirmationDialog(
+			"confirmation dialog",
+			isPresented: Binding(
+				get: { checkConfirmatioDialog(isSheet: false) },
+				set: { _ in Model.shared.alertViewModel.send(event: .didRequestDismiss) }
+			),
+			actions: confirmationDialogActions,
+			message: confirmationDialogMessage
+		)
 		.alert(isPresented: $alertIsPresented, content: alert)
 		.sheet(
 			isPresented: $sheetIsPresented,
@@ -67,6 +76,15 @@ struct ContentView: View {
 					sheetIsPresented = false
 				})
 				.alert(isPresented: $alertIsPresented, content: alert)
+				.confirmationDialog(
+					"confirmation dialog sheet",
+					isPresented: Binding(
+						get: { checkConfirmatioDialog(isSheet: true) },
+						set: { _ in Model.shared.alertViewModel.send(event: .didRequestDismiss) }
+					),
+					actions: confirmationDialogActions,
+					message: confirmationDialogMessage
+				)
 			}
 		)
 		.onAppear {
@@ -92,30 +110,51 @@ struct ContentView: View {
 		})
 		.onReceive(alertVM.$state, perform: { newState in
 			alertState = newState
-			switch alertState.alert {
-				case .none:
-					alertIsPresented = false
-				default:
-					alertIsPresented = true
-				}
 		})
 	}
 }
 
 extension ContentView {
+	func checkConfirmatioDialog(isSheet : Bool) -> Bool {
+		switch alertState.alert {
+		case .none:
+			return false
+		case .destructive:
+			return sheetIsPresented ? isSheet : !isSheet
+		}
+	}
+}
+
+extension ContentView {
+	@ViewBuilder func confirmationDialogActions() -> some View {
+		switch alertVM.state.alert {
+		case .none:
+			EmptyView()
+		case .destructive(let destructiveAction, _, let actionDescription, _):
+			Button(actionDescription, role: .destructive, action: destructiveAction)
+		}
+	}
+	
+	@ViewBuilder func confirmationDialogMessage() -> some View {
+		switch alertState.alert {
+		case .none:
+			EmptyView()
+		case .destructive(_, let description, _, _):
+			Text(verbatim: description)
+		}
+	}
+	
 	func alert() -> Alert {
 		switch alertState.alert {
 		case let .destructive(destructiveAction, description, actionDescripton,_):
 			return Alert(
-				title: description,
+				title: Text(verbatim: description) ,
 				primaryButton: .cancel(),
 				secondaryButton: .destructive(
-					actionDescripton,
+					Text(verbatim: actionDescripton),
 					action: destructiveAction
 				)
 			)
-		case let .info(title, msg):
-			return Alert(title: title, message: msg)
 		case .none:
 			return Alert(title: Text(verbatim: ""))
 		}

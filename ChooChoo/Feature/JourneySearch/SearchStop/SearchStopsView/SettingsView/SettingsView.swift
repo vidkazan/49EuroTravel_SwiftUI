@@ -94,9 +94,15 @@ struct SettingsView: View {
 									chewViewModel.send(event: .didUpdateSettings(Settings()))
 									closeSheet()
 								},
-								description: Text("Reset settings?", comment: "alert: description"),
-								actionDescription: Text("Reset", comment: "alert: actionDescription"),
-								id: .init()
+								description: NSLocalizedString(
+									"Reset settings?",
+									comment: "alert: description"
+								),
+								actionDescription: NSLocalizedString(
+									"Reset",
+									comment: "alert: actionDescription"
+								),
+								id: UUID()
 							))
 						)
 					}, label: {

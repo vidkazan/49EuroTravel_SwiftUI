@@ -18,14 +18,14 @@ struct TopBarAlertView: View {
 		ZStack {
 			RoundedRectangle(cornerRadius: 10)
 				.fill(alert.bgColor.blendMode(.darken))
+				.background(.ultraThinMaterial)
 				.frame(height: 35)
 				.cornerRadius(10)
 			HStack {
 				if let infoAction = alert.infoAction {
 					Button(
 						action: infoAction, label: {
-							Image(ChooSFSymbols.infoCircle)
-								.labelStyle(.iconOnly)
+							ChooSFSymbols.infoCircle.view
 								.foregroundColor(.white.opacity(0.7))
 								.chewTextSize(.big)
 								.lineLimit(1)
@@ -46,8 +46,7 @@ struct TopBarAlertView: View {
 							break
 						}
 					}, label: {
-						Image(alert.action.iconName)
-							.labelStyle(.iconOnly)
+						Image(systemName: alert.action.iconName)
 							.foregroundColor(.white.opacity(0.7))
 							.chewTextSize(.big)
 							.lineLimit(1)
@@ -59,7 +58,7 @@ struct TopBarAlertView: View {
 			BadgeView(alert.badgeType)
 				.foregroundColor(.white)
 				.chewTextSize(.medium)
-				.cornerRadius(10)
+				.cornerRadius(8)
 				.frame(maxWidth: .infinity,maxHeight: 35)
 		}
 		.frame(maxWidth: .infinity,maxHeight: 35)

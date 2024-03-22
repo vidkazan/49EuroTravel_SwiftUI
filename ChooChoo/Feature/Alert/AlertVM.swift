@@ -53,18 +53,18 @@ extension AlertViewModel {
 		case none
 		case destructive(
 			destructiveAction : ()->Void,
-			description : Text,
-			actionDescription : Text,
+			description : String,
+			actionDescription : String,
 			id : UUID
 		)
-		case info(title : Text, msg : Text)
+//		case info(title : String, msg : String)
 
 		var description : String {
 			switch self {
 			case .none:
 				return "none"
-			case let .info(title, _):
-				return "info \(title)"
+//			case let .info(title, _):
+//				return "info \(title)"
 			case let .destructive(_,name,_,id):
 				return "destructive \(name) \(id)"
 			}
@@ -76,7 +76,7 @@ extension AlertViewModel {
 	}
 	
 	enum Event {
-		case didRequestDismiss(_ type: AlertType)
+		case didRequestDismiss
 		case didRequestShow(_ type: AlertType)
 		var description : String {
 			switch self {

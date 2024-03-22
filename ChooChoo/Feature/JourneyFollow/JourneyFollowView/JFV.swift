@@ -17,7 +17,6 @@ struct JourneyFollowView : View {
 	
 	var body: some View {
 		VStack {
-			TopBarAlertsView()
 			switch viewModel.state.status {
 			case .updating:
 				switch viewModel.state.journeys.count {
@@ -154,11 +153,9 @@ extension JourneyFollowView {
 		let sorted = data.sorted(by: {
 			$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
 		   })
-		return ForEach(
-			sorted,
-			id: \.id) { journey in
-				listCell(journey: journey,map: journey.id == sorted.first?.id)
-			}
+		return ForEach(sorted, id: \.id) { journey in
+			listCell(journey: journey,map: journey.id == sorted.first?.id)
+		}
 	}
 }
 
@@ -190,7 +187,7 @@ extension JourneyFollowView {
 							Text("Reload", comment: "JourneyFollowView: listCell: swipe action item")
 						},
 						icon: {
-							Image(systemName: "arrow.clockwise")
+							ChooSFSymbols.arrowClockwise.view
 						}
 					)
 				}
@@ -225,8 +222,8 @@ extension JourneyFollowView {
 									journeyDetailsViewModel: vm
 								))
 						},
-							description: Text("Unfollow journey?", comment: "alert: description"),
-							actionDescription: Text("Unfollow", comment: "alert: actionDescription"),
+							description: NSLocalizedString("Unfollow journey?", comment: "alert: description"),
+							actionDescription: NSLocalizedString("Unfollow", comment: "alert: actionDescription"),
 							id: UUID()
 					)))
 				} label: {

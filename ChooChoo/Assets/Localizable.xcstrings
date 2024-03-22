@@ -162,6 +162,12 @@
         }
       }
     },
+    "confirmation dialog" : {
+
+    },
+    "confirmation dialog sheet" : {
+
+    },
     "Connection not found" : {
       "comment" : "ApiError"
     },
