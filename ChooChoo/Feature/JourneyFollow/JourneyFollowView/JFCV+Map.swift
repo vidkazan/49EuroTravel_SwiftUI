@@ -28,48 +28,6 @@ struct JourneyFollowViewMapCell : View {
 				}))
 			)
 			.frame(minHeight: 300)
-			VStack(alignment: .leading,spacing: 2) {
-				HStack {
-					NavigationLink(destination: {
-						JourneyDetailsView(journeyDetailsViewModel: vm)
-					}, label: {
-						BadgeView(
-							.departureArrivalStops(departure: data.origin, arrival: data.destination),
-							.big
-						)
-						.foregroundStyle(.primary)
-						.badgeBackgroundStyle(.accent)
-					})
-				}
-				HStack(spacing: 2) {
-					if let date = data.time.date.departure.actualOrPlannedIfActualIsNil() {
-						BadgeView(.date(date: date),.medium)
-							.badgeBackgroundStyle(.accent)
-					}
-					HStack(spacing: 2) {
-						TimeLabelView(
-							size: .medium,
-							arragement: .right,
-							time: data.time.date.departure,
-							delayStatus: data.time.departureStatus
-						)
-						Text(verbatim: "-")
-						TimeLabelView(
-							size: .medium,
-							arragement: .right,
-							time: data.time.date.arrival,
-							delayStatus: data.time.arrivalStatus
-						)
-					}
-					.padding(2)
-					.badgeBackgroundStyle(.accent)
-					BadgeView(.legDuration(data.time))
-						.badgeBackgroundStyle(.accent)
-				}
-				
-//				LegsView(journey : data,mode : chewVM.state.settings.legViewMode)
-			}
-			.padding(10)
 			.contextMenu {
 				Button(action: {
 					Model.shared.sheetViewModel.send(

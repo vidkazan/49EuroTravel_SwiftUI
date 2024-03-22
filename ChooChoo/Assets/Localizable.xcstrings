@@ -215,6 +215,7 @@
     },
     "Delete" : {
       "comment" : "JourneyFollowView: listCell: swipe action item",
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -441,7 +442,7 @@
       }
     },
     "now" : {
-      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
+      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -572,7 +573,7 @@
       }
     },
     "Search" : {
-      "comment" : "search tip title\nTabItem",
+      "comment" : "TabItem\nsearch tip title",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -697,7 +698,7 @@
       }
     },
     "Unfollow" : {
-      "comment" : "alert: actionDescription",
+      "comment" : "JourneyFollowView: listCell: swipe action item\nalert: actionDescription",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

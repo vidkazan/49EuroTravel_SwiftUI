@@ -29,7 +29,6 @@ enum ChooTip {
 		case .followJourney:
 			EmptyView()
 		case let .sunEvents(close, journey):
-//			TopBarAlertView(alert: <#T##TopBarAlertViewModel.AlertType#>)
 			Views.SunEventsTipView(onClose: close, journey: journey)
 		}
 	}

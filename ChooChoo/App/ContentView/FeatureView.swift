@@ -11,7 +11,7 @@ enum Tabs : Int,CaseIterable {
 	case search
 	case follow
 //	case map
-//	case settings
+	case appSettings
 //	case debug
 }
 
@@ -36,7 +36,17 @@ struct FeatureView: View {
 				Text("Follow", comment : "TabItem")
 			},
 			icon: {
-				Image(ChooSFSymbols.bookmark)
+				ChooSFSymbols.bookmark.view
+			}
+		)
+	}()
+	let tabAppSettingsLabel : some View = {
+		Label(
+			title: {
+				Text("Follow", comment : "TabItem")
+			},
+			icon: {
+				ChooSFSymbols.gearshape.view
 			}
 		)
 	}()
@@ -47,7 +57,7 @@ struct FeatureView: View {
 				switch selectedTab {
 				case .search:
 					chewViewModel.send(event: .didTapCloseJourneyList)
-				case .follow:
+				case .follow,.appSettings:
 					break
 				}
 			}
@@ -67,6 +77,11 @@ struct FeatureView: View {
 				}
 					.tabItem { tabFollowLabel }
 					.tag(Tabs.follow)
+				NavigationStack {
+					Text("appSettings")
+				}
+					.tabItem { tabAppSettingsLabel }
+					.tag(Tabs.appSettings)
 			} else {
 				NavigationView {
 					JourneySearchView()
@@ -78,6 +93,11 @@ struct FeatureView: View {
 				}
 					.tabItem { tabFollowLabel }
 					.tag(Tabs.follow)
+				NavigationView {
+					Text("appSettings")
+				}
+					.tabItem { tabAppSettingsLabel }
+					.tag(Tabs.appSettings)
 
 			}
 		}

@@ -44,7 +44,9 @@ struct JourneyFollowView : View {
 			}
 		}
 		.onReceive(timer, perform: { _ in
-			chooseJourneyToUpdate()
+			Task {
+				chooseJourneyToUpdate()
+			}
 		})
 		.frame(maxWidth: .infinity,maxHeight: .infinity)
 		.navigationBarTitleDisplayMode(.inline)
@@ -96,8 +98,9 @@ extension JourneyFollowView {
 				ForEach(
 					viewModel.state.journeys
 						.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .active})
-						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
-					}),
+//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
+//					})
+					,
 					id: \.id) { journey in
 						listCell(journey: journey, map: true)
 					}
@@ -116,8 +119,9 @@ extension JourneyFollowView {
 								return false
 							}
 						})
-						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
-					}),
+//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
+//					})
+					,
 					id: \.id) { journey in
 						listCell(journey: journey, map: false)
 					}
@@ -129,8 +133,8 @@ extension JourneyFollowView {
 				ForEach(
 					viewModel.state.journeys
 						.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .past})
-						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
-					}),
+//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0})
+					,
 					id: \.id) { journey in
 						listCell(journey: journey, map: false)
 					}
@@ -222,9 +226,9 @@ extension JourneyFollowView {
 									journeyDetailsViewModel: vm
 								))
 						},
-							description: NSLocalizedString("Unfollow journey?", comment: "alert: description"),
-							actionDescription: NSLocalizedString("Unfollow", comment: "alert: actionDescription"),
-							id: UUID()
+						description: NSLocalizedString("Unfollow journey?", comment: "alert: description"),
+						actionDescription: NSLocalizedString("Unfollow", comment: "alert: actionDescription"),
+						id: UUID()
 					)))
 				} label: {
 					Label(

@@ -9,8 +9,6 @@ import SwiftUI
 import TipKit
 
 // learn content shape
-// jfv: much logic in view
-// change alerts to confirmation dialog
 // fetch cdsettings
 
 // MARK: revise
