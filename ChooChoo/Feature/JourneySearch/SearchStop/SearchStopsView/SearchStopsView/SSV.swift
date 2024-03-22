@@ -77,10 +77,10 @@ extension SearchStopsView {
 		switch type {
 		case .departure:
 			RoundedRectangle(cornerRadius: 10)
-			.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
+				.stroke(fieldRedBorder.top == true ? .red : .clear, lineWidth: 1.5)
 		case .arrival:
 			RoundedRectangle(cornerRadius: 10)
-			.stroke(fieldRedBorder.bottom == true ? .red : .clear, lineWidth: 1.5)
+				.stroke(fieldRedBorder.bottom == true ? .red : .clear, lineWidth: 1.5)
 		}
 	}
 }

@@ -38,7 +38,7 @@ struct JourneySearchView : View {
 			ToolbarItem(
 				placement: .topBarTrailing,
 				content: {
-					if topAlertVM.state.alerts.contains(.offlineMode) {
+					if topAlertVM.state.alerts.contains(.offline) {
 						BadgeView(.offlineMode)
 							.badgeBackgroundStyle(.blue)
 					}

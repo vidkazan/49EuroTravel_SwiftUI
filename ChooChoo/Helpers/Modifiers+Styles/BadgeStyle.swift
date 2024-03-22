@@ -33,7 +33,7 @@ extension ViewModifier where Self == BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillYellowPrimary)
 	}
 	static var blue: BadgeBackgroundBaseStyle {
-		BadgeBackgroundBaseStyle(Color.chewFillBluePrimary)
+		BadgeBackgroundBaseStyle(Color.transport.uBlue)
 	}
 	static var accent: BadgeBackgroundBaseStyle {
 		BadgeBackgroundBaseStyle(Color.chewFillAccent)

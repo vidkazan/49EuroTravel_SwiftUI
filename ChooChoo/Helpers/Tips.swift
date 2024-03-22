@@ -72,9 +72,9 @@ struct HowToFollowJourneyView : View {
 				.chewTextSize(.big)
 			Spacer()
 			Group {
-				Image(systemName: "bookmark")
+				ChooSFSymbols.bookmark.view
 					.symbolVariant(isPressed ? .fill : .none )
-				Image(.arrowClockwise)
+				ChooSFSymbols.arrowClockwise.view
 			}
 			.foregroundStyle(.blue)
 			.frame(width: 15,height: 15)

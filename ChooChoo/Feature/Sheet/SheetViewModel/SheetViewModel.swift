@@ -100,7 +100,7 @@ extension SheetViewModel{
 		}
 		
 		case none
-		case tip(tipType : ChooTip)
+		case tip(ChooTip)
 		case date
 		case settings
 		case route(leg : LegViewData)
@@ -388,7 +388,7 @@ extension SheetViewModel {
 		return Empty().eraseToAnyPublisher()
 	}
 	
-	private static func mapLegData(leg : LegViewData) -> MapLegData? {
+	static func mapLegData(leg : LegViewData) -> MapLegData? {
 		if let locFirst = leg.legStopsViewData.first,
 		   let locLast = leg.legStopsViewData.last {
 			switch leg.legType {

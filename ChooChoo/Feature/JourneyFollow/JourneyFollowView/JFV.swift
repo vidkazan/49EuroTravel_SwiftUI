@@ -54,7 +54,7 @@ struct JourneyFollowView : View {
 		)
 		.toolbar {
 			ToolbarItem(placement: .topBarTrailing, content: {
-				if alertVM.state.alerts.contains(.offlineMode) {
+				if alertVM.state.alerts.contains(.offline) {
 					BadgeView(.offlineMode)
 						.frame(maxHeight: 40)
 						.badgeBackgroundStyle(.blue)
@@ -70,7 +70,7 @@ extension JourneyFollowView {
 		let now = Date.now.timeIntervalSince1970
 		let basicInterval = elem.journeyViewData.time.statusOnReferenceTime(.now).updateIntervalInMinutes
 		let updatedAt = elem.journeyViewData.updatedAt
-		return  (basicInterval - (now - updatedAt)/60	 ) / basicInterval
+		return  (basicInterval - (now - updatedAt)/60) / basicInterval
 	}
 	func chooseJourneyToUpdate()  {
 		let elems = viewModel.state.journeys.filter({$0.journeyViewData.time.statusOnReferenceTime(.now) != .past})
@@ -100,7 +100,7 @@ extension JourneyFollowView {
 						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
 					}),
 					id: \.id) { journey in
-						listCell(journey: journey)
+						listCell(journey: journey, map: true)
 					}
 			}, header: {
 				Text("Active", comment: "JourneyFollowView: section name")
@@ -120,7 +120,7 @@ extension JourneyFollowView {
 						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
 					}),
 					id: \.id) { journey in
-						listCell(journey: journey)
+						listCell(journey: journey, map: false)
 					}
 			}, header: {
 				Text("Ongoing", comment: "JourneyFollowView: section name")
@@ -133,7 +133,7 @@ extension JourneyFollowView {
 						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
 					}),
 					id: \.id) { journey in
-						listCell(journey: journey)
+						listCell(journey: journey, map: false)
 					}
 			}, header: {
 				Text("Past", comment: "JourneyFollowView: section name")
@@ -150,19 +150,20 @@ extension JourneyFollowView {
 }
 
 extension JourneyFollowView {
-	func list(data : [JourneyFollowData]) -> some View {
+	func list(data : [JourneyFollowData], map : Bool) -> some View {
+		let sorted = data.sorted(by: {
+			$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
+		   })
 		return ForEach(
-			data.sorted(by: {
-				$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
-			}),
+			sorted,
 			id: \.id) { journey in
-				listCell(journey: journey)
+				listCell(journey: journey,map: journey.id == sorted.first?.id)
 			}
 	}
 }
 
 extension JourneyFollowView {
-	func listCell(journey : JourneyFollowData) -> some View {
+	@ViewBuilder func listCell(journey : JourneyFollowData, map : Bool) -> some View {
 		let vm = Model.shared.journeyDetailViewModel(
 			followId: journey.id,
 			for: journey.journeyViewData.refreshToken,
@@ -170,10 +171,19 @@ extension JourneyFollowView {
 			stops: .init(departure: journey.depStop, arrival: journey.arrStop),
 			chewVM: chewVM
 		)
-		return JourneyFollowCellView(journeyDetailsViewModel: vm)
+		Group {
+//			if map == true {
+//				JourneyFollowViewMapCell(journeyDetailsViewModel: vm)
+//			} else {
+				JourneyFollowCellView(journeyDetailsViewModel: vm)
+//			}
+		}
 			.swipeActions(edge: .leading) {
 				Button {
-					vm.send(event: .didTapReloadButton(id: journey.id, ref: journey.journeyViewData.refreshToken))
+					vm.send(event: .didTapReloadButton(
+						id: journey.id,
+						ref: journey.journeyViewData.refreshToken)
+					)
 				} label: {
 					Label(
 						title: {

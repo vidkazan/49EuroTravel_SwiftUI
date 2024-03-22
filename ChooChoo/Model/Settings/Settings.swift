@@ -83,7 +83,7 @@ extension Settings {
 				case .redDot:
 					Circle()
 						.fill(Color.chewFillRedPrimary)
-						.frame(width: 14,height: 14)
+						.frame(width: 12,height: 12)
 				}
 			}
 		}

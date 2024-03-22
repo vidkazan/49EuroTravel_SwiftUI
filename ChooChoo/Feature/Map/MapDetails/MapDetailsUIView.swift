@@ -20,7 +20,6 @@ struct MapDetailsUIView: UIViewRepresentable {
 		mapView.delegate = context.coordinator
 		mapView.region = region
 		mapView.showsUserLocation = true
-		mapView.userTrackingMode = .followWithHeading
 		mapView.isZoomEnabled = true
 		mapView.isUserInteractionEnabled = true
 		mapView.pointOfInterestFilter = .excludingAll

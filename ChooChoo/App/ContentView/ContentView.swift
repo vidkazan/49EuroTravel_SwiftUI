@@ -8,6 +8,10 @@
 import SwiftUI
 import TipKit
 
+
+// jfv: much logic in view
+// jfv: mapCell: map without interaction, icons
+// topBarAlertView: locationError wtf??
 // searchView: cell with nearest stop departures
 // change alerts to confirmation dialog
 // fetch cdsettings
@@ -17,8 +21,6 @@ import TipKit
 // all text revision
 // revise icons
 
-#warning("Anna")
-// tip: for sunEvents ( first cell of journeyList )
 // tip: jfv: for swipe actions
 
 

@@ -177,6 +177,7 @@
 		7DAC40842B7A16C4006B3E55 /* MapPickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC40832B7A16C4006B3E55 /* MapPickerViewModel.swift */; };
 		7DAC408E2B7A5920006B3E55 /* MapDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC408D2B7A5920006B3E55 /* MapDetailsView.swift */; };
 		7DAC40962B7A5C02006B3E55 /* MapPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC40952B7A5C02006B3E55 /* MapPickerView.swift */; };
+		7DAC5CB72BACDA84000F7D33 /* JFCV+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC5CB62BACDA84000F7D33 /* JFCV+Map.swift */; };
 		7DAE1F6A2B0D26CF0097AAD8 /* CDTime+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F662B0D26CF0097AAD8 /* CDTime+CoreDataClass.swift */; };
 		7DAE1F6B2B0D26CF0097AAD8 /* CDSettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F672B0D26CF0097AAD8 /* CDSettings+CoreDataProperties.swift */; };
 		7DAE1F6C2B0D26CF0097AAD8 /* CDTransportMode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F682B0D26CF0097AAD8 /* CDTransportMode+CoreDataClass.swift */; };
@@ -232,7 +233,7 @@
 		7DE8A35D2B6AF4FC00C3A378 /* ChewDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DE8A35C2B6AF4FC00C3A378 /* ChewDate.swift */; };
 		7DEA645C2B95F794005BEE8A /* JourneyDebugView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEA645B2B95F794005BEE8A /* JourneyDebugView.swift */; };
 		7DEE69CD2B9BCDF200A063B4 /* Tips.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE69CC2B9BCDF200A063B4 /* Tips.swift */; };
-		7DEE69CF2B9BCE6A00A063B4 /* Info.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE69CE2B9BCE6A00A063B4 /* Info.swift */; };
+		7DEE69CF2B9BCE6A00A063B4 /* ChooTip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE69CE2B9BCE6A00A063B4 /* ChooTip.swift */; };
 		7DEE69D12B9BCE8B00A063B4 /* PresentationDetent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DEE69D02B9BCE8B00A063B4 /* PresentationDetent.swift */; };
 		7DF0D98D2B69557D00861C4F /* Iphones.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0D98C2B69557C00861C4F /* Iphones.swift */; };
 		7DF0D98F2B6956DD00861C4F /* FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */; };
@@ -418,6 +419,7 @@
 		7DAC40832B7A16C4006B3E55 /* MapPickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickerViewModel.swift; sourceTree = "<group>"; };
 		7DAC408D2B7A5920006B3E55 /* MapDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailsView.swift; sourceTree = "<group>"; };
 		7DAC40952B7A5C02006B3E55 /* MapPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickerView.swift; sourceTree = "<group>"; };
+		7DAC5CB62BACDA84000F7D33 /* JFCV+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JFCV+Map.swift"; sourceTree = "<group>"; };
 		7DAE1F662B0D26CF0097AAD8 /* CDTime+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTime+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7DAE1F672B0D26CF0097AAD8 /* CDSettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7DAE1F682B0D26CF0097AAD8 /* CDTransportMode+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTransportMode+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -474,7 +476,7 @@
 		7DE8A35F2B6B085400C3A378 /* UserLocationToStation.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = UserLocationToStation.json; sourceTree = "<group>"; };
 		7DEA645B2B95F794005BEE8A /* JourneyDebugView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyDebugView.swift; sourceTree = "<group>"; };
 		7DEE69CC2B9BCDF200A063B4 /* Tips.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tips.swift; sourceTree = "<group>"; };
-		7DEE69CE2B9BCE6A00A063B4 /* Info.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Info.swift; sourceTree = "<group>"; };
+		7DEE69CE2B9BCE6A00A063B4 /* ChooTip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooTip.swift; sourceTree = "<group>"; };
 		7DEE69D02B9BCE8B00A063B4 /* PresentationDetent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PresentationDetent.swift; sourceTree = "<group>"; };
 		7DF0D98C2B69557C00861C4F /* Iphones.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iphones.swift; sourceTree = "<group>"; };
 		7DF0D98E2B6956DD00861C4F /* FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowLayout.swift; sourceTree = "<group>"; };
@@ -580,7 +582,7 @@
 				7D6CCAF22B6004A200BCF62E /* VMTemplate.swift */,
 				7DBD26C12B99FB1800612A3B /* EnumTraversal.swift */,
 				7DEE69CC2B9BCDF200A063B4 /* Tips.swift */,
-				7DEE69CE2B9BCE6A00A063B4 /* Info.swift */,
+				7DEE69CE2B9BCE6A00A063B4 /* ChooTip.swift */,
 				7DEE69D02B9BCE8B00A063B4 /* PresentationDetent.swift */,
 			);
 			path = Helpers;
@@ -1227,6 +1229,7 @@
 			isa = PBXGroup;
 			children = (
 				7DABB02C2B2E18F1002BBA97 /* JFCV.swift */,
+				7DAC5CB62BACDA84000F7D33 /* JFCV+Map.swift */,
 				7DE727C52AD93869002FF033 /* JFV.swift */,
 			);
 			path = JourneyFollowView;
@@ -1788,6 +1791,7 @@
 				7D7A55322AA4A27C000256EF /* JLVM.swift in Sources */,
 				7D4208CB2AE122FF003D9BFB /* RouteView.swift in Sources */,
 				7D1638522B698457006E9660 /* LDSV+badges.swift in Sources */,
+				7DAC5CB72BACDA84000F7D33 /* JFCV+Map.swift in Sources */,
 				7D704F442B8558C200F8334F /* UIView+Constraints.swift in Sources */,
 				7D2CAF642B0BEA0200577FD4 /* Model.xcdatamodeld in Sources */,
 				7DBD26C52B9A202F00612A3B /* SheetViewDataSource.swift in Sources */,
@@ -1867,7 +1871,7 @@
 				7DBABFF92B879FA400C990FD /* ChildAnnotationViews.swift in Sources */,
 				7D4B1B992AA950780096F372 /* constructJourneyList.swift in Sources */,
 				7D462D492AAC947F00BC0D65 /* JLVM+reduce+LoadingJourneys.swift in Sources */,
-				7DEE69CF2B9BCE6A00A063B4 /* Info.swift in Sources */,
+				7DEE69CF2B9BCE6A00A063B4 /* ChooTip.swift in Sources */,
 				7D7547B82B616FD3002BE434 /* FeatureView.swift in Sources */,
 				7D9BB10C2B0CBF54008A3616 /* CDLocation+CoreDataClass.swift in Sources */,
 				7D0685ED2B50304500CCBE6B /* CoreDataStore+Fetch.swift in Sources */,
