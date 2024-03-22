@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-@objc(CDSettings)
-public class CDSettings: NSManagedObject {
+@objc(CDJounreySettings)
+public class CDJounreySettings: NSManagedObject {
 	
 }

@@ -11,7 +11,7 @@ import CoreData
 
 extension CDUser {
 	@NSManaged public var recentLocations: Set<CDLocation>?
-	@NSManaged public var chooSettings: CDSettings?
+	@NSManaged public var chooSettings: CDJounreySettings?
 	@NSManaged public var chewJourneys : Set<CDJourney>?
 	@NSManaged public var chewRecentSearches : Set<CDRecentSearch>?
 }
@@ -21,7 +21,7 @@ extension CDUser {
 		managedObjectContext.performAndWait {
 			let user = CDUser(entity: CDUser.entity(), insertInto: managedObjectContext)
 
-			let settings = CDSettings(entity: CDSettings.entity(), insertInto: managedObjectContext)
+			let settings = CDJounreySettings(entity: CDJounreySettings.entity(), insertInto: managedObjectContext)
 			let modes = CDTransportModes(entity: CDTransportModes.entity(), insertInto: managedObjectContext)
 			settings.user = user
 			modes.chooSettings = settings

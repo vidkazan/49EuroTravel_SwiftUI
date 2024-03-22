@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CDAppSettings" representedClassName="CDAppSettings" syncable="YES" codeGenerationType="class"/>
+    <entity name="CDAppSettings" representedClassName="CDAppSettings" syncable="YES">
+        <attribute name="legViewMode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
+    <entity name="CDJounreySettings" representedClassName="CDJounreySettings" syncable="YES">
+        <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
+        <attribute name="transferCount" optional="YES" attributeType="String"/>
+        <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDTransportModes" inverseName="chooSettings" inverseEntity="CDTransportModes"/>
+        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="chooSettings" inverseEntity="CDUser"/>
+    </entity>
     <entity name="CDJourney" representedClassName="CDJourney" syncable="YES">
         <attribute name="id" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
@@ -70,16 +80,6 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="CDSettings" representedClassName="CDSettings" syncable="YES">
-        <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="legViewMode" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="onboarding" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="transferCount" optional="YES" attributeType="String"/>
-        <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDTransportModes" inverseName="chooSettings" inverseEntity="CDTransportModes"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="chooSettings" inverseEntity="CDUser"/>
-    </entity>
     <entity name="CDStop" representedClassName="CDStop" syncable="YES">
         <attribute name="isCancelled" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="lat" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -122,11 +122,11 @@
         <attribute name="subway" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="taxi" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="tram" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDSettings" inverseName="transportModes" inverseEntity="CDSettings"/>
+        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJounreySettings" inverseName="transportModes" inverseEntity="CDJounreySettings"/>
     </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
         <relationship name="chewJourneys" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDJourney" inverseName="user" inverseEntity="CDJourney"/>
-        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDSettings" inverseName="user" inverseEntity="CDSettings"/>
+        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDJounreySettings" inverseName="user" inverseEntity="CDJounreySettings"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDLocation" inverseName="user" inverseEntity="CDLocation"/>
         <relationship name="recentSearches" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDRecentSearch" inverseName="user" inverseEntity="CDRecentSearch"/>
     </entity>
