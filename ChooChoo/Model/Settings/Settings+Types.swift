@@ -7,8 +7,8 @@
 
 import Foundation
 
-extension Settings {
-	static func transferDurationCases(count : Int16?) -> Settings.TransferDurationCases {
+extension JourneySettings {
+	static func transferDurationCases(count : Int16?) -> JourneySettings.TransferDurationCases {
 			switch count {
 			case 5:
 				return .five
@@ -31,29 +31,6 @@ extension Settings {
 			}
 	}
 	
-	enum LegViewMode : Int16, Equatable,CaseIterable {
-		case sunEvents
-		case colorfulLegs
-		case all
-		
-		var showSunEvents : Bool {
-			switch self {
-			case .colorfulLegs:
-				return false
-			default:
-				return true
-			}
-		}
-		var showColorfulLegs : Bool {
-			switch self {
-			case .sunEvents:
-				return false
-			default:
-				return true
-			}
-		}
-	}
-
 	enum TransferDurationCases : Int, Equatable, Hashable, CaseIterable {
 		case zero = 0
 		case five = 5
@@ -149,9 +126,5 @@ extension Settings {
 	enum Language : Equatable, Hashable {
 		case english
 		case german
-	}
-	struct ChewDebugSettings: Equatable, Hashable {
-		let prettyJSON : Bool
-		let alternativeSearchPage : Bool
 	}
 }

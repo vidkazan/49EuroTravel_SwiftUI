@@ -88,13 +88,13 @@ struct SheetViewInner : View {
 			tipType.tipView
 		case .settings:
 			SettingsView(
-				settings: chewViewModel.state.settings,
+				settings: chewViewModel.state.data.journeySettings,
 				closeSheet: closeSheet
 			)
 		case .date:
 			DatePickerView(
-				date: chewViewModel.state.date.date.date,
-				time: chewViewModel.state.date.date.date,
+				date: chewViewModel.state.data.date.date.date,
+				time: chewViewModel.state.data.date.date.date,
 				closeSheet: closeSheet
 			)
 		case .route:

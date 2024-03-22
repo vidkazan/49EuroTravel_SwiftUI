@@ -15,90 +15,42 @@ extension ChewViewModel {
 				.didLoadInitialData,
 				.didReceiveLocationData,
 				.didFailToLoadLocationData,
-				.didUpdateSettings,
 				.didStartViewAppear,
 				.onNotEnoughSearchData,
 				.didTapCloseJourneyList:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		case .didCancelEditStop:
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .idle
-			)
+			return State(state: state, status: .idle)
 		case .onStopEdit(let type):
+			return State(state: state, status: .editingStop(type))
+		case let .didUpdateSearchData(dep,arr,date,journeySettings,appSettings):
 			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .editingStop(type)
-			)
-		case let .onNewDate(date):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: date,
+				data: StateData(
+					data: state.data,
+					depStop: dep,
+					arrStop: arr,
+					journeySettings: journeySettings,
+					appSettings: appSettings,
+					date: date
+				),
 				status: .checkingSearchData
 			)
 		case .onStopsSwitch:
 			return State(
-				depStop: state.arrStop,
-				arrStop: state.depStop,
-				settings: state.settings,
-				date: state.date,
+				data: StateData(
+					data: state.data,
+					depStop: state.data.arrStop,
+					arrStop: state.data.depStop),
 				status: .editingStop(type.next())
 			)
-		case .onNewStop(let stop, let type):
-			switch type {
-			case .departure:
-				return State(
-					depStop: stop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: state.date,
-					status: .checkingSearchData
-				)
-			case .arrival:
-				return State(
-					depStop: state.depStop,
-					arrStop: stop,
-					settings: state.settings,
-					date: state.date,
-					status: .checkingSearchData
-				)
-			}
 		case .didLocationButtonPressed(send: let send):
 			switch Model.shared.searchStopsViewModel.state.status {
 			case .loading:
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: state.date,
-					status: .idle
-				)
+				return State(state: state, status: .idle)
 			default:
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: state.date,
-					status: .loadingLocation(send: send)
-				)
+				return State(state: state, status: .loadingLocation(send: send))
 			}
-		case .didSetBothLocations(let stops,let date):
-			return State(
-				depStop: .location(stops.departure),
-				arrStop: .location(stops.arrival),
-				settings: state.settings,
-				date: date ?? state.date,
-				status: .checkingSearchData
-			)
 		}
 	}
 }

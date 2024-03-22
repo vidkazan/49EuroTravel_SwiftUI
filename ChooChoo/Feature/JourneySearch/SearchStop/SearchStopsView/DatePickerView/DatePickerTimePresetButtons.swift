@@ -15,10 +15,14 @@ struct DatePickerTimePresetButtons: View {
 		HStack {
 			Button(action: {
 				Task {
-					chewVM.send(event: .onNewDate(SearchStopsDate(
-						date: .now,
-						mode: mode
-					)))
+					chewVM.send(
+						event: .didUpdateSearchData(
+							date: SearchStopsDate(
+								date: .now,
+								mode: mode
+							)
+						)
+					)
 					closeSheet()
 				}
 			}, label: {
@@ -32,10 +36,14 @@ struct DatePickerTimePresetButtons: View {
 			Button(action: {
 				Task {
 					let date = Date.now + (15 * 60)
-					chewVM.send(event: .onNewDate(SearchStopsDate(
-						date: .specificDate(date.timeIntervalSince1970),
-						mode: mode
-					)))
+					chewVM.send(
+						event: .didUpdateSearchData(
+							date: SearchStopsDate(
+								date: .specificDate(date.timeIntervalSince1970),
+								mode: mode
+							)
+						)
+					)
 					closeSheet()
 				}
 			}, label: {
@@ -49,10 +57,14 @@ struct DatePickerTimePresetButtons: View {
 			Button(action: {
 				Task {
 					let date = Date.now + (60 * 60)
-					chewVM.send(event: .onNewDate(SearchStopsDate(
-						date: .specificDate(date.timeIntervalSince1970),
-						mode: mode
-					)))
+					chewVM.send(
+						event: .didUpdateSearchData(
+							date: SearchStopsDate(
+								date: .specificDate(date.timeIntervalSince1970),
+								mode: mode
+							)
+						)
+					)
 					closeSheet()
 				}
 			}, label: {

@@ -14,7 +14,7 @@ struct LegsView: View {
 	@State var progressLineProportion : Double = 0
 	
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
-	let mode : Settings.LegViewMode
+	let mode : AppSettings.LegViewMode
 	let journey : JourneyViewData?
 	var gradientStops : [Gradient.Stop]
 	var showLabels : Bool
@@ -23,7 +23,7 @@ struct LegsView: View {
 	
 	init(
 		journey: JourneyViewData?,
-		mode : Settings.LegViewMode,
+		mode : AppSettings.LegViewMode,
 		showLabels : Bool = true,
 		legTapAction : ((UUID)->())? = nil
 	) {

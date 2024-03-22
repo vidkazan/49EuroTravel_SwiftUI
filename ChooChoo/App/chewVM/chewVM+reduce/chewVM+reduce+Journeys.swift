@@ -14,64 +14,33 @@ extension ChewViewModel {
 		switch event {
 		case .onStopsSwitch:
 			return State(
-				depStop: state.arrStop,
-				arrStop: state.depStop,
-				settings: state.settings,
-				date: state.date,
+				data: StateData(
+					data: state.data,
+					depStop: state.data.arrStop,
+					arrStop: state.data.depStop),
 				status: .checkingSearchData
 			)
-		case .onNewDate(let date):
+		case let .didUpdateSearchData(dep,arr,date,journeySettings,appSettings):
 			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: date,
-				status: .checkingSearchData
-			)
-		case .didUpdateSettings(let new):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: new,
-				date: state.date,
+				data: StateData(
+					data: state.data,
+					depStop: dep,
+					arrStop: arr,
+					journeySettings: journeySettings,
+					appSettings: appSettings,
+					date: date
+				),
 				status: .checkingSearchData
 			)
 		case .onStopEdit(let type):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .editingStop(type)
-			)
+			return State(state: state, status: .editingStop(type))
 		case .didTapCloseJourneyList:
-			print("reduce: didTapCloseJL")
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .idle
-			)
+			return State(state: state, status: .idle)
 		case .didLocationButtonPressed(send: let send):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .loadingLocation(send: send))
-		case .didSetBothLocations(let stops,let date):
-			return State(
-				depStop: .location(stops.departure),
-				arrStop: .location(stops.arrival),
-				settings: state.settings,
-				date: date ?? state.date,
-				status: .checkingSearchData
-			)
+			return State(state: state, status: .loadingLocation(send: send))
 		case .didReceiveLocationData,
 			 .didFailToLoadLocationData,
 			 .didLoadInitialData,
-			 .onNewStop,
 			 .onJourneyDataUpdated,
 			 .onNotEnoughSearchData,
 			 .didCancelEditStop,

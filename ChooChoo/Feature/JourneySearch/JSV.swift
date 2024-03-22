@@ -80,14 +80,3 @@ extension JourneySearchView {
 		}
 	}
 }
-
-#Preview {
-	JourneySearchView()
-		.environmentObject(ChewViewModel(initialState: .init(
-			depStop: .textOnly("pop"),
-		 arrStop: .textOnly(""),
-		 settings: .init(),
-		date: .init(date: .now, mode: .departure),
-			status: .editingStop(.departure)
-	 )))
-}

@@ -12,12 +12,12 @@ extension JourneyListViewModel {
 	struct StateData {
 		var date : SearchStopsDate
 		var stops : DepartureArrivalPair
-		var settings : Settings
+		var settings : JourneySettings
 		var journeys :  [JourneyViewData]
 		var earlierRef : String?
 		var laterRef : String?
 		
-		init(stops: DepartureArrivalPair,date : SearchStopsDate, settings: Settings, journeys: [JourneyViewData], earlierRef: String?, laterRef: String?) {
+		init(stops: DepartureArrivalPair,date : SearchStopsDate, settings: JourneySettings, journeys: [JourneyViewData], earlierRef: String?, laterRef: String?) {
 			self.stops = stops
 			self.date = date
 			self.settings = settings
@@ -35,7 +35,7 @@ extension JourneyListViewModel {
 			self.data = data
 			self.status = status
 		}
-		init(journeys: [JourneyViewData],date : SearchStopsDate, earlierRef: String?, laterRef: String?, settings : Settings,stops : DepartureArrivalPair, status: Status) {
+		init(journeys: [JourneyViewData],date : SearchStopsDate, earlierRef: String?, laterRef: String?, settings : JourneySettings,stops : DepartureArrivalPair, status: Status) {
 			self.data = StateData(
 				stops: stops,
 				date: date,

@@ -142,7 +142,7 @@ struct JourneyViewData : Equatable, Identifiable {
 	let refreshToken : String
 	let time : TimeContainer
 	let updatedAt : Double
-	let settings : Settings
+	let settings : JourneySettings
 }
 
 extension JourneyViewData {
@@ -171,7 +171,7 @@ extension JourneyViewData {
 		time : TimeContainer,
 		updatedAt : Double,
 		remarks : [RemarkViewData],
-		settings : Settings
+		settings : JourneySettings
 	){
 		self.origin = depStopName ?? "origin"
 		self.destination = arrStopName ?? "destination"

@@ -33,11 +33,12 @@ struct JourneyCell: View {
 					JourneyDetailsView(journeyDetailsViewModel: vm)
 				)
 			}, label: {
+				#warning("hardcoded mode")
 				VStack(spacing: 0) {
 					JourneyHeaderView(journey: journey)
 					LegsView(
 						journey : journey,
-						mode : chewVM.state.settings.legViewMode
+						mode : .sunEvents
 					)
 					.padding(.horizontal,7)
 				}

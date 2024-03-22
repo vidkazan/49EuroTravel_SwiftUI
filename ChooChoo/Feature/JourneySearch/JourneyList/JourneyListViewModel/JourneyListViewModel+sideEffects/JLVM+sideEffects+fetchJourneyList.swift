@@ -14,7 +14,7 @@ extension JourneyListViewModel {
 		arr : Stop,
 		time: Date,
 		mode: LocationDirectionType,
-		settings : Settings
+		settings : JourneySettings
 	) -> AnyPublisher<JourneyListDTO,ApiError> {
 		var query = addJourneyListStopsQuery(dep: dep, arr: arr)
 		query += addJourneyListTransfersQuery(settings: settings)
@@ -25,7 +25,7 @@ extension JourneyListViewModel {
 				Query.remarks(showRemarks: true),
 				Query.results(max: 5),
 				Query.stopovers(isShowing: true),
-				Query.pretty(pretyIntend: settings.debugSettings.prettyJSON),
+//				Query.pretty(pretyIntend: settings.debugSettings.prettyJSON),
 			]
 		)
 		return ApiService().fetch(JourneyListDTO.self,query: query, type: ApiService.Requests.journeys)
@@ -93,7 +93,7 @@ extension JourneyListViewModel {
 	}
 	
 	
-	static func addJourneyListTransfersQuery(settings : Settings) -> [URLQueryItem] {
+	static func addJourneyListTransfersQuery(settings : JourneySettings) -> [URLQueryItem] {
 		switch settings.transferTime {
 		case .direct:
 			return Query.queryItems(methods: [
@@ -125,7 +125,7 @@ extension JourneyListViewModel {
 		}
 	}
 	
-	static func addJourneyListTransportModes(settings : Settings) -> [URLQueryItem] {
+	static func addJourneyListTransportModes(settings : JourneySettings) -> [URLQueryItem] {
 		switch settings.transportMode {
 		case .all:
 			return []

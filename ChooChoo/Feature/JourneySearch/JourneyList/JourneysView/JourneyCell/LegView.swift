@@ -92,7 +92,7 @@ struct LegViewBG: View {
 	var leg : LegViewData
 	let screenWidth = UIScreen.main.bounds.width
 	let bgColor : Color
-	init(leg: LegViewData, mode : Settings.LegViewMode) {
+	init(leg: LegViewData, mode : AppSettings.LegViewMode) {
 		self.leg = leg
 		switch leg.isReachable {
 		case true:

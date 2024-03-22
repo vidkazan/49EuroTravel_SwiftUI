@@ -50,7 +50,7 @@ extension TimeAndSettingsView {
 				.background(Color.chewFillAccent)
 				.cornerRadius(8)
 				.overlay(alignment: .topTrailing) {
-					chewViewModel.state.settings.iconBadge.view
+					chewViewModel.state.data.journeySettings.iconBadge.view
 						.padding(5)
 				}
 		})
@@ -59,7 +59,7 @@ extension TimeAndSettingsView {
 
 #Preview {
 	HStack {
-		Settings.IconBadge.redDot.view
-		Settings.IconBadge.regional.view
+		JourneySettings.IconBadge.redDot.view
+		JourneySettings.IconBadge.regional.view
 	}
 }

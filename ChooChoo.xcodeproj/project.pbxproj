@@ -72,7 +72,7 @@
 		7D33A99B2B5343320005D723 /* Chew_chew_JourneyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A96C2B5343320005D723 /* Chew_chew_JourneyTest.swift */; };
 		7D33A99C2B5343320005D723 /* Chew_chew_JourneyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A96C2B5343320005D723 /* Chew_chew_JourneyTest.swift */; };
 		7D33A9A42B5433AA0005D723 /* BadgeStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D33A9A32B5433A90005D723 /* BadgeStyle.swift */; };
-		7D345E4A2AE95E7C003CA948 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E492AE95E7C003CA948 /* Settings.swift */; };
+		7D345E4A2AE95E7C003CA948 /* JourneySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E492AE95E7C003CA948 /* JourneySettings.swift */; };
 		7D345E4C2AE97FC8003CA948 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E4B2AE97FC8003CA948 /* SettingsView.swift */; };
 		7D3957202B54911F00024736 /* JDV+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D39571F2B54911F00024736 /* JDV+Toolbar.swift */; };
 		7D3C52012B29F0DC00AA887A /* CDLegType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C52002B29F0DC00AA887A /* CDLegType+CoreDataProperties.swift */; };
@@ -137,6 +137,7 @@
 		7D740CC72AEA796B00E9FFD4 /* SettingsView+Connections.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC62AEA796B00E9FFD4 /* SettingsView+Connections.swift */; };
 		7D740CC92AEA79C800E9FFD4 /* Set+Toogle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */; };
 		7D740CCB2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D740CCA2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift */; };
+		7D7497922BADBD6B0041FBFB /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7497912BADBD6A0041FBFB /* AppSettings.swift */; };
 		7D7547B82B616FD3002BE434 /* FeatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D7547B72B616FD3002BE434 /* FeatureView.swift */; };
 		7D787DD42B5D9E7D007D2A3A /* TimeAndSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D787DD32B5D9E7D007D2A3A /* TimeAndSettingsView.swift */; };
 		7D787DD62B5DA113007D2A3A /* BottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D787DD52B5DA113007D2A3A /* BottomView.swift */; };
@@ -310,7 +311,7 @@
 		7D33A96B2B5343320005D723 /* Chew_chew_LocationTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chew_chew_LocationTest.swift; sourceTree = "<group>"; };
 		7D33A96C2B5343320005D723 /* Chew_chew_JourneyTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chew_chew_JourneyTest.swift; sourceTree = "<group>"; };
 		7D33A9A32B5433A90005D723 /* BadgeStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgeStyle.swift; sourceTree = "<group>"; };
-		7D345E492AE95E7C003CA948 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
+		7D345E492AE95E7C003CA948 /* JourneySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneySettings.swift; sourceTree = "<group>"; };
 		7D345E4B2AE97FC8003CA948 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7D39571F2B54911F00024736 /* JDV+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDV+Toolbar.swift"; sourceTree = "<group>"; };
 		7D3C52002B29F0DC00AA887A /* CDLegType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLegType+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -378,6 +379,7 @@
 		7D740CC62AEA796B00E9FFD4 /* SettingsView+Connections.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+Connections.swift"; sourceTree = "<group>"; };
 		7D740CC82AEA79C800E9FFD4 /* Set+Toogle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Set+Toogle.swift"; sourceTree = "<group>"; };
 		7D740CCA2AEAB8F900E9FFD4 /* SettingsView+TransportTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+TransportTypes.swift"; sourceTree = "<group>"; };
+		7D7497912BADBD6A0041FBFB /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		7D7547B72B616FD3002BE434 /* FeatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeatureView.swift; sourceTree = "<group>"; };
 		7D7547BA2B61935A002BE434 /* Placeholder.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Placeholder.json; sourceTree = "<group>"; };
 		7D787DD32B5D9E7D007D2A3A /* TimeAndSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeAndSettingsView.swift; sourceTree = "<group>"; };
@@ -1312,7 +1314,8 @@
 			children = (
 				7DBD26BD2B99F10600612A3B /* Settings+init.swift */,
 				7DBD26BF2B99F13700612A3B /* Settings+Types.swift */,
-				7D345E492AE95E7C003CA948 /* Settings.swift */,
+				7D7497912BADBD6A0041FBFB /* AppSettings.swift */,
+				7D345E492AE95E7C003CA948 /* JourneySettings.swift */,
 			);
 			path = Settings;
 			sourceTree = "<group>";
@@ -1715,6 +1718,7 @@
 				7D33A94D2B51A7E60005D723 /* Styles.swift in Sources */,
 				7D462D4F2AAC956B00BC0D65 /* JLVM+reduce+FailedToLoadJourneys.swift in Sources */,
 				7D65DF1D2B2A2BFE00692601 /* CDStop+CoreDataProperties.swift in Sources */,
+				7D7497922BADBD6B0041FBFB /* AppSettings.swift in Sources */,
 				7DEA645C2B95F794005BEE8A /* JourneyDebugView.swift in Sources */,
 				7D1638502B69841D006E9660 /* LDSV+background.swift in Sources */,
 				7D4B1B952AA8FDA20096F372 /* SSVM+state.swift in Sources */,
@@ -1800,7 +1804,7 @@
 				7DBD26C02B99F13700612A3B /* Settings+Types.swift in Sources */,
 				7D000CF32AB86AD700566120 /* JLVM+sideEffects+loadingJourneys.swift in Sources */,
 				7D6C5C2F2AAF792200DEFC57 /* JDVM+state.swift in Sources */,
-				7D345E4A2AE95E7C003CA948 /* Settings.swift in Sources */,
+				7D345E4A2AE95E7C003CA948 /* JourneySettings.swift in Sources */,
 				7D4B1B8A2AA8CB460096F372 /* JLVM+reduce.swift in Sources */,
 				7D6CCAEF2B5FFB7300BCF62E /* SettingsView+TransportModesSection.swift in Sources */,
 				7DE8A34F2B6AB0AF00C3A378 /* TimeLabelView+Init.swift in Sources */,

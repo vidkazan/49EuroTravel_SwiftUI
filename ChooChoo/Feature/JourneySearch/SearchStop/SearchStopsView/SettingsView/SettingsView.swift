@@ -10,19 +10,19 @@ import SwiftUI
 
 struct SettingsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
-	@State var transferTime = Settings.TransferDurationCases.zero
-	@State var transferCount = Settings.TransferCountCases.unlimited
-	@State var transportModeSegment = Settings.TransportMode.all
+	@State var transferTime = JourneySettings.TransferDurationCases.zero
+	@State var transferCount = JourneySettings.TransferCountCases.unlimited
+	@State var transportModeSegment = JourneySettings.TransportMode.all
 	@State var selectedTypes = Set<LineType>()
 	@State var showWithTransfers : Int
-	@State var alternativeSearchPage : Bool
-	@State var legViewMode : Settings.LegViewMode
+//	@State var alternativeSearchPage : Bool
+//	@State var legViewMode : AppSettings.LegViewMode
 	@State var showRedDotWarning : Bool = true
 	
 	let closeSheet : ()->Void
-	let oldSettings : Settings
+	let oldSettings : JourneySettings
 	
-	init(settings : Settings,closeSheet : @escaping ()->Void) {
+	init(settings : JourneySettings,closeSheet : @escaping ()->Void) {
 		self.oldSettings = settings
 		self.transportModeSegment = settings.transportMode
 		self.selectedTypes = settings.customTransferModes
@@ -36,9 +36,9 @@ struct SettingsView: View {
 			self.showWithTransfers = 1
 			self.transferTime = minutes
 		}
-		self.alternativeSearchPage = settings.debugSettings.alternativeSearchPage
+//		self.alternativeSearchPage = settings.debugSettings.alternativeSearchPage
 		self.transferCount = settings.transferCount
-		self.legViewMode = settings.legViewMode
+//		self.legViewMode = settings.legViewMode
 	}
 	
 	var body: some View {
@@ -77,21 +77,25 @@ struct SettingsView: View {
 				if showWithTransfers == 1 {
 					transferSegment
 				}
-				Section(content: {
-					Button(action: {
-						self.legViewMode = self.legViewMode.next()
-					}, label: {
-						LegViewSettingsView(mode: self.legViewMode)
-					})
-				}, header: {
-					Text("Leg appearance", comment: "settingsView: section name")
-				})
+//				Section(content: {
+//					Button(action: {
+//						self.legViewMode = self.legViewMode.next()
+//					}, label: {
+//						LegViewSettingsView(mode: self.legViewMode)
+//					})
+//				}, header: {
+//					Text("Leg appearance", comment: "settingsView: section name")
+//				})
 				Section {
 					Button(role: .destructive, action: {
 						Model.shared.alertViewModel.send(
 							event: .didRequestShow(.destructive(
 								destructiveAction: {
-									chewViewModel.send(event: .didUpdateSettings(Settings()))
+									chewViewModel.send(
+										event: .didUpdateSearchData(
+											journeySettings: JourneySettings()
+										)
+									)
 									closeSheet()
 								},
 								description: NSLocalizedString(
@@ -132,7 +136,7 @@ struct SettingsView: View {
 extension SettingsView {
 	func loadSettings(state : ChewViewModel.State) {
 		Task {
-			let settings = state.settings
+			let settings = state.data.journeySettings
 			self.transportModeSegment = settings.transportMode
 			self.selectedTypes = settings.customTransferModes
 			switch settings.transferTime {
@@ -150,7 +154,7 @@ extension SettingsView {
 }
 
 struct LegViewSettingsView : View {
-	let mode : Settings.LegViewMode
+	let mode : AppSettings.LegViewMode
 	let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0,settings: .init())
 	var body: some View {
 		if let mock = mock {

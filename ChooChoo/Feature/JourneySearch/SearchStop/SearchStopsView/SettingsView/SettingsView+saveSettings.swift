@@ -11,17 +11,17 @@ import SwiftUI
 extension SettingsView {
 	func saveSettings(){
 		Task {
-			let transfer : Settings.TransferTime =  {
+			let transfer : JourneySettings.TransferTime =  {
 				switch self.showWithTransfers {
 				case 0:
-					return Settings.TransferTime.direct
+					return JourneySettings.TransferTime.direct
 				default:
-					return Settings.TransferTime.time(
+					return JourneySettings.TransferTime.time(
 						minutes: self.transferTime
 					)
 				}
 			}()
-			let res = Settings(
+			let res = JourneySettings(
 				customTransferModes: selectedTypes,
 				transportMode: transportModeSegment,
 				transferTime: transfer,
@@ -30,16 +30,15 @@ extension SettingsView {
 				walkingSpeed: .fast,
 				language: .english,
 				startWithWalking: true,
-				withBicycle: false,
-				onboarding: false,
-				debugSettings: Settings.ChewDebugSettings(
-					prettyJSON: false,
-					alternativeSearchPage: alternativeSearchPage
-				),
-				legViewMode: legViewMode
+				withBicycle: false
+//				debugSettings: JourneySettings.ChewDebugSettings(
+//					prettyJSON: false,
+//					alternativeSearchPage: alternativeSearchPage
+//				),
+//				legViewMode: legViewMode
 			)
 			if res != oldSettings {
-				chewViewModel.send(event: .didUpdateSettings(res))
+				chewViewModel.send(event: .didUpdateSearchData(journeySettings: res))
 				Model.shared.coreDataStore.updateSettings(
 					newSettings: res
 				)

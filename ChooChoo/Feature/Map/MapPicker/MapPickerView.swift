@@ -40,7 +40,12 @@ extension MapPickerView {
 extension MapPickerView {
 	func chooseBtn(stop : Stop) -> some View {
 		Button(action: {
-			chewVM.send(event: .onNewStop(.location(stop), type))
+			switch type {
+			case .departure:
+				chewVM.send(event: .didUpdateSearchData(dep: .location(stop)))
+			case .arrival:
+				chewVM.send(event: .didUpdateSearchData(arr: .location(stop)))
+			}
 			Model.shared.sheetViewModel.send(event: .didRequestHide)
 		}, label: {
 			Text(

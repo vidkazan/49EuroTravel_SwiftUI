@@ -14,7 +14,7 @@ import TipKit
 // MARK: revise
 // all text revision
 // revise icons
-
+// add language query and all settings queries
 // tip: jfv: for swipe actions
 
 
@@ -152,15 +152,4 @@ extension ContentView {
 			return Alert(title: Text(verbatim: ""))
 		}
 	}
-}
-
-#Preview {
-	ContentView()
-		.environmentObject(ChewViewModel(initialState: .init(
-			depStop: .textOnly(""),
-			arrStop: .textOnly(""),
-			settings: .init(),
-			date: .init(date: .now, mode: .departure),
-			status: .idle
-		)))
 }

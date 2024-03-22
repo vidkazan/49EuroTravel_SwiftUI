@@ -18,48 +18,46 @@ extension CoreDataStore {
 		return user
 	}
 	
-	func fetchSettings() -> Settings {
+	func fetchSettings() -> JourneySettings {
 		var settings : CDSettings?
-		var transferTypes = Settings.TransferTime.time(minutes: .zero)
-		var transportMode = Settings.TransportMode.all
-		var transferCount = Settings.TransferCountCases.unlimited
-		var onboarding : Bool = true
-		var legViewMode : Settings.LegViewMode = .sunEvents
+		var transferTypes = JourneySettings.TransferTime.time(minutes: .zero)
+		var transportMode = JourneySettings.TransportMode.all
+		var transferCount = JourneySettings.TransferCountCases.unlimited
+//		var legViewMode : AppSettings.LegViewMode = .sunEvents
 		
 		asyncContext.performAndWait {
 			settings = user?.chooSettings
 			guard let settings = settings else {
 				return
 			}
-			if let mode = Settings.LegViewMode(rawValue: settings.legViewMode) {
-				legViewMode = mode
-			}
+//			if let mode = AppSettings.LegViewMode(rawValue: settings.legViewMode) {
+//				legViewMode = mode
+//			}
 			transferTypes = {
 				 if settings.isWithTransfers == false {
 					 return .direct
 				 }
 				return .time(
-					minutes: Settings.transferDurationCases(count: settings.transferTime)
+					minutes: JourneySettings.transferDurationCases(count: settings.transferTime)
 				)
 			 }()
-			if let mode = Settings.TransportMode(rawValue: Int(settings.transportModeSegment)) {
+			if let mode = JourneySettings.TransportMode(rawValue: Int(settings.transportModeSegment)) {
 				transportMode = mode
 			}
-			onboarding = settings.onboarding
 			if let a = settings.transferCount,
-			   let b = Settings.TransferCountCases(
+			   let b = JourneySettings.TransferCountCases(
 				rawValue: a) {
 				transferCount = b
 			}
 		}
 		
 		guard settings != nil else {
-			return Settings()
+			return JourneySettings()
 		}
 		
 		let transportModes = fetchSettingsTransportModes()
 	
-		return Settings(
+		return JourneySettings(
 			customTransferModes: transportModes,
 			transportMode: transportMode,
 			transferTime: transferTypes,
@@ -68,13 +66,12 @@ extension CoreDataStore {
 			walkingSpeed: .fast,
 			language: .english,
 			startWithWalking: true,
-			withBicycle: false,
-			onboarding: onboarding,
-			debugSettings: Settings.ChewDebugSettings(
-				prettyJSON: false,
-				alternativeSearchPage: false
-			),
-			legViewMode: legViewMode
+			withBicycle: false
+//			debugSettings: JourneySettings.ChewDebugSettings(
+//				prettyJSON: false,
+//				alternativeSearchPage: false
+//			),
+//			legViewMode: legViewMode
 		)
 	}
 	

@@ -33,33 +33,18 @@ extension ChewViewModel {
 		}
 	}
 	
-	struct State : Equatable {
-		var depStop : TextFieldContent
-		var arrStop : TextFieldContent
-		var settings : Settings
-		var date : SearchStopsDate
-		var status : Status
+	struct StateData : Equatable {
+		let  depStop : TextFieldContent
+		let arrStop : TextFieldContent
+		let journeySettings : JourneySettings
+		let appSettings : AppSettings
+		let date : SearchStopsDate
 		
-		init(){
-			self.depStop =  .textOnly("")
-			self.arrStop = .textOnly("")
-			self.settings = Settings()
-			self.date = SearchStopsDate(date: .now, mode: .departure)
-			self.status = .start
-		}
-		init(
-			depStop: TextFieldContent,
-			arrStop: TextFieldContent,
-			settings: Settings,
-			date: SearchStopsDate,
-			status: Status
-		) {
-			self.depStop = depStop
-			self.arrStop = arrStop
-			self.settings = settings
-			self.date = date
-			self.status = status
-		}
+	}
+	
+	struct State : Equatable {
+		let data : StateData
+		let status : Status
 	}
 	
 	
@@ -98,23 +83,31 @@ extension ChewViewModel {
 	}
 	enum Event {
 		case didStartViewAppear
-		case didLoadInitialData(Settings)
+		case didLoadInitialData(JourneySettings)
 		case onStopEdit(LocationDirectionType)
-		case onNewStop(TextFieldContent,LocationDirectionType)
-		case onStopsSwitch
-		case didSetBothLocations(_ stops : DepartureArrivalPair, date : SearchStopsDate?)
+		case didUpdateSearchData(
+			dep: TextFieldContent?  = nil,
+			arr: TextFieldContent?  = nil,
+			date: SearchStopsDate?  = nil,
+			journeySettings : JourneySettings?  = nil,
+			appSettings : AppSettings? = nil
+		)
+		
 		case onJourneyDataUpdated(_ stops : DepartureArrivalPair)
+		
+		
+		case onStopsSwitch
 		case onNotEnoughSearchData
 		case didCancelEditStop
 		case didTapCloseJourneyList
-		case onNewDate(SearchStopsDate)
-		case didUpdateSettings(Settings)
 		case didLocationButtonPressed(send : (ChewViewModel.Event)->Void)
 		case didReceiveLocationData(Stop)
 		case didFailToLoadLocationData
 		
 		var description : String {
 			switch self {
+			case .didUpdateSearchData:
+				return "didUpdateSearchData"
 			case .didCancelEditStop:
 				return "didCancelEditStop"
 			case .onStopEdit(let type):
@@ -123,12 +116,8 @@ extension ChewViewModel {
 				return "onNotEnoughSearchData"
 			case .didTapCloseJourneyList:
 				return "didTapCloseJourneyList"
-			case .onNewStop:
-				return "onNewStop"
 			case .onStopsSwitch:
 				return "onStopsSwitch"
-			case .onNewDate:
-				return "onNewDate"
 			case .onJourneyDataUpdated:
 				return "onJourneyDataUpdated"
 			case .didReceiveLocationData:
@@ -137,15 +126,49 @@ extension ChewViewModel {
 				return "didFailToLoadLocationData"
 			case .didLocationButtonPressed:
 				return "didLocationButtonPressed"
-			case .didSetBothLocations:
-				return "didSetBothLocations"
-			case .didUpdateSettings:
-				return "didUpdateSettings"
 			case .didLoadInitialData:
 				return "didLoadInitialData"
 			case .didStartViewAppear:
 				return "didStartViewAppear"
 			}
 		}
+	}
+}
+
+extension ChewViewModel.State {
+	init(){
+		self.data = ChewViewModel.StateData(
+			depStop: .textOnly(""),
+			arrStop: .textOnly(""),
+			journeySettings: JourneySettings(),
+			appSettings: AppSettings(),
+			date: SearchStopsDate(date: .now, mode: .departure)
+		)
+		self.status = .start
+	}
+	init(
+		state : Self,
+		data : ChewViewModel.StateData? = nil,
+		status : ChewViewModel.Status
+	){
+		self.data = data ?? state.data
+		self.status = status
+	}
+}
+
+extension ChewViewModel.StateData {
+	init(
+		data : Self,
+		depStop: ChewViewModel.TextFieldContent? = nil,
+		arrStop: ChewViewModel.TextFieldContent? = nil,
+		journeySettings: JourneySettings? = nil,
+		appSettings: AppSettings? = nil,
+		date: SearchStopsDate? = nil
+	) {
+		self.depStop = depStop ?? data.depStop
+		self.arrStop = arrStop ?? data.arrStop
+		self.journeySettings = journeySettings ?? data.journeySettings
+		self.appSettings = appSettings ?? data.appSettings
+		self.date = date ?? data.date
 	}
 }

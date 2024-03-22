@@ -98,6 +98,9 @@
         }
       }
     },
+    "appSettings" : {
+
+    },
     "Bad search request" : {
       "comment" : "ApiError"
     },
@@ -209,9 +212,6 @@
     },
     "Debug leg" : {
       "comment" : "Debug"
-    },
-    "Debug options" : {
-      "comment" : "SettingsView: debug: section header"
     },
     "Delete" : {
       "comment" : "JourneyFollowView: listCell: swipe action item",
@@ -359,7 +359,7 @@
       }
     },
     "Journey debug" : {
-      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item"
+      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
     },
     "Journey details" : {
       "comment" : "navigationBarTitle",
@@ -396,6 +396,7 @@
     },
     "Leg appearance" : {
       "comment" : "settingsView: section name",
+      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -442,7 +443,7 @@
       }
     },
     "now" : {
-      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
+      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -562,7 +563,7 @@
       }
     },
     "Save" : {
-      "comment" : "datePickerView: save button\nsettingsView: save button",
+      "comment" : "settingsView: save button\ndatePickerView: save button",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -610,9 +611,6 @@
     },
     "Server response data nil" : {
       "comment" : "ApiError"
-    },
-    "Show alternative search page" : {
-      "comment" : "SettingsView: debug: toggle"
     },
     "Show full segment" : {
       "comment" : "LegDetailsView: menu item",

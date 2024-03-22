@@ -47,7 +47,7 @@ extension SettingsView {
 			Picker(
 				selection: $transferTime,
 				content: {
-					ForEach(Settings.TransferDurationCases.allCases,id: \.rawValue) { val in
+					ForEach(JourneySettings.TransferDurationCases.allCases,id: \.rawValue) { val in
 						Text(
 							"\(val.rawValue) min ",
 							comment: "SettingsView: transferSegment: transfer duration"
@@ -68,7 +68,7 @@ extension SettingsView {
 			Picker(
 				selection: $transferCount,
 				content: {
-					ForEach(Settings.TransferCountCases.allCases,id: \.rawValue) { val in
+					ForEach(JourneySettings.TransferCountCases.allCases,id: \.rawValue) { val in
 						Text(verbatim: val.rawValue)
 							.tag(val)
 					}
@@ -89,20 +89,20 @@ extension SettingsView {
 	}
 }
 
-extension SettingsView {
-	var debug : some View {
-		Section(content: {
-			Toggle(
-				isOn: Binding(
-					get: { alternativeSearchPage },
-					set: { _ in alternativeSearchPage.toggle()}
-				),
-				label: {
-					Text("Show alternative search page",comment: "SettingsView: debug: toggle")
-				}
-			)
-		}, header: {
-			Text("Debug options",comment: "SettingsView: debug: section header")
-		})
-	}
-}
+//extension SettingsView {
+//	var debug : some View {
+//		Section(content: {
+//			Toggle(
+//				isOn: Binding(
+//					get: { alternativeSearchPage },
+//					set: { _ in alternativeSearchPage.toggle()}
+//				),
+//				label: {
+//					Text("Show alternative search page",comment: "SettingsView: debug: toggle")
+//				}
+//			)
+//		}, header: {
+//			Text("Debug options",comment: "SettingsView: debug: section header")
+//		})
+//	}
+//}

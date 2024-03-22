@@ -17,7 +17,7 @@ extension ChewViewModel {
 			}
 			guard Model.shared.coreDataStore.fetchUser() != nil else {
 				print("whenLoadingInitialData: user is nil: loading default data")
-				return Just(Event.didLoadInitialData(Settings()))
+				return Just(Event.didLoadInitialData(JourneySettings()))
 					.eraseToAnyPublisher()
 			}
 			
@@ -36,7 +36,7 @@ extension ChewViewModel {
 					Model.shared.journeyFollowViewModel.send(event: .didUpdateData(data))
 				}
 			}
-			return Just(Event.didLoadInitialData(settings ?? Settings()))
+			return Just(Event.didLoadInitialData(settings ?? JourneySettings()))
 				.eraseToAnyPublisher()
 		}
 	}

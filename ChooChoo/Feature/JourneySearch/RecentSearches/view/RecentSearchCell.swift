@@ -14,7 +14,12 @@ struct RecentSearchCell: View {
 	let locations : DepartureArrivalPair
 	var body: some View {
 		Button(action: {
-			chewVM.send(event: .didSetBothLocations(locations,date: nil))
+			chewVM.send(
+				event: .didUpdateSearchData(
+					dep: ChewViewModel.TextFieldContent.location(locations.departure),
+					arr: ChewViewModel.TextFieldContent.location(locations.arrival)
+				)
+			)
 		}, label: {
 			HStack(alignment: .top,spacing: 0) {
 				VStack(alignment: .leading,spacing: 0) {

@@ -19,7 +19,7 @@ extension ChewViewModel {
 	static func whenIdleCheckForSufficientDataForJourneyRequest() -> Feedback<State, Event> {
 		Feedback {  (state: State) -> AnyPublisher<Event, Never> in
 			guard case .checkingSearchData = state.status else { return Empty().eraseToAnyPublisher() }
-			guard let dep = state.depStop.stop, let arr = state.arrStop.stop else {
+			guard let dep = state.data.depStop.stop, let arr = state.data.arrStop.stop else {
 				return Just(Event.onNotEnoughSearchData)
 					.eraseToAnyPublisher()
 			}

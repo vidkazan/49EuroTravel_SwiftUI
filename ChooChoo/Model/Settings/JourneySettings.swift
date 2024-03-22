@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 struct JourneySettings : Equatable,Hashable {
-	// api settings
 	let customTransferModes : Set<LineType>
 	let transportMode : TransportMode
 	let transferTime : TransferTime
@@ -19,9 +18,6 @@ struct JourneySettings : Equatable,Hashable {
 	let language : Language
 	let startWithWalking : Bool
 	let withBicycle : Bool
-	// app settings
-	let debugSettings : ChewDebugSettings
-	let legViewMode : LegViewMode
 }
 
 extension JourneySettings {

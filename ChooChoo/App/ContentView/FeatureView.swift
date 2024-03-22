@@ -10,9 +10,7 @@ import SwiftUI
 enum Tabs : Int,CaseIterable {
 	case search
 	case follow
-//	case map
 	case appSettings
-//	case debug
 }
 
 struct FeatureView: View {
@@ -98,7 +96,6 @@ struct FeatureView: View {
 				}
 					.tabItem { tabAppSettingsLabel }
 					.tag(Tabs.appSettings)
-
 			}
 		}
 		.onReceive(chewViewModel.$state, perform: { state in

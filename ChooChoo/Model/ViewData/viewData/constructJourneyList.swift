@@ -12,7 +12,7 @@ func constructJourneyListViewDataAsync(
 	journeysData : JourneyListDTO,
 	depStop : Stop,
 	arrStop : Stop,
-	settings: Settings
+	settings: JourneySettings
 ) async -> [JourneyViewData] {
 	return constructJourneyListViewData(
 		journeysData: journeysData,
@@ -26,7 +26,7 @@ func constructJourneyListViewData(
 	journeysData : JourneyListDTO,
 	depStop : Stop,
 	arrStop : Stop,
-	settings: Settings
+	settings: JourneySettings
 )  -> [JourneyViewData] {
 	guard let journeys = journeysData.journeys else { return [] }
 	var res = [JourneyViewData]()

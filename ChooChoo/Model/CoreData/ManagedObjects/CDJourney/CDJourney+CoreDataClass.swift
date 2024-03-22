@@ -41,7 +41,7 @@ extension CDJourney {
 					time: time,
 					updatedAt: self.updatedAt,
 					remarks: [],
-					settings: Settings()
+					settings: JourneySettings()
 				),
 				depStop: self.departureStop.stop(),
 				arrStop: self.arrivalStop.stop()

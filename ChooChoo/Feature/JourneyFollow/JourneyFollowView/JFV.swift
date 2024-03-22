@@ -199,10 +199,13 @@ extension JourneyFollowView {
 			}
 			.swipeActions(edge: .leading) {
 				Button {
-					chewVM.send(event: .didSetBothLocations(.init(
-						departure: journey.depStop,
-						arrival: journey.arrStop
-					),date: SearchStopsDate(date: .now, mode: .departure)))
+					chewVM.send(
+						event: .didUpdateSearchData(
+							dep: .location(journey.depStop),
+							arr: .location(journey.arrStop),
+							date: SearchStopsDate(date: .now, mode: .departure)
+						)
+					)
 				} label: {
 					Label(
 						title: {

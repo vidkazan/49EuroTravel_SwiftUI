@@ -25,7 +25,7 @@ extension SettingsView {
 							Image("re")
 						}
 					)
-						.tag(Settings.TransportMode.regional)
+						.tag(JourneySettings.TransportMode.regional)
 					Label(
 						title: {
 							Text(
@@ -37,7 +37,7 @@ extension SettingsView {
 							Image("ice")
 						}
 					)
-						.tag(Settings.TransportMode.all)
+						.tag(JourneySettings.TransportMode.all)
 					Label(
 						title: {
 							Text(
@@ -49,7 +49,7 @@ extension SettingsView {
 							Image(systemName: "ellipsis")
 						}
 					)
-						.tag(Settings.TransportMode.custom)
+						.tag(JourneySettings.TransportMode.custom)
 				},
 				label: {}
 			)

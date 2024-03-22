@@ -33,7 +33,7 @@ struct TimeChoosingView: View {
 							)
 							EmptyView()
 						case .specificDate:
-							Text(chewVM.state.date.date.date, format: .dateTime)
+							Text(chewVM.state.data.date.date.date, format: .dateTime)
 						}
 					} else {
 						switch elem {
@@ -43,7 +43,7 @@ struct TimeChoosingView: View {
 								comment: "timeChoosingView: button on segmented picker"
 							)
 						case .specificDate:
-							Text(chewVM.state.date.date.date, format: .dateTime)
+							Text(chewVM.state.data.date.date.date, format: .dateTime)
 						}
 					}
 				}
@@ -53,7 +53,7 @@ struct TimeChoosingView: View {
 				Task {
 					switch selected {
 					case .now:
-						chewVM.send(event: .onNewDate(SearchStopsDate(
+						chewVM.send(event: .didUpdateSearchData(date: SearchStopsDate(
 							date: .now,
 							mode: .departure
 						)))
@@ -64,7 +64,7 @@ struct TimeChoosingView: View {
 			}
 		)
 		.onReceive(chewVM.$state, perform: { state in
-			switch state.date.date {
+			switch state.data.date.date {
 			case .now:
 				selectedOption = .now
 			case .specificDate:

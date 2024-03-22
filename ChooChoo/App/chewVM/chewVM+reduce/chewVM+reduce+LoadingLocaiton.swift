@@ -16,85 +16,37 @@ extension ChewViewModel {
 				.didLoadInitialData,
 				.didCancelEditStop,
 				.didStartViewAppear,
-				.onNotEnoughSearchData,
-				.didUpdateSettings:
+				.onNotEnoughSearchData:
 			print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 			return state
 		case .onStopEdit(let type):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .editingStop(type)
-			)
+			return State(state: state, status: .editingStop(type))
 		case .onStopsSwitch:
 			return State(
-				depStop: state.arrStop,
-				arrStop: state.depStop,
-				settings: state.settings,
-				date: state.date,
+				data: StateData(
+					data: state.data,
+					depStop: state.data.arrStop,
+					arrStop: state.data.depStop),
 				status: .checkingSearchData
 			)
-		case .onNewStop(let stop, let type):
-			switch type {
-			case .departure:
-				return State(
-					depStop: stop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: state.date,
-					status: .checkingSearchData
-				)
-			case .arrival:
-				return State(
-					depStop: state.depStop,
-					arrStop: stop,
-					settings: state.settings,
-					date: state.date,
-					status: .checkingSearchData
-				)
-			}
-		case .didLocationButtonPressed:
+		case let .didUpdateSearchData(dep,arr,date,journeySettings,appSettings):
 			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .idle
-			)
-		case .onNewDate(let date):
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: date,
+				data: StateData(
+					data: state.data,
+					depStop: dep,
+					arrStop: arr,
+					journeySettings: journeySettings,
+					appSettings: appSettings,
+					date: date
+				),
 				status: .checkingSearchData
 			)
+		case .didLocationButtonPressed(send: let send):
+			return State(state: state, status: .idle)
 		case .didReceiveLocationData(let stop):
-			return State(
-				depStop: .location(stop),
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .checkingSearchData
-			)
+			return State(data: StateData(data: state.data,depStop: .location(stop)), status: .checkingSearchData)
 		case .didFailToLoadLocationData:
-			return State(
-				depStop: state.depStop,
-				arrStop: state.arrStop,
-				settings: state.settings,
-				date: state.date,
-				status: .idle
-			)
-		case .didSetBothLocations(let stops,let date):
-			return State(
-				depStop: .location(stops.departure),
-				arrStop: .location(stops.arrival),
-				settings: state.settings,
-				date: date ?? state.date,
-				status: .checkingSearchData
-			)
+			return State(state: state, status: .idle)
 		}
 	}
 }

@@ -21,38 +21,22 @@ extension ChewViewModel {
 			return reduceLoadingLocation(state, event)
 		case .checkingSearchData:
 			switch event {
-			case .didUpdateSettings(let new):
+			case let .didUpdateSearchData(dep,arr,date,journeySettings,appSettings):
 				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: new,
-					date: state.date,
-					status: .checkingSearchData
-				)
-			case .onNewDate(let date):
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: date,
+					data: StateData(
+						data: state.data,
+						depStop: dep,
+						arrStop: arr,
+						journeySettings: journeySettings, 
+						appSettings: appSettings,
+						date: date
+					), 
 					status: .checkingSearchData
 				)
 			case .onJourneyDataUpdated(let stops):
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: state.date,
-					status: .journeys(stops)
-				)
+				return State(state: state, status: .journeys(stops))
 			case .onNotEnoughSearchData:
-				return State(
-					depStop: state.depStop,
-					arrStop: state.arrStop,
-					settings: state.settings,
-					date: state.date,
-					status: .idle
-				)
+				return State(state: state, status: .idle)
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
@@ -60,14 +44,7 @@ extension ChewViewModel {
 		case .loadingInitialData:
 			switch event {
 			case .didLoadInitialData(let settings):
-				return State(
-					depStop: .textOnly(""),
-					arrStop: .textOnly(""),
-					settings: settings,
-					// MARK: set timePicker default date here
-					date: .init(date: .now, mode: .departure),
-					status: .idle
-				)
+				return State(data: StateData(data: state.data,journeySettings: settings), status: .idle)
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state
@@ -75,13 +52,7 @@ extension ChewViewModel {
 		case .start:
 			switch event {
 			case .didStartViewAppear:
-				return State(
-					depStop: .textOnly(""),
-					arrStop: .textOnly(""),
-					settings: Settings(),
-					date: state.date,
-					status: .loadingInitialData
-				)
+				return State(data: StateData(data: state.data,journeySettings: JourneySettings()), status: .loadingInitialData)
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state

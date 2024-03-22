@@ -13,7 +13,7 @@ struct JourneyListView: View {
 	@ObservedObject var journeyViewModel : JourneyListViewModel
 	@State var firstAppear : Bool = true
 	
-	init(stops : DepartureArrivalPair, date: SearchStopsDate,settings : Settings) {
+	init(stops : DepartureArrivalPair, date: SearchStopsDate,settings : JourneySettings) {
 		self.journeyViewModel = JourneyListViewModel(
 			date: date,
 			settings: settings,

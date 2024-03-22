@@ -138,8 +138,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "29"
-            endingLineNumber = "29"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
             <Locations>
@@ -186,8 +186,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "53"
+            endingLineNumber = "53"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
          </BreakpointContent>
@@ -425,8 +425,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "123"
+            endingLineNumber = "123"
             landmarkName = "fetchRecentSearches()"
             landmarkType = "7">
             <Locations>
@@ -473,8 +473,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "129"
-            endingLineNumber = "129"
+            startingLineNumber = "126"
+            endingLineNumber = "126"
             landmarkName = "fetchRecentSearches()"
             landmarkType = "7">
          </BreakpointContent>
@@ -489,8 +489,8 @@
             filePath = "ChooChoo/Feature/Map/MapPicker/MapPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "59"
-            endingLineNumber = "59"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "selectedStop"
             landmarkType = "24">
          </BreakpointContent>
@@ -505,8 +505,8 @@
             filePath = "ChooChoo/Feature/Map/MapPicker/MapPickerView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
             landmarkName = "selectedStop"
             landmarkType = "24">
          </BreakpointContent>
@@ -677,8 +677,8 @@
             filePath = "ChooChoo/Feature/JourneySearch/JourneyList/JourneysView/JourneyCell/JourneyCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "57"
-            endingLineNumber = "57"
+            startingLineNumber = "58"
+            endingLineNumber = "58"
             landmarkName = "body"
             landmarkType = "24">
          </BreakpointContent>
@@ -693,8 +693,8 @@
             filePath = "ChooChoo/Feature/JourneySearch/JourneyList/JourneysView/JourneyCell/JourneyCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
             landmarkName = "body"
             landmarkType = "24">
             <Locations>
@@ -791,7 +791,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "19"
             endingLineNumber = "19"
-            landmarkName = "Settings"
+            landmarkName = "JourneySettings"
             landmarkType = "14">
          </BreakpointContent>
       </BreakpointProxy>

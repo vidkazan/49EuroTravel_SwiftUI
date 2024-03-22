@@ -52,8 +52,8 @@ struct JourneyFollowCellView : View {
 				BadgeView(.legDuration(data.time))
 					.badgeBackgroundStyle(.secondary)
 			}
-
-			LegsView(journey : data,mode : chewVM.state.settings.legViewMode)
+			#warning("hardcoded mode")
+			LegsView(journey : data,mode : .sunEvents)
 			HStack(spacing: 2) {
 				Spacer()
 				BadgeView(

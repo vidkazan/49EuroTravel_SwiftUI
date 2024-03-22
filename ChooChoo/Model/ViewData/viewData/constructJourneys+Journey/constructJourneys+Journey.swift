@@ -13,7 +13,7 @@ extension JourneyDTO {
 		depStop: Stop?,
 		arrStop : Stop?,
 		realtimeDataUpdatedAt: Double,
-		settings : Settings
+		settings : JourneySettings
 	) async -> JourneyViewData? {
 		return journeyViewData(
 			depStop: depStop,
@@ -27,7 +27,7 @@ extension JourneyDTO {
 		depStop: Stop?,
 		arrStop : Stop?,
 		realtimeDataUpdatedAt: Double,
-		settings : Settings
+		settings : JourneySettings
 	) -> JourneyViewData? {
 		do {
 			return try journeyViewDataThrows(
@@ -46,7 +46,7 @@ extension JourneyDTO {
 		depStop: Stop?,
 		arrStop : Stop?,
 		realtimeDataUpdatedAt: Double,
-		settings : Settings
+		settings : JourneySettings
 	) throws -> JourneyViewData {
 		let time = TimeContainer(
 			plannedDeparture: legs.first?.plannedDeparture,

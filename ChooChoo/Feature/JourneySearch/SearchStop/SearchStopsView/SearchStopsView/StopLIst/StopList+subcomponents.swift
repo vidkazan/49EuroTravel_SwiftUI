@@ -19,7 +19,12 @@ extension SearchStopsView {
 				ForEach(recentStops,id: \.distance) { stop in
 					HStack(alignment: .center) {
 						Button(action: {
-							chewViewModel.send(event: .onNewStop(.location(stop.stop), type))
+							switch type {
+							case .departure:
+								chewViewModel.send(event: .didUpdateSearchData(dep: .location(stop.stop)))
+							case .arrival:
+								chewViewModel.send(event: .didUpdateSearchData(arr: .location(stop.stop)))
+							}
 							searchStopViewModel.send(event: .onStopDidTap(.location(stop.stop), type))
 						}, label: {
 							StopListCell(stop: stop)
@@ -105,8 +110,12 @@ extension SearchStopsView {
 					.coreDataStore
 					.addRecentLocation(stop: stop.stop)
 			}
-			chewViewModel
-				.send(event: .onNewStop(.location(stop.stop), type))
+			switch type {
+			case .departure:
+				chewViewModel.send(event: .didUpdateSearchData(dep: .location(stop.stop)))
+			case .arrival:
+				chewViewModel.send(event: .didUpdateSearchData(arr: .location(stop.stop)))
+			}
 			searchStopViewModel
 				.send(event: .onStopDidTap(.location(stop.stop), type))
 		}

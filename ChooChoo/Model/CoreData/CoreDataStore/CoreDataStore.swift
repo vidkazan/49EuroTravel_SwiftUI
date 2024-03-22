@@ -157,7 +157,7 @@ extension CoreDataStore {
 		print("📕 > update Journeys : error : delete fault")
 		return false
 	}
-	func updateSettings(newSettings : Settings){
+	func updateSettings(newSettings : JourneySettings){
 		 asyncContext.performAndWait {
 //			print("> ⚡️ update Settings thread ",Thread.current)
 			guard let user = self.user else {
@@ -178,7 +178,7 @@ extension CoreDataStore {
 				settings.transferTime = Int16(minutes.rawValue)
 			}
 			
-			 settings.legViewMode = newSettings.legViewMode.rawValue
+//			 settings.legViewMode = newSettings.legViewMode.rawValue
 			settings.transportModeSegment = Int16(newSettings.transportMode.rawValue)
 			settings.transferCount = newSettings.transferCount.rawValue
 			let modes = Self.transportModes(

@@ -49,10 +49,14 @@ struct DatePickerView: View {
 								date: date,
 								time: time
 							) {
-								chewVM.send(event: .onNewDate(SearchStopsDate(
-									date: .specificDate(dateCombined.timeIntervalSince1970),
-									mode: type
-								)))
+								chewVM.send(
+									event: .didUpdateSearchData(
+										date: SearchStopsDate(
+											date: .specificDate(dateCombined.timeIntervalSince1970),
+											mode: type
+										)
+									)
+								)
 								closeSheet()
 							}
 						}

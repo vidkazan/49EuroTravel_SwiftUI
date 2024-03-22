@@ -11,7 +11,7 @@ import SwiftUI
 struct SunEventsGradient : View {
 	let gradientStops : [Gradient.Stop]?
 	let size : CGSize
-	let mode : Settings.LegViewMode
+	let mode : AppSettings.LegViewMode
 	let progressLineProportion : Double?
 	var body: some View {
 		switch progressLineProportion {

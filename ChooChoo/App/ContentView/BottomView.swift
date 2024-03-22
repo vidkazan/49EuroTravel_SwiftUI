@@ -18,8 +18,8 @@ struct BottomView: View {
 			case let .journeys(stops):
 				JourneyListView(
 					stops: stops,
-					date: state.date,
-					settings: state.settings
+					date: state.data.date,
+					settings: state.data.journeySettings
 				)
 			case .idle:
 				RecentSearchesView()
