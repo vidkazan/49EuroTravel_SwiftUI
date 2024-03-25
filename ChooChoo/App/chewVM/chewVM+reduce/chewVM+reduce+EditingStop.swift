@@ -24,14 +24,13 @@ extension ChewViewModel {
 			return State(state: state, status: .idle)
 		case .onStopEdit(let type):
 			return State(state: state, status: .editingStop(type))
-		case let .didUpdateSearchData(dep,arr,date,journeySettings,appSettings):
+		case let .didUpdateSearchData(dep,arr,date,journeySettings):
 			return State(
 				data: StateData(
 					data: state.data,
 					depStop: dep,
 					arrStop: arr,
 					journeySettings: journeySettings,
-					appSettings: appSettings,
 					date: date
 				),
 				status: .checkingSearchData

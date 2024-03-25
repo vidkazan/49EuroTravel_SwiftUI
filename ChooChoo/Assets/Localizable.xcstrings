@@ -98,9 +98,6 @@
         }
       }
     },
-    "appSettings" : {
-
-    },
     "Bad search request" : {
       "comment" : "ApiError"
     },
@@ -359,7 +356,7 @@
       }
     },
     "Journey debug" : {
-      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
+      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item"
     },
     "Journey details" : {
       "comment" : "navigationBarTitle",
@@ -396,7 +393,6 @@
     },
     "Leg appearance" : {
       "comment" : "settingsView: section name",
-      "extractionState" : "stale",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -443,7 +439,7 @@
       }
     },
     "now" : {
-      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
+      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -611,6 +607,9 @@
     },
     "Server response data nil" : {
       "comment" : "ApiError"
+    },
+    "Settings" : {
+      "comment" : "TabItem"
     },
     "Show full segment" : {
       "comment" : "LegDetailsView: menu item",

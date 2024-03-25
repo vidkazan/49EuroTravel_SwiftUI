@@ -77,15 +77,6 @@ struct SettingsView: View {
 				if showWithTransfers == 1 {
 					transferSegment
 				}
-//				Section(content: {
-//					Button(action: {
-//						self.legViewMode = self.legViewMode.next()
-//					}, label: {
-//						LegViewSettingsView(mode: self.legViewMode)
-//					})
-//				}, header: {
-//					Text("Leg appearance", comment: "settingsView: section name")
-//				})
 				Section {
 					Button(role: .destructive, action: {
 						Model.shared.alertViewModel.send(

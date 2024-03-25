@@ -20,7 +20,7 @@ extension CDTransportModes {
 	@NSManaged public var subway: Bool
 	@NSManaged public var tram: Bool
 	@NSManaged public var taxi: Bool
-    @NSManaged public var chooSettings: CDJounreySettings?
+    @NSManaged public var chooSettings: CDJourneySettings?
 }
 
 extension CDTransportModes {

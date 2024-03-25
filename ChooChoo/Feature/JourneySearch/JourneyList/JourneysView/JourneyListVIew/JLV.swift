@@ -11,7 +11,7 @@ import SwiftUI
 struct JourneyListView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var journeyViewModel : JourneyListViewModel
-	@State var firstAppear : Bool = true
+	@ObservedObject var appSettingsViewModel = Model.shared.appSettingsVM
 	
 	init(stops : DepartureArrivalPair, date: SearchStopsDate,settings : JourneySettings) {
 		self.journeyViewModel = JourneyListViewModel(

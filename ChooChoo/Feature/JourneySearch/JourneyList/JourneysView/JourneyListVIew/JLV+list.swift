@@ -12,10 +12,10 @@ extension JourneyListView {
 		return ScrollViewReader { val in
 			ScrollView {
 				LazyVStack(spacing: 10) {
-					if firstAppear == true {
-						ChooTip.sunEvents(
+					if appSettingsViewModel.state.settings.tips.contains(.sunEventsTip) {
+						AppSettings.ChooTip.sunEvents(
 							onClose: {
-								firstAppear.toggle()
+								appSettingsViewModel.send(event: .didShowTip(tip: .sunEventsTip))
 							},
 							journey: journeyViewModel.state.data.journeys.first
 						)

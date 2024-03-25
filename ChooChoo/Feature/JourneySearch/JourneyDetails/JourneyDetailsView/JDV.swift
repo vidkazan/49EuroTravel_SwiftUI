@@ -12,6 +12,7 @@ import TipKit
 struct JourneyDetailsView: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyDetailsViewModel
+	@ObservedObject var appSettingsVM : AppSettingsViewModel = Model.shared.appSettingsVM
 	@State var scrollToLegId : UUID?
 	init(journeyDetailsViewModel : JourneyDetailsViewModel) {
 		viewModel = journeyDetailsViewModel

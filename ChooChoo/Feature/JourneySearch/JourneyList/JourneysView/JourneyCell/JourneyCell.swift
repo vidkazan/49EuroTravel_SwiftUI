@@ -10,6 +10,7 @@ import SwiftUI
 
 struct JourneyCell: View {
 	@EnvironmentObject var chewVM : ChewViewModel
+	@ObservedObject var appSettingsVM : AppSettingsViewModel = Model.shared.appSettingsVM
 	let journey : JourneyViewData
 	let stops : DepartureArrivalPair
 	let isPlaceholder : Bool
@@ -33,12 +34,11 @@ struct JourneyCell: View {
 					JourneyDetailsView(journeyDetailsViewModel: vm)
 				)
 			}, label: {
-				#warning("hardcoded mode")
 				VStack(spacing: 0) {
 					JourneyHeaderView(journey: journey)
 					LegsView(
 						journey : journey,
-						mode : .sunEvents
+						mode : appSettingsVM.state.settings.legViewMode
 					)
 					.padding(.horizontal,7)
 				}

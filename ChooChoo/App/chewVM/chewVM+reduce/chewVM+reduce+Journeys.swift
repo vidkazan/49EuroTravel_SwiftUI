@@ -20,14 +20,13 @@ extension ChewViewModel {
 					arrStop: state.data.depStop),
 				status: .checkingSearchData
 			)
-		case let .didUpdateSearchData(dep,arr,date,journeySettings,appSettings):
+		case let .didUpdateSearchData(dep,arr,date,journeySettings):
 			return State(
 				data: StateData(
 					data: state.data,
 					depStop: dep,
 					arrStop: arr,
 					journeySettings: journeySettings,
-					appSettings: appSettings,
 					date: date
 				),
 				status: .checkingSearchData

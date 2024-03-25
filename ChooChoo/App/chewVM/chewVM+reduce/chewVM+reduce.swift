@@ -21,14 +21,13 @@ extension ChewViewModel {
 			return reduceLoadingLocation(state, event)
 		case .checkingSearchData:
 			switch event {
-			case let .didUpdateSearchData(dep,arr,date,journeySettings,appSettings):
+			case let .didUpdateSearchData(dep,arr,date,journeySettings):
 				return State(
 					data: StateData(
 						data: state.data,
 						depStop: dep,
 						arrStop: arr,
 						journeySettings: journeySettings, 
-						appSettings: appSettings,
 						date: date
 					), 
 					status: .checkingSearchData

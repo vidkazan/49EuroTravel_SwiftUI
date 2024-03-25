@@ -11,6 +11,7 @@ import SwiftUI
 struct JourneyFollowCellView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var vm : JourneyDetailsViewModel
+	@ObservedObject var appSettingsVM : AppSettingsViewModel = Model.shared.appSettingsVM
 	init(journeyDetailsViewModel: JourneyDetailsViewModel) {
 		self.vm = journeyDetailsViewModel
 	}
@@ -52,8 +53,7 @@ struct JourneyFollowCellView : View {
 				BadgeView(.legDuration(data.time))
 					.badgeBackgroundStyle(.secondary)
 			}
-			#warning("hardcoded mode")
-			LegsView(journey : data,mode : .sunEvents)
+			LegsView(journey : data,mode : appSettingsVM.state.settings.legViewMode)
 			HStack(spacing: 2) {
 				Spacer()
 				BadgeView(

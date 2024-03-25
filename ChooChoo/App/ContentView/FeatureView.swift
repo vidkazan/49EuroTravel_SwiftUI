@@ -41,7 +41,7 @@ struct FeatureView: View {
 	let tabAppSettingsLabel : some View = {
 		Label(
 			title: {
-				Text("Follow", comment : "TabItem")
+				Text("Settings", comment : "TabItem")
 			},
 			icon: {
 				ChooSFSymbols.gearshape.view
@@ -76,7 +76,7 @@ struct FeatureView: View {
 					.tabItem { tabFollowLabel }
 					.tag(Tabs.follow)
 				NavigationStack {
-					Text("appSettings")
+					AppSettingsView()
 				}
 					.tabItem { tabAppSettingsLabel }
 					.tag(Tabs.appSettings)
@@ -92,7 +92,7 @@ struct FeatureView: View {
 					.tabItem { tabFollowLabel }
 					.tag(Tabs.follow)
 				NavigationView {
-					Text("appSettings")
+					AppSettingsView()
 				}
 					.tabItem { tabAppSettingsLabel }
 					.tag(Tabs.appSettings)

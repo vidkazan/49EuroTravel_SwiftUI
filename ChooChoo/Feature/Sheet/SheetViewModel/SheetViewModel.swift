@@ -100,7 +100,7 @@ extension SheetViewModel{
 		}
 		
 		case none
-		case tip(ChooTip)
+		case tip(AppSettings.ChooTip)
 		case date
 		case settings
 		case route(leg : LegViewData)

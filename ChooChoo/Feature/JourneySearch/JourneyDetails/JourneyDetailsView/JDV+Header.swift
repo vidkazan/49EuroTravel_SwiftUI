@@ -29,10 +29,9 @@ extension JourneyDetailsView {
 						Spacer()
 					}
 				}
-				#warning("hardcoded mode")
 				LegsView(
 					journey : viewModel.state.data.viewData,
-					mode : .sunEvents,
+					mode : appSettingsVM.state.settings.legViewMode,
 					legTapAction: { id in
 						scrollToLegId = id
 					}

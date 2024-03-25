@@ -10,8 +10,7 @@ import Foundation
 import CoreData
 
 
-extension CDJounreySettings {
-	@NSManaged public var onboarding: Bool
+extension CDJourneySettings {
     @NSManaged public var isWithTransfers: Bool
     @NSManaged public var transferTime: Int16
     @NSManaged public var transportModeSegment: Int16

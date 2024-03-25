@@ -26,7 +26,9 @@
 		7D0685ED2B50304500CCBE6B /* CoreDataStore+Fetch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0685EC2B50304500CCBE6B /* CoreDataStore+Fetch.swift */; };
 		7D08885E2B4A3F1B00283A34 /* CoreDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */; };
 		7D0D8ABE2AC75DD6008F0F4B /* TimeContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */; };
+		7D10BD3D2BB1A2C100702D83 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D10BD3C2BB1A2C100702D83 /* AppSettingsView.swift */; };
 		7D14D98F2B7AD85400FB67AC /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D14D98E2B7AD85400FB67AC /* AnnotationView.swift */; };
+		7D15AA462BB19E6800B6966D /* AppSettingsVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D15AA452BB19E6800B6966D /* AppSettingsVM.swift */; };
 		7D1638502B69841D006E9660 /* LDSV+background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D16384F2B69841D006E9660 /* LDSV+background.swift */; };
 		7D1638522B698457006E9660 /* LDSV+badges.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1638512B698457006E9660 /* LDSV+badges.swift */; };
 		7D1638542B698A04006E9660 /* SFSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D1638532B698A04006E9660 /* SFSymbols.swift */; };
@@ -282,7 +284,9 @@
 		7D0685EC2B50304500CCBE6B /* CoreDataStore+Fetch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreDataStore+Fetch.swift"; sourceTree = "<group>"; };
 		7D08885D2B4A3F1B00283A34 /* CoreDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataStore.swift; sourceTree = "<group>"; };
 		7D0D8ABD2AC75DD6008F0F4B /* TimeContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeContainer.swift; sourceTree = "<group>"; };
+		7D10BD3C2BB1A2C100702D83 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
 		7D14D98E2B7AD85400FB67AC /* AnnotationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
+		7D15AA452BB19E6800B6966D /* AppSettingsVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsVM.swift; sourceTree = "<group>"; };
 		7D16384F2B69841D006E9660 /* LDSV+background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LDSV+background.swift"; sourceTree = "<group>"; };
 		7D1638512B698457006E9660 /* LDSV+badges.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LDSV+badges.swift"; sourceTree = "<group>"; };
 		7D1638532B698A04006E9660 /* SFSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SFSymbols.swift; sourceTree = "<group>"; };
@@ -1123,6 +1127,7 @@
 				7D787DD52B5DA113007D2A3A /* BottomView.swift */,
 				7D7547B72B616FD3002BE434 /* FeatureView.swift */,
 				7D6734B42A96334B00CBE9C1 /* ContentView.swift */,
+				7D10BD3C2BB1A2C100702D83 /* AppSettingsView.swift */,
 			);
 			path = ContentView;
 			sourceTree = "<group>";
@@ -1319,6 +1324,7 @@
 				7DBD26BD2B99F10600612A3B /* Settings+init.swift */,
 				7DBD26BF2B99F13700612A3B /* Settings+Types.swift */,
 				7D7497912BADBD6A0041FBFB /* AppSettings.swift */,
+				7D15AA452BB19E6800B6966D /* AppSettingsVM.swift */,
 				7D345E492AE95E7C003CA948 /* JourneySettings.swift */,
 			);
 			path = Settings;
@@ -1817,6 +1823,7 @@
 				7DFA4A832AB10531005ECAEB /* constructJourneys+Badges.swift in Sources */,
 				7D9E10872AA6752B00820B92 /* SSV.swift in Sources */,
 				7D33A9492B5192940005D723 /* JFVM + reduce.swift in Sources */,
+				7D10BD3D2BB1A2C100702D83 /* AppSettingsView.swift in Sources */,
 				7D6C5C2D2AAF791400DEFC57 /* JDVM+sideEffects.swift in Sources */,
 				7D9BB10E2B0CBF54008A3616 /* CDJourney+CoreDataClass.swift in Sources */,
 				7D02CE342A98E8130048ADE6 /* JLV.swift in Sources */,
@@ -1882,6 +1889,7 @@
 				7D462D492AAC947F00BC0D65 /* JLVM+reduce+LoadingJourneys.swift in Sources */,
 				7DEE69CF2B9BCE6A00A063B4 /* ChooTip.swift in Sources */,
 				7D7547B82B616FD3002BE434 /* FeatureView.swift in Sources */,
+				7D15AA462BB19E6800B6966D /* AppSettingsVM.swift in Sources */,
 				7D9BB10C2B0CBF54008A3616 /* CDLocation+CoreDataClass.swift in Sources */,
 				7D0685ED2B50304500CCBE6B /* CoreDataStore+Fetch.swift in Sources */,
 				7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */,

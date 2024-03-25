@@ -37,7 +37,6 @@ extension ChewViewModel {
 		let  depStop : TextFieldContent
 		let arrStop : TextFieldContent
 		let journeySettings : JourneySettings
-		let appSettings : AppSettings
 		let date : SearchStopsDate
 		
 	}
@@ -89,8 +88,7 @@ extension ChewViewModel {
 			dep: TextFieldContent?  = nil,
 			arr: TextFieldContent?  = nil,
 			date: SearchStopsDate?  = nil,
-			journeySettings : JourneySettings?  = nil,
-			appSettings : AppSettings? = nil
+			journeySettings : JourneySettings?  = nil
 		)
 		
 		case onJourneyDataUpdated(_ stops : DepartureArrivalPair)
@@ -141,7 +139,6 @@ extension ChewViewModel.State {
 			depStop: .textOnly(""),
 			arrStop: .textOnly(""),
 			journeySettings: JourneySettings(),
-			appSettings: AppSettings(),
 			date: SearchStopsDate(date: .now, mode: .departure)
 		)
 		self.status = .start
@@ -168,7 +165,6 @@ extension ChewViewModel.StateData {
 		self.depStop = depStop ?? data.depStop
 		self.arrStop = arrStop ?? data.arrStop
 		self.journeySettings = journeySettings ?? data.journeySettings
-		self.appSettings = appSettings ?? data.appSettings
 		self.date = date ?? data.date
 	}
 }

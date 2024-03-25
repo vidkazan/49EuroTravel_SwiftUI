@@ -146,7 +146,6 @@ extension CoreDataStore {
 				print("📕 > update Settings : error : settings entity is null")
 				return
 			}
-			settings.onboarding = false
 			self.saveAsyncContext()
 		}
 	}

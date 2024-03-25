@@ -21,6 +21,7 @@ final class Model {
 	let journeyFollowViewModel : JourneyFollowViewModel
 	let recentSearchesViewModel : RecentSearchesViewModel
 	let alertViewModel : AlertViewModel
+	let appSettingsVM : AppSettingsViewModel
 	
 	init(
 		sheetVM : SheetViewModel,
@@ -37,6 +38,7 @@ final class Model {
 		self.alertViewModel = .init()
 		self.coreDataStore = .init()
 		self.locationDataManager = .init()
+		self.appSettingsVM = .init()
 	}
 	
 	init() {
@@ -48,6 +50,7 @@ final class Model {
 		self.alertViewModel = .init()
 		self.coreDataStore = .init()
 		self.locationDataManager = .init()
+		self.appSettingsVM = .init()
 	}
 }
 
