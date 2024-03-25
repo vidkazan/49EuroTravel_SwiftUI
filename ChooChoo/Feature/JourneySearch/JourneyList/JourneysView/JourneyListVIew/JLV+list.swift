@@ -12,7 +12,7 @@ extension JourneyListView {
 		return ScrollViewReader { val in
 			ScrollView {
 				LazyVStack(spacing: 10) {
-					if appSettingsViewModel.state.settings.tips.contains(.sunEventsTip) {
+					if appSettingsViewModel.state.settings.showTip(tip: .sunEventsTip) {
 						AppSettings.ChooTip.sunEvents(
 							onClose: {
 								appSettingsViewModel.send(event: .didShowTip(tip: .sunEventsTip))

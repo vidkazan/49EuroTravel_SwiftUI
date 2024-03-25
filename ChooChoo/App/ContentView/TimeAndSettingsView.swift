@@ -46,7 +46,7 @@ extension TimeAndSettingsView {
 			Image(.gearshape)
 				.tint(.primary)
 				.chewTextSize(.big)
-				.frame(maxWidth: 43,maxHeight: 43)
+				.frame(maxWidth: 40,maxHeight: 40)
 				.background(Color.chewFillAccent)
 				.cornerRadius(8)
 				.overlay(alignment: .topTrailing) {
@@ -54,6 +54,7 @@ extension TimeAndSettingsView {
 						.padding(5)
 				}
 		})
+		.frame(maxWidth: 40,maxHeight: 40)
 	}
 }
 

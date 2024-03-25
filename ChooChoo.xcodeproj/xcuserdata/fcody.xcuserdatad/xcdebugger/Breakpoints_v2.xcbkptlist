@@ -122,8 +122,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "23"
-            endingLineNumber = "23"
+            startingLineNumber = "57"
+            endingLineNumber = "57"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,8 +138,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "28"
-            endingLineNumber = "28"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
             <Locations>
@@ -186,8 +186,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "84"
+            endingLineNumber = "84"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
          </BreakpointContent>
@@ -425,8 +425,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "123"
-            endingLineNumber = "123"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "fetchRecentSearches()"
             landmarkType = "7">
             <Locations>
@@ -473,8 +473,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "126"
-            endingLineNumber = "126"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "fetchRecentSearches()"
             landmarkType = "7">
          </BreakpointContent>
@@ -793,6 +793,198 @@
             endingLineNumber = "19"
             landmarkName = "JourneySettings"
             landmarkType = "14">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1385F608-3A3A-445D-A91C-5280E722710A"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "fetchAppSettings()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1385F608-3A3A-445D-A91C-5280E722710A - 219f4f8d307adb43"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.CoreDataStore.fetchAppSettings() -&gt; Swift.Optional&lt;ChooChoo.AppSettings&gt;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "660">
+               </Location>
+               <Location
+                  uuid = "1385F608-3A3A-445D-A91C-5280E722710A - 219f4f8d307adb43"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.CoreDataStore.fetchAppSettings() -&gt; Swift.Optional&lt;ChooChoo.AppSettings&gt;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "44"
+                  endingLineNumber = "44"
+                  offsetFromSymbolStart = "664">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E3BBB759-BF02-4980-B604-8817EE3C1131"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "fetchAppSettings()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E951C1F0-C09A-4968-9BD4-65DCE36F21A2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
+            landmarkName = "fetchAppSettings()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D0DF5F71-265D-459C-B8C2-B68B4C55719E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/App/ContentView/AppSettingsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "D0DF5F71-265D-459C-B8C2-B68B4C55719E - 4366740650d72fa"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; SwiftUI.Text in closure #1 () -&gt; SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.Button&lt;ChooChoo.LegViewSettingsView&gt;, SwiftUI.EmptyView&gt; in ChooChoo.AppSettingsView.body.getter : some"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/App/ContentView/AppSettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "404">
+               </Location>
+               <Location
+                  uuid = "D0DF5F71-265D-459C-B8C2-B68B4C55719E - 9efacd69dedb995a"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 () -&gt; ChooChoo.LegViewSettingsView in closure #1 () -&gt; SwiftUI.Button&lt;ChooChoo.LegViewSettingsView&gt; in closure #1 () -&gt; SwiftUI.Section&lt;SwiftUI.Text, SwiftUI.Button&lt;ChooChoo.LegViewSettingsView&gt;, SwiftUI.EmptyView&gt; in ChooChoo.AppSettingsView.body.getter : some"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/App/ContentView/AppSettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "28"
+                  endingLineNumber = "28"
+                  offsetFromSymbolStart = "144">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "96233514-4472-46D7-88D4-C422E713A2BA"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "151"
+            endingLineNumber = "151"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1AF600F2-5661-4FF1-BB67-0D1FB432DA6B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "fetchAppSettings()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1AF600F2-5661-4FF1-BB67-0D1FB432DA6B - 219f4f8d307ad8df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.CoreDataStore.fetchAppSettings() -&gt; Swift.Optional&lt;ChooChoo.AppSettings&gt;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "748">
+               </Location>
+               <Location
+                  uuid = "1AF600F2-5661-4FF1-BB67-0D1FB432DA6B - 219f4f8d307ad8df"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.CoreDataStore.fetchAppSettings() -&gt; Swift.Optional&lt;ChooChoo.AppSettings&gt;"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "48"
+                  endingLineNumber = "48"
+                  offsetFromSymbolStart = "840">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

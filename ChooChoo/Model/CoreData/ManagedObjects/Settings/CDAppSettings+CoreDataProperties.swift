@@ -11,5 +11,7 @@ import CoreData
 
 
 extension CDAppSettings {
+	@NSManaged public var user: CDUser?
     @NSManaged public var legViewMode: Int16
+	@NSManaged public var tipsToShow: Data?
 }

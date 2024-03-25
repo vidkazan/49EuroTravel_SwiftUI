@@ -16,7 +16,7 @@ extension ChewViewModel {
 				return Empty().eraseToAnyPublisher()
 			}
 			guard Model.shared.coreDataStore.fetchUser() != nil else {
-				print("whenLoadingInitialData: user is nil: loading default data")
+				print("\(#function): user is nil: loading default data")
 				return Just(Event.didLoadInitialData(JourneySettings()))
 					.eraseToAnyPublisher()
 			}
@@ -25,6 +25,11 @@ extension ChewViewModel {
 
 			
 			Task {
+				if let appSettings = Model.shared.coreDataStore.fetchAppSettings() {
+					Model.shared.appSettingsVM.send(event: .didRequestToLoadInitialData(settings: appSettings))
+				} else {
+					print("\(#function): appSettings is nil")
+				}
 				if let stops = Model.shared.coreDataStore.fetchLocations() {
 					Model.shared.searchStopsViewModel.send(event: .didRecentStopsUpdated(recentStops: stops))
 				}
@@ -32,11 +37,14 @@ extension ChewViewModel {
 					Model.shared.recentSearchesViewModel.send(event: .didUpdateData(recentSearches))
 				}
 				if let chewJourneys = Model.shared.coreDataStore.fetchJourneys() {
-					let data = chewJourneys.map {$0.journeyFollowData()}
-					Model.shared.journeyFollowViewModel.send(event: .didUpdateData(data))
+					Model.shared.journeyFollowViewModel.send(
+						event: .didUpdateData(
+							chewJourneys.map {$0.journeyFollowData()}
+						)
+					)
 				}
 			}
-			return Just(Event.didLoadInitialData(settings ?? JourneySettings()))
+			return Just(Event.didLoadInitialData(settings))
 				.eraseToAnyPublisher()
 		}
 	}

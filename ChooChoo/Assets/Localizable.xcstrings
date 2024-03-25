@@ -439,7 +439,7 @@
       }
     },
     "now" : {
-      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
+      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -559,7 +559,7 @@
       }
     },
     "Save" : {
-      "comment" : "datePickerView: save button\nsettingsView: save button",
+      "comment" : "settingsView: save button\ndatePickerView: save button",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

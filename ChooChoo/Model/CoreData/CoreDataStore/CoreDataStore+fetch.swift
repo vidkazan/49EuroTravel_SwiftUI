@@ -13,9 +13,43 @@ import CoreLocation
 // MARK: Fetch
 extension CoreDataStore {
 	func fetchUser() -> CDUser? {
-		let user = self.fetchOrCreate(entity: .user, CDUser.self)?.first
+		let user = self.fetchOrCreateUser()?.first
 		self.user = user
 		return user
+	}
+	
+	func fetchAppSettings() -> AppSettings? {
+		var settings : CDAppSettings?
+		var legViewMode : AppSettings.LegViewMode = .all
+		var tips = Set<AppSettings.ChooTipType>()
+		
+		asyncContext.performAndWait {
+			settings = user?.appSettings
+			guard let settings = settings else {
+				return
+			}
+			if let mode = AppSettings.LegViewMode(rawValue: settings.legViewMode) {
+				legViewMode = mode
+			}
+			if let tipsToShowData = settings.tipsToShow,
+				let res = try? JSONDecoder()
+				.decode(
+					Set<AppSettings.ChooTipType>.self,
+					from: tipsToShowData
+				) {
+				tips = res
+			}
+		}
+		
+		guard settings != nil else {
+			return nil
+		}
+		
+		return AppSettings(
+			debugSettings: .init(prettyJSON: false, alternativeSearchPage: false),
+			legViewMode: legViewMode,
+			tips: tips
+		)
 	}
 	
 	func fetchSettings() -> JourneySettings {
@@ -23,16 +57,13 @@ extension CoreDataStore {
 		var transferTypes = JourneySettings.TransferTime.time(minutes: .zero)
 		var transportMode = JourneySettings.TransportMode.all
 		var transferCount = JourneySettings.TransferCountCases.unlimited
-//		var legViewMode : AppSettings.LegViewMode = .sunEvents
 		
 		asyncContext.performAndWait {
-			settings = user?.chooSettings
+			settings = user?.journeySettings
 			guard let settings = settings else {
 				return
 			}
-//			if let mode = AppSettings.LegViewMode(rawValue: settings.legViewMode) {
-//				legViewMode = mode
-//			}
+
 			transferTypes = {
 				 if settings.isWithTransfers == false {
 					 return .direct
@@ -67,11 +98,6 @@ extension CoreDataStore {
 			language: .english,
 			startWithWalking: true,
 			withBicycle: false
-//			debugSettings: JourneySettings.ChewDebugSettings(
-//				prettyJSON: false,
-//				alternativeSearchPage: false
-//			),
-//			legViewMode: legViewMode
 		)
 	}
 	
@@ -79,7 +105,7 @@ extension CoreDataStore {
 		var modes : CDTransportModes!
 		var transportModes = Set<LineType>()
 		asyncContext.performAndWait {
-			modes = user?.chooSettings?.transportModes
+			modes = user?.journeySettings?.transportModes
 		
 		
 		// buuueeeeeeee
@@ -141,17 +167,14 @@ extension CoreDataStore {
 	}
 	
 	
-	private func fetchOrCreate<T : NSManagedObject>(
-		entity : CoreDataStore.Entities,
-		_ t : T.Type
-	) -> [T]? {
-		if let res = fetch(t), !res.isEmpty {
+	private func fetchOrCreateUser() -> [CDUser]? {
+		if let res = fetch(CDUser.self), !res.isEmpty {
 			return res
 		}
 		 asyncContext.performAndWait {
 			self.user = CDUser.createWith(date: .now, using: self.asyncContext)
 		}
-		return fetch(t)
+		return fetch(CDUser.self)
 	}
 	
 	func fetch<T : NSManagedObject>(_ t : T.Type) -> [T]? {

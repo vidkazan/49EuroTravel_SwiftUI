@@ -11,20 +11,21 @@ import Combine
 
 class AppSettingsViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
-		didSet { print(">> state:",state.settings) }
+		didSet { print("🚂⚙️ >> state:",state.status,state.settings.legViewMode) }
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
 	
-	init(settings : AppSettings = .init()) {
-		self.state = State(settings: settings)
+	init(settings : AppSettings = .init(),status : Status = .idle) {
+		self.state = State(settings: settings,status: status)
 		Publishers.system(
-			initial: State(settings: settings),
+			initial: State(settings: settings,status: status),
 			reduce: Self.reduce,
 			scheduler: RunLoop.main,
 			feedbacks: [
 				Self.userInput(input: input.eraseToAnyPublisher()),
+				Self.whenUpdatedSettings()
 			],
 			name: ""
 		)
@@ -43,25 +44,48 @@ class AppSettingsViewModel : ObservableObject, Identifiable {
 
 extension AppSettingsViewModel  {
 	struct State : Equatable  {
+		let status : Status
 		let settings : AppSettings
 
-		init(settings: AppSettings = .init()) {
+		init(settings: AppSettings,status : Status) {
 			self.settings = settings
+			self.status = status
 		}
 	}
 	
-	enum Event {
-		case didLoadInitialData(settings : AppSettings)
-		case didShowTip(tip : AppSettings.ChooTipType)
-		case didChangeLegViewMode(mode : AppSettings.LegViewMode)
+	enum Status : Equatable {
+		static func == (lhs: AppSettingsViewModel.Status, rhs: AppSettingsViewModel.Status) -> Bool {
+			return lhs.description == rhs.description
+		}
+		
+		case updating
+		case idle
+		
+		
 		var description : String {
 			switch self {
-			case .didLoadInitialData:
-				return "didLoadInitialData"
+			case .idle:
+				return "idle"
+			case .updating:
+				return "updating"
+			}
+		}
+	}
+	enum Event {
+		case didRequestToLoadInitialData(settings : AppSettings)
+		case didShowTip(tip : AppSettings.ChooTipType)
+		case didRequestToChangeLegViewMode(mode : AppSettings.LegViewMode)
+		case didUpdateData
+		var description : String {
+			switch self {
+			case .didUpdateData:
+				return "didUpdateData"
+			case .didRequestToLoadInitialData:
+				return "didRequestToLoadInitialData"
 			case .didShowTip:
 				return "didShowTip"
-			case .didChangeLegViewMode:
-				return "didChangeLegViewMode"
+			case .didRequestToChangeLegViewMode:
+				return "didRequestToChangeLegViewMode"
 			}
 		}
 	}
@@ -70,22 +94,46 @@ extension AppSettingsViewModel  {
 
 extension AppSettingsViewModel {
 	static func reduce(_ state: State, _ event: Event) -> State {
-		print(">> ",event.description,"state:",state.settings)
-		switch event {
-		case .didLoadInitialData(let settings):
-			return State(settings: settings)
-		case .didShowTip(let tip):
-			var tips = state.settings.tips
-			tips.remove(tip)
-			return State(settings: AppSettings(
-				oldSettings: state.settings,
-				tips: tips
-			))
-		case .didChangeLegViewMode(let mode):
-			return State(settings: AppSettings(
-				oldSettings: state.settings,
-				legViewMode: mode
-			))
+		print("🚂⚙️ >> ",event.description,"state:",state.status,state.settings.legViewMode)
+		switch state.status {
+			case .idle:
+			switch event {
+			case .didRequestToLoadInitialData(let settings):
+				return State(settings: settings, status: .idle)
+			case .didShowTip(let tip):
+				var tips = state.settings.tipsToShow
+				tips.remove(tip)
+				return State(settings: AppSettings(
+					oldSettings: state.settings,
+					tips: tips
+				),status: .updating)
+			case .didRequestToChangeLegViewMode(let mode):
+				return State(settings: AppSettings(
+					oldSettings: state.settings,
+					legViewMode: mode
+				),status: .updating)
+			case .didUpdateData:
+				return state
+			}
+			case .updating:
+			switch event {
+			case .didRequestToLoadInitialData(let settings):
+				return State(settings: settings, status: .idle)
+			case .didShowTip(let tip):
+				var tips = state.settings.tipsToShow
+				tips.remove(tip)
+				return State(settings: AppSettings(
+					oldSettings: state.settings,
+					tips: tips
+				),status: .updating)
+			case .didRequestToChangeLegViewMode(let mode):
+				return State(settings: AppSettings(
+					oldSettings: state.settings,
+					legViewMode: mode
+				),status: .updating)
+			case .didUpdateData:
+				return State(settings: state.settings, status: .idle)
+			}
 		}
 	}
 }
@@ -94,6 +142,18 @@ extension AppSettingsViewModel {
 	static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
 		Feedback { _ in
 			return input
+		}
+	}
+		
+	static func whenUpdatedSettings() -> Feedback<State, Event> {
+		Feedback { (state: State) -> AnyPublisher<Event, Never> in
+			guard case .updating = state.status else {
+				return Empty().eraseToAnyPublisher()
+			}
+			Model.shared.coreDataStore.updateAppSettings(
+				newSettings: state.settings
+			)
+			return Just(Event.didUpdateData).eraseToAnyPublisher()
 		}
 	}
 }

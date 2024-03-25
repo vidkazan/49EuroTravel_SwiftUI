@@ -31,15 +31,10 @@ extension SettingsView {
 				language: .english,
 				startWithWalking: true,
 				withBicycle: false
-//				debugSettings: JourneySettings.ChewDebugSettings(
-//					prettyJSON: false,
-//					alternativeSearchPage: alternativeSearchPage
-//				),
-//				legViewMode: legViewMode
 			)
 			if res != oldSettings {
 				chewViewModel.send(event: .didUpdateSearchData(journeySettings: res))
-				Model.shared.coreDataStore.updateSettings(
+				Model.shared.coreDataStore.updateJounreySettings(
 					newSettings: res
 				)
 			}

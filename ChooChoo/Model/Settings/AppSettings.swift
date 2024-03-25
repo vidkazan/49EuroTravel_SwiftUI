@@ -11,25 +11,30 @@ import SwiftUI
 struct AppSettings : Equatable {
 	let debugSettings : ChewDebugSettings
 	let legViewMode : LegViewMode
-	let tips : Set<ChooTipType>
-	init(debugSettings : ChewDebugSettings = ChewDebugSettings(
-		prettyJSON: false, alternativeSearchPage: false),
-		legViewMode : LegViewMode = .sunEvents,
-		tips : Set<ChooTipType> = Set(ChooTipType.allCases)
+	let tipsToShow : Set<ChooTipType>
+	init(debugSettings : ChewDebugSettings,
+		legViewMode : LegViewMode,
+		tips : Set<ChooTipType>
 	) {
-		self.legViewMode = .sunEvents
-		self.tips = tips
+		self.legViewMode = legViewMode
+		self.tipsToShow = tips
 		self.debugSettings = debugSettings
 	}
 	
 	init(oldSettings : Self,
 		debugSettings : ChewDebugSettings? = nil,
 		legViewMode : LegViewMode? = nil,
-		tips : Set<ChooTipType>? = nil
+		 tips : Set<ChooTipType>? = [.followJourney,.sunEventsTip]
 	) {
 		self.legViewMode = legViewMode ?? oldSettings.legViewMode
-		self.tips = tips ?? oldSettings.tips
+		self.tipsToShow = tips ?? oldSettings.tipsToShow
 		self.debugSettings = debugSettings ?? oldSettings.debugSettings
+	}
+	
+	init() {
+		self.legViewMode = .sunEvents
+		self.tipsToShow = [.followJourney,.sunEventsTip]
+		self.debugSettings = .init(prettyJSON: false, alternativeSearchPage: false)
 	}
 }
 
@@ -51,10 +56,8 @@ extension AppSettings {
 			self != .sunEvents
 		}
 	}
-}
-
-extension AppSettings {
-	enum ChooTipType : String ,Equatable, Hashable, CaseIterable {
+	
+	enum ChooTipType : String ,Equatable, Hashable, CaseIterable,Codable {
 		case followJourney
 		case sunEventsTip
 	}
@@ -162,3 +165,19 @@ extension AppSettings.ChooTip {
 	}
 }
 
+extension AppSettings {
+	func showTip(tip : ChooTipType) -> Bool {
+		if !tipsToShow.contains(tip) {
+			return false
+		}
+		switch tip {
+		case .followJourney:
+			return true
+		case .sunEventsTip:
+			if self.legViewMode != .colorfulLegs {
+				return true
+			}
+			return false
+		}
+	}
+}
