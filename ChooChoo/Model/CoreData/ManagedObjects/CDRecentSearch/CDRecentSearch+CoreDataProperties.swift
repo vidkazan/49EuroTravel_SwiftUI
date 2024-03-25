@@ -28,6 +28,7 @@ extension CDRecentSearch : Identifiable {
 		self.init(entity: CDRecentSearch.entity(), insertInto: managedObjectContext)
 		self.id = search.stops.id
 		self.searchDate = Date(timeIntervalSince1970: search.searchTS)
+		self.searchDate = Date(timeIntervalSince1970: search.searchTS)
 		let _ = CDLocation(
 			context: managedObjectContext,
 			stop: search.stops.departure,

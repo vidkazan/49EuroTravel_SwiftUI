@@ -34,7 +34,7 @@ extension ChewViewModel {
 				)
 			)
 			return Just(Event.onJourneyDataUpdated(
-				DepartureArrivalPair(
+				DepartureArrivalPairStop(
 					departure: dep,
 					arrival: arr
 				)

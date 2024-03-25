@@ -12,10 +12,10 @@ struct JourneyCell: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var appSettingsVM : AppSettingsViewModel = Model.shared.appSettingsVM
 	let journey : JourneyViewData
-	let stops : DepartureArrivalPair
+	let stops : DepartureArrivalPairStop
 	let isPlaceholder : Bool
 	
-	init(journey: JourneyViewData,stops : DepartureArrivalPair, isPlaceholder : Bool = false) {
+	init(journey: JourneyViewData,stops : DepartureArrivalPairStop, isPlaceholder : Bool = false) {
 		self.journey = journey
 		self.stops = stops
 		self.isPlaceholder = isPlaceholder
@@ -44,7 +44,7 @@ struct JourneyCell: View {
 				}
 			})
 			HStack(alignment: .center) {
-				if let pl = journey.legs.first?.legStopsViewData.first?.departurePlatform {
+				if let pl = journey.legs.first?.legStopsViewData.first?.platforms.departure {
 					PlatformView(
 						isShowingPlatormWord: false,
 						platform: pl

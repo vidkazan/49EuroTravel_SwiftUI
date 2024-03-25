@@ -65,7 +65,7 @@ extension Model {
 		followId: Int64,
 		for journeyRef: String,
 		viewdata : JourneyViewData,
-		stops : DepartureArrivalPair,
+		stops : DepartureArrivalPairStop,
 		chewVM : ChewViewModel?
 	) -> JourneyDetailsViewModel {
 		if let vm = _journeyDetailsViewModels[journeyRef] {

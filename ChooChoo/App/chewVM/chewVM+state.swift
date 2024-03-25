@@ -56,7 +56,7 @@ extension ChewViewModel {
 		case loadingInitialData
 		case idle
 		case checkingSearchData
-		case journeys(_ stops : DepartureArrivalPair)
+		case journeys(_ stops : DepartureArrivalPairStop)
 		case editingStop(LocationDirectionType)
 		case loadingLocation(send : (ChewViewModel.Event)->Void)
 		
@@ -91,7 +91,7 @@ extension ChewViewModel {
 			journeySettings : JourneySettings?  = nil
 		)
 		
-		case onJourneyDataUpdated(_ stops : DepartureArrivalPair)
+		case onJourneyDataUpdated(_ stops : DepartureArrivalPairStop)
 		
 		
 		case onStopsSwitch

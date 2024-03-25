@@ -51,8 +51,12 @@ extension StopTripDTO {
 						id: origin.id,
 						locationCoordinates: CLLocationCoordinate2D(latitude: origin.latitude ?? 0, longitude: origin.longitude ?? 0),
 						name: origin.name ?? "",
-						departurePlatform: .init(),
-						arrivalPlatform: .init(),
+						platforms: .init(
+							departure: .init(),
+							arrival: .init()
+						),
+//						departurePlatform: .init(),
+//						arrivalPlatform: .init(),
 						time: .init(),
 						stopOverType: .origin
 					),
@@ -60,8 +64,12 @@ extension StopTripDTO {
 						id: stop?.id,
 						locationCoordinates: CLLocationCoordinate2D(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
 						name: stop?.name ?? "",
-						departurePlatform: .init(),
-						arrivalPlatform: .init(actual: platform,planned: plannedPlatform),
+						platforms: .init(
+							departure: .init(),
+							arrival: .init(actual: platform,planned: plannedPlatform)
+						),
+//						departurePlatform: .init(),
+//						arrivalPlatform: .init(actual: platform,planned: plannedPlatform),
 						time: container,
 						stopOverType: .destination
 					)
@@ -74,8 +82,12 @@ extension StopTripDTO {
 						id: stop?.id,
 						locationCoordinates: CLLocationCoordinate2D(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
 						name: stop?.name ?? "",
-						departurePlatform: .init(actual: platform,planned: plannedPlatform),
-						arrivalPlatform: .init(),
+						platforms: .init(
+							departure: .init(actual: platform,planned: plannedPlatform),
+							arrival: .init()
+						),
+//						departurePlatform: .init(actual: platform,planned: plannedPlatform),
+//						arrivalPlatform: .init(),
 						time: container,
 						stopOverType: .origin
 					),
@@ -83,8 +95,12 @@ extension StopTripDTO {
 						id: destination.id,
 						locationCoordinates: CLLocationCoordinate2D(latitude: destination.latitude ?? 0, longitude: destination.longitude ?? 0),
 						name: destination.name ?? "",
-						departurePlatform: .init(),
-						arrivalPlatform: .init(),
+						platforms: .init(
+							departure: .init(),
+							arrival: .init()
+						),
+//						departurePlatform: .init(),
+//						arrivalPlatform: .init(),
 						time: .init(),
 						stopOverType: .destination
 					)

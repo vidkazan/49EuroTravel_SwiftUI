@@ -13,8 +13,9 @@ struct StopViewData : Equatable, Identifiable, Hashable {
 	let id : String?
 	let locationCoordinates : CLLocationCoordinate2D
 	let name : String
-	let departurePlatform : Prognosed<String>
-	let arrivalPlatform : Prognosed<String>
+	let platforms : DepartureArrivalPair<Prognosed<String>>
+//	let departurePlatform : Prognosed<String>
+//	let arrivalPlatform : Prognosed<String>
 	let time : TimeContainer
 	let stopOverType : StopOverType
 	
@@ -84,14 +85,18 @@ extension StopViewData {
 	) {
 		self.time = time
 		self.name = name
-		self.departurePlatform  = Prognosed(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
-		self.arrivalPlatform  = Prognosed(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
+//		self.departurePlatform  = Prognosed(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
+//		self.arrivalPlatform  = Prognosed(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
 		self.stopOverType = type
 		self.locationCoordinates = CLLocationCoordinate2D(
 			latitude: stop.stop?.location?.latitude ?? stop.stop?.latitude ?? -1,
 			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
 		)
 		self.id = stop.stop?.id
+		self.platforms = .init(
+			departure: Prognosed(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform),
+			arrival: Prognosed(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
+		)
 	}
 	
 	init(
@@ -103,10 +108,14 @@ extension StopViewData {
 	) {
 		self.time = time
 		self.name = name
-		self.departurePlatform  = Prognosed(actual: nil, planned: nil)
-		self.arrivalPlatform  = Prognosed(actual: nil, planned: nil)
+//		self.departurePlatform  = Prognosed(actual: nil, planned: nil)
+//		self.arrivalPlatform  = Prognosed(actual: nil, planned: nil)
 		self.stopOverType = type
 		self.locationCoordinates = coordinates
 		self.id = stopId
+		self.platforms = .init(
+			departure: .init(),
+			arrival: .init()
+		)
 	}
 }

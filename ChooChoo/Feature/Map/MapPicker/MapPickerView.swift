@@ -93,7 +93,7 @@ extension MapPickerView {
 													time: trip.time.date.departure
 												)
 												.frame(minWidth: 50)
-												let platform = trip.legStopsViewData.first?.departurePlatform ?? trip.legStopsViewData.last?.arrivalPlatform
+												let platform = trip.legStopsViewData.first?.platforms.departure ?? trip.legStopsViewData.last?.platforms.arrival
 												HStack {
 													if let platform = platform  {
 														PlatformView(isShowingPlatormWord: false, platform: platform)

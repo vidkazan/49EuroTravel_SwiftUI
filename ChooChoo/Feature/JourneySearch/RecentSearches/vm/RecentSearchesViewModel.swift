@@ -10,10 +10,10 @@ import Combine
 
 final class RecentSearchesViewModel : ObservableObject, Identifiable {
 	struct RecentSearch : Equatable {
-		let stops : DepartureArrivalPair
+		let stops : DepartureArrivalPairStop
 		let searchTS : Double
 		
-		init(stops: DepartureArrivalPair, searchTS: Double) {
+		init(stops: DepartureArrivalPairStop, searchTS: Double) {
 			self.stops = stops
 			self.searchTS = searchTS
 		}

@@ -13,7 +13,7 @@ struct JourneyListView: View {
 	@ObservedObject var journeyViewModel : JourneyListViewModel
 	@ObservedObject var appSettingsViewModel = Model.shared.appSettingsVM
 	
-	init(stops : DepartureArrivalPair, date: SearchStopsDate,settings : JourneySettings) {
+	init(stops : DepartureArrivalPairStop, date: SearchStopsDate,settings : JourneySettings) {
 		self.journeyViewModel = JourneyListViewModel(
 			date: date,
 			settings: settings,

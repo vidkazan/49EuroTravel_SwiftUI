@@ -144,7 +144,7 @@ extension ArrivingTrainTimeViewModel {
 				let searchArrivalTime = leg.time.date.departure.actual,
 				leg.lineViewData.type == .regional || leg.lineViewData.type == .suburban,
 				let stop = leg.legStopsViewData.first,
-				let searchArrivalPlatform = leg.legStopsViewData[0].departurePlatform.actual
+				  let searchArrivalPlatform = leg.legStopsViewData[0].platforms.departure.actual
 			else {
 				return Just(Event.didFail(DataError.validationError(msg: "request validation filed"))).eraseToAnyPublisher()
 			}

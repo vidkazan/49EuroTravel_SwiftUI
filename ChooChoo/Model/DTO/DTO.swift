@@ -21,11 +21,11 @@ enum StopOverType : String,Equatable, CaseIterable {
 	func platform(stopOver : StopViewData) -> Prognosed<String>? {
 		switch self {
 		case .stopover:
-			return stopOver.departurePlatform.actual == nil ? stopOver.arrivalPlatform : stopOver.departurePlatform
+			return stopOver.platforms.departure.actual == nil ? stopOver.platforms.arrival : stopOver.platforms.departure
 		case .destination,.footBottom:
-			return stopOver.arrivalPlatform
+			return stopOver.platforms.arrival
 		case .footTop,.origin,.footMiddle,.transfer:
-			return stopOver.departurePlatform
+			return stopOver.platforms.departure
 		}
 	}
 	

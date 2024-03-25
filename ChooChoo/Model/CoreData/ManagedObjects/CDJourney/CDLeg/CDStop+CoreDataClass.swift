@@ -35,8 +35,8 @@ extension CDStop {
 //			for: self
 //		)
 		
-		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.departurePlatform, to: self, type: .departure)
-		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.arrivalPlatform, to: self, type: .arrival)
+		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.platforms.departure, to: self, type: .departure)
+		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.platforms.arrival, to: self, type: .arrival)
 	}
 }
 
@@ -54,8 +54,12 @@ extension CDStop {
 			id: self.stopId,
 			locationCoordinates: CLLocationCoordinate2D(latitude: self.lat, longitude: self.long),
 			name: self.name,
-			departurePlatform: Prognosed<String>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),
-			arrivalPlatform: Prognosed<String>(actual: self.arrPlatform?.actual, planned: self.arrPlatform?.planned),
+			platforms: .init(
+				departure: Prognosed<String>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),
+				arrival: Prognosed<String>(actual: self.arrPlatform?.actual, planned: self.arrPlatform?.planned)
+			),
+//			departurePlatform: Prognosed<String>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),
+//			arrivalPlatform: Prognosed<String>(actual: self.arrPlatform?.actual, planned: self.arrPlatform?.planned),
 			time: time,
 			stopOverType: StopOverType(rawValue: self.stopOverType) ?? .stopover
 		)

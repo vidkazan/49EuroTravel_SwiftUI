@@ -11,7 +11,7 @@ import SwiftUI
 struct RecentSearchCell: View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	let send : (RecentSearchesViewModel.Event) -> Void
-	let locations : DepartureArrivalPair
+	let locations : DepartureArrivalPairStop
 	var body: some View {
 		Button(action: {
 			chewVM.send(

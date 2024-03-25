@@ -18,7 +18,7 @@ final class JourneyListViewModel : ObservableObject {
 	private let input = PassthroughSubject<Event,Never>()
 	
 	// testing init
-	init(stops : DepartureArrivalPair,viewData : JourneyListViewData) {
+	init(stops : DepartureArrivalPairStop,viewData : JourneyListViewData) {
 //		print("💾 JLVM \(self.id.uuidString.suffix(4)) init")
 		state = State(
 			journeys: viewData.journeys,
@@ -47,7 +47,7 @@ final class JourneyListViewModel : ObservableObject {
 	init(
 		date: SearchStopsDate,
 		settings : JourneySettings,
-		stops : DepartureArrivalPair
+		stops : DepartureArrivalPairStop
 	) {
 //		print("💾 JLVM \(self.id.uuidString.suffix(4)) init")
 		state = State(
