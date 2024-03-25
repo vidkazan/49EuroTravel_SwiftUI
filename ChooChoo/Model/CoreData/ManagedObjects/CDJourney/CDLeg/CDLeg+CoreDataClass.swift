@@ -32,7 +32,10 @@ extension CDLeg {
 
 		let _ = CDLegType(insertIntoManagedObjectContext: context, type: leg.legType, for: self)
 		
-		let _ = CDTime(context: context, container: leg.time, cancelled: !leg.isReachable,for: self)
+		if let time = leg.time.encode() {
+			self.time = time
+		}
+//		let _ = CDTime(context: context, container: leg.time, cancelled: !leg.isReachable,for: self)
 		
 		for stop in leg.legStopsViewData {
 			let _ = CDStop(insertInto: context, with: stop, to: self)
@@ -46,7 +49,8 @@ extension CDLeg {
 		
 		stopsViewData = stops.map { $0.stopViewData() }
 		
-		let time = TimeContainer(chewTime: self.time)
+		let time = TimeContainer(isoEncoded: self.time) ?? .init()
+//		let time = TimeContainer(chewTime: self.time)
 		let segments = segments(from : stopsViewData)
 		var legDTOobj : LegDTO? = nil
 		if let legDTOdata = legDTO?.data(using: .utf8) {

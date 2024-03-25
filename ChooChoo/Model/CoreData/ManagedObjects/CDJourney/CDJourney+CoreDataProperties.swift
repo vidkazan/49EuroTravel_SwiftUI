@@ -18,7 +18,8 @@ extension CDJourney {
 	@NSManaged public var user: CDUser?
 	@NSManaged public var isActive: Bool
 	@NSManaged public var legs: Set<CDLeg>
-	@NSManaged public var time: CDTime
+	@NSManaged public var time: Data
+//	@NSManaged public var time: CDTime
 	@NSManaged public var sunEvents: Set<CDSunEvent>
 	@NSManaged public var updatedAt: Double
 }
@@ -36,12 +37,15 @@ extension CDJourney {
 			self.isActive = false
 			self.journeyRef = viewData.refreshToken
 			self.updatedAt = Date.now.timeIntervalSince1970
-			let _ = CDTime(
-				context: managedObjectContext,
-				container: viewData.time,
-				cancelled: !viewData.isReachable,
-				for: self
-			)
+			if let time = try?  JSONEncoder().encode(viewData.time.iso) {
+				self.time = time
+			}
+//			let _ = CDTime(
+//				context: managedObjectContext,
+//				container: viewData.time,
+//				cancelled: !viewData.isReachable,
+//				for: self
+//			)
 			viewData.legs.forEach {
 				let _ = CDLeg(context: managedObjectContext,leg: $0,for: self)
 			}

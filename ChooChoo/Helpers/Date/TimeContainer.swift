@@ -47,15 +47,24 @@ struct TimeContainer : Equatable, Hashable {
 
 extension TimeContainer {
 	// MARK: Init
-	init(chewTime : CDTime?) {
+	init(iso : ISOTimeContainer) {
 		self.init(
-			plannedDeparture: chewTime?.plannedDeparture,
-			plannedArrival: chewTime?.plannedArrival,
-			actualDeparture: chewTime?.actualDeparture,
-			actualArrival: chewTime?.actualArrival,
-			cancelled: chewTime?.cancelled
+			plannedDeparture: iso.departure.planned,
+			plannedArrival: iso.arrival.planned,
+			actualDeparture: iso.departure.actual,
+			actualArrival: iso.arrival.planned,
+			cancelled: nil
 		)
 	}
+//	init(chewTime : CDTime?) {
+//		self.init(
+//			plannedDeparture: chewTime?.plannedDeparture,
+//			plannedArrival: chewTime?.plannedArrival,
+//			actualDeparture: chewTime?.actualDeparture,
+//			actualArrival: chewTime?.actualArrival,
+//			cancelled: chewTime?.cancelled
+//		)
+//	}
 	init() {
 		let departure = Prognosed<String>(
 			actual: nil,
@@ -103,7 +112,7 @@ extension TimeContainer {
 
 extension TimeContainer {
 	// MARK: ISO Container
-	struct ISOTimeContainer : Equatable, Hashable {
+	struct ISOTimeContainer : Equatable, Hashable, Codable {
 		let departure : Prognosed<String>
 		let arrival : Prognosed<String>
 		
@@ -219,6 +228,20 @@ extension TimeContainer {
 			return .active
 		default:
 			return .past
+		}
+	}
+}
+
+extension TimeContainer {
+	func encode() -> Data? {
+		return try? JSONEncoder().encode(self.iso)
+	}
+	
+	init?(isoEncoded : Data) {
+		if let iso = try? JSONDecoder().decode(ISOTimeContainer.self, from: isoEncoded) {
+			self.init(iso: iso)
+		} else {
+			return nil
 		}
 	}
 }

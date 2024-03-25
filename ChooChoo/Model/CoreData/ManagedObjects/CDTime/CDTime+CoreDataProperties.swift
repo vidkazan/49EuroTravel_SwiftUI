@@ -9,14 +9,14 @@
 import Foundation
 import CoreData
 
-extension CDTime {
-	@NSManaged public var actualArrival : String?
-	@NSManaged public var actualDeparture : String?
-	@NSManaged public var plannedArrival : String?
-	@NSManaged public var plannedDeparture : String?
-	@NSManaged public var cancelled : Bool
-	
-	@NSManaged public var chewJourney : CDJourney?
-	@NSManaged public var leg: CDLeg?
-	@NSManaged public var stop: CDStop?
-}
+//extension CDTime {
+//	@NSManaged public var actualArrival : String?
+//	@NSManaged public var actualDeparture : String?
+//	@NSManaged public var plannedArrival : String?
+//	@NSManaged public var plannedDeparture : String?
+//	@NSManaged public var cancelled : Bool
+//	
+//	@NSManaged public var chewJourney : CDJourney?
+//	@NSManaged public var leg: CDLeg?
+//	@NSManaged public var stop: CDStop?
+//}

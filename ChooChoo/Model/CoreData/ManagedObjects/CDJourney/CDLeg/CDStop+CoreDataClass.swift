@@ -25,22 +25,31 @@ extension CDStop {
 		self.stopOverType = stopData.stopOverType.rawValue
 		self.isCancelled = stopData.cancellationType() == .fullyCancelled
 		self.leg = leg
-		
-		let _ = CDTime(
-			context: context,
-			container: stopData.time,
-			cancelled: stopData.cancellationType() == .fullyCancelled,
-			for: self
-		)
+		if let time = stopData.time.encode() {
+			self.time = time
+		}
+//		let _ = CDTime(
+//			context: context,
+//			container: stopData.time,
+//			cancelled: stopData.cancellationType() == .fullyCancelled,
+//			for: self
+//		)
 		
 		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.departurePlatform, to: self, type: .departure)
 		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.arrivalPlatform, to: self, type: .arrival)
 	}
 }
 
+#warning("finish here")
 extension CDStop {
 	func stopViewData() -> StopViewData {
-		let time = TimeContainer(chewTime: self.time)
+		var time = TimeContainer()
+		if let isoTime =  try? JSONDecoder().decode(TimeContainer.ISOTimeContainer.self, from: self.time) {
+			time = TimeContainer(iso: isoTime)
+		} 
+//		else {
+//			return nil
+//		}
 		return StopViewData(
 			id: self.stopId,
 			locationCoordinates: CLLocationCoordinate2D(latitude: self.lat, longitude: self.long),

@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Prognosed<T : Hashable> : Hashable {
+struct Prognosed<T: Hashable & Codable> : Hashable,Codable {
 	var actual : T?
 	var planned : T?
 	

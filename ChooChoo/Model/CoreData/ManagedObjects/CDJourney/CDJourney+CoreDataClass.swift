@@ -27,7 +27,8 @@ extension CDJourney {
 			sunEvents = self.sunEvents.map {
 				$0.sunEvent()
 			}
-			let time = TimeContainer(chewTime: self.time)
+			let time = TimeContainer(isoEncoded: self.time) ?? .init()
+//			let time = TimeContainer(chewTime: self.time)
 			#warning("add remarks")
 			data = JourneyFollowData(
 				id : self.id,

@@ -21,7 +21,9 @@ struct StopViewData : Equatable, Identifiable, Hashable {
 	func cancellationType() -> StopOverCancellationType {
 		switch self.stopOverType {
 		case .stopover:
-			if time.arrivalStatus == .cancelled && time.departureStatus == .cancelled {
+			if time.arrivalStatus == .cancelled 
+				&&
+				time.departureStatus == .cancelled {
 				return .fullyCancelled
 			}
 			if time.arrivalStatus == .cancelled {
