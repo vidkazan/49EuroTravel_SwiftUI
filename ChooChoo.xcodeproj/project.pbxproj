@@ -187,8 +187,6 @@
 		7DAC5CB72BACDA84000F7D33 /* JFCV+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC5CB62BACDA84000F7D33 /* JFCV+Map.swift */; };
 		7DAE1F6A2B0D26CF0097AAD8 /* CDTime+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F662B0D26CF0097AAD8 /* CDTime+CoreDataClass.swift */; };
 		7DAE1F6B2B0D26CF0097AAD8 /* CDJourneySettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F672B0D26CF0097AAD8 /* CDJourneySettings+CoreDataProperties.swift */; };
-		7DAE1F6C2B0D26CF0097AAD8 /* CDTransportMode+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F682B0D26CF0097AAD8 /* CDTransportMode+CoreDataClass.swift */; };
-		7DAE1F6D2B0D26CF0097AAD8 /* CDTransportMode+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F692B0D26CF0097AAD8 /* CDTransportMode+CoreDataProperties.swift */; };
 		7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */; };
 		7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C12A9E8C2B006F1A17 /* Solar.swift */; };
 		7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */; };
@@ -436,8 +434,6 @@
 		7DAC5CB62BACDA84000F7D33 /* JFCV+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JFCV+Map.swift"; sourceTree = "<group>"; };
 		7DAE1F662B0D26CF0097AAD8 /* CDTime+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTime+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7DAE1F672B0D26CF0097AAD8 /* CDJourneySettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDJourneySettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7DAE1F682B0D26CF0097AAD8 /* CDTransportMode+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTransportMode+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7DAE1F692B0D26CF0097AAD8 /* CDTransportMode+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDTransportMode+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTimePresetButtons.swift; sourceTree = "<group>"; };
 		7DAF62C12A9E8C2B006F1A17 /* Solar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solar.swift; sourceTree = "<group>"; };
 		7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunEvent.swift; sourceTree = "<group>"; };
@@ -924,7 +920,6 @@
 			children = (
 				7D7497972BADDA030041FBFB /* CDAppSettings+CoreDataClass.swift */,
 				7D7497982BADDA030041FBFB /* CDAppSettings+CoreDataProperties.swift */,
-				7D65DF132B2A26BE00692601 /* CDTransportMode */,
 				7DA13A402B28D5F10045061F /* CDJourneySettings+CoreDataClass.swift */,
 				7DAE1F672B0D26CF0097AAD8 /* CDJourneySettings+CoreDataProperties.swift */,
 			);
@@ -938,15 +933,6 @@
 				7D3D88EA2B2A166E00B269E7 /* CDSunEvent+CoreDataClass.swift */,
 			);
 			path = CDSunEvent;
-			sourceTree = "<group>";
-		};
-		7D65DF132B2A26BE00692601 /* CDTransportMode */ = {
-			isa = PBXGroup;
-			children = (
-				7DAE1F692B0D26CF0097AAD8 /* CDTransportMode+CoreDataProperties.swift */,
-				7DAE1F682B0D26CF0097AAD8 /* CDTransportMode+CoreDataClass.swift */,
-			);
-			path = CDTransportMode;
 			sourceTree = "<group>";
 		};
 		7D65DF142B2A270B00692601 /* CDJourney */ = {
@@ -1722,7 +1708,6 @@
 				7DD5BAE32B72ADDA00CFE768 /* JDV.swift in Sources */,
 				7D53705C2ACED7300009BA20 /* PlannedActual.swift in Sources */,
 				7D3D88ED2B2A166E00B269E7 /* CDSunEvent+CoreDataProperties.swift in Sources */,
-				7DAE1F6C2B0D26CF0097AAD8 /* CDTransportMode+CoreDataClass.swift in Sources */,
 				7DAC0C932B2780C0001FC6EA /* JFVM.swift in Sources */,
 				7DE6FDA32B5BE58100AC8DE3 /* NetworkMonitor.swift in Sources */,
 				7D6C5C252AAF4B1300DEFC57 /* chewVM+reduce+Idle.swift in Sources */,
@@ -1855,7 +1840,6 @@
 				7D55BD9E2B5EA39900A0CE08 /* ChewDatePicker.swift in Sources */,
 				7D02CE302A97E96E0048ADE6 /* BadgeView.swift in Sources */,
 				7D4B1B972AA8FDDB0096F372 /* SSVM+sideEffect.swift in Sources */,
-				7DAE1F6D2B0D26CF0097AAD8 /* CDTransportMode+CoreDataProperties.swift in Sources */,
 				7D6C5C162AAF485F00DEFC57 /* chewVM+sideEffect.swift in Sources */,
 				7DD5BAEB2B72AF9400CFE768 /* JDVM+sideEffects+loading.swift in Sources */,
 				7D08885E2B4A3F1B00283A34 /* CoreDataStore.swift in Sources */,
@@ -1994,7 +1978,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -2049,7 +2033,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

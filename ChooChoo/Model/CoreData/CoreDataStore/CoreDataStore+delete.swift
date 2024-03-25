@@ -18,7 +18,6 @@ extension CoreDataStore {
 				if let res = objects.first(where: { obj in
 					return obj.id == id
 				}) {
-//					print("> ⚡️ delete journeys thread ",Thread.current)
 					self.asyncContext.delete(res)
 					self.saveAsyncContext()
 					result = true
@@ -56,7 +55,6 @@ extension CoreDataStore {
 				if let res = objects.first(where: { obj in
 					return obj.id == id
 				}) {
-//					print("> ⚡️ delete journeys thread ",Thread.current)
 					self.asyncContext.delete(res)
 					self.saveAsyncContext()
 					result = true

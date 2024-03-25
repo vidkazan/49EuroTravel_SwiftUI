@@ -14,7 +14,6 @@ extension CoreDataStore {
 	func addRecentLocation(stop : Stop){
 		guard let user = self.user else { return }
 		 asyncContext.performAndWait {
-//			print("> ⚡️ create locations thread ",Thread.current)
 			 if stop.stopDTO?.products != nil {
 				 let _ = CDLocation(
 					context: self.asyncContext,

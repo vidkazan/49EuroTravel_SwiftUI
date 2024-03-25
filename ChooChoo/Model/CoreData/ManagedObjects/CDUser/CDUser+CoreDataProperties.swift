@@ -24,10 +24,8 @@ extension CDUser {
 
 			let journeySettings = CDJourneySettings(entity: CDJourneySettings.entity(), insertInto: managedObjectContext)
 			let appSettings = CDAppSettings(entity: CDAppSettings.entity(), insertInto: managedObjectContext)
-			let modes = CDTransportModes(entity: CDTransportModes.entity(), insertInto: managedObjectContext)
 			journeySettings.user = user
 			appSettings.user = user
-			modes.chooSettings = journeySettings
 
 			do {
 				try managedObjectContext.save()

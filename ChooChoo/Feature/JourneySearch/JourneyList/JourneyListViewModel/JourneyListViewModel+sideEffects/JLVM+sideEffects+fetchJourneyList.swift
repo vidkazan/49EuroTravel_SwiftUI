@@ -24,15 +24,14 @@ extension JourneyListViewModel {
 			methods: [
 				Query.remarks(showRemarks: true),
 				Query.results(max: 5),
-				Query.stopovers(isShowing: true),
-//				Query.pretty(pretyIntend: settings.debugSettings.prettyJSON),
+				Query.stopovers(isShowing: true)
 			]
 		)
 		return ApiService().fetch(JourneyListDTO.self,query: query, type: ApiService.Requests.journeys)
 	}
 	
 	static func addJourneyListStopsQuery(dep : Stop,arr : Stop) -> [URLQueryItem] {
-		var query : [URLQueryItem] = []
+		var query : [URLQueryItem] = Constants.initialQuery
 		switch dep.type {
 		case .location:
 			query += [

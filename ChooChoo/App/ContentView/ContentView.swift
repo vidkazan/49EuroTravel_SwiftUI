@@ -9,7 +9,7 @@ import SwiftUI
 import TipKit
 
 // learn content shape
-// fetch cdsettings
+// add all journeySettings
 
 // MARK: revise
 // all text revision

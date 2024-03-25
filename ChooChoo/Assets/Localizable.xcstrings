@@ -15,6 +15,12 @@
     "%lld min " : {
       "comment" : "SettingsView: transferSegment: transfer duration",
       "localizations" : {
+        "de" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%lld min"
+          }
+        },
         "ru" : {
           "stringUnit" : {
             "state" : "translated",
@@ -97,6 +103,9 @@
           }
         }
       }
+    },
+    "App system settings" : {
+      "comment" : "AppSettingsView"
     },
     "Bad search request" : {
       "comment" : "ApiError"
@@ -439,7 +448,7 @@
       }
     },
     "now" : {
-      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
+      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -570,7 +579,7 @@
       }
     },
     "Search" : {
-      "comment" : "TabItem\nsearch tip title",
+      "comment" : "search tip title\nTabItem",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

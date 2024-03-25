@@ -9,7 +9,12 @@ import Foundation
 import SwiftUI
 
 struct Constants {
-
+	static let initialQuery : [URLQueryItem] = [
+		Query.language(
+			language: Locale.current.languageCode ?? "de"
+		)
+		.queryItem()
+	]
 	struct apiData {
 		static let urlBase = "v6.db.transport.rest"
 		static let urlPathStops = "/stops/"

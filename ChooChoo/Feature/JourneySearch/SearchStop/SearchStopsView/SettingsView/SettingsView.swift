@@ -15,8 +15,7 @@ struct SettingsView: View {
 	@State var transportModeSegment = JourneySettings.TransportMode.all
 	@State var selectedTypes = Set<LineType>()
 	@State var showWithTransfers : Int
-//	@State var alternativeSearchPage : Bool
-//	@State var legViewMode : AppSettings.LegViewMode
+
 	@State var showRedDotWarning : Bool = true
 	
 	let closeSheet : ()->Void
@@ -36,9 +35,7 @@ struct SettingsView: View {
 			self.showWithTransfers = 1
 			self.transferTime = minutes
 		}
-//		self.alternativeSearchPage = settings.debugSettings.alternativeSearchPage
 		self.transferCount = settings.transferCount
-//		self.legViewMode = settings.legViewMode
 	}
 	
 	var body: some View {

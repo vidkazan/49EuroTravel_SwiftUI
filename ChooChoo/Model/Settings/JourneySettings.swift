@@ -15,7 +15,6 @@ struct JourneySettings : Equatable,Hashable {
 	let transferCount : TransferCountCases
 	let accessiblity : Accessiblity
 	let walkingSpeed : WalkingSpeed
-	let language : Language
 	let startWithWalking : Bool
 	let withBicycle : Bool
 }

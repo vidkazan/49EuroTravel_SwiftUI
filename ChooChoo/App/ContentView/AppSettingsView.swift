@@ -31,6 +31,13 @@ struct AppSettingsView: View {
 			}, header: {
 				Text("Leg appearance", comment: "settingsView: section name")
 			})
+			Section {
+				Button(action: {
+					UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,options: [:], completionHandler: nil)
+				}, label: {
+					Text("App system settings",comment: "AppSettingsView")
+				})
+			}
 		}
 	}
 }

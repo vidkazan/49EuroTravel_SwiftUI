@@ -123,8 +123,4 @@ extension JourneySettings {
 			.fast
 		}
 	}
-	enum Language : Equatable, Hashable {
-		case english
-		case german
-	}
 }

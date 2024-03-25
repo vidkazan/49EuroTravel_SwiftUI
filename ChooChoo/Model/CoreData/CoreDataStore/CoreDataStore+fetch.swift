@@ -54,16 +54,18 @@ extension CoreDataStore {
 	
 	func fetchSettings() -> JourneySettings {
 		var settings : CDJourneySettings?
+		var modesData : Data?
 		var transferTypes = JourneySettings.TransferTime.time(minutes: .zero)
 		var transportMode = JourneySettings.TransportMode.all
 		var transferCount = JourneySettings.TransferCountCases.unlimited
+		var customTransferModes = Set<LineType>()
 		
 		asyncContext.performAndWait {
 			settings = user?.journeySettings
 			guard let settings = settings else {
 				return
 			}
-
+			modesData = settings.transportModes
 			transferTypes = {
 				 if settings.isWithTransfers == false {
 					 return .direct
@@ -86,44 +88,23 @@ extension CoreDataStore {
 			return JourneySettings()
 		}
 		
-		let transportModes = fetchSettingsTransportModes()
+		
+		if let modes = modesData,
+		   let modesDecoded = try? JSONDecoder().decode(Set<LineType>.self, from: modes) {
+			customTransferModes = modesDecoded
+		}
 	
 		return JourneySettings(
-			customTransferModes: transportModes,
+			customTransferModes: customTransferModes,
 			transportMode: transportMode,
 			transferTime: transferTypes,
 			transferCount: transferCount,
 			accessiblity: .partial,
 			walkingSpeed: .fast,
-			language: .english,
 			startWithWalking: true,
 			withBicycle: false
 		)
 	}
-	
-	func fetchSettingsTransportModes() -> Set<LineType> {
-		var modes : CDTransportModes!
-		var transportModes = Set<LineType>()
-		asyncContext.performAndWait {
-			modes = user?.journeySettings?.transportModes
-		
-		
-		// buuueeeeeeee
-		if modes.bus { transportModes.insert(.bus) }
-		if modes.ferry { transportModes.insert(.ferry) }
-		if modes.national { transportModes.insert(.national) }
-		if modes.nationalExpress { transportModes.insert(.nationalExpress) }
-		if modes.regional { transportModes.insert(.regional) }
-		if modes.regionalExpress { transportModes.insert(.regionalExpress) }
-		if modes.suburban { transportModes.insert(.suburban) }
-		if modes.subway { transportModes.insert(.subway) }
-		if modes.taxi { transportModes.insert(.taxi) }
-		if modes.tram { transportModes.insert(.tram) }
-		}
-		return transportModes
-	}
-	
-	
 	
 	func fetchLocations() -> [Stop]? {
 		var stops = [Stop]()

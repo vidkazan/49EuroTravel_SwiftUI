@@ -26,8 +26,8 @@
         <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="transferCount" optional="YES" attributeType="String"/>
         <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="transportModes" optional="YES" attributeType="Binary"/>
         <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="transportModes" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDTransportModes" inverseName="chooSettings" inverseEntity="CDTransportModes"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="journeySettings" inverseEntity="CDUser"/>
     </entity>
     <entity name="CDLeg" representedClassName="CDLeg" syncable="YES">
@@ -112,19 +112,6 @@
         <relationship name="chewJourney" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJourney" inverseName="time" inverseEntity="CDJourney"/>
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDLeg" inverseName="time" inverseEntity="CDLeg"/>
         <relationship name="stop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDStop" inverseName="time" inverseEntity="CDStop"/>
-    </entity>
-    <entity name="CDTransportModes" representedClassName="CDTransportModes" syncable="YES">
-        <attribute name="bus" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="ferry" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="national" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="nationalExpress" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="regional" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="regionalExpress" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="suburban" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="subway" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="taxi" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="tram" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <relationship name="chooSettings" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJourneySettings" inverseName="transportModes" inverseEntity="CDJourneySettings"/>
     </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
         <relationship name="appSettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDAppSettings" inverseName="user" inverseEntity="CDAppSettings"/>

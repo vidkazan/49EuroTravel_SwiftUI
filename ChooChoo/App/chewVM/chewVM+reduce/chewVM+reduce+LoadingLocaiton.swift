@@ -40,7 +40,7 @@ extension ChewViewModel {
 				),
 				status: .checkingSearchData
 			)
-		case .didLocationButtonPressed(send: let send):
+		case .didLocationButtonPressed(_):
 			return State(state: state, status: .idle)
 		case .didReceiveLocationData(let stop):
 			return State(data: StateData(data: state.data,depStop: .location(stop)), status: .checkingSearchData)

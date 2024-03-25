@@ -28,7 +28,6 @@ extension SettingsView {
 				transferCount: transferCount,
 				accessiblity: .partial,
 				walkingSpeed: .fast,
-				language: .english,
 				startWithWalking: true,
 				withBicycle: false
 			)

@@ -55,40 +55,10 @@ extension CoreDataStore {
 			}
 			settings.transportModeSegment = Int16(newSettings.transportMode.rawValue)
 			settings.transferCount = newSettings.transferCount.rawValue
-			let modes = Self.transportModes(
-				modes: newSettings.customTransferModes,
-				from: settings.transportModes,
-				context: settings.managedObjectContext ?? asyncContext
-			)
-			
-			modes.chooSettings = settings
-			
+			if let transportModesEncoded = try? JSONEncoder().encode(newSettings.customTransferModes) {
+				settings.transportModes = transportModesEncoded
+			}
 			self.saveAsyncContext()
 		}
-	}
-	
-	static func transportModes(
-		modes : Set<LineType>,
-		from obj : CDTransportModes? = nil,
-		context : NSManagedObjectContext
-	) -> CDTransportModes {
-		let item : CDTransportModes = {
-			if let obj = obj {
-				return obj
-			}
-			return CDTransportModes(entity: CDTransportModes.entity(), insertInto: context)
-		}()
-		item.bus = modes.contains(.bus)
-		item.ferry = modes.contains(.ferry)
-		item.national = modes.contains(.national)
-		item.nationalExpress = modes.contains(.nationalExpress)
-		item.regional = modes.contains(.regional)
-		item.regionalExpress = modes.contains(.regionalExpress)
-		item.suburban = modes.contains(.suburban)
-		item.subway = modes.contains(.subway)
-		item.taxi = modes.contains(.taxi)
-		item.tram = modes.contains(.tram)
-		
-		return item
 	}
 }

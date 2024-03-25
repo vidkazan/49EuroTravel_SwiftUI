@@ -11,6 +11,7 @@ import OSLog
 
 final class Model {
 	static let shared = Model()
+	
 	let modelLogger = Logger(subsystem: "ChooChoo", category: "Model")
 	private var _journeyDetailsViewModels : [String: JourneyDetailsViewModel] = [:]
 	let locationDataManager : LocationDataManager

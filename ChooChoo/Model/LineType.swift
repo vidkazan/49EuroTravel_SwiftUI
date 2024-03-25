@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-enum LineType : String,Equatable,Hashable, CaseIterable {
+enum LineType : String,Equatable,Hashable, CaseIterable, Codable {
 	static func < (lhs: LineType, rhs: LineType) -> Bool {
 		return lhs.rawValue < rhs.rawValue
 	}
