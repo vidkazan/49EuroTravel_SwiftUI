@@ -113,29 +113,29 @@ extension JourneyFollowCellView {
 		return false
 	}
 }
-
-struct FollowCellPreviews: PreviewProvider {
-	static var previews: some View {
-		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
-		if let mock = mock,
-		   let viewData = mock.journeyViewData(
-			   depStop:  .init(),
-			   arrStop:  .init(),
-			   realtimeDataUpdatedAt: Date.now.timeIntervalSince1970 - 10000,
-			   settings: .init()
-		   ){
-			JourneyFollowCellView(journeyDetailsViewModel: .init(
-				followId: 0,
-				data: viewData,
-				depStop: .init(),
-				arrStop: .init(),
-				chewVM: .init()
-			))
-			.environmentObject(ChewViewModel())
-			.padding()
-			.background(Color.gray.opacity(0.1))
-		} else {
-			Text(verbatim: "error")
-		}
-	}
-}
+//
+//struct FollowCellPreviews: PreviewProvider {
+//	static var previews: some View {
+//		let mock = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey
+//		if let mock = mock,
+//		   let viewData = mock.journeyViewData(
+//			   depStop:  .init(),
+//			   arrStop:  .init(),
+//			   realtimeDataUpdatedAt: Date.now.timeIntervalSince1970 - 10000,
+//			   settings: .init()
+//		   ){
+//			JourneyFollowCellView(journeyDetailsViewModel: .init(
+//				followId: 0,
+//				data: viewData,
+//				depStop: .init(),
+//				arrStop: .init(),
+//				chewVM: .init()
+//			))
+//			.environmentObject(ChewViewModel())
+//			.padding()
+//			.background(Color.gray.opacity(0.1))
+//		} else {
+//			Text(verbatim: "error")
+//		}
+//	}
+//}

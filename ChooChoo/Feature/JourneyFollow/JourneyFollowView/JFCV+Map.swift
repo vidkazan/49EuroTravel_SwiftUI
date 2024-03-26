@@ -61,19 +61,19 @@ struct JourneyFollowViewMapCell : View {
 		}
 	}
 }
-
-#Preview {
-	JourneyFollowViewMapCell(journeyDetailsViewModel: .init(
-		followId: 0,
-		data: (Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(
-			depStop: .init(),
-			arrStop: .init(),
-			realtimeDataUpdatedAt: 0,
-			settings: .init()
-		))!,
-		depStop: .init(),
-		arrStop: .init(),
-		chewVM: .init()
-	))
-	.environmentObject(ChewViewModel())
-}
+//
+//#Preview {
+//	JourneyFollowViewMapCell(journeyDetailsViewModel: .init(
+//		followId: 0,
+//		data: (Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(
+//			depStop: .init(),
+//			arrStop: .init(),
+//			realtimeDataUpdatedAt: 0,
+//			settings: .init()
+//		))!,
+//		depStop: .init(),
+//		arrStop: .init(),
+//		chewVM: .init()
+//	))
+//	.environmentObject(ChewViewModel())
+//}

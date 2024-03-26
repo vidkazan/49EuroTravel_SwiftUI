@@ -39,7 +39,7 @@ extension ChewViewModel {
 				if let chewJourneys = Model.shared.coreDataStore.fetchJourneys() {
 					Model.shared.journeyFollowViewModel.send(
 						event: .didUpdateData(
-							chewJourneys.map {$0.journeyFollowData()}
+							chewJourneys.compactMap{$0.journeyFollowData()}
 						)
 					)
 				}

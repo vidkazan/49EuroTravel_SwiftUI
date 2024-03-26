@@ -111,29 +111,29 @@ extension JourneyCell {
 	}
 }
 
-
-struct JourneyCellPreview: PreviewProvider {
-	static var previews: some View {
-		let mocks = [
-			Mock.journeys.journeyNeussWolfsburg.decodedData,
-			Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData
-		]
-		VStack {
-			ForEach(mocks,id: \.?.realtimeDataUpdatedAt){ mock in
-				if let mock = mock,
-				   let viewData = mock.journey.journeyViewData(
-						depStop: .init(),
-						arrStop: .init(),
-						realtimeDataUpdatedAt: 0,
-						settings: .init()
-					) {
-					JourneyCell(journey: viewData,stops: .init(departure: .init(), arrival: .init()))
-						.environmentObject(ChewViewModel())
-				} else {
-					Text(verbatim: "error")
-				}
-			}
-		}
-		.padding()
-	}
-}
+//
+//struct JourneyCellPreview: PreviewProvider {
+//	static var previews: some View {
+//		let mocks = [
+//			Mock.journeys.journeyNeussWolfsburg.decodedData,
+//			Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData
+//		]
+//		VStack {
+//			ForEach(mocks,id: \.?.realtimeDataUpdatedAt){ mock in
+//				if let mock = mock,
+//				   let viewData = mock.journey.journeyViewData(
+//						depStop: .init(),
+//						arrStop: .init(),
+//						realtimeDataUpdatedAt: 0,
+//						settings: .init()
+//					) {
+//					JourneyCell(journey: viewData,stops: .init(departure: .init(), arrival: .init()))
+//						.environmentObject(ChewViewModel())
+//				} else {
+//					Text(verbatim: "error")
+//				}
+//			}
+//		}
+//		.padding()
+//	}
+//}

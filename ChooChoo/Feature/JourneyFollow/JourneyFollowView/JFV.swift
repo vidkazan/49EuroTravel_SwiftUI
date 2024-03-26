@@ -247,22 +247,23 @@ extension JourneyFollowView {
 			}
 	}
 }
-struct FollowPreviews: PreviewProvider {
-	static var previews: some View {
-		if let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData {
-			let data = constructJourneyListViewData(
-				journeysData: mock,
-				depStop:  .init(),
-				arrStop:  .init(),
-				settings: .init()
-			)
-			JourneyFollowView(viewModel: .init(
-				journeys: data.map {
-					JourneyFollowData(id: 0, journeyViewData: $0,stops: .init(departure: .init(), arrival: .init()))
-				},
-				initialStatus: .idle
-			))
-			.environmentObject(ChewViewModel(referenceDate: .specificDate(data.last?.time.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0)))
-		}
-	}
-}
+//
+//struct FollowPreviews: PreviewProvider {
+//	static var previews: some View {
+//		if let mock = Mock.journeyList.journeyNeussWolfsburg.decodedData {
+//			let data = constructJourneyListViewData(
+//				journeysData: mock,
+//				depStop:  .init(),
+//				arrStop:  .init(),
+//				settings: .init()
+//			)
+//			JourneyFollowView(viewModel: .init(
+//				journeys: data.map {
+//					JourneyFollowData(id: 0, journeyViewData: $0,stops: .init(departure: .init(), arrival: .init()))
+//				},
+//				initialStatus: .idle
+//			))
+//			.environmentObject(ChewViewModel(referenceDate: .specificDate(data.last?.time.timestamp.departure.actualOrPlannedIfActualIsNil() ?? 0)))
+//		}
+//	}
+//}

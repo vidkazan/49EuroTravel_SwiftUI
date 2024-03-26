@@ -74,14 +74,14 @@ extension JourneyListView {
 	}
 }
 
-
-struct JourneyListPreview : PreviewProvider {
-	static var previews: some View {
-		JourneyListView(
-			stops: .init(departure: .init(), arrival: .init()), 
-			date: .init(date: .now, mode: .departure),
-			settings: .init()
-		)
-			.environmentObject(ChewViewModel())
-	}
-}
+//
+//struct JourneyListPreview : PreviewProvider {
+//	static var previews: some View {
+//		JourneyListView(
+//			stops: .init(departure: .init(), arrival: .init()), 
+//			date: .init(date: .now, mode: .departure),
+//			settings: .init()
+//		)
+//			.environmentObject(ChewViewModel())
+//	}
+//}

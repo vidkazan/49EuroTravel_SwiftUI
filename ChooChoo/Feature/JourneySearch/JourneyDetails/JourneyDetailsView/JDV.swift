@@ -81,34 +81,34 @@ struct JourneyDetailsView: View {
 		}
 	}
 }
-
-struct JourneyDetailsPreview : PreviewProvider {
-	static var previews: some View {
-		let mocks = [
-			Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData!.journey,
-//			Mock.journeys.journeyNeussWolfsburgMissedConnection.decodedData!.journey
-		]
-//		ScrollView(.horizontal) {
-//			LazyHStack {
-				ForEach(mocks.prefix(1),id: \.id) { mock in
-					let viewData = mock.journeyViewData(
-						depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
-						arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
-						realtimeDataUpdatedAt: 0,
-						settings: .init()
-					)
-					JourneyDetailsView(
-						journeyDetailsViewModel: JourneyDetailsViewModel(
-							followId: 0,
-							data: viewData!,
-							depStop: .init(),
-							arrStop: .init(),
-							chewVM: .init()
-						))
-					.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData!.time.timestamp.departure.actual ?? 0) + 1000)))
-				}
-//			}
-//		}
-//		.previewDevice(PreviewDevice(.iPadMini6gen))
-	}
-}
+//
+//struct JourneyDetailsPreview : PreviewProvider {
+//	static var previews: some View {
+//		let mocks = [
+//			Mock.journeys.journeyNeussWolfsburgFirstCancelled.decodedData!.journey,
+////			Mock.journeys.journeyNeussWolfsburgMissedConnection.decodedData!.journey
+//		]
+////		ScrollView(.horizontal) {
+////			LazyHStack {
+//				ForEach(mocks.prefix(1),id: \.id) { mock in
+//					let viewData = mock.journeyViewData(
+//						depStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
+//						arrStop:  .init(coordinates: .init(),type: .stop,stopDTO: nil),
+//						realtimeDataUpdatedAt: 0,
+//						settings: .init()
+//					)
+//					JourneyDetailsView(
+//						journeyDetailsViewModel: JourneyDetailsViewModel(
+//							followId: 0,
+//							data: viewData!,
+//							depStop: .init(),
+//							arrStop: .init(),
+//							chewVM: .init()
+//						))
+//					.environmentObject(ChewViewModel(referenceDate: .specificDate((viewData!.time.timestamp.departure.actual ?? 0) + 1000)))
+//				}
+////			}
+////		}
+////		.previewDevice(PreviewDevice(.iPadMini6gen))
+//	}
+//}

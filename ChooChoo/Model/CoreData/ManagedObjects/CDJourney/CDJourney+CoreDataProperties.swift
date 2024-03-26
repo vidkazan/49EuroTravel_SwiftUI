@@ -13,14 +13,11 @@ import CoreData
 extension CDJourney {
 	@NSManaged public var id: Int64
     @NSManaged public var journeyRef: String
-//    @NSManaged public var arrivalStop: CDLocation
-//    @NSManaged public var departureStop: CDLocation
 	@NSManaged public var depArrStops: Data
 	@NSManaged public var user: CDUser?
 	@NSManaged public var isActive: Bool
 	@NSManaged public var legs: Set<CDLeg>
 	@NSManaged public var time: Data
-//	@NSManaged public var time: CDTime
 	@NSManaged public var sunEvents: Set<CDSunEvent>
 	@NSManaged public var updatedAt: Double
 }
@@ -30,8 +27,6 @@ extension CDJourney {
 		viewData : JourneyViewData,
 		user : CDUser,
 		stops : DepartureArrivalPairStop,
-//		depStop : Stop,
-//		arrStop : Stop,
 		id : Int64,
 		using managedObjectContext: NSManagedObjectContext) {
 			self.init(entity: CDJourney.entity(), insertInto: managedObjectContext)
@@ -42,8 +37,8 @@ extension CDJourney {
 			if let time = try?  JSONEncoder().encode(viewData.time.iso) {
 				self.time = time
 			}
-			if let stops = try?  JSONEncoder().encode(stops) {
-				self.depArrStops = time
+			if let stops = try? JSONEncoder().encode(stops) {
+				self.depArrStops = stops
 			}
 			viewData.legs.forEach {
 				let _ = CDLeg(context: managedObjectContext,leg: $0,for: self)

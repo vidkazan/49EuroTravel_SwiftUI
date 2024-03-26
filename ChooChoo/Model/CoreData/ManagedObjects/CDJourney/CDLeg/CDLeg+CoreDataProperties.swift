@@ -20,7 +20,6 @@ extension CDLeg {
     @NSManaged public var lineShortName: String
     @NSManaged public var lineType: String
 	@NSManaged public var time: Data
-//    @NSManaged public var time: CDTime
 	@NSManaged public var journey: CDJourney?
 	@NSManaged public var chewLegType: CDLegType
 	@NSManaged public var stops: [CDStop]

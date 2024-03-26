@@ -923,5 +923,53 @@
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "663A9505-DE49-4234-84B3-964750B42A7F"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Model/CoreData/ManagedObjects/CDJourney/CDJourney+CoreDataProperties.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
+            landmarkName = "init(viewData:user:stops:id:using:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "663A9505-DE49-4234-84B3-964750B42A7F - 367cbc424b5e4ccf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.CDJourney.__allocating_init(viewData: ChooChoo.JourneyViewData, user: ChooChoo.CDUser, stops: ChooChoo.DepartureArrivalPairStop, id: Swift.Int64, using: __C.NSManagedObjectContext) -&gt; ChooChoo.CDJourney"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/ManagedObjects/CDJourney/CDJourney+CoreDataProperties.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "1288">
+               </Location>
+               <Location
+                  uuid = "663A9505-DE49-4234-84B3-964750B42A7F - 367cbc424b5e4ccf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ChooChoo.CDJourney.__allocating_init(viewData: ChooChoo.JourneyViewData, user: ChooChoo.CDUser, stops: ChooChoo.DepartureArrivalPairStop, id: Swift.Int64, using: __C.NSManagedObjectContext) -&gt; ChooChoo.CDJourney"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Model/CoreData/ManagedObjects/CDJourney/CDJourney+CoreDataProperties.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "45"
+                  endingLineNumber = "45"
+                  offsetFromSymbolStart = "1356">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>

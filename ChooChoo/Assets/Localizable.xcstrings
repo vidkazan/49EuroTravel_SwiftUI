@@ -1,5 +1,5 @@
 {
-  "sourceLanguage" : "en",
+  "sourceLanguage" : "en-GB",
   "strings" : {
     " to " : {
       "comment" : "badge: departureArrivalStops",
@@ -365,7 +365,7 @@
       }
     },
     "Journey debug" : {
-      "comment" : "JourneyCell: menu item\nJourneyFollowCellView: menu item"
+      "comment" : "JourneyFollowCellView: menu item\nJourneyCell: menu item"
     },
     "Journey details" : {
       "comment" : "navigationBarTitle",
@@ -448,7 +448,7 @@
       }
     },
     "now" : {
-      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
+      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -568,7 +568,7 @@
       }
     },
     "Save" : {
-      "comment" : "settingsView: save button\ndatePickerView: save button",
+      "comment" : "datePickerView: save button\nsettingsView: save button",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -579,7 +579,7 @@
       }
     },
     "Search" : {
-      "comment" : "TabItem\nsearch tip title",
+      "comment" : "search tip title\nTabItem",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

@@ -53,23 +53,23 @@ struct RecentSearchCell: View {
 		.clipShape(.rect(cornerRadius: 8))
 	}
 }
-
-struct RecentSearchesPreviews: PreviewProvider {
-	static var previews: some View {
-		let mock = Mock.trip.RE6NeussMinden.decodedData?.trip
-		RecentSearchesView(
-			recentSearchesVM: .init(
-				searches: [
-					.init(
-						depStop: mock?.stopovers?[23].stop?.stop() ?? .init(),
-						arrStop: mock?.destination?.stop() ?? .init(),
-						searchTS: 0
-					)
-				]
-			)
-		)
-		.padding()
-		.background(.chewFillTertiary)
-		.environmentObject(ChewViewModel(referenceDate: .now))
-	}
-}
+//
+//struct RecentSearchesPreviews: PreviewProvider {
+//	static var previews: some View {
+//		let mock = Mock.trip.RE6NeussMinden.decodedData?.trip
+//		RecentSearchesView(
+//			recentSearchesVM: .init(
+//				searches: [
+//					.init(
+//						depStop: mock?.stopovers?[23].stop?.stop() ?? .init(),
+//						arrStop: mock?.destination?.stop() ?? .init(),
+//						searchTS: 0
+//					)
+//				]
+//			)
+//		)
+//		.padding()
+//		.background(.chewFillTertiary)
+//		.environmentObject(ChewViewModel(referenceDate: .now))
+//	}
+//}

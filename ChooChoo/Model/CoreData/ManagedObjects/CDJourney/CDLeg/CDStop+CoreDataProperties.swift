@@ -18,10 +18,7 @@ extension CDStop {
     @NSManaged public var stopOverType: String
 	@NSManaged public var locationType: Int16
 	@NSManaged public var time: Data
-//    @NSManaged public var time: CDTime
 	@NSManaged public var platforms: Data?
-//    @NSManaged public var depPlatform: CDPrognosedPlatform?
-//    @NSManaged public var arrPlatform: CDPrognosedPlatform?
 	@NSManaged public var leg: CDLeg?
 	@NSManaged public var isCancelled: Bool
 

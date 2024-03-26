@@ -228,74 +228,74 @@ struct BadgeView : View {
 	}
 }
 
-
-
-@available(iOS 16.0, *)
-struct BadgeViewPreview : PreviewProvider {
-	static var previews: some View {
-		if let viewData = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0,settings: .init()) {
-			VStack {
-				FlowLayout {
-						BadgeView(.lineNumber(lineType: .national, num: "ICE666"))
-						BadgeView(.lineNumber(lineType: .regional, num: "RE666"))
-						BadgeView(.lineNumber(lineType: .bus, num: "Bus666"))
-						BadgeView(.lineNumber(lineType: .tram, num: "Tram 700"))
-						BadgeView(.lineNumber(lineType: .ferry, num: "Schiff"))
-						BadgeView(.lineNumber(lineType: .suburban, num: "S6"))
-						BadgeView(.lineNumber(lineType: .subway, num: "U6"))
-				}
-				FlowLayout {
-					BadgeView(.routeError)
-						.badgeBackgroundStyle(.red)
-					BadgeView(.followError(.deleting))
-						.badgeBackgroundStyle(.red)
-					BadgeView(.locationError)
-						.badgeBackgroundStyle(.red)
-					BadgeView(.offlineMode)
-						.badgeBackgroundStyle(.blue)
-				}
-				FlowLayout {
-					BadgeView(.timeDepartureTimeArrival(timeContainer: viewData.time))
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.changesCount(3))
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.departureArrivalStops(
-						departure: "Blablablablabla Hbf",
-						arrival: "Plaplaplaplapla Hbf"),
-							  .big)
-					.badgeBackgroundStyle(.primary)
-					BadgeView(.remarkImportant(remarks: []))
-						.badgeBackgroundStyle(.red)
-					BadgeView(.cancelled)
-						.badgeBackgroundStyle(.red)
-					BadgeView(.connectionNotReachable)
-						.badgeBackgroundStyle(.red)
-					BadgeView(.date(date: .now))
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.legDuration(viewData.time))
-						.badgeBackgroundStyle(.primary)
-				}
-				FlowLayout {
-					BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf",strikethrough: false))
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf",strikethrough: false),.big)
-					.badgeBackgroundStyle(.primary)
-					BadgeView(.price(50))
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.stopsCount(10,.showShevronDown),.medium)
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.transfer(viewData.time))
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.walking(viewData.time))
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.updatedAtTime(referenceTime: 1705930000,isLoading: true))
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.updatedAtTime(referenceTime: 1705930000,isLoading: false))
-						.badgeBackgroundStyle(.primary)
-					BadgeView(.distanceInMeters(dist: 100))
-						.badgeBackgroundStyle(.primary)
-				}
-			}
-		}
-	}
-}
+//
+//
+//@available(iOS 16.0, *)
+//struct BadgeViewPreview : PreviewProvider {
+//	static var previews: some View {
+//		if let viewData = Mock.journeys.journeyNeussWolfsburg.decodedData?.journey.journeyViewData(depStop: .init(), arrStop: .init(), realtimeDataUpdatedAt: 0,settings: .init()) {
+//			VStack {
+//				FlowLayout {
+//						BadgeView(.lineNumber(lineType: .national, num: "ICE666"))
+//						BadgeView(.lineNumber(lineType: .regional, num: "RE666"))
+//						BadgeView(.lineNumber(lineType: .bus, num: "Bus666"))
+//						BadgeView(.lineNumber(lineType: .tram, num: "Tram 700"))
+//						BadgeView(.lineNumber(lineType: .ferry, num: "Schiff"))
+//						BadgeView(.lineNumber(lineType: .suburban, num: "S6"))
+//						BadgeView(.lineNumber(lineType: .subway, num: "U6"))
+//				}
+//				FlowLayout {
+//					BadgeView(.routeError)
+//						.badgeBackgroundStyle(.red)
+//					BadgeView(.followError(.deleting))
+//						.badgeBackgroundStyle(.red)
+//					BadgeView(.locationError)
+//						.badgeBackgroundStyle(.red)
+//					BadgeView(.offlineMode)
+//						.badgeBackgroundStyle(.blue)
+//				}
+//				FlowLayout {
+//					BadgeView(.timeDepartureTimeArrival(timeContainer: viewData.time))
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.changesCount(3))
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.departureArrivalStops(
+//						departure: "Blablablablabla Hbf",
+//						arrival: "Plaplaplaplapla Hbf"),
+//							  .big)
+//					.badgeBackgroundStyle(.primary)
+//					BadgeView(.remarkImportant(remarks: []))
+//						.badgeBackgroundStyle(.red)
+//					BadgeView(.cancelled)
+//						.badgeBackgroundStyle(.red)
+//					BadgeView(.connectionNotReachable)
+//						.badgeBackgroundStyle(.red)
+//					BadgeView(.date(date: .now))
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.legDuration(viewData.time))
+//						.badgeBackgroundStyle(.primary)
+//				}
+//				FlowLayout {
+//					BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf",strikethrough: false))
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.legDirection(dir: "Tudasudadudabuda Hbf",strikethrough: false),.big)
+//					.badgeBackgroundStyle(.primary)
+//					BadgeView(.price(50))
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.stopsCount(10,.showShevronDown),.medium)
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.transfer(viewData.time))
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.walking(viewData.time))
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.updatedAtTime(referenceTime: 1705930000,isLoading: true))
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.updatedAtTime(referenceTime: 1705930000,isLoading: false))
+//						.badgeBackgroundStyle(.primary)
+//					BadgeView(.distanceInMeters(dist: 100))
+//						.badgeBackgroundStyle(.primary)
+//				}
+//			}
+//		}
+//	}
+//}

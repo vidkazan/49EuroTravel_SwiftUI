@@ -1583,13 +1583,12 @@
 			};
 			buildConfigurationList = 7D6734AA2A96334B00CBE9C1 /* Build configuration list for PBXProject "ChooChoo" */;
 			compatibilityVersion = "Xcode 14.0";
-			developmentRegion = en;
+			developmentRegion = "en-GB";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
 				de,
-				ru,
+				"en-GB",
+				Base,
 			);
 			mainGroup = 7D6734A62A96334B00CBE9C1;
 			packageReferences = (

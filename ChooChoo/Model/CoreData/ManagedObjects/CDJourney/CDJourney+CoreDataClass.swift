@@ -15,10 +15,10 @@ public class CDJourney: NSManagedObject {
 }
 
 extension CDJourney {
-	func journeyFollowData() -> JourneyFollowData {
+	func journeyFollowData() -> JourneyFollowData? {
 		var legsViewData = [LegViewData]()
 		var sunEvents = [SunEvent]()
-		var data : JourneyFollowData!
+		var data : JourneyFollowData?
 		self.managedObjectContext?.performAndWait {
 			legsViewData = legs.map {
 				$0.legViewData()
@@ -27,7 +27,10 @@ extension CDJourney {
 			sunEvents = self.sunEvents.map {
 				$0.sunEvent()
 			}
-			let stops = try? JSONDecoder().decode(DepartureArrivalPairStop.self, from: self.depArrStops)
+			guard let stops = try? JSONDecoder().decode(DepartureArrivalPairStop.self, from: self.depArrStops) else {
+				data = nil
+				return
+			}
 			let time = TimeContainer(isoEncoded: self.time) ?? .init()
 			#warning("add remarks")
 			data = JourneyFollowData(
@@ -37,16 +40,15 @@ extension CDJourney {
 					badges: [],
 					sunEvents: sunEvents,
 					legs: legsViewData,
-					depStopName: stops?.departure.name ?? "",
-					arrStopName: stops?.arrival.name ?? "",
+					depStopName: stops.departure.name,
+					arrStopName: stops.arrival.name,
 					time: time,
 					updatedAt: self.updatedAt,
 					remarks: [],
 					settings: JourneySettings()
 				),
-				stops: stops ?? .init(departure: .init(), arrival: .init())
+				stops: stops
 			)
-			
 		}
 		return data
 	}
