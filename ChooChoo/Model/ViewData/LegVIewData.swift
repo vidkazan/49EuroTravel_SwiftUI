@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct LegViewData : Equatable,Identifiable {
+struct LegViewData : Hashable,Identifiable {
 	let id = UUID()
 	var isReachable : Bool
 	let legType : LegType
@@ -90,7 +90,7 @@ enum LocationDirectionType : Int, Hashable, CaseIterable {
 	}
 }
 
-struct LineViewData : Equatable {
+struct LineViewData : Equatable, Hashable, Codable {
 	let type : LineType
 	let name : String
 	let shortName : String

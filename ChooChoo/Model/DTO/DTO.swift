@@ -30,7 +30,7 @@ struct Coordinate: Hashable, Codable {
 	}
 }
 
-enum StopOverType : String,Equatable, CaseIterable {
+enum StopOverType : String,Equatable, CaseIterable, Codable{
 	case origin
 	case stopover
 	case destination
@@ -140,7 +140,7 @@ enum StopOverCancellationType : Equatable {
 	case fullyCancelled
 }
 
-struct StopWithTimeDTO : Codable,Equatable,Identifiable {
+struct StopWithTimeDTO : Codable,Hashable,Identifiable {
 	let id = UUID()
 	let stop				: StopDTO?
 	let departure,
@@ -184,8 +184,9 @@ struct TripDTO : Codable,Equatable,Identifiable {
 	}
 }
 
-struct LegDTO : Codable,Equatable, Identifiable {
-	let id = UUID()
+struct LegDTO : Codable,Identifiable, Hashable {
+//	let id = UUID()
+	var id : Int { hashValue }
 	let origin : StopDTO?
 	let destination : StopDTO?
 	let line : LineDTO?
@@ -511,7 +512,7 @@ struct Departure : Codable,Equatable {
 
 
 // MARK: - Location
-struct LocationCoordinatesDTO : Codable,Equatable,Hashable {
+struct LocationCoordinatesDTO : Codable,Hashable {
 	let type		: String?
 	let id			: String?
 	let latitude	: Double?
@@ -592,7 +593,7 @@ extension Products {
 }
 
 // MARK: - Line
-struct LineDTO : Codable,Equatable {
+struct LineDTO : Codable,Hashable {
 	let type			: String?
 	let id				: String?
 	let fahrtNr			: String?
@@ -605,7 +606,7 @@ struct LineDTO : Codable,Equatable {
 }
 
 // MARK: - Remark
-struct Remark : Codable,Equatable,Hashable {
+struct Remark : Codable,Hashable {
 	let type	: String?
 	let code	: String?
 	let text	: String?

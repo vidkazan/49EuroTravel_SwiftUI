@@ -14,8 +14,6 @@ struct StopViewData : Equatable, Identifiable, Hashable {
 	let locationCoordinates : Coordinate
 	let name : String
 	let platforms : DepartureArrivalPair<Prognosed<String>>
-//	let departurePlatform : Prognosed<String>
-//	let arrivalPlatform : Prognosed<String>
 	let time : TimeContainer
 	let stopOverType : StopOverType
 	
@@ -85,8 +83,6 @@ extension StopViewData {
 	) {
 		self.time = time
 		self.name = name
-//		self.departurePlatform  = Prognosed(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
-//		self.arrivalPlatform  = Prognosed(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
 		self.stopOverType = type
 		self.locationCoordinates = Coordinate(
 			latitude: stop.stop?.location?.latitude ?? stop.stop?.latitude ?? -1,
@@ -108,8 +104,6 @@ extension StopViewData {
 	) {
 		self.time = time
 		self.name = name
-//		self.departurePlatform  = Prognosed(actual: nil, planned: nil)
-//		self.arrivalPlatform  = Prognosed(actual: nil, planned: nil)
 		self.stopOverType = type
 		self.locationCoordinates = coordinates
 		self.id = stopId

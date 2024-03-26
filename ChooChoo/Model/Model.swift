@@ -69,7 +69,14 @@ extension Model {
 		chewVM : ChewViewModel?
 	) -> JourneyDetailsViewModel {
 		if let vm = _journeyDetailsViewModels[journeyRef] {
-			return vm
+			#warning("viewData comparing criteria")
+//			if vm.state.data.viewData.time == viewdata.time {
+				return vm
+//			} 
+//			else {
+//				_journeyDetailsViewModels.removeValue(forKey: journeyRef)
+//			}
+//			print("🏭 \(#function): viewData doesnt match: creating new")
 		}
 		print("🏭 \(#function): vm not found: creating new")
 		let vm = JourneyDetailsViewModel(

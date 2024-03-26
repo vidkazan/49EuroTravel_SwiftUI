@@ -128,7 +128,7 @@ extension MultiJourneyViewData {
 	}
 }
 
-struct JourneyViewData : Equatable, Identifiable {
+struct JourneyViewData : Identifiable, Hashable {
 	let id = UUID()
 	let origin : String
 	let destination : String

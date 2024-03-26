@@ -8,7 +8,7 @@
 import Foundation
 import CoreLocation
 
-enum SunEventType : String,Equatable,Hashable,Codable {
+enum SunEventType : String,Hashable,Codable {
 	case sunrise
 	case day
 	case sunset
@@ -16,7 +16,7 @@ enum SunEventType : String,Equatable,Hashable,Codable {
 }
 
 // TODO: tests
-struct SunEvent : Equatable,Hashable {
+struct SunEvent : Hashable {
 	static func == (lhs: SunEvent, rhs: SunEvent) -> Bool {
 		return
 			lhs.type == rhs.type &&

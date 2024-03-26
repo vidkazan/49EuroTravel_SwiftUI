@@ -7,13 +7,13 @@
 
 import Foundation
 
-struct Segments : Equatable, Hashable {
-	enum ShowType : Int, Equatable, Hashable, CaseIterable {
+struct Segments : Hashable {
+	enum ShowType : Int, Hashable, CaseIterable {
 		case collapsed
 		case expanded
 	}
 	
-	struct SegmentPoint : Equatable, Hashable {
+	struct SegmentPoint : Hashable {
 		let time: Double
 		let height: Double
 	}

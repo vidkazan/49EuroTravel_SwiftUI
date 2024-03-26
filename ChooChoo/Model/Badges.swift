@@ -49,7 +49,7 @@ enum StopsCountBadgeMode {
 	}
 }
 
-enum Badges : Equatable, Identifiable {
+enum Badges : Identifiable,Hashable {
 	var id: Int {
 		switch self {
 		case .generic:

@@ -8,8 +8,8 @@
 import Foundation
 
 // MARK: TimeContainer
-struct TimeContainer : Equatable, Hashable {
-	enum DelayStatus : Equatable,Hashable  {
+struct TimeContainer : Hashable {
+	enum DelayStatus : Hashable  {
 		case onTime
 		case delay(Int)
 		case cancelled

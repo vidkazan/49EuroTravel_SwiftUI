@@ -1119,7 +1119,7 @@
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
             uuid = "889932E6-0AFC-4774-A99B-899D00BA9400"
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ChooChoo/Feature/JourneyFollow/JourneyFollowView/JFCV.swift"

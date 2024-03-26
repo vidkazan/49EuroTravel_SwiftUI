@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct FeatureGeometryDTO : Codable,Equatable,Identifiable {
+struct FeatureGeometryDTO : Codable,Equatable,Identifiable, Hashable {
 	let id = UUID()
 	let type : String?
 	// MARK: coordinates[0] : long
@@ -19,7 +19,7 @@ struct FeatureGeometryDTO : Codable,Equatable,Identifiable {
 	}
 }
 
-struct PolylineFeatureDTO : Codable,Equatable,Identifiable {
+struct PolylineFeatureDTO : Codable,Equatable,Identifiable, Hashable {
 	let id = UUID()
 	let type : String?
 	let geometry : FeatureGeometryDTO?
@@ -30,7 +30,7 @@ struct PolylineFeatureDTO : Codable,Equatable,Identifiable {
 }
 
 
-struct PolylineDTO : Codable,Equatable,Identifiable {
+struct PolylineDTO : Codable,Equatable,Identifiable, Hashable {
 	let id = UUID()
 	let type : String?
 	let features : [PolylineFeatureDTO]?
