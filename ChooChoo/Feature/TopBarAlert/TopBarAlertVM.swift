@@ -174,7 +174,7 @@ extension TopBarAlertViewModel {
 		let status : Status
 	}
 	
-	enum Status : Equatable, Hashable {
+	enum Status : Hashable {
 		static func == (lhs: TopBarAlertViewModel.Status, rhs: TopBarAlertViewModel.Status) -> Bool {
 			return lhs.description == rhs.description
 		}

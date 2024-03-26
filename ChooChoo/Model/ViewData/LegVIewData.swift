@@ -90,7 +90,7 @@ enum LocationDirectionType : Int, Hashable, CaseIterable {
 	}
 }
 
-struct LineViewData : Equatable, Hashable, Codable {
+struct LineViewData : Hashable, Codable {
 	let type : LineType
 	let name : String
 	let shortName : String

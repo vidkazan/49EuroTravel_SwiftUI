@@ -103,7 +103,7 @@ extension TimeContainer {
 
 extension TimeContainer {
 	// MARK: ISO Container
-	struct ISOTimeContainer : Equatable, Hashable, Codable {
+	struct ISOTimeContainer : Hashable, Codable {
 		let departure : Prognosed<String>
 		let arrival : Prognosed<String>
 		
@@ -179,7 +179,7 @@ extension TimeContainer {
 }
 
 extension TimeContainer {
-	enum Status {
+	enum Status : String,Hashable,CaseIterable {
 		case ongoingFar
 		case ongoing
 		case ongoingSoon

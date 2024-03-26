@@ -30,7 +30,7 @@ struct Coordinate: Hashable, Codable {
 	}
 }
 
-enum StopOverType : String,Equatable, CaseIterable, Codable{
+enum StopOverType : String,Hashable, CaseIterable, Codable{
 	case origin
 	case stopover
 	case destination
@@ -342,7 +342,7 @@ struct JourneyListDTO : Codable,Equatable {
 	let realtimeDataUpdatedAt: Int64?
 }
 
-enum LocationType : Int16, Equatable, Hashable, Codable {
+enum LocationType : Int16, Hashable, Codable {
 	case pointOfInterest
 	case location
 	case stop

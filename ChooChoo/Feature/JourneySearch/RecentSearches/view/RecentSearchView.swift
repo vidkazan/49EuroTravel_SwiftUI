@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct DepartureArrivalPairStop : Equatable, Hashable,Codable {
+struct DepartureArrivalPairStop : Hashable,Codable {
 	let departure : Stop
 	let arrival : Stop
 	let id : String
@@ -20,7 +20,7 @@ struct DepartureArrivalPairStop : Equatable, Hashable,Codable {
 	}
 }
 
-struct DepartureArrivalPair<T: Hashable & Codable> : Equatable, Hashable, Codable {
+struct DepartureArrivalPair<T: Hashable & Codable> : Hashable, Codable {
 	let departure : T
 	let arrival : T
 	init(departure: T, arrival: T) {

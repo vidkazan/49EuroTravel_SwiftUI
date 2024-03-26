@@ -31,7 +31,7 @@ extension JourneySettings {
 			}
 	}
 	
-	enum TransferDurationCases : Int, Equatable, Hashable, CaseIterable, Codable {
+	enum TransferDurationCases : Int, Hashable, CaseIterable, Codable {
 		case zero = 0
 		case five = 5
 		case seven = 7
@@ -49,7 +49,7 @@ extension JourneySettings {
 		}
 	}
 	
-	enum TransferCountCases : String, Equatable, Hashable, CaseIterable,Codable {
+	enum TransferCountCases : String, Hashable, CaseIterable,Codable {
 		case unlimited = "Unlimited"
 		case one = "1"
 		case two = "2"
@@ -78,7 +78,7 @@ extension JourneySettings {
 			.unlimited
 		}
 	}
-	enum TransportMode : String, Equatable, Hashable, Codable {
+	enum TransportMode : String, Hashable, Codable {
 		case regional
 		case all
 		case custom

@@ -39,7 +39,7 @@ struct AppSettings : Hashable, Codable {
 }
 
 extension AppSettings {
-	struct ChewDebugSettings: Equatable, Hashable, Codable {
+	struct ChewDebugSettings: Hashable, Codable {
 		let prettyJSON : Bool
 		let alternativeSearchPage : Bool
 	}
@@ -62,7 +62,7 @@ extension AppSettings {
 		case followJourney
 		case sunEventsTip
 	}
-	enum ChooTip : Equatable, Hashable {
+	enum ChooTip : Hashable {
 		static func == (lhs: ChooTip, rhs: ChooTip) -> Bool {
 			lhs.description == rhs.description
 		}

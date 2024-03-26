@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol ChewError : Error, Equatable, Hashable {
+protocol ChewError : Error, Hashable {
 //	var description : String { get }
 	var localizedDescription : String { get }
 }
