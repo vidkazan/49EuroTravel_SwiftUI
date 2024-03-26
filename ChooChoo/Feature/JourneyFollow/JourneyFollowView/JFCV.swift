@@ -68,7 +68,7 @@ struct JourneyFollowCellView : View {
 					BadgeView(.connectionNotReachable)
 						.badgeBackgroundStyle(.red)
 				}
-				BadgeView(.generic(msg: "\(data.settings.transportMode.tmp)"))
+				BadgeView(.generic(msg: "\(data.settings.transportMode)"))
 			}
 		}
 		.contextMenu { menu }

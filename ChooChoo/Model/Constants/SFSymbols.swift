@@ -22,6 +22,7 @@ enum ChooSFSymbols : String {
 	case clockArrowCirclepath = "clock.arrow.circlepath"
 	case chevronDown = "chevron.down"
 	case chevronDownCircle = "chevron.down.circle"
+	case figureWalk = "figure.walk"
 	case figureWalkCircle = "figure.walk.circle"
 	case arrowTriangle2Circlepath = "arrow.triangle.2.circlepath"
  

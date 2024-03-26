@@ -10,10 +10,12 @@ import SwiftUI
 import CoreLocation
 
 struct StopViewData : Identifiable, Hashable {
+	typealias Platforms = DepartureArrivalPair<Prognosed<String>>
+	
 	let id : String?
 	let locationCoordinates : Coordinate
 	let name : String
-	let platforms : DepartureArrivalPair<Prognosed<String>>
+	let platforms : Platforms
 	let time : TimeContainer
 	let stopOverType : StopOverType
 	
@@ -89,9 +91,15 @@ extension StopViewData {
 			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
 		)
 		self.id = stop.stop?.id
-		self.platforms = .init(
-			departure: Prognosed(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform),
-			arrival: Prognosed(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
+		self.platforms = Platforms(
+			departure: Prognosed(
+				actual: stop.departurePlatform,
+				planned: stop.plannedDeparturePlatform
+			),
+			arrival: Prognosed(
+				actual: stop.arrivalPlatform,
+				planned: stop.plannedArrivalPlatform
+			)
 		)
 	}
 	
@@ -107,7 +115,7 @@ extension StopViewData {
 		self.stopOverType = type
 		self.locationCoordinates = coordinates
 		self.id = stopId
-		self.platforms = .init(
+		self.platforms = Platforms(
 			departure: .init(),
 			arrival: .init()
 		)

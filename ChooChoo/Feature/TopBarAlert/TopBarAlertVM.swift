@@ -24,7 +24,7 @@ final class TopBarAlertViewModel : ObservableObject, Identifiable {
 			alerts: alerts,
 			status: initaialStatus
 		)
-		self.networkMonitor = .init(send: { [weak self] in
+		self.networkMonitor = NetworkMonitor(send: { [weak self] in
 			self?.send(event: $0)
 		})
 		Publishers.system(

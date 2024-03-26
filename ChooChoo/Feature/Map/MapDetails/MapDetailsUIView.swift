@@ -24,7 +24,15 @@ struct MapDetailsUIView: UIViewRepresentable {
 		mapView.isUserInteractionEnabled = true
 		mapView.pointOfInterestFilter = .excludingAll
 		
+		
 		legs.forEach({ leg in
+			#warning("vehicle locaiton: for test")
+			let anno = VehicleLocationAnnotation(
+				location: leg.currenLocation?.cllocationcoordinates2d ?? .init(),
+				type: leg.lineType
+			)
+			mapView.addAnnotation(anno)
+			
 			leg.stops.forEach { stop in
 				MapPickerViewModel.addStopAnnotation(
 					id: stop.id,
@@ -35,6 +43,7 @@ struct MapDetailsUIView: UIViewRepresentable {
 					stopOverType: stop.stopOverType
 				)
 			}
+			
 			if let route = leg.route {
 				if leg.type != .line {
 					route.title = "foot"
@@ -42,6 +51,7 @@ struct MapDetailsUIView: UIViewRepresentable {
 				mapView.addOverlay(route, level: .aboveRoads)
 			}
 		})
+		
 		StopAnnotation.registerStopViews(mapView)
 		return mapView
 	}
@@ -67,6 +77,12 @@ extension MapDetailsUIView {
 		}
 		
 		func mapView(_ mapView: MKMapView,viewFor annotation: MKAnnotation) -> MKAnnotationView? {
+			#warning("check actual locaiton with API given locaiton")
+			#if DEBUG
+			if let anno = annotation as? VehicleLocationAnnotation {
+				return MKMarkerAnnotationView(annotation: anno, reuseIdentifier: "anno")
+			}
+			#endif
 			let view = MapPickerViewModel.mapView(mapView, viewFor: annotation)
 			if let anno = annotation as? StopAnnotation {
 				switch anno.stopOverType {

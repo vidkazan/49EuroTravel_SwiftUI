@@ -21,6 +21,16 @@ protocol ChewStopAnnotaion {
 
 class LocationAnnotation : MKPointAnnotation {}
 
+class VehicleLocationAnnotation : MKPointAnnotation {
+	let type : LineType
+	init(location: CLLocationCoordinate2D, type: LineType) {
+		self.type = type
+		super.init()
+		self.coordinate = location
+		self.title = type.rawValue
+	}
+}
+
 class StopAnnotation: NSObject, Identifiable, ChewStopAnnotaion {
 	let stopOverType : StopOverType?
 	let stopId : String?

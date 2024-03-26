@@ -64,13 +64,16 @@ struct ChewPrimaryStyle: ChewTextStyle {
 	}
 }
 
-//struct Font_Previews: PreviewProvider {
-//	static var previews: some View {
-//		VStack {
-//			ForEach(Font.TextStyle.allCases, id: \.hashValue, content: {
-//				Text("popopopo")
-//					.font(.system($0))
-//			})
-//		}
-//	}
-//}
+
+#if DEBUG
+struct Font_Previews: PreviewProvider {
+	static var previews: some View {
+		VStack {
+			ForEach(Font.TextStyle.allCases, id: \.hashValue, content: {
+				Text("popopopo")
+					.font(.system($0))
+			})
+		}
+	}
+}
+#endif

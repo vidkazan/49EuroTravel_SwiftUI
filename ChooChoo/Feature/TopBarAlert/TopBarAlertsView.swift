@@ -64,8 +64,9 @@ struct Bla : View {
 	}
 }
 
+#if DEBUG
 struct AlertViewPreview : PreviewProvider {
-	@ObservedObject var vm : TopBarAlertViewModel = .init(.start,alerts: [.routeError,.offline,.userLocationError])
+	@ObservedObject var vm = TopBarAlertViewModel(.start,alerts: [.routeError,.offline,.userLocationError])
 	static var previews: some View {
 		
 		let vm = TopBarAlertViewModel(
@@ -84,4 +85,4 @@ struct AlertViewPreview : PreviewProvider {
 		.environmentObject(ChewViewModel())
 	}
 }
-
+#endif

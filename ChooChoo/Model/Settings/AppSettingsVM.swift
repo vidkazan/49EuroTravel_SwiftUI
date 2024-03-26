@@ -17,7 +17,7 @@ class AppSettingsViewModel : ObservableObject, Identifiable {
 	private let input = PassthroughSubject<Event,Never>()
 	
 	
-	init(settings : AppSettings = .init(),status : Status = .idle) {
+	init(settings : AppSettings = AppSettings(),status : Status = .idle) {
 		self.state = State(settings: settings,status: status)
 		Publishers.system(
 			initial: State(settings: settings,status: status),

@@ -40,9 +40,9 @@ extension LegViewData {
 		self.delayedAndNextIsNotReachable = false
 		self.legStopsViewData = []
 		self.footDistance = 0
-		self.lineViewData = .init(type: .taxi, name: "", shortName: "")
-		self.progressSegments = .init(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0)
-		self.time = .init(plannedDeparture: "", plannedArrival: "", actualDeparture: "", actualArrival: "", cancelled: false)
+		self.lineViewData = LineViewData(type: .taxi, name: "", shortName: "")
+		self.progressSegments = Segments(segments: [], heightTotalCollapsed: 0, heightTotalExtended: 0)
+		self.time = TimeContainer(plannedDeparture: "", plannedArrival: "", actualDeparture: "", actualArrival: "", cancelled: false)
 		self.remarks = []
 		self.polyline = nil
 		self.legDTO = nil

@@ -12,7 +12,15 @@ extension SettingsView {
 	var transportTypes : some View {
 		Section(content: {
 			Picker(
-				selection: $transportModeSegment,
+				selection: 
+					Binding<JourneySettings.TransportMode>(
+						get: {
+							currentSettings.transportMode
+						},
+						set: {
+							currentSettings.transportMode = $0
+						}
+					),
 				content: {
 					Label(
 						title: {

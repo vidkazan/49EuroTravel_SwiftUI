@@ -14,7 +14,6 @@ import TipKit
 // MARK: revise
 // all text revision
 // revise icons
-// add language query and all settings queries
 // tip: jfv: for swipe actions
 
 
@@ -27,7 +26,7 @@ struct ContentView: View {
 	@ObservedObject var sheetVM = Model.shared.sheetViewModel
 	@ObservedObject var topAlertVM = Model.shared.topBarAlertViewModel
 	
-	@State var state : ChewViewModel.State = .init()
+	@State var state = ChewViewModel.State()
 	@State var sheetState = SheetViewModel.State(status: .showing(.none, result: EmptyDataSource()))
 	@State var alertState = AlertViewModel.State(alert: .none)
 	@State var sheetIsPresented = false

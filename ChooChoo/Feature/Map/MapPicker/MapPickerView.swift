@@ -146,7 +146,7 @@ extension MapPickerView {
 	}
 }
 
-
+#if DEBUG
 struct MapPicker_Previews: PreviewProvider {
 	static var previews: some View {
 		MapPickerView(
@@ -156,3 +156,4 @@ struct MapPicker_Previews: PreviewProvider {
 		)
 	}
 }
+#endif

@@ -63,8 +63,28 @@ enum Query {
 	case showPointsOfInterests(showPointsOfInterests : Bool)
 	case stopovers(isShowing: Bool)
 	
+	case accessibility(JourneySettings.Accessiblity)
+	case bike(Bool)
+	case startWithWalking(Bool)
+	case walkingSpeed(JourneySettings.WalkingSpeed)
 	func queryItem() -> URLQueryItem {
 		switch self {
+		case .walkingSpeed(let speed):
+			return URLQueryItem(
+				name: "walkingSpeed",
+				value: speed.rawValue)
+		case .startWithWalking(let val):
+			return URLQueryItem(
+				name: "startWithWalking",
+				value: String(val))
+		case .bike(let bike):
+			return URLQueryItem(
+				name: "bike",
+				value: String(bike))
+		case .accessibility(let acc):
+			return URLQueryItem(
+				name: "accessibility",
+				value: acc.rawValue)
 		case .location(let location):
 			return URLQueryItem(
 				name: "query",

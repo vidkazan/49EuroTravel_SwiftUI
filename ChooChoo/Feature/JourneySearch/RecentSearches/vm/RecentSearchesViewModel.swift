@@ -18,7 +18,7 @@ final class RecentSearchesViewModel : ObservableObject, Identifiable {
 			self.searchTS = searchTS
 		}
 		init(depStop : Stop,arrStop : Stop, searchTS: Double) {
-			self.stops = .init(departure: depStop, arrival: arrStop)
+			self.stops = DepartureArrivalPairStop(departure: depStop, arrival: arrStop)
 			self.searchTS = searchTS
 		}
 	}

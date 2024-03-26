@@ -8,7 +8,42 @@
 import Foundation
 import SwiftUI
 
-struct JourneySettings : Equatable,Hashable,Codable {
+class JourneySettingsClass : ObservableObject {
+	@Published var customTransferModes : Set<LineType>
+	@Published var transportMode : JourneySettings.TransportMode
+	@Published var transferTime : JourneySettings.TransferTime
+	@Published var transferCount : JourneySettings.TransferCountCases
+	@Published var accessiblity : JourneySettings.Accessiblity
+	@Published var walkingSpeed : JourneySettings.WalkingSpeed
+	@Published var startWithWalking : Bool
+	@Published var withBicycle : Bool
+	
+	init(customTransferModes: Set<LineType>, transportMode: JourneySettings.TransportMode, transferTime: JourneySettings.TransferTime, transferCount: JourneySettings.TransferCountCases, accessiblity: JourneySettings.Accessiblity, walkingSpeed: JourneySettings.WalkingSpeed, startWithWalking: Bool, withBicycle: Bool) {
+		self.customTransferModes = customTransferModes
+		self.transportMode = transportMode
+		self.transferTime = transferTime
+		self.transferCount = transferCount
+		self.accessiblity = accessiblity
+		self.walkingSpeed = walkingSpeed
+		self.startWithWalking = startWithWalking
+		self.withBicycle = withBicycle
+	}
+	
+	convenience init(settings : JourneySettings) {
+		self.init(
+			customTransferModes: settings.customTransferModes,
+			transportMode: settings.transportMode,
+			transferTime: settings.transferTime,
+			transferCount: settings.transferCount,
+			accessiblity: settings.accessiblity,
+			walkingSpeed: settings.walkingSpeed,
+			startWithWalking: settings.startWithWalking,
+			withBicycle: settings.withBicycle
+		)
+	}
+}
+
+struct JourneySettings : Hashable,Codable {
 	let customTransferModes : Set<LineType>
 	let transportMode : TransportMode
 	let transferTime : TransferTime
@@ -17,6 +52,30 @@ struct JourneySettings : Equatable,Hashable,Codable {
 	let walkingSpeed : WalkingSpeed
 	let startWithWalking : Bool
 	let withBicycle : Bool
+	
+	init(customTransferModes: Set<LineType>, transportMode: TransportMode, transferTime: TransferTime, transferCount: TransferCountCases, accessiblity: Accessiblity, walkingSpeed: WalkingSpeed, startWithWalking: Bool, withBicycle: Bool) {
+		self.customTransferModes = customTransferModes
+		self.transportMode = transportMode
+		self.transferTime = transferTime
+		self.transferCount = transferCount
+		self.accessiblity = accessiblity
+		self.walkingSpeed = walkingSpeed
+		self.startWithWalking = startWithWalking
+		self.withBicycle = withBicycle
+	}
+	
+	init(settings : JourneySettingsClass) {
+		self.init(
+			customTransferModes: settings.customTransferModes,
+			transportMode: settings.transportMode,
+			transferTime: settings.transferTime,
+			transferCount: settings.transferCount,
+			accessiblity: settings.accessiblity,
+			walkingSpeed: settings.walkingSpeed,
+			startWithWalking: settings.startWithWalking,
+			withBicycle: settings.withBicycle
+		)
+	}
 }
 
 extension JourneySettings {
@@ -32,6 +91,33 @@ extension JourneySettings {
 		}
 	}
 }
+
+extension JourneySettingsClass {
+	func isDefault() -> Bool {
+		guard transportMode == .regional
+				||
+				transportMode == .all
+				||
+				( transportMode == .custom && customTransferModes.count > 6 )
+		else {
+			return false
+		}
+		guard transferTime == transferTime.defaultValue else {
+			return false
+		}
+		guard transferCount == transferCount.defaultValue else {
+			return false
+		}
+		guard startWithWalking == true else {
+			return false
+		}
+		guard withBicycle == false else {
+			return false
+		}
+		return true
+	}
+}
+
 
 extension JourneySettings {
 	func isDefault() -> Bool {

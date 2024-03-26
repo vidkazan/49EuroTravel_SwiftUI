@@ -7,114 +7,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "SettingsView"
-            landmarkType = "14">
-            <Locations>
-               <Location
-                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 5ce95ccd2a718624"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "property wrapper backing initializer of ChooChoo.SettingsView.transferCount : ChooChoo.ChewSettings.TransferCountCases"
-                  moduleName = "ChooChoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 38496ab5cda868c3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ChooChoo.SettingsView.transferCount.getter : ChooChoo.ChewSettings.TransferCountCases"
-                  moduleName = "ChooChoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "20">
-               </Location>
-               <Location
-                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - a81d5a56da0a36df"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ChooChoo.SettingsView.transferCount.setter : ChooChoo.ChewSettings.TransferCountCases"
-                  moduleName = "ChooChoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 6ef611d05c1bf6d0"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ChooChoo.SettingsView.transferCount.modify : ChooChoo.ChewSettings.TransferCountCases"
-                  moduleName = "ChooChoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "0">
-               </Location>
-               <Location
-                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 2e9e93d28cd1dc5d"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ChooChoo.SettingsView.transferCount.modify : ChooChoo.ChewSettings.TransferCountCases with unmangled suffix &quot;.resume.0&quot;"
-                  moduleName = "ChooChoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/%3Ccompiler-generated%3E"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "40">
-               </Location>
-               <Location
-                  uuid = "39EC9BF3-3C0B-474B-ABE4-7D540D48635E - 80f2016f40042ed1"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "ChooChoo.SettingsView.$transferCount.getter : SwiftUI.Binding&lt;ChooChoo.ChewSettings.TransferCountCases&gt;"
-                  moduleName = "ChooChoo"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "0">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "3D998E21-7F45-45E8-81F7-1C7CA72631E0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -853,8 +745,8 @@
             filePath = "ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "148"
-            endingLineNumber = "148"
+            startingLineNumber = "174"
+            endingLineNumber = "174"
             landmarkName = "reset()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1118,22 +1010,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "889932E6-0AFC-4774-A99B-899D00BA9400"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChooChoo/Feature/JourneyFollow/JourneyFollowView/JFCV.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "2169DB67-95B4-4C8C-B886-ABA34CEB1BB5"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -1257,6 +1133,70 @@
             endingLineNumber = "51"
             landmarkName = "init(iso:)"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "08E8E127-86A0-4BA5-8E9B-785F0167DFA2"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Feature/JourneyFollow/JourneyFollowView/JFCV.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "body"
+            landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8CD676FE-DE86-42D3-84B3-B22A20EED463"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "body"
+            landmarkType = "24">
+            <Locations>
+               <Location
+                  uuid = "8CD676FE-DE86-42D3-84B3-B22A20EED463 - f4846cd687ebfc1d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;&lt;&lt;opaque return type of ChooChoo.SettingsView.filterDisclaimer() -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of ChooChoo.SettingsView.transportTypes : some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of ChooChoo.SettingsView.segments : some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of ChooChoo.SettingsView.connections : some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of ChooChoo.SettingsView.transferSegment : some&gt;&gt;.0&gt;, SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI.TupleView&lt;(SwiftUI.Picker&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;, ChooChoo.JourneySettings.Accessiblity, SwiftUI.ForEach&lt;Swift.Array&lt;ChooChoo.JourneySettings.Accessiblity&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.tag&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Toggle&lt;SwiftUI.Label&lt;SwiftUI.Text, &lt;&lt;opaque return type of ChooChoo.ChooSFSymbols.view : some&gt;&gt;.0&gt;&gt;, SwiftUI.Picker&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;, ChooChoo.JourneySettings.WalkingSpeed, SwiftUI.ForEach&lt;Swift.Array&lt;ChooChoo.JourneySettings.WalkingSpeed&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.tag&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Toggle&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;, &lt;&lt;opaque return type of ChooChoo.SettingsView.reset() -&gt; some&gt;&gt;.0)&gt; in ChooChoo.SettingsView.body.getter : some"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "2520">
+               </Location>
+               <Location
+                  uuid = "8CD676FE-DE86-42D3-84B3-B22A20EED463 - f4846cd687ebfc1d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; SwiftUI.TupleView&lt;(Swift.Optional&lt;&lt;&lt;opaque return type of ChooChoo.SettingsView.filterDisclaimer() -&gt; some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of ChooChoo.SettingsView.transportTypes : some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of ChooChoo.SettingsView.segments : some&gt;&gt;.0&gt;, &lt;&lt;opaque return type of ChooChoo.SettingsView.connections : some&gt;&gt;.0, Swift.Optional&lt;&lt;&lt;opaque return type of ChooChoo.SettingsView.transferSegment : some&gt;&gt;.0&gt;, SwiftUI.Section&lt;SwiftUI.EmptyView, SwiftUI.TupleView&lt;(SwiftUI.Picker&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;, ChooChoo.JourneySettings.Accessiblity, SwiftUI.ForEach&lt;Swift.Array&lt;ChooChoo.JourneySettings.Accessiblity&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.tag&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Toggle&lt;SwiftUI.Label&lt;SwiftUI.Text, &lt;&lt;opaque return type of ChooChoo.ChooSFSymbols.view : some&gt;&gt;.0&gt;&gt;, SwiftUI.Picker&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;, ChooChoo.JourneySettings.WalkingSpeed, SwiftUI.ForEach&lt;Swift.Array&lt;ChooChoo.JourneySettings.WalkingSpeed&gt;, Swift.Int, &lt;&lt;opaque return type of SwiftUI.View.tag&lt;&#x3c4;_0_0 where &#x3c4;_1_0: Swift.Hashable&gt;(&#x3c4;_1_0) -&gt; some&gt;&gt;.0&gt;&gt;, SwiftUI.Toggle&lt;SwiftUI.Label&lt;SwiftUI.Text, SwiftUI.Image&gt;&gt;)&gt;, SwiftUI.EmptyView&gt;, &lt;&lt;opaque return type of ChooChoo.SettingsView.reset() -&gt; some&gt;&gt;.0)&gt; in ChooChoo.SettingsView.body.getter : some"
+                  moduleName = "ChooChoo"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/fcody/Desktop/swift/ChooChoo/ChooChoo/Feature/JourneySearch/SearchStop/SearchStopsView/SettingsView/SettingsView.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "36"
+                  endingLineNumber = "36"
+                  offsetFromSymbolStart = "3048">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

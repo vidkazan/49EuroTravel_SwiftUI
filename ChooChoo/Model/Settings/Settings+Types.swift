@@ -78,27 +78,17 @@ extension JourneySettings {
 			.unlimited
 		}
 	}
-	enum TransportMode : Int, Equatable, Hashable, Codable {
-		case regional = 1
-		case all = 0
-		case custom = 2
+	enum TransportMode : String, Equatable, Hashable, Codable {
+		case regional
+		case all
+		case custom
 		
 		var defaultValue : Self {
 			.all
 		}
-		var tmp : String {
-			switch self {
-			case .regional:
-				return "regional"
-			case .all:
-				return "all"
-			case .custom:
-				return "custom"
-			}
-		}
 	}
 	
-	enum TransferTime : Equatable, Hashable,Codable {
+	enum TransferTime : Hashable,Codable {
 		case direct
 		case time(minutes : TransferDurationCases)
 		
@@ -106,7 +96,7 @@ extension JourneySettings {
 			.time(minutes: .zero)
 		}
 	}
-	enum Accessiblity: String, Equatable, Hashable,Codable {
+	enum Accessiblity: String, Hashable,Codable, CaseIterable {
 		case partial
 		case complete
 		
@@ -114,7 +104,7 @@ extension JourneySettings {
 			.partial
 		}
 	}
-	enum WalkingSpeed : Equatable, Hashable, Codable{
+	enum WalkingSpeed : String, Hashable, Codable, CaseIterable{
 		case fast
 		case moderate
 		case slow

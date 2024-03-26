@@ -178,6 +178,7 @@ extension LegDetailsView {
 	}
 }
 
+#if DEBUG
 @available(iOS 16.0, *)
 struct LegDetailsPreview : PreviewProvider {
 	static var previews : some View {
@@ -233,3 +234,4 @@ struct LegDetailsPreview : PreviewProvider {
 		}
 	}
 }
+#endif

@@ -12,7 +12,21 @@ extension SettingsView {
 	var connections : some View {
 		Section(content: {
 			Picker(
-				selection: $showWithTransfers,
+				selection:
+					Binding<Bool>(
+						get: {
+							currentSettings.transferTime != .direct
+						},
+						set: {
+							switch $0 {
+							case true:
+								currentSettings.transferTime = .time(minutes: .zero)
+							case false:
+								currentSettings.transferTime = .direct
+							}
+						}
+					),
+//				selection: $showWithTransfers,
 				content: {
 					Label(
 						title: {
@@ -22,7 +36,7 @@ extension SettingsView {
 							Image(systemName: "arrow.up.right")
 						}
 					)
-					.tag(0)
+					.tag(false)
 					Label(
 						title: {
 							Text("With transfers", comment : "SettingsView: connections: picker option")
@@ -31,7 +45,7 @@ extension SettingsView {
 							Image(.arrowLeftArrowRight)
 						}
 					)
-					.tag(1)
+					.tag(true)
 				}, label: {
 				})
 			.pickerStyle(.inline)
@@ -45,7 +59,25 @@ extension SettingsView {
 	var transferSegment : some View {
 		Section(content: {
 			Picker(
-				selection: $transferTime,
+				selection:
+					Binding<JourneySettings.TransferDurationCases>(
+						get: {
+							switch currentSettings.transferTime {
+							case .direct:
+								return .zero
+							case .time(let minutes):
+								return minutes
+							}
+						},
+						set: {
+							switch currentSettings.transferTime {
+							case .direct:
+								currentSettings.transferTime = .direct
+							case .time:
+								currentSettings.transferTime = .time(minutes: $0)
+							}
+						}
+					),
 				content: {
 					ForEach(JourneySettings.TransferDurationCases.allCases,id: \.rawValue) { val in
 						Text(
@@ -66,7 +98,15 @@ extension SettingsView {
 				}
 			)
 			Picker(
-				selection: $transferCount,
+				selection:
+					Binding<JourneySettings.TransferCountCases>(
+						get: {
+							currentSettings.transferCount
+						},
+						set: {
+							currentSettings.transferCount = $0
+						}
+					),
 				content: {
 					ForEach(JourneySettings.TransferCountCases.allCases,id: \.rawValue) { val in
 						Text(verbatim: val.rawValue)

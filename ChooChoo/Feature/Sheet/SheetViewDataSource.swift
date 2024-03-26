@@ -16,6 +16,7 @@ struct MapLegData : Hashable {
 	let lineType : LineType
 	let stops : [StopViewData]
 	let route : MKPolyline?
+	let currenLocation : Coordinate?
 }
 
 enum MapDetailsRequest {

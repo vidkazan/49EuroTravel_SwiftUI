@@ -37,7 +37,7 @@ func layout(sizes: [CGSize], containerWidth: CGFloat,spacing: CGSize) -> [CGRect
 @available(iOS 16.0, *)
 struct FlowLayout: Layout {
 	let spacing : CGSize
-	init(spacing: CGSize = .init(width: 10, height: 10)) {
+	init(spacing: CGSize = CGSize(width: 10, height: 10)) {
 		self.spacing = spacing
 	}
 	

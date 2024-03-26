@@ -16,7 +16,7 @@ struct StopListCell : View {
 	}
 	
 	init(stop: Stop) {
-		self.stop = .init(
+		self.stop = StopWithDistance(
 			stop: stop,
 			distance: nil
 		)

@@ -34,7 +34,7 @@ struct AppSettings : Equatable {
 	init() {
 		self.legViewMode = .sunEvents
 		self.tipsToShow = Set(ChooTipType.allCases)
-		self.debugSettings = .init(prettyJSON: false, alternativeSearchPage: false)
+		self.debugSettings = ChewDebugSettings(prettyJSON: false, alternativeSearchPage: false)
 	}
 }
 

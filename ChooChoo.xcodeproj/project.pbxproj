@@ -2007,7 +2007,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChooChoo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Choo Choo";
+				INFOPLIST_KEY_CFBundleDisplayName = Debug;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -2048,7 +2048,7 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = ChooChoo/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "Choo Choo";
+				INFOPLIST_KEY_CFBundleDisplayName = "Choo Choo Debug";
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.travel";
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "App needs your location";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;

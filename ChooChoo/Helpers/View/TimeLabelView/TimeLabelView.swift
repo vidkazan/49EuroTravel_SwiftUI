@@ -51,7 +51,7 @@ struct TimeLabelView: View {
 	}
 }
 
-
+#if DEBUG
 struct TimeLabelPreviews: PreviewProvider {
 	static var previews: some View {
 		VStack {
@@ -74,3 +74,4 @@ struct TimeLabelPreviews: PreviewProvider {
 		}
 	}
 }
+#endif

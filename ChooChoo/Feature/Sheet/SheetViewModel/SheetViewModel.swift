@@ -402,7 +402,8 @@ extension SheetViewModel {
 					type: leg.legType,
 					lineType: leg.lineViewData.type,
 					stops: leg.legStopsViewData,
-					route: polyline
+					route: polyline,
+					currenLocation: leg.legDTO?.currentLocation
 				)
 			case .line:
 				var polyline : MKPolyline? = nil
@@ -424,14 +425,16 @@ extension SheetViewModel {
 					type: leg.legType,
 					lineType: leg.lineViewData.type,
 					stops: leg.legStopsViewData,
-					route: polyline
+					route: polyline,
+					currenLocation: leg.legDTO?.currentLocation
 				)
 			case .transfer:
 				return MapLegData(
 					type: leg.legType,
 					lineType: leg.lineViewData.type,
 					stops: [locFirst,locLast],
-					route: nil
+					route: nil,
+					currenLocation: leg.legDTO?.currentLocation
 				)
 			}
 		}
@@ -462,7 +465,8 @@ extension SheetViewModel {
 										type: leg.legType,
 										lineType: leg.lineViewData.type,
 										stops: [locFirst,locLast],
-										route: res.routes.first?.polyline
+										route: res.routes.first?.polyline,
+										currenLocation: leg.legDTO?.currentLocation
 									)
 								]
 							)
@@ -479,7 +483,8 @@ extension SheetViewModel {
 										type: leg.legType,
 										lineType: leg.lineViewData.type,
 										stops: [locFirst,locLast],
-										route: nil
+										route: nil,
+										currenLocation: leg.legDTO?.currentLocation
 									)
 								]
 							)

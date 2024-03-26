@@ -39,7 +39,7 @@ extension CDStop {
 			time = TimeContainer(iso: isoTime)
 		}
 		
-		var platforms : DepartureArrivalPair<Prognosed<String>> = .init(departure: .init(), arrival: .init())
+		var platforms = DepartureArrivalPair<Prognosed<String>>(departure: .init(), arrival: .init())
 		if let platformsData = self.platforms,
 		   let platformsDecoded = DepartureArrivalPair<Prognosed<String>>.decode(data: platformsData){
 			platforms = platformsDecoded

@@ -201,7 +201,7 @@ struct LegDTO : Codable,Identifiable, Hashable {
 	let tripId : String?
 	let tripIdAlternative : String?
 	let direction: String?
-	let currentLocation: LocationCoordinatesDTO?
+	let currentLocation: Coordinate?
 	let arrivalPlatform,
 		plannedArrivalPlatform: String?
 	let departurePlatform,
@@ -257,7 +257,7 @@ struct LegDTO : Codable,Identifiable, Hashable {
 			self.tripId = self.tripIdAlternative
 		}
 		self.direction = try container.decodeIfPresent(String.self, forKey: .direction)
-		self.currentLocation = try container.decodeIfPresent(LocationCoordinatesDTO.self, forKey: .currentLocation)
+		self.currentLocation = try container.decodeIfPresent(Coordinate.self, forKey: .currentLocation)
 		self.arrivalPlatform = try container.decodeIfPresent(String.self, forKey: .arrivalPlatform)
 		self.plannedArrivalPlatform = try container.decodeIfPresent(String.self, forKey: .plannedArrivalPlatform)
 		self.departurePlatform = try container.decodeIfPresent(String.self, forKey: .departurePlatform)

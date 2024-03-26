@@ -27,7 +27,7 @@ struct RouteSheet: View {
 	}
 }
 
-
+#if DEBUG
 struct Preview : PreviewProvider {
 	static var previews: some View {
 		let mock = Mock.trip.RE6NeussMinden.decodedData
@@ -40,3 +40,4 @@ struct Preview : PreviewProvider {
 		}
 	}
 }
+#endif

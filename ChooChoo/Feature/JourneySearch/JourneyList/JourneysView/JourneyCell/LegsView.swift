@@ -163,7 +163,7 @@ extension LegsView {
 	}
 }
 
-
+#if DEBUG
 struct LegsViewPreviews: PreviewProvider {
 	static var previews: some View {
 		let mocks = [
@@ -191,3 +191,4 @@ struct LegsViewPreviews: PreviewProvider {
 		.padding()
 	}
 }
+#endif

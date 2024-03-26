@@ -39,5 +39,9 @@ struct AppSettingsView: View {
 				})
 			}
 		}
+		.navigationBarTitleDisplayMode(.inline)
+		.navigationTitle(
+			Text("App Settings", comment: "navigationBarTitle")
+		)
 	}
 }

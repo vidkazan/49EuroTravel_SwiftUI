@@ -16,8 +16,8 @@ extension SettingsView {
 					if type != .foot, type != .transfer {
 						Toggle(
 							isOn: Binding(
-								get: { selectedTypes.contains(type) },
-								set: { _ in selectedTypes.toogle(val: type)}
+								get: { currentSettings.customTransferModes.contains(type) },
+								set: { _ in currentSettings.customTransferModes.toogle(val: type)}
 							),
 							label: {
 								BadgeView(.lineNumber(

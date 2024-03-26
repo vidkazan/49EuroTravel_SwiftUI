@@ -20,6 +20,7 @@ extension JourneyListViewModel {
 		query += addJourneyListTransfersQuery(settings: settings)
 		query += addJourneyListTransportModes(settings: settings)
 		query += addJourneyListTimeQuery(time: time, mode: mode)
+		query += addJourneyOtherSettings(settings: settings)
 		query += Query.queryItems(
 			methods: [
 				Query.remarks(showRemarks: true),
@@ -109,6 +110,14 @@ extension JourneyListViewModel {
 				Query.transferTime(transferTime: minutes.rawValue)
 			])
 		}
+	}
+	static func addJourneyOtherSettings(settings : JourneySettings) -> [URLQueryItem] {
+		return Query.queryItems(methods: [
+			Query.accessibility(settings.accessiblity),
+			Query.bike(settings.withBicycle),
+			Query.startWithWalking(settings.startWithWalking),
+			Query.walkingSpeed(settings.walkingSpeed)
+		])
 	}
 	
 	static func addJourneyListTimeQuery(time : Date, mode : LocationDirectionType) -> [URLQueryItem] {

@@ -36,6 +36,7 @@ struct RemarkSheet : View {
 	}
 }
 
+#if DEBUG
 @available(iOS 16.0, *)
 struct SheetPreviews: PreviewProvider {
 	static var previews: some View {
@@ -70,3 +71,4 @@ struct SheetPreviews: PreviewProvider {
 		}
 	}
 }
+#endif

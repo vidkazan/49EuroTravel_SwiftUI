@@ -82,8 +82,8 @@ struct MapPickerUIView: UIViewRepresentable {
 }
 
 
-
-struct MyPreviewProvider_Previews: PreviewProvider {
+#if DEBUG
+struct MapPickerUIViewPreview: PreviewProvider {
 	static var previews: some View {
 		MapPickerView(
 			vm: .init(
@@ -102,3 +102,4 @@ struct MyPreviewProvider_Previews: PreviewProvider {
 		)
 	}
 }
+#endif

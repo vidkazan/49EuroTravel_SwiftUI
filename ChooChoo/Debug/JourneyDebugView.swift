@@ -227,7 +227,7 @@ struct JourneyDebugView : View {
 	}
 }
 
-
+#if DEBUG
 struct MapDetails_Previews: PreviewProvider {
 	static var previews: some View {
 		if let mock = Mock
@@ -238,3 +238,4 @@ struct MapDetails_Previews: PreviewProvider {
 		}
 	}
 }
+#endif

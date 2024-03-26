@@ -11,7 +11,7 @@ import SwiftUI
 struct BottomView: View {
 	@ObservedObject var searchStopsVM = Model.shared.searchStopsViewModel
 	@EnvironmentObject var chewViewModel : ChewViewModel
-	@State var state : ChewViewModel.State = .init()
+	@State var state = ChewViewModel.State()
 	var body: some View {
 		Group {
 			switch state.status {

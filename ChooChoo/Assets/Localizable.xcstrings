@@ -82,6 +82,9 @@
         }
       }
     },
+    "Accesibility" : {
+      "comment" : "Settings"
+    },
     "Active" : {
       "comment" : "JourneyFollowView: section name",
       "localizations" : {
@@ -103,6 +106,9 @@
           }
         }
       }
+    },
+    "App Settings" : {
+      "comment" : "navigationBarTitle"
     },
     "App system settings" : {
       "comment" : "AppSettingsView"
@@ -448,7 +454,7 @@
       }
     },
     "now" : {
-      "comment" : "DatePickerTimePresetButtons\ntimeChoosingView: button on segmented picker",
+      "comment" : "timeChoosingView: button on segmented picker\nDatePickerTimePresetButtons",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -505,6 +511,9 @@
           }
         }
       }
+    },
+    "popopopo" : {
+
     },
     "Recents" : {
       "comment" : "RecentSearchesView: view name"
@@ -579,7 +588,7 @@
       }
     },
     "Search" : {
-      "comment" : "TabItem\nsearch tip title",
+      "comment" : "search tip title\nTabItem",
       "localizations" : {
         "ru" : {
           "stringUnit" : {
@@ -641,6 +650,9 @@
           }
         }
       }
+    },
+    "Start with walking" : {
+      "comment" : "Settings"
     },
     "Stop not found" : {
       "comment" : "ApiError"
@@ -756,8 +768,14 @@
     "walk %lld min" : {
       "comment" : "badge: walking"
     },
+    "Walking speed" : {
+      "comment" : "Settings"
+    },
     "What does this colorful line mean?" : {
       "comment" : "jlv: header info: sunevents"
+    },
+    "With bicycle" : {
+      "comment" : "Settings"
     },
     "With transfers" : {
       "comment" : "SettingsView: connections: picker option",

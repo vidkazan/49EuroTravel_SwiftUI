@@ -11,7 +11,7 @@ import SwiftUI
 struct TimeAndSettingsView: View {
 	@Environment(\.colorScheme) var colorScheme
 	@EnvironmentObject var chewViewModel : ChewViewModel
-	@State var state : ChewViewModel.State = .init()
+	@State var state = ChewViewModel.State()
 
 	
 	var body: some View {
@@ -26,15 +26,6 @@ struct TimeAndSettingsView: View {
 		.onReceive(chewViewModel.$state, perform: { newState in
 			state = newState
 		})
-	}
-	
-	struct TimeAndSettingsPreview : PreviewProvider {
-		static var previews: some View {
-			TimeAndSettingsView()
-				.padding(10)
-				.environmentObject(ChewViewModel(referenceDate: .now))
-				.background(Color.chewFillPrimary)
-		}
 	}
 }
 
@@ -58,9 +49,13 @@ extension TimeAndSettingsView {
 	}
 }
 
-#Preview {
-	HStack {
-		JourneySettings.IconBadge.redDot.view
-		JourneySettings.IconBadge.regional.view
+#if DEBUG
+struct TimeAndSettingsPreview : PreviewProvider {
+	static var previews: some View {
+		TimeAndSettingsView()
+			.padding(10)
+			.environmentObject(ChewViewModel(referenceDate: .now))
+			.background(Color.chewFillPrimary)
 	}
 }
+#endif
