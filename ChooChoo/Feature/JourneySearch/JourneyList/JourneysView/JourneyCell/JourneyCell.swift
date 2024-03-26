@@ -92,21 +92,20 @@ struct JourneyCell: View {
 
 extension JourneyCell {
 	var menu : some View {
-		VStack {
-			Button(action: {
-				Model.shared.sheetViewModel.send(
-					event: .didRequestShow(.journeyDebug(legs: journey.legs.compactMap {$0.legDTO}))
-				)
-			}, label: {
-				Label(
-					title: {
-						Text("Journey debug", comment: "JourneyCell: menu item")
-					},
-					icon: {
-						Image(systemName: "ant")
-					}
-				)
-			})
+		Group {
+			if !journey.options.isEmpty {
+				ForEach(journey.options, id:\.text) { option in
+					Button(action: {
+						option.action(journey)
+					}, label: {
+						Label(title: {
+							Text(verbatim: option.text)
+						}, icon: {
+							Image(systemName: option.icon)
+						})
+					})
+				}
+			}
 		}
 	}
 }

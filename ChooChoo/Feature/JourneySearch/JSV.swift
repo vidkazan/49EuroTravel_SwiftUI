@@ -48,16 +48,28 @@ struct JourneySearchView : View {
 }
 
 extension JourneySearchView {
+	static let colors : [Color] = {
+		#if DEBUG
+		debugColors
+		#else
+		releaseColors
+		#endif
+	}()
+	static private let releaseColors = [
+		Color.transport.uBlue.opacity(0.1),
+		Color.transport.shipCyan.opacity(0.05)
+	]
+	static private let debugColors = [
+		Color.transport.tramRed.opacity(0.4),
+		Color.transport.tramRed.opacity(0.2)
+	]
 	@ViewBuilder func gradient() -> some View {
 		ZStack {
 			Rectangle().ignoresSafeArea(.all)
 				.foregroundStyle(.clear)
 				.background (
 					.linearGradient(
-						colors: [
-							.transport.uBlue.opacity(0.1),
-							.transport.shipCyan.opacity(0.05)
-						],
+						colors: Self.colors,
 						startPoint: UnitPoint(x: 0.2, y: 0),
 						endPoint: UnitPoint(x: 0.2, y: 0.4)
 					)

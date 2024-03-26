@@ -217,4 +217,27 @@ extension JourneyViewData {
 			"Show on map", comment: "JourneyCell: menu item"
 		)
 	)
+	
+	static let journeyDebug = Option(
+		action: { data in
+			Model.shared.sheetViewModel.send(
+				event: .didRequestShow(
+					.journeyDebug(legs: data.legs.compactMap {$0.legDTO})))},
+		icon: "ant",
+		text : NSLocalizedString(
+			"Journey debug", comment: "JourneyCell: menu item"
+		)
+	)
+}
+
+extension JourneyViewData {
+	var options : [Option] {
+		#if DEBUG
+		return [
+			Self.journeyDebug
+		]
+		#else
+		return []
+		#endif
+	}
 }
