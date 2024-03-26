@@ -512,6 +512,9 @@
         }
       }
     },
+    "popopopo" : {
+
+    },
     "Recents" : {
       "comment" : "RecentSearchesView: view name"
     },
@@ -574,7 +577,7 @@
       }
     },
     "Save" : {
-      "comment" : "datePickerView: save button\nsettingsView: save button",
+      "comment" : "settingsView: save button\ndatePickerView: save button",
       "localizations" : {
         "ru" : {
           "stringUnit" : {

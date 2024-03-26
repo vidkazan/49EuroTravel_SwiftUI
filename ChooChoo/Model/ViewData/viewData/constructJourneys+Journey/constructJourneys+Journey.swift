@@ -86,14 +86,8 @@ extension JourneyDTO {
 			}
 		}
 		let sunEventService = SunEventService(
-			locationStart: CLLocationCoordinate2D(
-				latitude: depStop?.coordinates.latitude ?? 0,
-				longitude: depStop?.coordinates.longitude ?? 0
-			),
-			locationFinal : CLLocationCoordinate2D(
-				latitude: arrStop?.coordinates.latitude ?? 0,
-				longitude: arrStop?.coordinates.longitude ?? 0
-			),
+			locationStart: depStop?.coordinates ?? .init(),
+			locationFinal: arrStop?.coordinates ?? .init(),
 			dateStart: startTS,
 			dateFinal: endTS
 		)

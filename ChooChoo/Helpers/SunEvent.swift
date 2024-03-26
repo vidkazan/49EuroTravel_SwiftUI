@@ -16,7 +16,7 @@ enum SunEventType : String,Hashable,Codable {
 }
 
 // TODO: tests
-struct SunEvent : Hashable {
+struct SunEvent : Hashable, Codable {
 	static func == (lhs: SunEvent, rhs: SunEvent) -> Bool {
 		return
 			lhs.type == rhs.type &&
@@ -25,11 +25,11 @@ struct SunEvent : Hashable {
 	}
 	
 	let type : SunEventType
-	let location : CLLocationCoordinate2D
+	let location : Coordinate
 	let timeStart : Date
 	let timeFinal : Date?
 	
-	init(type: SunEventType, location: CLLocationCoordinate2D, timeStart: Date, timeFinal: Date?) {
+	init(type: SunEventType, location: Coordinate, timeStart: Date, timeFinal: Date?) {
 		self.type = type
 		self.location = location
 		self.timeStart = timeStart
@@ -38,13 +38,13 @@ struct SunEvent : Hashable {
 }
 
 class SunEventService {
-	private let locationStart : CLLocationCoordinate2D
-	private let locationFinal : CLLocationCoordinate2D
+	private let locationStart : Coordinate
+	private let locationFinal : Coordinate
 	private let dateStart : Date
 	private let dateFinal : Date
 	private let duration : Double?
 	
-	init(locationStart: CLLocationCoordinate2D, locationFinal: CLLocationCoordinate2D, dateStart: Date, dateFinal: Date) {
+	init(locationStart: Coordinate, locationFinal: Coordinate, dateStart: Date, dateFinal: Date) {
 		self.locationStart = locationStart
 		self.locationFinal = locationFinal
 		self.dateStart = dateStart
@@ -55,7 +55,7 @@ class SunEventService {
 	func getSunEvents() -> [SunEvent] {
 		var sunEvents : [SunEvent] = []
 		
-		guard let solar = Solar(for: self.dateStart,coordinate: self.locationStart) else { return [] }
+		guard let solar = Solar(for: self.dateStart,coordinate: self.locationStart.cllocationcoordinates2d) else { return [] }
 		
 		//MARK: fix setting initial sun state
 		sunEvents.append(
@@ -77,7 +77,7 @@ class SunEventService {
 		
 		//MARK: going through all dates and getting all sun events from them
 		for date in dates {
-			guard let solar = Solar(for: date,coordinate: self.locationStart) else { return [] }
+			guard let solar = Solar(for: date,coordinate: self.locationStart.cllocationcoordinates2d) else { return [] }
 			
 			if let sunriseStart = solar.sunrise {
 				

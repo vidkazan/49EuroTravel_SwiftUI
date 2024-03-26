@@ -80,8 +80,6 @@
 		7D345E4A2AE95E7C003CA948 /* JourneySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E492AE95E7C003CA948 /* JourneySettings.swift */; };
 		7D345E4C2AE97FC8003CA948 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E4B2AE97FC8003CA948 /* SettingsView.swift */; };
 		7D3957202B54911F00024736 /* JDV+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D39571F2B54911F00024736 /* JDV+Toolbar.swift */; };
-		7D3D88EC2B2A166E00B269E7 /* CDSunEvent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D88EA2B2A166E00B269E7 /* CDSunEvent+CoreDataClass.swift */; };
-		7D3D88ED2B2A166E00B269E7 /* CDSunEvent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D88EB2B2A166E00B269E7 /* CDSunEvent+CoreDataProperties.swift */; };
 		7D3E5F012AB321580064213A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3E5F002AB321580064213A /* LocationManager.swift */; };
 		7D4208CB2AE122FF003D9BFB /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D4208CA2AE122FF003D9BFB /* RouteView.swift */; };
 		7D462D492AAC947F00BC0D65 /* JLVM+reduce+LoadingJourneys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D462D482AAC947F00BC0D65 /* JLVM+reduce+LoadingJourneys.swift */; };
@@ -312,8 +310,6 @@
 		7D345E492AE95E7C003CA948 /* JourneySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneySettings.swift; sourceTree = "<group>"; };
 		7D345E4B2AE97FC8003CA948 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7D39571F2B54911F00024736 /* JDV+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDV+Toolbar.swift"; sourceTree = "<group>"; };
-		7D3D88EA2B2A166E00B269E7 /* CDSunEvent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSunEvent+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7D3D88EB2B2A166E00B269E7 /* CDSunEvent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSunEvent+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D3E5F002AB321580064213A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		7D4208CA2AE122FF003D9BFB /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
 		7D462D482AAC947F00BC0D65 /* JLVM+reduce+LoadingJourneys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLVM+reduce+LoadingJourneys.swift"; sourceTree = "<group>"; };
@@ -872,20 +868,10 @@
 			path = CDLeg;
 			sourceTree = "<group>";
 		};
-		7D65DF122B2A26BC00692601 /* CDSunEvent */ = {
-			isa = PBXGroup;
-			children = (
-				7D3D88EB2B2A166E00B269E7 /* CDSunEvent+CoreDataProperties.swift */,
-				7D3D88EA2B2A166E00B269E7 /* CDSunEvent+CoreDataClass.swift */,
-			);
-			path = CDSunEvent;
-			sourceTree = "<group>";
-		};
 		7D65DF142B2A270B00692601 /* CDJourney */ = {
 			isa = PBXGroup;
 			children = (
 				7D65DF0C2B2A264700692601 /* CDLeg */,
-				7D65DF122B2A26BC00692601 /* CDSunEvent */,
 				7D9BB1082B0CBF53008A3616 /* CDJourney+CoreDataClass.swift */,
 				7D9BB1092B0CBF53008A3616 /* CDJourney+CoreDataProperties.swift */,
 			);
@@ -1652,7 +1638,6 @@
 				7D33A94B2B5192960005D723 /* JFVM + sideEffects.swift in Sources */,
 				7DD5BAE32B72ADDA00CFE768 /* JDV.swift in Sources */,
 				7D53705C2ACED7300009BA20 /* PlannedActual.swift in Sources */,
-				7D3D88ED2B2A166E00B269E7 /* CDSunEvent+CoreDataProperties.swift in Sources */,
 				7DAC0C932B2780C0001FC6EA /* JFVM.swift in Sources */,
 				7DE6FDA32B5BE58100AC8DE3 /* NetworkMonitor.swift in Sources */,
 				7D6C5C252AAF4B1300DEFC57 /* chewVM+reduce+Idle.swift in Sources */,
@@ -1660,7 +1645,6 @@
 				7D1AD8EC2AE94A7500868056 /* GeoDTO.swift in Sources */,
 				7D10BD412BB1B3B000702D83 /* CoreDataStore+add.swift in Sources */,
 				7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */,
-				7D3D88EC2B2A166E00B269E7 /* CDSunEvent+CoreDataClass.swift in Sources */,
 				7D33A94D2B51A7E60005D723 /* Styles.swift in Sources */,
 				7D462D4F2AAC956B00BC0D65 /* JLVM+reduce+FailedToLoadJourneys.swift in Sources */,
 				7D65DF1D2B2A2BFE00692601 /* CDStop+CoreDataProperties.swift in Sources */,

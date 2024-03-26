@@ -24,8 +24,10 @@ extension CDJourney {
 				$0.legViewData()
 			}
 			
-			sunEvents = self.sunEvents.map {
-				$0.sunEvent()
+			if 
+				let sunEventsData = self.sunEvents,
+				let sun = try? JSONDecoder().decode(Set<SunEvent>.self, from: sunEventsData) {
+				sunEvents = Array(sun)
 			}
 			guard let stops = try? JSONDecoder().decode(
 				DepartureArrivalPairStop.self, 

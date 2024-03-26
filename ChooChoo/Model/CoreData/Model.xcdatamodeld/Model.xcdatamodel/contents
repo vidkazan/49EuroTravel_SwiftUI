@@ -6,10 +6,10 @@
         <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="journeyRef" attributeType="String"/>
         <attribute name="journeySettings" optional="YES" attributeType="Binary"/>
+        <attribute name="sunEvents" optional="YES" attributeType="Binary"/>
         <attribute name="time" optional="YES" attributeType="Binary"/>
         <attribute name="updatedAt" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="legs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CDLeg" inverseName="journey" inverseEntity="CDLeg"/>
-        <relationship name="sunEvents" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CDSunEvent" inverseName="journey" inverseEntity="CDSunEvent"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="chewJourneys" inverseEntity="CDUser"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
@@ -63,14 +63,6 @@
         <attribute name="stopOverType" attributeType="String"/>
         <attribute name="time" optional="YES" attributeType="Binary"/>
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDLeg" inverseName="stops" inverseEntity="CDLeg"/>
-    </entity>
-    <entity name="CDSunEvent" representedClassName="CDSunEvent" syncable="YES">
-        <attribute name="latitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="longtitude" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="timeFinal" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="timeStart" attributeType="Date" usesScalarValueType="NO"/>
-        <attribute name="type" attributeType="String"/>
-        <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJourney" inverseName="sunEvents" inverseEntity="CDJourney"/>
     </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
         <attribute name="appSettings" optional="YES" attributeType="Binary"/>
