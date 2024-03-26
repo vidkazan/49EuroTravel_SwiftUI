@@ -10,7 +10,6 @@ import Foundation
 import CoreData
 
 extension CDUser {
-	@NSManaged public var locations: Data?
 	@NSManaged public var recentLocations: Set<CDLocation>?
 	@NSManaged public var journeySettings: CDJourneySettings?
 	@NSManaged public var appSettings: CDAppSettings?
