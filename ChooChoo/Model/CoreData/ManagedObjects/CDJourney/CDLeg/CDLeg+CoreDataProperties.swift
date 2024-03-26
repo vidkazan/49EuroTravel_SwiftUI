@@ -12,7 +12,7 @@ import CoreData
 
 extension CDLeg {
 	@NSManaged public var tripId: String
-	@NSManaged public var legDTO: String?
+	@NSManaged public var legDTO: Data?
     @NSManaged public var isReachable: Bool
     @NSManaged public var legTopPosition: Double
     @NSManaged public var legBottomPosition: Double
@@ -21,6 +21,6 @@ extension CDLeg {
     @NSManaged public var lineType: String
 	@NSManaged public var time: Data
 	@NSManaged public var journey: CDJourney?
-	@NSManaged public var chewLegType: CDLegType
+	@NSManaged public var legType: Data?
 	@NSManaged public var stops: [CDStop]
 }

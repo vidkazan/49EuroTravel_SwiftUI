@@ -18,9 +18,9 @@ extension CDJourney {
 	func journeyFollowData() -> JourneyFollowData? {
 		var legsViewData = [LegViewData]()
 		var sunEvents = [SunEvent]()
-		var data : JourneyFollowData?
+		var data : JourneyFollowData? = nil
 		self.managedObjectContext?.performAndWait {
-			legsViewData = legs.map {
+			legsViewData = legs.compactMap {
 				$0.legViewData()
 			}
 			
@@ -31,7 +31,6 @@ extension CDJourney {
 				DepartureArrivalPairStop.self, 
 				from: self.depArrStops
 			) else {
-				data = nil
 				return
 			}
 			
@@ -40,15 +39,11 @@ extension CDJourney {
 				JourneySettings.self,
 				from: settData
 			) else {
-				data = nil
 				return
 			}
-			
-			
 			guard let time = TimeContainer(isoEncoded: self.time) else {
-				return nil
+				return
 			}
-			
 			#warning("add remarks")
 			data = JourneyFollowData(
 				id : self.id,

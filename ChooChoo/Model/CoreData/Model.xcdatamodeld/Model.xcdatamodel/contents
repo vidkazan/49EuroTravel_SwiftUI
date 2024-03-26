@@ -25,22 +25,16 @@
     <entity name="CDLeg" representedClassName="CDLeg" syncable="YES">
         <attribute name="isReachable" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="legBottomPosition" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <attribute name="legDTO" optional="YES" attributeType="String"/>
+        <attribute name="legDTO" optional="YES" attributeType="Binary"/>
         <attribute name="legTopPosition" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="legType" optional="YES" attributeType="Binary"/>
         <attribute name="lineName" attributeType="String"/>
         <attribute name="lineShortName" attributeType="String"/>
         <attribute name="lineType" attributeType="String"/>
         <attribute name="time" optional="YES" attributeType="Binary"/>
         <attribute name="tripId" attributeType="String"/>
-        <relationship name="chewLegType" maxCount="1" deletionRule="Cascade" destinationEntity="CDLegType" inverseName="leg" inverseEntity="CDLegType"/>
         <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJourney" inverseName="legs" inverseEntity="CDJourney"/>
         <relationship name="stops" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CDStop" inverseName="leg" inverseEntity="CDStop"/>
-    </entity>
-    <entity name="CDLegType" representedClassName="CDLegType" syncable="YES">
-        <attribute name="caseType" attributeType="String"/>
-        <attribute name="finishPointName" optional="YES" attributeType="String"/>
-        <attribute name="startPointName" optional="YES" attributeType="String"/>
-        <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDLeg" inverseName="chewLegType" inverseEntity="CDLeg"/>
     </entity>
     <entity name="CDLocation" representedClassName="CDLocation" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String"/>

@@ -24,18 +24,18 @@ extension CDLeg {
 		self.lineName = leg.lineViewData.name
 		self.lineShortName = leg.lineViewData.shortName
 		self.lineType = leg.lineViewData.type.rawValue
-		if let legDTO = try? JSONEncoder().encode(leg.legDTO), let string = String(data: legDTO, encoding: .utf8) {
-			self.legDTO = string
+		if let legDTO = try? JSONEncoder().encode(leg.legDTO) {
+			self.legDTO = legDTO
+		}
+		if let legType = try? JSONEncoder().encode(leg.legType) {
+			self.legType = legType
 		}
 				
 		self.journey = journey
-
-		let _ = CDLegType(insertIntoManagedObjectContext: context, type: leg.legType, for: self)
 		
 		if let time = leg.time.encode() {
 			self.time = time
 		}
-//		let _ = CDTime(context: context, container: leg.time, cancelled: !leg.isReachable,for: self)
 		
 		for stop in leg.legStopsViewData {
 			let _ = CDStop(insertInto: context, with: stop, to: self)
@@ -44,23 +44,31 @@ extension CDLeg {
 }
 
 extension CDLeg {
-	func legViewData() -> LegViewData {
+	func legViewData() -> LegViewData? {
 		var stopsViewData = [StopViewData]()
 		
 		stopsViewData = stops.map { $0.stopViewData() }
 		
-		let time = TimeContainer(isoEncoded: self.time) ?? .init()
-//		let time = TimeContainer(chewTime: self.time)
 		let segments = segments(from : stopsViewData)
-		var legDTOobj : LegDTO? = nil
-		if let legDTOdata = legDTO?.data(using: .utf8) {
-			legDTOobj = try? JSONDecoder().decode(LegDTO.self, from: legDTOdata)
+		guard let time = TimeContainer(isoEncoded: self.time) else {
+			return nil
+		}
+		guard let legDTOdata = legDTO,
+			let legDTOobj = try? JSONDecoder().decode(LegDTO.self,from: legDTOdata) else {
+			return nil
+		}
+		guard let legTypeData = self.legType,
+		   let legType = try? JSONDecoder().decode(LegViewData.LegType.self,from: legTypeData) else {
+				return nil
+		}
+		guard let direction = self.stops.last?.name else {
+			return nil
 		}
 		return LegViewData(
 			isReachable: self.isReachable,
-			legType: self.chewLegType.legType ?? .line,
+			legType: legType,
 			tripId: self.tripId,
-			direction: self.stops.last?.name ?? "direction",
+			direction: direction,
 			legTopPosition: self.legTopPosition,
 			legBottomPosition: self.legBottomPosition,
 			remarks: [],

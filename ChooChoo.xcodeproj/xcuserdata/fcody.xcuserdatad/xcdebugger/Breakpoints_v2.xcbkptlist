@@ -1189,8 +1189,8 @@
             filePath = "ChooChoo/Model/CoreData/ManagedObjects/CDJourney/CDJourney+CoreDataClass.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
             landmarkName = "journeyFollowData()"
             landmarkType = "7">
             <Locations>
