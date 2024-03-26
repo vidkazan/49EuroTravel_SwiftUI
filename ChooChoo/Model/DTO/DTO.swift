@@ -9,6 +9,27 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
+struct Coordinate: Hashable, Codable {
+	let latitude, longitude: Double
+	
+	init() {
+		self.latitude = 0
+		self.longitude = 0
+	}
+	
+	init(_ coordinate: CLLocationCoordinate2D) {
+		self.latitude = Double(coordinate.latitude)
+		self.longitude = Double(coordinate.longitude)
+	}
+	init(latitude : Double ,longitude : Double) {
+		self.latitude = latitude
+		self.longitude = longitude
+	}
+	var cllocationcoordinates2d : CLLocationCoordinate2D {
+		.init(latitude: latitude, longitude: longitude)
+	}
+}
+
 enum StopOverType : String,Equatable, CaseIterable {
 	case origin
 	case stopover
@@ -320,7 +341,7 @@ struct JourneyListDTO : Codable,Equatable {
 	let realtimeDataUpdatedAt: Int64?
 }
 
-enum LocationType : Int16, Equatable, Hashable {
+enum LocationType : Int16, Equatable, Hashable, Codable {
 	case pointOfInterest
 	case location
 	case stop
@@ -340,7 +361,7 @@ enum LocationType : Int16, Equatable, Hashable {
 	}
 }
 
-struct StationDTO : Codable, Identifiable, Equatable,Hashable {
+struct StationDTO : Codable, Identifiable, Hashable {
 	let type	: String?
 	let id		: String?
 	let name	: String?
@@ -360,7 +381,7 @@ struct StationDTO : Codable, Identifiable, Equatable,Hashable {
 	}
 }
 
-struct StopDTO : Codable, Identifiable, Equatable,Hashable {
+struct StopDTO : Codable, Identifiable, Hashable {
 	let type	: String?
 	let id		: String?
 	let name	: String?
@@ -443,7 +464,7 @@ extension StopDTO {
 			return self.products
 		}()
 		return Stop(
-			coordinates: CLLocationCoordinate2D(
+			coordinates: Coordinate(
 				latitude: latitude ?? location?.latitude ?? 0 ,
 				longitude: longitude ?? location?.longitude ?? 0
 			),

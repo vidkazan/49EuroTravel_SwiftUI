@@ -13,8 +13,9 @@ import CoreData
 extension CDJourney {
 	@NSManaged public var id: Int64
     @NSManaged public var journeyRef: String
-    @NSManaged public var arrivalStop: CDLocation
-    @NSManaged public var departureStop: CDLocation
+//    @NSManaged public var arrivalStop: CDLocation
+//    @NSManaged public var departureStop: CDLocation
+	@NSManaged public var depArrStops: Data
 	@NSManaged public var user: CDUser?
 	@NSManaged public var isActive: Bool
 	@NSManaged public var legs: Set<CDLeg>
@@ -28,8 +29,9 @@ extension CDJourney {
 	convenience init(
 		viewData : JourneyViewData,
 		user : CDUser,
-		depStop : Stop,
-		arrStop : Stop,
+		stops : DepartureArrivalPairStop,
+//		depStop : Stop,
+//		arrStop : Stop,
 		id : Int64,
 		using managedObjectContext: NSManagedObjectContext) {
 			self.init(entity: CDJourney.entity(), insertInto: managedObjectContext)
@@ -40,28 +42,15 @@ extension CDJourney {
 			if let time = try?  JSONEncoder().encode(viewData.time.iso) {
 				self.time = time
 			}
-//			let _ = CDTime(
-//				context: managedObjectContext,
-//				container: viewData.time,
-//				cancelled: !viewData.isReachable,
-//				for: self
-//			)
+			if let stops = try?  JSONEncoder().encode(stops) {
+				self.depArrStops = time
+			}
 			viewData.legs.forEach {
 				let _ = CDLeg(context: managedObjectContext,leg: $0,for: self)
 			}
 			viewData.sunEvents.forEach {
 				let _ = CDSunEvent(context: managedObjectContext,sun: $0,for: self)
 			}
-			let _ = CDLocation(
-				context: managedObjectContext,
-				stop: depStop,
-				parent: .followedJourneyDepStop(self)
-			)
-			let _ = CDLocation(
-				context: managedObjectContext,
-				stop: arrStop,
-				parent: .followedJourneyArrStop(self)
-			)
 			user.addToChewJourneys(self)
 		}
 }

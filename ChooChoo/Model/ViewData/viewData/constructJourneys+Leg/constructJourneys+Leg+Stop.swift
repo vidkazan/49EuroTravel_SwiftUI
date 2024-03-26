@@ -70,7 +70,7 @@ extension LegDTO {
 					name: startName,
 					time: first,
 					type: .footTop,
-					coordinates: CLLocationCoordinate2D(
+					coordinates: Coordinate(
 						latitude: origin?.latitude ?? origin?.location?.latitude ?? 0,
 						longitude: origin?.longitude ?? origin?.location?.longitude ?? 0
 					)
@@ -80,7 +80,7 @@ extension LegDTO {
 					name: destination?.name ?? "name",
 					time: last,
 					type: .footTop,
-					coordinates: CLLocationCoordinate2D(
+					coordinates: Coordinate(
 						latitude: destination?.latitude ?? destination?.location?.latitude ?? 0,
 						longitude: destination?.longitude ?? destination?.location?.longitude ?? 0
 					)
@@ -107,7 +107,7 @@ extension LegDTO {
 					name: origin?.name ?? "name",
 					time: first,
 					type: .footMiddle,
-					coordinates: CLLocationCoordinate2D(
+					coordinates: Coordinate(
 						latitude: origin?.latitude ?? origin?.location?.latitude ?? 0,
 						longitude: origin?.longitude ?? origin?.location?.longitude ?? 0
 					)
@@ -117,7 +117,7 @@ extension LegDTO {
 					name: destination?.name ?? "name",
 					time: last,
 					type: .footMiddle,
-					coordinates: CLLocationCoordinate2D(
+					coordinates: Coordinate(
 						latitude: destination?.latitude ?? destination?.location?.latitude ?? 0,
 						longitude: destination?.longitude ?? destination?.location?.longitude ?? 0
 					)
@@ -144,7 +144,7 @@ extension LegDTO {
 					name: origin?.name ?? endName,
 					time: first,
 					type: .footBottom,
-					coordinates: CLLocationCoordinate2D(
+					coordinates: Coordinate(
 						latitude: origin?.latitude ?? origin?.location?.latitude ?? 0,
 						longitude: origin?.longitude ?? origin?.location?.longitude ?? 0
 					)
@@ -154,7 +154,7 @@ extension LegDTO {
 					name: endName,
 					time: last,
 					type: .footBottom,
-					coordinates: CLLocationCoordinate2D(
+					coordinates: Coordinate(
 						latitude: destination?.latitude ?? destination?.location?.latitude ?? 0,
 						longitude: destination?.longitude ?? destination?.location?.longitude ?? 0
 					)
@@ -181,7 +181,7 @@ extension LegDTO {
 					name: origin?.name ?? "name",
 					time: first,
 					type: .transfer,
-					coordinates: CLLocationCoordinate2D(
+					coordinates: Coordinate(
 						latitude: origin?.latitude ?? origin?.location?.latitude ?? 0,
 						longitude: origin?.longitude ?? origin?.location?.longitude ?? 0
 					)
@@ -191,7 +191,7 @@ extension LegDTO {
 					name: destination?.name ?? "name",
 					time: last,
 					type: .transfer,
-					coordinates: CLLocationCoordinate2D(
+					coordinates: Coordinate(
 						latitude: destination?.latitude ?? destination?.location?.latitude ?? 0,
 						longitude: destination?.longitude ?? destination?.location?.longitude ?? 0
 					)

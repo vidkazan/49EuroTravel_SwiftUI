@@ -33,9 +33,9 @@ extension CDLocation {
 		self.managedObjectContext?.performAndWait {
 			type = LocationType(rawValue: self.functionType)
 			stop = Stop(
-				coordinates: CLLocationCoordinate2D(
-				 latitude: self.latitude,
-				 longitude: self.longitude
+				coordinates: Coordinate(
+					latitude: self.latitude,
+					longitude: self.longitude
 			 ),
 			 type: type ?? LocationType.location,
 			 stopDTO: StopDTO(

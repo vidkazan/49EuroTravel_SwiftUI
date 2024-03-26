@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct DepartureArrivalPairStop : Equatable, Hashable {
+struct DepartureArrivalPairStop : Equatable, Hashable,Codable {
 	let departure : Stop
 	let arrival : Stop
 	let id : String
@@ -33,7 +33,7 @@ extension DepartureArrivalPair {
 	func encode() -> Data? {
 		return try? JSONEncoder().encode(self)
 	}
-	func decode(data: Data) -> Self? {
+	static func decode(data: Data) -> Self? {
 		return try? JSONDecoder().decode(Self.self, from: data)
 	}
 }

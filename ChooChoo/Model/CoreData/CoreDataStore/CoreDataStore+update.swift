@@ -10,9 +10,9 @@ import CoreData
 import CoreLocation
 // MARK: update
 extension CoreDataStore {
-	func updateJourney(id: Int64,viewData : JourneyViewData,depStop : Stop, arrStop : Stop) -> Bool {
+	func updateJourney(id: Int64,viewData : JourneyViewData,stops : DepartureArrivalPairStop) -> Bool {
 		if deleteJourneyIfFound(id: id) {
-			return addJourney(id: id,viewData: viewData, depStop: depStop, arrStop: arrStop)
+			return addJourney(id: id,viewData: viewData, stops: stops)
 		}
 		print("📕 > \(#function) : error : delete fault")
 		return false

@@ -11,7 +11,7 @@ import CoreLocation
 
 struct StopViewData : Equatable, Identifiable, Hashable {
 	let id : String?
-	let locationCoordinates : CLLocationCoordinate2D
+	let locationCoordinates : Coordinate
 	let name : String
 	let platforms : DepartureArrivalPair<Prognosed<String>>
 //	let departurePlatform : Prognosed<String>
@@ -88,7 +88,7 @@ extension StopViewData {
 //		self.departurePlatform  = Prognosed(actual: stop.departurePlatform, planned: stop.plannedDeparturePlatform)
 //		self.arrivalPlatform  = Prognosed(actual: stop.arrivalPlatform, planned: stop.plannedArrivalPlatform)
 		self.stopOverType = type
-		self.locationCoordinates = CLLocationCoordinate2D(
+		self.locationCoordinates = Coordinate(
 			latitude: stop.stop?.location?.latitude ?? stop.stop?.latitude ?? -1,
 			longitude: stop.stop?.location?.longitude ?? stop.stop?.longitude ?? -1
 		)
@@ -104,7 +104,7 @@ extension StopViewData {
 		name : String,
 		time : TimeContainer,
 		type: StopOverType,
-		coordinates : CLLocationCoordinate2D
+		coordinates : Coordinate
 	) {
 		self.time = time
 		self.name = name

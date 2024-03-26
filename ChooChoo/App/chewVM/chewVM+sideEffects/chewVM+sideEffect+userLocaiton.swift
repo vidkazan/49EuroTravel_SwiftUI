@@ -26,7 +26,10 @@ extension ChewViewModel {
 					return Just(Event.didFailToLoadLocationData).eraseToAnyPublisher()
 				}
 				Task {
-					await Self.reverseGeocoding(coords : coords ,send:send)
+					await Self.reverseGeocoding(
+						coords : Coordinate(coords),
+						send:send
+					)
 				}
 				return Empty().eraseToAnyPublisher()
 			@unknown default:
@@ -36,7 +39,7 @@ extension ChewViewModel {
 		}
 	}
 	
-	private static func reverseGeocoding(coords : CLLocationCoordinate2D,send : (ChewViewModel.Event)->Void) async {
+	private static func reverseGeocoding(coords : Coordinate,send : (ChewViewModel.Event)->Void) async {
 		if let res = await Model.shared.locationDataManager.reverseGeocoding(coords: coords) {
 			let stop = Stop(
 				coordinates: coords,

@@ -53,7 +53,7 @@ struct MapPickerUIView: UIViewRepresentable {
 			}
 			let annotation = LocationAnnotation()
 			annotation.title = vm.state.data.selectedStop?.name
-			annotation.coordinate = selectedCoordinate
+			annotation.coordinate = selectedCoordinate.cllocationcoordinates2d
 			uiView.addAnnotation(annotation)
 		}
 		
@@ -64,14 +64,14 @@ struct MapPickerUIView: UIViewRepresentable {
 		} else {
 			vm.state.data.stops.forEach({ stop in
 				if uiView.annotations.first(
-					where: {$0.coordinate == stop.coordinates}) == nil,
+					where: {$0.coordinate == stop.coordinates.cllocationcoordinates2d}) == nil,
 				   let lineType = stop.stopDTO?.products?.lineType
 				{
 					MapPickerViewModel.addStopAnnotation(
 						id: stop.id,
 						lineType: lineType,
 						stopName: stop.name,
-						coords: stop.coordinates,
+						coords: stop.coordinates.cllocationcoordinates2d,
 						mapView: uiView,
 						stopOverType: nil
 					)

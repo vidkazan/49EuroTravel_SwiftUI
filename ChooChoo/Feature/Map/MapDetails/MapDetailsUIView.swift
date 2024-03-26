@@ -30,7 +30,7 @@ struct MapDetailsUIView: UIViewRepresentable {
 					id: stop.id,
 					lineType: leg.lineType,
 					stopName: stop.name,
-					coords: stop.locationCoordinates,
+					coords: stop.locationCoordinates.cllocationcoordinates2d,
 					mapView: mapView,
 					stopOverType: stop.stopOverType
 				)

@@ -49,7 +49,7 @@ extension StopTripDTO {
 				return [
 					StopViewData(
 						id: origin.id,
-						locationCoordinates: CLLocationCoordinate2D(latitude: origin.latitude ?? 0, longitude: origin.longitude ?? 0),
+						locationCoordinates: Coordinate(latitude: origin.latitude ?? 0, longitude: origin.longitude ?? 0),
 						name: origin.name ?? "",
 						platforms: .init(
 							departure: .init(),
@@ -62,7 +62,7 @@ extension StopTripDTO {
 					),
 					StopViewData(
 						id: stop?.id,
-						locationCoordinates: CLLocationCoordinate2D(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
+						locationCoordinates: Coordinate(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
 						name: stop?.name ?? "",
 						platforms: .init(
 							departure: .init(),
@@ -80,7 +80,7 @@ extension StopTripDTO {
 				return [
 					StopViewData(
 						id: stop?.id,
-						locationCoordinates: CLLocationCoordinate2D(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
+						locationCoordinates: Coordinate(latitude: stop?.latitude ?? 0, longitude: stop?.longitude ?? 0),
 						name: stop?.name ?? "",
 						platforms: .init(
 							departure: .init(actual: platform,planned: plannedPlatform),
@@ -93,7 +93,7 @@ extension StopTripDTO {
 					),
 					StopViewData(
 						id: destination.id,
-						locationCoordinates: CLLocationCoordinate2D(latitude: destination.latitude ?? 0, longitude: destination.longitude ?? 0),
+						locationCoordinates: Coordinate(latitude: destination.latitude ?? 0, longitude: destination.longitude ?? 0),
 						name: destination.name ?? "",
 						platforms: .init(
 							departure: .init(),

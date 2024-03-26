@@ -42,8 +42,10 @@ extension JourneyDetailsViewModel {
 						followData: JourneyFollowData(
 							id : id,
 							journeyViewData: state.data.viewData,
-							depStop: state.data.depStop,
-							arrStop: state.data.arrStop
+							stops: .init(
+								departure: state.data.depStop,
+								arrival: state.data.arrStop
+							)
 						),
 						sendToJourneyDetailsViewModel: { event in
 							vm?.send(event: event)

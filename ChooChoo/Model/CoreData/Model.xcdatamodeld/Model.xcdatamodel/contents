@@ -6,6 +6,7 @@
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="appSettings" inverseEntity="CDUser"/>
     </entity>
     <entity name="CDJourney" representedClassName="CDJourney" syncable="YES">
+        <attribute name="depArrStops" optional="YES" attributeType="Binary"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="journeyRef" attributeType="String"/>
@@ -64,13 +65,8 @@
         <relationship name="chewRecentSearchDepStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDRecentSearch" inverseName="depStop" inverseEntity="CDRecentSearch"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="recentLocations" inverseEntity="CDUser"/>
     </entity>
-    <entity name="CDPrognosedPlatform" representedClassName="CDPrognosedPlatform" syncable="YES">
-        <attribute name="actual" optional="YES" attributeType="String"/>
-        <attribute name="planned" optional="YES" attributeType="String"/>
-        <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDStop" inverseName="arrPlatform" inverseEntity="CDStop"/>
-        <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDStop" inverseName="depPlatform" inverseEntity="CDStop"/>
-    </entity>
     <entity name="CDRecentSearch" representedClassName="CDRecentSearch" syncable="YES">
+        <attribute name="depArrStops" optional="YES" attributeType="Binary"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="searchDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <relationship name="arrStop" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDLocation" inverseName="chewRecentSearchArrStop" inverseEntity="CDLocation"/>
@@ -88,11 +84,10 @@
         <attribute name="locationType" optional="YES" attributeType="String"/>
         <attribute name="long" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String"/>
+        <attribute name="platforms" optional="YES" attributeType="Binary"/>
         <attribute name="stopId" optional="YES" attributeType="String"/>
         <attribute name="stopOverType" attributeType="String"/>
         <attribute name="time" optional="YES" attributeType="Binary"/>
-        <relationship name="arrPlatform" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDPrognosedPlatform" inverseName="arrivalStop" inverseEntity="CDPrognosedPlatform"/>
-        <relationship name="depPlatform" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDPrognosedPlatform" inverseName="departureStop" inverseEntity="CDPrognosedPlatform"/>
         <relationship name="leg" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDLeg" inverseName="stops" inverseEntity="CDLeg"/>
     </entity>
     <entity name="CDSunEvent" representedClassName="CDSunEvent" syncable="YES">
@@ -104,6 +99,7 @@
         <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJourney" inverseName="sunEvents" inverseEntity="CDJourney"/>
     </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
+        <attribute name="locations" optional="YES" attributeType="Binary"/>
         <relationship name="appSettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDAppSettings" inverseName="user" inverseEntity="CDAppSettings"/>
         <relationship name="chewJourneys" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDJourney" inverseName="user" inverseEntity="CDJourney"/>
         <relationship name="journeySettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDJourneySettings" inverseName="user" inverseEntity="CDJourneySettings"/>

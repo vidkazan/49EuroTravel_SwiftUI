@@ -12,14 +12,12 @@ import SwiftUI
 struct JourneyFollowData : Equatable {
 	let id : Int64
 	let journeyViewData : JourneyViewData
-	let depStop: Stop
-	let arrStop : Stop
+	let stops : DepartureArrivalPairStop
 	
-	init(id: Int64, journeyViewData: JourneyViewData, depStop: Stop, arrStop: Stop) {
+	init(id: Int64, journeyViewData: JourneyViewData, stops : DepartureArrivalPairStop) {
 		self.id = id
 		self.journeyViewData = journeyViewData
-		self.depStop = depStop
-		self.arrStop = arrStop
+		self.stops = stops
 	}
 }
 

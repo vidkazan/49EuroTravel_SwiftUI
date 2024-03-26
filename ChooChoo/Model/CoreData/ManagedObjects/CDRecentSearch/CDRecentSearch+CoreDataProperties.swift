@@ -14,9 +14,7 @@ extension CDRecentSearch {
 	@NSManaged public var id: String
 	@NSManaged public var user: CDUser?
     @NSManaged public var searchDate: Date?
-    @NSManaged public var depStop: CDLocation?
-    @NSManaged public var arrStop: CDLocation?
-
+	@NSManaged public var depArrStops: Data
 }
 
 extension CDRecentSearch : Identifiable {
@@ -28,17 +26,9 @@ extension CDRecentSearch : Identifiable {
 		self.init(entity: CDRecentSearch.entity(), insertInto: managedObjectContext)
 		self.id = search.stops.id
 		self.searchDate = Date(timeIntervalSince1970: search.searchTS)
-		self.searchDate = Date(timeIntervalSince1970: search.searchTS)
-		let _ = CDLocation(
-			context: managedObjectContext,
-			stop: search.stops.departure,
-			parent: .recentSearchDepStop(self)
-		)
-		let _ = CDLocation(
-			context: managedObjectContext,
-			stop: search.stops.arrival,
-			parent: .recentSearchArrStop(self)
-		)
+		if let stops = try? JSONEncoder().encode(search.stops) {
+			self.depArrStops = stops
+		}
 		user.addToRecentSearches(self)
 	}
 }

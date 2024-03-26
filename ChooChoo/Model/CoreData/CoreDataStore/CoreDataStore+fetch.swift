@@ -20,8 +20,8 @@ extension CoreDataStore {
 	
 	func fetchAppSettings() -> AppSettings? {
 		var settings : CDAppSettings?
-		var legViewMode : AppSettings.LegViewMode = .all
-		var tips = Set<AppSettings.ChooTipType>()
+		var legViewMode : AppSettings.LegViewMode? = nil
+		var tips : Set<AppSettings.ChooTipType>? = nil
 		
 		asyncContext.performAndWait {
 			settings = user?.appSettings
@@ -41,7 +41,7 @@ extension CoreDataStore {
 			}
 		}
 		
-		guard settings != nil else {
+		guard let legViewMode = legViewMode, let tips = tips else {
 			return nil
 		}
 		
@@ -126,13 +126,21 @@ extension CoreDataStore {
 			var stops = [RecentSearchesViewModel.RecentSearch]()
 			asyncContext.performAndWait {
 				res.forEach {
+//					if
+//						let dep = $0.depStop?.stop(),
+//						let arr = $0.arrStop?.stop(),
+//						let ts = $0.searchDate?.timeIntervalSince1970 {
+//							stops.append(RecentSearchesViewModel.RecentSearch(
+//								depStop: dep,
+//								arrStop: arr,
+//								searchTS: ts
+//							))
+//					}
 					if
-						let dep = $0.depStop?.stop(),
-						let arr = $0.arrStop?.stop(),
+						let depArrStops = try? JSONDecoder().decode(DepartureArrivalPairStop.self, from: $0.depArrStops),
 						let ts = $0.searchDate?.timeIntervalSince1970 {
 							stops.append(RecentSearchesViewModel.RecentSearch(
-								depStop: dep,
-								arrStop: arr,
+								stops: depArrStops,
 								searchTS: ts
 							))
 					}

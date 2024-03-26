@@ -169,7 +169,7 @@ extension JourneyFollowView {
 			followId: journey.id,
 			for: journey.journeyViewData.refreshToken,
 			viewdata: journey.journeyViewData,
-			stops: .init(departure: journey.depStop, arrival: journey.arrStop),
+			stops: journey.stops,
 			chewVM: chewVM
 		)
 		Group {
@@ -201,8 +201,8 @@ extension JourneyFollowView {
 				Button {
 					chewVM.send(
 						event: .didUpdateSearchData(
-							dep: .location(journey.depStop),
-							arr: .location(journey.arrStop),
+							dep: .location(journey.stops.departure),
+							arr: .location(journey.stops.arrival),
 							date: SearchStopsDate(date: .now, mode: .departure)
 						)
 					)
@@ -258,7 +258,7 @@ struct FollowPreviews: PreviewProvider {
 			)
 			JourneyFollowView(viewModel: .init(
 				journeys: data.map {
-					JourneyFollowData(id: 0, journeyViewData: $0, depStop: .init(), arrStop: .init())
+					JourneyFollowData(id: 0, journeyViewData: $0,stops: .init(departure: .init(), arrival: .init()))
 				},
 				initialStatus: .idle
 			))

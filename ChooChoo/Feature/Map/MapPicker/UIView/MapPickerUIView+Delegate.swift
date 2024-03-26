@@ -77,7 +77,7 @@ extension MapPickerUIView {
 				case .began:
 					// disabling zoom, so the didSelect triggers immediately
 					let location = gestureRecognizer.location(in: mapView)
-					let coordinate = mapView.convert(location, toCoordinateFrom: mapView)
+					let coordinate = Coordinate(mapView.convert(location, toCoordinateFrom: mapView))
 					parent.vm.send(event: .didTapStopOnMap(Stop(
 						coordinates: coordinate,
 						type: .location,

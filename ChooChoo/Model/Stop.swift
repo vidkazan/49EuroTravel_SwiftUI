@@ -8,9 +8,9 @@
 import Foundation
 import CoreLocation
 
-struct Stop : Equatable,Identifiable, Hashable {
+struct Stop : Identifiable,Hashable,Codable {
 	let id : String
-	var coordinates: CLLocationCoordinate2D
+	var coordinates: Coordinate
 	var type: LocationType
 	var stopDTO : StopDTO?
 	var name : String
@@ -23,11 +23,11 @@ struct Stop : Equatable,Identifiable, Hashable {
 		self.type = .stop
 	}
 	
-	init(coordinates: CLLocationCoordinate2D, type: LocationType, stopDTO: StopDTO?) {
+	init(coordinates: Coordinate, type: LocationType, stopDTO: StopDTO?) {
 		self.coordinates = coordinates
 		self.type = type
 		self.stopDTO = stopDTO
-		self.name = stopDTO?.name ?? stopDTO?.address ?? "\(String(coordinates.latitude)) , \(String(coordinates.longitude))"
+		self.name = stopDTO?.name ?? stopDTO?.address ?? "\(String(coordinates.latitude).prefix(6)) , \(String(coordinates.longitude).prefix(6))"
 		self.id = stopDTO?.id ?? self.name
 	}
 }
@@ -40,7 +40,7 @@ extension Stop {
 				return StopAnnotation(
 					stopId: id,
 					name: name,
-					location: coordinates,
+					location: coordinates.cllocationcoordinates2d,
 					type: type,
 					stopOverType: stopOverType
 				)

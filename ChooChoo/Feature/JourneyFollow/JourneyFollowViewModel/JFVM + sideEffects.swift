@@ -31,16 +31,15 @@ extension JourneyFollowViewModel {
 			guard Model.shared.coreDataStore.updateJourney(
 				id: followId,
 				viewData: viewData,
-				depStop: oldViewData.depStop,
-				arrStop: oldViewData.arrStop) == true else {
+				stops: oldViewData.stops
+			) == true else {
 				return Just(Event.didFailToUpdateJourney(CoreDataError.failedToUpdateDatabase(type: CDJourney.self))).eraseToAnyPublisher()
 			}
 			
 			followData[index] = JourneyFollowData(
 				id: oldViewData.id,
 				journeyViewData: viewData,
-				depStop: oldViewData.depStop,
-				arrStop: oldViewData.arrStop
+				stops: oldViewData.stops
 			)
 			
 			return Just(Event.didUpdateData(followData)).eraseToAnyPublisher()
@@ -76,8 +75,7 @@ extension JourneyFollowViewModel {
 					Model.shared.coreDataStore.addJourney(
 						id : viewData.id,
 						viewData: viewData.journeyViewData,
-						depStop: viewData.depStop,
-						arrStop: viewData.arrStop
+						stops: viewData.stops
 					) == true
 				else {
 					send(.didFailToChangeSubscribingState(

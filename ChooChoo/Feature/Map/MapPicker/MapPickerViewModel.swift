@@ -392,7 +392,7 @@ extension MapPickerViewModel {
 		.eraseToAnyPublisher()
 	}
 	
-	private static func reverseGeocoding(coords : CLLocationCoordinate2D,send : (MapPickerViewModel.Event)->Void) async {
+	private static func reverseGeocoding(coords : Coordinate,send : (MapPickerViewModel.Event)->Void) async {
 		if let res = await Model.shared.locationDataManager.reverseGeocoding(coords: coords) {
 			let stop = Stop(
 				coordinates: coords,

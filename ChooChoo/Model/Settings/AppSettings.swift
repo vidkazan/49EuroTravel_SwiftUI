@@ -24,7 +24,7 @@ struct AppSettings : Equatable {
 	init(oldSettings : Self,
 		debugSettings : ChewDebugSettings? = nil,
 		legViewMode : LegViewMode? = nil,
-		 tips : Set<ChooTipType>? = [.followJourney,.sunEventsTip]
+		 tips : Set<ChooTipType>? = Set(ChooTipType.allCases)
 	) {
 		self.legViewMode = legViewMode ?? oldSettings.legViewMode
 		self.tipsToShow = tips ?? oldSettings.tipsToShow
@@ -33,7 +33,7 @@ struct AppSettings : Equatable {
 	
 	init() {
 		self.legViewMode = .sunEvents
-		self.tipsToShow = [.followJourney,.sunEventsTip]
+		self.tipsToShow = Set(ChooTipType.allCases)
 		self.debugSettings = .init(prettyJSON: false, alternativeSearchPage: false)
 	}
 }

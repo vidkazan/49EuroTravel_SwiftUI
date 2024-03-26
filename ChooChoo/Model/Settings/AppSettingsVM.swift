@@ -11,7 +11,7 @@ import Combine
 
 class AppSettingsViewModel : ObservableObject, Identifiable {
 	@Published private(set) var state : State {
-		didSet { print("🚂⚙️ >> state:",state.status,state.settings.legViewMode) }
+		didSet { print("🚂⚙️ >> state:",state.status,state.settings) }
 	}
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
@@ -94,7 +94,7 @@ extension AppSettingsViewModel  {
 
 extension AppSettingsViewModel {
 	static func reduce(_ state: State, _ event: Event) -> State {
-		print("🚂⚙️ >> ",event.description,"state:",state.status,state.settings.legViewMode)
+		print("🚂⚙️ >> ",event.description,"state:",state.status,state.settings)
 		switch state.status {
 			case .idle:
 			switch event {

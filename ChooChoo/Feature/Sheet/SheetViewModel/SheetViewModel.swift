@@ -288,7 +288,7 @@ extension SheetViewModel {
 }
 
 extension SheetViewModel {
-	static func constructMapRegion(locFirst : CLLocationCoordinate2D, locLast : CLLocationCoordinate2D) -> MKCoordinateRegion {
+	static func constructMapRegion(locFirst : Coordinate, locLast : Coordinate) -> MKCoordinateRegion {
 		let centerCoordinate = CLLocationCoordinate2D(
 			latitude: (locFirst.latitude + locLast.latitude) / 2,
 			longitude: (locFirst.longitude + locLast.longitude) / 2
@@ -309,18 +309,18 @@ extension SheetViewModel {
 	}
 	
 	
-	static func makeDirectionsRequest(from: CLLocationCoordinate2D, to: CLLocationCoordinate2D
+	static func makeDirectionsRequest(from: Coordinate, to: Coordinate
 	) -> AnyPublisher<MKDirections.Response, ApiError> {
 		let request = MKDirections.Request()
 		request.source = MKMapItem(
 			placemark: MKPlacemark(
-				coordinate: from,
+				coordinate: from.cllocationcoordinates2d,
 				addressDictionary: nil
 			)
 		)
 		request.destination = MKMapItem(
 			placemark: MKPlacemark(
-				coordinate: to,
+				coordinate: to.cllocationcoordinates2d,
 				addressDictionary: nil
 			)
 		)
@@ -395,7 +395,7 @@ extension SheetViewModel {
 			case .footEnd,.footMiddle,.footStart:
 				var polyline : MKPolyline? = nil
 				let polylinePoints = leg.legStopsViewData.compactMap {
-					return $0.locationCoordinates
+					return $0.locationCoordinates.cllocationcoordinates2d
 				}
 				polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
 				return MapLegData(
@@ -416,7 +416,7 @@ extension SheetViewModel {
 					polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
 				} else {
 					let polylinePoints = leg.legStopsViewData.compactMap {
-						return $0.locationCoordinates
+						return $0.locationCoordinates.cllocationcoordinates2d
 					}
 					polyline = MKPolyline(coordinates: polylinePoints, count: polylinePoints.count)
 				}

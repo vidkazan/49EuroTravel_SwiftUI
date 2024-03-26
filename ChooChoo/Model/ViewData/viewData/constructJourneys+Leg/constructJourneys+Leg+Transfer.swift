@@ -48,7 +48,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 				name: fromLeg.destination?.name ?? "from",
 				time: first,
 				type: .transfer,
-				coordinates: CLLocationCoordinate2D(
+				coordinates: Coordinate(
 					latitude: fromLeg.destination?.latitude ?? fromLeg.destination?.location?.latitude ?? 0,
 					longitude: fromLeg.destination?.longitude ?? fromLeg.destination?.location?.longitude ?? 0
 				)
@@ -58,7 +58,7 @@ func constructTransferViewData(fromLeg : LegDTO, toLeg : LegDTO) -> LegViewData?
 				name: toLeg.origin?.name ?? "to",
 				time: last,
 				type: .transfer,
-				coordinates: CLLocationCoordinate2D(
+				coordinates: Coordinate(
 					latitude: toLeg.origin?.latitude ?? toLeg.origin?.location?.latitude ?? 0,
 					longitude: toLeg.origin?.longitude ?? toLeg.origin?.location?.longitude ?? 0
 				)

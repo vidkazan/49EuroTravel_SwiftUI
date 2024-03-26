@@ -28,38 +28,30 @@ extension CDStop {
 		if let time = stopData.time.encode() {
 			self.time = time
 		}
-//		let _ = CDTime(
-//			context: context,
-//			container: stopData.time,
-//			cancelled: stopData.cancellationType() == .fullyCancelled,
-//			for: self
-//		)
-		
-		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.platforms.departure, to: self, type: .departure)
-		let _ = CDPrognosedPlatform(insertInto: context, with: stopData.platforms.arrival, to: self, type: .arrival)
+		self.platforms = stopData.platforms.encode()
 	}
 }
 
-#warning("finish here")
 extension CDStop {
 	func stopViewData() -> StopViewData {
 		var time = TimeContainer()
 		if let isoTime =  try? JSONDecoder().decode(TimeContainer.ISOTimeContainer.self, from: self.time) {
 			time = TimeContainer(iso: isoTime)
-		} 
+		}
+		
+		var platforms : DepartureArrivalPair<Prognosed<String>> = .init(departure: .init(), arrival: .init())
+		if let platformsData = self.platforms,
+		   let platformsDecoded = DepartureArrivalPair<Prognosed<String>>.decode(data: platformsData){
+			platforms = platformsDecoded
+		}
 //		else {
 //			return nil
 //		}
 		return StopViewData(
 			id: self.stopId,
-			locationCoordinates: CLLocationCoordinate2D(latitude: self.lat, longitude: self.long),
+			locationCoordinates: Coordinate(latitude: self.lat, longitude: self.long),
 			name: self.name,
-			platforms: .init(
-				departure: Prognosed<String>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),
-				arrival: Prognosed<String>(actual: self.arrPlatform?.actual, planned: self.arrPlatform?.planned)
-			),
-//			departurePlatform: Prognosed<String>(actual: self.depPlatform?.actual, planned: self.depPlatform?.planned),
-//			arrivalPlatform: Prognosed<String>(actual: self.arrPlatform?.actual, planned: self.arrPlatform?.planned),
+			platforms: platforms,
 			time: time,
 			stopOverType: StopOverType(rawValue: self.stopOverType) ?? .stopover
 		)
