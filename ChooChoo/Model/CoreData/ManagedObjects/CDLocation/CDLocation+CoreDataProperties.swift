@@ -18,11 +18,6 @@ extension CDLocation {
 	@NSManaged public var name: String
 	@NSManaged public var functionType: Int16
 	@NSManaged public var transportType: String?
-	
-	@NSManaged public var chewJourneyDep: CDJourney?
-	@NSManaged public var chewJourneyArr: CDJourney?
-	@NSManaged public var chewRecentSearchArrStop: CDRecentSearch?
-	@NSManaged public var chewRecentSearchDepStop: CDRecentSearch?
 	@NSManaged public var user: CDUser?
 }
 

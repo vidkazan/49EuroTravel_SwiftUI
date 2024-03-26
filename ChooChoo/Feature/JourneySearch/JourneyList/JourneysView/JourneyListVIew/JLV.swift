@@ -42,6 +42,7 @@ struct JourneyListView: View {
 				.frame(maxWidth: .infinity, maxHeight: .infinity)
 			}
 		}
+		.animation(.easeInOut, value: appSettingsViewModel.state.settings)
 	}
 }
 

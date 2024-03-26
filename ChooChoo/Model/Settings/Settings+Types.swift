@@ -31,7 +31,7 @@ extension JourneySettings {
 			}
 	}
 	
-	enum TransferDurationCases : Int, Equatable, Hashable, CaseIterable {
+	enum TransferDurationCases : Int, Equatable, Hashable, CaseIterable, Codable {
 		case zero = 0
 		case five = 5
 		case seven = 7
@@ -49,7 +49,7 @@ extension JourneySettings {
 		}
 	}
 	
-	enum TransferCountCases : String, Equatable, Hashable, CaseIterable {
+	enum TransferCountCases : String, Equatable, Hashable, CaseIterable,Codable {
 		case unlimited = "Unlimited"
 		case one = "1"
 		case two = "2"
@@ -78,7 +78,7 @@ extension JourneySettings {
 			.unlimited
 		}
 	}
-	enum TransportMode : Int, Equatable, Hashable {
+	enum TransportMode : Int, Equatable, Hashable, Codable {
 		case regional = 1
 		case all = 0
 		case custom = 2
@@ -98,7 +98,7 @@ extension JourneySettings {
 		}
 	}
 	
-	enum TransferTime : Equatable, Hashable {
+	enum TransferTime : Equatable, Hashable,Codable {
 		case direct
 		case time(minutes : TransferDurationCases)
 		
@@ -106,7 +106,7 @@ extension JourneySettings {
 			.time(minutes: .zero)
 		}
 	}
-	enum Accessiblity: Equatable, Hashable {
+	enum Accessiblity: String, Equatable, Hashable,Codable {
 		case partial
 		case complete
 		
@@ -114,7 +114,7 @@ extension JourneySettings {
 			.partial
 		}
 	}
-	enum WalkingSpeed : Equatable, Hashable{
+	enum WalkingSpeed : Equatable, Hashable, Codable{
 		case fast
 		case moderate
 		case slow

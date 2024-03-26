@@ -10,19 +10,20 @@ import SwiftUI
 
 struct SettingsView: View {
 	@EnvironmentObject  var chewViewModel : ChewViewModel
+	@ObservedObject var appSettingsVM : AppSettingsViewModel = Model.shared.appSettingsVM
 	@State var transferTime = JourneySettings.TransferDurationCases.zero
 	@State var transferCount = JourneySettings.TransferCountCases.unlimited
 	@State var transportModeSegment = JourneySettings.TransportMode.all
 	@State var selectedTypes = Set<LineType>()
 	@State var showWithTransfers : Int
 
-	@State var showRedDotWarning : Bool = true
-	
+	@State var currentSettings = JourneySettings()
 	let closeSheet : ()->Void
 	let oldSettings : JourneySettings
 	
 	init(settings : JourneySettings,closeSheet : @escaping ()->Void) {
 		self.oldSettings = settings
+		self.currentSettings = settings
 		self.transportModeSegment = settings.transportMode
 		self.selectedTypes = settings.customTransferModes
 		self.closeSheet = closeSheet
@@ -40,31 +41,10 @@ struct SettingsView: View {
 	
 	var body: some View {
 			Form {
-				if showRedDotWarning == true  {
-					if !oldSettings.isDefault() {
-						Section {
-							HStack(alignment: .top) {
-								Label(
-									title: {
-										Text("Current settings can reduce your search result", comment: "settingsView: warning")
-											.foregroundStyle(.secondary)
-											.font(.system(.footnote))
-									},
-									icon: {
-										oldSettings.iconBadge.view
-									}
-								)
-								Spacer()
-								Button(action: {
-									showRedDotWarning = false
-								}, label: {
-									Image(.xmarkCircle)
-										.chewTextSize(.big)
-										.tint(.gray)
-								})
-							}
-						}
-					}
+				if appSettingsVM.state.settings.showTip(
+					tip: .journeySettingsFilterDisclaimer
+				) {
+					filterDisclaimer()
 				}
 				transportTypes
 				if transportModeSegment == .custom {
@@ -74,36 +54,11 @@ struct SettingsView: View {
 				if showWithTransfers == 1 {
 					transferSegment
 				}
-				Section {
-					Button(role: .destructive, action: {
-						Model.shared.alertViewModel.send(
-							event: .didRequestShow(.destructive(
-								destructiveAction: {
-									chewViewModel.send(
-										event: .didUpdateSearchData(
-											journeySettings: JourneySettings()
-										)
-									)
-									closeSheet()
-								},
-								description: NSLocalizedString(
-									"Reset settings?",
-									comment: "alert: description"
-								),
-								actionDescription: NSLocalizedString(
-									"Reset",
-									comment: "alert: actionDescription"
-								),
-								id: UUID()
-							))
-						)
-					}, label: {
-						Text("Reset settings",comment: "settingsView: button name")
-					})
-				}
+				reset()
 			}
-			.animation(.easeInOut, value: showRedDotWarning)
+			.animation(.easeInOut, value: appSettingsVM.state.settings)
 			.onAppear {
+				self.currentSettings = oldSettings
 				loadSettings(state: chewViewModel.state)
 			}
 			.toolbar {
@@ -161,5 +116,45 @@ struct SettingsPreview: PreviewProvider {
 	static var previews: some View {
 		SettingsView(settings: .init(),closeSheet: {})
 			.environmentObject(ChewViewModel(referenceDate: .now))
+	}
+}
+
+extension SettingsView {
+	@ViewBuilder func filterDisclaimer() -> some View {
+		if !oldSettings.isDefault() {
+			Section {
+				AppSettings.ChooTip.journeySettingsFilterDisclaimer.tipLabel
+			}
+		}
+	}
+	
+	@ViewBuilder func reset() -> some View {
+		Section {
+			Button(role: .destructive, action: {
+				Model.shared.alertViewModel.send(
+					event: .didRequestShow(.destructive(
+						destructiveAction: {
+							chewViewModel.send(
+								event: .didUpdateSearchData(
+									journeySettings: JourneySettings()
+								)
+							)
+							closeSheet()
+						},
+						description: NSLocalizedString(
+							"Reset settings?",
+							comment: "alert: description"
+						),
+						actionDescription: NSLocalizedString(
+							"Reset",
+							comment: "alert: actionDescription"
+						),
+						id: UUID()
+					))
+				)
+			}, label: {
+				Text("Reset settings",comment: "settingsView: button name")
+			})
+		}
 	}
 }

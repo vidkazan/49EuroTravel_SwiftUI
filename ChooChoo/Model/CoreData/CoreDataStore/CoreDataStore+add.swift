@@ -25,7 +25,11 @@ extension CoreDataStore {
 		}
 	}
 	
-	func addJourney(id : Int64,viewData : JourneyViewData,stops : DepartureArrivalPairStop) -> Bool {
+	func addJourney(
+		id : Int64,
+		viewData : JourneyViewData,
+		stops : DepartureArrivalPairStop
+	) -> Bool {
 		var res = false
 		guard let user = self.user else {
 			print("📕 > \(#function) : error : ref / user/ journeys")

@@ -24,7 +24,7 @@ struct AppSettings : Equatable {
 	init(oldSettings : Self,
 		debugSettings : ChewDebugSettings? = nil,
 		legViewMode : LegViewMode? = nil,
-		 tips : Set<ChooTipType>? = Set(ChooTipType.allCases)
+		 tips : Set<ChooTipType>? = nil
 	) {
 		self.legViewMode = legViewMode ?? oldSettings.legViewMode
 		self.tipsToShow = tips ?? oldSettings.tipsToShow
@@ -58,6 +58,7 @@ extension AppSettings {
 	}
 	
 	enum ChooTipType : String ,Equatable, Hashable, CaseIterable,Codable {
+		case journeySettingsFilterDisclaimer
 		case followJourney
 		case sunEventsTip
 	}
@@ -69,10 +70,13 @@ extension AppSettings {
 			hasher.combine(description)
 		}
 		case followJourney
+		case journeySettingsFilterDisclaimer
 		case sunEvents(onClose: () -> (), journey: JourneyViewData?)
 		
 		var description  : String {
 			switch self {
+			case .journeySettingsFilterDisclaimer:
+				return "journeySettingsFilterDisclaimer"
 			case .followJourney:
 				return "followJourney"
 			case .sunEvents:
@@ -83,6 +87,8 @@ extension AppSettings {
 		@ViewBuilder var tipView : some View  {
 			Group {
 				switch self {
+				case .journeySettingsFilterDisclaimer:
+					EmptyView()
 				case .followJourney:
 					HowToFollowJourneyView()
 				case .sunEvents:
@@ -94,17 +100,47 @@ extension AppSettings {
 		
 		@ViewBuilder var tipLabel : some View {
 			switch self {
+			case .journeySettingsFilterDisclaimer:
+				Labels.JourneySettingsFilterDisclaimer()
 			case .followJourney:
 				EmptyView()
 			case let .sunEvents(close, journey):
-				Views.SunEventsTipView(onClose: close, journey: journey)
+				Labels.SunEventsTipView(onClose: close, journey: journey)
 			}
 		}
 	}
 }
 
 extension AppSettings.ChooTip {
-	private struct Views {
+	private struct Labels {
+		struct JourneySettingsFilterDisclaimer : View {
+			var body: some View {
+				HStack(alignment: .top) {
+					Label(
+						title: {
+							Text(
+								"Current settings can reduce your search result",
+								comment: "settingsView: warning"
+							)
+								.foregroundStyle(.secondary)
+								.font(.system(.footnote))
+						},
+						icon: {
+							JourneySettings.IconBadge.redDot.view
+						}
+					)
+					Spacer()
+					Button(action: {
+						Model.shared.appSettingsVM.send(event: .didShowTip(tip: .journeySettingsFilterDisclaimer))
+					}, label: {
+						Image(.xmarkCircle)
+							.chewTextSize(.big)
+							.tint(.gray)
+					})
+				}
+			}
+		}
+		
 		struct SunEventsTipView: View {
 			let onClose : () -> ()
 			let journey : JourneyViewData?
@@ -171,7 +207,7 @@ extension AppSettings {
 			return false
 		}
 		switch tip {
-		case .followJourney:
+		case .journeySettingsFilterDisclaimer,.followJourney:
 			return true
 		case .sunEventsTip:
 			if self.legViewMode != .colorfulLegs {

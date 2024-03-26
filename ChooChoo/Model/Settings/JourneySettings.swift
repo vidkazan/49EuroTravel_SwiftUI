@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct JourneySettings : Equatable,Hashable {
+struct JourneySettings : Equatable,Hashable,Codable {
 	let customTransferModes : Set<LineType>
 	let transportMode : TransportMode
 	let transferTime : TransferTime

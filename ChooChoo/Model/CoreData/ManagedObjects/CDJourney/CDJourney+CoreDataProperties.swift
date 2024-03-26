@@ -20,6 +20,7 @@ extension CDJourney {
 	@NSManaged public var time: Data
 	@NSManaged public var sunEvents: Set<CDSunEvent>
 	@NSManaged public var updatedAt: Double
+	@NSManaged public var journeySettings: Data?
 }
 
 extension CDJourney {
@@ -36,6 +37,9 @@ extension CDJourney {
 			self.updatedAt = Date.now.timeIntervalSince1970
 			if let time = try?  JSONEncoder().encode(viewData.time.iso) {
 				self.time = time
+			}
+			if let sett = try?  JSONEncoder().encode(viewData.settings) {
+				self.journeySettings = sett
 			}
 			if let stops = try? JSONEncoder().encode(stops) {
 				self.depArrStops = stops

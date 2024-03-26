@@ -10,10 +10,9 @@
         <attribute name="id" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="isActive" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES"/>
         <attribute name="journeyRef" attributeType="String"/>
+        <attribute name="journeySettings" optional="YES" attributeType="Binary"/>
         <attribute name="time" optional="YES" attributeType="Binary"/>
         <attribute name="updatedAt" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
-        <relationship name="arrivalStop" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDLocation" inverseName="chewJourneyArr" inverseEntity="CDLocation"/>
-        <relationship name="departureStop" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDLocation" inverseName="chewJourneyDep" inverseEntity="CDLocation"/>
         <relationship name="legs" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CDLeg" inverseName="journey" inverseEntity="CDLeg"/>
         <relationship name="sunEvents" optional="YES" toMany="YES" deletionRule="Cascade" ordered="YES" destinationEntity="CDSunEvent" inverseName="journey" inverseEntity="CDSunEvent"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="chewJourneys" inverseEntity="CDUser"/>
@@ -59,18 +58,12 @@
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <attribute name="name" attributeType="String" defaultValueString="default_stop_name"/>
         <attribute name="transportType" optional="YES" attributeType="String"/>
-        <relationship name="chewJourneyArr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJourney" inverseName="arrivalStop" inverseEntity="CDJourney"/>
-        <relationship name="chewJourneyDep" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJourney" inverseName="departureStop" inverseEntity="CDJourney"/>
-        <relationship name="chewRecentSearchArrStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDRecentSearch" inverseName="arrStop" inverseEntity="CDRecentSearch"/>
-        <relationship name="chewRecentSearchDepStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDRecentSearch" inverseName="depStop" inverseEntity="CDRecentSearch"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="recentLocations" inverseEntity="CDUser"/>
     </entity>
     <entity name="CDRecentSearch" representedClassName="CDRecentSearch" syncable="YES">
         <attribute name="depArrStops" optional="YES" attributeType="Binary"/>
         <attribute name="id" attributeType="String"/>
         <attribute name="searchDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="arrStop" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDLocation" inverseName="chewRecentSearchArrStop" inverseEntity="CDLocation"/>
-        <relationship name="depStop" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDLocation" inverseName="chewRecentSearchDepStop" inverseEntity="CDLocation"/>
         <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="recentSearches" inverseEntity="CDUser"/>
         <uniquenessConstraints>
             <uniquenessConstraint>
