@@ -97,7 +97,7 @@ struct LineViewData : Equatable {
 }
 
 extension LegViewData {
-	enum LegType : Equatable,Hashable {
+	enum LegType : Equatable,Hashable, Codable {
 		case footStart(startPointName : String)
 		case footMiddle
 		case footEnd(finishPointName : String)

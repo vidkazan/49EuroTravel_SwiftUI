@@ -171,7 +171,6 @@
 		7DA001FD2B0F88B6009BB79D /* SegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA001FC2B0F88B6009BB79D /* SegmentedPicker.swift */; };
 		7DA085332BA492AB005E72B2 /* JLV+footer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA085322BA492AB005E72B2 /* JLV+footer.swift */; };
 		7DA085352BA492E5005E72B2 /* ErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA085342BA492E5005E72B2 /* ErrorView.swift */; };
-		7DA13A412B28D5F10045061F /* CDJourneySettings+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA13A402B28D5F10045061F /* CDJourneySettings+CoreDataClass.swift */; };
 		7DA13A452B28F01F0045061F /* LineType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA13A442B28F01F0045061F /* LineType.swift */; };
 		7DA8D3482A9A0E07005DF550 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */; };
 		7DA8D34A2A9A118E005DF550 /* BadgesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DA8D3492A9A118E005DF550 /* BadgesView.swift */; };
@@ -182,7 +181,6 @@
 		7DAC408E2B7A5920006B3E55 /* MapDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC408D2B7A5920006B3E55 /* MapDetailsView.swift */; };
 		7DAC40962B7A5C02006B3E55 /* MapPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC40952B7A5C02006B3E55 /* MapPickerView.swift */; };
 		7DAC5CB72BACDA84000F7D33 /* JFCV+Map.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAC5CB62BACDA84000F7D33 /* JFCV+Map.swift */; };
-		7DAE1F6B2B0D26CF0097AAD8 /* CDJourneySettings+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAE1F672B0D26CF0097AAD8 /* CDJourneySettings+CoreDataProperties.swift */; };
 		7DAF62B82A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */; };
 		7DAF62C22A9E8C2B006F1A17 /* Solar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C12A9E8C2B006F1A17 /* Solar.swift */; };
 		7DAF62C42A9F78D0006F1A17 /* SunEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */; };
@@ -414,7 +412,6 @@
 		7DA001FC2B0F88B6009BB79D /* SegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SegmentedPicker.swift; sourceTree = "<group>"; };
 		7DA085322BA492AB005E72B2 /* JLV+footer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JLV+footer.swift"; sourceTree = "<group>"; };
 		7DA085342BA492E5005E72B2 /* ErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorView.swift; sourceTree = "<group>"; };
-		7DA13A402B28D5F10045061F /* CDJourneySettings+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDJourneySettings+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7DA13A442B28F01F0045061F /* LineType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LineType.swift; sourceTree = "<group>"; };
 		7DA8D3472A9A0E07005DF550 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		7DA8D3492A9A118E005DF550 /* BadgesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BadgesView.swift; sourceTree = "<group>"; };
@@ -425,7 +422,6 @@
 		7DAC408D2B7A5920006B3E55 /* MapDetailsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDetailsView.swift; sourceTree = "<group>"; };
 		7DAC40952B7A5C02006B3E55 /* MapPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPickerView.swift; sourceTree = "<group>"; };
 		7DAC5CB62BACDA84000F7D33 /* JFCV+Map.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JFCV+Map.swift"; sourceTree = "<group>"; };
-		7DAE1F672B0D26CF0097AAD8 /* CDJourneySettings+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDJourneySettings+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7DAF62B72A9E5A0B006F1A17 /* DatePickerTimePresetButtons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTimePresetButtons.swift; sourceTree = "<group>"; };
 		7DAF62C12A9E8C2B006F1A17 /* Solar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Solar.swift; sourceTree = "<group>"; };
 		7DAF62C32A9F78CF006F1A17 /* SunEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SunEvent.swift; sourceTree = "<group>"; };
@@ -900,8 +896,6 @@
 			children = (
 				7D7497972BADDA030041FBFB /* CDAppSettings+CoreDataClass.swift */,
 				7D7497982BADDA030041FBFB /* CDAppSettings+CoreDataProperties.swift */,
-				7DA13A402B28D5F10045061F /* CDJourneySettings+CoreDataClass.swift */,
-				7DAE1F672B0D26CF0097AAD8 /* CDJourneySettings+CoreDataProperties.swift */,
 			);
 			path = CDSettings;
 			sourceTree = "<group>";
@@ -1760,7 +1754,6 @@
 				7D1638542B698A04006E9660 /* SFSymbols.swift in Sources */,
 				7DD5BAFD2B72BBDB00CFE768 /* PlatformView.swift in Sources */,
 				7D74979A2BADDA030041FBFB /* CDAppSettings+CoreDataProperties.swift in Sources */,
-				7DA13A412B28D5F10045061F /* CDJourneySettings+CoreDataClass.swift in Sources */,
 				7D86D17E2B88093E0090D0F2 /* TopBarAlertView.swift in Sources */,
 				7D33A9A42B5433AA0005D723 /* BadgeStyle.swift in Sources */,
 				7D6734B32A96334B00CBE9C1 /* ChooChooApp.swift in Sources */,
@@ -1828,7 +1821,6 @@
 				7D740CC72AEA796B00E9FFD4 /* SettingsView+Connections.swift in Sources */,
 				7D69552A2B58283E00271F56 /* TopBarAlertVM.swift in Sources */,
 				7D23E44A2A98F9800037C3E1 /* LegsView.swift in Sources */,
-				7DAE1F6B2B0D26CF0097AAD8 /* CDJourneySettings+CoreDataProperties.swift in Sources */,
 				7D9BB1112B0CBF54008A3616 /* CDUser+CoreDataProperties.swift in Sources */,
 				7D5D78532B29C00600E17CC7 /* CDLeg+CoreDataProperties.swift in Sources */,
 				7D000CF72AB86BA500566120 /* JLVM+sideEffects+loadingJourneysRef.swift in Sources */,

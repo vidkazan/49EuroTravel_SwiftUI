@@ -71,35 +71,26 @@ struct JourneyFollowCellView : View {
 				BadgeView(.generic(msg: "\(data.settings.transportMode.tmp)"))
 			}
 		}
-		.contextMenu {
-			Button(action: {
-				Model.shared.sheetViewModel.send(
-					event: .didRequestShow(.mapDetails(.journey(data.legs)))
-				)
-			}, label: {
-				Label(
-					title: {
-						Text("Show on map", comment: "JourneyFollowCellView: menu item")
-					},
-					icon: {
-						Image(systemName: "map")
-					}
-				)
-			})
-			Button(action: {
-				Model.shared.sheetViewModel.send(
-					event: .didRequestShow(.journeyDebug(legs: data.legs.compactMap {$0.legDTO}))
-				)
-			}, label: {
-				Label(
-					title: {
-						Text("Journey debug", comment: "JourneyFollowCellView: menu item")
-					},
-					icon: {
-						Image(systemName: "ant")
-					}
-				)
-			})
+		.contextMenu { menu }
+	}
+}
+
+extension JourneyFollowCellView {
+	var menu : some View {
+		Group {
+			if !vm.state.data.viewData.options.isEmpty {
+				ForEach(vm.state.data.viewData.options, id:\.text) { option in
+					Button(action: {
+						option.action(vm.state.data.viewData)
+					}, label: {
+						Label(title: {
+							Text(verbatim: option.text)
+						}, icon: {
+							Image(systemName: option.icon)
+						})
+					})
+				}
+			}
 		}
 	}
 }

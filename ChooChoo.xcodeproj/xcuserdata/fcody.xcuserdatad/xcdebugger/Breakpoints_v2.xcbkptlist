@@ -115,7 +115,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "B587D59D-F1D6-4CB3-972E-D83DC98FF0A1"
+            uuid = "3D998E21-7F45-45E8-81F7-1C7CA72631E0"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
@@ -124,22 +124,6 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "58"
             endingLineNumber = "58"
-            landmarkName = "fetchSettings()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "3D998E21-7F45-45E8-81F7-1C7CA72631E0"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
             <Locations>
@@ -186,8 +170,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
          </BreakpointContent>
@@ -425,8 +409,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "fetchRecentSearches()"
             landmarkType = "7">
             <Locations>
@@ -473,8 +457,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "142"
-            endingLineNumber = "142"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
             landmarkName = "fetchRecentSearches()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1253,8 +1237,8 @@
             filePath = "ChooChoo/Helpers/Date/TimeContainer.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "240"
-            endingLineNumber = "240"
+            startingLineNumber = "231"
+            endingLineNumber = "231"
             landmarkName = "init?(isoEncoded:)"
             landmarkType = "7">
          </BreakpointContent>

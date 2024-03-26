@@ -56,15 +56,6 @@ extension TimeContainer {
 			cancelled: nil
 		)
 	}
-//	init(chewTime : CDTime?) {
-//		self.init(
-//			plannedDeparture: chewTime?.plannedDeparture,
-//			plannedArrival: chewTime?.plannedArrival,
-//			actualDeparture: chewTime?.actualDeparture,
-//			actualArrival: chewTime?.actualArrival,
-//			cancelled: chewTime?.cancelled
-//		)
-//	}
 	init() {
 		let departure = Prognosed<String>(
 			actual: nil,

@@ -11,20 +11,20 @@ import CoreData
 
 extension CDUser {
 	@NSManaged public var recentLocations: Set<CDLocation>?
-	@NSManaged public var journeySettings: CDJourneySettings?
+	@NSManaged public var journeySettings: Data?
 	@NSManaged public var appSettings: CDAppSettings?
 	@NSManaged public var chewJourneys : Set<CDJourney>?
 	@NSManaged public var chewRecentSearches : Set<CDRecentSearch>?
 }
 
 extension CDUser {
-	static func createWith(date : Date,using managedObjectContext: NSManagedObjectContext) -> CDUser? {
+	static func createWith(using managedObjectContext: NSManagedObjectContext) -> CDUser? {
 		managedObjectContext.performAndWait {
 			let user = CDUser(entity: CDUser.entity(), insertInto: managedObjectContext)
 
-			let journeySettings = CDJourneySettings(entity: CDJourneySettings.entity(), insertInto: managedObjectContext)
+//			let journeySettings = CDJourneySettings(entity: CDJourneySettings.entity(), insertInto: managedObjectContext)
 			let appSettings = CDAppSettings(entity: CDAppSettings.entity(), insertInto: managedObjectContext)
-			journeySettings.user = user
+//			journeySettings.user = user
 			appSettings.user = user
 
 			do {

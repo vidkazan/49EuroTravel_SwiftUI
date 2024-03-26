@@ -53,57 +53,16 @@ extension CoreDataStore {
 	}
 	
 	func fetchSettings() -> JourneySettings? {
-		var settings : CDJourneySettings?
-		var modesData : Data?
-		var transferTypes = JourneySettings.TransferTime.time(minutes: .zero)
-		var transportMode = JourneySettings.TransportMode.all
-		var transferCount = JourneySettings.TransferCountCases.unlimited
-		var customTransferModes = Set<LineType>()
+		var settings : Data?
 		
 		asyncContext.performAndWait {
 			settings = user?.journeySettings
-			guard let settings = settings else {
-				return
-			}
-			modesData = settings.transportModes
-			transferTypes = {
-				 if settings.isWithTransfers == false {
-					 return .direct
-				 }
-				return .time(
-					minutes: JourneySettings.transferDurationCases(count: settings.transferTime)
-				)
-			 }()
-			if let mode = JourneySettings.TransportMode(rawValue: Int(settings.transportModeSegment)) {
-				transportMode = mode
-			}
-			if let a = settings.transferCount,
-			   let b = JourneySettings.TransferCountCases(
-				rawValue: a) {
-				transferCount = b
-			}
 		}
 		
-		guard settings != nil else {
-			return nil
+		if let settings = settings {
+			return try? JSONDecoder().decode(JourneySettings.self, from: settings)
 		}
-		
-		
-		if let modes = modesData,
-		   let modesDecoded = try? JSONDecoder().decode(Set<LineType>.self, from: modes) {
-			customTransferModes = modesDecoded
-		}
-	
-		return JourneySettings(
-			customTransferModes: customTransferModes,
-			transportMode: transportMode,
-			transferTime: transferTypes,
-			transferCount: transferCount,
-			accessiblity: .partial,
-			walkingSpeed: .fast,
-			startWithWalking: true,
-			withBicycle: false
-		)
+		return nil
 	}
 	
 	func fetchLocations() -> [Stop]? {
@@ -126,16 +85,6 @@ extension CoreDataStore {
 			var stops = [RecentSearchesViewModel.RecentSearch]()
 			asyncContext.performAndWait {
 				res.forEach {
-//					if
-//						let dep = $0.depStop?.stop(),
-//						let arr = $0.arrStop?.stop(),
-//						let ts = $0.searchDate?.timeIntervalSince1970 {
-//							stops.append(RecentSearchesViewModel.RecentSearch(
-//								depStop: dep,
-//								arrStop: arr,
-//								searchTS: ts
-//							))
-//					}
 					if
 						let depArrStops = try? JSONDecoder().decode(DepartureArrivalPairStop.self, from: $0.depArrStops),
 						let ts = $0.searchDate?.timeIntervalSince1970 {
@@ -161,7 +110,7 @@ extension CoreDataStore {
 			return res
 		}
 		 asyncContext.performAndWait {
-			self.user = CDUser.createWith(date: .now, using: self.asyncContext)
+			self.user = CDUser.createWith(using: self.asyncContext)
 		}
 		return fetch(CDUser.self)
 	}

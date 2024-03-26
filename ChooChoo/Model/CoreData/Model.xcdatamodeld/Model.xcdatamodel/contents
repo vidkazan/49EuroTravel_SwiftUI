@@ -22,14 +22,6 @@
             </uniquenessConstraint>
         </uniquenessConstraints>
     </entity>
-    <entity name="CDJourneySettings" representedClassName="CDJourneySettings" syncable="YES">
-        <attribute name="isWithTransfers" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
-        <attribute name="transferCount" optional="YES" attributeType="String"/>
-        <attribute name="transferTime" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="transportModes" optional="YES" attributeType="Binary"/>
-        <attribute name="transportModeSegment" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="journeySettings" inverseEntity="CDUser"/>
-    </entity>
     <entity name="CDLeg" representedClassName="CDLeg" syncable="YES">
         <attribute name="isReachable" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="legBottomPosition" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -92,10 +84,10 @@
         <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJourney" inverseName="sunEvents" inverseEntity="CDJourney"/>
     </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
+        <attribute name="journeySettings" optional="YES" attributeType="Binary"/>
         <attribute name="locations" optional="YES" attributeType="Binary"/>
         <relationship name="appSettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDAppSettings" inverseName="user" inverseEntity="CDAppSettings"/>
         <relationship name="chewJourneys" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDJourney" inverseName="user" inverseEntity="CDJourney"/>
-        <relationship name="journeySettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDJourneySettings" inverseName="user" inverseEntity="CDJourneySettings"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDLocation" inverseName="user" inverseEntity="CDLocation"/>
         <relationship name="recentSearches" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDRecentSearch" inverseName="user" inverseEntity="CDRecentSearch"/>
     </entity>
