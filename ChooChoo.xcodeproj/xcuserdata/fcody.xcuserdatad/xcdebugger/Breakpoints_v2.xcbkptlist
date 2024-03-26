@@ -14,8 +14,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "37"
+            endingLineNumber = "37"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
             <Locations>
@@ -62,8 +62,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "61"
-            endingLineNumber = "61"
+            startingLineNumber = "40"
+            endingLineNumber = "40"
             landmarkName = "fetchSettings()"
             landmarkType = "7">
          </BreakpointContent>
@@ -301,8 +301,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
             landmarkName = "fetchRecentSearches()"
             landmarkType = "7">
             <Locations>
@@ -349,8 +349,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+Fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "fetchRecentSearches()"
             landmarkType = "7">
          </BreakpointContent>
@@ -674,22 +674,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "E3BBB759-BF02-4980-B604-8817EE3C1131"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
-            landmarkName = "fetchAppSettings()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "D0DF5F71-265D-459C-B8C2-B68B4C55719E"
             shouldBeEnabled = "No"
             ignoreCount = "0"
@@ -761,8 +745,8 @@
             filePath = "ChooChoo/Model/CoreData/CoreDataStore/CoreDataStore+fetch.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "48"
-            endingLineNumber = "48"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
             landmarkName = "fetchAppSettings()"
             landmarkType = "7">
             <Locations>
@@ -857,8 +841,8 @@
             filePath = "ChooChoo/App/chewVM/chewVM+sideEffects/chewVM+loadingInitialData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "37"
-            endingLineNumber = "37"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
             landmarkName = "whenLoadingInitialData()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1017,8 +1001,8 @@
             filePath = "ChooChoo/App/chewVM/chewVM+sideEffects/chewVM+loadingInitialData.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "whenLoadingInitialData()"
             landmarkType = "7">
             <Locations>

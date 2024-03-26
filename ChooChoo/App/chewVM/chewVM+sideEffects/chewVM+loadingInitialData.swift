@@ -21,10 +21,11 @@ extension ChewViewModel {
 					.eraseToAnyPublisher()
 			}
 
-			
 			Task {
 				if let appSettings = Model.shared.coreDataStore.fetchAppSettings() {
-					Model.shared.appSettingsVM.send(event: .didRequestToLoadInitialData(settings: appSettings))
+					Model.shared.appSettingsVM.send(
+						event: .didRequestToLoadInitialData(settings: appSettings)
+					)
 				} else {
 					print("\(#function): appSettings is nil")
 				}

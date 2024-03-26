@@ -1,10 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="22522" systemVersion="22G74" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="CDAppSettings" representedClassName="CDAppSettings" syncable="YES">
-        <attribute name="legViewMode" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="tipsToShow" optional="YES" attributeType="Binary"/>
-        <relationship name="user" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDUser" inverseName="appSettings" inverseEntity="CDUser"/>
-    </entity>
     <entity name="CDJourney" representedClassName="CDJourney" syncable="YES">
         <attribute name="depArrStops" optional="YES" attributeType="Binary"/>
         <attribute name="id" attributeType="Integer 64" defaultValueString="0.0" usesScalarValueType="YES"/>
@@ -78,9 +73,9 @@
         <relationship name="journey" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CDJourney" inverseName="sunEvents" inverseEntity="CDJourney"/>
     </entity>
     <entity name="CDUser" representedClassName="CDUser" syncable="YES">
+        <attribute name="appSettings" optional="YES" attributeType="Binary"/>
         <attribute name="journeySettings" optional="YES" attributeType="Binary"/>
         <attribute name="locations" optional="YES" attributeType="Binary"/>
-        <relationship name="appSettings" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CDAppSettings" inverseName="user" inverseEntity="CDAppSettings"/>
         <relationship name="chewJourneys" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDJourney" inverseName="user" inverseEntity="CDJourney"/>
         <relationship name="recentLocations" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDLocation" inverseName="user" inverseEntity="CDLocation"/>
         <relationship name="recentSearches" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CDRecentSearch" inverseName="user" inverseEntity="CDRecentSearch"/>

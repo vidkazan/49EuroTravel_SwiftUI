@@ -19,37 +19,16 @@ extension CoreDataStore {
 	}
 	
 	func fetchAppSettings() -> AppSettings? {
-		var settings : CDAppSettings?
-		var legViewMode : AppSettings.LegViewMode? = nil
-		var tips : Set<AppSettings.ChooTipType>? = nil
+		var res : AppSettings?
 		
 		asyncContext.performAndWait {
-			settings = user?.appSettings
+			let settings = user?.appSettings
 			guard let settings = settings else {
 				return
 			}
-			if let mode = AppSettings.LegViewMode(rawValue: settings.legViewMode) {
-				legViewMode = mode
-			}
-			if let tipsToShowData = settings.tipsToShow,
-				let res = try? JSONDecoder()
-				.decode(
-					Set<AppSettings.ChooTipType>.self,
-					from: tipsToShowData
-				) {
-				tips = res
-			}
+			res = try? JSONDecoder().decode(AppSettings.self, from: settings)
 		}
-		
-		guard let legViewMode = legViewMode, let tips = tips else {
-			return nil
-		}
-		
-		return AppSettings(
-			debugSettings: .init(prettyJSON: false, alternativeSearchPage: false),
-			legViewMode: legViewMode,
-			tips: tips
-		)
+		return res
 	}
 	
 	func fetchSettings() -> JourneySettings? {

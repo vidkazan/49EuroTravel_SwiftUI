@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct AppSettings : Equatable {
+struct AppSettings : Hashable, Codable {
 	let debugSettings : ChewDebugSettings
 	let legViewMode : LegViewMode
 	let tipsToShow : Set<ChooTipType>
@@ -39,12 +39,12 @@ struct AppSettings : Equatable {
 }
 
 extension AppSettings {
-	struct ChewDebugSettings: Equatable, Hashable {
+	struct ChewDebugSettings: Equatable, Hashable, Codable {
 		let prettyJSON : Bool
 		let alternativeSearchPage : Bool
 	}
 	
-	enum LegViewMode : Int16, Equatable,CaseIterable {
+	enum LegViewMode : Int16, Hashable,CaseIterable, Codable {
 		case sunEvents
 		case colorfulLegs
 		case all
@@ -57,7 +57,7 @@ extension AppSettings {
 		}
 	}
 	
-	enum ChooTipType : String ,Equatable, Hashable, CaseIterable,Codable {
+	enum ChooTipType : String ,Hashable, CaseIterable,Codable {
 		case journeySettingsFilterDisclaimer
 		case followJourney
 		case sunEventsTip

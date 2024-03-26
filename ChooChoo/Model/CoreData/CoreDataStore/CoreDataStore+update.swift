@@ -23,13 +23,10 @@ extension CoreDataStore {
 				print("📕 > \(#function) : error : user entity is null")
 				return
 			}
-			guard let settings = user.appSettings else {
-				print("📕 > \(#function) : error : settings entity is null")
+			guard let settings = try? JSONEncoder().encode(newSettings) else {
 				return
 			}
-			settings.legViewMode = newSettings.legViewMode.rawValue
-			settings.tipsToShow = try? JSONEncoder()
-				.encode(newSettings.tipsToShow)
+			user.appSettings = settings
 			self.saveAsyncContext()
 		}
 	}

@@ -12,7 +12,7 @@ import CoreData
 extension CDUser {
 	@NSManaged public var recentLocations: Set<CDLocation>?
 	@NSManaged public var journeySettings: Data?
-	@NSManaged public var appSettings: CDAppSettings?
+	@NSManaged public var appSettings: Data
 	@NSManaged public var chewJourneys : Set<CDJourney>?
 	@NSManaged public var chewRecentSearches : Set<CDRecentSearch>?
 }
@@ -23,9 +23,7 @@ extension CDUser {
 			let user = CDUser(entity: CDUser.entity(), insertInto: managedObjectContext)
 
 //			let journeySettings = CDJourneySettings(entity: CDJourneySettings.entity(), insertInto: managedObjectContext)
-			let appSettings = CDAppSettings(entity: CDAppSettings.entity(), insertInto: managedObjectContext)
-//			journeySettings.user = user
-			appSettings.user = user
+//			let appSettings = CDAppSettings(entity: CDAppSettings.entity(), insertInto: managedObjectContext)
 
 			do {
 				try managedObjectContext.save()
