@@ -15,7 +15,11 @@ public class CDLeg: NSManagedObject {
 }
 
 extension CDLeg {
-	convenience init(context : NSManagedObjectContext,leg : LegViewData,for journey : CDJourney){
+	convenience init(
+		context : NSManagedObjectContext,
+		leg : LegViewData,
+		for journey : CDJourney
+	){
 		self.init(entity: CDLeg.entity(), insertInto: context)
 		self.tripId = leg.tripId
 		self.isReachable = leg.isReachable

@@ -8,14 +8,14 @@
 import Foundation
 import SwiftUI
 
-struct RemarkViewData : Equatable, Hashable {
+struct RemarkViewData : Hashable, Codable {
 	let type : RemarkType
 	let summary : String
 	let text : String
 }
 
 extension RemarkViewData {
-	enum RemarkType : String {
+	enum RemarkType : String, Codable, Hashable {
 		case status
 		case hint
 		

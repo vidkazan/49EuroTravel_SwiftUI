@@ -40,31 +40,12 @@ extension CoreDataStore {
 				print("📕 > \(#function) : error : user entity is null")
 				return
 			}
-//			guard let settings = user.journeySettings else {
-//				print("📕 > \(#function) : error : settings entity is null")
-//				return
-//			}
-			
 			guard let settings = try? JSONEncoder().encode(newSettings) else {
 				print("📕 > \(#function) : error : settings encoding failed")
 				return
 			}
 			
 			user.journeySettings = settings
-			
-//			switch newSettings.transferTime {
-//			case .direct:
-//				settings.isWithTransfers = false
-//				settings.transferTime = 0
-//			case .time(minutes: let minutes):
-//				settings.isWithTransfers = true
-//				settings.transferTime = Int16(minutes.rawValue)
-//			}
-//			settings.transportModeSegment = Int16(newSettings.transportMode.rawValue)
-//			settings.transferCount = newSettings.transferCount.rawValue
-//			if let transportModesEncoded = try? JSONEncoder().encode(newSettings.customTransferModes) {
-//				settings.transportModes = transportModesEncoded
-//			}
 			self.saveAsyncContext()
 		}
 	}

@@ -80,7 +80,6 @@
 		7D345E4A2AE95E7C003CA948 /* JourneySettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E492AE95E7C003CA948 /* JourneySettings.swift */; };
 		7D345E4C2AE97FC8003CA948 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D345E4B2AE97FC8003CA948 /* SettingsView.swift */; };
 		7D3957202B54911F00024736 /* JDV+Toolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D39571F2B54911F00024736 /* JDV+Toolbar.swift */; };
-		7D3C52012B29F0DC00AA887A /* CDLegType+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3C52002B29F0DC00AA887A /* CDLegType+CoreDataProperties.swift */; };
 		7D3D88EC2B2A166E00B269E7 /* CDSunEvent+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D88EA2B2A166E00B269E7 /* CDSunEvent+CoreDataClass.swift */; };
 		7D3D88ED2B2A166E00B269E7 /* CDSunEvent+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3D88EB2B2A166E00B269E7 /* CDSunEvent+CoreDataProperties.swift */; };
 		7D3E5F012AB321580064213A /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D3E5F002AB321580064213A /* LocationManager.swift */; };
@@ -106,7 +105,6 @@
 		7D55BD9E2B5EA39900A0CE08 /* ChewDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D55BD9D2B5EA39900A0CE08 /* ChewDatePicker.swift */; };
 		7D5D78522B29C00600E17CC7 /* CDLeg+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78502B29C00600E17CC7 /* CDLeg+CoreDataClass.swift */; };
 		7D5D78532B29C00600E17CC7 /* CDLeg+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78512B29C00600E17CC7 /* CDLeg+CoreDataProperties.swift */; };
-		7D5D78552B29C4AE00E17CC7 /* CDLegType+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D5D78542B29C4AE00E17CC7 /* CDLegType+CoreDataClass.swift */; };
 		7D63DB0F2B739048008297DD /* SheetViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63DB0E2B739048008297DD /* SheetViewModel.swift */; };
 		7D63DB112B739213008297DD /* SheetView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D63DB102B739213008297DD /* SheetView.swift */; };
 		7D65DF1C2B2A2BFE00692601 /* CDStop+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D65DF182B2A2BFE00692601 /* CDStop+CoreDataClass.swift */; };
@@ -316,7 +314,6 @@
 		7D345E492AE95E7C003CA948 /* JourneySettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneySettings.swift; sourceTree = "<group>"; };
 		7D345E4B2AE97FC8003CA948 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 		7D39571F2B54911F00024736 /* JDV+Toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "JDV+Toolbar.swift"; sourceTree = "<group>"; };
-		7D3C52002B29F0DC00AA887A /* CDLegType+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLegType+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D3D88EA2B2A166E00B269E7 /* CDSunEvent+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSunEvent+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D3D88EB2B2A166E00B269E7 /* CDSunEvent+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDSunEvent+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		7D3E5F002AB321580064213A /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
@@ -343,7 +340,6 @@
 		7D55BD9D2B5EA39900A0CE08 /* ChewDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChewDatePicker.swift; sourceTree = "<group>"; };
 		7D5D78502B29C00600E17CC7 /* CDLeg+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLeg+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D5D78512B29C00600E17CC7 /* CDLeg+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLeg+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7D5D78542B29C4AE00E17CC7 /* CDLegType+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDLegType+CoreDataClass.swift"; sourceTree = "<group>"; };
 		7D63DB0E2B739048008297DD /* SheetViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetViewModel.swift; sourceTree = "<group>"; };
 		7D63DB102B739213008297DD /* SheetView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetView.swift; sourceTree = "<group>"; };
 		7D65DF182B2A2BFE00692601 /* CDStop+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CDStop+CoreDataClass.swift"; sourceTree = "<group>"; };
@@ -875,20 +871,10 @@
 			children = (
 				7D65DF182B2A2BFE00692601 /* CDStop+CoreDataClass.swift */,
 				7D65DF192B2A2BFE00692601 /* CDStop+CoreDataProperties.swift */,
-				7D65DF102B2A26B800692601 /* CDLegType */,
 				7D5D78512B29C00600E17CC7 /* CDLeg+CoreDataProperties.swift */,
 				7D5D78502B29C00600E17CC7 /* CDLeg+CoreDataClass.swift */,
 			);
 			path = CDLeg;
-			sourceTree = "<group>";
-		};
-		7D65DF102B2A26B800692601 /* CDLegType */ = {
-			isa = PBXGroup;
-			children = (
-				7D5D78542B29C4AE00E17CC7 /* CDLegType+CoreDataClass.swift */,
-				7D3C52002B29F0DC00AA887A /* CDLegType+CoreDataProperties.swift */,
-			);
-			path = CDLegType;
 			sourceTree = "<group>";
 		};
 		7D65DF112B2A26BA00692601 /* CDSettings */ = {
@@ -1704,7 +1690,6 @@
 				7D7B3DA22AB9CC7E0070E44D /* LDSV.swift in Sources */,
 				7D000CF02AB86A4700566120 /* chewVM+sideEffect+userLocaiton.swift in Sources */,
 				7DF845602B764AEA00D76B14 /* RemarkSheet.swift in Sources */,
-				7D3C52012B29F0DC00AA887A /* CDLegType+CoreDataProperties.swift in Sources */,
 				7D181D672AD6D6BB003AB021 /* TextModifier.swift in Sources */,
 				7D9BB1102B0CBF54008A3616 /* CDUser+CoreDataClass.swift in Sources */,
 				7DD5BAED2B72B24F00CFE768 /* Segments.swift in Sources */,
@@ -1824,7 +1809,6 @@
 				7D9BB1112B0CBF54008A3616 /* CDUser+CoreDataProperties.swift in Sources */,
 				7D5D78532B29C00600E17CC7 /* CDLeg+CoreDataProperties.swift in Sources */,
 				7D000CF72AB86BA500566120 /* JLVM+sideEffects+loadingJourneysRef.swift in Sources */,
-				7D5D78552B29C4AE00E17CC7 /* CDLegType+CoreDataClass.swift in Sources */,
 				7DE727C62AD93869002FF033 /* JFV.swift in Sources */,
 				7D4B1B8C2AA8CB970096F372 /* JLVM+sideEffects.swift in Sources */,
 				7D6CCAF12B5FFB9200BCF62E /* SettingsView+saveSettings.swift in Sources */,

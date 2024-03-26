@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 import CoreLocation
 
-struct StopViewData : Equatable, Identifiable, Hashable {
+struct StopViewData : Identifiable, Hashable {
 	let id : String?
 	let locationCoordinates : Coordinate
 	let name : String

@@ -21,13 +21,13 @@ final class CoreDataStore : ObservableObject {
 
 extension CoreDataStore {
 	func saveAsyncContext(){
-			do {
-				try asyncContext.save()
-				print("📗 > saved asyncContext")
-			} catch {
-				let nserror = error as NSError
-				print("📕 > save asyncContext: ", nserror.description, nserror.userInfo)
-			}
+		do {
+			try asyncContext.save()
+			print("📗 > saved asyncContext")
+		} catch {
+			let nserror = error as NSError
+			print("📕 > save asyncContext: ", nserror.description, nserror.userInfo)
+		}
 	}
 }
 
