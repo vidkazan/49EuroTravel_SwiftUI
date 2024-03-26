@@ -52,7 +52,7 @@ extension TimeContainer {
 			plannedDeparture: iso.departure.planned,
 			plannedArrival: iso.arrival.planned,
 			actualDeparture: iso.departure.actual,
-			actualArrival: iso.arrival.planned,
+			actualArrival: iso.arrival.actual,
 			cancelled: nil
 		)
 	}

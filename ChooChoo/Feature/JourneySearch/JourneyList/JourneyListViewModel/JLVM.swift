@@ -17,32 +17,32 @@ final class JourneyListViewModel : ObservableObject {
 	private var bag = Set<AnyCancellable>()
 	private let input = PassthroughSubject<Event,Never>()
 	
-	// testing init
-	init(stops : DepartureArrivalPairStop,viewData : JourneyListViewData) {
-//		print("💾 JLVM \(self.id.uuidString.suffix(4)) init")
-		state = State(
-			journeys: viewData.journeys,
-			date: .init(date: .now, mode: .departure),
-			earlierRef: nil,
-			laterRef: nil,
-			settings: JourneySettings(),
-			stops: stops,
-			status: .journeysLoaded
-		)
-		Publishers.system(
-			initial: state,
-			reduce: Self.reduce,
-			scheduler: RunLoop.main,
-			feedbacks: [
-				Self.userInput(input: input.eraseToAnyPublisher()),
-				Self.whenLoadingJourneyRef(),
-				Self.whenLoadingJourneyList()
-			],
-			name: "JLVM"
-		)
-		.assign(to: \.state, on: self)
-		.store(in: &bag)
-	}
+//	// testing init
+//	init(stops : DepartureArrivalPairStop,viewData : JourneyListViewData) {
+////		print("💾 JLVM \(self.id.uuidString.suffix(4)) init")
+//		state = State(
+//			journeys: viewData.journeys,
+//			date: .init(date: .now, mode: .departure),
+//			earlierRef: nil,
+//			laterRef: nil,
+//			settings: JourneySettings(),
+//			stops: stops,
+//			status: .journeysLoaded
+//		)
+//		Publishers.system(
+//			initial: state,
+//			reduce: Self.reduce,
+//			scheduler: RunLoop.main,
+//			feedbacks: [
+//				Self.userInput(input: input.eraseToAnyPublisher()),
+//				Self.whenLoadingJourneyRef(),
+//				Self.whenLoadingJourneyList()
+//			],
+//			name: "JLVM"
+//		)
+//		.assign(to: \.state, on: self)
+//		.store(in: &bag)
+//	}
 	
 	init(
 		date: SearchStopsDate,

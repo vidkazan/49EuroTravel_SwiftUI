@@ -51,7 +51,13 @@ extension ChewViewModel {
 		case .start:
 			switch event {
 			case .didStartViewAppear:
-				return State(data: StateData(data: state.data,journeySettings: JourneySettings()), status: .loadingInitialData)
+				return State(
+					data: StateData(
+						data: state.data,
+						journeySettings: JourneySettings()
+					),
+					status: .loadingInitialData
+				)
 			default:
 				print("⚠️ \(Self.self): reduce error: \(state.status) \(event.description)")
 				return state

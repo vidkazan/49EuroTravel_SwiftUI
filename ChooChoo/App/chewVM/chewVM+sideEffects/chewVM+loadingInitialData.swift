@@ -20,8 +20,6 @@ extension ChewViewModel {
 				return Just(Event.didLoadInitialData(JourneySettings()))
 					.eraseToAnyPublisher()
 			}
-			
-			let settings = Model.shared.coreDataStore.fetchSettings()
 
 			
 			Task {
@@ -44,8 +42,13 @@ extension ChewViewModel {
 					)
 				}
 			}
-			return Just(Event.didLoadInitialData(settings))
-				.eraseToAnyPublisher()
+			if let settings = Model.shared.coreDataStore.fetchSettings() {
+				return Just(Event.didLoadInitialData(settings))
+					.eraseToAnyPublisher()
+			} else {
+				return Just(Event.didLoadInitialData(.init()))
+					.eraseToAnyPublisher()
+			}
 		}
 	}
 }

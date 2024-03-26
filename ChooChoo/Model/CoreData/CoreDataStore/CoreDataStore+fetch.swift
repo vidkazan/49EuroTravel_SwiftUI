@@ -52,7 +52,7 @@ extension CoreDataStore {
 		)
 	}
 	
-	func fetchSettings() -> JourneySettings {
+	func fetchSettings() -> JourneySettings? {
 		var settings : CDJourneySettings?
 		var modesData : Data?
 		var transferTypes = JourneySettings.TransferTime.time(minutes: .zero)
@@ -85,7 +85,7 @@ extension CoreDataStore {
 		}
 		
 		guard settings != nil else {
-			return JourneySettings()
+			return nil
 		}
 		
 		

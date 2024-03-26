@@ -27,11 +27,28 @@ extension CDJourney {
 			sunEvents = self.sunEvents.map {
 				$0.sunEvent()
 			}
-			guard let stops = try? JSONDecoder().decode(DepartureArrivalPairStop.self, from: self.depArrStops) else {
+			guard let stops = try? JSONDecoder().decode(
+				DepartureArrivalPairStop.self, 
+				from: self.depArrStops
+			) else {
 				data = nil
 				return
 			}
-			let time = TimeContainer(isoEncoded: self.time) ?? .init()
+			
+			guard let settData = self.journeySettings,
+				let settings = try? JSONDecoder().decode(
+				JourneySettings.self,
+				from: settData
+			) else {
+				data = nil
+				return
+			}
+			
+			
+			guard let time = TimeContainer(isoEncoded: self.time) else {
+				return nil
+			}
+			
 			#warning("add remarks")
 			data = JourneyFollowData(
 				id : self.id,
@@ -45,7 +62,7 @@ extension CDJourney {
 					time: time,
 					updatedAt: self.updatedAt,
 					remarks: [],
-					settings: JourneySettings()
+					settings: settings
 				),
 				stops: stops
 			)
