@@ -38,6 +38,21 @@ struct AppSettingsView: View {
 					Text("App system settings",comment: "AppSettingsView")
 				})
 			}
+			#if DEBUG
+			Section("Debug", content: {
+				Button(action: {
+					appSetttingsVM.send(event: .didRequestToLoadInitialData(
+						settings: AppSettings(
+							debugSettings: appSetttingsVM.state.settings.debugSettings,
+							legViewMode: appSetttingsVM.state.settings.legViewMode,
+							tips: Set(AppSettings.ChooTipType.allCases)
+						)
+					))
+				}, label: {
+					Text("Reset tips")
+				})
+			})
+			#endif
 		}
 		.navigationBarTitleDisplayMode(.inline)
 		.navigationTitle(

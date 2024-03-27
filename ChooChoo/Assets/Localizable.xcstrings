@@ -222,6 +222,9 @@
         }
       }
     },
+    "Debug" : {
+
+    },
     "Debug leg" : {
       "comment" : "Debug"
     },
@@ -406,6 +409,9 @@
         }
       }
     },
+    "journeys are swipable" : {
+
+    },
     "Leg appearance" : {
       "comment" : "settingsView: section name",
       "localizations" : {
@@ -575,6 +581,9 @@
           }
         }
       }
+    },
+    "Reset tips" : {
+
     },
     "Save" : {
       "comment" : "datePickerView: save button\nsettingsView: save button",

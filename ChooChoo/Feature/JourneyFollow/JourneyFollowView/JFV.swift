@@ -13,6 +13,7 @@ struct JourneyFollowView : View {
 	@EnvironmentObject var chewVM : ChewViewModel
 	@ObservedObject var viewModel : JourneyFollowViewModel = Model.shared.journeyFollowViewModel
 	@ObservedObject var alertVM : TopBarAlertViewModel = Model.shared.topBarAlertViewModel
+	@ObservedObject var appSettingsVM = Model.shared.appSettingsVM
 	let timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
 	
 	var body: some View {
@@ -93,54 +94,73 @@ extension JourneyFollowView {
 
 extension JourneyFollowView {
 	var followViewInner : some View {
-		List {
-			Section(content: {
-				ForEach(
-					viewModel.state.journeys
-						.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .active})
-//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
-//					})
-					,
-					id: \.id) { journey in
-						listCell(journey: journey, map: true)
-					}
-			}, header: {
-				Text("Active", comment: "JourneyFollowView: section name")
-			})
-			.chewTextSize(.big)
-			Section(content: {
-				ForEach(
-					viewModel.state.journeys
-						.filter({
-							switch $0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate){
-							case .ongoing,.ongoingFar,.ongoingSoon:
-								return true
-							default:
-								return false
-							}
-						})
-//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
-//					})
-					,
-					id: \.id) { journey in
-						listCell(journey: journey, map: false)
-					}
-			}, header: {
-				Text("Ongoing", comment: "JourneyFollowView: section name")
-			})
-			.chewTextSize(.big)
-			Section(content: {
-				ForEach(
-					viewModel.state.journeys
-						.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .past})
-//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0})
-					,
-					id: \.id) { journey in
-						listCell(journey: journey, map: false)
-					}
-			}, header: {
-				Text("Past", comment: "JourneyFollowView: section name")
-			})
+		VStack {
+			Section {
+				if appSettingsVM.state.settings.showTip(tip: .swipeActions){
+					AppSettings.ChooTip.swipeActions.tipLabel
+				}
+			}
+			.onDisappear {
+				appSettingsVM.send(event: .didShowTip(tip: .swipeActions))
+			}
+			.onTapGesture {
+				appSettingsVM.send(event: .didShowTip(tip: .swipeActions))
+			}
+//			.swipeActions(edge: .trailing, content: {
+//				Button("", role: .destructive, action: {
+//					appSettingsVM.send(event: .didShowTip(tip: .swipeActions))
+//				})
+//			})
+			.padding()
+			List {
+				Section(content: {
+					ForEach(
+						viewModel.state.journeys
+							.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .active})
+						//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
+						//					})
+						,
+						id: \.id) { journey in
+							listCell(journey: journey, map: true)
+						}
+				}, header: {
+					Text("Active", comment: "JourneyFollowView: section name")
+				})
+				.chewTextSize(.big)
+				Section(content: {
+					ForEach(
+						viewModel.state.journeys
+							.filter({
+								switch $0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate){
+								case .ongoing,.ongoingFar,.ongoingSoon:
+									return true
+								default:
+									return false
+								}
+							})
+						//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
+						//					})
+						,
+						id: \.id) { journey in
+							listCell(journey: journey, map: false)
+						}
+				}, header: {
+					Text("Ongoing", comment: "JourneyFollowView: section name")
+				})
+				.chewTextSize(.big)
+				Section(content: {
+					ForEach(
+						viewModel.state.journeys
+							.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .past})
+						//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0})
+						,
+						id: \.id) { journey in
+							listCell(journey: journey, map: false)
+						}
+				}, header: {
+					Text("Past", comment: "JourneyFollowView: section name")
+				})
+			}
 		}
 		.onAppear{
 			UITableView.appearance().separatorStyle = .singleLine

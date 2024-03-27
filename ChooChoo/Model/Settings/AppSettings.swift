@@ -61,6 +61,7 @@ extension AppSettings {
 		case journeySettingsFilterDisclaimer
 		case followJourney
 		case sunEventsTip
+		case swipeActions
 	}
 	enum ChooTip : Hashable {
 		static func == (lhs: ChooTip, rhs: ChooTip) -> Bool {
@@ -69,12 +70,15 @@ extension AppSettings {
 		func hash(into hasher: inout Hasher) {
 			hasher.combine(description)
 		}
+		case swipeActions
 		case followJourney
 		case journeySettingsFilterDisclaimer
 		case sunEvents(onClose: () -> (), journey: JourneyViewData?)
 		
 		var description  : String {
 			switch self {
+			case .swipeActions:
+				return "swipe actions"
 			case .journeySettingsFilterDisclaimer:
 				return "journeySettingsFilterDisclaimer"
 			case .followJourney:
@@ -87,6 +91,8 @@ extension AppSettings {
 		@ViewBuilder var tipView : some View  {
 			Group {
 				switch self {
+				case .swipeActions:
+					EmptyView()
 				case .journeySettingsFilterDisclaimer:
 					EmptyView()
 				case .followJourney:
@@ -100,6 +106,8 @@ extension AppSettings {
 		
 		@ViewBuilder var tipLabel : some View {
 			switch self {
+			case .swipeActions:
+				Labels.SwipeActionsTip()
 			case .journeySettingsFilterDisclaimer:
 				Labels.JourneySettingsFilterDisclaimer()
 			case .followJourney:
@@ -113,6 +121,68 @@ extension AppSettings {
 
 extension AppSettings.ChooTip {
 	private struct Labels {
+		enum AnimCase : String,CaseIterable {
+			case center0
+			case right
+			case center1
+			case left
+			
+			var leftCellsWidth : CGFloat {
+				switch self {
+				case .center0:
+					return 0
+				case .right:
+					return 40
+				case .center1:
+					return 0
+				case .left:
+					return 0
+				}
+			}
+			var rightCellsWidth : CGFloat {
+				switch self {
+				case .center0:
+					return 0
+				case .right:
+					return 0
+				case .center1:
+					return 0
+				case .left:
+					return 40
+				}
+			}
+		}
+		struct SwipeActionsTip : View {
+			@State var anim : AnimCase = .center0
+			let timer = Timer.publish(every: 0.5, on: .main, in: .common).autoconnect()
+			var body: some View {
+				HStack(spacing: 0) {
+					Group {
+						Color.chewFillGreenSecondary
+						Color.chewFillYellowPrimary
+					}
+					.frame(width: anim.leftCellsWidth)
+					Color.black.opacity(0.6)
+						.overlay{
+							Text("journeys are swipable")
+								.chewTextSize(.medium)
+								.foregroundStyle(.secondary)
+						}
+					Color.chewFillRedPrimary
+						.frame(width: anim.rightCellsWidth)
+				}
+				.background {
+					Color.chewFillTertiary
+				}
+				.frame(height: 40)
+				.clipShape(.rect(cornerRadius: 10))
+				.onReceive(timer, perform: { _ in
+					withAnimation(.spring, {
+						anim = anim.next()
+					})
+				})
+			}
+		}
 		struct JourneySettingsFilterDisclaimer : View {
 			var body: some View {
 				HStack(alignment: .top) {
@@ -207,7 +277,7 @@ extension AppSettings {
 			return false
 		}
 		switch tip {
-		case .journeySettingsFilterDisclaimer,.followJourney:
+		case .journeySettingsFilterDisclaimer,.followJourney,.swipeActions:
 			return true
 		case .sunEventsTip:
 			if self.legViewMode != .colorfulLegs {
@@ -217,3 +287,8 @@ extension AppSettings {
 		}
 	}
 }
+
+#Preview(body: {
+	AppSettings.ChooTip.swipeActions.tipLabel
+		.padding()
+})
