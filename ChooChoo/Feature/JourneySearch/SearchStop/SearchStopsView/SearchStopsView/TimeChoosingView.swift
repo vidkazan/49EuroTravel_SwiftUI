@@ -24,27 +24,18 @@ struct TimeChoosingView: View {
 			selectedItem: $selectedOption,
 			content: { elem in
 				Group {
-					if #available(iOS 17.0, *) {
-						switch elem {
-						case .now:
-							Text(
-								"now",
-								 comment: "timeChoosingView: button on segmented picker"
+					switch elem {
+					case .now:
+						Text(
+							"now",
+							comment: "timeChoosingView: button on segmented picker"
+						)
+					case .specificDate:
+						Text(
+							verbatim: DateParcer.getTimeAndDateStringFromDate(
+								date: chewVM.state.data.date.date.date
 							)
-							EmptyView()
-						case .specificDate:
-							Text(chewVM.state.data.date.date.date, format: .dateTime)
-						}
-					} else {
-						switch elem {
-						case .now:
-							Text(
-								"now",
-								comment: "timeChoosingView: button on segmented picker"
-							)
-						case .specificDate:
-							Text(chewVM.state.data.date.date.date, format: .dateTime)
-						}
+						)
 					}
 				}
 				.frame(maxWidth: .infinity,minHeight: 35)

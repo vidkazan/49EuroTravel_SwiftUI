@@ -116,10 +116,7 @@ extension JourneyFollowView {
 				Section(content: {
 					ForEach(
 						viewModel.state.journeys
-							.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .active})
-						//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
-						//					})
-						,
+							.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .active}),
 						id: \.id) { journey in
 							listCell(journey: journey, map: true)
 						}
@@ -137,10 +134,7 @@ extension JourneyFollowView {
 								default:
 									return false
 								}
-							})
-						//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0
-						//					})
-						,
+							}),
 						id: \.id) { journey in
 							listCell(journey: journey, map: false)
 						}
@@ -151,9 +145,7 @@ extension JourneyFollowView {
 				Section(content: {
 					ForEach(
 						viewModel.state.journeys
-							.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .past})
-						//						.sorted(by: {$0.journeyViewData.time.timestamp.departure.planned ?? 0 < $1.journeyViewData.time.timestamp.departure.planned ?? 0})
-						,
+							.filter({$0.journeyViewData.time.statusOnReferenceTime(chewVM.referenceDate) == .past}),
 						id: \.id) { journey in
 							listCell(journey: journey, map: false)
 						}

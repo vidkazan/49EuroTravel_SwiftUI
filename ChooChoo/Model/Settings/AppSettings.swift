@@ -185,7 +185,7 @@ extension AppSettings.ChooTip {
 		}
 		struct JourneySettingsFilterDisclaimer : View {
 			var body: some View {
-				HStack(alignment: .top) {
+				HStack {
 					Label(
 						title: {
 							Text(

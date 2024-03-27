@@ -13,7 +13,6 @@ import TipKit
 // MARK: revise
 // all text revision
 // revise icons
-// tip: jfv: for swipe actions
 
 
 // TODO: feature: ldsv: make stop tappable and show stop details and all leg stopover info

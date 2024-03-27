@@ -22,12 +22,17 @@ struct SettingsView: View {
 	}
 	
 	var body: some View {
+		VStack(spacing: 0) {
+			if appSettingsVM.state.settings.showTip(
+				tip: .journeySettingsFilterDisclaimer
+			) {
+				filterDisclaimer()
+					.padding(10)
+					.badgeBackgroundStyle(.secondary)
+					.padding(10)
+
+			}
 			Form {
-				if appSettingsVM.state.settings.showTip(
-					tip: .journeySettingsFilterDisclaimer
-				) {
-					filterDisclaimer()
-				}
 				transportTypes
 				if currentSettings.transportMode == .custom {
 					segments
@@ -40,12 +45,12 @@ struct SettingsView: View {
 					Picker(
 						selection: Binding<JourneySettings.Accessiblity>(
 							get:{
-							 currentSettings.accessiblity
-						 },
-						 set:{
-							 currentSettings.accessiblity = $0
-						 }
-					 ),
+								currentSettings.accessiblity
+							},
+							set:{
+								currentSettings.accessiblity = $0
+							}
+						),
 						content: {
 							ForEach(JourneySettings.Accessiblity.allCases,id: \.hashValue, content: { elem in
 								Text(elem.rawValue)
@@ -62,27 +67,27 @@ struct SettingsView: View {
 					Toggle(
 						isOn: Binding<Bool>(
 							get:{
-							 currentSettings.startWithWalking
-						 },
-						 set:{
-							 currentSettings.startWithWalking = $0
-						 }
-					 ),
+								currentSettings.startWithWalking
+							},
+							set:{
+								currentSettings.startWithWalking = $0
+							}
+						),
 						label: {
-						Label(
-							title: { Text("Start with walking", comment: "Settings") },
-							icon: { ChooSFSymbols.figureWalk.view }
-						)
-					})
+							Label(
+								title: { Text("Start with walking", comment: "Settings") },
+								icon: { ChooSFSymbols.figureWalk.view }
+							)
+						})
 					Picker(
 						selection: Binding<JourneySettings.WalkingSpeed>(
 							get:{
-							 currentSettings.walkingSpeed
-						 },
-						 set:{
-							 currentSettings.walkingSpeed = $0
-						 }
-					 ),
+								currentSettings.walkingSpeed
+							},
+							set:{
+								currentSettings.walkingSpeed = $0
+							}
+						),
 						content: {
 							ForEach(JourneySettings.WalkingSpeed.allCases,id: \.hashValue, content: { elem in
 								Text(elem.rawValue)
@@ -99,18 +104,18 @@ struct SettingsView: View {
 					Toggle(
 						isOn: Binding<Bool>(
 							get:{
-							 currentSettings.withBicycle
-						 },
-						 set:{
-							 currentSettings.withBicycle = $0
-						 }
-					 ),
+								currentSettings.withBicycle
+							},
+							set:{
+								currentSettings.withBicycle = $0
+							}
+						),
 						label: {
-						Label(
-							title: { Text("With bicycle", comment: "Settings") },
-							icon: { Image(systemName: "bicycle") }
-						)
-					})
+							Label(
+								title: { Text("With bicycle", comment: "Settings") },
+								icon: { Image(systemName: "bicycle") }
+							)
+						})
 				}
 				reset()
 			}
@@ -123,11 +128,12 @@ struct SettingsView: View {
 						closeSheet()
 					}, label: {
 						Text("Save", comment: "settingsView: save button")
-						.chewTextSize(.big)
-						.frame(maxWidth: .infinity,minHeight: 35,maxHeight: 43)
+							.chewTextSize(.big)
+							.frame(maxWidth: .infinity,minHeight: 35,maxHeight: 43)
 					})
 				}
 			)}
+		}
 	}
 }
 

@@ -7,8 +7,6 @@
 
 import Foundation
 import SwiftUI
-
-
 extension TimeLabelView {
 	func optionalTime(delay : Int) -> some View {
 		Group {
@@ -20,14 +18,14 @@ extension TimeLabelView {
 			case .big,.huge:
 				if delay > 0 {
 					if let time = time.planned {
-						Text(time,style: .time)
+						Text(verbatim: DateParcer.getTimeStringFromDate(date: time) ?? "")
 							.strikethrough()
 							.chewTextSize(.medium)
 							.lineLimit(1)
 					}
 				} else {
 					if let time = time.actual {
-						Text(time,style: .time)
+						Text(verbatim: DateParcer.getTimeStringFromDate(date: time) ?? "")
 							.strikethrough()
 							.chewTextSize(.medium)
 							.lineLimit(1)
@@ -42,14 +40,14 @@ extension TimeLabelView {
 			switch delayStatus {
 			case .cancelled:
 				if let time = time.planned {
-					Text(time, style: .time)
+					Text(verbatim: DateParcer.getTimeStringFromDate(date: time) ?? "")
 						.foregroundColor(Color.secondary)
 						.strikethrough()
 						.lineLimit(1)
 				}
 			default:
 				if let time = time.actual {
-					Text(time, style: .time)
+					Text(verbatim: DateParcer.getTimeStringFromDate(date: time) ?? "")
 						.foregroundColor(delay < 5 ? .primary : Color.chewFillRedPrimary)
 						.lineLimit(1)
 				}
